@@ -1865,6 +1865,49 @@ active_advanced_sequence_step
                 - LabVIEW Property: **Source:Advanced:Active Advanced Sequence Step**
                 - C Attribute: **NIDCPOWER_ATTR_ACTIVE_ADVANCED_SEQUENCE_STEP**
 
+actual_power_allocation
+-----------------------
+
+    .. py:attribute:: actual_power_allocation
+
+        Returns the power, in watts, the device is sourcing on each active channel if the :py:attr:`nidcpower.Session.power_allocation_mode` property is set to :py:data:`~nidcpower.PowerAllocationMode.AUTOMATIC` or :py:data:`~nidcpower.PowerAllocationMode.MANUAL`.
+
+         Valid Values: [0, device per-channel maximum power]
+
+         Default Value: Refer to the Supported Properties by Device topic for the default value by device.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to the Supported Properties by Device topic for information about supported devices.
+
+             This property returns -1 when the :py:attr:`nidcpower.Session.power_allocation_mode` property is set to :py:data:`~nidcpower.PowerAllocationMode.DISABLED`.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Advanced:Actual Power Allocation**
+                - C Attribute: **NIDCPOWER_ATTR_ACTUAL_POWER_ALLOCATION**
+
 aperture_time
 -------------
 
@@ -1955,6 +1998,8 @@ auto_zero
         Default Value: The default value for the NI PXI-4132 is :py:data:`~nidcpower.AutoZero.ON`. The default value for  all other devices is :py:data:`~nidcpower.AutoZero.OFF`, which is the only supported value for these devices.
 
 
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -2227,12 +2272,14 @@ current_level_autorange
     .. py:attribute:: current_level_autorange
 
         Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.
-        If you set this property to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:attr:`nidcpower.Session.current_level_range` property. If you change the :py:attr:`nidcpower.Session.current_level_autorange` property from  :py:data:`~nidcpower.AutoZero.ON` to :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:attr:`nidcpower.Session.current_level_range`  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
+        If you set this property to :py:data:`~nidcpower.NIDCPOWER_VAL_ON`, NI-DCPower ignores any changes you make to the  :py:attr:`nidcpower.Session.current_level_range` property. If you change the :py:attr:`nidcpower.Session.current_level_autorange` property from  :py:data:`~nidcpower.NIDCPOWER_VAL_ON` to :py:data:`~nidcpower.NIDCPOWER_VAL_OFF`, NI-DCPower retains the last value the :py:attr:`nidcpower.Session.current_level_range`  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
         Query the :py:attr:`nidcpower.Session.current_level_range` property by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` method for  information about which range NI-DCPower automatically selects.
         The :py:attr:`nidcpower.Session.current_level_autorange` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property  is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
-        Default Value: :py:data:`~nidcpower.AutoZero.OFF`
+        Default Value: :py:data:`~nidcpower.NIDCPOWER_VAL_OFF`
 
 
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -2347,12 +2394,14 @@ current_limit_autorange
     .. py:attribute:: current_limit_autorange
 
         Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).
-        If you set this property to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:attr:`nidcpower.Session.current_limit_range` property. If you change this property from :py:data:`~nidcpower.AutoZero.ON` to  :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:attr:`nidcpower.Session.current_limit_range` property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
+        If you set this property to :py:data:`~nidcpower.NIDCPOWER_VAL_ON`, NI-DCPower ignores any changes you make to the  :py:attr:`nidcpower.Session.current_limit_range` property. If you change this property from :py:data:`~nidcpower.NIDCPOWER_VAL_ON` to  :py:data:`~nidcpower.NIDCPOWER_VAL_OFF`, NI-DCPower retains the last value the :py:attr:`nidcpower.Session.current_limit_range` property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
         Query the :py:attr:`nidcpower.Session.current_limit_range` property by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` method for  information about which range NI-DCPower automatically selects.
         The :py:attr:`nidcpower.Session.current_limit_autorange` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property  is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
-        Default Value: :py:data:`~nidcpower.AutoZero.OFF`
+        Default Value: :py:data:`~nidcpower.NIDCPOWER_VAL_OFF`
 
 
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -4029,6 +4078,49 @@ ovp_limit
                 - LabVIEW Property: **Source:Advanced:OVP Limit**
                 - C Attribute: **NIDCPOWER_ATTR_OVP_LIMIT**
 
+power_allocation_mode
+---------------------
+
+    .. py:attribute:: power_allocation_mode
+
+        Determines whether the device sources the power its source configuration requires or a specific wattage you request; determines whether NI-DCPower proactively checks that this sourcing power is within the maximum per-channel and overall sourcing power of the device.
+
+         When this property configures NI-DCPower to perform a sourcing power check, a device is not permitted to source power in excess of its maximum per-channel or overall sourcing power. If the check determines a source configuration or power request would require the device to do so, NI-DCPower returns an error.
+
+         When this property does not configure NI-DCPower to perform a sourcing power check, a device can attempt to fulfill source configurations that would require it to source power in excess of its maximum per-channel or overall sourcing power and may shut down to prevent damage.
+
+         Default Value: Refer to the Supported Properties by Device topic for the default value by device.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to the Supported Properties by Device topic for information about supported devices. Devices that do not support this property behave as if this property were set to :py:data:`~nidcpower.PowerAllocationMode.DISABLED`.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+---------------------------+
+            | Characteristic | Value                     |
+            +================+===========================+
+            | Datatype       | enums.PowerAllocationMode |
+            +----------------+---------------------------+
+            | Permissions    | read-write                |
+            +----------------+---------------------------+
+            | Channel Based  | Yes                       |
+            +----------------+---------------------------+
+            | Resettable     | No                        |
+            +----------------+---------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Advanced:Power Allocation Mode**
+                - C Attribute: **NIDCPOWER_ATTR_POWER_ALLOCATION_MODE**
+
 power_line_frequency
 --------------------
 
@@ -5549,6 +5641,51 @@ ready_for_pulse_trigger_event_pulse_width
                 - LabVIEW Property: **Events:Ready For Pulse Trigger Event:Pulse:Width**
                 - C Attribute: **NIDCPOWER_ATTR_READY_FOR_PULSE_TRIGGER_EVENT_PULSE_WIDTH**
 
+requested_power_allocation
+--------------------------
+
+    .. py:attribute:: requested_power_allocation
+
+        Specifies the power, in watts, to request the device to source from each active channel.
+         This property defines the power to source from the device only if the :py:attr:`nidcpower.Session.power_allocation_mode` property is set to :py:data:`~nidcpower.PowerAllocationMode.MANUAL`.
+
+         The power you request with this property may be incompatible with the power a given source configuration requires or the power the device can provide:
+          If the requested power is less than the power required for the source configuration, the device does not exceed the requested power, and NI-DCPower returns an error.
+          If the requested power is greater than the maximum per-channel or overall sourcing power, the device does not exceed the allowed power, and NI-DCPower returns an error.
+
+        Valid Values: [0, device per-channel maximum power]
+         Default Value: Refer to the Supported Properties by Device topic for the default value by device.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic for information about supported devices.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Advanced:Requested Power Allocation**
+                - C Attribute: **NIDCPOWER_ATTR_REQUESTED_POWER_ALLOCATION**
+
 reset_average_before_measurement
 --------------------------------
 
@@ -6122,6 +6259,33 @@ sequence_step_delta_time_enabled
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NIDCPOWER_ATTR_SEQUENCE_STEP_DELTA_TIME_ENABLED**
+
+serial_number
+-------------
+
+    .. py:attribute:: serial_number
+
+        Contains the serial number for the device you are currently using.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Serial Number**
+                - C Attribute: **NIDCPOWER_ATTR_SERIAL_NUMBER**
 
 simulate
 --------
@@ -6723,12 +6887,14 @@ voltage_level_autorange
     .. py:attribute:: voltage_level_autorange
 
         Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).
-        If you set this property to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:attr:`nidcpower.Session.voltage_level_range` property. If you change the :py:attr:`nidcpower.Session.voltage_level_autorange` property from  :py:data:`~nidcpower.AutoZero.ON` to :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:attr:`nidcpower.Session.voltage_level_range`  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
+        If you set this property to :py:data:`~nidcpower.NIDCPOWER_VAL_ON`, NI-DCPower ignores any changes you make to the  :py:attr:`nidcpower.Session.voltage_level_range` property. If you change the :py:attr:`nidcpower.Session.voltage_level_autorange` property from  :py:data:`~nidcpower.NIDCPOWER_VAL_ON` to :py:data:`~nidcpower.NIDCPOWER_VAL_OFF`, NI-DCPower retains the last value the :py:attr:`nidcpower.Session.voltage_level_range`  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
         Query the :py:attr:`nidcpower.Session.voltage_level_range` property by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` method for  information about which range NI-DCPower automatically selects.
         The :py:attr:`nidcpower.Session.voltage_level_autorange` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property  is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
-        Default Value: :py:data:`~nidcpower.AutoZero.OFF`
+        Default Value: :py:data:`~nidcpower.NIDCPOWER_VAL_OFF`
 
 
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -6843,12 +7009,14 @@ voltage_limit_autorange
     .. py:attribute:: voltage_limit_autorange
 
         Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).
-        If this property is set to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:attr:`nidcpower.Session.voltage_limit_range` property. If you change the :py:attr:`nidcpower.Session.voltage_limit_autorange` property from  :py:data:`~nidcpower.AutoZero.ON` to :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:attr:`nidcpower.Session.voltage_limit_range`  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
+        If this property is set to :py:data:`~nidcpower.NIDCPOWER_VAL_ON`, NI-DCPower ignores any changes you make to the  :py:attr:`nidcpower.Session.voltage_limit_range` property. If you change the :py:attr:`nidcpower.Session.voltage_limit_autorange` property from  :py:data:`~nidcpower.NIDCPOWER_VAL_ON` to :py:data:`~nidcpower.NIDCPOWER_VAL_OFF`, NI-DCPower retains the last value the :py:attr:`nidcpower.Session.voltage_limit_range`  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
         Query the :py:attr:`nidcpower.Session.voltage_limit_range` property by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` method to find out  which range NI-DCPower automatically selects.
         The :py:attr:`nidcpower.Session.voltage_limit_autorange` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property  is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
-        Default Value: :py:data:`~nidcpower.AutoZero.OFF`
+        Default Value: :py:data:`~nidcpower.NIDCPOWER_VAL_OFF`
 
 
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the

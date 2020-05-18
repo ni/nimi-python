@@ -29,10 +29,11 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-DCPower
     * #### Added
-        * `serial number` attribute
-        * `actual power allocation` attribute
-        * `requested power allocation` attribute
-        * `power allocation mode` attribute
+        * API parity with NI-DCPower 20.0
+            * `SERIAL_NUMBER`
+            * `ACTUAL_POWER_ALLOCATION`
+            * `REQUESTED_POWER_ALLOCATION`
+            * `POWER_ALLOCATION_MODE`
     * #### Changed
     * #### Removed
 * ### NI-Digital Pattern Driver

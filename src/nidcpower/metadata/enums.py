@@ -62,42 +62,6 @@ enums = {
             }
         ]
     },
-    'CurrentLevelAutorange': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Autoranging is disabled.'
-                },
-                'name': 'NIDCPOWER_VAL_OFF',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Autoranging is enabled.'
-                },
-                'name': 'NIDCPOWER_VAL_ON',
-                'value': 1
-            }
-        ]
-    },
-    'CurrentLimitAutorange': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Autoranging is disabled.'
-                },
-                'name': 'NIDCPOWER_VAL_OFF',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Autoranging is enabled.'
-                },
-                'name': 'NIDCPOWER_VAL_ON',
-                'value': 1
-            }
-        ]
-    },
     'CurrentLimitBehavior': {
         'values': [
             {
@@ -571,24 +535,6 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_SEQUENCE',
                 'value': 1021
-            }
-        ]
-    },
-    'TBoolean': {
-        'values': [
-            {
-                'documentation': {
-                    'description': ''
-                },
-                'name': 'NIDCPOWER_VAL_FALSE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': ''
-                },
-                'name': 'NIDCPOWER_VAL_TRUE',
-                'value': 1
             }
         ]
     },

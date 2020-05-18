@@ -325,6 +325,41 @@ Polarity
 
 
 
+PowerAllocationMode
+-------------------
+
+.. py:class:: PowerAllocationMode
+
+    .. py:attribute:: PowerAllocationMode.DISABLED
+
+
+
+        The device attempts to source, on each active channel, the power that the present source configuration requires; NI-DCPower does not perform a sourcing power check. If the required power is greater than the maximum sourcing power, the device attempts to source the required amount and may shut down to prevent damage.
+
+        
+
+
+
+    .. py:attribute:: PowerAllocationMode.AUTOMATIC
+
+
+
+        The device attempts to source, on each active channel, the power that the present source configuration requires; NI-DCPower performs a sourcing power check. If the required power is greater than the maximum sourcing power, the device does not exceed the maximum power, and NI-DCPower returns an error.
+
+        
+
+
+
+    .. py:attribute:: PowerAllocationMode.MANUAL
+
+
+
+        The device attempts to source, on each active channel, the power you request with the :py:attr:`nidcpower.Session.requested_power_allocation` property; NI-DCPower performs a sourcing power check. If the requested power is either less than the required power for the present source configuration or greater than the maximum sourcing power, the device does not exceed the requested or allowed power, respectively, and NI-DCPower returns an error.
+
+        
+
+
+
 PowerSource
 -----------
 
