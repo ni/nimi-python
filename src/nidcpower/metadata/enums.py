@@ -378,25 +378,7 @@ enums = {
                 'value': 1060
             }
         ]
-    },
-    'PowerLineFrequency': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies a power line frequency of 50 Hz.'
-                },
-                'name': 'NIDCPOWER_VAL_50_HERTZ',
-                'value': 50.0
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies a power line frequency of 60 Hz.'
-                },
-                'name': 'NIDCPOWER_VAL_60_HERTZ',
-                'value': 60.0
-            }
-        ]
-    },
+    }
     'PowerSource': {
         'values': [
             {
@@ -592,42 +574,6 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_SOFTWARE_EDGE',
                 'value': 1015
-            }
-        ]
-    },
-    'VoltageLevelAutorange': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Autoranging is disabled.'
-                },
-                'name': 'NIDCPOWER_VAL_OFF',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Autoranging is enabled.'
-                },
-                'name': 'NIDCPOWER_VAL_ON',
-                'value': 1
-            }
-        ]
-    },
-    'VoltageLimitAutorange': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Autoranging is disabled.'
-                },
-                'name': 'NIDCPOWER_VAL_OFF',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Autoranging is enabled.'
-                },
-                'name': 'NIDCPOWER_VAL_ON',
-                'value': 1
             }
         ]
     }

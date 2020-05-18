@@ -29,7 +29,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-DCPower
     * #### Added
-        * API parity with NI-DCPower 20.0
+        * API parity with NI-DCPower 20.0 adding properties:
             * `SERIAL_NUMBER`
             * `ACTUAL_POWER_ALLOCATION`
             * `REQUESTED_POWER_ALLOCATION`
