@@ -378,7 +378,7 @@ enums = {
                 'value': 1060
             }
         ]
-    }
+    },
     'PowerSource': {
         'values': [
             {
