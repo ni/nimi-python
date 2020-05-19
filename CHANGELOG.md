@@ -52,14 +52,14 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-SCOPE
     * #### Added
-        * API parity with NI-SCOPE 20.0
-            * `END_OF_RECORD_EVENT_TERMINAL_NAME`
-            * `ADVANCE_TRIGGER_TERMINAL_NAME`
-            * `REF_TRIGGER_TERMINAL_NAME`
-            * `START_TRIGGER_TERMINAL_NAME`
-            * `READY_FOR_ADVANCE_EVENT_TERMINAL_NAME`
-            * `READY_FOR_REF_EVENT_TERMINAL_NAME`
-            * `READY_FOR_START_EVENT_TERMINAL_NAME`
+        * API parity with NI-SCOPE 20.0 adding properties:
+            * `Session.end_of_record_event_terminal_name`
+            * `Session.advance_trigger_terminal_name`
+            * `Session.ref_trigger_terminal_name`
+            * `Session.start_trigger_terminal_name`
+            * `Session.ready_for_advance_event_terminal_name`
+            * `Session.ready_for_ref_event_terminal_name`
+            * `Session.ready_for_start_event_terminal_name`
     * #### Changed
     * #### Removed
 * ### NI-Switch
