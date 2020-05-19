@@ -52,7 +52,8 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-SCOPE
     * #### Added
-        * API parity with NI-SCOPE 20.0 adding properties:
+        * API parity with NI-SCOPE 20.0 by adding the following properties:
+            * `Session.end_of_acquisition_event_terminal_name`
             * `Session.end_of_record_event_terminal_name`
             * `Session.advance_trigger_terminal_name`
             * `Session.ref_trigger_terminal_name`
