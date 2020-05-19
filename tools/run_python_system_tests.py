@@ -2,13 +2,13 @@ import argparse
 import os
 import subprocess
 
-print(os.getcwd)
+src = os.path.join(zip_folder, os.listdir(zip_folder)[0], 'generated')
 
 parser = argparse.ArgumentParser(description='Runs system tests on the specified driver.',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-d', '--driver', required=True, type=str,
                     help='Python package name.',
-                    choices=os.listdir('src'))
+                    choices=os.listdir(src))
 parser.add_argument('-pv', '--python-version', required=False, type=str,
                     help='Python version to be run. This is used to invoke the appropriate tox environment.',
                     choices=['py35', 'py36', 'py37', 'py38', ], default='py38')
