@@ -2,7 +2,7 @@ import argparse
 import os
 import subprocess
 
-src = os.path.join(zip_folder, os.listdir(zip_folder)[0], 'generated')
+src = r'../../src'
 
 parser = argparse.ArgumentParser(description='Runs system tests on the specified driver.',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
