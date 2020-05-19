@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.2.0d17
+# This file is generated from NI-DCPower API metadata version 20.2.0d22
 enums = {
     'ApertureTimeUnits': {
         'values': [
@@ -351,6 +351,31 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_ACTIVE_LOW',
                 'value': 1019
+            }
+        ]
+    },
+    'PowerAllocationMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The device attempts to source, on each active channel, the power that the present source configuration requires; NI-DCPower does not perform a sourcing power check. If the required power is greater than the maximum sourcing power, the device attempts to source the required amount and may shut down to prevent damage.'
+                },
+                'name': 'NIDCPOWER_VAL_POWER_ALLOCATION_MODE_DISABLED',
+                'value': 1058
+            },
+            {
+                'documentation': {
+                    'description': 'The device attempts to source, on each active channel, the power that the present source configuration requires; NI-DCPower performs a sourcing power check. If the required power is greater than the maximum sourcing power, the device does not exceed the maximum power, and NI-DCPower returns an error.'
+                },
+                'name': 'NIDCPOWER_VAL_POWER_ALLOCATION_MODE_AUTOMATIC',
+                'value': 1059
+            },
+            {
+                'documentation': {
+                    'description': 'The device attempts to source, on each active channel, the power you request with the NIDCPOWER_ATTR_REQUESTED_POWER_ALLOCATION attribute; NI-DCPower performs a sourcing power check. If the requested power is either less than the required power for the present source configuration or greater than the maximum sourcing power, the device does not exceed the requested or allowed power, respectively, and NI-DCPower returns an error.'
+                },
+                'name': 'NIDCPOWER_VAL_POWER_ALLOCATION_MODE_MANUAL',
+                'value': 1060
             }
         ]
     },

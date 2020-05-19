@@ -150,6 +150,25 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
+    actual_power_allocation = _attributes.AttributeViReal64(1150205)
+    '''Type: float
+
+    Returns the power, in watts, the device is sourcing on each active channel if the power_allocation_mode property is set to PowerAllocationMode.AUTOMATIC or PowerAllocationMode.MANUAL.
+
+     Valid Values: [0, device per-channel maximum power]
+
+     Default Value: Refer to the Supported Properties by Device topic for the default value by device.
+
+    Note: This property is not supported by all devices. Refer to the Supported Properties by Device topic for information about supported devices.
+
+     This property returns -1 when the power_allocation_mode property is set to PowerAllocationMode.DISABLED.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     aperture_time = _attributes.AttributeViReal64(1150058)
     '''Type: float
 
@@ -1015,6 +1034,25 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
+    power_allocation_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PowerAllocationMode, 1150207)
+    '''Type: enums.PowerAllocationMode
+
+    Determines whether the device sources the power its source configuration requires or a specific wattage you request; determines whether NI-DCPower proactively checks that this sourcing power is within the maximum per-channel and overall sourcing power of the device.
+
+     When this property configures NI-DCPower to perform a sourcing power check, a device is not permitted to source power in excess of its maximum per-channel or overall sourcing power. If the check determines a source configuration or power request would require the device to do so, NI-DCPower returns an error.
+
+     When this property does not configure NI-DCPower to perform a sourcing power check, a device can attempt to fulfill source configurations that would require it to source power in excess of its maximum per-channel or overall sourcing power and may shut down to prevent damage.
+
+     Default Value: Refer to the Supported Properties by Device topic for the default value by device.
+
+    Note: This property is not supported by all devices. Refer to the Supported Properties by Device topic for information about supported devices. Devices that do not support this property behave as if this property were set to PowerAllocationMode.DISABLED.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     power_line_frequency = _attributes.AttributeViReal64(1150020)
     '''Type: float
 
@@ -1738,6 +1776,27 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
+    requested_power_allocation = _attributes.AttributeViReal64(1150206)
+    '''Type: float
+
+    Specifies the power, in watts, to request the device to source from each active channel.
+     This property defines the power to source from the device only if the power_allocation_mode property is set to PowerAllocationMode.MANUAL.
+
+     The power you request with this property may be incompatible with the power a given source configuration requires or the power the device can provide:
+      If the requested power is less than the power required for the source configuration, the device does not exceed the requested power, and NI-DCPower returns an error.
+      If the requested power is greater than the maximum per-channel or overall sourcing power, the device does not exceed the allowed power, and NI-DCPower returns an error.
+
+    Valid Values: [0, device per-channel maximum power]
+     Default Value: Refer to the Supported Properties by Device topic for the default value by device.
+
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     reset_average_before_measurement = _attributes.AttributeViBoolean(1150006)
     '''Type: bool
 
@@ -1959,6 +2018,11 @@ class _SessionBase(object):
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    serial_number = _attributes.AttributeViString(1150152)
+    '''Type: str
+
+    Contains the serial number for the device you are currently using.
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool

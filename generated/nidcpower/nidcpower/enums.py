@@ -139,6 +139,21 @@ class Polarity(Enum):
     '''
 
 
+class PowerAllocationMode(Enum):
+    DISABLED = 1058
+    r'''
+    The device attempts to source, on each active channel, the power that the present source configuration requires; NI-DCPower does not perform a sourcing power check. If the required power is greater than the maximum sourcing power, the device attempts to source the required amount and may shut down to prevent damage.
+    '''
+    AUTOMATIC = 1059
+    r'''
+    The device attempts to source, on each active channel, the power that the present source configuration requires; NI-DCPower performs a sourcing power check. If the required power is greater than the maximum sourcing power, the device does not exceed the maximum power, and NI-DCPower returns an error.
+    '''
+    MANUAL = 1060
+    r'''
+    The device attempts to source, on each active channel, the power you request with the requested_power_allocation property; NI-DCPower performs a sourcing power check. If the requested power is either less than the required power for the present source configuration or greater than the maximum sourcing power, the device does not exceed the requested or allowed power, respectively, and NI-DCPower returns an error.
+    '''
+
+
 class PowerSource(Enum):
     INTERNAL = 1003
     r'''

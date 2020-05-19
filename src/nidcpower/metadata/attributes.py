@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.2.0d17
+# This file is generated from NI-DCPower API metadata version 20.2.0d22
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -1331,6 +1331,17 @@ attributes = {
         'resettable': False,
         'type': 'ViBoolean'
     },
+    1150152: {
+        'access': 'read only',
+        'channel_based': False,
+        'documentation': {
+            'description': 'Contains the serial number for the device you are currently using.'
+        },
+        'lv_property': 'Inherent IVI Attributes:Instrument Identification:Serial Number',
+        'name': 'SERIAL_NUMBER',
+        'resettable': False,
+        'type': 'ViString'
+    },
     1150184: {
         'access': 'read-write',
         'channel_based': True,
@@ -1501,6 +1512,43 @@ attributes = {
         'name': 'SEQUENCE_STEP_DELTA_TIME_ENABLED',
         'resettable': False,
         'type': 'ViBoolean'
+    },
+    1150205: {
+        'access': 'read only',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nReturns the power, in watts, the device is sourcing on each active channel if the NIDCPOWER_ATTR_POWER_ALLOCATION_MODE attribute is set to NIDCPOWER_VAL_POWER_ALLOCATION_MODE_AUTOMATIC or NIDCPOWER_VAL_POWER_ALLOCATION_MODE_MANUAL.\n\n Valid Values: [0, device per-channel maximum power]\n\n Default Value: Refer to the Supported Attributes by Device topic for the default value by device.\n',
+            'note': 'This attribute is not supported by all devices. Refer to the Supported Attributes by Device topic for information about supported devices.\n\n This attribute returns -1 when the NIDCPOWER_ATTR_POWER_ALLOCATION_MODE attribute is set to NIDCPOWER_VAL_POWER_ALLOCATION_MODE_DISABLED.\n\n'
+        },
+        'lv_property': 'Source:Advanced:Actual Power Allocation',
+        'name': 'ACTUAL_POWER_ALLOCATION',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150206: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the power, in watts, to request the device to source from each active channel.\n This attribute defines the power to source from the device only if the NIDCPOWER_ATTR_POWER_ALLOCATION_MODE attribute is set to NIDCPOWER_VAL_POWER_ALLOCATION_MODE_MANUAL.\n\n The power you request with this attribute may be incompatible with the power a given source configuration requires or the power the device can provide:\n  If the requested power is less than the power required for the source configuration, the device does not exceed the requested power, and NI-DCPower returns an error.\n  If the requested power is greater than the maximum per-channel or overall sourcing power, the device does not exceed the allowed power, and NI-DCPower returns an error.\n\nValid Values: [0, device per-channel maximum power]\n Default Value: Refer to the Supported Attributes by Device topic for the default value by device.\n',
+            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic for information about supported devices.\n\n'
+        },
+        'lv_property': 'Source:Advanced:Requested Power Allocation',
+        'name': 'REQUESTED_POWER_ALLOCATION',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150207: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nDetermines whether the device sources the power its source configuration requires or a specific wattage you request; determines whether NI-DCPower proactively checks that this sourcing power is within the maximum per-channel and overall sourcing power of the device.\n\n When this attribute configures NI-DCPower to perform a sourcing power check, a device is not permitted to source power in excess of its maximum per-channel or overall sourcing power. If the check determines a source configuration or power request would require the device to do so, NI-DCPower returns an error.\n\n When this attribute does not configure NI-DCPower to perform a sourcing power check, a device can attempt to fulfill source configurations that would require it to source power in excess of its maximum per-channel or overall sourcing power and may shut down to prevent damage.\n\n Default Value: Refer to the Supported Attributes by Device topic for the default value by device.\n',
+            'note': 'This attribute is not supported by all devices. Refer to the Supported Attributes by Device topic for information about supported devices. Devices that do not support this attribute behave as if this attribute were set to NIDCPOWER_VAL_POWER_ALLOCATION_MODE_DISABLED.\n\n'
+        },
+        'enum': 'PowerAllocationMode',
+        'lv_property': 'Source:Advanced:Power Allocation Mode',
+        'name': 'POWER_ALLOCATION_MODE',
+        'resettable': False,
+        'type': 'ViInt32'
     },
     1250001: {
         'access': 'read-write',
