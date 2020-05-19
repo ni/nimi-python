@@ -14,7 +14,7 @@
 
 import array
 import ctypes
-import datetime
+import hightime
 import threading
 
 import ${module_name}._attributes as _attributes

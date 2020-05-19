@@ -167,7 +167,7 @@ finish_sync_pulse_sender_synchronize
 
     .. py:currentmodule:: nitclk
 
-    .. py:function:: finish_sync_pulse_sender_synchronize(sessions, min_time=datetime.timedelta(seconds=0.0))
+    .. py:function:: finish_sync_pulse_sender_synchronize(sessions, min_time=hightime.timedelta(seconds=0.0))
 
         Finishes synchronizing the Sync Pulse Sender.
 
@@ -197,7 +197,7 @@ finish_sync_pulse_sender_synchronize
             
 
 
-        :type min_time: float in seconds or datetime.timedelta
+        :type min_time: hightime.timedelta, datetime.timedelta, or float in seconds
 
 initiate
 --------
@@ -267,7 +267,7 @@ setup_for_sync_pulse_sender_synchronize
 
     .. py:currentmodule:: nitclk
 
-    .. py:function:: setup_for_sync_pulse_sender_synchronize(sessions, min_time=datetime.timedelta(seconds=0.0))
+    .. py:function:: setup_for_sync_pulse_sender_synchronize(sessions, min_time=hightime.timedelta(seconds=0.0))
 
         Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
 
@@ -297,14 +297,14 @@ setup_for_sync_pulse_sender_synchronize
             
 
 
-        :type min_time: float in seconds or datetime.timedelta
+        :type min_time: hightime.timedelta, datetime.timedelta, or float in seconds
 
 synchronize
 -----------
 
     .. py:currentmodule:: nitclk
 
-    .. py:function:: synchronize(sessions, min_tclk_period=datetime.timedelta(seconds=0.0))
+    .. py:function:: synchronize(sessions, min_tclk_period=hightime.timedelta(seconds=0.0))
 
         Synchronizes the TClk signals on the given sessions. After
         :py:func:`nitclk.synchronize` executes, TClk signals from all sessions are
@@ -339,14 +339,14 @@ synchronize
             
 
 
-        :type min_tclk_period: float in seconds or datetime.timedelta
+        :type min_tclk_period: hightime.timedelta, datetime.timedelta, or float in seconds
 
 synchronize_to_sync_pulse_sender
 --------------------------------
 
     .. py:currentmodule:: nitclk
 
-    .. py:function:: synchronize_to_sync_pulse_sender(sessions, min_time=datetime.timedelta(seconds=0.0))
+    .. py:function:: synchronize_to_sync_pulse_sender(sessions, min_time=hightime.timedelta(seconds=0.0))
 
         Synchronizes the other devices to the Sync Pulse Sender.
 
@@ -376,14 +376,14 @@ synchronize_to_sync_pulse_sender
             
 
 
-        :type min_time: float in seconds or datetime.timedelta
+        :type min_time: hightime.timedelta, datetime.timedelta, or float in seconds
 
 wait_until_done
 ---------------
 
     .. py:currentmodule:: nitclk
 
-    .. py:function:: wait_until_done(sessions, timeout=datetime.timedelta(seconds=0.0))
+    .. py:function:: wait_until_done(sessions, timeout=hightime.timedelta(seconds=0.0))
 
         Call this method to pause execution of your program until the
         acquisitions and/or generations corresponding to sessions are done or
@@ -417,7 +417,7 @@ wait_until_done
             
 
 
-        :type timeout: float in seconds or datetime.timedelta
+        :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
 
 SessionReference
@@ -597,17 +597,17 @@ sample_clock_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

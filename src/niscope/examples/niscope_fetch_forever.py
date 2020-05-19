@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import argparse
-import datetime
+import hightime
 import niscope
 import numpy as np
 import pprint
@@ -38,7 +38,7 @@ def example(resource_name, options, total_acquisition_time_in_seconds, voltage, 
                 for channel, waveform in zip(channel_list, waveforms):
                     # 5. fetching - we return the slice of the waveform array that we want to "fetch into"
                     session.channels[channel].fetch_into(waveform[current_pos:current_pos + samples_per_fetch], relative_to=niscope.FetchRelativeTo.READ_POINTER,
-                                                         offset=0, record_number=0, num_records=1, timeout=datetime.timedelta(seconds=5.0))
+                                                         offset=0, record_number=0, num_records=1, timeout=hightime.timedelta(seconds=5.0))
                 current_pos += samples_per_fetch
 
 

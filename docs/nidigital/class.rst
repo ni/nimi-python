@@ -185,14 +185,14 @@ apply_tdr_offsets
                 
 
 
-            :type offsets: basic sequence of float in seconds or datetime.timedelta
+            :type offsets: basic sequence of hightime.timedelta, datetime.timedelta, or float in seconds
 
 burst_pattern
 -------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: burst_pattern(start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0))
+    .. py:method:: burst_pattern(start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.timedelta(seconds=10.0))
 
             Uses the start_label you specify to burst the pattern on the sites you specify. If you
             specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
@@ -236,7 +236,7 @@ burst_pattern
                 
 
 
-            :type timeout: float in seconds or datetime.timedelta
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
             :rtype: { int: bool, int: bool, ... }
             :return:
@@ -417,7 +417,7 @@ configure_time_set_compare_edges_strobe
                 
 
 
-            :type strobe_edge: float in seconds or datetime.timedelta
+            :type strobe_edge: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_time_set_compare_edges_strobe2x
 -----------------------------------------
@@ -450,14 +450,14 @@ configure_time_set_compare_edges_strobe2x
                 
 
 
-            :type strobe_edge: float in seconds or datetime.timedelta
+            :type strobe_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param strobe2_edge:
 
 
                 
 
 
-            :type strobe2_edge: float in seconds or datetime.timedelta
+            :type strobe2_edge: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_time_set_drive_edges
 ------------------------------
@@ -497,28 +497,28 @@ configure_time_set_drive_edges
                 
 
 
-            :type drive_on_edge: float in seconds or datetime.timedelta
+            :type drive_on_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_data_edge:
 
 
                 
 
 
-            :type drive_data_edge: float in seconds or datetime.timedelta
+            :type drive_data_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_return_edge:
 
 
                 
 
 
-            :type drive_return_edge: float in seconds or datetime.timedelta
+            :type drive_return_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_off_edge:
 
 
                 
 
 
-            :type drive_off_edge: float in seconds or datetime.timedelta
+            :type drive_off_edge: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_time_set_drive_edges2x
 --------------------------------
@@ -558,42 +558,42 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type drive_on_edge: float in seconds or datetime.timedelta
+            :type drive_on_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_data_edge:
 
 
                 
 
 
-            :type drive_data_edge: float in seconds or datetime.timedelta
+            :type drive_data_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_return_edge:
 
 
                 
 
 
-            :type drive_return_edge: float in seconds or datetime.timedelta
+            :type drive_return_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_off_edge:
 
 
                 
 
 
-            :type drive_off_edge: float in seconds or datetime.timedelta
+            :type drive_off_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_data2_edge:
 
 
                 
 
 
-            :type drive_data2_edge: float in seconds or datetime.timedelta
+            :type drive_data2_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_return2_edge:
 
 
                 
 
 
-            :type drive_return2_edge: float in seconds or datetime.timedelta
+            :type drive_return2_edge: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_time_set_drive_format
 -------------------------------
@@ -666,7 +666,7 @@ configure_time_set_edge
                 
 
 
-            :type time: float in seconds or datetime.timedelta
+            :type time: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_time_set_edge_multiplier
 ----------------------------------
@@ -727,7 +727,7 @@ configure_time_set_period
                 
 
 
-            :type period: float in seconds or datetime.timedelta
+            :type period: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_voltage_levels
 ------------------------
@@ -1067,7 +1067,7 @@ fetch_capture_waveform
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: fetch_capture_waveform(waveform_name, samples_to_read, timeout=datetime.timedelta(seconds=10.0))
+    .. py:method:: fetch_capture_waveform(waveform_name, samples_to_read, timeout=hightime.timedelta(seconds=10.0))
 
             Returns dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
 
@@ -1100,7 +1100,7 @@ fetch_capture_waveform
                 
 
 
-            :type timeout: float or datetime.timedelta
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
             :rtype: { int: memoryview of array.array of unsigned int, int: memoryview of array.array of unsigned int, ... }
             :return:
@@ -1561,7 +1561,7 @@ get_time_set_edge
 
             :type edge: :py:data:`nidigital.TimeSetEdgeType`
 
-            :rtype: datetime.timedelta
+            :rtype: hightime.timedelta
             :return:
 
 
@@ -1653,7 +1653,7 @@ get_time_set_period
 
             :type time_set_name: str
 
-            :rtype: datetime.timedelta
+            :rtype: hightime.timedelta
             :return:
 
 
@@ -2120,7 +2120,7 @@ tdr
 
             :type apply_offsets: bool
 
-            :rtype: list of datetime.timedelta
+            :rtype: list of hightime.timedelta
             :return:
 
 
@@ -2195,7 +2195,7 @@ wait_until_done
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: wait_until_done(timeout=datetime.timedelta(seconds=10.0))
+    .. py:method:: wait_until_done(timeout=hightime.timedelta(seconds=10.0))
 
             TBD
 
@@ -2209,7 +2209,7 @@ wait_until_done
                 
 
 
-            :type timeout: float in seconds or datetime.timedelta
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
 write_sequencer_flag
 --------------------
@@ -2896,17 +2896,17 @@ frequency_counter_measurement_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | Yes                                    |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4305,17 +4305,17 @@ tdr_offset
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | Yes                                    |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4363,17 +4363,17 @@ timing_absolute_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

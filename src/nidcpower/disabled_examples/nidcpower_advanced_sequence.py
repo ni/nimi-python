@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import argparse
-import datetime
+import hightime
 import nidcpower
 import sys
 
@@ -26,7 +26,7 @@ def example(resource_name, channels, options, steps, voltage_start, voltage_fina
     with nidcpower.Session(resource_name=resource_name, channels=channels, options=options) as session:
 
         session.source_mode = nidcpower.SourceMode.SEQUENCE
-        session.source_delay = datetime.timedelta(seconds=0.1)
+        session.source_delay = hightime.timedelta(seconds=0.1)
         session.voltage_level_autorange = True
         session.current_level_autorange = True
         session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=attribute_ids)

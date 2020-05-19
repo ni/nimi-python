@@ -1,5 +1,5 @@
-import datetime
 import fasteners
+import hightime
 import nifgen
 import numpy
 import os
@@ -412,7 +412,7 @@ def test_write_waveform_from_file_f64(session):
 
 
 def test_wait_until_done(session):
-    session.wait_until_done(datetime.timedelta(milliseconds=20))
+    session.wait_until_done(hightime.timedelta(milliseconds=20))
 
 
 def test_user_standard_waveform(session):

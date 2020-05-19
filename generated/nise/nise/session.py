@@ -2,7 +2,6 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401
 
 import nise._converters as _converters
 import nise._library_singleton as _library_singleton
@@ -10,6 +9,7 @@ import nise._visatype as _visatype
 import nise.enums as enums
 import nise.errors as errors
 
+import hightime
 
 # Used for __repr__
 import pprint
@@ -763,7 +763,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
-    def wait_for_debounce(self, maximum_time_ms=datetime.timedelta(milliseconds=-1)):
+    def wait_for_debounce(self, maximum_time_ms=hightime.timedelta(milliseconds=-1)):
         r'''wait_for_debounce
 
         Waits for all of the switches in the NI Switch Executive virtual device
@@ -777,7 +777,7 @@ class Session(_SessionBase):
         signals connected to the switching system.
 
         Args:
-            maximum_time_ms (int in milliseconds or datetime.timedelta): The amount of time to wait (in milliseconds) for the debounce to
+            maximum_time_ms (hightime.timedelta, datetime.timedelta, or int in milliseconds): The amount of time to wait (in milliseconds) for the debounce to
                 complete. A value of 0 checks for debouncing once and returns an error
                 if the system is not debounced at that time. A value of -1 means to
                 block for an infinite period of time until the system is debounced.

@@ -50,6 +50,7 @@ setup(
     install_requires=[
         'enum34;python_version<"3.4"',
         'singledispatch;python_version<"3.4"',
+        'hightime',
         % if config['uses_nitclk']:
         'nitclk',
         % endif

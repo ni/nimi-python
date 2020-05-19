@@ -21,7 +21,7 @@ functions = {
     'AcceptListOfDurationsInSeconds': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Accepts list of floats or datetime.timedelta instances representing time delays.'
+            'description': 'Accepts list of floats or hightime.timedelta instances representing time delays.'
         },
         'parameters': [
             {
@@ -52,7 +52,7 @@ functions = {
                     'value': 'count'
                 },
                 'type': 'ViReal64[]',
-                'type_in_documentation': 'float in seconds or datetime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -942,7 +942,7 @@ functions = {
                 'name': 'months',
                 'python_api_converter_name': 'convert_month_to_timedelta',
                 'type': 'ViInt32',
-                'type_in_documentation': 'datetime.timedelta'
+                'type_in_documentation': 'hightime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -1145,7 +1145,7 @@ functions = {
                     'description': 'Indicates date and time of the last calibration.'
                 },
                 'name': 'month',
-                'type': 'datetime.datetime'
+                'type': 'hightime.datetime'
             }
         ],
         'python_name': 'get_cal_date_and_time',
@@ -1637,7 +1637,7 @@ functions = {
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'datetime.timedelta'
+                'type_in_documentation': 'hightime.timedelta'
             },
             {
                 'direction': 'out',
@@ -1680,7 +1680,7 @@ functions = {
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'datetime.timedelta'
+                'type_in_documentation': 'hightime.timedelta'
             },
             {
                 'direction': 'out',
@@ -1734,7 +1734,7 @@ functions = {
     'ReturnDurationInSeconds': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns a datetime.timedelta instance.'
+            'description': 'Returns a hightime.timedelta instance.'
         },
         'parameters': [
             {
@@ -1753,7 +1753,7 @@ functions = {
                 'name': 'timedelta',
                 'python_api_converter_name': 'convert_seconds_real64_to_timedelta',
                 'type': 'ViReal64',
-                'type_in_documentation': 'datetime.timedelta'
+                'type_in_documentation': 'hightime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -1761,7 +1761,7 @@ functions = {
     'ReturnListOfDurationsInSeconds': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns a list of datetime.timedelta instances.'
+            'description': 'Returns a list of hightime.timedelta instances.'
         },
         'parameters': [
             {
@@ -1783,7 +1783,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Contains a list of datetime.timedelta instances.'
+                    'description': 'Contains a list of hightime.timedelta instances.'
                 },
                 'name': 'timedeltas',
                 'python_api_converter_name': 'convert_seconds_real64_to_timedeltas',
@@ -1792,7 +1792,7 @@ functions = {
                     'value': 'numberOfElements'
                 },
                 'type': 'ViReal64[]',
-                'type_in_documentation': 'datetime.timedelta'
+                'type_in_documentation': 'hightime.timedelta'
             }
         ],
         'returns': 'ViStatus'

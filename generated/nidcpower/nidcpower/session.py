@@ -2,7 +2,6 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -13,6 +12,7 @@ import nidcpower._visatype as _visatype
 import nidcpower.enums as enums
 import nidcpower.errors as errors
 
+import hightime
 
 # Used for __repr__
 import pprint
@@ -741,7 +741,7 @@ class _SessionBase(object):
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     measure_complete_event_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150046)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the amount of time to delay the generation of the Measure Complete event, in seconds.
     for information about supported devices.
@@ -805,7 +805,7 @@ class _SessionBase(object):
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     measure_record_delta_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150065)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record.  Only query this property after the desired measurement settings are committed.
     for information about supported devices.
@@ -1494,7 +1494,7 @@ class _SessionBase(object):
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     pulse_off_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150094)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Determines the length, in seconds, of the off phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -1509,7 +1509,7 @@ class _SessionBase(object):
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     pulse_on_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150093)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Determines the length, in seconds, of the on phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -2015,7 +2015,7 @@ class _SessionBase(object):
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     source_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the  measure_when property is set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
     Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.
@@ -2488,7 +2488,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
+    def fetch_multiple(self, count, timeout=hightime.timedelta(seconds=1.0)):
         '''fetch_multiple
 
         Returns a list of named tuples (Measurement) that were
@@ -2514,7 +2514,7 @@ class _SessionBase(object):
         Args:
             count (int): Specifies the number of measurements to fetch.
 
-            timeout (float in seconds or datetime.timedelta): Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
 
                 Note: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
@@ -2603,7 +2603,7 @@ class _SessionBase(object):
         nidcpower.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            timeout (float in seconds or datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -4550,7 +4550,7 @@ class Session(_SessionBase):
         external calibrations.
 
         Returns:
-            months (datetime.timedelta): Specifies the recommended maximum interval, in **months**, between
+            months (hightime.timedelta): Specifies the recommended maximum interval, in **months**, between
                 external calibrations.
 
         '''
@@ -4567,11 +4567,11 @@ class Session(_SessionBase):
         Returns the date and time of the last successful calibration.
 
         Returns:
-            month (datetime.datetime): Indicates date and time of the last calibration.
+            month (hightime.datetime): Indicates date and time of the last calibration.
 
         '''
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
-        return datetime.datetime(year, month, day, hour, minute)
+        return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
@@ -4582,11 +4582,11 @@ class Session(_SessionBase):
         Note: This method is not supported on all devices.
 
         Returns:
-            month (datetime.datetime): Returns the date and time the device was last calibrated.
+            month (hightime.datetime): Returns the date and time the device was last calibrated.
 
         '''
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
-        return datetime.datetime(year, month, day, hour, minute)
+        return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def _get_self_cal_last_date_and_time(self):
@@ -4982,7 +4982,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_for_event(self, event_id, timeout=datetime.timedelta(seconds=10.0)):
+    def wait_for_event(self, event_id, timeout=hightime.timedelta(seconds=10.0)):
         r'''wait_for_event
 
         Waits until the device has generated the specified event.
@@ -5019,7 +5019,7 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            timeout (float in seconds or datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
 

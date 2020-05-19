@@ -695,7 +695,7 @@ fetch_multiple
 
     .. py:currentmodule:: nidcpower.Session
 
-    .. py:method:: fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
+    .. py:method:: fetch_multiple(count, timeout=hightime.timedelta(seconds=1.0))
 
             Returns a list of named tuples (Measurement) that were
             previously taken and are stored in the NI-DCPower buffer. This method
@@ -739,7 +739,7 @@ fetch_multiple
                 .. note:: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
 
-            :type timeout: float in seconds or datetime.timedelta
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
             :rtype: list of Measurement
             :return:
@@ -804,7 +804,7 @@ get_ext_cal_last_date_and_time
 
 
 
-            :rtype: datetime.datetime
+            :rtype: hightime.datetime
             :return:
 
 
@@ -853,7 +853,7 @@ get_ext_cal_recommended_interval
 
 
 
-            :rtype: datetime.timedelta
+            :rtype: hightime.timedelta
             :return:
 
 
@@ -879,7 +879,7 @@ get_self_cal_last_date_and_time
 
 
 
-            :rtype: datetime.datetime
+            :rtype: hightime.datetime
             :return:
 
 
@@ -1729,7 +1729,7 @@ wait_for_event
 
     .. py:currentmodule:: nidcpower.Session
 
-    .. py:method:: wait_for_event(event_id, timeout=datetime.timedelta(seconds=10.0))
+    .. py:method:: wait_for_event(event_id, timeout=hightime.timedelta(seconds=10.0))
 
             Waits until the device has generated the specified event.
 
@@ -1785,7 +1785,7 @@ wait_for_event
                     application.
 
 
-            :type timeout: float in seconds or datetime.timedelta
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
 
 Properties
@@ -3370,17 +3370,17 @@ measure_complete_event_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | Yes                                    |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3529,17 +3529,17 @@ measure_record_delta_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read only                              |
-            +----------------+----------------------------------------+
-            | Channel Based  | Yes                                    |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read only                                                   |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5019,17 +5019,17 @@ pulse_off_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | Yes                                    |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5058,17 +5058,17 @@ pulse_on_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | Yes                                    |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6293,17 +6293,17 @@ source_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | Yes                                    |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

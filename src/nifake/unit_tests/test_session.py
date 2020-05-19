@@ -1,6 +1,7 @@
 import array
 import ctypes
 import datetime
+import hightime
 import math
 import nifake
 import nifake.errors
@@ -322,9 +323,9 @@ class TestSession(object):
         self.patched_library.niFake_close.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_single_point_read_timedelta(self):
-        test_maximum_time_ms = 100  # milliseconds
-        test_maximum_time_s = .1    # seconds
-        test_maximum_time_timedelta = datetime.timedelta(milliseconds=test_maximum_time_ms)
+        test_maximum_time_ns = 1    # nanoseconds
+        test_maximum_time_s = 1e-9  # seconds
+        test_maximum_time_timedelta = hightime.timedelta(nanoseconds=test_maximum_time_ns)
         test_reading = 5
         self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
         self.side_effects_helper['Read']['reading'] = test_reading
@@ -334,7 +335,7 @@ class TestSession(object):
 
     def test_single_point_read_nan(self):
         test_maximum_time_s = 10.0
-        test_maximum_time = datetime.timedelta(seconds=test_maximum_time_s)
+        test_maximum_time = hightime.timedelta(seconds=test_maximum_time_s)
         test_reading = float('NaN')
         self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
         self.side_effects_helper['Read']['reading'] = test_reading
@@ -717,7 +718,7 @@ class TestSession(object):
         warnings.filterwarnings("always", category=nifake.DriverWarning)
 
         test_maximum_time_s = 10.0
-        test_maximum_time = datetime.timedelta(seconds=test_maximum_time_s)
+        test_maximum_time = hightime.timedelta(seconds=test_maximum_time_s)
         test_reading = float('nan')
         test_error_code = 42
         test_error_desc = "The answer to the ultimate question, only positive"
@@ -825,7 +826,7 @@ class TestSession(object):
 
     def test_repeated_capability_method_on_session_timedelta(self):
         test_maximum_time_ms = 10     # milliseconds
-        test_maximum_time_timedelta = datetime.timedelta(milliseconds=test_maximum_time_ms)
+        test_maximum_time_timedelta = hightime.timedelta(milliseconds=test_maximum_time_ms)
         test_reading = 5
         self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
         self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
@@ -836,7 +837,7 @@ class TestSession(object):
 
     def test_repeated_capability_method_on_specific_channel(self):
         test_maximum_time_ms = 10     # milliseconds
-        test_maximum_time = datetime.timedelta(milliseconds=test_maximum_time_ms)
+        test_maximum_time = hightime.timedelta(milliseconds=test_maximum_time_ms)
         test_reading = 5
         self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
         self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
@@ -863,7 +864,7 @@ class TestSession(object):
 
     def test_chained_repeated_capability_method_on_specific_channel(self):
         test_maximum_time_ms = 10     # milliseconds
-        test_maximum_time = datetime.timedelta(milliseconds=test_maximum_time_ms)
+        test_maximum_time = hightime.timedelta(milliseconds=test_maximum_time_ms)
         test_reading = 5
         self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
         self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
@@ -907,7 +908,7 @@ class TestSession(object):
         attribute_id = 1000008
         test_number_ms = -10000
         with nifake.Session('dev1') as session:
-            session.read_write_integer_with_converter = datetime.timedelta(milliseconds=test_number_ms)
+            session.read_write_integer_with_converter = hightime.timedelta(milliseconds=test_number_ms)
             self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32Matcher(test_number_ms))
 
     def test_get_attribute_real64(self):
@@ -930,7 +931,7 @@ class TestSession(object):
     def test_get_attribute_real64_with_converter(self):
         self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
         attribute_id = 1000007
-        test_number = 1.5
+        test_number = 1e-9
         self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = test_number
         with nifake.Session('dev1') as session:
             attr_timedelta = session.read_write_double_with_converter
@@ -940,9 +941,9 @@ class TestSession(object):
     def test_set_attribute_real64_with_converter(self):
         self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
         attribute_id = 1000007
-        test_number = -10.1
+        test_number = 1e-9
         with nifake.Session('dev1') as session:
-            session.read_write_double_with_converter = datetime.timedelta(seconds=test_number)
+            session.read_write_double_with_converter = hightime.timedelta(nanoseconds=1)
             self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViReal64Matcher(test_number))
 
     def test_get_attribute_string(self):
@@ -1251,15 +1252,15 @@ class TestSession(object):
         self.side_effects_helper['GetCalDateAndTime']['minute'] = minute
         with nifake.Session('dev1') as session:
             last_cal = session.get_cal_date_and_time(0)
-            assert isinstance(last_cal, datetime.datetime)
-            assert datetime.datetime(year, month, day, hour, minute) == last_cal
+            assert isinstance(last_cal, hightime.datetime)
+            assert hightime.datetime(year, month, day, hour, minute) == last_cal
 
     def test_get_cal_interval(self):
         self.patched_library.niFake_GetCalInterval = self.side_effects_helper.niFake_GetCalInterval
         self.side_effects_helper['GetCalInterval']['months'] = 24
         with nifake.Session('dev1') as session:
             last_cal = session.get_cal_interval()
-            assert isinstance(last_cal, datetime.timedelta)
+            assert isinstance(last_cal, hightime.timedelta)
             assert 730 == last_cal.days
 
     # Import/Export functions
@@ -1453,8 +1454,8 @@ class TestSession(object):
 
     def test_accept_list_of_time_values_as_timedelta_instances(self):
         self.patched_library.niFake_AcceptListOfDurationsInSeconds.side_effect = self.side_effects_helper.niFake_AcceptListOfDurationsInSeconds
-        time_values = [-1.5, 2.0]
-        delays = [datetime.timedelta(seconds=i) for i in time_values]
+        time_values = [-1.5, 2e-9]
+        delays = [datetime.timedelta(seconds=-1.5), hightime.timedelta(nanoseconds=2)]
         with nifake.Session('dev1') as session:
             session.accept_list_of_durations_in_seconds(delays)
             self.patched_library.niFake_AcceptListOfDurationsInSeconds.assert_called_once_with(
@@ -1466,7 +1467,7 @@ class TestSession(object):
     def test_return_timedelta(self):
         self.patched_library.niFake_ReturnDurationInSeconds.side_effect = self.side_effects_helper.niFake_ReturnDurationInSeconds
         time_value = -1.5
-        expected_timedelta = datetime.timedelta(seconds=time_value)
+        expected_timedelta = hightime.timedelta(seconds=time_value)
         self.side_effects_helper['ReturnDurationInSeconds']['timedelta'] = time_value
         with nifake.Session('dev1') as session:
             returned_timedelta = session.return_duration_in_seconds()
@@ -1480,7 +1481,7 @@ class TestSession(object):
         self.patched_library.niFake_ReturnListOfDurationsInSeconds.side_effect = self.side_effects_helper.niFake_ReturnListOfDurationsInSeconds
         time_values = [-1.5, 2.0]
         time_values_ctype = (nifake._visatype.ViReal64 * len(time_values))(*time_values)
-        expected_timedeltas = [datetime.timedelta(seconds=i) for i in time_values]
+        expected_timedeltas = [hightime.timedelta(seconds=i) for i in time_values]
         self.side_effects_helper['ReturnListOfDurationsInSeconds']['timedeltas'] = time_values_ctype
         with nifake.Session('dev1') as session:
             returned_timedeltas = session.return_list_of_durations_in_seconds(len(expected_timedeltas))

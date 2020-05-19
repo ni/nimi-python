@@ -2,7 +2,6 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -15,6 +14,7 @@ import nifake.errors as errors
 
 import nifake.custom_struct as custom_struct  # noqa: F401
 
+import hightime
 import nitclk
 
 # Used for __repr__
@@ -148,7 +148,7 @@ class _SessionBase(object):
     A property of type float with read/write access.
     '''
     read_write_double_with_converter = _attributes.AttributeViReal64TimeDeltaSeconds(1000007)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Property in seconds
     '''
@@ -172,7 +172,7 @@ class _SessionBase(object):
     A property of type integer with read/write access.
     '''
     read_write_integer_with_converter = _attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
     Property in milliseconds
     '''
@@ -461,7 +461,7 @@ class _SessionBase(object):
         nifake.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in milliseconds.
+            maximum_time (hightime.timedelta): Specifies the **maximum_time** allowed in milliseconds.
 
 
         Returns:
@@ -769,10 +769,10 @@ class Session(_SessionBase):
     def accept_list_of_durations_in_seconds(self, delays):
         r'''accept_list_of_durations_in_seconds
 
-        Accepts list of floats or datetime.timedelta instances representing time delays.
+        Accepts list of floats or hightime.timedelta instances representing time delays.
 
         Args:
-            delays (float in seconds or datetime.timedelta): A collection of time delay values.
+            delays (hightime.timedelta, datetime.timedelta, or float in seconds): A collection of time delay values.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1186,7 +1186,7 @@ class Session(_SessionBase):
         Returns the recommended maximum interval, in **months**, between external calibrations.
 
         Returns:
-            months (datetime.timedelta): Specifies the recommended maximum interval, in **months**, between external calibrations.
+            months (hightime.timedelta): Specifies the recommended maximum interval, in **months**, between external calibrations.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1277,11 +1277,11 @@ class Session(_SessionBase):
 
 
         Returns:
-            month (datetime.datetime): Indicates date and time of the last calibration.
+            month (hightime.datetime): Indicates date and time of the last calibration.
 
         '''
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
-        return datetime.datetime(year, month, day, hour, minute)
+        return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
@@ -1505,7 +1505,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in seconds.
+            maximum_time (hightime.timedelta): Specifies the **maximum_time** allowed in seconds.
 
 
         Returns:
@@ -1544,10 +1544,10 @@ class Session(_SessionBase):
     def return_duration_in_seconds(self):
         r'''return_duration_in_seconds
 
-        Returns a datetime.timedelta instance.
+        Returns a hightime.timedelta instance.
 
         Returns:
-            timedelta (datetime.timedelta): Duration in seconds.
+            timedelta (hightime.timedelta): Duration in seconds.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1560,14 +1560,14 @@ class Session(_SessionBase):
     def return_list_of_durations_in_seconds(self, number_of_elements):
         r'''return_list_of_durations_in_seconds
 
-        Returns a list of datetime.timedelta instances.
+        Returns a list of hightime.timedelta instances.
 
         Args:
             number_of_elements (int): Number of elements in output.
 
 
         Returns:
-            timedeltas (datetime.timedelta): Contains a list of datetime.timedelta instances.
+            timedeltas (hightime.timedelta): Contains a list of hightime.timedelta instances.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

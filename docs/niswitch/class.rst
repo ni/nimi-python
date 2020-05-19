@@ -1163,7 +1163,7 @@ wait_for_debounce
 
     .. py:currentmodule:: niswitch.Session
 
-    .. py:method:: wait_for_debounce(maximum_time_ms=datetime.timedelta(milliseconds=5000))
+    .. py:method:: wait_for_debounce(maximum_time_ms=hightime.timedelta(milliseconds=5000))
 
             Pauses until all created paths have settled. If the time you specify
             with the Maximum Time (ms) parameter elapsed before the switch paths
@@ -1185,14 +1185,14 @@ wait_for_debounce
                 
 
 
-            :type maximum_time_ms: int in milliseconds or datetime.timedelta
+            :type maximum_time_ms: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
 wait_for_scan_complete
 ----------------------
 
     .. py:currentmodule:: niswitch.Session
 
-    .. py:method:: wait_for_scan_complete(maximum_time_ms=datetime.timedelta(milliseconds=5000))
+    .. py:method:: wait_for_scan_complete(maximum_time_ms=hightime.timedelta(milliseconds=5000))
 
             Pauses until the switch module stops scanning or the maximum time has
             elapsed and returns a timeout error. If the time you specify with the
@@ -1215,7 +1215,7 @@ wait_for_scan_complete
                 
 
 
-            :type maximum_time_ms: int in milliseconds or datetime.timedelta
+            :type maximum_time_ms: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
 
 Properties
@@ -2306,17 +2306,17 @@ scan_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2441,17 +2441,17 @@ settling_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | Yes                                    |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

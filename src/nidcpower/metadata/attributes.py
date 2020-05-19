@@ -666,7 +666,7 @@ attributes = {
         'name': 'MEASURE_COMPLETE_EVENT_DELAY',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150047: {
         'access': 'read-write',
@@ -729,7 +729,7 @@ attributes = {
         'name': 'SOURCE_DELAY',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150054: {
         'access': 'read-write',
@@ -876,7 +876,7 @@ attributes = {
         'name': 'MEASURE_RECORD_DELTA_TIME',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150066: {
         'access': 'read-write',
@@ -1192,7 +1192,7 @@ attributes = {
         'name': 'PULSE_ON_TIME',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150094: {
         'access': 'read-write',
@@ -1206,7 +1206,7 @@ attributes = {
         'name': 'PULSE_OFF_TIME',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150095: {
         'access': 'read-write',
