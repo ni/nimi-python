@@ -173,6 +173,11 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
+    advance_trigger_terminal_name = _attributes.AttributeViString(1150143)
+    '''Type: str
+
+    Returns the fully qualified name for the Advance Trigger terminal.  You can use this terminal as the source for another trigger.
+    '''
     adv_trig_src = _attributes.AttributeViString(1150094)
     '''Type: str
 
@@ -362,11 +367,21 @@ class _SessionBase(object):
     Specifies the destination for the End of Acquisition Event.    When this event is asserted, the digitizer has completed sampling for all records.
     Consult your device documentation for a specific list of valid destinations.
     '''
+    end_of_acquisition_event_terminal_name = _attributes.AttributeViString(1150141)
+    '''Type: str
+
+    Returns the fully qualified name for the End of Acquisition Event terminal.    You can use this terminal as the source for a trigger.
+    '''
     end_of_record_event_output_terminal = _attributes.AttributeViString(1150099)
     '''Type: str
 
     Specifies the destination for the End of Record Event.    When this event is asserted, the digitizer has completed sampling for the current record.
     Consult your device documentation for a specific list of valid destinations.
+    '''
+    end_of_record_event_terminal_name = _attributes.AttributeViString(1150142)
+    '''Type: str
+
+    Returns the fully qualified name for the End of Record Event terminal.    You can use this terminal as the source for a trigger.
     '''
     end_of_record_to_advance_trigger_holdoff = _attributes.AttributeViReal64TimeDeltaSeconds(1150366)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
@@ -1103,17 +1118,32 @@ class _SessionBase(object):
     Specifies the destination for the Ready for Advance Event.    When this event is asserted, the digitizer is ready to receive an advance trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
+    ready_for_advance_event_terminal_name = _attributes.AttributeViString(1150146)
+    '''Type: str
+
+    Returns the fully qualified name for the Ready for Advance Event terminal.    You can use this terminal as the source for a trigger.
+    '''
     ready_for_ref_event_output_terminal = _attributes.AttributeViString(1150111)
     '''Type: str
 
     Specifies the destination for the Ready for Reference Event.  When this event is asserted, the digitizer is ready to receive a reference trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
+    ready_for_ref_event_terminal_name = _attributes.AttributeViString(1150147)
+    '''Type: str
+
+    Returns the fully qualified name for the Ready for Reference Event terminal.    You can use this terminal as the source for a trigger.
+    '''
     ready_for_start_event_output_terminal = _attributes.AttributeViString(1150110)
     '''Type: str
 
     Specifies the destination for the Ready for Start Event.  When this event is asserted, the digitizer is ready to receive a start trigger.
     Consult your device documentation for a specific list of valid destinations.
+    '''
+    ready_for_start_event_terminal_name = _attributes.AttributeViString(1150148)
+    '''Type: str
+
+    Returns the fully qualified name for the Ready for Start Event terminal.    You can use this terminal as the source for a trigger.
     '''
     records_done = _attributes.AttributeViInt32(1150083)
     '''Type: int
@@ -1139,6 +1169,11 @@ class _SessionBase(object):
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     The amount of time the trigger circuit must not detect a signal above the trigger level before the trigger is armed.  This property is useful for triggering at the beginning and not in the middle of signal bursts.
+    '''
+    ref_trigger_terminal_name = _attributes.AttributeViString(1150144)
+    '''Type: str
+
+    Returns the fully qualified name for the Reference Trigger terminal.  You can use this terminal as the source for another trigger.
     '''
     ref_trig_tdc_enable = _attributes.AttributeViBoolean(1150096)
     '''Type: bool
@@ -1319,6 +1354,11 @@ class _SessionBase(object):
     Pass the length of time you want the digitizer to wait after it starts acquiring data until the digitizer enables the trigger system to detect a reference (stop) trigger.
     Units: Seconds
     Valid Values: 0.0 - 171.8
+    '''
+    start_trigger_terminal_name = _attributes.AttributeViString(1150145)
+    '''Type: str
+
+    Returns the fully qualified name for the Start Trigger terminal.  You can use this terminal as the source for another trigger.
     '''
     supported_instrument_models = _attributes.AttributeViString(1050327)
     '''Type: str
@@ -2013,7 +2053,7 @@ class _SessionBase(object):
                 -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                 -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
                 -  **x_increment** (float) the time between points in the acquired waveform in seconds
-                -  **channel** (str) channel name this waveform was asquire from
+                -  **channel** (str) channel name this waveform was acquired from
                 -  **record** (int) record number of this waveform
                 -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
@@ -2812,7 +2852,7 @@ class _SessionBase(object):
                 -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                 -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
                 -  **x_increment** (float) the time between points in the acquired waveform in seconds
-                -  **channel** (str) channel name this waveform was asquire from
+                -  **channel** (str) channel name this waveform was acquired from
                 -  **record** (int) record number of this waveform
                 -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 

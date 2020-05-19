@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.0.0d13
+# This file is generated from NI-SCOPE API metadata version 20.1.0d1
 attributes = {
     1050005: {
         'access': 'read-write',
@@ -1181,6 +1181,94 @@ attributes = {
             'description': '\nReturns a comma-separated list of the channels enabled for the session in ascending order.\n\nIf no channels are enabled, this attribute returns an empty string, "".\nIf all channels are enabled, this attribute enumerates all of the channels.\n\nBecause this attribute returns channels in ascending order, but the order in which you specify channels for the input is important, the value of this attribute may not necessarily reflect the order in which NI-SCOPE performs certain actions.\n\nRefer to Channel String Syntax in the NI High-Speed Digitizers Help for more information on the effects of channel order in NI-SCOPE.\n'
         },
         'name': 'ENABLED_CHANNELS',
+        'resettable': False,
+        'type': 'ViString'
+    },
+    1150141: {
+        'access': 'read only',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nReturns the fully qualified name for the End of Acquisition Event terminal.    You can use this terminal as the source for a trigger.\n'
+        },
+        'lv_property': 'Synchronization:End of Acquisition:Terminal Name',
+        'name': 'END_OF_ACQUISITION_EVENT_TERMINAL_NAME',
+        'resettable': False,
+        'type': 'ViString'
+    },
+    1150142: {
+        'access': 'read only',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nReturns the fully qualified name for the End of Record Event terminal.    You can use this terminal as the source for a trigger.\n'
+        },
+        'lv_property': 'Synchronization:End of Record:Terminal Name',
+        'name': 'END_OF_RECORD_EVENT_TERMINAL_NAME',
+        'resettable': False,
+        'type': 'ViString'
+    },
+    1150143: {
+        'access': 'read only',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nReturns the fully qualified name for the Advance Trigger terminal.  You can use this terminal as the source for another trigger.\n'
+        },
+        'lv_property': 'Synchronization:Advance Trigger:Terminal Name',
+        'name': 'ADVANCE_TRIGGER_TERMINAL_NAME',
+        'resettable': False,
+        'type': 'ViString'
+    },
+    1150144: {
+        'access': 'read only',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nReturns the fully qualified name for the Reference Trigger terminal.  You can use this terminal as the source for another trigger.\n'
+        },
+        'lv_property': 'Triggering:Terminal Name',
+        'name': 'REF_TRIGGER_TERMINAL_NAME',
+        'resettable': False,
+        'type': 'ViString'
+    },
+    1150145: {
+        'access': 'read only',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nReturns the fully qualified name for the Start Trigger terminal.  You can use this terminal as the source for another trigger.\n'
+        },
+        'lv_property': 'Synchronization:Start Trigger (Acq. Arm):Terminal Name',
+        'name': 'START_TRIGGER_TERMINAL_NAME',
+        'resettable': False,
+        'type': 'ViString'
+    },
+    1150146: {
+        'access': 'read only',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nReturns the fully qualified name for the Ready for Advance Event terminal.    You can use this terminal as the source for a trigger.\n'
+        },
+        'lv_property': 'Synchronization:Ready for Advance:Terminal Name',
+        'name': 'READY_FOR_ADVANCE_EVENT_TERMINAL_NAME',
+        'resettable': False,
+        'type': 'ViString'
+    },
+    1150147: {
+        'access': 'read only',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nReturns the fully qualified name for the Ready for Reference Event terminal.    You can use this terminal as the source for a trigger.\n'
+        },
+        'lv_property': 'Synchronization:Ready for Reference:Terminal Name',
+        'name': 'READY_FOR_REF_EVENT_TERMINAL_NAME',
+        'resettable': False,
+        'type': 'ViString'
+    },
+    1150148: {
+        'access': 'read only',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nReturns the fully qualified name for the Ready for Start Event terminal.    You can use this terminal as the source for a trigger.\n'
+        },
+        'lv_property': 'Synchronization:Ready for Start:Terminal Name',
+        'name': 'READY_FOR_START_EVENT_TERMINAL_NAME',
         'resettable': False,
         'type': 'ViString'
     },

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.0.0d13
+# This file is generated from NI-SCOPE API metadata version 20.1.0d1
 enums = {
     '5900AccessoryInAScopeSessionValues': {
         'values': [

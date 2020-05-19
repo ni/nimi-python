@@ -1459,7 +1459,7 @@ fetch_into
                     -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                     -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
                     -  **x_increment** (float) the time between points in the acquired waveform in seconds
-                    -  **channel** (str) channel name this waveform was asquire from
+                    -  **channel** (str) channel name this waveform was acquired from
                     -  **record** (int) record number of this waveform
                     -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
@@ -1765,7 +1765,7 @@ read
                     -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                     -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
                     -  **x_increment** (float) the time between points in the acquired waveform in seconds
-                    -  **channel** (str) channel name this waveform was asquire from
+                    -  **channel** (str) channel name this waveform was acquired from
                     -  **record** (int) record number of this waveform
                     -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
@@ -2094,6 +2094,33 @@ acq_arm_source
 
                 - LabVIEW Property: **Synchronization:Start Trigger (Acq. Arm):Source**
                 - C Attribute: **NISCOPE_ATTR_ACQ_ARM_SOURCE**
+
+advance_trigger_terminal_name
+-----------------------------
+
+    .. py:attribute:: advance_trigger_terminal_name
+
+        Returns the fully qualified name for the Advance Trigger terminal.  You can use this terminal as the source for another trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Synchronization:Advance Trigger:Terminal Name**
+                - C Attribute: **NISCOPE_ATTR_ADVANCE_TRIGGER_TERMINAL_NAME**
 
 adv_trig_src
 ------------
@@ -2729,6 +2756,33 @@ end_of_acquisition_event_output_terminal
                 - LabVIEW Property: **Synchronization:End of Acquisition:Output Terminal**
                 - C Attribute: **NISCOPE_ATTR_END_OF_ACQUISITION_EVENT_OUTPUT_TERMINAL**
 
+end_of_acquisition_event_terminal_name
+--------------------------------------
+
+    .. py:attribute:: end_of_acquisition_event_terminal_name
+
+        Returns the fully qualified name for the End of Acquisition Event terminal.    You can use this terminal as the source for a trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Synchronization:End of Acquisition:Terminal Name**
+                - C Attribute: **NISCOPE_ATTR_END_OF_ACQUISITION_EVENT_TERMINAL_NAME**
+
 end_of_record_event_output_terminal
 -----------------------------------
 
@@ -2756,6 +2810,33 @@ end_of_record_event_output_terminal
 
                 - LabVIEW Property: **Synchronization:End of Record:Output Terminal**
                 - C Attribute: **NISCOPE_ATTR_END_OF_RECORD_EVENT_OUTPUT_TERMINAL**
+
+end_of_record_event_terminal_name
+---------------------------------
+
+    .. py:attribute:: end_of_record_event_terminal_name
+
+        Returns the fully qualified name for the End of Record Event terminal.    You can use this terminal as the source for a trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Synchronization:End of Record:Terminal Name**
+                - C Attribute: **NISCOPE_ATTR_END_OF_RECORD_EVENT_TERMINAL_NAME**
 
 end_of_record_to_advance_trigger_holdoff
 ----------------------------------------
@@ -3983,6 +4064,33 @@ ready_for_advance_event_output_terminal
                 - LabVIEW Property: **Synchronization:Ready for Advance:Output Terminal**
                 - C Attribute: **NISCOPE_ATTR_READY_FOR_ADVANCE_EVENT_OUTPUT_TERMINAL**
 
+ready_for_advance_event_terminal_name
+-------------------------------------
+
+    .. py:attribute:: ready_for_advance_event_terminal_name
+
+        Returns the fully qualified name for the Ready for Advance Event terminal.    You can use this terminal as the source for a trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Synchronization:Ready for Advance:Terminal Name**
+                - C Attribute: **NISCOPE_ATTR_READY_FOR_ADVANCE_EVENT_TERMINAL_NAME**
+
 ready_for_ref_event_output_terminal
 -----------------------------------
 
@@ -4011,6 +4119,33 @@ ready_for_ref_event_output_terminal
                 - LabVIEW Property: **Synchronization:Ready for Reference:Output Terminal**
                 - C Attribute: **NISCOPE_ATTR_READY_FOR_REF_EVENT_OUTPUT_TERMINAL**
 
+ready_for_ref_event_terminal_name
+---------------------------------
+
+    .. py:attribute:: ready_for_ref_event_terminal_name
+
+        Returns the fully qualified name for the Ready for Reference Event terminal.    You can use this terminal as the source for a trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Synchronization:Ready for Reference:Terminal Name**
+                - C Attribute: **NISCOPE_ATTR_READY_FOR_REF_EVENT_TERMINAL_NAME**
+
 ready_for_start_event_output_terminal
 -------------------------------------
 
@@ -4038,6 +4173,33 @@ ready_for_start_event_output_terminal
 
                 - LabVIEW Property: **Synchronization:Ready for Start:Output Terminal**
                 - C Attribute: **NISCOPE_ATTR_READY_FOR_START_EVENT_OUTPUT_TERMINAL**
+
+ready_for_start_event_terminal_name
+-----------------------------------
+
+    .. py:attribute:: ready_for_start_event_terminal_name
+
+        Returns the fully qualified name for the Ready for Start Event terminal.    You can use this terminal as the source for a trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Synchronization:Ready for Start:Terminal Name**
+                - C Attribute: **NISCOPE_ATTR_READY_FOR_START_EVENT_TERMINAL_NAME**
 
 records_done
 ------------
@@ -4173,6 +4335,33 @@ ref_trigger_minimum_quiet_time
 
                 - LabVIEW Property: **Triggering:Onboard Signal Processing:Ref Trigger Min Quiet Time**
                 - C Attribute: **NISCOPE_ATTR_REF_TRIGGER_MINIMUM_QUIET_TIME**
+
+ref_trigger_terminal_name
+-------------------------
+
+    .. py:attribute:: ref_trigger_terminal_name
+
+        Returns the fully qualified name for the Reference Trigger terminal.  You can use this terminal as the source for another trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Triggering:Terminal Name**
+                - C Attribute: **NISCOPE_ATTR_REF_TRIGGER_TERMINAL_NAME**
 
 ref_trig_tdc_enable
 -------------------
@@ -4876,6 +5065,33 @@ start_to_ref_trigger_holdoff
 
                 - LabVIEW Property: **Triggering:Start To Ref Trigger Holdoff**
                 - C Attribute: **NISCOPE_ATTR_START_TO_REF_TRIGGER_HOLDOFF**
+
+start_trigger_terminal_name
+---------------------------
+
+    .. py:attribute:: start_trigger_terminal_name
+
+        Returns the fully qualified name for the Start Trigger terminal.  You can use this terminal as the source for another trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Synchronization:Start Trigger (Acq. Arm):Terminal Name**
+                - C Attribute: **NISCOPE_ATTR_START_TRIGGER_TERMINAL_NAME**
 
 supported_instrument_models
 ---------------------------
