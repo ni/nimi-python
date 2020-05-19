@@ -2,6 +2,8 @@ import argparse
 import os
 import subprocess
 
+print(os.getcwd)
+
 parser = argparse.ArgumentParser(description='Runs system tests on the specified driver.',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-d', '--driver', required=True, type=str,
