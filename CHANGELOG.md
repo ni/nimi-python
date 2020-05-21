@@ -35,6 +35,11 @@ All notable changes to this project will be documented in this file.
             * `Session.requested_power_allocation`
             * `Session.power_allocation_mode`
 * ### NI-Digital Pattern Driver
+    * #### Added
+        * 0.9.0 release:
+            * Public API is considered complete, stable, and tested
+            * Parity with public API for other ADEs supported in NI-Digital Pattern Driver 19.0.1
+            * API reference documentation and example code are not complete
     * #### Changed
         * Changed initial_state parameters in `apply_levels_and_timing` to basic sequence types - [#1391](https://github.com/ni/nimi-python/issues/1391) 
         * Changed HistoryRAMCycleInformation.__repr__ to include `__module__` - [#1426](https://github.com/ni/nimi-python/issues/1426) 
