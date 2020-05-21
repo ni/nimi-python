@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * Change the type of applicable properties and method parameters from `datetime.timedelta` to `hightime.timedelta` and from `datetime.datetime` to `hightime.datetime`. - [#744](https://github.com/ni/nimi-python/issues/744), [#1368](https://github.com/ni/nimi-python/issues/1368), [#1382](https://github.com/ni/nimi-python/issues/1382), [#1397](https://github.com/ni/nimi-python/issues/1397)
+        * Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot. The version is 20.0.0 for all modules except nidigital, for which it is 19.0.1.
     * #### Removed
 * ### NI-DCPower
     * #### Added
