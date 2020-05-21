@@ -177,7 +177,7 @@ def test_measure_multiple(session):
 
 def test_query_max_current_limit(single_channel_session):
     max_current_limit = single_channel_session.query_max_current_limit(6)
-    expected_max_current_limit = 0.06  # for a simulated 4162 max current limit should be 0.06 for 6V Voltage level
+    expected_max_current_limit = 0.1  # for a simulated 4162 max current limit should be 0.1 for 6V Voltage level
     max_current_limit_in_range = abs(max_current_limit - expected_max_current_limit) <= max(1e-09 * max(abs(max_current_limit), abs(expected_max_current_limit)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
     assert max_current_limit_in_range is True
 
