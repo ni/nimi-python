@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.3.0](#130---2020-05-21)
 * [1.2.1](#121---2020-04-21)
 * [1.2.0](#120---2020-03-06)
 * [1.1.5](#115---2019-11-22)
@@ -22,13 +22,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.3.0 - 2020-05-21
 * ### ALL
-    * #### Added
     * #### Changed
         * Change the type of applicable properties and method parameters from `datetime.timedelta` to `hightime.timedelta` and from `datetime.datetime` to `hightime.datetime`. - [#744](https://github.com/ni/nimi-python/issues/744), [#1368](https://github.com/ni/nimi-python/issues/1368), [#1382](https://github.com/ni/nimi-python/issues/1382), [#1397](https://github.com/ni/nimi-python/issues/1397)
         * Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot. The version is 20.0.0 for all modules except nidigital, for which it is 19.0.1.
-    * #### Removed
 * ### NI-DCPower
     * #### Added
         * API parity with NI-DCPower 20.0 by adding the following properties:
@@ -36,27 +34,11 @@ All notable changes to this project will be documented in this file.
             * `Session.actual_power_allocation`
             * `Session.requested_power_allocation`
             * `Session.power_allocation_mode`
-    * #### Changed
-    * #### Removed
 * ### NI-Digital Pattern Driver
-    * #### Added
     * #### Changed
         * Changed initial_state parameters in `apply_levels_and_timing` to basic sequence types - [#1391](https://github.com/ni/nimi-python/issues/1391) 
         * Changed HistoryRAMCycleInformation.__repr__ to include `__module__` - [#1426](https://github.com/ni/nimi-python/issues/1426) 
         * Changed return type of `get_time_set_period` and `get_time_set_edge` to `datetime.timedelta` - [#1397](https://github.com/ni/nimi-python/issues/1397) 
-    * #### Removed
-* ### NI-DMM
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-FGEN
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### NI-SCOPE
     * #### Added
         * API parity with NI-SCOPE 20.0 by adding the following properties:
@@ -68,20 +50,6 @@ All notable changes to this project will be documented in this file.
             * `Session.ready_for_advance_event_terminal_name`
             * `Session.ready_for_ref_event_terminal_name`
             * `Session.ready_for_start_event_terminal_name`
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI Switch Executive
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-TClk
-    * #### Added
-    * #### Changed
-    * #### Removed
  
  
 ## 1.2.1 - 2020-04-21
