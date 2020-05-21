@@ -287,16 +287,7 @@ def test_filter_coefficients(session_5142):
         assert "Incorrect number of filter coefficients." in e.description
         assert e.code == -1074135024
     filter_coefficients = [0.01] * 35
-    try:
-        # TODO(marcoskirsch): The following should work. It doesn't due to internal NI-SCOPE driver bug 959625.
-        #                     The bug is fixed in NI-SCOPE 20.0 which has not shipped at the time of this writing.
-        #                     The workaround is to explicitly pass a channel rather than the default "" to the driver runtime
-        #                     which should be equivalent to "all channels" (in the PXI-5142 case, that would be "0,1").
-        session_5142.configure_equalization_filter_coefficients(filter_coefficients)
-        assert False, "Looks like NI-SCOPE bug 959625 has been fixed. You can now remove this try/except clause"
-    except niscope.errors.DriverError as e:
-        assert e.code == -214202
-    session_5142.channels[0].configure_equalization_filter_coefficients(filter_coefficients)
+    session_5142.configure_equalization_filter_coefficients(filter_coefficients)
     assert filter_coefficients == session_5142.get_equalization_filter_coefficients()
 
 
