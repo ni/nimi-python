@@ -1,7 +1,7 @@
 Examples
 ========
 
-`You can download all niswitch examples here <https://github.com/ni/nimi-python/releases/download/1.3.0/niswitch_examples.zip>`_
+`You can download all niswitch examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.3.0/niswitch_examples.zip>`_
 
 niswitch_connect_channels.py
 ----------------------------
