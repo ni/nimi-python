@@ -1,7 +1,7 @@
 Examples
 ========
 
-`You can download all nidcpower examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.2.1/nidcpower_examples.zip>`_
+`You can download all nidcpower examples here <https://github.com/ni/nimi-python/releases/download/1.3.0/nidcpower_examples.zip>`_
 
 nidcpower_advanced_sequence.py
 ------------------------------
