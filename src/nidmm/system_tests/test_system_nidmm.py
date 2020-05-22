@@ -159,8 +159,36 @@ def test_get_cal_date_time(session):
     assert last_cal.minute == 0   # cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00
 
 
+def test_get_self_cal_last_date_time(session):
+    last_cal = session.get_self_cal_last_date_and_time(0)
+    assert last_cal.month == 3
+    assert last_cal.day == 1
+    assert last_cal.year == 1940
+    assert last_cal.hour == 0
+    assert last_cal.minute == 0   # cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00
+
+
+def test_get_ext_cal_last_date_time(session):
+    last_cal = session.get_ext_cal_last_date_and_time(0)
+    assert last_cal.month == 3
+    assert last_cal.day == 1
+    assert last_cal.year == 1940
+    assert last_cal.hour == 0
+    assert last_cal.minute == 0   # cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00
+
+
 def test_get_last_cal_temperature(session):
     last_cal_temp = session.get_last_cal_temp(0)
+    assert last_cal_temp == 25   # last_cal_temp should be 25 for simulated 408x devices; 407x and 4065 returns 0
+
+
+def test_get_self_cal_last_temperature(session):
+    last_cal_temp = session.get_self_cal_last_temp(0)
+    assert last_cal_temp == 25   # last_cal_temp should be 25 for simulated 408x devices; 407x and 4065 returns 0
+
+
+def test_get_ext_cal_last_temperature(session):
+    last_cal_temp = session.get_ext_cal_last_temp(0)
     assert last_cal_temp == 25   # last_cal_temp should be 25 for simulated 408x devices; 407x and 4065 returns 0
 
 

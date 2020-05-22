@@ -98,6 +98,9 @@ class _RepeatedCapabilities(object):
         # Now we know there is at lease one entry, so we look if it is an empty string or not
         self._separator = '/' if len(self._current_repeated_capability_list[0]) > 0 else ''
 
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('nifake', self.__class__.__name__, pp.pformat(self.current_repeated_capability_list))
+
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
         rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
