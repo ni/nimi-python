@@ -2161,14 +2161,6 @@ class Session(_SessionBase):
         Returns:
             month (int): Indicates the **month** of the last calibration.
 
-            day (int): Indicates the **day** of the last calibration.
-
-            year (int): Indicates the **year** of the last calibration.
-
-            hour (int): Indicates the **hour** of the last calibration.
-
-            minute (int): Indicates the **minute** of the last calibration.
-
         '''
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return hightime.datetime(year, month, day, hour, minute)
@@ -2232,14 +2224,6 @@ class Session(_SessionBase):
 
         Returns:
             month (int): Indicates the **month** of the last calibration.
-
-            day (int): Indicates the **day** of the last calibration.
-
-            year (int): Indicates the **year** of the last calibration.
-
-            hour (int): Indicates the **hour** of the last calibration.
-
-            minute (int): Indicates the **minute** of the last calibration.
 
         '''
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)

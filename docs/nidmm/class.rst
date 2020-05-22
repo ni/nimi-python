@@ -1242,46 +1242,11 @@ get_ext_cal_last_date_and_time
 
             :type cal_type: int
 
-            :rtype: tuple (month, day, year, hour, minute)
-
-                WHERE
-
-                month (int): 
+            :rtype: int
+            :return:
 
 
                     Indicates the **month** of the last calibration.
-
-                    
-
-
-                day (int): 
-
-
-                    Indicates the **day** of the last calibration.
-
-                    
-
-
-                year (int): 
-
-
-                    Indicates the **year** of the last calibration.
-
-                    
-
-
-                hour (int): 
-
-
-                    Indicates the **hour** of the last calibration.
-
-                    
-
-
-                minute (int): 
-
-
-                    Indicates the **minute** of the last calibration.
 
                     
 
@@ -1434,46 +1399,11 @@ get_self_cal_last_date_and_time
 
             :type cal_type: int
 
-            :rtype: tuple (month, day, year, hour, minute)
-
-                WHERE
-
-                month (int): 
+            :rtype: int
+            :return:
 
 
                     Indicates the **month** of the last calibration.
-
-                    
-
-
-                day (int): 
-
-
-                    Indicates the **day** of the last calibration.
-
-                    
-
-
-                year (int): 
-
-
-                    Indicates the **year** of the last calibration.
-
-                    
-
-
-                hour (int): 
-
-
-                    Indicates the **hour** of the last calibration.
-
-                    
-
-
-                minute (int): 
-
-
-                    Indicates the **minute** of the last calibration.
 
                     
 

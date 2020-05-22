@@ -31,6 +31,16 @@ class SideEffectsHelper(object):
         self._defaults['AddWaveformProcessing']['return'] = 0
         self._defaults['AutoSetup'] = {}
         self._defaults['AutoSetup']['return'] = 0
+        self._defaults['CalFetchDate'] = {}
+        self._defaults['CalFetchDate']['return'] = 0
+        self._defaults['CalFetchDate']['month'] = None
+        self._defaults['CalFetchDate']['day'] = None
+        self._defaults['CalFetchDate']['year'] = None
+        self._defaults['CalFetchDate']['hour'] = None
+        self._defaults['CalFetchDate']['minute'] = None
+        self._defaults['CalFetchTemperature'] = {}
+        self._defaults['CalFetchTemperature']['return'] = 0
+        self._defaults['CalFetchTemperature']['temperature'] = None
         self._defaults['CalSelfCalibrate'] = {}
         self._defaults['CalSelfCalibrate']['return'] = 0
         self._defaults['ClearWaveformMeasurementStats'] = {}
@@ -227,6 +237,46 @@ class SideEffectsHelper(object):
         if self._defaults['AutoSetup']['return'] != 0:
             return self._defaults['AutoSetup']['return']
         return self._defaults['AutoSetup']['return']
+
+    def niScope_CalFetchDate(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
+        if self._defaults['CalFetchDate']['return'] != 0:
+            return self._defaults['CalFetchDate']['return']
+        # month
+        if self._defaults['CalFetchDate']['month'] is None:
+            raise MockFunctionCallError("niScope_CalFetchDate", param='month')
+        if month is not None:
+            month.contents.value = self._defaults['CalFetchDate']['month']
+        # day
+        if self._defaults['CalFetchDate']['day'] is None:
+            raise MockFunctionCallError("niScope_CalFetchDate", param='day')
+        if day is not None:
+            day.contents.value = self._defaults['CalFetchDate']['day']
+        # year
+        if self._defaults['CalFetchDate']['year'] is None:
+            raise MockFunctionCallError("niScope_CalFetchDate", param='year')
+        if year is not None:
+            year.contents.value = self._defaults['CalFetchDate']['year']
+        # hour
+        if self._defaults['CalFetchDate']['hour'] is None:
+            raise MockFunctionCallError("niScope_CalFetchDate", param='hour')
+        if hour is not None:
+            hour.contents.value = self._defaults['CalFetchDate']['hour']
+        # minute
+        if self._defaults['CalFetchDate']['minute'] is None:
+            raise MockFunctionCallError("niScope_CalFetchDate", param='minute')
+        if minute is not None:
+            minute.contents.value = self._defaults['CalFetchDate']['minute']
+        return self._defaults['CalFetchDate']['return']
+
+    def niScope_CalFetchTemperature(self, vi, cal_type, temperature):  # noqa: N802
+        if self._defaults['CalFetchTemperature']['return'] != 0:
+            return self._defaults['CalFetchTemperature']['return']
+        # temperature
+        if self._defaults['CalFetchTemperature']['temperature'] is None:
+            raise MockFunctionCallError("niScope_CalFetchTemperature", param='temperature')
+        if temperature is not None:
+            temperature.contents.value = self._defaults['CalFetchTemperature']['temperature']
+        return self._defaults['CalFetchTemperature']['return']
 
     def niScope_CalSelfCalibrate(self, vi, channel_list, option):  # noqa: N802
         if self._defaults['CalSelfCalibrate']['return'] != 0:
@@ -831,6 +881,10 @@ class SideEffectsHelper(object):
         mock_library.niScope_AddWaveformProcessing.return_value = 0
         mock_library.niScope_AutoSetup.side_effect = MockFunctionCallError("niScope_AutoSetup")
         mock_library.niScope_AutoSetup.return_value = 0
+        mock_library.niScope_CalFetchDate.side_effect = MockFunctionCallError("niScope_CalFetchDate")
+        mock_library.niScope_CalFetchDate.return_value = 0
+        mock_library.niScope_CalFetchTemperature.side_effect = MockFunctionCallError("niScope_CalFetchTemperature")
+        mock_library.niScope_CalFetchTemperature.return_value = 0
         mock_library.niScope_CalSelfCalibrate.side_effect = MockFunctionCallError("niScope_CalSelfCalibrate")
         mock_library.niScope_CalSelfCalibrate.return_value = 0
         mock_library.niScope_ClearWaveformMeasurementStats.side_effect = MockFunctionCallError("niScope_ClearWaveformMeasurementStats")
