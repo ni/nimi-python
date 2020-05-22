@@ -57,38 +57,6 @@ functions_additional_get_self_cal_last_date_and_time = {
                 },
                 'name': 'month',
                 'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Indicates the **day** of the last calibration.'
-                },
-                'name': 'day',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Indicates the **year** of the last calibration.'
-                },
-                'name': 'year',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Indicates the **hour** of the last calibration.'
-                },
-                'name': 'hour',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Indicates the **minute** of the last calibration.'
-                },
-                'name': 'minute',
-                'type': 'ViInt32'
             }
         ],
         'python_name': 'get_self_cal_last_date_and_time',
@@ -149,38 +117,6 @@ functions_additional_get_ext_cal_last_date_and_time = {
                     'description': 'Indicates the **month** of the last calibration.'
                 },
                 'name': 'month',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Indicates the **day** of the last calibration.'
-                },
-                'name': 'day',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Indicates the **year** of the last calibration.'
-                },
-                'name': 'year',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Indicates the **hour** of the last calibration.'
-                },
-                'name': 'hour',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Indicates the **minute** of the last calibration.'
-                },
-                'name': 'minute',
                 'type': 'ViInt32'
             }
         ],

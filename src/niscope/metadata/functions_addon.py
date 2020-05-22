@@ -4,4 +4,6 @@
 functions_override_metadata = {
 }
 
+functions_additional_get_ext_cal_last_date_and_time = {
 
+}
