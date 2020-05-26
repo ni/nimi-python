@@ -7,20 +7,6 @@ import time
 import urllib.request
 import zipfile
 
-parser = argparse.ArgumentParser(description='Downloads the latest release artifacts from nimi-python and runs system tests on the specified python package.',
-                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('-d', '--driver', required=True, type=str,
-                    help='Python package name.',
-                    choices=['nidigital', 'nidmm', 'nidcpower', 'niscope', 'nifgen', 'nimodinst', 'nise', 'niswitch', 'nitclk'])
-parser.add_argument('-pv', '--python-version', required=False, type=str,
-                    help='Python version to be run. This is used to invoke the appropriate tox environment.',
-                    choices=['py35', 'py36', 'py37', 'py38', ], default='py38')
-parser.add_argument('-pb', '--python-bitness', required=False, type=str,
-                    help='Python bitness to be run. "32" means pass "--32" to tox, which will force 32 bit. "any" does not pass anything to tox, so it will used whatever bitness is installed, preferring 64 if available',
-                    choices=['32', 'any'], default=None)
-args = parser.parse_args()
-
-
 print('****Installing tox to Python.****')
 results = subprocess.run(["python", '-m', 'pip', 'install', '--disable-pip-version-check', '--upgrade', 'pip', 'tox'], check=True)
 
@@ -57,6 +43,22 @@ zip_ref = zipfile.ZipFile(my_zip_file, 'r')
 zip_ref.extractall(zip_folder)
 zip_ref.close()
 print(zip_folder)
+
+src = os.path.join(zip_folder, os.listdir(zip_folder)[0], 'generated')
+
+parser = argparse.ArgumentParser(description='Downloads the latest release artifacts from nimi-python and runs system tests on the specified python package.',
+                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('-d', '--driver', required=True, type=str,
+                    help='Python package name.',
+                    choices=os.listdir(src))
+parser.add_argument('-pv', '--python-version', required=False, type=str,
+                    help='Python version to be run. This is used to invoke the appropriate tox environment.',
+                    choices=['py35', 'py36', 'py37', 'py38', ], default='py38')
+parser.add_argument('-pb', '--python-bitness', required=False, type=str,
+                    help='Python bitness to be run. "32" means pass "--32" to tox, which will force 32 bit. "any" does not pass anything to tox, so it will used whatever bitness is installed, preferring 64 if available',
+                    choices=['32', 'any'], default=None)
+args = parser.parse_args()
+
 
 drivers_using_other_driver = ['niscope', 'nifgen', 'nidigital', 'nitclk', ]
 other_driver_env = ''
