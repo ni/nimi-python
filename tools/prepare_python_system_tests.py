@@ -10,7 +10,8 @@ import zipfile
 parser = argparse.ArgumentParser(description='Downloads the latest release artifacts from nimi-python and runs system tests on the specified python package.',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-d', '--driver', required=True, type=str,
-                    help='Python package name.')
+                    help='Python package name.',
+                    choices=['nidigital', 'nidmm', 'nidcpower', 'niscope', 'nifgen', 'nimodinst', 'nise', 'niswitch', 'nitclk'])
 parser.add_argument('-pv', '--python-version', required=False, type=str,
                     help='Python version to be run. This is used to invoke the appropriate tox environment.',
                     choices=['py35', 'py36', 'py37', 'py38', ], default='py38')
