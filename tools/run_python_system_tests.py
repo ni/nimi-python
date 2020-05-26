@@ -1,7 +1,5 @@
 import argparse
-import os
 import subprocess
-
 
 parser = argparse.ArgumentParser(description='Runs system tests on the specified driver.',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
