@@ -1,5 +1,5 @@
-import argparse
 import os
+import argparse
 import subprocess
 
 src = r'..\..\src'
