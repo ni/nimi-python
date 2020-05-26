@@ -44,7 +44,7 @@ zip_ref.extractall(zip_folder)
 zip_ref.close()
 print(zip_folder)
 
-src = os.path.join(zip_folder, os.listdir(zip_folder)[0], 'generated')
+src = os.path.join(zip_folder, os.listdir(zip_folder)[0], 'src')
 
 parser = argparse.ArgumentParser(description='Downloads the latest release artifacts from nimi-python and runs system tests on the specified python package.',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
