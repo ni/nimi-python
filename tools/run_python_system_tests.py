@@ -1,11 +1,13 @@
 import argparse
 import subprocess
 
+src = r'..\..\src'
+
 parser = argparse.ArgumentParser(description='Runs system tests on the specified driver.',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-d', '--driver', required=True, type=str,
                     help='Python package name.',
-                    choices=['nidigital', 'nidmm', 'nidcpower', 'niscope', 'nifgen', 'nimodinst', 'nise', 'niswitch', 'nitclk'])
+                    choices=os.listdir(src))
 parser.add_argument('-pv', '--python-version', required=False, type=str,
                     help='Python version to be run. This is used to invoke the appropriate tox environment.',
                     choices=['py35', 'py36', 'py37', 'py38', ], default='py38')
