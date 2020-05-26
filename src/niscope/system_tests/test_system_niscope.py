@@ -195,6 +195,34 @@ def test_fetch_double_into(session):
             assert record_wfm[j] == waveform[i * test_record_length + j]
 
 
+def test_get_self_cal_last_date_time(session):
+    last_cal = session.get_self_cal_last_date_and_time(0)
+    assert last_cal.month == 3
+    assert last_cal.day == 1
+    assert last_cal.year == 1940
+    assert last_cal.hour == 0
+    assert last_cal.minute == 0
+
+
+def test_get_ext_cal_last_date_time(session):
+    last_cal = session.get_ext_cal_last_date_and_time(0)
+    assert last_cal.month == 3
+    assert last_cal.day == 1
+    assert last_cal.year == 1940
+    assert last_cal.hour == 0
+    assert last_cal.minute == 0
+
+
+def test_get_self_cal_last_temperature(session):
+    last_cal_temp = session.get_self_cal_last_temp(0)
+    assert last_cal_temp == 25
+
+
+def test_get_ext_cal_last_temperature(session):
+    last_cal_temp = session.get_ext_cal_last_temp(0)
+    assert last_cal_temp == 25
+
+
 def test_self_test(session):
     # We should not get an assert if self_test passes
     session.self_test()

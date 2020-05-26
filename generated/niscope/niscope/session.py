@@ -4216,6 +4216,22 @@ class Session(_SessionBase):
         return float(temperature_ctype.value)
 
     @ivi_synchronized
+    def get_cal_user_info(self):
+        r'''get_cal_user_info
+
+        Returns the miscellaneous information you can store during an external calibration using niScope Cal Store Misc Info.
+
+        Returns:
+            miscellaneous_information (str): A string containing up to four characters of miscellaneous information stored in the EEPROM.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        miscellaneous_information_ctype = (_visatype.ViChar * 4)()  # case C070
+        error_code = self._library.niScope_CalFetchMiscInfo(vi_ctype, miscellaneous_information_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return miscellaneous_information_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
     def get_self_cal_last_date_and_time(self, cal_type=0):
         '''get_self_cal_last_date_and_time
 

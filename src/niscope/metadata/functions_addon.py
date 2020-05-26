@@ -370,3 +370,35 @@ functions_additional_cal_fetch_self_temp = {
     }
 }
 
+functions_additional_get_cal_user_info = {
+    'CalFetchMiscInfo': {
+        'documentation': {
+            'description': 'Returns the miscellaneous information you can store during an external calibration using niScope Cal Store Misc Info.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'A string containing up to four characters of miscellaneous information stored in the EEPROM.'
+                },
+                'name': 'miscellaneousInformation',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 4
+                },
+                'type': 'ViString'
+            }
+        ],
+        'python_name': 'get_cal_user_info',
+        'returns': 'ViStatus'
+    }
+}
+

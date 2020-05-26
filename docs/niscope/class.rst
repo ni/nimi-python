@@ -1479,6 +1479,29 @@ fetch_into
 
 
 
+get_cal_user_info
+-----------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: get_cal_user_info()
+
+            Returns the miscellaneous information you can store during an external calibration using niScope Cal Store Misc Info.
+
+            
+
+
+
+            :rtype: str
+            :return:
+
+
+                    A string containing up to four characters of miscellaneous information stored in the EEPROM.
+
+                    
+
+
+
 get_equalization_filter_coefficients
 ------------------------------------
 

@@ -27,6 +27,7 @@ class Library(object):
         self.niScope_AddWaveformProcessing_cfunc = None
         self.niScope_AutoSetup_cfunc = None
         self.niScope_CalFetchDate_cfunc = None
+        self.niScope_CalFetchMiscInfo_cfunc = None
         self.niScope_CalFetchTemperature_cfunc = None
         self.niScope_CalSelfCalibrate_cfunc = None
         self.niScope_ClearWaveformMeasurementStats_cfunc = None
@@ -139,6 +140,14 @@ class Library(object):
                 self.niScope_CalFetchDate_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niScope_CalFetchDate_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_CalFetchDate_cfunc(vi, cal_type, month, day, year, hour, minute)
+
+    def niScope_CalFetchMiscInfo(self, vi, miscellaneous_information):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_CalFetchMiscInfo_cfunc is None:
+                self.niScope_CalFetchMiscInfo_cfunc = self._library.niScope_CalFetchMiscInfo
+                self.niScope_CalFetchMiscInfo_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niScope_CalFetchMiscInfo_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_CalFetchMiscInfo_cfunc(vi, miscellaneous_information)
 
     def niScope_CalFetchTemperature(self, vi, cal_type, temperature):  # noqa: N802
         with self._func_lock:
