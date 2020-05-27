@@ -9,5 +9,5 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
 
-        return self._cal_fetch_temp(0)
+        return self._cal_fetch_temperature(0)
 

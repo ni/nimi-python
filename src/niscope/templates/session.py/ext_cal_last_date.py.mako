@@ -9,6 +9,6 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
 
-        month, day, year, hour, minute = self._cal_fetch_date(1)
+        year, month, day, hour, minute = self._cal_fetch_date(1)
         return hightime.datetime(year, month, day, hour, minute)
 

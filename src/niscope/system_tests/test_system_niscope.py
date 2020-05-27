@@ -197,18 +197,18 @@ def test_fetch_double_into(session):
 
 def test_get_self_cal_last_date_time(session):
     last_cal = session.get_self_cal_last_date_and_time()
-    assert last_cal.month == 3
-    assert last_cal.day == 1
-    assert last_cal.year == 1940
+    assert last_cal.month == 12
+    assert last_cal.day == 21
+    assert last_cal.year == 1999
     assert last_cal.hour == 0
     assert last_cal.minute == 0
 
 
 def test_get_ext_cal_last_date_time(session):
     last_cal = session.get_ext_cal_last_date_and_time()
-    assert last_cal.month == 3
-    assert last_cal.day == 1
-    assert last_cal.year == 1940
+    assert last_cal.month == 12
+    assert last_cal.day == 21
+    assert last_cal.year == 1999
     assert last_cal.hour == 0
     assert last_cal.minute == 0
 

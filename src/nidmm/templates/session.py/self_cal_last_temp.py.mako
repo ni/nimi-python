@@ -9,5 +9,5 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
 
-        return self.get_cal_last_temp(0)
+        return self.get_last_cal_temp(0)
 
