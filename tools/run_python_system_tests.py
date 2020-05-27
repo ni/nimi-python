@@ -2,7 +2,7 @@ import argparse
 import os
 import subprocess
 
-src = r'..\..\src'
+src = r'../../src'
 
 parser = argparse.ArgumentParser(description='Runs system tests on the specified driver.',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
