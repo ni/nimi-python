@@ -50,6 +50,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-SCOPE
     * #### Added
+        * Exposed niScope_CalFetchDate, niScope_CalFetchTemperature, and niScope_CalFetchMiscInfo - [#1463}(https://github.com/ni/nimi-python/issues/1463)
     * #### Changed
     * #### Removed
 * ### NI-Switch
