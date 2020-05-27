@@ -4158,64 +4158,6 @@ class Session(_SessionBase):
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     @ivi_synchronized
-    def get_ext_cal_last_date_and_time(self, cal_type=1):
-        '''get_ext_cal_last_date_and_time
-
-        Returns the date and time of the last external calibration performed.
-
-        Note: The NI 4050 and NI 4060 are not supported.
-
-        Args:
-            cal_type (int): Specifies the type of calibration performed (external or self-calibration). Should be left as the default value.
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                Note: The NI 4065 does not support self-calibration.
-
-
-        Returns:
-            month (int): Indicates the **month** of the last calibration.
-
-        '''
-        month, day, year, hour, minute = self._cal_fetch_date(cal_type)
-        return hightime.datetime(year, month, day, hour, minute)
-
-    @ivi_synchronized
-    def get_ext_cal_last_temp(self, cal_type=1):
-        r'''get_ext_cal_last_temp
-
-        Returns the **Temperature** during the last external calibration procedure.
-
-        Note: The NI 4050 and NI 4060 are not supported.
-
-        Args:
-            cal_type (int): Specifies the type of calibration performed (external or self-calibration). Should be left as default.
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                Note: The NI 4065 does not support self-calibration.
-
-
-        Returns:
-            temperature (float): Returns the **temperature** during the last calibration.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        cal_type_ctype = _visatype.ViInt32(cal_type)  # case S150
-        temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niScope_CalFetchExtTemperature(vi_ctype, cal_type_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(temperature_ctype.value)
-
-    @ivi_synchronized
     def get_cal_user_info(self):
         r'''get_cal_user_info
 
@@ -4232,73 +4174,15 @@ class Session(_SessionBase):
         return miscellaneous_information_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_self_cal_last_date_and_time(self, cal_type=0):
-        '''get_self_cal_last_date_and_time
-
-        Returns the date and time of the last self calibration performed.
-
-        Note: The NI 4050 and NI 4060 are not supported.
-
-        Args:
-            cal_type (int): Specifies the type of calibration performed (external or self-calibration) Should be left as the default value.
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                Note: The NI 4065 does not support self-calibration.
-
-
-        Returns:
-            month (int): Indicates the **month** of the last calibration.
-
-        '''
-        month, day, year, hour, minute = self._cal_fetch_date(cal_type)
-        return hightime.datetime(year, month, day, hour, minute)
-
-    @ivi_synchronized
-    def get_self_cal_last_temp(self, cal_type=0):
-        r'''get_self_cal_last_temp
-
-        Returns the **Temperature** during the last self calibration procedure.
-
-        Note: The NI 4050 and NI 4060 are not supported.
-
-        Args:
-            cal_type (int): Specifies the type of calibration performed (external or self-calibration). Should be left as default.
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                Note: The NI 4065 does not support self-calibration.
-
-
-        Returns:
-            temperature (float): Returns the **temperature** during the last calibration.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        cal_type_ctype = _visatype.ViInt32(cal_type)  # case S150
-        temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niScope_CalFetchSelfTemperature(vi_ctype, cal_type_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(temperature_ctype.value)
-
-    @ivi_synchronized
-    def get_cal_last_temp(self, cal_type=1):
-        r'''get_cal_last_temp
+    def _cal_fetch_temperature(self, cal_type):
+        r'''_cal_fetch_temperature
 
         Returns the **Temperature** during the last external calibration procedure.
 
         Note: The NI 4050 and NI 4060 are not supported.
 
         Args:
-            cal_type (int): Specifies the type of calibration performed (external or self-calibration). Should be left as default.
+            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
 
                 +-----------------------------------+---+----------------------+
                 | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
@@ -4937,6 +4821,68 @@ class Session(_SessionBase):
         error_code = self._library.niScope_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last external calibration performed.
+
+        Note: The NI 4050 and NI 4060 are not supported.
+
+        Returns:
+            month (int): Indicates the **month** of the last calibration.
+
+        '''
+
+        month, day, year, hour, minute = self._cal_fetch_date(1)
+        return hightime.datetime(year, month, day, hour, minute)
+
+    @ivi_synchronized
+    def get_ext_cal_last_temp(self):
+        '''get_ext_cal_last_temp
+
+        Returns the **Temperature** during the last external calibration procedure.
+
+        Note: The NI 4050 and NI 4060 are not supported.
+
+        Returns:
+            temperature (float): Returns the **temperature** during the last calibration.
+
+        '''
+
+        return self._cal_fetch_temp(1)
+
+    @ivi_synchronized
+    def get_self_cal_last_date_and_time(self):
+        '''get_self_cal_last_date_and_time
+
+        Returns the date and time of the last self calibration performed.
+
+        Note: The NI 4050 and NI 4060 are not supported.
+
+        Returns:
+            month (int): Indicates the **month** of the last calibration.
+
+        '''
+
+        month, day, year, hour, minute = self._cal_fetch_date(0)
+        return hightime.datetime(year, month, day, hour, minute)
+
+    @ivi_synchronized
+    def get_self_cal_last_temp(self):
+        '''get_self_cal_last_temp
+
+        Returns the **Temperature** during the last self calibration procedure.
+
+        Note: The NI 4050 and NI 4060 are not supported.
+
+        Returns:
+            temperature (float): Returns the **temperature** during the last calibration.
+
+        '''
+
+        return self._cal_fetch_temp(0)
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):

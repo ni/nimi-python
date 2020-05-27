@@ -1525,7 +1525,7 @@ get_ext_cal_last_date_and_time
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: get_ext_cal_last_date_and_time(cal_type=1)
+    .. py:method:: get_ext_cal_last_date_and_time()
 
             Returns the date and time of the last external calibration performed.
 
@@ -1534,22 +1534,6 @@ get_ext_cal_last_date_and_time
             .. note:: The NI 4050 and NI 4060 are not supported.
 
 
-
-            :param cal_type:
-
-
-                Specifies the type of calibration performed (external or self-calibration). Should be left as the default value.
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                .. note:: The NI 4065 does not support self-calibration.
-
-
-            :type cal_type: int
 
             :rtype: int
             :return:
@@ -1566,7 +1550,7 @@ get_ext_cal_last_temp
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: get_ext_cal_last_temp(cal_type=1)
+    .. py:method:: get_ext_cal_last_temp()
 
             Returns the **Temperature** during the last external calibration procedure.
 
@@ -1575,22 +1559,6 @@ get_ext_cal_last_temp
             .. note:: The NI 4050 and NI 4060 are not supported.
 
 
-
-            :param cal_type:
-
-
-                Specifies the type of calibration performed (external or self-calibration). Should be left as default.
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                .. note:: The NI 4065 does not support self-calibration.
-
-
-            :type cal_type: int
 
             :rtype: float
             :return:
@@ -1607,7 +1575,7 @@ get_self_cal_last_date_and_time
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: get_self_cal_last_date_and_time(cal_type=0)
+    .. py:method:: get_self_cal_last_date_and_time()
 
             Returns the date and time of the last self calibration performed.
 
@@ -1616,22 +1584,6 @@ get_self_cal_last_date_and_time
             .. note:: The NI 4050 and NI 4060 are not supported.
 
 
-
-            :param cal_type:
-
-
-                Specifies the type of calibration performed (external or self-calibration) Should be left as the default value.
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                .. note:: The NI 4065 does not support self-calibration.
-
-
-            :type cal_type: int
 
             :rtype: int
             :return:
@@ -1648,7 +1600,7 @@ get_self_cal_last_temp
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: get_self_cal_last_temp(cal_type=0)
+    .. py:method:: get_self_cal_last_temp()
 
             Returns the **Temperature** during the last self calibration procedure.
 
@@ -1657,22 +1609,6 @@ get_self_cal_last_temp
             .. note:: The NI 4050 and NI 4060 are not supported.
 
 
-
-            :param cal_type:
-
-
-                Specifies the type of calibration performed (external or self-calibration). Should be left as default.
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                .. note:: The NI 4065 does not support self-calibration.
-
-
-            :type cal_type: int
 
             :rtype: float
             :return:

@@ -46,6 +46,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-DMM
     * #### Added
+        * Added `get_ext_cal_last_date_and_time`, `get_self_cal_last_date_and_time`, `get_ext_cal_last_temp`, and `get_self_cal_last_temp` to be consistent with the rest of nimi-python - [#1462](https://github.com/ni/nimi-python/issues/1462)
     * #### Changed
     * #### Removed
 * ### NI-FGEN
@@ -67,6 +68,7 @@ All notable changes to this project will be documented in this file.
             * `Session.ready_for_advance_event_terminal_name`
             * `Session.ready_for_ref_event_terminal_name`
             * `Session.ready_for_start_event_terminal_name`
+        * Exposed niScope_CalFetchDate, niScope_CalFetchTemperature, and niScope_CalFetchMiscInfo - [#1463}(https://github.com/ni/nimi-python/issues/1463)
     * #### Changed
     * #### Removed
 * ### NI-Switch
