@@ -2164,7 +2164,7 @@ class Session(_SessionBase):
 
         '''
 
-        return self.get_cal_last_temp(1)
+        return self.get_last_cal_temp(1)
 
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
@@ -2195,7 +2195,7 @@ class Session(_SessionBase):
 
         '''
 
-        return self.get_cal_last_temp(0)
+        return self.get_last_cal_temp(0)
 
     @ivi_synchronized
     def get_self_cal_supported(self):

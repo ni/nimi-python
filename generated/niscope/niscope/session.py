@@ -4835,7 +4835,7 @@ class Session(_SessionBase):
 
         '''
 
-        month, day, year, hour, minute = self._cal_fetch_date(1)
+        year, month, day, hour, minute = self._cal_fetch_date(1)
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
@@ -4851,7 +4851,7 @@ class Session(_SessionBase):
 
         '''
 
-        return self._cal_fetch_temp(1)
+        return self._cal_fetch_temperature(1)
 
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
@@ -4866,7 +4866,7 @@ class Session(_SessionBase):
 
         '''
 
-        month, day, year, hour, minute = self._cal_fetch_date(0)
+        year, month, day, hour, minute = self._cal_fetch_date(0)
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
@@ -4882,7 +4882,7 @@ class Session(_SessionBase):
 
         '''
 
-        return self._cal_fetch_temp(0)
+        return self._cal_fetch_temperature(0)
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
