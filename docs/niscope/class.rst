@@ -1479,6 +1479,29 @@ fetch_into
 
 
 
+get_cal_user_info
+-----------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: get_cal_user_info()
+
+            Returns the miscellaneous information you can store during an external calibration using niScope Cal Store Misc Info.
+
+            
+
+
+
+            :rtype: str
+            :return:
+
+
+                    A string containing up to four characters of miscellaneous information stored in the EEPROM.
+
+                    
+
+
+
 get_equalization_filter_coefficients
 ------------------------------------
 
@@ -1495,6 +1518,106 @@ get_equalization_filter_coefficients
                 niscope.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
                 niscope.Session repeated capabilities container, and calling this method on the result.
+
+
+get_ext_cal_last_date_and_time
+------------------------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: get_ext_cal_last_date_and_time()
+
+            Returns the date and time of the last external calibration performed.
+
+            
+
+            .. note:: The NI 4050 and NI 4060 are not supported.
+
+
+
+            :rtype: int
+            :return:
+
+
+                    Indicates the **month** of the last calibration.
+
+                    
+
+
+
+get_ext_cal_last_temp
+---------------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: get_ext_cal_last_temp()
+
+            Returns the **Temperature** during the last external calibration procedure.
+
+            
+
+            .. note:: The NI 4050 and NI 4060 are not supported.
+
+
+
+            :rtype: float
+            :return:
+
+
+                    Returns the **temperature** during the last calibration.
+
+                    
+
+
+
+get_self_cal_last_date_and_time
+-------------------------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: get_self_cal_last_date_and_time()
+
+            Returns the date and time of the last self calibration performed.
+
+            
+
+            .. note:: The NI 4050 and NI 4060 are not supported.
+
+
+
+            :rtype: int
+            :return:
+
+
+                    Indicates the **month** of the last calibration.
+
+                    
+
+
+
+get_self_cal_last_temp
+----------------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: get_self_cal_last_temp()
+
+            Returns the **Temperature** during the last self calibration procedure.
+
+            
+
+            .. note:: The NI 4050 and NI 4060 are not supported.
+
+
+
+            :rtype: float
+            :return:
+
+
+                    Returns the **temperature** during the last calibration.
+
+                    
+
 
 
 import_attribute_configuration_buffer
