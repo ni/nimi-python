@@ -9,14 +9,13 @@ functions_additional_internal_cal_fetch_temperature = {
         'codegen_method': 'private',
         'method_name_for_documentation': '_cal_fetch_temperature',
         'documentation': {
-            'description': 'Returns the **Temperature** during the last external calibration procedure.',
-            'note': 'The NI 4050 and NI 4060 are not supported.'
+            'description': 'Returns the **Temperature** in degrees Celsius during the last external calibration procedure.',
         },
         'parameters': [
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM_init or niDMM_InitWithOptions. The default is None.'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -25,7 +24,6 @@ functions_additional_internal_cal_fetch_temperature = {
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the type of calibration performed (external or self-calibration).',
-                    'note': 'The NI 4065 does not support self-calibration.',
                     'table_body': [
                         [
                             'NIDMM_VAL_INTERNAL_AREA (default)',
@@ -45,7 +43,7 @@ functions_additional_internal_cal_fetch_temperature = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns the **temperature** during the last calibration.'
+                    'description': 'Returns the **temperature** in degrees Celsius during the last calibration.'
                 },
                 'name': 'temperature',
                 'type': 'ViReal64'
@@ -60,14 +58,13 @@ functions_additional_internal_cal_fetch_date = {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Returns the date and time of the last calibration performed.',
-            'note': 'The NI 4050 and NI 4060 are not supported.'
         },
         'method_name_for_documentation': '_cal_fetch_date',
         'parameters': [
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM_init or niDMM_InitWithOptions. The default is None.'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -76,7 +73,6 @@ functions_additional_internal_cal_fetch_date = {
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the type of calibration performed (external or self-calibration).',
-                    'note': 'The NI 4065 does not support self-calibration.',
                     'table_body': [
                         [
                             'NIDMM_VAL_INTERNAL_AREA (default)',
@@ -139,24 +135,23 @@ functions_additional_internal_cal_fetch_date = {
 }
 
 functions_additional_get_self_cal_last_date_and_time = {
-    'GetLastSelfCalDateAndTime': {
+    'FancyGetLastSelfCalDateAndTime': {
         'codegen_method': 'python-only',
         'documentation': {
             'description': 'Returns the date and time of the last self calibration performed.',
-            'note': 'The NI 4050 and NI 4060 are not supported.'
         },
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'self_cal_last_date'
+                'session_filename': 'fancy_self_cal_last_date'
             }
         ],
         'parameters': [
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM_init or niDMM_InitWithOptions. The default is None.'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -164,9 +159,9 @@ functions_additional_get_self_cal_last_date_and_time = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Indicates the **month** of the last calibration.'
+                    'description': 'Indicates the **datetime** of the last calibration.'
                 },
-                'name': 'month',
+                'name': 'datetime',
                 'type': 'ViInt32'
             }
         ],
@@ -176,24 +171,23 @@ functions_additional_get_self_cal_last_date_and_time = {
 }
 
 functions_additional_get_ext_cal_last_date_and_time = {
-    'GetLastExtCalDateAndTime': {
+    'FancyGetLastExtCalDateAndTime': {
         'codegen_method': 'python-only',
         'documentation': {
             'description': 'Returns the date and time of the last external calibration performed.',
-            'note': 'The NI 4050 and NI 4060 are not supported.'
         },
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'ext_cal_last_date'
+                'session_filename': 'fancy_ext_cal_last_date'
             }
         ],
         'parameters': [
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM_init or niDMM_InitWithOptions. The default is None.'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -201,9 +195,9 @@ functions_additional_get_ext_cal_last_date_and_time = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Indicates the **month** of the last calibration.'
+                    'description': 'Indicates the **datetime** of the last calibration.'
                 },
-                'name': 'month',
+                'name': 'datetime',
                 'type': 'ViInt32'
             }
         ],
@@ -213,25 +207,24 @@ functions_additional_get_ext_cal_last_date_and_time = {
 }
 
 functions_additional_get_self_cal_last_temp = {
-    'GetLastSelfCalTemp': {
+    'FancyGetLastSelfCalTemp': {
         'codegen_method': 'python-only',
         'python_name': 'get_self_cal_last_temp',
         'documentation': {
-            'description': 'Returns the **Temperature** during the last self calibration procedure.',
-            'note': 'The NI 4050 and NI 4060 are not supported.'
+            'description': 'Returns the **Temperature** in degrees Celsius during the last self calibration procedure.',
         },
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'self_cal_last_temp'
+                'session_filename': 'fancy_self_cal_last_temp'
             }
         ],
         'parameters': [
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM_init or niDMM_InitWithOptions. The default is None.'
+                    'description': 'The instrument handle you obtain from niScope_init that identifies a particular instrument session.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -239,7 +232,7 @@ functions_additional_get_self_cal_last_temp = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns the **temperature** during the last calibration.'
+                    'description': 'Returns the **temperature** in degrees Celsius during the last calibration.'
                 },
                 'name': 'temperature',
                 'type': 'ViReal64'
@@ -250,25 +243,24 @@ functions_additional_get_self_cal_last_temp = {
 }
 
 functions_additional_get_ext_cal_last_temp = {
-    'GetLastExtCalTemp': {
+    'FancyGetLastExtCalTemp': {
         'codegen_method': 'python-only',
         'python_name': 'get_ext_cal_last_temp',
         'documentation': {
-            'description': 'Returns the **Temperature** during the last external calibration procedure.',
-            'note': 'The NI 4050 and NI 4060 are not supported.'
+            'description': 'Returns the **Temperature** in degrees Celsius during the last external calibration procedure.',
         },
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'ext_cal_last_temp'
+                'session_filename': 'fancy_ext_cal_last_temp'
             }
         ],
         'parameters': [
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM_init or niDMM_InitWithOptions. The default is None.'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -276,7 +268,7 @@ functions_additional_get_ext_cal_last_temp = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns the **temperature** during the last calibration.'
+                    'description': 'Returns the **temperature** in degrees Celsius during the last calibration.'
                 },
                 'name': 'temperature',
                 'type': 'ViReal64'
