@@ -1,8 +1,9 @@
 import argparse
 import os
+import pathlib
 import subprocess
 
-src = r'../../src'
+src = pathlib.Path().resolve().parents[1] / 'src'
 
 parser = argparse.ArgumentParser(description='Runs system tests on the specified driver.',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
