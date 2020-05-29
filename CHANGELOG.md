@@ -52,7 +52,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
-* ### `niswitch` (NI-Switch)
+* ### `niswitch` (NI-SWITCH)
     * #### Added
     * #### Changed
     * #### Removed
@@ -358,7 +358,7 @@ All notable changes to this project will be documented in this file.
 * ### `nimodinst` (NI-ModInst)
     * #### Changed
         * Double close will now allow NI-ModInst to return error
-* ### `niswitch` (NI-Switch)
+* ### `niswitch` (NI-SWITCH)
     * #### Removed
         * `cabled_module_scan_advanced_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
         * `cabled_module_trigger_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
@@ -720,7 +720,7 @@ All notable changes to this project will be documented in this file.
         * Removed these enums and disconnected them from the associated attribute (Fix [#666](https://github.com/ni/nimi-python/issues/666))
             * `DCBias` - `DC_BIAS`
             * `OffsetCompensatedOhms` - `OFFSET_COMP_OHMS`
-* ### `niswitch` (NI-Switch)
+* ### `niswitch` (NI-SWITCH)
     * #### Changed
         * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
             * `configure_scan_trigger()`
@@ -794,7 +794,7 @@ All notable changes to this project will be documented in this file.
     * Removed `actual_number_of_points` from `fetch_multi_point()` returned tuple
     * Removed `actual_number_of_points` from `read_multi_point()` returned tuple
     * Removed `actual_number_of_points` from `read_waveform()` returned tuple
-* ### `niswitch` (NI-Switch)
+* ### `niswitch` (NI-SWITCH)
   * #### Removed
     * Removed `init_with_topology`. Clients should use `niswitch.Session` constructor. See [#660](https://github.com/ni/nimi-python/issues/660).
 * ### `nidcpower` (NI-DCPower)
@@ -868,7 +868,7 @@ All notable changes to this project will be documented in this file.
       * `TriggerSource.TTL_3`
       * `TriggerSource.TTL_7`
       * `TriggerSource.PXI_STAR`
-* ### `niswitch` (NI-Switch)
+* ### `niswitch` (NI-SWITCH)
   * #### Removed
     * Support for `is_debounced` and `is_scanning` functions. Instead use the attribute of the same name.
 * ### `nidcpower` (NI-DCPower)
@@ -901,7 +901,7 @@ All notable changes to this project will be documented in this file.
     * Added default values to some parameters.
   * #### Removed
     * Removed methods that aren’t useful in the Python bindings.
-* ### `niswitch` (NI-Switch)
+* ### `niswitch` (NI-SWITCH)
   * #### Changed
     * Added default values to some parameters.
   * #### Removed
@@ -928,7 +928,7 @@ All notable changes to this project will be documented in this file.
       with nimodinst.Session('nidmm') as session:
           name = session[i].device_name
       ```
-* ### `niswitch` (NI-Switch)
+* ### `niswitch` (NI-SWITCH)
   * #### Added
     * Initial release
 
@@ -974,7 +974,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Added
     * #### Changed
     * #### Removed
-* ### `niswitch` (NI-Switch)
+* ### `niswitch` (NI-SWITCH)
     * #### Added
     * #### Changed
     * #### Removed
