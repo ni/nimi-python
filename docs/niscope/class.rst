@@ -1479,29 +1479,6 @@ fetch_into
 
 
 
-get_cal_user_info
------------------
-
-    .. py:currentmodule:: niscope.Session
-
-    .. py:method:: get_cal_user_info()
-
-            Returns the miscellaneous information you can store during an external calibration using niScope Cal Store Misc Info.
-
-            
-
-
-
-            :rtype: str
-            :return:
-
-
-                    A string containing up to four characters of miscellaneous information stored in the EEPROM.
-
-                    
-
-
-
 get_equalization_filter_coefficients
 ------------------------------------
 
@@ -1531,15 +1508,13 @@ get_ext_cal_last_date_and_time
 
             
 
-            .. note:: The NI 4050 and NI 4060 are not supported.
-
 
 
             :rtype: int
             :return:
 
 
-                    Indicates the **month** of the last calibration.
+                    Indicates the **datetime** of the last calibration.
 
                     
 
@@ -1552,11 +1527,9 @@ get_ext_cal_last_temp
 
     .. py:method:: get_ext_cal_last_temp()
 
-            Returns the **Temperature** during the last external calibration procedure.
+            Returns the **Temperature** in degrees Celsius during the last external calibration procedure.
 
             
-
-            .. note:: The NI 4050 and NI 4060 are not supported.
 
 
 
@@ -1564,7 +1537,7 @@ get_ext_cal_last_temp
             :return:
 
 
-                    Returns the **temperature** during the last calibration.
+                    Returns the **temperature** in degrees Celsius during the last calibration.
 
                     
 
@@ -1581,15 +1554,13 @@ get_self_cal_last_date_and_time
 
             
 
-            .. note:: The NI 4050 and NI 4060 are not supported.
-
 
 
             :rtype: int
             :return:
 
 
-                    Indicates the **month** of the last calibration.
+                    Indicates the **datetime** of the last calibration.
 
                     
 
@@ -1602,11 +1573,9 @@ get_self_cal_last_temp
 
     .. py:method:: get_self_cal_last_temp()
 
-            Returns the **Temperature** during the last self calibration procedure.
+            Returns the **Temperature** in degrees Celsius during the last self calibration procedure.
 
             
-
-            .. note:: The NI 4050 and NI 4060 are not supported.
 
 
 
@@ -1614,7 +1583,7 @@ get_self_cal_last_temp
             :return:
 
 
-                    Returns the **temperature** during the last calibration.
+                    Returns the **temperature** in degrees Celsius during the last calibration.
 
                     
 

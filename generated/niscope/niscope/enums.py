@@ -147,6 +147,12 @@ class CableSenseMode(Enum):
     '''
 
 
+class _CalibrationTypes(Enum):
+    SELF = 1
+    EXTERNAL = 0
+    MANUFACTURE = 2
+
+
 class _ClearableMeasurement(Enum):
     ALL_MEASUREMENTS = 10000
     MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004

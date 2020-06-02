@@ -33,14 +33,12 @@ class SideEffectsHelper(object):
         self._defaults['AutoSetup']['return'] = 0
         self._defaults['CalFetchDate'] = {}
         self._defaults['CalFetchDate']['return'] = 0
+        self._defaults['CalFetchDate']['year'] = None
         self._defaults['CalFetchDate']['month'] = None
         self._defaults['CalFetchDate']['day'] = None
-        self._defaults['CalFetchDate']['year'] = None
-        self._defaults['CalFetchDate']['hour'] = None
-        self._defaults['CalFetchDate']['minute'] = None
         self._defaults['CalFetchMiscInfo'] = {}
         self._defaults['CalFetchMiscInfo']['return'] = 0
-        self._defaults['CalFetchMiscInfo']['miscellaneousInformation'] = None
+        self._defaults['CalFetchMiscInfo']['miscInfo'] = None
         self._defaults['CalFetchTemperature'] = {}
         self._defaults['CalFetchTemperature']['return'] = 0
         self._defaults['CalFetchTemperature']['temperature'] = None
@@ -241,9 +239,14 @@ class SideEffectsHelper(object):
             return self._defaults['AutoSetup']['return']
         return self._defaults['AutoSetup']['return']
 
-    def niScope_CalFetchDate(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
+    def niScope_CalFetchDate(self, vi, which_one, year, month, day):  # noqa: N802
         if self._defaults['CalFetchDate']['return'] != 0:
             return self._defaults['CalFetchDate']['return']
+        # year
+        if self._defaults['CalFetchDate']['year'] is None:
+            raise MockFunctionCallError("niScope_CalFetchDate", param='year')
+        if year is not None:
+            year.contents.value = self._defaults['CalFetchDate']['year']
         # month
         if self._defaults['CalFetchDate']['month'] is None:
             raise MockFunctionCallError("niScope_CalFetchDate", param='month')
@@ -254,38 +257,23 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_CalFetchDate", param='day')
         if day is not None:
             day.contents.value = self._defaults['CalFetchDate']['day']
-        # year
-        if self._defaults['CalFetchDate']['year'] is None:
-            raise MockFunctionCallError("niScope_CalFetchDate", param='year')
-        if year is not None:
-            year.contents.value = self._defaults['CalFetchDate']['year']
-        # hour
-        if self._defaults['CalFetchDate']['hour'] is None:
-            raise MockFunctionCallError("niScope_CalFetchDate", param='hour')
-        if hour is not None:
-            hour.contents.value = self._defaults['CalFetchDate']['hour']
-        # minute
-        if self._defaults['CalFetchDate']['minute'] is None:
-            raise MockFunctionCallError("niScope_CalFetchDate", param='minute')
-        if minute is not None:
-            minute.contents.value = self._defaults['CalFetchDate']['minute']
         return self._defaults['CalFetchDate']['return']
 
-    def niScope_CalFetchMiscInfo(self, vi, miscellaneous_information):  # noqa: N802
+    def niScope_CalFetchMiscInfo(self, vi, misc_info):  # noqa: N802
         if self._defaults['CalFetchMiscInfo']['return'] != 0:
             return self._defaults['CalFetchMiscInfo']['return']
-        # miscellaneous_information
-        if self._defaults['CalFetchMiscInfo']['miscellaneousInformation'] is None:
-            raise MockFunctionCallError("niScope_CalFetchMiscInfo", param='miscellaneousInformation')
-        test_value = self._defaults['CalFetchMiscInfo']['miscellaneousInformation']
+        # misc_info
+        if self._defaults['CalFetchMiscInfo']['miscInfo'] is None:
+            raise MockFunctionCallError("niScope_CalFetchMiscInfo", param='miscInfo')
+        test_value = self._defaults['CalFetchMiscInfo']['miscInfo']
         if type(test_value) is str:
             test_value = test_value.encode('ascii')
-        assert len(miscellaneous_information) >= len(test_value)
+        assert len(misc_info) >= len(test_value)
         for i in range(len(test_value)):
-            miscellaneous_information[i] = test_value[i]
+            misc_info[i] = test_value[i]
         return self._defaults['CalFetchMiscInfo']['return']
 
-    def niScope_CalFetchTemperature(self, vi, cal_type, temperature):  # noqa: N802
+    def niScope_CalFetchTemperature(self, vi, which_one, temperature):  # noqa: N802
         if self._defaults['CalFetchTemperature']['return'] != 0:
             return self._defaults['CalFetchTemperature']['return']
         # temperature

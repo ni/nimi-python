@@ -4112,92 +4112,68 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _cal_fetch_date(self, cal_type):
+    def _cal_fetch_date(self, which_one):
         r'''_cal_fetch_date
 
-        Returns the date and time of the last calibration performed.
-
-        Note: The NI 4050 and NI 4060 are not supported.
+        TBD
 
         Args:
-            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                Note: The NI 4065 does not support self-calibration.
+            which_one (enums.CalibrationTypes):
 
 
         Returns:
-            month (int): Indicates the **month** of the last calibration.
+            year (int):
 
-            day (int): Indicates the **day** of the last calibration.
+            month (int):
 
-            year (int): Indicates the **year** of the last calibration.
-
-            hour (int): Indicates the **hour** of the last calibration.
-
-            minute (int): Indicates the **minute** of the last calibration.
+            day (int):
 
         '''
+        if type(which_one) is not enums._CalibrationTypes:
+            raise TypeError('Parameter which_one must be of type ' + str(enums._CalibrationTypes))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        cal_type_ctype = _visatype.ViInt32(cal_type)  # case S150
+        which_one_ctype = _visatype.ViInt32(which_one.value)  # case S130
+        year_ctype = _visatype.ViInt32()  # case S220
         month_ctype = _visatype.ViInt32()  # case S220
         day_ctype = _visatype.ViInt32()  # case S220
-        year_ctype = _visatype.ViInt32()  # case S220
-        hour_ctype = _visatype.ViInt32()  # case S220
-        minute_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niScope_CalFetchDate(vi_ctype, cal_type_ctype, None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if year_ctype is None else (ctypes.pointer(year_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
+        error_code = self._library.niScope_CalFetchDate(vi_ctype, which_one_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value)
 
     @ivi_synchronized
-    def get_cal_user_info(self):
-        r'''get_cal_user_info
+    def _cal_fetch_misc_info(self):
+        r'''_cal_fetch_misc_info
 
-        Returns the miscellaneous information you can store during an external calibration using niScope Cal Store Misc Info.
+        TBD
 
         Returns:
-            miscellaneous_information (str): A string containing up to four characters of miscellaneous information stored in the EEPROM.
+            misc_info (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        miscellaneous_information_ctype = (_visatype.ViChar * 4)()  # case C070
-        error_code = self._library.niScope_CalFetchMiscInfo(vi_ctype, miscellaneous_information_ctype)
+        misc_info_ctype = (_visatype.ViChar * 5)()  # case C070
+        error_code = self._library.niScope_CalFetchMiscInfo(vi_ctype, misc_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return miscellaneous_information_ctype.value.decode(self._encoding)
+        return misc_info_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def _cal_fetch_temperature(self, cal_type):
+    def _cal_fetch_temperature(self, which_one):
         r'''_cal_fetch_temperature
 
-        Returns the **Temperature** during the last external calibration procedure.
-
-        Note: The NI 4050 and NI 4060 are not supported.
+        TBD
 
         Args:
-            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                Note: The NI 4065 does not support self-calibration.
+            which_one (int):
 
 
         Returns:
-            temperature (float): Returns the **temperature** during the last calibration.
+            temperature (float):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        cal_type_ctype = _visatype.ViInt32(cal_type)  # case S150
+        which_one_ctype = _visatype.ViInt32(which_one)  # case S150
         temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niScope_CalFetchTemperature(vi_ctype, cal_type_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
+        error_code = self._library.niScope_CalFetchTemperature(vi_ctype, which_one_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -4825,30 +4801,26 @@ class Session(_SessionBase):
 
         Returns the date and time of the last external calibration performed.
 
-        Note: The NI 4050 and NI 4060 are not supported.
-
         Returns:
-            month (int): Indicates the **month** of the last calibration.
+            datetime (int): Indicates the **datetime** of the last calibration.
 
         '''
 
-        year, month, day, hour, minute = self._cal_fetch_date(1)
+        year, month, day, hour, minute = self._cal_fetch_date(enums.GetLastCalibrationDateType.GET_EXT_CAL_LAST_DATE_AND_TIME.value)
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
         '''get_ext_cal_last_temp
 
-        Returns the **Temperature** during the last external calibration procedure.
-
-        Note: The NI 4050 and NI 4060 are not supported.
+        Returns the **Temperature** in degrees Celsius during the last external calibration procedure.
 
         Returns:
-            temperature (float): Returns the **temperature** during the last calibration.
+            temperature (float): Returns the **temperature** in degrees Celsius during the last calibration.
 
         '''
 
-        return self._cal_fetch_temperature(1)
+        return self._cal_fetch_temperature(enums.GetLastCalibrationTempType.GET_EXT_CAL_LAST_TEMP.value)
 
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
@@ -4856,30 +4828,26 @@ class Session(_SessionBase):
 
         Returns the date and time of the last self calibration performed.
 
-        Note: The NI 4050 and NI 4060 are not supported.
-
         Returns:
-            month (int): Indicates the **month** of the last calibration.
+            datetime (int): Indicates the **datetime** of the last calibration.
 
         '''
 
-        year, month, day, hour, minute = self._cal_fetch_date(0)
+        year, month, day, hour, minute = self._cal_fetch_date(enums.GetLastCalibrationDateType.GET_SELF_CAL_LAST_DATE_AND_TIME.value)
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def get_self_cal_last_temp(self):
         '''get_self_cal_last_temp
 
-        Returns the **Temperature** during the last self calibration procedure.
-
-        Note: The NI 4050 and NI 4060 are not supported.
+        Returns the **Temperature** in degrees Celsius during the last self calibration procedure.
 
         Returns:
-            temperature (float): Returns the **temperature** during the last calibration.
+            temperature (float): Returns the **temperature** in degrees Celsius during the last calibration.
 
         '''
 
-        return self._cal_fetch_temperature(0)
+        return self._cal_fetch_temperature(enums.GetLastCalibrationTempType.GET_SELF_CAL_LAST_TEMP.value)
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
