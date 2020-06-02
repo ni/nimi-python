@@ -4141,22 +4141,6 @@ class Session(_SessionBase):
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value)
 
     @ivi_synchronized
-    def _cal_fetch_misc_info(self):
-        r'''_cal_fetch_misc_info
-
-        TBD
-
-        Returns:
-            misc_info (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        misc_info_ctype = (_visatype.ViChar * 5)()  # case C070
-        error_code = self._library.niScope_CalFetchMiscInfo(vi_ctype, misc_info_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return misc_info_ctype.value.decode(self._encoding)
-
-    @ivi_synchronized
     def _cal_fetch_temperature(self, which_one):
         r'''_cal_fetch_temperature
 
@@ -4806,8 +4790,8 @@ class Session(_SessionBase):
 
         '''
 
-        year, month, day, hour, minute = self._cal_fetch_date(enums._CalibrationTypes.EXTERNAL.value)
-        return hightime.datetime(year, month, day, hour, minute)
+        year, month, day = self._cal_fetch_date(enums._CalibrationTypes.EXTERNAL)
+        return hightime.datetime(year, month, day)
 
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
@@ -4833,8 +4817,8 @@ class Session(_SessionBase):
 
         '''
 
-        year, month, day, hour, minute = self._cal_fetch_date(enums._CalibrationTypes.SELF.value)
-        return hightime.datetime(year, month, day, hour, minute)
+        year, month, day = self._cal_fetch_date(enums._CalibrationTypes.SELF)
+        return hightime.datetime(year, month, day)
 
     @ivi_synchronized
     def get_self_cal_last_temp(self):

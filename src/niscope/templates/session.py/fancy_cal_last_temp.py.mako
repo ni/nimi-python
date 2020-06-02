@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Forwards to _cal_fetch_temp, with external calibration pre-selected.'''
+    '''Forwards to _cal_fetch_temp, with calibration type pre-selected.'''
     import build.helper as helper
     if f['python_name']=="get_self_cal_last_temp":
         calibration_type="SELF"

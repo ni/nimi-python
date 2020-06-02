@@ -36,9 +36,6 @@ class SideEffectsHelper(object):
         self._defaults['CalFetchDate']['year'] = None
         self._defaults['CalFetchDate']['month'] = None
         self._defaults['CalFetchDate']['day'] = None
-        self._defaults['CalFetchMiscInfo'] = {}
-        self._defaults['CalFetchMiscInfo']['return'] = 0
-        self._defaults['CalFetchMiscInfo']['miscInfo'] = None
         self._defaults['CalFetchTemperature'] = {}
         self._defaults['CalFetchTemperature']['return'] = 0
         self._defaults['CalFetchTemperature']['temperature'] = None
@@ -258,20 +255,6 @@ class SideEffectsHelper(object):
         if day is not None:
             day.contents.value = self._defaults['CalFetchDate']['day']
         return self._defaults['CalFetchDate']['return']
-
-    def niScope_CalFetchMiscInfo(self, vi, misc_info):  # noqa: N802
-        if self._defaults['CalFetchMiscInfo']['return'] != 0:
-            return self._defaults['CalFetchMiscInfo']['return']
-        # misc_info
-        if self._defaults['CalFetchMiscInfo']['miscInfo'] is None:
-            raise MockFunctionCallError("niScope_CalFetchMiscInfo", param='miscInfo')
-        test_value = self._defaults['CalFetchMiscInfo']['miscInfo']
-        if type(test_value) is str:
-            test_value = test_value.encode('ascii')
-        assert len(misc_info) >= len(test_value)
-        for i in range(len(test_value)):
-            misc_info[i] = test_value[i]
-        return self._defaults['CalFetchMiscInfo']['return']
 
     def niScope_CalFetchTemperature(self, vi, which_one, temperature):  # noqa: N802
         if self._defaults['CalFetchTemperature']['return'] != 0:
@@ -888,8 +871,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_AutoSetup.return_value = 0
         mock_library.niScope_CalFetchDate.side_effect = MockFunctionCallError("niScope_CalFetchDate")
         mock_library.niScope_CalFetchDate.return_value = 0
-        mock_library.niScope_CalFetchMiscInfo.side_effect = MockFunctionCallError("niScope_CalFetchMiscInfo")
-        mock_library.niScope_CalFetchMiscInfo.return_value = 0
         mock_library.niScope_CalFetchTemperature.side_effect = MockFunctionCallError("niScope_CalFetchTemperature")
         mock_library.niScope_CalFetchTemperature.return_value = 0
         mock_library.niScope_CalSelfCalibrate.side_effect = MockFunctionCallError("niScope_CalSelfCalibrate")

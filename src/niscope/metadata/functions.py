@@ -293,29 +293,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'CalFetchMiscInfo': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'out',
-                'name': 'miscInfo',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 5
-                },
-                'type': 'ViChar[]'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'CalFetchTemperature': {
         'codegen_method': 'private',
         'documentation': {

@@ -13,6 +13,6 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
 
-        year, month, day, hour, minute = self._cal_fetch_date(enums._CalibrationTypes.${calibration_type}.value)
-        return hightime.datetime(year, month, day, hour, minute)
+        year, month, day = self._cal_fetch_date(enums._CalibrationTypes.${calibration_type})
+        return hightime.datetime(year, month, day)
 
