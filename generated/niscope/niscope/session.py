@@ -4806,7 +4806,7 @@ class Session(_SessionBase):
 
         '''
 
-        year, month, day, hour, minute = self._cal_fetch_date(enums.GetLastCalibrationDateType.GET_EXT_CAL_LAST_DATE_AND_TIME.value)
+        year, month, day, hour, minute = self._cal_fetch_date(enums._CalibrationTypes.EXTERNAL.value)
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
@@ -4820,7 +4820,7 @@ class Session(_SessionBase):
 
         '''
 
-        return self._cal_fetch_temperature(enums.GetLastCalibrationTempType.GET_EXT_CAL_LAST_TEMP.value)
+        return self._cal_fetch_temperature(enums._CalibrationTypes.EXTERNAL.value)
 
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
@@ -4833,7 +4833,7 @@ class Session(_SessionBase):
 
         '''
 
-        year, month, day, hour, minute = self._cal_fetch_date(enums.GetLastCalibrationDateType.GET_SELF_CAL_LAST_DATE_AND_TIME.value)
+        year, month, day, hour, minute = self._cal_fetch_date(enums._CalibrationTypes.SELF.value)
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
@@ -4847,7 +4847,7 @@ class Session(_SessionBase):
 
         '''
 
-        return self._cal_fetch_temperature(enums.GetLastCalibrationTempType.GET_SELF_CAL_LAST_TEMP.value)
+        return self._cal_fetch_temperature(enums._CalibrationTypes.SELF.value)
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
