@@ -55,7 +55,6 @@ All notable changes to this project will be documented in this file.
             * `get_ext_cal_last_temp`
             * `get_self_cal_last_date_and_time`
             * `get_self_cal_last_temp`
-            * `get_cal_user_info`
     * #### Changed
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
