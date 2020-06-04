@@ -48,7 +48,6 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     _library_singleton.py \
     session.py \
     errors.py \
-    unit_tests/test_converters.py \
     unit_tests/_mock_helper.py \
     unit_tests/_matchers.py \
     __init__.py \
