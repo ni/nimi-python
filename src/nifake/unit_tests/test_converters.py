@@ -1,14 +1,6 @@
-# This file was generated
-<%
-    config = template_parameters['metadata'].config
-    module_name = config['module_name']
-    extra_errors_used = config['extra_errors_used']
-%>\
-import ${module_name}._converters as _converters
-import ${module_name}._visatype as _visatype
-% if 'InvalidRepeatedCapabilityError' in extra_errors_used:
-import ${module_name}.errors as errors
-% endif
+import nifake._converters as _converters
+import nifake._visatype as _visatype
+import nifake.errors as errors
 
 import hightime
 import pytest
@@ -83,11 +75,6 @@ def test_convert_seconds_real64_to_timedeltas():
     assert all([isinstance(x, hightime.timedelta) for x in test_result])
 
 
-<%
-# If the driver does not need InvalidRepeatedCapabilityError, then it does not call convert_repeated_capabilities() and
-# there is no need to test it
-%>\
-% if 'InvalidRepeatedCapabilityError' in extra_errors_used:
 # Tests - repeated capabilities
 def test_repeated_capabilies_string_channel():
     test_result_list = _converters.convert_repeated_capabilities('0')
@@ -267,7 +254,6 @@ def test_convert_chained_repeated_capability_to_parts_empty_string():
     assert rep_cap_list == ['']
 
 
-% endif
 def test_string_to_list_channel():
     test_result = _converters._convert_repeated_capabilities('r0', '')
     assert test_result == ['r0']

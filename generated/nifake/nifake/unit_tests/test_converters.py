@@ -1,4 +1,3 @@
-# This file was generated
 import nifake._converters as _converters
 import nifake._visatype as _visatype
 import nifake.errors as errors
