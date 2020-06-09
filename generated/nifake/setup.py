@@ -29,7 +29,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='1.3.1.dev1',
+    version='1.3.2.dev0',
     description='NI-FAKE Python API',
     long_description=read_contents('README.rst'),
     long_description_content_type='text/x-rst',
@@ -45,7 +45,7 @@ setup(
     install_requires=[
         'enum34;python_version<"3.4"',
         'singledispatch;python_version<"3.4"',
-        'hightime',
+        'hightime>=0.2.0',
         'nitclk',
     ],
     setup_requires=['pytest-runner', ],

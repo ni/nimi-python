@@ -1,6 +1,7 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [1.3.1](#131---2020-06-08)
 * [1.3.0](#130---2020-05-21)
 * [1.2.1](#121---2020-04-21)
 * [1.2.0](#120---2020-03-06)
@@ -69,6 +70,13 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+
+
+## 1.3.1 - 2020-06-08
+* ### ALL
+    * #### Changed
+        * Fix [#1473](https://github.com/ni/nimi-python/issues/1473): Unintentional dependency on pytest
+        * Fix [#1474](https://github.com/ni/nimi-python/issues/1474): Requires hightime>=0.2.0
  
 
 ## 1.3.0 - 2020-05-21
