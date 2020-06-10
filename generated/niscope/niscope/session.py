@@ -4799,7 +4799,7 @@ class Session(_SessionBase):
 
         Returns the onboard temperature, in degrees Celsius, of an SMC-based oscilloscope at the time of the last successful external calibration.
         The temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.
-        Temperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually the more important temperature to read.
+        Temperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.
 
         Returns:
             temperature (float): Returns the **temperature** in degrees Celsius during the last calibration.
@@ -4826,9 +4826,9 @@ class Session(_SessionBase):
     def get_self_cal_last_temp(self):
         '''get_self_cal_last_temp
 
-        Returns the onboard temperature, in degrees Celsius, of an SMC-based oscilloscope at the time of the last successful self calibration.
+        Returns the onboard temperature, in degrees Celsius, of an SMC-based oscilloscope at the time of the last successful external calibration.
         The temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.
-        Temperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually the more important temperature to read.
+        Temperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.
 
         Returns:
             temperature (float): Returns the **temperature** in degrees Celsius during the last calibration.
