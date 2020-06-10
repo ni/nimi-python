@@ -51,7 +51,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `niscope` (NI-SCOPE)
     * #### Added
-        * Added methods for getting calibration information. - [#1463](https://github.com/ni/nimi-python/issues/1463)
+        * New methods for getting calibration information. - [#1463](https://github.com/ni/nimi-python/issues/1463)
             * `get_ext_cal_last_date_and_time`
             * `get_ext_cal_last_temp`
             * `get_self_cal_last_date_and_time`
