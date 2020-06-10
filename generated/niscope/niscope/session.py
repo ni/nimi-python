@@ -4786,7 +4786,7 @@ class Session(_SessionBase):
         Returns the date and time of the last external calibration performed.
 
         Returns:
-            last_cal_datetime (hightime.datetime): Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains precision to the day.
+            last_cal_datetime (hightime.datetime): Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.
 
         '''
 
@@ -4815,7 +4815,7 @@ class Session(_SessionBase):
         Returns the date and time of the last self calibration performed.
 
         Returns:
-            last_cal_datetime (hightime.datetime): Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains precision to the day.
+            last_cal_datetime (hightime.datetime): Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.
 
         '''
 

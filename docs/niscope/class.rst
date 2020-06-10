@@ -1514,7 +1514,7 @@ get_ext_cal_last_date_and_time
             :return:
 
 
-                    Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains precision to the day.
+                    Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.
 
                     
 
@@ -1562,7 +1562,7 @@ get_self_cal_last_date_and_time
             :return:
 
 
-                    Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains precision to the day.
+                    Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.
 
                     
 

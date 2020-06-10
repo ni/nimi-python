@@ -29,7 +29,7 @@ functions_additional_get_self_cal_last_date_and_time = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains precision to the day.'
+                    'description': 'Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.'
                 },
                 'name': 'last_cal_datetime',
                 'type': 'hightime.datetime'
@@ -65,7 +65,7 @@ functions_additional_get_ext_cal_last_date_and_time = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains precision to the day.'
+                    'description': 'Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.'
                 },
                 'name': 'last_cal_datetime',
                 'type': 'hightime.datetime'
