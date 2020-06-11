@@ -26,6 +26,8 @@ class Library(object):
         self.niScope_ActualNumWfms_cfunc = None
         self.niScope_AddWaveformProcessing_cfunc = None
         self.niScope_AutoSetup_cfunc = None
+        self.niScope_CalFetchDate_cfunc = None
+        self.niScope_CalFetchTemperature_cfunc = None
         self.niScope_CalSelfCalibrate_cfunc = None
         self.niScope_ClearWaveformMeasurementStats_cfunc = None
         self.niScope_ClearWaveformProcessing_cfunc = None
@@ -129,6 +131,22 @@ class Library(object):
                 self.niScope_AutoSetup_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_AutoSetup_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_AutoSetup_cfunc(vi)
+
+    def niScope_CalFetchDate(self, vi, which_one, year, month, day):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_CalFetchDate_cfunc is None:
+                self.niScope_CalFetchDate_cfunc = self._library.niScope_CalFetchDate
+                self.niScope_CalFetchDate_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niScope_CalFetchDate_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_CalFetchDate_cfunc(vi, which_one, year, month, day)
+
+    def niScope_CalFetchTemperature(self, vi, which_one, temperature):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_CalFetchTemperature_cfunc is None:
+                self.niScope_CalFetchTemperature_cfunc = self._library.niScope_CalFetchTemperature
+                self.niScope_CalFetchTemperature_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niScope_CalFetchTemperature_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_CalFetchTemperature_cfunc(vi, which_one, temperature)
 
     def niScope_CalSelfCalibrate(self, vi, channel_list, option):  # noqa: N802
         with self._func_lock:

@@ -4112,6 +4112,56 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def _cal_fetch_date(self, which_one):
+        r'''_cal_fetch_date
+
+        TBD
+
+        Args:
+            which_one (enums.CalibrationTypes):
+
+
+        Returns:
+            year (int):
+
+            month (int):
+
+            day (int):
+
+        '''
+        if type(which_one) is not enums._CalibrationTypes:
+            raise TypeError('Parameter which_one must be of type ' + str(enums._CalibrationTypes))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        which_one_ctype = _visatype.ViInt32(which_one.value)  # case S130
+        year_ctype = _visatype.ViInt32()  # case S220
+        month_ctype = _visatype.ViInt32()  # case S220
+        day_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niScope_CalFetchDate(vi_ctype, which_one_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value)
+
+    @ivi_synchronized
+    def _cal_fetch_temperature(self, which_one):
+        r'''_cal_fetch_temperature
+
+        TBD
+
+        Args:
+            which_one (int):
+
+
+        Returns:
+            temperature (float):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        which_one_ctype = _visatype.ViInt32(which_one)  # case S150
+        temperature_ctype = _visatype.ViReal64()  # case S220
+        error_code = self._library.niScope_CalFetchTemperature(vi_ctype, which_one_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(temperature_ctype.value)
+
+    @ivi_synchronized
     def commit(self):
         r'''commit
 
@@ -4728,6 +4778,64 @@ class Session(_SessionBase):
         error_code = self._library.niScope_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last external calibration performed.
+
+        Returns:
+            last_cal_datetime (hightime.datetime): Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.
+
+        '''
+
+        year, month, day = self._cal_fetch_date(enums._CalibrationTypes.EXTERNAL)
+        return hightime.datetime(year, month, day)
+
+    @ivi_synchronized
+    def get_ext_cal_last_temp(self):
+        '''get_ext_cal_last_temp
+
+        Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful external calibration.
+        The temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.
+        Temperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.
+
+        Returns:
+            temperature (float): Returns the **temperature** in degrees Celsius during the last calibration.
+
+        '''
+
+        return self._cal_fetch_temperature(enums._CalibrationTypes.EXTERNAL.value)
+
+    @ivi_synchronized
+    def get_self_cal_last_date_and_time(self):
+        '''get_self_cal_last_date_and_time
+
+        Returns the date and time of the last self calibration performed.
+
+        Returns:
+            last_cal_datetime (hightime.datetime): Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.
+
+        '''
+
+        year, month, day = self._cal_fetch_date(enums._CalibrationTypes.SELF)
+        return hightime.datetime(year, month, day)
+
+    @ivi_synchronized
+    def get_self_cal_last_temp(self):
+        '''get_self_cal_last_temp
+
+        Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful external calibration.
+        The temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.
+        Temperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.
+
+        Returns:
+            temperature (float): Returns the **temperature** in degrees Celsius during the last calibration.
+
+        '''
+
+        return self._cal_fetch_temperature(enums._CalibrationTypes.SELF.value)
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):

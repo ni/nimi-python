@@ -258,6 +258,65 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'CalFetchDate': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'enum': 'CalibrationTypes',
+                'name': 'whichOne',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'year',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'month',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'day',
+                'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'CalFetchTemperature': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'whichOne',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'temperature',
+                'type': 'ViReal64'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'CalSelfCalibrate': {
         'documentation': {
             'description': '\nSelf-calibrates most NI digitizers, including all SMC-based devices and\nmost Traditional NI-DAQ (Legacy) devices. To verify that your digitizer\nsupports self-calibration, refer to `Features Supported by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__.\n\nFor SMC-based digitizers, if the self-calibration is performed\nsuccessfully in a regular session, the calibration constants are\nimmediately stored in the self-calibration area of the EEPROM. If the\nself-calibration is performed in an external calibration session, the\ncalibration constants take effect immediately for the duration of the\nsession. However, they are not stored in the EEPROM until\nniScope_CalEnd is called with **action** set to\nNISCOPE_VAL_ACTION_STORE and no errors occur.\n'
