@@ -81,7 +81,7 @@ functions_additional_get_self_cal_last_temp = {
         'codegen_method': 'python-only',
         'python_name': 'get_self_cal_last_temp',
         'documentation': {
-            'description': 'Returns the onboard temperature, in degrees Celsius, of an SMC-based oscilloscope at the time of the last successful external calibration.\nThe temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.\nTemperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.',
+            'description': 'Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful external calibration.\nThe temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.\nTemperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.',
         },
         'method_templates': [
             {
@@ -117,7 +117,7 @@ functions_additional_get_ext_cal_last_temp = {
         'codegen_method': 'python-only',
         'python_name': 'get_ext_cal_last_temp',
         'documentation': {
-            'description': 'Returns the onboard temperature, in degrees Celsius, of an SMC-based oscilloscope at the time of the last successful external calibration.\nThe temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.\nTemperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.',
+            'description': 'Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful external calibration.\nThe temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.\nTemperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.',
         },
         'method_templates': [
             {

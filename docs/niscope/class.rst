@@ -1527,7 +1527,7 @@ get_ext_cal_last_temp
 
     .. py:method:: get_ext_cal_last_temp()
 
-            Returns the onboard temperature, in degrees Celsius, of an SMC-based oscilloscope at the time of the last successful external calibration.
+            Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful external calibration.
             The temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.
             Temperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.
 
@@ -1575,7 +1575,7 @@ get_self_cal_last_temp
 
     .. py:method:: get_self_cal_last_temp()
 
-            Returns the onboard temperature, in degrees Celsius, of an SMC-based oscilloscope at the time of the last successful external calibration.
+            Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful external calibration.
             The temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.
             Temperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.
 
