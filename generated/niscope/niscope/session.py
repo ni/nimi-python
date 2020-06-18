@@ -676,7 +676,7 @@ class _SessionBase(object):
     _meas_array_gain = _attributes.AttributeViReal64(1150043)
     '''Type: float
 
-    Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to _ArrayMeasurement.ARRAY_GAIN for more information.
+    Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to ArrayMeasurement.ARRAY_GAIN for more information.
     Default: 1.0
 
     Tip:
@@ -688,7 +688,7 @@ class _SessionBase(object):
     _meas_array_offset = _attributes.AttributeViReal64(1150044)
     '''Type: float
 
-    Every element of an array is added to this scalar value during the Array Offset measurement. Refer to _ArrayMeasurement.ARRAY_OFFSET for more information.
+    Every element of an array is added to this scalar value during the Array Offset measurement. Refer to ArrayMeasurement.ARRAY_OFFSET for more information.
     Default: 0.0
 
     Tip:
@@ -841,11 +841,11 @@ class _SessionBase(object):
 
     Specifies the FIR window type. The possible choices are:
     _FIRFilterWindow.NONE
-    _ArrayMeasurement.HANNING_WINDOW
-    _ArrayMeasurement.HAMMING_WINDOW
-    _ArrayMeasurement.TRIANGLE_WINDOW
-    _ArrayMeasurement.FLAT_TOP_WINDOW
-    _ArrayMeasurement.BLACKMAN_WINDOW
+    ArrayMeasurement.HANNING_WINDOW
+    ArrayMeasurement.HAMMING_WINDOW
+    ArrayMeasurement.TRIANGLE_WINDOW
+    ArrayMeasurement.FLAT_TOP_WINDOW
+    ArrayMeasurement.BLACKMAN_WINDOW
     The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
     Default: _FIRFilterWindow.NONE
 
@@ -871,7 +871,7 @@ class _SessionBase(object):
     _meas_interpolation_sampling_factor = _attributes.AttributeViReal64(1150030)
     '''Type: float
 
-    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling FetchWaveformMeasurementArray with the _ArrayMeasurement.POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
+    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling FetchWaveformMeasurementArray with the ArrayMeasurement.POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
     Default: 2.0
 
     Note:
@@ -900,7 +900,7 @@ class _SessionBase(object):
     _meas_other_channel = _attributes.AttributeViString(1150018)
     '''Type: str
 
-    Specifies the second channel for two-channel measurements, such as _ArrayMeasurement.ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
+    Specifies the second channel for two-channel measurements, such as ArrayMeasurement.ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
     Default: '0'
 
     Tip:
@@ -1007,7 +1007,7 @@ class _SessionBase(object):
     _meas_time_histogram_size = _attributes.AttributeViInt32(1150024)
     '''Type: int
 
-    Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with _clear_waveform_measurement_stats.
+    Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with clear_waveform_measurement_stats.
     Default: 256
 
     Tip:
@@ -1043,7 +1043,7 @@ class _SessionBase(object):
     _meas_voltage_histogram_size = _attributes.AttributeViInt32(1150021)
     '''Type: int
 
-    Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method _clear_waveform_measurement_stats.
+    Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method clear_waveform_measurement_stats.
     Default: 256
 
     Tip:
@@ -1615,8 +1615,8 @@ class _SessionBase(object):
                 waveform.
 
         '''
-        if type(array_meas_function) is not enums._ArrayMeasurement:
-            raise TypeError('Parameter array_meas_function must be of type ' + str(enums._ArrayMeasurement))
+        if type(array_meas_function) is not enums.ArrayMeasurement:
+            raise TypeError('Parameter array_meas_function must be of type ' + str(enums.ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         array_meas_function_ctype = _visatype.ViInt32(array_meas_function.value)  # case S130
         meas_waveform_size_ctype = _visatype.ViInt32()  # case S220
@@ -1651,8 +1651,8 @@ class _SessionBase(object):
         return int(num_wfms_ctype.value)
 
     @ivi_synchronized
-    def _add_waveform_processing(self, meas_function):
-        r'''_add_waveform_processing
+    def add_waveform_processing(self, meas_function):
+        r'''add_waveform_processing
 
         Adds one measurement to the list of processing steps that are completed
         before the measurement. The processing is added on a per channel basis,
@@ -1679,8 +1679,8 @@ class _SessionBase(object):
                 to add.
 
         '''
-        if type(meas_function) is not enums._ArrayMeasurement:
-            raise TypeError('Parameter meas_function must be of type ' + str(enums._ArrayMeasurement))
+        if type(meas_function) is not enums.ArrayMeasurement:
+            raise TypeError('Parameter meas_function must be of type ' + str(enums.ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         meas_function_ctype = _visatype.ViInt32(meas_function.value)  # case S130
@@ -1737,18 +1737,18 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _clear_waveform_measurement_stats(self, clearable_measurement_function=enums._ClearableMeasurement.ALL_MEASUREMENTS):
-        r'''_clear_waveform_measurement_stats
+    def clear_waveform_measurement_stats(self, clearable_measurement_function=enums._ClearableMeasurement.ALL_MEASUREMENTS):
+        r'''clear_waveform_measurement_stats
 
         Clears the waveform stats on the channel and measurement you specify. If
         you want to clear all of the measurements, use
-        _ClearableMeasurement.ALL_MEASUREMENTS in the **clearableMeasurementFunction**
+        ClearableMeasurement.ALL_MEASUREMENTS in the **clearableMeasurementFunction**
         parameter.
 
         Every time a measurement is called, the statistics information is
         updated, including the min, max, mean, standard deviation, and number of
         updates. This information is fetched with
-        _fetch_measurement_stats. The multi-acquisition array measurements
+        fetch_measurement_stats. The multi-acquisition array measurements
         are also cleared with this method.
 
         Tip:
@@ -1765,8 +1765,8 @@ class _SessionBase(object):
                 to clear the stats for.
 
         '''
-        if type(clearable_measurement_function) is not enums._ClearableMeasurement:
-            raise TypeError('Parameter clearable_measurement_function must be of type ' + str(enums._ClearableMeasurement))
+        if type(clearable_measurement_function) is not enums.ClearableMeasurement:
+            raise TypeError('Parameter clearable_measurement_function must be of type ' + str(enums.ClearableMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         clearable_measurement_function_ctype = _visatype.ViInt32(clearable_measurement_function.value)  # case S130
@@ -1775,11 +1775,11 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _clear_waveform_processing(self):
-        r'''_clear_waveform_processing
+    def clear_waveform_processing(self):
+        r'''clear_waveform_processing
 
         Clears the list of processing steps assigned to the given channel. The
-        processing is added using the _add_waveform_processing method,
+        processing is added using the add_waveform_processing method,
         where the processing steps are completed in the same order in which they
         are registered. The processing measurements are streamed, so the result
         of the first processing step is used as the input for the next step. The
@@ -1996,6 +1996,103 @@ class _SessionBase(object):
                 i += 1
 
         return wfm_info
+
+    @ivi_synchronized
+    def fetch_array_measurement(self, array_meas_function, timeout=hightime.timedelta(seconds=5.0), other_channel=None):
+        r'''fetch_array_measurement
+
+        Obtains a waveform from the digitizer and returns the specified
+        measurement array. This method may return multiple waveforms depending
+        on the number of channels, the acquisition type, and the number of
+        records you specify.
+
+        Note:
+        Some functionality, such as time stamping, is not supported in all
+        digitizers. Refer to `Features Supported by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+        more information.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            array_meas_function (enums.ArrayMeasurement): The `array
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
+                to perform.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+
+            other_channel (str): The identifier for the "other channel" for multi-channel measurements such as Add Channels or Multiply Channels.
+
+
+        Returns:
+            meas_wfm (list of float): Returns an array whose length is the number of waveforms times
+                **measWfmSize**; call _actual_num_wfms to determine the number of
+                waveforms; call _actual_meas_wfm_size to determine the size of each
+                waveform.
+
+                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+                first. For example, with channel list of 0, 1, you would have the
+                following index values:
+
+                index 0 = record 0, channel 0
+
+                index *x* = record 0, channel 1
+
+                index 2\ *x* = record 1, channel 0
+
+                index 3\ *x* = record 1, channel 1
+
+                Where *x* = the record length
+
+            wfm_info (list of WaveformInfo): Returns a list of class instances with the following timing and scaling
+                information about each waveform:
+
+                -  **relativeInitialX**—the time (in seconds) from the trigger to the
+                   first sample in the fetched waveform
+                -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
+                   sample. This timestamp is comparable between records and
+                   acquisitions; devices that do not support this parameter use 0 for
+                   this output.
+                -  **xIncrement**—the time between points in the acquired waveform in
+                   seconds
+                -  **actualSamples**—the actual number of samples fetched and placed in
+                   the waveform array
+                -  **gain**—the gain factor of the given channel; useful for scaling
+                   binary data with the following formula:
+
+                voltage = binary data × gain factor + offset
+
+                -  **offset**—the offset factor of the given channel; useful for scaling
+                   binary data with the following formula:
+
+                voltage = binary data × gain factor + offset
+
+                Call _actual_num_wfms to determine the size of this array.
+
+        '''
+        # Set the fetch attributes
+        with _NoChannel(session=self):
+            self._other_channel = other_channel
+
+        meas_wfm, wfm_info = self._fetch_array_measurement(array_meas_function, timeout)
+
+        mv = memoryview(meas_wfm)
+        record_length = self.horz_record_length
+        meas_wfm_array = []
+
+        for i in range(len(meas_wfm)):
+            start = i * record_length
+            end = start + record_length
+            single_record_array = mv[start:end]
+            meas_wfm_array.append(single_record_array)
+
+        return meas_wfm_array, wfm_info
 
     @ivi_synchronized
     def get_equalization_filter_coefficients(self):
@@ -2409,8 +2506,8 @@ class _SessionBase(object):
                 Call _actual_num_wfms to determine the size of this array.
 
         '''
-        if type(array_meas_function) is not enums._ArrayMeasurement:
-            raise TypeError('Parameter array_meas_function must be of type ' + str(enums._ArrayMeasurement))
+        if type(array_meas_function) is not enums.ArrayMeasurement:
+            raise TypeError('Parameter array_meas_function must be of type ' + str(enums.ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -2915,8 +3012,8 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def _fetch_measurement(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
-        r'''_fetch_measurement
+    def fetch_measurement(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+        r'''fetch_measurement
 
         Fetches a waveform from the digitizer and performs the specified
         waveform measurement. Refer to `Using Fetch
@@ -2951,8 +3048,8 @@ class _SessionBase(object):
                 _actual_num_wfms to determine the array length.
 
         '''
-        if type(scalar_meas_function) is not enums._ScalarMeasurement:
-            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums._ScalarMeasurement))
+        if type(scalar_meas_function) is not enums.ScalarMeasurement:
+            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -2964,8 +3061,8 @@ class _SessionBase(object):
         return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def _fetch_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
-        r'''_fetch_measurement_stats
+    def fetch_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+        r'''fetch_measurement_stats
 
         Obtains a waveform measurement and returns the measurement value. This
         method may return multiple statistical results depending on the number
@@ -2981,7 +3078,7 @@ class _SessionBase(object):
         methods. If a Fetch Measurement method has not been called, this
         method fetches the data on which to perform the measurement. The
         statistics are cleared by calling
-        _clear_waveform_measurement_stats. Refer to `Using Fetch
+        clear_waveform_measurement_stats. Refer to `Using Fetch
         Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
         more information on incorporating fetch methods in your application.
 
@@ -3012,7 +3109,7 @@ class _SessionBase(object):
             result (list of float): Returns the resulting measurement
 
             mean (list of float): Returns the mean scalar value, which is obtained by averaging each
-                _fetch_measurement_stats call.
+                fetch_measurement_stats call.
 
             stdev (list of float): Returns the standard deviation of the most recent **numInStats**
                 measurements.
@@ -3023,12 +3120,12 @@ class _SessionBase(object):
             max (list of float): Returns the largest scalar value acquired (the maximum of the
                 **numInStats** measurements).
 
-            num_in_stats (list of int): Returns the number of times _fetch_measurement_stats has been
+            num_in_stats (list of int): Returns the number of times fetch_measurement_stats has been
                 called.
 
         '''
-        if type(scalar_meas_function) is not enums._ScalarMeasurement:
-            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums._ScalarMeasurement))
+        if type(scalar_meas_function) is not enums.ScalarMeasurement:
+            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -3475,8 +3572,8 @@ class _SessionBase(object):
         return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def _read_measurement(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
-        r'''_read_measurement
+    def read_measurement(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+        r'''read_measurement
 
         Initiates an acquisition, waits for it to complete, and performs the
         specified waveform measurement for a single channel and record or for
@@ -3514,8 +3611,8 @@ class _SessionBase(object):
                 _actual_num_wfms to determine the array length.
 
         '''
-        if type(scalar_meas_function) is not enums._ScalarMeasurement:
-            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums._ScalarMeasurement))
+        if type(scalar_meas_function) is not enums.ScalarMeasurement:
+            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -4226,8 +4323,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _configure_ref_levels(self, low=10.0, mid=50.0, high=90.0):
-        r'''_configure_ref_levels
+    def configure_ref_levels(self, low=10.0, mid=50.0, high=90.0):
+        r'''configure_ref_levels
 
         This method is included for compliance with the IviScope Class
         Specification.
@@ -4239,7 +4336,7 @@ class Session(_SessionBase):
         meas_chan_mid_ref_level
 
         This method configures the reference levels for waveform measurements.
-        Call this method before calling _fetch_measurement to take a
+        Call this method before calling fetch_measurement to take a
         rise time, fall time, width negative, width positive, duty cycle
         negative, or duty cycle positive measurement.
 

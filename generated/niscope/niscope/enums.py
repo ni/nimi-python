@@ -25,7 +25,7 @@ class AcquisitionType(Enum):
     '''
 
 
-class _ArrayMeasurement(Enum):
+class ArrayMeasurement(Enum):
     NO_MEASUREMENT = 4000
     r'''
     None
@@ -153,7 +153,7 @@ class _CalibrationTypes(Enum):
     MANUFACTURE = 2
 
 
-class _ClearableMeasurement(Enum):
+class ClearableMeasurement(Enum):
     ALL_MEASUREMENTS = 10000
     MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004
     MULTI_ACQ_TIME_HISTOGRAM = 4005
@@ -437,7 +437,7 @@ class RuntTimeCondition(Enum):
     '''
 
 
-class _ScalarMeasurement(Enum):
+class ScalarMeasurement(Enum):
     NO_MEASUREMENT = 4000
     r'''
     None

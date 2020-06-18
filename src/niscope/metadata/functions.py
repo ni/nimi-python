@@ -111,7 +111,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'AddWaveformProcessing': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nAdds one measurement to the list of processing steps that are completed\nbefore the measurement. The processing is added on a per channel basis,\nand the processing measurements are completed in the same order they are\nregistered. All measurement library parameters—the attributes starting\nwith NISCOPE_ATTR_MEAS—are cached at the time of registering the\nprocessing, and this set of parameters is used during the processing\nstep. The processing measurements are streamed, so the result of the\nfirst processing step is used as the input for the next step. The\nprocessing is done before any other measurements.\n'
         },
@@ -353,7 +353,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClearWaveformMeasurementStats': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nClears the waveform stats on the channel and measurement you specify. If\nyou want to clear all of the measurements, use\nNISCOPE_VAL_ALL_MEASUREMENTS in the **clearableMeasurementFunction**\nparameter.\n\nEvery time a measurement is called, the statistics information is\nupdated, including the min, max, mean, standard deviation, and number of\nupdates. This information is fetched with\nniScope_FetchMeasurementStats. The multi-acquisition array measurements\nare also cleared with this function.\n'
         },
@@ -388,7 +388,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClearWaveformProcessing': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nClears the list of processing steps assigned to the given channel. The\nprocessing is added using the niScope_AddWaveformProcessing function,\nwhere the processing steps are completed in the same order in which they\nare registered. The processing measurements are streamed, so the result\nof the first processing step is used as the input for the next step. The\nprocessing is also done before any other measurements.\n'
         },
@@ -569,7 +569,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ConfigureRefLevels': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nThis function is included for compliance with the IviScope Class\nSpecification.\n\nConfigures the reference levels for all channels of the digitizer. The\nlevels may be set on a per channel basis by setting\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL\n\nThis function configures the reference levels for waveform measurements.\nCall this function before calling niScope_FetchMeasurement to take a\nrise time, fall time, width negative, width positive, duty cycle\nnegative, or duty cycle positive measurement.\n'
         },
@@ -1953,7 +1953,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchMeasurement': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nFetches a waveform from the digitizer and performs the specified\nwaveform measurement. Refer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references by using\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
         },
@@ -2010,7 +2010,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchMeasurementStats': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nObtains a waveform measurement and returns the measurement value. This\nfunction may return multiple statistical results depending on the number\nof channels, the acquisition type, and the number of records you\nspecify.\n\nYou specify a particular measurement type, such as rise time, frequency,\nor voltage peak-to-peak. The waveform on which the digitizer calculates\nthe waveform measurement is from an acquisition that you previously\ninitiated. The statistics for the specified measurement function are\nreturned, where the statistics are updated once every acquisition when\nthe specified measurement is fetched by any of the Fetch Measurement\nfunctions. If a Fetch Measurement function has not been called, this\nfunction fetches the data on which to perform the measurement. The\nstatistics are cleared by calling\nniScope_ClearWaveformMeasurementStats. Refer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information on incorporating fetch functions in your application.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references with\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
         },
@@ -2747,7 +2747,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ReadMeasurement': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nInitiates an acquisition, waits for it to complete, and performs the\nspecified waveform measurement for a single channel and record or for\nmultiple channels and records.\n\nRefer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references by using\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
         },
