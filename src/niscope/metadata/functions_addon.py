@@ -2,6 +2,41 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
+    'ClearWaveformMeasurementStats': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '\nClears the waveform stats on the channel and measurement you specify. If\nyou want to clear all of the measurements, use\nNISCOPE_VAL_ALL_MEASUREMENTS in the **clearableMeasurementFunction**\nparameter.\n\nEvery time a measurement is called, the statistics information is\nupdated, including the min, max, mean, standard deviation, and number of\nupdates. This information is fetched with\nniScope_FetchMeasurementStats. The multi-acquisition array measurements\nare also cleared with this function.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe instrument handle you obtain from niScope_init that identifies a\nparticular instrument session.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': "\nThe channel to configure. For more information, refer to `Channel String\nSyntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc)>`__.\n"
+                },
+                'name': 'channelList',
+                'type': 'ViConstString'
+            },
+            {
+                'default_value': 'ClearableMeasurement.ALL_MEASUREMENTS',
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe `scalar\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__\nor `array\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__\nto clear the stats for.\n'
+                },
+                'enum': 'ClearableMeasurement',
+                'name': 'clearableMeasurementFunction',
+                'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    }
 }
 
 functions_additional_get_self_cal_last_date_and_time = {

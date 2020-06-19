@@ -1737,7 +1737,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def clear_waveform_measurement_stats(self, clearable_measurement_function=enums._ClearableMeasurement.ALL_MEASUREMENTS):
+    def clear_waveform_measurement_stats(self, clearable_measurement_function=enums.ClearableMeasurement.ALL_MEASUREMENTS):
         r'''clear_waveform_measurement_stats
 
         Clears the waveform stats on the channel and measurement you specify. If
