@@ -11,7 +11,7 @@
         '''
         # Set the fetch attributes
         with _NoChannel(session=self):
-            self._other_channel = other_channel
+            self._meas_other_channel = other_channel
 
         meas_wfm, wfm_info = self._${f['python_name']}(array_meas_function, timeout)
 

@@ -2078,7 +2078,7 @@ class _SessionBase(object):
         '''
         # Set the fetch attributes
         with _NoChannel(session=self):
-            self._other_channel = other_channel
+            self._meas_other_channel = other_channel
 
         meas_wfm, wfm_info = self._fetch_array_measurement(array_meas_function, timeout)
 
