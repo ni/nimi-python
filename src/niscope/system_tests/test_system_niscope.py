@@ -331,7 +331,7 @@ def test_disable(session):
 
 
 def test_configure_ref_levels(session):
-    session._configure_ref_levels()
+    session.configure_ref_levels()
     assert 90.0 == session._meas_chan_high_ref_level
 
 
