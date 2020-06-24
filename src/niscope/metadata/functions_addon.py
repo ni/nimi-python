@@ -252,7 +252,7 @@ functions_additional_fetch_array_measurement = {
                 'default_value': 'None',
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThe identifier for the "other channel" for multi-channel measurements such as Add Channels or Multiply Channels.'
+                    'description': '\nThe identifier for the "other channel" for multi-channel measurements such as Add Channels or Multiply Channels.\n'
                 },
                 'name': 'otherChannel',
                 'type': 'ViConstString'
@@ -260,19 +260,7 @@ functions_additional_fetch_array_measurement = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nReturns an array whose length is the number of waveforms times\n**measWfmSize**; call niScope_ActualNumWfms to determine the number of\nwaveforms; call niScope_ActualMeasWfmSize to determine the size of each\nwaveform.\n\nNI-SCOPE returns this data sequentially, so all record 0 waveforms are\nfirst. For example, with channel list of 0, 1, you would have the\nfollowing index values:\n\nindex 0 = record 0, channel 0\n\nindex *x* = record 0, channel 1\n\nindex 2\\ *x* = record 1, channel 0\n\nindex 3\\ *x* = record 1, channel 1\n\nWhere *x* = the record length\n'
-                },
-                'name': 'measWfm',
-                'size': {
-                    'mechanism': 'python-code',
-                    'value': '(self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())'
-                },
-                'type': 'ViReal64[]'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': '\nReturns a list of class instances with the following timing and scaling\ninformation about each waveform:\n\n-  **relativeInitialX**—the time (in seconds) from the trigger to the\n   first sample in the fetched waveform\n-  **absoluteInitialX**—timestamp (in seconds) of the first fetched\n   sample. This timestamp is comparable between records and\n   acquisitions; devices that do not support this parameter use 0 for\n   this output.\n-  **xIncrement**—the time between points in the acquired waveform in\n   seconds\n-  **actualSamples**—the actual number of samples fetched and placed in\n   the waveform array\n-  **gain**—the gain factor of the given channel; useful for scaling\n   binary data with the following formula:\n\nvoltage = binary data × gain factor + offset\n\n-  **offset**—the offset factor of the given channel; useful for scaling\n   binary data with the following formula:\n\nvoltage = binary data × gain factor + offset\n\nCall niScope_ActualNumWfms to determine the size of this array.\n'
+                    'description': '\nReturns a list of class instances with the following timing and scaling\ninformation about each waveform:\n\n-  **relativeInitialX**—the time (in seconds) from the trigger to the\n   first sample in the fetched waveform\n-  **absoluteInitialX**—timestamp (in seconds) of the first fetched\n   sample. This timestamp is comparable between records and\n   acquisitions; devices that do not support this parameter use 0 for\n   this output.\n-  **xIncrement**—the time between points in the acquired waveform in\n   seconds\n-  **channel**-channel name this waveform was acquired from\n-  **record**-record number of this waveform\n-  **samples**—floating point array of samples. Length will be of actual samples acquired\n-  **gain**—the gain factor of the given channel; useful for scaling\n   binary data with the following formula:\n\nvoltage = binary data × gain factor + offset\n\n-  **offset**—the offset factor of the given channel; useful for scaling\n   binary data with the following formula:\n\nvoltage = binary data × gain factor + offset\n\nCall niScope_ActualNumWfms to determine the size of this array.\n'
                 },
                 'name': 'wfmInfo',
                 'size': {

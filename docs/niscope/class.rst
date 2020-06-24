@@ -1595,36 +1595,8 @@ fetch_array_measurement
 
             :type other_channel: str
 
-            :rtype: tuple (meas_wfm, wfm_info)
-
-                WHERE
-
-                meas_wfm (list of float): 
-
-
-                    Returns an array whose length is the number of waveforms times
-                    **measWfmSize**; call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of
-                    waveforms; call :py:meth:`niscope.Session._actual_meas_wfm_size` to determine the size of each
-                    waveform.
-
-                    NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-                    first. For example, with channel list of 0, 1, you would have the
-                    following index values:
-
-                    index 0 = record 0, channel 0
-
-                    index *x* = record 0, channel 1
-
-                    index 2\ *x* = record 1, channel 0
-
-                    index 3\ *x* = record 1, channel 1
-
-                    Where *x* = the record length
-
-                    
-
-
-                wfm_info (list of WaveformInfo): 
+            :rtype: list of WaveformInfo
+            :return:
 
 
                     Returns a list of class instances with the following timing and scaling
@@ -1638,8 +1610,9 @@ fetch_array_measurement
                        this output.
                     -  **xIncrement**—the time between points in the acquired waveform in
                        seconds
-                    -  **actualSamples**—the actual number of samples fetched and placed in
-                       the waveform array
+                    -  **channel**-channel name this waveform was acquired from
+                    -  **record**-record number of this waveform
+                    -  **samples**—floating point array of samples. Length will be of actual samples acquired
                     -  **gain**—the gain factor of the given channel; useful for scaling
                        binary data with the following formula:
 
