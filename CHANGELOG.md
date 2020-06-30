@@ -56,6 +56,15 @@ All notable changes to this project will be documented in this file.
             * `get_ext_cal_last_temp`
             * `get_self_cal_last_date_and_time`
             * `get_self_cal_last_temp`
+        * Added measurement library methods for public usage. - [#806](https://github.com/ni/nimi-python/issues/806)
+            * `add_waveform_processing`
+            * `clear_waveform_measurement_stats`
+            * `clear_waveform_processing`
+            * `configure_ref_levels`
+            * `fetch_array_measurement`
+            * `fetch_measurement`
+            * `fetch_measurement_stats`
+            * `read_measurement`
     * #### Changed
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
