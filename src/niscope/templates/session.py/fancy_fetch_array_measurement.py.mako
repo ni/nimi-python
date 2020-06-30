@@ -13,17 +13,17 @@
         with _NoChannel(session=self):
             if other_channel is not None:
                 self._meas_other_channel = other_channel
-            record_length = self.horz_record_length
 
         meas_wfm, wfm_info = self._${f['python_name']}(array_meas_function, timeout)
+        record_length = int(len(meas_wfm) / len(wfm_info))
 
-        for i in range(len(meas_wfm)):
+        for i in range(len(wfm_info)):
             start = i * record_length
             end = start + record_length
             wfm_info[i].samples = meas_wfm[start:end]
             wfm_info[i]._actual_samples = None
 
-        num_records = int(len(self._repeated_capability_list) / len(wfm_info))
+        num_records = int(len(wfm_info) / len(self._repeated_capability_list))
         i = 0
         for chan in self._repeated_capability_list:
             for rec in range(0, num_records):
