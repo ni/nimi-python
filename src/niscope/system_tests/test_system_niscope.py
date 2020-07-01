@@ -296,10 +296,11 @@ def test_waveform_processing(session):
     assert len(processed_waveforms) == test_num_channels * test_num_records
     assert len(unprocessed_waveforms) == test_num_channels * test_num_records
     # Here the idea is to leave a large margin to not test too specifically for any returned values but to demonstrate that the waveform processing does
-    # undeniably cause a consistent shift in the values returned.
+    # undeniably cause a consistent shift in the values returned. The "0" exception for processed is due to the nature of derivatives -- if two samples
+    # next to each other are identical, the derivative will be 0.
     for processed, unprocessed in zip(processed_waveforms, unprocessed_waveforms):
         assert abs(unprocessed) < 1
-        assert abs(processed) > 1
+        assert abs(processed) > 1 or processed == 0
 
 
 def test_get_self_cal_last_date_time(session):
