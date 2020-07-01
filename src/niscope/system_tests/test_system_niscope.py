@@ -273,6 +273,8 @@ def test_clear_waveform_measurement_stats(session):
         session.channels[test_channels].clear_waveform_measurement_stats(niscope.enums.ClearableMeasurement.FREQUENCY)
         cleared_stats = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
 
+    # The principle here is using consistent behavior (i.e. if stats are fetched twice on a single record/channel measurement in a row, it will always be the same)
+    # to demonstrate that clearing the stats does in fact cause a measurable change.
     assert uncleared_stats == uncleared_stats_2
     assert uncleared_stats != cleared_stats
 
@@ -293,9 +295,11 @@ def test_waveform_processing(session):
 
     assert len(processed_waveforms) == test_num_channels * test_num_records
     assert len(unprocessed_waveforms) == test_num_channels * test_num_records
+    # Here the idea is to leave a large margin to not test too specifically for any returned values but to demonstrate that the waveform processing does
+    # undeniably cause a consistent shift in the values returned.
     for processed, unprocessed in zip(processed_waveforms, unprocessed_waveforms):
-        assert abs(unprocessed) < 0.02
-        assert abs(processed) > 100
+        assert abs(unprocessed) < 1
+        assert abs(processed) > 1
 
 
 def test_get_self_cal_last_date_time(session):
