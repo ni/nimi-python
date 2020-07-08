@@ -253,10 +253,9 @@ def test_fetch_measurement_stats(session):
     with session.initiate():
         measurement_stats = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
 
+    assert len(measurement_stats) == test_num_channels * test_num_records
     for stat in measurement_stats:
-        assert len(stat) == test_num_channels * test_num_records
-        for num in stat:
-            assert num == 0.0
+        assert stat.result == 0.0
 
 
 def test_clear_waveform_measurement_stats(session):
@@ -439,7 +438,7 @@ def test_disable(session):
 
 
 def test_configure_ref_levels(session):
-    session.configure_ref_levels()
+    session._configure_ref_levels()
     assert 90.0 == session._meas_chan_high_ref_level
 
 

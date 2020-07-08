@@ -273,3 +273,71 @@ functions_additional_fetch_array_measurement = {
         'returns': 'ViStatus'
     }
 }
+
+functions_additional_fetch_array_measurement_stats = {
+    'FancyFetchMeasurementStats': {
+        'codegen_method': 'python-only',
+        'python_name': 'fetch_array_measurement_stats',
+        'documentation': {
+            'description': '\nObtains a waveform measurement and returns the measurement value. This\nfunction may return multiple statistical results depending on the number\nof channels, the acquisition type, and the number of records you\nspecify.\n\nYou specify a particular measurement type, such as rise time, frequency,\nor voltage peak-to-peak. The waveform on which the digitizer calculates\nthe waveform measurement is from an acquisition that you previously\ninitiated. The statistics for the specified measurement function are\nreturned, where the statistics are updated once every acquisition when\nthe specified measurement is fetched by any of the Fetch Measurement\nfunctions. If a Fetch Measurement function has not been called, this\nfunction fetches the data on which to perform the measurement. The\nstatistics are cleared by calling\nniScope_ClearWaveformMeasurementStats. Refer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information on incorporating fetch functions in your application.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references with\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_fetch_array_measurement_stats'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe instrument handle you obtain from niScope_init that identifies a\nparticular instrument session.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': "\nThe channel to configure. For more information, refer to `Channel String\nSyntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc)>`__.\n"
+                },
+                'name': 'channelList',
+                'type': 'ViConstString'
+            },
+            {
+                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
+                },
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe `scalar\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__\nto be performed on each fetched waveform.\n'
+                },
+                'enum': 'ScalarMeasurement',
+                'name': 'scalarMeasFunction',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns a list of class instances with the following measurement statistics\nabout the specified measurement:\n\n-	**result** (float): returns the resulting measurement\n-	**mean** (float): returns the mean scalar value, which is obtained by\naveraging each fetch_measurement_stats call\n-	**stdev** (float): returns the standard deviations of the most recent\n**numInStats** measurements\n-	**min** (float): returns the smallest scalar value acquired (the minimum\nof the **numInStats** measurements)\n-	**max** (float): returns the largest scalar value acquired (the maximum\nof the **numInStats** measurements)\n-	**num_in_stats** (int): returns the number of times fetch_measurement_stats has been called\n-	**channel** (str): channel name this result was acquired from\n-	**record** (int): record number of this result'
+                },
+                'name': 'measurement_stats',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': None
+                },
+                'type': 'MeasurementStats[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    }
+}

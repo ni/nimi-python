@@ -569,7 +569,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ConfigureRefLevels': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nThis function is included for compliance with the IviScope Class\nSpecification.\n\nConfigures the reference levels for all channels of the digitizer. The\nlevels may be set on a per channel basis by setting\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL\n\nThis function configures the reference levels for waveform measurements.\nCall this function before calling niScope_FetchMeasurement to take a\nrise time, fall time, width negative, width positive, duty cycle\nnegative, or duty cycle positive measurement.\n'
         },
@@ -2010,7 +2010,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchMeasurementStats': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nObtains a waveform measurement and returns the measurement value. This\nfunction may return multiple statistical results depending on the number\nof channels, the acquisition type, and the number of records you\nspecify.\n\nYou specify a particular measurement type, such as rise time, frequency,\nor voltage peak-to-peak. The waveform on which the digitizer calculates\nthe waveform measurement is from an acquisition that you previously\ninitiated. The statistics for the specified measurement function are\nreturned, where the statistics are updated once every acquisition when\nthe specified measurement is fetched by any of the Fetch Measurement\nfunctions. If a Fetch Measurement function has not been called, this\nfunction fetches the data on which to perform the measurement. The\nstatistics are cleared by calling\nniScope_ClearWaveformMeasurementStats. Refer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information on incorporating fetch functions in your application.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references with\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
         },
