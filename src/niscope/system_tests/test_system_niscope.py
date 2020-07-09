@@ -274,8 +274,13 @@ def test_clear_waveform_measurement_stats(session):
 
     # The principle here is using consistent behavior (i.e. if stats are fetched twice on a single record/channel measurement in a row, it will always be the same)
     # to demonstrate that clearing the stats does in fact cause a measurable change.
-    assert uncleared_stats == uncleared_stats_2
-    assert uncleared_stats != cleared_stats
+    assert uncleared_stats[0].results == uncleared_stats_2[0].results
+    assert uncleared_stats[0].stdev == uncleared_stats_2[0].stdev
+    assert uncleared_stats[0].mean == uncleared_stats_2[0].mean
+    assert uncleared_stats[0].min_val == uncleared_stats_2[0].min_val
+    assert uncleared_stats[0].max_val == uncleared_stats_2[0].max_val
+    assert uncleared_stats[0].num_in_stats == uncleared_stats_2[0].num_in_stats
+    assert uncleared_stats[0].num_in_stats != cleared_stats[0].num_in_stats
 
 
 def test_waveform_processing(session):
