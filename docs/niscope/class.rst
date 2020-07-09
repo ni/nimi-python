@@ -1552,94 +1552,6 @@ fetch_array_measurement
 
 
 
-fetch_array_measurement_stats
------------------------------
-
-    .. py:currentmodule:: niscope.Session
-
-    .. py:method:: fetch_array_measurement_stats(scalar_meas_function, timeout=hightime.timedelta(seconds=5.0))
-
-            Obtains a waveform measurement and returns the measurement value. This
-            method may return multiple statistical results depending on the number
-            of channels, the acquisition type, and the number of records you
-            specify.
-
-            You specify a particular measurement type, such as rise time, frequency,
-            or voltage peak-to-peak. The waveform on which the digitizer calculates
-            the waveform measurement is from an acquisition that you previously
-            initiated. The statistics for the specified measurement method are
-            returned, where the statistics are updated once every acquisition when
-            the specified measurement is fetched by any of the Fetch Measurement
-            methods. If a Fetch Measurement method has not been called, this
-            method fetches the data on which to perform the measurement. The
-            statistics are cleared by calling
-            :py:meth:`niscope.Session.clear_waveform_measurement_stats`. Refer to `Using Fetch
-            Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
-            more information on incorporating fetch methods in your application.
-
-            Many of the measurements use the low, mid, and high reference levels.
-            You configure the low, mid, and high references with
-            :py:attr:`niscope.Session.meas_chan_low_ref_level`,
-            :py:attr:`niscope.Session.meas_chan_mid_ref_level`, and
-            :py:attr:`niscope.Session.meas_chan_high_ref_level` to set each channel
-            differently.
-
-            
-
-
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
-
-
-            :param scalar_meas_function:
-
-
-                The `scalar
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
-                to be performed on each fetched waveform.
-
-                
-
-
-            :type scalar_meas_function: :py:data:`niscope.ScalarMeasurement`
-            :param timeout:
-
-
-                The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
-
-                
-
-
-            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
-
-            :rtype: list of MeasurementStats
-            :return:
-
-
-                    Returns a list of class instances with the following measurement statistics
-                    about the specified measurement:
-
-                    -	**result** (float): returns the resulting measurement
-                    -	**mean** (float): returns the mean scalar value, which is obtained by
-                    averaging each fetch_measurement_stats call
-                    -	**stdev** (float): returns the standard deviations of the most recent
-                    **numInStats** measurements
-                    -	**min** (float): returns the smallest scalar value acquired (the minimum
-                    of the **numInStats** measurements)
-                    -	**max** (float): returns the largest scalar value acquired (the maximum
-                    of the **numInStats** measurements)
-                    -	**num_in_stats** (int): returns the number of times fetch_measurement_stats has been called
-                    -	**channel** (str): channel name this result was acquired from
-                    -	**record** (int): record number of this result
-
-                    
-
-
-
 fetch_into
 ----------
 
@@ -1820,6 +1732,94 @@ fetch_measurement
 
                     Contains an array of all measurements acquired; call
                     :py:meth:`niscope.Session._actual_num_wfms` to determine the array length.
+
+                    
+
+
+
+fetch_measurement_stats
+-----------------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: fetch_measurement_stats(scalar_meas_function, timeout=hightime.timedelta(seconds=5.0))
+
+            Obtains a waveform measurement and returns the measurement value. This
+            method may return multiple statistical results depending on the number
+            of channels, the acquisition type, and the number of records you
+            specify.
+
+            You specify a particular measurement type, such as rise time, frequency,
+            or voltage peak-to-peak. The waveform on which the digitizer calculates
+            the waveform measurement is from an acquisition that you previously
+            initiated. The statistics for the specified measurement method are
+            returned, where the statistics are updated once every acquisition when
+            the specified measurement is fetched by any of the Fetch Measurement
+            methods. If a Fetch Measurement method has not been called, this
+            method fetches the data on which to perform the measurement. The
+            statistics are cleared by calling
+            :py:meth:`niscope.Session.clear_waveform_measurement_stats`. Refer to `Using Fetch
+            Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+            more information on incorporating fetch methods in your application.
+
+            Many of the measurements use the low, mid, and high reference levels.
+            You configure the low, mid, and high references with
+            :py:attr:`niscope.Session.meas_chan_low_ref_level`,
+            :py:attr:`niscope.Session.meas_chan_mid_ref_level`, and
+            :py:attr:`niscope.Session.meas_chan_high_ref_level` to set each channel
+            differently.
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                niscope.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                niscope.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param scalar_meas_function:
+
+
+                The `scalar
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+                to be performed on each fetched waveform.
+
+                
+
+
+            :type scalar_meas_function: :py:data:`niscope.ScalarMeasurement`
+            :param timeout:
+
+
+                The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+
+                
+
+
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
+
+            :rtype: list of MeasurementStats
+            :return:
+
+
+                    Returns a list of class instances with the following measurement statistics
+                    about the specified measurement:
+
+                    -	**result** (float): returns the resulting measurement
+                    -	**mean** (float): returns the mean scalar value, which is obtained by
+                    averaging each fetch_measurement_stats call
+                    -	**stdev** (float): returns the standard deviations of the most recent
+                    **numInStats** measurements
+                    -	**min** (float): returns the smallest scalar value acquired (the minimum
+                    of the **numInStats** measurements)
+                    -	**max** (float): returns the largest scalar value acquired (the maximum
+                    of the **numInStats** measurements)
+                    -	**num_in_stats** (int): returns the number of times fetch_measurement_stats has been called
+                    -	**channel** (str): channel name this result was acquired from
+                    -	**record** (int): record number of this result
 
                     
 

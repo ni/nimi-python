@@ -2085,8 +2085,8 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def fetch_array_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
-        r'''fetch_array_measurement_stats
+    def fetch_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+        r'''fetch_measurement_stats
 
         Obtains a waveform measurement and returns the measurement value. This
         method may return multiple statistical results depending on the number
@@ -2148,7 +2148,7 @@ class _SessionBase(object):
 
         '''
 
-        results, means, stdevs, min_vals, max_vals, nums_in_stats = self._fetch_array_measurement_stats(scalar_meas_function, timeout)
+        results, means, stdevs, min_vals, max_vals, nums_in_stats = self._fetch_measurement_stats(scalar_meas_function, timeout)
 
         output = []
         for result, mean, stdev, min_val, max_val, num_in_stats in zip(results, means, stdevs, min_vals, max_vals, nums_in_stats):
