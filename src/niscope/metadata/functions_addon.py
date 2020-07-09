@@ -285,7 +285,7 @@ functions_additional_fetch_array_measurement_stats = {
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'fancy_fetch_array_measurement_stats'
+                'session_filename': 'fancy_fetch_measurement_stats'
             }
         ],
         'parameters': [

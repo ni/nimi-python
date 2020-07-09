@@ -14,6 +14,8 @@ import niscope.errors as errors
 
 import niscope.waveform_info as waveform_info  # noqa: F401
 
+import niscope.measurement_stats as measurement_stats  # noqa: F401
+
 import hightime
 import nitclk
 
@@ -1748,7 +1750,7 @@ class _SessionBase(object):
         Every time a measurement is called, the statistics information is
         updated, including the min, max, mean, standard deviation, and number of
         updates. This information is fetched with
-        fetch_measurement_stats. The multi-acquisition array measurements
+        _fetch_measurement_stats. The multi-acquisition array measurements
         are also cleared with this method.
 
         Tip:
@@ -2081,6 +2083,87 @@ class _SessionBase(object):
                 i += 1
 
         return wfm_info
+
+    @ivi_synchronized
+    def fetch_array_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+        r'''fetch_array_measurement_stats
+
+        Obtains a waveform measurement and returns the measurement value. This
+        method may return multiple statistical results depending on the number
+        of channels, the acquisition type, and the number of records you
+        specify.
+
+        You specify a particular measurement type, such as rise time, frequency,
+        or voltage peak-to-peak. The waveform on which the digitizer calculates
+        the waveform measurement is from an acquisition that you previously
+        initiated. The statistics for the specified measurement method are
+        returned, where the statistics are updated once every acquisition when
+        the specified measurement is fetched by any of the Fetch Measurement
+        methods. If a Fetch Measurement method has not been called, this
+        method fetches the data on which to perform the measurement. The
+        statistics are cleared by calling
+        clear_waveform_measurement_stats. Refer to `Using Fetch
+        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+        more information on incorporating fetch methods in your application.
+
+        Many of the measurements use the low, mid, and high reference levels.
+        You configure the low, mid, and high references with
+        meas_chan_low_ref_level,
+        meas_chan_mid_ref_level, and
+        meas_chan_high_ref_level to set each channel
+        differently.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            scalar_meas_function (enums.ScalarMeasurement): The `scalar
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+                to be performed on each fetched waveform.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+
+
+        Returns:
+            measurement_stats (list of MeasurementStats): Returns a list of class instances with the following measurement statistics
+                about the specified measurement:
+
+                -	**result** (float): returns the resulting measurement
+                -	**mean** (float): returns the mean scalar value, which is obtained by
+                averaging each fetch_measurement_stats call
+                -	**stdev** (float): returns the standard deviations of the most recent
+                **numInStats** measurements
+                -	**min** (float): returns the smallest scalar value acquired (the minimum
+                of the **numInStats** measurements)
+                -	**max** (float): returns the largest scalar value acquired (the maximum
+                of the **numInStats** measurements)
+                -	**num_in_stats** (int): returns the number of times fetch_measurement_stats has been called
+                -	**channel** (str): channel name this result was acquired from
+                -	**record** (int): record number of this result
+
+        '''
+
+        results, means, stdevs, min_vals, max_vals, nums_in_stats = self._fetch_array_measurement_stats(scalar_meas_function, timeout)
+
+        output = []
+        for result, mean, stdev, min_val, max_val, num_in_stats in zip(results, means, stdevs, min_vals, max_vals, nums_in_stats):
+            measurement_stat = measurement_stats.MeasurementStats(result, mean, stdev, min_val, max_val, num_in_stats)
+            output.append(measurement_stat)
+
+        i = 0
+        num_records = int(len(results) / len(self._repeated_capability_list))
+        for chan in self._repeated_capability_list:
+            for rec in range(0, num_records):
+                output[i].channel = chan
+                output[i].record = rec
+                i += 1
+
+        return output
 
     @ivi_synchronized
     def get_equalization_filter_coefficients(self):
@@ -3049,8 +3132,8 @@ class _SessionBase(object):
         return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def fetch_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
-        r'''fetch_measurement_stats
+    def _fetch_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+        r'''_fetch_measurement_stats
 
         Obtains a waveform measurement and returns the measurement value. This
         method may return multiple statistical results depending on the number
@@ -3097,7 +3180,7 @@ class _SessionBase(object):
             result (list of float): Returns the resulting measurement
 
             mean (list of float): Returns the mean scalar value, which is obtained by averaging each
-                fetch_measurement_stats call.
+                _fetch_measurement_stats call.
 
             stdev (list of float): Returns the standard deviation of the most recent **numInStats**
                 measurements.
@@ -3108,7 +3191,7 @@ class _SessionBase(object):
             max (list of float): Returns the largest scalar value acquired (the maximum of the
                 **numInStats** measurements).
 
-            num_in_stats (list of int): Returns the number of times fetch_measurement_stats has been
+            num_in_stats (list of int): Returns the number of times _fetch_measurement_stats has been
                 called.
 
         '''
@@ -4311,8 +4394,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_ref_levels(self, low=10.0, mid=50.0, high=90.0):
-        r'''configure_ref_levels
+    def _configure_ref_levels(self, low=10.0, mid=50.0, high=90.0):
+        r'''_configure_ref_levels
 
         This method is included for compliance with the IviScope Class
         Specification.

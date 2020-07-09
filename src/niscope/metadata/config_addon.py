@@ -2,4 +2,16 @@
 config_additional_config = {
     'module_version': '1.3.2.dev0',
     'latest_runtime_version_tested_against': '20.0.0',
+    'custom_types': [
+        {
+            'ctypes_type': 'struct_niScope_wfmInfo',
+            'file_name': 'waveform_info',
+            'python_name': 'WaveformInfo'
+        },
+        {
+            'ctypes_type': '',
+            'file_name': 'measurement_stats',
+            'python_name': 'MeasurementStats'
+        }
+    ]
 }
