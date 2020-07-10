@@ -1792,6 +1792,58 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last external calibration performed.
+
+        Returns:
+            last_cal_datetime (hightime.datetime): Indicates date and time of the last external calibration.
+
+        '''
+
+        return self.get_last_cal_temp(1)
+
+    @ivi_synchronized
+    def get_ext_cal_last_temp(self):
+        '''get_ext_cal_last_temp
+
+        Returns the **Temperature** during the last external calibration procedure.
+
+        Returns:
+            temperature (float): Returns the **temperature** during the last external calibration.
+
+        '''
+
+        return self.get_last_cal_temp(1)
+
+    @ivi_synchronized
+    def get_self_cal_last_date_and_time(self):
+        '''get_self_cal_last_date_and_time
+
+        Returns the date and time of the last self calibration performed.
+
+        Returns:
+            last_cal_datetime (hightime.datetime): Indicates date and time of the last self calibration.
+
+        '''
+
+        return self.get_last_cal_temp(0)
+
+    @ivi_synchronized
+    def get_self_cal_last_temp(self):
+        '''get_self_cal_last_temp
+
+        Returns the **Temperature** during the last self calibration procedure.
+
+        Returns:
+            temperature (float): Returns the **temperature** during the last self calibration.
+
+        '''
+
+        return self.get_last_cal_temp(0)
+
+    @ivi_synchronized
     def fetch(self, maximum_time=hightime.timedelta(milliseconds=-1)):
         r'''fetch
 

@@ -1209,6 +1209,52 @@ get_dev_temp
 
 
 
+get_ext_cal_last_date_and_time
+------------------------------
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: get_ext_cal_last_date_and_time()
+
+            Returns the date and time of the last external calibration performed.
+
+            
+
+
+
+            :rtype: hightime.datetime
+            :return:
+
+
+                    Indicates date and time of the last external calibration.
+
+                    
+
+
+
+get_ext_cal_last_temp
+---------------------
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: get_ext_cal_last_temp()
+
+            Returns the **Temperature** during the last external calibration procedure.
+
+            
+
+
+
+            :rtype: float
+            :return:
+
+
+                    Returns the **temperature** during the last external calibration.
+
+                    
+
+
+
 get_ext_cal_recommended_interval
 --------------------------------
 
@@ -1275,6 +1321,52 @@ get_last_cal_temp
 
 
                     Returns the **temperature** during the last calibration.
+
+                    
+
+
+
+get_self_cal_last_date_and_time
+-------------------------------
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: get_self_cal_last_date_and_time()
+
+            Returns the date and time of the last self calibration performed.
+
+            
+
+
+
+            :rtype: hightime.datetime
+            :return:
+
+
+                    Indicates date and time of the last self calibration.
+
+                    
+
+
+
+get_self_cal_last_temp
+----------------------
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: get_self_cal_last_temp()
+
+            Returns the **Temperature** during the last self calibration procedure.
+
+            
+
+
+
+            :rtype: float
+            :return:
+
+
+                    Returns the **temperature** during the last self calibration.
 
                     
 
