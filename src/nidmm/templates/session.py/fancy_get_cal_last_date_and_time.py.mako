@@ -15,5 +15,5 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
 
-        return self.get_last_cal_temp(${calibration_type})
+        return self.get_cal_date_and_time(${calibration_type})
 
