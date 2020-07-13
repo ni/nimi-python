@@ -307,6 +307,33 @@ def test_waveform_processing(session):
         assert abs(processed) > 1 or processed == 0
 
 
+def test_measurement_stats_str(session):
+    test_voltage = 1.0
+    test_record_length = 1000
+    test_channels = 0
+    test_num_channels = 1
+    test_num_records = 1
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        measurement_stat = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
+
+    # As defined in the MeasurementStat class for string output:
+    row_format_g = '{:<20}: {:,.6g}\n'
+    row_format_d = '{:<20}: {:,}\n'
+    row_format_s = '{:<20}: {:}\n'
+    string_representation = ''
+    string_representation += row_format_s.format('channel', 0)
+    string_representation += row_format_d.format('record', 0)
+    string_representation += row_format_g.format('result', 0)
+    string_representation += row_format_g.format('mean', 0)
+    string_representation += row_format_g.format('standard deviation', 0)
+    string_representation += row_format_g.format('minimum value', 0)
+    string_representation += row_format_g.format('maximum value', 0)
+    string_representation += row_format_d.format('num in stats', 0)
+
+    assert str(measurement_stat[0]) == string_representation
+
 def test_get_self_cal_last_date_time(session):
     last_cal = session.get_self_cal_last_date_and_time()
     assert last_cal.month == 12
