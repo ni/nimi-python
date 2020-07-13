@@ -311,7 +311,6 @@ def test_measurement_stats_str(session):
     test_voltage = 1.0
     test_record_length = 1000
     test_channels = 0
-    test_num_channels = 1
     test_num_records = 1
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
@@ -333,6 +332,7 @@ def test_measurement_stats_str(session):
     string_representation += row_format_d.format('num in stats', 0)
 
     assert str(measurement_stat[0]) == string_representation
+
 
 def test_get_self_cal_last_date_time(session):
     last_cal = session.get_self_cal_last_date_and_time()
