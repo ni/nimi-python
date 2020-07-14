@@ -223,7 +223,7 @@ class ClearableMeasurement(Enum):
     TIME_HISTOGRAM_NEW_HITS = 3011
 
 
-class _FIRFilterWindow(Enum):
+class FIRFilterWindow(Enum):
     NONE = 0
     r'''
     No window.
@@ -273,7 +273,7 @@ class FetchRelativeTo(Enum):
     '''
 
 
-class _FilterType(Enum):
+class FilterType(Enum):
     LOWPASS = 0
     r'''
     Specifies lowpass as the filter type.
@@ -348,7 +348,7 @@ class Option(Enum):
     '''
 
 
-class _PercentageMethod(Enum):
+class PercentageMethod(Enum):
     LOWHIGH = 0
     r'''
     Specifies that the reference level percentages should be computed using
@@ -384,7 +384,7 @@ class RISMethod(Enum):
     '''
 
 
-class _RefLevelUnits(Enum):
+class RefLevelUnits(Enum):
     VOLTS = 0
     r'''
     Specifies that the reference levels are given in units of volts.

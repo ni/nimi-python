@@ -675,7 +675,7 @@ class _SessionBase(object):
 
     Returns the maximum sample rate in RIS mode in Hz.
     '''
-    _meas_array_gain = _attributes.AttributeViReal64(1150043)
+    meas_array_gain = _attributes.AttributeViReal64(1150043)
     '''Type: float
 
     Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to ArrayMeasurement.ARRAY_GAIN for more information.
@@ -687,7 +687,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_array_offset = _attributes.AttributeViReal64(1150044)
+    meas_array_offset = _attributes.AttributeViReal64(1150044)
     '''Type: float
 
     Every element of an array is added to this scalar value during the Array Offset measurement. Refer to ArrayMeasurement.ARRAY_OFFSET for more information.
@@ -699,7 +699,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_chan_high_ref_level = _attributes.AttributeViReal64(1150040)
+    meas_chan_high_ref_level = _attributes.AttributeViReal64(1150040)
     '''Type: float
 
     Stores the high reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_high_ref if you use this property to set various channels to different values.
@@ -711,7 +711,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_chan_low_ref_level = _attributes.AttributeViReal64(1150038)
+    meas_chan_low_ref_level = _attributes.AttributeViReal64(1150038)
     '''Type: float
 
     Stores the low reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_low_ref if you use this property to set various channels to different values.
@@ -723,7 +723,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_chan_mid_ref_level = _attributes.AttributeViReal64(1150039)
+    meas_chan_mid_ref_level = _attributes.AttributeViReal64(1150039)
     '''Type: float
 
     Stores the mid reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_mid_ref if you use this property to set various channels to different values.
@@ -735,7 +735,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_filter_center_freq = _attributes.AttributeViReal64(1150032)
+    meas_filter_center_freq = _attributes.AttributeViReal64(1150032)
     '''Type: float
 
     The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by meas_filter_width, where the cutoff frequencies are the center ± width.
@@ -747,7 +747,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_filter_cutoff_freq = _attributes.AttributeViReal64(1150031)
+    meas_filter_cutoff_freq = _attributes.AttributeViReal64(1150031)
     '''Type: float
 
     Specifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter.
@@ -759,7 +759,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_filter_order = _attributes.AttributeViInt32(1150036)
+    meas_filter_order = _attributes.AttributeViInt32(1150036)
     '''Type: int
 
     Specifies the order of an IIR filter. All positive integers are valid.
@@ -771,7 +771,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_filter_ripple = _attributes.AttributeViReal64(1150033)
+    meas_filter_ripple = _attributes.AttributeViReal64(1150033)
     '''Type: float
 
     Specifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.
@@ -783,7 +783,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_filter_taps = _attributes.AttributeViInt32(1150037)
+    meas_filter_taps = _attributes.AttributeViInt32(1150037)
     '''Type: int
 
     Defines the number of taps (coefficients) for an FIR filter.
@@ -795,7 +795,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_filter_transient_waveform_percent = _attributes.AttributeViReal64(1150034)
+    meas_filter_transient_waveform_percent = _attributes.AttributeViReal64(1150034)
     '''Type: float
 
     The percentage (0 - 100%) of the IIR filtered waveform to eliminate from the beginning of the waveform. This allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition.
@@ -807,7 +807,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._FilterType, 1150035)
+    meas_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FilterType, 1150035)
     '''Type: enums.FilterType
 
     Specifies the type of filter, for both IIR and FIR filters. The allowed values are the following:
@@ -826,7 +826,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_filter_width = _attributes.AttributeViReal64(1150041)
+    meas_filter_width = _attributes.AttributeViReal64(1150041)
     '''Type: float
 
     Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at meas_filter_center_freq ± one-half width.
@@ -838,18 +838,18 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._FIRFilterWindow, 1150042)
+    meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FIRFilterWindow, 1150042)
     '''Type: enums.FIRFilterWindow
 
     Specifies the FIR window type. The possible choices are:
-    _FIRFilterWindow.NONE
+    FIRFilterWindow.NONE
     ArrayMeasurement.HANNING_WINDOW
     ArrayMeasurement.HAMMING_WINDOW
     ArrayMeasurement.TRIANGLE_WINDOW
     ArrayMeasurement.FLAT_TOP_WINDOW
     ArrayMeasurement.BLACKMAN_WINDOW
     The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
-    Default: _FIRFilterWindow.NONE
+    Default: FIRFilterWindow.NONE
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -857,8 +857,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_high_ref = _attributes.AttributeViReal64(1250607)
-    _meas_hysteresis_percent = _attributes.AttributeViReal64(1150019)
+    meas_high_ref = _attributes.AttributeViReal64(1250607)
+    meas_hysteresis_percent = _attributes.AttributeViReal64(1150019)
     '''Type: float
 
     Digital hysteresis that is used in several of the scalar waveform measurements. This property specifies the percentage of the full-scale vertical range for the hysteresis window size.
@@ -870,7 +870,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_interpolation_sampling_factor = _attributes.AttributeViReal64(1150030)
+    meas_interpolation_sampling_factor = _attributes.AttributeViReal64(1150030)
     '''Type: float
 
     The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling FetchWaveformMeasurementArray with the ArrayMeasurement.POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
@@ -885,7 +885,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_last_acq_histogram_size = _attributes.AttributeViInt32(1150020)
+    meas_last_acq_histogram_size = _attributes.AttributeViInt32(1150020)
     '''Type: int
 
     Specifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high.
@@ -897,9 +897,9 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_low_ref = _attributes.AttributeViReal64(1250608)
-    _meas_mid_ref = _attributes.AttributeViReal64(1250609)
-    _meas_other_channel = _attributes.AttributeViString(1150018)
+    meas_low_ref = _attributes.AttributeViReal64(1250608)
+    meas_mid_ref = _attributes.AttributeViReal64(1250609)
+    meas_other_channel = _attributes.AttributeViString(1150018)
     '''Type: str
 
     Specifies the second channel for two-channel measurements, such as ArrayMeasurement.ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
@@ -911,7 +911,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_percentage_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._PercentageMethod, 1150045)
+    meas_percentage_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PercentageMethod, 1150045)
     '''Type: enums.PercentageMethod
 
     Specifies the method used to map percentage reference units to voltages for the reference. Possible values are:
@@ -929,7 +929,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_polynomial_interpolation_order = _attributes.AttributeViInt32(1150029)
+    meas_polynomial_interpolation_order = _attributes.AttributeViInt32(1150029)
     '''Type: int
 
     Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
@@ -941,7 +941,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._RefLevelUnits, 1150016)
+    meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefLevelUnits, 1150016)
     '''Type: enums.RefLevelUnits
 
     Specifies the units of the reference levels.
@@ -958,7 +958,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_time_histogram_high_time = _attributes.AttributeViReal64(1150028)
+    meas_time_histogram_high_time = _attributes.AttributeViReal64(1150028)
     '''Type: float
 
     Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
@@ -970,7 +970,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_time_histogram_high_volts = _attributes.AttributeViReal64(1150026)
+    meas_time_histogram_high_volts = _attributes.AttributeViReal64(1150026)
     '''Type: float
 
     Specifies the highest voltage value included in the multiple-acquisition time histogram. The units are always volts.
@@ -982,7 +982,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_time_histogram_low_time = _attributes.AttributeViReal64(1150027)
+    meas_time_histogram_low_time = _attributes.AttributeViReal64(1150027)
     '''Type: float
 
     Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
@@ -994,7 +994,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_time_histogram_low_volts = _attributes.AttributeViReal64(1150025)
+    meas_time_histogram_low_volts = _attributes.AttributeViReal64(1150025)
     '''Type: float
 
     Specifies the lowest voltage value included in the multiple acquisition time histogram. The units are always volts.
@@ -1006,7 +1006,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_time_histogram_size = _attributes.AttributeViInt32(1150024)
+    meas_time_histogram_size = _attributes.AttributeViInt32(1150024)
     '''Type: int
 
     Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with clear_waveform_measurement_stats.
@@ -1018,7 +1018,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_voltage_histogram_high_volts = _attributes.AttributeViReal64(1150023)
+    meas_voltage_histogram_high_volts = _attributes.AttributeViReal64(1150023)
     '''Type: float
 
     Specifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.
@@ -1030,7 +1030,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_voltage_histogram_low_volts = _attributes.AttributeViReal64(1150022)
+    meas_voltage_histogram_low_volts = _attributes.AttributeViReal64(1150022)
     '''Type: float
 
     Specifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.
@@ -1042,7 +1042,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    _meas_voltage_histogram_size = _attributes.AttributeViInt32(1150021)
+    meas_voltage_histogram_size = _attributes.AttributeViInt32(1150021)
     '''Type: int
 
     Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method clear_waveform_measurement_stats.
@@ -1660,14 +1660,11 @@ class _SessionBase(object):
         before the measurement. The processing is added on a per channel basis,
         and the processing measurements are completed in the same order they are
         registered. All measurement library parameters—the properties starting
-        with MEAS—are cached at the time of registering the
+        with "meas_"—are cached at the time of registering the
         processing, and this set of parameters is used during the processing
         step. The processing measurements are streamed, so the result of the
         first processing step is used as the input for the next step. The
         processing is done before any other measurements.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -2063,7 +2060,7 @@ class _SessionBase(object):
         # Set the fetch attributes
         with _NoChannel(session=self):
             if other_channel is not None:
-                self._meas_other_channel = other_channel
+                self.meas_other_channel = other_channel
 
         meas_wfm, wfm_info = self._fetch_array_measurement(array_meas_function, timeout)
         record_length = int(len(meas_wfm) / len(wfm_info))

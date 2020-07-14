@@ -12,7 +12,7 @@
         # Set the fetch attributes
         with _NoChannel(session=self):
             if other_channel is not None:
-                self._meas_other_channel = other_channel
+                self.meas_other_channel = other_channel
 
         meas_wfm, wfm_info = self._${f['python_name']}(array_meas_function, timeout)
         record_length = int(len(meas_wfm) / len(wfm_info))

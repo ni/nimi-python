@@ -631,6 +631,71 @@ ClearableMeasurement
 
 
 
+FIRFilterWindow
+---------------
+
+.. py:class:: FIRFilterWindow
+
+    .. py:attribute:: FIRFilterWindow.NONE
+
+
+
+        No window.
+
+        
+
+
+
+    .. py:attribute:: FIRFilterWindow.HANNING
+
+
+
+        Specifies a Hanning window.
+
+        
+
+
+
+    .. py:attribute:: FIRFilterWindow.FLAT_TOP
+
+
+
+        Specifies a Flat Top window.
+
+        
+
+
+
+    .. py:attribute:: FIRFilterWindow.HAMMING
+
+
+
+        Specifies a Hamming window.
+
+        
+
+
+
+    .. py:attribute:: FIRFilterWindow.TRIANGLE
+
+
+
+        Specifies a Triangle window.
+
+        
+
+
+
+    .. py:attribute:: FIRFilterWindow.BLACKMAN
+
+
+
+        Specifies a Blackman window.
+
+        
+
+
+
 FetchRelativeTo
 ---------------
 
@@ -681,6 +746,51 @@ FetchRelativeTo
 
 
         Fetch at the first posttrigger sample.
+
+        
+
+
+
+FilterType
+----------
+
+.. py:class:: FilterType
+
+    .. py:attribute:: FilterType.LOWPASS
+
+
+
+        Specifies lowpass as the filter type.
+
+        
+
+
+
+    .. py:attribute:: FilterType.HIGHPASS
+
+
+
+        Specifies highpass as the filter type.
+
+        
+
+
+
+    .. py:attribute:: FilterType.BANDPASS
+
+
+
+        Specifies bandpass as the filter type.
+
+        
+
+
+
+    .. py:attribute:: FilterType.BANDSTOP
+
+
+
+        Specifies bandstop as the filter type.
 
         
 
@@ -816,6 +926,42 @@ Option
 
 
 
+PercentageMethod
+----------------
+
+.. py:class:: PercentageMethod
+
+    .. py:attribute:: PercentageMethod.LOWHIGH
+
+
+
+        Specifies that the reference level percentages should be computed using
+        the low/high method,
+
+        
+
+
+
+    .. py:attribute:: PercentageMethod.MINMAX
+
+
+
+        Reference level percentages are computed using the min/max method.
+
+        
+
+
+
+    .. py:attribute:: PercentageMethod.BASETOP
+
+
+
+        Reference level percentages are computed using the base/top method.
+
+        
+
+
+
 RISMethod
 ---------
 
@@ -857,6 +1003,32 @@ RISMethod
 
 
         Limits the waveforms in the various bins to be within 200 ps of the center of the bin.
+
+        
+
+
+
+RefLevelUnits
+-------------
+
+.. py:class:: RefLevelUnits
+
+    .. py:attribute:: RefLevelUnits.VOLTS
+
+
+
+        Specifies that the reference levels are given in units of volts.
+
+        
+
+
+
+    .. py:attribute:: RefLevelUnits.PERCENTAGE
+
+
+
+        (Default) Specifies that the reference levels are given in percentage
+        units.
 
         
 
