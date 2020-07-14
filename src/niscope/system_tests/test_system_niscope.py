@@ -378,20 +378,20 @@ def test_reset(session):
 
 
 def test_reset_device(session):
-    deault_meas_time_histogram_high_time = session._meas_time_histogram_high_time
+    deault_meas_time_histogram_high_time = session.meas_time_histogram_high_time
     assert deault_meas_time_histogram_high_time == 0.0005
     session.meas_time_histogram_high_time = 0.0010
-    non_default_meas_time_histogram_high_time = session._meas_time_histogram_high_time
+    non_default_meas_time_histogram_high_time = session.meas_time_histogram_high_time
     assert non_default_meas_time_histogram_high_time == 0.0010
     session.reset_device()
     assert session.meas_time_histogram_high_time == 0.0005
 
 
 def test_reset_with_defaults(session):
-    deault_meas_time_histogram_high_time = session._meas_time_histogram_high_time
+    deault_meas_time_histogram_high_time = session.meas_time_histogram_high_time
     assert deault_meas_time_histogram_high_time == 0.0005
     session.meas_time_histogram_high_time = 0.0010
-    non_default_meas_time_histogram_high_time = session._meas_time_histogram_high_time
+    non_default_meas_time_histogram_high_time = session.meas_time_histogram_high_time
     assert non_default_meas_time_histogram_high_time == 0.0010
     session.reset_with_defaults()
     assert session.meas_time_histogram_high_time == 0.0005
