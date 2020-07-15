@@ -60,11 +60,43 @@ All notable changes to this project will be documented in this file.
             * `add_waveform_processing`
             * `clear_waveform_measurement_stats`
             * `clear_waveform_processing`
-            * `configure_ref_levels`
             * `fetch_array_measurement`
             * `fetch_measurement`
             * `fetch_measurement_stats`
             * `read_measurement`
+        * Added measurement library properties.
+            * `meas_array_gain`
+            * `meas_array_offset`
+            * `meas_chan_high_ref_level`
+            * `meas_chan_low_ref_level`
+            * `meas_chan_mid_ref_level`
+            * `meas_filter_center_freq`
+            * `meas_filter_cutoff_freq`
+            * `meas_filter_order`
+            * `meas_filter_ripple`
+            * `meas_filter_taps`
+            * `meas_filter_transient_waveform_percent`
+            * `meas_filter_type`
+            * `meas_filter_width`
+            * `meas_fir_filter_window`
+            * `meas_high_ref`
+            * `meas_low_ref`
+            * `meas_mid_ref`
+            * `meas_hysteresis_percent`
+            * `meas_interpolation_sampling_factor`
+            * `meas_last_acq_histogram_size`
+            * `meas_other_channel`
+            * `meas_percentage_method`
+            * `meas_polynomial_interpolation_order`
+            * `meas_ref_level_units`
+            * `meas_time_histogram_high_time`
+            * `meas_time_histogram_high_volts`
+            * `meas_time_histogram_low_time`
+            * `meas_time_hisogram_low_volts`
+            * `meas_time_histogram_size`
+            * `meas_voltage_histogram_high_volts`
+            * `meas_voltage_histogram_low_volts`
+            * `meas_voltage_histogram_size`
     * #### Changed
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
