@@ -317,21 +317,8 @@ def test_measurement_stats_str(session):
     with session.initiate():
         measurement_stat = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
 
-    # As defined in the MeasurementStat class for string output:
-    row_format_g = '{:<20}: {:,.6g}\n'
-    row_format_d = '{:<20}: {:,}\n'
-    row_format_s = '{:<20}: {:}\n'
-    string_representation = ''
-    string_representation += row_format_s.format('channel', 0)
-    string_representation += row_format_d.format('record', 0)
-    string_representation += row_format_g.format('result', 0)
-    string_representation += row_format_g.format('mean', 0)
-    string_representation += row_format_g.format('standard deviation', 0)
-    string_representation += row_format_g.format('minimum value', 0)
-    string_representation += row_format_g.format('maximum value', 0)
-    string_representation += row_format_d.format('num in stats', 0)
-
-    assert str(measurement_stat[0]) == string_representation
+    assert isinstance(measurement_stat[0].__str__(), str)
+    assert isinstance(measurement_stat[0].__repr__(), str)
 
 
 def test_get_self_cal_last_date_time(session):

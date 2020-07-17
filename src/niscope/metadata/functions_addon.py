@@ -189,7 +189,7 @@ functions_additional_fetch_array_measurement = {
         'python_name': 'fetch_array_measurement',
         'documentation': {
             'description': '\nObtains a waveform from the digitizer and returns the specified\nmeasurement array. This function may return multiple waveforms depending\non the number of channels, the acquisition type, and the number of\nrecords you specify.\n',
-            'note': '\nSome functionality, such as time stamping, is not supported in all\ndigitizers. Refer to `Features Supported by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for\nmore information.\n'
+            'note': '\nSome functionality, such as time stamping, is not supported in all\ndigitizers.\n'
         },
         'method_templates': [
             {
@@ -210,7 +210,7 @@ functions_additional_fetch_array_measurement = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': "\nThe channel to configure. For more information, refer to `Channel String\nSyntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc)>`__.\n"
+                    'description': "\nThe channel to configure.\n"
                 },
                 'name': 'channelList',
                 'type': 'ViConstString'
@@ -229,7 +229,7 @@ functions_additional_fetch_array_measurement = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThe `array\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__\nto perform.\n'
+                    'description': '\nThe array measurement to perform.\n'
                 },
                 'enum': 'ArrayMeasurement',
                 'name': 'arrayMeasFunction',
@@ -239,7 +239,7 @@ functions_additional_fetch_array_measurement = {
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Use niScope_ActualMeasWfmSize to\ndetermine the number of available samples.\n',
-                    'note': '\nUse the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the\nnumber of samples to fetch when performing a measurement. For more\ninformation about when to use this attribute, refer to the `NI\nKnowledgeBase <javascript:WWW(WWW_KB_MEAS)>`__.\n'
+                    'note': '\nUse the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the\nnumber of samples to fetch when performing a measurement.\n'
                 },
                 'name': 'measWfmSize',
                 'size': {
@@ -279,7 +279,7 @@ functions_additional_fetch_array_measurement_stats = {
         'codegen_method': 'python-only',
         'python_name': 'fetch_measurement_stats',
         'documentation': {
-            'description': '\nObtains a waveform measurement and returns the measurement value. This\nfunction may return multiple statistical results depending on the number\nof channels, the acquisition type, and the number of records you\nspecify.\n\nYou specify a particular measurement type, such as rise time, frequency,\nor voltage peak-to-peak. The waveform on which the digitizer calculates\nthe waveform measurement is from an acquisition that you previously\ninitiated. The statistics for the specified measurement function are\nreturned, where the statistics are updated once every acquisition when\nthe specified measurement is fetched by any of the Fetch Measurement\nfunctions. If a Fetch Measurement function has not been called, this\nfunction fetches the data on which to perform the measurement. The\nstatistics are cleared by calling\nniScope_ClearWaveformMeasurementStats. Refer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information on incorporating fetch functions in your application.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references with\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
+            'description': '\nObtains a waveform measurement and returns the measurement value. This\nfunction may return multiple statistical results depending on the number\nof channels, the acquisition type, and the number of records you\nspecify.\n\nYou specify a particular measurement type, such as rise time, frequency,\nor voltage peak-to-peak. The waveform on which the digitizer calculates\nthe waveform measurement is from an acquisition that you previously\ninitiated. The statistics for the specified measurement function are\nreturned, where the statistics are updated once every acquisition when\nthe specified measurement is fetched by any of the Fetch Measurement\nfunctions. If a Fetch Measurement function has not been called, this\nfunction fetches the data on which to perform the measurement. The\nstatistics are cleared by calling\nniScope_ClearWaveformMeasurementStats.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references with\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
         },
         'method_templates': [
             {
@@ -300,7 +300,7 @@ functions_additional_fetch_array_measurement_stats = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': "\nThe channel to configure. For more information, refer to `Channel String\nSyntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc)>`__.\n"
+                    'description': "\nThe channel to configure.\n"
                 },
                 'name': 'channelList',
                 'type': 'ViConstString'
@@ -319,7 +319,7 @@ functions_additional_fetch_array_measurement_stats = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThe `scalar\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__\nto be performed on each fetched waveform.\n'
+                    'description': '\nThe scalar measurement to be performed on each fetched waveform.\n'
                 },
                 'enum': 'ScalarMeasurement',
                 'name': 'scalarMeasFunction',
