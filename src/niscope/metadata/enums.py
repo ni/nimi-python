@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.1.0d1
+# This file is generated from NI-SCOPE API metadata version 20.5.0d1
 enums = {
     '5900AccessoryInAScopeSessionValues': {
         'values': [
@@ -343,12 +343,12 @@ enums = {
     'AttributeRetrievalModes': {
         'values': [
             {
-                'name': 'NISCOPE_VAL_ATTRIBUTE_RETRIEVAL_MODE_DESIRED',
-                'value': 1
-            },
-            {
                 'name': 'NISCOPE_VAL_ATTRIBUTE_RETRIEVAL_MODE_COERCED',
                 'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_ATTRIBUTE_RETRIEVAL_MODE_DESIRED',
+                'value': 1
             },
             {
                 'name': 'NISCOPE_VAL_ATTRIBUTE_RETRIEVAL_MODE_DEFAULT',
@@ -1021,13 +1021,13 @@ enums = {
                 'value': 10
             },
             {
+                'name': 'NISCOPE_VAL_REF_CLOCK',
+                'value': 100
+            },
+            {
                 'name': 'NISCOPE_VAL_5V_OUT',
                 'python_name': 'FIVE_V_OUT',
                 'value': 13
-            },
-            {
-                'name': 'NISCOPE_VAL_REF_CLOCK',
-                'value': 100
             },
             {
                 'name': 'NISCOPE_VAL_SAMPLE_CLOCK',

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.1.0d1
+# This file is generated from NI-SCOPE API metadata version 20.5.0d1
 functions = {
     'Abort': {
         'documentation': {
@@ -111,7 +111,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'AddWaveformProcessing': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nAdds one measurement to the list of processing steps that are completed\nbefore the measurement. The processing is added on a per channel basis,\nand the processing measurements are completed in the same order they are\nregistered. All measurement library parameters—the attributes starting\nwith NISCOPE_ATTR_MEAS—are cached at the time of registering the\nprocessing, and this set of parameters is used during the processing\nstep. The processing measurements are streamed, so the result of the\nfirst processing step is used as the input for the next step. The\nprocessing is done before any other measurements.\n'
         },
@@ -353,7 +353,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClearWaveformMeasurementStats': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nClears the waveform stats on the channel and measurement you specify. If\nyou want to clear all of the measurements, use\nNISCOPE_VAL_ALL_MEASUREMENTS in the **clearableMeasurementFunction**\nparameter.\n\nEvery time a measurement is called, the statistics information is\nupdated, including the min, max, mean, standard deviation, and number of\nupdates. This information is fetched with\nniScope_FetchMeasurementStats. The multi-acquisition array measurements\nare also cleared with this function.\n'
         },
@@ -388,7 +388,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClearWaveformProcessing': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nClears the list of processing steps assigned to the given channel. The\nprocessing is added using the niScope_AddWaveformProcessing function,\nwhere the processing steps are completed in the same order in which they\nare registered. The processing measurements are streamed, so the result\nof the first processing step is used as the input for the next step. The\nprocessing is also done before any other measurements.\n'
         },
@@ -645,7 +645,7 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe length of time the digitizer waits after detecting a trigger before\nenabling NI-SCOPE to detect another trigger. Refer to\nNISCOPE_ATTR_TRIGGER_HOLDOFF for more information.\n'
@@ -653,10 +653,10 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nHow long the digitizer waits after receiving the trigger to start\nacquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more\ninformation.\n'
@@ -664,7 +664,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -719,7 +719,7 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe length of time the digitizer waits after detecting a trigger before\nenabling NI-SCOPE to detect another trigger. Refer to\nNISCOPE_ATTR_TRIGGER_HOLDOFF for more information.\n'
@@ -727,10 +727,10 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nHow long the digitizer waits after receiving the trigger to start\nacquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more\ninformation.\n'
@@ -738,7 +738,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -801,7 +801,7 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe length of time the digitizer waits after detecting a trigger before\nenabling NI-SCOPE to detect another trigger. Refer to\nNISCOPE_ATTR_TRIGGER_HOLDOFF for more information.\n'
@@ -809,10 +809,10 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nHow long the digitizer waits after receiving the trigger to start\nacquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more\ninformation.\n'
@@ -820,7 +820,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -856,7 +856,7 @@ functions = {
                 'type': 'ViSession'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe length of time the digitizer waits after detecting a trigger before\nenabling NI-SCOPE to detect another trigger. Refer to\nNISCOPE_ATTR_TRIGGER_HOLDOFF for more information.\n'
@@ -864,10 +864,10 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nHow long the digitizer waits after receiving the trigger to start\nacquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more\ninformation.\n'
@@ -875,7 +875,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -957,7 +957,7 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe length of time the digitizer waits after detecting a trigger before\nenabling NI-SCOPE to detect another trigger. Refer to\nNISCOPE_ATTR_TRIGGER_HOLDOFF for more information.\n'
@@ -965,10 +965,10 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nHow long the digitizer waits after receiving the trigger to start\nacquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more\ninformation.\n'
@@ -976,7 +976,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -1038,7 +1038,7 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe length of time the digitizer waits after detecting a trigger before\nenabling NI-SCOPE to detect another trigger. Refer to\nNISCOPE_ATTR_TRIGGER_HOLDOFF for more information.\n'
@@ -1046,10 +1046,10 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=0.0)',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nHow long the digitizer waits after receiving the trigger to start\nacquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more\ninformation.\n'
@@ -1057,7 +1057,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -1174,7 +1174,6 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
-                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'sizeInBytes'
@@ -1286,16 +1285,16 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.'
                 },
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'python_type': 'float or hightime.timedelta',
+                'python_type': 'float or datetime.timedelta',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'out',
@@ -1423,16 +1422,16 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.'
                 },
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'python_type': 'float or hightime.timedelta',
+                'python_type': 'float or datetime.timedelta',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'out',
@@ -1485,7 +1484,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
@@ -1493,7 +1492,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -1556,7 +1555,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
@@ -1564,7 +1563,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -1646,7 +1645,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
@@ -1654,7 +1653,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -1724,7 +1723,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
@@ -1732,7 +1731,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -1802,7 +1801,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
@@ -1810,7 +1809,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -1927,14 +1926,14 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.'
                 },
                 'name': 'timeout',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'out',
@@ -1942,18 +1941,14 @@ functions = {
                     'description': '\nReturns a list of class instances with the following timing and scaling information about each waveform:\n\n-  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform\n-  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.\n-  **x_increment** (float) the time between points in the acquired waveform in seconds\n-  **channel** (str) channel name this waveform was acquired from\n-  **record** (int) record number of this waveform\n-  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:\n\n    .. math::\n\n        voltage = binary data * gain factor + offset\n\n-  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:\n\n    .. math::\n\n        voltage = binary data * gain factor + offset\n\n- **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired\n'
                 },
                 'name': 'wfmInfo',
-                'size': {
-                    'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
-                },
-                'type': 'struct niScope_wfmInfo[]'
+                'type': 'struct niScope_wfmInfo'
             }
         ],
         'python_name': 'fetch',
         'returns': 'ViStatus'
     },
     'FetchMeasurement': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nFetches a waveform from the digitizer and performs the specified\nwaveform measurement. Refer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references by using\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
         },
@@ -1975,7 +1970,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
@@ -1983,7 +1978,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -2032,7 +2027,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
@@ -2040,7 +2035,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -2464,8 +2459,7 @@ functions = {
                     'description': '\nSpecifies the byte array buffer that contains the attribute\nconfiguration to import.\n'
                 },
                 'name': 'configuration',
-                'python_api_converter_name': 'convert_to_bytes',
-                'type_in_documentation': 'bytes',
+                'python_api_converter_name': 'convert_import_buffer_to_array',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sizeInBytes'
@@ -2700,7 +2694,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
@@ -2708,7 +2702,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -2747,7 +2741,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ReadMeasurement': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nInitiates an acquisition, waits for it to complete, and performs the\nspecified waveform measurement for a single channel and record or for\nmultiple channels and records.\n\nRefer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references by using\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
         },
@@ -2769,7 +2763,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
@@ -2777,7 +2771,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
