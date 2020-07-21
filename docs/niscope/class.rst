@@ -208,6 +208,46 @@ acquisition_status
 
 
 
+add_waveform_processing
+-----------------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: add_waveform_processing(meas_function)
+
+            Adds one measurement to the list of processing steps that are completed
+            before the measurement. The processing is added on a per channel basis,
+            and the processing measurements are completed in the same order they are
+            registered. All measurement library parameters—the properties starting
+            with :py:attr:`niscope.Session.MEAS`—are cached at the time of registering the
+            processing, and this set of parameters is used during the processing
+            step. The processing measurements are streamed, so the result of the
+            first processing step is used as the input for the next step. The
+            processing is done before any other measurements.
+
+            
+
+            .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                niscope.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                niscope.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param meas_function:
+
+
+                The `array
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
+                to add.
+
+                
+
+
+            :type meas_function: :py:data:`niscope.ArrayMeasurement`
+
 auto_setup
 ----------
 
@@ -282,6 +322,70 @@ auto_setup
             | Trigger output     | None                                          |
             +--------------------+-----------------------------------------------+
 
+
+
+clear_waveform_measurement_stats
+--------------------------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: clear_waveform_measurement_stats(clearable_measurement_function=niscope._ClearableMeasurement.ALL_MEASUREMENTS)
+
+            Clears the waveform stats on the channel and measurement you specify. If
+            you want to clear all of the measurements, use
+            :py:data:`~niscope.ClearableMeasurement.ALL_MEASUREMENTS` in the **clearableMeasurementFunction**
+            parameter.
+
+            Every time a measurement is called, the statistics information is
+            updated, including the min, max, mean, standard deviation, and number of
+            updates. This information is fetched with
+            :py:meth:`niscope.Session._fetch_measurement_stats`. The multi-acquisition array measurements
+            are also cleared with this method.
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                niscope.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                niscope.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param clearable_measurement_function:
+
+
+                The `scalar
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+                or `array
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
+                to clear the stats for.
+
+                
+
+
+            :type clearable_measurement_function: :py:data:`niscope.ClearableMeasurement`
+
+clear_waveform_processing
+-------------------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: clear_waveform_processing()
+
+            Clears the list of processing steps assigned to the given channel. The
+            processing is added using the :py:meth:`niscope.Session.add_waveform_processing` method,
+            where the processing steps are completed in the same order in which they
+            are registered. The processing measurements are streamed, so the result
+            of the first processing step is used as the input for the next step. The
+            processing is also done before any other measurements.
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                niscope.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                niscope.Session repeated capabilities container, and calling this method on the result.
 
 
 close
@@ -1193,7 +1297,7 @@ export_attribute_configuration_buffer
 
 
 
-            :rtype: bytes
+            :rtype: array.array("b")
             :return:
 
 
@@ -1450,7 +1554,7 @@ fetch_into
 
             :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
-            :rtype: list of WaveformInfo
+            :rtype: WaveformInfo
             :return:
 
 
@@ -1474,6 +1578,68 @@ fetch_into
                             voltage = binary data * gain factor + offset
 
                     - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
+
+                    
+
+
+
+fetch_measurement
+-----------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: fetch_measurement(scalar_meas_function, timeout=hightime.timedelta(seconds=5.0))
+
+            Fetches a waveform from the digitizer and performs the specified
+            waveform measurement. Refer to `Using Fetch
+            Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+            more information.
+
+            Many of the measurements use the low, mid, and high reference levels.
+            You configure the low, mid, and high references by using
+            :py:attr:`niscope.Session.meas_chan_low_ref_level`,
+            :py:attr:`niscope.Session.meas_chan_mid_ref_level`, and
+            :py:attr:`niscope.Session.meas_chan_high_ref_level` to set each channel
+            differently.
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                niscope.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                niscope.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param scalar_meas_function:
+
+
+                The `scalar
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+                to be performed.
+
+                
+
+
+            :type scalar_meas_function: :py:data:`niscope.ScalarMeasurement`
+            :param timeout:
+
+
+                The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+
+                
+
+
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
+
+            :rtype: list of float
+            :return:
+
+
+                    Contains an array of all measurements acquired; call
+                    :py:meth:`niscope.Session._actual_num_wfms` to determine the array length.
 
                     
 
@@ -1631,7 +1797,7 @@ import_attribute_configuration_buffer
                 
 
 
-            :type configuration: bytes
+            :type configuration: list of int
 
 import_attribute_configuration_file
 -----------------------------------
@@ -1876,6 +2042,71 @@ read
                             voltage = binary data * gain factor + offset
 
                     - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
+
+                    
+
+
+
+read_measurement
+----------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: read_measurement(scalar_meas_function, timeout=hightime.timedelta(seconds=5.0))
+
+            Initiates an acquisition, waits for it to complete, and performs the
+            specified waveform measurement for a single channel and record or for
+            multiple channels and records.
+
+            Refer to `Using Fetch
+            Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+            more information.
+
+            Many of the measurements use the low, mid, and high reference levels.
+            You configure the low, mid, and high references by using
+            :py:attr:`niscope.Session.meas_chan_low_ref_level`,
+            :py:attr:`niscope.Session.meas_chan_mid_ref_level`, and
+            :py:attr:`niscope.Session.meas_chan_high_ref_level` to set each channel
+            differently.
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                niscope.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                niscope.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param scalar_meas_function:
+
+
+                The `scalar
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+                to be performed
+
+                
+
+
+            :type scalar_meas_function: :py:data:`niscope.ScalarMeasurement`
+            :param timeout:
+
+
+                The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+
+                
+
+
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
+
+            :rtype: array.array("d")
+            :return:
+
+
+                    Contains an array of all measurements acquired. Call
+                    :py:meth:`niscope.Session._actual_num_wfms` to determine the array length.
 
                     
 
@@ -3911,6 +4142,1152 @@ max_ris_rate
 
                 - LabVIEW Property: **Horizontal:Maximum RIS Rate**
                 - C Attribute: **NISCOPE_ATTR_MAX_RIS_RATE**
+
+meas_array_gain
+---------------
+
+    .. py:attribute:: meas_array_gain
+
+        Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to :py:data:`~niscope.ArrayMeasurement.ARRAY_GAIN` for more information.
+        Default: 1.0
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Array Gain**
+                - C Attribute: **NISCOPE_ATTR_MEAS_ARRAY_GAIN**
+
+meas_array_offset
+-----------------
+
+    .. py:attribute:: meas_array_offset
+
+        Every element of an array is added to this scalar value during the Array Offset measurement. Refer to :py:data:`~niscope.ArrayMeasurement.ARRAY_OFFSET` for more information.
+        Default: 0.0
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Array Offset**
+                - C Attribute: **NISCOPE_ATTR_MEAS_ARRAY_OFFSET**
+
+meas_chan_high_ref_level
+------------------------
+
+    .. py:attribute:: meas_chan_high_ref_level
+
+        Stores the high reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as :py:attr:`niscope.Session.meas_high_ref` if you use this property to set various channels to different values.
+        Default: 90%
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Reference Levels:Channel Based High Ref Level**
+                - C Attribute: **NISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL**
+
+meas_chan_low_ref_level
+-----------------------
+
+    .. py:attribute:: meas_chan_low_ref_level
+
+        Stores the low reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as :py:attr:`niscope.Session.meas_low_ref` if you use this property to set various channels to different values.
+        Default: 10%
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Reference Levels:Channel Based Low Ref Level**
+                - C Attribute: **NISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL**
+
+meas_chan_mid_ref_level
+-----------------------
+
+    .. py:attribute:: meas_chan_mid_ref_level
+
+        Stores the mid reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as :py:attr:`niscope.Session.meas_mid_ref` if you use this property to set various channels to different values.
+        Default: 50%
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Reference Levels:Channel Based Mid Ref Level**
+                - C Attribute: **NISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL**
+
+meas_filter_center_freq
+-----------------------
+
+    .. py:attribute:: meas_filter_center_freq
+
+        The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by :py:attr:`niscope.Session.meas_filter_width`, where the cutoff frequencies are the center ± width.
+        Default: 1.0e6 Hz
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Filter:Center Frequency**
+                - C Attribute: **NISCOPE_ATTR_MEAS_FILTER_CENTER_FREQ**
+
+meas_filter_cutoff_freq
+-----------------------
+
+    .. py:attribute:: meas_filter_cutoff_freq
+
+        Specifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter.
+        Default: 1.0e6 Hz
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Filter:Cutoff Frequency**
+                - C Attribute: **NISCOPE_ATTR_MEAS_FILTER_CUTOFF_FREQ**
+
+meas_filter_order
+-----------------
+
+    .. py:attribute:: meas_filter_order
+
+        Specifies the order of an IIR filter. All positive integers are valid.
+        Default: 2
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | int        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Filter:IIR Order**
+                - C Attribute: **NISCOPE_ATTR_MEAS_FILTER_ORDER**
+
+meas_filter_ripple
+------------------
+
+    .. py:attribute:: meas_filter_ripple
+
+        Specifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.
+        Default: 0.1 dB
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Filter:Ripple**
+                - C Attribute: **NISCOPE_ATTR_MEAS_FILTER_RIPPLE**
+
+meas_filter_taps
+----------------
+
+    .. py:attribute:: meas_filter_taps
+
+        Defines the number of taps (coefficients) for an FIR filter.
+        Default: 25
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | int        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Filter:FIR Taps**
+                - C Attribute: **NISCOPE_ATTR_MEAS_FILTER_TAPS**
+
+meas_filter_transient_waveform_percent
+--------------------------------------
+
+    .. py:attribute:: meas_filter_transient_waveform_percent
+
+        The percentage (0 - 100%) of the IIR filtered waveform to eliminate from the beginning of the waveform. This allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition.
+        Default: 20.0%
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Filter:Percent Waveform Transient**
+                - C Attribute: **NISCOPE_ATTR_MEAS_FILTER_TRANSIENT_WAVEFORM_PERCENT**
+
+meas_filter_type
+----------------
+
+    .. py:attribute:: meas_filter_type
+
+        Specifies the type of filter, for both IIR and FIR filters. The allowed values are the following:
+        ·  :py:data:`~niscope.NISCOPE_VAL_MEAS_LOWPASS`
+        ·  :py:data:`~niscope.NISCOPE_VAL_MEAS_HIGHPASS`
+        ·  :py:data:`~niscope.NISCOPE_VAL_MEAS_BANDPASS`
+        ·  :py:data:`~niscope.NISCOPE_VAL_MEAS_BANDSTOP`
+        Default: :py:data:`~niscope.NISCOPE_VAL_MEAS_LOWPASS`
+
+
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------------+
+            | Characteristic | Value            |
+            +================+==================+
+            | Datatype       | enums.FilterType |
+            +----------------+------------------+
+            | Permissions    | read-write       |
+            +----------------+------------------+
+            | Channel Based  | Yes              |
+            +----------------+------------------+
+            | Resettable     | Yes              |
+            +----------------+------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Filter:Type**
+                - C Attribute: **NISCOPE_ATTR_MEAS_FILTER_TYPE**
+
+meas_filter_width
+-----------------
+
+    .. py:attribute:: meas_filter_width
+
+        Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at :py:attr:`niscope.Session.meas_filter_center_freq` ± one-half width.
+        Default: 1.0e3 Hz
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Filter:Width**
+                - C Attribute: **NISCOPE_ATTR_MEAS_FILTER_WIDTH**
+
+meas_fir_filter_window
+----------------------
+
+    .. py:attribute:: meas_fir_filter_window
+
+        Specifies the FIR window type. The possible choices are:
+        :py:data:`~niscope.FIRFilterWindow.NONE`
+        :py:data:`~niscope.ArrayMeasurement.HANNING_WINDOW`
+        :py:data:`~niscope.ArrayMeasurement.HAMMING_WINDOW`
+        :py:data:`~niscope.ArrayMeasurement.TRIANGLE_WINDOW`
+        :py:data:`~niscope.ArrayMeasurement.FLAT_TOP_WINDOW`
+        :py:data:`~niscope.ArrayMeasurement.BLACKMAN_WINDOW`
+        The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
+        Default: :py:data:`~niscope.FIRFilterWindow.NONE`
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------------------+
+            | Characteristic | Value                 |
+            +================+=======================+
+            | Datatype       | enums.FIRFilterWindow |
+            +----------------+-----------------------+
+            | Permissions    | read-write            |
+            +----------------+-----------------------+
+            | Channel Based  | Yes                   |
+            +----------------+-----------------------+
+            | Resettable     | Yes                   |
+            +----------------+-----------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Filter:FIR Window**
+                - C Attribute: **NISCOPE_ATTR_MEAS_FIR_FILTER_WINDOW**
+
+meas_high_ref
+-------------
+
+    .. py:attribute:: meas_high_ref
+
+        
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_MEAS_HIGH_REF**
+
+meas_hysteresis_percent
+-----------------------
+
+    .. py:attribute:: meas_hysteresis_percent
+
+        Digital hysteresis that is used in several of the scalar waveform measurements. This property specifies the percentage of the full-scale vertical range for the hysteresis window size.
+        Default: 2%
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Hysteresis Percent**
+                - C Attribute: **NISCOPE_ATTR_MEAS_HYSTERESIS_PERCENT**
+
+meas_interpolation_sampling_factor
+----------------------------------
+
+    .. py:attribute:: meas_interpolation_sampling_factor
+
+        The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling :py:meth:`niscope.Session.FetchWaveformMeasurementArray` with the :py:data:`~niscope.ArrayMeasurement.POLYNOMIAL_INTERPOLATION` measurement resamples the waveform to 2,500 points.
+        Default: 2.0
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Interpolation:Sampling Factor**
+                - C Attribute: **NISCOPE_ATTR_MEAS_INTERPOLATION_SAMPLING_FACTOR**
+
+meas_last_acq_histogram_size
+----------------------------
+
+    .. py:attribute:: meas_last_acq_histogram_size
+
+        Specifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high.
+        Default: 256
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | int        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Last Acq. Histogram Size**
+                - C Attribute: **NISCOPE_ATTR_MEAS_LAST_ACQ_HISTOGRAM_SIZE**
+
+meas_low_ref
+------------
+
+    .. py:attribute:: meas_low_ref
+
+        
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_MEAS_LOW_REF**
+
+meas_mid_ref
+------------
+
+    .. py:attribute:: meas_mid_ref
+
+        
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_MEAS_MID_REF**
+
+meas_other_channel
+------------------
+
+    .. py:attribute:: meas_other_channel
+
+        Specifies the second channel for two-channel measurements, such as :py:data:`~niscope.ArrayMeasurement.ADD_CHANNELS`. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
+        Default: '0'
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | str        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Other Channel**
+                - C Attribute: **NISCOPE_ATTR_MEAS_OTHER_CHANNEL**
+
+meas_percentage_method
+----------------------
+
+    .. py:attribute:: meas_percentage_method
+
+        Specifies the method used to map percentage reference units to voltages for the reference. Possible values are:
+        :py:data:`~niscope.NISCOPE_VAL_MEAS_LOW_HIGH`
+        :py:data:`~niscope.NISCOPE_VAL_MEAS_MIN_MAX`
+        :py:data:`~niscope.NISCOPE_VAL_MEAS_BASE_TOP`
+        Default: :py:data:`~niscope.NISCOPE_VAL_MEAS_BASE_TOP`
+
+
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------------------+
+            | Characteristic | Value                  |
+            +================+========================+
+            | Datatype       | enums.PercentageMethod |
+            +----------------+------------------------+
+            | Permissions    | read-write             |
+            +----------------+------------------------+
+            | Channel Based  | Yes                    |
+            +----------------+------------------------+
+            | Resettable     | Yes                    |
+            +----------------+------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Reference Levels:Percentage Units Method**
+                - C Attribute: **NISCOPE_ATTR_MEAS_PERCENTAGE_METHOD**
+
+meas_polynomial_interpolation_order
+-----------------------------------
+
+    .. py:attribute:: meas_polynomial_interpolation_order
+
+        Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
+        Default: 1
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | int        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Interpolation:Polynomial Interpolation Order**
+                - C Attribute: **NISCOPE_ATTR_MEAS_POLYNOMIAL_INTERPOLATION_ORDER**
+
+meas_ref_level_units
+--------------------
+
+    .. py:attribute:: meas_ref_level_units
+
+        Specifies the units of the reference levels.
+        :py:data:`~niscope.NISCOPE_VAL_MEAS_VOLTAGE`--Specifies that the reference levels are given in units of volts
+        :py:data:`~niscope.NISCOPE_VAL_MEAS_PERCENTAGE`--Percentage units, where the measurements voltage low and voltage high represent 0% and 100%, respectively.
+        Default: :py:data:`~niscope.NISCOPE_VAL_MEAS_PERCENTAGE`
+
+
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+---------------------+
+            | Characteristic | Value               |
+            +================+=====================+
+            | Datatype       | enums.RefLevelUnits |
+            +----------------+---------------------+
+            | Permissions    | read-write          |
+            +----------------+---------------------+
+            | Channel Based  | Yes                 |
+            +----------------+---------------------+
+            | Resettable     | Yes                 |
+            +----------------+---------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Reference Levels:Units**
+                - C Attribute: **NISCOPE_ATTR_MEAS_REF_LEVEL_UNITS**
+
+meas_time_histogram_high_time
+-----------------------------
+
+    .. py:attribute:: meas_time_histogram_high_time
+
+        Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
+        Default: 5.0e-4 seconds
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Time Histogram:High Time**
+                - C Attribute: **NISCOPE_ATTR_MEAS_TIME_HISTOGRAM_HIGH_TIME**
+
+meas_time_histogram_high_volts
+------------------------------
+
+    .. py:attribute:: meas_time_histogram_high_volts
+
+        Specifies the highest voltage value included in the multiple-acquisition time histogram. The units are always volts.
+        Default: 10.0 V
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Time Histogram:High Volts**
+                - C Attribute: **NISCOPE_ATTR_MEAS_TIME_HISTOGRAM_HIGH_VOLTS**
+
+meas_time_histogram_low_time
+----------------------------
+
+    .. py:attribute:: meas_time_histogram_low_time
+
+        Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
+        Default: -5.0e-4 seconds
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Time Histogram:Low Time**
+                - C Attribute: **NISCOPE_ATTR_MEAS_TIME_HISTOGRAM_LOW_TIME**
+
+meas_time_histogram_low_volts
+-----------------------------
+
+    .. py:attribute:: meas_time_histogram_low_volts
+
+        Specifies the lowest voltage value included in the multiple acquisition time histogram. The units are always volts.
+        Default: -10.0 V
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Time Histogram:Low Volts**
+                - C Attribute: **NISCOPE_ATTR_MEAS_TIME_HISTOGRAM_LOW_VOLTS**
+
+meas_time_histogram_size
+------------------------
+
+    .. py:attribute:: meas_time_histogram_size
+
+        Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with :py:meth:`niscope.Session.clear_waveform_measurement_stats`.
+        Default: 256
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | int        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Time Histogram:Size**
+                - C Attribute: **NISCOPE_ATTR_MEAS_TIME_HISTOGRAM_SIZE**
+
+meas_voltage_histogram_high_volts
+---------------------------------
+
+    .. py:attribute:: meas_voltage_histogram_high_volts
+
+        Specifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.
+        Default: 10.0 V
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Voltage Histogram:High Volts**
+                - C Attribute: **NISCOPE_ATTR_MEAS_VOLTAGE_HISTOGRAM_HIGH_VOLTS**
+
+meas_voltage_histogram_low_volts
+--------------------------------
+
+    .. py:attribute:: meas_voltage_histogram_low_volts
+
+        Specifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.
+        Default: -10.0 V
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Voltage Histogram:Low Volts**
+                - C Attribute: **NISCOPE_ATTR_MEAS_VOLTAGE_HISTOGRAM_LOW_VOLTS**
+
+meas_voltage_histogram_size
+---------------------------
+
+    .. py:attribute:: meas_voltage_histogram_size
+
+        Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method :py:meth:`niscope.Session.clear_waveform_measurement_stats`.
+        Default: 256
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | int        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Waveform Measurement:Voltage Histogram:Size**
+                - C Attribute: **NISCOPE_ATTR_MEAS_VOLTAGE_HISTOGRAM_SIZE**
 
 min_sample_rate
 ---------------
@@ -5974,16 +7351,6 @@ width_polarity
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NISCOPE_ATTR_WIDTH_POLARITY**
-
-
-NI-TClk Support
-===============
-
-    .. py:attribute:: tclk
-
-        This is used to get and set NI-TClk attributes on the session.
-
-        .. seealso:: See :py:attr:`nitclk.SessionReference` for a complete list of attributes.
 
 
 .. contents:: Session

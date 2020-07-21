@@ -562,7 +562,7 @@ attributes = {
     1150043: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nEvery element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to NISCOPE_VAL_ARRAY_GAIN for more information.\nDefault: 1.0\n'
         },
@@ -980,7 +980,7 @@ attributes = {
         'name': 'START_TO_REF_TRIGGER_HOLDOFF',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150104: {
         'access': 'read only',
@@ -1364,7 +1364,7 @@ attributes = {
         'name': 'REF_TRIGGER_MINIMUM_QUIET_TIME',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150316: {
         'access': 'read-write',
@@ -1421,7 +1421,7 @@ attributes = {
         'name': 'END_OF_RECORD_TO_ADVANCE_TRIGGER_HOLDOFF',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150367: {
         'access': 'read-write',
@@ -1446,7 +1446,7 @@ attributes = {
         'name': 'ABSOLUTE_SAMPLE_CLOCK_OFFSET',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150375: {
         'access': 'read only',
@@ -1573,7 +1573,7 @@ attributes = {
         'name': 'HORZ_TIME_PER_RECORD',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1250008: {
         'access': 'read only',
@@ -1665,7 +1665,7 @@ attributes = {
         'name': 'TRIGGER_DELAY_TIME',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1250016: {
         'access': 'read-write',
@@ -1678,7 +1678,7 @@ attributes = {
         'name': 'TRIGGER_HOLDOFF',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1250017: {
         'access': 'read-write',
@@ -1760,7 +1760,7 @@ attributes = {
         'name': 'ACQUISITION_START_TIME',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1250201: {
         'access': 'read-write',

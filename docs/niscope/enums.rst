@@ -58,6 +58,281 @@ AcquisitionType
 
 
 
+ArrayMeasurement
+----------------
+
+.. py:class:: ArrayMeasurement
+
+    .. py:attribute:: ArrayMeasurement.NO_MEASUREMENT
+
+
+
+        None
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.LAST_ACQ_HISTOGRAM
+
+
+
+        Last Acquisition Histogram
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.FFT_PHASE_SPECTRUM
+
+
+
+        FFT Phase Spectrum
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.FFT_AMP_SPECTRUM_VOLTS_RMS
+
+
+
+        FFT Amp. Spectrum (Volts RMS)
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.MULTI_ACQ_VOLTAGE_HISTOGRAM
+
+
+
+        Multi Acquisition Voltage Histogram
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.MULTI_ACQ_TIME_HISTOGRAM
+
+
+
+        Multi Acquisition Time Histogram
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.ARRAY_INTEGRAL
+
+
+
+        Array Integral
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.DERIVATIVE
+
+
+
+        Derivative
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.INVERSE
+
+
+
+        Inverse
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.HANNING_WINDOW
+
+
+
+        Hanning Window
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.FLAT_TOP_WINDOW
+
+
+
+        Flat Top Window
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.POLYNOMIAL_INTERPOLATION
+
+
+
+        Polynomial Interpolation
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.MULTIPLY_CHANNELS
+
+
+
+        Multiply Channels
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.ADD_CHANNELS
+
+
+
+        Add Channels
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.SUBTRACT_CHANNELS
+
+
+
+        Subtract Channels
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.DIVIDE_CHANNELS
+
+
+
+        Divide Channels
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.MULTI_ACQ_AVERAGE
+
+
+
+        Multi Acquisition Average
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.BUTTERWORTH_FILTER
+
+
+
+        Butterworth IIR Filter
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.CHEBYSHEV_FILTER
+
+
+
+        Chebyshev IIR Filter
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.FFT_AMP_SPECTRUM_DB
+
+
+
+        FFT Amp. Spectrum (dB)
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.HAMMING_WINDOW
+
+
+
+        Hamming Window
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.WINDOWED_FIR_FILTER
+
+
+
+        FIR Windowed Filter
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.BESSEL_FILTER
+
+
+
+        Bessel IIR Filter
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.TRIANGLE_WINDOW
+
+
+
+        Triangle Window
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.BLACKMAN_WINDOW
+
+
+
+        Blackman Window
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.ARRAY_OFFSET
+
+
+
+        Array Offset
+
+        
+
+
+
+    .. py:attribute:: ArrayMeasurement.ARRAY_GAIN
+
+
+
+        Array Gain
+
+        
+
+
+
 CableSenseMode
 --------------
 
@@ -78,6 +353,344 @@ CableSenseMode
 
 
         The oscilloscope is configured to emit a single CableSense pulse.
+
+        
+
+
+
+ClearableMeasurement
+--------------------
+
+.. py:class:: ClearableMeasurement
+
+    .. py:attribute:: ClearableMeasurement.ALL_MEASUREMENTS
+
+
+
+    .. py:attribute:: ClearableMeasurement.MULTI_ACQ_VOLTAGE_HISTOGRAM
+
+
+
+    .. py:attribute:: ClearableMeasurement.MULTI_ACQ_TIME_HISTOGRAM
+
+
+
+    .. py:attribute:: ClearableMeasurement.MULTI_ACQ_AVERAGE
+
+
+
+    .. py:attribute:: ClearableMeasurement.FREQUENCY
+
+
+
+    .. py:attribute:: ClearableMeasurement.AVERAGE_FREQUENCY
+
+
+
+    .. py:attribute:: ClearableMeasurement.FFT_FREQUENCY
+
+
+
+    .. py:attribute:: ClearableMeasurement.PERIOD
+
+
+
+    .. py:attribute:: ClearableMeasurement.AVERAGE_PERIOD
+
+
+
+    .. py:attribute:: ClearableMeasurement.RISE_TIME
+
+
+
+    .. py:attribute:: ClearableMeasurement.FALL_TIME
+
+
+
+    .. py:attribute:: ClearableMeasurement.RISE_SLEW_RATE
+
+
+
+    .. py:attribute:: ClearableMeasurement.FALL_SLEW_RATE
+
+
+
+    .. py:attribute:: ClearableMeasurement.OVERSHOOT
+
+
+
+    .. py:attribute:: ClearableMeasurement.PRESHOOT
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_RMS
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_CYCLE_RMS
+
+
+
+    .. py:attribute:: ClearableMeasurement.AC_ESTIMATE
+
+
+
+    .. py:attribute:: ClearableMeasurement.FFT_AMPLITUDE
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_AVERAGE
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_CYCLE_AVERAGE
+
+
+
+    .. py:attribute:: ClearableMeasurement.DC_ESTIMATE
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_MAX
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_MIN
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_PEAK_TO_PEAK
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HIGH
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_LOW
+
+
+
+    .. py:attribute:: ClearableMeasurement.AMPLITUDE
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_TOP
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_BASE
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_BASE_TO_TOP
+
+
+
+    .. py:attribute:: ClearableMeasurement.WIDTH_NEG
+
+
+
+    .. py:attribute:: ClearableMeasurement.WIDTH_POS
+
+
+
+    .. py:attribute:: ClearableMeasurement.DUTY_CYCLE_NEG
+
+
+
+    .. py:attribute:: ClearableMeasurement.DUTY_CYCLE_POS
+
+
+
+    .. py:attribute:: ClearableMeasurement.INTEGRAL
+
+
+
+    .. py:attribute:: ClearableMeasurement.AREA
+
+
+
+    .. py:attribute:: ClearableMeasurement.CYCLE_AREA
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_DELAY
+
+
+
+    .. py:attribute:: ClearableMeasurement.PHASE_DELAY
+
+
+
+    .. py:attribute:: ClearableMeasurement.LOW_REF_VOLTS
+
+
+
+    .. py:attribute:: ClearableMeasurement.MID_REF_VOLTS
+
+
+
+    .. py:attribute:: ClearableMeasurement.HIGH_REF_VOLTS
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_MEAN
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_STDEV
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_MEDIAN
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_MODE
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_MAX
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_MIN
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_PEAK_TO_PEAK
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_MEAN_PLUS_STDEV
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_MEAN_PLUS_2_STDEV
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_MEAN_PLUS_3_STDEV
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_HITS
+
+
+
+    .. py:attribute:: ClearableMeasurement.VOLTAGE_HISTOGRAM_NEW_HITS
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_MEAN
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_STDEV
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_MEDIAN
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_MODE
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_MAX
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_MIN
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_PEAK_TO_PEAK
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_MEAN_PLUS_STDEV
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_MEAN_PLUS_2_STDEV
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_MEAN_PLUS_3_STDEV
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_HITS
+
+
+
+    .. py:attribute:: ClearableMeasurement.TIME_HISTOGRAM_NEW_HITS
+
+
+
+FIRFilterWindow
+---------------
+
+.. py:class:: FIRFilterWindow
+
+    .. py:attribute:: FIRFilterWindow.NONE
+
+
+
+        No window.
+
+        
+
+
+
+    .. py:attribute:: FIRFilterWindow.HANNING
+
+
+
+        Specifies a Hanning window.
+
+        
+
+
+
+    .. py:attribute:: FIRFilterWindow.FLAT_TOP
+
+
+
+        Specifies a Flat Top window.
+
+        
+
+
+
+    .. py:attribute:: FIRFilterWindow.HAMMING
+
+
+
+        Specifies a Hamming window.
+
+        
+
+
+
+    .. py:attribute:: FIRFilterWindow.TRIANGLE
+
+
+
+        Specifies a Triangle window.
+
+        
+
+
+
+    .. py:attribute:: FIRFilterWindow.BLACKMAN
+
+
+
+        Specifies a Blackman window.
 
         
 
@@ -133,6 +746,51 @@ FetchRelativeTo
 
 
         Fetch at the first posttrigger sample.
+
+        
+
+
+
+FilterType
+----------
+
+.. py:class:: FilterType
+
+    .. py:attribute:: FilterType.LOWPASS
+
+
+
+        Specifies lowpass as the filter type.
+
+        
+
+
+
+    .. py:attribute:: FilterType.HIGHPASS
+
+
+
+        Specifies highpass as the filter type.
+
+        
+
+
+
+    .. py:attribute:: FilterType.BANDPASS
+
+
+
+        Specifies bandpass as the filter type.
+
+        
+
+
+
+    .. py:attribute:: FilterType.BANDSTOP
+
+
+
+        Specifies bandstop as the filter type.
 
         
 
@@ -268,6 +926,42 @@ Option
 
 
 
+PercentageMethod
+----------------
+
+.. py:class:: PercentageMethod
+
+    .. py:attribute:: PercentageMethod.LOWHIGH
+
+
+
+        Specifies that the reference level percentages should be computed using
+        the low/high method,
+
+        
+
+
+
+    .. py:attribute:: PercentageMethod.MINMAX
+
+
+
+        Reference level percentages are computed using the min/max method.
+
+        
+
+
+
+    .. py:attribute:: PercentageMethod.BASETOP
+
+
+
+        Reference level percentages are computed using the base/top method.
+
+        
+
+
+
 RISMethod
 ---------
 
@@ -309,6 +1003,32 @@ RISMethod
 
 
         Limits the waveforms in the various bins to be within 200 ps of the center of the bin.
+
+        
+
+
+
+RefLevelUnits
+-------------
+
+.. py:class:: RefLevelUnits
+
+    .. py:attribute:: RefLevelUnits.VOLTS
+
+
+
+        Specifies that the reference levels are given in units of volts.
+
+        
+
+
+
+    .. py:attribute:: RefLevelUnits.PERCENTAGE
+
+
+
+        (Default) Specifies that the reference levels are given in percentage
+        units.
 
         
 
@@ -406,6 +1126,177 @@ RuntTimeCondition
         Trigger on pulses that, in addition to meeting runt voltage criteria, have a duration not within the range bounded by :py:attr:`niscope.Session.runt_time_low_limit` and :py:attr:`niscope.Session.runt_time_high_limit`.
 
         
+
+
+
+ScalarMeasurement
+-----------------
+
+.. py:class:: ScalarMeasurement
+
+    .. py:attribute:: ScalarMeasurement.NO_MEASUREMENT
+
+
+
+        None
+
+        
+
+
+
+    .. py:attribute:: ScalarMeasurement.RISE_TIME
+
+
+
+    .. py:attribute:: ScalarMeasurement.FALL_TIME
+
+
+
+    .. py:attribute:: ScalarMeasurement.FREQUENCY
+
+
+
+    .. py:attribute:: ScalarMeasurement.PERIOD
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_RMS
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_PEAK_TO_PEAK
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_MAX
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_MIN
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_HIGH
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_LOW
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_AVERAGE
+
+
+
+    .. py:attribute:: ScalarMeasurement.WIDTH_NEG
+
+
+
+    .. py:attribute:: ScalarMeasurement.WIDTH_POS
+
+
+
+    .. py:attribute:: ScalarMeasurement.DUTY_CYCLE_NEG
+
+
+
+    .. py:attribute:: ScalarMeasurement.DUTY_CYCLE_POS
+
+
+
+    .. py:attribute:: ScalarMeasurement.AMPLITUDE
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_CYCLE_RMS
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_CYCLE_AVERAGE
+
+
+
+    .. py:attribute:: ScalarMeasurement.OVERSHOOT
+
+
+
+    .. py:attribute:: ScalarMeasurement.PRESHOOT
+
+
+
+    .. py:attribute:: ScalarMeasurement.LOW_REF_VOLTS
+
+
+
+    .. py:attribute:: ScalarMeasurement.MID_REF_VOLTS
+
+
+
+    .. py:attribute:: ScalarMeasurement.HIGH_REF_VOLTS
+
+
+
+    .. py:attribute:: ScalarMeasurement.AREA
+
+
+
+    .. py:attribute:: ScalarMeasurement.CYCLE_AREA
+
+
+
+    .. py:attribute:: ScalarMeasurement.INTEGRAL
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_BASE
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_TOP
+
+
+
+    .. py:attribute:: ScalarMeasurement.FFT_FREQUENCY
+
+
+
+    .. py:attribute:: ScalarMeasurement.FFT_AMPLITUDE
+
+
+
+    .. py:attribute:: ScalarMeasurement.RISE_SLEW_RATE
+
+
+
+    .. py:attribute:: ScalarMeasurement.FALL_SLEW_RATE
+
+
+
+    .. py:attribute:: ScalarMeasurement.AC_ESTIMATE
+
+
+
+    .. py:attribute:: ScalarMeasurement.DC_ESTIMATE
+
+
+
+    .. py:attribute:: ScalarMeasurement.TIME_DELAY
+
+
+
+    .. py:attribute:: ScalarMeasurement.AVERAGE_PERIOD
+
+
+
+    .. py:attribute:: ScalarMeasurement.AVERAGE_FREQUENCY
+
+
+
+    .. py:attribute:: ScalarMeasurement.VOLTAGE_BASE_TO_TOP
+
+
+
+    .. py:attribute:: ScalarMeasurement.PHASE_DELAY
 
 
 
