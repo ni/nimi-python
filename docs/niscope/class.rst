@@ -329,7 +329,7 @@ clear_waveform_measurement_stats
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: clear_waveform_measurement_stats(clearable_measurement_function=niscope._ClearableMeasurement.ALL_MEASUREMENTS)
+    .. py:method:: clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
             Clears the waveform stats on the channel and measurement you specify. If
             you want to clear all of the measurements, use

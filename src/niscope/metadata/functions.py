@@ -375,7 +375,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': '_ClearableMeasurement.ALL_MEASUREMENTS',
+                'default_value': 'ClearableMeasurement.ALL_MEASUREMENTS',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe `scalar\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__\nor `array\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__\nto clear the stats for.\n'
