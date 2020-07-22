@@ -7353,6 +7353,16 @@ width_polarity
                 - C Attribute: **NISCOPE_ATTR_WIDTH_POLARITY**
 
 
+NI-TClk Support
+===============
+
+    .. py:attribute:: tclk
+
+        This is used to get and set NI-TClk attributes on the session.
+
+        .. seealso:: See :py:attr:`nitclk.SessionReference` for a complete list of attributes.
+
+
 .. contents:: Session
 
 
