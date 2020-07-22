@@ -15,7 +15,6 @@ import niscope.errors as errors
 import niscope.waveform_info as waveform_info  # noqa: F401
 
 import hightime
-import nitclk
 
 # Used for __repr__
 import pprint
@@ -3943,8 +3942,6 @@ class Session(_SessionBase):
         # Call specified init function
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, options)
-
-        self.tclk = nitclk.SessionReference(self._vi)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
