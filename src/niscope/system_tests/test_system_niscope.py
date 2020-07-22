@@ -330,6 +330,7 @@ def test_disable(session):
     assert session.allow_more_records_than_memory is False
 
 
+# Basic configuration tests
 def test_configure_ref_levels(session):
     session._configure_ref_levels()
     assert 90.0 == session.meas_chan_high_ref_level
