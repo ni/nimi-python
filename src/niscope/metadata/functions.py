@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.5.0d1
+# This file is generated from NI-SCOPE API metadata version 20.5.0d7
 functions = {
     'Abort': {
         'documentation': {
@@ -1179,6 +1179,7 @@ functions = {
                     'value': 'sizeInBytes'
                 },
                 'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes',
                 'use_array': True
             }
         ],
@@ -1941,7 +1942,11 @@ functions = {
                     'description': '\nReturns a list of class instances with the following timing and scaling information about each waveform:\n\n-  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform\n-  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.\n-  **x_increment** (float) the time between points in the acquired waveform in seconds\n-  **channel** (str) channel name this waveform was acquired from\n-  **record** (int) record number of this waveform\n-  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:\n\n    .. math::\n\n        voltage = binary data * gain factor + offset\n\n-  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:\n\n    .. math::\n\n        voltage = binary data * gain factor + offset\n\n- **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired\n'
                 },
                 'name': 'wfmInfo',
-                'type': 'struct niScope_wfmInfo'
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': '(num_samples * self._actual_num_wfms())'
+                },
+                'type': 'struct niScope_wfmInfo[]'
             }
         ],
         'python_name': 'fetch',
@@ -2459,12 +2464,13 @@ functions = {
                     'description': '\nSpecifies the byte array buffer that contains the attribute\nconfiguration to import.\n'
                 },
                 'name': 'configuration',
-                'python_api_converter_name': 'convert_import_buffer_to_array',
+                'python_api_converter_name': 'convert_to_bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sizeInBytes'
                 },
-                'type': 'ViInt8[]'
+                'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes'
             }
         ],
         'returns': 'ViStatus'

@@ -2847,7 +2847,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm_info (WaveformInfo): Returns a list of class instances with the following timing and scaling information about each waveform:
+            wfm_info (list of WaveformInfo): Returns a list of class instances with the following timing and scaling information about each waveform:
 
                 -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                 -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
@@ -4726,7 +4726,7 @@ class Session(_SessionBase):
         Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
         Returns:
-            configuration (array.array("b")): Specifies the byte array buffer to be populated with the exported
+            configuration (bytes): Specifies the byte array buffer to be populated with the exported
                 property configuration.
 
         '''
@@ -4861,13 +4861,13 @@ class Session(_SessionBase):
         such as while acquiring a signal.
 
         Args:
-            configuration (list of int): Specifies the byte array buffer that contains the property
+            configuration (bytes): Specifies the byte array buffer that contains the property
                 configuration to import.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_import_buffer_to_array(configuration), library_type=_visatype.ViInt8)  # case B520
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_bytes(configuration), library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niScope_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

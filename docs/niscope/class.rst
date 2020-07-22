@@ -1297,7 +1297,7 @@ export_attribute_configuration_buffer
 
 
 
-            :rtype: array.array("b")
+            :rtype: bytes
             :return:
 
 
@@ -1554,7 +1554,7 @@ fetch_into
 
             :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
-            :rtype: WaveformInfo
+            :rtype: list of WaveformInfo
             :return:
 
 
@@ -1797,7 +1797,7 @@ import_attribute_configuration_buffer
                 
 
 
-            :type configuration: list of int
+            :type configuration: bytes
 
 import_attribute_configuration_file
 -----------------------------------
