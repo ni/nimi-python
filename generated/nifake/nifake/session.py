@@ -777,7 +777,8 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         count_ctype = _visatype.ViInt32(0 if delays is None else len(delays))  # case S160
-        delays_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_timedeltas_to_seconds_real64(delays), library_type=_visatype.ViReal64)  # case B520
+        converted_delays = _converters.convert_timedeltas_to_seconds_real64(delays)  # case B520
+        delays_ctype = get_ctypes_pointer_for_buffer(value=converted_delays, library_type=_visatype.ViReal64)  # case B520
         error_code = self._library.niFake_AcceptListOfDurationsInSeconds(vi_ctype, count_ctype, delays_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -816,7 +817,8 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_count_ctype = _visatype.ViInt32(0 if numbers is None else len(numbers))  # case S160
-        numbers_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_double_each_element(numbers), library_type=_visatype.ViReal64)  # case B520
+        converted_numbers = _converters.convert_double_each_element(numbers)  # case B520
+        numbers_ctype = get_ctypes_pointer_for_buffer(value=converted_numbers, library_type=_visatype.ViReal64)  # case B520
         error_code = self._library.niFake_DoubleAllTheNums(vi_ctype, number_count_ctype, numbers_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1295,7 +1297,8 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_bytes(configuration), library_type=_visatype.ViInt8)  # case B520
+        converted_configuration = _converters.convert_to_bytes(configuration)  # case B520
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=converted_configuration, library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niFake_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
