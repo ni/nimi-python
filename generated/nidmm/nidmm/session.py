@@ -2202,8 +2202,8 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        converted_configuration = _converters.convert_to_bytes(configuration)  # case B520
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=converted_configuration, library_type=_visatype.ViInt8)  # case B520
+        configuration_converted = _converters.convert_to_bytes(configuration)  # case B520
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niDMM_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

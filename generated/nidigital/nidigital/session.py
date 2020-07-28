@@ -622,8 +622,8 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         num_offsets_ctype = _visatype.ViInt32(0 if offsets is None else len(offsets))  # case S160
-        converted_offsets = _converters.convert_timedeltas_to_seconds_real64(offsets)  # case B520
-        offsets_ctype = get_ctypes_pointer_for_buffer(value=converted_offsets, library_type=_visatype.ViReal64)  # case B520
+        offsets_converted = _converters.convert_timedeltas_to_seconds_real64(offsets)  # case B520
+        offsets_ctype = get_ctypes_pointer_for_buffer(value=offsets_converted, library_type=_visatype.ViReal64)  # case B520
         error_code = self._library.niDigital_ApplyTDROffsets(vi_ctype, channel_list_ctype, num_offsets_ctype, offsets_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
