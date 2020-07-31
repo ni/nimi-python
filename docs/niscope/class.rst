@@ -5019,17 +5019,17 @@ meas_time_histogram_high_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5091,17 +5091,17 @@ meas_time_histogram_low_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

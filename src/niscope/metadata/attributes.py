@@ -367,6 +367,7 @@ attributes = {
     },
     1150027: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': True,
         'codegen_method': 'public',
         'documentation': {
@@ -375,10 +376,12 @@ attributes = {
         'lv_property': 'Waveform Measurement:Time Histogram:Low Time',
         'name': 'MEAS_TIME_HISTOGRAM_LOW_TIME',
         'resettable': True,
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150028: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': True,
         'codegen_method': 'public',
         'documentation': {
@@ -387,7 +390,8 @@ attributes = {
         'lv_property': 'Waveform Measurement:Time Histogram:High Time',
         'name': 'MEAS_TIME_HISTOGRAM_HIGH_TIME',
         'resettable': True,
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150029: {
         'access': 'read-write',

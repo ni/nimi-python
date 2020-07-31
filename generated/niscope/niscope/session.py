@@ -956,8 +956,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    meas_time_histogram_high_time = _attributes.AttributeViReal64(1150028)
-    '''Type: float
+    meas_time_histogram_high_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150028)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
     Default: 5.0e-4 seconds
@@ -980,8 +980,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    meas_time_histogram_low_time = _attributes.AttributeViReal64(1150027)
-    '''Type: float
+    meas_time_histogram_low_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150027)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
     Default: -5.0e-4 seconds
