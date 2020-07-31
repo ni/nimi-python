@@ -5,6 +5,7 @@ import numpy
 import os
 import pytest
 import tempfile
+import hightime
 
 
 # There are system tests below that need either a PXI-5124 or a PXI-5142 instead of the PXIe-5164 we use everywhere else
