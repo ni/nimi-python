@@ -296,22 +296,22 @@ def test_reset(session):
 
 def test_reset_device(session):
     deault_meas_time_histogram_high_time = session.meas_time_histogram_high_time
-    assert deault_meas_time_histogram_high_time == 0.0005
-    session.meas_time_histogram_high_time = 0.0010
+    assert deault_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
+    session.meas_time_histogram_high_time = hightime.timedelta(microseconds=1000)
     non_default_meas_time_histogram_high_time = session.meas_time_histogram_high_time
-    assert non_default_meas_time_histogram_high_time == 0.0010
+    assert non_default_meas_time_histogram_high_time == hightime.timedelta(microseconds=1000)
     session.reset_device()
-    assert session.meas_time_histogram_high_time == 0.0005
+    assert session.meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
 
 
 def test_reset_with_defaults(session):
     deault_meas_time_histogram_high_time = session.meas_time_histogram_high_time
-    assert deault_meas_time_histogram_high_time == 0.0005
-    session.meas_time_histogram_high_time = 0.0010
+    assert deault_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
+    session.meas_time_histogram_high_time = hightime.timedelta(microseconds=1000)
     non_default_meas_time_histogram_high_time = session.meas_time_histogram_high_time
-    assert non_default_meas_time_histogram_high_time == 0.0010
-    session.reset_with_defaults()
-    assert session.meas_time_histogram_high_time == 0.0005
+    assert non_default_meas_time_histogram_high_time == hightime.timedelta(microseconds=1000)
+    session.reset_device()
+    assert session.meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
 
 
 def test_error_message():
