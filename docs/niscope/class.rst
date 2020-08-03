@@ -1473,9 +1473,7 @@ fetch_array_measurement
             
 
             .. note:: Some functionality, such as time stamping, is not supported in all
-                digitizers. Refer to `Features Supported by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-                more information.
+                digitizers.
 
 
             .. tip:: This method requires repeated capabilities. If called directly on the
@@ -1487,9 +1485,7 @@ fetch_array_measurement
             :param array_meas_function:
 
 
-                The `array
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-                to perform.
+                The array measurement to perform.
 
                 
 
@@ -1756,9 +1752,7 @@ fetch_measurement_stats
             methods. If a Fetch Measurement method has not been called, this
             method fetches the data on which to perform the measurement. The
             statistics are cleared by calling
-            :py:meth:`niscope.Session.clear_waveform_measurement_stats`. Refer to `Using Fetch
-            Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
-            more information on incorporating fetch methods in your application.
+            :py:meth:`niscope.Session.clear_waveform_measurement_stats`.
 
             Many of the measurements use the low, mid, and high reference levels.
             You configure the low, mid, and high references with
@@ -1779,9 +1773,7 @@ fetch_measurement_stats
             :param scalar_meas_function:
 
 
-                The `scalar
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
-                to be performed on each fetched waveform.
+                The scalar measurement to be performed on each fetched waveform.
 
                 
 
@@ -1854,7 +1846,7 @@ get_ext_cal_last_date_and_time
 
 
 
-            :rtype: hightime.datetime
+            :rtype: hightime.timedelta, datetime.timedelta, or float in seconds
             :return:
 
 
@@ -1902,7 +1894,7 @@ get_self_cal_last_date_and_time
 
 
 
-            :rtype: hightime.datetime
+            :rtype: hightime.timedelta, datetime.timedelta, or float in seconds
             :return:
 
 
@@ -1919,7 +1911,7 @@ get_self_cal_last_temp
 
     .. py:method:: get_self_cal_last_temp()
 
-            Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful external calibration.
+            Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful self calibration.
             The temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.
             Temperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.
 
@@ -5197,17 +5189,17 @@ meas_time_histogram_high_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5269,17 +5261,17 @@ meas_time_histogram_low_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

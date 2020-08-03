@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.1.0d1
+# This file is generated from NI-SCOPE API metadata version 20.5.0d7
 attributes = {
     1050005: {
         'access': 'read-write',
@@ -367,6 +367,7 @@ attributes = {
     },
     1150027: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': True,
         'codegen_method': 'public',
         'documentation': {
@@ -375,10 +376,12 @@ attributes = {
         'lv_property': 'Waveform Measurement:Time Histogram:Low Time',
         'name': 'MEAS_TIME_HISTOGRAM_LOW_TIME',
         'resettable': True,
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150028: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': True,
         'codegen_method': 'public',
         'documentation': {
@@ -387,7 +390,8 @@ attributes = {
         'lv_property': 'Waveform Measurement:Time Histogram:High Time',
         'name': 'MEAS_TIME_HISTOGRAM_HIGH_TIME',
         'resettable': True,
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150029: {
         'access': 'read-write',

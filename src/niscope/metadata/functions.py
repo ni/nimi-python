@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.1.0d1
+# This file is generated from NI-SCOPE API metadata version 20.5.0d7
 functions = {
     'Abort': {
         'documentation': {
@@ -375,7 +375,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': '_ClearableMeasurement.ALL_MEASUREMENTS',
+                'default_value': 'ClearableMeasurement.ALL_MEASUREMENTS',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe `scalar\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__\nor `array\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__\nto clear the stats for.\n'
@@ -1174,12 +1174,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
-                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'sizeInBytes'
                 },
                 'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes',
                 'use_array': True
             }
         ],
@@ -1293,7 +1293,7 @@ functions = {
                 },
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'python_type': 'float or hightime.timedelta',
+                'python_type': 'hightime.timedelta, datetime.timedelta, or float',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
@@ -1344,6 +1344,142 @@ functions = {
             }
         ],
         'python_name': 'get_equalization_filter_coefficients',
+        'returns': 'ViStatus'
+    },
+    'FancyGetExtCalLastDateAndTime': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Returns the date and time of the last external calibration performed.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_cal_last_date'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.'
+                },
+                'name': 'lastCalDatetime',
+                'python_type': 'hightime.timedelta, datetime.timedelta, or float',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+            }
+        ],
+        'python_name': 'get_ext_cal_last_date_and_time',
+        'returns': 'ViStatus'
+    },
+    'FancyGetExtCalLastTemp': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful external calibration.\nThe temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.\nTemperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_cal_last_temp'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the **temperature** in degrees Celsius during the last calibration.'
+                },
+                'name': 'temperature',
+                'type': 'ViReal64'
+            }
+        ],
+        'python_name': 'get_ext_cal_last_temp',
+        'returns': 'ViStatus'
+    },
+    'FancyGetSelfCalLastDateAndTime': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Returns the date and time of the last self calibration performed.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_cal_last_date'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.'
+                },
+                'name': 'lastCalDatetime',
+                'python_type': 'hightime.timedelta, datetime.timedelta, or float',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+            }
+        ],
+        'python_name': 'get_self_cal_last_date_and_time',
+        'returns': 'ViStatus'
+    },
+    'FancyGetSelfCalLastTemp': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful self calibration.\nThe temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.\nTemperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_cal_last_temp'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the **temperature** in degrees Celsius during the last calibration.'
+                },
+                'name': 'temperature',
+                'type': 'ViReal64'
+            }
+        ],
+        'python_name': 'get_self_cal_last_temp',
         'returns': 'ViStatus'
     },
     'FancyRead': {
@@ -1430,7 +1566,7 @@ functions = {
                 },
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'python_type': 'float or hightime.timedelta',
+                'python_type': 'hightime.timedelta, datetime.timedelta, or float',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
@@ -2465,12 +2601,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
-                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sizeInBytes'
                 },
-                'type': 'ViInt8[]'
+                'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes'
             }
         ],
         'returns': 'ViStatus'

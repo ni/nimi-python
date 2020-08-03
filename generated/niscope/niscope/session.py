@@ -958,8 +958,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    meas_time_histogram_high_time = _attributes.AttributeViReal64(1150028)
-    '''Type: float
+    meas_time_histogram_high_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150028)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
     Default: 5.0e-4 seconds
@@ -982,8 +982,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    meas_time_histogram_low_time = _attributes.AttributeViReal64(1150027)
-    '''Type: float
+    meas_time_histogram_low_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150027)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
     Default: -5.0e-4 seconds
@@ -2007,9 +2007,7 @@ class _SessionBase(object):
 
         Note:
         Some functionality, such as time stamping, is not supported in all
-        digitizers. Refer to `Features Supported by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-        more information.
+        digitizers.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -2018,9 +2016,7 @@ class _SessionBase(object):
         niscope.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            array_meas_function (enums.ArrayMeasurement): The `array
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-                to perform.
+            array_meas_function (enums.ArrayMeasurement): The array measurement to perform.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
@@ -2099,9 +2095,7 @@ class _SessionBase(object):
         methods. If a Fetch Measurement method has not been called, this
         method fetches the data on which to perform the measurement. The
         statistics are cleared by calling
-        clear_waveform_measurement_stats. Refer to `Using Fetch
-        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
-        more information on incorporating fetch methods in your application.
+        clear_waveform_measurement_stats.
 
         Many of the measurements use the low, mid, and high reference levels.
         You configure the low, mid, and high references with
@@ -2117,9 +2111,7 @@ class _SessionBase(object):
         niscope.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            scalar_meas_function (enums.ScalarMeasurement): The `scalar
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
-                to be performed on each fetched waveform.
+            scalar_meas_function (enums.ScalarMeasurement): The scalar measurement to be performed on each fetched waveform.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
@@ -4951,7 +4943,7 @@ class Session(_SessionBase):
         Returns the date and time of the last external calibration performed.
 
         Returns:
-            last_cal_datetime (hightime.datetime): Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.
+            last_cal_datetime (hightime.timedelta, datetime.timedelta, or float in seconds): Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.
 
         '''
 
@@ -4980,7 +4972,7 @@ class Session(_SessionBase):
         Returns the date and time of the last self calibration performed.
 
         Returns:
-            last_cal_datetime (hightime.datetime): Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.
+            last_cal_datetime (hightime.timedelta, datetime.timedelta, or float in seconds): Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.
 
         '''
 
@@ -4991,7 +4983,7 @@ class Session(_SessionBase):
     def get_self_cal_last_temp(self):
         '''get_self_cal_last_temp
 
-        Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful external calibration.
+        Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful self calibration.
         The temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.
         Temperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.
 
@@ -5032,7 +5024,8 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_bytes(configuration), library_type=_visatype.ViInt8)  # case B520
+        configuration_converted = _converters.convert_to_bytes(configuration)  # case B520
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niScope_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
