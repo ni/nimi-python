@@ -10,6 +10,7 @@ RST_FILES_TO_GENERATE := $(DEFAULT_RST_FILES_TO_GENERATE)
 
 CUSTOM_TYPES_TO_COPY += \
     waveform_info.py \
+    measurement_stats.py \
 
 include $(BUILD_HELPER_DIR)/rules.mak
 

@@ -100,6 +100,21 @@ def test_fetch_defaults(session):
         assert len(waveforms[i].samples) == test_record_length
 
 
+def test_fetch_array_measurement(session):
+    test_voltage = 1.0
+    test_record_length = 2000
+    test_channels = range(2)
+    test_num_channels = 2
+    test_num_records = 3
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        waveforms = session.channels[test_channels].fetch_array_measurement(niscope.enums.ArrayMeasurement.ARRAY_GAIN)
+    assert len(waveforms) == test_num_channels * test_num_records
+    for i in range(len(waveforms)):
+        assert len(waveforms[i].samples) == test_record_length
+
+
 def test_fetch_binary8_into(session):
     test_voltage = 1.0
     test_record_length = 2000
@@ -228,6 +243,47 @@ def test_fetch_measurement(session):
         assert meas == 0.0
 
 
+def test_fetch_measurement_stats(session):
+    test_voltage = 1.0
+    test_record_length = 1000
+    test_channels = range(2)
+    test_num_channels = 2
+    test_num_records = 3
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        measurement_stats = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
+
+    assert len(measurement_stats) == test_num_channels * test_num_records
+    for stat in measurement_stats:
+        assert stat.result == 0.0
+
+
+def test_clear_waveform_measurement_stats(session):
+    test_voltage = 1.0
+    test_record_length = 1000
+    test_channels = 0
+    test_num_records = 1
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        session.channels[test_channels].fetch_measurement(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
+        uncleared_stats = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
+        uncleared_stats_2 = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
+        session.channels[test_channels].clear_waveform_measurement_stats(niscope.enums.ClearableMeasurement.FREQUENCY)
+        cleared_stats = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
+
+    # The principle here is using consistent behavior (i.e. if stats are fetched twice on a single record/channel measurement in a row, it will always be the same)
+    # to demonstrate that clearing the stats does in fact cause a measurable change.
+    assert uncleared_stats[0].result == uncleared_stats_2[0].result
+    assert uncleared_stats[0].stdev == uncleared_stats_2[0].stdev
+    assert uncleared_stats[0].mean == uncleared_stats_2[0].mean
+    assert uncleared_stats[0].min_val == uncleared_stats_2[0].min_val
+    assert uncleared_stats[0].max_val == uncleared_stats_2[0].max_val
+    assert uncleared_stats[0].num_in_stats == uncleared_stats_2[0].num_in_stats
+    assert uncleared_stats[0].num_in_stats != cleared_stats[0].num_in_stats
+
+
 def test_waveform_processing(session):
     test_voltage = 1.0
     test_record_length = 1000
@@ -250,6 +306,20 @@ def test_waveform_processing(session):
     for processed, unprocessed in zip(processed_waveforms, unprocessed_waveforms):
         assert abs(unprocessed) < 1
         assert abs(processed) > 1 or processed == 0
+
+
+def test_measurement_stats_str(session):
+    test_voltage = 1.0
+    test_record_length = 1000
+    test_channels = 0
+    test_num_records = 1
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        measurement_stat = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
+
+    assert isinstance(measurement_stat[0].__str__(), str)
+    assert isinstance(measurement_stat[0].__repr__(), str)
 
 
 def test_get_self_cal_last_date_time(session):

@@ -219,15 +219,13 @@ add_waveform_processing
             before the measurement. The processing is added on a per channel basis,
             and the processing measurements are completed in the same order they are
             registered. All measurement library parameters—the properties starting
-            with :py:attr:`niscope.Session.MEAS`—are cached at the time of registering the
+            with "meas_"—are cached at the time of registering the
             processing, and this set of parameters is used during the processing
             step. The processing measurements are streamed, so the result of the
             first processing step is used as the input for the next step. The
             processing is done before any other measurements.
 
             
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
             .. tip:: This method requires repeated capabilities. If called directly on the
@@ -1460,6 +1458,84 @@ fetch
 
 
 
+fetch_array_measurement
+-----------------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: fetch_array_measurement(array_meas_function, meas_wfm_size, timeout=hightime.timedelta(seconds=5.0))
+
+            Obtains a waveform from the digitizer and returns the specified
+            measurement array. This method may return multiple waveforms depending
+            on the number of channels, the acquisition type, and the number of
+            records you specify.
+
+            
+
+            .. note:: Some functionality, such as time stamping, is not supported in all
+                digitizers.
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                niscope.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                niscope.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param array_meas_function:
+
+
+                The array measurement to perform.
+
+                
+
+
+            :type array_meas_function: :py:data:`niscope.ArrayMeasurement`
+            :param timeout:
+
+
+                The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+
+                
+
+
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
+
+            :rtype: list of WaveformInfo
+            :return:
+
+
+                    Returns a list of class instances with the following timing and scaling
+                    information about each waveform:
+
+                    -  **relativeInitialX**—the time (in seconds) from the trigger to the
+                       first sample in the fetched waveform
+                    -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
+                       sample. This timestamp is comparable between records and
+                       acquisitions; devices that do not support this parameter use 0 for
+                       this output.
+                    -  **xIncrement**—the time between points in the acquired waveform in
+                       seconds
+                    -  **channel**-channel name this waveform was acquired from
+                    -  **record**-record number of this waveform
+                    -  **gain**—the gain factor of the given channel; useful for scaling
+                       binary data with the following formula:
+
+                    voltage = binary data × gain factor + offset
+
+                    -  **offset**—the offset factor of the given channel; useful for scaling
+                       binary data with the following formula:
+
+                    voltage = binary data × gain factor + offset
+
+                    -  **samples**-floating point array of samples. Length will be of actual samples acquired.
+
+                    
+
+
+
 fetch_into
 ----------
 
@@ -1640,6 +1716,90 @@ fetch_measurement
 
                     Contains an array of all measurements acquired; call
                     :py:meth:`niscope.Session._actual_num_wfms` to determine the array length.
+
+                    
+
+
+
+fetch_measurement_stats
+-----------------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: fetch_measurement_stats(scalar_meas_function, timeout=hightime.timedelta(seconds=5.0))
+
+            Obtains a waveform measurement and returns the measurement value. This
+            method may return multiple statistical results depending on the number
+            of channels, the acquisition type, and the number of records you
+            specify.
+
+            You specify a particular measurement type, such as rise time, frequency,
+            or voltage peak-to-peak. The waveform on which the digitizer calculates
+            the waveform measurement is from an acquisition that you previously
+            initiated. The statistics for the specified measurement method are
+            returned, where the statistics are updated once every acquisition when
+            the specified measurement is fetched by any of the Fetch Measurement
+            methods. If a Fetch Measurement method has not been called, this
+            method fetches the data on which to perform the measurement. The
+            statistics are cleared by calling
+            :py:meth:`niscope.Session.clear_waveform_measurement_stats`.
+
+            Many of the measurements use the low, mid, and high reference levels.
+            You configure the low, mid, and high references with
+            :py:attr:`niscope.Session.meas_chan_low_ref_level`,
+            :py:attr:`niscope.Session.meas_chan_mid_ref_level`, and
+            :py:attr:`niscope.Session.meas_chan_high_ref_level` to set each channel
+            differently.
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                niscope.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                niscope.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param scalar_meas_function:
+
+
+                The scalar measurement to be performed on each fetched waveform.
+
+                
+
+
+            :type scalar_meas_function: :py:data:`niscope.ScalarMeasurement`
+            :param timeout:
+
+
+                The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+
+                
+
+
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
+
+            :rtype: list of MeasurementStats
+            :return:
+
+
+                    Returns a list of class instances with the following measurement statistics
+                    about the specified measurement:
+
+                    -	**result** (float): the resulting measurement
+                    -	**mean** (float): the mean scalar value, which is obtained by
+                    averaging each fetch_measurement_stats call
+                    -	**stdev** (float): the standard deviations of the most recent
+                    **numInStats** measurements
+                    -	**min** (float): the smallest scalar value acquired (the minimum
+                    of the **numInStats** measurements)
+                    -	**max** (float): the largest scalar value acquired (the maximum
+                    of the **numInStats** measurements)
+                    -	**num_in_stats** (int): the number of times fetch_measurement_stats has been called
+                    -	**channel** (str): channel name this result was acquired from
+                    -	**record** (int): record number of this result
 
                     
 

@@ -61,7 +61,9 @@ All notable changes to this project will be documented in this file.
             * `add_waveform_processing`
             * `clear_waveform_measurement_stats`
             * `clear_waveform_processing`
+            * `fetch_array_measurement`
             * `fetch_measurement`
+            * `fetch_measurement_stats`
             * `read_measurement`
         * Measurement library properties.
             * `meas_array_gain`
