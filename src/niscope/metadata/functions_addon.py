@@ -70,18 +70,9 @@ functions_additional_fetch_array_measurement = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'None',
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe identifier for the "other channel" for multi-channel measurements such as Add Channels or Multiply Channels.\n'
-                },
-                'name': 'otherChannel',
-                'type': 'ViConstString'
-            },
-            {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nReturns a list of class instances with the following timing and scaling\ninformation about each waveform:\n\n-  **relativeInitialX**—the time (in seconds) from the trigger to the\n   first sample in the fetched waveform\n-  **absoluteInitialX**—timestamp (in seconds) of the first fetched\n   sample. This timestamp is comparable between records and\n   acquisitions; devices that do not support this parameter use 0 for\n   this output.\n-  **xIncrement**—the time between points in the acquired waveform in\n   seconds\n-  **channel**-channel name this waveform was acquired from\n-  **record**-record number of this waveform\n-  **samples**—floating point array of samples. Length will be of actual samples acquired\n-  **gain**—the gain factor of the given channel; useful for scaling\n   binary data with the following formula:\n\nvoltage = binary data × gain factor + offset\n\n-  **offset**—the offset factor of the given channel; useful for scaling\n   binary data with the following formula:\n\nvoltage = binary data × gain factor + offset\n\nCall niScope_ActualNumWfms to determine the size of this array.\n'
+                    'description': '\nReturns a list of class instances with the following timing and scaling\ninformation about each waveform:\n\n-  **relativeInitialX**—the time (in seconds) from the trigger to the\n   first sample in the fetched waveform\n-  **absoluteInitialX**—timestamp (in seconds) of the first fetched\n   sample. This timestamp is comparable between records and\n   acquisitions; devices that do not support this parameter use 0 for\n   this output.\n-  **xIncrement**—the time between points in the acquired waveform in\n   seconds\n-  **channel**-channel name this waveform was acquired from\n-  **record**-record number of this waveform\n-  **gain**—the gain factor of the given channel; useful for scaling\n   binary data with the following formula:\n\nvoltage = binary data × gain factor + offset\n\n-  **offset**—the offset factor of the given channel; useful for scaling\n   binary data with the following formula:\n\nvoltage = binary data × gain factor + offset\n\n-  **samples**-floating point array of samples. Length will be of actual samples acquired.\n'
                 },
                 'name': 'wfmInfo',
                 'size': {
@@ -149,7 +140,7 @@ functions_additional_fetch_array_measurement_stats = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns a list of class instances with the following measurement statistics\nabout the specified measurement:\n\n-	**result** (float): returns the resulting measurement\n-	**mean** (float): returns the mean scalar value, which is obtained by\naveraging each fetch_measurement_stats call\n-	**stdev** (float): returns the standard deviations of the most recent\n**numInStats** measurements\n-	**min** (float): returns the smallest scalar value acquired (the minimum\nof the **numInStats** measurements)\n-	**max** (float): returns the largest scalar value acquired (the maximum\nof the **numInStats** measurements)\n-	**num_in_stats** (int): returns the number of times fetch_measurement_stats has been called\n-	**channel** (str): channel name this result was acquired from\n-	**record** (int): record number of this result'
+                    'description': 'Returns a list of class instances with the following measurement statistics\nabout the specified measurement:\n\n-	**result** (float): the resulting measurement\n-	**mean** (float): the mean scalar value, which is obtained by\naveraging each fetch_measurement_stats call\n-	**stdev** (float): the standard deviations of the most recent\n**numInStats** measurements\n-	**min** (float): the smallest scalar value acquired (the minimum\nof the **numInStats** measurements)\n-	**max** (float): the largest scalar value acquired (the maximum\nof the **numInStats** measurements)\n-	**num_in_stats** (int): the number of times fetch_measurement_stats has been called\n-	**channel** (str): channel name this result was acquired from\n-	**record** (int): record number of this result'
                 },
                 'name': 'measurement_stats',
                 'size': {

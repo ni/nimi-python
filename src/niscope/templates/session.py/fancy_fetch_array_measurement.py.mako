@@ -9,19 +9,15 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        # Set the fetch attributes
-        with _NoChannel(session=self):
-            if other_channel is not None:
-                self.meas_other_channel = other_channel
 
         meas_wfm, wfm_info = self._${f['python_name']}(array_meas_function, timeout)
         record_length = int(len(meas_wfm) / len(wfm_info))
 
         for i in range(len(wfm_info)):
             start = i * record_length
-            end = start + record_length
-            wfm_info[i].samples = meas_wfm[start:end]
+            end = start + wfm_info[i]._actual_samples
             wfm_info[i]._actual_samples = None
+            wfm_info[i].samples = meas_wfm[start:end]
 
         num_records = int(len(wfm_info) / len(self._repeated_capability_list))
         i = 0

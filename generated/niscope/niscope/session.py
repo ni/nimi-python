@@ -1997,7 +1997,7 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def fetch_array_measurement(self, array_meas_function, timeout=hightime.timedelta(seconds=5.0), other_channel=None):
+    def fetch_array_measurement(self, array_meas_function, timeout=hightime.timedelta(seconds=5.0)):
         r'''fetch_array_measurement
 
         Obtains a waveform from the digitizer and returns the specified
@@ -2022,8 +2022,6 @@ class _SessionBase(object):
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
-            other_channel (str): The identifier for the "other channel" for multi-channel measurements such as Add Channels or Multiply Channels.
-
 
         Returns:
             wfm_info (list of WaveformInfo): Returns a list of class instances with the following timing and scaling
@@ -2039,7 +2037,6 @@ class _SessionBase(object):
                    seconds
                 -  **channel**-channel name this waveform was acquired from
                 -  **record**-record number of this waveform
-                -  **samples**—floating point array of samples. Length will be of actual samples acquired
                 -  **gain**—the gain factor of the given channel; useful for scaling
                    binary data with the following formula:
 
@@ -2050,22 +2047,18 @@ class _SessionBase(object):
 
                 voltage = binary data × gain factor + offset
 
-                Call _actual_num_wfms to determine the size of this array.
+                -  **samples**-floating point array of samples. Length will be of actual samples acquired.
 
         '''
-        # Set the fetch attributes
-        with _NoChannel(session=self):
-            if other_channel is not None:
-                self.meas_other_channel = other_channel
 
         meas_wfm, wfm_info = self._fetch_array_measurement(array_meas_function, timeout)
         record_length = int(len(meas_wfm) / len(wfm_info))
 
         for i in range(len(wfm_info)):
             start = i * record_length
-            end = start + record_length
-            wfm_info[i].samples = meas_wfm[start:end]
+            end = start + wfm_info[i]._actual_samples
             wfm_info[i]._actual_samples = None
+            wfm_info[i].samples = meas_wfm[start:end]
 
         num_records = int(len(wfm_info) / len(self._repeated_capability_list))
         i = 0
@@ -2122,16 +2115,16 @@ class _SessionBase(object):
             measurement_stats (list of MeasurementStats): Returns a list of class instances with the following measurement statistics
                 about the specified measurement:
 
-                -	**result** (float): returns the resulting measurement
-                -	**mean** (float): returns the mean scalar value, which is obtained by
+                -	**result** (float): the resulting measurement
+                -	**mean** (float): the mean scalar value, which is obtained by
                 averaging each fetch_measurement_stats call
-                -	**stdev** (float): returns the standard deviations of the most recent
+                -	**stdev** (float): the standard deviations of the most recent
                 **numInStats** measurements
-                -	**min** (float): returns the smallest scalar value acquired (the minimum
+                -	**min** (float): the smallest scalar value acquired (the minimum
                 of the **numInStats** measurements)
-                -	**max** (float): returns the largest scalar value acquired (the maximum
+                -	**max** (float): the largest scalar value acquired (the maximum
                 of the **numInStats** measurements)
-                -	**num_in_stats** (int): returns the number of times fetch_measurement_stats has been called
+                -	**num_in_stats** (int): the number of times fetch_measurement_stats has been called
                 -	**channel** (str): channel name this result was acquired from
                 -	**record** (int): record number of this result
 
