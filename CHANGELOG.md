@@ -40,8 +40,14 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidmm` (NI-DMM)
     * #### Added
+        * New methods for getting calibration information. - [#1462](https://github.com/ni/nimi-python/issues/1462)
+            * `get_ext_cal_last_date_and_time`
+            * `get_ext_cal_last_temp`
+            * `get_self_cal_last_date_and_time`
+            * `get_self_cal_last_temp`
     * #### Changed
     * #### Removed
+        * Outdated `get_cal_date_and_time` method removed in favor of more consistent new methods. - [#1462](https://github.com/ni/nimi-python/issues/1462)
 * ### `nifgen` (NI-FGEN)
     * #### Added
     * #### Changed
