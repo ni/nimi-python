@@ -1802,7 +1802,8 @@ class Session(_SessionBase):
 
         '''
 
-        return self.get_cal_date_and_time(1)
+        month, day, year, hour, minute = self._get_cal_date_and_time(1)
+        return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
@@ -1815,7 +1816,7 @@ class Session(_SessionBase):
 
         '''
 
-        return self.get_last_cal_temp(1)
+        return self._get_last_cal_temp(1)
 
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
@@ -1828,7 +1829,8 @@ class Session(_SessionBase):
 
         '''
 
-        return self.get_cal_date_and_time(0)
+        month, day, year, hour, minute = self._get_cal_date_and_time(0)
+        return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def get_self_cal_last_temp(self):
@@ -1841,7 +1843,7 @@ class Session(_SessionBase):
 
         '''
 
-        return self.get_last_cal_temp(0)
+        return self._get_last_cal_temp(0)
 
     @ivi_synchronized
     def fetch(self, maximum_time=hightime.timedelta(milliseconds=-1)):
@@ -2123,38 +2125,8 @@ class Session(_SessionBase):
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     @ivi_synchronized
-    def get_cal_date_and_time(self, cal_type):
-        '''get_cal_date_and_time
-
-        Returns the date and time of the last calibration performed.
-
-        Note: The NI 4050 and NI 4060 are not supported.
-
-        Args:
-            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                Note: The NI 4065 does not support self-calibration.
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-        Returns:
-            month (hightime.datetime): Indicates date and time of the last calibration.
-
-        '''
-        month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
-        return hightime.datetime(year, month, day, hour, minute)
-
-    @ivi_synchronized
-    def get_last_cal_temp(self, cal_type):
-        r'''get_last_cal_temp
+    def _get_last_cal_temp(self, cal_type):
+        r'''_get_last_cal_temp
 
         Returns the **Temperature** during the last calibration procedure.
 

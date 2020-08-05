@@ -15,5 +15,6 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
 
-        return self.get_cal_date_and_time(${calibration_type})
+        month, day, year, hour, minute = self._get_cal_date_and_time(${calibration_type})
+        return hightime.datetime(year, month, day, hour, minute)
 
