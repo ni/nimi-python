@@ -13,6 +13,8 @@ from niscope.waveform_info import WaveformInfo  # noqa: F401
 
 from niscope.waveform_info import struct_niScope_wfmInfo  # noqa: F401
 
+from niscope.measurement_stats import MeasurementStats  # noqa: F401
+
 
 def get_diagnostic_information():
     '''Get diagnostic information about the system state that is suitable for printing or logging

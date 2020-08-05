@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.1.0d1
+# This file is generated from NI-SCOPE API metadata version 20.5.0d7
 attributes = {
     1050005: {
         'access': 'read-write',
@@ -247,7 +247,7 @@ attributes = {
     1150016: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the units of the reference levels.\nNISCOPE_VAL_MEAS_VOLTAGE--Specifies that the reference levels are given in units of volts\nNISCOPE_VAL_MEAS_PERCENTAGE--Percentage units, where the measurements voltage low and voltage high represent 0% and 100%, respectively.\nDefault: NISCOPE_VAL_MEAS_PERCENTAGE\n'
         },
@@ -260,7 +260,7 @@ attributes = {
     1150018: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': "\nSpecifies the second channel for two-channel measurements, such as NISCOPE_VAL_ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.\nDefault: '0'\n"
         },
@@ -272,7 +272,7 @@ attributes = {
     1150019: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nDigital hysteresis that is used in several of the scalar waveform measurements. This attribute specifies the percentage of the full-scale vertical range for the hysteresis window size.\nDefault: 2%\n'
         },
@@ -284,7 +284,7 @@ attributes = {
     1150020: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high.\nDefault: 256\n'
         },
@@ -296,7 +296,7 @@ attributes = {
     1150021: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nDetermines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the function niScope_ClearWaveformMeasurementStats.\nDefault: 256\n'
         },
@@ -308,7 +308,7 @@ attributes = {
     1150022: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.\nDefault: -10.0 V\n'
         },
@@ -320,7 +320,7 @@ attributes = {
     1150023: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.\nDefault: 10.0 V\n'
         },
@@ -332,7 +332,7 @@ attributes = {
     1150024: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nDetermines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with niScope_ClearWaveformMeasurementStats.\nDefault: 256\n'
         },
@@ -344,7 +344,7 @@ attributes = {
     1150025: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the lowest voltage value included in the multiple acquisition time histogram. The units are always volts.\nDefault: -10.0 V\n'
         },
@@ -356,7 +356,7 @@ attributes = {
     1150026: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the highest voltage value included in the multiple-acquisition time histogram. The units are always volts.\nDefault: 10.0 V\n'
         },
@@ -367,32 +367,36 @@ attributes = {
     },
     1150027: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.\nDefault: -5.0e-4 seconds\n'
         },
         'lv_property': 'Waveform Measurement:Time Histogram:Low Time',
         'name': 'MEAS_TIME_HISTOGRAM_LOW_TIME',
         'resettable': True,
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150028: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.\nDefault: 5.0e-4 seconds\n'
         },
         'lv_property': 'Waveform Measurement:Time Histogram:High Time',
         'name': 'MEAS_TIME_HISTOGRAM_HIGH_TIME',
         'resettable': True,
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150029: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.\nDefault: 1\n'
         },
@@ -404,7 +408,7 @@ attributes = {
     1150030: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nThe new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this attribute to 2.5, calling niScope_FetchWaveformMeasurementArray with the NISCOPE_VAL_POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.\nDefault: 2.0\n'
         },
@@ -416,7 +420,7 @@ attributes = {
     1150031: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter.\nDefault: 1.0e6 Hz\n'
         },
@@ -428,7 +432,7 @@ attributes = {
     1150032: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nThe center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by NISCOPE_ATTR_MEAS_FILTER_WIDTH, where the cutoff frequencies are the center ± width.\nDefault: 1.0e6 Hz\n'
         },
@@ -440,7 +444,7 @@ attributes = {
     1150033: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.\nDefault: 0.1 dB\n'
         },
@@ -452,7 +456,7 @@ attributes = {
     1150034: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nThe percentage (0 - 100%) of the IIR filtered waveform to eliminate from the beginning of the waveform. This allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition.\nDefault: 20.0%\n'
         },
@@ -464,7 +468,7 @@ attributes = {
     1150035: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the type of filter, for both IIR and FIR filters. The allowed values are the following:\n·  NISCOPE_VAL_MEAS_LOWPASS\n·  NISCOPE_VAL_MEAS_HIGHPASS\n·  NISCOPE_VAL_MEAS_BANDPASS\n·  NISCOPE_VAL_MEAS_BANDSTOP\nDefault: NISCOPE_VAL_MEAS_LOWPASS\n'
         },
@@ -477,7 +481,7 @@ attributes = {
     1150036: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the order of an IIR filter. All positive integers are valid.\nDefault: 2\n'
         },
@@ -489,7 +493,7 @@ attributes = {
     1150037: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nDefines the number of taps (coefficients) for an FIR filter.\nDefault: 25\n'
         },
@@ -501,7 +505,7 @@ attributes = {
     1150038: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nStores the low reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as NISCOPE_ATTR_MEAS_LOW_REF if you use this attribute to set various channels to different values.\nDefault: 10%\n'
         },
@@ -513,7 +517,7 @@ attributes = {
     1150039: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nStores the mid reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as NISCOPE_ATTR_MEAS_MID_REF if you use this attribute to set various channels to different values.\nDefault: 50%\n'
         },
@@ -525,7 +529,7 @@ attributes = {
     1150040: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nStores the high reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as NISCOPE_ATTR_MEAS_HIGH_REF if you use this attribute to set various channels to different values.\nDefault: 90%\n'
         },
@@ -537,7 +541,7 @@ attributes = {
     1150041: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at NISCOPE_ATTR_MEAS_FILTER_CENTER_FREQ ± one-half width.\nDefault: 1.0e3 Hz\n'
         },
@@ -549,7 +553,7 @@ attributes = {
     1150042: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the FIR window type. The possible choices are:\nNISCOPE_VAL_NONE\nNISCOPE_VAL_HANNING_WINDOW\nNISCOPE_VAL_HAMMING_WINDOW\nNISCOPE_VAL_TRIANGLE_WINDOW\nNISCOPE_VAL_FLAT_TOP_WINDOW\nNISCOPE_VAL_BLACKMAN_WINDOW\nThe symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.\nDefault: NISCOPE_VAL_NONE\n'
         },
@@ -562,7 +566,7 @@ attributes = {
     1150043: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nEvery element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to NISCOPE_VAL_ARRAY_GAIN for more information.\nDefault: 1.0\n'
         },
@@ -574,7 +578,7 @@ attributes = {
     1150044: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nEvery element of an array is added to this scalar value during the Array Offset measurement. Refer to NISCOPE_VAL_ARRAY_OFFSET for more information.\nDefault: 0.0\n'
         },
@@ -586,7 +590,7 @@ attributes = {
     1150045: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nSpecifies the method used to map percentage reference units to voltages for the reference. Possible values are:\nNISCOPE_VAL_MEAS_LOW_HIGH\nNISCOPE_VAL_MEAS_MIN_MAX\nNISCOPE_VAL_MEAS_BASE_TOP\nDefault: NISCOPE_VAL_MEAS_BASE_TOP\n'
         },
@@ -1917,7 +1921,7 @@ attributes = {
     1250607: {
         'access': 'read-write',
         'channel_based': False,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'name': 'MEAS_HIGH_REF',
         'resettable': True,
         'type': 'ViReal64'
@@ -1925,7 +1929,7 @@ attributes = {
     1250608: {
         'access': 'read-write',
         'channel_based': False,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'name': 'MEAS_LOW_REF',
         'resettable': True,
         'type': 'ViReal64'
@@ -1933,7 +1937,7 @@ attributes = {
     1250609: {
         'access': 'read-write',
         'channel_based': False,
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'name': 'MEAS_MID_REF',
         'resettable': True,
         'type': 'ViReal64'

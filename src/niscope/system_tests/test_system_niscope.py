@@ -1,4 +1,5 @@
 import fasteners
+import hightime
 import math
 import niscope
 import numpy
@@ -99,6 +100,21 @@ def test_fetch_defaults(session):
         assert len(waveforms[i].samples) == test_record_length
 
 
+def test_fetch_array_measurement(session):
+    test_voltage = 1.0
+    test_record_length = 2000
+    test_channels = range(2)
+    test_num_channels = 2
+    test_num_records = 3
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        waveforms = session.channels[test_channels].fetch_array_measurement(niscope.enums.ArrayMeasurement.ARRAY_GAIN)
+    assert len(waveforms) == test_num_channels * test_num_records
+    for i in range(len(waveforms)):
+        assert len(waveforms[i].samples) == test_record_length
+
+
 def test_fetch_binary8_into(session):
     test_voltage = 1.0
     test_record_length = 2000
@@ -195,6 +211,117 @@ def test_fetch_double_into(session):
             assert record_wfm[j] == waveform[i * test_record_length + j]
 
 
+def test_read_measurement(session):
+    test_voltage = 1.0
+    test_record_length = 1000
+    test_channels = range(2)
+    test_num_channels = 2
+    test_num_records = 3
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        measurement = session.channels[test_channels].read_measurement(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
+
+    assert len(measurement) == test_num_records * test_num_channels
+    for meas in measurement:
+        assert meas == 0.0
+
+
+def test_fetch_measurement(session):
+    test_voltage = 1.0
+    test_record_length = 1000
+    test_channels = range(2)
+    test_num_channels = 2
+    test_num_records = 3
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        measurement = session.channels[test_channels].fetch_measurement(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
+
+    assert len(measurement) == test_num_records * test_num_channels
+    for meas in measurement:
+        assert meas == 0.0
+
+
+def test_fetch_measurement_stats(session):
+    test_voltage = 1.0
+    test_record_length = 1000
+    test_channels = range(2)
+    test_num_channels = 2
+    test_num_records = 3
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        measurement_stats = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
+
+    assert len(measurement_stats) == test_num_channels * test_num_records
+    for stat in measurement_stats:
+        assert stat.result == 0.0
+
+
+def test_clear_waveform_measurement_stats(session):
+    test_voltage = 1.0
+    test_record_length = 1000
+    test_channels = 0
+    test_num_records = 1
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        session.channels[test_channels].fetch_measurement(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
+        uncleared_stats = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
+        uncleared_stats_2 = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
+        session.channels[test_channels].clear_waveform_measurement_stats(niscope.enums.ClearableMeasurement.FREQUENCY)
+        cleared_stats = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
+
+    # The principle here is using consistent behavior (i.e. if stats are fetched twice on a single record/channel measurement in a row, it will always be the same)
+    # to demonstrate that clearing the stats does in fact cause a measurable change.
+    assert uncleared_stats[0].result == uncleared_stats_2[0].result
+    assert uncleared_stats[0].stdev == uncleared_stats_2[0].stdev
+    assert uncleared_stats[0].mean == uncleared_stats_2[0].mean
+    assert uncleared_stats[0].min_val == uncleared_stats_2[0].min_val
+    assert uncleared_stats[0].max_val == uncleared_stats_2[0].max_val
+    assert uncleared_stats[0].num_in_stats == uncleared_stats_2[0].num_in_stats
+    assert uncleared_stats[0].num_in_stats != cleared_stats[0].num_in_stats
+
+
+def test_waveform_processing(session):
+    test_voltage = 1.0
+    test_record_length = 1000
+    test_channels = range(2)
+    test_num_channels = 2
+    test_num_records = 3
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        session.add_waveform_processing(niscope.enums.ArrayMeasurement.DERIVATIVE)
+        processed_waveforms = session.channels[test_channels].fetch_measurement(niscope.enums.ScalarMeasurement.MID_REF_VOLTS, 5.0)
+        session.clear_waveform_processing()
+        unprocessed_waveforms = session.channels[test_channels].fetch_measurement(niscope.enums.ScalarMeasurement.MID_REF_VOLTS, 5.0)
+
+    assert len(processed_waveforms) == test_num_channels * test_num_records
+    assert len(unprocessed_waveforms) == test_num_channels * test_num_records
+    # Here the idea is to leave a large margin to not test too specifically for any returned values but to demonstrate that the waveform processing does
+    # undeniably cause a consistent shift in the values returned. The "0" exception for processed is due to the nature of derivatives -- if two samples
+    # next to each other are identical, the derivative will be 0.
+    for processed, unprocessed in zip(processed_waveforms, unprocessed_waveforms):
+        assert abs(unprocessed) < 1
+        assert abs(processed) > 1 or processed == 0
+
+
+def test_measurement_stats_str(session):
+    test_voltage = 1.0
+    test_record_length = 1000
+    test_channels = 0
+    test_num_records = 1
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    with session.initiate():
+        measurement_stat = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
+
+    assert isinstance(measurement_stat[0].__str__(), str)
+    assert isinstance(measurement_stat[0].__repr__(), str)
+
+
 def test_get_self_cal_last_date_time(session):
     last_cal = session.get_self_cal_last_date_and_time()
     assert last_cal.month == 12
@@ -239,23 +366,23 @@ def test_reset(session):
 
 
 def test_reset_device(session):
-    deault_meas_time_histogram_high_time = session._meas_time_histogram_high_time
-    assert deault_meas_time_histogram_high_time == 0.0005
-    session._meas_time_histogram_high_time = 0.0010
-    non_default_meas_time_histogram_high_time = session._meas_time_histogram_high_time
-    assert non_default_meas_time_histogram_high_time == 0.0010
+    deault_meas_time_histogram_high_time = session.meas_time_histogram_high_time
+    assert deault_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
+    session.meas_time_histogram_high_time = hightime.timedelta(microseconds=1000)
+    non_default_meas_time_histogram_high_time = session.meas_time_histogram_high_time
+    assert non_default_meas_time_histogram_high_time == hightime.timedelta(microseconds=1000)
     session.reset_device()
-    assert session._meas_time_histogram_high_time == 0.0005
+    assert session.meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
 
 
 def test_reset_with_defaults(session):
-    deault_meas_time_histogram_high_time = session._meas_time_histogram_high_time
-    assert deault_meas_time_histogram_high_time == 0.0005
-    session._meas_time_histogram_high_time = 0.0010
-    non_default_meas_time_histogram_high_time = session._meas_time_histogram_high_time
-    assert non_default_meas_time_histogram_high_time == 0.0010
-    session.reset_with_defaults()
-    assert session._meas_time_histogram_high_time == 0.0005
+    deault_meas_time_histogram_high_time = session.meas_time_histogram_high_time
+    assert deault_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
+    session.meas_time_histogram_high_time = hightime.timedelta(microseconds=1000)
+    non_default_meas_time_histogram_high_time = session.meas_time_histogram_high_time
+    assert non_default_meas_time_histogram_high_time == hightime.timedelta(microseconds=1000)
+    session.reset_device()
+    assert session.meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
 
 
 def test_error_message():
@@ -330,9 +457,10 @@ def test_disable(session):
     assert session.allow_more_records_than_memory is False
 
 
+# Basic configuration tests
 def test_configure_ref_levels(session):
     session._configure_ref_levels()
-    assert 90.0 == session._meas_chan_high_ref_level
+    assert 90.0 == session.meas_chan_high_ref_level
 
 
 def test_configure_trigger_digital(session):

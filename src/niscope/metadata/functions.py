@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.1.0d1
+# This file is generated from NI-SCOPE API metadata version 20.5.0d7
 functions = {
     'Abort': {
         'documentation': {
@@ -111,9 +111,9 @@ functions = {
         'returns': 'ViStatus'
     },
     'AddWaveformProcessing': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
-            'description': '\nAdds one measurement to the list of processing steps that are completed\nbefore the measurement. The processing is added on a per channel basis,\nand the processing measurements are completed in the same order they are\nregistered. All measurement library parameters—the attributes starting\nwith NISCOPE_ATTR_MEAS—are cached at the time of registering the\nprocessing, and this set of parameters is used during the processing\nstep. The processing measurements are streamed, so the result of the\nfirst processing step is used as the input for the next step. The\nprocessing is done before any other measurements.\n'
+            'description': '\nAdds one measurement to the list of processing steps that are completed\nbefore the measurement. The processing is added on a per channel basis,\nand the processing measurements are completed in the same order they are\nregistered. All measurement library parameters—the attributes starting\nwith "meas_"—are cached at the time of registering the\nprocessing, and this set of parameters is used during the processing\nstep. The processing measurements are streamed, so the result of the\nfirst processing step is used as the input for the next step. The\nprocessing is done before any other measurements.\n'
         },
         'parameters': [
             {
@@ -353,7 +353,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClearWaveformMeasurementStats': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nClears the waveform stats on the channel and measurement you specify. If\nyou want to clear all of the measurements, use\nNISCOPE_VAL_ALL_MEASUREMENTS in the **clearableMeasurementFunction**\nparameter.\n\nEvery time a measurement is called, the statistics information is\nupdated, including the min, max, mean, standard deviation, and number of\nupdates. This information is fetched with\nniScope_FetchMeasurementStats. The multi-acquisition array measurements\nare also cleared with this function.\n'
         },
@@ -375,7 +375,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': '_ClearableMeasurement.ALL_MEASUREMENTS',
+                'default_value': 'ClearableMeasurement.ALL_MEASUREMENTS',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe `scalar\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__\nor `array\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__\nto clear the stats for.\n'
@@ -388,7 +388,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClearWaveformProcessing': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nClears the list of processing steps assigned to the given channel. The\nprocessing is added using the niScope_AddWaveformProcessing function,\nwhere the processing steps are completed in the same order in which they\nare registered. The processing measurements are streamed, so the result\nof the first processing step is used as the input for the next step. The\nprocessing is also done before any other measurements.\n'
         },
@@ -1174,12 +1174,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
-                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'sizeInBytes'
                 },
                 'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes',
                 'use_array': True
             }
         ],
@@ -1293,7 +1293,7 @@ functions = {
                 },
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'python_type': 'float or hightime.timedelta',
+                'python_type': 'hightime.timedelta, datetime.timedelta, or float',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
@@ -1344,6 +1344,142 @@ functions = {
             }
         ],
         'python_name': 'get_equalization_filter_coefficients',
+        'returns': 'ViStatus'
+    },
+    'FancyGetExtCalLastDateAndTime': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Returns the date and time of the last external calibration performed.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_cal_last_date'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.'
+                },
+                'name': 'lastCalDatetime',
+                'python_type': 'hightime.timedelta, datetime.timedelta, or float',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+            }
+        ],
+        'python_name': 'get_ext_cal_last_date_and_time',
+        'returns': 'ViStatus'
+    },
+    'FancyGetExtCalLastTemp': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful external calibration.\nThe temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.\nTemperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_cal_last_temp'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the **temperature** in degrees Celsius during the last calibration.'
+                },
+                'name': 'temperature',
+                'type': 'ViReal64'
+            }
+        ],
+        'python_name': 'get_ext_cal_last_temp',
+        'returns': 'ViStatus'
+    },
+    'FancyGetSelfCalLastDateAndTime': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Returns the date and time of the last self calibration performed.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_cal_last_date'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Indicates the **date** of the last calibration. A hightime.datetime object is returned, but only contains resolution to the day.'
+                },
+                'name': 'lastCalDatetime',
+                'python_type': 'hightime.timedelta, datetime.timedelta, or float',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+            }
+        ],
+        'python_name': 'get_self_cal_last_date_and_time',
+        'returns': 'ViStatus'
+    },
+    'FancyGetSelfCalLastTemp': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful self calibration.\nThe temperature returned by this node is an onboard temperature read from a sensor on the surface of the oscilloscope. This temperature should not be confused with the environmental temperature of the oscilloscope surroundings. During operation, the onboard temperature is normally higher than the environmental temperature.\nTemperature-sensitive parameters are calibrated during self-calibration. Therefore, the self-calibration temperature is usually more important to read than the external calibration temperature.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_cal_last_temp'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the **temperature** in degrees Celsius during the last calibration.'
+                },
+                'name': 'temperature',
+                'type': 'ViReal64'
+            }
+        ],
+        'python_name': 'get_self_cal_last_temp',
         'returns': 'ViStatus'
     },
     'FancyRead': {
@@ -1430,7 +1566,7 @@ functions = {
                 },
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'python_type': 'float or hightime.timedelta',
+                'python_type': 'hightime.timedelta, datetime.timedelta, or float',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
@@ -1953,7 +2089,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchMeasurement': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nFetches a waveform from the digitizer and performs the specified\nwaveform measurement. Refer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references by using\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
         },
@@ -2465,12 +2601,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
-                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sizeInBytes'
                 },
-                'type': 'ViInt8[]'
+                'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes'
             }
         ],
         'returns': 'ViStatus'
@@ -2747,7 +2883,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ReadMeasurement': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': '\nInitiates an acquisition, waits for it to complete, and performs the\nspecified waveform measurement for a single channel and record or for\nmultiple channels and records.\n\nRefer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references by using\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
         },

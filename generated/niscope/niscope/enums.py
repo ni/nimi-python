@@ -25,7 +25,7 @@ class AcquisitionType(Enum):
     '''
 
 
-class _ArrayMeasurement(Enum):
+class ArrayMeasurement(Enum):
     NO_MEASUREMENT = 4000
     r'''
     None
@@ -153,7 +153,7 @@ class _CalibrationTypes(Enum):
     MANUFACTURE = 2
 
 
-class _ClearableMeasurement(Enum):
+class ClearableMeasurement(Enum):
     ALL_MEASUREMENTS = 10000
     MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004
     MULTI_ACQ_TIME_HISTOGRAM = 4005
@@ -223,7 +223,7 @@ class _ClearableMeasurement(Enum):
     TIME_HISTOGRAM_NEW_HITS = 3011
 
 
-class _FIRFilterWindow(Enum):
+class FIRFilterWindow(Enum):
     NONE = 0
     r'''
     No window.
@@ -273,7 +273,7 @@ class FetchRelativeTo(Enum):
     '''
 
 
-class _FilterType(Enum):
+class FilterType(Enum):
     LOWPASS = 0
     r'''
     Specifies lowpass as the filter type.
@@ -348,7 +348,7 @@ class Option(Enum):
     '''
 
 
-class _PercentageMethod(Enum):
+class PercentageMethod(Enum):
     LOWHIGH = 0
     r'''
     Specifies that the reference level percentages should be computed using
@@ -384,7 +384,7 @@ class RISMethod(Enum):
     '''
 
 
-class _RefLevelUnits(Enum):
+class RefLevelUnits(Enum):
     VOLTS = 0
     r'''
     Specifies that the reference levels are given in units of volts.
@@ -437,7 +437,7 @@ class RuntTimeCondition(Enum):
     '''
 
 
-class _ScalarMeasurement(Enum):
+class ScalarMeasurement(Enum):
     NO_MEASUREMENT = 4000
     r'''
     None
