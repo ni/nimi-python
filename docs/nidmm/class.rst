@@ -1131,6 +1131,49 @@ fetch_waveform_into
 
 
 
+get_cal_date_and_time
+---------------------
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: get_cal_date_and_time(cal_type)
+
+            Returns the date and time of the last calibration performed.
+
+            
+
+            .. note:: The NI 4050 and NI 4060 are not supported.
+
+
+
+            :param cal_type:
+
+
+                Specifies the type of calibration performed (external or self-calibration).
+
+                +-----------------------------------------------------+---+----------------------+
+                | :py:data:`~nidmm.NIDMM_VAL_INTERNAL_AREA` (default) | 0 | Self-Calibration     |
+                +-----------------------------------------------------+---+----------------------+
+                | :py:data:`~nidmm.NIDMM_VAL_EXTERNAL_AREA`           | 1 | External Calibration |
+                +-----------------------------------------------------+---+----------------------+
+
+                .. note:: The NI 4065 does not support self-calibration.
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+            :type cal_type: int
+
+            :rtype: hightime.datetime
+            :return:
+
+
+                    Indicates date and time of the last calibration.
+
+                    
+
+
+
 get_dev_temp
 ------------
 

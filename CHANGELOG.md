@@ -47,7 +47,6 @@ All notable changes to this project will be documented in this file.
             * `get_self_cal_last_temp`
     * #### Changed
     * #### Removed
-        * Outdated `get_cal_date_and_time` method removed in favor of more consistent new methods. - [#1462](https://github.com/ni/nimi-python/issues/1462)
 * ### `nifgen` (NI-FGEN)
     * #### Added
     * #### Changed

@@ -150,6 +150,15 @@ def test_get_auto_range_value(session):
         assert auto_range_value_property == 300   # simulated device auto_range_value to maximum 300
 
 
+def test_get_cal_last_date_time(session):
+    last_cal = session.get_cal_date_and_time(0)
+    assert last_cal.month == 3
+    assert last_cal.day == 1
+    assert last_cal.year == 1940
+    assert last_cal.hour == 0
+    assert last_cal.minute == 0   # cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00
+
+
 def test_get_ext_cal_last_date_and_time(session):
     last_cal = session.get_ext_cal_last_date_and_time()
     assert last_cal.month == 3

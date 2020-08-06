@@ -1152,6 +1152,62 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'GetLastCalDateAndTime': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Returns the date and time of the last calibration performed.',
+            'note': 'The NI 4050 and NI 4060 are not supported.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'datetime_wrappers'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM_init or niDMM_InitWithOptions. The default is None.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the type of calibration performed (external or self-calibration).',
+                    'note': 'The NI 4065 does not support self-calibration.',
+                    'table_body': [
+                        [
+                            'NIDMM_VAL_INTERNAL_AREA (default)',
+                            '0',
+                            'Self-Calibration'
+                        ],
+                        [
+                            'NIDMM_VAL_EXTERNAL_AREA',
+                            '1',
+                            'External Calibration'
+                        ]
+                    ]
+                },
+                'name': 'calType',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Indicates date and time of the last calibration.'
+                },
+                'name': 'month',
+                'type': 'hightime.datetime'
+            }
+        ],
+        'python_name': 'get_cal_date_and_time',
+        'real_datetime_call': 'GetCalDateAndTime',
+        'returns': 'ViStatus'
+    },
     'GetLastCalTemp': {
         'codegen_method': 'private',
         'documentation': {
