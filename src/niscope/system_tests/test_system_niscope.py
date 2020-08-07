@@ -211,38 +211,6 @@ def test_fetch_double_into(session):
             assert record_wfm[j] == waveform[i * test_record_length + j]
 
 
-def test_read_measurement(session):
-    test_voltage = 1.0
-    test_record_length = 1000
-    test_channels = range(2)
-    test_num_channels = 2
-    test_num_records = 3
-    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
-    with session.initiate():
-        measurement = session.channels[test_channels].read_measurement(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
-
-    assert len(measurement) == test_num_records * test_num_channels
-    for meas in measurement:
-        assert meas == 0.0
-
-
-def test_fetch_measurement(session):
-    test_voltage = 1.0
-    test_record_length = 1000
-    test_channels = range(2)
-    test_num_channels = 2
-    test_num_records = 3
-    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
-    with session.initiate():
-        measurement = session.channels[test_channels].fetch_measurement(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
-
-    assert len(measurement) == test_num_records * test_num_channels
-    for meas in measurement:
-        assert meas == 0.0
-
-
 def test_fetch_measurement_stats(session):
     test_voltage = 1.0
     test_record_length = 1000
@@ -267,7 +235,6 @@ def test_clear_waveform_measurement_stats(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
     with session.initiate():
-        session.channels[test_channels].fetch_measurement(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
         uncleared_stats = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
         uncleared_stats_2 = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
         session.channels[test_channels].clear_waveform_measurement_stats(niscope.enums.ClearableMeasurement.FREQUENCY)
@@ -294,9 +261,9 @@ def test_waveform_processing(session):
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
     with session.initiate():
         session.add_waveform_processing(niscope.enums.ArrayMeasurement.DERIVATIVE)
-        processed_waveforms = session.channels[test_channels].fetch_measurement(niscope.enums.ScalarMeasurement.MID_REF_VOLTS, 5.0)
+        processed_waveforms = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.MID_REF_VOLTS, 5.0)
         session.clear_waveform_processing()
-        unprocessed_waveforms = session.channels[test_channels].fetch_measurement(niscope.enums.ScalarMeasurement.MID_REF_VOLTS, 5.0)
+        unprocessed_waveforms = session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.MID_REF_VOLTS, 5.0)
 
     assert len(processed_waveforms) == test_num_channels * test_num_records
     assert len(unprocessed_waveforms) == test_num_channels * test_num_records
@@ -304,8 +271,8 @@ def test_waveform_processing(session):
     # undeniably cause a consistent shift in the values returned. The "0" exception for processed is due to the nature of derivatives -- if two samples
     # next to each other are identical, the derivative will be 0.
     for processed, unprocessed in zip(processed_waveforms, unprocessed_waveforms):
-        assert abs(unprocessed) < 1
-        assert abs(processed) > 1 or processed == 0
+        assert abs(unprocessed.result) < 1
+        assert abs(processed.result) > 1 or processed.result == 0
 
 
 def test_measurement_stats_str(session):

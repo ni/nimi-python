@@ -3065,55 +3065,6 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def fetch_measurement(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
-        r'''fetch_measurement
-
-        Fetches a waveform from the digitizer and performs the specified
-        waveform measurement. Refer to `Using Fetch
-        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
-        more information.
-
-        Many of the measurements use the low, mid, and high reference levels.
-        You configure the low, mid, and high references by using
-        meas_chan_low_ref_level,
-        meas_chan_mid_ref_level, and
-        meas_chan_high_ref_level to set each channel
-        differently.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            scalar_meas_function (enums.ScalarMeasurement): The `scalar
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
-                to be performed.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
-
-
-        Returns:
-            result (list of float): Contains an array of all measurements acquired; call
-                _actual_num_wfms to determine the array length.
-
-        '''
-        if type(scalar_meas_function) is not enums.ScalarMeasurement:
-            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums.ScalarMeasurement))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
-        result_size = self._actual_num_wfms()  # case B560
-        result_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=result_size)  # case B560
-        error_code = self._library.niScope_FetchMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
-
-    @ivi_synchronized
     def _fetch_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
         r'''_fetch_measurement_stats
 
@@ -3623,59 +3574,6 @@ class _SessionBase(object):
         error_code = self._library.niScope_Read(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
-
-    @ivi_synchronized
-    def read_measurement(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
-        r'''read_measurement
-
-        Initiates an acquisition, waits for it to complete, and performs the
-        specified waveform measurement for a single channel and record or for
-        multiple channels and records.
-
-        Refer to `Using Fetch
-        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
-        more information.
-
-        Many of the measurements use the low, mid, and high reference levels.
-        You configure the low, mid, and high references by using
-        meas_chan_low_ref_level,
-        meas_chan_mid_ref_level, and
-        meas_chan_high_ref_level to set each channel
-        differently.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            scalar_meas_function (enums.ScalarMeasurement): The `scalar
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
-                to be performed
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
-
-
-        Returns:
-            result (array.array("d")): Contains an array of all measurements acquired. Call
-                _actual_num_wfms to determine the array length.
-
-        '''
-        if type(scalar_meas_function) is not enums.ScalarMeasurement:
-            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums.ScalarMeasurement))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
-        result_size = self._actual_num_wfms()  # case B560
-        result_array = array.array("d", [0] * result_size)  # case B560
-        result_ctype = get_ctypes_pointer_for_buffer(value=result_array, library_type=_visatype.ViReal64)  # case B560
-        error_code = self._library.niScope_ReadMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return result_array
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, value):
@@ -4389,9 +4287,12 @@ class Session(_SessionBase):
         meas_chan_mid_ref_level
 
         This method configures the reference levels for waveform measurements.
-        Call this method before calling fetch_measurement to take a
+        Call this method before calling FetchMeasurement to take a
         rise time, fall time, width negative, width positive, duty cycle
         negative, or duty cycle positive measurement.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Args:
             low (float): Pass the low reference you want the digitizer to use for waveform
