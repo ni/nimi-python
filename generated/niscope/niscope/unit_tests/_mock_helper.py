@@ -151,9 +151,6 @@ class SideEffectsHelper(object):
         self._defaults['Read']['return'] = 0
         self._defaults['Read']['waveform'] = None
         self._defaults['Read']['wfmInfo'] = None
-        self._defaults['ReadMeasurement'] = {}
-        self._defaults['ReadMeasurement']['return'] = 0
-        self._defaults['ReadMeasurement']['result'] = None
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -746,22 +743,6 @@ class SideEffectsHelper(object):
             wfm_info_ref[i] = test_value[i]
         return self._defaults['Read']['return']
 
-    def niScope_ReadMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
-        if self._defaults['ReadMeasurement']['return'] != 0:
-            return self._defaults['ReadMeasurement']['return']
-        # result
-        if self._defaults['ReadMeasurement']['result'] is None:
-            raise MockFunctionCallError("niScope_ReadMeasurement", param='result')
-        test_value = self._defaults['ReadMeasurement']['result']
-        try:
-            result_ref = result.contents
-        except AttributeError:
-            result_ref = result
-        assert len(result_ref) >= len(test_value)
-        for i in range(len(test_value)):
-            result_ref[i] = test_value[i]
-        return self._defaults['ReadMeasurement']['return']
-
     def niScope_ResetDevice(self, vi):  # noqa: N802
         if self._defaults['ResetDevice']['return'] != 0:
             return self._defaults['ResetDevice']['return']
@@ -955,8 +936,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_ProbeCompensationSignalStop.return_value = 0
         mock_library.niScope_Read.side_effect = MockFunctionCallError("niScope_Read")
         mock_library.niScope_Read.return_value = 0
-        mock_library.niScope_ReadMeasurement.side_effect = MockFunctionCallError("niScope_ReadMeasurement")
-        mock_library.niScope_ReadMeasurement.return_value = 0
         mock_library.niScope_ResetDevice.side_effect = MockFunctionCallError("niScope_ResetDevice")
         mock_library.niScope_ResetDevice.return_value = 0
         mock_library.niScope_ResetWithDefaults.side_effect = MockFunctionCallError("niScope_ResetWithDefaults")

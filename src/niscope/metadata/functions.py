@@ -2882,64 +2882,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'ReadMeasurement': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': '\nInitiates an acquisition, waits for it to complete, and performs the\nspecified waveform measurement for a single channel and record or for\nmultiple channels and records.\n\nRefer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references by using\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe instrument handle you obtain from niScope_init that identifies a\nparticular instrument session.\n'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': "\nThe channel to configure. For more information, refer to `Channel String\nSyntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc)>`__.\n"
-                },
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
-                },
-                'name': 'timeout',
-                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe `scalar\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__\nto be performed\n'
-                },
-                'enum': 'ScalarMeasurement',
-                'name': 'scalarMeasFunction',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': '\nContains an array of all measurements acquired. Call\nniScope_ActualNumWfms to determine the array length.\n'
-                },
-                'name': 'result',
-                'size': {
-                    'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
-                },
-                'type': 'ViReal64[]',
-                'use_array': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'ResetDevice': {
         'documentation': {
             'description': '\nPerforms a hard reset of the device. Acquisition stops, all routes are\nreleased, RTSI and PFI lines are tristated, hardware is configured to\nits default state, and all session attributes are reset to their default\nstate.\n\n-  `Thermal Shutdown <digitizers.chm::/Thermal_Shutdown.html>`__\n'
