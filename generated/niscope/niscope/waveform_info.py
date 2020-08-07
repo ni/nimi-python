@@ -79,9 +79,7 @@ class WaveformInfo(object):
             'relative_initial_x={}'.format(self.relative_initial_x),
             'x_increment={}'.format(self.x_increment),
             'offset={}'.format(self.offset),
-            'gain={}'.format(self.gain),
-            'channel={}'.format(self.channel),
-            'record={}'.format(self.record)
+            'gain={}'.format(self.gain)
         ]
 
         return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))

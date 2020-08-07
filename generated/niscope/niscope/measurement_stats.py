@@ -17,9 +17,7 @@ class MeasurementStats(object):
             'stdev={}'.format(self.stdev),
             'min_val={}'.format(self.min_val),
             'max_val={}'.format(self.max_val),
-            'num_in_stats={}'.format(self.num_in_stats),
-            'channel={}'.format(self.channel),
-            'record={}'.format(self.record)
+            'num_in_stats={}'.format(self.num_in_stats)
         ]
 
         return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))
