@@ -80,6 +80,8 @@ class WaveformInfo(object):
             'x_increment={}'.format(self.x_increment),
             'offset={}'.format(self.offset),
             'gain={}'.format(self.gain),
+            'channel={}'.format(self.channel),
+            'record={}'.format(self.record)
         ]
 
         return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))
@@ -92,17 +94,17 @@ class WaveformInfo(object):
 
         string_representation = ''
         if self.channel is not None:  # We explicitly look for not None to differentiate from empty string
-            string_representation += row_format_s.format('channel', self.channel)
+            string_representation += row_format_s.format('Channel', self.channel)
         if self.record is not None:  # We explicitly look for not None to differentiate from 0
-            string_representation += row_format_d.format('record', self.record)
+            string_representation += row_format_d.format('Record', self.record)
 
         string_representation += row_format_g.format('Absolute X0', self.absolute_initial_x)
         string_representation += row_format_g.format('Relative X0', self.relative_initial_x)
         string_representation += row_format_g.format('dt', self.x_increment)
-        string_representation += row_format_g.format('offset', self.offset)
-        string_representation += row_format_g.format('gain', self.gain)
+        string_representation += row_format_g.format('Offset', self.offset)
+        string_representation += row_format_g.format('Gain', self.gain)
         if self.samples is not None:  # We explicitly look for not None to differentiate from empty array
-            string_representation += row_format_g.format('wfm length', len(self.samples))
+            string_representation += row_format_g.format('Waveform Length', len(self.samples))
 
         # Put possible private variable last
         if self._actual_samples is not None:  # We explicitly look for not None to differentiate from 0

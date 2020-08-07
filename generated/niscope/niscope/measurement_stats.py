@@ -17,7 +17,9 @@ class MeasurementStats(object):
             'stdev={}'.format(self.stdev),
             'min_val={}'.format(self.min_val),
             'max_val={}'.format(self.max_val),
-            'num_in_stats={}'.format(self.num_in_stats)
+            'num_in_stats={}'.format(self.num_in_stats),
+            'channel={}'.format(self.channel),
+            'record={}'.format(self.record)
         ]
 
         return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))
@@ -33,11 +35,11 @@ class MeasurementStats(object):
         if self.record is not None:
             string_representation += row_format_d.format('record', self.record)
 
-        string_representation += row_format_g.format('result', self.result)
-        string_representation += row_format_g.format('mean', self.mean)
-        string_representation += row_format_g.format('standard deviation', self.stdev)
-        string_representation += row_format_g.format('minimum value', self.min_val)
-        string_representation += row_format_g.format('maximum value', self.max_val)
-        string_representation += row_format_d.format('num in stats', self.num_in_stats)
+        string_representation += row_format_g.format('Result', self.result)
+        string_representation += row_format_g.format('Mean', self.mean)
+        string_representation += row_format_g.format('Standard Deviation', self.stdev)
+        string_representation += row_format_g.format('Minimum Value', self.min_val)
+        string_representation += row_format_g.format('Maximum Value', self.max_val)
+        string_representation += row_format_d.format('Number in Stats', self.num_in_stats)
 
         return string_representation
