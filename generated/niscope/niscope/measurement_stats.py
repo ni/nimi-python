@@ -29,9 +29,9 @@ class MeasurementStats(object):
 
         string_representation = ''
         if self.channel is not None:
-            string_representation += row_format_s.format('channel', self.channel)
+            string_representation += row_format_s.format('Channel', self.channel)
         if self.record is not None:
-            string_representation += row_format_d.format('record', self.record)
+            string_representation += row_format_d.format('Record', self.record)
 
         string_representation += row_format_g.format('Result', self.result)
         string_representation += row_format_g.format('Mean', self.mean)
