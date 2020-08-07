@@ -2120,9 +2120,9 @@ class _SessionBase(object):
                 averaging each fetch_measurement_stats call
                 -	**stdev** (float): the standard deviations of the most recent
                 **numInStats** measurements
-                -	**min** (float): the smallest scalar value acquired (the minimum
+                -	**min_val** (float): the smallest scalar value acquired (the minimum
                 of the **numInStats** measurements)
-                -	**max** (float): the largest scalar value acquired (the maximum
+                -	**max_val** (float): the largest scalar value acquired (the maximum
                 of the **numInStats** measurements)
                 -	**num_in_stats** (int): the number of times fetch_measurement_stats has been called
                 -	**channel** (str): channel name this result was acquired from
