@@ -272,7 +272,7 @@ def test_waveform_processing(session):
     # next to each other are identical, the derivative will be 0.
     for processed, unprocessed in zip(processed_waveforms, unprocessed_waveforms):
         assert abs(unprocessed.result) < 1
-        assert abs(processed.result) > 1 or processed == 0
+        assert abs(processed.result) > 1 or processed.result == 0
 
 
 def test_measurement_stats_str(session):
