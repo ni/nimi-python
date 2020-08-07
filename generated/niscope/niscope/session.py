@@ -3065,8 +3065,8 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def fetch_measurement(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
-        r'''fetch_measurement
+    def _fetch_measurement(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+        r'''_fetch_measurement
 
         Fetches a waveform from the digitizer and performs the specified
         waveform measurement. Refer to `Using Fetch
@@ -3625,8 +3625,8 @@ class _SessionBase(object):
         return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def read_measurement(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
-        r'''read_measurement
+    def _read_measurement(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+        r'''_read_measurement
 
         Initiates an acquisition, waits for it to complete, and performs the
         specified waveform measurement for a single channel and record or for
@@ -4389,7 +4389,7 @@ class Session(_SessionBase):
         meas_chan_mid_ref_level
 
         This method configures the reference levels for waveform measurements.
-        Call this method before calling fetch_measurement to take a
+        Call this method before calling _fetch_measurement to take a
         rise time, fall time, width negative, width positive, duty cycle
         negative, or duty cycle positive measurement.
 

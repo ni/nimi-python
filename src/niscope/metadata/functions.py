@@ -2089,7 +2089,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchMeasurement': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nFetches a waveform from the digitizer and performs the specified\nwaveform measurement. Refer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references by using\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
         },
@@ -2883,7 +2883,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ReadMeasurement': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nInitiates an acquisition, waits for it to complete, and performs the\nspecified waveform measurement for a single channel and record or for\nmultiple channels and records.\n\nRefer to `Using Fetch\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for\nmore information.\n\nMany of the measurements use the low, mid, and high reference levels.\nYou configure the low, mid, and high references by using\nNISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,\nNISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and\nNISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel\ndifferently.\n'
         },
