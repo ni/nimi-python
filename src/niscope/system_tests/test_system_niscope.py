@@ -8,6 +8,11 @@ import pytest
 import tempfile
 
 
+instruments = ['FakeDevice1', 'FakeDevice2']
+# TODO(sbethur): Use `get_channel_names` when #1402 is fixed
+test_channels = 'FakeDevice2/0,FakeDevice1/1'
+
+
 # There are system tests below that need either a PXI-5124 or a PXI-5142 instead of the PXIe-5164 we use everywhere else
 # because of specific capabilities on those models. Due to internal NI bug 969274, opening a simulated session to those models
 # sometimes fails. As a workaround, the nimi-bot VMs are configured with one persistently simulated instrument of each kind respectively
@@ -24,8 +29,14 @@ daqmx_sim_5142_lock = fasteners.InterProcessLock(daqmx_sim_5142_lock_file)
 
 
 @pytest.fixture(scope='function')
-def session():
+def single_instrument_session():
     with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as simulated_session:
+        yield simulated_session
+
+
+@pytest.fixture(scope='function')
+def session():
+    with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as simulated_session:
         yield simulated_session
 
 
@@ -51,16 +62,15 @@ def test_vi_boolean_attribute(session):
 
 
 def test_vi_string_attribute(session):
-    session.acq_arm_source = 'NISCOPE_VAL_IMMEDIATE'
-    start_trigger_source = session.acq_arm_source
-    assert start_trigger_source == 'NISCOPE_VAL_IMMEDIATE'
+    trigger_source = '/{0}/NISCOPE_VAL_IMMEDIATE'.format(instruments[1])
+    session.acq_arm_source = trigger_source
+    assert trigger_source == session.acq_arm_source
 
 
 # Basic usability tests
 def test_read(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(2)
     test_num_channels = 2
     test_num_records = 3
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
@@ -74,7 +84,6 @@ def test_read(session):
 def test_fetch(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(2)
     test_num_channels = 2
     test_num_records = 3
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
@@ -89,7 +98,6 @@ def test_fetch(session):
 def test_fetch_defaults(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(2)
     test_num_channels = 2
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
@@ -103,7 +111,6 @@ def test_fetch_defaults(session):
 def test_fetch_array_measurement(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(2)
     test_num_channels = 2
     test_num_records = 3
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
@@ -118,7 +125,6 @@ def test_fetch_array_measurement(session):
 def test_fetch_binary8_into(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(2)
     test_num_channels = 2
     waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int8)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
@@ -142,7 +148,6 @@ def test_fetch_binary8_into(session):
 def test_fetch_binary16_into(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(2)
     test_num_channels = 2
     waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int16)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
@@ -166,7 +171,6 @@ def test_fetch_binary16_into(session):
 def test_fetch_binary32_into(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(2)
     test_num_channels = 2
     waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int32)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
@@ -190,7 +194,6 @@ def test_fetch_binary32_into(session):
 def test_fetch_double_into(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(2)
     test_num_channels = 2
     waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.float64)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
@@ -214,7 +217,6 @@ def test_fetch_double_into(session):
 def test_fetch_measurement_stats(session):
     test_voltage = 1.0
     test_record_length = 1000
-    test_channels = range(2)
     test_num_channels = 2
     test_num_records = 3
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
@@ -230,7 +232,6 @@ def test_fetch_measurement_stats(session):
 def test_clear_waveform_measurement_stats(session):
     test_voltage = 1.0
     test_record_length = 1000
-    test_channels = 0
     test_num_records = 1
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
@@ -254,7 +255,6 @@ def test_clear_waveform_measurement_stats(session):
 def test_waveform_processing(session):
     test_voltage = 1.0
     test_record_length = 1000
-    test_channels = range(2)
     test_num_channels = 2
     test_num_records = 3
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
@@ -278,7 +278,6 @@ def test_waveform_processing(session):
 def test_measurement_stats_str(session):
     test_voltage = 1.0
     test_record_length = 1000
-    test_channels = 0
     test_num_records = 1
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
@@ -289,8 +288,8 @@ def test_measurement_stats_str(session):
     assert isinstance(measurement_stat[0].__repr__(), str)
 
 
-def test_get_self_cal_last_date_time(session):
-    last_cal = session.get_self_cal_last_date_and_time()
+def test_get_self_cal_last_date_time(single_instrument_session):
+    last_cal = single_instrument_session.get_self_cal_last_date_and_time()
     assert last_cal.month == 12
     assert last_cal.day == 21
     assert last_cal.year == 1999
@@ -298,8 +297,8 @@ def test_get_self_cal_last_date_time(session):
     assert last_cal.minute == 0
 
 
-def test_get_ext_cal_last_date_time(session):
-    last_cal = session.get_ext_cal_last_date_and_time()
+def test_get_ext_cal_last_date_time(single_instrument_session):
+    last_cal = single_instrument_session.get_ext_cal_last_date_and_time()
     assert last_cal.month == 12
     assert last_cal.day == 21
     assert last_cal.year == 1999
@@ -307,13 +306,13 @@ def test_get_ext_cal_last_date_time(session):
     assert last_cal.minute == 0
 
 
-def test_get_self_cal_last_temperature(session):
-    last_cal_temp = session.get_self_cal_last_temp()
+def test_get_self_cal_last_temperature(single_instrument_session):
+    last_cal_temp = single_instrument_session.get_self_cal_last_temp()
     assert last_cal_temp == 25
 
 
-def test_get_ext_cal_last_temperature(session):
-    last_cal_temp = session.get_ext_cal_last_temp()
+def test_get_ext_cal_last_temperature(single_instrument_session):
+    last_cal_temp = single_instrument_session.get_ext_cal_last_temp()
     assert last_cal_temp == 25
 
 
@@ -425,28 +424,31 @@ def test_disable(session):
 
 
 # Basic configuration tests
-def test_configure_ref_levels(session):
-    session._configure_ref_levels()
-    assert 90.0 == session.meas_chan_high_ref_level
+def test_configure_ref_levels(single_instrument_session):
+    single_instrument_session._configure_ref_levels()
+    assert 90.0 == single_instrument_session.meas_chan_high_ref_level
 
 
 def test_configure_trigger_digital(session):
-    session.configure_trigger_digital('VAL_RTSI_0')
+    trigger_source = '/{0}/VAL_RTSI_0'.format(instruments[1])
+    session.configure_trigger_digital(trigger_source)
     session.vertical_range = 5
-    assert 'VAL_RTSI_0' == session.trigger_source
+    assert trigger_source == session.trigger_source
 
 
 def test_configure_trigger_edge(session):
     assert niscope.TriggerSlope.POSITIVE == session.trigger_slope
-    session.configure_trigger_edge('0', 0.0, niscope.TriggerCoupling.DC)
+    trigger_source = '{0}/0'.format(instruments[1])
+    session.configure_trigger_edge(trigger_source, 0.0, niscope.TriggerCoupling.DC)
     session.commit()
-    assert '0' == session.trigger_source
+    assert trigger_source == session.trigger_source
     assert niscope.TriggerCoupling.DC == session.trigger_coupling
 
 
 def test_configure_trigger_hysteresis(session):
-    session.configure_trigger_hysteresis('1', 0.0, 0.05, niscope.TriggerCoupling.DC)
-    assert '1' == session.trigger_source
+    trigger_source = '{0}/1'.format(instruments[1])
+    session.configure_trigger_hysteresis(trigger_source, 0.0, 0.05, niscope.TriggerCoupling.DC)
+    assert trigger_source == session.trigger_source
     assert niscope.TriggerCoupling.DC == session.trigger_coupling
 
 
@@ -492,8 +494,9 @@ def test_configure_trigger_video(session_5124):
 
 
 def test_configure_trigger_window(session):
-    session.configure_trigger_window('1', 0, 5, niscope.TriggerWindowMode.ENTERING, niscope.TriggerCoupling.DC)
-    assert '1' == session.trigger_source
+    trigger_source = '{0}/1'.format(instruments[1])
+    session.configure_trigger_window(trigger_source, 0, 5, niscope.TriggerWindowMode.ENTERING, niscope.TriggerCoupling.DC)
+    assert trigger_source == session.trigger_source
     assert niscope.TriggerWindowMode.ENTERING == session.trigger_window_mode
 
 
