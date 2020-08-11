@@ -1987,16 +1987,18 @@ class _SessionBase(object):
         # Should this raise instead? If this asserts, is it the users fault?
         assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
         actual_num_records = int(lwfm_i / lrcl)
-        i = 0
-        for chan in self._repeated_capability_list:
-            for rec in range(offset, offset + actual_num_records):
-                wfm_info[i].channel = chan
-                wfm_info[i].record = rec
-                i += 1
-
+        self._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(offset, offset + actual_num_records))
         return wfm_info
 
     @ivi_synchronized
+    def _populate_channel_and_record_info(self, objects, channels, records):
+        i = 0
+        for channel in channels:
+            for record in records:
+                objects[i].channel = channel
+                objects[i].record = record
+                i += 1
+
     def fetch_array_measurement(self, array_meas_function, timeout=hightime.timedelta(seconds=5.0)):
         r'''fetch_array_measurement
 
@@ -2061,12 +2063,7 @@ class _SessionBase(object):
             wfm_info[i].samples = meas_wfm[start:end]
 
         num_records = int(len(wfm_info) / len(self._repeated_capability_list))
-        i = 0
-        for chan in self._repeated_capability_list:
-            for rec in range(0, num_records):
-                wfm_info[i].channel = chan
-                wfm_info[i].record = rec
-                i += 1
+        self._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(num_records))
 
         return wfm_info
 
@@ -2137,13 +2134,8 @@ class _SessionBase(object):
             measurement_stat = measurement_stats.MeasurementStats(result, mean, stdev, min_val, max_val, num_in_stats)
             output.append(measurement_stat)
 
-        i = 0
         num_records = int(len(results) / len(self._repeated_capability_list))
-        for chan in self._repeated_capability_list:
-            for rec in range(0, num_records):
-                output[i].channel = chan
-                output[i].record = rec
-                i += 1
+        self._populate_channel_and_record_info(output, self._repeated_capability_list, range(num_records))
 
         return output
 
@@ -2246,13 +2238,7 @@ class _SessionBase(object):
         # Should this raise instead? If this asserts, is it the users fault?
         assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
         actual_num_records = int(lwfm_i / lrcl)
-        i = 0
-        for chan in self._repeated_capability_list:
-            for rec in range(offset, offset + actual_num_records):
-                wfm_info[i].channel = chan
-                wfm_info[i].record = rec
-                i += 1
-
+        self._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(offset, offset + actual_num_records))
         return wfm_info
 
     @ivi_synchronized
