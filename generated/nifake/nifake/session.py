@@ -181,6 +181,11 @@ class _SessionBase(object):
 
     A property of type string with read/write access.
     '''
+    read_write_string_repeated_capability = _attributes.AttributeViStringRepeatedCapability(1000010)
+    '''Type: basic sequence types or str or int
+
+    A property of type string with read/write access, that represents a repeated capability
+    '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list

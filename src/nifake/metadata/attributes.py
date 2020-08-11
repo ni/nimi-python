@@ -112,5 +112,18 @@ attributes = {
         'name': 'READ_WRITE_DOUBLE_WITH_REPEATED_CAPABILITY',
         'resettable': False,
         'type': 'ViReal64'
+    },
+    1000010: {
+        'access': 'read-write',
+        'attribute_class': 'AttributeViStringRepeatedCapability',
+        'channel_based': False,
+        'documentation': {
+            'description': 'An attribute of type string with read/write access, that represents a repeated capability'
+        },
+        'lv_property': 'Fake attributes:Read Write String Repeated Capability',
+        'name': 'READ_WRITE_STRING_REPEATED_CAPABILITY',
+        'resettable': False,
+        'type': 'ViString',
+        'type_in_documentation': 'basic sequence types or str or int'
     }
 }

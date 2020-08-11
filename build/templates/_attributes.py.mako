@@ -70,6 +70,15 @@ class AttributeViString(Attribute):
         session._set_attribute_vi_string(self._attribute_id, value)
 
 
+class AttributeViStringRepeatedCapability(Attribute):
+
+    def __get__(self, session, session_type):
+        return session._get_attribute_vi_string(self._attribute_id)
+
+    def __set__(self, session, value):
+        session._set_attribute_vi_string(self._attribute_id, _converters.convert_repeated_capabilities_without_prefix(value))
+
+
 class AttributeViBoolean(Attribute):
 
     def __get__(self, session, session_type):

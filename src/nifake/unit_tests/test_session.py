@@ -966,6 +966,25 @@ class TestSession(object):
             session.read_write_string = attrib_string
             self.patched_library.niFake_SetAttributeViString.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViStringMatcher('This is test string'))
 
+    def test_get_attribute_string_with_converter(self):
+        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
+        string = 'not that interesting'
+        self.side_effects_helper['GetAttributeViString']['attributeValue'] = string
+        with nifake.Session('dev1') as session:
+            attr_string = session.read_write_string_repeated_capability
+            assert attr_string == string
+            from mock import call
+            calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(1000010), _matchers.ViInt32Matcher(0), None), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(1000010), _matchers.ViInt32Matcher(20), _matchers.ViCharBufferMatcher(len(string)))]
+            self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAttributeViString.call_count == 2
+
+    def test_set_attribute_string_with_converter(self):
+        self.patched_library.niFake_SetAttributeViString.side_effect = self.side_effects_helper.niFake_SetAttributeViString
+        attribute_id = 1000010
+        with nifake.Session('dev1') as session:
+            session.read_write_string_repeated_capability = 42
+            self.patched_library.niFake_SetAttributeViString.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViStringMatcher('42'))
+
     def test_get_attribute_boolean(self):
         self.patched_library.niFake_GetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_GetAttributeViBoolean
         self.side_effects_helper['GetAttributeViBoolean']['attributeValue'] = 1
