@@ -17,13 +17,8 @@
             measurement_stat = measurement_stats.MeasurementStats(result, mean, stdev, min_val, max_val, num_in_stats)
             output.append(measurement_stat)
 
-        i = 0
         num_records = int(len(results) / len(self._repeated_capability_list))
-        for chan in self._repeated_capability_list:
-            for rec in range(0, num_records):
-                output[i].channel = chan
-                output[i].record = rec
-                i += 1
+        self._populate_channel_and_record_info(output, self._repeated_capability_list, range(num_records))
 
         return output
 
