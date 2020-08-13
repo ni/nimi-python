@@ -182,9 +182,14 @@ class _SessionBase(object):
     A property of type string with read/write access.
     '''
     read_write_string_repeated_capability = _attributes.AttributeViStringRepeatedCapability(1000010)
-    '''Type: basic sequence types or str or int
+    '''Type: Any repeated capability type, as defined in nimi-python:
+        - str
+        - str - Comma delimited list
+        - str - Range (using '-' or ':')
+        - int
+        - Basic sequence types (list, tuple, range, slice) of other supported types
 
-    A property of type string with read/write access, that represents a repeated capability
+    A property with read/write access, that represents a repeated capability
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
