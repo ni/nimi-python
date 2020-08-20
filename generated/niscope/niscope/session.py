@@ -899,8 +899,8 @@ class _SessionBase(object):
     '''
     meas_low_ref = _attributes.AttributeViReal64(1250608)
     meas_mid_ref = _attributes.AttributeViReal64(1250609)
-    meas_other_channel = _attributes.AttributeViString(1150018)
-    '''Type: str
+    meas_other_channel = _attributes.AttributeViStringRepeatedCapability(1150018)
+    '''Type: str or int
 
     Specifies the second channel for two-channel measurements, such as ArrayMeasurement.ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
     Default: '0'
