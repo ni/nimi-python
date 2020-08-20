@@ -112,5 +112,23 @@ attributes = {
         'name': 'READ_WRITE_DOUBLE_WITH_REPEATED_CAPABILITY',
         'resettable': False,
         'type': 'ViReal64'
+    },
+    1000010: {
+        'access': 'read-write',
+        'attribute_class': 'AttributeViStringRepeatedCapability',
+        'channel_based': False,
+        'documentation': {
+            'description': 'An attribute with read/write access, that represents a repeated capability'
+        },
+        'lv_property': 'Fake attributes:Read Write String Repeated Capability',
+        'name': 'READ_WRITE_STRING_REPEATED_CAPABILITY',
+        'resettable': False,
+        'type': 'ViString',
+        'type_in_documentation': '''Any repeated capability type, as defined in nimi-python:
+        - str
+        - str - Comma delimited list
+        - str - Range (using '-' or ':')
+        - int
+        - Basic sequence types (list, tuple, range, slice) of other supported types'''
     }
 }
