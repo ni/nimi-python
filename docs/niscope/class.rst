@@ -4902,7 +4902,7 @@ meas_other_channel
             +----------------+------------+
             | Characteristic | Value      |
             +================+============+
-            | Datatype       | str        |
+            | Datatype       | str or int |
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+

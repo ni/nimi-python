@@ -259,6 +259,7 @@ attributes = {
     },
     1150018: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViStringRepeatedCapability',
         'channel_based': True,
         'codegen_method': 'public',
         'documentation': {
@@ -267,7 +268,8 @@ attributes = {
         'lv_property': 'Waveform Measurement:Other Channel',
         'name': 'MEAS_OTHER_CHANNEL',
         'resettable': True,
-        'type': 'ViString'
+        'type': 'ViString',
+        'type_in_documentation': 'str or int'
     },
     1150019: {
         'access': 'read-write',
