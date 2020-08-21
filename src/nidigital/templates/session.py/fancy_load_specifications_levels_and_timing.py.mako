@@ -12,6 +12,7 @@
         self._call_method_with_iterable(self._load_levels, levels_file_paths)
         self._call_method_with_iterable(self._load_timing, timing_file_paths)
 
+    ## Define the private method below the public method so that lock decorator gets added to the public method
     def _call_method_with_iterable(self, method, files):
         if files is None:
             return

@@ -24,6 +24,7 @@
 
         return wfm_info
 
+    ## Define the private method below the public method so that lock decorator gets added to the public method
     def _populate_channel_and_record_info(self, objects, channels, records):
         i = 0
         for channel in channels:
