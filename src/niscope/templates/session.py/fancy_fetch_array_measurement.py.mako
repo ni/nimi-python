@@ -4,14 +4,6 @@
     import build.helper as helper
     suffix = method_template['method_python_name_suffix']
 %>\
-    def _populate_channel_and_record_info(self, objects, channels, records):
-        i = 0
-        for channel in channels:
-            for record in records:
-                objects[i].channel = channel
-                objects[i].record = record
-                i += 1
-
     def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         r'''${f['python_name']}
 
@@ -31,4 +23,12 @@
         self._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(num_records))
 
         return wfm_info
+
+    def _populate_channel_and_record_info(self, objects, channels, records):
+        i = 0
+        for channel in channels:
+            for record in records:
+                objects[i].channel = channel
+                objects[i].record = record
+                i += 1
 
