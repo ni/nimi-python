@@ -23,13 +23,7 @@
 
         mv = memoryview(wfm)
 
-        for i in range(len(wfm_info)):
-            start = i * num_samples
-            end = start + wfm_info[i]._actual_samples
-            # We use the actual number of samples returned from the device to determine the end of the waveform. We then remove it from the wfm_info
-            # since the length of the wfm will tell us that information
-            wfm_info[i]._actual_samples = None
-            wfm_info[i].samples = mv[start:end]
+        self._populate_samples_info(wfm_info, mv, num_samples)
 
         lwfm_i = len(wfm_info)
         lrcl = len(self._repeated_capability_list)
@@ -37,5 +31,6 @@
         assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
         actual_num_records = int(lwfm_i / lrcl)
         self._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(offset, offset + actual_num_records))
+
         return wfm_info
 
