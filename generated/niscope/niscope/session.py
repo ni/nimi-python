@@ -1991,14 +1991,6 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def _populate_channel_and_record_info(self, objects, channels, records):
-        i = 0
-        for channel in channels:
-            for record in records:
-                objects[i].channel = channel
-                objects[i].record = record
-                i += 1
-
     def fetch_array_measurement(self, array_meas_function, timeout=hightime.timedelta(seconds=5.0)):
         r'''fetch_array_measurement
 
@@ -2066,6 +2058,14 @@ class _SessionBase(object):
         self._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(num_records))
 
         return wfm_info
+
+    def _populate_channel_and_record_info(self, objects, channels, records):
+        i = 0
+        for channel in channels:
+            for record in records:
+                objects[i].channel = channel
+                objects[i].record = record
+                i += 1
 
     @ivi_synchronized
     def fetch_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
