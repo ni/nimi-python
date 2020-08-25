@@ -111,4 +111,20 @@ class WaveformInfo(object):
         return string_representation
 
 
+def _populate_samples_info(waveform_infos, sample_data, num_samples_per_waveform):
+    for i in range(len(waveform_infos)):
+        start = i * num_samples_per_waveform
+        end = start + waveform_infos[i]._actual_samples
+        # We use the actual number of samples returned from the device to determine the end of the waveform.
+        # We then remove it from waveform_info since the length of the waveform will tell us that information.
+        waveform_infos[i]._actual_samples = None
+        waveform_infos[i].samples = sample_data[start:end]
 
+
+def _populate_channel_and_record_info(waveform_infos, channels, records):
+    i = 0
+    for channel in channels:
+        for record in records:
+            waveform_infos[i].channel = channel
+            waveform_infos[i].record = record
+            i += 1
