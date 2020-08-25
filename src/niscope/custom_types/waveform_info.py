@@ -112,6 +112,15 @@ class WaveformInfo(object):
 
 
 def _populate_samples_info(waveform_infos, sample_data, num_samples_per_waveform):
+    '''Chunk up flat array of sample_data and copy each chunk into individual WaveformInfo instance
+
+    Args:
+        waveform_infos (Iterable of WaveformInfo): WaveformInfo class instances
+
+        sample_data (Iterable of float): Waveform sample data
+
+        num_samples_per_waveform (int): Number of samples belonging to each waveform
+    '''
     for i in range(len(waveform_infos)):
         start = i * num_samples_per_waveform
         end = start + waveform_infos[i]._actual_samples
@@ -122,6 +131,15 @@ def _populate_samples_info(waveform_infos, sample_data, num_samples_per_waveform
 
 
 def _populate_channel_and_record_info(waveform_infos, channels, records):
+    '''Populate the channel and record attributes of WaveformInfo instances
+
+    Args:
+        waveform_infos (Iterable of WaveformInfo): WaveformInfo class instances
+
+        channels (Iterable of str): Channel names
+
+        records (Iterable of int): Record numbers
+    '''
     i = 0
     for channel in channels:
         for record in records:

@@ -18,7 +18,7 @@
             output.append(measurement_stat)
 
         num_records = int(len(results) / len(self._repeated_capability_list))
-        measurement_stats._populate_channel_and_record_info(output, self._repeated_capability_list, range(num_records))
+        waveform_info._populate_channel_and_record_info(output, self._repeated_capability_list, range(num_records))
 
         return output
 

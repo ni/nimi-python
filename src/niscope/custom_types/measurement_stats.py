@@ -1,6 +1,3 @@
-import niscope.waveform_info
-
-
 class MeasurementStats(object):
     def __init__(self, result=0.0, mean=0.0, stdev=0.0, min_val=0.0, max_val=0.0, num_in_stats=0):
         self.result = result
@@ -44,7 +41,3 @@ class MeasurementStats(object):
         string_representation += row_format_d.format('Number in Stats', self.num_in_stats)
 
         return string_representation
-
-
-def _populate_channel_and_record_info(measurement_stats, channels, records):
-    niscope.waveform_info._populate_channel_and_record_info(measurement_stats, channels, records)
