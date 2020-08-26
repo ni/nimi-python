@@ -10,6 +10,11 @@ omit =
     */nimodinst/_converters.py
     */nimodinst/_visatype.py
     */nimodinst/errors.py
+    */niscope/_*
+    */niscope/enums.py
+    */niscope/errors.py
+    */niscope/measurement_stats.py
+    */niscope/session.py
     */nitclk/__init__.py
     */nitclk/_attributes.py
     */nitclk/_converters.py
@@ -19,5 +24,6 @@ include =
     */nifake/*
     */nidigital/session.py
     */nimodinst/session.py
+    */niscope/waveform_info.py
     */nitclk/session.py
     build/*

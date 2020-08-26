@@ -27,6 +27,7 @@ generated/*/coverage.xml
 nidigitalunittest.xml
 nifakeunittest.xml
 nimodinstunittest.xml
+niscopeunittest.xml
 nitclkunittest.xml
 codegen.xml
 commands.log
