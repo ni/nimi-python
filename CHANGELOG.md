@@ -97,6 +97,8 @@ All notable changes to this project will be documented in this file.
             * `meas_voltage_histogram_low_volts`
             * `meas_voltage_histogram_size`
     * #### Changed
+        * Fix [#1509](https://github.com/ni/nimi-python/issues/1509): `channel` and `record` fields are swapped in `waveform_info` struct returned from niscope fetch methods
+        * Fix [#1510](https://github.com/ni/nimi-python/issues/1510): `record` value in `waveform_info` struct returned from niscope fetch methods is wrong if `record_number` is non-zero
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
     * #### Added
