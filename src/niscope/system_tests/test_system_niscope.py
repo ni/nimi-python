@@ -85,14 +85,23 @@ def test_fetch(multi_instrument_session):
     test_voltage = 1.0
     test_record_length = 2000
     test_num_channels = 2
-    test_num_records = 3
+    test_starting_record_number = 2
+    test_num_records_to_acquire = 5
+    test_num_records_to_fetch = test_num_records_to_acquire - test_starting_record_number
     multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-    multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records_to_acquire, True)
     with multi_instrument_session.initiate():
-        waveforms = multi_instrument_session.channels[test_channels].fetch(num_samples=test_record_length, num_records=test_num_records)
-    assert len(waveforms) == test_num_channels * test_num_records
+        waveforms = multi_instrument_session.channels[test_channels].fetch(
+            num_samples=test_record_length,
+            record_number=test_starting_record_number,
+            num_records=test_num_records_to_fetch)
+    assert len(waveforms) == test_num_channels * test_num_records_to_fetch
+    expected_channels = test_channels.split(',') * test_num_records_to_fetch
+    expected_records = [2, 2, 3, 3, 4, 4]
     for i in range(len(waveforms)):
         assert len(waveforms[i].samples) == test_record_length
+        assert waveforms[i].channel == expected_channels[i]
+        assert waveforms[i].record == expected_records[i]
 
 
 def test_fetch_defaults(multi_instrument_session):
@@ -122,96 +131,42 @@ def test_fetch_array_measurement(multi_instrument_session):
         assert len(waveforms[i].samples) == test_record_length
 
 
-def test_fetch_binary8_into(multi_instrument_session):
+@pytest.fixture(params=[numpy.int8, numpy.int16, numpy.int32, numpy.float64])
+def fetch_waveform_type(request):
+    return request.param
+
+
+def test_fetch_into(multi_instrument_session, fetch_waveform_type):
     test_voltage = 1.0
     test_record_length = 2000
     test_num_channels = 2
-    waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int8)
+    test_starting_record_number = 2
+    test_num_records_to_acquire = 5
+    test_num_records_to_fetch = test_num_records_to_acquire - test_starting_record_number
+    waveform = numpy.ndarray(test_num_channels * test_num_records_to_fetch * test_record_length, dtype=fetch_waveform_type)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
     waveform.fill(float('nan'))
     multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-    multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
+    multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records_to_acquire, True)
     with multi_instrument_session.initiate():
-        waveforms = multi_instrument_session.channels[test_channels].fetch_into(waveform=waveform)
+        waveforms = multi_instrument_session.channels[test_channels].fetch_into(
+            waveform=waveform,
+            record_number=test_starting_record_number,
+            num_records=test_num_records_to_fetch)
 
     for sample in waveform:
         assert not math.isnan(sample)
-    assert len(waveforms) == test_num_channels
+    assert len(waveforms) == test_num_channels * test_num_records_to_fetch
 
+    expected_channels = test_channels.split(',') * test_num_records_to_fetch
+    expected_records = [2, 2, 3, 3, 4, 4]
     for i in range(len(waveforms)):
         record_wfm = waveforms[i].samples
         assert len(record_wfm) == test_record_length
         for j in range(len(record_wfm)):
             assert record_wfm[j] == waveform[i * test_record_length + j]
-
-
-def test_fetch_binary16_into(multi_instrument_session):
-    test_voltage = 1.0
-    test_record_length = 2000
-    test_num_channels = 2
-    waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int16)
-    # Initialize with NaN so we can later verify all samples were overwritten by the driver.
-    waveform.fill(float('nan'))
-    multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-    multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
-    with multi_instrument_session.initiate():
-        waveforms = multi_instrument_session.channels[test_channels].fetch_into(waveform=waveform)
-
-    for sample in waveform:
-        assert not math.isnan(sample)
-    assert len(waveforms) == test_num_channels
-
-    for i in range(len(waveforms)):
-        record_wfm = waveforms[i].samples
-        assert len(record_wfm) == test_record_length
-        for j in range(len(record_wfm)):
-            assert record_wfm[j] == waveform[i * test_record_length + j]
-
-
-def test_fetch_binary32_into(multi_instrument_session):
-    test_voltage = 1.0
-    test_record_length = 2000
-    test_num_channels = 2
-    waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int32)
-    # Initialize with NaN so we can later verify all samples were overwritten by the driver.
-    waveform.fill(float('nan'))
-    multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-    multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
-    with multi_instrument_session.initiate():
-        waveforms = multi_instrument_session.channels[test_channels].fetch_into(waveform=waveform)
-
-    for sample in waveform:
-        assert not math.isnan(sample)
-    assert len(waveforms) == test_num_channels
-
-    for i in range(len(waveforms)):
-        record_wfm = waveforms[i].samples
-        assert len(record_wfm) == test_record_length
-        for j in range(len(record_wfm)):
-            assert record_wfm[j] == waveform[i * test_record_length + j]
-
-
-def test_fetch_double_into(multi_instrument_session):
-    test_voltage = 1.0
-    test_record_length = 2000
-    test_num_channels = 2
-    waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.float64)
-    # Initialize with NaN so we can later verify all samples were overwritten by the driver.
-    waveform.fill(float('nan'))
-    multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-    multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
-    with multi_instrument_session.initiate():
-        waveforms = multi_instrument_session.channels[test_channels].fetch_into(waveform=waveform)
-
-    for sample in waveform:
-        assert not math.isnan(sample)
-    assert len(waveforms) == test_num_channels
-
-    for i in range(len(waveforms)):
-        record_wfm = waveforms[i].samples
-        assert len(record_wfm) == test_record_length
-        for j in range(len(record_wfm)):
-            assert record_wfm[j] == waveform[i * test_record_length + j]
+        assert waveforms[i].channel == expected_channels[i]
+        assert waveforms[i].record == expected_records[i]
 
 
 def test_fetch_measurement_stats(multi_instrument_session):
