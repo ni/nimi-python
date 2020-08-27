@@ -141,8 +141,8 @@ def _populate_channel_and_record_info(waveform_infos, channels, records):
         records (Iterable of int): Record numbers
     '''
     i = 0
-    for channel in channels:
-        for record in records:
+    for record in records:
+        for channel in channels:
             waveform_infos[i].channel = channel
             waveform_infos[i].record = record
             i += 1
