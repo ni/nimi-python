@@ -12,7 +12,7 @@
         if meas_wfm_size is None:
             meas_wfm_size = self.actual_meas_wfm_size(array_meas_function)
 
-        meas_wfm, wfm_info = self._${f['python_name']}(array_meas_function, timeout, meas_wfm_size)
+        meas_wfm, wfm_info = self._${f['python_name']}(array_meas_function, meas_wfm_size, timeout)
 
         record_length = int(len(meas_wfm) / len(wfm_info))
         waveform_info._populate_samples_info(wfm_info, meas_wfm, record_length)

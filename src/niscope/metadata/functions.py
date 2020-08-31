@@ -1711,24 +1711,23 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': None,
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Use niScope_ActualMeasWfmSize to determine the number\nof available samples. Default Value: None (returns all available samples).\n',
                     'note': '\nUse the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the\nnumber of samples to fetch when performing a measurement. For more\ninformation about when to use this attribute, refer to the `NI\nKnowledgeBase <javascript:WWW(WWW_KB_MEAS)>`__.\n'
                 },
-                'name': 'measWfmSize',
+                'name': 'measurementWaveformSize',
                 'type': 'ViInt32'
             },
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nReturns an array whose length is the number of waveforms times\n**measWfmSize**; call niScope_ActualNumWfms to determine the number of\nwaveforms; call niScope_ActualMeasWfmSize to determine the size of each\nwaveform.\n\nNI-SCOPE returns this data sequentially, so all record 0 waveforms are\nfirst. For example, with channel list of 0, 1, you would have the\nfollowing index values:\n\nindex 0 = record 0, channel 0\n\nindex *x* = record 0, channel 1\n\nindex 2\\ *x* = record 1, channel 0\n\nindex 3\\ *x* = record 1, channel 1\n\nWhere *x* = the record length\n'
+                    'description': '\nReturns an array whose length is the number of waveforms times\n**measurementWaveformSize**; call niScope_ActualNumWfms to determine the number of\nwaveforms; call niScope_ActualMeasWfmSize to determine the size of each\nwaveform.\n\nNI-SCOPE returns this data sequentially, so all record 0 waveforms are\nfirst. For example, with channel list of 0, 1, you would have the\nfollowing index values:\n\nindex 0 = record 0, channel 0\n\nindex *x* = record 0, channel 1\n\nindex 2\\ *x* = record 1, channel 0\n\nindex 3\\ *x* = record 1, channel 1\n\nWhere *x* = the record length\n'
                 },
                 'name': 'measWfm',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(self.actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())'
+                    'value': '(measurement_waveform_size * self._actual_num_wfms())'
                 },
                 'type': 'ViReal64[]'
             },

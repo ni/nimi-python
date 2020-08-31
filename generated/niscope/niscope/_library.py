@@ -308,13 +308,13 @@ class Library(object):
                 self.niScope_Fetch_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Fetch_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
 
-    def niScope_FetchArrayMeasurement(self, vi, channel_list, timeout, array_meas_function, meas_wfm_size, meas_wfm, wfm_info):  # noqa: N802
+    def niScope_FetchArrayMeasurement(self, vi, channel_list, timeout, array_meas_function, measurement_waveform_size, meas_wfm, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchArrayMeasurement_cfunc is None:
                 self.niScope_FetchArrayMeasurement_cfunc = self._library.niScope_FetchArrayMeasurement
                 self.niScope_FetchArrayMeasurement_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchArrayMeasurement_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_FetchArrayMeasurement_cfunc(vi, channel_list, timeout, array_meas_function, meas_wfm_size, meas_wfm, wfm_info)
+        return self.niScope_FetchArrayMeasurement_cfunc(vi, channel_list, timeout, array_meas_function, measurement_waveform_size, meas_wfm, wfm_info)
 
     def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
