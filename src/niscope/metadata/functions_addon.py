@@ -57,16 +57,13 @@ functions_additional_fetch_array_measurement = {
                 'type': 'ViInt32'
             },
             {
+                'default_value': None,
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Use niScope_ActualMeasWfmSize to\ndetermine the number of available samples.\n',
                     'note': '\nUse the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the\nnumber of samples to fetch when performing a measurement.\n'
                 },
                 'name': 'measWfmSize',
-                'size': {
-                    'mechanism': 'python-code',
-                    'value': 'self._actual_meas_wfm_size(array_meas_function)'
-                },
                 'type': 'ViInt32'
             },
             {

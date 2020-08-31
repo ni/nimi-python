@@ -1601,8 +1601,8 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def _actual_meas_wfm_size(self, array_meas_function):
-        r'''_actual_meas_wfm_size
+    def actual_meas_wfm_size(self, array_meas_function):
+        r'''actual_meas_wfm_size
 
         Returns the total available size of an array measurement acquisition.
 
@@ -1986,7 +1986,7 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def fetch_array_measurement(self, array_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+    def fetch_array_measurement(self, array_meas_function, timeout=hightime.timedelta(seconds=5.0), meas_wfm_size=None):
         r'''fetch_array_measurement
 
         Obtains a waveform from the digitizer and returns the specified
@@ -2010,6 +2010,14 @@ class _SessionBase(object):
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
+
+            meas_wfm_size (int): The maximum number of samples returned in the measurement waveform array
+                for each waveform measurement. Use actual_meas_wfm_size to
+                determine the number of available samples.
+
+                Note:
+                Use the property fetch_meas_num_samples to set the
+                number of samples to fetch when performing a measurement.
 
 
         Returns:
@@ -2039,8 +2047,10 @@ class _SessionBase(object):
                 -  **samples**-floating point array of samples. Length will be of actual samples acquired.
 
         '''
+        if meas_wfm_size is None:
+            meas_wfm_size = self.actual_meas_wfm_size(array_meas_function)
 
-        meas_wfm, wfm_info = self._fetch_array_measurement(array_meas_function, timeout)
+        meas_wfm, wfm_info = self._fetch_array_measurement(array_meas_function, meas_wfm_size, timeout)
 
         record_length = int(len(meas_wfm) / len(wfm_info))
         waveform_info._populate_samples_info(wfm_info, meas_wfm, record_length)
@@ -2447,7 +2457,7 @@ class _SessionBase(object):
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def _fetch_array_measurement(self, array_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+    def _fetch_array_measurement(self, array_meas_function, meas_wfm_size, timeout=hightime.timedelta(seconds=5.0)):
         r'''_fetch_array_measurement
 
         Obtains a waveform from the digitizer and returns the specified
@@ -2472,6 +2482,16 @@ class _SessionBase(object):
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to perform.
 
+            meas_wfm_size (int): The maximum number of samples returned in the measurement waveform array
+                for each waveform measurement. Use actual_meas_wfm_size to
+                determine the number of available samples.
+
+                Note:
+                Use the property fetch_meas_num_samples to set the
+                number of samples to fetch when performing a measurement. For more
+                information about when to use this property, refer to the `NI
+                KnowledgeBase <javascript:WWW(WWW_KB_MEAS)>`__.
+
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
@@ -2480,7 +2500,7 @@ class _SessionBase(object):
         Returns:
             meas_wfm (list of float): Returns an array whose length is the number of waveforms times
                 **measWfmSize**; call _actual_num_wfms to determine the number of
-                waveforms; call _actual_meas_wfm_size to determine the size of each
+                waveforms; call actual_meas_wfm_size to determine the size of each
                 waveform.
 
                 NI-SCOPE returns this data sequentially, so all record 0 waveforms are
@@ -2527,16 +2547,16 @@ class _SessionBase(object):
             raise TypeError('Parameter array_meas_function must be of type ' + str(enums.ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         array_meas_function_ctype = _visatype.ViInt32(array_meas_function.value)  # case S130
-        meas_wfm_size_ctype = _visatype.ViInt32(self._actual_meas_wfm_size(array_meas_function))  # case S120
-        meas_wfm_size = (self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())  # case B560
+        meas_wfm_size_ctype = _visatype.ViInt32(meas_wfm_size)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
+        meas_wfm_size = (self.actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())  # case B560
         meas_wfm_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=meas_wfm_size)  # case B560
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
-        error_code = self._library.niScope_FetchArrayMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, array_meas_function_ctype, meas_wfm_size_ctype, meas_wfm_ctype, wfm_info_ctype)
+        error_code = self._library.niScope_FetchArrayMeasurement(vi_ctype, channel_list_ctype, array_meas_function_ctype, meas_wfm_size_ctype, timeout_ctype, meas_wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(meas_wfm_ctype[i]) for i in range((self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return [float(meas_wfm_ctype[i]) for i in range((self.actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
     def _fetch_binary16_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):

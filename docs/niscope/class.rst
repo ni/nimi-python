@@ -208,6 +208,42 @@ acquisition_status
 
 
 
+actual_meas_wfm_size
+--------------------
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: actual_meas_wfm_size(array_meas_function)
+
+            Returns the total available size of an array measurement acquisition.
+
+            
+
+
+
+            :param array_meas_function:
+
+
+                The `array
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
+                to perform.
+
+                
+
+
+            :type array_meas_function: :py:data:`niscope.ArrayMeasurement`
+
+            :rtype: int
+            :return:
+
+
+                    Returns the size (in number of samples) of the resulting analysis
+                    waveform.
+
+                    
+
+
+
 add_waveform_processing
 -----------------------
 
@@ -1463,7 +1499,7 @@ fetch_array_measurement
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: fetch_array_measurement(array_meas_function, meas_wfm_size, timeout=hightime.timedelta(seconds=5.0))
+    .. py:method:: fetch_array_measurement(array_meas_function, timeout=hightime.timedelta(seconds=5.0), meas_wfm_size=None)
 
             Obtains a waveform from the digitizer and returns the specified
             measurement array. This method may return multiple waveforms depending
@@ -1502,6 +1538,20 @@ fetch_array_measurement
 
 
             :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
+            :param meas_wfm_size:
+
+
+                The maximum number of samples returned in the measurement waveform array
+                for each waveform measurement. Use :py:meth:`niscope.Session.actual_meas_wfm_size` to
+                determine the number of available samples.
+
+                
+
+                .. note:: Use the property :py:attr:`niscope.Session.fetch_meas_num_samples` to set the
+                    number of samples to fetch when performing a measurement.
+
+
+            :type meas_wfm_size: int
 
             :rtype: list of WaveformInfo
             :return:
