@@ -1691,24 +1691,6 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe `array\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__\nto perform.\n'
-                },
-                'enum': 'ArrayMeasurement',
-                'name': 'arrayMeasFunction',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Use niScope_ActualMeasWfmSize to\ndetermine the number of available samples.\n',
-                    'note': '\nUse the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the\nnumber of samples to fetch when performing a measurement. For more\ninformation about when to use this attribute, refer to the `NI\nKnowledgeBase <javascript:WWW(WWW_KB_MEAS)>`__.\n'
-                },
-                'name': 'measWfmSize',
-                'type': 'ViInt32'
-            },
-            {
                 'default_value': 'hightime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
@@ -1718,6 +1700,25 @@ functions = {
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe `array\nmeasurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__\nto perform.\n'
+                },
+                'enum': 'ArrayMeasurement',
+                'name': 'arrayMeasFunction',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': None,
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Use niScope_ActualMeasWfmSize to determine the number\nof available samples. Default Value: None (returns all available samples).\n',
+                    'note': '\nUse the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the\nnumber of samples to fetch when performing a measurement. For more\ninformation about when to use this attribute, refer to the `NI\nKnowledgeBase <javascript:WWW(WWW_KB_MEAS)>`__.\n'
+                },
+                'name': 'measWfmSize',
+                'type': 'ViInt32'
             },
             {
                 'direction': 'out',
