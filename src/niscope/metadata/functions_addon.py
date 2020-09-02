@@ -49,7 +49,7 @@ functions_additional_fetch_array_measurement = {
                 'default_value': None,
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Use niScope_ActualMeasWfmSize to determine the number\nof available samples. Default Value: None (returns all available samples).\n',
+                    'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Default Value: None (returns all available samples).\n',
                     'note': '\nUse the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the\nnumber of samples to fetch when performing a measurement.\n'
                 },
                 'name': 'measWfmSize',

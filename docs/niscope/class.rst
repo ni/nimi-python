@@ -208,42 +208,6 @@ acquisition_status
 
 
 
-actual_meas_wfm_size
---------------------
-
-    .. py:currentmodule:: niscope.Session
-
-    .. py:method:: actual_meas_wfm_size(array_meas_function)
-
-            Returns the total available size of an array measurement acquisition.
-
-            
-
-
-
-            :param array_meas_function:
-
-
-                The `array
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-                to perform.
-
-                
-
-
-            :type array_meas_function: :py:data:`niscope.ArrayMeasurement`
-
-            :rtype: int
-            :return:
-
-
-                    Returns the size (in number of samples) of the resulting analysis
-                    waveform.
-
-                    
-
-
-
 add_waveform_processing
 -----------------------
 
@@ -1531,8 +1495,7 @@ fetch_array_measurement
 
 
                 The maximum number of samples returned in the measurement waveform array
-                for each waveform measurement. Use :py:meth:`niscope.Session.actual_meas_wfm_size` to determine the number
-                of available samples. Default Value: None (returns all available samples).
+                for each waveform measurement. Default Value: None (returns all available samples).
 
                 
 

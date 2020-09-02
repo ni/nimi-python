@@ -136,7 +136,6 @@ def test_fetch_array_measurement(multi_instrument_session, measurement_wfm_lengt
     multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
 
     with multi_instrument_session.initiate():
-        assert multi_instrument_session.actual_meas_wfm_size(test_array_meas_function) == 2000
         waveforms = multi_instrument_session.channels[test_channels].fetch_array_measurement(
             array_meas_function=test_array_meas_function,
             meas_wfm_size=test_meas_wfm_length,

@@ -10,7 +10,7 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         if meas_wfm_size is None:
-            meas_wfm_size = self.actual_meas_wfm_size(array_meas_function)
+            meas_wfm_size = self._actual_meas_wfm_size(array_meas_function)
 
         meas_wfm, wfm_info = self._${f['python_name']}(array_meas_function, meas_wfm_size, timeout)
 

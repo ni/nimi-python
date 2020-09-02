@@ -1601,8 +1601,8 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def actual_meas_wfm_size(self, array_meas_function):
-        r'''actual_meas_wfm_size
+    def _actual_meas_wfm_size(self, array_meas_function):
+        r'''_actual_meas_wfm_size
 
         Returns the total available size of an array measurement acquisition.
 
@@ -2008,8 +2008,7 @@ class _SessionBase(object):
             array_meas_function (enums.ArrayMeasurement): The array measurement to perform.
 
             meas_wfm_size (int): The maximum number of samples returned in the measurement waveform array
-                for each waveform measurement. Use actual_meas_wfm_size to determine the number
-                of available samples. Default Value: None (returns all available samples).
+                for each waveform measurement. Default Value: None (returns all available samples).
 
                 Note:
                 Use the property fetch_meas_num_samples to set the
@@ -2048,7 +2047,7 @@ class _SessionBase(object):
 
         '''
         if meas_wfm_size is None:
-            meas_wfm_size = self.actual_meas_wfm_size(array_meas_function)
+            meas_wfm_size = self._actual_meas_wfm_size(array_meas_function)
 
         meas_wfm, wfm_info = self._fetch_array_measurement(array_meas_function, meas_wfm_size, timeout)
 
@@ -2483,8 +2482,7 @@ class _SessionBase(object):
                 to perform.
 
             measurement_waveform_size (int): The maximum number of samples returned in the measurement waveform array
-                for each waveform measurement. Use actual_meas_wfm_size to determine the number
-                of available samples. Default Value: None (returns all available samples).
+                for each waveform measurement. Default Value: None (returns all available samples).
 
                 Note:
                 Use the property fetch_meas_num_samples to set the
@@ -2500,7 +2498,7 @@ class _SessionBase(object):
         Returns:
             meas_wfm (list of float): Returns an array whose length is the number of waveforms times
                 **measurementWaveformSize**; call _actual_num_wfms to determine the number of
-                waveforms; call actual_meas_wfm_size to determine the size of each
+                waveforms; call _actual_meas_wfm_size to determine the size of each
                 waveform.
 
                 NI-SCOPE returns this data sequentially, so all record 0 waveforms are
