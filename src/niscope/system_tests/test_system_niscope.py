@@ -1,3 +1,4 @@
+import collections
 import fasteners
 import hightime
 import math
@@ -117,18 +118,32 @@ def test_fetch_defaults(multi_instrument_session):
         assert len(waveforms[i].samples) == test_record_length
 
 
-def test_fetch_array_measurement(multi_instrument_session):
+@pytest.fixture(params=[(1000, 1000), (2000, 2000), (3000, 2000)], ids=["less_than_actual", "equal_to_actual", "greater_than_actual"])
+def measurement_wfm_length(request):
+    MeasWfmLength = collections.namedtuple('MeasurementWaveformLength', ['passed_in', 'expected'])
+    return MeasWfmLength(passed_in=request.param[0], expected=request.param[1])
+
+
+def test_fetch_array_measurement(multi_instrument_session, measurement_wfm_length):
     test_voltage = 1.0
     test_record_length = 2000
     test_num_channels = 2
     test_num_records = 3
+    test_meas_wfm_length = measurement_wfm_length.passed_in
+    test_array_meas_function = niscope.ArrayMeasurement.ARRAY_GAIN
+
     multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+
     with multi_instrument_session.initiate():
-        waveforms = multi_instrument_session.channels[test_channels].fetch_array_measurement(niscope.enums.ArrayMeasurement.ARRAY_GAIN)
+        waveforms = multi_instrument_session.channels[test_channels].fetch_array_measurement(
+            array_meas_function=test_array_meas_function,
+            meas_wfm_size=test_meas_wfm_length,
+            timeout=hightime.timedelta(seconds=4))
+
     assert len(waveforms) == test_num_channels * test_num_records
     for i in range(len(waveforms)):
-        assert len(waveforms[i].samples) == test_record_length
+        assert len(waveforms[i].samples) == measurement_wfm_length.expected
 
 
 @pytest.fixture(params=[numpy.int8, numpy.int16, numpy.int32, numpy.float64])

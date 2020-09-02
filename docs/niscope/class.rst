@@ -1463,7 +1463,7 @@ fetch_array_measurement
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: fetch_array_measurement(array_meas_function, meas_wfm_size, timeout=hightime.timedelta(seconds=5.0))
+    .. py:method:: fetch_array_measurement(array_meas_function, meas_wfm_size=None, timeout=hightime.timedelta(seconds=5.0))
 
             Obtains a waveform from the digitizer and returns the specified
             measurement array. This method may return multiple waveforms depending
@@ -1491,6 +1491,19 @@ fetch_array_measurement
 
 
             :type array_meas_function: :py:data:`niscope.ArrayMeasurement`
+            :param meas_wfm_size:
+
+
+                The maximum number of samples returned in the measurement waveform array
+                for each waveform measurement. Default Value: None (returns all available samples).
+
+                
+
+                .. note:: Use the property :py:attr:`niscope.Session.fetch_meas_num_samples` to set the
+                    number of samples to fetch when performing a measurement.
+
+
+            :type meas_wfm_size: int
             :param timeout:
 
 

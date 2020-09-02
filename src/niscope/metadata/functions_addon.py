@@ -37,17 +37,6 @@ functions_additional_fetch_array_measurement = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': 'hightime.timedelta(seconds=5.0)',
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
-                },
-                'name': 'timeout',
-                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
-            },
-            {
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe array measurement to perform.\n'
@@ -57,17 +46,25 @@ functions_additional_fetch_array_measurement = {
                 'type': 'ViInt32'
             },
             {
+                'default_value': None,
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Use niScope_ActualMeasWfmSize to\ndetermine the number of available samples.\n',
+                    'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Default Value: None (returns all available samples).\n',
                     'note': '\nUse the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the\nnumber of samples to fetch when performing a measurement.\n'
                 },
                 'name': 'measWfmSize',
-                'size': {
-                    'mechanism': 'python-code',
-                    'value': 'self._actual_meas_wfm_size(array_meas_function)'
-                },
                 'type': 'ViInt32'
+            },
+            {
+                'default_value': 'hightime.timedelta(seconds=5.0)',
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe time to wait in seconds for data to be acquired; using 0 for this\nparameter tells NI-SCOPE to fetch whatever is currently available. Using\n-1 for this parameter implies infinite timeout.\n'
+                },
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'out',
