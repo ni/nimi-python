@@ -50,9 +50,54 @@ functions_additional_fetch_array_measurement = {
                 'direction': 'in',
                 'documentation': {
                     'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Default Value: None (returns all available samples).\n',
-                    'note': '\nUse the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the\nnumber of samples to fetch when performing a measurement.\n'
                 },
                 'name': 'measWfmSize',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': 'FetchRelativeTo.PRETRIGGER',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Position to start fetching within one record.'
+                },
+                'enum': 'FetchRelativeTo',
+                'name': 'relativeTo',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': 0,
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Offset in samples to start fetching data within each record. The offset can be positive or negative.'
+                },
+                'name': 'offset',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': 0,
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Zero-based index of the first record to fetch.'
+                },
+                'name': 'recordNumber',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': None,
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Number of records to fetch. Use `None` to fetch all configured records.'
+                },
+                'name': 'numRecords',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': None,
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Number of samples to fetch when performing a measurement. Use `None` to fetch the actual record length.'
+                },
+                'name': 'measNumSamples',
                 'type': 'ViInt32'
             },
             {
@@ -115,6 +160,52 @@ functions_additional_fetch_array_measurement_stats = {
                 'type': 'ViConstString'
             },
             {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe scalar measurement to be performed on each fetched waveform.\n'
+                },
+                'enum': 'ScalarMeasurement',
+                'name': 'scalarMeasFunction',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': 'FetchRelativeTo.PRETRIGGER',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Position to start fetching within one record.'
+                },
+                'enum': 'FetchRelativeTo',
+                'name': 'relativeTo',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': 0,
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Offset in samples to start fetching data within each record. The offset can be positive or negative.'
+                },
+                'name': 'offset',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': 0,
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Zero-based index of the first record to fetch.'
+                },
+                'name': 'recordNumber',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': None,
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Number of records to fetch. Use `None` to fetch all configured records.'
+                },
+                'name': 'numRecords',
+                'type': 'ViInt32'
+            },
+            {
                 'default_value': 'hightime.timedelta(seconds=5.0)',
                 'direction': 'in',
                 'documentation': {
@@ -124,15 +215,6 @@ functions_additional_fetch_array_measurement_stats = {
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe scalar measurement to be performed on each fetched waveform.\n'
-                },
-                'enum': 'ScalarMeasurement',
-                'name': 'scalarMeasFunction',
-                'type': 'ViInt32'
             },
             {
                 'direction': 'out',

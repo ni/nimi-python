@@ -126,10 +126,41 @@ def measurement_wfm_length(request):
 
 def test_fetch_array_measurement(multi_instrument_session, measurement_wfm_length):
     test_voltage = 1.0
-    test_record_length = 2000
+    test_record_length = 1000
+    test_num_channels = 2
+    test_meas_wfm_length = measurement_wfm_length.passed_in
+    test_array_meas_function = niscope.ArrayMeasurement.ARRAY_GAIN
+    test_starting_record_number = 2
+    test_num_records_to_acquire = 5
+    test_num_records_to_fetch = test_num_records_to_acquire - test_starting_record_number
+    multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records_to_acquire, True)
+
+    with multi_instrument_session.initiate():
+        waveforms = multi_instrument_session.channels[test_channels].fetch_array_measurement(
+            array_meas_function=test_array_meas_function,
+            meas_wfm_size=test_meas_wfm_length,
+            relative_to=niscope.FetchRelativeTo.PRETRIGGER,
+            offset=5,
+            record_number=test_starting_record_number,
+            num_records=test_num_records_to_fetch,
+            meas_num_samples=2000,
+            timeout=hightime.timedelta(seconds=4))
+
+    assert len(waveforms) == test_num_channels * test_num_records_to_fetch
+    expected_channels = test_channels.split(',') * test_num_records_to_fetch
+    expected_records = [2, 2, 3, 3, 4, 4]
+    for i in range(len(waveforms)):
+        assert len(waveforms[i].samples) == measurement_wfm_length.expected
+        assert waveforms[i].channel == expected_channels[i]
+        assert waveforms[i].record == expected_records[i]
+
+
+def test_fetch_array_measurement_defaults(multi_instrument_session):
+    test_voltage = 1.0
+    test_record_length = 1000
     test_num_channels = 2
     test_num_records = 3
-    test_meas_wfm_length = measurement_wfm_length.passed_in
     test_array_meas_function = niscope.ArrayMeasurement.ARRAY_GAIN
 
     multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
@@ -137,13 +168,11 @@ def test_fetch_array_measurement(multi_instrument_session, measurement_wfm_lengt
 
     with multi_instrument_session.initiate():
         waveforms = multi_instrument_session.channels[test_channels].fetch_array_measurement(
-            array_meas_function=test_array_meas_function,
-            meas_wfm_size=test_meas_wfm_length,
-            timeout=hightime.timedelta(seconds=4))
+            array_meas_function=test_array_meas_function)
 
     assert len(waveforms) == test_num_channels * test_num_records
     for i in range(len(waveforms)):
-        assert len(waveforms[i].samples) == measurement_wfm_length.expected
+        assert len(waveforms[i].samples) == test_record_length
 
 
 @pytest.fixture(params=[numpy.int8, numpy.int16, numpy.int32, numpy.float64])
@@ -189,10 +218,38 @@ def test_fetch_measurement_stats(multi_instrument_session):
     test_record_length = 1000
     test_num_channels = 2
     test_num_records = 3
+    test_starting_record_number = 2
+    test_num_records_to_acquire = 5
+    test_num_records_to_fetch = test_num_records_to_acquire - test_starting_record_number
+    multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records_to_acquire, True)
+    with multi_instrument_session.initiate():
+        measurement_stats = multi_instrument_session.channels[test_channels].fetch_measurement_stats(
+            scalar_meas_function=niscope.enums.ScalarMeasurement.NO_MEASUREMENT,
+            relative_to=niscope.FetchRelativeTo.PRETRIGGER,
+            offset=5,
+            record_number=test_starting_record_number,
+            num_records=test_num_records_to_fetch,
+            timeout=hightime.timedelta(seconds=4))
+
+    assert len(measurement_stats) == test_num_channels * test_num_records
+    expected_channels = test_channels.split(',') * test_num_records_to_fetch
+    expected_records = [2, 2, 3, 3, 4, 4]
+    for i in range(len(measurement_stats)):
+        assert measurement_stats[i].result == 0.0
+        assert measurement_stats[i].channel == expected_channels[i]
+        assert measurement_stats[i].record == expected_records[i]
+
+
+def test_fetch_measurement_stats_defaults(multi_instrument_session):
+    test_voltage = 1.0
+    test_record_length = 1000
+    test_num_channels = 2
+    test_num_records = 3
     multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
     with multi_instrument_session.initiate():
-        measurement_stats = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
+        measurement_stats = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.NO_MEASUREMENT)
 
     assert len(measurement_stats) == test_num_channels * test_num_records
     for stat in measurement_stats:
@@ -206,10 +263,10 @@ def test_clear_waveform_measurement_stats(multi_instrument_session):
     multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
     with multi_instrument_session.initiate():
-        uncleared_stats = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
-        uncleared_stats_2 = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
+        uncleared_stats = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY)
+        uncleared_stats_2 = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY)
         multi_instrument_session.channels[test_channels].clear_waveform_measurement_stats(niscope.enums.ClearableMeasurement.FREQUENCY)
-        cleared_stats = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY, 5.0)
+        cleared_stats = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.FREQUENCY)
 
     # The principle here is using consistent behavior (i.e. if stats are fetched twice on a single record/channel measurement in a row, it will always be the same)
     # to demonstrate that clearing the stats does in fact cause a measurable change.
@@ -231,9 +288,9 @@ def test_waveform_processing(multi_instrument_session):
     multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
     with multi_instrument_session.initiate():
         multi_instrument_session.add_waveform_processing(niscope.enums.ArrayMeasurement.DERIVATIVE)
-        processed_waveforms = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.MID_REF_VOLTS, 5.0)
+        processed_waveforms = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.MID_REF_VOLTS)
         multi_instrument_session.clear_waveform_processing()
-        unprocessed_waveforms = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.MID_REF_VOLTS, 5.0)
+        unprocessed_waveforms = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.MID_REF_VOLTS)
 
     assert len(processed_waveforms) == test_num_channels * test_num_records
     assert len(unprocessed_waveforms) == test_num_channels * test_num_records
@@ -252,7 +309,7 @@ def test_measurement_stats_str(multi_instrument_session):
     multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
     with multi_instrument_session.initiate():
-        measurement_stat = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.NO_MEASUREMENT, 5.0)
+        measurement_stat = multi_instrument_session.channels[test_channels].fetch_measurement_stats(niscope.enums.ScalarMeasurement.NO_MEASUREMENT)
 
     assert isinstance(measurement_stat[0].__str__(), str)
     assert isinstance(measurement_stat[0].__repr__(), str)
