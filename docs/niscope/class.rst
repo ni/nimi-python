@@ -1463,7 +1463,7 @@ fetch_array_measurement
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: fetch_array_measurement(array_meas_function, meas_wfm_size=None, timeout=hightime.timedelta(seconds=5.0))
+    .. py:method:: fetch_array_measurement(array_meas_function, meas_wfm_size=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, meas_num_samples=None, timeout=hightime.timedelta(seconds=5.0))
 
             Obtains a waveform from the digitizer and returns the specified
             measurement array. This method may return multiple waveforms depending
@@ -1499,11 +1499,53 @@ fetch_array_measurement
 
                 
 
-                .. note:: Use the property :py:attr:`niscope.Session.fetch_meas_num_samples` to set the
-                    number of samples to fetch when performing a measurement.
-
 
             :type meas_wfm_size: int
+            :param relative_to:
+
+
+                Position to start fetching within one record.
+
+                
+
+
+            :type relative_to: :py:data:`niscope.FetchRelativeTo`
+            :param offset:
+
+
+                Offset in samples to start fetching data within each record. The offset can be positive or negative.
+
+                
+
+
+            :type offset: int
+            :param record_number:
+
+
+                Zero-based index of the first record to fetch.
+
+                
+
+
+            :type record_number: int
+            :param num_records:
+
+
+                Number of records to fetch. Use `None` to fetch all configured records.
+
+                
+
+
+            :type num_records: int
+            :param meas_num_samples:
+
+
+                Number of samples to fetch when performing a measurement. Use `None` to fetch the actual record length.
+
+                
+
+
+            :type meas_num_samples: int
             :param timeout:
 
 
@@ -1677,7 +1719,7 @@ fetch_measurement_stats
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: fetch_measurement_stats(scalar_meas_function, timeout=hightime.timedelta(seconds=5.0))
+    .. py:method:: fetch_measurement_stats(scalar_meas_function, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0))
 
             Obtains a waveform measurement and returns the measurement value. This
             method may return multiple statistical results depending on the number
@@ -1720,6 +1762,42 @@ fetch_measurement_stats
 
 
             :type scalar_meas_function: :py:data:`niscope.ScalarMeasurement`
+            :param relative_to:
+
+
+                Position to start fetching within one record.
+
+                
+
+
+            :type relative_to: :py:data:`niscope.FetchRelativeTo`
+            :param offset:
+
+
+                Offset in samples to start fetching data within each record. The offset can be positive or negative.
+
+                
+
+
+            :type offset: int
+            :param record_number:
+
+
+                Zero-based index of the first record to fetch.
+
+                
+
+
+            :type record_number: int
+            :param num_records:
+
+
+                Number of records to fetch. Use `None` to fetch all configured records.
+
+                
+
+
+            :type num_records: int
             :param timeout:
 
 

@@ -1986,7 +1986,7 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def fetch_array_measurement(self, array_meas_function, meas_wfm_size=None, timeout=hightime.timedelta(seconds=5.0)):
+    def fetch_array_measurement(self, array_meas_function, meas_wfm_size=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, meas_num_samples=None, timeout=hightime.timedelta(seconds=5.0)):
         r'''fetch_array_measurement
 
         Obtains a waveform from the digitizer and returns the specified
@@ -2010,9 +2010,15 @@ class _SessionBase(object):
             meas_wfm_size (int): The maximum number of samples returned in the measurement waveform array
                 for each waveform measurement. Default Value: None (returns all available samples).
 
-                Note:
-                Use the property fetch_meas_num_samples to set the
-                number of samples to fetch when performing a measurement.
+            relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
+
+            offset (int): Offset in samples to start fetching data within each record. The offset can be positive or negative.
+
+            record_number (int): Zero-based index of the first record to fetch.
+
+            num_records (int): Number of records to fetch. Use `None` to fetch all configured records.
+
+            meas_num_samples (int): Number of samples to fetch when performing a measurement. Use `None` to fetch the actual record length.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
@@ -2046,6 +2052,14 @@ class _SessionBase(object):
                 -  **samples**-floating point array of samples. Length will be of actual samples acquired.
 
         '''
+        # Set the fetch attributes
+        with _NoChannel(session=self):
+            self._fetch_relative_to = relative_to
+            self._fetch_offset = offset
+            self._fetch_record_number = record_number
+            self._fetch_num_records = -1 if num_records is None else num_records
+            self._fetch_meas_num_samples = -1 if meas_num_samples is None else meas_num_samples
+
         if meas_wfm_size is None:
             meas_wfm_size = self._actual_meas_wfm_size(array_meas_function)
 
@@ -2054,13 +2068,16 @@ class _SessionBase(object):
         record_length = int(len(meas_wfm) / len(wfm_info))
         waveform_info._populate_samples_info(wfm_info, meas_wfm, record_length)
 
-        num_records = int(len(wfm_info) / len(self._repeated_capability_list))
-        waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(num_records))
+        wfm_info_count = len(wfm_info)
+        channel_count = len(self._repeated_capability_list)
+        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(wfm_info_count, channel_count)
+        actual_num_records = int(wfm_info_count / channel_count)
+        waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
 
         return wfm_info
 
     @ivi_synchronized
-    def fetch_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+    def fetch_measurement_stats(self, scalar_meas_function, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0)):
         r'''fetch_measurement_stats
 
         Obtains a waveform measurement and returns the measurement value. This
@@ -2095,6 +2112,14 @@ class _SessionBase(object):
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The scalar measurement to be performed on each fetched waveform.
 
+            relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
+
+            offset (int): Offset in samples to start fetching data within each record. The offset can be positive or negative.
+
+            record_number (int): Zero-based index of the first record to fetch.
+
+            num_records (int): Number of records to fetch. Use `None` to fetch all configured records.
+
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
@@ -2118,6 +2143,12 @@ class _SessionBase(object):
                 -	**record** (int): record number of this result
 
         '''
+        # Set the fetch attributes
+        with _NoChannel(session=self):
+            self._fetch_relative_to = relative_to
+            self._fetch_offset = offset
+            self._fetch_record_number = record_number
+            self._fetch_num_records = -1 if num_records is None else num_records
 
         results, means, stdevs, min_vals, max_vals, nums_in_stats = self._fetch_measurement_stats(scalar_meas_function, timeout)
 
@@ -2126,8 +2157,11 @@ class _SessionBase(object):
             measurement_stat = measurement_stats.MeasurementStats(result, mean, stdev, min_val, max_val, num_in_stats)
             output.append(measurement_stat)
 
-        num_records = int(len(results) / len(self._repeated_capability_list))
-        waveform_info._populate_channel_and_record_info(output, self._repeated_capability_list, range(num_records))
+        results_count = len(results)
+        channel_count = len(self._repeated_capability_list)
+        assert results_count % channel_count == 0, 'Number of results should be evenly divisible by the number of channels: len(results) == {0}, len(self._repeated_capability_list) == {1}'.format(results_count, channel_count)
+        actual_num_records = int(results_count / channel_count)
+        waveform_info._populate_channel_and_record_info(output, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
 
         return output
 
