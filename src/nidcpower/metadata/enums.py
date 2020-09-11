@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.2.0d22
+# This file is generated from NI-DCPower API metadata version 20.6.0d4
 enums = {
     'ApertureTimeUnits': {
         'values': [
@@ -41,6 +41,58 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_ONCE',
                 'value': 1024
+            }
+        ]
+    },
+    'AutorangeApertureTimeMode': {
+        'values': [
+            {
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO',
+                'value': 1110
+            },
+            {
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_CUSTOM',
+                'value': 1111
+            }
+        ]
+    },
+    'AutorangeBehavior': {
+        'values': [
+            {
+                'name': 'NIDCPOWER_VAL_RANGE_UP_TO_LIMIT_THEN_DOWN',
+                'value': 1107
+            },
+            {
+                'name': 'NIDCPOWER_VAL_RANGE_UP',
+                'value': 1108
+            },
+            {
+                'name': 'NIDCPOWER_VAL_RANGE_UP_AND_DOWN',
+                'value': 1109
+            }
+        ]
+    },
+    'AutorangeThresholdMode': {
+        'values': [
+            {
+                'name': 'NIDCPOWER_VAL_THRESHOLD_MODE_NORMAL',
+                'value': 1112
+            },
+            {
+                'name': 'NIDCPOWER_VAL_THRESHOLD_MODE_FAST_STEP',
+                'value': 1113
+            },
+            {
+                'name': 'NIDCPOWER_VAL_THRESHOLD_MODE_HIGH_HYSTERESIS',
+                'value': 1114
+            },
+            {
+                'name': 'NIDCPOWER_VAL_THRESHOLD_MODE_MEDIUM_HYSTERESIS',
+                'value': 1115
+            },
+            {
+                'name': 'NIDCPOWER_VAL_THRESHOLD_MODE_HOLD',
+                'value': 1116
             }
         ]
     },

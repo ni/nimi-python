@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.2.0d22
+# This file is generated from NI-DCPower API metadata version 20.6.0d4
 functions = {
     'Abort': {
         'documentation': {
@@ -847,12 +847,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
-                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'size'
                 },
                 'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes',
                 'use_array': True
             }
         ],
@@ -1689,12 +1689,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
-                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'size'
                 },
-                'type': 'ViInt8[]'
+                'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes'
             }
         ],
         'returns': 'ViStatus'

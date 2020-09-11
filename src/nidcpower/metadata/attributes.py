@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.2.0d22
+# This file is generated from NI-DCPower API metadata version 20.6.0d4
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -108,6 +108,7 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Manufacturer',
         'name': 'INSTRUMENT_MANUFACTURER',
+        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -973,6 +974,7 @@ attributes = {
         'enum': 'SelfCalibrationPersistence',
         'lv_property': 'Advanced:Self-Calibration Persistence',
         'name': 'SELF_CALIBRATION_PERSISTENCE',
+        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViInt32'
     },
@@ -1339,6 +1341,7 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Serial Number',
         'name': 'SERIAL_NUMBER',
+        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -1547,6 +1550,75 @@ attributes = {
         'enum': 'PowerAllocationMode',
         'lv_property': 'Source:Advanced:Power Allocation Mode',
         'name': 'POWER_ALLOCATION_MODE',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
+    1150244: {
+        'access': 'read-write',
+        'channel_based': True,
+        'lv_property': 'Measurement:Autorange',
+        'name': 'AUTORANGE',
+        'python_type': 'bool',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
+    1150245: {
+        'access': 'read-write',
+        'channel_based': True,
+        'enum': 'AutorangeBehavior',
+        'lv_property': 'Measurement:Advanced:Autorange Behavior',
+        'name': 'AUTORANGE_BEHAVIOR',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
+    1150246: {
+        'access': 'read-write',
+        'channel_based': True,
+        'enum': 'AutorangeApertureTimeMode',
+        'lv_property': 'Measurement:Advanced:Autorange Aperture Time Mode',
+        'name': 'AUTORANGE_APERTURE_TIME_MODE',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
+    1150247: {
+        'access': 'read-write',
+        'channel_based': True,
+        'lv_property': 'Measurement:Advanced:Autorange Minimum Aperture Time',
+        'name': 'AUTORANGE_MINIMUM_APERTURE_TIME',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150248: {
+        'access': 'read-write',
+        'channel_based': True,
+        'enum': 'ApertureTimeUnits',
+        'lv_property': 'Measurement:Advanced:Autorange Minimum Aperture Time Units',
+        'name': 'AUTORANGE_MINIMUM_APERTURE_TIME_UNITS',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
+    1150255: {
+        'access': 'read-write',
+        'channel_based': True,
+        'lv_property': 'Measurement:Advanced:Autorange Minimum Current Range',
+        'name': 'AUTORANGE_MINIMUM_CURRENT_RANGE',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150256: {
+        'access': 'read-write',
+        'channel_based': True,
+        'lv_property': 'Measurement:Advanced:Autorange Minimum Voltage Range',
+        'name': 'AUTORANGE_MINIMUM_VOLTAGE_RANGE',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150257: {
+        'access': 'read-write',
+        'channel_based': True,
+        'enum': 'AutorangeThresholdMode',
+        'lv_property': 'Measurement:Advanced:Autorange Threshold Mode',
+        'name': 'AUTORANGE_THRESHOLD_MODE',
         'resettable': False,
         'type': 'ViInt32'
     },

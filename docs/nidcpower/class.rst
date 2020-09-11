@@ -1988,6 +1988,246 @@ aperture_time_units
                 - LabVIEW Property: **Measurement:Aperture Time Units**
                 - C Attribute: **NIDCPOWER_ATTR_APERTURE_TIME_UNITS**
 
+autorange
+---------
+
+    .. py:attribute:: autorange
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Measurement:Autorange**
+                - C Attribute: **NIDCPOWER_ATTR_AUTORANGE**
+
+autorange_aperture_time_mode
+----------------------------
+
+    .. py:attribute:: autorange_aperture_time_mode
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+---------------------------------+
+            | Characteristic | Value                           |
+            +================+=================================+
+            | Datatype       | enums.AutorangeApertureTimeMode |
+            +----------------+---------------------------------+
+            | Permissions    | read-write                      |
+            +----------------+---------------------------------+
+            | Channel Based  | Yes                             |
+            +----------------+---------------------------------+
+            | Resettable     | No                              |
+            +----------------+---------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Measurement:Advanced:Autorange Aperture Time Mode**
+                - C Attribute: **NIDCPOWER_ATTR_AUTORANGE_APERTURE_TIME_MODE**
+
+autorange_behavior
+------------------
+
+    .. py:attribute:: autorange_behavior
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-------------------------+
+            | Characteristic | Value                   |
+            +================+=========================+
+            | Datatype       | enums.AutorangeBehavior |
+            +----------------+-------------------------+
+            | Permissions    | read-write              |
+            +----------------+-------------------------+
+            | Channel Based  | Yes                     |
+            +----------------+-------------------------+
+            | Resettable     | No                      |
+            +----------------+-------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Measurement:Advanced:Autorange Behavior**
+                - C Attribute: **NIDCPOWER_ATTR_AUTORANGE_BEHAVIOR**
+
+autorange_minimum_aperture_time
+-------------------------------
+
+    .. py:attribute:: autorange_minimum_aperture_time
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Measurement:Advanced:Autorange Minimum Aperture Time**
+                - C Attribute: **NIDCPOWER_ATTR_AUTORANGE_MINIMUM_APERTURE_TIME**
+
+autorange_minimum_aperture_time_units
+-------------------------------------
+
+    .. py:attribute:: autorange_minimum_aperture_time_units
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-------------------------+
+            | Characteristic | Value                   |
+            +================+=========================+
+            | Datatype       | enums.ApertureTimeUnits |
+            +----------------+-------------------------+
+            | Permissions    | read-write              |
+            +----------------+-------------------------+
+            | Channel Based  | Yes                     |
+            +----------------+-------------------------+
+            | Resettable     | No                      |
+            +----------------+-------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Measurement:Advanced:Autorange Minimum Aperture Time Units**
+                - C Attribute: **NIDCPOWER_ATTR_AUTORANGE_MINIMUM_APERTURE_TIME_UNITS**
+
+autorange_minimum_current_range
+-------------------------------
+
+    .. py:attribute:: autorange_minimum_current_range
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Measurement:Advanced:Autorange Minimum Current Range**
+                - C Attribute: **NIDCPOWER_ATTR_AUTORANGE_MINIMUM_CURRENT_RANGE**
+
+autorange_minimum_voltage_range
+-------------------------------
+
+    .. py:attribute:: autorange_minimum_voltage_range
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Measurement:Advanced:Autorange Minimum Voltage Range**
+                - C Attribute: **NIDCPOWER_ATTR_AUTORANGE_MINIMUM_VOLTAGE_RANGE**
+
+autorange_threshold_mode
+------------------------
+
+    .. py:attribute:: autorange_threshold_mode
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------------------------+
+            | Characteristic | Value                        |
+            +================+==============================+
+            | Datatype       | enums.AutorangeThresholdMode |
+            +----------------+------------------------------+
+            | Permissions    | read-write                   |
+            +----------------+------------------------------+
+            | Channel Based  | Yes                          |
+            +----------------+------------------------------+
+            | Resettable     | No                           |
+            +----------------+------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Measurement:Advanced:Autorange Threshold Mode**
+                - C Attribute: **NIDCPOWER_ATTR_AUTORANGE_THRESHOLD_MODE**
+
 auto_zero
 ---------
 
@@ -3198,6 +3438,14 @@ instrument_manufacturer
     .. py:attribute:: instrument_manufacturer
 
         Contains the name of the manufacturer for the device you are currently using.
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5779,6 +6027,12 @@ self_calibration_persistence
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------------------------+
@@ -6260,6 +6514,14 @@ serial_number
     .. py:attribute:: serial_number
 
         Contains the serial number for the device you are currently using.
+
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 

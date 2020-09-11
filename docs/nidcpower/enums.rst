@@ -66,6 +66,61 @@ AutoZero
 
 
 
+AutorangeApertureTimeMode
+-------------------------
+
+.. py:class:: AutorangeApertureTimeMode
+
+    .. py:attribute:: AutorangeApertureTimeMode.AUTO
+
+
+
+    .. py:attribute:: AutorangeApertureTimeMode.CUSTOM
+
+
+
+AutorangeBehavior
+-----------------
+
+.. py:class:: AutorangeBehavior
+
+    .. py:attribute:: AutorangeBehavior.UP_TO_LIMIT_THEN_DOWN
+
+
+
+    .. py:attribute:: AutorangeBehavior.UP
+
+
+
+    .. py:attribute:: AutorangeBehavior.UP_AND_DOWN
+
+
+
+AutorangeThresholdMode
+----------------------
+
+.. py:class:: AutorangeThresholdMode
+
+    .. py:attribute:: AutorangeThresholdMode.NORMAL
+
+
+
+    .. py:attribute:: AutorangeThresholdMode.FAST_STEP
+
+
+
+    .. py:attribute:: AutorangeThresholdMode.HIGH_HYSTERESIS
+
+
+
+    .. py:attribute:: AutorangeThresholdMode.MEDIUM_HYSTERESIS
+
+
+
+    .. py:attribute:: AutorangeThresholdMode.HOLD
+
+
+
 ComplianceLimitSymmetry
 -----------------------
 

@@ -30,6 +30,25 @@ class AutoZero(Enum):
     '''
 
 
+class AutorangeApertureTimeMode(Enum):
+    AUTO = 1110
+    CUSTOM = 1111
+
+
+class AutorangeBehavior(Enum):
+    UP_TO_LIMIT_THEN_DOWN = 1107
+    UP = 1108
+    UP_AND_DOWN = 1109
+
+
+class AutorangeThresholdMode(Enum):
+    NORMAL = 1112
+    FAST_STEP = 1113
+    HIGH_HYSTERESIS = 1114
+    MEDIUM_HYSTERESIS = 1115
+    HOLD = 1116
+
+
 class ComplianceLimitSymmetry(Enum):
     SYMMETRIC = 0
     r'''
