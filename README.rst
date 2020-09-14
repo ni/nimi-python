@@ -70,7 +70,7 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | NI-DCPower (nidcpower)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 20.0.0                   |
+| Driver Version Tested Against | 20.5.0                   |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
@@ -148,7 +148,7 @@ NI-DMM Python API Status
 +-------------------------------+----------------------+
 | NI-DMM (nidmm)                |                      |
 +===============================+======================+
-| Driver Version Tested Against | 20.0.0               |
+| Driver Version Tested Against | 20.5.0               |
 +-------------------------------+----------------------+
 | PyPI Version                  | |nidmmLatestVersion| |
 +-------------------------------+----------------------+
@@ -304,7 +304,7 @@ NI Switch Executive Python API Status
 +-------------------------------+---------------------+
 | NI Switch Executive (nise)    |                     |
 +===============================+=====================+
-| Driver Version Tested Against | 20.0.0              |
+| Driver Version Tested Against | 20.5.0              |
 +-------------------------------+---------------------+
 | PyPI Version                  | |niseLatestVersion| |
 +-------------------------------+---------------------+
