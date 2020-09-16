@@ -75,10 +75,9 @@ def test_method_get_self_cal_supported(session):
     assert session.get_self_cal_supported() in [True, False]
 
 
-# TODO(sbethur): When internal bug# 999932 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1375)
-def test_get_self_cal_last_date_and_time(session_5421):
+def test_get_self_cal_last_date_and_time(session):
     try:
-        session_5421.get_self_cal_last_date_and_time()
+        session.get_self_cal_last_date_and_time()
         assert False
     except nifgen.Error as e:
         assert e.code == -1074118632  # This operation is not supported for simulated device
