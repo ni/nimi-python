@@ -43,7 +43,6 @@ All notable changes to this project will be documented in this file.
             * `autorange_minimum_voltage_range`
             * `autorange_threshold_mode`
     * #### Changed
-        * Fix the documentation of `instrument_manufacturer`, `instrument_model`, and `serial_number` properties to correctly mention that they use `instruments` repeated capability.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
