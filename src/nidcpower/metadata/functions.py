@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.6.0d4
+# This file is generated from NI-DCPower API metadata version 20.6.0d7
 functions = {
     'Abort': {
         'documentation': {

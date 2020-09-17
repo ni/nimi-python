@@ -1993,6 +1993,13 @@ autorange
 
     .. py:attribute:: autorange
 
+        Specifies whether the hardware automatically selects the best range to measure the signal.  Note the highest range the algorithm uses is dependent on the corresponding limit range property. The algorithm the hardware uses can be controlled using the :py:attr:`nidcpower.Session.autorange_aperture_time_mode` property.
+
+
+
+        .. note:: Autoranging begins at module startup and remains active until the module is reconfigured or reset.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -2022,6 +2029,13 @@ autorange_aperture_time_mode
 ----------------------------
 
     .. py:attribute:: autorange_aperture_time_mode
+
+        Specifies whether the aperture time used for the measurement autorange algorithm is determined automatically or customized using the :py:attr:`nidcpower.Session.autorange_minimum_aperture_time` property.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2053,6 +2067,13 @@ autorange_behavior
 
     .. py:attribute:: autorange_behavior
 
+        Specifies the algorithm the hardware uses for measurement autoranging.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -2082,6 +2103,13 @@ autorange_minimum_aperture_time
 -------------------------------
 
     .. py:attribute:: autorange_minimum_aperture_time
+
+        Specifies the measurement autorange aperture time used for the measurement autorange algorithm.  The aperture time is specified in the units set by the :py:attr:`nidcpower.Session.autorange_minimum_aperture_time_units` property. This value will typically be smaller than the aperture time used for measurements.
+
+
+
+        .. note:: For smaller ranges, the value is scaled up to account for noise. The factor used to scale the value is derived from the module capabilities.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2113,6 +2141,13 @@ autorange_minimum_aperture_time_units
 
     .. py:attribute:: autorange_minimum_aperture_time_units
 
+        Specifies the units of the :py:attr:`nidcpower.Session.autorange_minimum_aperture_time` property.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -2142,6 +2177,13 @@ autorange_minimum_current_range
 -------------------------------
 
     .. py:attribute:: autorange_minimum_current_range
+
+        Specifies the lowest range used during measurement autoranging.  Limiting the lowest range used during autoranging can improve the speed of the autoranging algorithm and minimize frequent and unpredictable range changes for noisy signals.
+
+
+
+        .. note:: The maximum range used is the range that includes the value specified in the compliance limit property, :py:attr:`nidcpower.Session.voltage_limit_range` property or :py:attr:`nidcpower.Session.current_limit_range` property, depending on the selected :py:attr:`nidcpower.Session.output_function`. This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2173,6 +2215,13 @@ autorange_minimum_voltage_range
 
     .. py:attribute:: autorange_minimum_voltage_range
 
+        Specifies the lowest range used during measurement autoranging. The maximum range used is range that includes the value specified in the compliance limit property. Limiting the lowest range used during autoranging can improve the speed of the autoranging algorithm and/or minimize thrashing between ranges for noisy signals.
+
+
+
+        .. note:: The maximum range used is the range that includes the value specified in the compliance limit property, :py:attr:`nidcpower.Session.voltage_limit_range` property or :py:attr:`nidcpower.Session.current_limit_range` property, depending on the selected :py:attr:`nidcpower.Session.output_function`. This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -2202,6 +2251,13 @@ autorange_threshold_mode
 ------------------------
 
     .. py:attribute:: autorange_threshold_mode
+
+        Specifies thresholds used during autoranging to determine when range changing occurs.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
