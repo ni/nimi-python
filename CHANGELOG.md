@@ -33,7 +33,17 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * API parity with NI-DCPower 20.5.0 by adding measurement autoranging threshold range support, for which the following properties are added:
+            * `autorange`
+            * `autorange_aperture_time_mode`
+            * `autorange_behavior`
+            * `autorange_minimum_aperture_time`
+            * `autorange_minimum_aperture_time_units`
+            * `autorange_minimum_current_range`
+            * `autorange_minimum_voltage_range`
+            * `autorange_threshold_mode`
     * #### Changed
+        * Fix the documentation of `instrument_manufacturer`, `instrument_model`, and `serial_number` properties to correctly mention that they use `instruments` repeated capability.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
