@@ -806,12 +806,6 @@ class _SessionBase(object):
     '''Type: str
 
     Contains the name of the manufacturer for the device you are currently using.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     instrument_model = _attributes.AttributeViString(1050512)
     '''Type: str
@@ -1953,12 +1947,6 @@ class _SessionBase(object):
     Default Value: SelfCalibrationPersistence.KEEP_IN_MEMORY
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     sense = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Sense, 1150013)
     '''Type: enums.Sense
@@ -2139,12 +2127,6 @@ class _SessionBase(object):
     '''Type: str
 
     Contains the serial number for the device you are currently using.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool

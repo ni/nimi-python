@@ -108,7 +108,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Manufacturer',
         'name': 'INSTRUMENT_MANUFACTURER',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -974,7 +973,6 @@ attributes = {
         'enum': 'SelfCalibrationPersistence',
         'lv_property': 'Advanced:Self-Calibration Persistence',
         'name': 'SELF_CALIBRATION_PERSISTENCE',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViInt32'
     },
@@ -1341,7 +1339,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Serial Number',
         'name': 'SERIAL_NUMBER',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },

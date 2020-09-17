@@ -3495,14 +3495,6 @@ instrument_manufacturer
 
         Contains the name of the manufacturer for the device you are currently using.
 
-
-
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
-
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -6083,12 +6075,6 @@ self_calibration_persistence
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
-
         The following table lists the characteristics of this property.
 
             +----------------+----------------------------------+
@@ -6570,14 +6556,6 @@ serial_number
     .. py:attribute:: serial_number
 
         Contains the serial number for the device you are currently using.
-
-
-
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
