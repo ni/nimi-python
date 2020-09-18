@@ -1,7 +1,7 @@
 Examples
 ========
 
-`You can download all nifgen examples here <https://github.com/ni/nimi-python/releases/download/1.3.2/nifgen_examples.zip>`_
+`You can download all nifgen examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.3.2/nifgen_examples.zip>`_
 
 nifgen_arb_waveform.py
 ----------------------
