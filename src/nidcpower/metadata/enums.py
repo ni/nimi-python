@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.2.0d22
+# This file is generated from NI-DCPower API metadata version 20.6.0d7
 enums = {
     'ApertureTimeUnits': {
         'values': [
@@ -41,6 +41,88 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_ONCE',
                 'value': 1024
+            }
+        ]
+    },
+    'AutorangeApertureTimeMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'NI-DCPower optimizes the aperture time for the autorange algorithm based on the module range.'
+                },
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO',
+                'value': 1110
+            },
+            {
+                'documentation': {
+                    'description': 'The user specifies a minimum aperture time for the algorithm using the NIDCPOWER_ATTR_AUTORANGE_MINIMUM_APERTURE_TIME property and the corresponding NIDCPOWER_ATTR_AUTORANGE_MINIMUM_APERTURE_TIME_UNITS property.'
+                },
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_CUSTOM',
+                'value': 1111
+            }
+        ]
+    },
+    'AutorangeBehavior': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Go to limit range then range down as needed until measured value is within thresholds.'
+                },
+                'name': 'NIDCPOWER_VAL_RANGE_UP_TO_LIMIT_THEN_DOWN',
+                'value': 1107
+            },
+            {
+                'documentation': {
+                    'description': 'go up one range when the upper threshold is reached.'
+                },
+                'name': 'NIDCPOWER_VAL_RANGE_UP',
+                'value': 1108
+            },
+            {
+                'documentation': {
+                    'description': 'go up or down one range when the upper/lower threshold is reached.'
+                },
+                'name': 'NIDCPOWER_VAL_RANGE_UP_AND_DOWN',
+                'value': 1109
+            }
+        ]
+    },
+    'AutorangeThresholdMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Thresholds are selected based on a balance between accuracy and hysteresis.'
+                },
+                'name': 'NIDCPOWER_VAL_THRESHOLD_MODE_NORMAL',
+                'value': 1112
+            },
+            {
+                'documentation': {
+                    'description': 'Optimized for faster changes in the measured signal. Thresholds are configured to be a smaller percentage of the range.'
+                },
+                'name': 'NIDCPOWER_VAL_THRESHOLD_MODE_FAST_STEP',
+                'value': 1113
+            },
+            {
+                'documentation': {
+                    'description': 'Optimized for noisy signals to minimize frequent and unpredictable range changes. Thresholds are configured to be a larger percentage of the range.'
+                },
+                'name': 'NIDCPOWER_VAL_THRESHOLD_MODE_HIGH_HYSTERESIS',
+                'value': 1114
+            },
+            {
+                'documentation': {
+                    'description': 'Optimized for noisy signals to minimize frequent and unpredictable range changes. Thresholds are configured to be a medium percentage of the range.'
+                },
+                'name': 'NIDCPOWER_VAL_THRESHOLD_MODE_MEDIUM_HYSTERESIS',
+                'value': 1115
+            },
+            {
+                'documentation': {
+                    'description': 'Attempt to maintain the active range. Thresholds will favor the active range.'
+                },
+                'name': 'NIDCPOWER_VAL_THRESHOLD_MODE_HOLD',
+                'value': 1116
             }
         ]
     },

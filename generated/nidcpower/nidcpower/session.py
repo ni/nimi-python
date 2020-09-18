@@ -201,6 +201,110 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
+    autorange = _attributes.AttributeViInt32(1150244)
+    '''Type: bool
+
+    Specifies whether the hardware automatically selects the best range to measure the signal.  Note the highest range the algorithm uses is dependent on the corresponding limit range property. The algorithm the hardware uses can be controlled using the autorange_aperture_time_mode property.
+
+    Note: Autoranging begins at module startup and remains active until the module is reconfigured or reset.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    autorange_aperture_time_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutorangeApertureTimeMode, 1150246)
+    '''Type: enums.AutorangeApertureTimeMode
+
+    Specifies whether the aperture time used for the measurement autorange algorithm is determined automatically or customized using the autorange_minimum_aperture_time property.
+
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    autorange_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutorangeBehavior, 1150245)
+    '''Type: enums.AutorangeBehavior
+
+    Specifies the algorithm the hardware uses for measurement autoranging.
+
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    autorange_minimum_aperture_time = _attributes.AttributeViReal64(1150247)
+    '''Type: float
+
+    Specifies the measurement autorange aperture time used for the measurement autorange algorithm.  The aperture time is specified in the units set by the autorange_minimum_aperture_time_units property. This value will typically be smaller than the aperture time used for measurements.
+
+    Note: For smaller ranges, the value is scaled up to account for noise. The factor used to scale the value is derived from the module capabilities.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    autorange_minimum_aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150248)
+    '''Type: enums.ApertureTimeUnits
+
+    Specifies the units of the autorange_minimum_aperture_time property.
+
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    autorange_minimum_current_range = _attributes.AttributeViReal64(1150255)
+    '''Type: float
+
+    Specifies the lowest range used during measurement autoranging.  Limiting the lowest range used during autoranging can improve the speed of the autoranging algorithm and minimize frequent and unpredictable range changes for noisy signals.
+
+    Note: The maximum range used is the range that includes the value specified in the compliance limit property, voltage_limit_range property or current_limit_range property, depending on the selected output_function. This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    autorange_minimum_voltage_range = _attributes.AttributeViReal64(1150256)
+    '''Type: float
+
+    Specifies the lowest range used during measurement autoranging. The maximum range used is range that includes the value specified in the compliance limit property. Limiting the lowest range used during autoranging can improve the speed of the autoranging algorithm and/or minimize thrashing between ranges for noisy signals.
+
+    Note: The maximum range used is the range that includes the value specified in the compliance limit property, voltage_limit_range property or current_limit_range property, depending on the selected output_function. This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    autorange_threshold_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutorangeThresholdMode, 1150257)
+    '''Type: enums.AutorangeThresholdMode
+
+    Specifies thresholds used during autoranging to determine when range changing occurs.
+
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     auto_zero = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutoZero, 1150055)
     '''Type: enums.AutoZero
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.2.0d22
+# This file is generated from NI-DCPower API metadata version 20.6.0d7
 config = {
-    'api_version': '20.2.0d22',
+    'api_version': '20.6.0d7',
     'c_function_prefix': 'niDCPower_',
     'close_function': 'close',
     'context_manager_name': {
@@ -45,5 +45,5 @@ config = {
     ],
     'session_class_description': 'An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.',
     'session_handle_parameter_name': 'vi',
-    'uses_nitclk': False,
+    'uses_nitclk': False
 }

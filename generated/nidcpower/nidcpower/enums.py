@@ -30,6 +30,55 @@ class AutoZero(Enum):
     '''
 
 
+class AutorangeApertureTimeMode(Enum):
+    AUTO = 1110
+    r'''
+    NI-DCPower optimizes the aperture time for the autorange algorithm based on the module range.
+    '''
+    CUSTOM = 1111
+    r'''
+    The user specifies a minimum aperture time for the algorithm using the autorange_minimum_aperture_time property and the corresponding autorange_minimum_aperture_time_units property.
+    '''
+
+
+class AutorangeBehavior(Enum):
+    UP_TO_LIMIT_THEN_DOWN = 1107
+    r'''
+    Go to limit range then range down as needed until measured value is within thresholds.
+    '''
+    UP = 1108
+    r'''
+    go up one range when the upper threshold is reached.
+    '''
+    UP_AND_DOWN = 1109
+    r'''
+    go up or down one range when the upper/lower threshold is reached.
+    '''
+
+
+class AutorangeThresholdMode(Enum):
+    NORMAL = 1112
+    r'''
+    Thresholds are selected based on a balance between accuracy and hysteresis.
+    '''
+    FAST_STEP = 1113
+    r'''
+    Optimized for faster changes in the measured signal. Thresholds are configured to be a smaller percentage of the range.
+    '''
+    HIGH_HYSTERESIS = 1114
+    r'''
+    Optimized for noisy signals to minimize frequent and unpredictable range changes. Thresholds are configured to be a larger percentage of the range.
+    '''
+    MEDIUM_HYSTERESIS = 1115
+    r'''
+    Optimized for noisy signals to minimize frequent and unpredictable range changes. Thresholds are configured to be a medium percentage of the range.
+    '''
+    HOLD = 1116
+    r'''
+    Attempt to maintain the active range. Thresholds will favor the active range.
+    '''
+
+
 class ComplianceLimitSymmetry(Enum):
     SYMMETRIC = 0
     r'''

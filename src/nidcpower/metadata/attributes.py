@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.2.0d22
+# This file is generated from NI-DCPower API metadata version 20.6.0d7
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -1547,6 +1547,107 @@ attributes = {
         'enum': 'PowerAllocationMode',
         'lv_property': 'Source:Advanced:Power Allocation Mode',
         'name': 'POWER_ALLOCATION_MODE',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
+    1150244: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies whether the hardware automatically selects the best range to measure the signal.  Note the highest range the algorithm uses is dependent on the corresponding limit range property. The algorithm the hardware uses can be controlled using the NIDCPOWER_ATTR_AUTORANGE_APERTURE_TIME_MODE property.\n',
+            'note': 'Autoranging begins at module startup and remains active until the module is reconfigured or reset.  This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.'
+        },
+        'lv_property': 'Measurement:Autorange',
+        'name': 'AUTORANGE',
+        'python_type': 'bool',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
+    1150245: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the algorithm the hardware uses for measurement autoranging.\n',
+            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.'
+        },
+        'enum': 'AutorangeBehavior',
+        'lv_property': 'Measurement:Advanced:Autorange Behavior',
+        'name': 'AUTORANGE_BEHAVIOR',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
+    1150246: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies whether the aperture time used for the measurement autorange algorithm is determined automatically or customized using the NIDCPOWER_ATTR_AUTORANGE_MINIMUM_APERTURE_TIME property.\n',
+            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.'
+        },
+        'enum': 'AutorangeApertureTimeMode',
+        'lv_property': 'Measurement:Advanced:Autorange Aperture Time Mode',
+        'name': 'AUTORANGE_APERTURE_TIME_MODE',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
+    1150247: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the measurement autorange aperture time used for the measurement autorange algorithm.  The aperture time is specified in the units set by the NIDCPOWER_ATTR_AUTORANGE_MINIMUM_APERTURE_TIME_UNITS property. This value will typically be smaller than the aperture time used for measurements.\n',
+            'note': 'For smaller ranges, the value is scaled up to account for noise. The factor used to scale the value is derived from the module capabilities.  This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.'
+        },
+        'lv_property': 'Measurement:Advanced:Autorange Minimum Aperture Time',
+        'name': 'AUTORANGE_MINIMUM_APERTURE_TIME',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150248: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the units of the NIDCPOWER_ATTR_AUTORANGE_MINIMUM_APERTURE_TIME property.\n',
+            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.'
+        },
+        'enum': 'ApertureTimeUnits',
+        'lv_property': 'Measurement:Advanced:Autorange Minimum Aperture Time Units',
+        'name': 'AUTORANGE_MINIMUM_APERTURE_TIME_UNITS',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
+    1150255: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the lowest range used during measurement autoranging.  Limiting the lowest range used during autoranging can improve the speed of the autoranging algorithm and minimize frequent and unpredictable range changes for noisy signals.\n',
+            'note': 'The maximum range used is the range that includes the value specified in the compliance limit property, NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE property or NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE property, depending on the selected NIDCPOWER_ATTR_OUTPUT_FUNCTION. This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.'
+        },
+        'lv_property': 'Measurement:Advanced:Autorange Minimum Current Range',
+        'name': 'AUTORANGE_MINIMUM_CURRENT_RANGE',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150256: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the lowest range used during measurement autoranging. The maximum range used is range that includes the value specified in the compliance limit property. Limiting the lowest range used during autoranging can improve the speed of the autoranging algorithm and/or minimize thrashing between ranges for noisy signals.\n',
+            'note': 'The maximum range used is the range that includes the value specified in the compliance limit property, NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE property or NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE property, depending on the selected NIDCPOWER_ATTR_OUTPUT_FUNCTION. This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.'
+        },
+        'lv_property': 'Measurement:Advanced:Autorange Minimum Voltage Range',
+        'name': 'AUTORANGE_MINIMUM_VOLTAGE_RANGE',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150257: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies thresholds used during autoranging to determine when range changing occurs.\n',
+            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.'
+        },
+        'enum': 'AutorangeThresholdMode',
+        'lv_property': 'Measurement:Advanced:Autorange Threshold Mode',
+        'name': 'AUTORANGE_THRESHOLD_MODE',
         'resettable': False,
         'type': 'ViInt32'
     },

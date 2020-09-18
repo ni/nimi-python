@@ -66,6 +66,121 @@ AutoZero
 
 
 
+AutorangeApertureTimeMode
+-------------------------
+
+.. py:class:: AutorangeApertureTimeMode
+
+    .. py:attribute:: AutorangeApertureTimeMode.AUTO
+
+
+
+        NI-DCPower optimizes the aperture time for the autorange algorithm based on the module range.
+
+        
+
+
+
+    .. py:attribute:: AutorangeApertureTimeMode.CUSTOM
+
+
+
+        The user specifies a minimum aperture time for the algorithm using the :py:attr:`nidcpower.Session.autorange_minimum_aperture_time` property and the corresponding :py:attr:`nidcpower.Session.autorange_minimum_aperture_time_units` property.
+
+        
+
+
+
+AutorangeBehavior
+-----------------
+
+.. py:class:: AutorangeBehavior
+
+    .. py:attribute:: AutorangeBehavior.UP_TO_LIMIT_THEN_DOWN
+
+
+
+        Go to limit range then range down as needed until measured value is within thresholds.
+
+        
+
+
+
+    .. py:attribute:: AutorangeBehavior.UP
+
+
+
+        go up one range when the upper threshold is reached.
+
+        
+
+
+
+    .. py:attribute:: AutorangeBehavior.UP_AND_DOWN
+
+
+
+        go up or down one range when the upper/lower threshold is reached.
+
+        
+
+
+
+AutorangeThresholdMode
+----------------------
+
+.. py:class:: AutorangeThresholdMode
+
+    .. py:attribute:: AutorangeThresholdMode.NORMAL
+
+
+
+        Thresholds are selected based on a balance between accuracy and hysteresis.
+
+        
+
+
+
+    .. py:attribute:: AutorangeThresholdMode.FAST_STEP
+
+
+
+        Optimized for faster changes in the measured signal. Thresholds are configured to be a smaller percentage of the range.
+
+        
+
+
+
+    .. py:attribute:: AutorangeThresholdMode.HIGH_HYSTERESIS
+
+
+
+        Optimized for noisy signals to minimize frequent and unpredictable range changes. Thresholds are configured to be a larger percentage of the range.
+
+        
+
+
+
+    .. py:attribute:: AutorangeThresholdMode.MEDIUM_HYSTERESIS
+
+
+
+        Optimized for noisy signals to minimize frequent and unpredictable range changes. Thresholds are configured to be a medium percentage of the range.
+
+        
+
+
+
+    .. py:attribute:: AutorangeThresholdMode.HOLD
+
+
+
+        Attempt to maintain the active range. Thresholds will favor the active range.
+
+        
+
+
+
 ComplianceLimitSymmetry
 -----------------------
 
