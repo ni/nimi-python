@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.3.2](#132---2020-09-18)
 * [1.3.1](#131---2020-06-08)
 * [1.3.0](#130---2020-05-21)
 * [1.2.1](#121---2020-04-21)
@@ -24,13 +24,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.3.2 - 2020-09-18
 * ### ALL
-    * #### Added
     * #### Changed
         * Fix [#1491](https://github.com/ni/nimi-python/issues/1491): import_attribute_configuration_buffer() fails intermittently when `list` or `array.array` is passed in.
         * Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot. The version is 20.5.0 for NI-DCPower, NI-SWITCH, and NI-DMM. no changes on other drivers.
-    * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * API parity with NI-DCPower 20.5.0 by adding measurement autoranging threshold range support, for which the following properties are added:
@@ -42,24 +40,6 @@ All notable changes to this project will be documented in this file.
             * `autorange_minimum_current_range`
             * `autorange_minimum_voltage_range`
             * `autorange_threshold_mode`
-    * #### Changed
-    * #### Removed
-* ### `nidigital` (NI-Digital Pattern Driver)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nidmm` (NI-DMM)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nifgen` (NI-FGEN)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### `niscope` (NI-SCOPE)
     * #### Added
         * New methods for getting calibration information. - [#1463](https://github.com/ni/nimi-python/issues/1463)
@@ -109,19 +89,6 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * Fix [#1509](https://github.com/ni/nimi-python/issues/1509): `channel` and `record` fields are swapped in `waveform_info` struct returned from niscope fetch methods
         * Fix [#1510](https://github.com/ni/nimi-python/issues/1510): `record` value in `waveform_info` struct returned from niscope fetch methods is wrong if `record_number` is non-zero
-    * #### Removed
-* ### `niswitch` (NI-SWITCH)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nitclk` (NI-TClk)
-    * #### Added
-    * #### Changed
-    * #### Removed
 
 
 ## 1.3.1 - 2020-06-08
