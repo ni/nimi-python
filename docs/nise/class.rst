@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, virtual_device_name, options={})
+.. py:class:: Session(self, virtual_device_name: str, options={})
 
     
 

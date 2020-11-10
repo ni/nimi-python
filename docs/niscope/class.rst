@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, id_query=False, reset_device=False, options={})
+.. py:class:: Session(self, resource_name: str, id_query: 'bool' = False, reset_device: 'bool' = False, options={})
 
     
 

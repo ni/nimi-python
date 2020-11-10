@@ -2,8 +2,10 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
+import datetime
 # Used by @ivi_synchronized
 from functools import wraps
+import typing
 
 import niscope._attributes as _attributes
 import niscope._converters as _converters
@@ -1601,7 +1603,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def _actual_meas_wfm_size(self, array_meas_function):
+    def _actual_meas_wfm_size(self, array_meas_function: 'enums.ArrayMeasurement') -> int:
         r'''_actual_meas_wfm_size
 
         Returns the total available size of an array measurement acquisition.
@@ -1627,7 +1629,7 @@ class _SessionBase(object):
         return int(meas_waveform_size_ctype.value)
 
     @ivi_synchronized
-    def _actual_num_wfms(self):
+    def _actual_num_wfms(self) -> int:
         r'''_actual_num_wfms
 
         Helps you to declare appropriately sized waveforms. NI-SCOPE handles the
@@ -1653,7 +1655,7 @@ class _SessionBase(object):
         return int(num_wfms_ctype.value)
 
     @ivi_synchronized
-    def add_waveform_processing(self, meas_function):
+    def add_waveform_processing(self, meas_function: 'enums.ArrayMeasurement') -> None:
         r'''add_waveform_processing
 
         Adds one measurement to the list of processing steps that are completed
@@ -1688,7 +1690,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def self_cal(self, option=enums.Option.SELF_CALIBRATE_ALL_CHANNELS):
+    def self_cal(self, option: 'enums.Option' = enums.Option.SELF_CALIBRATE_ALL_CHANNELS) -> None:
         r'''self_cal
 
         Self-calibrates most NI digitizers, including all SMC-based devices and
@@ -1736,7 +1738,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def clear_waveform_measurement_stats(self, clearable_measurement_function=enums.ClearableMeasurement.ALL_MEASUREMENTS):
+    def clear_waveform_measurement_stats(self, clearable_measurement_function: 'enums.ClearableMeasurement' = enums.ClearableMeasurement.ALL_MEASUREMENTS) -> None:
         r'''clear_waveform_measurement_stats
 
         Clears the waveform stats on the channel and measurement you specify. If
@@ -1774,7 +1776,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def clear_waveform_processing(self):
+    def clear_waveform_processing(self) -> None:
         r'''clear_waveform_processing
 
         Clears the list of processing steps assigned to the given channel. The
@@ -1797,7 +1799,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_chan_characteristics(self, input_impedance, max_input_frequency):
+    def configure_chan_characteristics(self, input_impedance: float, max_input_frequency: float) -> None:
         r'''configure_chan_characteristics
 
         Configures the properties that control the electrical characteristics of
@@ -1828,7 +1830,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_equalization_filter_coefficients(self, coefficients):
+    def configure_equalization_filter_coefficients(self, coefficients: typing.Iterable[float]) -> None:
         r'''configure_equalization_filter_coefficients
 
         Configures the custom coefficients for the equalization FIR filter on
@@ -1862,7 +1864,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_vertical(self, range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True):
+    def configure_vertical(self, range: float, coupling: 'enums.VerticalCoupling', offset: float = 0.0, probe_attenuation: float = 1.0, enabled: 'bool' = True) -> None:
         r'''configure_vertical
 
         Configures the most commonly configured properties of the digitizer
@@ -1906,7 +1908,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def fetch(self, num_samples=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0)):
+    def fetch(self, num_samples: int = None, relative_to: 'enums.FetchRelativeTo' = enums.FetchRelativeTo.PRETRIGGER, offset: int = 0, record_number: int = 0, num_records: int = None, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Iterable['waveform_info.WaveformInfo']:
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -1986,7 +1988,7 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def fetch_array_measurement(self, array_meas_function, meas_wfm_size=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, meas_num_samples=None, timeout=hightime.timedelta(seconds=5.0)):
+    def fetch_array_measurement(self, array_meas_function: 'enums.ArrayMeasurement', meas_wfm_size: int = None, relative_to: 'enums.FetchRelativeTo' = enums.FetchRelativeTo.PRETRIGGER, offset: int = 0, record_number: int = 0, num_records: int = None, meas_num_samples: int = None, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Iterable['waveform_info.WaveformInfo']:
         r'''fetch_array_measurement
 
         Obtains a waveform from the digitizer and returns the specified
@@ -2077,7 +2079,7 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def fetch_measurement_stats(self, scalar_meas_function, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0)):
+    def fetch_measurement_stats(self, scalar_meas_function: 'enums.ScalarMeasurement', relative_to: 'enums.FetchRelativeTo' = enums.FetchRelativeTo.PRETRIGGER, offset: int = 0, record_number: int = 0, num_records: int = None, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.List[measurement_stats.MeasurementStats]:
         r'''fetch_measurement_stats
 
         Obtains a waveform measurement and returns the measurement value. This
@@ -2166,7 +2168,7 @@ class _SessionBase(object):
         return output
 
     @ivi_synchronized
-    def get_equalization_filter_coefficients(self):
+    def get_equalization_filter_coefficients(self) -> typing.Iterable[float]:
         '''get_equalization_filter_coefficients
 
         Retrieves the custom coefficients for the equalization FIR filter on the device. This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. Because this filter is a generic FIR filter, any coefficients are valid. Coefficient values should be between +1 and –1.
@@ -2180,7 +2182,7 @@ class _SessionBase(object):
         return self._get_equalization_filter_coefficients(self.equalization_num_coefficients)
 
     @ivi_synchronized
-    def read(self, num_samples=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0)):
+    def read(self, num_samples: int = None, relative_to: 'enums.FetchRelativeTo' = enums.FetchRelativeTo.PRETRIGGER, offset: int = 0, record_number: int = 0, num_records: int = None, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Iterable['waveform_info.WaveformInfo']:
         '''read
 
         Initiates an acquisition, waits for it to complete, and retrieves the
@@ -2263,7 +2265,7 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def _fetch(self, num_samples, timeout=hightime.timedelta(seconds=5.0)):
+    def _fetch(self, num_samples: int, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Tuple[typing.Iterable[float], typing.Iterable['waveform_info.WaveformInfo']]:
         r'''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2363,7 +2365,7 @@ class _SessionBase(object):
         return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def _fetch_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
+    def _fetch_into_numpy(self, num_samples: int, waveform: typing.Iterable[float], timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Iterable['waveform_info.WaveformInfo']:
         r'''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2490,7 +2492,7 @@ class _SessionBase(object):
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def _fetch_array_measurement(self, array_meas_function, measurement_waveform_size, timeout=hightime.timedelta(seconds=5.0)):
+    def _fetch_array_measurement(self, array_meas_function: 'enums.ArrayMeasurement', measurement_waveform_size: int, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Tuple[typing.Iterable[float], typing.Iterable['waveform_info.WaveformInfo']]:
         r'''_fetch_array_measurement
 
         Obtains a waveform from the digitizer and returns the specified
@@ -2591,7 +2593,7 @@ class _SessionBase(object):
         return [float(meas_wfm_ctype[i]) for i in range((measurement_waveform_size * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def _fetch_binary16_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
+    def _fetch_binary16_into_numpy(self, num_samples: int, waveform: typing.Iterable[int], timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Iterable['waveform_info.WaveformInfo']:
         r'''_fetch_binary16
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2716,7 +2718,7 @@ class _SessionBase(object):
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def _fetch_binary32_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
+    def _fetch_binary32_into_numpy(self, num_samples: int, waveform: typing.Iterable[int], timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Iterable['waveform_info.WaveformInfo']:
         r'''_fetch_binary32
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2841,7 +2843,7 @@ class _SessionBase(object):
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def _fetch_binary8_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
+    def _fetch_binary8_into_numpy(self, num_samples: int, waveform: typing.Iterable[int], timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Iterable['waveform_info.WaveformInfo']:
         r'''_fetch_binary8
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2966,7 +2968,7 @@ class _SessionBase(object):
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def fetch_into(self, waveform, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0)):
+    def fetch_into(self, waveform: typing.Iterable[float], relative_to: 'enums.FetchRelativeTo' = enums.FetchRelativeTo.PRETRIGGER, offset: int = 0, record_number: int = 0, num_records: int = None, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Iterable['waveform_info.WaveformInfo']:
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -3070,7 +3072,7 @@ class _SessionBase(object):
         return wfm_info
 
     @ivi_synchronized
-    def _fetch_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
+    def _fetch_measurement_stats(self, scalar_meas_function: 'enums.ScalarMeasurement', timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Tuple[typing.Iterable[float], typing.Iterable[float], typing.Iterable[float], typing.Iterable[float], typing.Iterable[float], typing.Iterable[int]]:
         r'''_fetch_measurement_stats
 
         Obtains a waveform measurement and returns the measurement value. This
@@ -3156,7 +3158,7 @@ class _SessionBase(object):
         return [float(result_ctype[i]) for i in range(self._actual_num_wfms())], [float(mean_ctype[i]) for i in range(self._actual_num_wfms())], [float(stdev_ctype[i]) for i in range(self._actual_num_wfms())], [float(min_ctype[i]) for i in range(self._actual_num_wfms())], [float(max_ctype[i]) for i in range(self._actual_num_wfms())], [int(num_in_stats_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def _get_attribute_vi_boolean(self, attribute_id):
+    def _get_attribute_vi_boolean(self, attribute_id: int) -> 'bool':
         r'''_get_attribute_vi_boolean
 
         Queries the value of a ViBoolean property. You can use this method to
@@ -3192,7 +3194,7 @@ class _SessionBase(object):
         return bool(value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_int32(self, attribute_id):
+    def _get_attribute_vi_int32(self, attribute_id: int) -> int:
         r'''_get_attribute_vi_int32
 
         Queries the value of a ViInt32 property. You can use this method to
@@ -3227,7 +3229,7 @@ class _SessionBase(object):
         return int(value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_int64(self, attribute_id):
+    def _get_attribute_vi_int64(self, attribute_id: int) -> int:
         r'''_get_attribute_vi_int64
 
         Queries the value of a ViInt64 property. You can use this method to
@@ -3262,7 +3264,7 @@ class _SessionBase(object):
         return int(value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_real64(self, attribute_id):
+    def _get_attribute_vi_real64(self, attribute_id: int) -> float:
         r'''_get_attribute_vi_real64
 
         Queries the value of a ViReal64 property. You can use this method to
@@ -3298,7 +3300,7 @@ class _SessionBase(object):
         return float(value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_string(self, attribute_id):
+    def _get_attribute_vi_string(self, attribute_id: int) -> str:
         r'''_get_attribute_vi_string
 
         Queries the value of a ViString property. You can use this method to
@@ -3351,7 +3353,7 @@ class _SessionBase(object):
         return value_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def _get_equalization_filter_coefficients(self, number_of_coefficients):
+    def _get_equalization_filter_coefficients(self, number_of_coefficients: int) -> typing.Iterable[float]:
         r'''_get_equalization_filter_coefficients
 
         Retrieves the custom coefficients for the equalization FIR filter on the
@@ -3387,7 +3389,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_ctype[i]) for i in range(number_of_coefficients_ctype.value)]
 
-    def _get_error(self):
+    def _get_error(self) -> typing.Tuple[int, str]:
         r'''_get_error
 
         Reads an error code and message from the error queue. National
@@ -3436,7 +3438,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def lock(self):
+    def lock(self) -> 'bool':
         '''lock
 
         Obtains a multithread lock on the device session. Before doing so, the
@@ -3471,7 +3473,7 @@ class _SessionBase(object):
         # that will handle the unlock for them
         return _Lock(self)
 
-    def _lock_session(self):
+    def _lock_session(self) -> None:
         '''_lock_session
 
         Actual call to driver
@@ -3482,7 +3484,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _read(self, num_samples, timeout=hightime.timedelta(seconds=5.0)):
+    def _read(self, num_samples: int, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=5.0)) -> typing.Tuple[typing.Iterable[float], typing.Iterable['waveform_info.WaveformInfo']]:
         r'''_read
 
         Initiates an acquisition, waits for it to complete, and retrieves the
@@ -3581,7 +3583,7 @@ class _SessionBase(object):
         return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     @ivi_synchronized
-    def _set_attribute_vi_boolean(self, attribute_id, value):
+    def _set_attribute_vi_boolean(self, attribute_id: int, value: 'bool') -> None:
         r'''_set_attribute_vi_boolean
 
         Sets the value of a ViBoolean property. This is a low-level method
@@ -3629,7 +3631,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_int32(self, attribute_id, value):
+    def _set_attribute_vi_int32(self, attribute_id: int, value: int) -> None:
         r'''_set_attribute_vi_int32
 
         Sets the value of a ViInt32 property. This is a low-level method that
@@ -3677,7 +3679,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_int64(self, attribute_id, value):
+    def _set_attribute_vi_int64(self, attribute_id: int, value: int) -> None:
         r'''_set_attribute_vi_int64
 
         Sets the value of a ViInt64 property. This is a low-level method that
@@ -3725,7 +3727,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_real64(self, attribute_id, value):
+    def _set_attribute_vi_real64(self, attribute_id: int, value: float) -> None:
         r'''_set_attribute_vi_real64
 
         Sets the value of a ViReal64 property. This is a low-level method
@@ -3773,7 +3775,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_string(self, attribute_id, value):
+    def _set_attribute_vi_string(self, attribute_id: int, value: str) -> None:
         r'''_set_attribute_vi_string
 
         Sets the value of a ViString property.
@@ -3822,7 +3824,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def unlock(self):
+    def unlock(self) -> 'bool':
         '''unlock
 
         Releases a lock that you acquired on an device session using
@@ -3834,7 +3836,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
-    def _error_message(self, error_code):
+    def _error_message(self, error_code: int) -> str:
         r'''_error_message
 
         Takes the **Error_Code** returned by the instrument driver methods, interprets it, and returns it as a user-readable string.
@@ -3858,7 +3860,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-SCOPE session to a National Instruments Digitizer.'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
+    def __init__(self, resource_name: str, id_query: 'bool' = False, reset_device: 'bool' = False, options={}):
         r'''An NI-SCOPE session to a National Instruments Digitizer.
 
         Performs the following initialization actions:
@@ -4052,7 +4054,7 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def abort(self):
+    def abort(self) -> None:
         r'''abort
 
         Aborts an acquisition and returns the digitizer to the Idle state. Call
@@ -4064,7 +4066,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def acquisition_status(self):
+    def acquisition_status(self) -> 'enums.AcquisitionStatus':
         r'''acquisition_status
 
         Returns status information about the acquisition to the **status**
@@ -4089,7 +4091,7 @@ class Session(_SessionBase):
         return enums.AcquisitionStatus(acquisition_status_ctype.value)
 
     @ivi_synchronized
-    def auto_setup(self):
+    def auto_setup(self) -> None:
         r'''auto_setup
 
         Automatically configures the instrument. When you call this method,
@@ -4165,7 +4167,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _cal_fetch_date(self, which_one):
+    def _cal_fetch_date(self, which_one: 'enums.CalibrationTypes') -> typing.Tuple[int, int, int]:
         r'''_cal_fetch_date
 
         TBD
@@ -4194,7 +4196,7 @@ class Session(_SessionBase):
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value)
 
     @ivi_synchronized
-    def _cal_fetch_temperature(self, which_one):
+    def _cal_fetch_temperature(self, which_one: int) -> float:
         r'''_cal_fetch_temperature
 
         TBD
@@ -4215,7 +4217,7 @@ class Session(_SessionBase):
         return float(temperature_ctype.value)
 
     @ivi_synchronized
-    def commit(self):
+    def commit(self) -> None:
         r'''commit
 
         Commits to hardware all the parameter settings associated with the task.
@@ -4229,7 +4231,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_horizontal_timing(self, min_sample_rate, min_num_pts, ref_position, num_records, enforce_realtime):
+    def configure_horizontal_timing(self, min_sample_rate: float, min_num_pts: int, ref_position: float, num_records: int, enforce_realtime: 'bool') -> None:
         r'''configure_horizontal_timing
 
         Configures the common properties of the horizontal subsystem for a
@@ -4279,7 +4281,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _configure_ref_levels(self, low=10.0, mid=50.0, high=90.0):
+    def _configure_ref_levels(self, low: float = 10.0, mid: float = 50.0, high: float = 90.0) -> None:
         r'''_configure_ref_levels
 
         This method is included for compliance with the IviScope Class
@@ -4340,7 +4342,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_trigger_digital(self, trigger_source, slope=enums.TriggerSlope.POSITIVE, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):
+    def configure_trigger_digital(self, trigger_source: str, slope: 'enums.TriggerSlope' = enums.TriggerSlope.POSITIVE, holdoff: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0), delay: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0)) -> None:
         r'''configure_trigger_digital
 
         Configures the common properties of a digital trigger.
@@ -4402,7 +4404,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_trigger_edge(self, trigger_source, level, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):
+    def configure_trigger_edge(self, trigger_source: str, level: float, trigger_coupling: 'enums.TriggerCoupling', slope: 'enums.TriggerSlope' = enums.TriggerSlope.POSITIVE, holdoff: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0), delay: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0)) -> None:
         r'''configure_trigger_edge
 
         Configures common properties for analog edge triggering.
@@ -4464,7 +4466,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_trigger_hysteresis(self, trigger_source, level, hysteresis, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):
+    def configure_trigger_hysteresis(self, trigger_source: str, level: float, hysteresis: float, trigger_coupling: 'enums.TriggerCoupling', slope: 'enums.TriggerSlope' = enums.TriggerSlope.POSITIVE, holdoff: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0), delay: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0)) -> None:
         r'''configure_trigger_hysteresis
 
         Configures common properties for analog hysteresis triggering. This kind
@@ -4537,7 +4539,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_trigger_immediate(self):
+    def configure_trigger_immediate(self) -> None:
         r'''configure_trigger_immediate
 
         Configures common properties for immediate triggering. Immediate
@@ -4553,7 +4555,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_trigger_software(self, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):
+    def configure_trigger_software(self, holdoff: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0), delay: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0)) -> None:
         r'''configure_trigger_software
 
         Configures common properties for software triggering.
@@ -4596,7 +4598,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_trigger_video(self, trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):
+    def configure_trigger_video(self, trigger_source: str, signal_format: 'enums.VideoSignalFormat', event: 'enums.VideoTriggerEvent', polarity: 'enums.VideoPolarity', trigger_coupling: 'enums.TriggerCoupling', enable_dc_restore: 'bool' = False, line_number: int = 1, holdoff: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0), delay: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0)) -> None:
         r'''configure_trigger_video
 
         Configures the common properties for video triggering, including the
@@ -4682,7 +4684,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_trigger_window(self, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):
+    def configure_trigger_window(self, trigger_source: str, low_level: float, high_level: float, window_mode: 'enums.TriggerWindowMode', trigger_coupling: 'enums.TriggerCoupling', holdoff: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0), delay: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0)) -> None:
         r'''configure_trigger_window
 
         Configures common properties for analog window triggering. A window
@@ -4747,7 +4749,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def disable(self):
+    def disable(self) -> None:
         r'''disable
 
         Aborts any current operation, opens data channel relays, and releases
@@ -4759,7 +4761,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def export_attribute_configuration_buffer(self):
+    def export_attribute_configuration_buffer(self) -> typing.Iterable['bytes']:
         r'''export_attribute_configuration_buffer
 
         Exports the property configuration of the session to a configuration
@@ -4800,7 +4802,7 @@ class Session(_SessionBase):
         return _converters.convert_to_bytes(configuration_array)
 
     @ivi_synchronized
-    def export_attribute_configuration_file(self, file_path):
+    def export_attribute_configuration_file(self, file_path: str) -> None:
         r'''export_attribute_configuration_file
 
         Exports the property configuration of the session to the specified
@@ -4836,7 +4838,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def get_ext_cal_last_date_and_time(self):
+    def get_ext_cal_last_date_and_time(self) -> hightime.datetime:
         '''get_ext_cal_last_date_and_time
 
         Returns the date and time of the last external calibration performed.
@@ -4850,7 +4852,7 @@ class Session(_SessionBase):
         return hightime.datetime(year, month, day)
 
     @ivi_synchronized
-    def get_ext_cal_last_temp(self):
+    def get_ext_cal_last_temp(self) -> float:
         '''get_ext_cal_last_temp
 
         Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful external calibration.
@@ -4865,7 +4867,7 @@ class Session(_SessionBase):
         return self._cal_fetch_temperature(enums._CalibrationTypes.EXTERNAL.value)
 
     @ivi_synchronized
-    def get_self_cal_last_date_and_time(self):
+    def get_self_cal_last_date_and_time(self) -> hightime.datetime:
         '''get_self_cal_last_date_and_time
 
         Returns the date and time of the last self calibration performed.
@@ -4879,7 +4881,7 @@ class Session(_SessionBase):
         return hightime.datetime(year, month, day)
 
     @ivi_synchronized
-    def get_self_cal_last_temp(self):
+    def get_self_cal_last_temp(self) -> float:
         '''get_self_cal_last_temp
 
         Returns the onboard temperature, in degrees Celsius, of an oscilloscope at the time of the last successful self calibration.
@@ -4894,7 +4896,7 @@ class Session(_SessionBase):
         return self._cal_fetch_temperature(enums._CalibrationTypes.SELF.value)
 
     @ivi_synchronized
-    def import_attribute_configuration_buffer(self, configuration):
+    def import_attribute_configuration_buffer(self, configuration: typing.Iterable['bytes']) -> None:
         r'''import_attribute_configuration_buffer
 
         Imports a property configuration to the session from the specified
@@ -4930,7 +4932,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def import_attribute_configuration_file(self, file_path):
+    def import_attribute_configuration_file(self, file_path: str) -> None:
         r'''import_attribute_configuration_file
 
         Imports a property configuration to the session from the specified
@@ -4965,7 +4967,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
+    def _init_with_options(self, resource_name: str, id_query: 'bool' = False, reset_device: 'bool' = False, option_string: 'dict' = "") -> int:
         r'''_init_with_options
 
         Performs the following initialization actions:
@@ -5101,7 +5103,7 @@ class Session(_SessionBase):
         return int(vi_ctype.value)
 
     @ivi_synchronized
-    def _initiate_acquisition(self):
+    def _initiate_acquisition(self) -> None:
         r'''_initiate_acquisition
 
         Initiates a waveform acquisition.
@@ -5116,7 +5118,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def probe_compensation_signal_start(self):
+    def probe_compensation_signal_start(self) -> None:
         r'''probe_compensation_signal_start
 
         Starts the 1 kHz square wave output on PFI 1 for probe compensation.
@@ -5127,7 +5129,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def probe_compensation_signal_stop(self):
+    def probe_compensation_signal_stop(self) -> None:
         r'''probe_compensation_signal_stop
 
         Stops the 1 kHz square wave output on PFI 1 for probe compensation.
@@ -5138,7 +5140,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def reset_device(self):
+    def reset_device(self) -> None:
         r'''reset_device
 
         Performs a hard reset of the device. Acquisition stops, all routes are
@@ -5154,7 +5156,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def reset_with_defaults(self):
+    def reset_with_defaults(self) -> None:
         r'''reset_with_defaults
 
         Performs a software reset of the device, returning it to the default
@@ -5167,7 +5169,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def send_software_trigger_edge(self, which_trigger):
+    def send_software_trigger_edge(self, which_trigger: 'enums.WhichTrigger') -> None:
         r'''send_software_trigger_edge
 
         Sends the selected trigger to the digitizer. Call this method if you
@@ -5197,7 +5199,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _close(self):
+    def _close(self) -> None:
         r'''_close
 
         When you are finished using an instrument driver session, you must call
@@ -5213,7 +5215,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def self_test(self):
+    def self_test(self) -> None:
         '''self_test
 
         Runs the instrument self-test routine and returns the test result(s). Refer to the
@@ -5238,7 +5240,7 @@ class Session(_SessionBase):
         return None
 
     @ivi_synchronized
-    def reset(self):
+    def reset(self) -> None:
         r'''reset
 
         Stops the acquisition, releases routes, and all session properties are
@@ -5251,7 +5253,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _self_test(self):
+    def _self_test(self) -> typing.Tuple[int, str]:
         r'''_self_test
 
         Runs the instrument self-test routine and returns the test result(s).

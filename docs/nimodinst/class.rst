@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, driver)
+.. py:class:: Session(self, driver: str)
 
     
 

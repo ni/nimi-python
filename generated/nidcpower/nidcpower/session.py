@@ -2,8 +2,10 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
+import datetime
 # Used by @ivi_synchronized
 from functools import wraps
+import typing
 
 import nidcpower._attributes as _attributes
 import nidcpower._converters as _converters
@@ -2556,7 +2558,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def self_cal(self):
+    def self_cal(self) -> None:
         r'''self_cal
 
         Performs a self-calibration upon the specified channel(s).
@@ -2600,7 +2602,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
+    def configure_aperture_time(self, aperture_time: float, units: 'enums.ApertureTimeUnits' = enums.ApertureTimeUnits.SECONDS) -> None:
         r'''configure_aperture_time
 
         Configures the aperture time on the specified channel(s).
@@ -2656,7 +2658,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def fetch_multiple(self, count, timeout=hightime.timedelta(seconds=1.0)):
+    def fetch_multiple(self, count: int, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=1.0)) -> typing.List[typing.NamedTuple[float, float, bool]]:
         '''fetch_multiple
 
         Returns a list of named tuples (Measurement) that were
@@ -2695,15 +2697,14 @@ class _SessionBase(object):
                 - **in_compliance** (bool)
 
         '''
-        import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+        measurement = typing.NamedTuple('Measurement', [('voltage', 'float'), ('current', 'float'), ('in_compliance', 'bool')])
 
         voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(timeout, count)
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
+        return [measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
 
     @ivi_synchronized
-    def measure_multiple(self):
+    def measure_multiple(self) -> typing.List[typing.NamedTuple[float, float, bool]]:
         '''measure_multiple
 
         Returns a list of named tuples (Measurement) containing the measured voltage
@@ -2734,15 +2735,14 @@ class _SessionBase(object):
                 - **in_compliance** (bool) - Always None
 
         '''
-        import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+        measurement = typing.NamedTuple('Measurement', [('voltage', 'float'), ('current', 'float'), ('in_compliance', 'bool')])
 
         voltage_measurements, current_measurements = self._measure_multiple()
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
+        return [measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
 
     @ivi_synchronized
-    def _fetch_multiple(self, timeout, count):
+    def _fetch_multiple(self, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float], count: int) -> typing.Tuple[typing.Iterable[float], typing.Iterable[float], typing.Iterable['bool']]:
         r'''_fetch_multiple
 
         Returns an array of voltage measurements, an array of current
@@ -2816,7 +2816,7 @@ class _SessionBase(object):
         return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
 
     @ivi_synchronized
-    def _get_attribute_vi_boolean(self, attribute_id):
+    def _get_attribute_vi_boolean(self, attribute_id: int) -> 'bool':
         r'''_get_attribute_vi_boolean
 
         | Queries the value of a ViBoolean property.
@@ -2869,7 +2869,7 @@ class _SessionBase(object):
         return bool(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_int32(self, attribute_id):
+    def _get_attribute_vi_int32(self, attribute_id: int) -> int:
         r'''_get_attribute_vi_int32
 
         | Queries the value of a ViInt32 property.
@@ -2922,7 +2922,7 @@ class _SessionBase(object):
         return int(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_int64(self, attribute_id):
+    def _get_attribute_vi_int64(self, attribute_id: int) -> int:
         r'''_get_attribute_vi_int64
 
         | Queries the value of a ViInt64 property.
@@ -2975,7 +2975,7 @@ class _SessionBase(object):
         return int(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_real64(self, attribute_id):
+    def _get_attribute_vi_real64(self, attribute_id: int) -> float:
         r'''_get_attribute_vi_real64
 
         | Queries the value of a ViReal64 property.
@@ -3028,7 +3028,7 @@ class _SessionBase(object):
         return float(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_string(self, attribute_id):
+    def _get_attribute_vi_string(self, attribute_id: int) -> str:
         r'''_get_attribute_vi_string
 
         | Queries the value of a ViString property.
@@ -3095,7 +3095,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
-    def _get_error(self):
+    def _get_error(self) -> typing.Tuple[int, str]:
         r'''_get_error
 
         | Retrieves and then clears the IVI error information for the session or
@@ -3145,7 +3145,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def lock(self):
+    def lock(self) -> 'bool':
         '''lock
 
         Obtains a multithread lock on the device session. Before doing so, the
@@ -3180,7 +3180,7 @@ class _SessionBase(object):
         # that will handle the unlock for them
         return _Lock(self)
 
-    def _lock_session(self):
+    def _lock_session(self) -> None:
         '''_lock_session
 
         Actual call to driver
@@ -3191,7 +3191,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def measure(self, measurement_type):
+    def measure(self, measurement_type: 'enums.MeasurementTypes') -> float:
         r'''measure
 
         Returns the measured value of either the voltage or current on the
@@ -3233,7 +3233,7 @@ class _SessionBase(object):
         return float(measurement_ctype.value)
 
     @ivi_synchronized
-    def _measure_multiple(self):
+    def _measure_multiple(self) -> typing.Tuple[typing.Iterable[float], typing.Iterable[float]]:
         r'''_measure_multiple
 
         Returns arrays of the measured voltage and current values on the
@@ -3273,7 +3273,7 @@ class _SessionBase(object):
         return voltage_measurements_array, current_measurements_array
 
     @ivi_synchronized
-    def _parse_channel_count(self):
+    def _parse_channel_count(self) -> int:
         r'''_parse_channel_count
 
         Returns the number of channels.
@@ -3296,7 +3296,7 @@ class _SessionBase(object):
         return int(number_of_channels_ctype.value)
 
     @ivi_synchronized
-    def query_in_compliance(self):
+    def query_in_compliance(self) -> 'bool':
         r'''query_in_compliance
 
         Queries the specified output device to determine if it is operating at
@@ -3341,7 +3341,7 @@ class _SessionBase(object):
         return bool(in_compliance_ctype.value)
 
     @ivi_synchronized
-    def query_max_current_limit(self, voltage_level):
+    def query_max_current_limit(self, voltage_level: float) -> float:
         r'''query_max_current_limit
 
         Queries the maximum current limit on an output channel if the output
@@ -3372,7 +3372,7 @@ class _SessionBase(object):
         return float(max_current_limit_ctype.value)
 
     @ivi_synchronized
-    def query_max_voltage_level(self, current_limit):
+    def query_max_voltage_level(self, current_limit: float) -> float:
         r'''query_max_voltage_level
 
         Queries the maximum voltage level on an output channel if the output
@@ -3403,7 +3403,7 @@ class _SessionBase(object):
         return float(max_voltage_level_ctype.value)
 
     @ivi_synchronized
-    def query_min_current_limit(self, voltage_level):
+    def query_min_current_limit(self, voltage_level: float) -> float:
         r'''query_min_current_limit
 
         Queries the minimum current limit on an output channel if the output
@@ -3434,7 +3434,7 @@ class _SessionBase(object):
         return float(min_current_limit_ctype.value)
 
     @ivi_synchronized
-    def query_output_state(self, output_state):
+    def query_output_state(self, output_state: 'enums.OutputStates') -> 'bool':
         r'''query_output_state
 
         Queries the specified output channel to determine if the output channel
@@ -3477,7 +3477,7 @@ class _SessionBase(object):
         return bool(in_state_ctype.value)
 
     @ivi_synchronized
-    def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
+    def _set_attribute_vi_boolean(self, attribute_id: int, attribute_value: 'bool') -> None:
         r'''_set_attribute_vi_boolean
 
         | Sets the value of a ViBoolean property.
@@ -3533,7 +3533,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_int32(self, attribute_id, attribute_value):
+    def _set_attribute_vi_int32(self, attribute_id: int, attribute_value: int) -> None:
         r'''_set_attribute_vi_int32
 
         | Sets the value of a ViInt32 property.
@@ -3589,7 +3589,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_int64(self, attribute_id, attribute_value):
+    def _set_attribute_vi_int64(self, attribute_id: int, attribute_value: int) -> None:
         r'''_set_attribute_vi_int64
 
         | Sets the value of a ViInt64 property.
@@ -3645,7 +3645,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_real64(self, attribute_id, attribute_value):
+    def _set_attribute_vi_real64(self, attribute_id: int, attribute_value: float) -> None:
         r'''_set_attribute_vi_real64
 
         | Sets the value of a ViReal64 property.
@@ -3701,7 +3701,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_string(self, attribute_id, attribute_value):
+    def _set_attribute_vi_string(self, attribute_id: int, attribute_value: str) -> None:
         r'''_set_attribute_vi_string
 
         | Sets the value of a ViString property.
@@ -3757,7 +3757,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def set_sequence(self, values, source_delays):
+    def set_sequence(self, values: typing.Iterable[float], source_delays: typing.Iterable[float]) -> None:
         r'''set_sequence
 
         Configures a series of voltage or current outputs and corresponding
@@ -3813,7 +3813,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def unlock(self):
+    def unlock(self) -> 'bool':
         '''unlock
 
         Releases a lock that you acquired on an device session using
@@ -3825,7 +3825,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
-    def _error_message(self, error_code):
+    def _error_message(self, error_code: int) -> str:
         r'''_error_message
 
         Converts a status code returned by an instrument driver method into a
@@ -3853,7 +3853,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
 
-    def __init__(self, resource_name, channels=None, reset=False, options={}):
+    def __init__(self, resource_name: str, channels: typing.Union[str, 'list', 'range', 'tuple'] = None, reset: 'bool' = False, options={}):
         r'''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
 
         Creates and returns a new NI-DCPower session to the power supply or SMU
@@ -4016,7 +4016,7 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def abort(self):
+    def abort(self) -> None:
         r'''abort
 
         Transitions the NI-DCPower session from the Running state to the
@@ -4049,7 +4049,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def commit(self):
+    def commit(self) -> None:
         r'''commit
 
         Applies previously configured settings to the device. Calling this
@@ -4073,7 +4073,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _create_advanced_sequence(self, sequence_name, attribute_ids, set_as_active_sequence):
+    def _create_advanced_sequence(self, sequence_name: str, attribute_ids: typing.Iterable[int], set_as_active_sequence: 'bool') -> None:
         r'''_create_advanced_sequence
 
         Creates an empty advanced sequence. Call the
@@ -4242,7 +4242,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def create_advanced_sequence_step(self, set_as_active_step=True):
+    def create_advanced_sequence_step(self, set_as_active_step: 'bool' = True) -> None:
         r'''create_advanced_sequence_step
 
         Creates a new advanced sequence step in the advanced sequence specified
@@ -4285,7 +4285,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def delete_advanced_sequence(self, sequence_name):
+    def delete_advanced_sequence(self, sequence_name: str) -> None:
         r'''delete_advanced_sequence
 
         Deletes a previously created advanced sequence and all the advanced
@@ -4323,7 +4323,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def disable(self):
+    def disable(self) -> None:
         r'''disable
 
         This method performs the same actions as the reset
@@ -4339,7 +4339,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def export_attribute_configuration_buffer(self):
+    def export_attribute_configuration_buffer(self) -> typing.Iterable['bytes']:
         r'''export_attribute_configuration_buffer
 
         Exports the property configuration of the session to the specified
@@ -4404,7 +4404,7 @@ class Session(_SessionBase):
         return _converters.convert_to_bytes(configuration_array)
 
     @ivi_synchronized
-    def export_attribute_configuration_file(self, file_path):
+    def export_attribute_configuration_file(self, file_path: str) -> None:
         r'''export_attribute_configuration_file
 
         Exports the property configuration of the session to the specified
@@ -4464,7 +4464,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def create_advanced_sequence(self, sequence_name, property_names, set_as_active_sequence=True):
+    def create_advanced_sequence(self, sequence_name: str, property_names: typing.Iterable[str], set_as_active_sequence: 'bool' = True) -> None:
         '''create_advanced_sequence
 
         Creates an empty advanced sequence. Call the
@@ -4632,7 +4632,7 @@ class Session(_SessionBase):
         self._create_advanced_sequence(sequence_name, list(attribute_ids_used), set_as_active_sequence)
 
     @ivi_synchronized
-    def get_channel_name(self, index):
+    def get_channel_name(self, index: int) -> str:
         r'''get_channel_name
 
         Retrieves the output **channelName** that corresponds to the requested
@@ -4661,7 +4661,7 @@ class Session(_SessionBase):
         return channel_name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def _get_ext_cal_last_date_and_time(self):
+    def _get_ext_cal_last_date_and_time(self) -> typing.Tuple[int, int, int, int, int]:
         r'''_get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful calibration. The time
@@ -4693,7 +4693,7 @@ class Session(_SessionBase):
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     @ivi_synchronized
-    def get_ext_cal_last_temp(self):
+    def get_ext_cal_last_temp(self) -> float:
         r'''get_ext_cal_last_temp
 
         Returns the onboard **temperature** of the device, in degrees Celsius,
@@ -4711,7 +4711,7 @@ class Session(_SessionBase):
         return float(temperature_ctype.value)
 
     @ivi_synchronized
-    def get_ext_cal_recommended_interval(self):
+    def get_ext_cal_recommended_interval(self) -> 'hightime.timedelta':
         r'''get_ext_cal_recommended_interval
 
         Returns the recommended maximum interval, in **months**, between
@@ -4729,7 +4729,7 @@ class Session(_SessionBase):
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     @ivi_synchronized
-    def get_ext_cal_last_date_and_time(self):
+    def get_ext_cal_last_date_and_time(self) -> 'hightime.datetime':
         '''get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful calibration.
@@ -4742,7 +4742,7 @@ class Session(_SessionBase):
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
-    def get_self_cal_last_date_and_time(self):
+    def get_self_cal_last_date_and_time(self) -> 'hightime.datetime':
         '''get_self_cal_last_date_and_time
 
         Returns the date and time of the oldest successful self-calibration from among the channels in the session.
@@ -4757,7 +4757,7 @@ class Session(_SessionBase):
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
-    def _get_self_cal_last_date_and_time(self):
+    def _get_self_cal_last_date_and_time(self) -> typing.Tuple[int, int, int, int, int]:
         r'''_get_self_cal_last_date_and_time
 
         Returns the date and time of the oldest successful self-calibration from
@@ -4799,7 +4799,7 @@ class Session(_SessionBase):
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     @ivi_synchronized
-    def get_self_cal_last_temp(self):
+    def get_self_cal_last_temp(self) -> float:
         r'''get_self_cal_last_temp
 
         Returns the onboard temperature of the device, in degrees Celsius,
@@ -4830,7 +4830,7 @@ class Session(_SessionBase):
         return float(temperature_ctype.value)
 
     @ivi_synchronized
-    def import_attribute_configuration_buffer(self, configuration):
+    def import_attribute_configuration_buffer(self, configuration: typing.Iterable['bytes']) -> None:
         r'''import_attribute_configuration_buffer
 
         Imports a property configuration to the session from the specified
@@ -4889,7 +4889,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def import_attribute_configuration_file(self, file_path):
+    def import_attribute_configuration_file(self, file_path: str) -> None:
         r'''import_attribute_configuration_file
 
         Imports a property configuration to the session from the specified
@@ -4947,7 +4947,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _initialize_with_channels(self, resource_name, channels=None, reset=False, option_string=""):
+    def _initialize_with_channels(self, resource_name: str, channels: typing.Union[str, 'list', 'range', 'tuple'] = None, reset: 'bool' = False, option_string: 'dict' = "") -> int:
         r'''_initialize_with_channels
 
         Creates and returns a new NI-DCPower session to the power supply or SMU
@@ -5027,7 +5027,7 @@ class Session(_SessionBase):
         return int(vi_ctype.value)
 
     @ivi_synchronized
-    def _initiate(self):
+    def _initiate(self) -> None:
         r'''_initiate
 
         Starts generation or acquisition, causing the NI-DCPower session to
@@ -5049,7 +5049,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def read_current_temperature(self):
+    def read_current_temperature(self) -> float:
         r'''read_current_temperature
 
         Returns the current onboard **temperature**, in degrees Celsius, of the
@@ -5066,7 +5066,7 @@ class Session(_SessionBase):
         return float(temperature_ctype.value)
 
     @ivi_synchronized
-    def reset_device(self):
+    def reset_device(self) -> None:
         r'''reset_device
 
         Resets the device to a known state. The method disables power
@@ -5089,7 +5089,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def reset_with_defaults(self):
+    def reset_with_defaults(self) -> None:
         r'''reset_with_defaults
 
         Resets the device to a known state. This method disables power
@@ -5106,7 +5106,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def send_software_edge_trigger(self, trigger):
+    def send_software_edge_trigger(self, trigger: 'enums.SendSoftwareEdgeTriggerType') -> None:
         r'''send_software_edge_trigger
 
         Asserts the specified trigger. This method can override an external
@@ -5151,7 +5151,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_for_event(self, event_id, timeout=hightime.timedelta(seconds=10.0)):
+    def wait_for_event(self, event_id: 'enums.Event', timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=10.0)) -> None:
         r'''wait_for_event
 
         Waits until the device has generated the specified event.
@@ -5207,7 +5207,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _close(self):
+    def _close(self) -> None:
         r'''_close
 
         Closes the session specified in **vi** and deallocates the resources
@@ -5231,7 +5231,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def self_test(self):
+    def self_test(self) -> None:
         '''self_test
 
         Performs the device self-test routine and returns the test result(s).
@@ -5261,7 +5261,7 @@ class Session(_SessionBase):
         return None
 
     @ivi_synchronized
-    def reset(self):
+    def reset(self) -> None:
         r'''reset
 
         Resets the device to a known state. This method disables power
@@ -5277,7 +5277,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _self_test(self):
+    def _self_test(self) -> typing.Tuple[int, str]:
         r'''_self_test
 
         Performs the device self-test routine and returns the test result(s).

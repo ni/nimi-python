@@ -2,8 +2,10 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
+import datetime
 # Used by @ivi_synchronized
 from functools import wraps
+import typing
 
 import nifake._attributes as _attributes
 import nifake._converters as _converters
@@ -246,7 +248,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def _get_attribute_vi_boolean(self, attribute_id):
+    def _get_attribute_vi_boolean(self, attribute_id: int) -> 'bool':
         r'''_get_attribute_vi_boolean
 
         Queries the value of a ViBoolean property.
@@ -274,7 +276,7 @@ class _SessionBase(object):
         return bool(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_int32(self, attribute_id):
+    def _get_attribute_vi_int32(self, attribute_id: int) -> int:
         r'''_get_attribute_vi_int32
 
         Queries the value of a ViInt32 property.
@@ -302,7 +304,7 @@ class _SessionBase(object):
         return int(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_int64(self, attribute_id):
+    def _get_attribute_vi_int64(self, attribute_id: int) -> int:
         r'''_get_attribute_vi_int64
 
         Queries the value of a ViInt64 property.
@@ -330,7 +332,7 @@ class _SessionBase(object):
         return int(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_real64(self, attribute_id):
+    def _get_attribute_vi_real64(self, attribute_id: int) -> float:
         r'''_get_attribute_vi_real64
 
         Queries the value of a ViReal property.
@@ -358,7 +360,7 @@ class _SessionBase(object):
         return float(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_string(self, attribute_id):
+    def _get_attribute_vi_string(self, attribute_id: int) -> str:
         r'''_get_attribute_vi_string
 
         Queries the value of a ViBoolean property.
@@ -390,7 +392,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
-    def _get_error(self):
+    def _get_error(self) -> typing.Tuple[int, str]:
         r'''_get_error
 
         Returns the error information associated with the session.
@@ -413,7 +415,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def lock(self):
+    def lock(self) -> 'bool':
         '''lock
 
         Obtains a multithread lock on the device session. Before doing so, the
@@ -448,7 +450,7 @@ class _SessionBase(object):
         # that will handle the unlock for them
         return _Lock(self)
 
-    def _lock_session(self):
+    def _lock_session(self) -> None:
         '''_lock_session
 
         Actual call to driver
@@ -459,7 +461,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def read_from_channel(self, maximum_time):
+    def read_from_channel(self, maximum_time: 'hightime.timedelta') -> float:
         r'''read_from_channel
 
         Acquires a single measurement and returns the measured value.
@@ -487,7 +489,7 @@ class _SessionBase(object):
         return float(reading_ctype.value)
 
     @ivi_synchronized
-    def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
+    def _set_attribute_vi_boolean(self, attribute_id: int, attribute_value: 'bool') -> None:
         r'''_set_attribute_vi_boolean
 
         This method sets the value of a ViBoolean property.
@@ -513,7 +515,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_int32(self, attribute_id, attribute_value):
+    def _set_attribute_vi_int32(self, attribute_id: int, attribute_value: int) -> None:
         r'''_set_attribute_vi_int32
 
         This method sets the value of a ViInt32 property.
@@ -539,7 +541,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_int64(self, attribute_id, attribute_value):
+    def _set_attribute_vi_int64(self, attribute_id: int, attribute_value: int) -> None:
         r'''_set_attribute_vi_int64
 
         This method sets the value of a ViInt64 property.
@@ -565,7 +567,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_real64(self, attribute_id, attribute_value):
+    def _set_attribute_vi_real64(self, attribute_id: int, attribute_value: float) -> None:
         r'''_set_attribute_vi_real64
 
         This method sets the value of a ViReal64 property.
@@ -591,7 +593,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_string(self, attribute_id, attribute_value):
+    def _set_attribute_vi_string(self, attribute_id: int, attribute_value: str) -> None:
         r'''_set_attribute_vi_string
 
         This method sets the value of a ViString property.
@@ -616,7 +618,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def unlock(self):
+    def unlock(self) -> 'bool':
         '''unlock
 
         Releases a lock that you acquired on an device session using
@@ -628,7 +630,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
-    def _error_message(self, error_code):
+    def _error_message(self, error_code: int) -> str:
         r'''_error_message
 
         Takes the errorCode returned by a functiona and returns it as a user-readable string.
@@ -652,7 +654,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, options={}, id_query=False, reset_device=False):
+    def __init__(self, resource_name: str, options={}, id_query: 'bool' = False, reset_device: 'bool' = False):
         r'''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation
 
         Creates a new IVI instrument driver session.
@@ -765,7 +767,7 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def abort(self):
+    def abort(self) -> None:
         r'''abort
 
         Aborts a previously initiated thingie.
@@ -776,7 +778,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def accept_list_of_durations_in_seconds(self, delays):
+    def accept_list_of_durations_in_seconds(self, delays: typing.Union[typing.Iterable['hightime.timedelta'], typing.Iterable['datetime.timedelta'], typing.Iterable[float]]) -> None:
         r'''accept_list_of_durations_in_seconds
 
         Accepts list of floats or hightime.timedelta instances representing time delays.
@@ -794,7 +796,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def bool_array_output_function(self, number_of_elements):
+    def bool_array_output_function(self, number_of_elements: int) -> typing.Iterable['bool']:
         r'''bool_array_output_function
 
         This method returns an array of booleans.
@@ -816,7 +818,7 @@ class Session(_SessionBase):
         return [bool(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
     @ivi_synchronized
-    def double_all_the_nums(self, numbers):
+    def double_all_the_nums(self, numbers: typing.Iterable[float]) -> None:
         r'''double_all_the_nums
 
         Test for buffer with converter
@@ -834,7 +836,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def enum_array_output_function(self, number_of_elements):
+    def enum_array_output_function(self, number_of_elements: int) -> typing.Iterable['enums.Turtle']:
         r'''enum_array_output_function
 
         This method returns an array of enums, stored as 16 bit integers under the hood.
@@ -856,7 +858,7 @@ class Session(_SessionBase):
         return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
     @ivi_synchronized
-    def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
+    def enum_input_function_with_defaults(self, a_turtle: 'enums.Turtle' = enums.Turtle.LEONARDO) -> None:
         r'''enum_input_function_with_defaults
 
         This method takes one parameter other than the session, which happens to be an enum and has a default value.
@@ -884,7 +886,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def export_attribute_configuration_buffer(self):
+    def export_attribute_configuration_buffer(self) -> typing.Iterable['bytes']:
         r'''export_attribute_configuration_buffer
 
         Export configuration buffer.
@@ -907,7 +909,7 @@ class Session(_SessionBase):
         return _converters.convert_to_bytes(configuration_array)
 
     @ivi_synchronized
-    def fetch_waveform(self, number_of_samples):
+    def fetch_waveform(self, number_of_samples: int) -> typing.Iterable[float]:
         r'''fetch_waveform
 
         Returns waveform data.
@@ -933,7 +935,7 @@ class Session(_SessionBase):
         return waveform_data_array
 
     @ivi_synchronized
-    def fetch_waveform_into(self, waveform_data):
+    def fetch_waveform_into(self, waveform_data: typing.Iterable[float]) -> None:
         r'''fetch_waveform
 
         Returns waveform data.
@@ -967,7 +969,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def get_a_boolean(self):
+    def get_a_boolean(self) -> 'bool':
         r'''get_a_boolean
 
         Returns a boolean.
@@ -985,7 +987,7 @@ class Session(_SessionBase):
         return bool(a_boolean_ctype.value)
 
     @ivi_synchronized
-    def get_a_number(self):
+    def get_a_number(self) -> int:
         r'''get_a_number
 
         Returns a number.
@@ -1003,7 +1005,7 @@ class Session(_SessionBase):
         return int(a_number_ctype.value)
 
     @ivi_synchronized
-    def get_a_string_of_fixed_maximum_size(self):
+    def get_a_string_of_fixed_maximum_size(self) -> str:
         r'''get_a_string_of_fixed_maximum_size
 
         Illustrates returning a string of fixed size.
@@ -1019,7 +1021,7 @@ class Session(_SessionBase):
         return a_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_a_string_using_python_code(self, a_number):
+    def get_a_string_using_python_code(self, a_number: int) -> str:
         r'''get_a_string_using_python_code
 
         Returns a number and a string.
@@ -1042,7 +1044,7 @@ class Session(_SessionBase):
         return a_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_an_ivi_dance_string(self):
+    def get_an_ivi_dance_string(self) -> str:
         r'''get_an_ivi_dance_string
 
         Returns a string using the IVI dance.
@@ -1063,7 +1065,7 @@ class Session(_SessionBase):
         return a_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_an_ivi_dance_with_a_twist_string(self):
+    def get_an_ivi_dance_with_a_twist_string(self) -> str:
         r'''get_an_ivi_dance_with_a_twist_string
 
         TBD
@@ -1085,7 +1087,7 @@ class Session(_SessionBase):
         return a_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_array_for_python_code_custom_type(self):
+    def get_array_for_python_code_custom_type(self) -> typing.Iterable['custom_struct.CustomStruct']:
         r'''get_array_for_python_code_custom_type
 
         This method returns an array for use in python-code size mechanism.
@@ -1103,7 +1105,7 @@ class Session(_SessionBase):
         return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
 
     @ivi_synchronized
-    def get_array_for_python_code_double(self):
+    def get_array_for_python_code_double(self) -> typing.Iterable[float]:
         r'''get_array_for_python_code_double
 
         This method returns an array for use in python-code size mechanism.
@@ -1121,7 +1123,7 @@ class Session(_SessionBase):
         return [float(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
 
     @ivi_synchronized
-    def get_array_size_for_python_code(self):
+    def get_array_size_for_python_code(self) -> int:
         r'''get_array_size_for_python_code
 
         This method returns the size of the array for use in python-code size mechanism.
@@ -1137,7 +1139,7 @@ class Session(_SessionBase):
         return int(size_out_ctype.value)
 
     @ivi_synchronized
-    def get_array_using_ivi_dance(self):
+    def get_array_using_ivi_dance(self) -> typing.Iterable[float]:
         r'''get_array_using_ivi_dance
 
         This method returns an array of float whose size is determined with the IVI dance.
@@ -1159,7 +1161,7 @@ class Session(_SessionBase):
         return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
 
     @ivi_synchronized
-    def _get_cal_date_and_time(self, cal_type):
+    def _get_cal_date_and_time(self, cal_type: int) -> typing.Tuple[int, int, int, int, int]:
         r'''_get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
@@ -1192,7 +1194,7 @@ class Session(_SessionBase):
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     @ivi_synchronized
-    def get_cal_interval(self):
+    def get_cal_interval(self) -> 'hightime.timedelta':
         r'''get_cal_interval
 
         Returns the recommended maximum interval, in **months**, between external calibrations.
@@ -1208,7 +1210,7 @@ class Session(_SessionBase):
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     @ivi_synchronized
-    def get_custom_type(self):
+    def get_custom_type(self) -> 'custom_struct.CustomStruct':
         r'''get_custom_type
 
         This method returns a custom type.
@@ -1224,7 +1226,7 @@ class Session(_SessionBase):
         return custom_struct.CustomStruct(cs_ctype)
 
     @ivi_synchronized
-    def get_custom_type_array(self, number_of_elements):
+    def get_custom_type_array(self, number_of_elements: int) -> typing.Iterable['custom_struct.CustomStruct']:
         r'''get_custom_type_array
 
         This method returns a custom type.
@@ -1246,7 +1248,7 @@ class Session(_SessionBase):
         return [custom_struct.CustomStruct(cs_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
     @ivi_synchronized
-    def get_enum_value(self):
+    def get_enum_value(self) -> typing.Tuple[int, 'enums.Turtle']:
         r'''get_enum_value
 
         Returns an enum value
@@ -1279,7 +1281,7 @@ class Session(_SessionBase):
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
 
     @ivi_synchronized
-    def get_cal_date_and_time(self, cal_type):
+    def get_cal_date_and_time(self, cal_type: int) -> 'hightime.datetime':
         '''get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
@@ -1296,7 +1298,7 @@ class Session(_SessionBase):
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
-    def import_attribute_configuration_buffer(self, configuration):
+    def import_attribute_configuration_buffer(self, configuration: typing.Iterable['bytes']) -> None:
         r'''import_attribute_configuration_buffer
 
         Import configuration buffer.
@@ -1313,7 +1315,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _init_with_options(self, resource_name, option_string, id_query=False, reset_device=False):
+    def _init_with_options(self, resource_name: str, option_string: 'dict', id_query: 'bool' = False, reset_device: 'bool' = False) -> int:
         r'''_init_with_options
 
         Creates a new IVI instrument driver session.
@@ -1356,7 +1358,7 @@ class Session(_SessionBase):
         return int(vi_ctype.value)
 
     @ivi_synchronized
-    def _initiate(self):
+    def _initiate(self) -> None:
         r'''_initiate
 
         Initiates a thingie.
@@ -1367,7 +1369,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers=None):
+    def multiple_array_types(self, output_array_size: int, input_array_of_floats: typing.Iterable[float], input_array_of_integers: typing.Iterable[int] = None) -> typing.Tuple[typing.Iterable[float], typing.Iterable[float]]:
         r'''multiple_array_types
 
         Receives and returns multiple types of arrays.
@@ -1404,7 +1406,7 @@ class Session(_SessionBase):
         return [float(output_array_ctype[i]) for i in range(output_array_size_ctype.value)], [float(output_array_of_fixed_length_ctype[i]) for i in range(3)]
 
     @ivi_synchronized
-    def multiple_arrays_same_size(self, values1, values2, values3, values4):
+    def multiple_arrays_same_size(self, values1: typing.Iterable[float], values2: typing.Iterable[float], values3: typing.Iterable[float], values4: typing.Iterable[float]) -> None:
         r'''multiple_arrays_same_size
 
         Method to test multiple arrays that use the same size
@@ -1436,7 +1438,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def one_input_function(self, a_number):
+    def one_input_function(self, a_number: int) -> None:
         r'''one_input_function
 
         This method takes one parameter other than the session.
@@ -1452,7 +1454,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):
+    def parameters_are_multiple_types(self, a_boolean: 'bool', an_int32: int, an_int64: int, an_int_enum: 'enums.Turtle', a_float: float, a_float_enum: 'enums.FloatEnum', a_string: str) -> None:
         r'''parameters_are_multiple_types
 
         Has parameters of multiple types.
@@ -1501,7 +1503,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def simple_function(self):
+    def simple_function(self) -> None:
         r'''simple_function
 
         This method takes no parameters other than the session.
@@ -1512,7 +1514,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def read(self, maximum_time):
+    def read(self, maximum_time: 'hightime.timedelta') -> float:
         r'''read
 
         Acquires a single measurement and returns the measured value.
@@ -1533,7 +1535,7 @@ class Session(_SessionBase):
         return float(reading_ctype.value)
 
     @ivi_synchronized
-    def return_a_number_and_a_string(self):
+    def return_a_number_and_a_string(self) -> typing.Tuple[int, str]:
         r'''return_a_number_and_a_string
 
         Returns a number and a string.
@@ -1554,7 +1556,7 @@ class Session(_SessionBase):
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def return_duration_in_seconds(self):
+    def return_duration_in_seconds(self) -> 'hightime.timedelta':
         r'''return_duration_in_seconds
 
         Returns a hightime.timedelta instance.
@@ -1570,7 +1572,7 @@ class Session(_SessionBase):
         return _converters.convert_seconds_real64_to_timedelta(float(timedelta_ctype.value))
 
     @ivi_synchronized
-    def return_list_of_durations_in_seconds(self, number_of_elements):
+    def return_list_of_durations_in_seconds(self, number_of_elements: int) -> typing.Iterable['hightime.timedelta']:
         r'''return_list_of_durations_in_seconds
 
         Returns a list of hightime.timedelta instances.
@@ -1592,7 +1594,7 @@ class Session(_SessionBase):
         return _converters.convert_seconds_real64_to_timedeltas([float(timedeltas_ctype[i]) for i in range(number_of_elements_ctype.value)])
 
     @ivi_synchronized
-    def return_multiple_types(self, array_size):
+    def return_multiple_types(self, array_size: int) -> typing.Tuple['bool', int, int, 'enums.Turtle', float, 'enums.FloatEnum', typing.Iterable[float], str]:
         r'''return_multiple_types
 
         Returns multiple types.
@@ -1652,7 +1654,7 @@ class Session(_SessionBase):
         return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), [float(an_array_ctype[i]) for i in range(array_size_ctype.value)], a_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def set_custom_type(self, cs):
+    def set_custom_type(self, cs: 'custom_struct.CustomStruct') -> None:
         r'''set_custom_type
 
         This method takes a custom type.
@@ -1668,7 +1670,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def set_custom_type_array(self, cs):
+    def set_custom_type_array(self, cs: typing.Iterable['custom_struct.CustomStruct']) -> None:
         r'''set_custom_type_array
 
         This method takes an array of custom types.
@@ -1685,7 +1687,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name=enums.MobileOSNames.ANDROID):
+    def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name: 'enums.MobileOSNames' = enums.MobileOSNames.ANDROID) -> None:
         r'''string_valued_enum_input_function_with_defaults
 
         This method takes one parameter other than the session, which happens to be a string-valued enum and has a default value.
@@ -1711,7 +1713,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def two_input_function(self, a_number, a_string):
+    def two_input_function(self, a_number: float, a_string: str) -> None:
         r'''two_input_function
 
         This method takes two parameters other than the session.
@@ -1730,7 +1732,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def use64_bit_number(self, input):
+    def use64_bit_number(self, input: int) -> int:
         r'''use64_bit_number
 
         Returns a number and a string.
@@ -1753,7 +1755,7 @@ class Session(_SessionBase):
         return int(output_ctype.value)
 
     @ivi_synchronized
-    def write_waveform(self, waveform):
+    def write_waveform(self, waveform: typing.Iterable[float]) -> None:
         r'''write_waveform
 
         Writes waveform to the driver
@@ -1771,7 +1773,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def write_waveform_numpy(self, waveform):
+    def write_waveform_numpy(self, waveform: typing.Iterable[float]) -> None:
         r'''write_waveform
 
         Writes waveform to the driver
@@ -1795,7 +1797,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _close(self):
+    def _close(self) -> None:
         r'''_close
 
         Closes the specified session and deallocates resources that it reserved.
@@ -1806,7 +1808,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def self_test(self):
+    def self_test(self) -> None:
         '''self_test
 
         Performs a self-test
@@ -1817,7 +1819,7 @@ class Session(_SessionBase):
         return None
 
     @ivi_synchronized
-    def _self_test(self):
+    def _self_test(self) -> typing.Tuple[int, str]:
         r'''_self_test
 
         Performs a self-test.

@@ -2,8 +2,10 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
+import datetime
 # Used by @ivi_synchronized
 from functools import wraps
+import typing
 
 import nidmm._attributes as _attributes
 import nidmm._converters as _converters
@@ -565,7 +567,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def _get_attribute_vi_boolean(self, attribute_id):
+    def _get_attribute_vi_boolean(self, attribute_id: int) -> 'bool':
         r'''_get_attribute_vi_boolean
 
         Queries the value of a ViBoolean property. You can use this method to
@@ -603,7 +605,7 @@ class _SessionBase(object):
         return bool(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_int32(self, attribute_id):
+    def _get_attribute_vi_int32(self, attribute_id: int) -> int:
         r'''_get_attribute_vi_int32
 
         Queries the value of a ViInt32 property. You can use this method to
@@ -641,7 +643,7 @@ class _SessionBase(object):
         return int(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_real64(self, attribute_id):
+    def _get_attribute_vi_real64(self, attribute_id: int) -> float:
         r'''_get_attribute_vi_real64
 
         Queries the value of a ViReal64 property. You can use this method to
@@ -679,7 +681,7 @@ class _SessionBase(object):
         return float(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_string(self, attribute_id):
+    def _get_attribute_vi_string(self, attribute_id: int) -> str:
         r'''_get_attribute_vi_string
 
         Queries the value of a ViString property. You can use this method to
@@ -728,7 +730,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
-    def _get_error(self):
+    def _get_error(self) -> typing.Tuple[int, str]:
         r'''_get_error
 
         Returns the error information associated with the
@@ -761,7 +763,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def lock(self):
+    def lock(self) -> 'bool':
         '''lock
 
         Obtains a multithread lock on the device session. Before doing so, the
@@ -796,7 +798,7 @@ class _SessionBase(object):
         # that will handle the unlock for them
         return _Lock(self)
 
-    def _lock_session(self):
+    def _lock_session(self) -> None:
         '''_lock_session
 
         Actual call to driver
@@ -807,7 +809,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
+    def _set_attribute_vi_boolean(self, attribute_id: int, attribute_value: 'bool') -> None:
         r'''_set_attribute_vi_boolean
 
         This method sets the value of a ViBoolean property.
@@ -857,7 +859,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_int32(self, attribute_id, attribute_value):
+    def _set_attribute_vi_int32(self, attribute_id: int, attribute_value: int) -> None:
         r'''_set_attribute_vi_int32
 
         This method sets the value of a ViInt32 property.
@@ -907,7 +909,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_real64(self, attribute_id, attribute_value):
+    def _set_attribute_vi_real64(self, attribute_id: int, attribute_value: float) -> None:
         r'''_set_attribute_vi_real64
 
         This method sets the value of a ViReal64 property.
@@ -957,7 +959,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_string(self, attribute_id, attribute_value):
+    def _set_attribute_vi_string(self, attribute_id: int, attribute_value: str) -> None:
         r'''_set_attribute_vi_string
 
         This method sets the value of a ViString property.
@@ -1006,7 +1008,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def unlock(self):
+    def unlock(self) -> 'bool':
         '''unlock
 
         Releases a lock that you acquired on an device session using
@@ -1018,7 +1020,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
-    def _error_message(self, error_code):
+    def _error_message(self, error_code: int) -> str:
         r'''_error_message
 
         Takes the **Error_Code** returned by the instrument driver methods,
@@ -1044,7 +1046,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
+    def __init__(self, resource_name: str, id_query: 'bool' = False, reset_device: 'bool' = False, options={}):
         r'''An NI-DMM session to a National Instruments Digital Multimeter
 
         This method completes the following tasks:
@@ -1200,7 +1202,7 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def abort(self):
+    def abort(self) -> None:
         r'''abort
 
         Aborts a previously initiated measurement and returns the DMM to the
@@ -1212,7 +1214,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
+    def configure_measurement_absolute(self, measurement_function: 'enums.Function', range: float, resolution_absolute: float) -> None:
         r'''configure_measurement_absolute
 
         Configures the common properties of the measurement. These properties
@@ -1279,7 +1281,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_measurement_digits(self, measurement_function, range, resolution_digits):
+    def configure_measurement_digits(self, measurement_function: 'enums.Function', range: float, resolution_digits: float) -> None:
         r'''configure_measurement_digits
 
         Configures the common properties of the measurement. These properties
@@ -1347,7 +1349,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=hightime.timedelta(seconds=-1)):
+    def configure_multi_point(self, trigger_count: int, sample_count: int, sample_trigger: 'enums.SampleTrigger' = enums.SampleTrigger.IMMEDIATE, sample_interval: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=-1)) -> None:
         r'''configure_multi_point
 
         Configures the properties for multipoint measurements. These properties
@@ -1407,7 +1409,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_rtd_custom(self, rtd_a, rtd_b, rtd_c):
+    def configure_rtd_custom(self, rtd_a: float, rtd_b: float, rtd_c: float) -> None:
         r'''configure_rtd_custom
 
         Configures the A, B, and C parameters for a custom RTD.
@@ -1435,7 +1437,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_rtd_type(self, rtd_type, rtd_resistance):
+    def configure_rtd_type(self, rtd_type: 'enums.RTDType', rtd_resistance: float) -> None:
         r'''configure_rtd_type
 
         Configures the RTD Type and RTD Resistance parameters for an RTD.
@@ -1479,7 +1481,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_thermistor_custom(self, thermistor_a, thermistor_b, thermistor_c):
+    def configure_thermistor_custom(self, thermistor_a: float, thermistor_b: float, thermistor_c: float) -> None:
         r'''configure_thermistor_custom
 
         Configures the A, B, and C parameters for a custom thermistor.
@@ -1516,7 +1518,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_thermocouple(self, thermocouple_type, reference_junction_type=enums.ThermocoupleReferenceJunctionType.FIXED):
+    def configure_thermocouple(self, thermocouple_type: 'enums.ThermocoupleType', reference_junction_type: 'enums.ThermocoupleReferenceJunctionType' = enums.ThermocoupleReferenceJunctionType.FIXED) -> None:
         r'''configure_thermocouple
 
         Configures the thermocouple type and reference junction type for a
@@ -1566,7 +1568,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_trigger(self, trigger_source, trigger_delay=hightime.timedelta(seconds=-1)):
+    def configure_trigger(self, trigger_source: 'enums.TriggerSource', trigger_delay: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=-1)) -> None:
         r'''configure_trigger
 
         Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
@@ -1612,7 +1614,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_waveform_acquisition(self, measurement_function, range, rate, waveform_points):
+    def configure_waveform_acquisition(self, measurement_function: 'enums.Function', range: float, rate: float, waveform_points: int) -> None:
         r'''configure_waveform_acquisition
 
         Configures the DMM for waveform acquisitions. This feature is supported
@@ -1668,7 +1670,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def disable(self):
+    def disable(self) -> None:
         r'''disable
 
         Places the instrument in a quiescent state where it has minimal or no
@@ -1681,7 +1683,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def export_attribute_configuration_buffer(self):
+    def export_attribute_configuration_buffer(self) -> typing.Iterable['bytes']:
         r'''export_attribute_configuration_buffer
 
         Exports the property configuration of the session to the specified
@@ -1739,7 +1741,7 @@ class Session(_SessionBase):
         return _converters.convert_to_bytes(configuration_array)
 
     @ivi_synchronized
-    def export_attribute_configuration_file(self, file_path):
+    def export_attribute_configuration_file(self, file_path: str) -> None:
         r'''export_attribute_configuration_file
 
         Exports the property configuration of the session to the specified
@@ -1792,7 +1794,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def fetch(self, maximum_time=hightime.timedelta(milliseconds=-1)):
+    def fetch(self, maximum_time: typing.Union['hightime.timedelta', 'datetime.timedelta', int] = hightime.timedelta(milliseconds=-1)) -> float:
         r'''fetch
 
         Returns the value from a previously initiated measurement. You must call
@@ -1826,7 +1828,7 @@ class Session(_SessionBase):
         return float(reading_ctype.value)
 
     @ivi_synchronized
-    def fetch_multi_point(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):
+    def fetch_multi_point(self, array_size: int, maximum_time: typing.Union['hightime.timedelta', 'datetime.timedelta', int] = hightime.timedelta(milliseconds=-1)) -> typing.Iterable[float]:
         r'''fetch_multi_point
 
         Returns an array of values from a previously initiated multipoint
@@ -1881,7 +1883,7 @@ class Session(_SessionBase):
         return reading_array_array
 
     @ivi_synchronized
-    def fetch_waveform(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):
+    def fetch_waveform(self, array_size: int, maximum_time: typing.Union['hightime.timedelta', 'datetime.timedelta', int] = hightime.timedelta(milliseconds=-1)) -> typing.Iterable[float]:
         r'''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1928,7 +1930,7 @@ class Session(_SessionBase):
         return waveform_array_array
 
     @ivi_synchronized
-    def fetch_waveform_into(self, waveform_array, maximum_time=hightime.timedelta(milliseconds=-1)):
+    def fetch_waveform_into(self, waveform_array: typing.Iterable[float], maximum_time: typing.Union['hightime.timedelta', 'datetime.timedelta', int] = hightime.timedelta(milliseconds=-1)) -> None:
         r'''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1981,7 +1983,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _get_cal_date_and_time(self, cal_type):
+    def _get_cal_date_and_time(self, cal_type: int) -> typing.Tuple[int, int, int, int, int]:
         r'''_get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
@@ -2028,7 +2030,7 @@ class Session(_SessionBase):
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     @ivi_synchronized
-    def get_dev_temp(self, options=""):
+    def get_dev_temp(self, options: str = "") -> float:
         r'''get_dev_temp
 
         Returns the current **Temperature** of the device.
@@ -2051,7 +2053,7 @@ class Session(_SessionBase):
         return float(temperature_ctype.value)
 
     @ivi_synchronized
-    def get_ext_cal_recommended_interval(self):
+    def get_ext_cal_recommended_interval(self) -> 'hightime.timedelta':
         r'''get_ext_cal_recommended_interval
 
         Returns the recommended interval between external recalibration in
@@ -2071,7 +2073,7 @@ class Session(_SessionBase):
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     @ivi_synchronized
-    def get_cal_date_and_time(self, cal_type):
+    def get_cal_date_and_time(self, cal_type: int) -> 'hightime.datetime':
         '''get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
@@ -2101,7 +2103,7 @@ class Session(_SessionBase):
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
-    def get_last_cal_temp(self, cal_type):
+    def get_last_cal_temp(self, cal_type: int) -> float:
         r'''get_last_cal_temp
 
         Returns the **Temperature** during the last calibration procedure.
@@ -2136,7 +2138,7 @@ class Session(_SessionBase):
         return float(temperature_ctype.value)
 
     @ivi_synchronized
-    def get_self_cal_supported(self):
+    def get_self_cal_supported(self) -> 'bool':
         r'''get_self_cal_supported
 
         Returns a Boolean value that expresses whether or not the DMM that you
@@ -2160,7 +2162,7 @@ class Session(_SessionBase):
         return bool(self_cal_supported_ctype.value)
 
     @ivi_synchronized
-    def import_attribute_configuration_buffer(self, configuration):
+    def import_attribute_configuration_buffer(self, configuration: typing.Iterable['bytes']) -> None:
         r'''import_attribute_configuration_buffer
 
         Imports a property configuration to the session from the specified
@@ -2209,7 +2211,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def import_attribute_configuration_file(self, file_path):
+    def import_attribute_configuration_file(self, file_path: str) -> None:
         r'''import_attribute_configuration_file
 
         Imports a property configuration to the session from the specified
@@ -2257,7 +2259,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
+    def _init_with_options(self, resource_name: str, id_query: 'bool' = False, reset_device: 'bool' = False, option_string: 'dict' = "") -> int:
         r'''_init_with_options
 
         This method completes the following tasks:
@@ -2374,7 +2376,7 @@ class Session(_SessionBase):
         return int(vi_ctype.value)
 
     @ivi_synchronized
-    def _initiate(self):
+    def _initiate(self) -> None:
         r'''_initiate
 
         Initiates an acquisition. After you call this method, the DMM leaves
@@ -2389,7 +2391,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def perform_open_cable_comp(self):
+    def perform_open_cable_comp(self) -> typing.Tuple[float, float]:
         r'''perform_open_cable_comp
 
         For the NI 4082 and NI 4072 only, performs the open cable compensation
@@ -2421,7 +2423,7 @@ class Session(_SessionBase):
         return float(conductance_ctype.value), float(susceptance_ctype.value)
 
     @ivi_synchronized
-    def perform_short_cable_comp(self):
+    def perform_short_cable_comp(self) -> typing.Tuple[float, float]:
         r'''perform_short_cable_comp
 
         Performs the short cable compensation measurements for the current
@@ -2452,7 +2454,7 @@ class Session(_SessionBase):
         return float(resistance_ctype.value), float(reactance_ctype.value)
 
     @ivi_synchronized
-    def read(self, maximum_time=hightime.timedelta(milliseconds=-1)):
+    def read(self, maximum_time: typing.Union['hightime.timedelta', 'datetime.timedelta', int] = hightime.timedelta(milliseconds=-1)) -> float:
         r'''read
 
         Acquires a single measurement and returns the measured value.
@@ -2485,7 +2487,7 @@ class Session(_SessionBase):
         return float(reading_ctype.value)
 
     @ivi_synchronized
-    def read_multi_point(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):
+    def read_multi_point(self, array_size: int, maximum_time: typing.Union['hightime.timedelta', 'datetime.timedelta', int] = hightime.timedelta(milliseconds=-1)) -> typing.Iterable[float]:
         r'''read_multi_point
 
         Acquires multiple measurements and returns an array of measured values.
@@ -2539,7 +2541,7 @@ class Session(_SessionBase):
         return reading_array_array
 
     @ivi_synchronized
-    def read_status(self):
+    def read_status(self) -> typing.Tuple[int, 'enums.AcquisitionStatus']:
         r'''read_status
 
         Returns measurement backlog and acquisition status. Use this method to
@@ -2584,7 +2586,7 @@ class Session(_SessionBase):
         return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
     @ivi_synchronized
-    def read_waveform(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):
+    def read_waveform(self, array_size: int, maximum_time: typing.Union['hightime.timedelta', 'datetime.timedelta', int] = hightime.timedelta(milliseconds=-1)) -> typing.Iterable[float]:
         r'''read_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
@@ -2636,7 +2638,7 @@ class Session(_SessionBase):
         return waveform_array_array
 
     @ivi_synchronized
-    def reset_with_defaults(self):
+    def reset_with_defaults(self) -> None:
         r'''reset_with_defaults
 
         Resets the instrument to a known state and sends initialization commands
@@ -2650,7 +2652,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def self_cal(self):
+    def self_cal(self) -> None:
         r'''self_cal
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the
@@ -2667,7 +2669,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def send_software_trigger(self):
+    def send_software_trigger(self) -> None:
         r'''send_software_trigger
 
         Sends a command to trigger the DMM. Call this method if you have
@@ -2686,7 +2688,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _close(self):
+    def _close(self) -> None:
         r'''_close
 
         Closes the specified session and deallocates resources that it reserved.
@@ -2697,7 +2699,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def self_test(self):
+    def self_test(self) -> None:
         '''self_test
 
         Performs a self-test on the DMM to ensure that the DMM is functioning
@@ -2722,7 +2724,7 @@ class Session(_SessionBase):
         return None
 
     @ivi_synchronized
-    def reset(self):
+    def reset(self) -> None:
         r'''reset
 
         Resets the instrument to a known state and sends initialization commands
@@ -2735,7 +2737,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _self_test(self):
+    def _self_test(self) -> typing.Tuple[int, str]:
         r'''_self_test
 
         Performs a self-test on the DMM to ensure that the DMM is functioning

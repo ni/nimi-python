@@ -2,6 +2,8 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
+import datetime
+import typing
 
 import nise._converters as _converters
 import nise._library_singleton as _library_singleton
@@ -104,7 +106,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    def _get_error(self, error_description_size=[1024]):
+    def _get_error(self, error_description_size: typing.Iterable[int] = [1024]) -> typing.Tuple[int, str]:
         r'''_get_error
 
         Get error information of the first error that occurred. If a valid
@@ -174,7 +176,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI Switch Executive session'''
 
-    def __init__(self, virtual_device_name, options={}):
+    def __init__(self, virtual_device_name: str, options={}):
         r'''An NI Switch Executive session
 
         Opens a session to a specified NI Switch Executive virtual device. Opens
@@ -272,7 +274,7 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def _close_session(self):
+    def _close_session(self) -> None:
         r'''_close_session
 
         Reduces the reference count of open sessions by one. If the reference
@@ -286,7 +288,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def connect(self, connect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, wait_for_debounce=True):
+    def connect(self, connect_spec: str, multiconnect_mode: 'enums.MulticonnectMode' = enums.MulticonnectMode.DEFAULT, wait_for_debounce: 'bool' = True) -> None:
         r'''connect
 
         Connects the routes specified by the connection specification. When
@@ -346,7 +348,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def connect_and_disconnect(self, connect_spec, disconnect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, operation_order=enums.OperationOrder.AFTER, wait_for_debounce=True):
+    def connect_and_disconnect(self, connect_spec: str, disconnect_spec: str, multiconnect_mode: 'enums.MulticonnectMode' = enums.MulticonnectMode.DEFAULT, operation_order: 'enums.OperationOrder' = enums.OperationOrder.AFTER, wait_for_debounce: 'bool' = True) -> None:
         r'''connect_and_disconnect
 
         Connects routes and disconnects routes in a similar fashion to
@@ -441,7 +443,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def disconnect(self, disconnect_spec):
+    def disconnect(self, disconnect_spec: str) -> None:
         r'''disconnect
 
         Disconnects the routes specified in the Disconnection Specification. If
@@ -470,7 +472,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def disconnect_all(self):
+    def disconnect_all(self) -> None:
         r'''disconnect_all
 
         Disconnects all connections on every IVI switch device managed by the
@@ -483,7 +485,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def expand_route_spec(self, route_spec, expand_action=enums.ExpandAction.ROUTES, expanded_route_spec_size=[1024]):
+    def expand_route_spec(self, route_spec: str, expand_action: 'enums.ExpandAction' = enums.ExpandAction.ROUTES, expanded_route_spec_size: typing.Iterable[int] = [1024]) -> str:
         r'''expand_route_spec
 
         Expands a route spec string to yield more information about the routes
@@ -549,7 +551,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return expanded_route_spec_ctype.value.decode(self._encoding)
 
-    def find_route(self, channel1, channel2, route_spec_size=[1024]):
+    def find_route(self, channel1: str, channel2: str, route_spec_size: typing.Iterable[int] = [1024]) -> typing.Tuple[str, 'enums.PathCapability']:
         r'''find_route
 
         Finds an existing or potential route between channel 1 and channel 2.
@@ -630,7 +632,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return route_spec_ctype.value.decode(self._encoding), enums.PathCapability(path_capability_ctype.value)
 
-    def get_all_connections(self, route_spec_size=[1024]):
+    def get_all_connections(self, route_spec_size: typing.Iterable[int] = [1024]) -> str:
         r'''get_all_connections
 
         Returns the top-level connected routes and route groups. The route
@@ -677,7 +679,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return route_spec_ctype.value.decode(self._encoding)
 
-    def is_connected(self, route_spec):
+    def is_connected(self, route_spec: str) -> 'bool':
         r'''is_connected
 
         Checks whether the specified routes and routes groups are connected. It
@@ -706,7 +708,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_connected_ctype.value)
 
-    def is_debounced(self):
+    def is_debounced(self) -> 'bool':
         r'''is_debounced
 
         Checks to see if the switching system is debounced or not. This method
@@ -725,7 +727,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_debounced_ctype.value)
 
-    def _open_session(self, virtual_device_name, option_string=""):
+    def _open_session(self, virtual_device_name: str, option_string: 'dict' = "") -> int:
         r'''_open_session
 
         Opens a session to a specified NI Switch Executive virtual device. Opens
@@ -763,7 +765,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
-    def wait_for_debounce(self, maximum_time_ms=hightime.timedelta(milliseconds=-1)):
+    def wait_for_debounce(self, maximum_time_ms: typing.Union['hightime.timedelta', 'datetime.timedelta', int] = hightime.timedelta(milliseconds=-1)) -> None:
         r'''wait_for_debounce
 
         Waits for all of the switches in the NI Switch Executive virtual device

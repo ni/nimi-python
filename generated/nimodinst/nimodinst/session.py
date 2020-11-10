@@ -1,6 +1,7 @@
 # This file was generated
 
 import ctypes
+import typing
 
 import nimodinst._library_singleton as _library_singleton
 import nimodinst._visatype as _visatype
@@ -216,7 +217,7 @@ class Session(object):
         self._handle = 0
 
     ''' These are code-generated '''
-    def _close_installed_devices_session(self):
+    def _close_installed_devices_session(self) -> None:
         r'''_close_installed_devices_session
 
         Cleans up the NI-ModInst session created by a call to
@@ -228,7 +229,7 @@ class Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _get_extended_error_info(self):
+    def _get_extended_error_info(self) -> str:
         r'''_get_extended_error_info
 
         Returns detailed information about the last error that occurred in the
@@ -260,7 +261,7 @@ class Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode(self._encoding)
 
-    def _get_installed_device_attribute_vi_int32(self, index, attribute_id):
+    def _get_installed_device_attribute_vi_int32(self, index: int, attribute_id: int) -> int:
         r'''_get_installed_device_attribute_vi_int32
 
         Returns an integer property specified by the attributeID parameter for
@@ -303,7 +304,7 @@ class Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
-    def _get_installed_device_attribute_vi_string(self, index, attribute_id):
+    def _get_installed_device_attribute_vi_string(self, index: int, attribute_id: int) -> str:
         r'''_get_installed_device_attribute_vi_string
 
         Returns a string property specified by the attributeID parameter for a
@@ -350,7 +351,7 @@ class Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
-    def _open_installed_devices_session(self, driver):
+    def _open_installed_devices_session(self, driver: str) -> typing.Tuple[int, int]:
         r'''_open_installed_devices_session
 
         Creates a handle to a list of installed devices supported by the

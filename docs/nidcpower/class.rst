@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, channels=None, reset=False, options={})
+.. py:class:: Session(self, resource_name: str, channels: typing.Union[str, 'list', 'range', 'tuple'] = None, reset: 'bool' = False, options={})
 
     
 
