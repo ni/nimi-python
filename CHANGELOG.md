@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 * ### ALL
     * #### Added
+        * Type hints for all public methods
     * #### Changed
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
