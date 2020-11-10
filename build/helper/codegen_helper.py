@@ -141,6 +141,25 @@ def get_method_return_snippet(parameters, config, use_numpy_array=False):
     return ('return ' + ', '.join(snippets)).strip()
 
 
+def get_method_return_type_hint(parameters, config, use_numpy_array=False):
+    '''Add the type hint for the return value(s)'''
+    snippets = []
+    for x in parameters:
+        if x['direction'] == 'out' or x['size']['mechanism'] == 'ivi-dance':
+            if x['numpy'] is False or use_numpy_array is False:
+                if x['use_in_python_api']:
+                    snippets.append(x['type_hint'])
+
+    if len(snippets) == 0:
+        type_hint = 'None'
+    elif len(snippets) == 1:
+        type_hint = snippets[0]
+    else:
+        type_hint = 'typing.Tuple[' + ', '.join(snippets) + ']'
+
+    return type_hint
+
+
 def get_enum_type_check_snippet(parameter, indent):
     '''Returns python snippet to check that the type of a parameter is what is expected'''
     assert parameter['enum'] is not None, pp.pformat(parameter)
