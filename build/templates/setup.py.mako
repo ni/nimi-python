@@ -54,6 +54,7 @@ setup(
         % if config['uses_nitclk']:
         'nitclk',
         % endif
+        'typing',
     ],
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],

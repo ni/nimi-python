@@ -19,15 +19,14 @@
     else:
         raise ValueError('Only fetch_multiple and measure_multiple are supported. Got {0}'.format(f['python_name']))
 %>\
-    def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}) -> typing.List[typing.NamedTuple[float, float, bool]]:
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+        measurement = typing.NamedTuple('Measurement', [('voltage', 'float'), ('current', 'float'), ('in_compliance', 'bool')])
 
         voltage_measurements, current_measurements${in_compliance_return} = self._${f['python_name']}(${param_list})
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=${in_compliance_value}) for i in range(${array_size})]
+        return [measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=${in_compliance_value}) for i in range(${array_size})]
 

@@ -15,6 +15,7 @@
 %>\
 
 import ctypes
+import typing
 
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype

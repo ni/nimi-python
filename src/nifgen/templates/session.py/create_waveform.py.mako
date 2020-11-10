@@ -3,7 +3,7 @@
     '''Dispatches to the appropriate "create waveform" method based on the waveform type.'''
     import build.helper as helper
 %>\
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}) -> int:
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}

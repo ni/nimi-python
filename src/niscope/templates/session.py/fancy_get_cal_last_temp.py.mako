@@ -7,7 +7,7 @@
     else: # f['python_name'] == "get_ext_cal_last_temp"
         calibration_type = "EXTERNAL"
 %>\
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}) -> float:
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}

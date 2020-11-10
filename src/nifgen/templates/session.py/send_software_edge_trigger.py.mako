@@ -3,7 +3,7 @@
     '''Need different behavior depending on whether we are called on a rep cap container or not'''
     import build.helper as helper
 %>\
-    def send_software_edge_trigger(self, trigger=None, trigger_id=None):
+    def send_software_edge_trigger(self, trigger=None, trigger_id=None) -> None:
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}

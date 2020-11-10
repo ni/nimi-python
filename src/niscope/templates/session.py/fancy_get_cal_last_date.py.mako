@@ -7,7 +7,7 @@
     else: #f['python_name'] == "get_ext_cal_last_date_and_time"
         calibration_type = "EXTERNAL"
 %>\
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}) -> hightime.datetime:
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}

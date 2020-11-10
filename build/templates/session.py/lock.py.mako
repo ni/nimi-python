@@ -4,7 +4,7 @@
 
     c_function_prefix = config['c_function_prefix']
 %>\
-    def ${f['python_name']}(self):
+    def ${f['python_name']}(self) -> ${helper.get_method_return_type_hint(f['parameters'], config)}:
         '''${f['python_name']}
 
         Obtains a multithread lock on the device session. Before doing so, the
@@ -39,7 +39,7 @@
         # that will handle the unlock for them
         return _Lock(self)
 
-    def _lock_session(self):
+    def _lock_session(self) -> None:
         '''_lock_session
 
         Actual call to driver
