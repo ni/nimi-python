@@ -12,3 +12,12 @@ nidigital_do_nothing.py
    :encoding: utf8
    :caption: `(nidigital_do_nothing.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/nidigital_do_nothing.py>`_
 
+nidigital_ppmu_source_and_measure.py
+------------------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/nidigital_ppmu_source_and_measure.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/nidigital_ppmu_source_and_measure.py>`_
+
