@@ -2334,12 +2334,6 @@ auxiliary_power_source_available
 
         .. note:: This property does not necessarily indicate if the device is using the auxiliary
 
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
-
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -2349,7 +2343,7 @@ auxiliary_power_source_available
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | Yes       |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3110,6 +3104,45 @@ digital_edge_sequence_advance_trigger_input_terminal
                 - LabVIEW Property: **Triggers:Sequence Advance Trigger:Digital Edge:Input Terminal**
                 - C Attribute: **NIDCPOWER_ATTR_DIGITAL_EDGE_SEQUENCE_ADVANCE_TRIGGER_INPUT_TERMINAL**
 
+digital_edge_shutdown_trigger_input_terminal
+--------------------------------------------
+
+    .. py:attribute:: digital_edge_shutdown_trigger_input_terminal
+
+        Specifies the input terminal for the Shutdown trigger. This property is used only when the :py:attr:`nidcpower.Session.shutdown_trigger_type` property is set to digital edge.
+        You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
+        Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | str        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Triggers:Shutdown Trigger:Digital Edge:Input Terminal**
+                - C Attribute: **NIDCPOWER_ATTR_DIGITAL_EDGE_SHUTDOWN_TRIGGER_INPUT_TERMINAL**
+
 digital_edge_source_trigger_input_terminal
 ------------------------------------------
 
@@ -3495,6 +3528,14 @@ instrument_manufacturer
 
         Contains the name of the manufacturer for the device you are currently using.
 
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -3504,7 +3545,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -4041,6 +4082,47 @@ measure_when
                 - LabVIEW Property: **Measurement:Advanced:Measure When**
                 - C Attribute: **NIDCPOWER_ATTR_MEASURE_WHEN**
 
+merged_channels
+---------------
+
+    .. py:attribute:: merged_channels
+
+        Specifies the channel(s) to merge with a designated primary channel of an SMU in order to increase the maximum current you can source from the SMU.
+        This property designates the merge channels to combine with a primary channel. To designate the primary channel, initialize the session to the primary channel only.
+        Note: You cannot change the merge configuration with this property when the session is in the Running state.
+        For complete information on using merged channels with this property, refer to Merged Channels in the NI DC Power Supplies and SMUs Help.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices. Devices that do not support this property behave as if no channels were merged.
+            Default Value: Refer to the Supported Properties by Device topic for the default value by device.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | str        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Advanced:Merged Channels**
+                - C Attribute: **NIDCPOWER_ATTR_MERGED_CHANNELS**
+
 output_capacitance
 ------------------
 
@@ -4492,14 +4574,6 @@ power_source_in_use
 
         Indicates whether the device is using the internal or auxiliary power source to generate power.
 
-
-
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
-
         The following table lists the characteristics of this property.
 
             +----------------+------------------------+
@@ -4509,7 +4583,7 @@ power_source_in_use
             +----------------+------------------------+
             | Permissions    | read only              |
             +----------------+------------------------+
-            | Channel Based  | Yes                    |
+            | Channel Based  | No                     |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -6075,6 +6149,12 @@ self_calibration_persistence
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------------------------+
@@ -6084,7 +6164,7 @@ self_calibration_persistence
             +----------------+----------------------------------+
             | Permissions    | read-write                       |
             +----------------+----------------------------------+
-            | Channel Based  | No                               |
+            | Channel Based  | Yes                              |
             +----------------+----------------------------------+
             | Resettable     | No                               |
             +----------------+----------------------------------+
@@ -6557,6 +6637,14 @@ serial_number
 
         Contains the serial number for the device you are currently using.
 
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -6566,7 +6654,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -6576,6 +6664,44 @@ serial_number
 
                 - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Serial Number**
                 - C Attribute: **NIDCPOWER_ATTR_SERIAL_NUMBER**
+
+shutdown_trigger_type
+---------------------
+
+    .. py:attribute:: shutdown_trigger_type
+
+        Specifies the behavior of the Shutdown trigger.
+        Default Value: :py:data:`~nidcpower.TriggerType.NONE`
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-------------------+
+            | Characteristic | Value             |
+            +================+===================+
+            | Datatype       | enums.TriggerType |
+            +----------------+-------------------+
+            | Permissions    | read-write        |
+            +----------------+-------------------+
+            | Channel Based  | Yes               |
+            +----------------+-------------------+
+            | Resettable     | No                |
+            +----------------+-------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Triggers:Shutdown Trigger:Trigger Type**
+                - C Attribute: **NIDCPOWER_ATTR_SHUTDOWN_TRIGGER_TYPE**
 
 simulate
 --------

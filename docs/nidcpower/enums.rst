@@ -585,6 +585,10 @@ SendSoftwareEdgeTriggerType
 
 
 
+    .. py:attribute:: SendSoftwareEdgeTriggerType.SHUTDOWN
+
+
+
 Sense
 -----
 
