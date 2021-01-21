@@ -2694,7 +2694,11 @@ class Session(_SessionBase):
     def initiate(self):
         '''initiate
 
-        TBD
+        Starts bursting the pattern, causing the NI-Digital session
+        to be committed. To stop the pattern burst, call abort
+        method. If keep alive pattern is bursting when abort
+        is called, keep alive pattern will not be stopped. To stop
+        the keep alive pattern, call abort_keep_alive method.
 
         Note:
         This method will return a Python context manager that will initiate on entering and abort on exit.
@@ -3032,7 +3036,11 @@ class Session(_SessionBase):
     def _initiate(self):
         r'''_initiate
 
-        TBD
+        Starts bursting the pattern, causing the NI-Digital session
+        to be committed. To stop the pattern burst, call abort
+        method. If keep alive pattern is bursting when abort
+        is called, keep alive pattern will not be stopped. To stop
+        the keep alive pattern, call abort_keep_alive method.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDigital_Initiate(vi_ctype)

@@ -1668,7 +1668,11 @@ initiate
 
     .. py:method:: initiate()
 
-            TBD
+            Starts bursting the pattern, causing the NI-Digital session
+            to be committed. To stop the pattern burst, call abort
+            method. If keep alive pattern is bursting when abort
+            is called, keep alive pattern will not be stopped. To stop
+            the keep alive pattern, call abort_keep_alive method.
 
             
 
