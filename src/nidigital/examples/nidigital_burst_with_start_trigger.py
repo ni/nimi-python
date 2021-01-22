@@ -6,48 +6,61 @@ import os
 import sys
 
 
-def example(resource_name, options, source, rising_edge):
+def example(resource_name, options, trigger_source=None, trigger_edge=None):
 
     with nidigital.Session(resource_name=resource_name, options=options) as session:
 
-        dir = os.path.dirname(__file__)
+        dir = os.path.join(os.path.dirname(__file__), 'burst_with_start_trigger_files')
 
-        # Configure the session by loading pin map (.pinmap) created in the Digital Pattern Editor on the instrument
-        pin_map_filename = os.path.join(dir, 'burst_with_start_trigger_files', 'PinMap.pinmap')
+        # Load the pin map (.pinmap) created using the Digital Pattern Editor
+        pin_map_filename = os.path.join(dir, 'PinMap.pinmap')
         session.load_pin_map(pin_map_filename)
 
-        # Configure the session by loading the specifications (.sepcs), levels (.digilevels), and timing (.digitiming) files created in the Digital Pattern Editor on the instrument
-        spec_filename = os.path.join(dir, 'burst_with_start_trigger_files', 'Specifications.specs')
-        levels_filename = os.path.join(dir, 'burst_with_start_trigger_files', 'PinLevels.digilevels')
-        timing_filename = os.path.join(dir, 'burst_with_start_trigger_files', 'Timing.digitiming')
+        # Load the specifications (.specs), levels (.digilevels), and timing (.digitiming) sheets created using the Digital Pattern Editor
+        spec_filename = os.path.join(dir, 'Specifications.specs')
+        levels_filename = os.path.join(dir, 'PinLevels.digilevels')
+        timing_filename = os.path.join(dir, 'Timing.digitiming')
         session.load_specifications_levels_and_timing(spec_filename, levels_filename, timing_filename)
 
-        # Apply the settings from the levels and timing files we just loaded on the instrument.
+        # Apply the settings from the levels and timing sheets we just loaded to the session
         session.apply_levels_and_timing(levels_filename, timing_filename)
 
-        # Configure the session by loading the pattern file (.digipat) created in the Digital Pattern Editor on the instrument.
-        pattern_filename = os.path.join(dir, 'burst_with_start_trigger_files', 'Pattern.digipat')
+        # Loading the pattern file (.digipat) created using the Digital Pattern Editor
+        pattern_filename = os.path.join(dir, 'Pattern.digipat')
         session.load_pattern(pattern_filename)
 
-        # Specify a source and edge for the external start trigger
-        session.digital_edge_start_trigger_source = source
-        session.digital_edge_start_trigger_edge = nidigital.DigitalEdge.RISING if rising_edge else nidigital.DigitalEdge.FALLING
+        if trigger_source is not None:
+            # Specify a source and edge for the external start trigger
+            session.start_trigger_type = nidigital.TriggerType.DIGITAL_EDGE
+            session.digital_edge_start_trigger_source = trigger_source
+            session.digital_edge_start_trigger_edge = nidigital.DigitalEdge.RISING if trigger_edge == 'Rising' else nidigital.DigitalEdge.FALLING
 
         # Waiting for the trigger to start bursting and then blocks until the pattern is done bursting
-        session.burst_pattern('new_pattern')
+        session.burst_pattern(start_label='new_pattern')
+        if trigger_source is None:
+            print('Start bursting pattern')
+        else:
+            print('Waiting for start trigger and then start bursting pattern')
 
         # Disconnect all channels using programmable onboard switching
         session.selected_function = nidigital.SelectedFunction.DISCONNECT
+    print('Done bursting pattern')
 
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to create and configure an instrument session and to burst a pattern on the digital pattern instrument using a start trigger.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='Resource name of a NI digital pattern instrument')
-    parser.add_argument('-s', '--simulated', default=True, type=bool, help='Whether to run on hardware or run on software simulation')
-    parser.add_argument('-src', '--source', default='/PXI1Slot2/PXI_Trig0', help='Source terminal where the external signal is connected')
-    parser.add_argument('-re', '--rising-edge', default=True, type=bool, help='Trigger on rising edge or falling edge of the signal')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='Resource name of a NI digital pattern instrument. Ensure the resource name matches the instrument name in the pinmap file.')
+    parser.add_argument('-s', '--simulate', default=True, type=bool, help='Whether to run on hardware or run on software simulation')
+    subparser = parser.add_subparsers(dest='command', help='Sub-command help')
+    start_trigger = subparser.add_parser('start-trigger', help='Configure start trigger')
+    start_trigger.add_argument('-src', '--trigger-source', default='/PXI1Slot2/PXI_Trig0', help='Source terminal for the start trigger')
+    start_trigger.add_argument('-edge', '--trigger-edge', default='Rising', choices=['Rising', 'Falling'], help='Trigger on rising edge or falling edge of start trigger')
     args = parser.parse_args(argsv)
-    example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulated else '', args.source, args.rising_edge)
+
+    example(args.resource_name,
+            'Simulate=1, DriverSetup=Model:6571' if args.simulate else '',
+            args.trigger_source if args.command == 'start-trigger' else None,
+            args.trigger_edge if args.command == 'start-trigger' else None)
 
 
 def main():
@@ -56,13 +69,17 @@ def main():
 
 def test_main():
     _main([])
+    _main(['start-trigger'])
 
 
 def test_example():
+    resource_name = 'PXI1Slot2,PXI1Slot3'
     options = {'simulate': True, 'driver_setup': {'Model': '6571'}, }
-    source = '/PXI1Slot2/PXI_Trig0'
-    rising_edge = True
-    example('PXI1Slot2,PXI1Slot3', options, source, rising_edge)
+    example(resource_name, options)
+
+    trigger_source = '/PXI1Slot2/PXI_Trig0'
+    trigger_edge = True
+    example(resource_name, options, trigger_source, trigger_edge)
 
 
 if __name__ == '__main__':
