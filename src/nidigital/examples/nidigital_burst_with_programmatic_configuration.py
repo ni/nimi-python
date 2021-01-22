@@ -49,18 +49,18 @@ def example(resource_name, options,
 
         dir = os.path.dirname(__file__)
 
-        # Configure the session by loading pin map (.pinmap) created in the Digital Pattern Editor on the instrument
+        # Load pin map (.pinmap) created using Digital Pattern Editor
         pin_map_filename = os.path.join(dir, 'burst_with_programmatic_configuration_files', 'PinMap.pinmap')
         session.load_pin_map(pin_map_filename)
 
-        # Configure the session by loading the specifications (.sepcs), levels (.digilevels), and timing (.digitiming) files created in the Digital Pattern Editor on the instrument
+        # Load the specifications (.specs), levels (.digilevels), and timing (.digitiming) sheets created using Digital Pattern Editor
         spec_filename = os.path.join(dir, 'burst_with_programmatic_configuration_files', 'Specifications.specs')
         levels_filename = None if command == 'configure-voltage' else os.path.join(dir, 'burst_with_programmatic_configuration_files', 'PinLevels.digilevels')
         timing_filename = None if command == 'configure-time-set' else os.path.join(dir, 'burst_with_programmatic_configuration_files', 'Timing.digitiming')
 
         session.load_specifications_levels_and_timing(spec_filename, levels_filename, timing_filename)
 
-        # Apply the settings from the levels and timing files we just loaded on the instrument
+        # Apply the settings from the levels and timing sheets we just loaded
         session.apply_levels_and_timing(levels_filename if levels_filename is not None else '', timing_filename if timing_filename is not None else '')
 
         # Configure voltage levels and terminal voltage through driver API
@@ -83,21 +83,23 @@ def example(resource_name, options,
                                                                       time_set_config.drive_return, time_set_config.drive_off)
             session.channels[channels].configure_time_set_compare_edges_strobe(time_set_config.time_set_name, time_set_config.strobe_edge)
 
-        # Configure the session by loading the pattern file (.digipat) created in the Digital Pattern Editor on the instrument.
+        # Load the pattern file (.digipat) created using Digital Pattern Editor
         pattern_filename = os.path.join(dir, 'burst_with_programmatic_configuration_files', 'Pattern.digipat')
         session.load_pattern(pattern_filename)
 
         # Burst pattern, blocks until the pattern is done bursting
-        session.burst_pattern('new_pattern')
+        session.burst_pattern(start_label='new_pattern')
+        print('Start bursting pattern')
 
         # Disconnect all channels using programmable onboard switching
         session.selected_function = nidigital.SelectedFunction.DISCONNECT
+    print('Done bursting pattern')
 
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to create and configure an instrument session programmatically and to burst a pattern on the digital pattern instrument.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='Resource name of a NI digital pattern instrument')
-    parser.add_argument('-s', '--simulated', default=True, type=bool, help='Whether to run on hardware or run on software simulation')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='Resource name of a NI digital pattern instrument, ensure the resource name matches the instrument name in the pinmap file.')
+    parser.add_argument('-s', '--simulate', default=True, type=bool, help='Whether to run on hardware or run on software simulation')
     subparser = parser.add_subparsers(dest='command', help='Sub-command help')
 
     configure_voltage = subparser.add_parser('configure-voltage', help='Configure voltage levels and termination voltage of the digital pattern based on command line arguments')
@@ -126,18 +128,18 @@ def _main(argsv):
 
     if args.command == 'configure-voltage':
         voltage_config = VoltageLevelsAndTerminationConfig(args.vil, args.vih, args.vol, args.voh, args.vterm, args.termination_mode, args.iol, args.ioh, args.vcom)
-        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulated else '',
+        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulate else '',
                 args.command,
                 args.channels,
                 voltage_config)
     elif args.command == 'configure-time-set':
         time_set_config = TimeSetConfig("tset0", args.period, args.drive_format, args.drive_on, args.drive_data, args.drive_return, args.drive_off, args.strobe_edge)
-        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulated else '',
+        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulate else '',
                 args.command,
                 args.channels,
                 time_set_config=time_set_config)
     else:
-        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulated else '',
+        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulate else '',
                 args.command)
 
 
