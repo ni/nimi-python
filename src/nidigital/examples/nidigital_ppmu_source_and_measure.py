@@ -12,10 +12,10 @@ def example(resource_name, options, channels, aperture_time, settling_time, curr
 
     with nidigital.Session(resource_name=resource_name, options=options) as session:
 
-        dir = os.path.dirname(__file__)
+        dir = os.path.join(os.path.dirname(__file__), 'ppmu_source_and_measure_files')
 
-        # Configure the session by loading pin map (.pinmap) created in the Digital Pattern Editor on the instrument
-        pin_map_filename = os.path.join(dir, 'ppmu_source_and_measure_files', 'PinMap.pinmap')
+        # Load pin map (.pinmap) created using Digital Pattern Editor
+        pin_map_filename = os.path.join(dir, 'PinMap.pinmap')
         session.load_pin_map(pin_map_filename)
 
         # Configure PPMU measurements
@@ -51,8 +51,8 @@ def example(resource_name, options, channels, aperture_time, settling_time, curr
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to configure and source/measure voltage/current using the PPMU on selected channels/pins of the digital pattern instrument',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='Resource name of a NI digital pattern instrument')
-    parser.add_argument('-s', '--simulated', default=True, type=bool, help='Whether to run on hardware or run on software simulation')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='Resource name of a NI digital pattern instrument, ensure the resource name matches the instrument name in the pinmap file.')
+    parser.add_argument('-s', '--simulate', default=True, type=bool, help='Whether to run on hardware or run on software simulation')
     parser.add_argument('-c', '--channels', default='DUTPin1, SystemPin1', help='Channel(s)/Pin(s) to use')
     parser.add_argument('-at', '--aperture-time', default=0.000004, type=float, help='Aperture time in seconds')
     parser.add_argument('-st', '--settling-time', default=0.01, type=float, help='Settling time in seconds')
@@ -63,7 +63,7 @@ def _main(argsv):
     args = parser.parse_args(argsv)
     example(
         args.resource_name,
-        'Simulate=1, DriverSetup=Model:6571' if args.simulated else '',
+        'Simulate=1, DriverSetup=Model:6571' if args.simulate else '',
         args.channels,
         args.aperture_time,
         args.settling_time,
