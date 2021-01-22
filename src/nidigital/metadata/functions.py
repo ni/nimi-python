@@ -2048,7 +2048,7 @@ the trigger conditions are met.
     'Initiate': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Starts bursting the pattern, causing the NI-Digital session\nto be committed. To stop the pattern burst, call abort\nmethod. If keep alive pattern is bursting when abort\nis called, keep alive pattern will not be stopped. To stop\nthe keep alive pattern, call abort_keep_alive method.'
+            'description': 'Starts bursting the pattern configured by NIDIGITAL_ATTR_START_LABEL,\ncausing the NI-Digital sessionto be committed. To stop the\npattern burst, call niDigital_Abort. If keep alive pattern is\nbursting when niDigital_Abort is called or upon exiting the\ncontext manager, keep alive pattern will not be stopped. To\nstop the keep alive pattern, call niDigital_AbortKeepAlive.'
         },
         'parameters': [
             {

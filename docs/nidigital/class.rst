@@ -1668,11 +1668,12 @@ initiate
 
     .. py:method:: initiate()
 
-            Starts bursting the pattern, causing the NI-Digital session
-            to be committed. To stop the pattern burst, call abort
-            method. If keep alive pattern is bursting when abort
-            is called, keep alive pattern will not be stopped. To stop
-            the keep alive pattern, call abort_keep_alive method.
+            Starts bursting the pattern configured by :py:attr:`nidigital.Session.start_label`,
+            causing the NI-Digital sessionto be committed. To stop the
+            pattern burst, call :py:meth:`nidigital.Session.abort`. If keep alive pattern is
+            bursting when :py:meth:`nidigital.Session.abort` is called or upon exiting the
+            context manager, keep alive pattern will not be stopped. To
+            stop the keep alive pattern, call :py:meth:`nidigital.Session.abort_keep_alive`.
 
             
 
