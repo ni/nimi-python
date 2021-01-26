@@ -1418,7 +1418,7 @@ functions = {
     'GetChannelNameFromString': {
         'documentation': {
             'description': """\nReturns a list of channel names for given channel indices.
- 
+
 This is useful in multi-instrument sessions, where channels are expected to be
 referenced by their fully-qualified names, for example, PXI1Slot3/0.
 """
@@ -1438,7 +1438,7 @@ The following types and formats are supported:
   - int - example: 0
   - Basic sequence - example: [0, range(2, 4)]
   - str - example: "0, 2, 3, 1", "0-3", "0:3"
-    
+
 The input can contain any combination of above types. Both out-of-order and repeated indices are
 supported ([2,3,0], [1,2,2,3]). White space characters, including spaces, tabs, feeds, and
 carriage returns, are allowed within strings. Ranges can be incrementing or decrementing.
@@ -1551,7 +1551,7 @@ carriage returns, are allowed within strings. Ranges can be incrementing or decr
         'documentation': {
             'description': """\nReturns the number of samples History RAM acquired on the last pattern burst.
 """,
-            'note': """\nBefore bursting a pattern, you must configure the History RAM trigger and specify which cycles to acquire. 
+            'note': """\nBefore bursting a pattern, you must configure the History RAM trigger and specify which cycles to acquire.
 
 NIDIGITAL_ATTR_HISTORY_RAM_TRIGGER_TYPE should be used to specify the trigger condition on which History RAM
 starts acquiring pattern information.
@@ -1562,15 +1562,15 @@ History RAM starts acquiring pattern information.
 
 If History RAM trigger is configured as NIDIGITAL_VAL_PATTERN_LABEL,
 NIDIGITAL_ATTR_PATTERN_LABEL_HISTORY_RAM_TRIGGER_LABEL should be used to specify the pattern label from which to
-start acquiring pattern information. 
+start acquiring pattern information.
 NIDIGITAL_ATTR_PATTERN_LABEL_HISTORY_RAM_TRIGGER_VECTOR_OFFSET should be used to specify the number of vectors
-following the specified pattern label from which to start acquiring pattern information. 
+following the specified pattern label from which to start acquiring pattern information.
 NIDIGITAL_ATTR_PATTERN_LABEL_HISTORY_RAM_TRIGGER_CYCLE_OFFSET should be used to specify the number of cycles
 following the specified pattern label and vector offset from which to start acquiring pattern information.
 
 For all History RAM trigger conditions, NIDIGITAL_ATTR_HISTORY_RAM_PRETRIGGER_SAMPLES should be used to specify
 the number of samples to acquire before the trigger conditions are met. If you configure History RAM to only
-acquire failed cycles, you must set NIDIGITAL_ATTR_HISTORY_RAM_PRETRIGGER_SAMPLES to 0. 
+acquire failed cycles, you must set NIDIGITAL_ATTR_HISTORY_RAM_PRETRIGGER_SAMPLES to 0.
 
 NIDIGITAL_ATTR_HISTORY_RAM_CYCLES_TO_ACQUIRE should be used to specify which cycles History RAM acquires after
 the trigger conditions are met.
@@ -2048,7 +2048,7 @@ the trigger conditions are met.
     'Initiate': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'TBD'
+            'description': 'Starts bursting the pattern configured by NIDIGITAL_ATTR_START_LABEL,\ncausing the NI-Digital sessionto be committed. To stop the\npattern burst, call niDigital_Abort. If keep alive pattern is\nbursting when niDigital_Abort is called or upon exiting the\ncontext manager, keep alive pattern will not be stopped. To\nstop the keep alive pattern, call niDigital_AbortKeepAlive.'
         },
         'parameters': [
             {
