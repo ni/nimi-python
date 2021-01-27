@@ -4,10 +4,16 @@ enums = {
     'BitOrder': {
         'values': [
             {
+                'documentation': {
+                    'description': 'The most significant bit is first. The first bit is in the 2n place, where n is the number of bits.'
+                },
                 'name': 'NIDIGITAL_VAL_MSB_FIRST',
                 'value': 2500
             },
             {
+                'documentation': {
+                    'description': 'The least significant bit is first. The first bit is in the 20 place.'
+                },
                 'name': 'NIDIGITAL_VAL_LSB_FIRST',
                 'value': 2501
             }
@@ -40,10 +46,16 @@ enums = {
     'DigitalEdge': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Asserts the trigger when the signal transitions from low level to high level.'
+                },
                 'name': 'NIDIGITAL_VAL_RISING_EDGE',
                 'value': 1800
             },
             {
+                'documentation': {
+                    'description': 'Asserts the trigger when the signal transitions from high level to low level.'
+                },
                 'name': 'NIDIGITAL_VAL_FALLING_EDGE',
                 'value': 1801
             }
@@ -52,18 +64,30 @@ enums = {
     'DriveFormat': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Drive format remains at logic level after each bit.'
+                },
                 'name': 'NIDIGITAL_VAL_NR',
                 'value': 1500
             },
             {
+                'documentation': {
+                    'description': 'Drive format returns to a logic level low after each bit.'
+                },
                 'name': 'NIDIGITAL_VAL_RL',
                 'value': 1501
             },
             {
+                'documentation': {
+                    'description': 'Drive format returns to a logic level high after each bit.'
+                },
                 'name': 'NIDIGITAL_VAL_RH',
                 'value': 1502
             },
             {
+                'documentation': {
+                    'description': 'Drive format returns to the complement logic level of the bit after each bit.'
+                },
                 'name': 'NIDIGITAL_VAL_SBC',
                 'value': 1503
             }
@@ -72,14 +96,23 @@ enums = {
     'ExportSignal': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Overrides the start trigger.'
+                },
                 'name': 'NIDIGITAL_VAL_START_TRIGGER',
                 'value': 2000
             },
             {
+                'documentation': {
+                    'description': 'Specifies to route a conditional jump trigger.'
+                },
                 'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER',
                 'value': 2001
             },
             {
+                'documentation': {
+                    'description': 'Specifies to route a pattern opcode event signal.'
+                },
                 'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT',
                 'value': 2002
             },
@@ -92,10 +125,16 @@ enums = {
     'HistoryRAMCyclesToAcquire': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Acquires failed cycles.'
+                },
                 'name': 'NIDIGITAL_VAL_FAILED_CYCLES',
                 'value': 2303
             },
             {
+                'documentation': {
+                    'description': 'Acquires all cycles.'
+                },
                 'name': 'NIDIGITAL_VAL_ALL_CYCLES',
                 'value': 2304
             }
@@ -104,14 +143,23 @@ enums = {
     'HistoryRAMTriggerType': {
         'values': [
             {
+                'documentation': {
+                    'description': 'First Failure History RAM trigger'
+                },
                 'name': 'NIDIGITAL_VAL_FIRST_FAILURE',
                 'value': 2200
             },
             {
+                'documentation': {
+                    'description': 'Cycle Number History RAM trigger.'
+                },
                 'name': 'NIDIGITAL_VAL_CYCLE_NUMBER',
                 'value': 2201
             },
             {
+                'documentation': {
+                    'description': 'Pattern Label History RAM trigger'
+                },
                 'name': 'NIDIGITAL_VAL_PATTERN_LABEL',
                 'value': 2202
             }
@@ -120,10 +168,16 @@ enums = {
     'MeasurementMode': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Frequency measurements are done in banks'
+                },
                 'name': 'NIDIGITAL_VAL_BANKED',
                 'value': 3700
             },
             {
+                'documentation': {
+                    'description': 'Frequency measurements are done in parallel'
+                },
                 'name': 'NIDIGITAL_VAL_PARALLEL',
                 'value': 3701
             }
@@ -132,6 +186,9 @@ enums = {
     'PPMUApertureTimeUnits': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Unit in seconds.'
+                },
                 'name': 'NIDIGITAL_VAL_SECONDS',
                 'value': 2100
             }
@@ -140,6 +197,9 @@ enums = {
     'PPMUCurrentLimitBehavior': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached.'
+                },
                 'name': 'NIDIGITAL_VAL_CURRENT_REGULATE',
                 'value': 3100
             }
@@ -148,10 +208,16 @@ enums = {
     'PPMUMeasurementType': {
         'values': [
             {
+                'documentation': {
+                    'description': 'The PPMU measures current.'
+                },
                 'name': 'NIDIGITAL_VAL_MEASURE_CURRENT',
                 'value': 2400
             },
             {
+                'documentation': {
+                    'description': 'The PPMU measures voltage.'
+                },
                 'name': 'NIDIGITAL_VAL_MEASURE_VOLTAGE',
                 'value': 2401
             }
@@ -160,10 +226,16 @@ enums = {
     'PPMUOutputFunction': {
         'values': [
             {
+                'documentation': {
+                    'description': 'The PPMU forces voltage to the DUT.'
+                },
                 'name': 'NIDIGITAL_VAL_DC_VOLTAGE',
                 'value': 1300
             },
             {
+                'documentation': {
+                    'description': 'The PPMU forces current to the DUT.'
+                },
                 'name': 'NIDIGITAL_VAL_DC_CURRENT',
                 'value': 1301
             }
@@ -192,36 +264,60 @@ enums = {
     'PinState': {
         'values': [
             {
+                'documentation': {
+                    'description': 'A digital state of 0. This state can be used for WriteStatic(PinState).'
+                },
                 'name': 'NIDIGITAL_VAL_0',
                 'python_name': 'ZERO',
                 'value': 0
             },
             {
+                'documentation': {
+                    'description': 'A digital state of 1. This state can be used for WriteStatic(PinState).'
+                },
                 'name': 'NIDIGITAL_VAL_1',
                 'python_name': 'ONE',
                 'value': 1
             },
             {
+                'documentation': {
+                    'description': 'A digital state of L (low). This state should not be used with WriteStatic(PinState).'
+                },
                 'name': 'NIDIGITAL_VAL_L',
                 'value': 3
             },
             {
+                'documentation': {
+                    'description': 'A digital state of H (high). This state should not be used with WriteStatic(PinState).'
+                },
                 'name': 'NIDIGITAL_VAL_H',
                 'value': 4
             },
             {
+                'documentation': {
+                    'description': 'A digital state of X (non-drive state). This state can be used for WriteStatic(PinState).'
+                },
                 'name': 'NIDIGITAL_VAL_X',
                 'value': 5
             },
             {
+                'documentation': {
+                    'description': 'A digital state of M (midband). This state should not be used with WriteStatic(PinState).'
+                },
                 'name': 'NIDIGITAL_VAL_M',
                 'value': 6
             },
             {
+                'documentation': {
+                    'description': 'A digital state of V (compare high or low, not midband; store results from capture functionality if configured). This state should not be used with WriteStatic(PinState).'
+                },
                 'name': 'NIDIGITAL_VAL_V',
                 'value': 7
             },
             {
+                'documentation': {
+                    'description': 'A digital state of D (drive data from source functionality if configured). This state should not be used with WriteStatic(PinState).'
+                },
                 'name': 'NIDIGITAL_VAL_D',
                 'value': 8
             },
@@ -230,6 +326,9 @@ enums = {
                 'value': 9
             },
             {
+                'documentation': {
+                    'description': 'Not a pin state is used for non-existent DUT cycles.'
+                },
                 'name': 'NIDIGITAL_VAL_NOT_A_PIN_STATE',
                 'value': 254
             },
@@ -242,18 +341,30 @@ enums = {
     'SelectedFunction': {
         'values': [
             {
+                'documentation': {
+                    'description': 'The pattern sequencer controls the specified pin(s). If a pattern is currently bursting, the pin immediately switches to bursting the pattern. This option disconnects the PPMU.'
+                },
                 'name': 'NIDIGITAL_VAL_DIGITAL',
                 'value': 1100
             },
             {
+                'documentation': {
+                    'description': 'The PPMU controls the specified pin(s) and connects the PPMU. The pin driver is in a non-drive state, and the active load is disabled. The PPMU does not start sourcing or measuring until Source or Measure(PpmuMeasurementType) is called.'
+                },
                 'name': 'NIDIGITAL_VAL_PPMU',
                 'value': 1101
             },
             {
+                'documentation': {
+                    'description': 'Puts the digital driver in a non-drive state, disables the active load, disconnects the PPMU, and closes the I/O switch connecting the instrument channel.'
+                },
                 'name': 'NIDIGITAL_VAL_OFF',
                 'value': 1102
             },
             {
+                'documentation': {
+                    'description': 'The I/O switch connecting the instrument channel is open to the I/O connector. If the PPMU is sourcing, it is stopped prior to opening the I/O switch.'
+                },
                 'name': 'NIDIGITAL_VAL_DISCONNECT',
                 'value': 1103
             }
@@ -350,10 +461,16 @@ enums = {
     'SiteResultType': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Pass/fail site result.'
+                },
                 'name': 'NIDIGITAL_VAL_PASS_FAIL',
                 'value': 3300
             },
             {
+                'documentation': {
+                    'description': 'Capture waveform site result.'
+                },
                 'name': 'NIDIGITAL_VAL_CAPTURE_WAVEFORM',
                 'value': 3301
             }
@@ -374,10 +491,16 @@ enums = {
     'SourceDataMapping': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Broadcasts the waveform you specify to all sites.'
+                },
                 'name': 'NIDIGITAL_VAL_BROADCAST',
                 'value': 2600
             },
             {
+                'documentation': {
+                    'description': 'Sources unique waveform data to each site.'
+                },
                 'name': 'NIDIGITAL_VAL_SITE_UNIQUE',
                 'value': 2601
             }
@@ -386,10 +509,16 @@ enums = {
     'TDREndpointTermination': {
         'values': [
             {
+                'documentation': {
+                    'description': 'TDR channels are connected to an open circuit.'
+                },
                 'name': 'NIDIGITAL_VAL_TDR_TO_OPEN',
                 'value': 3600
             },
             {
+                'documentation': {
+                    'description': 'TDR channels are connected to a short to ground.'
+                },
                 'name': 'NIDIGITAL_VAL_TDR_TO_SHORT_TO_GROUND',
                 'value': 3601
             }
@@ -398,14 +527,23 @@ enums = {
     'TerminationMode': {
         'values': [
             {
+                'documentation': {
+                    'description': 'The active load provides a constant current to a commutating voltage (Vcom).'
+                },
                 'name': 'NIDIGITAL_VAL_ACTIVE_LOAD',
                 'value': 1200
             },
             {
+                'documentation': {
+                    'description': 'The pin driver drives Vterm.'
+                },
                 'name': 'NIDIGITAL_VAL_VTERM',
                 'value': 1201
             },
             {
+                'documentation': {
+                    'description': 'The pin driver is in a non-drive state (in a high-impedance state) and the active load is disabled.'
+                },
                 'name': 'NIDIGITAL_VAL_HIGH_Z',
                 'value': 1202
             }
@@ -414,34 +552,58 @@ enums = {
     'TimeSetEdgeType': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Specifies the drive on edge of the time set.'
+                },
                 'name': 'NIDIGITAL_VAL_DRIVE_ON',
                 'value': 2800
             },
             {
+                'documentation': {
+                    'description': 'Specifies the drive data edge of the time set.'
+                },
                 'name': 'NIDIGITAL_VAL_DRIVE_DATA',
                 'value': 2801
             },
             {
+                'documentation': {
+                    'description': 'Specifies the drive return edge of the time set.'
+                },
                 'name': 'NIDIGITAL_VAL_DRIVE_RETURN',
                 'value': 2802
             },
             {
+                'documentation': {
+                    'description': 'Specifies the drive off edge of the time set.'
+                },
                 'name': 'NIDIGITAL_VAL_DRIVE_OFF',
                 'value': 2803
             },
             {
+                'documentation': {
+                    'description': 'Specifies the compare strobe of the time set.'
+                },
                 'name': 'NIDIGITAL_VAL_COMPARE_STROBE',
                 'value': 2804
             },
             {
+                'documentation': {
+                    'description': 'Specifies the drive data 2 edge of the time set.'
+                },
                 'name': 'NIDIGITAL_VAL_DRIVE_DATA2',
                 'value': 2805
             },
             {
+                'documentation': {
+                    'description': 'Specifies the drive return 2 edge of the time set.'
+                },
                 'name': 'NIDIGITAL_VAL_DRIVE_RETURN2',
                 'value': 2806
             },
             {
+                'documentation': {
+                    'description': 'Specifies the compare strobe 2 of the time set.'
+                },
                 'name': 'NIDIGITAL_VAL_COMPARE_STROBE2',
                 'value': 2807
             }
@@ -490,14 +652,23 @@ enums = {
     'TriggerType': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Disables the start trigger.'
+                },
                 'name': 'NIDIGITAL_VAL_NONE',
                 'value': 1700
             },
             {
+                'documentation': {
+                    'description': 'Digital edge trigger.'
+                },
                 'name': 'NIDIGITAL_VAL_DIGITAL_EDGE',
                 'value': 1701
             },
             {
+                'documentation': {
+                    'description': 'Software start trigger.'
+                },
                 'name': 'NIDIGITAL_VAL_SOFTWARE',
                 'value': 1702
             }
