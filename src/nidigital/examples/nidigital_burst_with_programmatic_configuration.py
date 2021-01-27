@@ -99,7 +99,7 @@ def example(resource_name, options,
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to create and configure an instrument session programmatically and to burst a pattern on the digital pattern instrument.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='Resource name of a NI digital pattern instrument, ensure the resource name matches the instrument name in the pinmap file.')
-    parser.add_argument('-s', '--simulate', default=True, type=bool, help='Whether to run on hardware or run on software simulation')
+    parser.add_argument('-s', '--simulate', default='True', choices=['True', 'False'], help='Whether to run on simulated hardware or on real hardware')
     subparser = parser.add_subparsers(dest='command', help='Sub-command help')
 
     configure_voltage = subparser.add_parser('configure-voltage', help='Configure voltage levels and termination voltage of the digital pattern based on command line arguments')
@@ -128,18 +128,18 @@ def _main(argsv):
 
     if args.command == 'configure-voltage':
         voltage_config = VoltageLevelsAndTerminationConfig(args.vil, args.vih, args.vol, args.voh, args.vterm, args.termination_mode, args.iol, args.ioh, args.vcom)
-        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulate else '',
+        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulate == 'True' else '',
                 args.command,
                 args.channels,
                 voltage_config)
     elif args.command == 'configure-time-set':
         time_set_config = TimeSetConfig("tset0", args.period, args.drive_format, args.drive_on, args.drive_data, args.drive_return, args.drive_off, args.strobe_edge)
-        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulate else '',
+        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulate == 'True' else '',
                 args.command,
                 args.channels,
                 time_set_config=time_set_config)
     else:
-        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulate else '',
+        example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulate == 'True' else '',
                 args.command)
 
 
