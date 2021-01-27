@@ -7,7 +7,7 @@ Session
 
     
 
-    TBD
+    Creates and returns a new session to the specified digital pattern instrument to use in all subsequent method calls. To place the instrument in a known startup state when creating a new session, set the reset parameter to True, which is equivalent to calling the :py:meth:`nidigital.Session.reset` method immediately after initializing the session.
 
     
 
@@ -16,13 +16,25 @@ Session
     :param resource_name:
         
 
+        The specified resource name shown in Measurement & Automation Explorer (MAX) for a digital pattern instrument, for example, PXI1Slot3, where PXI1Slot3 is an instrument resource name. **resourceName** can also be a logical IVI name. This parameter accepts a comma-delimited list of strings in the form PXI1Slot2,PXI1Slot3, where ``PXI1Slot2`` is one instrument resource name and ``PXI1Slot3`` is another. When including more than one digital pattern instrument in the comma-delimited list of strings, list the instruments in the same order they appear in the pin map.
+
+        +--------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | |Note| | Note   You only can specify multiple instruments of the same model. For example, you can list two PXIe-6570s but not a PXIe-6570 and PXIe-6571. The instruments must be in the same chassis. |
+        +--------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        .. |Note| image:: note.gif
+
         
+
+        .. note:: 
 
 
     :type resource_name: str
 
     :param id_query:
         
+
+        A Boolean that verifies that the digital pattern instrument you initialize is supported by NI-Digital. NI-Digital automatically performs this query, so setting this parameter is not necessary.
 
         
 
@@ -31,6 +43,8 @@ Session
 
     :param reset_device:
         
+
+        A Boolean that specifies whether to reset a digital pattern instrument to a known state when the session is initialized. Setting the **resetDevice** value to True is equivalent to calling the :py:meth:`nidigital.Session.reset` method immediately after initializing the session.
 
         
 
@@ -82,7 +96,7 @@ abort
 
     .. py:method:: abort()
 
-            TBD
+            Stops bursting the pattern.
 
             
 
@@ -95,7 +109,7 @@ abort_keep_alive
 
     .. py:method:: abort_keep_alive()
 
-            TBD
+            Stops the keep alive pattern if it is currently running. If a pattern burst is in progress, the method aborts the pattern burst. If you start a new pattern burst while a keep alive pattern is running, the keep alive pattern runs to the last keep alive vector, and the new pattern burst starts on the next cycle.
 
             
 
@@ -108,7 +122,7 @@ apply_levels_and_timing
 
     .. py:method:: apply_levels_and_timing(levels_sheet, timing_sheet, initial_state_high_pins=None, initial_state_low_pins=None, initial_state_tristate_pins=None)
 
-            TBD
+            Applies digital levels and timing values defined in previously loaded levels and timing sheets. When applying a levels sheet, only the levels specified in the sheet are affected. Any levels not specified in the sheet remain unchanged. When applying a timing sheet, all existing time sets are deleted before the new time sets are loaded.
 
             
 
@@ -122,12 +136,16 @@ apply_levels_and_timing
             :param levels_sheet:
 
 
+                Name of the levels sheet to apply. Use the name of the sheet or pass the absolute file path you use in the :py:meth:`nidigital.Session._load_levels` method. The name of the levels sheet is the file name without the directory and file extension.
+
                 
 
 
             :type levels_sheet: str
             :param timing_sheet:
 
+
+                Name of the timing sheet to apply. Use the name of the sheet or pass the absolute file path that you use in the :py:meth:`nidigital.Session._load_timing` method. The name of the timing sheet is the file name without the directory and file extension.
 
                 
 
@@ -136,7 +154,7 @@ apply_levels_and_timing
             :param initial_state_high_pins:
 
 
-                Pins or pin groups to initialize to a high state.
+                Comma-delimited list of pins, pin groups, or channels to initialize to a high state.
 
                 
 
@@ -145,7 +163,7 @@ apply_levels_and_timing
             :param initial_state_low_pins:
 
 
-                Pins or pin groups to initialize to a low state.
+                Comma-delimited list of pins, pin groups, or channels to initialize to a low state.
 
                 
 
@@ -154,7 +172,7 @@ apply_levels_and_timing
             :param initial_state_tristate_pins:
 
 
-                Pins or pin groups to initialize to a non-drive state (X).
+                Comma-delimited list of pins, pin groups, or channels to initialize to a non-drive state (X)
 
                 
 
@@ -168,7 +186,7 @@ apply_tdr_offsets
 
     .. py:method:: apply_tdr_offsets(offsets)
 
-            TBD
+            Applies the correction for propagation delay offsets to a digital pattern instrument. Use this method to apply TDR offsets that are stored from a past measurement or are measured by means other than the :py:meth:`nidigital.Session.tdr` method. Also use this method to apply correction for offsets if the **applyOffsets** input of the :py:meth:`nidigital.Session.tdr` method was set to False at the time of measurement.
 
             
 
@@ -181,6 +199,8 @@ apply_tdr_offsets
 
             :param offsets:
 
+
+                TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the **channelList**. If the **channelList** contains pin names, you must specify offsets for each site in the channel map per pin.
 
                 
 
@@ -256,7 +276,7 @@ clock_generator_abort
 
     .. py:method:: clock_generator_abort()
 
-            TBD
+            Stops clock generation on the specified channel(s) or pin(s) and pin group(s).
 
             
 
@@ -274,7 +294,7 @@ clock_generator_generate_clock
 
     .. py:method:: clock_generator_generate_clock(frequency, select_digital_function=True)
 
-            TBD
+            Configures clock generator frequency and initiates clock generation on the specified channel(s) or pin(s) and pin group(s).
 
             
 
@@ -288,12 +308,16 @@ clock_generator_generate_clock
             :param frequency:
 
 
+                The frequency of the clock generation, in Hz.
+
                 
 
 
             :type frequency: float
             :param select_digital_function:
 
+
+                A Boolean that specifies whether to select the digital method for the pins specified prior to starting clock generation.
 
                 
 
@@ -307,7 +331,7 @@ close
 
     .. py:method:: close()
 
-            TBD
+            Closes the specified instrument session to a digital pattern instrument, aborts pattern execution, and unloads pattern memory. The channels on a digital pattern instrument remain in their current state.
 
             
 
@@ -322,7 +346,7 @@ commit
 
     .. py:method:: commit()
 
-            TBD
+            Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the :py:meth:`nidigital.Session.commit` method, then the :py:meth:`nidigital.Session._initiate` method or the :py:meth:`nidigital.Session._burst_pattern` method will implicitly call this method for you. Calling this method moves the session from the Uncommitted state to the Committed state.
 
             
 
@@ -335,7 +359,7 @@ configure_active_load_levels
 
     .. py:method:: configure_active_load_levels(iol, ioh, vcom)
 
-            TBD
+            Configures I\ :sub:`OL`, I\ :sub:`OH`, and V\ :sub:`COM` levels for the active load on the pins you specify. The DUT sources or sinks current based on the level values. To enable active load, set the termination mode to :py:data:`~nidigital.TerminationMode.ACTIVE_LOAD`. To disable active load, set the termination mode of the instrument to High Z or V\ :sub:`TERM`.
 
             
 
@@ -349,6 +373,8 @@ configure_active_load_levels
             :param iol:
 
 
+                Maximum current that the DUT sinks while outputting a voltage below V\ :sub:`COM`.
+
                 
 
 
@@ -356,12 +382,16 @@ configure_active_load_levels
             :param ioh:
 
 
+                Maximum current that the DUT sources while outputting a voltage above V\ :sub:`COM`.
+
                 
 
 
             :type ioh: float
             :param vcom:
 
+
+                Commutating voltage level at which the active load circuit switches between sourcing current and sinking current.
 
                 
 
@@ -375,7 +405,7 @@ configure_pattern_burst_sites
 
     .. py:method:: configure_pattern_burst_sites()
 
-            TBD
+            Configures which sites burst the pattern on the next call to the :py:meth:`nidigital.Session._initiate` method. The pattern burst sites can also be modified through the **siteList** parameter in the :py:meth:`nidigital.Session._burst_pattern` method. If a site has been disabled through the :py:meth:`nidigital.Session.disable_sites` method, the site does not burst a pattern even if included in the pattern burst sites.
 
             
 
@@ -393,7 +423,7 @@ configure_time_set_compare_edges_strobe
 
     .. py:method:: configure_time_set_compare_edges_strobe(time_set_name, strobe_edge)
 
-            TBD
+            Configures the strobe edge time for the specified pins. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
@@ -407,12 +437,16 @@ configure_time_set_compare_edges_strobe
             :param time_set_name:
 
 
+                The specified time set name.
+
                 
 
 
             :type time_set_name: str
             :param strobe_edge:
 
+
+                Time when the comparison happens within a vector period.
 
                 
 
@@ -426,7 +460,7 @@ configure_time_set_compare_edges_strobe2x
 
     .. py:method:: configure_time_set_compare_edges_strobe2x(time_set_name, strobe_edge, strobe2_edge)
 
-            TBD
+            Configures the compare strobes for the specified pins in the time set, including the 2x strobe. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
@@ -440,6 +474,8 @@ configure_time_set_compare_edges_strobe2x
             :param time_set_name:
 
 
+                The specified time set name.
+
                 
 
 
@@ -447,12 +483,16 @@ configure_time_set_compare_edges_strobe2x
             :param strobe_edge:
 
 
+                Time when the comparison happens within a vector period.
+
                 
 
 
             :type strobe_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param strobe2_edge:
 
+
+                Time when the comparison happens for the second DUT cycle within a vector period.
 
                 
 
@@ -466,7 +506,7 @@ configure_time_set_drive_edges
 
     .. py:method:: configure_time_set_drive_edges(time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
 
-            TBD
+            Configures the drive format and drive edge placement for the specified pins. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
@@ -480,12 +520,21 @@ configure_time_set_drive_edges
             :param time_set_name:
 
 
+                The specified time set name.
+
                 
 
 
             :type time_set_name: str
             :param format:
 
+
+                Drive format of the time set.
+
+                -   :py:data:`~nidigital.DriveFormat.NR` (1500): Non-return.
+                -   :py:data:`~nidigital.DriveFormat.RL` (1501): Return to low.
+                -   :py:data:`~nidigital.DriveFormat.RH` (1502): Return to high.
+                -   :py:data:`~nidigital.DriveFormat.SBC` (1503): Surround by complement.
 
                 
 
@@ -494,12 +543,16 @@ configure_time_set_drive_edges
             :param drive_on_edge:
 
 
+                Delay, in seconds, from the beginning of the vector period for turning on the pin driver.This option applies only when the prior vector left the pin in a non-drive pin state (L, H, X, V, M, E). For the SBC format, this option specifies the delay from the beginning of the vector period at which the complement of the pattern value is driven.
+
                 
 
 
             :type drive_on_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_data_edge:
 
+
+                Delay, in seconds, from the beginning of the vector period until the pattern data is driven to the pattern value.The ending state from the previous vector persists until this point.
 
                 
 
@@ -508,12 +561,16 @@ configure_time_set_drive_edges
             :param drive_return_edge:
 
 
+                Delay, in seconds, from the beginning of the vector period until the pin changes from the pattern data to the return value, as specified in the format.
+
                 
 
 
             :type drive_return_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_off_edge:
 
+
+                Delay, in seconds, from the beginning of the vector period to turn off the pin driver when the next vector period uses a non-drive symbol (L, H, X, V, M, E).
 
                 
 
@@ -527,7 +584,7 @@ configure_time_set_drive_edges2x
 
     .. py:method:: configure_time_set_drive_edges2x(time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
 
-            TBD
+            Configures the drive edges of the pins in the time set, including 2x edges. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
@@ -541,12 +598,21 @@ configure_time_set_drive_edges2x
             :param time_set_name:
 
 
+                The specified time set name.
+
                 
 
 
             :type time_set_name: str
             :param format:
 
+
+                Drive format of the time set.
+
+                -   :py:data:`~nidigital.DriveFormat.NR` (1500): Non-return.
+                -   :py:data:`~nidigital.DriveFormat.RL` (1501): Return to low.
+                -   :py:data:`~nidigital.DriveFormat.RH` (1502): Return to high.
+                -   :py:data:`~nidigital.DriveFormat.SBC` (1503): Surround by complement.
 
                 
 
@@ -555,12 +621,16 @@ configure_time_set_drive_edges2x
             :param drive_on_edge:
 
 
+                Delay, in seconds, from the beginning of the vector period for turning on the pin driver.This option applies only when the prior vector left the pin in a non-drive pin state (L, H, X, V, M, E). For the SBC format, this option specifies the delay from the beginning of the vector period at which the complement of the pattern value is driven.
+
                 
 
 
             :type drive_on_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_data_edge:
 
+
+                Delay, in seconds, from the beginning of the vector period until the pattern data is driven to the pattern value.The ending state from the previous vector persists until this point.
 
                 
 
@@ -569,12 +639,16 @@ configure_time_set_drive_edges2x
             :param drive_return_edge:
 
 
+                Delay, in seconds, from the beginning of the vector period until the pin changes from the pattern data to the return value, as specified in the format.
+
                 
 
 
             :type drive_return_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_off_edge:
 
+
+                Delay, in seconds, from the beginning of the vector period to turn off the pin driver when the next vector period uses a non-drive symbol (L, H, X, V, M, E).
 
                 
 
@@ -583,12 +657,16 @@ configure_time_set_drive_edges2x
             :param drive_data2_edge:
 
 
+                Delay, in seconds, from the beginning of the vector period until the pattern data in the second DUT cycle is driven to the pattern value.
+
                 
 
 
             :type drive_data2_edge: hightime.timedelta, datetime.timedelta, or float in seconds
             :param drive_return2_edge:
 
+
+                Delay, in seconds, from the beginning of the vector period until the pin changes from the pattern data in the second DUT cycle to the return value, as specified in the format.
 
                 
 
@@ -602,7 +680,7 @@ configure_time_set_drive_format
 
     .. py:method:: configure_time_set_drive_format(time_set_name, drive_format)
 
-            TBD
+            Configures the drive format for the pins not specified in the **pinList**. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
@@ -616,12 +694,21 @@ configure_time_set_drive_format
             :param time_set_name:
 
 
+                The specified time set name.
+
                 
 
 
             :type time_set_name: str
             :param drive_format:
 
+
+                Drive format of the time set.
+
+                -   :py:data:`~nidigital.DriveFormat.NR` (1500): Non-return.
+                -   :py:data:`~nidigital.DriveFormat.RL` (1501): Return to low.
+                -   :py:data:`~nidigital.DriveFormat.RH` (1502): Return to high.
+                -   :py:data:`~nidigital.DriveFormat.SBC` (1503): Surround by complement.
 
                 
 
@@ -635,7 +722,7 @@ configure_time_set_edge
 
     .. py:method:: configure_time_set_edge(time_set_name, edge, time)
 
-            TBD
+            Configures the edge placement for the pins specified in the pin list. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
@@ -649,6 +736,8 @@ configure_time_set_edge
             :param time_set_name:
 
 
+                The specified time set name.
+
                 
 
 
@@ -656,12 +745,27 @@ configure_time_set_edge
             :param edge:
 
 
+                Name of the edge.
+
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_ON` (2800)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA` (2801)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN` (2802)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_OFF` (2803)
+                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE` (2804)
+                -   :py:data:`~nidigital.NIDIGITAL_VAL_DRIVE_DATA_2` (2805)
+                -   :py:data:`~nidigital.NIDIGITAL_VAL_DRIVE_RETURN_2` (2806)
+                -   :py:data:`~nidigital.NIDIGITAL_VAL_COMPARE_STROBE_2` (2807)
+
                 
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type edge: :py:data:`nidigital.TimeSetEdgeType`
             :param time:
 
+
+                The time from the beginning of the vector period in which to place the edge.
 
                 
 
@@ -675,7 +779,7 @@ configure_time_set_edge_multiplier
 
     .. py:method:: configure_time_set_edge_multiplier(time_set_name, edge_multiplier)
 
-            TBD
+            Configures the edge multiplier of the pins in the time set. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
@@ -689,12 +793,16 @@ configure_time_set_edge_multiplier
             :param time_set_name:
 
 
+                The specified time set name.
+
                 
 
 
             :type time_set_name: str
             :param edge_multiplier:
 
+
+                The specified edge multiplier for the pins in the pin list.
 
                 
 
@@ -708,7 +816,7 @@ configure_time_set_period
 
     .. py:method:: configure_time_set_period(time_set_name, period)
 
-            TBD
+            Configures the period of a time set. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
@@ -717,12 +825,16 @@ configure_time_set_period
             :param time_set_name:
 
 
+                The specified time set name.
+
                 
 
 
             :type time_set_name: str
             :param period:
 
+
+                Period for this time set, in seconds.
 
                 
 
@@ -736,7 +848,7 @@ configure_voltage_levels
 
     .. py:method:: configure_voltage_levels(vil, vih, vol, voh, vterm)
 
-            TBD
+            Configures voltage levels for the pins you specify.
 
             
 
@@ -750,12 +862,16 @@ configure_voltage_levels
             :param vil:
 
 
+                Voltage that the instrument will apply to the input of the DUT when the pin driver drives a logic low (0).
+
                 
 
 
             :type vil: float
             :param vih:
 
+
+                Voltage that the instrument will apply to the input of the DUT when the test instrument drives a logic high (1).
 
                 
 
@@ -764,6 +880,8 @@ configure_voltage_levels
             :param vol:
 
 
+                Output voltage below which the comparator on the pin driver interprets a logic low (L).
+
                 
 
 
@@ -771,12 +889,16 @@ configure_voltage_levels
             :param voh:
 
 
+                Output voltage above which the comparator on the pin driver interprets a logic high (H).
+
                 
 
 
             :type voh: float
             :param vterm:
 
+
+                Termination voltage the instrument applies during non-drive cycles when the termination mode is set to V\ :sub:`term`. The instrument applies the termination voltage through a 50 ohm parallel termination resistance.
 
                 
 
@@ -790,7 +912,7 @@ create_capture_waveform_from_file_digicapture
 
     .. py:method:: create_capture_waveform_from_file_digicapture(waveform_name, waveform_file_path)
 
-            TBD
+            Creates a capture waveform with the configuration information from a Digicapture file generated by the Digital Pattern Editor.
 
             
 
@@ -799,12 +921,16 @@ create_capture_waveform_from_file_digicapture
             :param waveform_name:
 
 
+                Waveform name you want to use. You must specify **waveformName** if the file contains multiple waveforms. Use the **waveformName** with the capture_start opcode in your pattern.
+
                 
 
 
             :type waveform_name: str
             :param waveform_file_path:
 
+
+                Absolute file path to the capture waveform file (.digicapture) you want to load.
 
                 
 
@@ -818,7 +944,7 @@ create_capture_waveform_parallel
 
     .. py:method:: create_capture_waveform_parallel(waveform_name)
 
-            TBD
+            Sets the capture waveform settings for parallel acquisition. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
 
             
 
@@ -831,6 +957,8 @@ create_capture_waveform_parallel
 
             :param waveform_name:
 
+
+                Waveform name you want to use. Use the **waveformName** with the capture_start opcode in your pattern.
 
                 
 
@@ -844,7 +972,7 @@ create_capture_waveform_serial
 
     .. py:method:: create_capture_waveform_serial(waveform_name, sample_width, bit_order)
 
-            TBD
+            Sets the capture waveform settings for serial acquisition. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
 
             
 
@@ -858,6 +986,8 @@ create_capture_waveform_serial
             :param waveform_name:
 
 
+                Waveform name you want to use. Use the **waveformName** with the capture_start opcode in your pattern.
+
                 
 
 
@@ -865,12 +995,19 @@ create_capture_waveform_serial
             :param sample_width:
 
 
+                Width in bits of each serial sample. Valid values are between 1 and 32.
+
                 
 
 
             :type sample_width: int
             :param bit_order:
 
+
+                Order in which to shift the bits.
+
+                -   :py:data:`~nidigital.BitOrder.MSB` (2500): Specifies the bit order by most significant bit first.
+                -   :py:data:`~nidigital.BitOrder.LSB` (2501): Specifies the bit order by least significant bit first.
 
                 
 
@@ -884,7 +1021,7 @@ create_source_waveform_from_file_tdms
 
     .. py:method:: create_source_waveform_from_file_tdms(waveform_name, waveform_file_path, write_waveform_data=True)
 
-            TBD
+            Creates a source waveform with configuration information from a TDMS file generated by the Digital Pattern Editor. It also optionally writes waveform data from the file.
 
             
 
@@ -893,6 +1030,8 @@ create_source_waveform_from_file_tdms
             :param waveform_name:
 
 
+                The waveform name you want to use from the file. You must specify **waveformName** if the file contains multiple waveforms. Use the **waveformName** with the source_start opcode in your pattern.
+
                 
 
 
@@ -900,12 +1039,16 @@ create_source_waveform_from_file_tdms
             :param waveform_file_path:
 
 
+                Absolute file path to the load source waveform file (.tdms).
+
                 
 
 
             :type waveform_file_path: str
             :param write_waveform_data:
 
+
+                A Boolean that writes waveform data to source memory if True and the waveform data is in the file.
 
                 
 
@@ -919,7 +1062,7 @@ create_source_waveform_parallel
 
     .. py:method:: create_source_waveform_parallel(waveform_name, data_mapping)
 
-            TBD
+            Sets the source waveform settings required for parallel sourcing. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
 
             
 
@@ -933,12 +1076,19 @@ create_source_waveform_parallel
             :param waveform_name:
 
 
+                The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+
                 
 
 
             :type waveform_name: str
             :param data_mapping:
 
+
+                Parameter that specifies how to map data on multiple sites.
+
+                -   :py:data:`~nidigital.SourceDataMapping.BROADCAST` (2600): Broadcasts the waveform you specify to all sites.
+                -   :py:data:`~nidigital.SourceDataMapping.SITE_UNIQUE` (2601): Sources unique waveform data to each site.
 
                 
 
@@ -952,7 +1102,7 @@ create_source_waveform_serial
 
     .. py:method:: create_source_waveform_serial(waveform_name, data_mapping, sample_width, bit_order)
 
-            TBD
+            Sets the source waveform settings required for serial sourcing. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
 
             
 
@@ -966,12 +1116,19 @@ create_source_waveform_serial
             :param waveform_name:
 
 
+                The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+
                 
 
 
             :type waveform_name: str
             :param data_mapping:
 
+
+                Parameter that specifies how to map data on multiple sites.
+
+                -   :py:data:`~nidigital.SourceDataMapping.BROADCAST` (2600): Broadcasts the waveform you specify to all sites.
+                -   :py:data:`~nidigital.SourceDataMapping.SITE_UNIQUE` (2601): Sources unique waveform data to each site.
 
                 
 
@@ -980,12 +1137,19 @@ create_source_waveform_serial
             :param sample_width:
 
 
+                Width in bits of each serial sample. Valid values are between 1 and 32.
+
                 
 
 
             :type sample_width: int
             :param bit_order:
 
+
+                Order in which to shift the bits.
+
+                -   :py:data:`~nidigital.BitOrder.MSB` (2500): Specifies the bit order by most significant bit first.
+                -   :py:data:`~nidigital.BitOrder.LSB` (2501): Specifies the bit order by least significant bit first.
 
                 
 
@@ -999,7 +1163,7 @@ create_time_set
 
     .. py:method:: create_time_set(name)
 
-            TBD
+            Creates a time set with the name that you specify. Use this method when you want to create time sets programmatically rather than with a timing sheet.
 
             
 
@@ -1007,6 +1171,8 @@ create_time_set
 
             :param name:
 
+
+                The specified name of the new time set.
 
                 
 
@@ -1020,7 +1186,7 @@ delete_all_time_sets
 
     .. py:method:: delete_all_time_sets()
 
-            TBD
+            Deletes all time sets from instrument memory.
 
             
 
@@ -1033,7 +1199,7 @@ disable_sites
 
     .. py:method:: disable_sites()
 
-            TBD
+            Disables specified sites. Disabled sites are not included in pattern bursts initiated by the :py:meth:`nidigital.Session._initiate` method or the :py:meth:`nidigital.Session._burst_pattern` method, even if the site is specified in the list of pattern burst sites in :py:meth:`nidigital.Session.configure_pattern_burst_sites` method or in the **siteList** input of the :py:meth:`nidigital.Session._burst_pattern` method. Additionally, if you specify a list of pin or pin group names in a **channelList** parameter in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the :py:meth:`nidigital.Session.ppmu_measure` method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
 
             
 
@@ -1051,7 +1217,7 @@ enable_sites
 
     .. py:method:: enable_sites()
 
-            TBD
+            Enables the sites you specify. All sites are enabled by default.
 
             
 
@@ -1230,7 +1396,7 @@ frequency_counter_measure_frequency
 
     .. py:method:: frequency_counter_measure_frequency()
 
-            TBD
+            Measures the frequency on the specified channel(s) over the specified measurement time. All channels in the **channelList** should have the same measurement time.
 
             
 
@@ -1245,6 +1411,8 @@ frequency_counter_measure_frequency
             :return:
 
 
+                    The returned frequency counter measurement, in Hz.This method returns -1 if the measurement is invalid for the channel.
+
                     
 
 
@@ -1256,10 +1424,7 @@ get_channel_names
 
     .. py:method:: get_channel_names(indices)
 
-            Returns a list of channel names for given channel indices.
-
-            This is useful in multi-instrument sessions, where channels are expected to be
-            referenced by their fully-qualified names, for example, PXI1Slot3/0.
+            Returns a comma-separated list of channel names from a string index list.
 
             
 
@@ -1268,16 +1433,13 @@ get_channel_names
             :param indices:
 
 
-                Specifies indices for the channels in the session.
-                Valid values are from zero to the total number of channels in the session minus one.
-                The following types and formats are supported:
-                  - int - example: 0
-                  - Basic sequence - example: [0, range(2, 4)]
-                  - str - example: "0, 2, 3, 1", "0-3", "0:3"
+                Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
 
-                The input can contain any combination of above types. Both out-of-order and repeated indices are
-                supported ([2,3,0], [1,2,2,3]). White space characters, including spaces, tabs, feeds, and
-                carriage returns, are allowed within strings. Ranges can be incrementing or decrementing.
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
 
                 
 
@@ -1288,7 +1450,7 @@ get_channel_names
             :return:
 
 
-                    Channel names
+                    The returned channel name(s) at the specified index.
 
                     
 
@@ -1301,7 +1463,7 @@ get_fail_count
 
     .. py:method:: get_fail_count()
 
-            TBD
+            Returns the comparison fail count for pins in the **channelList**.
 
             
 
@@ -1316,7 +1478,11 @@ get_fail_count
             :return:
 
 
+                    Number of failures in an array. If a site is disabled or not enabled for burst, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the :py:meth:`nidigital.Session.SortPinResultsBySiteViInt64` method to order and combine the data to match the **channelList**. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
+
                     
+
+                    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -1366,6 +1532,8 @@ get_history_ram_sample_count
             :return:
 
 
+                    The returned number of samples that History RAM acquired.
+
                     
 
 
@@ -1377,7 +1545,7 @@ get_pattern_name
 
     .. py:method:: get_pattern_name(pattern_index)
 
-            TBD
+            You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **bufferSize**. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the **bufferSize**, the method copies (bufferSize - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the **bufferSize** you must pass to get the entire value. For example, if the value is "123456" and the **bufferSize** is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for the **bufferSize** and VI_NULL for the value.
 
             
 
@@ -1385,6 +1553,8 @@ get_pattern_name
 
             :param pattern_index:
 
+
+                The specified pattern index.
 
                 
 
@@ -1394,6 +1564,8 @@ get_pattern_name
             :rtype: str
             :return:
 
+
+                    Returns the pin name at the specified **pinIndex**.
 
                     
 
@@ -1406,7 +1578,7 @@ get_pattern_pin_names
 
     .. py:method:: get_pattern_pin_names(start_label)
 
-            TBD
+            Returns the pattern pin list. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the buffer size. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the method copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for the buffer size and VI_NULL for the value.
 
             
 
@@ -1414,6 +1586,8 @@ get_pattern_pin_names
 
             :param start_label:
 
+
+                Pattern name or exported pattern label from which to get the pin names that the pattern references.
 
                 
 
@@ -1423,6 +1597,8 @@ get_pattern_pin_names
             :rtype: list of str
             :return:
 
+
+                    List of pins referenced by the pattern with the **startLabel**.
 
                     
 
@@ -1501,7 +1677,7 @@ get_time_set_drive_format
 
     .. py:method:: get_time_set_drive_format(time_set_name)
 
-            TBD
+            Returns the drive format of a pin in the specified time set.
 
             
 
@@ -1515,6 +1691,8 @@ get_time_set_drive_format
             :param time_set_name:
 
 
+                The specified time set name.
+
                 
 
 
@@ -1523,6 +1701,8 @@ get_time_set_drive_format
             :rtype: :py:data:`nidigital.DriveFormat`
             :return:
 
+
+                    Returned drive format of the time set for the specified pin.
 
                     
 
@@ -1535,7 +1715,7 @@ get_time_set_edge
 
     .. py:method:: get_time_set_edge(time_set_name, edge)
 
-            TBD
+            Returns the edge time of a pin in the specified time set.
 
             
 
@@ -1549,6 +1729,8 @@ get_time_set_edge
             :param time_set_name:
 
 
+                The specified time set name.
+
                 
 
 
@@ -1556,7 +1738,20 @@ get_time_set_edge
             :param edge:
 
 
+                Name of the edge.
+
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_ON` (2800)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA` (2801)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN` (2802)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_OFF` (2803)
+                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE` (2804)
+                -   :py:data:`~nidigital.NIDIGITAL_VAL_DRIVE_DATA_2` (2805)
+                -   :py:data:`~nidigital.NIDIGITAL_VAL_DRIVE_RETURN_2` (2806)
+                -   :py:data:`~nidigital.NIDIGITAL_VAL_COMPARE_STROBE_2` (2807)
+
                 
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type edge: :py:data:`nidigital.TimeSetEdgeType`
@@ -1564,6 +1759,8 @@ get_time_set_edge
             :rtype: hightime.timedelta
             :return:
 
+
+                    Time from the beginning of the vector period in which to place the edge.
 
                     
 
@@ -1576,7 +1773,7 @@ get_time_set_edge_multiplier
 
     .. py:method:: get_time_set_edge_multiplier(time_set_name)
 
-            TBD
+            Returns the edge multiplier of the specified time set.
 
             
 
@@ -1590,6 +1787,8 @@ get_time_set_edge_multiplier
             :param time_set_name:
 
 
+                The specified time set name.
+
                 
 
 
@@ -1598,6 +1797,8 @@ get_time_set_edge_multiplier
             :rtype: int
             :return:
 
+
+                    Returned edge multiplier of the time set for the specified pin.
 
                     
 
@@ -1610,7 +1811,7 @@ get_time_set_name
 
     .. py:method:: get_time_set_name(time_set_index)
 
-            TBD
+            You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **nameBufferSize**. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the method copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for **nameBufferSize** and VI_NULL for the name.
 
             
 
@@ -1618,6 +1819,8 @@ get_time_set_name
 
             :param time_set_index:
 
+
+                The specified time set index.
 
                 
 
@@ -1627,6 +1830,8 @@ get_time_set_name
             :rtype: str
             :return:
 
+
+                    The returned time set name at the specified **timeSetIndex**.
 
                     
 
@@ -1639,7 +1844,7 @@ get_time_set_period
 
     .. py:method:: get_time_set_period(time_set_name)
 
-            TBD
+            Returns the period of the specified time set.
 
             
 
@@ -1647,6 +1852,8 @@ get_time_set_period
 
             :param time_set_name:
 
+
+                The specified time set name.
 
                 
 
@@ -1656,6 +1863,8 @@ get_time_set_period
             :rtype: hightime.timedelta
             :return:
 
+
+                    Returned period, in seconds, that the edge is configured to.
 
                     
 
@@ -1688,7 +1897,7 @@ is_done
 
     .. py:method:: is_done()
 
-            TBD
+            Checks the hardware to determine if the pattern burst has completed or if any errors have occurred.
 
             
 
@@ -1697,6 +1906,8 @@ is_done
             :rtype: bool
             :return:
 
+
+                    A Boolean that indicates whether the pattern burst completed.
 
                     
 
@@ -1709,7 +1920,7 @@ is_site_enabled
 
     .. py:method:: is_site_enabled()
 
-            TBD
+            Checks if a specified site is enabled.
 
             
 
@@ -1726,6 +1937,8 @@ is_site_enabled
             :return:
 
 
+                    Boolean value that returns whether the site is enabled or disabled.
+
                     
 
 
@@ -1737,7 +1950,7 @@ load_pattern
 
     .. py:method:: load_pattern(file_path)
 
-            TBD
+            Loads the specified pattern file.
 
             
 
@@ -1746,7 +1959,11 @@ load_pattern
             :param file_path:
 
 
+                Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using the :py:meth:`nidigital.Session.ConfigureStartLabel` method or the **startLabel** parameter of the :py:meth:`nidigital.Session._burst_pattern` method.
+
                 
+
+                .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
             :type file_path: str
@@ -1758,7 +1975,7 @@ load_pin_map
 
     .. py:method:: load_pin_map(file_path)
 
-            TBD
+            Loads a pin map file. You can load only a single pin and channel map file during an NI-Digital Pattern Driver session. To switch pin maps, create a new session or call the :py:meth:`nidigital.Session.reset` method.
 
             
 
@@ -1766,6 +1983,8 @@ load_pin_map
 
             :param file_path:
 
+
+                Absolute file path to a pin map file created with the Digital Pattern Editor or the NI TestStand Semiconductor Module.
 
                 
 
@@ -1874,7 +2093,7 @@ ppmu_measure
 
     .. py:method:: ppmu_measure(measurement_type)
 
-            TBD
+            Instructs the PPMU to measure voltage or current. This method can be called to take a voltage measurement even if the pin method is not set to PPMU.
 
             
 
@@ -1888,6 +2107,11 @@ ppmu_measure
             :param measurement_type:
 
 
+                Parameter that specifies whether the PPMU measures voltage or current from the DUT.
+
+                -   :py:data:`~nidigital.PPMUMeasurementType.CURRENT` (2400): The PPMU measures current from the DUT.
+                -   :py:data:`~nidigital.PPMUMeasurementType.VOLTAGE` (2401): The PPMU measures voltage from the DUT.
+
                 
 
 
@@ -1897,7 +2121,12 @@ ppmu_measure
             :return:
 
 
+                    The returned array of measurements in the order you specify in the **channelList**.
+                    If a site is disabled, the method does not return data for that site. Use the :py:meth:`nidigital.Session.SortPinResultsBySiteViReal64` method to order and combine the data to match the **channelList**. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
+
                     
+
+                    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -1908,7 +2137,7 @@ ppmu_source
 
     .. py:method:: ppmu_source()
 
-            TBD
+            Starts sourcing voltage or current from the PPMU. This method automatically selects the PPMU method. Changes to PPMU source settings do not take effect until you call this method. If you modify source settings after you call this method, you must call this method again for changes in the configuration to take effect.
 
             
 
@@ -1926,7 +2155,7 @@ read_sequencer_flag
 
     .. py:method:: read_sequencer_flag(flag)
 
-            TBD
+            Reads the state of a pattern sequencer flag. Use pattern sequencer flags to coordinate execution between the pattern sequencer and a runtime test program.
 
             
 
@@ -1934,6 +2163,13 @@ read_sequencer_flag
 
             :param flag:
 
+
+                The pattern sequencer flag you want to read.
+
+                -   :py:data:`~nidigital.SequencerFlag.FLAG0` ("seqflag0"): Writes pattern sequencer flag 0.
+                -   :py:data:`~nidigital.SequencerFlag.FLAG1` ("seqflag1"): Writes pattern sequencer flag 1.
+                -   :py:data:`~nidigital.SequencerFlag.FLAG2` ("seqflag2"): Writes pattern sequencer flag 2.
+                -   :py:data:`~nidigital.SequencerFlag.FLAG3` ("seqflag3"): Writes pattern sequencer flag 3.
 
                 
 
@@ -1943,6 +2179,8 @@ read_sequencer_flag
             :rtype: bool
             :return:
 
+
+                    A Boolean that indicates the state of the pattern sequencer flag you specify.
 
                     
 
@@ -1955,7 +2193,7 @@ read_sequencer_register
 
     .. py:method:: read_sequencer_register(reg)
 
-            TBD
+            Reads the value of a pattern sequencer register. Use pattern sequencer registers to pass numeric values between the pattern sequencer and a runtime test program. For example, you can use this method to read a register modified by the write_reg opcode during a pattern burst.
 
             
 
@@ -1963,6 +2201,25 @@ read_sequencer_register
 
             :param reg:
 
+
+                The sequencer register to read from.
+
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER0` ("reg0"): Reads sequencer register 0.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER1` ("reg1"): Reads sequencer register 1.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER2` ("reg2"): Reads sequencer register 2.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER3` ("reg3"): Reads sequencer register 3.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER4` ("reg4"): Reads sequencer register 4.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER5` ("reg5"): Reads sequencer register 5.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER6` ("reg6"): Reads sequencer register 6.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER7` ("reg7"): Reads sequencer register 7.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER8` ("reg8"): Reads sequencer register 8.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER9` ("reg9"): Reads sequencer register 9.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER10` ("reg10"): Reads sequencer register 10.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER11` ("reg11"): Reads sequencer register 11.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER12` ("reg12"): Reads sequencer register 12.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER13` ("reg13"): Reads sequencer register 13.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER14` ("reg14"): Reads sequencer register 14.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER15` ("reg15"): Reads sequencer register 15.
 
                 
 
@@ -1972,6 +2229,8 @@ read_sequencer_register
             :rtype: int
             :return:
 
+
+                    Value read from the sequencer register.
 
                     
 
@@ -1984,7 +2243,7 @@ read_static
 
     .. py:method:: read_static()
 
-            TBD
+            Reads the current state of comparators for pins you specify in the **channelList** parameter. If there are uncommitted changes to levels or the termination mode, this method commits the changes to the pins.
 
             
 
@@ -1999,7 +2258,16 @@ read_static
             :return:
 
 
+                    The returned array of pin states read from the channels in the **channelList**. Data is returned in the order you specify in the **channelList**. If a site is disabled, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the :py:meth:`nidigital.Session.SortPinResultsBySiteViUInt8` method to order and combine the data to match the **channelList**. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
+
+                    -   :py:data:`~nidigital.PinState.L` (3): The comparators read a logic low pin state.
+                    -   :py:data:`~nidigital.PinState.H` (4): The comparators read a logic high pin state.
+                    -   :py:data:`~nidigital.PinState.M` (6): The comparators read a midband pin state.
+                    -   :py:data:`~nidigital.PinState.V` (7): The comparators read a value that is above VOH and below VOL, which can occur when you set VOL higher than VOH.
+
                     
+
+                    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -2010,7 +2278,7 @@ reset
 
     .. py:method:: reset()
 
-            TBD
+            Resets a digital pattern instrument to a known state. method
 
             
 
@@ -2023,7 +2291,7 @@ reset_device
 
     .. py:method:: reset_device()
 
-            TBD
+            Returns a digital pattern instrument to a known state. method
 
             
 
@@ -2036,7 +2304,7 @@ self_calibrate
 
     .. py:method:: self_calibrate()
 
-            TBD
+            Performs self-calibration on a digital pattern instrument.
 
             
 
@@ -2062,8 +2330,7 @@ send_software_edge_trigger
 
     .. py:method:: send_software_edge_trigger(trigger, trigger_identifier)
 
-            Forces a particular edge-based trigger to occur regardless of how the
-            specified trigger is configured. You can use this method as a software override.
+            Forces a particular edge-based trigger to occur regardless of how the specified trigger is configured. You can use this method as a software override.
 
             
 
@@ -2108,7 +2375,7 @@ tdr
 
     .. py:method:: tdr(apply_offsets=True)
 
-            TBD
+            Measures propagation delays through cables, connectors, and load boards using Time-Domain Reflectometry (TDR). Ensure that the channels and pins you select are connected to an open circuit.
 
             
 
@@ -2122,6 +2389,8 @@ tdr
             :param apply_offsets:
 
 
+                A Boolean that specifies whether to apply the measured TDR offsets. If you need to adjust the measured offsets prior to applying, set this input to False, and call the :py:meth:`nidigital.Session.apply_tdr_offsets` method to specify the adjusted TDR offsets values.
+
                 
 
 
@@ -2130,6 +2399,8 @@ tdr
             :rtype: list of hightime.timedelta
             :return:
 
+
+                    Measured TDR offsets specified in seconds.
 
                     
 
@@ -2142,7 +2413,7 @@ unload_all_patterns
 
     .. py:method:: unload_all_patterns(unload_keep_alive_pattern=False)
 
-            TBD
+            Unloads all patterns, source waveforms, and capture waveforms from a digital pattern instrument.
 
             
 
@@ -2150,6 +2421,8 @@ unload_all_patterns
 
             :param unload_keep_alive_pattern:
 
+
+                A Boolean that specifies whether to keep or unload the keep alive pattern.
 
                 
 
@@ -2204,7 +2477,7 @@ wait_until_done
 
     .. py:method:: wait_until_done(timeout=hightime.timedelta(seconds=10.0))
 
-            TBD
+            Waits until the pattern burst has completed or the timeout has expired.
 
             
 
@@ -2212,6 +2485,8 @@ wait_until_done
 
             :param timeout:
 
+
+                Maximum time (in seconds) allowed for this method to complete. If this method does not complete within this time interval, this method returns an error.
 
                 
 
@@ -2225,7 +2500,7 @@ write_sequencer_flag
 
     .. py:method:: write_sequencer_flag(flag, value)
 
-            TBD
+            Writes the state of a pattern sequencer flag. Use pattern sequencer flags to coordinate execution between the pattern sequencer and a runtime test program.
 
             
 
@@ -2234,12 +2509,21 @@ write_sequencer_flag
             :param flag:
 
 
+                The pattern sequencer flag to write.
+
+                -   :py:data:`~nidigital.SequencerFlag.FLAG0` ("seqflag0"): Writes pattern sequencer flag 0.
+                -   :py:data:`~nidigital.SequencerFlag.FLAG1` ("seqflag1"): Writes pattern sequencer flag 1.
+                -   :py:data:`~nidigital.SequencerFlag.FLAG2` ("seqflag2"): Writes pattern sequencer flag 2.
+                -   :py:data:`~nidigital.SequencerFlag.FLAG3` ("seqflag3"): Writes pattern sequencer flag 3.
+
                 
 
 
             :type flag: :py:data:`nidigital.SequencerFlag`
             :param value:
 
+
+                A Boolean that assigns a state to the pattern sequencer flag you specify.
 
                 
 
@@ -2253,7 +2537,7 @@ write_sequencer_register
 
     .. py:method:: write_sequencer_register(reg, value)
 
-            TBD
+            Writes a value to a pattern sequencer register. Use pattern sequencer registers to pass numeric values between the pattern sequencer and a runtime test program.
 
             
 
@@ -2262,12 +2546,33 @@ write_sequencer_register
             :param reg:
 
 
+                The sequencer register you want to write to.
+
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER0` ("reg0"): Writes sequencer register 0.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER1` ("reg1"): Writes sequencer register 1.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER2` ("reg2"): Writes sequencer register 2.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER3` ("reg3"): Writes sequencer register 3.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER4` ("reg4"): Writes sequencer register 4.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER5` ("reg5"): Writes sequencer register 5.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER6` ("reg6"): Writes sequencer register 6.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER7` ("reg7"): Writes sequencer register 7.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER8` ("reg8"): Writes sequencer register 8.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER9` ("reg9"): Writes sequencer register 9.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER10` ("reg10"): Writes sequencer register 10.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER11` ("reg11"): Writes sequencer register 11.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER12` ("reg12"): Writes sequencer register 12.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER13` ("reg13"): Writes sequencer register 13.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER14` ("reg14"): Writes sequencer register 14.
+                -   :py:data:`~nidigital.SequencerRegister.REGISTER15` ("reg15"): Writes sequencer register 15.
+
                 
 
 
             :type reg: :py:data:`nidigital.SequencerRegister`
             :param value:
 
+
+                The value you want to write to the register.
 
                 
 
@@ -2281,7 +2586,7 @@ write_source_waveform_broadcast
 
     .. py:method:: write_source_waveform_broadcast(waveform_name, waveform_data)
 
-            TBD
+            Writes the same waveform data to all sites. Use this write method if you set the **dataMapping** parameter of the create source waveform method to Broadcast.
 
             
 
@@ -2290,12 +2595,16 @@ write_source_waveform_broadcast
             :param waveform_name:
 
 
+                The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+
                 
 
 
             :type waveform_name: str
             :param waveform_data:
 
+
+                1D array of samples to use as source data to apply to all sites.
 
                 
 
@@ -2309,7 +2618,7 @@ write_source_waveform_data_from_file_tdms
 
     .. py:method:: write_source_waveform_data_from_file_tdms(waveform_name, waveform_file_path)
 
-            TBD
+            Writes a source waveform based on the waveform data and configuration information the file contains.
 
             
 
@@ -2318,12 +2627,16 @@ write_source_waveform_data_from_file_tdms
             :param waveform_name:
 
 
+                The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+
                 
 
 
             :type waveform_name: str
             :param waveform_file_path:
 
+
+                Absolute file path to the load source waveform file (.tdms).
 
                 
 
@@ -2367,7 +2680,7 @@ write_static
 
     .. py:method:: write_static(state)
 
-            TBD
+            Writes a static state to the specified pins. The selected pins remain in the specified state until the next pattern burst or call to this method. If there are uncommitted changes to levels or the termination mode, this method commits the changes to the pins. This method does not change the selected pin method. If you write a static state to a pin that does not have the Digital method selected, the new static state is stored by the instrument, and affects the state of the pin the next time you change the selected method to Digital.
 
             
 
@@ -2381,7 +2694,15 @@ write_static
             :param state:
 
 
+                Parameter that specifies one of the following digital states to assign to the pin.
+
+                -   :py:data:`~nidigital.WriteStaticPinState.ZERO` (0): Specifies to drive low.
+                -   :py:data:`~nidigital.WriteStaticPinState.ONE` (1): Specifies to drive high.
+                -   :py:data:`~nidigital.WriteStaticPinState.X` (5): Specifies to not drive.
+
                 
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type state: :py:data:`nidigital.WriteStaticPinState`
@@ -2394,6 +2715,11 @@ active_load_ioh
 ---------------
 
     .. py:attribute:: active_load_ioh
+
+        Specifies the current that the DUT sources to the active load while outputting a voltage above VCOM.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2424,6 +2750,11 @@ active_load_iol
 
     .. py:attribute:: active_load_iol
 
+        Specifies the current that the DUT sinks from the active load while outputting a voltage below VCOM.
+
+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -2452,6 +2783,11 @@ active_load_vcom
 ----------------
 
     .. py:attribute:: active_load_vcom
+
+        Specifies the voltage level at which the active load circuit switches between sourcing current and sinking current.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2508,7 +2844,7 @@ channel_count
 
     .. py:attribute:: channel_count
 
-        
+        Returns the number of channels that the specific digital pattern instrument driver supports.
 
         The following table lists the characteristics of this property.
 
@@ -2533,6 +2869,11 @@ clock_generator_frequency
 -------------------------
 
     .. py:attribute:: clock_generator_frequency
+
+        Specifies the frequency for the clock generator.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2562,6 +2903,11 @@ clock_generator_is_running
 --------------------------
 
     .. py:attribute:: clock_generator_is_running
+
+        Indicates whether the clock generator is running.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2650,7 +2996,7 @@ cycle_number_history_ram_trigger_cycle_number
 
     .. py:attribute:: cycle_number_history_ram_trigger_cycle_number
 
-        
+        Specifies the cycle number on which History RAM starts acquiring pattern information when configured for a cycle number trigger.
 
         The following table lists the characteristics of this property.
 
@@ -2734,7 +3080,15 @@ digital_edge_start_trigger_edge
 
     .. py:attribute:: digital_edge_start_trigger_edge
 
-        
+        Specifies the active edge for the Start trigger. This property is used when the :py:attr:`nidigital.Session.start_trigger_type` property is set to Digital Edge.
+
+        +--------------------------------------------------+-------------------------------------------------------------------------------+
+        | Defined Values:                                  |                                                                               |
+        +==================================================+===============================================================================+
+        | :py:data:`~nidigital.DigitalEdge.RISING` (1800)  | Asserts the trigger when the signal transitions from low level to high level. |
+        +--------------------------------------------------+-------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.DigitalEdge.FALLING` (1801) | Asserts the trigger when the signal transitions from high level to low level. |
+        +--------------------------------------------------+-------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
@@ -2760,7 +3114,27 @@ digital_edge_start_trigger_source
 
     .. py:attribute:: digital_edge_start_trigger_source
 
-        
+        Specifies the source terminal for the Start trigger. This property is used when the :py:attr:`nidigital.Session.start_trigger_type` property is set to Digital Edge. You can specify source terminals in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The source terminal can also be a terminal from another device, in which case the NI-Digital Pattern Driver automatically finds a route (if one is available) from that terminal to the input terminal (going through a physical PXI backplane trigger line). For example, you can set the source terminal on Dev1 to be /Dev2/StartTrigger.
+
+        +-----------------+--------------------+
+        | Defined Values: |                    |
+        +=================+====================+
+        | PXI_Trig0       | PXI trigger line 0 |
+        +-----------------+--------------------+
+        | PXI_Trig1       | PXI trigger line 1 |
+        +-----------------+--------------------+
+        | PXI_Trig2       | PXI trigger line 2 |
+        +-----------------+--------------------+
+        | PXI_Trig3       | PXI trigger line 3 |
+        +-----------------+--------------------+
+        | PXI_Trig4       | PXI trigger line 4 |
+        +-----------------+--------------------+
+        | PXI_Trig5       | PXI trigger line 5 |
+        +-----------------+--------------------+
+        | PXI_Trig6       | PXI trigger line 6 |
+        +-----------------+--------------------+
+        | PXI_Trig7       | PXI trigger line 7 |
+        +-----------------+--------------------+
 
         The following table lists the characteristics of this property.
 
@@ -2786,7 +3160,7 @@ driver_setup
 
     .. py:attribute:: driver_setup
 
-        
+        This property returns initial values for NI-Digital Pattern Driver properties as a string.
 
         The following table lists the characteristics of this property.
 
@@ -2841,6 +3215,29 @@ exported_pattern_opcode_event_output_terminal
 
     .. py:attribute:: exported_pattern_opcode_event_output_terminal
 
+        Specifies the destination terminal for exporting the Pattern Opcode Event. Terminals can be specified in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
+
+        +-----------------+--------------------+
+        | Defined Values: |                    |
+        +=================+====================+
+        | PXI_Trig0       | PXI trigger line 0 |
+        +-----------------+--------------------+
+        | PXI_Trig1       | PXI trigger line 1 |
+        +-----------------+--------------------+
+        | PXI_Trig2       | PXI trigger line 2 |
+        +-----------------+--------------------+
+        | PXI_Trig3       | PXI trigger line 3 |
+        +-----------------+--------------------+
+        | PXI_Trig4       | PXI trigger line 4 |
+        +-----------------+--------------------+
+        | PXI_Trig5       | PXI trigger line 5 |
+        +-----------------+--------------------+
+        | PXI_Trig6       | PXI trigger line 6 |
+        +-----------------+--------------------+
+        | PXI_Trig7       | PXI trigger line 7 |
+        +-----------------+--------------------+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -2870,7 +3267,29 @@ exported_start_trigger_output_terminal
 
     .. py:attribute:: exported_start_trigger_output_terminal
 
-        
+        Specifies the destination terminal for exporting the Start trigger. Terminals can be specified in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
+
+        +----------------------+-----------------------------+
+        | Defined Values:      |                             |
+        +======================+=============================+
+        | Do not export signal | The signal is not exported. |
+        +----------------------+-----------------------------+
+        | PXI_Trig0            | PXI trigger line 0          |
+        +----------------------+-----------------------------+
+        | PXI_Trig1            | PXI trigger line 1          |
+        +----------------------+-----------------------------+
+        | PXI_Trig2            | PXI trigger line 2          |
+        +----------------------+-----------------------------+
+        | PXI_Trig3            | PXI trigger line 3          |
+        +----------------------+-----------------------------+
+        | PXI_Trig4            | PXI trigger line 4          |
+        +----------------------+-----------------------------+
+        | PXI_Trig5            | PXI trigger line 5          |
+        +----------------------+-----------------------------+
+        | PXI_Trig6            | PXI trigger line 6          |
+        +----------------------+-----------------------------+
+        | PXI_Trig7            | PXI trigger line 7          |
+        +----------------------+-----------------------------+
 
         The following table lists the characteristics of this property.
 
@@ -2895,6 +3314,11 @@ frequency_counter_measurement_time
 ----------------------------------
 
     .. py:attribute:: frequency_counter_measurement_time
+
+        Specifies the measurement time for the frequency counter.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2925,7 +3349,7 @@ group_capabilities
 
     .. py:attribute:: group_capabilities
 
-        
+        Returns a string that contains a comma-separated list of class-extension groups that the driver implements.
 
         The following table lists the characteristics of this property.
 
@@ -2951,7 +3375,7 @@ halt_on_keep_alive_opcode
 
     .. py:attribute:: halt_on_keep_alive_opcode
 
-        
+        Specifies whether keep_alive opcodes should behave like halt opcodes.
 
         The following table lists the characteristics of this property.
 
@@ -2977,7 +3401,13 @@ history_ram_buffer_size_per_site
 
     .. py:attribute:: history_ram_buffer_size_per_site
 
-        
+        Specifies the size, in samples, of the host memory buffer.
+
+        +---------------+
+        | Valid Values: |
+        +===============+
+        | 0-INT64_MAX   |
+        +---------------+
 
         The following table lists the characteristics of this property.
 
@@ -3003,7 +3433,15 @@ history_ram_cycles_to_acquire
 
     .. py:attribute:: history_ram_cycles_to_acquire
 
-        
+        Configures which cycles History RAM acquires after the trigger conditions are met. If you configure History RAM to only acquire failed cycles, you must set the pretrigger samples for History RAM to 0.
+
+        +---------------------------------------------------------------+-----------------------------------------------------------------------------------+
+        | Defined Values:                                               |                                                                                   |
+        +===============================================================+===================================================================================+
+        | :py:data:`~nidigital.HistoryRAMCyclesToAcquire.FAILED` (2303) | Only acquires cycles that fail a compare after the triggering conditions are met. |
+        +---------------------------------------------------------------+-----------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.HistoryRAMCyclesToAcquire.ALL` (2304)    | Acquires all cycles after the triggering conditions are met.                      |
+        +---------------------------------------------------------------+-----------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
@@ -3029,7 +3467,7 @@ history_ram_max_samples_to_acquire_per_site
 
     .. py:attribute:: history_ram_max_samples_to_acquire_per_site
 
-        
+        Specifies the maximum number of History RAM samples to acquire per site. If the property is set to -1, it will acquire until the History RAM buffer is full.
 
         The following table lists the characteristics of this property.
 
@@ -3055,7 +3493,15 @@ history_ram_number_of_samples_is_finite
 
     .. py:attribute:: history_ram_number_of_samples_is_finite
 
-        
+        Specifies whether the instrument acquires a finite number of History Ram samples or acquires continuously. The maximum number of samples that will be acquired when this property is set to True is determined by the instrument History RAM depth specification and the History RAM Max Samples to Acquire Per Site property.
+
+        +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Valid Values: |                                                                                                                                                      |
+        +===============+======================================================================================================================================================+
+        | True          | Specifies that History RAM results will not stream into the host buffer until a History RAM fetch API is called.                                     |
+        +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | False         | Specifies that History RAM results will automatically start streaming into a host buffer after a pattern is burst and the History RAM has triggered. |
+        +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
@@ -3081,7 +3527,7 @@ history_ram_pretrigger_samples
 
     .. py:attribute:: history_ram_pretrigger_samples
 
-        
+        Specifies the number of samples to acquire before the trigger conditions are met. If you configure History RAM to only acquire failed cycles, you must set the pretrigger samples for History RAM to 0.
 
         The following table lists the characteristics of this property.
 
@@ -3107,7 +3553,17 @@ history_ram_trigger_type
 
     .. py:attribute:: history_ram_trigger_type
 
-        
+        Specifies the type of trigger condition on which History RAM starts acquiring pattern information.
+
+        +------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+        | Defined Values:                                                  |                                                                                                                                     |
+        +==================================================================+=====================================================================================================================================+
+        | :py:data:`~nidigital.HistoryRAMTriggerType.FIRST_FAILURE` (2200) | Starts acquiring pattern information in History RAM on the first failed cycle in a pattern burst.                                   |
+        +------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.HistoryRAMTriggerType.CYCLE_NUMBER` (2201)  | Starts acquiring pattern information in History RAM starting from a specified cycle number.                                         |
+        +------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.HistoryRAMTriggerType.PATTERN_LABEL` (2202) | Starts acquiring pattern information in History RAM starting from a specified pattern label, augmented by vector and cycle offsets. |
+        +------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
@@ -3132,6 +3588,11 @@ instrument_firmware_revision
 ----------------------------
 
     .. py:attribute:: instrument_firmware_revision
+
+        Returns a string that contains the firmware revision information for the digital pattern instrument.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3162,7 +3623,7 @@ instrument_manufacturer
 
     .. py:attribute:: instrument_manufacturer
 
-        
+        Returns a string ("National Instruments") that contains the name of the manufacturer of the digital pattern instrument.
 
         The following table lists the characteristics of this property.
 
@@ -3188,7 +3649,7 @@ instrument_model
 
     .. py:attribute:: instrument_model
 
-        
+        Returns a string that contains the model number or name of the digital pattern instrument.
 
         The following table lists the characteristics of this property.
 
@@ -3214,7 +3675,7 @@ interchange_check
 
     .. py:attribute:: interchange_check
 
-        
+        This property is not supported.
 
         The following table lists the characteristics of this property.
 
@@ -3240,7 +3701,7 @@ io_resource_descriptor
 
     .. py:attribute:: io_resource_descriptor
 
-        
+        Returns a string that contains the resource descriptor that the NI-Digital Pattern Driver uses to identify the digital pattern instrument.
 
         The following table lists the characteristics of this property.
 
@@ -3266,7 +3727,7 @@ is_keep_alive_active
 
     .. py:attribute:: is_keep_alive_active
 
-        
+        Returns True if the digital pattern instrument is driving the keep alive pattern.
 
         The following table lists the characteristics of this property.
 
@@ -3292,7 +3753,7 @@ logical_name
 
     .. py:attribute:: logical_name
 
-        
+        Returns a string containing the logical name that you specified when opening the current IVI session. This property is not supported.
 
         The following table lists the characteristics of this property.
 
@@ -3317,6 +3778,11 @@ mask_compare
 ------------
 
     .. py:attribute:: mask_compare
+
+        Specifies whether the pattern comparisons are masked or not. When set to True for a specified pin, failures on that pin will be masked.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3347,7 +3813,7 @@ pattern_label_history_ram_trigger_cycle_offset
 
     .. py:attribute:: pattern_label_history_ram_trigger_cycle_offset
 
-        
+        Specifies the number of cycles that follow the specified pattern label and vector offset, after which History RAM will start acquiring pattern information when configured for a pattern label trigger.
 
         The following table lists the characteristics of this property.
 
@@ -3373,7 +3839,7 @@ pattern_label_history_ram_trigger_label
 
     .. py:attribute:: pattern_label_history_ram_trigger_label
 
-        
+        Specifies the pattern label, augmented by the vector and cycle offset, to determine the point where History RAM will start acquiring pattern information when configured for a pattern label trigger.
 
         The following table lists the characteristics of this property.
 
@@ -3399,7 +3865,7 @@ pattern_label_history_ram_trigger_vector_offset
 
     .. py:attribute:: pattern_label_history_ram_trigger_vector_offset
 
-        
+        Specifies the number of vectors that follow the specified pattern label, after which History RAM will start acquiring pattern information when configured for a pattern label trigger.
 
         The following table lists the characteristics of this property.
 
@@ -3424,6 +3890,11 @@ pattern_opcode_event_terminal_name
 ----------------------------------
 
     .. py:attribute:: pattern_opcode_event_terminal_name
+
+        Specifies the terminal name for the output trigger signal of the specified instance of a Pattern Opcode Event. You can use this terminal name as an input signal source for another trigger.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3454,6 +3925,11 @@ ppmu_allow_extended_voltage_range
 
     .. py:attribute:: ppmu_allow_extended_voltage_range
 
+        Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to True, this property enables extended voltage range operation. Review specification deviations for application suitability before using this property. NI recommends setting this property to False when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output method set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the SELECTED_FUNCTION property to Off before sourcing a voltage level that requires a range change.
+
+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -3482,6 +3958,11 @@ ppmu_aperture_time
 ------------------
 
     .. py:attribute:: ppmu_aperture_time
+
+        Specifies the measurement aperture time for the PPMU. The PPMU_APERTURE_TIME_UNITS property sets the units of the PPMU aperture time.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3512,6 +3993,15 @@ ppmu_aperture_time_units
 
     .. py:attribute:: ppmu_aperture_time_units
 
+        Specifies the units of the measurement aperture time for the PPMU.
+
+        +------------------------------------------------------------+-----------------------------------------+
+        | Defined Values:                                            |                                         |
+        +============================================================+=========================================+
+        | :py:data:`~nidigital.PPMUApertureTimeUnits.SECONDS` (2100) | Specifies the aperture time in seconds. |
+        +------------------------------------------------------------+-----------------------------------------+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -3540,6 +4030,13 @@ ppmu_current_level
 ------------------
 
     .. py:attribute:: ppmu_current_level
+
+        Specifies the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current. Specify valid values for the current level using the :py:meth:`nidigital.Session.PPMU_ConfigureCurrentLevelRange` method.
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3570,6 +4067,11 @@ ppmu_current_level_range
 
     .. py:attribute:: ppmu_current_level_range
 
+        Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current.
+
+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -3598,6 +4100,11 @@ ppmu_current_limit
 ------------------
 
     .. py:attribute:: ppmu_current_limit
+
+        Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage. The PXIe-6570/6571 does not support the PPMU_CURRENT_LIMIT property and only allows configuration of the PPMU_CURRENT_LIMIT_RANGE property.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3628,6 +4135,15 @@ ppmu_current_limit_behavior
 
     .. py:attribute:: ppmu_current_limit_behavior
 
+        Specifies how the output should behave when the current limit is reached.
+
+        +----------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | Defined Values:                                                |                                                                                                                                         |
+        +================================================================+=========================================================================================================================================+
+        | :py:data:`~nidigital.PPMUCurrentLimitBehavior.REGULATE` (3100) | Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached. |
+        +----------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -3656,6 +4172,11 @@ ppmu_current_limit_range
 ------------------------
 
     .. py:attribute:: ppmu_current_limit_range
+
+        Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3686,6 +4207,11 @@ ppmu_current_limit_supported
 
     .. py:attribute:: ppmu_current_limit_supported
 
+        Returns whether the device supports configuration of a current limit when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage.
+
+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -3714,6 +4240,17 @@ ppmu_output_function
 --------------------
 
     .. py:attribute:: ppmu_output_function
+
+        Specifies whether the PPMU forces voltage or current to the DUT.
+
+        +---------------------------------------------------------+--------------------------------------------+
+        | Defined Values:                                         |                                            |
+        +=========================================================+============================================+
+        | :py:data:`~nidigital.PPMUOutputFunction.VOLTAGE` (1300) | Specifies the output method to DC Voltage. |
+        +---------------------------------------------------------+--------------------------------------------+
+        | :py:data:`~nidigital.PPMUOutputFunction.CURRENT` (1301) | Specifies the output method to DC Current. |
+        +---------------------------------------------------------+--------------------------------------------+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3744,6 +4281,11 @@ ppmu_voltage_level
 
     .. py:attribute:: ppmu_voltage_level
 
+        Specifies the voltage level, in volts, that the PPMU forces to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage.
+
+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -3772,6 +4314,11 @@ ppmu_voltage_limit_high
 -----------------------
 
     .. py:attribute:: ppmu_voltage_limit_high
+
+        Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3802,6 +4349,11 @@ ppmu_voltage_limit_low
 
     .. py:attribute:: ppmu_voltage_limit_low
 
+        Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current.
+
+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -3831,7 +4383,7 @@ query_instrument_status
 
     .. py:attribute:: query_instrument_status
 
-        
+        Specifies whether the NI-Digital Pattern Driver queries the digital pattern instrument status after each operation. The instrument status is always queried, regardless of the property setting.
 
         The following table lists the characteristics of this property.
 
@@ -3857,7 +4409,7 @@ range_check
 
     .. py:attribute:: range_check
 
-        
+        Checks the range and validates parameter and property values you pass to NI-Digital Pattern Driver methods. Ranges are always checked, regardless of the property setting.
 
         The following table lists the characteristics of this property.
 
@@ -3883,7 +4435,7 @@ record_coercions
 
     .. py:attribute:: record_coercions
 
-        
+        Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type properties. Enabling record value coercions is not supported.
 
         The following table lists the characteristics of this property.
 
@@ -3908,6 +4460,27 @@ selected_function
 -----------------
 
     .. py:attribute:: selected_function
+
+        .. caution:: In the Disconnect state, some I/O protection and sensing circuitry remains exposed. Do not subject the instrument to voltage beyond its operating range.
+
+        Specifies whether digital pattern instrument channels are controlled by the pattern sequencer or PPMU, disconnected, or off.
+
+        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Defined Values:                                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+        +==========================================================+======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nidigital.SelectedFunction.DIGITAL` (1100)    | The pin is connected to the driver, comparator, and active load methods. The PPMU is not sourcing, but can make voltage measurements. The state of the digital pin driver when you change the selected method to Digital is determined by the most recent call to the :py:meth:`nidigital.Session.write_static` method or the last vector of the most recently executed pattern burst, whichever happened last. Use the :py:meth:`nidigital.Session.write_static` method to control the state of the digital pin driver through software. Use the :py:meth:`nidigital.Session._burst_pattern` method to control the state of the digital pin driver through a pattern. Set the **selectDigitalFunction** parameter of the :py:meth:`nidigital.Session._burst_pattern` method to True to automatically switch the selected method of the pins in the pattern burst to :py:data:`~nidigital.SelectedFunction.DIGITAL`. |
+        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.SelectedFunction.PPMU` (1101)       | The pin is connected to the PPMU. The driver, comparator, and active load are off while this method is selected. Call the :py:meth:`nidigital.Session.ppmu_source` method to source a voltage or current. The :py:meth:`nidigital.Session.ppmu_source` method automatically switches the selected method to the PPMU state and starts sourcing from the PPMU. Changing the selected method to :py:data:`~nidigital.SelectedFunction.DISCONNECT`, :py:data:`~nidigital.SelectedFunction.OFF`, or :py:data:`~nidigital.SelectedFunction.DIGITAL` causes the PPMU to stop sourcing. If you change the selected method to PPMU using the :py:meth:`nidigital.Session.SelectFunction` method, the PPMU is initially not sourcing.                                                                                                                                                                                         |
+        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.SelectedFunction.OFF` (1102)        | The pin is electrically connected, and the PPMU and digital pin driver are off while this method is selected.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.SelectedFunction.DISCONNECT` (1103) | The pin is electrically disconnected from instrument methods. Selecting this method causes the PPMU to stop sourcing prior to disconnecting the pin.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        .. note:: You can make PPMU voltage measurements using the :py:meth:`nidigital.Session.ppmu_measure` method from within any selected method.
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3938,7 +4511,7 @@ sequencer_flag_terminal_name
 
     .. py:attribute:: sequencer_flag_terminal_name
 
-        
+        Specifies the terminal name for the output trigger signal of the Sequencer Flags trigger. You can use this terminal name as an input signal source for another trigger.
 
         The following table lists the characteristics of this property.
 
@@ -3963,6 +4536,11 @@ serial_number
 -------------
 
     .. py:attribute:: serial_number
+
+        Returns the serial number of the device.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3993,7 +4571,7 @@ simulate
 
     .. py:attribute:: simulate
 
-        
+        Simulates I/O operations. After you open a session, you cannot change the simulation state. Use the :py:meth:`nidigital.Session.__init__` method to enable simulation.
 
         The following table lists the characteristics of this property.
 
@@ -4019,7 +4597,7 @@ specific_driver_class_spec_major_version
 
     .. py:attribute:: specific_driver_class_spec_major_version
 
-        
+        Returns the major version number of the class specification with which NI-Digital is compliant. This property is not supported.
 
         The following table lists the characteristics of this property.
 
@@ -4045,7 +4623,7 @@ specific_driver_class_spec_minor_version
 
     .. py:attribute:: specific_driver_class_spec_minor_version
 
-        
+        Returns the minor version number of the class specification with which NI-Digital is compliant. This property is not supported.
 
         The following table lists the characteristics of this property.
 
@@ -4071,7 +4649,7 @@ specific_driver_description
 
     .. py:attribute:: specific_driver_description
 
-        
+        Returns a string that contains a brief description of the NI-Digital Pattern driver.
 
         The following table lists the characteristics of this property.
 
@@ -4097,7 +4675,7 @@ specific_driver_prefix
 
     .. py:attribute:: specific_driver_prefix
 
-        
+        Returns a string that contains the prefix for the NI-Digital Pattern driver.
 
         The following table lists the characteristics of this property.
 
@@ -4123,7 +4701,7 @@ specific_driver_revision
 
     .. py:attribute:: specific_driver_revision
 
-        
+        Returns a string that contains additional version information about the NI-Digital Pattern Driver. For example, the driver can return Driver: NI-Digital 16.0 as the value of this property.
 
         The following table lists the characteristics of this property.
 
@@ -4149,7 +4727,7 @@ specific_driver_vendor
 
     .. py:attribute:: specific_driver_vendor
 
-        
+        Returns a string ("National Instruments") that contains the name of the vendor that supplies the NI-Digital Pattern Driver.
 
         The following table lists the characteristics of this property.
 
@@ -4175,7 +4753,7 @@ start_label
 
     .. py:attribute:: start_label
 
-        
+        Specifies the pattern name or exported pattern label from which to start bursting the pattern.
 
         The following table lists the characteristics of this property.
 
@@ -4201,7 +4779,7 @@ start_trigger_terminal_name
 
     .. py:attribute:: start_trigger_terminal_name
 
-        
+        Specifies the terminal name for the output trigger signal of the Start trigger. You can use this terminal name as an input signal source for another trigger.
 
         The following table lists the characteristics of this property.
 
@@ -4227,7 +4805,19 @@ start_trigger_type
 
     .. py:attribute:: start_trigger_type
 
-        
+        Specifies the Start trigger type. The digital pattern instrument waits for this trigger after you call the :py:meth:`nidigital.Session.init` method or the :py:meth:`nidigital.Session._burst_pattern` method, and does not burst a pattern until this trigger is received.
+
+        +-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Defined Values:                                       |                                                                                                                                                                                                                                                                                                                                     |
+        +=======================================================+=====================================================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nidigital.TriggerType.NONE` (1700)         | Disables the Start trigger. Pattern bursting starts immediately after you call the :py:meth:`nidigital.Session.init` method or the :py:meth:`nidigital.Session._burst_pattern` method.                                                                                                                                              |
+        +-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` (1701) | Pattern bursting does not start until the digital pattern instrument detects a digital edge.                                                                                                                                                                                                                                        |
+        +-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.TriggerType.SOFTWARE` (1702)     | Pattern bursting does not start until the digital pattern instrument receives a software Start trigger. Create a software Start trigger by calling the :py:meth:`nidigital.Session.send_software_edge_trigger` method and selecting start trigger in the **trigger** parameter.Related information: SendSoftwareEdgeTrigger method. |
+        +-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -4253,7 +4843,7 @@ supported_instrument_models
 
     .. py:attribute:: supported_instrument_models
 
-        
+        Returns a comma delimited string that contains the supported digital pattern instrument models for the specific driver.
 
         The following table lists the characteristics of this property.
 
@@ -4279,7 +4869,7 @@ tdr_endpoint_termination
 
     .. py:attribute:: tdr_endpoint_termination
 
-        
+        Specifies whether TDR Channels are connected to an open circuit or a short to ground.
 
         The following table lists the characteristics of this property.
 
@@ -4304,6 +4894,11 @@ tdr_offset
 ----------
 
     .. py:attribute:: tdr_offset
+
+        Specifies the TDR Offset.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -4334,6 +4929,19 @@ termination_mode
 
     .. py:attribute:: termination_mode
 
+        Specifies the behavior of the pin during non-drive cycles.
+
+        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Defined Values:                                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+        +==========================================================+======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nidigital.TerminationMode.ACTIVE_LOAD` (1200) | Specifies that, for non-drive pin states (L, H, X, V, M, E), the active load is connected and the instrument sources or sinks a defined amount of current to load the DUT. The amount of current sourced by the instrument and therefore sunk by the DUT is specified by IOL. The amount of current sunk by the instrument and therefore sourced by the DUT is specified by IOH. The voltage at which the instrument changes between sourcing and sinking is specified by VCOM.                                                                                                                                                                                                                                                                                                                                                                                      |
+        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.TerminationMode.VTERM` (1201)       | Specifies that, for non-drive pin states (L, H, X, V, M, E), the pin driver terminates the pin to the configured VTERM voltage through a 50 Ω impedance. VTERM is adjustable to allow for the pin to terminate at a set level. This is useful for instruments that might operate incorrectly if an instrument pin is unterminated and is allowed to float to any voltage level within the instrument voltage range. To address this issue, enable VTERM by configuring the VTERM pin level to the desired voltage and selecting the VTERM termination mode. Setting VTERM to 0 V and selecting the VTERM termination mode has the effect of connecting a 50 Ω termination to ground, which provides an effective 50 Ω impedance for the pin. This can be useful for improving signal integrity of certain DUTs by reducing reflections while the DUT drives the pin. |
+        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.TerminationMode.HIGH_Z` (1202)      | Specifies that, for non-drive pin states (L, H, X, V, M, E), the pin driver is put in a high-impedance state and the active load is disabled.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -4362,6 +4970,11 @@ timing_absolute_delay
 ---------------------
 
     .. py:attribute:: timing_absolute_delay
+
+        Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the TIMING_ABSOLUTE_DELAY_ENABLED property is set to True, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the TIMING_ABSOLUTE_DELAY_ENABLED property is False, this property will return 0.0. Changing the TIMING_ABSOLUTE_DELAY_ENABLED property from False to True will set the TIMING_ABSOLUTE_DELAY value back to your previously set value.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -4392,7 +5005,7 @@ timing_absolute_delay_enabled
 
     .. py:attribute:: timing_absolute_delay_enabled
 
-        
+        Specifies whether the TIMING_ABSOLUTE_DELAY property should be applied to adjust the digital pattern instrument timing reference relative to other instruments in the system. Do not use this feature with digital pattern instruments in a Semiconductor Test System (STS). Timing absolute delay conflicts with the adjustment performed during STS timing calibration. When set to True, the digital pattern instrument automatically adjusts the timing absolute delay to correct the instrument timing reference relative to other instruments in the system for better timing alignment among synchronized instruments.
 
         The following table lists the characteristics of this property.
 
@@ -4417,6 +5030,11 @@ vih
 ---
 
     .. py:attribute:: vih
+
+        Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic high (1).
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -4447,6 +5065,11 @@ vil
 
     .. py:attribute:: vil
 
+        Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic low (0).
+
+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -4475,6 +5098,11 @@ voh
 ---
 
     .. py:attribute:: voh
+
+        Specifies the output voltage from the DUT above which the comparator on the digital pattern test instrument interprets a logic high (H).
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -4505,6 +5133,11 @@ vol
 
     .. py:attribute:: vol
 
+        Specifies the output voltage from the DUT below which the comparator on the digital pattern test instrument interprets a logic low (L).
+
+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -4533,6 +5166,11 @@ vterm
 -----
 
     .. py:attribute:: vterm
+
+        Specifies the termination voltage the digital pattern instrument applies during non-drive cycles when the termination mode is set to V :sub:`term`. The instrument applies the termination voltage through a 50 Ω parallel termination resistance.
+
+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
