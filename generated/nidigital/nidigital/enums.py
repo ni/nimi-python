@@ -123,6 +123,18 @@ class PPMUOutputFunction(Enum):
 
 
 class PinState(Enum):
+    def __str__(self):
+        if self.name == 'ZERO':
+            return str(0)
+        elif self.name == 'ONE':
+            return str(1)
+        elif self.name == 'NOT_A_PIN_STATE':
+            return "Not a Pin State"
+        elif self.name == 'PIN_STATE_NOT_ACQUIRED':
+            return "Pin State Not Acquired"
+        else:
+            return str(self.name)
+
     ZERO = 0
     r'''
     A digital state of 0.
@@ -324,6 +336,14 @@ class TriggerType(Enum):
 
 
 class WriteStaticPinState(Enum):
+    def __str__(self):
+        if self.name == 'ZERO':
+            return str(0)
+        elif self.name == 'ONE':
+            return str(1)
+        else:
+            return str(self.name)
+
     ZERO = 0
     r'''
     Specifies to drive low.

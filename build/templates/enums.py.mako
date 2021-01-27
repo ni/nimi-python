@@ -10,6 +10,10 @@ from enum import Enum
 
 
 class ${enums[enum_name]['python_name']}(Enum):
+    % if '__str__' in enums[enum_name]:
+    ${"def __str__(self):"}
+    ${enums[enum_name]['__str__']}
+    % endif
     % for enum_value in enums[enum_name]['values']:
     % if type(enum_value['value']) is str:
     ${enum_value['python_name']} = '${enum_value['value']}'
