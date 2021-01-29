@@ -1639,7 +1639,9 @@ send_software_edge_trigger
                 +---------------------------------------------------------------------+---------------------------------------+
                 | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER` (1037) | Asserts the Sequence Advance trigger. |
                 +---------------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_TRIGGER` (1053             | Asserts the Pulse trigger.            |
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_TRIGGER` (1053)            | Asserts the Pulse trigger.            |
+                +---------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_SHUTDOWN_TRIGGER` (1118)         | Asserts the Shutdown trigger.         |
                 +---------------------------------------------------------------------+---------------------------------------+
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -2334,6 +2336,12 @@ auxiliary_power_source_available
 
         .. note:: This property does not necessarily indicate if the device is using the auxiliary
 
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -2343,7 +2351,7 @@ auxiliary_power_source_available
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3528,14 +3536,6 @@ instrument_manufacturer
 
         Contains the name of the manufacturer for the device you are currently using.
 
-
-
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
-
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -3545,7 +3545,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | Yes       |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -4574,6 +4574,14 @@ power_source_in_use
 
         Indicates whether the device is using the internal or auxiliary power source to generate power.
 
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+------------------------+
@@ -4583,7 +4591,7 @@ power_source_in_use
             +----------------+------------------------+
             | Permissions    | read only              |
             +----------------+------------------------+
-            | Channel Based  | No                     |
+            | Channel Based  | Yes                    |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -6149,12 +6157,6 @@ self_calibration_persistence
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
-
         The following table lists the characteristics of this property.
 
             +----------------+----------------------------------+
@@ -6164,7 +6166,7 @@ self_calibration_persistence
             +----------------+----------------------------------+
             | Permissions    | read-write                       |
             +----------------+----------------------------------+
-            | Channel Based  | Yes                              |
+            | Channel Based  | No                               |
             +----------------+----------------------------------+
             | Resettable     | No                               |
             +----------------+----------------------------------+
@@ -6637,14 +6639,6 @@ serial_number
 
         Contains the serial number for the device you are currently using.
 
-
-
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
-
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -6654,7 +6648,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | Yes       |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+

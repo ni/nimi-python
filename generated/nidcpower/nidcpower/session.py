@@ -326,6 +326,12 @@ class _SessionBase(object):
     power source to generate power. Use the power_source_in_use property to retrieve this information.
 
     Note: This property does not necessarily indicate if the device is using the auxiliary
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
@@ -815,12 +821,6 @@ class _SessionBase(object):
     '''Type: str
 
     Contains the name of the manufacturer for the device you are currently using.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     instrument_model = _attributes.AttributeViString(1050512)
     '''Type: str
@@ -1220,6 +1220,12 @@ class _SessionBase(object):
     '''Type: enums.PowerSourceInUse
 
     Indicates whether the device is using the internal or auxiliary power source to generate power.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     pulse_bias_current_level = _attributes.AttributeViReal64(1150088)
     '''Type: float
@@ -1973,12 +1979,6 @@ class _SessionBase(object):
     Default Value: SelfCalibrationPersistence.KEEP_IN_MEMORY
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     sense = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Sense, 1150013)
     '''Type: enums.Sense
@@ -2159,12 +2159,6 @@ class _SessionBase(object):
     '''Type: str
 
     Contains the serial number for the device you are currently using.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     shutdown_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150275)
     '''Type: enums.TriggerType
@@ -5187,7 +5181,9 @@ class Session(_SessionBase):
                 +-----------------------------------------------+---------------------------------------+
                 | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER (1037) | Asserts the Sequence Advance trigger. |
                 +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_PULSE_TRIGGER (1053             | Asserts the Pulse trigger.            |
+                | NIDCPOWER_VAL_PULSE_TRIGGER (1053)            | Asserts the Pulse trigger.            |
+                +-----------------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_SHUTDOWN_TRIGGER (1118)         | Asserts the Shutdown trigger.         |
                 +-----------------------------------------------+---------------------------------------+
 
                 Note:
