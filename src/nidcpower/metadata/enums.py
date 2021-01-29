@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.7.0d7
+# This file is generated from NI-DCPower API metadata version 20.7.0d8
 enums = {
     'ApertureTimeUnits': {
         'values': [
@@ -304,6 +304,13 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_PULSE_TRIGGER',
                 'value': 1053
+            },
+            {
+                'documentation': {
+                    'description': 'Exports the Shutdown trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_SHUTDOWN_TRIGGER',
+                'value': 1118
             }
         ]
     },
