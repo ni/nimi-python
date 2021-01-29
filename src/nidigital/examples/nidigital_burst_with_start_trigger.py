@@ -29,19 +29,18 @@ def example(resource_name, options, trigger_source=None, trigger_edge=None):
         pattern_filename = os.path.join(dir, 'Pattern.digipat')
         session.load_pattern(pattern_filename)
 
-        if trigger_source is not None:
+        if trigger_source is None:
+            print('Start bursting pattern')
+        else:
             # Specify a source and edge for the external start trigger
             session.start_trigger_type = nidigital.TriggerType.DIGITAL_EDGE
             session.digital_edge_start_trigger_source = trigger_source
             session.digital_edge_start_trigger_edge = nidigital.DigitalEdge.RISING if trigger_edge == 'Rising' else nidigital.DigitalEdge.FALLING
+            print('Wait for start trigger and then start bursting pattern')
 
         # If start trigger is configured, waiting for the trigger to start bursting and then blocks until the pattern is done bursting
         # Else just start bursting and block until the pattern is done bursting
         session.burst_pattern(start_label='new_pattern')
-        if trigger_source is None:
-            print('Start bursting pattern')
-        else:
-            print('Wait for start trigger and then start bursting pattern')
 
         # Disconnect all channels using programmable onboard switching
         session.selected_function = nidigital.SelectedFunction.DISCONNECT
@@ -49,7 +48,7 @@ def example(resource_name, options, trigger_source=None, trigger_edge=None):
 
 
 def _main(argsv):
-    parser = argparse.ArgumentParser(description='Demonstrates how to create and configure an instrument session and to burst a pattern on the digital pattern instrument using a start trigger.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser = argparse.ArgumentParser(description='Demonstrates how to create and configure a session that bursts a pattern on the digital pattern instrument using a start trigger', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='Resource name of a NI digital pattern instrument. Ensure the resource name matches the instrument name in the pinmap file.')
     parser.add_argument('-s', '--simulate', default='True', choices=['True', 'False'], help='Whether to run on simulated hardware or real hardware')
     subparser = parser.add_subparsers(dest='command', help='Sub-command help')
