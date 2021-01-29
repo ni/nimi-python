@@ -315,6 +315,46 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
     assert all(len(fetched_waveforms[site]) == num_samples for site in fetched_waveforms)
 
 
+@pytest.fixture(params=[tuple, int, str])
+def source_waveform_wrong_type(request):
+    return request.param
+
+
+def test_source_waveform_parallel_site_unique_wrong_type(multi_instrument_session, source_waveform_wrong_type):
+    '''Test methods for passing wrong types write_source_waveform_site_unique .
+
+    - create_source_waveform_parallel
+    - write_source_waveform_site_unique
+    '''
+    test_name = test_source_waveform_parallel_site_unique.__name__
+    configure_session(multi_instrument_session, test_name)
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
+
+    num_samples = 256
+    multi_instrument_session.write_sequencer_register(reg=nidigital.SequencerRegister.REGISTER0, value=num_samples)
+
+    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(
+        waveform_name='src_wfm',
+        data_mapping=nidigital.SourceDataMapping.SITE_UNIQUE)
+
+    if source_waveform_wrong_type == tuple:
+        source_waveform = ([i for i in range(num_samples)], [i for i in reversed(range(num_samples))])
+    elif source_waveform_wrong_type == int:
+        source_waveform = num_samples
+    elif source_waveform_wrong_type == str:
+        source_waveform = {
+            str(1): [str(i) for i in range(num_samples)],
+            str(0): [str(i) for i in reversed(range(num_samples))]}
+    else:
+        assert False, "Invalid source waveform data type: {}".format(source_waveform_type)
+
+    with pytest.raises(TypeError):
+        multi_instrument_session.write_source_waveform_site_unique(
+            waveform_name='src_wfm',
+            waveform_data=source_waveform)
+
+
 def test_fetch_capture_waveform_parallel(multi_instrument_session):
     '''Test methods for using capture waveform with parallel acquisition.
 
