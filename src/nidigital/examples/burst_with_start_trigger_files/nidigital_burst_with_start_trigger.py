@@ -10,7 +10,7 @@ def example(resource_name, options, trigger_source=None, trigger_edge=None):
 
     with nidigital.Session(resource_name=resource_name, options=options) as session:
 
-        dir = os.path.join(os.path.dirname(__file__), 'burst_with_start_trigger_files')
+        dir = os.path.join(os.path.dirname(__file__))
 
         # Load the pin map (.pinmap) created using the Digital Pattern Editor
         pin_map_filename = os.path.join(dir, 'PinMap.pinmap')
