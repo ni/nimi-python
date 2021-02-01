@@ -2079,7 +2079,8 @@ the trigger conditions are met.
     },
     'IsSiteEnabled': {
         'documentation': {
-            'description': 'TBD'
+            'description': 'TBD',
+            'note': 'The function returns an error if more than one site is specified.\n'
         },
         'parameters': [
             {
