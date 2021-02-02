@@ -1713,6 +1713,8 @@ is_site_enabled
 
             
 
+            .. note:: The method returns an error if more than one site is specified.
+
 
             .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
