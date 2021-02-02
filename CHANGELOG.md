@@ -32,6 +32,10 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * API parity with NI-DCPower 20.6.0 by adding Merged Channels and Shutdown Triggers support. The following properties are added:
+            * `merged_channels`
+            * `digital_edge_shutdown_trigger_input_terminal`
+            * `shutdown_trigger_type`
     * #### Changed
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
