@@ -2914,6 +2914,9 @@ class Session(_SessionBase):
             waveform_data ({ int: basic sequence of unsigned int, int: basic sequence of unsigned int, ... }): Dictionary where each key is a site number and value is a collection of samples to use as source data
 
         '''
+        from collections.abc import Mapping
+        if not isinstance(waveform_data, Mapping):
+            raise TypeError("Expecting waveform_data to be a dictionary but got {}".format(type(waveform_data)))
         site_list = []
         # We assume all the entries are the same length (we'll check later) to make the array the correct size
         # Get an entry from the dictionary from https://stackoverflow.com/questions/30362391/how-do-you-find-the-first-key-in-a-dictionary
