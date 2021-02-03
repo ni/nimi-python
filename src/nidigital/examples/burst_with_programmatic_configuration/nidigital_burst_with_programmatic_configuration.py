@@ -50,13 +50,13 @@ def example(resource_name, options,
         dir = os.path.dirname(__file__)
 
         # Load pin map (.pinmap) created using Digital Pattern Editor
-        pin_map_filename = os.path.join(dir, 'burst_with_programmatic_configuration_files', 'PinMap.pinmap')
+        pin_map_filename = os.path.join(dir, 'PinMap.pinmap')
         session.load_pin_map(pin_map_filename)
 
         # Load the specifications (.specs), levels (.digilevels), and timing (.digitiming) sheets created using Digital Pattern Editor
-        spec_filename = os.path.join(dir, 'burst_with_programmatic_configuration_files', 'Specifications.specs')
-        levels_filename = None if command == 'configure-voltage' else os.path.join(dir, 'burst_with_programmatic_configuration_files', 'PinLevels.digilevels')
-        timing_filename = None if command == 'configure-time-set' else os.path.join(dir, 'burst_with_programmatic_configuration_files', 'Timing.digitiming')
+        spec_filename = os.path.join(dir, 'Specifications.specs')
+        levels_filename = None if command == 'configure-voltage' else os.path.join(dir, 'PinLevels.digilevels')
+        timing_filename = None if command == 'configure-time-set' else os.path.join(dir, 'Timing.digitiming')
 
         session.load_specifications_levels_and_timing(spec_filename, levels_filename, timing_filename)
 
@@ -84,7 +84,7 @@ def example(resource_name, options,
             session.channels[channels].configure_time_set_compare_edges_strobe(time_set_config.time_set_name, time_set_config.strobe_edge)
 
         # Load the pattern file (.digipat) created using Digital Pattern Editor
-        pattern_filename = os.path.join(dir, 'burst_with_programmatic_configuration_files', 'Pattern.digipat')
+        pattern_filename = os.path.join(dir, 'Pattern.digipat')
         session.load_pattern(pattern_filename)
 
         # Burst pattern, blocks until the pattern is done bursting
