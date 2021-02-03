@@ -2214,6 +2214,8 @@ class _SessionBase(object):
 
         TBD
 
+        Note: The method returns an error if more than one site is specified.
+
         Tip:
         This method requires repeated capabilities. If called directly on the
         nidigital.Session object, then the method will use all repeated capabilities in the session.
