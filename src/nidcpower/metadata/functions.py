@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.6.0d7
+# This file is generated from NI-DCPower API metadata version 20.7.0d8
 functions = {
     'Abort': {
         'documentation': {
@@ -2257,8 +2257,12 @@ functions = {
                             'Asserts the Sequence Advance trigger.'
                         ],
                         [
-                            'NIDCPOWER_VAL_PULSE_TRIGGER (1053',
+                            'NIDCPOWER_VAL_PULSE_TRIGGER (1053)',
                             'Asserts the Pulse trigger.'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_SHUTDOWN_TRIGGER (1118)',
+                            'Asserts the Shutdown trigger.'
                         ]
                     ]
                 },
