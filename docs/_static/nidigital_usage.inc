@@ -1,8 +1,8 @@
 Usage
 ------
 
-The following is a basic example of using the **nidigital** module to open a session to a digital pattern instrument
-and source/measure both voltage and current using the PPMU on selected channels.
+The following is a basic example of using the **nidigital** module to open a session to a digital pattern instrument,
+source current, and measure both voltage and current using the PPMU on selected channels.
 
 .. code-block:: python
 
@@ -34,7 +34,7 @@ and source/measure both voltage and current using the PPMU on selected channels.
         current_measurements = session.channels[channels].ppmu_measure(nidigital.PPMUMeasurementType.CURRENT)
         voltage_measurements = session.channels[channels].ppmu_measure(nidigital.PPMUMeasurementType.VOLTAGE)
 
-        print('{:,<20} {:,<10} {:,<10}'.format('Channel Name', 'Current', 'Voltage'))
+        print('{:<20} {:<10} {:<10}'.format('Channel Name', 'Current', 'Voltage'))
         for channel, current, voltage in zip(channels.split(','), current_measurements, voltage_measurements):
             print('{:<20} {:<10f} {:<10f}'.format(channel, current, voltage))
 
