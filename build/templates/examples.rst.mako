@@ -4,10 +4,11 @@
     config        = template_parameters['metadata'].config
     module_name = config['module_name']
 
+    import glob
     import os
 
     examples_dir = os.path.join('src', module_name, 'examples')
-    examples = [f for f in os.listdir(examples_dir) if os.path.isfile(os.path.join(examples_dir, f)) and f.endswith('.py')]
+    examples = glob.glob(examples_dir + '/**/*.py', recursive=True)
     examples = sorted(examples)
 
     # If there is no dev or pre ('a', 'b', 'rc'), then the url should link to the (soon to exist) release
@@ -33,12 +34,12 @@ ${helper.get_rst_header_snippet('Examples', '=')}
 ${examples_link_text}
 
 % for e in examples:
-${helper.get_rst_header_snippet(e, '-')}
+${helper.get_rst_header_snippet(os.path.basename(e), '-')}
 
-.. literalinclude:: ${os.path.join('..', '..', examples_dir, e).replace('\\', '/')}
+.. literalinclude:: ${os.path.join('..', '..', e).replace('\\', '/')}
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(${e}) <https://github.com/ni/nimi-python/blob/master/src/${module_name}/examples/${e}>`_
+   :caption: `(${os.path.basename(e)}) <https://github.com/ni/nimi-python/blob/master/${e}>`_
 
 % endfor
