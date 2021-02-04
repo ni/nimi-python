@@ -140,7 +140,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the **channelList**. If the **channelList** contains pin names, you must specify offsets for each site in the channel map per pin.\n'
+                    'description': 'TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the repeated capabilities. If the repeated capabilities contain pin names, you must specify offsets for each site in the channel map per pin.\n'
                 },
                 'name': 'offsets',
                 'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
@@ -330,7 +330,7 @@ functions = {
     },
     'Commit': {
         'documentation': {
-            'description': 'Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the niDigital_Commit function, then the niDigital_Initiate function or the niDigital_BurstPattern function will implicitly call this function for you. Calling this function moves the session from the Uncommitted state to the Committed state.\n'
+            'description': 'Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the niDigital_Commit function, then the niDigital_Initiate function or the niDigital_FancyBurstPattern function will implicitly call this function for you. Calling this function moves the session from the Uncommitted state to the Committed state.\n'
         },
         'parameters': [
             {
@@ -346,7 +346,7 @@ functions = {
     },
     'ConfigureActiveLoadLevels': {
         'documentation': {
-            'description': 'Configures I\\ :sub:`OL`, I\\ :sub:`OH`, and V\\ :sub:`COM` levels for the active load on the pins you specify. The DUT sources or sinks current based on the level values. To enable active load, set the termination mode to NIDIGITAL_VAL_ACTIVE_LOAD. To disable active load, set the termination mode of the instrument to High Z or V\\ :sub:`TERM`.\n'
+            'description': 'Configures I\\ :sub:`OL`, I\\ :sub:`OH`, and V\\ :sub:`COM` levels for the active load on the pins you specify. The DUT sources or sinks current based on the level values. To enable active load, set the termination mode to NIDIGITAL_VAL_ACTIVE_LOAD. To disable active load, set the termination mode of the instrument to NIDIGITAL_VAL_HIGH_Z or NIDIGITAL_VAL_VTERM.\n'
         },
         'parameters': [
             {
@@ -394,7 +394,7 @@ functions = {
     },
     'ConfigurePatternBurstSites': {
         'documentation': {
-            'description': 'Configures which sites burst the pattern on the next call to the niDigital_Initiate function. The pattern burst sites can also be modified through the **siteList** parameter in the niDigital_BurstPattern function. If a site has been disabled through the niDigital_DisableSites function, the site does not burst a pattern even if included in the pattern burst sites.\n'
+            'description': 'Configures which sites burst the pattern on the next call to the niDigital_Initiate function. The pattern burst sites can also be modified through the repeated capabilities for the niDigital_FancyBurstPattern function. If a site has been disabled through the niDigital_DisableSites function, the site does not burst a pattern even if included in the pattern burst sites.\n'
         },
         'parameters': [
             {
@@ -1241,7 +1241,7 @@ functions = {
     },
     'DisableSites': {
         'documentation': {
-            'description': 'Disables specified sites. Disabled sites are not included in pattern bursts initiated by the niDigital_Initiate function or the niDigital_BurstPattern function, even if the site is specified in the list of pattern burst sites in niDigital_ConfigurePatternBurstSites function or in the **siteList** input of the niDigital_BurstPattern function. Additionally, if you specify a list of pin or pin group names in a **channelList** parameter in any NI-Digital function, digital pattern instrument channels mapped to disabled sites are not affected by the function. The functions that return per-pin data, such as the niDigital_PPMU_Measure function, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this function with the Semiconductor Module.\n'
+            'description': 'Disables specified sites. Disabled sites are not included in pattern bursts initiated by the niDigital_Initiate function or the niDigital_FancyBurstPattern function, even if the site is specified in the list of pattern burst sites in niDigital_ConfigurePatternBurstSites function or in the repeated capabilities for the niDigital_FancyBurstPattern function. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital function, digital pattern instrument channels mapped to disabled sites are not affected by the function. The functions that return per-pin data, such as the niDigital_PPMU_Measure function, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this function with the Semiconductor Module.\n'
         },
         'parameters': [
             {
@@ -1372,7 +1372,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'An array of digital states read from the sites in the **siteList**. Each row in the array corresponds to a site in the list. If a site is disabled, not enabled for burst, or the current instrument does not include any capture pins, the function does not return data for that site. Data for each site in the **siteList** are returned sequentially (non-interleaved). If you are using a list of pin names to read data from multiple instruments, use the niDigital_SortSiteResultsViUInt32Waveform function to order and combine the data to match the **siteList**. You can also use the niDigital_GetSiteResultsSiteNumbers function to obtain a list of returned sites.\n'
+                    'description': 'An array of digital states read from the sites in the repeated capabilities. Each row in the array corresponds to a site in the list. If a site is disabled, not enabled for burst, or the current instrument does not include any capture pins, the function does not return data for that site. Data for each site in the repeated capabilities are returned sequentially (non-interleaved). If you are using a list of pin names to read data from multiple instruments, use the niDigital_SortSiteResultsViUInt32Waveform function to order and combine the data to match the repeated capabilities. You can also use the niDigital_GetSiteResultsSiteNumbers function to obtain a list of returned sites.\n'
                 },
                 'name': 'data',
                 'size': {
@@ -1629,7 +1629,7 @@ functions = {
     },
     'FrequencyCounter_MeasureFrequency': {
         'documentation': {
-            'description': 'Measures the frequency on the specified channel(s) over the specified measurement time. All channels in the **channelList** should have the same measurement time.\n'
+            'description': 'Measures the frequency on the specified channel(s) over the specified measurement time. All channels in the repeated capabilities should have the same measurement time.\n'
         },
         'parameters': [
             {
@@ -2042,7 +2042,7 @@ functions = {
     },
     'GetFailCount': {
         'documentation': {
-            'description': 'Returns the comparison fail count for pins in the **channelList**.\n'
+            'description': 'Returns the comparison fail count for pins in the repeated capabilities.\n'
         },
         'parameters': [
             {
@@ -2072,7 +2072,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Number of failures in an array. If a site is disabled or not enabled for burst, the function does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the niDigital_SortPinResultsBySiteViInt64 function to order and combine the data to match the **channelList**. You can also use the niDigital_GetResultsPinMapInformation function to obtain a sorted list of returned sites and channels.\n'
+                    'description': 'Number of failures in an array. If a site is disabled or not enabled for burst, the function does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the niDigital_SortPinResultsBySiteViInt64 function to order and combine the data to match the repeated capabilities. You can also use the niDigital_GetResultsPinMapInformation function to obtain a sorted list of returned sites and channels.\n'
                 },
                 'name': 'failureCount',
                 'size': {
@@ -2322,7 +2322,7 @@ the trigger conditions are met.
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned index of the pins corresponding to data read from the digital pattern instrument using the specified **channelList**. If you do not want to use this parameter, pass VI_NULL.\nCall niDigital_GetPinName to get the name of the pin associated with an index.\n'
+                    'description': 'The returned index of the pins corresponding to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.\nCall niDigital_GetPinName to get the name of the pin associated with an index.\n'
                 },
                 'name': 'pinIndexes',
                 'size': {
@@ -2335,7 +2335,7 @@ the trigger conditions are met.
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned site numbers that correspond to data read from the digital pattern instrument using the specified **channelList**. If you do not want to use this parameter, pass VI_NULL.\n'
+                    'description': 'The returned site numbers that correspond to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.\n'
                 },
                 'name': 'siteNumbers',
                 'size': {
@@ -2348,7 +2348,7 @@ the trigger conditions are met.
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned index of channels corresponding to data read from the digital pattern instrument using the specified **channelList**. If you do not want to use this parameter, pass VI_NULL.\nCall niDigital_GetChannelName to get the name of the channel associated with an index. Channel indexes are one-based.\n'
+                    'description': 'The returned index of channels corresponding to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.\nCall niDigital_GetChannelName to get the name of the channel associated with an index. Channel indexes are one-based.\n'
                 },
                 'name': 'channelIndexes',
                 'size': {
@@ -2404,7 +2404,7 @@ the trigger conditions are met.
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned array of pass (VI_TRUE) and fail results for the sites you specify in the **siteList** parameter. If sites span multiple digital pattern instruments, you must use an AND operator for the partial results for those sites returned by each instrument. If a site is disabled or not enabled for burst, the function does not return data for that site. Use the niDigital_SortSiteResultsViBoolean function to order and combine the data to match the **siteList**. You can also use the niDigital_GetSiteResultsSiteNumbers function to determine the order of the sites returned from this function call so that you can match the pass array with site numbers.\n'
+                    'description': 'The returned array of pass (VI_TRUE) and fail results for the sites you specify in the repeated capabilities. If sites span multiple digital pattern instruments, you must use an AND operator for the partial results for those sites returned by each instrument. If a site is disabled or not enabled for burst, the function does not return data for that site. Use the niDigital_SortSiteResultsViBoolean function to order and combine the data to match the repeated capabilities. You can also use the niDigital_GetSiteResultsSiteNumbers function to determine the order of the sites returned from this function call so that you can match the pass array with site numbers.\n'
                 },
                 'name': 'passFail',
                 'size': {
@@ -2882,7 +2882,7 @@ the trigger conditions are met.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using the niDigital_ConfigureStartLabel function or the **startLabel** parameter of the niDigital_BurstPattern function.\n'
+                    'description': 'Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using the niDigital_ConfigureStartLabel function or the **startLabel** parameter of the niDigital_FancyBurstPattern function.\n'
                 },
                 'name': 'filePath',
                 'type': 'ViConstString'
@@ -3039,7 +3039,7 @@ the trigger conditions are met.
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned array of measurements in the order you specify in the **channelList**.\nIf a site is disabled, the function does not return data for that site. Use the niDigital_SortPinResultsBySiteViReal64 function to order and combine the data to match the **channelList**. You can also use the niDigital_GetResultsPinMapInformation function to obtain a sorted list of returned sites and channels.\n'
+                    'description': 'The returned array of measurements in the order you specify in the repeated capabilities. If a site is disabled, the function does not return data for that site. Use the niDigital_SortPinResultsBySiteViReal64 function to order and combine the data to match the repeated capabilities. You can also use the niDigital_GetResultsPinMapInformation function to obtain a sorted list of returned sites and channels.\n'
                 },
                 'name': 'measurements',
                 'size': {
@@ -3154,7 +3154,7 @@ the trigger conditions are met.
     },
     'ReadStatic': {
         'documentation': {
-            'description': 'Reads the current state of comparators for pins you specify in the **channelList** parameter. If there are uncommitted changes to levels or the termination mode, this function commits the changes to the pins.\n'
+            'description': 'Reads the current state of comparators for pins you specify in the repeated capabilities. If there are uncommitted changes to levels or the termination mode, this function commits the changes to the pins.\n'
         },
         'parameters': [
             {
@@ -3184,7 +3184,7 @@ the trigger conditions are met.
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned array of pin states read from the channels in the **channelList**. Data is returned in the order you specify in the **channelList**. If a site is disabled, the function does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the niDigital_SortPinResultsBySiteViUInt8 function to order and combine the data to match the **channelList**. You can also use the niDigital_GetResultsPinMapInformation function to obtain a sorted list of returned sites and channels.\n\n-   NIDIGITAL_VAL_L (3): The comparators read a logic low pin state.\n-   NIDIGITAL_VAL_H (4): The comparators read a logic high pin state.\n-   NIDIGITAL_VAL_M (6): The comparators read a midband pin state.\n-   NIDIGITAL_VAL_V (7): The comparators read a value that is above VOH and below VOL, which can occur when you set VOL higher than VOH.\n'
+                    'description': 'The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the function does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the niDigital_SortPinResultsBySiteViUInt8 function to order and combine the data to match the repeated capabilities. You can also use the niDigital_GetResultsPinMapInformation function to obtain a sorted list of returned sites and channels.\n\n-   NIDIGITAL_VAL_L (3): The comparators read a logic low pin state.\n-   NIDIGITAL_VAL_H (4): The comparators read a logic high pin state.\n-   NIDIGITAL_VAL_M (6): The comparators read a midband pin state.\n-   NIDIGITAL_VAL_V (7): The comparators read a value that is above VOH and below VOL, which can occur when you set VOL higher than VOH.\n'
                 },
                 'enum': 'PinState',
                 'name': 'data',
@@ -3769,7 +3769,7 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
     },
     'WriteSourceWaveformBroadcastU32': {
         'documentation': {
-            'description': 'Writes the same waveform data to all sites. Use this write function if you set the **dataMapping** parameter of the create source waveform function to Broadcast.\n'
+            'description': 'Writes the same waveform data to all sites. Use this write function if you set the data_mapping parameter of the create source waveform function to NIDIGITAL_VAL_BROADCAST.\n'
         },
         'parameters': [
             {

@@ -1069,7 +1069,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            offsets (basic sequence of hightime.timedelta, datetime.timedelta, or float in seconds): TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the **channelList**. If the **channelList** contains pin names, you must specify offsets for each site in the channel map per pin.
+            offsets (basic sequence of hightime.timedelta, datetime.timedelta, or float in seconds): TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the repeated capabilities. If the repeated capabilities contain pin names, you must specify offsets for each site in the channel map per pin.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1161,7 +1161,7 @@ class _SessionBase(object):
     def configure_active_load_levels(self, iol, ioh, vcom):
         r'''configure_active_load_levels
 
-        Configures I\ :sub:`OL`, I\ :sub:`OH`, and V\ :sub:`COM` levels for the active load on the pins you specify. The DUT sources or sinks current based on the level values. To enable active load, set the termination mode to TerminationMode.ACTIVE_LOAD. To disable active load, set the termination mode of the instrument to High Z or V\ :sub:`TERM`.
+        Configures I\ :sub:`OL`, I\ :sub:`OH`, and V\ :sub:`COM` levels for the active load on the pins you specify. The DUT sources or sinks current based on the level values. To enable active load, set the termination mode to TerminationMode.ACTIVE_LOAD. To disable active load, set the termination mode of the instrument to TerminationMode.HIGH_Z or TerminationMode.VTERM.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -1190,7 +1190,7 @@ class _SessionBase(object):
     def configure_pattern_burst_sites(self):
         r'''configure_pattern_burst_sites
 
-        Configures which sites burst the pattern on the next call to the _initiate method. The pattern burst sites can also be modified through the **siteList** parameter in the _burst_pattern method. If a site has been disabled through the disable_sites method, the site does not burst a pattern even if included in the pattern burst sites.
+        Configures which sites burst the pattern on the next call to the _initiate method. The pattern burst sites can also be modified through the repeated capabilities for the burst_pattern method. If a site has been disabled through the disable_sites method, the site does not burst a pattern even if included in the pattern burst sites.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -1626,7 +1626,7 @@ class _SessionBase(object):
     def disable_sites(self):
         r'''disable_sites
 
-        Disables specified sites. Disabled sites are not included in pattern bursts initiated by the _initiate method or the _burst_pattern method, even if the site is specified in the list of pattern burst sites in configure_pattern_burst_sites method or in the **siteList** input of the _burst_pattern method. Additionally, if you specify a list of pin or pin group names in a **channelList** parameter in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the ppmu_measure method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
+        Disables specified sites. Disabled sites are not included in pattern bursts initiated by the _initiate method or the burst_pattern method, even if the site is specified in the list of pattern burst sites in configure_pattern_burst_sites method or in the repeated capabilities for the burst_pattern method. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the ppmu_measure method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -1675,13 +1675,13 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            start_label (str):
+            start_label (str): Pattern nane or exported pattern label from which to start bursting the pattern.
 
-            select_digital_function (bool):
+            select_digital_function (bool): A Boolean that specifies whether to select the digital method for the pins in the pattern prior to bursting.
 
-            wait_until_done (bool):
+            wait_until_done (bool): A Boolean that indicates whether to wait until the bursting is complete.
 
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds):
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Maximum time (in seconds) allowed for this method to complete. If this method does not complete within this time interval, this method returns an error.
 
 
         Returns:
@@ -1709,11 +1709,11 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            waveform_name (str):
+            waveform_name (str): Waveform name you create with the create capture waveform method. Use the waveform_name parameter with capture_start opcode in your pattern.
 
-            samples_to_read (int):
+            samples_to_read (int): Number of samples to fetch.
 
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds):
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Maximum time (in seconds) allowed for this method to complete. If this method does not complete within this time interval, this method returns an error.
 
 
         Returns:
@@ -2119,7 +2119,7 @@ class _SessionBase(object):
     def frequency_counter_measure_frequency(self):
         r'''frequency_counter_measure_frequency
 
-        Measures the frequency on the specified channel(s) over the specified measurement time. All channels in the **channelList** should have the same measurement time.
+        Measures the frequency on the specified channel(s) over the specified measurement time. All channels in the repeated capabilities should have the same measurement time.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -2351,7 +2351,7 @@ class _SessionBase(object):
     def get_fail_count(self):
         r'''get_fail_count
 
-        Returns the comparison fail count for pins in the **channelList**.
+        Returns the comparison fail count for pins in the repeated capabilities.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -2360,7 +2360,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Returns:
-            failure_count (list of int): Number of failures in an array. If a site is disabled or not enabled for burst, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the SortPinResultsBySiteViInt64 method to order and combine the data to match the **channelList**. You can also use the GetResultsPinMapInformation method to obtain a sorted list of returned sites and channels.
+            failure_count (list of int): Number of failures in an array. If a site is disabled or not enabled for burst, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the SortPinResultsBySiteViInt64 method to order and combine the data to match the repeated capabilities. You can also use the GetResultsPinMapInformation method to obtain a sorted list of returned sites and channels.
 
                 Note:
                 One or more of the referenced methods are not in the Python API for this driver.
@@ -2493,12 +2493,12 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Returns:
-            pin_indexes (list of int): The returned index of the pins corresponding to data read from the digital pattern instrument using the specified **channelList**. If you do not want to use this parameter, pass VI_NULL.
+            pin_indexes (list of int): The returned index of the pins corresponding to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.
                 Call _get_pin_name to get the name of the pin associated with an index.
 
-            site_numbers (list of int): The returned site numbers that correspond to data read from the digital pattern instrument using the specified **channelList**. If you do not want to use this parameter, pass VI_NULL.
+            site_numbers (list of int): The returned site numbers that correspond to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.
 
-            channel_indexes (list of int): The returned index of channels corresponding to data read from the digital pattern instrument using the specified **channelList**. If you do not want to use this parameter, pass VI_NULL.
+            channel_indexes (list of int): The returned index of channels corresponding to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.
                 Call get_channel_name to get the name of the channel associated with an index. Channel indexes are one-based.
 
         '''
@@ -2535,7 +2535,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Returns:
-            pass_fail (list of bool): The returned array of pass (True) and fail results for the sites you specify in the **siteList** parameter. If sites span multiple digital pattern instruments, you must use an AND operator for the partial results for those sites returned by each instrument. If a site is disabled or not enabled for burst, the method does not return data for that site. Use the SortSiteResultsViBoolean method to order and combine the data to match the **siteList**. You can also use the _get_site_results_site_numbers method to determine the order of the sites returned from this method call so that you can match the pass array with site numbers.
+            pass_fail (list of bool): The returned array of pass (True) and fail results for the sites you specify in the repeated capabilities. If sites span multiple digital pattern instruments, you must use an AND operator for the partial results for those sites returned by each instrument. If a site is disabled or not enabled for burst, the method does not return data for that site. Use the SortSiteResultsViBoolean method to order and combine the data to match the repeated capabilities. You can also use the _get_site_results_site_numbers method to determine the order of the sites returned from this method call so that you can match the pass array with site numbers.
 
                 Note:
                 One or more of the referenced methods are not in the Python API for this driver.
@@ -2812,8 +2812,7 @@ class _SessionBase(object):
 
 
         Returns:
-            measurements (list of float): The returned array of measurements in the order you specify in the **channelList**.
-                If a site is disabled, the method does not return data for that site. Use the SortPinResultsBySiteViReal64 method to order and combine the data to match the **channelList**. You can also use the GetResultsPinMapInformation method to obtain a sorted list of returned sites and channels.
+            measurements (list of float): The returned array of measurements in the order you specify in the repeated capabilities. If a site is disabled, the method does not return data for that site. Use the SortPinResultsBySiteViReal64 method to order and combine the data to match the repeated capabilities. You can also use the GetResultsPinMapInformation method to obtain a sorted list of returned sites and channels.
 
                 Note:
                 One or more of the referenced methods are not in the Python API for this driver.
@@ -2858,7 +2857,7 @@ class _SessionBase(object):
     def read_static(self):
         r'''read_static
 
-        Reads the current state of comparators for pins you specify in the **channelList** parameter. If there are uncommitted changes to levels or the termination mode, this method commits the changes to the pins.
+        Reads the current state of comparators for pins you specify in the repeated capabilities. If there are uncommitted changes to levels or the termination mode, this method commits the changes to the pins.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -2867,7 +2866,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Returns:
-            data (list of enums.PinState): The returned array of pin states read from the channels in the **channelList**. Data is returned in the order you specify in the **channelList**. If a site is disabled, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the SortPinResultsBySiteViUInt8 method to order and combine the data to match the **channelList**. You can also use the GetResultsPinMapInformation method to obtain a sorted list of returned sites and channels.
+            data (list of enums.PinState): The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the SortPinResultsBySiteViUInt8 method to order and combine the data to match the repeated capabilities. You can also use the GetResultsPinMapInformation method to obtain a sorted list of returned sites and channels.
 
                 -   PinState.L (3): The comparators read a logic low pin state.
                 -   PinState.H (4): The comparators read a logic high pin state.
@@ -3290,7 +3289,7 @@ class Session(_SessionBase):
     def commit(self):
         r'''commit
 
-        Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the commit method, then the _initiate method or the _burst_pattern method will implicitly call this method for you. Calling this method moves the session from the Uncommitted state to the Committed state.
+        Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the commit method, then the _initiate method or the burst_pattern method will implicitly call this method for you. Calling this method moves the session from the Uncommitted state to the Committed state.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDigital_Commit(vi_ctype)
@@ -3635,7 +3634,7 @@ class Session(_SessionBase):
         Loads the specified pattern file.
 
         Args:
-            file_path (str): Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using the ConfigureStartLabel method or the **startLabel** parameter of the _burst_pattern method.
+            file_path (str): Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using the ConfigureStartLabel method or the **startLabel** parameter of the burst_pattern method.
 
                 Note:
                 One or more of the referenced methods are not in the Python API for this driver.
@@ -3939,7 +3938,7 @@ class Session(_SessionBase):
     def write_source_waveform_broadcast(self, waveform_name, waveform_data):
         r'''write_source_waveform_broadcast
 
-        Writes the same waveform data to all sites. Use this write method if you set the **dataMapping** parameter of the create source waveform method to Broadcast.
+        Writes the same waveform data to all sites. Use this write method if you set the data_mapping parameter of the create source waveform method to SourceDataMapping.BROADCAST.
 
         Args:
             waveform_name (str): The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.

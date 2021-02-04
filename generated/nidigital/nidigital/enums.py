@@ -7,11 +7,11 @@ from enum import Enum
 class BitOrder(Enum):
     MSB = 2500
     r'''
-    The most significant bit is first. The first bit is in the 2n place, where n is the number of bits.
+    The most significant bit is first. The first bit is in the 2^n place, where n is the number of bits.
     '''
     LSB = 2501
     r'''
-    The least significant bit is first. The first bit is in the 20 place.
+    The least significant bit is first. The first bit is in the 2^0 place.
     '''
 
 

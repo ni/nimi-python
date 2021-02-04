@@ -15,7 +15,7 @@ BitOrder
 
 
 
-        The most significant bit is first. The first bit is in the 2n place, where n is the number of bits.
+        The most significant bit is first. The first bit is in the 2^n place, where n is the number of bits.
 
         
 
@@ -25,7 +25,7 @@ BitOrder
 
 
 
-        The least significant bit is first. The first bit is in the 20 place.
+        The least significant bit is first. The first bit is in the 2^0 place.
 
         
 

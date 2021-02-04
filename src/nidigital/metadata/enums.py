@@ -5,14 +5,14 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': 'The most significant bit is first. The first bit is in the 2n place, where n is the number of bits.'
+                    'description': 'The most significant bit is first. The first bit is in the 2^n place, where n is the number of bits.'
                 },
                 'name': 'NIDIGITAL_VAL_MSB_FIRST',
                 'value': 2500
             },
             {
                 'documentation': {
-                    'description': 'The least significant bit is first. The first bit is in the 20 place.'
+                    'description': 'The least significant bit is first. The first bit is in the 2^0 place.'
                 },
                 'name': 'NIDIGITAL_VAL_LSB_FIRST',
                 'value': 2501

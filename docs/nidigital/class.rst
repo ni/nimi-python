@@ -200,7 +200,7 @@ apply_tdr_offsets
             :param offsets:
 
 
-                TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the **channelList**. If the **channelList** contains pin names, you must specify offsets for each site in the channel map per pin.
+                TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the repeated capabilities. If the repeated capabilities contain pin names, you must specify offsets for each site in the channel map per pin.
 
                 
 
@@ -232,12 +232,16 @@ burst_pattern
             :param start_label:
 
 
+                Pattern nane or exported pattern label from which to start bursting the pattern.
+
                 
 
 
             :type start_label: str
             :param select_digital_function:
 
+
+                A Boolean that specifies whether to select the digital method for the pins in the pattern prior to bursting.
 
                 
 
@@ -246,12 +250,16 @@ burst_pattern
             :param wait_until_done:
 
 
+                A Boolean that indicates whether to wait until the bursting is complete.
+
                 
 
 
             :type wait_until_done: bool
             :param timeout:
 
+
+                Maximum time (in seconds) allowed for this method to complete. If this method does not complete within this time interval, this method returns an error.
 
                 
 
@@ -346,7 +354,7 @@ commit
 
     .. py:method:: commit()
 
-            Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the :py:meth:`nidigital.Session.commit` method, then the :py:meth:`nidigital.Session._initiate` method or the :py:meth:`nidigital.Session._burst_pattern` method will implicitly call this method for you. Calling this method moves the session from the Uncommitted state to the Committed state.
+            Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the :py:meth:`nidigital.Session.commit` method, then the :py:meth:`nidigital.Session._initiate` method or the :py:meth:`nidigital.Session.burst_pattern` method will implicitly call this method for you. Calling this method moves the session from the Uncommitted state to the Committed state.
 
             
 
@@ -359,7 +367,7 @@ configure_active_load_levels
 
     .. py:method:: configure_active_load_levels(iol, ioh, vcom)
 
-            Configures I\ :sub:`OL`, I\ :sub:`OH`, and V\ :sub:`COM` levels for the active load on the pins you specify. The DUT sources or sinks current based on the level values. To enable active load, set the termination mode to :py:data:`~nidigital.TerminationMode.ACTIVE_LOAD`. To disable active load, set the termination mode of the instrument to High Z or V\ :sub:`TERM`.
+            Configures I\ :sub:`OL`, I\ :sub:`OH`, and V\ :sub:`COM` levels for the active load on the pins you specify. The DUT sources or sinks current based on the level values. To enable active load, set the termination mode to :py:data:`~nidigital.TerminationMode.ACTIVE_LOAD`. To disable active load, set the termination mode of the instrument to :py:data:`~nidigital.TerminationMode.HIGH_Z` or :py:data:`~nidigital.TerminationMode.VTERM`.
 
             
 
@@ -405,7 +413,7 @@ configure_pattern_burst_sites
 
     .. py:method:: configure_pattern_burst_sites()
 
-            Configures which sites burst the pattern on the next call to the :py:meth:`nidigital.Session._initiate` method. The pattern burst sites can also be modified through the **siteList** parameter in the :py:meth:`nidigital.Session._burst_pattern` method. If a site has been disabled through the :py:meth:`nidigital.Session.disable_sites` method, the site does not burst a pattern even if included in the pattern burst sites.
+            Configures which sites burst the pattern on the next call to the :py:meth:`nidigital.Session._initiate` method. The pattern burst sites can also be modified through the repeated capabilities for the :py:meth:`nidigital.Session.burst_pattern` method. If a site has been disabled through the :py:meth:`nidigital.Session.disable_sites` method, the site does not burst a pattern even if included in the pattern burst sites.
 
             
 
@@ -1199,7 +1207,7 @@ disable_sites
 
     .. py:method:: disable_sites()
 
-            Disables specified sites. Disabled sites are not included in pattern bursts initiated by the :py:meth:`nidigital.Session._initiate` method or the :py:meth:`nidigital.Session._burst_pattern` method, even if the site is specified in the list of pattern burst sites in :py:meth:`nidigital.Session.configure_pattern_burst_sites` method or in the **siteList** input of the :py:meth:`nidigital.Session._burst_pattern` method. Additionally, if you specify a list of pin or pin group names in a **channelList** parameter in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the :py:meth:`nidigital.Session.ppmu_measure` method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
+            Disables specified sites. Disabled sites are not included in pattern bursts initiated by the :py:meth:`nidigital.Session._initiate` method or the :py:meth:`nidigital.Session.burst_pattern` method, even if the site is specified in the list of pattern burst sites in :py:meth:`nidigital.Session.configure_pattern_burst_sites` method or in the repeated capabilities for the :py:meth:`nidigital.Session.burst_pattern` method. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the :py:meth:`nidigital.Session.ppmu_measure` method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
 
             
 
@@ -1249,6 +1257,8 @@ fetch_capture_waveform
             :param waveform_name:
 
 
+                Waveform name you create with the create capture waveform method. Use the waveform_name parameter with capture_start opcode in your pattern.
+
                 
 
 
@@ -1256,12 +1266,16 @@ fetch_capture_waveform
             :param samples_to_read:
 
 
+                Number of samples to fetch.
+
                 
 
 
             :type samples_to_read: int
             :param timeout:
 
+
+                Maximum time (in seconds) allowed for this method to complete. If this method does not complete within this time interval, this method returns an error.
 
                 
 
@@ -1396,7 +1410,7 @@ frequency_counter_measure_frequency
 
     .. py:method:: frequency_counter_measure_frequency()
 
-            Measures the frequency on the specified channel(s) over the specified measurement time. All channels in the **channelList** should have the same measurement time.
+            Measures the frequency on the specified channel(s) over the specified measurement time. All channels in the repeated capabilities should have the same measurement time.
 
             
 
@@ -1463,7 +1477,7 @@ get_fail_count
 
     .. py:method:: get_fail_count()
 
-            Returns the comparison fail count for pins in the **channelList**.
+            Returns the comparison fail count for pins in the repeated capabilities.
 
             
 
@@ -1478,7 +1492,7 @@ get_fail_count
             :return:
 
 
-                    Number of failures in an array. If a site is disabled or not enabled for burst, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the :py:meth:`nidigital.Session.SortPinResultsBySiteViInt64` method to order and combine the data to match the **channelList**. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
+                    Number of failures in an array. If a site is disabled or not enabled for burst, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the :py:meth:`nidigital.Session.SortPinResultsBySiteViInt64` method to order and combine the data to match the repeated capabilities. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
 
                     
 
@@ -1954,7 +1968,7 @@ load_pattern
             :param file_path:
 
 
-                Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using the :py:meth:`nidigital.Session.ConfigureStartLabel` method or the **startLabel** parameter of the :py:meth:`nidigital.Session._burst_pattern` method.
+                Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using the :py:meth:`nidigital.Session.ConfigureStartLabel` method or the **startLabel** parameter of the :py:meth:`nidigital.Session.burst_pattern` method.
 
                 
 
@@ -2116,8 +2130,7 @@ ppmu_measure
             :return:
 
 
-                    The returned array of measurements in the order you specify in the **channelList**.
-                    If a site is disabled, the method does not return data for that site. Use the :py:meth:`nidigital.Session.SortPinResultsBySiteViReal64` method to order and combine the data to match the **channelList**. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
+                    The returned array of measurements in the order you specify in the repeated capabilities. If a site is disabled, the method does not return data for that site. Use the :py:meth:`nidigital.Session.SortPinResultsBySiteViReal64` method to order and combine the data to match the repeated capabilities. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
 
                     
 
@@ -2238,7 +2251,7 @@ read_static
 
     .. py:method:: read_static()
 
-            Reads the current state of comparators for pins you specify in the **channelList** parameter. If there are uncommitted changes to levels or the termination mode, this method commits the changes to the pins.
+            Reads the current state of comparators for pins you specify in the repeated capabilities. If there are uncommitted changes to levels or the termination mode, this method commits the changes to the pins.
 
             
 
@@ -2253,7 +2266,7 @@ read_static
             :return:
 
 
-                    The returned array of pin states read from the channels in the **channelList**. Data is returned in the order you specify in the **channelList**. If a site is disabled, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the :py:meth:`nidigital.Session.SortPinResultsBySiteViUInt8` method to order and combine the data to match the **channelList**. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
+                    The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the :py:meth:`nidigital.Session.SortPinResultsBySiteViUInt8` method to order and combine the data to match the repeated capabilities. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
 
                     -   :py:data:`~nidigital.PinState.L` (3): The comparators read a logic low pin state.
                     -   :py:data:`~nidigital.PinState.H` (4): The comparators read a logic high pin state.
@@ -2581,7 +2594,7 @@ write_source_waveform_broadcast
 
     .. py:method:: write_source_waveform_broadcast(waveform_name, waveform_data)
 
-            Writes the same waveform data to all sites. Use this write method if you set the **dataMapping** parameter of the create source waveform method to Broadcast.
+            Writes the same waveform data to all sites. Use this write method if you set the data_mapping parameter of the create source waveform method to :py:data:`~nidigital.SourceDataMapping.BROADCAST`.
 
             
 
