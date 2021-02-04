@@ -1492,11 +1492,9 @@ get_fail_count
             :return:
 
 
-                    Number of failures in an array. If a site is disabled or not enabled for burst, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the :py:meth:`nidigital.Session.SortPinResultsBySiteViInt64` method to order and combine the data to match the repeated capabilities. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
+                    Number of failures in an array. If a site is disabled or not enabled for burst, the method does not return data for that site. You can also use the :py:meth:`nidigital.Session.get_pin_results_pin_information` method to obtain a sorted list of returned sites and channels.
 
                     
-
-                    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -1625,13 +1623,7 @@ get_pin_results_pin_information
 
     .. py:method:: get_pin_results_pin_information()
 
-            Returns a list of named tuples (PinInfo) that <FILL IN THE BLANK HERE>
-
-            Fields in PinInfo:
-
-            - **pin_name** (str)
-            - **site_number** (int)
-            - **channel_name** (str)
+            Returns the pin names, site numbers, and channel names that correspond to per-pin data read from the digital pattern instrument. The method returns pin information in the same order as values read using the :py:meth:`nidigital.Session.read_static` method, :py:meth:`nidigital.Session.ppmu_measure` method, and :py:meth:`nidigital.Session.get_fail_count` method. Use this method to match values the previously listed methods return with pins, sites, and instrument channels.
 
             
 
@@ -2130,11 +2122,9 @@ ppmu_measure
             :return:
 
 
-                    The returned array of measurements in the order you specify in the repeated capabilities. If a site is disabled, the method does not return data for that site. Use the :py:meth:`nidigital.Session.SortPinResultsBySiteViReal64` method to order and combine the data to match the repeated capabilities. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
+                    The returned array of measurements in the order you specify in the repeated capabilities. If a site is disabled, the method does not return data for that site. You can also use the :py:meth:`nidigital.Session.get_pin_results_pin_information` method to obtain a sorted list of returned sites and channels.
 
                     
-
-                    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -2266,7 +2256,7 @@ read_static
             :return:
 
 
-                    The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the method does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the :py:meth:`nidigital.Session.SortPinResultsBySiteViUInt8` method to order and combine the data to match the repeated capabilities. You can also use the :py:meth:`nidigital.Session.GetResultsPinMapInformation` method to obtain a sorted list of returned sites and channels.
+                    The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the method does not return data for that site. You can also use the :py:meth:`nidigital.Session.get_pin_results_pin_information` method to obtain a sorted list of returned sites and channels.
 
                     -   :py:data:`~nidigital.PinState.L` (3): The comparators read a logic low pin state.
                     -   :py:data:`~nidigital.PinState.H` (4): The comparators read a logic high pin state.
@@ -2274,8 +2264,6 @@ read_static
                     -   :py:data:`~nidigital.PinState.V` (7): The comparators read a value that is above VOH and below VOL, which can occur when you set VOL higher than VOH.
 
                     
-
-                    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 

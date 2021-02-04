@@ -149,6 +149,9 @@ class PinState(Enum):
     Not a pin state is used for non-existent DUT cycles.
     '''
     PIN_STATE_NOT_ACQUIRED = 255
+    r'''
+    Pin state could not be acquired because none of the pins mapped to the instrument in a multi-instrument session had any failures.
+    '''
 
 
 class SelectedFunction(Enum):

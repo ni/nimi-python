@@ -336,6 +336,9 @@ enums = {
                 'value': 254
             },
             {
+                'documentation': {
+                    'description': 'Pin state could not be acquired because none of the pins mapped to the instrument in a multi-instrument session had any failures.'
+                },
                 'name': 'NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED',
                 'value': 255
             }

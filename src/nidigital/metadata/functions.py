@@ -2072,7 +2072,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Number of failures in an array. If a site is disabled or not enabled for burst, the function does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the niDigital_SortPinResultsBySiteViInt64 function to order and combine the data to match the repeated capabilities. You can also use the niDigital_GetResultsPinMapInformation function to obtain a sorted list of returned sites and channels.\n'
+                    'description': 'Number of failures in an array. If a site is disabled or not enabled for burst, the function does not return data for that site. You can also use the niDigital_FancyGetPinResultsPinInformation function to obtain a sorted list of returned sites and channels.\n'
                 },
                 'name': 'failureCount',
                 'size': {
@@ -3039,7 +3039,7 @@ the trigger conditions are met.
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned array of measurements in the order you specify in the repeated capabilities. If a site is disabled, the function does not return data for that site. Use the niDigital_SortPinResultsBySiteViReal64 function to order and combine the data to match the repeated capabilities. You can also use the niDigital_GetResultsPinMapInformation function to obtain a sorted list of returned sites and channels.\n'
+                    'description': 'The returned array of measurements in the order you specify in the repeated capabilities. If a site is disabled, the function does not return data for that site. You can also use the niDigital_FancyGetPinResultsPinInformation function to obtain a sorted list of returned sites and channels.\n'
                 },
                 'name': 'measurements',
                 'size': {
@@ -3184,7 +3184,7 @@ the trigger conditions are met.
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the function does not return data for that site. If you are using a list of pin names to read data from multiple instruments, use the niDigital_SortPinResultsBySiteViUInt8 function to order and combine the data to match the repeated capabilities. You can also use the niDigital_GetResultsPinMapInformation function to obtain a sorted list of returned sites and channels.\n\n-   NIDIGITAL_VAL_L (3): The comparators read a logic low pin state.\n-   NIDIGITAL_VAL_H (4): The comparators read a logic high pin state.\n-   NIDIGITAL_VAL_M (6): The comparators read a midband pin state.\n-   NIDIGITAL_VAL_V (7): The comparators read a value that is above VOH and below VOL, which can occur when you set VOL higher than VOH.\n'
+                    'description': 'The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the function does not return data for that site. You can also use the niDigital_FancyGetPinResultsPinInformation function to obtain a sorted list of returned sites and channels.\n\n-   NIDIGITAL_VAL_L (3): The comparators read a logic low pin state.\n-   NIDIGITAL_VAL_H (4): The comparators read a logic high pin state.\n-   NIDIGITAL_VAL_M (6): The comparators read a midband pin state.\n-   NIDIGITAL_VAL_V (7): The comparators read a value that is above VOH and below VOL, which can occur when you set VOL higher than VOH.\n'
                 },
                 'enum': 'PinState',
                 'name': 'data',

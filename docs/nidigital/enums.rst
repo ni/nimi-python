@@ -350,6 +350,12 @@ PinState
 
 
 
+        Pin state could not be acquired because none of the pins mapped to the instrument in a multi-instrument session had any failures.
+
+        
+
+
+
 SelectedFunction
 ----------------
 
