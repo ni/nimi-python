@@ -24,6 +24,9 @@ attributes = {
     1050004: {
         'access': 'read-write',
         'channel_based': False,
+        'documentation': {
+            'description': 'Specifies whether to cache the value of attributes. When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument. This significantly increases execution speed. Caching is always enabled in the driver, regardless of the value of this attribute.'
+        },
         'name': 'CACHE',
         'resettable': True,
         'type': 'ViBoolean'
@@ -390,7 +393,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': 'Specifies the voltage level, in volts, that the PPMU forces to the DUT. This attribute is applicable only when you set the PPMU_OUTPUT_FUNCTION attribute to DC Voltage.\n'
+            'description': 'Specifies the voltage level, in volts, that the PPMU forces to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Voltage.\n'
         },
         'name': 'PPMU_VOLTAGE_LEVEL',
         'resettable': True,
@@ -400,7 +403,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': 'Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This attribute is applicable only when you set the PPMU_OUTPUT_FUNCTION attribute to DC Voltage.\n'
+            'description': 'Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Voltage.\n'
         },
         'name': 'PPMU_CURRENT_LIMIT_RANGE',
         'resettable': True,
@@ -410,7 +413,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': 'Specifies the current level, in amps, that the PPMU forces to the DUT. This attribute is applicable only when you set the PPMU_OUTPUT_FUNCTION attribute to DC Current. Specify valid values for the current level using the niDigital_PPMU_ConfigureCurrentLevelRange function.\n'
+            'description': 'Specifies the current level, in amps, that the PPMU forces to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Current. Specify valid values for the current level using the niDigital_PPMU_ConfigureCurrentLevelRange function.\n'
         },
         'name': 'PPMU_CURRENT_LEVEL',
         'resettable': True,
@@ -420,7 +423,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': 'Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This attribute is applicable only when you set the PPMU_OUTPUT_FUNCTION attribute to DC Current.\n'
+            'description': 'Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Current.\n'
         },
         'name': 'PPMU_CURRENT_LEVEL_RANGE',
         'resettable': True,
@@ -430,7 +433,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': 'Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This attribute is applicable only when you set the PPMU_OUTPUT_FUNCTION attribute to DC Current.\n'
+            'description': 'Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Current.\n'
         },
         'name': 'PPMU_VOLTAGE_LIMIT_LOW',
         'resettable': True,
@@ -440,7 +443,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': 'Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This attribute is applicable only when you set the PPMU_OUTPUT_FUNCTION attribute to DC Current.\n'
+            'description': 'Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Current.\n'
         },
         'name': 'PPMU_VOLTAGE_LIMIT_HIGH',
         'resettable': True,
@@ -609,6 +612,26 @@ attributes = {
     1150033: {
         'access': 'read-write',
         'channel_based': True,
+        'documentation': {
+            'description': 'Disables the conditional jump trigger or configures it for either hardware triggering or software triggering.  The default value is NIDIGITAL_VAL_NONE.\n',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_NONE (1700)',
+                    'Disables the conditional jump trigger.'
+                ],
+                [
+                    'NIDIGITAL_VAL_DIGITAL_EDGE (1701)',
+                    'Configures the conditional jump trigger for hardware triggering.'
+                ],
+                [
+                    'NIDIGITAL_VAL_SOFTWARE (1702)',
+                    'Configures the conditional jump trigger for software triggering.'
+                ]
+            ],
+            'table_header': [
+                'Valid Values:'
+            ]
+        },
         'enum': 'TriggerType',
         'name': 'CONDITIONAL_JUMP_TRIGGER_TYPE',
         'resettable': True,
@@ -617,6 +640,17 @@ attributes = {
     1150034: {
         'access': 'read-write',
         'channel_based': True,
+        'documentation': {
+            'description': 'Configures the digital trigger source terminal for a conditional jump trigger instance. The PXIe-6570/6571 supports triggering through the PXI trigger bus. You can specify source terminals in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The source terminal can also be a terminal from another device, in which case the NI-Digital Pattern Driver automatically finds a route (if one is available) from that terminal to the input terminal (going through a physical PXI backplane trigger line). For example, you can set the source terminal on Dev1 to be /Dev2/ConditionalJumpTrigger0. The default value is VI_NULL.\n',
+            'table_body': [
+                [
+                    'String identifier to any valid terminal name'
+                ]
+            ],
+            'table_header': [
+                'Valid Values:'
+            ]
+        },
         'name': 'DIGITAL_EDGE_CONDITIONAL_JUMP_TRIGGER_SOURCE',
         'resettable': True,
         'type': 'ViString'
@@ -624,6 +658,22 @@ attributes = {
     1150035: {
         'access': 'read-write',
         'channel_based': True,
+        'documentation': {
+            'description': 'Configures the active edge of the incoming trigger signal for the conditional jump trigger instance. The default value is NIDIGITAL_VAL_RISING_EDGE.\n',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_RISING_EDGE (1800)',
+                    'Specifies the signal transition from low level to high level.'
+                ],
+                [
+                    'NIDIGITAL_VAL_FALLING_EDGE (1801)',
+                    'Specifies the signal transition from high level to low level.'
+                ]
+            ],
+            'table_header': [
+                'Valid Values:'
+            ]
+        },
         'enum': 'DigitalEdge',
         'name': 'DIGITAL_EDGE_CONDITIONAL_JUMP_TRIGGER_EDGE',
         'resettable': True,
@@ -632,6 +682,50 @@ attributes = {
     1150036: {
         'access': 'read-write',
         'channel_based': True,
+        'documentation': {
+            'description': 'Specifies the terminal to output the exported signal of the specified instance of the conditional jump trigger. The default value is VI_NULL.\n',
+            'table_body': [
+                [
+                    'VI_NULL ("")',
+                    'Returns an empty string'
+                ],
+                [
+                    'PXI_Trig0',
+                    'PXI trigger line 0'
+                ],
+                [
+                    'PXI_Trig1',
+                    'PXI trigger line 1'
+                ],
+                [
+                    'PXI_Trig2',
+                    'PXI trigger line 2'
+                ],
+                [
+                    'PXI_Trig3',
+                    'PXI trigger line 3'
+                ],
+                [
+                    'PXI_Trig4',
+                    'PXI trigger line 4'
+                ],
+                [
+                    'PXI_Trig5',
+                    'PXI trigger line 5'
+                ],
+                [
+                    'PXI_Trig6',
+                    'PXI trigger line 6'
+                ],
+                [
+                    'PXI_Trig7',
+                    'PXI trigger line 7'
+                ]
+            ],
+            'table_header': [
+                'Valid Values:'
+            ]
+        },
         'name': 'EXPORTED_CONDITIONAL_JUMP_TRIGGER_OUTPUT_TERMINAL',
         'resettable': True,
         'type': 'ViString'
@@ -640,7 +734,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': 'Specifies the measurement aperture time for the PPMU. The PPMU_APERTURE_TIME_UNITS attribute sets the units of the PPMU aperture time.\n'
+            'description': 'Specifies the measurement aperture time for the PPMU. The NIDIGITAL_ATTR_PPMU_APERTURE_TIME_UNITS attribute sets the units of the PPMU aperture time.\n'
         },
         'name': 'PPMU_APERTURE_TIME',
         'resettable': True,
@@ -679,6 +773,9 @@ attributes = {
     1150040: {
         'access': 'read only',
         'channel_based': True,
+        'documentation': {
+            'description': 'Specifies the terminal name from which the exported conditional jump trigger signal may be routed to other instruments through the PXI trigger bus. You can use this signal to trigger other instruments when the conditional jump trigger instance asserts on the digital pattern instrument.\n'
+        },
         'name': 'CONDITIONAL_JUMP_TRIGGER_TERMINAL_NAME',
         'resettable': False,
         'type': 'ViString'
@@ -858,7 +955,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': 'Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This attribute is applicable only when you set the PPMU_OUTPUT_FUNCTION attribute to DC Voltage. The PXIe-6570/6571 does not support the PPMU_CURRENT_LIMIT attribute and only allows configuration of the PPMU_CURRENT_LIMIT_RANGE attribute.\n'
+            'description': 'Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Voltage. The PXIe-6570/6571 does not support the NIDIGITAL_ATTR_PPMU_CURRENT_LIMIT attribute and only allows configuration of the NIDIGITAL_ATTR_PPMU_CURRENT_LIMIT_RANGE attribute.\n'
         },
         'name': 'PPMU_CURRENT_LIMIT',
         'resettable': True,
@@ -868,7 +965,7 @@ attributes = {
         'access': 'read only',
         'channel_based': True,
         'documentation': {
-            'description': 'Returns whether the device supports configuration of a current limit when you set the PPMU_OUTPUT_FUNCTION attribute to DC Voltage.\n'
+            'description': 'Returns whether the device supports configuration of a current limit when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Voltage.\n'
         },
         'name': 'PPMU_CURRENT_LIMIT_SUPPORTED',
         'resettable': False,
@@ -944,13 +1041,13 @@ attributes = {
         'name': 'FREQUENCY_COUNTER_MEASUREMENT_TIME',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+        'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
     1150071: {
         'access': 'read-write',
         'channel_based': False,
         'documentation': {
-            'description': 'Specifies whether the TIMING_ABSOLUTE_DELAY attribute should be applied to adjust the digital pattern instrument timing reference relative to other instruments in the system. Do not use this feature with digital pattern instruments in a Semiconductor Test System (STS). Timing absolute delay conflicts with the adjustment performed during STS timing calibration. When set to VI_TRUE, the digital pattern instrument automatically adjusts the timing absolute delay to correct the instrument timing reference relative to other instruments in the system for better timing alignment among synchronized instruments.\n'
+            'description': 'Specifies whether the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY attribute should be applied to adjust the digital pattern instrument timing reference relative to other instruments in the system. Do not use this feature with digital pattern instruments in a Semiconductor Test System (STS). Timing absolute delay conflicts with the adjustment performed during STS timing calibration. When set to VI_TRUE, the digital pattern instrument automatically adjusts the timing absolute delay to correct the instrument timing reference relative to other instruments in the system for better timing alignment among synchronized instruments.\n'
         },
         'name': 'TIMING_ABSOLUTE_DELAY_ENABLED',
         'resettable': True,
@@ -961,7 +1058,7 @@ attributes = {
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': False,
         'documentation': {
-            'description': 'Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the TIMING_ABSOLUTE_DELAY_ENABLED attribute is set to VI_TRUE, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the TIMING_ABSOLUTE_DELAY_ENABLED attribute is VI_FALSE, this attribute will return 0.0. Changing the TIMING_ABSOLUTE_DELAY_ENABLED attribute from VI_FALSE to VI_TRUE will set the TIMING_ABSOLUTE_DELAY value back to your previously set value.\n'
+            'description': 'Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY_ENABLED attribute is set to VI_TRUE, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY_ENABLED attribute is VI_FALSE, this attribute will return 0.0. Changing the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY_ENABLED attribute from VI_FALSE to VI_TRUE will set the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY value back to your previously set value.\n'
         },
         'name': 'TIMING_ABSOLUTE_DELAY',
         'repeated_capability_type': 'instruments',
@@ -993,7 +1090,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': 'Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to VI_TRUE, this attribute enables extended voltage range operation. Review specification deviations for application suitability before using this attribute. NI recommends setting this attribute to VI_FALSE when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output function set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the SELECTED_FUNCTION attribute to Off before sourcing a voltage level that requires a range change.\n'
+            'description': 'Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to VI_TRUE, this attribute enables extended voltage range operation. Review specification deviations for application suitability before using this attribute. NI recommends setting this attribute to VI_FALSE when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output function set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the NIDIGITAL_ATTR_SELECTED_FUNCTION attribute to Off before sourcing a voltage level that requires a range change.\n'
         },
         'name': 'PPMU_ALLOW_EXTENDED_VOLTAGE_RANGE',
         'resettable': True,
@@ -1013,7 +1110,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'documentation': {
-            'description': 'Specifies whether the instrument acquires a finite number of History Ram samples or acquires continuously. The maximum number of samples that will be acquired when this property is set to VI_TRUE is determined by the instrument History RAM depth specification and the History RAM Max Samples to Acquire Per Site property.\n',
+            'description': 'Specifies whether the instrument acquires a finite number of History Ram samples or acquires continuously. The maximum number of samples that will be acquired when this property is set to VI_TRUE is determined by the instrument History RAM depth specification and the History RAM Max Samples to Acquire Per Site property. The default value is VI_TRUE.\n',
             'table_body': [
                 [
                     'VI_TRUE',
@@ -1036,7 +1133,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'documentation': {
-            'description': 'Specifies the size, in samples, of the host memory buffer.\n',
+            'description': 'Specifies the size, in samples, of the host memory buffer. The default value is 32000.\n',
             'table_body': [
                 [
                     '0-INT64_MAX'

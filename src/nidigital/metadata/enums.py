@@ -265,7 +265,7 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': 'A digital state of 0. This state can be used for WriteStatic(PinState).'
+                    'description': 'A digital state of 0.'
                 },
                 'name': 'NIDIGITAL_VAL_0',
                 'python_name': 'ZERO',
@@ -273,7 +273,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'A digital state of 1. This state can be used for WriteStatic(PinState).'
+                    'description': 'A digital state of 1.'
                 },
                 'name': 'NIDIGITAL_VAL_1',
                 'python_name': 'ONE',
@@ -281,47 +281,50 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'A digital state of L (low). This state should not be used with WriteStatic(PinState).'
+                    'description': 'A digital state of L (low).'
                 },
                 'name': 'NIDIGITAL_VAL_L',
                 'value': 3
             },
             {
                 'documentation': {
-                    'description': 'A digital state of H (high). This state should not be used with WriteStatic(PinState).'
+                    'description': 'A digital state of H (high).'
                 },
                 'name': 'NIDIGITAL_VAL_H',
                 'value': 4
             },
             {
                 'documentation': {
-                    'description': 'A digital state of X (non-drive state). This state can be used for WriteStatic(PinState).'
+                    'description': 'A digital state of X (non-drive state).'
                 },
                 'name': 'NIDIGITAL_VAL_X',
                 'value': 5
             },
             {
                 'documentation': {
-                    'description': 'A digital state of M (midband). This state should not be used with WriteStatic(PinState).'
+                    'description': 'A digital state of M (midband).'
                 },
                 'name': 'NIDIGITAL_VAL_M',
                 'value': 6
             },
             {
                 'documentation': {
-                    'description': 'A digital state of V (compare high or low, not midband; store results from capture functionality if configured). This state should not be used with WriteStatic(PinState).'
+                    'description': 'A digital state of V (compare high or low, not midband; store results from capture functionality if configured).'
                 },
                 'name': 'NIDIGITAL_VAL_V',
                 'value': 7
             },
             {
                 'documentation': {
-                    'description': 'A digital state of D (drive data from source functionality if configured). This state should not be used with WriteStatic(PinState).'
+                    'description': 'A digital state of D (drive data from source functionality if configured).'
                 },
                 'name': 'NIDIGITAL_VAL_D',
                 'value': 8
             },
             {
+                'documentation': {
+                    'description': 'A digital state of E (compare data from source functionality if configured).'
+                },
                 'name': 'NIDIGITAL_VAL_E',
                 'value': 9
             },

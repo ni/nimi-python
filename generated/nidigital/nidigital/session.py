@@ -161,6 +161,10 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     cache = _attributes.AttributeViBoolean(1050004)
+    '''Type: bool
+
+    Specifies whether to cache the value of properties. When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument. This significantly increases execution speed. Caching is always enabled in the driver, regardless of the value of this property.
+    '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
@@ -191,6 +195,8 @@ class _SessionBase(object):
     conditional_jump_trigger_terminal_name = _attributes.AttributeViString(1150040)
     '''Type: str
 
+    Specifies the terminal name from which the exported conditional jump trigger signal may be routed to other instruments through the PXI trigger bus. You can use this signal to trigger other instruments when the conditional jump trigger instance asserts on the digital pattern instrument.
+
     Tip:
     This property can use repeated capabilities. If set or get directly on the
     nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -199,6 +205,18 @@ class _SessionBase(object):
     '''
     conditional_jump_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150033)
     '''Type: enums.TriggerType
+
+    Disables the conditional jump trigger or configures it for either hardware triggering or software triggering.  The default value is TriggerType.NONE.
+
+    +---------------------------------+------------------------------------------------------------------+
+    | Valid Values:                   |                                                                  |
+    +=================================+==================================================================+
+    | TriggerType.NONE (1700)         | Disables the conditional jump trigger.                           |
+    +---------------------------------+------------------------------------------------------------------+
+    | TriggerType.DIGITAL_EDGE (1701) | Configures the conditional jump trigger for hardware triggering. |
+    +---------------------------------+------------------------------------------------------------------+
+    | TriggerType.SOFTWARE (1702)     | Configures the conditional jump trigger for software triggering. |
+    +---------------------------------+------------------------------------------------------------------+
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -214,6 +232,16 @@ class _SessionBase(object):
     digital_edge_conditional_jump_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150035)
     '''Type: enums.DigitalEdge
 
+    Configures the active edge of the incoming trigger signal for the conditional jump trigger instance. The default value is DigitalEdge.RISING.
+
+    +----------------------------+---------------------------------------------------------------+
+    | Valid Values:              |                                                               |
+    +============================+===============================================================+
+    | DigitalEdge.RISING (1800)  | Specifies the signal transition from low level to high level. |
+    +----------------------------+---------------------------------------------------------------+
+    | DigitalEdge.FALLING (1801) | Specifies the signal transition from high level to low level. |
+    +----------------------------+---------------------------------------------------------------+
+
     Tip:
     This property can use repeated capabilities. If set or get directly on the
     nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -222,6 +250,14 @@ class _SessionBase(object):
     '''
     digital_edge_conditional_jump_trigger_source = _attributes.AttributeViString(1150034)
     '''Type: str
+
+    Configures the digital trigger source terminal for a conditional jump trigger instance. The PXIe-6570/6571 supports triggering through the PXI trigger bus. You can specify source terminals in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The source terminal can also be a terminal from another device, in which case the NI-Digital Pattern Driver automatically finds a route (if one is available) from that terminal to the input terminal (going through a physical PXI backplane trigger line). For example, you can set the source terminal on Dev1 to be /Dev2/ConditionalJumpTrigger0. The default value is VI_NULL.
+
+    +----------------------------------------------+
+    | Valid Values:                                |
+    +==============================================+
+    | String identifier to any valid terminal name |
+    +----------------------------------------------+
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -274,6 +310,30 @@ class _SessionBase(object):
     '''
     exported_conditional_jump_trigger_output_terminal = _attributes.AttributeViString(1150036)
     '''Type: str
+
+    Specifies the terminal to output the exported signal of the specified instance of the conditional jump trigger. The default value is VI_NULL.
+
+    +---------------+-------------------------+
+    | Valid Values: |                         |
+    +===============+=========================+
+    | VI_NULL ("")  | Returns an empty string |
+    +---------------+-------------------------+
+    | PXI_Trig0     | PXI trigger line 0      |
+    +---------------+-------------------------+
+    | PXI_Trig1     | PXI trigger line 1      |
+    +---------------+-------------------------+
+    | PXI_Trig2     | PXI trigger line 2      |
+    +---------------+-------------------------+
+    | PXI_Trig3     | PXI trigger line 3      |
+    +---------------+-------------------------+
+    | PXI_Trig4     | PXI trigger line 4      |
+    +---------------+-------------------------+
+    | PXI_Trig5     | PXI trigger line 5      |
+    +---------------+-------------------------+
+    | PXI_Trig6     | PXI trigger line 6      |
+    +---------------+-------------------------+
+    | PXI_Trig7     | PXI trigger line 7      |
+    +---------------+-------------------------+
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -340,7 +400,7 @@ class _SessionBase(object):
     +----------------------+-----------------------------+
     '''
     frequency_counter_measurement_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150069)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+    '''Type: float in seconds or datetime.timedelta
 
     Specifies the measurement time for the frequency counter.
 
@@ -363,7 +423,7 @@ class _SessionBase(object):
     history_ram_buffer_size_per_site = _attributes.AttributeViInt64(1150079)
     '''Type: int
 
-    Specifies the size, in samples, of the host memory buffer.
+    Specifies the size, in samples, of the host memory buffer. The default value is 32000.
 
     +---------------+
     | Valid Values: |
@@ -392,7 +452,7 @@ class _SessionBase(object):
     history_ram_number_of_samples_is_finite = _attributes.AttributeViBoolean(1150078)
     '''Type: bool
 
-    Specifies whether the instrument acquires a finite number of History Ram samples or acquires continuously. The maximum number of samples that will be acquired when this property is set to True is determined by the instrument History RAM depth specification and the History RAM Max Samples to Acquire Per Site property.
+    Specifies whether the instrument acquires a finite number of History Ram samples or acquires continuously. The maximum number of samples that will be acquired when this property is set to True is determined by the instrument History RAM depth specification and the History RAM Max Samples to Acquire Per Site property. The default value is True.
 
     +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Valid Values: |                                                                                                                                                      |
@@ -503,7 +563,7 @@ class _SessionBase(object):
     ppmu_allow_extended_voltage_range = _attributes.AttributeViBoolean(1150076)
     '''Type: bool
 
-    Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to True, this property enables extended voltage range operation. Review specification deviations for application suitability before using this property. NI recommends setting this property to False when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output method set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the SELECTED_FUNCTION property to Off before sourcing a voltage level that requires a range change.
+    Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to True, this property enables extended voltage range operation. Review specification deviations for application suitability before using this property. NI recommends setting this property to False when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output method set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the selected_function property to Off before sourcing a voltage level that requires a range change.
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -514,7 +574,7 @@ class _SessionBase(object):
     ppmu_aperture_time = _attributes.AttributeViReal64(1150037)
     '''Type: float
 
-    Specifies the measurement aperture time for the PPMU. The PPMU_APERTURE_TIME_UNITS property sets the units of the PPMU aperture time.
+    Specifies the measurement aperture time for the PPMU. The ppmu_aperture_time_units property sets the units of the PPMU aperture time.
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -542,7 +602,7 @@ class _SessionBase(object):
     ppmu_current_level = _attributes.AttributeViReal64(1150019)
     '''Type: float
 
-    Specifies the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current. Specify valid values for the current level using the PPMU_ConfigureCurrentLevelRange method.
+    Specifies the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current. Specify valid values for the current level using the PPMU_ConfigureCurrentLevelRange method.
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
@@ -556,7 +616,7 @@ class _SessionBase(object):
     ppmu_current_level_range = _attributes.AttributeViReal64(1150020)
     '''Type: float
 
-    Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current.
+    Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -567,7 +627,7 @@ class _SessionBase(object):
     ppmu_current_limit = _attributes.AttributeViReal64(1150054)
     '''Type: float
 
-    Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage. The PXIe-6570/6571 does not support the PPMU_CURRENT_LIMIT property and only allows configuration of the PPMU_CURRENT_LIMIT_RANGE property.
+    Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage. The PXIe-6570/6571 does not support the ppmu_current_limit property and only allows configuration of the ppmu_current_limit_range property.
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -595,7 +655,7 @@ class _SessionBase(object):
     ppmu_current_limit_range = _attributes.AttributeViReal64(1150017)
     '''Type: float
 
-    Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage.
+    Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage.
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -606,7 +666,7 @@ class _SessionBase(object):
     ppmu_current_limit_supported = _attributes.AttributeViBoolean(1150055)
     '''Type: bool
 
-    Returns whether the device supports configuration of a current limit when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage.
+    Returns whether the device supports configuration of a current limit when you set the ppmu_output_function property to DC Voltage.
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -636,7 +696,7 @@ class _SessionBase(object):
     ppmu_voltage_level = _attributes.AttributeViReal64(1150016)
     '''Type: float
 
-    Specifies the voltage level, in volts, that the PPMU forces to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage.
+    Specifies the voltage level, in volts, that the PPMU forces to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage.
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -647,7 +707,7 @@ class _SessionBase(object):
     ppmu_voltage_limit_high = _attributes.AttributeViReal64(1150022)
     '''Type: float
 
-    Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current.
+    Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -658,7 +718,7 @@ class _SessionBase(object):
     ppmu_voltage_limit_low = _attributes.AttributeViReal64(1150021)
     '''Type: float
 
-    Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current.
+    Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -835,7 +895,7 @@ class _SessionBase(object):
     timing_absolute_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150072)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
-    Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the TIMING_ABSOLUTE_DELAY_ENABLED property is set to True, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the TIMING_ABSOLUTE_DELAY_ENABLED property is False, this property will return 0.0. Changing the TIMING_ABSOLUTE_DELAY_ENABLED property from False to True will set the TIMING_ABSOLUTE_DELAY value back to your previously set value.
+    Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the timing_absolute_delay_enabled property is set to True, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the timing_absolute_delay_enabled property is False, this property will return 0.0. Changing the timing_absolute_delay_enabled property from False to True will set the timing_absolute_delay value back to your previously set value.
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -846,7 +906,7 @@ class _SessionBase(object):
     timing_absolute_delay_enabled = _attributes.AttributeViBoolean(1150071)
     '''Type: bool
 
-    Specifies whether the TIMING_ABSOLUTE_DELAY property should be applied to adjust the digital pattern instrument timing reference relative to other instruments in the system. Do not use this feature with digital pattern instruments in a Semiconductor Test System (STS). Timing absolute delay conflicts with the adjustment performed during STS timing calibration. When set to True, the digital pattern instrument automatically adjusts the timing absolute delay to correct the instrument timing reference relative to other instruments in the system for better timing alignment among synchronized instruments.
+    Specifies whether the timing_absolute_delay property should be applied to adjust the digital pattern instrument timing reference relative to other instruments in the system. Do not use this feature with digital pattern instruments in a Semiconductor Test System (STS). Timing absolute delay conflicts with the adjustment performed during STS timing calibration. When set to True, the digital pattern instrument automatically adjusts the timing absolute delay to correct the instrument timing reference relative to other instruments in the system for better timing alignment among synchronized instruments.
     '''
     vih = _attributes.AttributeViReal64(1150008)
     '''Type: float
@@ -1937,7 +1997,7 @@ class _SessionBase(object):
     def _fetch_history_ram_cycle_information(self, sample_index):
         r'''_fetch_history_ram_cycle_information
 
-        TBD
+        Gets the per-cycle pattern information acquired for the specified cycle.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -1977,7 +2037,7 @@ class _SessionBase(object):
     def _fetch_history_ram_cycle_pin_data(self, pin_list, sample_index, dut_cycle_index):
         r'''_fetch_history_ram_cycle_pin_data
 
-        TBD
+        Gets the per-pin pattern data acquired for the specified cycle.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -3180,12 +3240,7 @@ class Session(_SessionBase):
     def initiate(self):
         '''initiate
 
-        Starts bursting the pattern configured by start_label,
-        causing the NI-Digital sessionto be committed. To stop the
-        pattern burst, call abort. If keep alive pattern is
-        bursting when abort is called or upon exiting the
-        context manager, keep alive pattern will not be stopped. To
-        stop the keep alive pattern, call abort_keep_alive.
+        Starts bursting the pattern configured by start_label, causing the NI-Digital session to be committed. To stop the pattern burst, call abort. If keep alive pattern is bursting when abort is called or upon exiting the context manager, keep alive pattern will not be stopped. To stop the keep alive pattern, call abort_keep_alive.
 
         Note:
         This method will return a Python context manager that will initiate on entering and abort on exit.
@@ -3534,12 +3589,7 @@ class Session(_SessionBase):
     def _initiate(self):
         r'''_initiate
 
-        Starts bursting the pattern configured by start_label,
-        causing the NI-Digital sessionto be committed. To stop the
-        pattern burst, call abort. If keep alive pattern is
-        bursting when abort is called or upon exiting the
-        context manager, keep alive pattern will not be stopped. To
-        stop the keep alive pattern, call abort_keep_alive.
+        Starts bursting the pattern configured by start_label, causing the NI-Digital session to be committed. To stop the pattern burst, call abort. If keep alive pattern is bursting when abort is called or upon exiting the context manager, keep alive pattern will not be stopped. To stop the keep alive pattern, call abort_keep_alive.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDigital_Initiate(vi_ctype)

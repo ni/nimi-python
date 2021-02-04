@@ -1877,12 +1877,7 @@ initiate
 
     .. py:method:: initiate()
 
-            Starts bursting the pattern configured by :py:attr:`nidigital.Session.start_label`,
-            causing the NI-Digital sessionto be committed. To stop the
-            pattern burst, call :py:meth:`nidigital.Session.abort`. If keep alive pattern is
-            bursting when :py:meth:`nidigital.Session.abort` is called or upon exiting the
-            context manager, keep alive pattern will not be stopped. To
-            stop the keep alive pattern, call :py:meth:`nidigital.Session.abort_keep_alive`.
+            Starts bursting the pattern configured by :py:attr:`nidigital.Session.start_label`, causing the NI-Digital session to be committed. To stop the pattern burst, call :py:meth:`nidigital.Session.abort`. If keep alive pattern is bursting when :py:meth:`nidigital.Session.abort` is called or upon exiting the context manager, keep alive pattern will not be stopped. To stop the keep alive pattern, call :py:meth:`nidigital.Session.abort_keep_alive`.
 
             
 
@@ -2818,7 +2813,7 @@ cache
 
     .. py:attribute:: cache
 
-        
+        Specifies whether to cache the value of properties. When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument. This significantly increases execution speed. Caching is always enabled in the driver, regardless of the value of this property.
 
         The following table lists the characteristics of this property.
 
@@ -2938,6 +2933,11 @@ conditional_jump_trigger_terminal_name
 
     .. py:attribute:: conditional_jump_trigger_terminal_name
 
+        Specifies the terminal name from which the exported conditional jump trigger signal may be routed to other instruments through the PXI trigger bus. You can use this signal to trigger other instruments when the conditional jump trigger instance asserts on the digital pattern instrument.
+
+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -2966,6 +2966,19 @@ conditional_jump_trigger_type
 -----------------------------
 
     .. py:attribute:: conditional_jump_trigger_type
+
+        Disables the conditional jump trigger or configures it for either hardware triggering or software triggering.  The default value is :py:data:`~nidigital.TriggerType.NONE`.
+
+        +-------------------------------------------------------+------------------------------------------------------------------+
+        | Valid Values:                                         |                                                                  |
+        +=======================================================+==================================================================+
+        | :py:data:`~nidigital.TriggerType.NONE` (1700)         | Disables the conditional jump trigger.                           |
+        +-------------------------------------------------------+------------------------------------------------------------------+
+        | :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` (1701) | Configures the conditional jump trigger for hardware triggering. |
+        +-------------------------------------------------------+------------------------------------------------------------------+
+        | :py:data:`~nidigital.TriggerType.SOFTWARE` (1702)     | Configures the conditional jump trigger for software triggering. |
+        +-------------------------------------------------------+------------------------------------------------------------------+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3022,6 +3035,17 @@ digital_edge_conditional_jump_trigger_edge
 
     .. py:attribute:: digital_edge_conditional_jump_trigger_edge
 
+        Configures the active edge of the incoming trigger signal for the conditional jump trigger instance. The default value is :py:data:`~nidigital.DigitalEdge.RISING`.
+
+        +--------------------------------------------------+---------------------------------------------------------------+
+        | Valid Values:                                    |                                                               |
+        +==================================================+===============================================================+
+        | :py:data:`~nidigital.DigitalEdge.RISING` (1800)  | Specifies the signal transition from low level to high level. |
+        +--------------------------------------------------+---------------------------------------------------------------+
+        | :py:data:`~nidigital.DigitalEdge.FALLING` (1801) | Specifies the signal transition from high level to low level. |
+        +--------------------------------------------------+---------------------------------------------------------------+
+
+
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
@@ -3050,6 +3074,15 @@ digital_edge_conditional_jump_trigger_source
 --------------------------------------------
 
     .. py:attribute:: digital_edge_conditional_jump_trigger_source
+
+        Configures the digital trigger source terminal for a conditional jump trigger instance. The PXIe-6570/6571 supports triggering through the PXI trigger bus. You can specify source terminals in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The source terminal can also be a terminal from another device, in which case the NI-Digital Pattern Driver automatically finds a route (if one is available) from that terminal to the input terminal (going through a physical PXI backplane trigger line). For example, you can set the source terminal on Dev1 to be /Dev2/ConditionalJumpTrigger0. The default value is VI_NULL.
+
+        +----------------------------------------------+
+        | Valid Values:                                |
+        +==============================================+
+        | String identifier to any valid terminal name |
+        +----------------------------------------------+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3185,6 +3218,31 @@ exported_conditional_jump_trigger_output_terminal
 -------------------------------------------------
 
     .. py:attribute:: exported_conditional_jump_trigger_output_terminal
+
+        Specifies the terminal to output the exported signal of the specified instance of the conditional jump trigger. The default value is VI_NULL.
+
+        +---------------+-------------------------+
+        | Valid Values: |                         |
+        +===============+=========================+
+        | VI_NULL ("")  | Returns an empty string |
+        +---------------+-------------------------+
+        | PXI_Trig0     | PXI trigger line 0      |
+        +---------------+-------------------------+
+        | PXI_Trig1     | PXI trigger line 1      |
+        +---------------+-------------------------+
+        | PXI_Trig2     | PXI trigger line 2      |
+        +---------------+-------------------------+
+        | PXI_Trig3     | PXI trigger line 3      |
+        +---------------+-------------------------+
+        | PXI_Trig4     | PXI trigger line 4      |
+        +---------------+-------------------------+
+        | PXI_Trig5     | PXI trigger line 5      |
+        +---------------+-------------------------+
+        | PXI_Trig6     | PXI trigger line 6      |
+        +---------------+-------------------------+
+        | PXI_Trig7     | PXI trigger line 7      |
+        +---------------+-------------------------+
+
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3327,17 +3385,17 @@ frequency_counter_measurement_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------------------------+
-            | Characteristic | Value                                                       |
-            +================+=============================================================+
-            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +----------------+-------------------------------------------------------------+
-            | Permissions    | read-write                                                  |
-            +----------------+-------------------------------------------------------------+
-            | Channel Based  | Yes                                                         |
-            +----------------+-------------------------------------------------------------+
-            | Resettable     | Yes                                                         |
-            +----------------+-------------------------------------------------------------+
+            +----------------+----------------------------------------+
+            | Characteristic | Value                                  |
+            +================+========================================+
+            | Datatype       | float in seconds or datetime.timedelta |
+            +----------------+----------------------------------------+
+            | Permissions    | read-write                             |
+            +----------------+----------------------------------------+
+            | Channel Based  | Yes                                    |
+            +----------------+----------------------------------------+
+            | Resettable     | Yes                                    |
+            +----------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3401,7 +3459,7 @@ history_ram_buffer_size_per_site
 
     .. py:attribute:: history_ram_buffer_size_per_site
 
-        Specifies the size, in samples, of the host memory buffer.
+        Specifies the size, in samples, of the host memory buffer. The default value is 32000.
 
         +---------------+
         | Valid Values: |
@@ -3493,7 +3551,7 @@ history_ram_number_of_samples_is_finite
 
     .. py:attribute:: history_ram_number_of_samples_is_finite
 
-        Specifies whether the instrument acquires a finite number of History Ram samples or acquires continuously. The maximum number of samples that will be acquired when this property is set to True is determined by the instrument History RAM depth specification and the History RAM Max Samples to Acquire Per Site property.
+        Specifies whether the instrument acquires a finite number of History Ram samples or acquires continuously. The maximum number of samples that will be acquired when this property is set to True is determined by the instrument History RAM depth specification and the History RAM Max Samples to Acquire Per Site property. The default value is True.
 
         +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Valid Values: |                                                                                                                                                      |
@@ -3925,7 +3983,7 @@ ppmu_allow_extended_voltage_range
 
     .. py:attribute:: ppmu_allow_extended_voltage_range
 
-        Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to True, this property enables extended voltage range operation. Review specification deviations for application suitability before using this property. NI recommends setting this property to False when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output method set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the SELECTED_FUNCTION property to Off before sourcing a voltage level that requires a range change.
+        Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to True, this property enables extended voltage range operation. Review specification deviations for application suitability before using this property. NI recommends setting this property to False when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output method set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the :py:attr:`nidigital.Session.selected_function` property to Off before sourcing a voltage level that requires a range change.
 
 
 
@@ -3959,7 +4017,7 @@ ppmu_aperture_time
 
     .. py:attribute:: ppmu_aperture_time
 
-        Specifies the measurement aperture time for the PPMU. The PPMU_APERTURE_TIME_UNITS property sets the units of the PPMU aperture time.
+        Specifies the measurement aperture time for the PPMU. The :py:attr:`nidigital.Session.ppmu_aperture_time_units` property sets the units of the PPMU aperture time.
 
 
 
@@ -4031,7 +4089,7 @@ ppmu_current_level
 
     .. py:attribute:: ppmu_current_level
 
-        Specifies the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current. Specify valid values for the current level using the :py:meth:`nidigital.Session.PPMU_ConfigureCurrentLevelRange` method.
+        Specifies the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Current. Specify valid values for the current level using the :py:meth:`nidigital.Session.PPMU_ConfigureCurrentLevelRange` method.
 
 
 
@@ -4067,7 +4125,7 @@ ppmu_current_level_range
 
     .. py:attribute:: ppmu_current_level_range
 
-        Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current.
+        Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Current.
 
 
 
@@ -4101,7 +4159,7 @@ ppmu_current_limit
 
     .. py:attribute:: ppmu_current_limit
 
-        Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage. The PXIe-6570/6571 does not support the PPMU_CURRENT_LIMIT property and only allows configuration of the PPMU_CURRENT_LIMIT_RANGE property.
+        Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Voltage. The PXIe-6570/6571 does not support the :py:attr:`nidigital.Session.ppmu_current_limit` property and only allows configuration of the :py:attr:`nidigital.Session.ppmu_current_limit_range` property.
 
 
 
@@ -4173,7 +4231,7 @@ ppmu_current_limit_range
 
     .. py:attribute:: ppmu_current_limit_range
 
-        Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage.
+        Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Voltage.
 
 
 
@@ -4207,7 +4265,7 @@ ppmu_current_limit_supported
 
     .. py:attribute:: ppmu_current_limit_supported
 
-        Returns whether the device supports configuration of a current limit when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage.
+        Returns whether the device supports configuration of a current limit when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Voltage.
 
 
 
@@ -4281,7 +4339,7 @@ ppmu_voltage_level
 
     .. py:attribute:: ppmu_voltage_level
 
-        Specifies the voltage level, in volts, that the PPMU forces to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Voltage.
+        Specifies the voltage level, in volts, that the PPMU forces to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Voltage.
 
 
 
@@ -4315,7 +4373,7 @@ ppmu_voltage_limit_high
 
     .. py:attribute:: ppmu_voltage_limit_high
 
-        Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current.
+        Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Current.
 
 
 
@@ -4349,7 +4407,7 @@ ppmu_voltage_limit_low
 
     .. py:attribute:: ppmu_voltage_limit_low
 
-        Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the PPMU_OUTPUT_FUNCTION property to DC Current.
+        Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Current.
 
 
 
@@ -4971,7 +5029,7 @@ timing_absolute_delay
 
     .. py:attribute:: timing_absolute_delay
 
-        Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the TIMING_ABSOLUTE_DELAY_ENABLED property is set to True, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the TIMING_ABSOLUTE_DELAY_ENABLED property is False, this property will return 0.0. Changing the TIMING_ABSOLUTE_DELAY_ENABLED property from False to True will set the TIMING_ABSOLUTE_DELAY value back to your previously set value.
+        Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the :py:attr:`nidigital.Session.timing_absolute_delay_enabled` property is set to True, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the :py:attr:`nidigital.Session.timing_absolute_delay_enabled` property is False, this property will return 0.0. Changing the :py:attr:`nidigital.Session.timing_absolute_delay_enabled` property from False to True will set the :py:attr:`nidigital.Session.timing_absolute_delay` value back to your previously set value.
 
 
 
@@ -5005,7 +5063,7 @@ timing_absolute_delay_enabled
 
     .. py:attribute:: timing_absolute_delay_enabled
 
-        Specifies whether the TIMING_ABSOLUTE_DELAY property should be applied to adjust the digital pattern instrument timing reference relative to other instruments in the system. Do not use this feature with digital pattern instruments in a Semiconductor Test System (STS). Timing absolute delay conflicts with the adjustment performed during STS timing calibration. When set to True, the digital pattern instrument automatically adjusts the timing absolute delay to correct the instrument timing reference relative to other instruments in the system for better timing alignment among synchronized instruments.
+        Specifies whether the :py:attr:`nidigital.Session.timing_absolute_delay` property should be applied to adjust the digital pattern instrument timing reference relative to other instruments in the system. Do not use this feature with digital pattern instruments in a Semiconductor Test System (STS). Timing absolute delay conflicts with the adjustment performed during STS timing calibration. When set to True, the digital pattern instrument automatically adjusts the timing absolute delay to correct the instrument timing reference relative to other instruments in the system for better timing alignment among synchronized instruments.
 
         The following table lists the characteristics of this property.
 

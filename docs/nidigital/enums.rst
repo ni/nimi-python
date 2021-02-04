@@ -250,7 +250,7 @@ PinState
 
 
 
-        A digital state of 0. This state can be used for WriteStatic(PinState).
+        A digital state of 0.
 
         
 
@@ -260,7 +260,7 @@ PinState
 
 
 
-        A digital state of 1. This state can be used for WriteStatic(PinState).
+        A digital state of 1.
 
         
 
@@ -270,7 +270,7 @@ PinState
 
 
 
-        A digital state of L (low). This state should not be used with WriteStatic(PinState).
+        A digital state of L (low).
 
         
 
@@ -280,7 +280,7 @@ PinState
 
 
 
-        A digital state of H (high). This state should not be used with WriteStatic(PinState).
+        A digital state of H (high).
 
         
 
@@ -290,7 +290,7 @@ PinState
 
 
 
-        A digital state of X (non-drive state). This state can be used for WriteStatic(PinState).
+        A digital state of X (non-drive state).
 
         
 
@@ -300,7 +300,7 @@ PinState
 
 
 
-        A digital state of M (midband). This state should not be used with WriteStatic(PinState).
+        A digital state of M (midband).
 
         
 
@@ -310,7 +310,7 @@ PinState
 
 
 
-        A digital state of V (compare high or low, not midband; store results from capture functionality if configured). This state should not be used with WriteStatic(PinState).
+        A digital state of V (compare high or low, not midband; store results from capture functionality if configured).
 
         
 
@@ -320,13 +320,19 @@ PinState
 
 
 
-        A digital state of D (drive data from source functionality if configured). This state should not be used with WriteStatic(PinState).
+        A digital state of D (drive data from source functionality if configured).
 
         
 
 
 
     .. py:attribute:: PinState.E
+
+
+
+        A digital state of E (compare data from source functionality if configured).
+
+        
 
 
 

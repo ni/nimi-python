@@ -110,37 +110,40 @@ class PPMUOutputFunction(Enum):
 class PinState(Enum):
     ZERO = 0
     r'''
-    A digital state of 0. This state can be used for WriteStatic(PinState).
+    A digital state of 0.
     '''
     ONE = 1
     r'''
-    A digital state of 1. This state can be used for WriteStatic(PinState).
+    A digital state of 1.
     '''
     L = 3
     r'''
-    A digital state of L (low). This state should not be used with WriteStatic(PinState).
+    A digital state of L (low).
     '''
     H = 4
     r'''
-    A digital state of H (high). This state should not be used with WriteStatic(PinState).
+    A digital state of H (high).
     '''
     X = 5
     r'''
-    A digital state of X (non-drive state). This state can be used for WriteStatic(PinState).
+    A digital state of X (non-drive state).
     '''
     M = 6
     r'''
-    A digital state of M (midband). This state should not be used with WriteStatic(PinState).
+    A digital state of M (midband).
     '''
     V = 7
     r'''
-    A digital state of V (compare high or low, not midband; store results from capture functionality if configured). This state should not be used with WriteStatic(PinState).
+    A digital state of V (compare high or low, not midband; store results from capture functionality if configured).
     '''
     D = 8
     r'''
-    A digital state of D (drive data from source functionality if configured). This state should not be used with WriteStatic(PinState).
+    A digital state of D (drive data from source functionality if configured).
     '''
     E = 9
+    r'''
+    A digital state of E (compare data from source functionality if configured).
+    '''
     NOT_A_PIN_STATE = 254
     r'''
     Not a pin state is used for non-existent DUT cycles.

@@ -1404,7 +1404,7 @@ functions = {
     'FetchHistoryRAMCycleInformation': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'TBD'
+            'description': 'Gets the per-cycle pattern information acquired for the specified cycle.\n'
         },
         'parameters': [
             {
@@ -1479,7 +1479,7 @@ functions = {
     'FetchHistoryRAMCyclePinData': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'TBD'
+            'description': 'Gets the per-pin pattern data acquired for the specified cycle.\n'
         },
         'parameters': [
             {
@@ -2095,8 +2095,7 @@ functions = {
     },
     'GetHistoryRAMSampleCount': {
         'documentation': {
-            'description': """\nReturns the number of samples History RAM acquired on the last pattern burst.
-""",
+            'description': 'Returns the number of samples History RAM acquired on the last pattern burst.\n',
             'note': """\nBefore bursting a pattern, you must configure the History RAM trigger and specify which cycles to acquire.
 
 NIDIGITAL_ATTR_HISTORY_RAM_TRIGGER_TYPE should be used to specify the trigger condition on which History RAM
@@ -2769,7 +2768,7 @@ the trigger conditions are met.
     'Initiate': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Starts bursting the pattern configured by NIDIGITAL_ATTR_START_LABEL,\ncausing the NI-Digital sessionto be committed. To stop the\npattern burst, call niDigital_Abort. If keep alive pattern is\nbursting when niDigital_Abort is called or upon exiting the\ncontext manager, keep alive pattern will not be stopped. To\nstop the keep alive pattern, call niDigital_AbortKeepAlive.'
+            'description': 'Starts bursting the pattern configured by NIDIGITAL_ATTR_START_LABEL, causing the NI-Digital session to be committed. To stop the pattern burst, call niDigital_Abort. If keep alive pattern is bursting when niDigital_Abort is called or upon exiting the context manager, keep alive pattern will not be stopped. To stop the keep alive pattern, call niDigital_AbortKeepAlive.\n'
         },
         'parameters': [
             {
