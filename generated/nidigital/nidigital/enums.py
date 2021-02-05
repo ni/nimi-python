@@ -212,7 +212,13 @@ class _SiteResultType(Enum):
 
 class SoftwareTrigger(Enum):
     START = 2000
+    r'''
+    Overrides the start trigger.
+    '''
     CONDITIONAL_JUMP = 2001
+    r'''
+    Specifies to route a pattern opcode event signal.
+    '''
 
 
 class SourceDataMapping(Enum):

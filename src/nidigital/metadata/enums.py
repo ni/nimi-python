@@ -485,10 +485,16 @@ enums = {
     'SoftwareTrigger': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Overrides the start trigger.'
+                },
                 'name': 'NIDIGITAL_VAL_START_TRIGGER',
                 'value': 2000
             },
             {
+                'documentation': {
+                    'description': 'Specifies to route a pattern opcode event signal.'
+                },
                 'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER',
                 'value': 2001
             }

@@ -500,7 +500,19 @@ SoftwareTrigger
 
 
 
+        Overrides the start trigger.
+
+        
+
+
+
     .. py:attribute:: SoftwareTrigger.CONDITIONAL_JUMP
+
+
+
+        Specifies to route a pattern opcode event signal.
+
+        
 
 
 
