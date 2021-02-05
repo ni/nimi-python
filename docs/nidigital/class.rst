@@ -2312,7 +2312,18 @@ self_test
 
             Returns self test results from a digital pattern instrument. This test requires several minutes to execute.
 
-            
+            Raises `SelfTestError` on self test failure. Properties on exception object:
+
+            - code - failure code from driver
+            - message - status message from driver
+
+            +----------------+-------------------+
+            | Self-Test Code | Description       |
+            +================+===================+
+            | 0              | Self test passed. |
+            +----------------+-------------------+
+            | 1              | Self test failed. |
+            +----------------+-------------------+
 
 
 

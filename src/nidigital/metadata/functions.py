@@ -1294,7 +1294,21 @@ functions = {
     'FancySelfTest': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'Returns self test results from a digital pattern instrument. This test requires several minutes to execute.\n'
+            'description': 'Returns self test results from a digital pattern instrument. This test requires several minutes to execute.\n\nRaises `SelfTestError` on self test failure. Attributes on exception object:\n\n- code - failure code from driver\n- message - status message from driver\n',
+            'table_body': [
+                [
+                    '0',
+                    'Self test passed.'
+                ],
+                [
+                    '1',
+                    'Self test failed.'
+                ]
+            ],
+            'table_header': [
+                'Self-Test Code',
+                'Description'
+            ]
         },
         'method_templates': [
             {
