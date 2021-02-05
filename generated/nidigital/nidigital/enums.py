@@ -123,18 +123,6 @@ class PPMUOutputFunction(Enum):
 
 
 class PinState(Enum):
-    def __str__(self):
-        if self.name == 'ZERO':
-            return str(0)
-        elif self.name == 'ONE':
-            return str(1)
-        elif self.name == 'NOT_A_PIN_STATE':
-            return "Not a Pin State"
-        elif self.name == 'PIN_STATE_NOT_ACQUIRED':
-            return "Pin State Not Acquired"
-        else:
-            return str(self.name)
-
     ZERO = 0
     r'''
     A digital state of 0.
@@ -179,6 +167,32 @@ class PinState(Enum):
     r'''
     Pin state could not be acquired because none of the pins mapped to the instrument in a multi-instrument session had any failures.
     '''
+
+    def __str__(self):
+        if self.name == 'ZERO':
+            return str('0')
+        elif self.name == 'ONE':
+            return str('1')
+        elif self.name == 'L':
+            return str('L')
+        elif self.name == 'H':
+            return str('H')
+        elif self.name == 'X':
+            return str('X')
+        elif self.name == 'M':
+            return str('M')
+        elif self.name == 'V':
+            return str('V')
+        elif self.name == 'D':
+            return str('D')
+        elif self.name == 'E':
+            return str('E')
+        elif self.name == 'NOT_A_PIN_STATE':
+            return str('Not a Pin State')
+        elif self.name == 'PIN_STATE_NOT_ACQUIRED':
+            return str('Pin State Not Acquired')
+        else:
+            return str(self.name)
 
 
 class SelectedFunction(Enum):
@@ -336,14 +350,6 @@ class TriggerType(Enum):
 
 
 class WriteStaticPinState(Enum):
-    def __str__(self):
-        if self.name == 'ZERO':
-            return str(0)
-        elif self.name == 'ONE':
-            return str(1)
-        else:
-            return str(self.name)
-
     ZERO = 0
     r'''
     Specifies to drive low.
@@ -356,3 +362,13 @@ class WriteStaticPinState(Enum):
     r'''
     Specifies to not drive.
     '''
+
+    def __str__(self):
+        if self.name == 'ZERO':
+            return str('0')
+        elif self.name == 'ONE':
+            return str('1')
+        elif self.name == 'X':
+            return str('X')
+        else:
+            return str(self.name)

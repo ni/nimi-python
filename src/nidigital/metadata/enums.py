@@ -269,6 +269,7 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_0',
                 'python_name': 'ZERO',
+                'pretty_name': '0',
                 'value': 0
             },
             {
@@ -277,6 +278,7 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_1',
                 'python_name': 'ONE',
+                'pretty_name': '1',
                 'value': 1
             },
             {
@@ -284,6 +286,7 @@ enums = {
                     'description': 'A digital state of L (low).'
                 },
                 'name': 'NIDIGITAL_VAL_L',
+                'pretty_name': 'L',
                 'value': 3
             },
             {
@@ -291,6 +294,7 @@ enums = {
                     'description': 'A digital state of H (high).'
                 },
                 'name': 'NIDIGITAL_VAL_H',
+                'pretty_name': 'H',
                 'value': 4
             },
             {
@@ -298,6 +302,7 @@ enums = {
                     'description': 'A digital state of X (non-drive state).'
                 },
                 'name': 'NIDIGITAL_VAL_X',
+                'pretty_name': 'X',
                 'value': 5
             },
             {
@@ -305,6 +310,7 @@ enums = {
                     'description': 'A digital state of M (midband).'
                 },
                 'name': 'NIDIGITAL_VAL_M',
+                'pretty_name': 'M',
                 'value': 6
             },
             {
@@ -312,6 +318,7 @@ enums = {
                     'description': 'A digital state of V (compare high or low, not midband; store results from capture functionality if configured).'
                 },
                 'name': 'NIDIGITAL_VAL_V',
+                'pretty_name': 'V',
                 'value': 7
             },
             {
@@ -319,6 +326,7 @@ enums = {
                     'description': 'A digital state of D (drive data from source functionality if configured).'
                 },
                 'name': 'NIDIGITAL_VAL_D',
+                'pretty_name': 'D',
                 'value': 8
             },
             {
@@ -326,6 +334,7 @@ enums = {
                     'description': 'A digital state of E (compare data from source functionality if configured).'
                 },
                 'name': 'NIDIGITAL_VAL_E',
+                'pretty_name': 'E',
                 'value': 9
             },
             {
@@ -333,6 +342,7 @@ enums = {
                     'description': 'Not a pin state is used for non-existent DUT cycles.'
                 },
                 'name': 'NIDIGITAL_VAL_NOT_A_PIN_STATE',
+                'pretty_name': 'Not a Pin State',
                 'value': 254
             },
             {
@@ -340,6 +350,7 @@ enums = {
                     'description': 'Pin state could not be acquired because none of the pins mapped to the instrument in a multi-instrument session had any failures.'
                 },
                 'name': 'NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED',
+                'pretty_name': 'Pin State Not Acquired',
                 'value': 255
             }
         ]
@@ -694,6 +705,7 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_0',
                 'python_name': 'ZERO',
+                'pretty_name': '0',
                 'value': 0
             },
             {
@@ -702,6 +714,7 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_1',
                 'python_name': 'ONE',
+                'pretty_name': '1',
                 'value': 1
             },
             {
@@ -709,6 +722,7 @@ enums = {
                     'description': 'Specifies to not drive.'
                 },
                 'name': 'NIDIGITAL_VAL_X',
+                'pretty_name': 'X',
                 'value': 5
             }
         ]
