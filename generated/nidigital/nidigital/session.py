@@ -1891,12 +1891,12 @@ class _SessionBase(object):
 
             if pattern_index not in pattern_names:
                 # Repeated capability is not used
-                pattern_names[pattern_index] = self.get_pattern_name(pattern_index)
+                pattern_names[pattern_index] = self._get_pattern_name(pattern_index)
             pattern_name = pattern_names[pattern_index]
 
             if time_set_index not in time_set_names:
                 # Repeated capability is not used
-                time_set_names[time_set_index] = self.get_time_set_name(time_set_index)
+                time_set_names[time_set_index] = self._get_time_set_name(time_set_index)
             time_set_name = time_set_names[time_set_index]
 
             # site is passed as repeated capability
@@ -2001,9 +2001,9 @@ class _SessionBase(object):
 
 
         Returns:
-            pattern_index (int): The returned index of the pattern for the acquired cycle. Use get_pattern_name to get the name of the pattern from its index.
+            pattern_index (int): The returned index of the pattern for the acquired cycle. Use _get_pattern_name to get the name of the pattern from its index.
 
-            time_set_index (int): The returned time set for the acquired cycle. Use get_time_set_name to get the name of the time set from its index.
+            time_set_index (int): The returned time set for the acquired cycle. Use _get_time_set_name to get the name of the time set from its index.
 
             vector_number (int): The returned vector number within the pattern for the acquired cycle. Vector numbers start at 0 from the beginning of the pattern.
 
@@ -2417,8 +2417,8 @@ class _SessionBase(object):
         return int(sample_count_ctype.value)
 
     @ivi_synchronized
-    def get_pattern_name(self, pattern_index):
-        r'''get_pattern_name
+    def _get_pattern_name(self, pattern_index):
+        r'''_get_pattern_name
 
         TBD
 
@@ -2682,8 +2682,8 @@ class _SessionBase(object):
         return int(edge_multiplier_ctype.value)
 
     @ivi_synchronized
-    def get_time_set_name(self, time_set_index):
-        r'''get_time_set_name
+    def _get_time_set_name(self, time_set_index):
+        r'''_get_time_set_name
 
         TBD
 

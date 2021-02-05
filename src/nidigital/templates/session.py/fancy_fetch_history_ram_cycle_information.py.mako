@@ -53,12 +53,12 @@
 
             if pattern_index not in pattern_names:
                 # Repeated capability is not used
-                pattern_names[pattern_index] = self.get_pattern_name(pattern_index)
+                pattern_names[pattern_index] = self._get_pattern_name(pattern_index)
             pattern_name = pattern_names[pattern_index]
 
             if time_set_index not in time_set_names:
                 # Repeated capability is not used
-                time_set_names[time_set_index] = self.get_time_set_name(time_set_index)
+                time_set_names[time_set_index] = self._get_time_set_name(time_set_index)
             time_set_name = time_set_names[time_set_index]
 
             # site is passed as repeated capability

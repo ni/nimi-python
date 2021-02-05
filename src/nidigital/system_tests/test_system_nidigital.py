@@ -788,7 +788,7 @@ def test_create_get_delete_time_sets(multi_instrument_session):
     '''Test basic time set methods.
 
     - create_time_set
-    - get_time_set_name
+    - _get_time_set_name
     - delete_all_time_sets
     '''
     time_set_a = 'time_set_abc'
@@ -797,11 +797,11 @@ def test_create_get_delete_time_sets(multi_instrument_session):
 
     multi_instrument_session.create_time_set(time_set_a)
     multi_instrument_session.create_time_set(time_set_b)
-    assert multi_instrument_session.get_time_set_name(0) == time_set_a
-    assert multi_instrument_session.get_time_set_name(1) == time_set_b
+    assert multi_instrument_session._get_time_set_name(0) == time_set_a
+    assert multi_instrument_session._get_time_set_name(1) == time_set_b
     multi_instrument_session.delete_all_time_sets()
     try:
-        multi_instrument_session.get_time_set_name(0)
+        multi_instrument_session._get_time_set_name(0)
         assert False
     except nidigital.Error as e:
         assert e.code == -1074135025
@@ -1054,7 +1054,7 @@ def test_load_get_unload_patterns(multi_instrument_session):
     '''Test basic pattern methods.
 
     - load_pattern
-    - get_pattern_name
+    - _get_pattern_name
     - unload_all_patterns
     '''
     test_name = 'multiple_patterns'
@@ -1063,12 +1063,12 @@ def test_load_get_unload_patterns(multi_instrument_session):
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern_a.digipat'))
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern_b.digipat'))
 
-    assert multi_instrument_session.get_pattern_name(0) == 'first_pattern'
-    assert multi_instrument_session.get_pattern_name(1) == 'second_pattern'
+    assert multi_instrument_session._get_pattern_name(0) == 'first_pattern'
+    assert multi_instrument_session._get_pattern_name(1) == 'second_pattern'
 
     multi_instrument_session.unload_all_patterns(unload_keep_alive_pattern=True)
     try:
-        multi_instrument_session.get_pattern_name(0)
+        multi_instrument_session._get_pattern_name(0)
         assert False
     except nidigital.Error as e:
         assert e.code == -1074135025
