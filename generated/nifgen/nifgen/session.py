@@ -2,8 +2,10 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
+import datetime
 # Used by @ivi_synchronized
 from functools import wraps
+import typing
 
 import nifgen._attributes as _attributes
 import nifgen._converters as _converters
@@ -966,7 +968,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def allocate_named_waveform(self, waveform_name, waveform_size):
+    def allocate_named_waveform(self, waveform_name: str, waveform_size: int) -> None:
         r'''allocate_named_waveform
 
         Specifies the size of a named waveform up front so that it can be
@@ -997,7 +999,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def allocate_waveform(self, waveform_size):
+    def allocate_waveform(self, waveform_size: int) -> int:
         r'''allocate_waveform
 
         Specifies the size of a waveform so that it can be allocated in onboard
@@ -1032,7 +1034,7 @@ class _SessionBase(object):
         return int(waveform_handle_ctype.value)
 
     @ivi_synchronized
-    def clear_user_standard_waveform(self):
+    def clear_user_standard_waveform(self) -> None:
         r'''clear_user_standard_waveform
 
         Clears the user-defined waveform created by the
@@ -1051,7 +1053,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_arb_sequence(self, sequence_handle, gain, offset):
+    def configure_arb_sequence(self, sequence_handle: int, gain: float, offset: float) -> None:
         r'''configure_arb_sequence
 
         Configures the signal generator properties that affect arbitrary
@@ -1115,7 +1117,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_arb_waveform(self, waveform_handle, gain, offset):
+    def configure_arb_waveform(self, waveform_handle: int, gain: float, offset: float) -> None:
         r'''configure_arb_waveform
 
         Configures the properties of the signal generator that affect arbitrary
@@ -1189,7 +1191,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_freq_list(self, frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0):
+    def configure_freq_list(self, frequency_list_handle: int, amplitude: float, dc_offset: float = 0.0, start_phase: float = 0.0) -> None:
         r'''configure_freq_list
 
         Configures the properties of the signal generator that affect frequency
@@ -1272,7 +1274,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_standard_waveform(self, waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0):
+    def configure_standard_waveform(self, waveform: 'enums.Waveform', amplitude: float, frequency: float, dc_offset: float = 0.0, start_phase: float = 0.0) -> None:
         r'''configure_standard_waveform
 
         Configures the following properties of the signal generator that affect
@@ -1398,7 +1400,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def create_waveform(self, waveform_data_array):
+    def create_waveform(self, waveform_data_array: typing.Union[float, int]) -> int:
         '''create_waveform
 
         Creates an onboard waveform for use in Arbitrary Waveform output mode or Arbitrary Sequence output mode.
@@ -1439,7 +1441,7 @@ class _SessionBase(object):
         return self._create_waveform_f64(waveform_data_array)
 
     @ivi_synchronized
-    def _create_waveform_f64(self, waveform_data_array):
+    def _create_waveform_f64(self, waveform_data_array: typing.Iterable[float]) -> int:
         r'''_create_waveform_f64
 
         Creates an onboard waveform from binary F64 (floating point double) data
@@ -1486,7 +1488,7 @@ class _SessionBase(object):
         return int(waveform_handle_ctype.value)
 
     @ivi_synchronized
-    def _create_waveform_f64_numpy(self, waveform_data_array):
+    def _create_waveform_f64_numpy(self, waveform_data_array: typing.Iterable[float]) -> int:
         r'''_create_waveform_f64
 
         Creates an onboard waveform from binary F64 (floating point double) data
@@ -1540,7 +1542,7 @@ class _SessionBase(object):
         return int(waveform_handle_ctype.value)
 
     @ivi_synchronized
-    def create_waveform_from_file_f64(self, file_name, byte_order):
+    def create_waveform_from_file_f64(self, file_name: str, byte_order: 'enums.ByteOrder') -> int:
         r'''create_waveform_from_file_f64
 
         This method takes the floating point double (F64) data from the
@@ -1602,7 +1604,7 @@ class _SessionBase(object):
         return int(waveform_handle_ctype.value)
 
     @ivi_synchronized
-    def create_waveform_from_file_i16(self, file_name, byte_order):
+    def create_waveform_from_file_i16(self, file_name: str, byte_order: 'enums.ByteOrder') -> int:
         r'''create_waveform_from_file_i16
 
         Takes the binary 16-bit signed integer (I16) data from the specified
@@ -1664,7 +1666,7 @@ class _SessionBase(object):
         return int(waveform_handle_ctype.value)
 
     @ivi_synchronized
-    def _create_waveform_i16_numpy(self, waveform_data_array):
+    def _create_waveform_i16_numpy(self, waveform_data_array: typing.Iterable[int]) -> int:
         r'''_create_waveform_i16
 
         Creates an onboard waveform from binary 16-bit signed integer (I16) data
@@ -1716,7 +1718,7 @@ class _SessionBase(object):
         return int(waveform_handle_ctype.value)
 
     @ivi_synchronized
-    def define_user_standard_waveform(self, waveform_data_array):
+    def define_user_standard_waveform(self, waveform_data_array: typing.Iterable[float]) -> None:
         r'''define_user_standard_waveform
 
         Defines a user waveform for use in either Standard Method or Frequency
@@ -1761,7 +1763,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _delete_named_waveform(self, waveform_name):
+    def _delete_named_waveform(self, waveform_name: str) -> None:
         r'''_delete_named_waveform
 
         Removes a previously created arbitrary waveform from the signal
@@ -1789,7 +1791,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def delete_script(self, script_name):
+    def delete_script(self, script_name: str) -> None:
         r'''delete_script
 
         Deletes the specified script from onboard memory.
@@ -1813,7 +1815,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def delete_waveform(self, waveform_name_or_handle):
+    def delete_waveform(self, waveform_name_or_handle: typing.Union[str, int]) -> None:
         '''delete_waveform
 
         Removes a previously created arbitrary waveform from the signal generator memory.
@@ -1836,7 +1838,7 @@ class _SessionBase(object):
             return self._clear_arb_waveform(waveform_name_or_handle)
 
     @ivi_synchronized
-    def _get_attribute_vi_boolean(self, attribute_id):
+    def _get_attribute_vi_boolean(self, attribute_id: int) -> 'bool':
         r'''_get_attribute_vi_boolean
 
         Queries the value of a ViBoolean property.
@@ -1874,7 +1876,7 @@ class _SessionBase(object):
         return bool(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_int32(self, attribute_id):
+    def _get_attribute_vi_int32(self, attribute_id: int) -> int:
         r'''_get_attribute_vi_int32
 
         Queries the value of a ViInt32 property. You can use this method to
@@ -1910,7 +1912,7 @@ class _SessionBase(object):
         return int(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_real64(self, attribute_id):
+    def _get_attribute_vi_real64(self, attribute_id: int) -> float:
         r'''_get_attribute_vi_real64
 
         Queries the value of a ViReal64 property.
@@ -1948,7 +1950,7 @@ class _SessionBase(object):
         return float(attribute_value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_string(self, attribute_id):
+    def _get_attribute_vi_string(self, attribute_id: int) -> str:
         r'''_get_attribute_vi_string
 
         Queries the value of a ViString property.
@@ -2020,7 +2022,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
-    def _get_error(self):
+    def _get_error(self) -> typing.Tuple[int, str]:
         r'''_get_error
 
         Returns the error information associated with an IVI session or with the
@@ -2068,7 +2070,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
 
-    def lock(self):
+    def lock(self) -> 'bool':
         '''lock
 
         Obtains a multithread lock on the device session. Before doing so, the
@@ -2103,7 +2105,7 @@ class _SessionBase(object):
         # that will handle the unlock for them
         return _Lock(self)
 
-    def _lock_session(self):
+    def _lock_session(self) -> None:
         '''_lock_session
 
         Actual call to driver
@@ -2114,7 +2116,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def send_software_edge_trigger(self, trigger=None, trigger_id=None):
+    def send_software_edge_trigger(self, trigger=None, trigger_id=None) -> None:
         '''send_software_edge_trigger
 
         Sends a command to trigger the signal generator. This VI can act as an
@@ -2169,7 +2171,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
+    def _set_attribute_vi_boolean(self, attribute_id: int, attribute_value: 'bool') -> None:
         r'''_set_attribute_vi_boolean
 
         Sets the value of a ViBoolean property.
@@ -2223,7 +2225,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_int32(self, attribute_id, attribute_value):
+    def _set_attribute_vi_int32(self, attribute_id: int, attribute_value: int) -> None:
         r'''_set_attribute_vi_int32
 
         Sets the value of a ViInt32 property.
@@ -2277,7 +2279,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_real64(self, attribute_id, attribute_value):
+    def _set_attribute_vi_real64(self, attribute_id: int, attribute_value: float) -> None:
         r'''_set_attribute_vi_real64
 
         Sets the value of a ViReal64 property.
@@ -2331,7 +2333,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_string(self, attribute_id, attribute_value):
+    def _set_attribute_vi_string(self, attribute_id: int, attribute_value: str) -> None:
         r'''_set_attribute_vi_string
 
         Sets the value of a ViString property.
@@ -2385,7 +2387,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_named_waveform_next_write_position(self, waveform_name, relative_to, offset):
+    def _set_named_waveform_next_write_position(self, waveform_name: str, relative_to: 'enums.RelativeTo', offset: int) -> None:
         r'''_set_named_waveform_next_write_position
 
         Sets the position in the waveform to which data is written at the next
@@ -2440,7 +2442,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def set_next_write_position(self, waveform_name_or_handle, relative_to, offset):
+    def set_next_write_position(self, waveform_name_or_handle: typing.Union[str, int], relative_to: 'enums.RelativeTo', offset: int) -> None:
         '''set_next_write_position
 
         Sets the position in the waveform at which the next waveform data is
@@ -2483,7 +2485,7 @@ class _SessionBase(object):
             return self._set_waveform_next_write_position(waveform_name_or_handle, relative_to, offset)
 
     @ivi_synchronized
-    def _set_waveform_next_write_position(self, waveform_handle, relative_to, offset):
+    def _set_waveform_next_write_position(self, waveform_handle: int, relative_to: 'enums.RelativeTo', offset: int) -> None:
         r'''_set_waveform_next_write_position
 
         Sets the position in the waveform at which the next waveform data is
@@ -2538,7 +2540,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def unlock(self):
+    def unlock(self) -> 'bool':
         '''unlock
 
         Releases a lock that you acquired on an device session using
@@ -2551,7 +2553,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _write_binary16_waveform_numpy(self, waveform_handle, data):
+    def _write_binary16_waveform_numpy(self, waveform_handle: int, data: typing.Iterable[int]) -> None:
         r'''_write_binary16_waveform
 
         Writes binary data to the waveform in onboard memory. The waveform
@@ -2600,7 +2602,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _write_named_waveform_f64(self, waveform_name, data):
+    def _write_named_waveform_f64(self, waveform_name: str, data: typing.Iterable[float]) -> None:
         r'''_write_named_waveform_f64
 
         Writes floating-point data to the waveform in onboard memory. The
@@ -2647,7 +2649,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _write_named_waveform_f64_numpy(self, waveform_name, data):
+    def _write_named_waveform_f64_numpy(self, waveform_name: str, data: typing.Iterable[float]) -> None:
         r'''_write_named_waveform_f64
 
         Writes floating-point data to the waveform in onboard memory. The
@@ -2701,7 +2703,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _write_named_waveform_i16_numpy(self, waveform_name, data):
+    def _write_named_waveform_i16_numpy(self, waveform_name: str, data: typing.Iterable[int]) -> None:
         r'''_write_named_waveform_i16
 
         Writes binary data to the named waveform in onboard memory.
@@ -2746,7 +2748,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def write_script(self, script):
+    def write_script(self, script: str) -> None:
         r'''write_script
 
         Writes a string containing one or more scripts that govern the
@@ -2773,7 +2775,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _write_waveform(self, waveform_handle, data):
+    def _write_waveform(self, waveform_handle: int, data: typing.Iterable[float]) -> None:
         r'''_write_waveform
 
         Writes floating-point data to the waveform in onboard memory. The
@@ -2821,7 +2823,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _write_waveform_numpy(self, waveform_handle, data):
+    def _write_waveform_numpy(self, waveform_handle: int, data: typing.Iterable[float]) -> None:
         r'''_write_waveform
 
         Writes floating-point data to the waveform in onboard memory. The
@@ -2876,7 +2878,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def write_waveform(self, waveform_name_or_handle, data):
+    def write_waveform(self, waveform_name_or_handle: typing.Union[str, int], data: typing.Iterable[float]) -> None:
         '''write_waveform
 
         Writes data to the waveform in onboard memory.
@@ -2918,7 +2920,7 @@ class _SessionBase(object):
 
         return self._write_named_waveform_f64(waveform_name_or_handle, data) if use_named else self._write_waveform(waveform_name_or_handle, data)
 
-    def _error_message(self, error_code):
+    def _error_message(self, error_code: int) -> str:
         r'''_error_message
 
         Converts a status code returned by an NI-FGEN method into a
@@ -2949,7 +2951,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FGEN session to a National Instruments Signal Generator.'''
 
-    def __init__(self, resource_name, channel_name=None, reset_device=False, options={}):
+    def __init__(self, resource_name: str, channel_name: typing.Union[str, 'list', 'range', 'tuple'] = None, reset_device: 'bool' = False, options={}):
         r'''An NI-FGEN session to a National Instruments Signal Generator.
 
         Creates and returns a new NI-FGEN session to the specified channel of a
@@ -3136,7 +3138,7 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def abort(self):
+    def abort(self) -> None:
         r'''abort
 
         Aborts any previously initiated signal generation. Call the
@@ -3149,7 +3151,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def clear_arb_memory(self):
+    def clear_arb_memory(self) -> None:
         r'''clear_arb_memory
 
         Removes all previously created arbitrary waveforms, sequences, and
@@ -3166,7 +3168,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def clear_arb_sequence(self, sequence_handle):
+    def clear_arb_sequence(self, sequence_handle: int) -> None:
         r'''clear_arb_sequence
 
         Removes a previously created arbitrary sequence from the signal
@@ -3199,7 +3201,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _clear_arb_waveform(self, waveform_handle):
+    def _clear_arb_waveform(self, waveform_handle: int) -> None:
         r'''_clear_arb_waveform
 
         Removes a previously created arbitrary waveform from the signal
@@ -3243,7 +3245,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def clear_freq_list(self, frequency_list_handle):
+    def clear_freq_list(self, frequency_list_handle: int) -> None:
         r'''clear_freq_list
 
         Removes a previously created frequency list from the signal generator
@@ -3278,7 +3280,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def commit(self):
+    def commit(self) -> None:
         r'''commit
 
         Causes a transition to the Committed state. This method verifies
@@ -3308,7 +3310,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None):
+    def create_advanced_arb_sequence(self, waveform_handles_array: typing.Iterable[int], loop_counts_array: typing.Iterable[int], sample_counts_array: typing.Iterable[int] = None, marker_location_array: typing.Iterable[int] = None) -> typing.Tuple[typing.Iterable[int], int]:
         r'''create_advanced_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
@@ -3428,7 +3430,7 @@ class Session(_SessionBase):
         return [int(coerced_markers_array_ctype[i]) for i in range((0 if marker_location_array is None else len(marker_location_array)))], int(sequence_handle_ctype.value)
 
     @ivi_synchronized
-    def create_arb_sequence(self, waveform_handles_array, loop_counts_array):
+    def create_arb_sequence(self, waveform_handles_array: typing.Iterable[int], loop_counts_array: typing.Iterable[int]) -> int:
         r'''create_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
@@ -3496,7 +3498,7 @@ class Session(_SessionBase):
         return int(sequence_handle_ctype.value)
 
     @ivi_synchronized
-    def create_freq_list(self, waveform, frequency_array, duration_array):
+    def create_freq_list(self, waveform: 'enums.Waveform', frequency_array: typing.Iterable[float], duration_array: typing.Iterable[float]) -> int:
         r'''create_freq_list
 
         Creates a frequency list from an array of frequencies
@@ -3585,7 +3587,7 @@ class Session(_SessionBase):
         return int(frequency_list_handle_ctype.value)
 
     @ivi_synchronized
-    def disable(self):
+    def disable(self) -> None:
         r'''disable
 
         Places the instrument in a quiescent state where it has minimal or no
@@ -3598,7 +3600,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def export_attribute_configuration_buffer(self):
+    def export_attribute_configuration_buffer(self) -> typing.Iterable['bytes']:
         r'''export_attribute_configuration_buffer
 
         Exports the property configuration of the session to a configuration
@@ -3631,7 +3633,7 @@ class Session(_SessionBase):
         return _converters.convert_to_bytes(configuration_array)
 
     @ivi_synchronized
-    def export_attribute_configuration_file(self, file_path):
+    def export_attribute_configuration_file(self, file_path: str) -> None:
         r'''export_attribute_configuration_file
 
         Exports the property configuration of the session to the specified
@@ -3659,7 +3661,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def get_channel_name(self, index):
+    def get_channel_name(self, index: int) -> str:
         r'''get_channel_name
 
         Returns the channel string that is in the channel table at an index you
@@ -3691,7 +3693,7 @@ class Session(_SessionBase):
         return channel_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def _get_ext_cal_last_date_and_time(self):
+    def _get_ext_cal_last_date_and_time(self) -> typing.Tuple[int, int, int, int, int]:
         r'''_get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful external calibration.
@@ -3722,7 +3724,7 @@ class Session(_SessionBase):
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     @ivi_synchronized
-    def get_ext_cal_last_temp(self):
+    def get_ext_cal_last_temp(self) -> float:
         r'''get_ext_cal_last_temp
 
         Returns the temperature at the last successful external calibration. The
@@ -3740,7 +3742,7 @@ class Session(_SessionBase):
         return float(temperature_ctype.value)
 
     @ivi_synchronized
-    def get_ext_cal_recommended_interval(self):
+    def get_ext_cal_recommended_interval(self) -> 'hightime.timedelta':
         r'''get_ext_cal_recommended_interval
 
         Returns the recommended interval between external calibrations in
@@ -3758,7 +3760,7 @@ class Session(_SessionBase):
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     @ivi_synchronized
-    def get_hardware_state(self):
+    def get_hardware_state(self) -> 'enums.HardwareState':
         r'''get_hardware_state
 
         Returns the current hardware state of the device and, if the device is
@@ -3791,7 +3793,7 @@ class Session(_SessionBase):
         return enums.HardwareState(state_ctype.value)
 
     @ivi_synchronized
-    def get_ext_cal_last_date_and_time(self):
+    def get_ext_cal_last_date_and_time(self) -> 'hightime.datetime':
         '''get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this method returns 14 for the **hour** parameter and 30 for the **minute** parameter.
@@ -3804,7 +3806,7 @@ class Session(_SessionBase):
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
-    def get_self_cal_last_date_and_time(self):
+    def get_self_cal_last_date_and_time(self) -> 'hightime.datetime':
         '''get_self_cal_last_date_and_time
 
         Returns the date and time of the last successful self-calibration.
@@ -3817,7 +3819,7 @@ class Session(_SessionBase):
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
-    def _get_self_cal_last_date_and_time(self):
+    def _get_self_cal_last_date_and_time(self) -> typing.Tuple[int, int, int, int, int]:
         r'''_get_self_cal_last_date_and_time
 
         Returns the date and time of the last successful self-calibration.
@@ -3855,7 +3857,7 @@ class Session(_SessionBase):
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     @ivi_synchronized
-    def get_self_cal_last_temp(self):
+    def get_self_cal_last_temp(self) -> float:
         r'''get_self_cal_last_temp
 
         Returns the temperature at the last successful self-calibration. The
@@ -3873,7 +3875,7 @@ class Session(_SessionBase):
         return float(temperature_ctype.value)
 
     @ivi_synchronized
-    def get_self_cal_supported(self):
+    def get_self_cal_supported(self) -> 'bool':
         r'''get_self_cal_supported
 
         Returns whether the device supports self–calibration.
@@ -3897,7 +3899,7 @@ class Session(_SessionBase):
         return bool(self_cal_supported_ctype.value)
 
     @ivi_synchronized
-    def import_attribute_configuration_buffer(self, configuration):
+    def import_attribute_configuration_buffer(self, configuration: typing.Iterable['bytes']) -> None:
         r'''import_attribute_configuration_buffer
 
         Imports a property configuration to the session from the specified
@@ -3925,7 +3927,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def import_attribute_configuration_file(self, file_path):
+    def import_attribute_configuration_file(self, file_path: str) -> None:
         r'''import_attribute_configuration_file
 
         Imports a property configuration to the session from the specified
@@ -3952,7 +3954,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _initialize_with_channels(self, resource_name, channel_name=None, reset_device=False, option_string=""):
+    def _initialize_with_channels(self, resource_name: str, channel_name: typing.Union[str, 'list', 'range', 'tuple'] = None, reset_device: 'bool' = False, option_string: 'dict' = "") -> int:
         r'''_initialize_with_channels
 
         Creates and returns a new NI-FGEN session to the specified channel of a
@@ -4093,7 +4095,7 @@ class Session(_SessionBase):
         return int(vi_ctype.value)
 
     @ivi_synchronized
-    def _initiate_generation(self):
+    def _initiate_generation(self) -> None:
         r'''_initiate_generation
 
         Initiates signal generation. If you want to abort signal generation,
@@ -4107,7 +4109,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def is_done(self):
+    def is_done(self) -> 'bool':
         r'''is_done
 
         Determines whether the current generation is complete. This method
@@ -4137,7 +4139,7 @@ class Session(_SessionBase):
         return bool(done_ctype.value)
 
     @ivi_synchronized
-    def query_arb_seq_capabilities(self):
+    def query_arb_seq_capabilities(self) -> typing.Tuple[int, int, int, int]:
         r'''query_arb_seq_capabilities
 
         Returns the properties of the signal generator that are related to
@@ -4174,7 +4176,7 @@ class Session(_SessionBase):
         return int(maximum_number_of_sequences_ctype.value), int(minimum_sequence_length_ctype.value), int(maximum_sequence_length_ctype.value), int(maximum_loop_count_ctype.value)
 
     @ivi_synchronized
-    def query_arb_wfm_capabilities(self):
+    def query_arb_wfm_capabilities(self) -> typing.Tuple[int, int, int, int]:
         r'''query_arb_wfm_capabilities
 
         Returns the properties of the signal generator that are related to
@@ -4218,7 +4220,7 @@ class Session(_SessionBase):
         return int(maximum_number_of_waveforms_ctype.value), int(waveform_quantum_ctype.value), int(minimum_waveform_size_ctype.value), int(maximum_waveform_size_ctype.value)
 
     @ivi_synchronized
-    def query_freq_list_capabilities(self):
+    def query_freq_list_capabilities(self) -> typing.Tuple[int, int, int, float, float, float]:
         r'''query_freq_list_capabilities
 
         Returns the properties of the signal generator that are related to
@@ -4268,7 +4270,7 @@ class Session(_SessionBase):
         return int(maximum_number_of_freq_lists_ctype.value), int(minimum_frequency_list_length_ctype.value), int(maximum_frequency_list_length_ctype.value), float(minimum_frequency_list_duration_ctype.value), float(maximum_frequency_list_duration_ctype.value), float(frequency_list_duration_quantum_ctype.value)
 
     @ivi_synchronized
-    def read_current_temperature(self):
+    def read_current_temperature(self) -> float:
         r'''read_current_temperature
 
         Reads the current onboard temperature of the device. The temperature is
@@ -4286,7 +4288,7 @@ class Session(_SessionBase):
         return float(temperature_ctype.value)
 
     @ivi_synchronized
-    def reset_device(self):
+    def reset_device(self) -> None:
         r'''reset_device
 
         Performs a hard reset on the device. Generation is stopped, all routes
@@ -4300,7 +4302,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def reset_with_defaults(self):
+    def reset_with_defaults(self) -> None:
         r'''reset_with_defaults
 
         Resets the instrument and reapplies initial user–specified settings from
@@ -4314,7 +4316,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def self_cal(self):
+    def self_cal(self) -> None:
         r'''self_cal
 
         Performs a full internal self-calibration on the device. If the
@@ -4327,7 +4329,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_until_done(self, max_time=hightime.timedelta(seconds=10.0)):
+    def wait_until_done(self, max_time: typing.Union['hightime.timedelta', 'datetime.timedelta', int] = hightime.timedelta(seconds=10.0)) -> None:
         r'''wait_until_done
 
         Waits until the device is done generating or until the maximum time has
@@ -4343,7 +4345,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _close(self):
+    def _close(self) -> None:
         r'''_close
 
         Performs the following operations:
@@ -4375,7 +4377,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def self_test(self):
+    def self_test(self) -> None:
         '''self_test
 
         Runs the instrument self-test routine and returns the test result(s).
@@ -4405,7 +4407,7 @@ class Session(_SessionBase):
         return None
 
     @ivi_synchronized
-    def reset(self):
+    def reset(self) -> None:
         r'''reset
 
         Resets the instrument to a known state. This method aborts the
@@ -4423,7 +4425,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _self_test(self):
+    def _self_test(self) -> typing.Tuple[int, str]:
         r'''_self_test
 
         Runs the instrument self-test routine and returns the test result(s).

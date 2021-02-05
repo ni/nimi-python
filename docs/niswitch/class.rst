@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False)
+.. py:class:: Session(self, resource_name: str, topology: str = "Configured Topology", simulate: 'bool' = False, reset_device: 'bool' = False)
 
     
 

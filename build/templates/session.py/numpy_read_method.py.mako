@@ -9,7 +9,7 @@
     enum_input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
     suffix = method_template['method_python_name_suffix']
 %>\
-    def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION)}):
+    def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION)}) -> ${helper.get_method_return_type_hint(f['parameters'], config, use_numpy_array=True)}:
         r'''${f['python_name']}
 
         ${helper.get_function_docstring(f, True, config, indent=8)}

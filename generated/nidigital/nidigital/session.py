@@ -2,8 +2,10 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
+import datetime
 # Used by @ivi_synchronized
 from functools import wraps
+import typing
 
 import nidigital._attributes as _attributes
 import nidigital._converters as _converters
@@ -569,7 +571,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def apply_levels_and_timing(self, levels_sheet, timing_sheet, initial_state_high_pins=None, initial_state_low_pins=None, initial_state_tristate_pins=None):
+    def apply_levels_and_timing(self, levels_sheet: str, timing_sheet: str, initial_state_high_pins: typing.Union[typing.Iterable[int], str] = None, initial_state_low_pins: typing.Union[typing.Iterable[int], str] = None, initial_state_tristate_pins: typing.Union[typing.Iterable[int], str] = None) -> None:
         r'''apply_levels_and_timing
 
         TBD
@@ -604,7 +606,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def apply_tdr_offsets(self, offsets):
+    def apply_tdr_offsets(self, offsets: typing.Iterable[typing.Union['hightime.timedelta', 'datetime.timedelta', float]]) -> None:
         r'''apply_tdr_offsets
 
         TBD
@@ -629,7 +631,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.timedelta(seconds=10.0)):
+    def _burst_pattern(self, start_label: str, select_digital_function: 'bool' = True, wait_until_done: 'bool' = True, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=10.0)) -> None:
         r'''_burst_pattern
 
         TBD
@@ -661,7 +663,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def clock_generator_abort(self):
+    def clock_generator_abort(self) -> None:
         r'''clock_generator_abort
 
         TBD
@@ -679,7 +681,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def clock_generator_generate_clock(self, frequency, select_digital_function=True):
+    def clock_generator_generate_clock(self, frequency: float, select_digital_function: 'bool' = True) -> None:
         r'''clock_generator_generate_clock
 
         TBD
@@ -705,7 +707,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_active_load_levels(self, iol, ioh, vcom):
+    def configure_active_load_levels(self, iol: float, ioh: float, vcom: float) -> None:
         r'''configure_active_load_levels
 
         TBD
@@ -734,7 +736,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_pattern_burst_sites(self):
+    def configure_pattern_burst_sites(self) -> None:
         r'''configure_pattern_burst_sites
 
         TBD
@@ -752,7 +754,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_time_set_compare_edges_strobe(self, time_set_name, strobe_edge):
+    def configure_time_set_compare_edges_strobe(self, time_set_name: str, strobe_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float]) -> None:
         r'''configure_time_set_compare_edges_strobe
 
         TBD
@@ -778,7 +780,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_time_set_compare_edges_strobe2x(self, time_set_name, strobe_edge, strobe2_edge):
+    def configure_time_set_compare_edges_strobe2x(self, time_set_name: str, strobe_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float], strobe2_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float]) -> None:
         r'''configure_time_set_compare_edges_strobe2x
 
         TBD
@@ -807,7 +809,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_time_set_drive_edges(self, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):
+    def configure_time_set_drive_edges(self, time_set_name: str, format: 'enums.DriveFormat', drive_on_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float], drive_data_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float], drive_return_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float], drive_off_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float]) -> None:
         r'''configure_time_set_drive_edges
 
         TBD
@@ -847,7 +849,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_time_set_drive_edges2x(self, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):
+    def configure_time_set_drive_edges2x(self, time_set_name: str, format: 'enums.DriveFormat', drive_on_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float], drive_data_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float], drive_return_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float], drive_off_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float], drive_data2_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float], drive_return2_edge: typing.Union['hightime.timedelta', 'datetime.timedelta', float]) -> None:
         r'''configure_time_set_drive_edges2x
 
         TBD
@@ -893,7 +895,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_time_set_drive_format(self, time_set_name, drive_format):
+    def configure_time_set_drive_format(self, time_set_name: str, drive_format: 'enums.DriveFormat') -> None:
         r'''configure_time_set_drive_format
 
         TBD
@@ -921,7 +923,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_time_set_edge(self, time_set_name, edge, time):
+    def configure_time_set_edge(self, time_set_name: str, edge: 'enums.TimeSetEdgeType', time: typing.Union['hightime.timedelta', 'datetime.timedelta', float]) -> None:
         r'''configure_time_set_edge
 
         TBD
@@ -952,7 +954,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_time_set_edge_multiplier(self, time_set_name, edge_multiplier):
+    def configure_time_set_edge_multiplier(self, time_set_name: str, edge_multiplier: int) -> None:
         r'''configure_time_set_edge_multiplier
 
         TBD
@@ -978,7 +980,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_voltage_levels(self, vil, vih, vol, voh, vterm):
+    def configure_voltage_levels(self, vil: float, vih: float, vol: float, voh: float, vterm: float) -> None:
         r'''configure_voltage_levels
 
         TBD
@@ -1013,7 +1015,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def create_capture_waveform_parallel(self, waveform_name):
+    def create_capture_waveform_parallel(self, waveform_name: str) -> None:
         r'''create_capture_waveform_parallel
 
         TBD
@@ -1036,7 +1038,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def create_capture_waveform_serial(self, waveform_name, sample_width, bit_order):
+    def create_capture_waveform_serial(self, waveform_name: str, sample_width: int, bit_order: 'enums.BitOrder') -> None:
         r'''create_capture_waveform_serial
 
         TBD
@@ -1067,7 +1069,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def create_source_waveform_parallel(self, waveform_name, data_mapping):
+    def create_source_waveform_parallel(self, waveform_name: str, data_mapping: 'enums.SourceDataMapping') -> None:
         r'''create_source_waveform_parallel
 
         TBD
@@ -1095,7 +1097,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def create_source_waveform_serial(self, waveform_name, data_mapping, sample_width, bit_order):
+    def create_source_waveform_serial(self, waveform_name: str, data_mapping: 'enums.SourceDataMapping', sample_width: int, bit_order: 'enums.BitOrder') -> None:
         r'''create_source_waveform_serial
 
         TBD
@@ -1131,7 +1133,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def disable_sites(self):
+    def disable_sites(self) -> None:
         r'''disable_sites
 
         TBD
@@ -1149,7 +1151,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def enable_sites(self):
+    def enable_sites(self) -> None:
         r'''enable_sites
 
         TBD
@@ -1167,7 +1169,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.timedelta(seconds=10.0)):
+    def burst_pattern(self, start_label: str, select_digital_function: 'bool' = True, wait_until_done: 'bool' = True, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=10.0)) -> typing.Optional[typing.Dict[int, bool]]:
         '''burst_pattern
 
         Uses the start_label you specify to burst the pattern on the sites you specify. If you
@@ -1205,7 +1207,7 @@ class _SessionBase(object):
             return None
 
     @ivi_synchronized
-    def fetch_capture_waveform(self, waveform_name, samples_to_read, timeout=hightime.timedelta(seconds=10.0)):
+    def fetch_capture_waveform(self, waveform_name: str, samples_to_read: int, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=10.0)) -> typing.Dict[int, memoryview]:
         '''fetch_capture_waveform
 
         Returns dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
@@ -1271,7 +1273,7 @@ class _SessionBase(object):
         return data_array, actual_num_waveforms_ctype.value, actual_samples_per_waveform_ctype.value  # (modified)
 
     @ivi_synchronized
-    def fetch_history_ram_cycle_information(self, position, samples_to_read):
+    def fetch_history_ram_cycle_information(self, position: int, samples_to_read: int) -> typing.List[history_ram_cycle_information.HistoryRAMCycleInformation]:
         '''fetch_history_ram_cycle_information
 
         Returns the pattern information acquired for the specified cycles.
@@ -1437,7 +1439,7 @@ class _SessionBase(object):
         return cycle_infos
 
     @ivi_synchronized
-    def get_pin_results_pin_information(self):
+    def get_pin_results_pin_information(self) -> typing.List[typing.Any]:
         '''get_pin_results_pin_information
 
         Returns a list of named tuples (PinInfo) that <FILL IN THE BLANK HERE>
@@ -1462,8 +1464,7 @@ class _SessionBase(object):
                 - **channel_name** (str)
 
         '''
-        import collections
-        PinInfo = collections.namedtuple('PinInformation', ['pin_name', 'site_number', 'channel_name'])
+        pininfo = typing.NamedTuple('PinInformation', [('pin_name', 'str'), ('site_number', 'int'), ('channel_name', 'str')])
 
         pin_indexes, site_numbers, channel_indexes = self._get_pin_results_pin_information()
         assert len(pin_indexes) == len(site_numbers), "length of returned arrays don't match"
@@ -1474,12 +1475,12 @@ class _SessionBase(object):
             pin_name = "" if pin_indexes[i] == -1 else self._get_pin_name(pin_indexes[i])
             channel_names = self.get_channel_names(channel_indexes[i] - 1)  # channel_indexes are 1-based
             assert 1 == len(channel_names)
-            pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_names[0]))
+            pin_infos.append(pininfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_names[0]))
 
         return pin_infos
 
     @ivi_synchronized
-    def get_site_pass_fail(self):
+    def get_site_pass_fail(self) -> typing.Dict[int, bool]:
         '''get_site_pass_fail
 
         Returns dictionary where each key is a site number and value is pass/fail
@@ -1502,7 +1503,7 @@ class _SessionBase(object):
         return dict(zip(site_list, result_list))
 
     @ivi_synchronized
-    def _fetch_history_ram_cycle_information(self, sample_index):
+    def _fetch_history_ram_cycle_information(self, sample_index: int) -> typing.Tuple[int, int, int, int, int]:
         r'''_fetch_history_ram_cycle_information
 
         TBD
@@ -1542,7 +1543,7 @@ class _SessionBase(object):
         return int(pattern_index_ctype.value), int(time_set_index_ctype.value), int(vector_number_ctype.value), int(cycle_number_ctype.value), int(num_dut_cycles_ctype.value)
 
     @ivi_synchronized
-    def _fetch_history_ram_cycle_pin_data(self, pin_list, sample_index, dut_cycle_index):
+    def _fetch_history_ram_cycle_pin_data(self, pin_list: str, sample_index: int, dut_cycle_index: int) -> typing.Tuple[typing.Iterable['enums.PinState'], typing.Iterable['enums.PinState'], typing.Iterable['bool']]:
         r'''_fetch_history_ram_cycle_pin_data
 
         TBD
@@ -1593,7 +1594,7 @@ class _SessionBase(object):
         return [enums.PinState(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [enums.PinState(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def _fetch_history_ram_scan_cycle_number(self, sample_index):
+    def _fetch_history_ram_scan_cycle_number(self, sample_index: int) -> int:
         r'''_fetch_history_ram_scan_cycle_number
 
         TBD
@@ -1621,7 +1622,7 @@ class _SessionBase(object):
         return int(scan_cycle_number_ctype.value)
 
     @ivi_synchronized
-    def frequency_counter_measure_frequency(self):
+    def frequency_counter_measure_frequency(self) -> typing.Iterable[float]:
         r'''frequency_counter_measure_frequency
 
         TBD
@@ -1651,7 +1652,7 @@ class _SessionBase(object):
         return [float(frequencies_ctype[i]) for i in range(frequencies_buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def _get_attribute_vi_boolean(self, attribute):
+    def _get_attribute_vi_boolean(self, attribute: int) -> 'bool':
         r'''_get_attribute_vi_boolean
 
         TBD
@@ -1679,7 +1680,7 @@ class _SessionBase(object):
         return bool(value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_int32(self, attribute):
+    def _get_attribute_vi_int32(self, attribute: int) -> int:
         r'''_get_attribute_vi_int32
 
         TBD
@@ -1707,7 +1708,7 @@ class _SessionBase(object):
         return int(value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_int64(self, attribute):
+    def _get_attribute_vi_int64(self, attribute: int) -> int:
         r'''_get_attribute_vi_int64
 
         TBD
@@ -1735,7 +1736,7 @@ class _SessionBase(object):
         return int(value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_real64(self, attribute):
+    def _get_attribute_vi_real64(self, attribute: int) -> float:
         r'''_get_attribute_vi_real64
 
         TBD
@@ -1763,7 +1764,7 @@ class _SessionBase(object):
         return float(value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_string(self, attribute):
+    def _get_attribute_vi_string(self, attribute: int) -> str:
         r'''_get_attribute_vi_string
 
         TBD
@@ -1796,7 +1797,7 @@ class _SessionBase(object):
         return value_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_channel_names(self, indices):
+    def get_channel_names(self, indices: typing.Union[typing.Iterable[int], str], int) -> str:
         r'''get_channel_names
 
         Returns a list of channel names for given channel indices.
@@ -1833,7 +1834,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
 
-    def _get_error(self):
+    def _get_error(self) -> typing.Tuple[int, str]:
         r'''_get_error
 
         TBD
@@ -1857,7 +1858,7 @@ class _SessionBase(object):
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_fail_count(self):
+    def get_fail_count(self) -> typing.Iterable[int]:
         r'''get_fail_count
 
         TBD
@@ -1887,7 +1888,7 @@ class _SessionBase(object):
         return [int(failure_count_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def get_history_ram_sample_count(self):
+    def get_history_ram_sample_count(self) -> int:
         r'''get_history_ram_sample_count
 
         Returns the number of samples History RAM acquired on the last pattern burst.
@@ -1935,7 +1936,7 @@ class _SessionBase(object):
         return int(sample_count_ctype.value)
 
     @ivi_synchronized
-    def get_pattern_name(self, pattern_index):
+    def get_pattern_name(self, pattern_index: int) -> str:
         r'''get_pattern_name
 
         TBD
@@ -1961,7 +1962,7 @@ class _SessionBase(object):
         return name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def _get_pin_name(self, pin_index):
+    def _get_pin_name(self, pin_index: int) -> str:
         r'''_get_pin_name
 
         TBD
@@ -1987,7 +1988,7 @@ class _SessionBase(object):
         return name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def _get_pin_results_pin_information(self):
+    def _get_pin_results_pin_information(self) -> typing.Tuple[typing.Iterable[int], typing.Iterable[int], typing.Iterable[int]]:
         r'''_get_pin_results_pin_information
 
         TBD
@@ -2027,7 +2028,7 @@ class _SessionBase(object):
         return [int(pin_indexes_ctype[i]) for i in range(buffer_size_ctype.value)], [int(site_numbers_ctype[i]) for i in range(buffer_size_ctype.value)], [int(channel_indexes_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def _get_site_pass_fail(self):
+    def _get_site_pass_fail(self) -> typing.Iterable['bool']:
         r'''_get_site_pass_fail
 
         TBD
@@ -2057,7 +2058,7 @@ class _SessionBase(object):
         return [bool(pass_fail_ctype[i]) for i in range(pass_fail_buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def _get_site_results_site_numbers(self, site_result_type):
+    def _get_site_results_site_numbers(self, site_result_type: 'enums.SiteResultType') -> typing.Iterable[int]:
         r'''_get_site_results_site_numbers
 
         TBD
@@ -2094,7 +2095,7 @@ class _SessionBase(object):
         return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def get_time_set_drive_format(self, time_set_name):
+    def get_time_set_drive_format(self, time_set_name: str) -> 'enums.DriveFormat':
         r'''get_time_set_drive_format
 
         TBD
@@ -2122,7 +2123,7 @@ class _SessionBase(object):
         return enums.DriveFormat(format_ctype.value)
 
     @ivi_synchronized
-    def get_time_set_edge(self, time_set_name, edge):
+    def get_time_set_edge(self, time_set_name: str, edge: 'enums.TimeSetEdgeType') -> 'hightime.timedelta':
         r'''get_time_set_edge
 
         TBD
@@ -2155,7 +2156,7 @@ class _SessionBase(object):
         return _converters.convert_seconds_real64_to_timedelta(float(time_ctype.value))
 
     @ivi_synchronized
-    def get_time_set_edge_multiplier(self, time_set_name):
+    def get_time_set_edge_multiplier(self, time_set_name: str) -> int:
         r'''get_time_set_edge_multiplier
 
         TBD
@@ -2183,7 +2184,7 @@ class _SessionBase(object):
         return int(edge_multiplier_ctype.value)
 
     @ivi_synchronized
-    def get_time_set_name(self, time_set_index):
+    def get_time_set_name(self, time_set_index: int) -> str:
         r'''get_time_set_name
 
         TBD
@@ -2209,7 +2210,7 @@ class _SessionBase(object):
         return name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def is_site_enabled(self):
+    def is_site_enabled(self) -> 'bool':
         r'''is_site_enabled
 
         TBD
@@ -2233,7 +2234,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(enable_ctype.value)
 
-    def lock(self):
+    def lock(self) -> 'bool':
         '''lock
 
         Obtains a multithread lock on the device session. Before doing so, the
@@ -2268,7 +2269,7 @@ class _SessionBase(object):
         # that will handle the unlock for them
         return _Lock(self)
 
-    def _lock_session(self):
+    def _lock_session(self) -> None:
         '''_lock_session
 
         Actual call to driver
@@ -2279,7 +2280,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def ppmu_measure(self, measurement_type):
+    def ppmu_measure(self, measurement_type: 'enums.PPMUMeasurementType') -> typing.Iterable[float]:
         r'''ppmu_measure
 
         TBD
@@ -2316,7 +2317,7 @@ class _SessionBase(object):
         return [float(measurements_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def ppmu_source(self):
+    def ppmu_source(self) -> None:
         r'''ppmu_source
 
         TBD
@@ -2334,7 +2335,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def read_static(self):
+    def read_static(self) -> typing.Iterable['enums.PinState']:
         r'''read_static
 
         TBD
@@ -2364,7 +2365,7 @@ class _SessionBase(object):
         return [enums.PinState(data_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def _set_attribute_vi_boolean(self, attribute, value):
+    def _set_attribute_vi_boolean(self, attribute: int, value: 'bool') -> None:
         r'''_set_attribute_vi_boolean
 
         TBD
@@ -2390,7 +2391,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_int32(self, attribute, value):
+    def _set_attribute_vi_int32(self, attribute: int, value: int) -> None:
         r'''_set_attribute_vi_int32
 
         TBD
@@ -2416,7 +2417,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_int64(self, attribute, value):
+    def _set_attribute_vi_int64(self, attribute: int, value: int) -> None:
         r'''_set_attribute_vi_int64
 
         TBD
@@ -2442,7 +2443,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_real64(self, attribute, value):
+    def _set_attribute_vi_real64(self, attribute: int, value: float) -> None:
         r'''_set_attribute_vi_real64
 
         TBD
@@ -2468,7 +2469,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _set_attribute_vi_string(self, attribute, value):
+    def _set_attribute_vi_string(self, attribute: int, value: str) -> None:
         r'''_set_attribute_vi_string
 
         TBD
@@ -2494,7 +2495,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def tdr(self, apply_offsets=True):
+    def tdr(self, apply_offsets: 'bool' = True) -> typing.Iterable['hightime.timedelta']:
         r'''tdr
 
         TBD
@@ -2528,7 +2529,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_seconds_real64_to_timedeltas([float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)])
 
-    def unlock(self):
+    def unlock(self) -> 'bool':
         '''unlock
 
         Releases a lock that you acquired on an device session using
@@ -2541,7 +2542,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _write_source_waveform_site_unique_u32(self, waveform_name, num_waveforms, samples_per_waveform, waveform_data):
+    def _write_source_waveform_site_unique_u32(self, waveform_name: str, num_waveforms: int, samples_per_waveform: int, waveform_data: typing.Iterable[int]) -> None:
         r'''_write_source_waveform_site_unique_u32
 
         TBD
@@ -2574,7 +2575,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def write_static(self, state):
+    def write_static(self, state: 'enums.WriteStaticPinState') -> None:
         r'''write_static
 
         TBD
@@ -2598,7 +2599,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _error_message(self, error_code):
+    def _error_message(self, error_code: int) -> str:
         r'''_error_message
 
         TBD
@@ -2622,7 +2623,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-Digital Pattern Driver session'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
+    def __init__(self, resource_name: str, id_query: 'bool' = False, reset_device: 'bool' = False, options={}):
         r'''An NI-Digital Pattern Driver session
 
         TBD
@@ -2726,7 +2727,7 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def abort(self):
+    def abort(self) -> None:
         r'''abort
 
         TBD
@@ -2737,7 +2738,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def abort_keep_alive(self):
+    def abort_keep_alive(self) -> None:
         r'''abort_keep_alive
 
         TBD
@@ -2748,7 +2749,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def commit(self):
+    def commit(self) -> None:
         r'''commit
 
         TBD
@@ -2759,7 +2760,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_time_set_period(self, time_set_name, period):
+    def configure_time_set_period(self, time_set_name: str, period: typing.Union['hightime.timedelta', 'datetime.timedelta', float]) -> None:
         r'''configure_time_set_period
 
         TBD
@@ -2778,7 +2779,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def create_capture_waveform_from_file_digicapture(self, waveform_name, waveform_file_path):
+    def create_capture_waveform_from_file_digicapture(self, waveform_name: str, waveform_file_path: str) -> None:
         r'''create_capture_waveform_from_file_digicapture
 
         TBD
@@ -2797,7 +2798,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def create_source_waveform_from_file_tdms(self, waveform_name, waveform_file_path, write_waveform_data=True):
+    def create_source_waveform_from_file_tdms(self, waveform_name: str, waveform_file_path: str, write_waveform_data: 'bool' = True) -> None:
         r'''create_source_waveform_from_file_tdms
 
         TBD
@@ -2819,7 +2820,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def create_time_set(self, name):
+    def create_time_set(self, name: str) -> None:
         r'''create_time_set
 
         TBD
@@ -2835,7 +2836,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def delete_all_time_sets(self):
+    def delete_all_time_sets(self) -> None:
         r'''delete_all_time_sets
 
         TBD
@@ -2846,7 +2847,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def load_specifications_levels_and_timing(self, specifications_file_paths=None, levels_file_paths=None, timing_file_paths=None):
+    def load_specifications_levels_and_timing(self, specifications_file_paths: typing.Union[str, typing.Iterable[str]] = None, levels_file_paths: typing.Union[str, typing.Iterable[str]] = None, timing_file_paths: typing.Union[str, typing.Iterable[str]] = None) -> None:
         '''load_specifications_levels_and_timing
 
         Loads settings in specifications, levels, and timing sheets. These settings are not
@@ -2877,7 +2878,7 @@ class Session(_SessionBase):
             method(f)
 
     @ivi_synchronized
-    def self_test(self):
+    def self_test(self) -> None:
         '''self_test
 
         TBD
@@ -2888,7 +2889,7 @@ class Session(_SessionBase):
         return None
 
     @ivi_synchronized
-    def unload_specifications(self, file_paths):
+    def unload_specifications(self, file_paths: typing.Union[str, typing.Iterable[str]]) -> None:
         '''unload_specifications
 
         Unloads the given specifications sheets present in the previously loaded
@@ -2905,7 +2906,7 @@ class Session(_SessionBase):
         self._call_method_with_iterable(self._unload_specifications, file_paths)
 
     @ivi_synchronized
-    def write_source_waveform_site_unique(self, waveform_name, waveform_data):
+    def write_source_waveform_site_unique(self, waveform_name: str, waveform_data: typing.Dict[int, typing.Iterable[int]]) -> None:
         '''write_source_waveform_site_unique
 
         TBD
@@ -2964,7 +2965,7 @@ class Session(_SessionBase):
         self.sites[site_list]._write_source_waveform_site_unique_u32(waveform_name, len(waveform_data), actual_samples_per_waveform, data)
 
     @ivi_synchronized
-    def get_pattern_pin_names(self, start_label):
+    def get_pattern_pin_names(self, start_label: str) -> str:
         r'''get_pattern_pin_names
 
         TBD
@@ -2990,7 +2991,7 @@ class Session(_SessionBase):
         return _converters.convert_comma_separated_string_to_list(pin_list_ctype.value.decode(self._encoding))
 
     @ivi_synchronized
-    def get_time_set_period(self, time_set_name):
+    def get_time_set_period(self, time_set_name: str) -> 'hightime.timedelta':
         r'''get_time_set_period
 
         TBD
@@ -3010,7 +3011,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_seconds_real64_to_timedelta(float(period_ctype.value))
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
+    def _init_with_options(self, resource_name: str, id_query: 'bool' = False, reset_device: 'bool' = False, option_string: 'dict' = "") -> int:
         r'''_init_with_options
 
         TBD
@@ -3039,7 +3040,7 @@ class Session(_SessionBase):
         return int(new_vi_ctype.value)
 
     @ivi_synchronized
-    def _initiate(self):
+    def _initiate(self) -> None:
         r'''_initiate
 
         Starts bursting the pattern configured by start_label,
@@ -3055,7 +3056,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def is_done(self):
+    def is_done(self) -> 'bool':
         r'''is_done
 
         TBD
@@ -3071,7 +3072,7 @@ class Session(_SessionBase):
         return bool(done_ctype.value)
 
     @ivi_synchronized
-    def _load_levels(self, file_path):
+    def _load_levels(self, file_path: str) -> None:
         r'''_load_levels
 
         TBD
@@ -3087,7 +3088,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def load_pattern(self, file_path):
+    def load_pattern(self, file_path: str) -> None:
         r'''load_pattern
 
         TBD
@@ -3103,7 +3104,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def load_pin_map(self, file_path):
+    def load_pin_map(self, file_path: str) -> None:
         r'''load_pin_map
 
         TBD
@@ -3119,7 +3120,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _load_specifications(self, file_path):
+    def _load_specifications(self, file_path: str) -> None:
         r'''_load_specifications
 
         TBD
@@ -3135,7 +3136,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _load_timing(self, file_path):
+    def _load_timing(self, file_path: str) -> None:
         r'''_load_timing
 
         TBD
@@ -3151,7 +3152,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def read_sequencer_flag(self, flag):
+    def read_sequencer_flag(self, flag: 'enums.SequencerFlag') -> 'bool':
         r'''read_sequencer_flag
 
         TBD
@@ -3174,7 +3175,7 @@ class Session(_SessionBase):
         return bool(value_ctype.value)
 
     @ivi_synchronized
-    def read_sequencer_register(self, reg):
+    def read_sequencer_register(self, reg: 'enums.SequencerRegister') -> int:
         r'''read_sequencer_register
 
         TBD
@@ -3197,7 +3198,7 @@ class Session(_SessionBase):
         return int(value_ctype.value)
 
     @ivi_synchronized
-    def reset_device(self):
+    def reset_device(self) -> None:
         r'''reset_device
 
         TBD
@@ -3208,7 +3209,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def self_calibrate(self):
+    def self_calibrate(self) -> None:
         r'''self_calibrate
 
         TBD
@@ -3219,7 +3220,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def send_software_edge_trigger(self, trigger, trigger_identifier):
+    def send_software_edge_trigger(self, trigger: 'enums.SoftwareTrigger', trigger_identifier: str) -> None:
         r'''send_software_edge_trigger
 
         Forces a particular edge-based trigger to occur regardless of how the
@@ -3258,7 +3259,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def unload_all_patterns(self, unload_keep_alive_pattern=False):
+    def unload_all_patterns(self, unload_keep_alive_pattern: 'bool' = False) -> None:
         r'''unload_all_patterns
 
         TBD
@@ -3274,7 +3275,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _unload_specifications(self, file_path):
+    def _unload_specifications(self, file_path: str) -> None:
         r'''_unload_specifications
 
         TBD
@@ -3290,7 +3291,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_until_done(self, timeout=hightime.timedelta(seconds=10.0)):
+    def wait_until_done(self, timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=10.0)) -> None:
         r'''wait_until_done
 
         TBD
@@ -3306,7 +3307,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def write_sequencer_flag(self, flag, value):
+    def write_sequencer_flag(self, flag: 'enums.SequencerFlag', value: 'bool') -> None:
         r'''write_sequencer_flag
 
         TBD
@@ -3327,7 +3328,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def write_sequencer_register(self, reg, value):
+    def write_sequencer_register(self, reg: 'enums.SequencerRegister', value: int) -> None:
         r'''write_sequencer_register
 
         TBD
@@ -3348,7 +3349,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def write_source_waveform_broadcast(self, waveform_name, waveform_data):
+    def write_source_waveform_broadcast(self, waveform_name: str, waveform_data: typing.Iterable[int]) -> None:
         r'''write_source_waveform_broadcast
 
         TBD
@@ -3368,7 +3369,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def write_source_waveform_data_from_file_tdms(self, waveform_name, waveform_file_path):
+    def write_source_waveform_data_from_file_tdms(self, waveform_name: str, waveform_file_path: str) -> None:
         r'''write_source_waveform_data_from_file_tdms
 
         TBD
@@ -3386,7 +3387,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _close(self):
+    def _close(self) -> None:
         r'''_close
 
         TBD
@@ -3397,7 +3398,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def reset(self):
+    def reset(self) -> None:
         r'''reset
 
         TBD
@@ -3408,7 +3409,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _self_test(self):
+    def _self_test(self) -> typing.Tuple[int, str]:
         r'''_self_test
 
         TBD

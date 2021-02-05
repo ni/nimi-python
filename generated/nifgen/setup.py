@@ -47,6 +47,7 @@ setup(
         'singledispatch;python_version<"3.4"',
         'hightime>=0.2.0',
         'nitclk',
+        'typing',
     ],
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],

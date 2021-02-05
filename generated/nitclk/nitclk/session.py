@@ -2,8 +2,10 @@
 
 import array
 import ctypes
+import datetime
 import hightime
 import threading
+import typing
 
 import nitclk._attributes as _attributes
 import nitclk._converters as _converters
@@ -198,7 +200,7 @@ class SessionReference(object):
     def _get_tclk_session_reference(self):
         return self._session_number
 
-    def _get_attribute_vi_real64(self, attribute_id):
+    def _get_attribute_vi_real64(self, attribute_id: int) -> float:
         r'''_get_attribute_vi_real64
 
         Gets the value of an NI-TClk ViReal64 property.
@@ -226,7 +228,7 @@ class SessionReference(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(value_ctype.value)
 
-    def _get_attribute_vi_session(self, attribute_id):
+    def _get_attribute_vi_session(self, attribute_id: int) -> int:
         r'''_get_attribute_vi_session
 
         Gets the value of an NI-TClk ViSession property.
@@ -257,7 +259,7 @@ class SessionReference(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
-    def _get_attribute_vi_string(self, attribute_id):
+    def _get_attribute_vi_string(self, attribute_id: int) -> str:
         r'''_get_attribute_vi_string
 
         This method queries the value of an NI-TClk ViString property. You
@@ -302,7 +304,7 @@ class SessionReference(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
 
-    def _get_extended_error_info(self):
+    def _get_extended_error_info(self) -> str:
         r'''_get_extended_error_info
 
         Reports extended error information for the most recent NI-TClk method
@@ -328,7 +330,7 @@ class SessionReference(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_string_ctype.value.decode(self._encoding)
 
-    def _set_attribute_vi_real64(self, attribute_id, value):
+    def _set_attribute_vi_real64(self, attribute_id: int, value: float) -> None:
         r'''_set_attribute_vi_real64
 
         Sets the value of an NI-TClk VIReal64 property.
@@ -358,7 +360,7 @@ class SessionReference(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_session(self, attribute_id, value):
+    def _set_attribute_vi_session(self, attribute_id: int, value: int) -> None:
         r'''_set_attribute_vi_session
 
         Sets the value of an NI-TClk ViSession property.
@@ -391,7 +393,7 @@ class SessionReference(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_string(self, attribute_id, value):
+    def _set_attribute_vi_string(self, attribute_id: int, value: str) -> None:
         r'''_set_attribute_vi_string
 
         Sets the value of an NI-TClk VIString property.
@@ -461,7 +463,7 @@ class _Session(object):
             return "Failed to retrieve error description."
 
     ''' These are code-generated '''
-    def configure_for_homogeneous_triggers(self, sessions):
+    def configure_for_homogeneous_triggers(self, sessions: typing.Iterable[typing.Any]) -> None:
         r'''configure_for_homogeneous_triggers
 
         Configures the properties commonly required for the TClk synchronization
@@ -597,7 +599,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def finish_sync_pulse_sender_synchronize(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
+    def finish_sync_pulse_sender_synchronize(self, sessions: typing.Iterable[typing.Any], min_time: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0)) -> None:
         r'''finish_sync_pulse_sender_synchronize
 
         Finishes synchronizing the Sync Pulse Sender.
@@ -621,7 +623,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _get_extended_error_info(self):
+    def _get_extended_error_info(self) -> str:
         r'''_get_extended_error_info
 
         Reports extended error information for the most recent NI-TClk method
@@ -647,7 +649,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_string_ctype.value.decode(self._encoding)
 
-    def initiate(self, sessions):
+    def initiate(self, sessions: typing.Iterable[typing.Any]) -> None:
         r'''initiate
 
         Initiates the acquisition or generation sessions specified, taking into
@@ -667,7 +669,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def is_done(self, sessions):
+    def is_done(self, sessions: typing.Iterable[typing.Any]) -> 'bool':
         r'''is_done
 
         Monitors the progress of the acquisitions and/or generations
@@ -691,7 +693,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
 
-    def setup_for_sync_pulse_sender_synchronize(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
+    def setup_for_sync_pulse_sender_synchronize(self, sessions: typing.Iterable[typing.Any], min_time: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0)) -> None:
         r'''setup_for_sync_pulse_sender_synchronize
 
         Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
@@ -715,7 +717,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def synchronize(self, sessions, min_tclk_period=hightime.timedelta(seconds=0.0)):
+    def synchronize(self, sessions: typing.Iterable[typing.Any], min_tclk_period: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0)) -> None:
         r'''synchronize
 
         Synchronizes the TClk signals on the given sessions. After
@@ -744,7 +746,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def synchronize_to_sync_pulse_sender(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
+    def synchronize_to_sync_pulse_sender(self, sessions: typing.Iterable[typing.Any], min_time: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0)) -> None:
         r'''synchronize_to_sync_pulse_sender
 
         Synchronizes the other devices to the Sync Pulse Sender.
@@ -768,7 +770,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_until_done(self, sessions, timeout=hightime.timedelta(seconds=0.0)):
+    def wait_until_done(self, sessions: typing.Iterable[typing.Any], timeout: typing.Union['hightime.timedelta', 'datetime.timedelta', float] = hightime.timedelta(seconds=0.0)) -> None:
         r'''wait_until_done
 
         Call this method to pause execution of your program until the

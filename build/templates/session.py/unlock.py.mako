@@ -4,7 +4,7 @@
 
     c_function_prefix = config['c_function_prefix']
 %>\
-    def ${f['python_name']}(self):
+    def ${f['python_name']}(self) -> ${helper.get_method_return_type_hint(f['parameters'], config)}:
         '''${f['python_name']}
 
         Releases a lock that you acquired on an device session using

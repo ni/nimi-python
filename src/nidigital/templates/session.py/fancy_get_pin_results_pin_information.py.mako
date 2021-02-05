@@ -3,13 +3,12 @@
     '''Forwards to _fetch()/_read() with a nicer interface'''
     import build.helper as helper
 %>\
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}) -> typing.List[typing.Any]:
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        import collections
-        PinInfo = collections.namedtuple('PinInformation', ['pin_name', 'site_number', 'channel_name'])
+        pininfo = typing.NamedTuple('PinInformation', [('pin_name', 'str'), ('site_number', 'int'), ('channel_name', 'str')])
 
         pin_indexes, site_numbers, channel_indexes = self._${f['python_name']}()
         assert len(pin_indexes) == len(site_numbers), "length of returned arrays don't match"
@@ -20,7 +19,7 @@
             pin_name = "" if pin_indexes[i] == -1 else self._get_pin_name(pin_indexes[i])
             channel_names = self.get_channel_names(channel_indexes[i] - 1)  # channel_indexes are 1-based
             assert 1 == len(channel_names)
-            pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_names[0]))
+            pin_infos.append(pininfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_names[0]))
 
         return pin_infos
 

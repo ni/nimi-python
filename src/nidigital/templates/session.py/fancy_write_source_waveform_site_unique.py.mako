@@ -3,7 +3,7 @@
     import build.helper as helper
     suffix = method_template['method_python_name_suffix']
 %>\
-    def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}) -> None:
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}

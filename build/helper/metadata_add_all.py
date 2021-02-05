@@ -195,13 +195,65 @@ def _add_library_method_call_snippet(parameter):
         parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
 
 
+def _add_parameter_type_hint(parameter):
+    '''Calculate type for type hint'''
+    # We are going to use 'type_in_documentation' since it has a list of possible types
+    td = parameter['type_in_documentation']
+    # Special cases for nitclk Session lists since there isn't any easy way to handle it given duck typing
+    td = td.replace('Driver Session or nitclk.SessionReference', 'typing.Iterable[typing.Any]')
+    td = td.replace('nimi-python Session class or nitclk.SessionReference', 'typing.Iterable[typing.Any]')
+    # Special cases for nifgen
+    td = td.replace('str or int', 'str, int')
+    td = td.replace('iterable of float or int16', 'float, int')
+    # Special case for nifake
+    td = td.replace('CustomStruct', 'custom_struct.CustomStruct')
+    # Special case for nidigital
+    td = td.replace('{ int: basic sequence of unsigned int, int: basic sequence of unsigned int, ... }', 'typing.Dict[int, typing.Iterable[int]]')
+    td = td.replace('{ int: bool, int: bool, ... }', 'typing.Dict[int, bool]')
+    td = td.replace('basic sequence types or str or int', 'typing.Union[typing.Iterable[int], int, str]')
+    td = td.replace('basic sequence of hightime.timedelta, datetime.timedelta, or float in seconds', "typing.Iterable[typing.Union['hightime.timedelta', 'datetime.timedelta', float]]")
+    td = td.replace('basic sequence types or str', 'typing.Union[typing.Iterable[int], str]')
+    td = td.replace('str or basic sequence of str', 'typing.Union[str, typing.Iterable[str]]')
+    # Special case for niscope
+    td = td.replace('WaveformInfo', 'waveform_info.WaveformInfo')
+
+    # Generic replacements
+    td = td.replace('or ', '').replace('in ', '').replace('milliseconds', '').replace('seconds', '').replace('list of', '').replace('(', '').replace(')', '')
+
+    th_list = []
+    if 'typing' not in td:  # Look for typing. If we see it we know we have already handled any special case so we can just skip this
+        for t in td.split(','):
+            t = t.strip()
+            # For non-builtin types, we add quotes so the type doesn't have to be available in code
+            if t not in ['int', 'float', 'str', 'bool']:
+                t = "'" + t + "'"
+
+            if parameter['use_list'] or parameter['use_array']:
+                type_hint = 'typing.Iterable[' + t + ']'
+            else:
+                type_hint = t
+            th_list.append(type_hint)
+    else:
+        th_list.append(td.strip())
+
+    if len(th_list) > 1:
+        type_hint = 'typing.Union[' + ', '.join(th_list) + ']'
+    elif len(th_list) == 1:
+        type_hint = th_list[0]
+    else:
+        assert "Got 0 entries for type_hint for parameter: {parameter}".format(parameter=parameter)
+
+    parameter['type_hint'] = type_hint
+
+
 def _add_default_value_name(parameter):
     '''Declaration with default value, if set'''
+    type_hint_str = ': ' + parameter['type_hint']
     if 'default_value' in parameter:
         if 'enum' in parameter and parameter['enum'] is not None and parameter['default_value'] is not None:
-            name_with_default = parameter['python_name'] + "=enums." + parameter['default_value']
+            name_with_default = parameter['python_name'] + type_hint_str + " = enums." + parameter['default_value']
         else:
-            name_with_default = parameter['python_name'] + "=" + str(parameter['default_value'])
+            name_with_default = parameter['python_name'] + type_hint_str + " = " + str(parameter['default_value'])
 
         if 'python_api_converter_name' in parameter:
             name_for_init = '_converters.{0}({1}, self._encoding)'.format(parameter['python_api_converter_name'], parameter['python_name'])
@@ -211,7 +263,7 @@ def _add_default_value_name(parameter):
             name_for_init = parameter['default_value']
 
     else:
-        name_with_default = parameter['python_name']
+        name_with_default = parameter['python_name'] + type_hint_str
         name_for_init = parameter['python_name']
 
     parameter['python_name_with_default'] = name_with_default
@@ -374,6 +426,7 @@ def add_all_function_metadata(functions, config):
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p, config)
             _add_numpy_info(p, functions[f]['parameters'], config)
+            _add_parameter_type_hint(p)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
@@ -820,7 +873,8 @@ functions_expected = {
                 'is_string': False,
                 'name': 'vi',
                 'python_name': 'vi',
-                'python_name_with_default': 'vi',
+                'python_name_with_default': 'vi: int',
+                'type_hint': 'int',
                 'python_name_with_doc_default': 'vi',
                 'size': {
                     'mechanism': 'fixed',
@@ -853,7 +907,8 @@ functions_expected = {
                 'is_string': True,
                 'name': 'channelName',
                 'python_name': 'channel_name',
-                'python_name_with_default': 'channel_name',
+                'type_hint': 'str',
+                'python_name_with_default': 'channel_name: str',
                 'python_name_with_doc_default': 'channel_name',
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'ViString',
@@ -882,7 +937,8 @@ functions_expected = {
                 'is_string': False,
                 'name': 'pinDataBufferSize',
                 'python_name': 'pin_data_buffer_size',
-                'python_name_with_default': 'pin_data_buffer_size',
+                'python_name_with_default': 'pin_data_buffer_size: int',
+                'type_hint': 'int',
                 'python_name_with_doc_default': 'pin_data_buffer_size',
                 'size': {
                     'mechanism': 'fixed',
@@ -914,7 +970,8 @@ functions_expected = {
                 'is_string': False,
                 'name': 'actualNumPinData',
                 'python_name': 'actual_num_pin_data',
-                'python_name_with_default': 'actual_num_pin_data',
+                'python_name_with_default': 'actual_num_pin_data: int',
+                'type_hint': 'int',
                 'python_name_with_doc_default': 'actual_num_pin_data',
                 'size': {
                     'mechanism': 'fixed',
@@ -947,7 +1004,8 @@ functions_expected = {
                 'name': 'expectedPinStates',
                 'original_type': 'ViUInt8[]',
                 'python_name': 'expected_pin_states',
-                'python_name_with_default': 'expected_pin_states',
+                'python_name_with_default': 'expected_pin_states: typing.Iterable[int]',
+                'type_hint': 'typing.Iterable[int]',
                 'python_name_with_doc_default': 'expected_pin_states',
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
@@ -993,7 +1051,8 @@ functions_expected = {
                 'is_buffer': False,
                 'use_list': False,
                 'is_string': False,
-                'python_name_with_default': 'vi',
+                'python_name_with_default': 'vi: int',
+                'type_hint': 'int',
                 'python_name_with_doc_default': 'vi',
                 'is_repeated_capability': False,
                 'is_session_handle': True,
@@ -1025,7 +1084,8 @@ functions_expected = {
                 'is_buffer': False,
                 'use_list': False,
                 'is_string': True,
-                'python_name_with_default': 'status',
+                'python_name_with_default': 'status: str',
+                'type_hint': 'str',
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
                 'is_session_handle': False,
@@ -1054,7 +1114,8 @@ functions_expected = {
                 'is_string': False,
                 'name': 'dataBufferSize',
                 'python_name': 'data_buffer_size',
-                'python_name_with_default': 'data_buffer_size',
+                'python_name_with_default': 'data_buffer_size: int',
+                'type_hint': 'int',
                 'python_name_with_doc_default': 'data_buffer_size',
                 'size': {
                     'mechanism': 'fixed',
@@ -1087,7 +1148,8 @@ functions_expected = {
                 'name': 'data',
                 'original_type': 'ViUInt32[]',
                 'python_name': 'data',
-                'python_name_with_default': 'data',
+                'python_name_with_default': 'data: typing.Iterable[int]',
+                'type_hint': 'typing.Iterable[int]',
                 'python_name_with_doc_default': 'data',
                 'size': {
                     'mechanism': 'ivi-dance',

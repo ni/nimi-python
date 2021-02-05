@@ -4,7 +4,7 @@
     results and returns it to the caller.'''
     import build.helper as helper
 %>\
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}) -> typing.Optional[typing.Dict[int, bool]]:
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}

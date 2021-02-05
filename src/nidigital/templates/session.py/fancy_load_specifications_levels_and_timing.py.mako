@@ -3,7 +3,7 @@
     '''Forwards to _load_specifications(), _load_levels(), and _load_timing().'''
     import build.helper as helper
 %>\
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}) -> None:
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}

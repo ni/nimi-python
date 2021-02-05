@@ -14,8 +14,10 @@
 
 import array
 import ctypes
+import datetime
 import hightime
 import threading
+import typing
 
 import ${module_name}._attributes as _attributes
 import ${module_name}._converters as _converters

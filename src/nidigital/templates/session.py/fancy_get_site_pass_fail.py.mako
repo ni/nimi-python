@@ -4,7 +4,7 @@
     dictionary where each key is a site number and value is a bool indicating pass/fail'''
     import build.helper as helper
 %>\
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}) -> typing.Dict[int, bool]:
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
