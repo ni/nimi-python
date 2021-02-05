@@ -354,7 +354,7 @@ commit
 
     .. py:method:: commit()
 
-            Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the :py:meth:`nidigital.Session.commit` method, then the :py:meth:`nidigital.Session._initiate` method or the :py:meth:`nidigital.Session.burst_pattern` method will implicitly call this method for you. Calling this method moves the session from the Uncommitted state to the Committed state.
+            Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the :py:meth:`nidigital.Session.commit` method, then the initiate method or the :py:meth:`nidigital.Session.burst_pattern` method will implicitly call this method for you. Calling this method moves the session from the Uncommitted state to the Committed state.
 
             
 
@@ -413,7 +413,7 @@ configure_pattern_burst_sites
 
     .. py:method:: configure_pattern_burst_sites()
 
-            Configures which sites burst the pattern on the next call to the :py:meth:`nidigital.Session._initiate` method. The pattern burst sites can also be modified through the repeated capabilities for the :py:meth:`nidigital.Session.burst_pattern` method. If a site has been disabled through the :py:meth:`nidigital.Session.disable_sites` method, the site does not burst a pattern even if included in the pattern burst sites.
+            Configures which sites burst the pattern on the next call to the initiate method. The pattern burst sites can also be modified through the repeated capabilities for the :py:meth:`nidigital.Session.burst_pattern` method. If a site has been disabled through the :py:meth:`nidigital.Session.disable_sites` method, the site does not burst a pattern even if included in the pattern burst sites.
 
             
 
@@ -760,13 +760,11 @@ configure_time_set_edge
                 -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN` (2802)
                 -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_OFF` (2803)
                 -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE` (2804)
-                -   :py:data:`~nidigital.NIDIGITAL_VAL_DRIVE_DATA_2` (2805)
-                -   :py:data:`~nidigital.NIDIGITAL_VAL_DRIVE_RETURN_2` (2806)
-                -   :py:data:`~nidigital.NIDIGITAL_VAL_COMPARE_STROBE_2` (2807)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA2` (2805)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN2` (2806)
+                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE2` (2807)
 
                 
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type edge: :py:data:`nidigital.TimeSetEdgeType`
@@ -929,7 +927,7 @@ create_capture_waveform_from_file_digicapture
             :param waveform_name:
 
 
-                Waveform name you want to use. You must specify **waveformName** if the file contains multiple waveforms. Use the **waveformName** with the capture_start opcode in your pattern.
+                Waveform name you want to use. You must specify waveform_name if the file contains multiple waveforms. Use the waveform_name with the capture_start opcode in your pattern.
 
                 
 
@@ -966,7 +964,7 @@ create_capture_waveform_parallel
             :param waveform_name:
 
 
-                Waveform name you want to use. Use the **waveformName** with the capture_start opcode in your pattern.
+                Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.
 
                 
 
@@ -994,7 +992,7 @@ create_capture_waveform_serial
             :param waveform_name:
 
 
-                Waveform name you want to use. Use the **waveformName** with the capture_start opcode in your pattern.
+                Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.
 
                 
 
@@ -1038,7 +1036,7 @@ create_source_waveform_from_file_tdms
             :param waveform_name:
 
 
-                The waveform name you want to use from the file. You must specify **waveformName** if the file contains multiple waveforms. Use the **waveformName** with the source_start opcode in your pattern.
+                The waveform name you want to use from the file. You must specify waveform_name if the file contains multiple waveforms. Use the waveform_name with the source_start opcode in your pattern.
 
                 
 
@@ -1084,7 +1082,7 @@ create_source_waveform_parallel
             :param waveform_name:
 
 
-                The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+                The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
 
                 
 
@@ -1124,7 +1122,7 @@ create_source_waveform_serial
             :param waveform_name:
 
 
-                The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+                The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
 
                 
 
@@ -1207,7 +1205,7 @@ disable_sites
 
     .. py:method:: disable_sites()
 
-            Disables specified sites. Disabled sites are not included in pattern bursts initiated by the :py:meth:`nidigital.Session._initiate` method or the :py:meth:`nidigital.Session.burst_pattern` method, even if the site is specified in the list of pattern burst sites in :py:meth:`nidigital.Session.configure_pattern_burst_sites` method or in the repeated capabilities for the :py:meth:`nidigital.Session.burst_pattern` method. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the :py:meth:`nidigital.Session.ppmu_measure` method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
+            Disables specified sites. Disabled sites are not included in pattern bursts initiated by the initiate method or the :py:meth:`nidigital.Session.burst_pattern` method, even if the site is specified in the list of pattern burst sites in :py:meth:`nidigital.Session.configure_pattern_burst_sites` method or in the repeated capabilities for the :py:meth:`nidigital.Session.burst_pattern` method. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the :py:meth:`nidigital.Session.ppmu_measure` method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
 
             
 
@@ -1557,7 +1555,7 @@ get_pattern_name
 
     .. py:method:: get_pattern_name(pattern_index)
 
-            You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **bufferSize**. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the **bufferSize**, the method copies (bufferSize - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the **bufferSize** you must pass to get the entire value. For example, if the value is "123456" and the **bufferSize** is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for the **bufferSize** and VI_NULL for the value.
+            TBD
 
             
 
@@ -1565,8 +1563,6 @@ get_pattern_name
 
             :param pattern_index:
 
-
-                The specified pattern index.
 
                 
 
@@ -1576,8 +1572,6 @@ get_pattern_name
             :rtype: str
             :return:
 
-
-                    Returns the pin name at the specified **pinIndex**.
 
                     
 
@@ -1590,7 +1584,7 @@ get_pattern_pin_names
 
     .. py:method:: get_pattern_pin_names(start_label)
 
-            Returns the pattern pin list. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the buffer size. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the method copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for the buffer size and VI_NULL for the value.
+            Returns the pattern pin list.
 
             
 
@@ -1751,13 +1745,11 @@ get_time_set_edge
                 -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN` (2802)
                 -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_OFF` (2803)
                 -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE` (2804)
-                -   :py:data:`~nidigital.NIDIGITAL_VAL_DRIVE_DATA_2` (2805)
-                -   :py:data:`~nidigital.NIDIGITAL_VAL_DRIVE_RETURN_2` (2806)
-                -   :py:data:`~nidigital.NIDIGITAL_VAL_COMPARE_STROBE_2` (2807)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA2` (2805)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN2` (2806)
+                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE2` (2807)
 
                 
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type edge: :py:data:`nidigital.TimeSetEdgeType`
@@ -1817,7 +1809,7 @@ get_time_set_name
 
     .. py:method:: get_time_set_name(time_set_index)
 
-            You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **nameBufferSize**. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the method copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for **nameBufferSize** and VI_NULL for the name.
+            TBD
 
             
 
@@ -1825,8 +1817,6 @@ get_time_set_name
 
             :param time_set_index:
 
-
-                The specified time set index.
 
                 
 
@@ -1836,8 +1826,6 @@ get_time_set_name
             :rtype: str
             :return:
 
-
-                    The returned time set name at the specified **timeSetIndex**.
 
                     
 
@@ -1960,11 +1948,9 @@ load_pattern
             :param file_path:
 
 
-                Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using the :py:meth:`nidigital.Session.ConfigureStartLabel` method or the **startLabel** parameter of the :py:meth:`nidigital.Session.burst_pattern` method.
+                Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using :py:attr:`nidigital.Session.start_label` or the start_label parameter of the :py:meth:`nidigital.Session.burst_pattern` method.
 
                 
-
-                .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
             :type file_path: str
@@ -2164,10 +2150,10 @@ read_sequencer_flag
 
                 The pattern sequencer flag you want to read.
 
-                -   :py:data:`~nidigital.SequencerFlag.FLAG0` ("seqflag0"): Writes pattern sequencer flag 0.
-                -   :py:data:`~nidigital.SequencerFlag.FLAG1` ("seqflag1"): Writes pattern sequencer flag 1.
-                -   :py:data:`~nidigital.SequencerFlag.FLAG2` ("seqflag2"): Writes pattern sequencer flag 2.
-                -   :py:data:`~nidigital.SequencerFlag.FLAG3` ("seqflag3"): Writes pattern sequencer flag 3.
+                -   :py:data:`~nidigital.SequencerFlag.FLAG0` ("seqflag0"): Reads pattern sequencer flag 0.
+                -   :py:data:`~nidigital.SequencerFlag.FLAG1` ("seqflag1"): Reads pattern sequencer flag 1.
+                -   :py:data:`~nidigital.SequencerFlag.FLAG2` ("seqflag2"): Reads pattern sequencer flag 2.
+                -   :py:data:`~nidigital.SequencerFlag.FLAG3` ("seqflag3"): Reads pattern sequencer flag 3.
 
                 
 
@@ -2274,7 +2260,12 @@ reset
 
     .. py:method:: reset()
 
-            Resets a digital pattern instrument to a known state. method
+            Returns a digital pattern instrument to a known state. This method performs the following actions:
+
+            - Aborts pattern execution.
+            - Clears pin maps, time sets, source and capture waveforms, and patterns.
+            - Resets all properties to default values, including the :py:attr:`nidigital.Session.selected_function` property that is set to :py:data:`~nidigital.SelectedFunction.DISCONNECT`, causing the I/O switches to open.
+            - Stops exporting all external signals and events.
 
             
 
@@ -2287,7 +2278,13 @@ reset_device
 
     .. py:method:: reset_device()
 
-            Returns a digital pattern instrument to a known state. method
+            Returns a digital pattern instrument to a known state. This method performs the following actions:
+
+            - Aborts pattern execution.
+            - Clears pin maps, time sets, source and capture waveforms, and patterns.
+            - Resets all properties to default values, including the :py:attr:`nidigital.Session.selected_function` property that is set to :py:data:`~nidigital.SelectedFunction.DISCONNECT`, causing the I/O switches to open.
+            - Stops export of all external signals and events.
+            - Clears over-temperature and over-power conditions.
 
             
 
@@ -2591,7 +2588,7 @@ write_source_waveform_broadcast
             :param waveform_name:
 
 
-                The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+                The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
 
                 
 
@@ -2623,7 +2620,7 @@ write_source_waveform_data_from_file_tdms
             :param waveform_name:
 
 
-                The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+                The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
 
                 
 

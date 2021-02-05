@@ -330,7 +330,7 @@ functions = {
     },
     'Commit': {
         'documentation': {
-            'description': 'Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the niDigital_Commit function, then the niDigital_Initiate function or the niDigital_FancyBurstPattern function will implicitly call this function for you. Calling this function moves the session from the Uncommitted state to the Committed state.\n'
+            'description': 'Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the niDigital_Commit function, then the initiate function or the niDigital_FancyBurstPattern function will implicitly call this function for you. Calling this function moves the session from the Uncommitted state to the Committed state.\n'
         },
         'parameters': [
             {
@@ -394,7 +394,7 @@ functions = {
     },
     'ConfigurePatternBurstSites': {
         'documentation': {
-            'description': 'Configures which sites burst the pattern on the next call to the niDigital_Initiate function. The pattern burst sites can also be modified through the repeated capabilities for the niDigital_FancyBurstPattern function. If a site has been disabled through the niDigital_DisableSites function, the site does not burst a pattern even if included in the pattern burst sites.\n'
+            'description': 'Configures which sites burst the pattern on the next call to the initiate function. The pattern burst sites can also be modified through the repeated capabilities for the niDigital_FancyBurstPattern function. If a site has been disabled through the niDigital_DisableSites function, the site does not burst a pattern even if included in the pattern burst sites.\n'
         },
         'parameters': [
             {
@@ -779,7 +779,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Name of the edge.\n\n-   NIDIGITAL_VAL_DRIVE_ON (2800)\n-   NIDIGITAL_VAL_DRIVE_DATA (2801)\n-   NIDIGITAL_VAL_DRIVE_RETURN (2802)\n-   NIDIGITAL_VAL_DRIVE_OFF (2803)\n-   NIDIGITAL_VAL_COMPARE_STROBE (2804)\n-   NIDIGITAL_VAL_DRIVE_DATA_2 (2805)\n-   NIDIGITAL_VAL_DRIVE_RETURN_2 (2806)\n-   NIDIGITAL_VAL_COMPARE_STROBE_2 (2807)\n'
+                    'description': 'Name of the edge.\n\n-   NIDIGITAL_VAL_DRIVE_ON (2800)\n-   NIDIGITAL_VAL_DRIVE_DATA (2801)\n-   NIDIGITAL_VAL_DRIVE_RETURN (2802)\n-   NIDIGITAL_VAL_DRIVE_OFF (2803)\n-   NIDIGITAL_VAL_COMPARE_STROBE (2804)\n-   NIDIGITAL_VAL_DRIVE_DATA2 (2805)\n-   NIDIGITAL_VAL_DRIVE_RETURN2 (2806)\n-   NIDIGITAL_VAL_COMPARE_STROBE2 (2807)\n'
                 },
                 'enum': 'TimeSetEdgeType',
                 'name': 'edge',
@@ -954,7 +954,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Waveform name you want to use. You must specify **waveformName** if the file contains multiple waveforms. Use the **waveformName** with the capture_start opcode in your pattern.\n'
+                    'description': 'Waveform name you want to use. You must specify waveform_name if the file contains multiple waveforms. Use the waveform_name with the capture_start opcode in your pattern.\n'
                 },
                 'name': 'waveformName',
                 'type': 'ViConstString'
@@ -996,7 +996,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Waveform name you want to use. Use the **waveformName** with the capture_start opcode in your pattern.\n'
+                    'description': 'Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.\n'
                 },
                 'name': 'waveformName',
                 'type': 'ViConstString'
@@ -1030,7 +1030,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Waveform name you want to use. Use the **waveformName** with the capture_start opcode in your pattern.\n'
+                    'description': 'Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.\n'
                 },
                 'name': 'waveformName',
                 'type': 'ViConstString'
@@ -1071,7 +1071,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'The waveform name you want to use from the file. You must specify **waveformName** if the file contains multiple waveforms. Use the **waveformName** with the source_start opcode in your pattern.\n'
+                    'description': 'The waveform name you want to use from the file. You must specify waveform_name if the file contains multiple waveforms. Use the waveform_name with the source_start opcode in your pattern.\n'
                 },
                 'name': 'waveformName',
                 'type': 'ViConstString'
@@ -1122,7 +1122,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.\n'
+                    'description': 'The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.\n'
                 },
                 'name': 'waveformName',
                 'type': 'ViConstString'
@@ -1165,7 +1165,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.\n'
+                    'description': 'The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.\n'
                 },
                 'name': 'waveformName',
                 'type': 'ViConstString'
@@ -1241,7 +1241,7 @@ functions = {
     },
     'DisableSites': {
         'documentation': {
-            'description': 'Disables specified sites. Disabled sites are not included in pattern bursts initiated by the niDigital_Initiate function or the niDigital_FancyBurstPattern function, even if the site is specified in the list of pattern burst sites in niDigital_ConfigurePatternBurstSites function or in the repeated capabilities for the niDigital_FancyBurstPattern function. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital function, digital pattern instrument channels mapped to disabled sites are not affected by the function. The functions that return per-pin data, such as the niDigital_PPMU_Measure function, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this function with the Semiconductor Module.\n'
+            'description': 'Disables specified sites. Disabled sites are not included in pattern bursts initiated by the initiate function or the niDigital_FancyBurstPattern function, even if the site is specified in the list of pattern burst sites in niDigital_ConfigurePatternBurstSites function or in the repeated capabilities for the niDigital_FancyBurstPattern function. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital function, digital pattern instrument channels mapped to disabled sites are not affected by the function. The functions that return per-pin data, such as the niDigital_PPMU_Measure function, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this function with the Semiconductor Module.\n'
         },
         'parameters': [
             {
@@ -1340,7 +1340,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Waveform name you create with the create capture waveform function. Use the **waveformName** parameter with capture_start opcode in your pattern.\n'
+                    'description': 'Waveform name you create with the create capture waveform function. Use the waveform_nam parameter with capture_start opcode in your pattern.\n'
                 },
                 'name': 'waveformName',
                 'type': 'ViConstString'
@@ -2153,38 +2153,26 @@ the trigger conditions are met.
     },
     'GetPatternName': {
         'documentation': {
-            'description': 'You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **bufferSize**. If the current value of the attribute, including the terminating NULL byte, is larger than the size you indicate in the **bufferSize**, the function copies (bufferSize - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the **bufferSize** you must pass to get the entire value. For example, if the value is "123456" and the **bufferSize** is 4, the function places "123" into the buffer and returns 7. If you want to call this function just to get the required buffer size, you can pass 0 for the **bufferSize** and VI_NULL for the value.\n'
+            'description': 'TBD'
         },
         'parameters': [
             {
                 'direction': 'in',
-                'documentation': {
-                    'description': 'The specified instrument session the niDigital_init or niDigital_InitWithOptions function returns.\n'
-                },
                 'name': 'vi',
                 'type': 'ViSession'
             },
             {
                 'direction': 'in',
-                'documentation': {
-                    'description': 'The specified pattern index.\n'
-                },
                 'name': 'patternIndex',
                 'type': 'ViInt32'
             },
             {
                 'direction': 'in',
-                'documentation': {
-                    'description': 'The number of elements in the ViChar array you specify for name.\n'
-                },
                 'name': 'nameBufferSize',
                 'type': 'ViInt32'
             },
             {
                 'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the pin name at the specified **pinIndex**.\n'
-                },
                 'name': 'name',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -2198,7 +2186,7 @@ the trigger conditions are met.
     },
     'GetPatternPinList': {
         'documentation': {
-            'description': 'Returns the pattern pin list. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the buffer size. If the current value of the attribute, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the function copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the function places "123" into the buffer and returns 7. If you want to call this function just to get the required buffer size, you can pass 0 for the buffer size and VI_NULL for the value.\n'
+            'description': 'Returns the pattern pin list.'
         },
         'parameters': [
             {
@@ -2567,7 +2555,7 @@ the trigger conditions are met.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Name of the edge.\n\n-   NIDIGITAL_VAL_DRIVE_ON (2800)\n-   NIDIGITAL_VAL_DRIVE_DATA (2801)\n-   NIDIGITAL_VAL_DRIVE_RETURN (2802)\n-   NIDIGITAL_VAL_DRIVE_OFF (2803)\n-   NIDIGITAL_VAL_COMPARE_STROBE (2804)\n-   NIDIGITAL_VAL_DRIVE_DATA_2 (2805)\n-   NIDIGITAL_VAL_DRIVE_RETURN_2 (2806)\n-   NIDIGITAL_VAL_COMPARE_STROBE_2 (2807)\n'
+                    'description': 'Name of the edge.\n\n-   NIDIGITAL_VAL_DRIVE_ON (2800)\n-   NIDIGITAL_VAL_DRIVE_DATA (2801)\n-   NIDIGITAL_VAL_DRIVE_RETURN (2802)\n-   NIDIGITAL_VAL_DRIVE_OFF (2803)\n-   NIDIGITAL_VAL_COMPARE_STROBE (2804)\n-   NIDIGITAL_VAL_DRIVE_DATA2 (2805)\n-   NIDIGITAL_VAL_DRIVE_RETURN2 (2806)\n-   NIDIGITAL_VAL_COMPARE_STROBE2 (2807)\n'
                 },
                 'enum': 'TimeSetEdgeType',
                 'name': 'edge',
@@ -2630,38 +2618,26 @@ the trigger conditions are met.
     },
     'GetTimeSetName': {
         'documentation': {
-            'description': 'You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **nameBufferSize**. If the current value of the attribute, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the function copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the function places "123" into the buffer and returns 7. If you want to call this function just to get the required buffer size, you can pass 0 for **nameBufferSize** and VI_NULL for the name.\n'
+            'description': 'TBD'
         },
         'parameters': [
             {
                 'direction': 'in',
-                'documentation': {
-                    'description': 'The specified instrument session the niDigital_init or niDigital_InitWithOptions function returns.\n'
-                },
                 'name': 'vi',
                 'type': 'ViSession'
             },
             {
                 'direction': 'in',
-                'documentation': {
-                    'description': 'The specified time set index.\n'
-                },
                 'name': 'timeSetIndex',
                 'type': 'ViInt32'
             },
             {
                 'direction': 'in',
-                'documentation': {
-                    'description': 'The number of elements in the ViChar array you specify for name.\n'
-                },
                 'name': 'nameBufferSize',
                 'type': 'ViInt32'
             },
             {
                 'direction': 'out',
-                'documentation': {
-                    'description': 'The returned time set name at the specified **timeSetIndex**.\n'
-                },
                 'name': 'name',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -2873,16 +2849,16 @@ the trigger conditions are met.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession',
                 'documentation': {
                     'description': 'The specified instrument session the niDigital_init or niDigital_InitWithOptions function returns.\n'
                 },
+                'name': 'vi',
+                'type': 'ViSession'
             },
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using the niDigital_ConfigureStartLabel function or the **startLabel** parameter of the niDigital_FancyBurstPattern function.\n'
+                    'description': 'Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using NIDIGITAL_ATTR_START_LABEL or the start_label parameter of the niDigital_FancyBurstPattern function.\n'
                 },
                 'name': 'filePath',
                 'type': 'ViConstString'
@@ -2897,11 +2873,11 @@ the trigger conditions are met.
         'parameters': [
             {
                 'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
                 'documentation': {
                     'description': 'The specified instrument session the niDigital_init or niDigital_InitWithOptions function returns.\n'
                 },
-                'name': 'vi',
-                'type': 'ViSession'
             },
             {
                 'direction': 'in',
@@ -3102,7 +3078,7 @@ the trigger conditions are met.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'The pattern sequencer flag you want to read.\n\n-   NIDIGITAL_VAL_SEQUENCER_FLAG0 ("seqflag0"): Writes pattern sequencer flag 0.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG1 ("seqflag1"): Writes pattern sequencer flag 1.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG2 ("seqflag2"): Writes pattern sequencer flag 2.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG3 ("seqflag3"): Writes pattern sequencer flag 3.\n'
+                    'description': 'The pattern sequencer flag you want to read.\n\n-   NIDIGITAL_VAL_SEQUENCER_FLAG0 ("seqflag0"): Reads pattern sequencer flag 0.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG1 ("seqflag1"): Reads pattern sequencer flag 1.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG2 ("seqflag2"): Reads pattern sequencer flag 2.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG3 ("seqflag3"): Reads pattern sequencer flag 3.\n'
                 },
                 'enum': 'SequencerFlag',
                 'name': 'flag',
@@ -3241,7 +3217,7 @@ the trigger conditions are met.
     },
     'ResetDevice': {
         'documentation': {
-            'description': 'Returns a digital pattern instrument to a known state. function\n'
+            'description': 'Returns a digital pattern instrument to a known state. This function performs the following actions:\n\n- Aborts pattern execution.\n- Clears pin maps, time sets, source and capture waveforms, and patterns.\n- Resets all properties to default values, including the NIDIGITAL_ATTR_SELECTED_FUNCTION property that is set to NIDIGITAL_VAL_DISCONNECT, causing the I/O switches to open.\n- Stops export of all external signals and events.\n- Clears over-temperature and over-power conditions.\n'
         },
         'parameters': [
             {
@@ -3783,7 +3759,7 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.\n'
+                    'description': 'The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.\n'
                 },
                 'name': 'waveformName',
                 'type': 'ViConstString'
@@ -3828,7 +3804,7 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.\n'
+                    'description': 'The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.\n'
                 },
                 'name': 'waveformName',
                 'type': 'ViConstString'
@@ -3871,7 +3847,7 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.\n'
+                    'description': 'The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.\n'
                 },
                 'name': 'waveformName',
                 'type': 'ViConstString'
@@ -4001,7 +3977,7 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
     },
     'reset': {
         'documentation': {
-            'description': 'Resets a digital pattern instrument to a known state. function\n'
+            'description': 'Returns a digital pattern instrument to a known state. This function performs the following actions:\n\n- Aborts pattern execution.\n- Clears pin maps, time sets, source and capture waveforms, and patterns.\n- Resets all properties to default values, including the NIDIGITAL_ATTR_SELECTED_FUNCTION property that is set to NIDIGITAL_VAL_DISCONNECT, causing the I/O switches to open.\n- Stops exporting all external signals and events.\n'
         },
         'parameters': [
             {

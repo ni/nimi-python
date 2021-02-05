@@ -1190,7 +1190,7 @@ class _SessionBase(object):
     def configure_pattern_burst_sites(self):
         r'''configure_pattern_burst_sites
 
-        Configures which sites burst the pattern on the next call to the _initiate method. The pattern burst sites can also be modified through the repeated capabilities for the burst_pattern method. If a site has been disabled through the disable_sites method, the site does not burst a pattern even if included in the pattern burst sites.
+        Configures which sites burst the pattern on the next call to the initiate method. The pattern burst sites can also be modified through the repeated capabilities for the burst_pattern method. If a site has been disabled through the disable_sites method, the site does not burst a pattern even if included in the pattern burst sites.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -1410,12 +1410,9 @@ class _SessionBase(object):
                 -   TimeSetEdgeType.DRIVE_RETURN (2802)
                 -   TimeSetEdgeType.DRIVE_OFF (2803)
                 -   TimeSetEdgeType.COMPARE_STROBE (2804)
-                -   NIDIGITAL_VAL_DRIVE_DATA_2 (2805)
-                -   NIDIGITAL_VAL_DRIVE_RETURN_2 (2806)
-                -   NIDIGITAL_VAL_COMPARE_STROBE_2 (2807)
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                -   TimeSetEdgeType.DRIVE_DATA2 (2805)
+                -   TimeSetEdgeType.DRIVE_RETURN2 (2806)
+                -   TimeSetEdgeType.COMPARE_STROBE2 (2807)
 
             time (hightime.timedelta, datetime.timedelta, or float in seconds): The time from the beginning of the vector period in which to place the edge.
 
@@ -1505,7 +1502,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            waveform_name (str): Waveform name you want to use. Use the **waveformName** with the capture_start opcode in your pattern.
+            waveform_name (str): Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1528,7 +1525,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            waveform_name (str): Waveform name you want to use. Use the **waveformName** with the capture_start opcode in your pattern.
+            waveform_name (str): Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.
 
             sample_width (int): Width in bits of each serial sample. Valid values are between 1 and 32.
 
@@ -1562,7 +1559,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            waveform_name (str): The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+            waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
 
             data_mapping (enums.SourceDataMapping): Parameter that specifies how to map data on multiple sites.
 
@@ -1593,7 +1590,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            waveform_name (str): The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+            waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
 
             data_mapping (enums.SourceDataMapping): Parameter that specifies how to map data on multiple sites.
 
@@ -1626,7 +1623,7 @@ class _SessionBase(object):
     def disable_sites(self):
         r'''disable_sites
 
-        Disables specified sites. Disabled sites are not included in pattern bursts initiated by the _initiate method or the burst_pattern method, even if the site is specified in the list of pattern burst sites in configure_pattern_burst_sites method or in the repeated capabilities for the burst_pattern method. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the ppmu_measure method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
+        Disables specified sites. Disabled sites are not included in pattern bursts initiated by the initiate method or the burst_pattern method, even if the site is specified in the list of pattern burst sites in configure_pattern_burst_sites method or in the repeated capabilities for the burst_pattern method. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the ppmu_measure method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -2423,14 +2420,14 @@ class _SessionBase(object):
     def get_pattern_name(self, pattern_index):
         r'''get_pattern_name
 
-        You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **bufferSize**. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the **bufferSize**, the method copies (bufferSize - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the **bufferSize** you must pass to get the entire value. For example, if the value is "123456" and the **bufferSize** is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for the **bufferSize** and VI_NULL for the value.
+        TBD
 
         Args:
-            pattern_index (int): The specified pattern index.
+            pattern_index (int):
 
 
         Returns:
-            name (str): Returns the pin name at the specified **pinIndex**.
+            name (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2636,12 +2633,9 @@ class _SessionBase(object):
                 -   TimeSetEdgeType.DRIVE_RETURN (2802)
                 -   TimeSetEdgeType.DRIVE_OFF (2803)
                 -   TimeSetEdgeType.COMPARE_STROBE (2804)
-                -   NIDIGITAL_VAL_DRIVE_DATA_2 (2805)
-                -   NIDIGITAL_VAL_DRIVE_RETURN_2 (2806)
-                -   NIDIGITAL_VAL_COMPARE_STROBE_2 (2807)
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                -   TimeSetEdgeType.DRIVE_DATA2 (2805)
+                -   TimeSetEdgeType.DRIVE_RETURN2 (2806)
+                -   TimeSetEdgeType.COMPARE_STROBE2 (2807)
 
 
         Returns:
@@ -2691,14 +2685,14 @@ class _SessionBase(object):
     def get_time_set_name(self, time_set_index):
         r'''get_time_set_name
 
-        You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **nameBufferSize**. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the method copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for **nameBufferSize** and VI_NULL for the name.
+        TBD
 
         Args:
-            time_set_index (int): The specified time set index.
+            time_set_index (int):
 
 
         Returns:
-            name (str): The returned time set name at the specified **timeSetIndex**.
+            name (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3066,7 +3060,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            waveform_name (str): The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+            waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
 
             num_waveforms (int): Number of waveforms.
 
@@ -3274,7 +3268,7 @@ class Session(_SessionBase):
     def commit(self):
         r'''commit
 
-        Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the commit method, then the _initiate method or the burst_pattern method will implicitly call this method for you. Calling this method moves the session from the Uncommitted state to the Committed state.
+        Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the commit method, then the initiate method or the burst_pattern method will implicitly call this method for you. Calling this method moves the session from the Uncommitted state to the Committed state.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDigital_Commit(vi_ctype)
@@ -3307,7 +3301,7 @@ class Session(_SessionBase):
         Creates a capture waveform with the configuration information from a Digicapture file generated by the Digital Pattern Editor.
 
         Args:
-            waveform_name (str): Waveform name you want to use. You must specify **waveformName** if the file contains multiple waveforms. Use the **waveformName** with the capture_start opcode in your pattern.
+            waveform_name (str): Waveform name you want to use. You must specify waveform_name if the file contains multiple waveforms. Use the waveform_name with the capture_start opcode in your pattern.
 
             waveform_file_path (str): Absolute file path to the capture waveform file (.digicapture) you want to load.
 
@@ -3326,7 +3320,7 @@ class Session(_SessionBase):
         Creates a source waveform with configuration information from a TDMS file generated by the Digital Pattern Editor. It also optionally writes waveform data from the file.
 
         Args:
-            waveform_name (str): The waveform name you want to use from the file. You must specify **waveformName** if the file contains multiple waveforms. Use the **waveformName** with the source_start opcode in your pattern.
+            waveform_name (str): The waveform name you want to use from the file. You must specify waveform_name if the file contains multiple waveforms. Use the waveform_name with the source_start opcode in your pattern.
 
             waveform_file_path (str): Absolute file path to the load source waveform file (.tdms).
 
@@ -3490,7 +3484,7 @@ class Session(_SessionBase):
     def get_pattern_pin_names(self, start_label):
         r'''get_pattern_pin_names
 
-        Returns the pattern pin list. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the buffer size. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the method copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for the buffer size and VI_NULL for the value.
+        Returns the pattern pin list.
 
         Args:
             start_label (str): Pattern name or exported pattern label from which to get the pin names that the pattern references.
@@ -3619,10 +3613,7 @@ class Session(_SessionBase):
         Loads the specified pattern file.
 
         Args:
-            file_path (str): Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using the ConfigureStartLabel method or the **startLabel** parameter of the burst_pattern method.
-
-                Note:
-                One or more of the referenced methods are not in the Python API for this driver.
+            file_path (str): Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using start_label or the start_label parameter of the burst_pattern method.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3688,10 +3679,10 @@ class Session(_SessionBase):
         Args:
             flag (enums.SequencerFlag): The pattern sequencer flag you want to read.
 
-                -   SequencerFlag.FLAG0 ("seqflag0"): Writes pattern sequencer flag 0.
-                -   SequencerFlag.FLAG1 ("seqflag1"): Writes pattern sequencer flag 1.
-                -   SequencerFlag.FLAG2 ("seqflag2"): Writes pattern sequencer flag 2.
-                -   SequencerFlag.FLAG3 ("seqflag3"): Writes pattern sequencer flag 3.
+                -   SequencerFlag.FLAG0 ("seqflag0"): Reads pattern sequencer flag 0.
+                -   SequencerFlag.FLAG1 ("seqflag1"): Reads pattern sequencer flag 1.
+                -   SequencerFlag.FLAG2 ("seqflag2"): Reads pattern sequencer flag 2.
+                -   SequencerFlag.FLAG3 ("seqflag3"): Reads pattern sequencer flag 3.
 
 
         Returns:
@@ -3751,7 +3742,13 @@ class Session(_SessionBase):
     def reset_device(self):
         r'''reset_device
 
-        Returns a digital pattern instrument to a known state. method
+        Returns a digital pattern instrument to a known state. This method performs the following actions:
+
+        - Aborts pattern execution.
+        - Clears pin maps, time sets, source and capture waveforms, and patterns.
+        - Resets all properties to default values, including the selected_function property that is set to SelectedFunction.DISCONNECT, causing the I/O switches to open.
+        - Stops export of all external signals and events.
+        - Clears over-temperature and over-power conditions.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDigital_ResetDevice(vi_ctype)
@@ -3926,7 +3923,7 @@ class Session(_SessionBase):
         Writes the same waveform data to all sites. Use this write method if you set the data_mapping parameter of the create source waveform method to SourceDataMapping.BROADCAST.
 
         Args:
-            waveform_name (str): The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+            waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
 
             waveform_data (list of int): 1D array of samples to use as source data to apply to all sites.
 
@@ -3946,7 +3943,7 @@ class Session(_SessionBase):
         Writes a source waveform based on the waveform data and configuration information the file contains.
 
         Args:
-            waveform_name (str): The name to assign to the waveform. Use the **waveformName** with source_start opcode in your pattern.
+            waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
 
             waveform_file_path (str): Absolute file path to the load source waveform file (.tdms).
 
@@ -3972,7 +3969,12 @@ class Session(_SessionBase):
     def reset(self):
         r'''reset
 
-        Resets a digital pattern instrument to a known state. method
+        Returns a digital pattern instrument to a known state. This method performs the following actions:
+
+        - Aborts pattern execution.
+        - Clears pin maps, time sets, source and capture waveforms, and patterns.
+        - Resets all properties to default values, including the selected_function property that is set to SelectedFunction.DISCONNECT, causing the I/O switches to open.
+        - Stops exporting all external signals and events.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDigital_reset(vi_ctype)
