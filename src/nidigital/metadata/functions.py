@@ -1294,7 +1294,7 @@ functions = {
     'FancySelfTest': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'TBD'
+            'description': 'Returns self test results from a digital pattern instrument. This test requires several minutes to execute.\n'
         },
         'method_templates': [
             {
@@ -1306,6 +1306,9 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'The specified instrument session the niDigital_init or niDigital_InitWithOptions function returns.\n'
+                },
                 'name': 'vi',
                 'type': 'ViSession'
             }

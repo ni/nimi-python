@@ -2310,7 +2310,7 @@ self_test
 
     .. py:method:: self_test()
 
-            TBD
+            Returns self test results from a digital pattern instrument. This test requires several minutes to execute.
 
             
 

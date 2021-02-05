@@ -3397,7 +3397,7 @@ class Session(_SessionBase):
     def self_test(self):
         '''self_test
 
-        TBD
+        Returns self test results from a digital pattern instrument. This test requires several minutes to execute.
         '''
         code, msg = self._self_test()
         if code:
