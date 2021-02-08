@@ -2654,7 +2654,7 @@ write_source_waveform_site_unique
 
     .. py:method:: write_source_waveform_site_unique(waveform_name, waveform_data)
 
-            TBD
+            Writes one waveform per site. Use this write method if you set the parameter of the create source waveform method to Site Unique.
 
             
 
@@ -2662,6 +2662,8 @@ write_source_waveform_site_unique
 
             :param waveform_name:
 
+
+                The name to assign to the waveform. Use the waveform_name with source_start opcode in your pattern.
 
                 
 

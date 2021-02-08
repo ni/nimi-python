@@ -103,7 +103,7 @@ functions_additional_write_source_waveform_site_unique = {
             }
         ],
         'documentation': {
-            'description': 'TBD'
+            'description': 'Writes one waveform per site. Use this write function if you set the parameter of the create source waveform function to Site Unique.\n'
         },
         'parameters': [
             {
@@ -113,6 +113,9 @@ functions_additional_write_source_waveform_site_unique = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'The name to assign to the waveform. Use the waveform_name with source_start opcode in your pattern.\n'
+                },
                 'name': 'waveformName',
                 'type': 'ViConstString'
             },

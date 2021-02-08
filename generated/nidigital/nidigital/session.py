@@ -3438,10 +3438,10 @@ class Session(_SessionBase):
     def write_source_waveform_site_unique(self, waveform_name, waveform_data):
         '''write_source_waveform_site_unique
 
-        TBD
+        Writes one waveform per site. Use this write method if you set the parameter of the create source waveform method to Site Unique.
 
         Args:
-            waveform_name (str):
+            waveform_name (str): The name to assign to the waveform. Use the waveform_name with source_start opcode in your pattern.
 
             waveform_data ({ int: basic sequence of unsigned int, int: basic sequence of unsigned int, ... }): Dictionary where each key is a site number and value is a collection of samples to use as source data
 
