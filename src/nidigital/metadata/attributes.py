@@ -229,15 +229,15 @@ attributes = {
         'documentation': {
             'caution': 'In the Disconnect state, some I/O protection and sensing circuitry remains exposed. Do not subject the instrument to voltage beyond its operating range.\n',
             'description': 'Specifies whether digital pattern instrument channels are controlled by the pattern sequencer or PPMU, disconnected, or off.\n',
-            'note': 'You can make PPMU voltage measurements using the niDigital_PPMU_Measure function from within any selected function.\n',
+            'note': 'You can make PPMU voltage measurements using the niDigital_PPMU_Measure function from within any NIDIGITAL_ATTR_SELECTED_FUNCTION.\n',
             'table_body': [
                 [
                     'NIDIGITAL_VAL_DIGITAL (1100)',
-                    'The pin is connected to the driver, comparator, and active load functions. The PPMU is not sourcing, but can make voltage measurements. The state of the digital pin driver when you change the selected function to Digital is determined by the most recent call to the niDigital_WriteStatic function or the last vector of the most recently executed pattern burst, whichever happened last. Use the niDigital_WriteStatic function to control the state of the digital pin driver through software. Use the niDigital_BurstPattern function to control the state of the digital pin driver through a pattern. Set the **selectDigitalFunction** parameter of the niDigital_BurstPattern function to VI_TRUE to automatically switch the selected function of the pins in the pattern burst to NIDIGITAL_VAL_DIGITAL.'
+                    'The pin is connected to the driver, comparator, and active load functions. The PPMU is not sourcing, but can make voltage measurements. The state of the digital pin driver when you change the NIDIGITAL_ATTR_SELECTED_FUNCTION to Digital is determined by the most recent call to the niDigital_WriteStatic function or the last vector of the most recently executed pattern burst, whichever happened last. Use the niDigital_WriteStatic function to control the state of the digital pin driver through software. Use the niDigital_FancyBurstPattern function to control the state of the digital pin driver through a pattern. Set the **selectDigitalFunction** parameter of the niDigital_FancyBurstPattern function to VI_TRUE to automatically switch the NIDIGITAL_ATTR_SELECTED_FUNCTION of the pins in the pattern burst to NIDIGITAL_VAL_DIGITAL.'
                 ],
                 [
                     'NIDIGITAL_VAL_PPMU (1101)',
-                    'The pin is connected to the PPMU. The driver, comparator, and active load are off while this function is selected. Call the niDigital_PPMU_Source function to source a voltage or current. The niDigital_PPMU_Source function automatically switches the selected function to the PPMU state and starts sourcing from the PPMU. Changing the selected function to NIDIGITAL_VAL_DISCONNECT, NIDIGITAL_VAL_OFF, or NIDIGITAL_VAL_DIGITAL causes the PPMU to stop sourcing. If you change the selected function to PPMU using the niDigital_SelectFunction function, the PPMU is initially not sourcing.'
+                    'The pin is connected to the PPMU. The driver, comparator, and active load are off while this function is selected. Call the niDigital_PPMU_Source function to source a voltage or current. The niDigital_PPMU_Source function automatically switches the NIDIGITAL_ATTR_SELECTED_FUNCTION to the PPMU state and starts sourcing from the PPMU. Changing the NIDIGITAL_ATTR_SELECTED_FUNCTION to NIDIGITAL_VAL_DISCONNECT, NIDIGITAL_VAL_OFF, or NIDIGITAL_VAL_DIGITAL causes the PPMU to stop sourcing. If you set the NIDIGITAL_ATTR_SELECTED_FUNCTION attribute to PPMU, the PPMU is initially not sourcing.'
                 ],
                 [
                     'NIDIGITAL_VAL_OFF (1102)',
@@ -463,11 +463,11 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'documentation': {
-            'description': 'Specifies the Start trigger type. The digital pattern instrument waits for this trigger after you call the niDigital_init function or the niDigital_BurstPattern function, and does not burst a pattern until this trigger is received.\n',
+            'description': 'Specifies the Start trigger type. The digital pattern instrument waits for this trigger after you call the niDigital_init function or the niDigital_FancyBurstPattern function, and does not burst a pattern until this trigger is received.\n',
             'table_body': [
                 [
                     'NIDIGITAL_VAL_NONE (1700)',
-                    'Disables the Start trigger. Pattern bursting starts immediately after you call the niDigital_init function or the niDigital_BurstPattern function.'
+                    'Disables the Start trigger. Pattern bursting starts immediately after you call the niDigital_init function or the niDigital_FancyBurstPattern function.'
                 ],
                 [
                     'NIDIGITAL_VAL_DIGITAL_EDGE (1701)',
