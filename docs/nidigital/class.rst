@@ -688,7 +688,7 @@ configure_time_set_drive_format
 
     .. py:method:: configure_time_set_drive_format(time_set_name, drive_format)
 
-            Configures the drive format for the pins not specified in the **pinList**. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
+            Configures the drive format for the pins specified in the **pinList**. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 

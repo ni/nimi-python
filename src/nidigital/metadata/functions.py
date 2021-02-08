@@ -704,7 +704,7 @@ functions = {
     },
     'ConfigureTimeSetDriveFormat': {
         'documentation': {
-            'description': 'Configures the drive format for the pins not specified in the **pinList**. Use this function to modify time set values after applying a timing sheet with the niDigital_ApplyLevelsAndTiming function, or to create time sets programmatically without the use of timing sheets. This function does not modify the timing sheet file or the timing sheet contents that will be used in future calls to niDigital_ApplyLevelsAndTiming; it only affects the values of the current timing context.\n'
+            'description': 'Configures the drive format for the pins specified in the **pinList**. Use this function to modify time set values after applying a timing sheet with the niDigital_ApplyLevelsAndTiming function, or to create time sets programmatically without the use of timing sheets. This function does not modify the timing sheet file or the timing sheet contents that will be used in future calls to niDigital_ApplyLevelsAndTiming; it only affects the values of the current timing context.\n'
         },
         'parameters': [
             {
