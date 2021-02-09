@@ -39,10 +39,11 @@ def convert_drive_format(drive_format):
     return converter.get(drive_format, None)
 
 
-def example(resource_name, options,
-            channels=None,
-            voltage_config=None,
-            time_set_config=None):
+def example(resource_name,
+            options,
+            channels,
+            voltage_config,
+            time_set_config):
 
     with nidigital.Session(resource_name=resource_name, options=options) as session:
 
