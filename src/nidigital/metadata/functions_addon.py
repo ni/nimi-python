@@ -39,24 +39,36 @@ niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTiming.
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Pattern name or exported pattern label from which to start bursting the pattern.'
+                },
                 'name': 'startLabel',
                 'type': 'ViConstString'
             },
             {
                 'default_value': True,
                 'direction': 'in',
+                'documentation': {
+                    'description': 'A Boolean that specifies whether to select the digital method for the pins in the pattern prior to bursting.'
+                },
                 'name': 'selectDigitalFunction',
                 'type': 'ViBoolean'
             },
             {
                 'default_value': True,
                 'direction': 'in',
+                'documentation': {
+                    'description': 'A Boolean that indicates whether to wait until the bursting is complete.'
+                },
                 'name': 'waitUntilDone',
                 'type': 'ViBoolean'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Maximum time (in seconds) allowed for this method to complete. If this method does not complete within this time interval, this method returns an error.'
+                },
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -91,7 +103,7 @@ functions_additional_write_source_waveform_site_unique = {
             }
         ],
         'documentation': {
-            'description': 'TBD'
+            'description': 'Writes one waveform per site. Use this write function if you set the parameter of the create source waveform function to Site Unique.\n'
         },
         'parameters': [
             {
@@ -101,6 +113,9 @@ functions_additional_write_source_waveform_site_unique = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'The name to assign to the waveform. Use the waveform_name with source_start opcode in your pattern.\n'
+                },
                 'name': 'waveformName',
                 'type': 'ViConstString'
             },
@@ -129,7 +144,7 @@ functions_additional_get_pin_results_pin_information = {
             }
         ],
         'documentation': {
-            'description': '\nReturns a list of named tuples (PinInfo) that <FILL IN THE BLANK HERE>\n\nFields in PinInfo:\n\n- **pin_name** (str)\n- **site_number** (int)\n- **channel_name** (str)\n\n',
+            'description': 'Returns the pin names, site numbers, and channel names that correspond to per-pin data read from the digital pattern instrument. The function returns pin information in the same order as values read using the niDigital_ReadStatic function, niDigital_PPMU_Measure function, and niDigital_GetFailCount function. Use this function to match values the previously listed functions return with pins, sites, and instrument channels.',
         },
         'parameters': [
             {
@@ -232,17 +247,26 @@ functions_additional_fetch_capture_waveform = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Waveform name you create with the create capture waveform function. Use the waveform_name parameter with capture_start opcode in your pattern.',
+                },
                 'name': 'waveformName',
                 'type': 'ViConstString'
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Number of samples to fetch.',
+                },
                 'name': 'samplesToRead',
                 'type': 'ViInt32'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Maximum time (in seconds) allowed for this function to complete. If this function does not complete within this time interval, this function returns an error.',
+                },
                 'name': 'timeout',
                 'type': 'ViReal64',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',

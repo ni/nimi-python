@@ -40,6 +40,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
+        * API reference documentation
     * #### Changed
     * #### Removed
 * ### `nidmm` (NI-DMM)
