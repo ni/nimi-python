@@ -12,6 +12,15 @@ nidigital_burst_with_start_trigger.py
    :encoding: utf8
    :caption: `(nidigital_burst_with_start_trigger.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/burst_with_start_trigger/nidigital_burst_with_start_trigger.py>`_
 
+nidigital_configure_time_set_and_voltage_levels.py
+--------------------------------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/configure_time_set_and_voltage_levels/nidigital_configure_time_set_and_voltage_levels.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_configure_time_set_and_voltage_levels.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/configure_time_set_and_voltage_levels/nidigital_configure_time_set_and_voltage_levels.py>`_
+
 nidigital_do_nothing.py
 -----------------------
 
