@@ -2169,6 +2169,7 @@ the trigger conditions are met.
         'returns': 'ViStatus'
     },
     'GetPatternName': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -2634,6 +2635,7 @@ the trigger conditions are met.
         'returns': 'ViStatus'
     },
     'GetTimeSetName': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },

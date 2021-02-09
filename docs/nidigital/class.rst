@@ -1548,35 +1548,6 @@ get_history_ram_sample_count
 
 
 
-get_pattern_name
-----------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: get_pattern_name(pattern_index)
-
-            TBD
-
-            
-
-
-
-            :param pattern_index:
-
-
-                
-
-
-            :type pattern_index: int
-
-            :rtype: str
-            :return:
-
-
-                    
-
-
-
 get_pattern_pin_names
 ---------------------
 
@@ -1797,35 +1768,6 @@ get_time_set_edge_multiplier
 
 
                     Returned edge multiplier of the time set for the specified pin.
-
-                    
-
-
-
-get_time_set_name
------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: get_time_set_name(time_set_index)
-
-            TBD
-
-            
-
-
-
-            :param time_set_index:
-
-
-                
-
-
-            :type time_set_index: int
-
-            :rtype: str
-            :return:
-
 
                     
 
