@@ -1672,7 +1672,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            start_label (str): Pattern nane or exported pattern label from which to start bursting the pattern.
+            start_label (str): Pattern name or exported pattern label from which to start bursting the pattern.
 
             select_digital_function (bool): A Boolean that specifies whether to select the digital method for the pins in the pattern prior to bursting.
 

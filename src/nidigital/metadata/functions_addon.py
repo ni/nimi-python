@@ -40,7 +40,7 @@ niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTiming.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Pattern nane or exported pattern label from which to start bursting the pattern.'
+                    'description': 'Pattern name or exported pattern label from which to start bursting the pattern.'
                 },
                 'name': 'startLabel',
                 'type': 'ViConstString'

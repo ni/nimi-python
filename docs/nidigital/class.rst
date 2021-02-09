@@ -232,7 +232,7 @@ burst_pattern
             :param start_label:
 
 
-                Pattern nane or exported pattern label from which to start bursting the pattern.
+                Pattern name or exported pattern label from which to start bursting the pattern.
 
                 
 
