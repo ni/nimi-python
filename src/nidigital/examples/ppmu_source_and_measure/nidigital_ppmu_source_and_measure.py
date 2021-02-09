@@ -9,8 +9,8 @@ import time
 
 
 def example(resource_name, options, channels, measure, aperture_time,
-            source=None, settling_time=None, current_limit_range=None, current_level=None,
-            voltage_limit_high=None, voltage_limit_low=None, voltage_level=None):
+            source=None, settling_time=None, current_level_range=None, current_level=None,
+            voltage_limit_high=None, voltage_limit_low=None, current_limit_range=None, voltage_level=None):
 
     with nidigital.Session(resource_name=resource_name, options=options) as session:
 
@@ -28,7 +28,7 @@ def example(resource_name, options, channels, measure, aperture_time,
         if source == 'source-current':
             session.channels[channels].ppmu_output_function = nidigital.PPMUOutputFunction.CURRENT
 
-            session.channels[channels].ppmu_current_limit_range = current_limit_range
+            session.channels[channels].ppmu_current_level_range = current_level_range
             session.channels[channels].ppmu_current_level = current_level
             session.channels[channels].ppmu_voltage_limit_high = voltage_limit_high
             session.channels[channels].ppmu_voltage_limit_low = voltage_limit_low
@@ -82,7 +82,7 @@ def _main(argsv):
     subparser = parser.add_subparsers(dest='source', help='Sub-command help, by default it measures voltage and does not source')
 
     source_current = subparser.add_parser('source-current', help='Source current')
-    source_current.add_argument('-clr', '--current-limit-range', default=0.000002, type=float, help='Current limit range in amps')
+    source_current.add_argument('-clr', '--current-level-range', default=0.000002, type=float, help='Current level range in amps')
     source_current.add_argument('-cl', '--current-level', default=0.000002, type=float, help='Current level in amps')
     source_current.add_argument('-vlh', '--voltage-limit-high', default=3.3, type=float, help='Voltage limit high in volts')
     source_current.add_argument('-vll', '--voltage-limit-low', default=0, type=float, help='Voltage limit low in volts')
@@ -104,7 +104,7 @@ def _main(argsv):
             args.aperture_time,
             args.source,
             args.settling_time,
-            args.current_limit_range,
+            args.current_level_range,
             args.current_level,
             args.voltage_limit_high,
             args.voltage_limit_low)
@@ -117,7 +117,7 @@ def _main(argsv):
             args.aperture_time,
             args.source,
             args.settling_time,
-            args.current_limit_range,
+            current_limit_range=args.current_limit_range,
             voltage_level=args.voltage_level)
     else:
         if args.measure == 'current':
@@ -158,27 +158,28 @@ def test_example():
                 aperture_time)
 
     settling_time = 0.01
-    current_limit_range = 0.000002
+    current_level_range = 0.000002
     current_level = 0.000002
     voltage_limit_high = 3.3
     voltage_limit_low = 0
     example(resource_name, options, channels, 'voltage',
             aperture_time, 'source-current', settling_time,
-            current_limit_range, current_level,
+            current_level_range, current_level,
             voltage_limit_high, voltage_limit_low)
     example(resource_name, options, channels, 'current',
             aperture_time, 'source-current', settling_time,
-            current_limit_range, current_level,
+            current_level_range, current_level,
             voltage_limit_high, voltage_limit_low)
 
+    current_limit_range = 0.000002
     voltage_level = 3.3
     example(resource_name, options, channels, 'voltage',
             aperture_time, 'source-voltage', settling_time,
-            current_limit_range,
+            current_limit_range=current_limit_range,
             voltage_level=voltage_level)
     example(resource_name, options, channels, 'current',
             aperture_time, 'source-voltage', settling_time,
-            current_limit_range,
+            current_limit_range=current_limit_range,
             voltage_level=voltage_level)
 
 
