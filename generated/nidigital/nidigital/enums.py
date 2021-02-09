@@ -173,20 +173,6 @@ class PinState(Enum):
             return str('0')
         elif self.name == 'ONE':
             return str('1')
-        elif self.name == 'L':
-            return str('L')
-        elif self.name == 'H':
-            return str('H')
-        elif self.name == 'X':
-            return str('X')
-        elif self.name == 'M':
-            return str('M')
-        elif self.name == 'V':
-            return str('V')
-        elif self.name == 'D':
-            return str('D')
-        elif self.name == 'E':
-            return str('E')
         elif self.name == 'NOT_A_PIN_STATE':
             return str('Not a Pin State')
         elif self.name == 'PIN_STATE_NOT_ACQUIRED':
@@ -368,7 +354,5 @@ class WriteStaticPinState(Enum):
             return str('0')
         elif self.name == 'ONE':
             return str('1')
-        elif self.name == 'X':
-            return str('X')
         else:
             return str(self.name)

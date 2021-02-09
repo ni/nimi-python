@@ -11,7 +11,7 @@ from enum import Enum
 
 class ${enums[enum_name]['python_name']}(Enum):
 <%
-print_list = []
+    print_list = []
 %>\
     % for enum_value in enums[enum_name]['values']:
     % if type(enum_value['value']) is str:
@@ -33,13 +33,13 @@ if 'pretty_name' in enum_value:
 
     def __str__(self):
 <%
-first = True
+    first = True
 %>\
     % for enum_value in print_list:
     % if first:
         if self.name == '${enum_value['python_name']}':
 <%
-first = False
+    first = False
 %>\
     % else:
         elif self.name == '${enum_value['python_name']}':
