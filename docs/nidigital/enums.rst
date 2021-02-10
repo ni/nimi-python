@@ -730,11 +730,29 @@ WriteStaticPinState
 
 
 
+        Specifies to drive low.
+
+        
+
+
+
     .. py:attribute:: WriteStaticPinState.ONE
 
 
 
+        Specifies to drive high.
+
+        
+
+
+
     .. py:attribute:: WriteStaticPinState.X
+
+
+
+        Specifies to not drive.
+
+        
 
 
 
