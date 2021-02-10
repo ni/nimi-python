@@ -170,13 +170,13 @@ class PinState(Enum):
 
     def __str__(self):
         if self.name == 'ZERO':
-            return str('0')
+            return '0'
         elif self.name == 'ONE':
-            return str('1')
+            return '1'
         elif self.name == 'NOT_A_PIN_STATE':
-            return str('Not a Pin State')
+            return 'Not a Pin State'
         elif self.name == 'PIN_STATE_NOT_ACQUIRED':
-            return str('Pin State Not Acquired')
+            return 'Pin State Not Acquired'
         else:
             return str(self.name)
 
@@ -351,8 +351,8 @@ class WriteStaticPinState(Enum):
 
     def __str__(self):
         if self.name == 'ZERO':
-            return str('0')
+            return '0'
         elif self.name == 'ONE':
-            return str('1')
+            return '1'
         else:
             return str(self.name)

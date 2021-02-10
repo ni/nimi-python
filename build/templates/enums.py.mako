@@ -44,7 +44,7 @@ if 'pretty_name' in enum_value:
     % else:
         elif self.name == '${enum_value['python_name']}':
     % endif
-            return str('${enum_value['pretty_name']}')
+            return '${enum_value['pretty_name']}'
     % endfor
         else:
             return str(self.name)
