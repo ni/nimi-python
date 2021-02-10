@@ -689,16 +689,25 @@ enums = {
     'WriteStaticPinState': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Specifies to drive low.'
+                },
                 'name': 'NIDIGITAL_VAL_0',
                 'python_name': 'ZERO',
                 'value': 0
             },
             {
+                'documentation': {
+                    'description': 'Specifies to drive high.'
+                },
                 'name': 'NIDIGITAL_VAL_1',
                 'python_name': 'ONE',
                 'value': 1
             },
             {
+                'documentation': {
+                    'description': 'Specifies to not drive.'
+                },
                 'name': 'NIDIGITAL_VAL_X',
                 'value': 5
             }

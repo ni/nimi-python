@@ -310,5 +310,14 @@ class TriggerType(Enum):
 
 class WriteStaticPinState(Enum):
     ZERO = 0
+    r'''
+    Specifies to drive low.
+    '''
     ONE = 1
+    r'''
+    Specifies to drive high.
+    '''
     X = 5
+    r'''
+    Specifies to not drive.
+    '''
