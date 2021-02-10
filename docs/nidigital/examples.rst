@@ -21,15 +21,6 @@ nidigital_configure_time_set_and_voltage_levels.py
    :encoding: utf8
    :caption: `(nidigital_configure_time_set_and_voltage_levels.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/configure_time_set_and_voltage_levels/nidigital_configure_time_set_and_voltage_levels.py>`_
 
-nidigital_do_nothing.py
------------------------
-
-.. literalinclude:: ../../src/nidigital/examples/nidigital_do_nothing.py
-   :language: python
-   :linenos:
-   :encoding: utf8
-   :caption: `(nidigital_do_nothing.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/nidigital_do_nothing.py>`_
-
 nidigital_ppmu_source_and_measure.py
 ------------------------------------
 
