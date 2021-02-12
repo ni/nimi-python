@@ -45,6 +45,21 @@ class DriveFormat(Enum):
     '''
 
 
+class FrequencyMeasurementMode(Enum):
+    BANKED = 3700
+    r'''
+    Frequency measurements are made serially for groups of channels associated with a single frequency counter for each group.
+
+    Maximum frequency measured: 200 MHz.
+    '''
+    PARALLEL = 3701
+    r'''
+    Frequency measurements are made by multiple frequency counters in parallel.
+
+    Maximum frequency measured: 100 MHz.
+    '''
+
+
 class HistoryRAMCyclesToAcquire(Enum):
     FAILED = 2303
     r'''

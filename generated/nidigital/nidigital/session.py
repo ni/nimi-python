@@ -399,6 +399,24 @@ class _SessionBase(object):
     | PXI_Trig7            | PXI trigger line 7          |
     +----------------------+-----------------------------+
     '''
+    frequency_counter_hysteresis_enabled = _attributes.AttributeViBoolean(1150085)
+    '''Type: bool
+
+    Specifies whether hysteresis is enabled for the frequency counters of the digital pattern instrument.
+    '''
+    frequency_counter_measurement_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FrequencyMeasurementMode, 1150084)
+    '''Type: enums.FrequencyMeasurementMode
+
+    Determines how the frequency counters of the digital pattern instrument make measurements.
+
+    +------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Valid Values:                            |                                                                                                                                                                                                                                                                                                                                                                                       |
+    +==========================================+=======================================================================================================================================================================================================================================================================================================================================================================================+
+    | FrequencyMeasurementMode.BANKED (3700)   | Each discrete frequency counter is mapped to specific channels and makes frequency measurements from only those channels. Use banked mode when you need access to the full measure frequency range of the instrument. **Note:** If you request frequency measurements from multiple channels within the same bank, the measurements are made in series for the channels in that bank. |
+    +------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | FrequencyMeasurementMode.PARALLEL (3701) | All discrete frequency counters make frequency measurements from all channels in parallel with one another. Use parallel mode to increase the speed of frequency measurements if you do not need access to the full measure frequency range of the instrument; in parallel mode, you can also add frequency_counter_hysteresis_enabled to reduce measurement noise.                   |
+    +------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    '''
     frequency_counter_measurement_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150069)
     '''Type: float in seconds or datetime.timedelta
 
