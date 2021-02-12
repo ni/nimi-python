@@ -19,7 +19,7 @@ def example(resource_name1, resource_name2, options, waveform, frequency, amplit
                 session1.send_software_edge_trigger(nifgen.Trigger.START)
                 time.sleep(gen_time)
 
-                
+
 def _main(argsv):
     supported_waveforms = list(nifgen.Waveform.__members__.keys())[:-1]  # no support for user-defined waveforms in example
     parser = argparse.ArgumentParser(description='Generates the standard function.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -35,7 +35,7 @@ def _main(argsv):
     args = parser.parse_args(argsv)
     example(args.resource_name1, args.resource_name2, args.option_string, args.waveform, args.frequency, args.amplitude, args.offset, args.phase, args.time)
 
-    
+
 def main():
     _main(sys.argv[1:])
 
