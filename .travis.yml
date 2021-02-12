@@ -2,16 +2,18 @@ group: travis_latest
 language: python
 matrix:
     include:
-      # We run Python 3.8 based tests towards the start. This is where additional tests are run so we give it more time
-      - python: 3.8
+      # We run Python 3.9 based tests towards the start. This is where additional tests are run so we give it more time
+      - python: 3.9
         dist: xenial
         sudo: true
-      # End Python 3.8 based tests
-      - python: 3.5
+      # End Python 3.9 based tests
       - python: 3.6
       # Python 3.7+ needs OpenSSL 1.0.2+ which isn't supported on trusty - use xenial and sudo: true based on workarounds
       # in Travis issues (this is from multiple issues)
       - python: 3.7
+        dist: xenial
+        sudo: true
+      - python: 3.8
         dist: xenial
         sudo: true
       # - python: nightly
@@ -36,4 +38,3 @@ after_success:
   - travis_retry codecov --flags nidigitalunittests --file ninidigitalunittest.xml
   - travis_retry codecov --flags nimodinstunittests --file nimodinstunittest.xml
   - travis_retry codecov --flags nitclkunittests --file nitclkunittest.xml
-
