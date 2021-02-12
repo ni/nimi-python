@@ -3321,6 +3321,66 @@ exported_start_trigger_output_terminal
 
                 - C Attribute: **NIDIGITAL_ATTR_EXPORTED_START_TRIGGER_OUTPUT_TERMINAL**
 
+frequency_counter_hysteresis_enabled
+------------------------------------
+
+    .. py:attribute:: frequency_counter_hysteresis_enabled
+
+        Specifies whether hysteresis is enabled for the frequency counters of the digital pattern instrument.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIDIGITAL_ATTR_FREQUENCY_COUNTER_HYSTERESIS_ENABLED**
+
+frequency_counter_measurement_mode
+----------------------------------
+
+    .. py:attribute:: frequency_counter_measurement_mode
+
+        Determines how the frequency counters of the digital pattern instrument make measurements.
+
+        +----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Valid Values:                                                  |                                                                                                                                                                                                                                                                                                                                                                                                  |
+        +================================================================+==================================================================================================================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nidigital.FrequencyMeasurementMode.BANKED` (3700)   | Each discrete frequency counter is mapped to specific channels and makes frequency measurements from only those channels. Use banked mode when you need access to the full measure frequency range of the instrument. **Note:** If you request frequency measurements from multiple channels within the same bank, the measurements are made in series for the channels in that bank.            |
+        +----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.FrequencyMeasurementMode.PARALLEL` (3701) | All discrete frequency counters make frequency measurements from all channels in parallel with one another. Use parallel mode to increase the speed of frequency measurements if you do not need access to the full measure frequency range of the instrument; in parallel mode, you can also add :py:attr:`nidigital.Session.frequency_counter_hysteresis_enabled` to reduce measurement noise. |
+        +----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        The following table lists the characteristics of this property.
+
+            +----------------+--------------------------------+
+            | Characteristic | Value                          |
+            +================+================================+
+            | Datatype       | enums.FrequencyMeasurementMode |
+            +----------------+--------------------------------+
+            | Permissions    | read-write                     |
+            +----------------+--------------------------------+
+            | Channel Based  | No                             |
+            +----------------+--------------------------------+
+            | Resettable     | Yes                            |
+            +----------------+--------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIDIGITAL_ATTR_FREQUENCY_COUNTER_MEASUREMENT_MODE**
+
 frequency_counter_measurement_time
 ----------------------------------
 

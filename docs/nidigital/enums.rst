@@ -101,6 +101,35 @@ DriveFormat
 
 
 
+FrequencyMeasurementMode
+------------------------
+
+.. py:class:: FrequencyMeasurementMode
+
+    .. py:attribute:: FrequencyMeasurementMode.BANKED
+
+
+
+        Frequency measurements are made serially for groups of channels associated with a single frequency counter for each group.
+
+        Maximum frequency measured: 200 MHz.
+
+        
+
+
+
+    .. py:attribute:: FrequencyMeasurementMode.PARALLEL
+
+
+
+        Frequency measurements are made by multiple frequency counters in parallel.
+
+        Maximum frequency measured: 100 MHz.
+
+        
+
+
+
 HistoryRAMCyclesToAcquire
 -------------------------
 

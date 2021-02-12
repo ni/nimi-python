@@ -1161,6 +1161,23 @@ attributes = {
     1150084: {
         'access': 'read-write',
         'channel_based': False,
+        'documentation': {
+            'description': 'Determines how the frequency counters of the digital pattern instrument make measurements.\n',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_BANKED (3700)',
+                    'Each discrete frequency counter is mapped to specific channels and makes frequency measurements from only those channels. Use banked mode when you need access to the full measure frequency range of the instrument. **Note:** If you request frequency measurements from multiple channels within the same bank, the measurements are made in series for the channels in that bank.'
+                ],
+                [
+                    'NIDIGITAL_VAL_PARALLEL (3701)',
+                    'All discrete frequency counters make frequency measurements from all channels in parallel with one another. Use parallel mode to increase the speed of frequency measurements if you do not need access to the full measure frequency range of the instrument; in parallel mode, you can also add NIDIGITAL_ATTR_FREQUENCY_COUNTER_HYSTERESIS_ENABLED to reduce measurement noise.'
+                ]
+            ],
+            'table_header': [
+                'Valid Values:'
+            ]
+        },
+        'enum': 'FrequencyMeasurementMode',
         'name': 'FREQUENCY_COUNTER_MEASUREMENT_MODE',
         'resettable': True,
         'type': 'ViInt32'
@@ -1168,6 +1185,9 @@ attributes = {
     1150085: {
         'access': 'read-write',
         'channel_based': False,
+        'documentation': {
+            'description': 'Specifies whether hysteresis is enabled for the frequency counters of the digital pattern instrument.\n'
+        },
         'name': 'FREQUENCY_COUNTER_HYSTERESIS_ENABLED',
         'resettable': True,
         'type': 'ViBoolean'

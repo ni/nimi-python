@@ -40,7 +40,10 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
-        * API reference documentation
+        * API reference documentation and API usage examples
+        * API parity with NI-Digital Pattern Driver 20.6.0 by adding support for configuration of frequency counter measurement mode. The following properties are added:
+            * `frequency_counter_measurement_mode`
+            * `frequency_counter_hysteresis_enabled`
     * #### Changed
     * #### Removed
 * ### `nidmm` (NI-DMM)
