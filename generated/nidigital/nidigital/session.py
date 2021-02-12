@@ -1031,9 +1031,9 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            levels_sheet (str): Name of the levels sheet to apply. Use the name of the sheet or pass the absolute file path you use in the _load_levels method. The name of the levels sheet is the file name without the directory and file extension.
+            levels_sheet (str): Name of the levels sheet to apply. Use the name of the sheet or pass the absolute file path you use in the load_specifications_levels_and_timing method. The name of the levels sheet is the file name without the directory and file extension.
 
-            timing_sheet (str): Name of the timing sheet to apply. Use the name of the sheet or pass the absolute file path that you use in the _load_timing method. The name of the timing sheet is the file name without the directory and file extension.
+            timing_sheet (str): Name of the timing sheet to apply. Use the name of the sheet or pass the absolute file path that you use in the load_specifications_levels_and_timing method. The name of the timing sheet is the file name without the directory and file extension.
 
             initial_state_high_pins (basic sequence types or str): Comma-delimited list of pins, pin groups, or channels to initialize to a high state.
 

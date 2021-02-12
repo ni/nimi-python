@@ -59,7 +59,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Name of the levels sheet to apply. Use the name of the sheet or pass the absolute file path you use in the niDigital_LoadLevels function. The name of the levels sheet is the file name without the directory and file extension.\n'
+                    'description': 'Name of the levels sheet to apply. Use the name of the sheet or pass the absolute file path you use in the niDigital_FancyLoadSpecificationsLevelsAndTiming function. The name of the levels sheet is the file name without the directory and file extension.\n'
                 },
                 'name': 'levelsSheet',
                 'type': 'ViConstString'
@@ -67,7 +67,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Name of the timing sheet to apply. Use the name of the sheet or pass the absolute file path that you use in the niDigital_LoadTiming function. The name of the timing sheet is the file name without the directory and file extension.\n'
+                    'description': 'Name of the timing sheet to apply. Use the name of the sheet or pass the absolute file path that you use in the niDigital_FancyLoadSpecificationsLevelsAndTiming function. The name of the timing sheet is the file name without the directory and file extension.\n'
                 },
                 'name': 'timingSheet',
                 'type': 'ViConstString'

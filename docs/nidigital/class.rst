@@ -136,7 +136,7 @@ apply_levels_and_timing
             :param levels_sheet:
 
 
-                Name of the levels sheet to apply. Use the name of the sheet or pass the absolute file path you use in the :py:meth:`nidigital.Session._load_levels` method. The name of the levels sheet is the file name without the directory and file extension.
+                Name of the levels sheet to apply. Use the name of the sheet or pass the absolute file path you use in the :py:meth:`nidigital.Session.load_specifications_levels_and_timing` method. The name of the levels sheet is the file name without the directory and file extension.
 
                 
 
@@ -145,7 +145,7 @@ apply_levels_and_timing
             :param timing_sheet:
 
 
-                Name of the timing sheet to apply. Use the name of the sheet or pass the absolute file path that you use in the :py:meth:`nidigital.Session._load_timing` method. The name of the timing sheet is the file name without the directory and file extension.
+                Name of the timing sheet to apply. Use the name of the sheet or pass the absolute file path that you use in the :py:meth:`nidigital.Session.load_specifications_levels_and_timing` method. The name of the timing sheet is the file name without the directory and file extension.
 
                 
 
