@@ -32,21 +32,10 @@ if 'pretty_name' in enum_value:
     % if print_list:
 
     def __str__(self):
-<%
-    first = True
-%>\
+        return {
     % for enum_value in print_list:
-    % if first:
-        if self.name == '${enum_value['python_name']}':
-<%
-    first = False
-%>\
-    % else:
-        elif self.name == '${enum_value['python_name']}':
-    % endif
-            return '${enum_value['pretty_name']}'
+            '${enum_value['python_name']}': '${enum_value['pretty_name']}',
     % endfor
-        else:
-            return str(self.name)
+        }.get(self.name, self.name)
     % endif
 % endfor

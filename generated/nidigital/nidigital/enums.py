@@ -169,16 +169,12 @@ class PinState(Enum):
     '''
 
     def __str__(self):
-        if self.name == 'ZERO':
-            return '0'
-        elif self.name == 'ONE':
-            return '1'
-        elif self.name == 'NOT_A_PIN_STATE':
-            return 'Not a Pin State'
-        elif self.name == 'PIN_STATE_NOT_ACQUIRED':
-            return 'Pin State Not Acquired'
-        else:
-            return str(self.name)
+        return {
+            'ZERO': '0',
+            'ONE': '1',
+            'NOT_A_PIN_STATE': 'Not a Pin State',
+            'PIN_STATE_NOT_ACQUIRED': 'Pin State Not Acquired',
+        }.get(self.name, self.name)
 
 
 class SelectedFunction(Enum):
@@ -350,9 +346,7 @@ class WriteStaticPinState(Enum):
     '''
 
     def __str__(self):
-        if self.name == 'ZERO':
-            return '0'
-        elif self.name == 'ONE':
-            return '1'
-        else:
-            return str(self.name)
+        return {
+            'ZERO': '0',
+            'ONE': '1',
+        }.get(self.name, self.name)
