@@ -168,6 +168,14 @@ class PinState(Enum):
     Pin state could not be acquired because none of the pins mapped to the instrument in a multi-instrument session had any failures.
     '''
 
+    def __str__(self):
+        return {
+            'ZERO': '0',
+            'ONE': '1',
+            'NOT_A_PIN_STATE': 'Not a Pin State',
+            'PIN_STATE_NOT_ACQUIRED': 'Pin State Not Acquired',
+        }.get(self.name, self.name)
+
 
 class SelectedFunction(Enum):
     DIGITAL = 1100
@@ -336,3 +344,9 @@ class WriteStaticPinState(Enum):
     r'''
     Specifies to not drive.
     '''
+
+    def __str__(self):
+        return {
+            'ZERO': '0',
+            'ONE': '1',
+        }.get(self.name, self.name)

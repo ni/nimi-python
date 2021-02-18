@@ -269,6 +269,7 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_0',
                 'python_name': 'ZERO',
+                'pretty_name': '0',
                 'value': 0
             },
             {
@@ -277,6 +278,7 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_1',
                 'python_name': 'ONE',
+                'pretty_name': '1',
                 'value': 1
             },
             {
@@ -333,6 +335,7 @@ enums = {
                     'description': 'Not a pin state is used for non-existent DUT cycles.'
                 },
                 'name': 'NIDIGITAL_VAL_NOT_A_PIN_STATE',
+                'pretty_name': 'Not a Pin State',
                 'value': 254
             },
             {
@@ -340,6 +343,7 @@ enums = {
                     'description': 'Pin state could not be acquired because none of the pins mapped to the instrument in a multi-instrument session had any failures.'
                 },
                 'name': 'NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED',
+                'pretty_name': 'Pin State Not Acquired',
                 'value': 255
             }
         ]
@@ -694,6 +698,7 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_0',
                 'python_name': 'ZERO',
+                'pretty_name': '0',
                 'value': 0
             },
             {
@@ -702,6 +707,7 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_1',
                 'python_name': 'ONE',
+                'pretty_name': '1',
                 'value': 1
             },
             {

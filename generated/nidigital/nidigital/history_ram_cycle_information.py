@@ -47,6 +47,6 @@ class HistoryRAMCycleInformation(object):
 
     @staticmethod
     def _digital_states_string(states):
-        states_string = [['{0}'.format(i.name) for i in j] for j in states]
+        states_string = [[str(i) for i in j] for j in states]
         return '[{}]'.format(', '.join(['[{}]'.format(', '.join(i)) for i in states_string]))
 

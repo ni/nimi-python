@@ -10,6 +10,9 @@ from enum import Enum
 
 
 class ${enums[enum_name]['python_name']}(Enum):
+<%
+    print_list = []
+%>\
     % for enum_value in enums[enum_name]['values']:
     % if type(enum_value['value']) is str:
     ${enum_value['python_name']} = '${enum_value['value']}'
@@ -21,5 +24,18 @@ class ${enums[enum_name]['python_name']}(Enum):
     ${helper.get_documentation_for_node_docstring(enum_value, config, indent=4)}
     '''
     % endif
+<%
+if 'pretty_name' in enum_value:
+    print_list.append(enum_value)
+%>\
     % endfor
+    % if print_list:
+
+    def __str__(self):
+        return {
+    % for enum_value in print_list:
+            '${enum_value['python_name']}': '${enum_value['pretty_name']}',
+    % endfor
+        }.get(self.name, self.name)
+    % endif
 % endfor

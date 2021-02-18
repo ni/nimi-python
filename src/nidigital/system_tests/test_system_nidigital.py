@@ -443,7 +443,7 @@ def test_history_ram_cycle_information_string():
         cycle_number=999,
         scan_cycle_number=13,
         expected_pin_states=[[nidigital.PinState.D, nidigital.PinState.V], [nidigital.PinState.V, nidigital.PinState.D]],
-        actual_pin_states=[[nidigital.PinState.PIN_STATE_NOT_ACQUIRED, nidigital.PinState.PIN_STATE_NOT_ACQUIRED], [nidigital.PinState.ZERO, nidigital.PinState.ONE]],
+        actual_pin_states=[[nidigital.PinState.PIN_STATE_NOT_ACQUIRED, nidigital.PinState.NOT_A_PIN_STATE], [nidigital.PinState.ZERO, nidigital.PinState.ONE]],
         per_pin_pass_fail=[[True, True], [False, False]])
     print(cycle_info)
     expected_string = '''Pattern Name        : pat
@@ -452,7 +452,7 @@ Vector Number       : 42
 Cycle Number        : 999
 Scan Cycle Number   : 13
 Expected Pin States : [[D, V], [V, D]]
-Actual Pin States   : [[PIN_STATE_NOT_ACQUIRED, PIN_STATE_NOT_ACQUIRED], [ZERO, ONE]]
+Actual Pin States   : [[Pin State Not Acquired, Not a Pin State], [0, 1]]
 Per Pin Pass Fail   : [[True, True], [False, False]]
 '''
     assert str(cycle_info) == expected_string
