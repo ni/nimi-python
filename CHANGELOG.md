@@ -26,46 +26,10 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-* ### ALL
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nidcpower` (NI-DCPower)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nidigital` (NI-Digital Pattern Driver)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nidmm` (NI-DMM)
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niscope` (NI-SCOPE)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niswitch` (NI-SWITCH)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nitclk` (NI-TClk)
-    * #### Added
-    * #### Changed
-    * #### Removed
+          *Added nifgen_trigger.py to demonstrate pulling a trigger from another device.
+
     
     
 ## 1.3.2 - 2020-09-18
