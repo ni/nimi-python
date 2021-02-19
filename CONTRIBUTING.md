@@ -39,7 +39,7 @@ following installed:
                 sudo apt-get install make
 
     - If you're on Windows 7, 8 or 10 (not using WSL):
-        - [Install mingw (msys-base)](http://www.mingw.org/wiki/Getting_Started).
+        - [Install mingw (msys-base)](https://osdn.net/projects/mingw/).
         - Add <mingw Install Path>\msys\1.0\bin to Windows path.
 
     - If you're on macOS
