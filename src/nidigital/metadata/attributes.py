@@ -232,19 +232,19 @@ attributes = {
             'note': 'You can make PPMU voltage measurements using the niDigital_PPMU_Measure function from within any NIDIGITAL_ATTR_SELECTED_FUNCTION.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_DIGITAL (1100)',
+                    'NIDIGITAL_VAL_DIGITAL',
                     'The pin is connected to the driver, comparator, and active load functions. The PPMU is not sourcing, but can make voltage measurements. The state of the digital pin driver when you change the NIDIGITAL_ATTR_SELECTED_FUNCTION to Digital is determined by the most recent call to the niDigital_WriteStatic function or the last vector of the most recently executed pattern burst, whichever happened last. Use the niDigital_WriteStatic function to control the state of the digital pin driver through software. Use the niDigital_FancyBurstPattern function to control the state of the digital pin driver through a pattern. Set the **selectDigitalFunction** parameter of the niDigital_FancyBurstPattern function to VI_TRUE to automatically switch the NIDIGITAL_ATTR_SELECTED_FUNCTION of the pins in the pattern burst to NIDIGITAL_VAL_DIGITAL.'
                 ],
                 [
-                    'NIDIGITAL_VAL_PPMU (1101)',
+                    'NIDIGITAL_VAL_PPMU',
                     'The pin is connected to the PPMU. The driver, comparator, and active load are off while this function is selected. Call the niDigital_PPMU_Source function to source a voltage or current. The niDigital_PPMU_Source function automatically switches the NIDIGITAL_ATTR_SELECTED_FUNCTION to the PPMU state and starts sourcing from the PPMU. Changing the NIDIGITAL_ATTR_SELECTED_FUNCTION to NIDIGITAL_VAL_DISCONNECT, NIDIGITAL_VAL_OFF, or NIDIGITAL_VAL_DIGITAL causes the PPMU to stop sourcing. If you set the NIDIGITAL_ATTR_SELECTED_FUNCTION attribute to PPMU, the PPMU is initially not sourcing.'
                 ],
                 [
-                    'NIDIGITAL_VAL_OFF (1102)',
+                    'NIDIGITAL_VAL_OFF',
                     'The pin is electrically connected, and the PPMU and digital pin driver are off while this function is selected.'
                 ],
                 [
-                    'NIDIGITAL_VAL_DISCONNECT (1103)',
+                    'NIDIGITAL_VAL_DISCONNECT',
                     'The pin is electrically disconnected from instrument functions. Selecting this function causes the PPMU to stop sourcing prior to disconnecting the pin.'
                 ]
             ],
@@ -264,15 +264,15 @@ attributes = {
             'description': 'Specifies the behavior of the pin during non-drive cycles.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_ACTIVE_LOAD (1200)',
+                    'NIDIGITAL_VAL_ACTIVE_LOAD',
                     'Specifies that, for non-drive pin states (L, H, X, V, M, E), the active load is connected and the instrument sources or sinks a defined amount of current to load the DUT. The amount of current sourced by the instrument and therefore sunk by the DUT is specified by IOL. The amount of current sunk by the instrument and therefore sourced by the DUT is specified by IOH. The voltage at which the instrument changes between sourcing and sinking is specified by VCOM.'
                 ],
                 [
-                    'NIDIGITAL_VAL_VTERM (1201)',
+                    'NIDIGITAL_VAL_VTERM',
                     'Specifies that, for non-drive pin states (L, H, X, V, M, E), the pin driver terminates the pin to the configured VTERM voltage through a 50 Ω impedance. VTERM is adjustable to allow for the pin to terminate at a set level. This is useful for instruments that might operate incorrectly if an instrument pin is unterminated and is allowed to float to any voltage level within the instrument voltage range. To address this issue, enable VTERM by configuring the VTERM pin level to the desired voltage and selecting the VTERM termination mode. Setting VTERM to 0 V and selecting the VTERM termination mode has the effect of connecting a 50 Ω termination to ground, which provides an effective 50 Ω impedance for the pin. This can be useful for improving signal integrity of certain DUTs by reducing reflections while the DUT drives the pin.'
                 ],
                 [
-                    'NIDIGITAL_VAL_HIGH_Z (1202)',
+                    'NIDIGITAL_VAL_HIGH_Z',
                     'Specifies that, for non-drive pin states (L, H, X, V, M, E), the pin driver is put in a high-impedance state and the active load is disabled.'
                 ]
             ],
@@ -372,11 +372,11 @@ attributes = {
             'description': 'Specifies whether the PPMU forces voltage or current to the DUT.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_DC_VOLTAGE (1300)',
+                    'NIDIGITAL_VAL_DC_VOLTAGE',
                     'Specifies the output function to DC Voltage.'
                 ],
                 [
-                    'NIDIGITAL_VAL_DC_CURRENT (1301)',
+                    'NIDIGITAL_VAL_DC_CURRENT',
                     'Specifies the output function to DC Current.'
                 ]
             ],
@@ -466,15 +466,15 @@ attributes = {
             'description': 'Specifies the Start trigger type. The digital pattern instrument waits for this trigger after you call the niDigital_init function or the niDigital_FancyBurstPattern function, and does not burst a pattern until this trigger is received.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_NONE (1700)',
+                    'NIDIGITAL_VAL_NONE',
                     'Disables the Start trigger. Pattern bursting starts immediately after you call the niDigital_init function or the niDigital_FancyBurstPattern function.'
                 ],
                 [
-                    'NIDIGITAL_VAL_DIGITAL_EDGE (1701)',
+                    'NIDIGITAL_VAL_DIGITAL_EDGE',
                     'Pattern bursting does not start until the digital pattern instrument detects a digital edge.'
                 ],
                 [
-                    'NIDIGITAL_VAL_SOFTWARE (1702)',
+                    'NIDIGITAL_VAL_SOFTWARE',
                     'Pattern bursting does not start until the digital pattern instrument receives a software Start trigger. Create a software Start trigger by calling the niDigital_SendSoftwareEdgeTrigger function and selecting start trigger in the **trigger** parameter.Related information: SendSoftwareEdgeTrigger function.'
                 ]
             ],
@@ -541,11 +541,11 @@ attributes = {
             'description': 'Specifies the active edge for the Start trigger. This property is used when the NIDIGITAL_ATTR_START_TRIGGER_TYPE attribute is set to Digital Edge.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_RISING_EDGE (1800)',
+                    'NIDIGITAL_VAL_RISING_EDGE',
                     'Asserts the trigger when the signal transitions from low level to high level.'
                 ],
                 [
-                    'NIDIGITAL_VAL_FALLING_EDGE (1801)',
+                    'NIDIGITAL_VAL_FALLING_EDGE',
                     'Asserts the trigger when the signal transitions from high level to low level.'
                 ]
             ],
@@ -616,15 +616,15 @@ attributes = {
             'description': 'Disables the conditional jump trigger or configures it for either hardware triggering or software triggering.  The default value is NIDIGITAL_VAL_NONE.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_NONE (1700)',
+                    'NIDIGITAL_VAL_NONE',
                     'Disables the conditional jump trigger.'
                 ],
                 [
-                    'NIDIGITAL_VAL_DIGITAL_EDGE (1701)',
+                    'NIDIGITAL_VAL_DIGITAL_EDGE',
                     'Configures the conditional jump trigger for hardware triggering.'
                 ],
                 [
-                    'NIDIGITAL_VAL_SOFTWARE (1702)',
+                    'NIDIGITAL_VAL_SOFTWARE',
                     'Configures the conditional jump trigger for software triggering.'
                 ]
             ],
@@ -662,11 +662,11 @@ attributes = {
             'description': 'Configures the active edge of the incoming trigger signal for the conditional jump trigger instance. The default value is NIDIGITAL_VAL_RISING_EDGE.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_RISING_EDGE (1800)',
+                    'NIDIGITAL_VAL_RISING_EDGE',
                     'Specifies the signal transition from low level to high level.'
                 ],
                 [
-                    'NIDIGITAL_VAL_FALLING_EDGE (1801)',
+                    'NIDIGITAL_VAL_FALLING_EDGE',
                     'Specifies the signal transition from high level to low level.'
                 ]
             ],
@@ -747,7 +747,7 @@ attributes = {
             'description': 'Specifies the units of the measurement aperture time for the PPMU.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_SECONDS (2100)',
+                    'NIDIGITAL_VAL_SECONDS',
                     'Specifies the aperture time in seconds.'
                 ]
             ],
@@ -845,15 +845,15 @@ attributes = {
             'description': 'Specifies the type of trigger condition on which History RAM starts acquiring pattern information.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_FIRST_FAILURE (2200)',
+                    'NIDIGITAL_VAL_FIRST_FAILURE',
                     'Starts acquiring pattern information in History RAM on the first failed cycle in a pattern burst.'
                 ],
                 [
-                    'NIDIGITAL_VAL_CYCLE_NUMBER (2201)',
+                    'NIDIGITAL_VAL_CYCLE_NUMBER',
                     'Starts acquiring pattern information in History RAM starting from a specified cycle number.'
                 ],
                 [
-                    'NIDIGITAL_VAL_PATTERN_LABEL (2202)',
+                    'NIDIGITAL_VAL_PATTERN_LABEL',
                     'Starts acquiring pattern information in History RAM starting from a specified pattern label, augmented by vector and cycle offsets.'
                 ]
             ],
@@ -903,11 +903,11 @@ attributes = {
             'description': 'Configures which cycles History RAM acquires after the trigger conditions are met. If you configure History RAM to only acquire failed cycles, you must set the pretrigger samples for History RAM to 0.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_FAILED_CYCLES (2303)',
+                    'NIDIGITAL_VAL_FAILED_CYCLES',
                     'Only acquires cycles that fail a compare after the triggering conditions are met.'
                 ],
                 [
-                    'NIDIGITAL_VAL_ALL_CYCLES (2304)',
+                    'NIDIGITAL_VAL_ALL_CYCLES',
                     'Acquires all cycles after the triggering conditions are met.'
                 ]
             ],
@@ -1018,7 +1018,7 @@ attributes = {
             'description': 'Specifies how the output should behave when the current limit is reached.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_CURRENT_REGULATE (3100)',
+                    'NIDIGITAL_VAL_CURRENT_REGULATE',
                     'Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached.'
                 ]
             ],
@@ -1165,11 +1165,11 @@ attributes = {
             'description': 'Determines how the frequency counters of the digital pattern instrument make measurements.\n',
             'table_body': [
                 [
-                    'NIDIGITAL_VAL_BANKED (3700)',
+                    'NIDIGITAL_VAL_BANKED',
                     'Each discrete frequency counter is mapped to specific channels and makes frequency measurements from only those channels. Use banked mode when you need access to the full measure frequency range of the instrument. **Note:** If you request frequency measurements from multiple channels within the same bank, the measurements are made in series for the channels in that bank.'
                 ],
                 [
-                    'NIDIGITAL_VAL_PARALLEL (3701)',
+                    'NIDIGITAL_VAL_PARALLEL',
                     'All discrete frequency counters make frequency measurements from all channels in parallel with one another. Use parallel mode to increase the speed of frequency measurements if you do not need access to the full measure frequency range of the instrument; in parallel mode, you can also add NIDIGITAL_ATTR_FREQUENCY_COUNTER_HYSTERESIS_ENABLED to reduce measurement noise.'
                 ]
             ],
