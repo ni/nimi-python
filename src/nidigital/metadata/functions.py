@@ -550,7 +550,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Drive format of the time set.\n\n-   NIDIGITAL_VAL_NR (1500): Non-return.\n-   NIDIGITAL_VAL_RL (1501): Return to low.\n-   NIDIGITAL_VAL_RH (1502): Return to high.\n-   NIDIGITAL_VAL_SBC (1503): Surround by complement.\n'
+                    'description': 'Drive format of the time set.\n\n-   NIDIGITAL_VAL_NR: Non-return.\n-   NIDIGITAL_VAL_RL: Return to low.\n-   NIDIGITAL_VAL_RH: Return to high.\n-   NIDIGITAL_VAL_SBC: Surround by complement.\n'
                 },
                 'enum': 'DriveFormat',
                 'name': 'format',
@@ -633,7 +633,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Drive format of the time set.\n\n-   NIDIGITAL_VAL_NR (1500): Non-return.\n-   NIDIGITAL_VAL_RL (1501): Return to low.\n-   NIDIGITAL_VAL_RH (1502): Return to high.\n-   NIDIGITAL_VAL_SBC (1503): Surround by complement.\n'
+                    'description': 'Drive format of the time set.\n\n-   NIDIGITAL_VAL_NR: Non-return.\n-   NIDIGITAL_VAL_RL: Return to low.\n-   NIDIGITAL_VAL_RH: Return to high.\n-   NIDIGITAL_VAL_SBC: Surround by complement.\n'
                 },
                 'enum': 'DriveFormat',
                 'name': 'format',
@@ -736,7 +736,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Drive format of the time set.\n\n-   NIDIGITAL_VAL_NR (1500): Non-return.\n-   NIDIGITAL_VAL_RL (1501): Return to low.\n-   NIDIGITAL_VAL_RH (1502): Return to high.\n-   NIDIGITAL_VAL_SBC (1503): Surround by complement.\n'
+                    'description': 'Drive format of the time set.\n\n-   NIDIGITAL_VAL_NR: Non-return.\n-   NIDIGITAL_VAL_RL: Return to low.\n-   NIDIGITAL_VAL_RH: Return to high.\n-   NIDIGITAL_VAL_SBC: Surround by complement.\n'
                 },
                 'enum': 'DriveFormat',
                 'name': 'driveFormat',
@@ -779,7 +779,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Name of the edge.\n\n-   NIDIGITAL_VAL_DRIVE_ON (2800)\n-   NIDIGITAL_VAL_DRIVE_DATA (2801)\n-   NIDIGITAL_VAL_DRIVE_RETURN (2802)\n-   NIDIGITAL_VAL_DRIVE_OFF (2803)\n-   NIDIGITAL_VAL_COMPARE_STROBE (2804)\n-   NIDIGITAL_VAL_DRIVE_DATA2 (2805)\n-   NIDIGITAL_VAL_DRIVE_RETURN2 (2806)\n-   NIDIGITAL_VAL_COMPARE_STROBE2 (2807)\n'
+                    'description': 'Name of the edge.\n\n-   NIDIGITAL_VAL_DRIVE_ON\n-   NIDIGITAL_VAL_DRIVE_DATA\n-   NIDIGITAL_VAL_DRIVE_RETURN\n-   NIDIGITAL_VAL_DRIVE_OFF\n-   NIDIGITAL_VAL_COMPARE_STROBE\n-   NIDIGITAL_VAL_DRIVE_DATA2\n-   NIDIGITAL_VAL_DRIVE_RETURN2\n-   NIDIGITAL_VAL_COMPARE_STROBE2\n'
                 },
                 'enum': 'TimeSetEdgeType',
                 'name': 'edge',
@@ -1046,7 +1046,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Order in which to shift the bits.\n\n-   NIDIGITAL_VAL_MSB_FIRST (2500): Specifies the bit order by most significant bit first.\n-   NIDIGITAL_VAL_LSB_FIRST (2501): Specifies the bit order by least significant bit first.\n'
+                    'description': 'Order in which to shift the bits.\n\n-   NIDIGITAL_VAL_MSB_FIRST: Specifies the bit order by most significant bit first.\n-   NIDIGITAL_VAL_LSB_FIRST: Specifies the bit order by least significant bit first.\n'
                 },
                 'enum': 'BitOrder',
                 'name': 'bitOrder',
@@ -1130,7 +1130,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Parameter that specifies how to map data on multiple sites.\n\n-   NIDIGITAL_VAL_BROADCAST (2600): Broadcasts the waveform you specify to all sites.\n-   NIDIGITAL_VAL_SITE_UNIQUE (2601): Sources unique waveform data to each site.\n'
+                    'description': 'Parameter that specifies how to map data on multiple sites.\n\n-   NIDIGITAL_VAL_BROADCAST: Broadcasts the waveform you specify to all sites.\n-   NIDIGITAL_VAL_SITE_UNIQUE: Sources unique waveform data to each site.\n'
                 },
                 'enum': 'SourceDataMapping',
                 'name': 'dataMapping',
@@ -1173,7 +1173,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Parameter that specifies how to map data on multiple sites.\n\n-   NIDIGITAL_VAL_BROADCAST (2600): Broadcasts the waveform you specify to all sites.\n-   NIDIGITAL_VAL_SITE_UNIQUE (2601): Sources unique waveform data to each site.\n'
+                    'description': 'Parameter that specifies how to map data on multiple sites.\n\n-   NIDIGITAL_VAL_BROADCAST: Broadcasts the waveform you specify to all sites.\n-   NIDIGITAL_VAL_SITE_UNIQUE: Sources unique waveform data to each site.\n'
                 },
                 'enum': 'SourceDataMapping',
                 'name': 'dataMapping',
@@ -1190,7 +1190,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Order in which to shift the bits.\n\n-   NIDIGITAL_VAL_MSB_FIRST (2500): Specifies the bit order by most significant bit first.\n-   NIDIGITAL_VAL_LSB_FIRST (2501): Specifies the bit order by least significant bit first.\n'
+                    'description': 'Order in which to shift the bits.\n\n-   NIDIGITAL_VAL_MSB_FIRST: Specifies the bit order by most significant bit first.\n-   NIDIGITAL_VAL_LSB_FIRST: Specifies the bit order by least significant bit first.\n'
                 },
                 'enum': 'BitOrder',
                 'name': 'bitOrder',
@@ -1552,7 +1552,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned pin state as expected by the loaded pattern in the order specified in **pinList**. Pins without defined edges in the specified DUT cycle will return NIDIGITAL_VAL_NOT_A_PIN_STATE (254).\n'
+                    'description': 'The returned pin state as expected by the loaded pattern in the order specified in **pinList**. Pins without defined edges in the specified DUT cycle will return NIDIGITAL_VAL_NOT_A_PIN_STATE\n'
                 },
                 'enum': 'PinState',
                 'name': 'expectedPinStates',
@@ -1566,7 +1566,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned pin state acquired by History RAM in the order specified in **pinList**. Pins without defined edges in the specified DUT cycle will return NIDIGITAL_VAL_NOT_A_PIN_STATE (254).\n'
+                    'description': 'The returned pin state acquired by History RAM in the order specified in **pinList**. Pins without defined edges in the specified DUT cycle will return NIDIGITAL_VAL_NOT_A_PIN_STATE\n'
                 },
                 'enum': 'PinState',
                 'name': 'actualPinStates',
@@ -2458,7 +2458,7 @@ the trigger conditions are met.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'The type of data specified in the results array.\n\n-   NIDIGITAL_VAL_PASS_FAIL (3300): Get site numbers for pass/fail data.\n-   NIDIGITAL_VAL_CAPTURE_WAVEFORM (3301): Get site numbers for capture waveforms.\n'
+                    'description': 'The type of data specified in the results array.\n\n-   NIDIGITAL_VAL_PASS_FAIL: Get site numbers for pass/fail data.\n-   NIDIGITAL_VAL_CAPTURE_WAVEFORM: Get site numbers for capture waveforms.\n'
                 },
                 'enum': 'SiteResultType',
                 'name': 'siteResultType',
@@ -2573,7 +2573,7 @@ the trigger conditions are met.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Name of the edge.\n\n-   NIDIGITAL_VAL_DRIVE_ON (2800)\n-   NIDIGITAL_VAL_DRIVE_DATA (2801)\n-   NIDIGITAL_VAL_DRIVE_RETURN (2802)\n-   NIDIGITAL_VAL_DRIVE_OFF (2803)\n-   NIDIGITAL_VAL_COMPARE_STROBE (2804)\n-   NIDIGITAL_VAL_DRIVE_DATA2 (2805)\n-   NIDIGITAL_VAL_DRIVE_RETURN2 (2806)\n-   NIDIGITAL_VAL_COMPARE_STROBE2 (2807)\n'
+                    'description': 'Name of the edge.\n\n-   NIDIGITAL_VAL_DRIVE_ON\n-   NIDIGITAL_VAL_DRIVE_DATA\n-   NIDIGITAL_VAL_DRIVE_RETURN\n-   NIDIGITAL_VAL_DRIVE_OFF\n-   NIDIGITAL_VAL_COMPARE_STROBE\n-   NIDIGITAL_VAL_DRIVE_DATA2\n-   NIDIGITAL_VAL_DRIVE_RETURN2\n-   NIDIGITAL_VAL_COMPARE_STROBE2\n'
                 },
                 'enum': 'TimeSetEdgeType',
                 'name': 'edge',
@@ -3017,7 +3017,7 @@ the trigger conditions are met.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Parameter that specifies whether the PPMU measures voltage or current from the DUT.\n\n-   NIDIGITAL_VAL_MEASURE_CURRENT (2400): The PPMU measures current from the DUT.\n-   NIDIGITAL_VAL_MEASURE_VOLTAGE (2401): The PPMU measures voltage from the DUT.\n'
+                    'description': 'Parameter that specifies whether the PPMU measures voltage or current from the DUT.\n\n-   NIDIGITAL_VAL_MEASURE_CURRENT: The PPMU measures current from the DUT.\n-   NIDIGITAL_VAL_MEASURE_VOLTAGE: The PPMU measures voltage from the DUT.\n'
                 },
                 'enum': 'PPMUMeasurementType',
                 'name': 'measurementType',
@@ -3179,7 +3179,7 @@ the trigger conditions are met.
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the function does not return data for that site. You can also use the niDigital_FancyGetPinResultsPinInformation function to obtain a sorted list of returned sites and channels.\n\n-   NIDIGITAL_VAL_L (3): The comparators read a logic low pin state.\n-   NIDIGITAL_VAL_H (4): The comparators read a logic high pin state.\n-   NIDIGITAL_VAL_M (6): The comparators read a midband pin state.\n-   NIDIGITAL_VAL_V (7): The comparators read a value that is above VOH and below VOL, which can occur when you set VOL higher than VOH.\n'
+                    'description': 'The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the function does not return data for that site. You can also use the niDigital_FancyGetPinResultsPinInformation function to obtain a sorted list of returned sites and channels.\n\n-   NIDIGITAL_VAL_L: The comparators read a logic low pin state.\n-   NIDIGITAL_VAL_H: The comparators read a logic high pin state.\n-   NIDIGITAL_VAL_M: The comparators read a midband pin state.\n-   NIDIGITAL_VAL_V: The comparators read a value that is above VOH and below VOL, which can occur when you set VOL higher than VOH.\n'
                 },
                 'enum': 'PinState',
                 'name': 'data',
@@ -3927,7 +3927,7 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Parameter that specifies one of the following digital states to assign to the pin.\n\n-   NIDIGITAL_VAL_0 (0): Specifies to drive low.\n-   NIDIGITAL_VAL_1 (1): Specifies to drive high.\n-   NIDIGITAL_VAL_X (5): Specifies to not drive.\n'
+                    'description': 'Parameter that specifies one of the following digital states to assign to the pin.\n\n-   NIDIGITAL_VAL_0: Specifies to drive low.\n-   NIDIGITAL_VAL_1: Specifies to drive high.\n-   NIDIGITAL_VAL_X: Specifies to not drive.\n'
                 },
                 'enum': 'WriteStaticPinState',
                 'name': 'state',

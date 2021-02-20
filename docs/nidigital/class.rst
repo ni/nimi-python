@@ -539,10 +539,10 @@ configure_time_set_drive_edges
 
                 Drive format of the time set.
 
-                -   :py:data:`~nidigital.DriveFormat.NR` (1500): Non-return.
-                -   :py:data:`~nidigital.DriveFormat.RL` (1501): Return to low.
-                -   :py:data:`~nidigital.DriveFormat.RH` (1502): Return to high.
-                -   :py:data:`~nidigital.DriveFormat.SBC` (1503): Surround by complement.
+                -   :py:data:`~nidigital.DriveFormat.NR`: Non-return.
+                -   :py:data:`~nidigital.DriveFormat.RL`: Return to low.
+                -   :py:data:`~nidigital.DriveFormat.RH`: Return to high.
+                -   :py:data:`~nidigital.DriveFormat.SBC`: Surround by complement.
 
                 
 
@@ -617,10 +617,10 @@ configure_time_set_drive_edges2x
 
                 Drive format of the time set.
 
-                -   :py:data:`~nidigital.DriveFormat.NR` (1500): Non-return.
-                -   :py:data:`~nidigital.DriveFormat.RL` (1501): Return to low.
-                -   :py:data:`~nidigital.DriveFormat.RH` (1502): Return to high.
-                -   :py:data:`~nidigital.DriveFormat.SBC` (1503): Surround by complement.
+                -   :py:data:`~nidigital.DriveFormat.NR`: Non-return.
+                -   :py:data:`~nidigital.DriveFormat.RL`: Return to low.
+                -   :py:data:`~nidigital.DriveFormat.RH`: Return to high.
+                -   :py:data:`~nidigital.DriveFormat.SBC`: Surround by complement.
 
                 
 
@@ -713,10 +713,10 @@ configure_time_set_drive_format
 
                 Drive format of the time set.
 
-                -   :py:data:`~nidigital.DriveFormat.NR` (1500): Non-return.
-                -   :py:data:`~nidigital.DriveFormat.RL` (1501): Return to low.
-                -   :py:data:`~nidigital.DriveFormat.RH` (1502): Return to high.
-                -   :py:data:`~nidigital.DriveFormat.SBC` (1503): Surround by complement.
+                -   :py:data:`~nidigital.DriveFormat.NR`: Non-return.
+                -   :py:data:`~nidigital.DriveFormat.RL`: Return to low.
+                -   :py:data:`~nidigital.DriveFormat.RH`: Return to high.
+                -   :py:data:`~nidigital.DriveFormat.SBC`: Surround by complement.
 
                 
 
@@ -755,14 +755,14 @@ configure_time_set_edge
 
                 Name of the edge.
 
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_ON` (2800)
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA` (2801)
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN` (2802)
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_OFF` (2803)
-                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE` (2804)
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA2` (2805)
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN2` (2806)
-                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE2` (2807)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_ON`
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA`
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN`
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_OFF`
+                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE`
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA2`
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN2`
+                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE2`
 
                 
 
@@ -1012,8 +1012,8 @@ create_capture_waveform_serial
 
                 Order in which to shift the bits.
 
-                -   :py:data:`~nidigital.BitOrder.MSB` (2500): Specifies the bit order by most significant bit first.
-                -   :py:data:`~nidigital.BitOrder.LSB` (2501): Specifies the bit order by least significant bit first.
+                -   :py:data:`~nidigital.BitOrder.MSB`: Specifies the bit order by most significant bit first.
+                -   :py:data:`~nidigital.BitOrder.LSB`: Specifies the bit order by least significant bit first.
 
                 
 
@@ -1093,8 +1093,8 @@ create_source_waveform_parallel
 
                 Parameter that specifies how to map data on multiple sites.
 
-                -   :py:data:`~nidigital.SourceDataMapping.BROADCAST` (2600): Broadcasts the waveform you specify to all sites.
-                -   :py:data:`~nidigital.SourceDataMapping.SITE_UNIQUE` (2601): Sources unique waveform data to each site.
+                -   :py:data:`~nidigital.SourceDataMapping.BROADCAST`: Broadcasts the waveform you specify to all sites.
+                -   :py:data:`~nidigital.SourceDataMapping.SITE_UNIQUE`: Sources unique waveform data to each site.
 
                 
 
@@ -1133,8 +1133,8 @@ create_source_waveform_serial
 
                 Parameter that specifies how to map data on multiple sites.
 
-                -   :py:data:`~nidigital.SourceDataMapping.BROADCAST` (2600): Broadcasts the waveform you specify to all sites.
-                -   :py:data:`~nidigital.SourceDataMapping.SITE_UNIQUE` (2601): Sources unique waveform data to each site.
+                -   :py:data:`~nidigital.SourceDataMapping.BROADCAST`: Broadcasts the waveform you specify to all sites.
+                -   :py:data:`~nidigital.SourceDataMapping.SITE_UNIQUE`: Sources unique waveform data to each site.
 
                 
 
@@ -1154,8 +1154,8 @@ create_source_waveform_serial
 
                 Order in which to shift the bits.
 
-                -   :py:data:`~nidigital.BitOrder.MSB` (2500): Specifies the bit order by most significant bit first.
-                -   :py:data:`~nidigital.BitOrder.LSB` (2501): Specifies the bit order by least significant bit first.
+                -   :py:data:`~nidigital.BitOrder.MSB`: Specifies the bit order by most significant bit first.
+                -   :py:data:`~nidigital.BitOrder.LSB`: Specifies the bit order by least significant bit first.
 
                 
 
@@ -1711,14 +1711,14 @@ get_time_set_edge
 
                 Name of the edge.
 
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_ON` (2800)
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA` (2801)
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN` (2802)
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_OFF` (2803)
-                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE` (2804)
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA2` (2805)
-                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN2` (2806)
-                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE2` (2807)
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_ON`
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA`
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN`
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_OFF`
+                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE`
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_DATA2`
+                -   :py:data:`~nidigital.TimeSetEdgeType.DRIVE_RETURN2`
+                -   :py:data:`~nidigital.TimeSetEdgeType.COMPARE_STROBE2`
 
                 
 
@@ -2038,8 +2038,8 @@ ppmu_measure
 
                 Parameter that specifies whether the PPMU measures voltage or current from the DUT.
 
-                -   :py:data:`~nidigital.PPMUMeasurementType.CURRENT` (2400): The PPMU measures current from the DUT.
-                -   :py:data:`~nidigital.PPMUMeasurementType.VOLTAGE` (2401): The PPMU measures voltage from the DUT.
+                -   :py:data:`~nidigital.PPMUMeasurementType.CURRENT`: The PPMU measures current from the DUT.
+                -   :py:data:`~nidigital.PPMUMeasurementType.VOLTAGE`: The PPMU measures voltage from the DUT.
 
                 
 
@@ -2186,10 +2186,10 @@ read_static
 
                     The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the method does not return data for that site. You can also use the :py:meth:`nidigital.Session.get_pin_results_pin_information` method to obtain a sorted list of returned sites and channels.
 
-                    -   :py:data:`~nidigital.PinState.L` (3): The comparators read a logic low pin state.
-                    -   :py:data:`~nidigital.PinState.H` (4): The comparators read a logic high pin state.
-                    -   :py:data:`~nidigital.PinState.M` (6): The comparators read a midband pin state.
-                    -   :py:data:`~nidigital.PinState.V` (7): The comparators read a value that is above VOH and below VOL, which can occur when you set VOL higher than VOH.
+                    -   :py:data:`~nidigital.PinState.L`: The comparators read a logic low pin state.
+                    -   :py:data:`~nidigital.PinState.H`: The comparators read a logic high pin state.
+                    -   :py:data:`~nidigital.PinState.M`: The comparators read a midband pin state.
+                    -   :py:data:`~nidigital.PinState.V`: The comparators read a value that is above VOH and below VOL, which can occur when you set VOL higher than VOH.
 
                     
 
@@ -2644,9 +2644,9 @@ write_static
 
                 Parameter that specifies one of the following digital states to assign to the pin.
 
-                -   :py:data:`~nidigital.WriteStaticPinState.ZERO` (0): Specifies to drive low.
-                -   :py:data:`~nidigital.WriteStaticPinState.ONE` (1): Specifies to drive high.
-                -   :py:data:`~nidigital.WriteStaticPinState.X` (5): Specifies to not drive.
+                -   :py:data:`~nidigital.WriteStaticPinState.ZERO`: Specifies to drive low.
+                -   :py:data:`~nidigital.WriteStaticPinState.ONE`: Specifies to drive high.
+                -   :py:data:`~nidigital.WriteStaticPinState.X`: Specifies to not drive.
 
                 
 
@@ -2922,15 +2922,15 @@ conditional_jump_trigger_type
 
         Disables the conditional jump trigger or configures it for either hardware triggering or software triggering.  The default value is :py:data:`~nidigital.TriggerType.NONE`.
 
-        +-------------------------------------------------------+------------------------------------------------------------------+
-        | Valid Values:                                         |                                                                  |
-        +=======================================================+==================================================================+
-        | :py:data:`~nidigital.TriggerType.NONE` (1700)         | Disables the conditional jump trigger.                           |
-        +-------------------------------------------------------+------------------------------------------------------------------+
-        | :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` (1701) | Configures the conditional jump trigger for hardware triggering. |
-        +-------------------------------------------------------+------------------------------------------------------------------+
-        | :py:data:`~nidigital.TriggerType.SOFTWARE` (1702)     | Configures the conditional jump trigger for software triggering. |
-        +-------------------------------------------------------+------------------------------------------------------------------+
+        +------------------------------------------------+------------------------------------------------------------------+
+        | Valid Values:                                  |                                                                  |
+        +================================================+==================================================================+
+        | :py:data:`~nidigital.TriggerType.NONE`         | Disables the conditional jump trigger.                           |
+        +------------------------------------------------+------------------------------------------------------------------+
+        | :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` | Configures the conditional jump trigger for hardware triggering. |
+        +------------------------------------------------+------------------------------------------------------------------+
+        | :py:data:`~nidigital.TriggerType.SOFTWARE`     | Configures the conditional jump trigger for software triggering. |
+        +------------------------------------------------+------------------------------------------------------------------+
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -2990,13 +2990,13 @@ digital_edge_conditional_jump_trigger_edge
 
         Configures the active edge of the incoming trigger signal for the conditional jump trigger instance. The default value is :py:data:`~nidigital.DigitalEdge.RISING`.
 
-        +--------------------------------------------------+---------------------------------------------------------------+
-        | Valid Values:                                    |                                                               |
-        +==================================================+===============================================================+
-        | :py:data:`~nidigital.DigitalEdge.RISING` (1800)  | Specifies the signal transition from low level to high level. |
-        +--------------------------------------------------+---------------------------------------------------------------+
-        | :py:data:`~nidigital.DigitalEdge.FALLING` (1801) | Specifies the signal transition from high level to low level. |
-        +--------------------------------------------------+---------------------------------------------------------------+
+        +-------------------------------------------+---------------------------------------------------------------+
+        | Valid Values:                             |                                                               |
+        +===========================================+===============================================================+
+        | :py:data:`~nidigital.DigitalEdge.RISING`  | Specifies the signal transition from low level to high level. |
+        +-------------------------------------------+---------------------------------------------------------------+
+        | :py:data:`~nidigital.DigitalEdge.FALLING` | Specifies the signal transition from high level to low level. |
+        +-------------------------------------------+---------------------------------------------------------------+
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -3068,13 +3068,13 @@ digital_edge_start_trigger_edge
 
         Specifies the active edge for the Start trigger. This property is used when the :py:attr:`nidigital.Session.start_trigger_type` property is set to Digital Edge.
 
-        +--------------------------------------------------+-------------------------------------------------------------------------------+
-        | Defined Values:                                  |                                                                               |
-        +==================================================+===============================================================================+
-        | :py:data:`~nidigital.DigitalEdge.RISING` (1800)  | Asserts the trigger when the signal transitions from low level to high level. |
-        +--------------------------------------------------+-------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.DigitalEdge.FALLING` (1801) | Asserts the trigger when the signal transitions from high level to low level. |
-        +--------------------------------------------------+-------------------------------------------------------------------------------+
+        +-------------------------------------------+-------------------------------------------------------------------------------+
+        | Defined Values:                           |                                                                               |
+        +===========================================+===============================================================================+
+        | :py:data:`~nidigital.DigitalEdge.RISING`  | Asserts the trigger when the signal transitions from low level to high level. |
+        +-------------------------------------------+-------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.DigitalEdge.FALLING` | Asserts the trigger when the signal transitions from high level to low level. |
+        +-------------------------------------------+-------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
@@ -3354,13 +3354,13 @@ frequency_counter_measurement_mode
 
         Determines how the frequency counters of the digital pattern instrument make measurements.
 
-        +----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Valid Values:                                                  |                                                                                                                                                                                                                                                                                                                                                                                                  |
-        +================================================================+==================================================================================================================================================================================================================================================================================================================================================================================================+
-        | :py:data:`~nidigital.FrequencyMeasurementMode.BANKED` (3700)   | Each discrete frequency counter is mapped to specific channels and makes frequency measurements from only those channels. Use banked mode when you need access to the full measure frequency range of the instrument. **Note:** If you request frequency measurements from multiple channels within the same bank, the measurements are made in series for the channels in that bank.            |
-        +----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.FrequencyMeasurementMode.PARALLEL` (3701) | All discrete frequency counters make frequency measurements from all channels in parallel with one another. Use parallel mode to increase the speed of frequency measurements if you do not need access to the full measure frequency range of the instrument; in parallel mode, you can also add :py:attr:`nidigital.Session.frequency_counter_hysteresis_enabled` to reduce measurement noise. |
-        +----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Valid Values:                                           |                                                                                                                                                                                                                                                                                                                                                                                                  |
+        +=========================================================+==================================================================================================================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nidigital.FrequencyMeasurementMode.BANKED`   | Each discrete frequency counter is mapped to specific channels and makes frequency measurements from only those channels. Use banked mode when you need access to the full measure frequency range of the instrument. **Note:** If you request frequency measurements from multiple channels within the same bank, the measurements are made in series for the channels in that bank.            |
+        +---------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.FrequencyMeasurementMode.PARALLEL` | All discrete frequency counters make frequency measurements from all channels in parallel with one another. Use parallel mode to increase the speed of frequency measurements if you do not need access to the full measure frequency range of the instrument; in parallel mode, you can also add :py:attr:`nidigital.Session.frequency_counter_hysteresis_enabled` to reduce measurement noise. |
+        +---------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
@@ -3506,13 +3506,13 @@ history_ram_cycles_to_acquire
 
         Configures which cycles History RAM acquires after the trigger conditions are met. If you configure History RAM to only acquire failed cycles, you must set the pretrigger samples for History RAM to 0.
 
-        +---------------------------------------------------------------+-----------------------------------------------------------------------------------+
-        | Defined Values:                                               |                                                                                   |
-        +===============================================================+===================================================================================+
-        | :py:data:`~nidigital.HistoryRAMCyclesToAcquire.FAILED` (2303) | Only acquires cycles that fail a compare after the triggering conditions are met. |
-        +---------------------------------------------------------------+-----------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.HistoryRAMCyclesToAcquire.ALL` (2304)    | Acquires all cycles after the triggering conditions are met.                      |
-        +---------------------------------------------------------------+-----------------------------------------------------------------------------------+
+        +--------------------------------------------------------+-----------------------------------------------------------------------------------+
+        | Defined Values:                                        |                                                                                   |
+        +========================================================+===================================================================================+
+        | :py:data:`~nidigital.HistoryRAMCyclesToAcquire.FAILED` | Only acquires cycles that fail a compare after the triggering conditions are met. |
+        +--------------------------------------------------------+-----------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.HistoryRAMCyclesToAcquire.ALL`    | Acquires all cycles after the triggering conditions are met.                      |
+        +--------------------------------------------------------+-----------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
@@ -3626,15 +3626,15 @@ history_ram_trigger_type
 
         Specifies the type of trigger condition on which History RAM starts acquiring pattern information.
 
-        +------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-        | Defined Values:                                                  |                                                                                                                                     |
-        +==================================================================+=====================================================================================================================================+
-        | :py:data:`~nidigital.HistoryRAMTriggerType.FIRST_FAILURE` (2200) | Starts acquiring pattern information in History RAM on the first failed cycle in a pattern burst.                                   |
-        +------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.HistoryRAMTriggerType.CYCLE_NUMBER` (2201)  | Starts acquiring pattern information in History RAM starting from a specified cycle number.                                         |
-        +------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.HistoryRAMTriggerType.PATTERN_LABEL` (2202) | Starts acquiring pattern information in History RAM starting from a specified pattern label, augmented by vector and cycle offsets. |
-        +------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+        +-----------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+        | Defined Values:                                           |                                                                                                                                     |
+        +===========================================================+=====================================================================================================================================+
+        | :py:data:`~nidigital.HistoryRAMTriggerType.FIRST_FAILURE` | Starts acquiring pattern information in History RAM on the first failed cycle in a pattern burst.                                   |
+        +-----------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.HistoryRAMTriggerType.CYCLE_NUMBER`  | Starts acquiring pattern information in History RAM starting from a specified cycle number.                                         |
+        +-----------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.HistoryRAMTriggerType.PATTERN_LABEL` | Starts acquiring pattern information in History RAM starting from a specified pattern label, augmented by vector and cycle offsets. |
+        +-----------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
@@ -4066,11 +4066,11 @@ ppmu_aperture_time_units
 
         Specifies the units of the measurement aperture time for the PPMU.
 
-        +------------------------------------------------------------+-----------------------------------------+
-        | Defined Values:                                            |                                         |
-        +============================================================+=========================================+
-        | :py:data:`~nidigital.PPMUApertureTimeUnits.SECONDS` (2100) | Specifies the aperture time in seconds. |
-        +------------------------------------------------------------+-----------------------------------------+
+        +-----------------------------------------------------+-----------------------------------------+
+        | Defined Values:                                     |                                         |
+        +=====================================================+=========================================+
+        | :py:data:`~nidigital.PPMUApertureTimeUnits.SECONDS` | Specifies the aperture time in seconds. |
+        +-----------------------------------------------------+-----------------------------------------+
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -4208,11 +4208,11 @@ ppmu_current_limit_behavior
 
         Specifies how the output should behave when the current limit is reached.
 
-        +----------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | Defined Values:                                                |                                                                                                                                         |
-        +================================================================+=========================================================================================================================================+
-        | :py:data:`~nidigital.PPMUCurrentLimitBehavior.REGULATE` (3100) | Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached. |
-        +----------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | Defined Values:                                         |                                                                                                                                         |
+        +=========================================================+=========================================================================================================================================+
+        | :py:data:`~nidigital.PPMUCurrentLimitBehavior.REGULATE` | Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached. |
+        +---------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -4314,13 +4314,13 @@ ppmu_output_function
 
         Specifies whether the PPMU forces voltage or current to the DUT.
 
-        +---------------------------------------------------------+--------------------------------------------+
-        | Defined Values:                                         |                                            |
-        +=========================================================+============================================+
-        | :py:data:`~nidigital.PPMUOutputFunction.VOLTAGE` (1300) | Specifies the output method to DC Voltage. |
-        +---------------------------------------------------------+--------------------------------------------+
-        | :py:data:`~nidigital.PPMUOutputFunction.CURRENT` (1301) | Specifies the output method to DC Current. |
-        +---------------------------------------------------------+--------------------------------------------+
+        +--------------------------------------------------+--------------------------------------------+
+        | Defined Values:                                  |                                            |
+        +==================================================+============================================+
+        | :py:data:`~nidigital.PPMUOutputFunction.VOLTAGE` | Specifies the output method to DC Voltage. |
+        +--------------------------------------------------+--------------------------------------------+
+        | :py:data:`~nidigital.PPMUOutputFunction.CURRENT` | Specifies the output method to DC Current. |
+        +--------------------------------------------------+--------------------------------------------+
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -4536,17 +4536,17 @@ selected_function
 
         Specifies whether digital pattern instrument channels are controlled by the pattern sequencer or PPMU, disconnected, or off.
 
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Defined Values:                                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-        +==========================================================+==================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
-        | :py:data:`~nidigital.SelectedFunction.DIGITAL` (1100)    | The pin is connected to the driver, comparator, and active load methods. The PPMU is not sourcing, but can make voltage measurements. The state of the digital pin driver when you change the :py:attr:`nidigital.Session.selected_function` to Digital is determined by the most recent call to the :py:meth:`nidigital.Session.write_static` method or the last vector of the most recently executed pattern burst, whichever happened last. Use the :py:meth:`nidigital.Session.write_static` method to control the state of the digital pin driver through software. Use the :py:meth:`nidigital.Session.burst_pattern` method to control the state of the digital pin driver through a pattern. Set the **selectDigitalFunction** parameter of the :py:meth:`nidigital.Session.burst_pattern` method to True to automatically switch the :py:attr:`nidigital.Session.selected_function` of the pins in the pattern burst to :py:data:`~nidigital.SelectedFunction.DIGITAL`. |
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.SelectedFunction.PPMU` (1101)       | The pin is connected to the PPMU. The driver, comparator, and active load are off while this method is selected. Call the :py:meth:`nidigital.Session.ppmu_source` method to source a voltage or current. The :py:meth:`nidigital.Session.ppmu_source` method automatically switches the :py:attr:`nidigital.Session.selected_function` to the PPMU state and starts sourcing from the PPMU. Changing the :py:attr:`nidigital.Session.selected_function` to :py:data:`~nidigital.SelectedFunction.DISCONNECT`, :py:data:`~nidigital.SelectedFunction.OFF`, or :py:data:`~nidigital.SelectedFunction.DIGITAL` causes the PPMU to stop sourcing. If you set the :py:attr:`nidigital.Session.selected_function` property to PPMU, the PPMU is initially not sourcing.                                                                                                                                                                                                               |
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.SelectedFunction.OFF` (1102)        | The pin is electrically connected, and the PPMU and digital pin driver are off while this method is selected.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.SelectedFunction.DISCONNECT` (1103) | The pin is electrically disconnected from instrument methods. Selecting this method causes the PPMU to stop sourcing prior to disconnecting the pin.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Defined Values:                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+        +===================================================+==================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nidigital.SelectedFunction.DIGITAL`    | The pin is connected to the driver, comparator, and active load methods. The PPMU is not sourcing, but can make voltage measurements. The state of the digital pin driver when you change the :py:attr:`nidigital.Session.selected_function` to Digital is determined by the most recent call to the :py:meth:`nidigital.Session.write_static` method or the last vector of the most recently executed pattern burst, whichever happened last. Use the :py:meth:`nidigital.Session.write_static` method to control the state of the digital pin driver through software. Use the :py:meth:`nidigital.Session.burst_pattern` method to control the state of the digital pin driver through a pattern. Set the **selectDigitalFunction** parameter of the :py:meth:`nidigital.Session.burst_pattern` method to True to automatically switch the :py:attr:`nidigital.Session.selected_function` of the pins in the pattern burst to :py:data:`~nidigital.SelectedFunction.DIGITAL`. |
+        +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.SelectedFunction.PPMU`       | The pin is connected to the PPMU. The driver, comparator, and active load are off while this method is selected. Call the :py:meth:`nidigital.Session.ppmu_source` method to source a voltage or current. The :py:meth:`nidigital.Session.ppmu_source` method automatically switches the :py:attr:`nidigital.Session.selected_function` to the PPMU state and starts sourcing from the PPMU. Changing the :py:attr:`nidigital.Session.selected_function` to :py:data:`~nidigital.SelectedFunction.DISCONNECT`, :py:data:`~nidigital.SelectedFunction.OFF`, or :py:data:`~nidigital.SelectedFunction.DIGITAL` causes the PPMU to stop sourcing. If you set the :py:attr:`nidigital.Session.selected_function` property to PPMU, the PPMU is initially not sourcing.                                                                                                                                                                                                               |
+        +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.SelectedFunction.OFF`        | The pin is electrically connected, and the PPMU and digital pin driver are off while this method is selected.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+        +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.SelectedFunction.DISCONNECT` | The pin is electrically disconnected from instrument methods. Selecting this method causes the PPMU to stop sourcing prior to disconnecting the pin.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+        +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: You can make PPMU voltage measurements using the :py:meth:`nidigital.Session.ppmu_measure` method from within any :py:attr:`nidigital.Session.selected_function`.
 
@@ -4876,15 +4876,15 @@ start_trigger_type
 
         Specifies the Start trigger type. The digital pattern instrument waits for this trigger after you call the :py:meth:`nidigital.Session.init` method or the :py:meth:`nidigital.Session.burst_pattern` method, and does not burst a pattern until this trigger is received.
 
-        +-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Defined Values:                                       |                                                                                                                                                                                                                                                                                                                                     |
-        +=======================================================+=====================================================================================================================================================================================================================================================================================================================================+
-        | :py:data:`~nidigital.TriggerType.NONE` (1700)         | Disables the Start trigger. Pattern bursting starts immediately after you call the :py:meth:`nidigital.Session.init` method or the :py:meth:`nidigital.Session.burst_pattern` method.                                                                                                                                               |
-        +-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` (1701) | Pattern bursting does not start until the digital pattern instrument detects a digital edge.                                                                                                                                                                                                                                        |
-        +-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.TriggerType.SOFTWARE` (1702)     | Pattern bursting does not start until the digital pattern instrument receives a software Start trigger. Create a software Start trigger by calling the :py:meth:`nidigital.Session.send_software_edge_trigger` method and selecting start trigger in the **trigger** parameter.Related information: SendSoftwareEdgeTrigger method. |
-        +-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Defined Values:                                |                                                                                                                                                                                                                                                                                                                                     |
+        +================================================+=====================================================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nidigital.TriggerType.NONE`         | Disables the Start trigger. Pattern bursting starts immediately after you call the :py:meth:`nidigital.Session.init` method or the :py:meth:`nidigital.Session.burst_pattern` method.                                                                                                                                               |
+        +------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` | Pattern bursting does not start until the digital pattern instrument detects a digital edge.                                                                                                                                                                                                                                        |
+        +------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.TriggerType.SOFTWARE`     | Pattern bursting does not start until the digital pattern instrument receives a software Start trigger. Create a software Start trigger by calling the :py:meth:`nidigital.Session.send_software_edge_trigger` method and selecting start trigger in the **trigger** parameter.Related information: SendSoftwareEdgeTrigger method. |
+        +------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
@@ -5000,15 +5000,15 @@ termination_mode
 
         Specifies the behavior of the pin during non-drive cycles.
 
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Defined Values:                                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-        +==========================================================+======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
-        | :py:data:`~nidigital.TerminationMode.ACTIVE_LOAD` (1200) | Specifies that, for non-drive pin states (L, H, X, V, M, E), the active load is connected and the instrument sources or sinks a defined amount of current to load the DUT. The amount of current sourced by the instrument and therefore sunk by the DUT is specified by IOL. The amount of current sunk by the instrument and therefore sourced by the DUT is specified by IOH. The voltage at which the instrument changes between sourcing and sinking is specified by VCOM.                                                                                                                                                                                                                                                                                                                                                                                      |
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.TerminationMode.VTERM` (1201)       | Specifies that, for non-drive pin states (L, H, X, V, M, E), the pin driver terminates the pin to the configured VTERM voltage through a 50 Ω impedance. VTERM is adjustable to allow for the pin to terminate at a set level. This is useful for instruments that might operate incorrectly if an instrument pin is unterminated and is allowed to float to any voltage level within the instrument voltage range. To address this issue, enable VTERM by configuring the VTERM pin level to the desired voltage and selecting the VTERM termination mode. Setting VTERM to 0 V and selecting the VTERM termination mode has the effect of connecting a 50 Ω termination to ground, which provides an effective 50 Ω impedance for the pin. This can be useful for improving signal integrity of certain DUTs by reducing reflections while the DUT drives the pin. |
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.TerminationMode.HIGH_Z` (1202)      | Specifies that, for non-drive pin states (L, H, X, V, M, E), the pin driver is put in a high-impedance state and the active load is disabled.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Defined Values:                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+        +===================================================+======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nidigital.TerminationMode.ACTIVE_LOAD` | Specifies that, for non-drive pin states (L, H, X, V, M, E), the active load is connected and the instrument sources or sinks a defined amount of current to load the DUT. The amount of current sourced by the instrument and therefore sunk by the DUT is specified by IOL. The amount of current sunk by the instrument and therefore sourced by the DUT is specified by IOH. The voltage at which the instrument changes between sourcing and sinking is specified by VCOM.                                                                                                                                                                                                                                                                                                                                                                                      |
+        +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.TerminationMode.VTERM`       | Specifies that, for non-drive pin states (L, H, X, V, M, E), the pin driver terminates the pin to the configured VTERM voltage through a 50 Ω impedance. VTERM is adjustable to allow for the pin to terminate at a set level. This is useful for instruments that might operate incorrectly if an instrument pin is unterminated and is allowed to float to any voltage level within the instrument voltage range. To address this issue, enable VTERM by configuring the VTERM pin level to the desired voltage and selecting the VTERM termination mode. Setting VTERM to 0 V and selecting the VTERM termination mode has the effect of connecting a 50 Ω termination to ground, which provides an effective 50 Ω impedance for the pin. This can be useful for improving signal integrity of certain DUTs by reducing reflections while the DUT drives the pin. |
+        +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.TerminationMode.HIGH_Z`      | Specifies that, for non-drive pin states (L, H, X, V, M, E), the pin driver is put in a high-impedance state and the active load is disabled.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+        +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
