@@ -53,7 +53,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
-          *Added nifgen_trigger.py to demonstrate pulling a trigger from another device.
+          *Added the nifgen_trigger.py example to demonstrate pulling a trigger from another device.
     * #### Changed
     * #### Removed
 
