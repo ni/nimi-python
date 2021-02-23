@@ -5,7 +5,7 @@ import sys
 import time
 
 
-def example(resource_name1, resource_name2, options, length, voltage):
+def example(resource_name1, resource_name2, options):
     with niscope.Session(resource_name=resource_name1, options=options) as session1, niscope.Session(resource_name=resource_name2, options=options) as session2:
         session_list = [session1, session2]
         for session in session_list:
