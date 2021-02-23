@@ -55,6 +55,26 @@ All notable changes to this project will be documented in this file.
           *Added the nifgen_trigger.py example to demonstrate pulling a trigger from another device.
     * #### Changed
     * #### Removed
+* ### `nimodinst` (NI-ModInst)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `niscope` (NI-SCOPE)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `niswitch` (NI-SWITCH)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nise` (NI Switch Executive)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nitclk` (NI-TClk)
+    * #### Added
+    * #### Changed
+    * #### Removed
 
     
     
