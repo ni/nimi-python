@@ -8,6 +8,9 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
+        from collections.abc import Mapping
+        if not isinstance(waveform_data, Mapping):
+            raise TypeError("Expecting waveform_data to be a dictionary but got {}".format(type(waveform_data)))
         site_list = []
         # We assume all the entries are the same length (we'll check later) to make the array the correct size
         # Get an entry from the dictionary from https://stackoverflow.com/questions/30362391/how-do-you-find-the-first-key-in-a-dictionary

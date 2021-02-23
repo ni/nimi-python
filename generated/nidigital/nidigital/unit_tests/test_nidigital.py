@@ -318,3 +318,23 @@ class TestSession(object):
             for s in self.site_numbers_looping:
                 session.sites[s].fetch_history_ram_cycle_information(position=0, samples_to_read=0)
             assert self.patched_library.niDigital_GetHistoryRAMSampleCount.call_count == len(self.site_numbers_looping)
+
+    def test_pin_state_enum_print(self):
+
+        assert str(nidigital.PinState.ZERO) == '0'
+        assert str(nidigital.PinState.ONE) == '1'
+        assert str(nidigital.PinState.NOT_A_PIN_STATE) == 'Not a Pin State'
+        assert str(nidigital.PinState.PIN_STATE_NOT_ACQUIRED) == 'Pin State Not Acquired'
+        assert str(nidigital.PinState.L) == 'L'
+        assert str(nidigital.PinState.H) == 'H'
+        assert str(nidigital.PinState.X) == 'X'
+        assert str(nidigital.PinState.M) == 'M'
+        assert str(nidigital.PinState.V) == 'V'
+        assert str(nidigital.PinState.D) == 'D'
+        assert str(nidigital.PinState.E) == 'E'
+
+    def test_write_static_pin_state_enum_print(self):
+
+        assert str(nidigital.WriteStaticPinState.ZERO) == '0'
+        assert str(nidigital.WriteStaticPinState.ONE) == '1'
+        assert str(nidigital.WriteStaticPinState.X) == 'X'

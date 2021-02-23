@@ -315,6 +315,46 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
     assert all(len(fetched_waveforms[site]) == num_samples for site in fetched_waveforms)
 
 
+@pytest.fixture(params=[tuple, int, str])
+def source_waveform_wrong_type(request):
+    return request.param
+
+
+def test_source_waveform_parallel_site_unique_wrong_type(multi_instrument_session, source_waveform_wrong_type):
+    '''Test methods for passing wrong types write_source_waveform_site_unique .
+
+    - create_source_waveform_parallel
+    - write_source_waveform_site_unique
+    '''
+    test_name = test_source_waveform_parallel_site_unique.__name__
+    configure_session(multi_instrument_session, test_name)
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
+
+    num_samples = 256
+    multi_instrument_session.write_sequencer_register(reg=nidigital.SequencerRegister.REGISTER0, value=num_samples)
+
+    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(
+        waveform_name='src_wfm',
+        data_mapping=nidigital.SourceDataMapping.SITE_UNIQUE)
+
+    if source_waveform_wrong_type == tuple:
+        source_waveform = ([i for i in range(num_samples)], [i for i in reversed(range(num_samples))])
+    elif source_waveform_wrong_type == int:
+        source_waveform = num_samples
+    elif source_waveform_wrong_type == str:
+        source_waveform = {
+            str(1): [str(i) for i in range(num_samples)],
+            str(0): [str(i) for i in reversed(range(num_samples))]}
+    else:
+        assert False, "Invalid source waveform data type: {}".format(source_waveform_type)
+
+    with pytest.raises(TypeError):
+        multi_instrument_session.write_source_waveform_site_unique(
+            waveform_name='src_wfm',
+            waveform_data=source_waveform)
+
+
 def test_fetch_capture_waveform_parallel(multi_instrument_session):
     '''Test methods for using capture waveform with parallel acquisition.
 
@@ -403,7 +443,7 @@ def test_history_ram_cycle_information_string():
         cycle_number=999,
         scan_cycle_number=13,
         expected_pin_states=[[nidigital.PinState.D, nidigital.PinState.V], [nidigital.PinState.V, nidigital.PinState.D]],
-        actual_pin_states=[[nidigital.PinState.PIN_STATE_NOT_ACQUIRED, nidigital.PinState.PIN_STATE_NOT_ACQUIRED], [nidigital.PinState.ZERO, nidigital.PinState.ONE]],
+        actual_pin_states=[[nidigital.PinState.PIN_STATE_NOT_ACQUIRED, nidigital.PinState.NOT_A_PIN_STATE], [nidigital.PinState.ZERO, nidigital.PinState.ONE]],
         per_pin_pass_fail=[[True, True], [False, False]])
     print(cycle_info)
     expected_string = '''Pattern Name        : pat
@@ -412,7 +452,7 @@ Vector Number       : 42
 Cycle Number        : 999
 Scan Cycle Number   : 13
 Expected Pin States : [[D, V], [V, D]]
-Actual Pin States   : [[PIN_STATE_NOT_ACQUIRED, PIN_STATE_NOT_ACQUIRED], [ZERO, ONE]]
+Actual Pin States   : [[Pin State Not Acquired, Not a Pin State], [0, 1]]
 Per Pin Pass Fail   : [[True, True], [False, False]]
 '''
     assert str(cycle_info) == expected_string
@@ -748,7 +788,6 @@ def test_create_get_delete_time_sets(multi_instrument_session):
     '''Test basic time set methods.
 
     - create_time_set
-    - get_time_set_name
     - delete_all_time_sets
     '''
     time_set_a = 'time_set_abc'
@@ -757,15 +796,7 @@ def test_create_get_delete_time_sets(multi_instrument_session):
 
     multi_instrument_session.create_time_set(time_set_a)
     multi_instrument_session.create_time_set(time_set_b)
-    assert multi_instrument_session.get_time_set_name(0) == time_set_a
-    assert multi_instrument_session.get_time_set_name(1) == time_set_b
     multi_instrument_session.delete_all_time_sets()
-    try:
-        multi_instrument_session.get_time_set_name(0)
-        assert False
-    except nidigital.Error as e:
-        assert e.code == -1074135025
-        assert e.description.find('Invalid parameter.') != -1
 
 
 def test_configure_get_time_set_period(multi_instrument_session):
@@ -1014,7 +1045,6 @@ def test_load_get_unload_patterns(multi_instrument_session):
     '''Test basic pattern methods.
 
     - load_pattern
-    - get_pattern_name
     - unload_all_patterns
     '''
     test_name = 'multiple_patterns'
@@ -1023,16 +1053,7 @@ def test_load_get_unload_patterns(multi_instrument_session):
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern_a.digipat'))
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern_b.digipat'))
 
-    assert multi_instrument_session.get_pattern_name(0) == 'first_pattern'
-    assert multi_instrument_session.get_pattern_name(1) == 'second_pattern'
-
     multi_instrument_session.unload_all_patterns(unload_keep_alive_pattern=True)
-    try:
-        multi_instrument_session.get_pattern_name(0)
-        assert False
-    except nidigital.Error as e:
-        assert e.code == -1074135025
-        assert e.description.find('Invalid parameter.') != -1
 
 
 def test_configure_pattern_burst_sites(multi_instrument_session):

@@ -6,7 +6,6 @@ import math
 import nifake
 import nifake.errors
 import numpy
-import six
 import warnings
 
 from mock import patch
@@ -463,7 +462,7 @@ class TestSession(object):
             assert result_int32 == int32_val
             assert isinstance(result_int32, int)
             assert result_int64 == int64_val
-            assert isinstance(result_int64, six.integer_types)
+            assert isinstance(result_int64, int)
             assert result_enum == enum_val
             assert isinstance(result_enum, nifake.Turtle)
             assert result_float == float_val
@@ -474,7 +473,7 @@ class TestSession(object):
             assert isinstance(result_array, list)
             assert isinstance(result_array[0], float)
             assert result_string == string_val
-            assert isinstance(result_string, six.text_type)
+            assert isinstance(result_string, str)
             assert self.patched_library.niFake_ReturnMultipleTypes.call_count == 2
 
     def test_multiple_array_types(self):

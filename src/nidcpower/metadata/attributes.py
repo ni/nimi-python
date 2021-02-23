@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.6.0d7
+# This file is generated from NI-DCPower API metadata version 20.7.0d8
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -1614,6 +1614,19 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32'
     },
+    1150249: {
+        'access': 'read-write',
+        'attribute_class': 'AttributeViStringRepeatedCapability',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the channel(s) to merge with a designated primary channel of an SMU in order to increase the maximum current you can source from the SMU.\nThis attribute designates the merge channels to combine with a primary channel. To designate the primary channel, initialize the session to the primary channel only.\nNote: You cannot change the merge configuration with this attribute when the session is in the Running state.\nFor complete information on using merged channels with this attribute, refer to Merged Channels in the NI DC Power Supplies and SMUs Help.\n',
+            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices. Devices that do not support this property behave as if no channels were merged.\nDefault Value: Refer to the Supported Attributes by Device topic for the default value by device.\n'
+        },
+        'lv_property': 'Source:Advanced:Merged Channels',
+        'name': 'MERGED_CHANNELS',
+        'resettable': False,
+        'type': 'ViString'
+    },
     1150255: {
         'access': 'read-write',
         'channel_based': True,
@@ -1650,6 +1663,31 @@ attributes = {
         'name': 'AUTORANGE_THRESHOLD_MODE',
         'resettable': False,
         'type': 'ViInt32'
+    },
+    1150275: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the behavior of the Shutdown trigger.\nDefault Value: NIDCPOWER_VAL_NONE\n',
+            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'enum': 'TriggerType',
+        'lv_property': 'Triggers:Shutdown Trigger:Trigger Type',
+        'name': 'SHUTDOWN_TRIGGER_TYPE',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
+    1150277: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the input terminal for the Shutdown trigger. This attribute is used only when the NIDCPOWER_ATTR_SHUTDOWN_TRIGGER_TYPE attribute is set to digital edge.\nYou can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.\nInput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.\n',
+            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'lv_property': 'Triggers:Shutdown Trigger:Digital Edge:Input Terminal',
+        'name': 'DIGITAL_EDGE_SHUTDOWN_TRIGGER_INPUT_TERMINAL',
+        'resettable': False,
+        'type': 'ViString'
     },
     1250001: {
         'access': 'read-write',
