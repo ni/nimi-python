@@ -28,7 +28,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 * ### `nitclk` (NI-TClk)
     * #### Added
-         * Added nitclk_niscope.py to demonstrate homogenous triggering.
+         * Added nitclk_synchronize_trigger.py to demonstrate homogenous triggering.
     
     
 ## 1.3.2 - 2020-09-18
