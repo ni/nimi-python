@@ -26,9 +26,36 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+=======
+* ### ALL
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nidcpower` (NI-DCPower)
+    * #### Added
+        * API parity with NI-DCPower 20.6.0 by adding Merged Channels and Shutdown Triggers support. The following properties are added:
+            * `merged_channels`
+            * `digital_edge_shutdown_trigger_input_terminal`
+            * `shutdown_trigger_type`
+    * #### Changed
+    * #### Removed
+* ### `nidigital` (NI-Digital Pattern Driver)
+    * #### Added
+        * API reference documentation and API usage examples
+        * API parity with NI-Digital Pattern Driver 20.6.0 by adding support for configuration of frequency counter measurement mode. The following properties are added:
+            * `frequency_counter_measurement_mode`
+            * `frequency_counter_hysteresis_enabled`
+    * #### Changed
+    * #### Removed
+* ### `nidmm` (NI-DMM)
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
           *Added nifgen_trigger.py to demonstrate pulling a trigger from another device.
+    * #### Changed
+    * #### Removed
 
     
     

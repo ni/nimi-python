@@ -15,7 +15,19 @@ BitOrder
 
 
 
+        The most significant bit is first. The first bit is in the 2^n place, where n is the number of bits.
+
+        
+
+
+
     .. py:attribute:: BitOrder.LSB
+
+
+
+        The least significant bit is first. The first bit is in the 2^0 place.
+
+        
 
 
 
@@ -28,7 +40,19 @@ DigitalEdge
 
 
 
+        Asserts the trigger when the signal transitions from low level to high level.
+
+        
+
+
+
     .. py:attribute:: DigitalEdge.FALLING
+
+
+
+        Asserts the trigger when the signal transitions from high level to low level.
+
+        
 
 
 
@@ -41,7 +65,19 @@ DriveFormat
 
 
 
+        Drive format remains at logic level after each bit.
+
+        
+
+
+
     .. py:attribute:: DriveFormat.RL
+
+
+
+        Drive format returns to a logic level low after each bit.
+
+        
 
 
 
@@ -49,7 +85,48 @@ DriveFormat
 
 
 
+        Drive format returns to a logic level high after each bit.
+
+        
+
+
+
     .. py:attribute:: DriveFormat.SBC
+
+
+
+        Drive format returns to the complement logic level of the bit after each bit.
+
+        
+
+
+
+FrequencyMeasurementMode
+------------------------
+
+.. py:class:: FrequencyMeasurementMode
+
+    .. py:attribute:: FrequencyMeasurementMode.BANKED
+
+
+
+        Frequency measurements are made serially for groups of channels associated with a single frequency counter for each group.
+
+        Maximum frequency measured: 200 MHz.
+
+        
+
+
+
+    .. py:attribute:: FrequencyMeasurementMode.PARALLEL
+
+
+
+        Frequency measurements are made by multiple frequency counters in parallel.
+
+        Maximum frequency measured: 100 MHz.
+
+        
 
 
 
@@ -62,7 +139,19 @@ HistoryRAMCyclesToAcquire
 
 
 
+        Acquires failed cycles.
+
+        
+
+
+
     .. py:attribute:: HistoryRAMCyclesToAcquire.ALL
+
+
+
+        Acquires all cycles.
+
+        
 
 
 
@@ -75,11 +164,29 @@ HistoryRAMTriggerType
 
 
 
+        First Failure History RAM trigger
+
+        
+
+
+
     .. py:attribute:: HistoryRAMTriggerType.CYCLE_NUMBER
 
 
 
+        Cycle Number History RAM trigger.
+
+        
+
+
+
     .. py:attribute:: HistoryRAMTriggerType.PATTERN_LABEL
+
+
+
+        Pattern Label History RAM trigger
+
+        
 
 
 
@@ -92,12 +199,24 @@ PPMUApertureTimeUnits
 
 
 
+        Unit in seconds.
+
+        
+
+
+
 PPMUCurrentLimitBehavior
 ------------------------
 
 .. py:class:: PPMUCurrentLimitBehavior
 
     .. py:attribute:: PPMUCurrentLimitBehavior.REGULATE
+
+
+
+        Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached.
+
+        
 
 
 
@@ -110,7 +229,19 @@ PPMUMeasurementType
 
 
 
+        The PPMU measures current.
+
+        
+
+
+
     .. py:attribute:: PPMUMeasurementType.VOLTAGE
+
+
+
+        The PPMU measures voltage.
+
+        
 
 
 
@@ -123,7 +254,19 @@ PPMUOutputFunction
 
 
 
+        The PPMU forces voltage to the DUT.
+
+        
+
+
+
     .. py:attribute:: PPMUOutputFunction.CURRENT
+
+
+
+        The PPMU forces current to the DUT.
+
+        
 
 
 
@@ -136,7 +279,19 @@ PinState
 
 
 
+        A digital state of 0.
+
+        
+
+
+
     .. py:attribute:: PinState.ONE
+
+
+
+        A digital state of 1.
+
+        
 
 
 
@@ -144,7 +299,19 @@ PinState
 
 
 
+        A digital state of L (low).
+
+        
+
+
+
     .. py:attribute:: PinState.H
+
+
+
+        A digital state of H (high).
+
+        
 
 
 
@@ -152,7 +319,19 @@ PinState
 
 
 
+        A digital state of X (non-drive state).
+
+        
+
+
+
     .. py:attribute:: PinState.M
+
+
+
+        A digital state of M (midband).
+
+        
 
 
 
@@ -160,7 +339,19 @@ PinState
 
 
 
+        A digital state of V (compare high or low, not midband; store results from capture functionality if configured).
+
+        
+
+
+
     .. py:attribute:: PinState.D
+
+
+
+        A digital state of D (drive data from source functionality if configured).
+
+        
 
 
 
@@ -168,11 +359,29 @@ PinState
 
 
 
+        A digital state of E (compare data from source functionality if configured).
+
+        
+
+
+
     .. py:attribute:: PinState.NOT_A_PIN_STATE
 
 
 
+        Not a pin state is used for non-existent DUT cycles.
+
+        
+
+
+
     .. py:attribute:: PinState.PIN_STATE_NOT_ACQUIRED
+
+
+
+        Pin state could not be acquired because none of the pins mapped to the instrument in a multi-instrument session had any failures.
+
+        
 
 
 
@@ -185,7 +394,19 @@ SelectedFunction
 
 
 
+        The pattern sequencer controls the specified pin(s). If a pattern is currently bursting, the pin immediately switches to bursting the pattern. This option disconnects the PPMU.
+
+        
+
+
+
     .. py:attribute:: SelectedFunction.PPMU
+
+
+
+        The PPMU controls the specified pin(s) and connects the PPMU. The pin driver is in a non-drive state, and the active load is disabled. The PPMU does not start sourcing or measuring until Source or Measure(PpmuMeasurementType) is called.
+
+        
 
 
 
@@ -193,7 +414,19 @@ SelectedFunction
 
 
 
+        Puts the digital driver in a non-drive state, disables the active load, disconnects the PPMU, and closes the I/O switch connecting the instrument channel.
+
+        
+
+
+
     .. py:attribute:: SelectedFunction.DISCONNECT
+
+
+
+        The I/O switch connecting the instrument channel is open to the I/O connector. If the PPMU is sourcing, it is stopped prior to opening the I/O switch.
+
+        
 
 
 
@@ -296,7 +529,19 @@ SoftwareTrigger
 
 
 
+        Overrides the start trigger.
+
+        
+
+
+
     .. py:attribute:: SoftwareTrigger.CONDITIONAL_JUMP
+
+
+
+        Specifies to route a pattern opcode event signal.
+
+        
 
 
 
@@ -309,7 +554,19 @@ SourceDataMapping
 
 
 
+        Broadcasts the waveform you specify to all sites.
+
+        
+
+
+
     .. py:attribute:: SourceDataMapping.SITE_UNIQUE
+
+
+
+        Sources unique waveform data to each site.
+
+        
 
 
 
@@ -322,7 +579,19 @@ TDREndpointTermination
 
 
 
+        TDR channels are connected to an open circuit.
+
+        
+
+
+
     .. py:attribute:: TDREndpointTermination.SHORT_TO_GROUND
+
+
+
+        TDR channels are connected to a short to ground.
+
+        
 
 
 
@@ -335,11 +604,29 @@ TerminationMode
 
 
 
+        The active load provides a constant current to a commutating voltage (Vcom).
+
+        
+
+
+
     .. py:attribute:: TerminationMode.VTERM
 
 
 
+        The pin driver drives Vterm.
+
+        
+
+
+
     .. py:attribute:: TerminationMode.HIGH_Z
+
+
+
+        The pin driver is in a non-drive state (in a high-impedance state) and the active load is disabled.
+
+        
 
 
 
@@ -352,7 +639,19 @@ TimeSetEdgeType
 
 
 
+        Specifies the drive on edge of the time set.
+
+        
+
+
+
     .. py:attribute:: TimeSetEdgeType.DRIVE_DATA
+
+
+
+        Specifies the drive data edge of the time set.
+
+        
 
 
 
@@ -360,7 +659,19 @@ TimeSetEdgeType
 
 
 
+        Specifies the drive return edge of the time set.
+
+        
+
+
+
     .. py:attribute:: TimeSetEdgeType.DRIVE_OFF
+
+
+
+        Specifies the drive off edge of the time set.
+
+        
 
 
 
@@ -368,7 +679,19 @@ TimeSetEdgeType
 
 
 
+        Specifies the compare strobe of the time set.
+
+        
+
+
+
     .. py:attribute:: TimeSetEdgeType.DRIVE_DATA2
+
+
+
+        Specifies the drive data 2 edge of the time set.
+
+        
 
 
 
@@ -376,7 +699,19 @@ TimeSetEdgeType
 
 
 
+        Specifies the drive return 2 edge of the time set.
+
+        
+
+
+
     .. py:attribute:: TimeSetEdgeType.COMPARE_STROBE2
+
+
+
+        Specifies the compare strobe 2 of the time set.
+
+        
 
 
 
@@ -389,11 +724,29 @@ TriggerType
 
 
 
+        Disables the start trigger.
+
+        
+
+
+
     .. py:attribute:: TriggerType.DIGITAL_EDGE
 
 
 
+        Digital edge trigger.
+
+        
+
+
+
     .. py:attribute:: TriggerType.SOFTWARE
+
+
+
+        Software start trigger.
+
+        
 
 
 
@@ -406,11 +759,29 @@ WriteStaticPinState
 
 
 
+        Specifies to drive low.
+
+        
+
+
+
     .. py:attribute:: WriteStaticPinState.ONE
 
 
 
+        Specifies to drive high.
+
+        
+
+
+
     .. py:attribute:: WriteStaticPinState.X
+
+
+
+        Specifies to not drive.
+
+        
 
 
 

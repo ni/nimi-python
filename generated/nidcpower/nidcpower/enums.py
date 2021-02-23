@@ -246,6 +246,7 @@ class SendSoftwareEdgeTriggerType(Enum):
     MEASURE = 1036
     SEQUENCE_ADVANCE = 1037
     PULSE = 1053
+    SHUTDOWN = 1118
 
 
 class Sense(Enum):

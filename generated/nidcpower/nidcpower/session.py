@@ -662,6 +662,21 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
+    digital_edge_shutdown_trigger_input_terminal = _attributes.AttributeViString(1150277)
+    '''Type: str
+
+    Specifies the input terminal for the Shutdown trigger. This property is used only when the shutdown_trigger_type property is set to digital edge.
+    You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
+    Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
+
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     digital_edge_source_trigger_input_terminal = _attributes.AttributeViString(1150032)
     '''Type: str
 
@@ -996,6 +1011,23 @@ class _SessionBase(object):
     Specifies when the measure unit should acquire measurements. Unless this property is configured to  MeasureWhen.ON_MEASURE_TRIGGER, the measure_trigger_type property is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
     Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the fetch_multiple method.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    merged_channels = _attributes.AttributeViStringRepeatedCapability(1150249)
+    '''Type: str
+
+    Specifies the channel(s) to merge with a designated primary channel of an SMU in order to increase the maximum current you can source from the SMU.
+    This property designates the merge channels to combine with a primary channel. To designate the primary channel, initialize the session to the primary channel only.
+    Note: You cannot change the merge configuration with this property when the session is in the Running state.
+    For complete information on using merged channels with this property, refer to Merged Channels in the NI DC Power Supplies and SMUs Help.
+
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices. Devices that do not support this property behave as if no channels were merged.
+    Default Value: Refer to the Supported Properties by Device topic for the default value by device.
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -2127,6 +2159,20 @@ class _SessionBase(object):
     '''Type: str
 
     Contains the serial number for the device you are currently using.
+    '''
+    shutdown_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150275)
+    '''Type: enums.TriggerType
+
+    Specifies the behavior of the Shutdown trigger.
+    Default Value: TriggerType.NONE
+
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -5135,7 +5181,9 @@ class Session(_SessionBase):
                 +-----------------------------------------------+---------------------------------------+
                 | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER (1037) | Asserts the Sequence Advance trigger. |
                 +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_PULSE_TRIGGER (1053             | Asserts the Pulse trigger.            |
+                | NIDCPOWER_VAL_PULSE_TRIGGER (1053)            | Asserts the Pulse trigger.            |
+                +-----------------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_SHUTDOWN_TRIGGER (1118)         | Asserts the Shutdown trigger.         |
                 +-----------------------------------------------+---------------------------------------+
 
                 Note:
