@@ -72,7 +72,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nitclk` (NI-TClk)
     * #### Added
-         * Added nitclk_synchronize_trigger.py to demonstrate homogenous triggering.
+         * Added nitclk_niscope_synchronize_with_trigger.py to demonstrate homogenous triggering.
     * #### Changed
     * #### Removed
     
