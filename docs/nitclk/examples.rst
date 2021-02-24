@@ -6,9 +6,9 @@ Examples
 nitclk_configure.py
 -------------------
 
-.. literalinclude:: ../../src/nitclk/examples/nitclk_synchronize_trigger.py
+.. literalinclude:: ../../src/nitclk/examples/nitclk_niscope_synchronize_with_trigger.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nitclk_configure.py) <https://github.com/ni/nimi-python/blob/master/src/nitclk/examples/nitclk_synchronize_trigger.py>`_
+   :caption: `(nitclk_configure.py) <https://github.com/ni/nimi-python/blob/master/src/nitclk/examples/nitclk_niscope_synchronize_with_trigger.py>`_
 
