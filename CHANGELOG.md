@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.3.3](#133---2021-02-26)
 * [1.3.2](#132---2020-09-18)
 * [1.3.1](#131---2020-06-08)
 * [1.3.0](#130---2020-05-21)
@@ -25,58 +25,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.3 - 2021-02-26
 ## Unreleased
-* ### ALL
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * API parity with NI-DCPower 20.6.0 by adding Merged Channels and Shutdown Triggers support. The following properties are added:
             * `merged_channels`
             * `digital_edge_shutdown_trigger_input_terminal`
             * `shutdown_trigger_type`
-    * #### Changed
-    * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
-        * API reference documentation and API usage examples
+        * 1.0.0 release:
+            * API reference documentation and API usage examples
         * API parity with NI-Digital Pattern Driver 20.6.0 by adding support for configuration of frequency counter measurement mode. The following properties are added:
             * `frequency_counter_measurement_mode`
             * `frequency_counter_hysteresis_enabled`
-    * #### Changed
-    * #### Removed
-* ### `nidmm` (NI-DMM)
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
-          *Added the nifgen_trigger.py example to demonstrate pulling a trigger from another device.
-    * #### Changed
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niscope` (NI-SCOPE)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niswitch` (NI-SWITCH)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
+        * nifgen_trigger.py example to demonstrate pulling a trigger from another device.
 * ### `nitclk` (NI-TClk)
     * #### Added
-         * Added nitclk_niscope_synchronize_with_trigger.py to demonstrate homogenous triggering.
-    * #### Changed
+        * nitclk_niscope_synchronize_with_trigger.py to demonstrate homogenous triggering.
     * #### Removed
-         * Removed nitclk_configure.py as it did not do anything.
+        * nitclk_configure.py as it did not do anything.
     
     
 ## 1.3.2 - 2020-09-18
