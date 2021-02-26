@@ -38,3 +38,4 @@ nifgen_trigger.py
    :linenos:
    :encoding: utf8
    :caption: `(nifgen_trigger.py) <https://github.com/ni/nimi-python/blob/master/src/nifgen/examples/nifgen_trigger.py>`_
+
