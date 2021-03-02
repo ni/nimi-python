@@ -26,7 +26,6 @@
 All notable changes to this project will be documented in this file.
 
 ## 1.3.3 - 2021-02-26
-## Unreleased
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * API parity with NI-DCPower 20.6.0 by adding Merged Channels and Shutdown Triggers support. The following properties are added:
