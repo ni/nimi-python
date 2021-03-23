@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.7.0d8
+# This file is generated from NI-DCPower API metadata version 20.7.0d9999
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -102,7 +102,7 @@ attributes = {
     },
     1050511: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': 'Contains the name of the manufacturer for the device you are currently using.'
         },
@@ -170,7 +170,7 @@ attributes = {
     },
     1150001: {
         'access': 'read only',
-        'channel_based': True,
+        'channel_based': False,
         'documentation': {
             'description': 'Indicates whether the device is using the internal or auxiliary power source to generate power.'
         },
@@ -182,7 +182,7 @@ attributes = {
     },
     1150002: {
         'access': 'read only',
-        'channel_based': True,
+        'channel_based': False,
         'documentation': {
             'description': '\nIndicates whether an auxiliary power source is connected to the device.\nA value of VI_FALSE may indicate that the auxiliary input fuse has blown.  Refer to the Detecting Internal/Auxiliary Power topic in the NI DC Power Supplies and SMUs Help for  more information about internal and auxiliary power.\npower source to generate power. Use the NIDCPOWER_ATTR_POWER_SOURCE_IN_USE attribute to retrieve this information.\n',
             'note': 'This attribute does not necessarily indicate if the device is using the auxiliary'
@@ -965,7 +965,7 @@ attributes = {
     },
     1150073: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the niDCPower_ResetDevice function is called or the machine  is powered down.\nThis attribute affects the behavior of the niDCPower_CalSelfCalibrate function. When set to  NIDCPOWER_VAL_KEEP_IN_MEMORY, the values calculated by the niDCPower_CalSelfCalibrate function are used in  the existing session, as well as in all further sessions until you call the niDCPower_ResetDevice function  or restart the machine. When you set this property to NIDCPOWER_VAL_WRITE_TO_EEPROM, the values calculated  by the niDCPower_CalSelfCalibrate function are written to hardware and used in the existing session and  in all subsequent sessions until another call to the niDCPower_CalSelfCalibrate function is made.\nabout supported devices.\nDefault Value: NIDCPOWER_VAL_KEEP_IN_MEMORY\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information'
@@ -1333,7 +1333,7 @@ attributes = {
     },
     1150152: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': 'Contains the serial number for the device you are currently using.'
         },
