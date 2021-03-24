@@ -10,5 +10,5 @@ nise_basic_example.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nise_basic_example.py) <https://github.com/ni/nimi-python/blob/1.3.3/src/nise/examples/nise_basic_example.py>`_
+   :caption: `(nise_basic_example.py) <https://github.com/ni/nimi-python/blob/1.3.3/src\nise\examples\nise_basic_example.py>`_
 

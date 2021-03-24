@@ -10,5 +10,5 @@ nitclk_niscope_synchronize_with_trigger.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nitclk_niscope_synchronize_with_trigger.py) <https://github.com/ni/nimi-python/blob/1.3.3/src/nitclk/examples/nitclk_niscope_synchronize_with_trigger.py>`_
+   :caption: `(nitclk_niscope_synchronize_with_trigger.py) <https://github.com/ni/nimi-python/blob/1.3.3/src\nitclk\examples\nitclk_niscope_synchronize_with_trigger.py>`_
 
