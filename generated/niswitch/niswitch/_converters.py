@@ -270,18 +270,34 @@ def convert_chained_repeated_capability_to_parts(chained_repeated_capability):
 
 
 def convert_resource_name(resource_name):
-    return _convert_resource_name(resource_name)
+    '''Convert a resource_name into a comma-separated list of device/channel resources
+
+    Args:
+        resource_name - Supported types:
+            - str - list (comma-delimited)
+            - str - single item
+            - list of str
+            - tuple of str
+            - None
+
+    Returns:
+        str - comma delimited string of each device/channel
+    '''
+    if resource_name is None:
+        return ''
+
+    return ','.join(_convert_resource_name(resource_name))
 
 
 @singledispatch
 def _convert_resource_name(arg):
-    raise errors.InvalidResourceNameError('Invalid type', type(arg))
+    raise errors.InvalidResourceNameError(str(arg), "Invalid Type")
 
 
 # This parsing function duplicate the parsing in the driver, so if changes to the allowed format are made there, they will need to be replicated here.
 @_convert_resource_name.register(str)  # noqa: F811
 def _(resource_name):
-    '''String version (this is the most complex)
+    '''String version
 
     We need to deal with a range ('Dev/0-3' or 'Dev/0:3'), a list ('Dev/0,Dev/1,Dev/2,Dev/3') and a single item
     '''
@@ -295,15 +311,15 @@ def _(resource_name):
     fields = [item.strip() for item in resource_name.split('/')]
     device_name = fields[0]
     if len(device_name) == 0:
-        raise errors.InvalidResourceNameError("Empty device name", resource_name)
+        raise errors.InvalidResourceNameError(resource_name, "Empty device name")
     if len(fields) > 2:
-        raise errors.InvalidResourceNameError("Multiple '/'", resource_name)
+        raise errors.InvalidResourceNameError(resource_name, "Multiple '/'")
     if len(fields) == 1:
         return [device_name]
     if len(fields) == 2:
         repeated_capability = fields[1]
         if len(repeated_capability) == 0:
-            raise errors.InvalidResourceNameError("Missing channels after '/''", resource_name)
+            raise errors.InvalidResourceNameError(resource_name, "Missing channels after '/''")
 
     return [device_name + '/' + r for r in _convert_repeated_capabilities(repeated_capability, '')]
 
@@ -313,7 +329,7 @@ def _(resource_name):
 @_convert_resource_name.register(list)  # noqa: F811
 @_convert_resource_name.register(tuple)  # noqa: F811
 def _(resource_name):
-    '''Iterable version - can handle lists, ranges, and tuples'''
+    '''Iterable version - can handle lists and tuples'''
     resource_name_list = []
     for r in resource_name:
         resource_name_list += _convert_resource_name(r)

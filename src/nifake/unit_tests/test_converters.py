@@ -238,74 +238,79 @@ def test_repeated_capabilies_without_prefix():
 
 
 # Tests - resource name
+def test_resource_name_none():
+    test_result_list = _converters.convert_resource_name(None)
+    assert test_result_list == ''
+
+
 def test_resource_name_string():
     test_result_list = _converters.convert_resource_name('Dev1')
-    assert test_result_list == ['Dev1']
+    assert test_result_list == 'Dev1'
     test_result_list = _converters.convert_resource_name('Dev1,Dev2')
-    assert test_result_list == ['Dev1', 'Dev2']
+    assert test_result_list == 'Dev1,Dev2'
     test_result_list = _converters.convert_resource_name('Dev1/0')
-    assert test_result_list == ['Dev1/0']
+    assert test_result_list == 'Dev1/0'
     test_result_list = _converters.convert_resource_name('Dev1/0:1, Dev2/0-1')
-    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev2/0', 'Dev2/1']
+    assert test_result_list == 'Dev1/0,Dev1/1,Dev2/0,Dev2/1'
     test_result_list = _converters.convert_resource_name('Dev1, Dev2/0-2')
-    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev2/2']
+    assert test_result_list == 'Dev1,Dev2/0,Dev2/1,Dev2/2'
 
 
 def test_resource_name_unicode_string():
     test_result_list = _converters.convert_resource_name(u'Dev1')
-    assert test_result_list == ['Dev1']
+    assert test_result_list == 'Dev1'
     test_result_list = _converters.convert_resource_name(u'Dev1,Dev2')
-    assert test_result_list == ['Dev1', 'Dev2']
+    assert test_result_list == 'Dev1,Dev2'
     test_result_list = _converters.convert_resource_name(u'Dev1/0')
-    assert test_result_list == ['Dev1/0']
+    assert test_result_list == 'Dev1/0'
     test_result_list = _converters.convert_resource_name(u'Dev1/0:1, Dev2/0-1')
-    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev2/0', 'Dev2/1']
+    assert test_result_list == 'Dev1/0,Dev1/1,Dev2/0,Dev2/1'
     test_result_list = _converters.convert_resource_name(u'Dev1, Dev2/0-2')
-    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev2/2']
+    assert test_result_list == 'Dev1,Dev2/0,Dev2/1,Dev2/2'
 
 
 def test_resource_name_raw_string():
     test_result_list = _converters.convert_resource_name(r'Dev1')
-    assert test_result_list == ['Dev1']
+    assert test_result_list == 'Dev1'
     test_result_list = _converters.convert_resource_name(r'Dev1,Dev2')
-    assert test_result_list == ['Dev1', 'Dev2']
+    assert test_result_list == 'Dev1,Dev2'
     test_result_list = _converters.convert_resource_name(r'Dev1/0')
-    assert test_result_list == ['Dev1/0']
+    assert test_result_list == 'Dev1/0'
     test_result_list = _converters.convert_resource_name(r'Dev1/0:1, Dev2/0-1')
-    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev2/0', 'Dev2/1']
+    assert test_result_list == 'Dev1/0,Dev1/1,Dev2/0,Dev2/1'
     test_result_list = _converters.convert_resource_name(r'Dev1, Dev2/0-2')
-    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev2/2']
+    assert test_result_list == 'Dev1,Dev2/0,Dev2/1,Dev2/2'
 
 
 def test_resource_name_list():
     test_result_list = _converters.convert_resource_name(['Dev1'])
-    assert test_result_list == ['Dev1']
+    assert test_result_list == 'Dev1'
     test_result_list = _converters.convert_resource_name(['Dev1', 'Dev2'])
-    assert test_result_list == ['Dev1', 'Dev2']
+    assert test_result_list == 'Dev1,Dev2'
     test_result_list = _converters.convert_resource_name(['Dev1/0'])
-    assert test_result_list == ['Dev1/0']
+    assert test_result_list == 'Dev1/0'
     test_result_list = _converters.convert_resource_name(['Dev1/0:1', 'Dev2/0-1'])
-    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev2/0', 'Dev2/1']
+    assert test_result_list == 'Dev1/0,Dev1/1,Dev2/0,Dev2/1'
     test_result_list = _converters.convert_resource_name(['Dev1', 'Dev2/0-2'])
-    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev2/2']
+    assert test_result_list == 'Dev1,Dev2/0,Dev2/1,Dev2/2'
 
 
 def test_resource_name_tuple():
     test_result_list = _converters.convert_resource_name(('Dev1'))
-    assert test_result_list == ['Dev1']
+    assert test_result_list == 'Dev1'
     test_result_list = _converters.convert_resource_name(('Dev1', 'Dev2'))
-    assert test_result_list == ['Dev1', 'Dev2']
+    assert test_result_list == 'Dev1,Dev2'
     test_result_list = _converters.convert_resource_name(('Dev1/0'))
-    assert test_result_list == ['Dev1/0']
+    assert test_result_list == 'Dev1/0'
     test_result_list = _converters.convert_resource_name(('Dev1/0:1', 'Dev2/0-1'))
-    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev2/0', 'Dev2/1']
+    assert test_result_list == 'Dev1/0,Dev1/1,Dev2/0,Dev2/1'
     test_result_list = _converters.convert_resource_name(('Dev1', 'Dev2/0-2'))
-    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev2/2']
+    assert test_result_list == 'Dev1,Dev2/0,Dev2/1,Dev2/2'
 
 
 def test_resource_name_mixed():
     test_result_list = _converters.convert_resource_name(['Dev1', ('Dev2/0', 'Dev2/1'), ['Dev3/0:1', 'Dev4/1:2'], 'Dev5/1'])
-    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev3/0', 'Dev3/1', 'Dev4/1', 'Dev4/2', 'Dev5/1']
+    assert test_result_list == 'Dev1,Dev2/0,Dev2/1,Dev3/0,Dev3/1,Dev4/1,Dev4/2,Dev5/1'
 
 
 def test_invalid_resource_name():
