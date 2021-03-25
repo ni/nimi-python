@@ -66,7 +66,7 @@ InvalidResourceNameError
 
     .. exception:: InvalidResourceNameError
 
-        An error due to an invalid character in a resource name
+        An error due to an incorrectly formatted resource name
 
 
 DriverWarning

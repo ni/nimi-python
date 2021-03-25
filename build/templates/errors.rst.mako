@@ -72,7 +72,7 @@ ${helper.get_rst_header_snippet('InvalidResourceNameError', '-')}
 
     .. exception:: InvalidResourceNameError
 
-        An error due to an invalid character in a resource name
+        An error due to an incorrectly formatted resource name
 
 
 % endif
