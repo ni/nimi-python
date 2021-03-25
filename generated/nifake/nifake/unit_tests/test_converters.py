@@ -237,6 +237,85 @@ def test_repeated_capabilies_without_prefix():
     assert test_result == '0,2,4,5,6,7,8,9,11,12,13,14,16,17'
 
 
+# Tests - resource name
+def test_resource_name_string():
+    test_result_list = _converters.convert_resource_name('Dev1')
+    assert test_result_list == ['Dev1']
+    test_result_list = _converters.convert_resource_name('Dev1,Dev2')
+    assert test_result_list == ['Dev1', 'Dev2']
+    test_result_list = _converters.convert_resource_name('Dev1/0')
+    assert test_result_list == ['Dev1/0']
+    test_result_list = _converters.convert_resource_name('Dev1/0:1, Dev2/0-1')
+    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev2/0', 'Dev2/1']
+    test_result_list = _converters.convert_resource_name('Dev1, Dev2/0-2')
+    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev2/2']
+
+
+def test_resource_name_unicode_string():
+    test_result_list = _converters.convert_resource_name(u'Dev1')
+    assert test_result_list == ['Dev1']
+    test_result_list = _converters.convert_resource_name(u'Dev1,Dev2')
+    assert test_result_list == ['Dev1', 'Dev2']
+    test_result_list = _converters.convert_resource_name(u'Dev1/0')
+    assert test_result_list == ['Dev1/0']
+    test_result_list = _converters.convert_resource_name(u'Dev1/0:1, Dev2/0-1')
+    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev2/0', 'Dev2/1']
+    test_result_list = _converters.convert_resource_name(u'Dev1, Dev2/0-2')
+    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev2/2']
+
+
+def test_resource_name_raw_string():
+    test_result_list = _converters.convert_resource_name(r'Dev1')
+    assert test_result_list == ['Dev1']
+    test_result_list = _converters.convert_resource_name(r'Dev1,Dev2')
+    assert test_result_list == ['Dev1', 'Dev2']
+    test_result_list = _converters.convert_resource_name(r'Dev1/0')
+    assert test_result_list == ['Dev1/0']
+    test_result_list = _converters.convert_resource_name(r'Dev1/0:1, Dev2/0-1')
+    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev2/0', 'Dev2/1']
+    test_result_list = _converters.convert_resource_name(r'Dev1, Dev2/0-2')
+    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev2/2']
+
+
+def test_resource_name_list():
+    test_result_list = _converters.convert_resource_name(['Dev1'])
+    assert test_result_list == ['Dev1']
+    test_result_list = _converters.convert_resource_name(['Dev1', 'Dev2'])
+    assert test_result_list == ['Dev1', 'Dev2']
+    test_result_list = _converters.convert_resource_name(['Dev1/0'])
+    assert test_result_list == ['Dev1/0']
+    test_result_list = _converters.convert_resource_name(['Dev1/0:1', 'Dev2/0-1'])
+    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev2/0', 'Dev2/1']
+    test_result_list = _converters.convert_resource_name(['Dev1', 'Dev2/0-2'])
+    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev2/2']
+
+
+def test_resource_name_tuple():
+    test_result_list = _converters.convert_resource_name(('Dev1'))
+    assert test_result_list == ['Dev1']
+    test_result_list = _converters.convert_resource_name(('Dev1', 'Dev2'))
+    assert test_result_list == ['Dev1', 'Dev2']
+    test_result_list = _converters.convert_resource_name(('Dev1/0'))
+    assert test_result_list == ['Dev1/0']
+    test_result_list = _converters.convert_resource_name(('Dev1/0:1', 'Dev2/0-1'))
+    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev2/0', 'Dev2/1']
+    test_result_list = _converters.convert_resource_name(('Dev1', 'Dev2/0-2'))
+    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev2/2']
+
+
+def test_resource_name_mixed():
+    test_result_list = _converters.convert_resource_name(['Dev1', ('Dev2/0', 'Dev2/1'), ['Dev3/0:1', 'Dev4/1:2'], 'Dev5/1'])
+    assert test_result_list == ['Dev1', 'Dev2/0', 'Dev2/1', 'Dev3/0', 'Dev3/1', 'Dev4/1', 'Dev4/2', 'Dev5/1']
+
+
+def test_invalid_resource_name():
+    try:
+        _converters.convert_resource_name('/')
+        assert False
+    except errors.InvalidResourceNameError:
+        pass
+
+
 def test_convert_chained_repeated_capability_to_parts_three_parts():
     chained_rep_cap = ('site0/test/PinA,site0/test/PinB,site0/test/PinC,'
                        'site1/test/PinA,site1/test/PinB,site1/test/PinC')

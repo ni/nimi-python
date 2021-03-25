@@ -65,6 +65,17 @@ ${helper.get_rst_header_snippet('SelfTestError', '-')}
 
 
 % endif
+% if 'InvalidResourceNameError' in extra_errors_used:
+${helper.get_rst_header_snippet('InvalidResourceNameError', '-')}
+
+    .. py:currentmodule:: ${module_name}.errors
+
+    .. exception:: InvalidResourceNameError
+
+        An error due to an invalid character in a resource name
+
+
+% endif
 ${helper.get_rst_header_snippet('DriverWarning', '-')}
 
     .. py:currentmodule:: ${module_name}.errors

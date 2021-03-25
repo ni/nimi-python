@@ -269,6 +269,55 @@ def convert_chained_repeated_capability_to_parts(chained_repeated_capability):
     return [','.join(collections.OrderedDict.fromkeys(x)) for x in repeated_capability_lists]
 
 
+def convert_resource_name(resource_name):
+    return _convert_resource_name(resource_name)
+
+
+@singledispatch
+def _convert_resource_name(arg):
+    raise errors.InvalidResourceNameError('Invalid type', type(arg))
+
+
+# This parsing function duplicate the parsing in the driver, so if changes to the allowed format are made there, they will need to be replicated here.
+@_convert_resource_name.register(str)  # noqa: F811
+def _(resource_name):
+    '''String version (this is the most complex)
+
+    We need to deal with a range ('Dev/0-3' or 'Dev/0:3'), a list ('Dev/0,Dev/1,Dev/2,Dev/3') and a single item
+    '''
+    # First we deal with a list
+    resource_name_list = resource_name.split(',')
+    if len(resource_name_list) > 1:
+        # We have a list so call ourselves again to let the iterable instance handle it
+        return _convert_resource_name(resource_name_list)
+
+    # Must be of form "Dev/0", "Dev/0:1", "Dev/0-1" or "Dev"
+    fields = [item.strip() for item in resource_name.split('/')]
+    device_name = fields[0]
+    if len(fields) > 2:
+        raise errors.InvalidResourceNameError("Multiple '/'", resource_name)
+    if len(fields) == 1:
+        return [device_name]
+    if len(fields) == 2:
+        repeated_capability = fields[1]
+        if len(repeated_capability) == 0:
+            raise errors.InvalidResourceNameError("Missing channels after '/''", resource_name)
+
+    return [device_name + '/' + r for r in _convert_repeated_capabilities(repeated_capability, '')]
+
+
+# We cannot use collections.abc.Iterable here because strings are also iterable and then this
+# instance is what gets called instead of the string one.
+@_convert_resource_name.register(list)  # noqa: F811
+@_convert_resource_name.register(tuple)  # noqa: F811
+def _(resource_name):
+    '''Iterable version - can handle lists, ranges, and tuples'''
+    resource_name_list = []
+    for r in resource_name:
+        resource_name_list += _convert_resource_name(r)
+    return resource_name_list
+
+
 # nifake specific converter(s) - used only for testing
 def convert_double_each_element(numbers):
     return [x * 2 for x in numbers]

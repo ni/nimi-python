@@ -59,6 +59,16 @@ SelfTestError
         An error due to a failed self-test
 
 
+InvalidResourceNameError
+------------------------
+
+    .. py:currentmodule:: nidcpower.errors
+
+    .. exception:: InvalidResourceNameError
+
+        An error due to an invalid character in a resource name
+
+
 DriverWarning
 -------------
 

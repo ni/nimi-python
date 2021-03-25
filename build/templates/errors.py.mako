@@ -89,6 +89,15 @@ class SelfTestError(Error):
 
 
 % endif
+% if 'InvalidResourceNameError' in extra_errors_used:
+class InvalidResourceNameError(Error):
+    '''An error due to an invalid character in a resource name'''
+
+    def __init__(self, invalid_character, invalid_string):
+        super(InvalidResourceNameError, self).__init__('An invalid character ({0}) was found in a resource name string ({1})'.format(invalid_character, invalid_string))
+
+
+% endif
 def handle_error(session, code, ignore_warnings, is_error_handling):
     '''handle_error
 
