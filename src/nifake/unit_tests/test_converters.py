@@ -310,7 +310,32 @@ def test_resource_name_mixed():
 
 def test_invalid_resource_name():
     try:
+        _converters.convert_resource_name('')
+        assert False
+    except errors.InvalidResourceNameError:
+        pass
+    try:
         _converters.convert_resource_name('/')
+        assert False
+    except errors.InvalidResourceNameError:
+        pass
+    try:
+        _converters.convert_resource_name('Dev,')
+        assert False
+    except errors.InvalidResourceNameError:
+        pass
+    try:
+        _converters.convert_resource_name('Dev/')
+        assert False
+    except errors.InvalidResourceNameError:
+        pass
+    try:
+        _converters.convert_resource_name('Dev/0/1')
+        assert False
+    except errors.InvalidResourceNameError:
+        pass
+    try:
+        _converters.convert_resource_name(0)
         assert False
     except errors.InvalidResourceNameError:
         pass

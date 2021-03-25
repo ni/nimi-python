@@ -294,6 +294,8 @@ def _(resource_name):
     # Must be of form "Dev/0", "Dev/0:1", "Dev/0-1" or "Dev"
     fields = [item.strip() for item in resource_name.split('/')]
     device_name = fields[0]
+    if len(device_name) == 0:
+        raise errors.InvalidResourceNameError("Empty device name", resource_name)
     if len(fields) > 2:
         raise errors.InvalidResourceNameError("Multiple '/'", resource_name)
     if len(fields) == 1:

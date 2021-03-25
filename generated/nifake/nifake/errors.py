@@ -73,6 +73,13 @@ class SelfTestError(Error):
         super(SelfTestError, self).__init__('Self-test failed with code {0}: {1}'.format(code, msg))
 
 
+class InvalidResourceNameError(Error):
+    '''An error due to an invalid character in a resource name'''
+
+    def __init__(self, invalid_character, invalid_string):
+        super(InvalidResourceNameError, self).__init__('An invalid character ({0}) was found in a resource name string ({1})'.format(invalid_character, invalid_string))
+
+
 def handle_error(session, code, ignore_warnings, is_error_handling):
     '''handle_error
 
