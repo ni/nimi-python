@@ -35,3 +35,6 @@ commands.log
 .vscode/settings.json
 
 .pytest_cache/
+
+system_tests.zip
+system_tests/ni-nimi-python-*
