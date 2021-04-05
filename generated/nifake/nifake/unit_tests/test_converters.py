@@ -290,6 +290,8 @@ def test_repeated_capabilities_invalid_resource_names():
     assert test_result_list == 'Dev,'
     test_result_list = _converters.convert_repeated_capabilities_without_prefix('Dev/1/1,')
     assert test_result_list == 'Dev/1/1,'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix('0/1:2,')
+    assert test_result_list == '0/1:2,'
 
 
 def test_convert_chained_repeated_capability_to_parts_three_parts():

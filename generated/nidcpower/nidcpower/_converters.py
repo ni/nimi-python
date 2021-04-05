@@ -74,7 +74,7 @@ def _(repeated_capability, prefix):
             start = int(rc[0])
             end = int(rc[1])
         except ValueError:
-            # This exception raised when repeated_capability is of the form "dev/0-1". rc[0] == "dev/0" in this case.
+            # This exception is raised when repeated_capability is of the form "dev/0-1". rc[0] == "dev/0" in this case.
             # Just return the repeated_capability string as-is in that case.
             pass
         else:
