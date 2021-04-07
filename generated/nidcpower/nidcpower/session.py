@@ -1067,6 +1067,175 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
+    output_cutoff_current_change_limit_high = _attributes.AttributeViReal64(1150295)
+    '''Type: float
+
+    Specifies a limit for positive current slew rate, in amps per microsecond, for output cutoff.
+    If the current increases at a rate that exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state method with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_current_change_limit_low = _attributes.AttributeViReal64(1150239)
+    '''Type: float
+
+    Specifies a limit for negative current slew rate, in amps per microsecond, for output cutoff.
+    If the current decreases at a rate that exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state method with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_current_measure_limit_high = _attributes.AttributeViReal64(1150237)
+    '''Type: float
+
+    Specifies a high limit current value, in amps, for output cutoff.
+    If the measured current exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.CURRENT_MEASURE_HIGH as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_current_measure_limit_low = _attributes.AttributeViReal64(1150293)
+    '''Type: float
+
+    Specifies a low limit current value, in amps, for output cutoff.
+    If the measured current falls below this limit, the output is disconnected.
+
+    To find out whether an output has fallen below this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.CURRENT_MEASURE_LOW as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_current_overrange_enabled = _attributes.AttributeViBoolean(1150240)
+    '''Type: bool
+
+    Enables or disables current overrange functionality for output cutoff. If enabled, the output is disconnected when the measured current saturates the current range.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.VOLTAGE_OUTPUT_HIGH as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_enabled = _attributes.AttributeViBoolean(1150235)
+    '''Type: bool
+
+    Enables or disables output cutoff functionality. If enabled, you can define output cutoffs that, if exceeded, cause the output of the specified channel(s) to be disconnected.
+    When this property is disabled, all other output cutoff properties are ignored.
+
+    Note: Refer to Supported Properties by Device for information about supported devices. Instruments that do not support this property behave as if this property were set to False.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_voltage_change_limit_high = _attributes.AttributeViReal64(1150294)
+    '''Type: float
+
+    Specifies a limit for positive voltage slew rate, in volts per microsecond, for output cutoff.
+    If the voltage increases at a rate that exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_voltage_change_limit_low = _attributes.AttributeViReal64(1150238)
+    '''Type: float
+
+    Specifies a limit for negative voltage slew rate, in volts per microsecond, for output cutoff.
+    If the voltage decreases at a rate that exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_voltage_output_limit_high = _attributes.AttributeViReal64(1150236)
+    '''Type: float
+
+    Specifies a high limit voltage value, in volts, for output cutoff.
+    If the voltage output exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.VOLTAGE_OUTPUT_HIGH as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_voltage_output_limit_low = _attributes.AttributeViReal64(1150292)
+    '''Type: float
+
+    Specifies a low limit voltage value, in volts, for output cutoff.
+    If the voltage output falls below this limit, the output is disconnected.
+
+    To find out whether an output has fallen below this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.VOLTAGE_OUTPUT_LOW as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     output_enabled = _attributes.AttributeViBoolean(1250006)
     '''Type: bool
 
@@ -2646,6 +2815,55 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def clear_latched_output_cutoff_state(self, output_cutoff_reason):
+        r'''clear_latched_output_cutoff_state
+
+        Clears the state of an output cutoff that was engaged.
+        To clear the state for all output cutoff reasons, use OutputCutoffReason.ALL.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            output_cutoff_reason (enums.OutputCutoffReason): Specifies the reasons for which to clear the output cutoff state.
+
+                +------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.ALL                                     | Clears all output cutoff conditions                                                                             |
+                +------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_OUTPUT_HIGH                     | Clears cutoffs caused when the output exceeded the high cutoff limit for voltage output                         |
+                +------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_OUTPUT_LOW                      | Clears cutoffs caused when the output fell below the low cutoff limit for voltage output                        |
+                +------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_MEASURE_HIGH                    | Clears cutoffs caused when the measured current exceeded the high cutoff limit for current output               |
+                +------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_MEASURE_LOW                     | Clears cutoffs caused when the measured current fell below the low cutoff limit for current output              |
+                +------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE | Clears cutoffs caused when the voltage slew rate increased beyond the positive change cutoff for voltage output |
+                +------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for voltage output |
+                +------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE | Clears cutoffs caused when the current slew rate increased beyond the positive change cutoff for current output |
+                +------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output |
+                +------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+        '''
+        if type(output_cutoff_reason) is not enums.OutputCutoffReason:
+            raise TypeError('Parameter output_cutoff_reason must be of type ' + str(enums.OutputCutoffReason))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        output_cutoff_reason_ctype = _visatype.ViInt32(output_cutoff_reason.value)  # case S130
+        error_code = self._library.niDCPower_ClearLatchedOutputCutoffState(vi_ctype, channel_name_ctype, output_cutoff_reason_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
         r'''configure_aperture_time
 
@@ -2684,11 +2902,11 @@ class _SessionBase(object):
             units (enums.ApertureTimeUnits): Specifies the units for **apertureTime**.
                 **Defined Values**:
 
-                +--------------------------------------------+------------------------------+
-                | ApertureTimeUnits.SECONDS (1028)           | Specifies seconds.           |
-                +--------------------------------------------+------------------------------+
-                | ApertureTimeUnits.POWER_LINE_CYCLES (1029) | Specifies Power Line Cycles. |
-                +--------------------------------------------+------------------------------+
+                +-------------------------------------+------------------------------+
+                | ApertureTimeUnits.SECONDS           | Specifies seconds.           |
+                +-------------------------------------+------------------------------+
+                | ApertureTimeUnits.POWER_LINE_CYCLES | Specifies Power Line Cycles. |
+                +-------------------------------------+------------------------------+
 
         '''
         if type(units) is not enums.ApertureTimeUnits:
@@ -3141,6 +3359,44 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
+    def get_channel_names(self, index):
+        r'''get_channel_names
+
+        Returns a comma-separated list of channel names from a string index list.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            index (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            channel_name (list of str): The returned channel name(s) at the specified index.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(index).encode(self._encoding))  # case C040
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        channel_name_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_comma_separated_string_to_list(channel_name_ctype.value.decode(self._encoding))
+
     def _get_error(self):
         r'''_get_error
 
@@ -3256,11 +3512,11 @@ class _SessionBase(object):
             measurement_type (enums.MeasurementTypes): Specifies whether a voltage or current value is measured.
                 **Defined Values**:
 
-                +------------------------------+------------------------------+
-                | MeasurementTypes.VOLTAGE (1) | The device measures voltage. |
-                +------------------------------+------------------------------+
-                | MeasurementTypes.CURRENT (0) | The device measures current. |
-                +------------------------------+------------------------------+
+                +--------------------------+------------------------------+
+                | MeasurementTypes.VOLTAGE | The device measures voltage. |
+                +--------------------------+------------------------------+
+                | MeasurementTypes.CURRENT | The device measures current. |
+                +--------------------------+------------------------------+
 
 
         Returns:
@@ -3387,6 +3643,71 @@ class _SessionBase(object):
         return bool(in_compliance_ctype.value)
 
     @ivi_synchronized
+    def query_latched_output_cutoff_state(self, output_cutoff_reason):
+        r'''query_latched_output_cutoff_state
+
+        Discovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.
+        If a limit was exceeded, the state is latched until you clear it with the clear_latched_output_cutoff_state method or the ResetWithChannels method.
+
+        outputCutoffReason specifies the conditions for which an output is disconnected.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            output_cutoff_reason (enums.OutputCutoffReason): Specifies which output cutoff conditions to query.
+
+                +------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.ALL                                     | Any output cutoff condition was met                                                  |
+                +------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_OUTPUT_HIGH                     | The output exceeded the high cutoff limit for voltage output                         |
+                +------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_OUTPUT_LOW                      | The output fell below the low cutoff limit for voltage output                        |
+                +------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_MEASURE_HIGH                    | The measured current exceeded the high cutoff limit for current output               |
+                +------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_MEASURE_LOW                     | The measured current fell below the low cutoff limit for current output              |
+                +------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE | The voltage slew rate increased beyond the positive change cutoff for voltage output |
+                +------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE | The voltage slew rate decreased beyond the negative change cutoff for voltage output |
+                +------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE | The current slew rate increased beyond the positive change cutoff for current output |
+                +------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE | The current slew rate decreased beyond the negative change cutoff for current output |
+                +------------------------------------------------------------+--------------------------------------------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        Returns:
+            output_cutoff_state (bool): Specifies whether an output cutoff has engaged.
+
+                +-------+------------------------------------------------------------------------------+
+                | True  | An output cutoff has engaged for the conditions in **output cutoff reason**. |
+                +-------+------------------------------------------------------------------------------+
+                | False | No output cutoff has engaged.                                                |
+                +-------+------------------------------------------------------------------------------+
+
+        '''
+        if type(output_cutoff_reason) is not enums.OutputCutoffReason:
+            raise TypeError('Parameter output_cutoff_reason must be of type ' + str(enums.OutputCutoffReason))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        output_cutoff_reason_ctype = _visatype.ViInt32(output_cutoff_reason.value)  # case S130
+        output_cutoff_state_ctype = _visatype.ViBoolean()  # case S220
+        error_code = self._library.niDCPower_QueryLatchedOutputCutoffState(vi_ctype, channel_name_ctype, output_cutoff_reason_ctype, None if output_cutoff_state_ctype is None else (ctypes.pointer(output_cutoff_state_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return bool(output_cutoff_state_ctype.value)
+
+    @ivi_synchronized
     def query_max_current_limit(self, voltage_level):
         r'''query_max_current_limit
 
@@ -3500,11 +3821,11 @@ class _SessionBase(object):
             output_state (enums.OutputStates): Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
-                +--------------------------+-------------------------------------------------------------------+
-                | OutputStates.VOLTAGE (0) | The device maintains a constant voltage by adjusting the current. |
-                +--------------------------+-------------------------------------------------------------------+
-                | OutputStates.CURRENT (1) | The device maintains a constant current by adjusting the voltage. |
-                +--------------------------+-------------------------------------------------------------------+
+                +----------------------+-------------------------------------------------------------------+
+                | OutputStates.VOLTAGE | The device maintains a constant voltage by adjusting the current. |
+                +----------------------+-------------------------------------------------------------------+
+                | OutputStates.CURRENT | The device maintains a constant current by adjusting the voltage. |
+                +----------------------+-------------------------------------------------------------------+
 
 
         Returns:
@@ -5172,19 +5493,19 @@ class Session(_SessionBase):
             trigger (enums.SendSoftwareEdgeTriggerType): Specifies which trigger to assert.
                 **Defined Values:**
 
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_START_TRIGGER (1034)            | Asserts the Start trigger.            |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_TRIGGER (1035)           | Asserts the Source trigger.           |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_TRIGGER (1036)          | Asserts the Measure trigger.          |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER (1037) | Asserts the Sequence Advance trigger. |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_PULSE_TRIGGER (1053)            | Asserts the Pulse trigger.            |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SHUTDOWN_TRIGGER (1118)         | Asserts the Shutdown trigger.         |
-                +-----------------------------------------------+---------------------------------------+
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_START_TRIGGER            | Asserts the Start trigger.            |
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_SOURCE_TRIGGER           | Asserts the Source trigger.           |
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_MEASURE_TRIGGER          | Asserts the Measure trigger.          |
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER | Asserts the Sequence Advance trigger. |
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_PULSE_TRIGGER            | Asserts the Pulse trigger.            |
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_SHUTDOWN_TRIGGER         | Asserts the Shutdown trigger.         |
+                +----------------------------------------+---------------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5219,19 +5540,19 @@ class Session(_SessionBase):
             event_id (enums.Event): Specifies which event to wait for.
                 **Defined Values:**
 
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT (1030)             | Waits for the Source Complete event.             |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT (1031)            | Waits for the Measure Complete event.            |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT (1032) | Waits for the Sequence Iteration Complete event. |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT (1033)        | Waits for the Sequence Engine Done event.        |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_PULSE_COMPLETE_EVENT (1051 )             | Waits for the Pulse Complete event.              |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
-                +--------------------------------------------------------+--------------------------------------------------+
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT             | Waits for the Source Complete event.             |
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT            | Waits for the Measure Complete event.            |
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT | Waits for the Sequence Iteration Complete event. |
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT        | Waits for the Sequence Engine Done event.        |
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_PULSE_COMPLETE_EVENT              | Waits for the Pulse Complete event.              |
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT     | Waits for the Ready for Pulse Trigger event.     |
+                +-------------------------------------------------+--------------------------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.

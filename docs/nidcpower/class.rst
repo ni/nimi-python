@@ -155,6 +155,55 @@ abort
 
 
 
+clear_latched_output_cutoff_state
+---------------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: clear_latched_output_cutoff_state(output_cutoff_reason)
+
+            Clears the state of an output cutoff that was engaged.
+            To clear the state for all output cutoff reasons, use :py:data:`~nidcpower.OutputCutoffReason.ALL`.
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param output_cutoff_reason:
+
+
+                Specifies the reasons for which to clear the output cutoff state.
+
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.ALL`                                     | Clears all output cutoff conditions                                                                             |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH`                     | Clears cutoffs caused when the output exceeded the high cutoff limit for voltage output                         |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW`                      | Clears cutoffs caused when the output fell below the low cutoff limit for voltage output                        |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH`                    | Clears cutoffs caused when the measured current exceeded the high cutoff limit for current output               |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW`                     | Clears cutoffs caused when the measured current fell below the low cutoff limit for current output              |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE` | Clears cutoffs caused when the voltage slew rate increased beyond the positive change cutoff for voltage output |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE` | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for voltage output |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE` | Clears cutoffs caused when the current slew rate increased beyond the positive change cutoff for current output |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE` | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+            :type output_cutoff_reason: :py:data:`nidcpower.OutputCutoffReason`
+
 close
 -----
 
@@ -261,11 +310,11 @@ configure_aperture_time
                 Specifies the units for **apertureTime**.
                 **Defined Values**:
 
-                +------------------------------------------------------------------+------------------------------+
-                | :py:data:`~nidcpower.ApertureTimeUnits.SECONDS` (1028)           | Specifies seconds.           |
-                +------------------------------------------------------------------+------------------------------+
-                | :py:data:`~nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES` (1029) | Specifies Power Line Cycles. |
-                +------------------------------------------------------------------+------------------------------+
+                +-----------------------------------------------------------+------------------------------+
+                | :py:data:`~nidcpower.ApertureTimeUnits.SECONDS`           | Specifies seconds.           |
+                +-----------------------------------------------------------+------------------------------+
+                | :py:data:`~nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES` | Specifies Power Line Cycles. |
+                +-----------------------------------------------------------+------------------------------+
 
 
             :type units: :py:data:`nidcpower.ApertureTimeUnits`
@@ -791,6 +840,50 @@ get_channel_name
 
 
 
+get_channel_names
+-----------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: get_channel_names(index)
+
+            Returns a comma-separated list of channel names from a string index list.
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param index:
+
+
+                Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+                
+
+
+            :type index: basic sequence types or str or int
+
+            :rtype: list of str
+            :return:
+
+
+                    The returned channel name(s) at the specified index.
+
+                    
+
+
+
 get_ext_cal_last_date_and_time
 ------------------------------
 
@@ -1157,11 +1250,11 @@ measure
                 Specifies whether a voltage or current value is measured.
                 **Defined Values**:
 
-                +----------------------------------------------------+------------------------------+
-                | :py:data:`~nidcpower.MeasurementTypes.VOLTAGE` (1) | The device measures voltage. |
-                +----------------------------------------------------+------------------------------+
-                | :py:data:`~nidcpower.MeasurementTypes.CURRENT` (0) | The device measures current. |
-                +----------------------------------------------------+------------------------------+
+                +------------------------------------------------+------------------------------+
+                | :py:data:`~nidcpower.MeasurementTypes.VOLTAGE` | The device measures voltage. |
+                +------------------------------------------------+------------------------------+
+                | :py:data:`~nidcpower.MeasurementTypes.CURRENT` | The device measures current. |
+                +------------------------------------------------+------------------------------+
 
 
             :type measurement_type: :py:data:`nidcpower.MeasurementTypes`
@@ -1267,6 +1360,73 @@ query_in_compliance
                     Returns whether the device output channel is in compliance.
 
                     
+
+
+
+query_latched_output_cutoff_state
+---------------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: query_latched_output_cutoff_state(output_cutoff_reason)
+
+            Discovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.
+            If a limit was exceeded, the state is latched until you clear it with the :py:meth:`nidcpower.Session.clear_latched_output_cutoff_state` method or the :py:meth:`nidcpower.Session.ResetWithChannels` method.
+
+            outputCutoffReason specifies the conditions for which an output is disconnected.
+
+            
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param output_cutoff_reason:
+
+
+                Specifies which output cutoff conditions to query.
+
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.ALL`                                     | Any output cutoff condition was met                                                  |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH`                     | The output exceeded the high cutoff limit for voltage output                         |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW`                      | The output fell below the low cutoff limit for voltage output                        |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH`                    | The measured current exceeded the high cutoff limit for current output               |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW`                     | The measured current fell below the low cutoff limit for current output              |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE` | The voltage slew rate increased beyond the positive change cutoff for voltage output |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE` | The voltage slew rate decreased beyond the negative change cutoff for voltage output |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE` | The current slew rate increased beyond the positive change cutoff for current output |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE` | The current slew rate decreased beyond the negative change cutoff for current output |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+            :type output_cutoff_reason: :py:data:`nidcpower.OutputCutoffReason`
+
+            :rtype: bool
+            :return:
+
+
+                    Specifies whether an output cutoff has engaged.
+
+                    +-------+------------------------------------------------------------------------------+
+                    | True  | An output cutoff has engaged for the conditions in **output cutoff reason**. |
+                    +-------+------------------------------------------------------------------------------+
+                    | False | No output cutoff has engaged.                                                |
+                    +-------+------------------------------------------------------------------------------+
 
 
 
@@ -1422,11 +1582,11 @@ query_output_state
                 Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
-                +------------------------------------------------+-------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputStates.VOLTAGE` (0) | The device maintains a constant voltage by adjusting the current. |
-                +------------------------------------------------+-------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputStates.CURRENT` (1) | The device maintains a constant current by adjusting the voltage. |
-                +------------------------------------------------+-------------------------------------------------------------------+
+                +--------------------------------------------+-------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.VOLTAGE` | The device maintains a constant voltage by adjusting the current. |
+                +--------------------------------------------+-------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.CURRENT` | The device maintains a constant current by adjusting the voltage. |
+                +--------------------------------------------+-------------------------------------------------------------------+
 
 
             :type output_state: :py:data:`nidcpower.OutputStates`
@@ -1630,19 +1790,19 @@ send_software_edge_trigger
                 Specifies which trigger to assert.
                 **Defined Values:**
 
-                +---------------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_START_TRIGGER` (1034)            | Asserts the Start trigger.            |
-                +---------------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SOURCE_TRIGGER` (1035)           | Asserts the Source trigger.           |
-                +---------------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_MEASURE_TRIGGER` (1036)          | Asserts the Measure trigger.          |
-                +---------------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER` (1037) | Asserts the Sequence Advance trigger. |
-                +---------------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_TRIGGER` (1053)            | Asserts the Pulse trigger.            |
-                +---------------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SHUTDOWN_TRIGGER` (1118)         | Asserts the Shutdown trigger.         |
-                +---------------------------------------------------------------------+---------------------------------------+
+                +--------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_START_TRIGGER`            | Asserts the Start trigger.            |
+                +--------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_SOURCE_TRIGGER`           | Asserts the Source trigger.           |
+                +--------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_MEASURE_TRIGGER`          | Asserts the Measure trigger.          |
+                +--------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER` | Asserts the Sequence Advance trigger. |
+                +--------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_TRIGGER`            | Asserts the Pulse trigger.            |
+                +--------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_SHUTDOWN_TRIGGER`         | Asserts the Shutdown trigger.         |
+                +--------------------------------------------------------------+---------------------------------------+
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -1755,19 +1915,19 @@ wait_for_event
                 Specifies which event to wait for.
                 **Defined Values:**
 
-                +------------------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT` (1030)             | Waits for the Source Complete event.             |
-                +------------------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT` (1031)            | Waits for the Measure Complete event.            |
-                +------------------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT` (1032) | Waits for the Sequence Iteration Complete event. |
-                +------------------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT` (1033)        | Waits for the Sequence Engine Done event.        |
-                +------------------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_COMPLETE_EVENT` (1051 )             | Waits for the Pulse Complete event.              |
-                +------------------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT` (1052)     | Waits for the Ready for Pulse Trigger event.     |
-                +------------------------------------------------------------------------------+--------------------------------------------------+
+                +-----------------------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT`             | Waits for the Source Complete event.             |
+                +-----------------------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT`            | Waits for the Measure Complete event.            |
+                +-----------------------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT` | Waits for the Sequence Iteration Complete event. |
+                +-----------------------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT`        | Waits for the Sequence Engine Done event.        |
+                +-----------------------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_COMPLETE_EVENT`              | Waits for the Pulse Complete event.              |
+                +-----------------------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT`     | Waits for the Ready for Pulse Trigger event.     |
+                +-----------------------------------------------------------------------+--------------------------------------------------+
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -4202,6 +4362,411 @@ output_connected
 
                 - LabVIEW Property: **Source:Output Connected**
                 - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CONNECTED**
+
+output_cutoff_current_change_limit_high
+---------------------------------------
+
+    .. py:attribute:: output_cutoff_current_change_limit_high
+
+        Specifies a limit for positive current slew rate, in amps per microsecond, for output cutoff.
+        If the current increases at a rate that exceeds this limit, the output is disconnected.
+
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE` as the output cutoff reason.
+
+
+
+        .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Current Change Limit High**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_CURRENT_CHANGE_LIMIT_HIGH**
+
+output_cutoff_current_change_limit_low
+--------------------------------------
+
+    .. py:attribute:: output_cutoff_current_change_limit_low
+
+        Specifies a limit for negative current slew rate, in amps per microsecond, for output cutoff.
+        If the current decreases at a rate that exceeds this limit, the output is disconnected.
+
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE` as the output cutoff reason.
+
+
+
+        .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Current Change Limit Low**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_CURRENT_CHANGE_LIMIT_LOW**
+
+output_cutoff_current_measure_limit_high
+----------------------------------------
+
+    .. py:attribute:: output_cutoff_current_measure_limit_high
+
+        Specifies a high limit current value, in amps, for output cutoff.
+        If the measured current exceeds this limit, the output is disconnected.
+
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH` as the output cutoff reason.
+
+
+
+        .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Current Measure Limit High**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_CURRENT_MEASURE_LIMIT_HIGH**
+
+output_cutoff_current_measure_limit_low
+---------------------------------------
+
+    .. py:attribute:: output_cutoff_current_measure_limit_low
+
+        Specifies a low limit current value, in amps, for output cutoff.
+        If the measured current falls below this limit, the output is disconnected.
+
+        To find out whether an output has fallen below this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW` as the output cutoff reason.
+
+
+
+        .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Current Measure Limit Low**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_CURRENT_MEASURE_LIMIT_LOW**
+
+output_cutoff_current_overrange_enabled
+---------------------------------------
+
+    .. py:attribute:: output_cutoff_current_overrange_enabled
+
+        Enables or disables current overrange functionality for output cutoff. If enabled, the output is disconnected when the measured current saturates the current range.
+
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH` as the output cutoff reason.
+
+
+
+        .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Current Overrange Enabled**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_CURRENT_OVERRANGE_ENABLED**
+
+output_cutoff_enabled
+---------------------
+
+    .. py:attribute:: output_cutoff_enabled
+
+        Enables or disables output cutoff functionality. If enabled, you can define output cutoffs that, if exceeded, cause the output of the specified channel(s) to be disconnected.
+        When this property is disabled, all other output cutoff properties are ignored.
+
+
+
+        .. note:: Refer to Supported Properties by Device for information about supported devices. Instruments that do not support this property behave as if this property were set to False.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Enabled**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_ENABLED**
+
+output_cutoff_voltage_change_limit_high
+---------------------------------------
+
+    .. py:attribute:: output_cutoff_voltage_change_limit_high
+
+        Specifies a limit for positive voltage slew rate, in volts per microsecond, for output cutoff.
+        If the voltage increases at a rate that exceeds this limit, the output is disconnected.
+
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE` as the output cutoff reason.
+
+
+
+        .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Voltage Change Limit High**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_VOLTAGE_CHANGE_LIMIT_HIGH**
+
+output_cutoff_voltage_change_limit_low
+--------------------------------------
+
+    .. py:attribute:: output_cutoff_voltage_change_limit_low
+
+        Specifies a limit for negative voltage slew rate, in volts per microsecond, for output cutoff.
+        If the voltage decreases at a rate that exceeds this limit, the output is disconnected.
+
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE` as the output cutoff reason.
+
+
+
+        .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Voltage Change Limit Low**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_VOLTAGE_CHANGE_LIMIT_LOW**
+
+output_cutoff_voltage_output_limit_high
+---------------------------------------
+
+    .. py:attribute:: output_cutoff_voltage_output_limit_high
+
+        Specifies a high limit voltage value, in volts, for output cutoff.
+        If the voltage output exceeds this limit, the output is disconnected.
+
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH` as the output cutoff reason.
+
+
+
+        .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Voltage Output Limit High**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_VOLTAGE_OUTPUT_LIMIT_HIGH**
+
+output_cutoff_voltage_output_limit_low
+--------------------------------------
+
+    .. py:attribute:: output_cutoff_voltage_output_limit_low
+
+        Specifies a low limit voltage value, in volts, for output cutoff.
+        If the voltage output falls below this limit, the output is disconnected.
+
+        To find out whether an output has fallen below this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW` as the output cutoff reason.
+
+
+
+        .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Voltage Output Limit Low**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_VOLTAGE_OUTPUT_LIMIT_LOW**
 
 output_enabled
 --------------
