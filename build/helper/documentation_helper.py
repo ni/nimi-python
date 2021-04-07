@@ -1169,6 +1169,7 @@ wanted to choose.''',
         1000000: {
             'access': 'read-write',
             'channel_based': 'False',
+            'instrument_based': 'False',
             'enum': None,
             'lv_property': 'Fake attributes:Read Write Bool',
             'name': 'READ_WRITE_BOOL',
@@ -1494,6 +1495,7 @@ def test_add_notes_re_links():
         1000000: {
             'access': 'read-write',
             'channel_based': 'False',
+            'instrument_based': 'False',
             'enum': None,
             'lv_property': 'Fake attributes:Read Write Bool',
             'name': 'READ_WRITE_BOOL',

@@ -1812,17 +1812,19 @@ active_advanced_sequence
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1849,17 +1851,19 @@ active_advanced_sequence_step
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | int        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1892,17 +1896,19 @@ actual_power_allocation
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | float     |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | Yes       |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1932,17 +1938,19 @@ aperture_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1972,17 +1980,19 @@ aperture_time_units
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------+
-            | Characteristic | Value                   |
-            +================+=========================+
-            | Datatype       | enums.ApertureTimeUnits |
-            +----------------+-------------------------+
-            | Permissions    | read-write              |
-            +----------------+-------------------------+
-            | Channel Based  | Yes                     |
-            +----------------+-------------------------+
-            | Resettable     | No                      |
-            +----------------+-------------------------+
+            +------------------+-------------------------+
+            | Characteristic   | Value                   |
+            +==================+=========================+
+            | Datatype         | enums.ApertureTimeUnits |
+            +------------------+-------------------------+
+            | Permissions      | read-write              |
+            +------------------+-------------------------+
+            | Channel Based    | Yes                     |
+            +------------------+-------------------------+
+            | Instrument Based | No                      |
+            +------------------+-------------------------+
+            | Resettable       | No                      |
+            +------------------+-------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2009,17 +2019,19 @@ autorange
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2046,17 +2058,19 @@ autorange_aperture_time_mode
 
         The following table lists the characteristics of this property.
 
-            +----------------+---------------------------------+
-            | Characteristic | Value                           |
-            +================+=================================+
-            | Datatype       | enums.AutorangeApertureTimeMode |
-            +----------------+---------------------------------+
-            | Permissions    | read-write                      |
-            +----------------+---------------------------------+
-            | Channel Based  | Yes                             |
-            +----------------+---------------------------------+
-            | Resettable     | No                              |
-            +----------------+---------------------------------+
+            +------------------+---------------------------------+
+            | Characteristic   | Value                           |
+            +==================+=================================+
+            | Datatype         | enums.AutorangeApertureTimeMode |
+            +------------------+---------------------------------+
+            | Permissions      | read-write                      |
+            +------------------+---------------------------------+
+            | Channel Based    | Yes                             |
+            +------------------+---------------------------------+
+            | Instrument Based | No                              |
+            +------------------+---------------------------------+
+            | Resettable       | No                              |
+            +------------------+---------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2083,17 +2097,19 @@ autorange_behavior
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------+
-            | Characteristic | Value                   |
-            +================+=========================+
-            | Datatype       | enums.AutorangeBehavior |
-            +----------------+-------------------------+
-            | Permissions    | read-write              |
-            +----------------+-------------------------+
-            | Channel Based  | Yes                     |
-            +----------------+-------------------------+
-            | Resettable     | No                      |
-            +----------------+-------------------------+
+            +------------------+-------------------------+
+            | Characteristic   | Value                   |
+            +==================+=========================+
+            | Datatype         | enums.AutorangeBehavior |
+            +------------------+-------------------------+
+            | Permissions      | read-write              |
+            +------------------+-------------------------+
+            | Channel Based    | Yes                     |
+            +------------------+-------------------------+
+            | Instrument Based | No                      |
+            +------------------+-------------------------+
+            | Resettable       | No                      |
+            +------------------+-------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2120,17 +2136,19 @@ autorange_minimum_aperture_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2157,17 +2175,19 @@ autorange_minimum_aperture_time_units
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------+
-            | Characteristic | Value                   |
-            +================+=========================+
-            | Datatype       | enums.ApertureTimeUnits |
-            +----------------+-------------------------+
-            | Permissions    | read-write              |
-            +----------------+-------------------------+
-            | Channel Based  | Yes                     |
-            +----------------+-------------------------+
-            | Resettable     | No                      |
-            +----------------+-------------------------+
+            +------------------+-------------------------+
+            | Characteristic   | Value                   |
+            +==================+=========================+
+            | Datatype         | enums.ApertureTimeUnits |
+            +------------------+-------------------------+
+            | Permissions      | read-write              |
+            +------------------+-------------------------+
+            | Channel Based    | Yes                     |
+            +------------------+-------------------------+
+            | Instrument Based | No                      |
+            +------------------+-------------------------+
+            | Resettable       | No                      |
+            +------------------+-------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2194,17 +2214,19 @@ autorange_minimum_current_range
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2231,17 +2253,19 @@ autorange_minimum_voltage_range
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2268,17 +2292,19 @@ autorange_threshold_mode
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------------------------+
-            | Characteristic | Value                        |
-            +================+==============================+
-            | Datatype       | enums.AutorangeThresholdMode |
-            +----------------+------------------------------+
-            | Permissions    | read-write                   |
-            +----------------+------------------------------+
-            | Channel Based  | Yes                          |
-            +----------------+------------------------------+
-            | Resettable     | No                           |
-            +----------------+------------------------------+
+            +------------------+------------------------------+
+            | Characteristic   | Value                        |
+            +==================+==============================+
+            | Datatype         | enums.AutorangeThresholdMode |
+            +------------------+------------------------------+
+            | Permissions      | read-write                   |
+            +------------------+------------------------------+
+            | Channel Based    | Yes                          |
+            +------------------+------------------------------+
+            | Instrument Based | No                           |
+            +------------------+------------------------------+
+            | Resettable       | No                           |
+            +------------------+------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2305,17 +2331,19 @@ auto_zero
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------+
-            | Characteristic | Value          |
-            +================+================+
-            | Datatype       | enums.AutoZero |
-            +----------------+----------------+
-            | Permissions    | read-write     |
-            +----------------+----------------+
-            | Channel Based  | Yes            |
-            +----------------+----------------+
-            | Resettable     | No             |
-            +----------------+----------------+
+            +------------------+----------------+
+            | Characteristic   | Value          |
+            +==================+================+
+            | Datatype         | enums.AutoZero |
+            +------------------+----------------+
+            | Permissions      | read-write     |
+            +------------------+----------------+
+            | Channel Based    | Yes            |
+            +------------------+----------------+
+            | Instrument Based | No             |
+            +------------------+----------------+
+            | Resettable       | No             |
+            +------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2336,25 +2364,21 @@ auxiliary_power_source_available
 
         .. note:: This property does not necessarily indicate if the device is using the auxiliary
 
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
-
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | bool      |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | bool      |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2371,17 +2395,19 @@ channel_count
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | int       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2426,17 +2452,19 @@ compliance_limit_symmetry
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------+
-            | Characteristic | Value                         |
-            +================+===============================+
-            | Datatype       | enums.ComplianceLimitSymmetry |
-            +----------------+-------------------------------+
-            | Permissions    | read-write                    |
-            +----------------+-------------------------------+
-            | Channel Based  | Yes                           |
-            +----------------+-------------------------------+
-            | Resettable     | No                            |
-            +----------------+-------------------------------+
+            +------------------+-------------------------------+
+            | Characteristic   | Value                         |
+            +==================+===============================+
+            | Datatype         | enums.ComplianceLimitSymmetry |
+            +------------------+-------------------------------+
+            | Permissions      | read-write                    |
+            +------------------+-------------------------------+
+            | Channel Based    | Yes                           |
+            +------------------+-------------------------------+
+            | Instrument Based | No                            |
+            +------------------+-------------------------------+
+            | Resettable       | No                            |
+            +------------------+-------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2465,17 +2493,19 @@ current_compensation_frequency
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2504,17 +2534,19 @@ current_gain_bandwidth
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2544,17 +2576,19 @@ current_level
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2583,17 +2617,19 @@ current_level_autorange
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2624,17 +2660,19 @@ current_level_range
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2664,17 +2702,19 @@ current_limit
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2703,17 +2743,19 @@ current_limit_autorange
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2733,17 +2775,19 @@ current_limit_behavior
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | int        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2794,17 +2838,19 @@ current_limit_high
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2856,17 +2902,19 @@ current_limit_low
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2897,17 +2945,19 @@ current_limit_range
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2936,17 +2986,19 @@ current_pole_zero_ratio
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2975,17 +3027,19 @@ dc_noise_rejection
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------------------+
-            | Characteristic | Value                  |
-            +================+========================+
-            | Datatype       | enums.DCNoiseRejection |
-            +----------------+------------------------+
-            | Permissions    | read-write             |
-            +----------------+------------------------+
-            | Channel Based  | Yes                    |
-            +----------------+------------------------+
-            | Resettable     | No                     |
-            +----------------+------------------------+
+            +------------------+------------------------+
+            | Characteristic   | Value                  |
+            +==================+========================+
+            | Datatype         | enums.DCNoiseRejection |
+            +------------------+------------------------+
+            | Permissions      | read-write             |
+            +------------------+------------------------+
+            | Channel Based    | Yes                    |
+            +------------------+------------------------+
+            | Instrument Based | No                     |
+            +------------------+------------------------+
+            | Resettable       | No                     |
+            +------------------+------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3015,17 +3069,19 @@ digital_edge_measure_trigger_input_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3054,17 +3110,19 @@ digital_edge_pulse_trigger_input_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3094,17 +3152,19 @@ digital_edge_sequence_advance_trigger_input_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3133,17 +3193,19 @@ digital_edge_shutdown_trigger_input_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3173,17 +3235,19 @@ digital_edge_source_trigger_input_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3213,17 +3277,19 @@ digital_edge_start_trigger_input_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3242,17 +3308,19 @@ driver_setup
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3282,17 +3350,19 @@ exported_measure_trigger_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3321,17 +3391,19 @@ exported_pulse_trigger_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3361,17 +3433,19 @@ exported_sequence_advance_trigger_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3401,17 +3475,19 @@ exported_source_trigger_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3441,17 +3517,19 @@ exported_start_trigger_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3476,17 +3554,19 @@ fetch_backlog
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | int       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | Yes       |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3511,17 +3591,19 @@ instrument_firmware_revision
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | Yes       |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3536,19 +3618,29 @@ instrument_manufacturer
 
         Contains the name of the manufacturer for the device you are currently using.
 
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | Yes       |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3573,17 +3665,19 @@ instrument_model
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | Yes       |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3612,17 +3706,19 @@ interlock_input_open
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | bool      |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | bool      |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | Yes       |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3641,17 +3737,19 @@ io_resource_descriptor
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3669,17 +3767,19 @@ logical_name
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3710,17 +3810,19 @@ measure_buffer_size
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | int        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3750,17 +3852,19 @@ measure_complete_event_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------------------------+
-            | Characteristic | Value                                                       |
-            +================+=============================================================+
-            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +----------------+-------------------------------------------------------------+
-            | Permissions    | read-write                                                  |
-            +----------------+-------------------------------------------------------------+
-            | Channel Based  | Yes                                                         |
-            +----------------+-------------------------------------------------------------+
-            | Resettable     | No                                                          |
-            +----------------+-------------------------------------------------------------+
+            +------------------+-------------------------------------------------------------+
+            | Characteristic   | Value                                                       |
+            +==================+=============================================================+
+            | Datatype         | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +------------------+-------------------------------------------------------------+
+            | Permissions      | read-write                                                  |
+            +------------------+-------------------------------------------------------------+
+            | Channel Based    | Yes                                                         |
+            +------------------+-------------------------------------------------------------+
+            | Instrument Based | No                                                          |
+            +------------------+-------------------------------------------------------------+
+            | Resettable       | No                                                          |
+            +------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3789,17 +3893,19 @@ measure_complete_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3828,17 +3934,19 @@ measure_complete_event_pulse_polarity
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------+
-            | Characteristic | Value          |
-            +================+================+
-            | Datatype       | enums.Polarity |
-            +----------------+----------------+
-            | Permissions    | read-write     |
-            +----------------+----------------+
-            | Channel Based  | Yes            |
-            +----------------+----------------+
-            | Resettable     | No             |
-            +----------------+----------------+
+            +------------------+----------------+
+            | Characteristic   | Value          |
+            +==================+================+
+            | Datatype         | enums.Polarity |
+            +------------------+----------------+
+            | Permissions      | read-write     |
+            +------------------+----------------+
+            | Channel Based    | Yes            |
+            +------------------+----------------+
+            | Instrument Based | No             |
+            +------------------+----------------+
+            | Resettable       | No             |
+            +------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3870,17 +3978,19 @@ measure_complete_event_pulse_width
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3909,17 +4019,19 @@ measure_record_delta_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------------------------+
-            | Characteristic | Value                                                       |
-            +================+=============================================================+
-            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +----------------+-------------------------------------------------------------+
-            | Permissions    | read only                                                   |
-            +----------------+-------------------------------------------------------------+
-            | Channel Based  | Yes                                                         |
-            +----------------+-------------------------------------------------------------+
-            | Resettable     | No                                                          |
-            +----------------+-------------------------------------------------------------+
+            +------------------+-------------------------------------------------------------+
+            | Characteristic   | Value                                                       |
+            +==================+=============================================================+
+            | Datatype         | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +------------------+-------------------------------------------------------------+
+            | Permissions      | read only                                                   |
+            +------------------+-------------------------------------------------------------+
+            | Channel Based    | Yes                                                         |
+            +------------------+-------------------------------------------------------------+
+            | Instrument Based | No                                                          |
+            +------------------+-------------------------------------------------------------+
+            | Resettable       | No                                                          |
+            +------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3949,17 +4061,19 @@ measure_record_length
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | int        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3988,17 +4102,19 @@ measure_record_length_is_finite
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4027,17 +4143,19 @@ measure_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.TriggerType |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | Yes               |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
+            +------------------+-------------------+
+            | Characteristic   | Value             |
+            +==================+===================+
+            | Datatype         | enums.TriggerType |
+            +------------------+-------------------+
+            | Permissions      | read-write        |
+            +------------------+-------------------+
+            | Channel Based    | Yes               |
+            +------------------+-------------------+
+            | Instrument Based | No                |
+            +------------------+-------------------+
+            | Resettable       | No                |
+            +------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4064,17 +4182,19 @@ measure_when
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.MeasureWhen |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | Yes               |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
+            +------------------+-------------------+
+            | Characteristic   | Value             |
+            +==================+===================+
+            | Datatype         | enums.MeasureWhen |
+            +------------------+-------------------+
+            | Permissions      | read-write        |
+            +------------------+-------------------+
+            | Channel Based    | Yes               |
+            +------------------+-------------------+
+            | Instrument Based | No                |
+            +------------------+-------------------+
+            | Resettable       | No                |
+            +------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4105,17 +4225,19 @@ merged_channels
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4144,17 +4266,19 @@ output_capacitance
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------+
-            | Characteristic | Value                   |
-            +================+=========================+
-            | Datatype       | enums.OutputCapacitance |
-            +----------------+-------------------------+
-            | Permissions    | read-write              |
-            +----------------+-------------------------+
-            | Channel Based  | Yes                     |
-            +----------------+-------------------------+
-            | Resettable     | No                      |
-            +----------------+-------------------------+
+            +------------------+-------------------------+
+            | Characteristic   | Value                   |
+            +==================+=========================+
+            | Datatype         | enums.OutputCapacitance |
+            +------------------+-------------------------+
+            | Permissions      | read-write              |
+            +------------------+-------------------------+
+            | Channel Based    | Yes                     |
+            +------------------+-------------------------+
+            | Instrument Based | No                      |
+            +------------------+-------------------------+
+            | Resettable       | No                      |
+            +------------------+-------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4185,17 +4309,19 @@ output_connected
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4225,17 +4351,19 @@ output_enabled
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4276,17 +4404,19 @@ output_function
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------+
-            | Characteristic | Value                |
-            +================+======================+
-            | Datatype       | enums.OutputFunction |
-            +----------------+----------------------+
-            | Permissions    | read-write           |
-            +----------------+----------------------+
-            | Channel Based  | Yes                  |
-            +----------------+----------------------+
-            | Resettable     | No                   |
-            +----------------+----------------------+
+            +------------------+----------------------+
+            | Characteristic   | Value                |
+            +==================+======================+
+            | Datatype         | enums.OutputFunction |
+            +------------------+----------------------+
+            | Permissions      | read-write           |
+            +------------------+----------------------+
+            | Channel Based    | Yes                  |
+            +------------------+----------------------+
+            | Instrument Based | No                   |
+            +------------------+----------------------+
+            | Resettable       | No                   |
+            +------------------+----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4315,17 +4445,19 @@ output_resistance
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4352,17 +4484,19 @@ overranging_enabled
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4392,17 +4526,19 @@ ovp_enabled
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4432,17 +4568,19 @@ ovp_limit
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4475,17 +4613,19 @@ power_allocation_mode
 
         The following table lists the characteristics of this property.
 
-            +----------------+---------------------------+
-            | Characteristic | Value                     |
-            +================+===========================+
-            | Datatype       | enums.PowerAllocationMode |
-            +----------------+---------------------------+
-            | Permissions    | read-write                |
-            +----------------+---------------------------+
-            | Channel Based  | Yes                       |
-            +----------------+---------------------------+
-            | Resettable     | No                        |
-            +----------------+---------------------------+
+            +------------------+---------------------------+
+            | Characteristic   | Value                     |
+            +==================+===========================+
+            | Datatype         | enums.PowerAllocationMode |
+            +------------------+---------------------------+
+            | Permissions      | read-write                |
+            +------------------+---------------------------+
+            | Channel Based    | Yes                       |
+            +------------------+---------------------------+
+            | Instrument Based | No                        |
+            +------------------+---------------------------+
+            | Resettable       | No                        |
+            +------------------+---------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4516,17 +4656,19 @@ power_line_frequency
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4549,17 +4691,19 @@ power_source
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.PowerSource |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | No                |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
+            +------------------+-------------------+
+            | Characteristic   | Value             |
+            +==================+===================+
+            | Datatype         | enums.PowerSource |
+            +------------------+-------------------+
+            | Permissions      | read-write        |
+            +------------------+-------------------+
+            | Channel Based    | No                |
+            +------------------+-------------------+
+            | Instrument Based | No                |
+            +------------------+-------------------+
+            | Resettable       | No                |
+            +------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4574,27 +4718,21 @@ power_source_in_use
 
         Indicates whether the device is using the internal or auxiliary power source to generate power.
 
-
-
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
-
         The following table lists the characteristics of this property.
 
-            +----------------+------------------------+
-            | Characteristic | Value                  |
-            +================+========================+
-            | Datatype       | enums.PowerSourceInUse |
-            +----------------+------------------------+
-            | Permissions    | read only              |
-            +----------------+------------------------+
-            | Channel Based  | Yes                    |
-            +----------------+------------------------+
-            | Resettable     | No                     |
-            +----------------+------------------------+
+            +------------------+------------------------+
+            | Characteristic   | Value                  |
+            +==================+========================+
+            | Datatype         | enums.PowerSourceInUse |
+            +------------------+------------------------+
+            | Permissions      | read only              |
+            +------------------+------------------------+
+            | Channel Based    | No                     |
+            +------------------+------------------------+
+            | Instrument Based | No                     |
+            +------------------+------------------------+
+            | Resettable       | No                     |
+            +------------------+------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4623,17 +4761,19 @@ pulse_bias_current_level
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4662,17 +4802,19 @@ pulse_bias_current_limit
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4727,17 +4869,19 @@ pulse_bias_current_limit_high
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4792,17 +4936,19 @@ pulse_bias_current_limit_low
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4831,17 +4977,19 @@ pulse_bias_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4870,17 +5018,19 @@ pulse_bias_voltage_level
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4909,17 +5059,19 @@ pulse_bias_voltage_limit
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4974,17 +5126,19 @@ pulse_bias_voltage_limit_high
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5039,17 +5193,19 @@ pulse_bias_voltage_limit_low
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5078,17 +5234,19 @@ pulse_complete_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5116,17 +5274,19 @@ pulse_complete_event_pulse_polarity
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------+
-            | Characteristic | Value          |
-            +================+================+
-            | Datatype       | enums.Polarity |
-            +----------------+----------------+
-            | Permissions    | read-write     |
-            +----------------+----------------+
-            | Channel Based  | Yes            |
-            +----------------+----------------+
-            | Resettable     | No             |
-            +----------------+----------------+
+            +------------------+----------------+
+            | Characteristic   | Value          |
+            +==================+================+
+            | Datatype         | enums.Polarity |
+            +------------------+----------------+
+            | Permissions      | read-write     |
+            +------------------+----------------+
+            | Channel Based    | Yes            |
+            +------------------+----------------+
+            | Instrument Based | No             |
+            +------------------+----------------+
+            | Resettable       | No             |
+            +------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5156,17 +5316,19 @@ pulse_complete_event_pulse_width
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5195,17 +5357,19 @@ pulse_current_level
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5235,17 +5399,19 @@ pulse_current_level_range
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5274,17 +5440,19 @@ pulse_current_limit
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5339,17 +5507,19 @@ pulse_current_limit_high
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5404,17 +5574,19 @@ pulse_current_limit_low
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5444,17 +5616,19 @@ pulse_current_limit_range
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5483,17 +5657,19 @@ pulse_off_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------------------------+
-            | Characteristic | Value                                                       |
-            +================+=============================================================+
-            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +----------------+-------------------------------------------------------------+
-            | Permissions    | read-write                                                  |
-            +----------------+-------------------------------------------------------------+
-            | Channel Based  | Yes                                                         |
-            +----------------+-------------------------------------------------------------+
-            | Resettable     | No                                                          |
-            +----------------+-------------------------------------------------------------+
+            +------------------+-------------------------------------------------------------+
+            | Characteristic   | Value                                                       |
+            +==================+=============================================================+
+            | Datatype         | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +------------------+-------------------------------------------------------------+
+            | Permissions      | read-write                                                  |
+            +------------------+-------------------------------------------------------------+
+            | Channel Based    | Yes                                                         |
+            +------------------+-------------------------------------------------------------+
+            | Instrument Based | No                                                          |
+            +------------------+-------------------------------------------------------------+
+            | Resettable       | No                                                          |
+            +------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5522,17 +5698,19 @@ pulse_on_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------------------------+
-            | Characteristic | Value                                                       |
-            +================+=============================================================+
-            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +----------------+-------------------------------------------------------------+
-            | Permissions    | read-write                                                  |
-            +----------------+-------------------------------------------------------------+
-            | Channel Based  | Yes                                                         |
-            +----------------+-------------------------------------------------------------+
-            | Resettable     | No                                                          |
-            +----------------+-------------------------------------------------------------+
+            +------------------+-------------------------------------------------------------+
+            | Characteristic   | Value                                                       |
+            +==================+=============================================================+
+            | Datatype         | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +------------------+-------------------------------------------------------------+
+            | Permissions      | read-write                                                  |
+            +------------------+-------------------------------------------------------------+
+            | Channel Based    | Yes                                                         |
+            +------------------+-------------------------------------------------------------+
+            | Instrument Based | No                                                          |
+            +------------------+-------------------------------------------------------------+
+            | Resettable       | No                                                          |
+            +------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5560,17 +5738,19 @@ pulse_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.TriggerType |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | Yes               |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
+            +------------------+-------------------+
+            | Characteristic   | Value             |
+            +==================+===================+
+            | Datatype         | enums.TriggerType |
+            +------------------+-------------------+
+            | Permissions      | read-write        |
+            +------------------+-------------------+
+            | Channel Based    | Yes               |
+            +------------------+-------------------+
+            | Instrument Based | No                |
+            +------------------+-------------------+
+            | Resettable       | No                |
+            +------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5599,17 +5779,19 @@ pulse_voltage_level
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5639,17 +5821,19 @@ pulse_voltage_level_range
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5678,17 +5862,19 @@ pulse_voltage_limit
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5743,17 +5929,19 @@ pulse_voltage_limit_high
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5808,17 +5996,19 @@ pulse_voltage_limit_low
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5848,17 +6038,19 @@ pulse_voltage_limit_range
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5879,17 +6071,19 @@ query_instrument_status
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | No         |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5917,17 +6111,19 @@ ready_for_pulse_trigger_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5955,17 +6151,19 @@ ready_for_pulse_trigger_event_pulse_polarity
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------+
-            | Characteristic | Value          |
-            +================+================+
-            | Datatype       | enums.Polarity |
-            +----------------+----------------+
-            | Permissions    | read-write     |
-            +----------------+----------------+
-            | Channel Based  | Yes            |
-            +----------------+----------------+
-            | Resettable     | No             |
-            +----------------+----------------+
+            +------------------+----------------+
+            | Characteristic   | Value          |
+            +==================+================+
+            | Datatype         | enums.Polarity |
+            +------------------+----------------+
+            | Permissions      | read-write     |
+            +------------------+----------------+
+            | Channel Based    | Yes            |
+            +------------------+----------------+
+            | Instrument Based | No             |
+            +------------------+----------------+
+            | Resettable       | No             |
+            +------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5995,17 +6193,19 @@ ready_for_pulse_trigger_event_pulse_width
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6040,17 +6240,19 @@ requested_power_allocation
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6080,17 +6282,19 @@ reset_average_before_measurement
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6125,17 +6329,19 @@ samples_to_average
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | int        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6157,19 +6363,27 @@ self_calibration_persistence
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------+
-            | Characteristic | Value                            |
-            +================+==================================+
-            | Datatype       | enums.SelfCalibrationPersistence |
-            +----------------+----------------------------------+
-            | Permissions    | read-write                       |
-            +----------------+----------------------------------+
-            | Channel Based  | No                               |
-            +----------------+----------------------------------+
-            | Resettable     | No                               |
-            +----------------+----------------------------------+
+            +------------------+----------------------------------+
+            | Characteristic   | Value                            |
+            +==================+==================================+
+            | Datatype         | enums.SelfCalibrationPersistence |
+            +------------------+----------------------------------+
+            | Permissions      | read-write                       |
+            +------------------+----------------------------------+
+            | Channel Based    | No                               |
+            +------------------+----------------------------------+
+            | Instrument Based | Yes                              |
+            +------------------+----------------------------------+
+            | Resettable       | No                               |
+            +------------------+----------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6196,17 +6410,19 @@ sense
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------+
-            | Characteristic | Value       |
-            +================+=============+
-            | Datatype       | enums.Sense |
-            +----------------+-------------+
-            | Permissions    | read-write  |
-            +----------------+-------------+
-            | Channel Based  | Yes         |
-            +----------------+-------------+
-            | Resettable     | No          |
-            +----------------+-------------+
+            +------------------+-------------+
+            | Characteristic   | Value       |
+            +==================+=============+
+            | Datatype         | enums.Sense |
+            +------------------+-------------+
+            | Permissions      | read-write  |
+            +------------------+-------------+
+            | Channel Based    | Yes         |
+            +------------------+-------------+
+            | Instrument Based | No          |
+            +------------------+-------------+
+            | Resettable       | No          |
+            +------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6235,17 +6451,19 @@ sequence_advance_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.TriggerType |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | Yes               |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
+            +------------------+-------------------+
+            | Characteristic   | Value             |
+            +==================+===================+
+            | Datatype         | enums.TriggerType |
+            +------------------+-------------------+
+            | Permissions      | read-write        |
+            +------------------+-------------------+
+            | Channel Based    | Yes               |
+            +------------------+-------------------+
+            | Instrument Based | No                |
+            +------------------+-------------------+
+            | Resettable       | No                |
+            +------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6274,17 +6492,19 @@ sequence_engine_done_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6313,17 +6533,19 @@ sequence_engine_done_event_pulse_polarity
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------+
-            | Characteristic | Value          |
-            +================+================+
-            | Datatype       | enums.Polarity |
-            +----------------+----------------+
-            | Permissions    | read-write     |
-            +----------------+----------------+
-            | Channel Based  | Yes            |
-            +----------------+----------------+
-            | Resettable     | No             |
-            +----------------+----------------+
+            +------------------+----------------+
+            | Characteristic   | Value          |
+            +==================+================+
+            | Datatype         | enums.Polarity |
+            +------------------+----------------+
+            | Permissions      | read-write     |
+            +------------------+----------------+
+            | Channel Based    | Yes            |
+            +------------------+----------------+
+            | Instrument Based | No             |
+            +------------------+----------------+
+            | Resettable       | No             |
+            +------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6355,17 +6577,19 @@ sequence_engine_done_event_pulse_width
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6394,17 +6618,19 @@ sequence_iteration_complete_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6433,17 +6659,19 @@ sequence_iteration_complete_event_pulse_polarity
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------+
-            | Characteristic | Value          |
-            +================+================+
-            | Datatype       | enums.Polarity |
-            +----------------+----------------+
-            | Permissions    | read-write     |
-            +----------------+----------------+
-            | Channel Based  | Yes            |
-            +----------------+----------------+
-            | Resettable     | No             |
-            +----------------+----------------+
+            +------------------+----------------+
+            | Characteristic   | Value          |
+            +==================+================+
+            | Datatype         | enums.Polarity |
+            +------------------+----------------+
+            | Permissions      | read-write     |
+            +------------------+----------------+
+            | Channel Based    | Yes            |
+            +------------------+----------------+
+            | Instrument Based | No             |
+            +------------------+----------------+
+            | Resettable       | No             |
+            +------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6475,17 +6703,19 @@ sequence_iteration_complete_event_pulse_width
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6516,17 +6746,19 @@ sequence_loop_count
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | int        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6556,17 +6788,19 @@ sequence_loop_count_is_finite
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6586,17 +6820,19 @@ sequence_step_delta_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6615,17 +6851,19 @@ sequence_step_delta_time_enabled
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6639,19 +6877,29 @@ serial_number
 
         Contains the serial number for the device you are currently using.
 
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | Yes       |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6679,17 +6927,19 @@ shutdown_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.TriggerType |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | Yes               |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
+            +------------------+-------------------+
+            | Characteristic   | Value             |
+            +==================+===================+
+            | Datatype         | enums.TriggerType |
+            +------------------+-------------------+
+            | Permissions      | read-write        |
+            +------------------+-------------------+
+            | Channel Based    | Yes               |
+            +------------------+-------------------+
+            | Instrument Based | No                |
+            +------------------+-------------------+
+            | Resettable       | No                |
+            +------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6707,17 +6957,19 @@ simulate
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | No         |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6746,17 +6998,19 @@ source_complete_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | str        |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6785,17 +7039,19 @@ source_complete_event_pulse_polarity
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------+
-            | Characteristic | Value          |
-            +================+================+
-            | Datatype       | enums.Polarity |
-            +----------------+----------------+
-            | Permissions    | read-write     |
-            +----------------+----------------+
-            | Channel Based  | Yes            |
-            +----------------+----------------+
-            | Resettable     | No             |
-            +----------------+----------------+
+            +------------------+----------------+
+            | Characteristic   | Value          |
+            +==================+================+
+            | Datatype         | enums.Polarity |
+            +------------------+----------------+
+            | Permissions      | read-write     |
+            +------------------+----------------+
+            | Channel Based    | Yes            |
+            +------------------+----------------+
+            | Instrument Based | No             |
+            +------------------+----------------+
+            | Resettable       | No             |
+            +------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6827,17 +7083,19 @@ source_complete_event_pulse_width
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6867,17 +7125,19 @@ source_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------------------------+
-            | Characteristic | Value                                                       |
-            +================+=============================================================+
-            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +----------------+-------------------------------------------------------------+
-            | Permissions    | read-write                                                  |
-            +----------------+-------------------------------------------------------------+
-            | Channel Based  | Yes                                                         |
-            +----------------+-------------------------------------------------------------+
-            | Resettable     | No                                                          |
-            +----------------+-------------------------------------------------------------+
+            +------------------+-------------------------------------------------------------+
+            | Characteristic   | Value                                                       |
+            +==================+=============================================================+
+            | Datatype         | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +------------------+-------------------------------------------------------------+
+            | Permissions      | read-write                                                  |
+            +------------------+-------------------------------------------------------------+
+            | Channel Based    | Yes                                                         |
+            +------------------+-------------------------------------------------------------+
+            | Instrument Based | No                                                          |
+            +------------------+-------------------------------------------------------------+
+            | Resettable       | No                                                          |
+            +------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6903,17 +7163,19 @@ source_mode
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------------+
-            | Characteristic | Value            |
-            +================+==================+
-            | Datatype       | enums.SourceMode |
-            +----------------+------------------+
-            | Permissions    | read-write       |
-            +----------------+------------------+
-            | Channel Based  | Yes              |
-            +----------------+------------------+
-            | Resettable     | No               |
-            +----------------+------------------+
+            +------------------+------------------+
+            | Characteristic   | Value            |
+            +==================+==================+
+            | Datatype         | enums.SourceMode |
+            +------------------+------------------+
+            | Permissions      | read-write       |
+            +------------------+------------------+
+            | Channel Based    | Yes              |
+            +------------------+------------------+
+            | Instrument Based | No               |
+            +------------------+------------------+
+            | Resettable       | No               |
+            +------------------+------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6942,17 +7204,19 @@ source_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.TriggerType |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | Yes               |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
+            +------------------+-------------------+
+            | Characteristic   | Value             |
+            +==================+===================+
+            | Datatype         | enums.TriggerType |
+            +------------------+-------------------+
+            | Permissions      | read-write        |
+            +------------------+-------------------+
+            | Channel Based    | Yes               |
+            +------------------+-------------------+
+            | Instrument Based | No                |
+            +------------------+-------------------+
+            | Resettable       | No                |
+            +------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6969,17 +7233,19 @@ specific_driver_description
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6996,17 +7262,19 @@ specific_driver_prefix
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7023,17 +7291,19 @@ specific_driver_revision
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7050,17 +7320,19 @@ specific_driver_vendor
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7089,17 +7361,19 @@ start_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.TriggerType |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | Yes               |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
+            +------------------+-------------------+
+            | Characteristic   | Value             |
+            +==================+===================+
+            | Datatype         | enums.TriggerType |
+            +------------------+-------------------+
+            | Permissions      | read-write        |
+            +------------------+-------------------+
+            | Channel Based    | Yes               |
+            +------------------+-------------------+
+            | Instrument Based | No                |
+            +------------------+-------------------+
+            | Resettable       | No                |
+            +------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7116,17 +7390,19 @@ supported_instrument_models
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +------------------+-----------+
+            | Characteristic   | Value     |
+            +==================+===========+
+            | Datatype         | str       |
+            +------------------+-----------+
+            | Permissions      | read only |
+            +------------------+-----------+
+            | Channel Based    | No        |
+            +------------------+-----------+
+            | Instrument Based | No        |
+            +------------------+-----------+
+            | Resettable       | No        |
+            +------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7155,17 +7431,19 @@ transient_response
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------+
-            | Characteristic | Value                   |
-            +================+=========================+
-            | Datatype       | enums.TransientResponse |
-            +----------------+-------------------------+
-            | Permissions    | read-write              |
-            +----------------+-------------------------+
-            | Channel Based  | Yes                     |
-            +----------------+-------------------------+
-            | Resettable     | No                      |
-            +----------------+-------------------------+
+            +------------------+-------------------------+
+            | Characteristic   | Value                   |
+            +==================+=========================+
+            | Datatype         | enums.TransientResponse |
+            +------------------+-------------------------+
+            | Permissions      | read-write              |
+            +------------------+-------------------------+
+            | Channel Based    | Yes                     |
+            +------------------+-------------------------+
+            | Instrument Based | No                      |
+            +------------------+-------------------------+
+            | Resettable       | No                      |
+            +------------------+-------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7194,17 +7472,19 @@ voltage_compensation_frequency
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7233,17 +7513,19 @@ voltage_gain_bandwidth
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7273,17 +7555,19 @@ voltage_level
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7312,17 +7596,19 @@ voltage_level_autorange
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7353,17 +7639,19 @@ voltage_level_range
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7393,17 +7681,19 @@ voltage_limit
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7432,17 +7722,19 @@ voltage_limit_autorange
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | bool       |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7494,17 +7786,19 @@ voltage_limit_high
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7556,17 +7850,19 @@ voltage_limit_low
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7597,17 +7893,19 @@ voltage_limit_range
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7636,17 +7934,19 @@ voltage_pole_zero_ratio
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +------------------+------------+
+            | Characteristic   | Value      |
+            +==================+============+
+            | Datatype         | float      |
+            +------------------+------------+
+            | Permissions      | read-write |
+            +------------------+------------+
+            | Channel Based    | Yes        |
+            +------------------+------------+
+            | Instrument Based | No         |
+            +------------------+------------+
+            | Resettable       | No         |
+            +------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
