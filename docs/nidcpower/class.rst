@@ -154,6 +154,60 @@ abort
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+
+clear_latched_output_cutoff_state
+---------------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: clear_latched_output_cutoff_state(output_cutoff_reason)
+
+            Clears the state of an output cutoff that was engaged.
+            To clear the state for all output cutoff reasons, use :py:data:`~nidcpower.OutputCutoffReason.ALL`.
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param output_cutoff_reason:
+
+
+                Specifies the reasons for which to clear the output cutoff state.
+
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.ALL`                                     | Clears all output cutoff conditions                                                                             |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH`                     | Clears cutoffs caused when the output exceeded the high cutoff limit for voltage output                         |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW`                      | Clears cutoffs caused when the output fell below the low cutoff limit for voltage output                        |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH`                    | Clears cutoffs caused when the measured current exceeded the high cutoff limit for current output               |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW`                     | Clears cutoffs caused when the measured current fell below the low cutoff limit for current output              |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE` | Clears cutoffs caused when the voltage slew rate increased beyond the positive change cutoff for voltage output |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE` | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for voltage output |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE` | Clears cutoffs caused when the current slew rate increased beyond the positive change cutoff for current output |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE` | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output |
+                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+            :type output_cutoff_reason: :py:data:`nidcpower.OutputCutoffReason`
 
 clear_latched_output_cutoff_state
 ---------------------------------
@@ -253,6 +307,11 @@ commit
 
             
 
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
 configure_aperture_time
@@ -505,7 +564,7 @@ create_advanced_sequence_step
 
             Creates a new advanced sequence step in the advanced sequence specified
             by the Active advanced sequence. When you create an advanced sequence
-            step, each property you passed to the :py:meth:`nidcpower.Session._create_advanced_sequence`
+            step, each property you passed to the :py:meth:`nidcpower.Session.create_advanced_sequence`
             method is reset to its default value for that step unless otherwise
             specified.
 
@@ -524,7 +583,7 @@ create_advanced_sequence_step
             `Programming
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-            :py:meth:`nidcpower.Session._create_advanced_sequence`
+            :py:meth:`nidcpower.Session.create_advanced_sequence`
 
             
 
@@ -533,6 +592,11 @@ create_advanced_sequence_step
                 Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
                 for more information about supported devices.
 
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param set_as_active_step:
@@ -577,6 +641,11 @@ delete_advanced_sequence
                 Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
                 for more information about supported devices.
 
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param sequence_name:
@@ -833,6 +902,50 @@ get_channel_name
 
 
                     Returns the output channel name that corresponds to **index**.
+
+                    
+
+
+
+get_channel_names
+-----------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: get_channel_names(index)
+
+            Returns a comma-separated list of channel names from a string index list.
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param index:
+
+
+                Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+                
+
+
+            :type index: basic sequence types or str or int
+
+            :rtype: list of str
+            :return:
+
+
+                    The returned channel name(s) at the specified index.
 
                     
 
@@ -1126,6 +1239,11 @@ initiate
             .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
 
 lock
 ----
@@ -1331,8 +1449,6 @@ query_latched_output_cutoff_state
 
             
 
-            .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
 
             .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
@@ -1345,25 +1461,27 @@ query_latched_output_cutoff_state
 
                 Specifies which output cutoff conditions to query.
 
-                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.ALL`                  | Any output cutoff condition was met                                                  |
-                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH`  | The output exceeded the high cutoff limit for voltage output                         |
-                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW`   | The output fell below the low cutoff limit for voltage output                        |
-                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH` | The measured current exceeded the high cutoff limit for current output               |
-                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW`  | The measured current fell below the low cutoff limit for current output              |
-                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_CHANGE_HIGH`  | The voltage slew rate increased beyond the positive change cutoff for voltage output |
-                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_CHANGE_LOW`   | The voltage slew rate decreased beyond the negative change cutoff for voltage output |
-                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_HIGH`  | The current slew rate increased beyond the positive change cutoff for current output |
-                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_LOW`   | The current slew rate decreased beyond the negative change cutoff for current output |
-                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.ALL`                                     | Any output cutoff condition was met                                                  |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH`                     | The output exceeded the high cutoff limit for voltage output                         |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW`                      | The output fell below the low cutoff limit for voltage output                        |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH`                    | The measured current exceeded the high cutoff limit for current output               |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW`                     | The measured current fell below the low cutoff limit for current output              |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE` | The voltage slew rate increased beyond the positive change cutoff for voltage output |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE` | The voltage slew rate decreased beyond the negative change cutoff for voltage output |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE` | The current slew rate increased beyond the positive change cutoff for current output |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE` | The current slew rate decreased beyond the negative change cutoff for current output |
+                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type output_cutoff_reason: :py:data:`nidcpower.OutputCutoffReason`
@@ -1595,6 +1713,11 @@ reset
             
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
 
 reset_device
 ------------
@@ -1735,6 +1858,11 @@ send_software_edge_trigger
                 for more information about supported devices.
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
 
             :param trigger:
 
@@ -1859,6 +1987,11 @@ wait_for_event
                 Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
                 for more information about supported devices.
 
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param event_id:
@@ -3642,6 +3775,14 @@ instrument_manufacturer
 
         Contains the name of the manufacturer for the device you are currently using.
 
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -3651,7 +3792,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -4317,11 +4458,13 @@ output_cutoff_current_change_limit_high
         Specifies a limit for positive current slew rate, in amps per microsecond, for output cutoff.
         If the current increases at a rate that exceeds this limit, the output is disconnected.
 
-        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_HIGH` as the output cutoff reason.
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE` as the output cutoff reason.
 
 
 
         .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -4357,11 +4500,13 @@ output_cutoff_current_change_limit_low
         Specifies a limit for negative current slew rate, in amps per microsecond, for output cutoff.
         If the current decreases at a rate that exceeds this limit, the output is disconnected.
 
-        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_LOW` as the output cutoff reason.
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE` as the output cutoff reason.
 
 
 
         .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -4554,11 +4699,13 @@ output_cutoff_voltage_change_limit_high
         Specifies a limit for positive voltage slew rate, in volts per microsecond, for output cutoff.
         If the voltage increases at a rate that exceeds this limit, the output is disconnected.
 
-        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` with :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_CHANGE_HIGH` as the output cutoff reason.
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE` as the output cutoff reason.
 
 
 
         .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -4594,11 +4741,13 @@ output_cutoff_voltage_change_limit_low
         Specifies a limit for negative voltage slew rate, in volts per microsecond, for output cutoff.
         If the voltage decreases at a rate that exceeds this limit, the output is disconnected.
 
-        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` with :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_CHANGE_LOW` as the output cutoff reason.
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE` as the output cutoff reason.
 
 
 
         .. note:: Refer to Supported Properties by Device for information about supported devices.
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -6652,6 +6801,12 @@ self_calibration_persistence
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------------------------+
@@ -6661,7 +6816,7 @@ self_calibration_persistence
             +----------------+----------------------------------+
             | Permissions    | read-write                       |
             +----------------+----------------------------------+
-            | Channel Based  | No                               |
+            | Channel Based  | Yes                              |
             +----------------+----------------------------------+
             | Resettable     | No                               |
             +----------------+----------------------------------+
@@ -7134,6 +7289,14 @@ serial_number
 
         Contains the serial number for the device you are currently using.
 
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -7143,7 +7306,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
