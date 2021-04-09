@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.7.0d8
+# This file is generated from NI-DCPower API metadata version 21.0.0d48
 config = {
-    'api_version': '20.7.0d8',
+    'api_version': '21.0.0d48',
     'c_function_prefix': 'niDCPower_',
     'close_function': 'close',
     'context_manager_name': {
-        'abort_function': 'Abort',
-        'initiate_function': 'Initiate',
+        'abort_function': 'AbortWithChannels',
+        'initiate_function': 'InitiateWithChannels',
         'task': 'acquisition'
     },
     'custom_types': [
