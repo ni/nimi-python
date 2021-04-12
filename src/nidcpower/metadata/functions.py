@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.7.0d8
+# This file is generated from NI-DCPower API metadata version 20.7.0d409
 functions = {
     'Abort': {
         'documentation': {
@@ -41,6 +41,77 @@ functions = {
             }
         ],
         'python_name': 'self_cal',
+        'returns': 'ViStatus'
+    },
+    'ClearLatchedOutputCutoffState': {
+        'documentation': {
+            'description': 'Clears the state of an output cutoff that was engaged.\nTo clear the state for all output cutoff reasons, use NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the reasons for which to clear the output cutoff state.\n',
+                    'table_body': [
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL',
+                            'Clears all output cutoff conditions'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_HIGH',
+                            'Clears cutoffs caused when the output exceeded the high cutoff limit for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_LOW',
+                            'Clears cutoffs caused when the output fell below the low cutoff limit for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_HIGH',
+                            'Clears cutoffs caused when the measured current exceeded the high cutoff limit for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_LOW',
+                            'Clears cutoffs caused when the measured current fell below the low cutoff limit for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_HIGH',
+                            'Clears cutoffs caused when the voltage slew rate increased beyond the positive change cutoff for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_LOW',
+                            'Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_HIGH',
+                            'Clears cutoffs caused when the current slew rate increased beyond the positive change cutoff for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
+                            'Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output'
+                        ]
+                    ]
+                },
+                'enum': 'OutputCutoffReason',
+                'name': 'outputCutoffReason',
+                'type': 'ViInt32'
+            }
+        ],
         'returns': 'ViStatus'
     },
     'Commit': {
@@ -96,11 +167,11 @@ functions = {
                     'description': '\nSpecifies the units for **apertureTime**.\n**Defined Values**:\n',
                     'table_body': [
                         [
-                            'NIDCPOWER_VAL_SECONDS (1028)',
+                            'NIDCPOWER_VAL_SECONDS',
                             'Specifies seconds.'
                         ],
                         [
-                            'NIDCPOWER_VAL_POWER_LINE_CYCLES (1029)',
+                            'NIDCPOWER_VAL_POWER_LINE_CYCLES',
                             'Specifies Power Line Cycles.'
                         ]
                     ]
@@ -1862,11 +1933,11 @@ functions = {
                     'description': '\nSpecifies whether a voltage or current value is measured.\n**Defined Values**:\n',
                     'table_body': [
                         [
-                            'NIDCPOWER_VAL_MEASURE_VOLTAGE (1)',
+                            'NIDCPOWER_VAL_MEASURE_VOLTAGE',
                             'The device measures voltage.'
                         ],
                         [
-                            'NIDCPOWER_VAL_MEASURE_CURRENT (0)',
+                            'NIDCPOWER_VAL_MEASURE_CURRENT',
                             'The device measures current.'
                         ]
                     ]
@@ -1989,6 +2060,95 @@ functions = {
                     'description': 'Returns whether the device output channel is in compliance.'
                 },
                 'name': 'inCompliance',
+                'type': 'ViBoolean'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'QueryLatchedOutputCutoffState': {
+        'documentation': {
+            'description': '\nDiscovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.\nIf a limit was exceeded, the state is latched until you clear it with the niDCPower_ClearLatchedOutputCutoffState function or the niDCPower_ResetWithChannels function.\n\noutputCutoffReason specifies the conditions for which an output is disconnected.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies which output cutoff conditions to query.\n',
+                    'table_body': [
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL',
+                            'Any output cutoff condition was met'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_HIGH',
+                            'The output exceeded the high cutoff limit for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_LOW',
+                            'The output fell below the low cutoff limit for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_HIGH',
+                            'The measured current exceeded the high cutoff limit for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_LOW',
+                            'The measured current fell below the low cutoff limit for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_HIGH',
+                            'The voltage slew rate increased beyond the positive change cutoff for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_LOW',
+                            'The voltage slew rate decreased beyond the negative change cutoff for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_HIGH',
+                            'The current slew rate increased beyond the positive change cutoff for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
+                            'The current slew rate decreased beyond the negative change cutoff for current output'
+                        ]
+                    ]
+                },
+                'enum': 'OutputCutoffReason',
+                'name': 'outputCutoffReason',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Specifies whether an output cutoff has engaged.\n',
+                    'table_body': [
+                        [
+                            'VI_TRUE',
+                            'An output cutoff has engaged for the conditions in **output cutoff reason**.'
+                        ],
+                        [
+                            'VI_FALSE',
+                            'No output cutoff has engaged.'
+                        ]
+                    ]
+                },
+                'name': 'outputCutoffState',
                 'type': 'ViBoolean'
             }
         ],
@@ -2141,11 +2301,11 @@ functions = {
                     'description': '\nSpecifies the output state of the output channel that is being queried.\n**Defined Values**:\n',
                     'table_body': [
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE (0)',
+                            'NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE',
                             'The device maintains a constant voltage by adjusting the current.'
                         ],
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT (1)',
+                            'NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT',
                             'The device maintains a constant current by adjusting the voltage.'
                         ]
                     ]
@@ -2241,27 +2401,27 @@ functions = {
                     'description': '\nSpecifies which trigger to assert.\n**Defined Values:**\n',
                     'table_body': [
                         [
-                            'NIDCPOWER_VAL_START_TRIGGER (1034)',
+                            'NIDCPOWER_VAL_START_TRIGGER',
                             'Asserts the Start trigger.'
                         ],
                         [
-                            'NIDCPOWER_VAL_SOURCE_TRIGGER (1035)',
+                            'NIDCPOWER_VAL_SOURCE_TRIGGER',
                             'Asserts the Source trigger.'
                         ],
                         [
-                            'NIDCPOWER_VAL_MEASURE_TRIGGER (1036)',
+                            'NIDCPOWER_VAL_MEASURE_TRIGGER',
                             'Asserts the Measure trigger.'
                         ],
                         [
-                            'NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER (1037)',
+                            'NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER',
                             'Asserts the Sequence Advance trigger.'
                         ],
                         [
-                            'NIDCPOWER_VAL_PULSE_TRIGGER (1053)',
+                            'NIDCPOWER_VAL_PULSE_TRIGGER',
                             'Asserts the Pulse trigger.'
                         ],
                         [
-                            'NIDCPOWER_VAL_SHUTDOWN_TRIGGER (1118)',
+                            'NIDCPOWER_VAL_SHUTDOWN_TRIGGER',
                             'Asserts the Shutdown trigger.'
                         ]
                     ]
@@ -2594,27 +2754,27 @@ functions = {
                     'description': '\nSpecifies which event to wait for.\n**Defined Values:**\n',
                     'table_body': [
                         [
-                            'NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT (1030)',
+                            'NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT',
                             'Waits for the Source Complete event.'
                         ],
                         [
-                            'NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT (1031)',
+                            'NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT',
                             'Waits for the Measure Complete event.'
                         ],
                         [
-                            'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT (1032)',
+                            'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT',
                             'Waits for the Sequence Iteration Complete event.'
                         ],
                         [
-                            'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT (1033)',
+                            'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT',
                             'Waits for the Sequence Engine Done event.'
                         ],
                         [
-                            'NIDCPOWER_VAL_PULSE_COMPLETE_EVENT (1051 )',
+                            'NIDCPOWER_VAL_PULSE_COMPLETE_EVENT',
                             'Waits for the Pulse Complete event.'
                         ],
                         [
-                            'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)',
+                            'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT',
                             'Waits for the Ready for Pulse Trigger event.'
                         ]
                     ]
