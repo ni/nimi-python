@@ -20,6 +20,8 @@ class SideEffectsHelper(object):
         self._defaults['Abort']['return'] = 0
         self._defaults['CalSelfCalibrate'] = {}
         self._defaults['CalSelfCalibrate']['return'] = 0
+        self._defaults['ClearLatchedOutputCutoffState'] = {}
+        self._defaults['ClearLatchedOutputCutoffState']['return'] = 0
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
         self._defaults['ConfigureApertureTime'] = {}
@@ -113,6 +115,9 @@ class SideEffectsHelper(object):
         self._defaults['QueryInCompliance'] = {}
         self._defaults['QueryInCompliance']['return'] = 0
         self._defaults['QueryInCompliance']['inCompliance'] = None
+        self._defaults['QueryLatchedOutputCutoffState'] = {}
+        self._defaults['QueryLatchedOutputCutoffState']['return'] = 0
+        self._defaults['QueryLatchedOutputCutoffState']['outputCutoffState'] = None
         self._defaults['QueryMaxCurrentLimit'] = {}
         self._defaults['QueryMaxCurrentLimit']['return'] = 0
         self._defaults['QueryMaxCurrentLimit']['maxCurrentLimit'] = None
@@ -178,6 +183,11 @@ class SideEffectsHelper(object):
         if self._defaults['CalSelfCalibrate']['return'] != 0:
             return self._defaults['CalSelfCalibrate']['return']
         return self._defaults['CalSelfCalibrate']['return']
+
+    def niDCPower_ClearLatchedOutputCutoffState(self, vi, channel_name, output_cutoff_reason):  # noqa: N802
+        if self._defaults['ClearLatchedOutputCutoffState']['return'] != 0:
+            return self._defaults['ClearLatchedOutputCutoffState']['return']
+        return self._defaults['ClearLatchedOutputCutoffState']['return']
 
     def niDCPower_Commit(self, vi):  # noqa: N802
         if self._defaults['Commit']['return'] != 0:
@@ -529,6 +539,16 @@ class SideEffectsHelper(object):
             in_compliance.contents.value = self._defaults['QueryInCompliance']['inCompliance']
         return self._defaults['QueryInCompliance']['return']
 
+    def niDCPower_QueryLatchedOutputCutoffState(self, vi, channel_name, output_cutoff_reason, output_cutoff_state):  # noqa: N802
+        if self._defaults['QueryLatchedOutputCutoffState']['return'] != 0:
+            return self._defaults['QueryLatchedOutputCutoffState']['return']
+        # output_cutoff_state
+        if self._defaults['QueryLatchedOutputCutoffState']['outputCutoffState'] is None:
+            raise MockFunctionCallError("niDCPower_QueryLatchedOutputCutoffState", param='outputCutoffState')
+        if output_cutoff_state is not None:
+            output_cutoff_state.contents.value = self._defaults['QueryLatchedOutputCutoffState']['outputCutoffState']
+        return self._defaults['QueryLatchedOutputCutoffState']['return']
+
     def niDCPower_QueryMaxCurrentLimit(self, vi, channel_name, voltage_level, max_current_limit):  # noqa: N802
         if self._defaults['QueryMaxCurrentLimit']['return'] != 0:
             return self._defaults['QueryMaxCurrentLimit']['return']
@@ -688,6 +708,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_Abort.return_value = 0
         mock_library.niDCPower_CalSelfCalibrate.side_effect = MockFunctionCallError("niDCPower_CalSelfCalibrate")
         mock_library.niDCPower_CalSelfCalibrate.return_value = 0
+        mock_library.niDCPower_ClearLatchedOutputCutoffState.side_effect = MockFunctionCallError("niDCPower_ClearLatchedOutputCutoffState")
+        mock_library.niDCPower_ClearLatchedOutputCutoffState.return_value = 0
         mock_library.niDCPower_Commit.side_effect = MockFunctionCallError("niDCPower_Commit")
         mock_library.niDCPower_Commit.return_value = 0
         mock_library.niDCPower_ConfigureApertureTime.side_effect = MockFunctionCallError("niDCPower_ConfigureApertureTime")
@@ -748,6 +770,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_ParseChannelCount.return_value = 0
         mock_library.niDCPower_QueryInCompliance.side_effect = MockFunctionCallError("niDCPower_QueryInCompliance")
         mock_library.niDCPower_QueryInCompliance.return_value = 0
+        mock_library.niDCPower_QueryLatchedOutputCutoffState.side_effect = MockFunctionCallError("niDCPower_QueryLatchedOutputCutoffState")
+        mock_library.niDCPower_QueryLatchedOutputCutoffState.return_value = 0
         mock_library.niDCPower_QueryMaxCurrentLimit.side_effect = MockFunctionCallError("niDCPower_QueryMaxCurrentLimit")
         mock_library.niDCPower_QueryMaxCurrentLimit.return_value = 0
         mock_library.niDCPower_QueryMaxVoltageLevel.side_effect = MockFunctionCallError("niDCPower_QueryMaxVoltageLevel")

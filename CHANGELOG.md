@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * API parity with NI-DCPower 20.7.0 by adding Output Cutoff functionality.
     * #### Changed
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)

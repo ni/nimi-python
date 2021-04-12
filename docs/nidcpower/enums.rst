@@ -345,6 +345,101 @@ OutputCapacitance
 
 
 
+OutputCutoffReason
+------------------
+
+.. py:class:: OutputCutoffReason
+
+    .. py:attribute:: OutputCutoffReason.ALL
+
+
+
+        Queries any output cutoff condition; clears all output cutoff conditions.
+
+        
+
+
+
+    .. py:attribute:: OutputCutoffReason.VOLTAGE_OUTPUT_HIGH
+
+
+
+        Queries or clears cutoff conditions when the output exceeded the high cutoff limit for voltage output.
+
+        
+
+
+
+    .. py:attribute:: OutputCutoffReason.VOLTAGE_OUTPUT_LOW
+
+
+
+        Queries or clears cutoff conditions when the output fell below the low cutoff limit for voltage output.
+
+        
+
+
+
+    .. py:attribute:: OutputCutoffReason.CURRENT_MEASURE_HIGH
+
+
+
+        Queries or clears cutoff conditions when the measured current exceeded the high cutoff limit for current output.
+
+        
+
+
+
+    .. py:attribute:: OutputCutoffReason.CURRENT_MEASURE_LOW
+
+
+
+        Queries or clears cutoff conditions when the measured current fell below the low cutoff limit for current output.
+
+        
+
+
+
+    .. py:attribute:: OutputCutoffReason.VOLTAGE_CHANGE_HIGH
+
+
+
+        Queries or clears cutoff conditions when the voltage slew rate increased beyond the positive change cutoff for voltage output.
+
+        
+
+
+
+    .. py:attribute:: OutputCutoffReason.VOLTAGE_CHANGE_LOW
+
+
+
+        Queries or clears cutoff conditions when the voltage slew rate decreased beyond the negative change cutoff for voltage output.
+
+        
+
+
+
+    .. py:attribute:: OutputCutoffReason.CURRENT_CHANGE_HIGH
+
+
+
+        Queries or clears cutoff conditions when the current slew rate increased beyond the positive change cutoff for current output.
+
+        
+
+
+
+    .. py:attribute:: OutputCutoffReason.CURRENT_CHANGE_LOW
+
+
+
+        Queries or clears cutoff conditions when the current slew rate decreased beyond the negative change cutoff for current output.
+
+        
+
+
+
 OutputFunction
 --------------
 

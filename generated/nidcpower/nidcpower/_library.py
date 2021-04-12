@@ -20,6 +20,7 @@ class Library(object):
         # We cache the cfunc object from the ctypes.CDLL object
         self.niDCPower_Abort_cfunc = None
         self.niDCPower_CalSelfCalibrate_cfunc = None
+        self.niDCPower_ClearLatchedOutputCutoffState_cfunc = None
         self.niDCPower_Commit_cfunc = None
         self.niDCPower_ConfigureApertureTime_cfunc = None
         self.niDCPower_CreateAdvancedSequence_cfunc = None
@@ -50,6 +51,7 @@ class Library(object):
         self.niDCPower_MeasureMultiple_cfunc = None
         self.niDCPower_ParseChannelCount_cfunc = None
         self.niDCPower_QueryInCompliance_cfunc = None
+        self.niDCPower_QueryLatchedOutputCutoffState_cfunc = None
         self.niDCPower_QueryMaxCurrentLimit_cfunc = None
         self.niDCPower_QueryMaxVoltageLevel_cfunc = None
         self.niDCPower_QueryMinCurrentLimit_cfunc = None
@@ -86,6 +88,14 @@ class Library(object):
                 self.niDCPower_CalSelfCalibrate_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_CalSelfCalibrate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_CalSelfCalibrate_cfunc(vi, channel_name)
+
+    def niDCPower_ClearLatchedOutputCutoffState(self, vi, channel_name, output_cutoff_reason):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ClearLatchedOutputCutoffState_cfunc is None:
+                self.niDCPower_ClearLatchedOutputCutoffState_cfunc = self._library.niDCPower_ClearLatchedOutputCutoffState
+                self.niDCPower_ClearLatchedOutputCutoffState_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
+                self.niDCPower_ClearLatchedOutputCutoffState_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ClearLatchedOutputCutoffState_cfunc(vi, channel_name, output_cutoff_reason)
 
     def niDCPower_Commit(self, vi):  # noqa: N802
         with self._func_lock:
@@ -326,6 +336,14 @@ class Library(object):
                 self.niDCPower_QueryInCompliance_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDCPower_QueryInCompliance_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryInCompliance_cfunc(vi, channel_name, in_compliance)
+
+    def niDCPower_QueryLatchedOutputCutoffState(self, vi, channel_name, output_cutoff_reason, output_cutoff_state):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_QueryLatchedOutputCutoffState_cfunc is None:
+                self.niDCPower_QueryLatchedOutputCutoffState_cfunc = self._library.niDCPower_QueryLatchedOutputCutoffState
+                self.niDCPower_QueryLatchedOutputCutoffState_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niDCPower_QueryLatchedOutputCutoffState_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_QueryLatchedOutputCutoffState_cfunc(vi, channel_name, output_cutoff_reason, output_cutoff_state)
 
     def niDCPower_QueryMaxCurrentLimit(self, vi, channel_name, voltage_level, max_current_limit):  # noqa: N802
         with self._func_lock:
