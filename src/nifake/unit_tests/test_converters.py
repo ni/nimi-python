@@ -76,7 +76,7 @@ def test_convert_seconds_real64_to_timedeltas():
 
 
 # Tests - repeated capabilities
-def test_repeated_capabilies_string_channel():
+def test_repeated_capabilities_string_channel():
     test_result_list = _converters.convert_repeated_capabilities('0')
     assert test_result_list == ['0']
     test_result_list = _converters.convert_repeated_capabilities('r0')
@@ -85,12 +85,12 @@ def test_repeated_capabilies_string_channel():
     assert test_result_list == ['0', '1']
 
 
-def test_repeated_capabilies_string_prefix():
+def test_repeated_capabilities_string_prefix():
     test_result_list = _converters.convert_repeated_capabilities('0', prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0']
 
 
-def test_repeated_capabilies_list_channel():
+def test_repeated_capabilities_list_channel():
     test_result_list = _converters.convert_repeated_capabilities(['0'])
     assert test_result_list == ['0']
     test_result_list = _converters.convert_repeated_capabilities(['r0'])
@@ -103,7 +103,7 @@ def test_repeated_capabilies_list_channel():
     assert test_result_list == ['0', '1', '3']
 
 
-def test_repeated_capabilies_list_prefix():
+def test_repeated_capabilities_list_prefix():
     test_result_list = _converters.convert_repeated_capabilities(['ScriptTrigger0', 'ScriptTrigger1'], prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
     test_result_list = _converters.convert_repeated_capabilities(['0'], prefix='ScriptTrigger')
@@ -114,7 +114,7 @@ def test_repeated_capabilies_list_prefix():
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
 
 
-def test_repeated_capabilies_tuple_channel():
+def test_repeated_capabilities_tuple_channel():
     test_result_list = _converters.convert_repeated_capabilities(('0'))
     assert test_result_list == ['0']
     test_result_list = _converters.convert_repeated_capabilities(('0,1'))
@@ -127,7 +127,7 @@ def test_repeated_capabilies_tuple_channel():
     assert test_result_list == ['0', '1', '3']
 
 
-def test_repeated_capabilies_tuple_prefix():
+def test_repeated_capabilities_tuple_prefix():
     test_result_list = _converters.convert_repeated_capabilities(('ScriptTrigger0,ScriptTrigger1'), prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
     test_result_list = _converters.convert_repeated_capabilities(('0'), prefix='ScriptTrigger')
@@ -138,7 +138,7 @@ def test_repeated_capabilies_tuple_prefix():
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
 
 
-def test_repeated_capabilies_unicode():
+def test_repeated_capabilities_unicode():
     test_result_list = _converters.convert_repeated_capabilities(u'ScriptTrigger0,ScriptTrigger1', prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
     test_result_list = _converters.convert_repeated_capabilities(u'ScriptTrigger0,ScriptTrigger1', prefix=u'ScriptTrigger')
@@ -147,7 +147,7 @@ def test_repeated_capabilies_unicode():
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
 
 
-def test_repeated_capabilies_raw():
+def test_repeated_capabilities_raw():
     test_result_list = _converters.convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
     test_result_list = _converters.convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
@@ -162,7 +162,7 @@ def test_repeated_capabilies_raw():
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
 
 
-def test_repeated_capabilies_slice_channel():
+def test_repeated_capabilities_slice_channel():
     test_result_list = _converters.convert_repeated_capabilities(slice(0, 1))
     assert test_result_list == ['0']
     test_result_list = _converters.convert_repeated_capabilities(slice(0, 2))
@@ -171,21 +171,21 @@ def test_repeated_capabilies_slice_channel():
     assert test_result_list == ['0', '1']
 
 
-def test_repeated_capabilies_mixed_channel():
+def test_repeated_capabilities_mixed_channel():
     test_result_list = _converters.convert_repeated_capabilities((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'))
     assert test_result_list == ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
     test_result_list = _converters.convert_repeated_capabilities([slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'])
     assert test_result_list == ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
 
 
-def test_repeated_capabilies_mixed_prefix():
+def test_repeated_capabilities_mixed_prefix():
     test_result_list = _converters.convert_repeated_capabilities((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'), prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger2', 'ScriptTrigger4', 'ScriptTrigger5', 'ScriptTrigger6', 'ScriptTrigger7', 'ScriptTrigger8', 'ScriptTrigger9', 'ScriptTrigger11', 'ScriptTrigger12', 'ScriptTrigger13', 'ScriptTrigger14', 'ScriptTrigger16', 'ScriptTrigger17']
     test_result_list = _converters.convert_repeated_capabilities([slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'], prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger2', 'ScriptTrigger4', 'ScriptTrigger5', 'ScriptTrigger6', 'ScriptTrigger7', 'ScriptTrigger8', 'ScriptTrigger9', 'ScriptTrigger11', 'ScriptTrigger12', 'ScriptTrigger13', 'ScriptTrigger14', 'ScriptTrigger16', 'ScriptTrigger17']
 
 
-def test_invalid_repeated_capabilies():
+def test_invalid_repeated_capabilities():
     try:
         _converters.convert_repeated_capabilities('6-8-10')
         assert False
@@ -223,7 +223,7 @@ def test_invalid_repeated_capabilies():
         pass
 
 
-def test_repeated_capabilies_slice_prefix():
+def test_repeated_capabilities_slice_prefix():
     test_result_list = _converters.convert_repeated_capabilities(slice(0, 1), prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0']
     test_result_list = _converters.convert_repeated_capabilities(slice(0, 2), prefix='ScriptTrigger')
@@ -232,9 +232,66 @@ def test_repeated_capabilies_slice_prefix():
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
 
 
-def test_repeated_capabilies_without_prefix():
+def test_repeated_capabilities_without_prefix():
     test_result = _converters.convert_repeated_capabilities_without_prefix((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'))
     assert test_result == '0,2,4,5,6,7,8,9,11,12,13,14,16,17'
+
+
+def test_repeated_capabilities_string_resource_name():
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix('Dev1')
+    assert test_result_list == 'Dev1'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix('Dev1,Dev2')
+    assert test_result_list == 'Dev1,Dev2'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix('Dev1/0')
+    assert test_result_list == 'Dev1/0'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix('Dev1/0:1, Dev2/0-1')
+    assert test_result_list == 'Dev1/0:1,Dev2/0-1'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix('Dev1, Dev2/0-2')
+    assert test_result_list == 'Dev1,Dev2/0-2'
+
+
+def test_repeated_capabilities_list_resource_name():
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix(['Dev1'])
+    assert test_result_list == 'Dev1'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix(['Dev1', 'Dev2'])
+    assert test_result_list == 'Dev1,Dev2'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix(['Dev1/0'])
+    assert test_result_list == 'Dev1/0'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix(['Dev1/0:1', 'Dev2/0-1'])
+    assert test_result_list == 'Dev1/0:1,Dev2/0-1'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix(['Dev1', 'Dev2/0-2'])
+    assert test_result_list == 'Dev1,Dev2/0-2'
+
+
+def test_repeated_capabilities_tuple_resource_name():
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix(('Dev1'))
+    assert test_result_list == 'Dev1'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix(('Dev1', 'Dev2'))
+    assert test_result_list == 'Dev1,Dev2'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix(('Dev1/0'))
+    assert test_result_list == 'Dev1/0'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix(('Dev1/0:1', 'Dev2/0-1'))
+    assert test_result_list == 'Dev1/0:1,Dev2/0-1'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix(('Dev1', 'Dev2/0-2'))
+    assert test_result_list == 'Dev1,Dev2/0-2'
+
+
+def test_repeated_capabilities_mixed_resource_name():
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix(['Dev1', ('Dev2/0', 'Dev2/1'), ['Dev3/0:1', 'Dev4/1:2'], 'Dev5/1'])
+    assert test_result_list == 'Dev1,Dev2/0,Dev2/1,Dev3/0:1,Dev4/1:2,Dev5/1'
+
+
+def test_repeated_capabilities_invalid_resource_names():
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix('/')
+    assert test_result_list == '/'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix('Dev/')
+    assert test_result_list == 'Dev/'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix('Dev,')
+    assert test_result_list == 'Dev,'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix('Dev/1/1,')
+    assert test_result_list == 'Dev/1/1,'
+    test_result_list = _converters.convert_repeated_capabilities_without_prefix('0/1:2,')
+    assert test_result_list == '0/1:2,'
 
 
 def test_convert_chained_repeated_capability_to_parts_three_parts():

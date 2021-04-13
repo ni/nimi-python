@@ -179,27 +179,25 @@ clear_latched_output_cutoff_state
 
                 Specifies the reasons for which to clear the output cutoff state.
 
-                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.ALL`                                     | Clears all output cutoff conditions                                                                             |
-                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH`                     | Clears cutoffs caused when the output exceeded the high cutoff limit for voltage output                         |
-                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW`                      | Clears cutoffs caused when the output fell below the low cutoff limit for voltage output                        |
-                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH`                    | Clears cutoffs caused when the measured current exceeded the high cutoff limit for current output               |
-                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW`                     | Clears cutoffs caused when the measured current fell below the low cutoff limit for current output              |
-                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE` | Clears cutoffs caused when the voltage slew rate increased beyond the positive change cutoff for voltage output |
-                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE` | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for voltage output |
-                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE` | Clears cutoffs caused when the current slew rate increased beyond the positive change cutoff for current output |
-                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE` | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output |
-                +----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.ALL`                  | Clears all output cutoff conditions                                                                             |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH`  | Clears cutoffs caused when the output exceeded the high cutoff limit for voltage output                         |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW`   | Clears cutoffs caused when the output fell below the low cutoff limit for voltage output                        |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH` | Clears cutoffs caused when the measured current exceeded the high cutoff limit for current output               |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW`  | Clears cutoffs caused when the measured current fell below the low cutoff limit for current output              |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_CHANGE_HIGH`  | Clears cutoffs caused when the voltage slew rate increased beyond the positive change cutoff for voltage output |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_CHANGE_LOW`   | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for voltage output |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_HIGH`  | Clears cutoffs caused when the current slew rate increased beyond the positive change cutoff for current output |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_LOW`   | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
 
 
             :type output_cutoff_reason: :py:data:`nidcpower.OutputCutoffReason`
@@ -1391,27 +1389,25 @@ query_latched_output_cutoff_state
 
                 Specifies which output cutoff conditions to query.
 
-                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.ALL`                                     | Any output cutoff condition was met                                                  |
-                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH`                     | The output exceeded the high cutoff limit for voltage output                         |
-                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW`                      | The output fell below the low cutoff limit for voltage output                        |
-                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH`                    | The measured current exceeded the high cutoff limit for current output               |
-                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW`                     | The measured current fell below the low cutoff limit for current output              |
-                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE` | The voltage slew rate increased beyond the positive change cutoff for voltage output |
-                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE` | The voltage slew rate decreased beyond the negative change cutoff for voltage output |
-                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE` | The current slew rate increased beyond the positive change cutoff for current output |
-                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE` | The current slew rate decreased beyond the negative change cutoff for current output |
-                +----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.ALL`                  | Any output cutoff condition was met                                                  |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH`  | The output exceeded the high cutoff limit for voltage output                         |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW`   | The output fell below the low cutoff limit for voltage output                        |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH` | The measured current exceeded the high cutoff limit for current output               |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW`  | The measured current fell below the low cutoff limit for current output              |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_CHANGE_HIGH`  | The voltage slew rate increased beyond the positive change cutoff for voltage output |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_CHANGE_LOW`   | The voltage slew rate decreased beyond the negative change cutoff for voltage output |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_HIGH`  | The current slew rate increased beyond the positive change cutoff for current output |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_LOW`   | The current slew rate decreased beyond the negative change cutoff for current output |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
 
 
             :type output_cutoff_reason: :py:data:`nidcpower.OutputCutoffReason`
@@ -2496,12 +2492,6 @@ auxiliary_power_source_available
 
         .. note:: This property does not necessarily indicate if the device is using the auxiliary
 
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
-
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -2511,7 +2501,7 @@ auxiliary_power_source_available
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | Yes       |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -4371,13 +4361,11 @@ output_cutoff_current_change_limit_high
         Specifies a limit for positive current slew rate, in amps per microsecond, for output cutoff.
         If the current increases at a rate that exceeds this limit, the output is disconnected.
 
-        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE` as the output cutoff reason.
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_HIGH` as the output cutoff reason.
 
 
 
         .. note:: Refer to Supported Properties by Device for information about supported devices.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -4413,13 +4401,11 @@ output_cutoff_current_change_limit_low
         Specifies a limit for negative current slew rate, in amps per microsecond, for output cutoff.
         If the current decreases at a rate that exceeds this limit, the output is disconnected.
 
-        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE` as the output cutoff reason.
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_LOW` as the output cutoff reason.
 
 
 
         .. note:: Refer to Supported Properties by Device for information about supported devices.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -4612,13 +4598,11 @@ output_cutoff_voltage_change_limit_high
         Specifies a limit for positive voltage slew rate, in volts per microsecond, for output cutoff.
         If the voltage increases at a rate that exceeds this limit, the output is disconnected.
 
-        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE` as the output cutoff reason.
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` with :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_CHANGE_HIGH` as the output cutoff reason.
 
 
 
         .. note:: Refer to Supported Properties by Device for information about supported devices.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -4654,13 +4638,11 @@ output_cutoff_voltage_change_limit_low
         Specifies a limit for negative voltage slew rate, in volts per microsecond, for output cutoff.
         If the voltage decreases at a rate that exceeds this limit, the output is disconnected.
 
-        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` with :py:data:`~nidcpower.NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE` as the output cutoff reason.
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` with :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_CHANGE_LOW` as the output cutoff reason.
 
 
 
         .. note:: Refer to Supported Properties by Device for information about supported devices.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities. If set or get directly on the
@@ -5139,14 +5121,6 @@ power_source_in_use
 
         Indicates whether the device is using the internal or auxiliary power source to generate power.
 
-
-
-
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
-
         The following table lists the characteristics of this property.
 
             +----------------+------------------------+
@@ -5156,7 +5130,7 @@ power_source_in_use
             +----------------+------------------------+
             | Permissions    | read only              |
             +----------------+------------------------+
-            | Channel Based  | Yes                    |
+            | Channel Based  | No                     |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+

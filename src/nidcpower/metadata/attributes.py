@@ -170,7 +170,7 @@ attributes = {
     },
     1150001: {
         'access': 'read only',
-        'channel_based': True,
+        'channel_based': False,
         'documentation': {
             'description': 'Indicates whether the device is using the internal or auxiliary power source to generate power.'
         },
@@ -182,7 +182,7 @@ attributes = {
     },
     1150002: {
         'access': 'read only',
-        'channel_based': True,
+        'channel_based': False,
         'documentation': {
             'description': '\nIndicates whether an auxiliary power source is connected to the device.\nA value of VI_FALSE may indicate that the auxiliary input fuse has blown.  Refer to the Detecting Internal/Auxiliary Power topic in the NI DC Power Supplies and SMUs Help for  more information about internal and auxiliary power.\npower source to generate power. Use the NIDCPOWER_ATTR_POWER_SOURCE_IN_USE attribute to retrieve this information.\n',
             'note': 'This attribute does not necessarily indicate if the device is using the auxiliary'
@@ -1590,7 +1590,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': '\nSpecifies a limit for negative voltage slew rate, in volts per microsecond, for output cutoff.\nIf the voltage decreases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE as the output cutoff reason.\n',
+            'description': '\nSpecifies a limit for negative voltage slew rate, in volts per microsecond, for output cutoff.\nIf the voltage decreases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_LOW as the output cutoff reason.\n',
             'note': 'Refer to Supported Attributes by Device for information about supported devices.'
         },
         'lv_property': 'Source:Output Cutoff:Voltage Change Limit Low',
@@ -1602,7 +1602,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': '\nSpecifies a limit for negative current slew rate, in amps per microsecond, for output cutoff.\nIf the current decreases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE as the output cutoff reason.\n',
+            'description': '\nSpecifies a limit for negative current slew rate, in amps per microsecond, for output cutoff.\nIf the current decreases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW as the output cutoff reason.\n',
             'note': 'Refer to Supported Attributes by Device for information about supported devices.'
         },
         'lv_property': 'Source:Output Cutoff:Current Change Limit Low',
@@ -1789,7 +1789,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': '\nSpecifies a limit for positive voltage slew rate, in volts per microsecond, for output cutoff.\nIf the voltage increases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE as the output cutoff reason.\n',
+            'description': '\nSpecifies a limit for positive voltage slew rate, in volts per microsecond, for output cutoff.\nIf the voltage increases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_HIGH as the output cutoff reason.\n',
             'note': 'Refer to Supported Attributes by Device for information about supported devices.'
         },
         'lv_property': 'Source:Output Cutoff:Voltage Change Limit High',
@@ -1801,7 +1801,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': '\nSpecifies a limit for positive current slew rate, in amps per microsecond, for output cutoff.\nIf the current increases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE as the output cutoff reason.\n',
+            'description': '\nSpecifies a limit for positive current slew rate, in amps per microsecond, for output cutoff.\nIf the current increases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_HIGH as the output cutoff reason.\n',
             'note': 'Refer to Supported Attributes by Device for information about supported devices.'
         },
         'lv_property': 'Source:Output Cutoff:Current Change Limit High',

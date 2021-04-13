@@ -90,19 +90,19 @@ functions = {
                             'Clears cutoffs caused when the measured current fell below the low cutoff limit for current output'
                         ],
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE',
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_HIGH',
                             'Clears cutoffs caused when the voltage slew rate increased beyond the positive change cutoff for voltage output'
                         ],
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE',
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_LOW',
                             'Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for voltage output'
                         ],
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE',
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_HIGH',
                             'Clears cutoffs caused when the current slew rate increased beyond the positive change cutoff for current output'
                         ],
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE',
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
                             'Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output'
                         ]
                     ]
@@ -2161,19 +2161,19 @@ functions = {
                             'The measured current fell below the low cutoff limit for current output'
                         ],
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_VOLTAGE_CHANGE',
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_HIGH',
                             'The voltage slew rate increased beyond the positive change cutoff for voltage output'
                         ],
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_VOLTAGE_CHANGE',
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_LOW',
                             'The voltage slew rate decreased beyond the negative change cutoff for voltage output'
                         ],
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_POSITIVE_CURRENT_CHANGE',
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_HIGH',
                             'The current slew rate increased beyond the positive change cutoff for current output'
                         ],
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_NEGATIVE_CURRENT_CHANGE',
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
                             'The current slew rate decreased beyond the negative change cutoff for current output'
                         ]
                     ]
