@@ -2895,6 +2895,37 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def commit(self):
+        r'''commit
+
+        Applies previously configured settings to the device. Calling this
+        method moves the NI-DCPower session from the Uncommitted state into
+        the Committed state. After calling this method, modifying any
+        property reverts the NI-DCPower session to the Uncommitted state. Use
+        the initiate method to transition to the Running state.
+        Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for details about the specific
+        NI-DCPower software states.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDCPower_CommitWithChannels(vi_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
         r'''configure_aperture_time
 
@@ -3978,12 +4009,9 @@ class _SessionBase(object):
         r'''query_latched_output_cutoff_state
 
         Discovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.
-        If a limit was exceeded, the state is latched until you clear it with the clear_latched_output_cutoff_state method or the ResetWithChannels method.
+        If a limit was exceeded, the state is latched until you clear it with the clear_latched_output_cutoff_state method or the reset method.
 
         outputCutoffReason specifies the conditions for which an output is disconnected.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -5615,110 +5643,6 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_ResetWithDefaults(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def send_software_edge_trigger(self, trigger):
-        r'''send_software_edge_trigger
-
-        Asserts the specified trigger. This method can override an external
-        edge trigger.
-
-        **Related Topics:**
-
-        `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            trigger (enums.SendSoftwareEdgeTriggerType): Specifies which trigger to assert.
-                **Defined Values:**
-
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_START_TRIGGER            | Asserts the Start trigger.            |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_TRIGGER           | Asserts the Source trigger.           |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_TRIGGER          | Asserts the Measure trigger.          |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER | Asserts the Sequence Advance trigger. |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_PULSE_TRIGGER            | Asserts the Pulse trigger.            |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SHUTDOWN_TRIGGER         | Asserts the Shutdown trigger.         |
-                +----------------------------------------+---------------------------------------+
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        '''
-        if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
-            raise TypeError('Parameter trigger must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        error_code = self._library.niDCPower_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def wait_for_event(self, event_id, timeout=hightime.timedelta(seconds=10.0)):
-        r'''wait_for_event
-
-        Waits until the device has generated the specified event.
-
-        The session monitors whether each type of event has occurred at least
-        once since the last time this method or the initiate
-        method were called. If an event has only been generated once and you
-        call this method successively, the method times out. Individual
-        events must be generated between separate calls of this method.
-
-        Note:
-        Refer to `Supported Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            event_id (enums.Event): Specifies which event to wait for.
-                **Defined Values:**
-
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT             | Waits for the Source Complete event.             |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT            | Waits for the Measure Complete event.            |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT | Waits for the Sequence Iteration Complete event. |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT        | Waits for the Sequence Engine Done event.        |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_PULSE_COMPLETE_EVENT              | Waits for the Pulse Complete event.              |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT     | Waits for the Ready for Pulse Trigger event.     |
-                +-------------------------------------------------+--------------------------------------------------+
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete, in
-                seconds. If the method does not complete within this time interval,
-                NI-DCPower returns an error.
-
-                Note:
-                When setting the timeout interval, ensure you take into account any
-                triggers so that the timeout interval is long enough for your
-                application.
-
-        '''
-        if type(event_id) is not enums.Event:
-            raise TypeError('Parameter event_id must be of type ' + str(enums.Event))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        error_code = self._library.niDCPower_WaitForEvent(vi_ctype, event_id_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

@@ -22,8 +22,8 @@ class SideEffectsHelper(object):
         self._defaults['CalSelfCalibrate']['return'] = 0
         self._defaults['ClearLatchedOutputCutoffState'] = {}
         self._defaults['ClearLatchedOutputCutoffState']['return'] = 0
-        self._defaults['Commit'] = {}
-        self._defaults['Commit']['return'] = 0
+        self._defaults['CommitWithChannels'] = {}
+        self._defaults['CommitWithChannels']['return'] = 0
         self._defaults['ConfigureApertureTime'] = {}
         self._defaults['ConfigureApertureTime']['return'] = 0
         self._defaults['CreateAdvancedSequenceStepWithChannels'] = {}
@@ -192,10 +192,10 @@ class SideEffectsHelper(object):
             return self._defaults['ClearLatchedOutputCutoffState']['return']
         return self._defaults['ClearLatchedOutputCutoffState']['return']
 
-    def niDCPower_Commit(self, vi):  # noqa: N802
-        if self._defaults['Commit']['return'] != 0:
-            return self._defaults['Commit']['return']
-        return self._defaults['Commit']['return']
+    def niDCPower_CommitWithChannels(self, vi, channel_name):  # noqa: N802
+        if self._defaults['CommitWithChannels']['return'] != 0:
+            return self._defaults['CommitWithChannels']['return']
+        return self._defaults['CommitWithChannels']['return']
 
     def niDCPower_ConfigureApertureTime(self, vi, channel_name, aperture_time, units):  # noqa: N802
         if self._defaults['ConfigureApertureTime']['return'] != 0:
@@ -723,8 +723,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_CalSelfCalibrate.return_value = 0
         mock_library.niDCPower_ClearLatchedOutputCutoffState.side_effect = MockFunctionCallError("niDCPower_ClearLatchedOutputCutoffState")
         mock_library.niDCPower_ClearLatchedOutputCutoffState.return_value = 0
-        mock_library.niDCPower_Commit.side_effect = MockFunctionCallError("niDCPower_Commit")
-        mock_library.niDCPower_Commit.return_value = 0
+        mock_library.niDCPower_CommitWithChannels.side_effect = MockFunctionCallError("niDCPower_CommitWithChannels")
+        mock_library.niDCPower_CommitWithChannels.return_value = 0
         mock_library.niDCPower_ConfigureApertureTime.side_effect = MockFunctionCallError("niDCPower_ConfigureApertureTime")
         mock_library.niDCPower_ConfigureApertureTime.return_value = 0
         mock_library.niDCPower_CreateAdvancedSequenceStepWithChannels.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceStepWithChannels")

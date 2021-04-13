@@ -21,7 +21,7 @@ class Library(object):
         self.niDCPower_AbortWithChannels_cfunc = None
         self.niDCPower_CalSelfCalibrate_cfunc = None
         self.niDCPower_ClearLatchedOutputCutoffState_cfunc = None
-        self.niDCPower_Commit_cfunc = None
+        self.niDCPower_CommitWithChannels_cfunc = None
         self.niDCPower_ConfigureApertureTime_cfunc = None
         self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc = None
         self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc = None
@@ -109,14 +109,6 @@ class Library(object):
                     raise AttributeError("A required function was not found in the instrument driver DLL. This might "
                                          "be an indication that the version of the instrument driver is too old for "
                                          "this version of the python API. Upgrade your instrument driver.") from e
-                self.niDCPower_ClearLatchedOutputCutoffState_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDCPower_ClearLatchedOutputCutoffState_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_ClearLatchedOutputCutoffState_cfunc(vi, channel_name, output_cutoff_reason)
-
-    def niDCPower_Commit(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ClearLatchedOutputCutoffState_cfunc is None:
-                self.niDCPower_ClearLatchedOutputCutoffState_cfunc = self._library.niDCPower_ClearLatchedOutputCutoffState
                 self.niDCPower_ClearLatchedOutputCutoffState_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niDCPower_ClearLatchedOutputCutoffState_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ClearLatchedOutputCutoffState_cfunc(vi, channel_name, output_cutoff_reason)
