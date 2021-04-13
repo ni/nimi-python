@@ -94,7 +94,12 @@ class Library(object):
     def niFgen_AbortGeneration(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_AbortGeneration_cfunc is None:
-                self.niFgen_AbortGeneration_cfunc = self._library.niFgen_AbortGeneration
+                try:
+                    self.niFgen_AbortGeneration_cfunc = self._library.niFgen_AbortGeneration
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_AbortGeneration_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_AbortGeneration_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_AbortGeneration_cfunc(vi)
@@ -102,7 +107,12 @@ class Library(object):
     def niFgen_AllocateNamedWaveform(self, vi, channel_name, waveform_name, waveform_size):  # noqa: N802
         with self._func_lock:
             if self.niFgen_AllocateNamedWaveform_cfunc is None:
-                self.niFgen_AllocateNamedWaveform_cfunc = self._library.niFgen_AllocateNamedWaveform
+                try:
+                    self.niFgen_AllocateNamedWaveform_cfunc = self._library.niFgen_AllocateNamedWaveform
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_AllocateNamedWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niFgen_AllocateNamedWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_AllocateNamedWaveform_cfunc(vi, channel_name, waveform_name, waveform_size)
@@ -110,7 +120,12 @@ class Library(object):
     def niFgen_AllocateWaveform(self, vi, channel_name, waveform_size, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_AllocateWaveform_cfunc is None:
-                self.niFgen_AllocateWaveform_cfunc = self._library.niFgen_AllocateWaveform
+                try:
+                    self.niFgen_AllocateWaveform_cfunc = self._library.niFgen_AllocateWaveform
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_AllocateWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_AllocateWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_AllocateWaveform_cfunc(vi, channel_name, waveform_size, waveform_handle)
@@ -118,7 +133,12 @@ class Library(object):
     def niFgen_ClearArbMemory(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ClearArbMemory_cfunc is None:
-                self.niFgen_ClearArbMemory_cfunc = self._library.niFgen_ClearArbMemory
+                try:
+                    self.niFgen_ClearArbMemory_cfunc = self._library.niFgen_ClearArbMemory
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ClearArbMemory_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_ClearArbMemory_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ClearArbMemory_cfunc(vi)
@@ -126,7 +146,12 @@ class Library(object):
     def niFgen_ClearArbSequence(self, vi, sequence_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ClearArbSequence_cfunc is None:
-                self.niFgen_ClearArbSequence_cfunc = self._library.niFgen_ClearArbSequence
+                try:
+                    self.niFgen_ClearArbSequence_cfunc = self._library.niFgen_ClearArbSequence
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ClearArbSequence_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
                 self.niFgen_ClearArbSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ClearArbSequence_cfunc(vi, sequence_handle)
@@ -134,7 +159,12 @@ class Library(object):
     def niFgen_ClearArbWaveform(self, vi, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ClearArbWaveform_cfunc is None:
-                self.niFgen_ClearArbWaveform_cfunc = self._library.niFgen_ClearArbWaveform
+                try:
+                    self.niFgen_ClearArbWaveform_cfunc = self._library.niFgen_ClearArbWaveform
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ClearArbWaveform_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
                 self.niFgen_ClearArbWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ClearArbWaveform_cfunc(vi, waveform_handle)
@@ -142,7 +172,12 @@ class Library(object):
     def niFgen_ClearFreqList(self, vi, frequency_list_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ClearFreqList_cfunc is None:
-                self.niFgen_ClearFreqList_cfunc = self._library.niFgen_ClearFreqList
+                try:
+                    self.niFgen_ClearFreqList_cfunc = self._library.niFgen_ClearFreqList
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ClearFreqList_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
                 self.niFgen_ClearFreqList_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ClearFreqList_cfunc(vi, frequency_list_handle)
@@ -150,7 +185,12 @@ class Library(object):
     def niFgen_ClearUserStandardWaveform(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ClearUserStandardWaveform_cfunc is None:
-                self.niFgen_ClearUserStandardWaveform_cfunc = self._library.niFgen_ClearUserStandardWaveform
+                try:
+                    self.niFgen_ClearUserStandardWaveform_cfunc = self._library.niFgen_ClearUserStandardWaveform
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ClearUserStandardWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_ClearUserStandardWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ClearUserStandardWaveform_cfunc(vi, channel_name)
@@ -158,7 +198,12 @@ class Library(object):
     def niFgen_Commit(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_Commit_cfunc is None:
-                self.niFgen_Commit_cfunc = self._library.niFgen_Commit
+                try:
+                    self.niFgen_Commit_cfunc = self._library.niFgen_Commit
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_Commit_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_Commit_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_Commit_cfunc(vi)
@@ -166,7 +211,12 @@ class Library(object):
     def niFgen_ConfigureArbSequence(self, vi, channel_name, sequence_handle, gain, offset):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ConfigureArbSequence_cfunc is None:
-                self.niFgen_ConfigureArbSequence_cfunc = self._library.niFgen_ConfigureArbSequence
+                try:
+                    self.niFgen_ConfigureArbSequence_cfunc = self._library.niFgen_ConfigureArbSequence
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ConfigureArbSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niFgen_ConfigureArbSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureArbSequence_cfunc(vi, channel_name, sequence_handle, gain, offset)
@@ -174,7 +224,12 @@ class Library(object):
     def niFgen_ConfigureArbWaveform(self, vi, channel_name, waveform_handle, gain, offset):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ConfigureArbWaveform_cfunc is None:
-                self.niFgen_ConfigureArbWaveform_cfunc = self._library.niFgen_ConfigureArbWaveform
+                try:
+                    self.niFgen_ConfigureArbWaveform_cfunc = self._library.niFgen_ConfigureArbWaveform
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ConfigureArbWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niFgen_ConfigureArbWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureArbWaveform_cfunc(vi, channel_name, waveform_handle, gain, offset)
@@ -182,7 +237,12 @@ class Library(object):
     def niFgen_ConfigureFreqList(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ConfigureFreqList_cfunc is None:
-                self.niFgen_ConfigureFreqList_cfunc = self._library.niFgen_ConfigureFreqList
+                try:
+                    self.niFgen_ConfigureFreqList_cfunc = self._library.niFgen_ConfigureFreqList
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ConfigureFreqList_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64, ViReal64]  # noqa: F405
                 self.niFgen_ConfigureFreqList_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureFreqList_cfunc(vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase)
@@ -190,7 +250,12 @@ class Library(object):
     def niFgen_ConfigureStandardWaveform(self, vi, channel_name, waveform, amplitude, dc_offset, frequency, start_phase):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ConfigureStandardWaveform_cfunc is None:
-                self.niFgen_ConfigureStandardWaveform_cfunc = self._library.niFgen_ConfigureStandardWaveform
+                try:
+                    self.niFgen_ConfigureStandardWaveform_cfunc = self._library.niFgen_ConfigureStandardWaveform
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ConfigureStandardWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64, ViReal64, ViReal64]  # noqa: F405
                 self.niFgen_ConfigureStandardWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureStandardWaveform_cfunc(vi, channel_name, waveform, amplitude, dc_offset, frequency, start_phase)
@@ -198,7 +263,12 @@ class Library(object):
     def niFgen_CreateAdvancedArbSequence(self, vi, sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array, coerced_markers_array, sequence_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateAdvancedArbSequence_cfunc is None:
-                self.niFgen_CreateAdvancedArbSequence_cfunc = self._library.niFgen_CreateAdvancedArbSequence
+                try:
+                    self.niFgen_CreateAdvancedArbSequence_cfunc = self._library.niFgen_CreateAdvancedArbSequence
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_CreateAdvancedArbSequence_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateAdvancedArbSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateAdvancedArbSequence_cfunc(vi, sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array, coerced_markers_array, sequence_handle)
@@ -206,7 +276,12 @@ class Library(object):
     def niFgen_CreateArbSequence(self, vi, sequence_length, waveform_handles_array, loop_counts_array, sequence_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateArbSequence_cfunc is None:
-                self.niFgen_CreateArbSequence_cfunc = self._library.niFgen_CreateArbSequence
+                try:
+                    self.niFgen_CreateArbSequence_cfunc = self._library.niFgen_CreateArbSequence
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_CreateArbSequence_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateArbSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateArbSequence_cfunc(vi, sequence_length, waveform_handles_array, loop_counts_array, sequence_handle)
@@ -214,7 +289,12 @@ class Library(object):
     def niFgen_CreateFreqList(self, vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateFreqList_cfunc is None:
-                self.niFgen_CreateFreqList_cfunc = self._library.niFgen_CreateFreqList
+                try:
+                    self.niFgen_CreateFreqList_cfunc = self._library.niFgen_CreateFreqList
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_CreateFreqList_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateFreqList_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateFreqList_cfunc(vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle)
@@ -222,7 +302,12 @@ class Library(object):
     def niFgen_CreateWaveformF64(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateWaveformF64_cfunc is None:
-                self.niFgen_CreateWaveformF64_cfunc = self._library.niFgen_CreateWaveformF64
+                try:
+                    self.niFgen_CreateWaveformF64_cfunc = self._library.niFgen_CreateWaveformF64
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_CreateWaveformF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateWaveformF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformF64_cfunc(vi, channel_name, waveform_size, waveform_data_array, waveform_handle)
@@ -230,7 +315,12 @@ class Library(object):
     def niFgen_CreateWaveformFromFileF64(self, vi, channel_name, file_name, byte_order, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateWaveformFromFileF64_cfunc is None:
-                self.niFgen_CreateWaveformFromFileF64_cfunc = self._library.niFgen_CreateWaveformFromFileF64
+                try:
+                    self.niFgen_CreateWaveformFromFileF64_cfunc = self._library.niFgen_CreateWaveformFromFileF64
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_CreateWaveformFromFileF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateWaveformFromFileF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformFromFileF64_cfunc(vi, channel_name, file_name, byte_order, waveform_handle)
@@ -238,7 +328,12 @@ class Library(object):
     def niFgen_CreateWaveformFromFileI16(self, vi, channel_name, file_name, byte_order, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateWaveformFromFileI16_cfunc is None:
-                self.niFgen_CreateWaveformFromFileI16_cfunc = self._library.niFgen_CreateWaveformFromFileI16
+                try:
+                    self.niFgen_CreateWaveformFromFileI16_cfunc = self._library.niFgen_CreateWaveformFromFileI16
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_CreateWaveformFromFileI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateWaveformFromFileI16_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformFromFileI16_cfunc(vi, channel_name, file_name, byte_order, waveform_handle)
@@ -246,7 +341,12 @@ class Library(object):
     def niFgen_CreateWaveformI16(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateWaveformI16_cfunc is None:
-                self.niFgen_CreateWaveformI16_cfunc = self._library.niFgen_CreateWaveformI16
+                try:
+                    self.niFgen_CreateWaveformI16_cfunc = self._library.niFgen_CreateWaveformI16
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_CreateWaveformI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt16), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateWaveformI16_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformI16_cfunc(vi, channel_name, waveform_size, waveform_data_array, waveform_handle)
@@ -254,7 +354,12 @@ class Library(object):
     def niFgen_DefineUserStandardWaveform(self, vi, channel_name, waveform_size, waveform_data_array):  # noqa: N802
         with self._func_lock:
             if self.niFgen_DefineUserStandardWaveform_cfunc is None:
-                self.niFgen_DefineUserStandardWaveform_cfunc = self._library.niFgen_DefineUserStandardWaveform
+                try:
+                    self.niFgen_DefineUserStandardWaveform_cfunc = self._library.niFgen_DefineUserStandardWaveform
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_DefineUserStandardWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_DefineUserStandardWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_DefineUserStandardWaveform_cfunc(vi, channel_name, waveform_size, waveform_data_array)
@@ -262,7 +367,12 @@ class Library(object):
     def niFgen_DeleteNamedWaveform(self, vi, channel_name, waveform_name):  # noqa: N802
         with self._func_lock:
             if self.niFgen_DeleteNamedWaveform_cfunc is None:
-                self.niFgen_DeleteNamedWaveform_cfunc = self._library.niFgen_DeleteNamedWaveform
+                try:
+                    self.niFgen_DeleteNamedWaveform_cfunc = self._library.niFgen_DeleteNamedWaveform
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_DeleteNamedWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_DeleteNamedWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_DeleteNamedWaveform_cfunc(vi, channel_name, waveform_name)
@@ -270,7 +380,12 @@ class Library(object):
     def niFgen_DeleteScript(self, vi, channel_name, script_name):  # noqa: N802
         with self._func_lock:
             if self.niFgen_DeleteScript_cfunc is None:
-                self.niFgen_DeleteScript_cfunc = self._library.niFgen_DeleteScript
+                try:
+                    self.niFgen_DeleteScript_cfunc = self._library.niFgen_DeleteScript
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_DeleteScript_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_DeleteScript_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_DeleteScript_cfunc(vi, channel_name, script_name)
@@ -278,7 +393,12 @@ class Library(object):
     def niFgen_Disable(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_Disable_cfunc is None:
-                self.niFgen_Disable_cfunc = self._library.niFgen_Disable
+                try:
+                    self.niFgen_Disable_cfunc = self._library.niFgen_Disable
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_Disable_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_Disable_cfunc(vi)
@@ -286,7 +406,12 @@ class Library(object):
     def niFgen_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ExportAttributeConfigurationBuffer_cfunc is None:
-                self.niFgen_ExportAttributeConfigurationBuffer_cfunc = self._library.niFgen_ExportAttributeConfigurationBuffer
+                try:
+                    self.niFgen_ExportAttributeConfigurationBuffer_cfunc = self._library.niFgen_ExportAttributeConfigurationBuffer
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ExportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
                 self.niFgen_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ExportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
@@ -294,7 +419,12 @@ class Library(object):
     def niFgen_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ExportAttributeConfigurationFile_cfunc is None:
-                self.niFgen_ExportAttributeConfigurationFile_cfunc = self._library.niFgen_ExportAttributeConfigurationFile
+                try:
+                    self.niFgen_ExportAttributeConfigurationFile_cfunc = self._library.niFgen_ExportAttributeConfigurationFile
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ExportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ExportAttributeConfigurationFile_cfunc(vi, file_path)
@@ -302,7 +432,12 @@ class Library(object):
     def niFgen_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetAttributeViBoolean_cfunc is None:
-                self.niFgen_GetAttributeViBoolean_cfunc = self._library.niFgen_GetAttributeViBoolean
+                try:
+                    self.niFgen_GetAttributeViBoolean_cfunc = self._library.niFgen_GetAttributeViBoolean
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFgen_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -310,7 +445,12 @@ class Library(object):
     def niFgen_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetAttributeViInt32_cfunc is None:
-                self.niFgen_GetAttributeViInt32_cfunc = self._library.niFgen_GetAttributeViInt32
+                try:
+                    self.niFgen_GetAttributeViInt32_cfunc = self._library.niFgen_GetAttributeViInt32
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -318,7 +458,12 @@ class Library(object):
     def niFgen_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetAttributeViReal64_cfunc is None:
-                self.niFgen_GetAttributeViReal64_cfunc = self._library.niFgen_GetAttributeViReal64
+                try:
+                    self.niFgen_GetAttributeViReal64_cfunc = self._library.niFgen_GetAttributeViReal64
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -326,7 +471,12 @@ class Library(object):
     def niFgen_GetAttributeViString(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetAttributeViString_cfunc is None:
-                self.niFgen_GetAttributeViString_cfunc = self._library.niFgen_GetAttributeViString
+                try:
+                    self.niFgen_GetAttributeViString_cfunc = self._library.niFgen_GetAttributeViString
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViString_cfunc(vi, channel_name, attribute_id, array_size, attribute_value)
@@ -334,7 +484,12 @@ class Library(object):
     def niFgen_GetChannelName(self, vi, index, buffer_size, channel_string):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetChannelName_cfunc is None:
-                self.niFgen_GetChannelName_cfunc = self._library.niFgen_GetChannelName
+                try:
+                    self.niFgen_GetChannelName_cfunc = self._library.niFgen_GetChannelName
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetChannelName_cfunc(vi, index, buffer_size, channel_string)
@@ -342,7 +497,12 @@ class Library(object):
     def niFgen_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetError_cfunc is None:
-                self.niFgen_GetError_cfunc = self._library.niFgen_GetError
+                try:
+                    self.niFgen_GetError_cfunc = self._library.niFgen_GetError
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetError_cfunc(vi, error_code, error_description_buffer_size, error_description)
@@ -350,7 +510,12 @@ class Library(object):
     def niFgen_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetExtCalLastDateAndTime_cfunc is None:
-                self.niFgen_GetExtCalLastDateAndTime_cfunc = self._library.niFgen_GetExtCalLastDateAndTime
+                try:
+                    self.niFgen_GetExtCalLastDateAndTime_cfunc = self._library.niFgen_GetExtCalLastDateAndTime
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_GetExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetExtCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
@@ -358,7 +523,12 @@ class Library(object):
     def niFgen_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetExtCalLastTemp_cfunc is None:
-                self.niFgen_GetExtCalLastTemp_cfunc = self._library.niFgen_GetExtCalLastTemp
+                try:
+                    self.niFgen_GetExtCalLastTemp_cfunc = self._library.niFgen_GetExtCalLastTemp
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetExtCalLastTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_GetExtCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetExtCalLastTemp_cfunc(vi, temperature)
@@ -366,7 +536,12 @@ class Library(object):
     def niFgen_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetExtCalRecommendedInterval_cfunc is None:
-                self.niFgen_GetExtCalRecommendedInterval_cfunc = self._library.niFgen_GetExtCalRecommendedInterval
+                try:
+                    self.niFgen_GetExtCalRecommendedInterval_cfunc = self._library.niFgen_GetExtCalRecommendedInterval
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetExtCalRecommendedInterval_cfunc(vi, months)
@@ -374,7 +549,12 @@ class Library(object):
     def niFgen_GetHardwareState(self, vi, state):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetHardwareState_cfunc is None:
-                self.niFgen_GetHardwareState_cfunc = self._library.niFgen_GetHardwareState
+                try:
+                    self.niFgen_GetHardwareState_cfunc = self._library.niFgen_GetHardwareState
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetHardwareState_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_GetHardwareState_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetHardwareState_cfunc(vi, state)
@@ -382,7 +562,12 @@ class Library(object):
     def niFgen_GetLastExtCalLastDateAndTime(self, vi, month):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetLastExtCalLastDateAndTime_cfunc is None:
-                self.niFgen_GetLastExtCalLastDateAndTime_cfunc = self._library.niFgen_GetLastExtCalLastDateAndTime
+                try:
+                    self.niFgen_GetLastExtCalLastDateAndTime_cfunc = self._library.niFgen_GetLastExtCalLastDateAndTime
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetLastExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(hightime.datetime)]  # noqa: F405
                 self.niFgen_GetLastExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetLastExtCalLastDateAndTime_cfunc(vi, month)
@@ -390,7 +575,12 @@ class Library(object):
     def niFgen_GetLastSelfCalLastDateAndTime(self, vi, month):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetLastSelfCalLastDateAndTime_cfunc is None:
-                self.niFgen_GetLastSelfCalLastDateAndTime_cfunc = self._library.niFgen_GetLastSelfCalLastDateAndTime
+                try:
+                    self.niFgen_GetLastSelfCalLastDateAndTime_cfunc = self._library.niFgen_GetLastSelfCalLastDateAndTime
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetLastSelfCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(hightime.datetime)]  # noqa: F405
                 self.niFgen_GetLastSelfCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetLastSelfCalLastDateAndTime_cfunc(vi, month)
@@ -398,7 +588,12 @@ class Library(object):
     def niFgen_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetSelfCalLastDateAndTime_cfunc is None:
-                self.niFgen_GetSelfCalLastDateAndTime_cfunc = self._library.niFgen_GetSelfCalLastDateAndTime
+                try:
+                    self.niFgen_GetSelfCalLastDateAndTime_cfunc = self._library.niFgen_GetSelfCalLastDateAndTime
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetSelfCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_GetSelfCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetSelfCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
@@ -406,7 +601,12 @@ class Library(object):
     def niFgen_GetSelfCalLastTemp(self, vi, temperature):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetSelfCalLastTemp_cfunc is None:
-                self.niFgen_GetSelfCalLastTemp_cfunc = self._library.niFgen_GetSelfCalLastTemp
+                try:
+                    self.niFgen_GetSelfCalLastTemp_cfunc = self._library.niFgen_GetSelfCalLastTemp
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetSelfCalLastTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_GetSelfCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetSelfCalLastTemp_cfunc(vi, temperature)
@@ -414,7 +614,12 @@ class Library(object):
     def niFgen_GetSelfCalSupported(self, vi, self_cal_supported):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetSelfCalSupported_cfunc is None:
-                self.niFgen_GetSelfCalSupported_cfunc = self._library.niFgen_GetSelfCalSupported
+                try:
+                    self.niFgen_GetSelfCalSupported_cfunc = self._library.niFgen_GetSelfCalSupported
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_GetSelfCalSupported_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFgen_GetSelfCalSupported_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetSelfCalSupported_cfunc(vi, self_cal_supported)
@@ -422,7 +627,12 @@ class Library(object):
     def niFgen_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ImportAttributeConfigurationBuffer_cfunc is None:
-                self.niFgen_ImportAttributeConfigurationBuffer_cfunc = self._library.niFgen_ImportAttributeConfigurationBuffer
+                try:
+                    self.niFgen_ImportAttributeConfigurationBuffer_cfunc = self._library.niFgen_ImportAttributeConfigurationBuffer
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
                 self.niFgen_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ImportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
@@ -430,7 +640,12 @@ class Library(object):
     def niFgen_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ImportAttributeConfigurationFile_cfunc is None:
-                self.niFgen_ImportAttributeConfigurationFile_cfunc = self._library.niFgen_ImportAttributeConfigurationFile
+                try:
+                    self.niFgen_ImportAttributeConfigurationFile_cfunc = self._library.niFgen_ImportAttributeConfigurationFile
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ImportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ImportAttributeConfigurationFile_cfunc(vi, file_path)
@@ -438,7 +653,12 @@ class Library(object):
     def niFgen_InitializeWithChannels(self, resource_name, channel_name, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_InitializeWithChannels_cfunc is None:
-                self.niFgen_InitializeWithChannels_cfunc = self._library.niFgen_InitializeWithChannels
+                try:
+                    self.niFgen_InitializeWithChannels_cfunc = self._library.niFgen_InitializeWithChannels
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_InitializeWithChannels_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niFgen_InitializeWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_InitializeWithChannels_cfunc(resource_name, channel_name, reset_device, option_string, vi)
@@ -446,7 +666,12 @@ class Library(object):
     def niFgen_InitiateGeneration(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_InitiateGeneration_cfunc is None:
-                self.niFgen_InitiateGeneration_cfunc = self._library.niFgen_InitiateGeneration
+                try:
+                    self.niFgen_InitiateGeneration_cfunc = self._library.niFgen_InitiateGeneration
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_InitiateGeneration_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_InitiateGeneration_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_InitiateGeneration_cfunc(vi)
@@ -454,7 +679,12 @@ class Library(object):
     def niFgen_IsDone(self, vi, done):  # noqa: N802
         with self._func_lock:
             if self.niFgen_IsDone_cfunc is None:
-                self.niFgen_IsDone_cfunc = self._library.niFgen_IsDone
+                try:
+                    self.niFgen_IsDone_cfunc = self._library.niFgen_IsDone
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_IsDone_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFgen_IsDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_IsDone_cfunc(vi, done)
@@ -462,7 +692,12 @@ class Library(object):
     def niFgen_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niFgen_LockSession_cfunc is None:
-                self.niFgen_LockSession_cfunc = self._library.niFgen_LockSession
+                try:
+                    self.niFgen_LockSession_cfunc = self._library.niFgen_LockSession
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFgen_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_LockSession_cfunc(vi, caller_has_lock)
@@ -470,7 +705,12 @@ class Library(object):
     def niFgen_QueryArbSeqCapabilities(self, vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count):  # noqa: N802
         with self._func_lock:
             if self.niFgen_QueryArbSeqCapabilities_cfunc is None:
-                self.niFgen_QueryArbSeqCapabilities_cfunc = self._library.niFgen_QueryArbSeqCapabilities
+                try:
+                    self.niFgen_QueryArbSeqCapabilities_cfunc = self._library.niFgen_QueryArbSeqCapabilities
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_QueryArbSeqCapabilities_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_QueryArbSeqCapabilities_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_QueryArbSeqCapabilities_cfunc(vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count)
@@ -478,7 +718,12 @@ class Library(object):
     def niFgen_QueryArbWfmCapabilities(self, vi, maximum_number_of_waveforms, waveform_quantum, minimum_waveform_size, maximum_waveform_size):  # noqa: N802
         with self._func_lock:
             if self.niFgen_QueryArbWfmCapabilities_cfunc is None:
-                self.niFgen_QueryArbWfmCapabilities_cfunc = self._library.niFgen_QueryArbWfmCapabilities
+                try:
+                    self.niFgen_QueryArbWfmCapabilities_cfunc = self._library.niFgen_QueryArbWfmCapabilities
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_QueryArbWfmCapabilities_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_QueryArbWfmCapabilities_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_QueryArbWfmCapabilities_cfunc(vi, maximum_number_of_waveforms, waveform_quantum, minimum_waveform_size, maximum_waveform_size)
@@ -486,7 +731,12 @@ class Library(object):
     def niFgen_QueryFreqListCapabilities(self, vi, maximum_number_of_freq_lists, minimum_frequency_list_length, maximum_frequency_list_length, minimum_frequency_list_duration, maximum_frequency_list_duration, frequency_list_duration_quantum):  # noqa: N802
         with self._func_lock:
             if self.niFgen_QueryFreqListCapabilities_cfunc is None:
-                self.niFgen_QueryFreqListCapabilities_cfunc = self._library.niFgen_QueryFreqListCapabilities
+                try:
+                    self.niFgen_QueryFreqListCapabilities_cfunc = self._library.niFgen_QueryFreqListCapabilities
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_QueryFreqListCapabilities_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_QueryFreqListCapabilities_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_QueryFreqListCapabilities_cfunc(vi, maximum_number_of_freq_lists, minimum_frequency_list_length, maximum_frequency_list_length, minimum_frequency_list_duration, maximum_frequency_list_duration, frequency_list_duration_quantum)
@@ -494,7 +744,12 @@ class Library(object):
     def niFgen_ReadCurrentTemperature(self, vi, temperature):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ReadCurrentTemperature_cfunc is None:
-                self.niFgen_ReadCurrentTemperature_cfunc = self._library.niFgen_ReadCurrentTemperature
+                try:
+                    self.niFgen_ReadCurrentTemperature_cfunc = self._library.niFgen_ReadCurrentTemperature
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ReadCurrentTemperature_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_ReadCurrentTemperature_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ReadCurrentTemperature_cfunc(vi, temperature)
@@ -502,7 +757,12 @@ class Library(object):
     def niFgen_ResetDevice(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ResetDevice_cfunc is None:
-                self.niFgen_ResetDevice_cfunc = self._library.niFgen_ResetDevice
+                try:
+                    self.niFgen_ResetDevice_cfunc = self._library.niFgen_ResetDevice
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ResetDevice_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_ResetDevice_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ResetDevice_cfunc(vi)
@@ -510,7 +770,12 @@ class Library(object):
     def niFgen_ResetWithDefaults(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ResetWithDefaults_cfunc is None:
-                self.niFgen_ResetWithDefaults_cfunc = self._library.niFgen_ResetWithDefaults
+                try:
+                    self.niFgen_ResetWithDefaults_cfunc = self._library.niFgen_ResetWithDefaults
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ResetWithDefaults_cfunc(vi)
@@ -518,7 +783,12 @@ class Library(object):
     def niFgen_SelfCal(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SelfCal_cfunc is None:
-                self.niFgen_SelfCal_cfunc = self._library.niFgen_SelfCal
+                try:
+                    self.niFgen_SelfCal_cfunc = self._library.niFgen_SelfCal
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_SelfCal_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_SelfCal_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SelfCal_cfunc(vi)
@@ -526,7 +796,12 @@ class Library(object):
     def niFgen_SendSoftwareEdgeTrigger(self, vi, trigger, trigger_id):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SendSoftwareEdgeTrigger_cfunc is None:
-                self.niFgen_SendSoftwareEdgeTrigger_cfunc = self._library.niFgen_SendSoftwareEdgeTrigger
+                try:
+                    self.niFgen_SendSoftwareEdgeTrigger_cfunc = self._library.niFgen_SendSoftwareEdgeTrigger
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_SendSoftwareEdgeTrigger_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_SendSoftwareEdgeTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SendSoftwareEdgeTrigger_cfunc(vi, trigger, trigger_id)
@@ -534,7 +809,12 @@ class Library(object):
     def niFgen_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetAttributeViBoolean_cfunc is None:
-                self.niFgen_SetAttributeViBoolean_cfunc = self._library.niFgen_SetAttributeViBoolean
+                try:
+                    self.niFgen_SetAttributeViBoolean_cfunc = self._library.niFgen_SetAttributeViBoolean
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
                 self.niFgen_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -542,7 +822,12 @@ class Library(object):
     def niFgen_SetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetAttributeViInt32_cfunc is None:
-                self.niFgen_SetAttributeViInt32_cfunc = self._library.niFgen_SetAttributeViInt32
+                try:
+                    self.niFgen_SetAttributeViInt32_cfunc = self._library.niFgen_SetAttributeViInt32
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niFgen_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -550,7 +835,12 @@ class Library(object):
     def niFgen_SetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetAttributeViReal64_cfunc is None:
-                self.niFgen_SetAttributeViReal64_cfunc = self._library.niFgen_SetAttributeViReal64
+                try:
+                    self.niFgen_SetAttributeViReal64_cfunc = self._library.niFgen_SetAttributeViReal64
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
                 self.niFgen_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -558,7 +848,12 @@ class Library(object):
     def niFgen_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetAttributeViString_cfunc is None:
-                self.niFgen_SetAttributeViString_cfunc = self._library.niFgen_SetAttributeViString
+                try:
+                    self.niFgen_SetAttributeViString_cfunc = self._library.niFgen_SetAttributeViString
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -566,7 +861,12 @@ class Library(object):
     def niFgen_SetNamedWaveformNextWritePosition(self, vi, channel_name, waveform_name, relative_to, offset):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetNamedWaveformNextWritePosition_cfunc is None:
-                self.niFgen_SetNamedWaveformNextWritePosition_cfunc = self._library.niFgen_SetNamedWaveformNextWritePosition
+                try:
+                    self.niFgen_SetNamedWaveformNextWritePosition_cfunc = self._library.niFgen_SetNamedWaveformNextWritePosition
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_SetNamedWaveformNextWritePosition_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ViInt32]  # noqa: F405
                 self.niFgen_SetNamedWaveformNextWritePosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetNamedWaveformNextWritePosition_cfunc(vi, channel_name, waveform_name, relative_to, offset)
@@ -574,7 +874,12 @@ class Library(object):
     def niFgen_SetWaveformNextWritePosition(self, vi, channel_name, waveform_handle, relative_to, offset):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetWaveformNextWritePosition_cfunc is None:
-                self.niFgen_SetWaveformNextWritePosition_cfunc = self._library.niFgen_SetWaveformNextWritePosition
+                try:
+                    self.niFgen_SetWaveformNextWritePosition_cfunc = self._library.niFgen_SetWaveformNextWritePosition
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_SetWaveformNextWritePosition_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ViInt32]  # noqa: F405
                 self.niFgen_SetWaveformNextWritePosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetWaveformNextWritePosition_cfunc(vi, channel_name, waveform_handle, relative_to, offset)
@@ -582,7 +887,12 @@ class Library(object):
     def niFgen_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niFgen_UnlockSession_cfunc is None:
-                self.niFgen_UnlockSession_cfunc = self._library.niFgen_UnlockSession
+                try:
+                    self.niFgen_UnlockSession_cfunc = self._library.niFgen_UnlockSession
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFgen_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_UnlockSession_cfunc(vi, caller_has_lock)
@@ -590,7 +900,12 @@ class Library(object):
     def niFgen_WaitUntilDone(self, vi, max_time):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WaitUntilDone_cfunc is None:
-                self.niFgen_WaitUntilDone_cfunc = self._library.niFgen_WaitUntilDone
+                try:
+                    self.niFgen_WaitUntilDone_cfunc = self._library.niFgen_WaitUntilDone
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_WaitUntilDone_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
                 self.niFgen_WaitUntilDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WaitUntilDone_cfunc(vi, max_time)
@@ -598,7 +913,12 @@ class Library(object):
     def niFgen_WriteBinary16Waveform(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WriteBinary16Waveform_cfunc is None:
-                self.niFgen_WriteBinary16Waveform_cfunc = self._library.niFgen_WriteBinary16Waveform
+                try:
+                    self.niFgen_WriteBinary16Waveform_cfunc = self._library.niFgen_WriteBinary16Waveform
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_WriteBinary16Waveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViInt16)]  # noqa: F405
                 self.niFgen_WriteBinary16Waveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteBinary16Waveform_cfunc(vi, channel_name, waveform_handle, size, data)
@@ -606,7 +926,12 @@ class Library(object):
     def niFgen_WriteNamedWaveformF64(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WriteNamedWaveformF64_cfunc is None:
-                self.niFgen_WriteNamedWaveformF64_cfunc = self._library.niFgen_WriteNamedWaveformF64
+                try:
+                    self.niFgen_WriteNamedWaveformF64_cfunc = self._library.niFgen_WriteNamedWaveformF64
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_WriteNamedWaveformF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_WriteNamedWaveformF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteNamedWaveformF64_cfunc(vi, channel_name, waveform_name, size, data)
@@ -614,7 +939,12 @@ class Library(object):
     def niFgen_WriteNamedWaveformI16(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WriteNamedWaveformI16_cfunc is None:
-                self.niFgen_WriteNamedWaveformI16_cfunc = self._library.niFgen_WriteNamedWaveformI16
+                try:
+                    self.niFgen_WriteNamedWaveformI16_cfunc = self._library.niFgen_WriteNamedWaveformI16
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_WriteNamedWaveformI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt16)]  # noqa: F405
                 self.niFgen_WriteNamedWaveformI16_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteNamedWaveformI16_cfunc(vi, channel_name, waveform_name, size, data)
@@ -622,7 +952,12 @@ class Library(object):
     def niFgen_WriteScript(self, vi, channel_name, script):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WriteScript_cfunc is None:
-                self.niFgen_WriteScript_cfunc = self._library.niFgen_WriteScript
+                try:
+                    self.niFgen_WriteScript_cfunc = self._library.niFgen_WriteScript
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_WriteScript_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_WriteScript_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteScript_cfunc(vi, channel_name, script)
@@ -630,7 +965,12 @@ class Library(object):
     def niFgen_WriteWaveform(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WriteWaveform_cfunc is None:
-                self.niFgen_WriteWaveform_cfunc = self._library.niFgen_WriteWaveform
+                try:
+                    self.niFgen_WriteWaveform_cfunc = self._library.niFgen_WriteWaveform
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_WriteWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_WriteWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteWaveform_cfunc(vi, channel_name, waveform_handle, size, data)
@@ -638,7 +978,12 @@ class Library(object):
     def niFgen_close(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_close_cfunc is None:
-                self.niFgen_close_cfunc = self._library.niFgen_close
+                try:
+                    self.niFgen_close_cfunc = self._library.niFgen_close
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_close_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_close_cfunc(vi)
@@ -646,7 +991,12 @@ class Library(object):
     def niFgen_error_message(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:
             if self.niFgen_error_message_cfunc is None:
-                self.niFgen_error_message_cfunc = self._library.niFgen_error_message
+                try:
+                    self.niFgen_error_message_cfunc = self._library.niFgen_error_message
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_error_message_cfunc(vi, error_code, error_message)
@@ -654,7 +1004,12 @@ class Library(object):
     def niFgen_reset(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_reset_cfunc is None:
-                self.niFgen_reset_cfunc = self._library.niFgen_reset
+                try:
+                    self.niFgen_reset_cfunc = self._library.niFgen_reset
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_reset_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_reset_cfunc(vi)
@@ -662,7 +1017,12 @@ class Library(object):
     def niFgen_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:
             if self.niFgen_self_test_cfunc is None:
-                self.niFgen_self_test_cfunc = self._library.niFgen_self_test
+                try:
+                    self.niFgen_self_test_cfunc = self._library.niFgen_self_test
+                except AttributeError as e:
+                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
+                                         "be an indication that the version of the instrument driver is too old for "
+                                         "this version of the python API. Upgrade your instrument driver.") from e
                 self.niFgen_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_self_test_cfunc(vi, self_test_result, self_test_message)
