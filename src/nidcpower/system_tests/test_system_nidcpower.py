@@ -23,8 +23,21 @@ def multiple_channel_session():
         yield simulated_session
 
 
-def test_self_test(session):
-    session.self_test()
+@pytest.fixture(scope='function')
+def independent_channel_session():
+    with nidcpower.Session(['4162/0', '4162/1'], False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+        yield simulated_session
+
+
+@pytest.fixture(scope='function', params=[('4162', ''), ('4162', '0'), ('4162', [0, 1])])
+def sessions(request):
+    with nidcpower.Session(request.param[0], request.param[1], False,
+                           'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+        yield simulated_session
+
+
+def test_self_test(sessions):
+    sessions.self_test()
 
 
 def test_self_cal(session):
@@ -103,6 +116,16 @@ def test_reset(session):
     channel.output_enabled = False
     session.reset()
     assert channel.output_enabled is True
+
+
+def test_reset_rep_cap(independent_channel_session):
+    assert independent_channel_session.channels['4162/0'].output_enabled is True
+    assert independent_channel_session.channels['4162/1'].output_enabled is True
+    independent_channel_session.channels['4162/0'].output_enabled = False
+    independent_channel_session.channels['4162/1'].output_enabled = False
+    independent_channel_session.channels['4162/0'].reset()
+    assert independent_channel_session.channels['4162/0'].output_enabled is True
+    assert independent_channel_session.channels['4162/1'].output_enabled is False
 
 
 def test_disable(session):
@@ -273,6 +296,24 @@ def test_create_and_delete_advanced_sequence(single_channel_session):
     single_channel_session.delete_advanced_sequence(sequence_name=sequence_name)
     try:
         single_channel_session.active_advanced_sequence = sequence_name
+        assert False
+    except nidcpower.errors.DriverError:
+        pass
+
+
+def test_create_and_delete_advanced_sequence_rep_cap(independent_channel_session):
+    properties_used = ['output_function', 'voltage_level']
+    sequence_name = 'my_sequence'
+    channel_session = independent_channel_session.channels['4162/0']
+    session.source_mode = nidcpower.SourceMode.SEQUENCE
+    channel_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+    channel_session.create_advanced_sequence_step(set_as_active_step=True)
+    assert channel_session.active_advanced_sequence == sequence_name
+    channel_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+    channel_session.voltage_level = 1
+    channel_session.delete_advanced_sequence(sequence_name=sequence_name)
+    try:
+        channel_session.active_advanced_sequence = sequence_name
         assert False
     except nidcpower.errors.DriverError:
         pass
