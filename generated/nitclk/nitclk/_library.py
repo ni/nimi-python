@@ -40,9 +40,9 @@ class Library(object):
                 try:
                     self.niTClk_ConfigureForHomogeneousTriggers_cfunc = self._library.niTClk_ConfigureForHomogeneousTriggers
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_ConfigureForHomogeneousTriggers was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_ConfigureForHomogeneousTriggers_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niTClk_ConfigureForHomogeneousTriggers_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_ConfigureForHomogeneousTriggers_cfunc(session_count, sessions)
@@ -53,9 +53,9 @@ class Library(object):
                 try:
                     self.niTClk_FinishSyncPulseSenderSynchronize_cfunc = self._library.niTClk_FinishSyncPulseSenderSynchronize
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_FinishSyncPulseSenderSynchronize was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_FinishSyncPulseSenderSynchronize_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession), ViReal64]  # noqa: F405
                 self.niTClk_FinishSyncPulseSenderSynchronize_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_FinishSyncPulseSenderSynchronize_cfunc(session_count, sessions, min_time)
@@ -66,9 +66,9 @@ class Library(object):
                 try:
                     self.niTClk_GetAttributeViReal64_cfunc = self._library.niTClk_GetAttributeViReal64
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_GetAttributeViReal64 was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niTClk_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_GetAttributeViReal64_cfunc(session, channel_name, attribute_id, value)
@@ -79,9 +79,9 @@ class Library(object):
                 try:
                     self.niTClk_GetAttributeViSession_cfunc = self._library.niTClk_GetAttributeViSession
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_GetAttributeViSession was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_GetAttributeViSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niTClk_GetAttributeViSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_GetAttributeViSession_cfunc(session, channel_name, attribute_id, value)
@@ -92,9 +92,9 @@ class Library(object):
                 try:
                     self.niTClk_GetAttributeViString_cfunc = self._library.niTClk_GetAttributeViString
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_GetAttributeViString was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niTClk_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_GetAttributeViString_cfunc(session, channel_name, attribute_id, buf_size, value)
@@ -105,9 +105,9 @@ class Library(object):
                 try:
                     self.niTClk_GetExtendedErrorInfo_cfunc = self._library.niTClk_GetExtendedErrorInfo
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_GetExtendedErrorInfo was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_GetExtendedErrorInfo_cfunc.argtypes = [ctypes.POINTER(ViChar), ViUInt32]  # noqa: F405
                 self.niTClk_GetExtendedErrorInfo_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_GetExtendedErrorInfo_cfunc(error_string, error_string_size)
@@ -118,9 +118,9 @@ class Library(object):
                 try:
                     self.niTClk_Initiate_cfunc = self._library.niTClk_Initiate
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_Initiate was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_Initiate_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niTClk_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_Initiate_cfunc(session_count, sessions)
@@ -131,9 +131,9 @@ class Library(object):
                 try:
                     self.niTClk_IsDone_cfunc = self._library.niTClk_IsDone
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_IsDone was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_IsDone_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession), ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niTClk_IsDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_IsDone_cfunc(session_count, sessions, done)
@@ -144,9 +144,9 @@ class Library(object):
                 try:
                     self.niTClk_SetAttributeViReal64_cfunc = self._library.niTClk_SetAttributeViReal64
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_SetAttributeViReal64 was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
                 self.niTClk_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_SetAttributeViReal64_cfunc(session, channel_name, attribute_id, value)
@@ -157,9 +157,9 @@ class Library(object):
                 try:
                     self.niTClk_SetAttributeViSession_cfunc = self._library.niTClk_SetAttributeViSession
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_SetAttributeViSession was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_SetAttributeViSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViSession]  # noqa: F405
                 self.niTClk_SetAttributeViSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_SetAttributeViSession_cfunc(session, channel_name, attribute_id, value)
@@ -170,9 +170,9 @@ class Library(object):
                 try:
                     self.niTClk_SetAttributeViString_cfunc = self._library.niTClk_SetAttributeViString
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_SetAttributeViString was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niTClk_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_SetAttributeViString_cfunc(session, channel_name, attribute_id, value)
@@ -183,9 +183,9 @@ class Library(object):
                 try:
                     self.niTClk_SetupForSyncPulseSenderSynchronize_cfunc = self._library.niTClk_SetupForSyncPulseSenderSynchronize
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_SetupForSyncPulseSenderSynchronize was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_SetupForSyncPulseSenderSynchronize_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession), ViReal64]  # noqa: F405
                 self.niTClk_SetupForSyncPulseSenderSynchronize_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_SetupForSyncPulseSenderSynchronize_cfunc(session_count, sessions, min_time)
@@ -196,9 +196,9 @@ class Library(object):
                 try:
                     self.niTClk_Synchronize_cfunc = self._library.niTClk_Synchronize
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_Synchronize was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_Synchronize_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession), ViReal64]  # noqa: F405
                 self.niTClk_Synchronize_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_Synchronize_cfunc(session_count, sessions, min_tclk_period)
@@ -209,9 +209,9 @@ class Library(object):
                 try:
                     self.niTClk_SynchronizeToSyncPulseSender_cfunc = self._library.niTClk_SynchronizeToSyncPulseSender
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_SynchronizeToSyncPulseSender was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_SynchronizeToSyncPulseSender_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession), ViReal64]  # noqa: F405
                 self.niTClk_SynchronizeToSyncPulseSender_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_SynchronizeToSyncPulseSender_cfunc(session_count, sessions, min_time)
@@ -222,9 +222,9 @@ class Library(object):
                 try:
                     self.niTClk_WaitUntilDone_cfunc = self._library.niTClk_WaitUntilDone
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niTClk_WaitUntilDone was not found in the NI-TClk runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niTClk_WaitUntilDone_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession), ViReal64]  # noqa: F405
                 self.niTClk_WaitUntilDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_WaitUntilDone_cfunc(session_count, sessions, timeout)

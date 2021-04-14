@@ -30,9 +30,9 @@ class Library(object):
                 try:
                     self.niModInst_CloseInstalledDevicesSession_cfunc = self._library.niModInst_CloseInstalledDevicesSession
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niModInst_CloseInstalledDevicesSession was not found in the NI-ModInst runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niModInst_CloseInstalledDevicesSession_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niModInst_CloseInstalledDevicesSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niModInst_CloseInstalledDevicesSession_cfunc(handle)
@@ -43,9 +43,9 @@ class Library(object):
                 try:
                     self.niModInst_GetExtendedErrorInfo_cfunc = self._library.niModInst_GetExtendedErrorInfo
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niModInst_GetExtendedErrorInfo was not found in the NI-ModInst runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niModInst_GetExtendedErrorInfo_cfunc.argtypes = [ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niModInst_GetExtendedErrorInfo_cfunc.restype = ViStatus  # noqa: F405
         return self.niModInst_GetExtendedErrorInfo_cfunc(error_info_buffer_size, error_info)
@@ -56,9 +56,9 @@ class Library(object):
                 try:
                     self.niModInst_GetInstalledDeviceAttributeViInt32_cfunc = self._library.niModInst_GetInstalledDeviceAttributeViInt32
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niModInst_GetInstalledDeviceAttributeViInt32 was not found in the NI-ModInst runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niModInst_GetInstalledDeviceAttributeViInt32_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niModInst_GetInstalledDeviceAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niModInst_GetInstalledDeviceAttributeViInt32_cfunc(handle, index, attribute_id, attribute_value)
@@ -69,9 +69,9 @@ class Library(object):
                 try:
                     self.niModInst_GetInstalledDeviceAttributeViString_cfunc = self._library.niModInst_GetInstalledDeviceAttributeViString
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niModInst_GetInstalledDeviceAttributeViString was not found in the NI-ModInst runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niModInst_GetInstalledDeviceAttributeViString_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niModInst_GetInstalledDeviceAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niModInst_GetInstalledDeviceAttributeViString_cfunc(handle, index, attribute_id, attribute_value_buffer_size, attribute_value)
@@ -82,9 +82,9 @@ class Library(object):
                 try:
                     self.niModInst_OpenInstalledDevicesSession_cfunc = self._library.niModInst_OpenInstalledDevicesSession
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niModInst_OpenInstalledDevicesSession was not found in the NI-ModInst runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niModInst_OpenInstalledDevicesSession_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViSession), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niModInst_OpenInstalledDevicesSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niModInst_OpenInstalledDevicesSession_cfunc(driver, handle, device_count)

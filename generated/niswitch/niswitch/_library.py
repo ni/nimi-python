@@ -64,9 +64,9 @@ class Library(object):
                 try:
                     self.niSwitch_AbortScan_cfunc = self._library.niSwitch_AbortScan
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_AbortScan was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_AbortScan_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niSwitch_AbortScan_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_AbortScan_cfunc(vi)
@@ -77,9 +77,9 @@ class Library(object):
                 try:
                     self.niSwitch_CanConnect_cfunc = self._library.niSwitch_CanConnect
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_CanConnect was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_CanConnect_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niSwitch_CanConnect_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_CanConnect_cfunc(vi, channel1, channel2, path_capability)
@@ -90,9 +90,9 @@ class Library(object):
                 try:
                     self.niSwitch_Commit_cfunc = self._library.niSwitch_Commit
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_Commit was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_Commit_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niSwitch_Commit_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_Commit_cfunc(vi)
@@ -103,9 +103,9 @@ class Library(object):
                 try:
                     self.niSwitch_Connect_cfunc = self._library.niSwitch_Connect
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_Connect was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_Connect_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_Connect_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_Connect_cfunc(vi, channel1, channel2)
@@ -116,9 +116,9 @@ class Library(object):
                 try:
                     self.niSwitch_ConnectMultiple_cfunc = self._library.niSwitch_ConnectMultiple
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_ConnectMultiple was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_ConnectMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_ConnectMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_ConnectMultiple_cfunc(vi, connection_list)
@@ -129,9 +129,9 @@ class Library(object):
                 try:
                     self.niSwitch_Disable_cfunc = self._library.niSwitch_Disable
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_Disable was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_Disable_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niSwitch_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_Disable_cfunc(vi)
@@ -142,9 +142,9 @@ class Library(object):
                 try:
                     self.niSwitch_Disconnect_cfunc = self._library.niSwitch_Disconnect
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_Disconnect was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_Disconnect_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_Disconnect_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_Disconnect_cfunc(vi, channel1, channel2)
@@ -155,9 +155,9 @@ class Library(object):
                 try:
                     self.niSwitch_DisconnectAll_cfunc = self._library.niSwitch_DisconnectAll
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_DisconnectAll was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_DisconnectAll_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niSwitch_DisconnectAll_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_DisconnectAll_cfunc(vi)
@@ -168,9 +168,9 @@ class Library(object):
                 try:
                     self.niSwitch_DisconnectMultiple_cfunc = self._library.niSwitch_DisconnectMultiple
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_DisconnectMultiple was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_DisconnectMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_DisconnectMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_DisconnectMultiple_cfunc(vi, disconnection_list)
@@ -181,9 +181,9 @@ class Library(object):
                 try:
                     self.niSwitch_GetAttributeViBoolean_cfunc = self._library.niSwitch_GetAttributeViBoolean
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_GetAttributeViBoolean was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niSwitch_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -194,9 +194,9 @@ class Library(object):
                 try:
                     self.niSwitch_GetAttributeViInt32_cfunc = self._library.niSwitch_GetAttributeViInt32
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_GetAttributeViInt32 was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niSwitch_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -207,9 +207,9 @@ class Library(object):
                 try:
                     self.niSwitch_GetAttributeViReal64_cfunc = self._library.niSwitch_GetAttributeViReal64
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_GetAttributeViReal64 was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niSwitch_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -220,9 +220,9 @@ class Library(object):
                 try:
                     self.niSwitch_GetAttributeViString_cfunc = self._library.niSwitch_GetAttributeViString
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_GetAttributeViString was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViString_cfunc(vi, channel_name, attribute_id, array_size, attribute_value)
@@ -233,9 +233,9 @@ class Library(object):
                 try:
                     self.niSwitch_GetChannelName_cfunc = self._library.niSwitch_GetChannelName
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_GetChannelName was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetChannelName_cfunc(vi, index, buffer_size, channel_name_buffer)
@@ -246,9 +246,9 @@ class Library(object):
                 try:
                     self.niSwitch_GetError_cfunc = self._library.niSwitch_GetError
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_GetError was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetError_cfunc(vi, code, buffer_size, description)
@@ -259,9 +259,9 @@ class Library(object):
                 try:
                     self.niSwitch_GetPath_cfunc = self._library.niSwitch_GetPath
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_GetPath was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_GetPath_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_GetPath_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetPath_cfunc(vi, channel1, channel2, buffer_size, path)
@@ -272,9 +272,9 @@ class Library(object):
                 try:
                     self.niSwitch_GetRelayCount_cfunc = self._library.niSwitch_GetRelayCount
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_GetRelayCount was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_GetRelayCount_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niSwitch_GetRelayCount_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetRelayCount_cfunc(vi, relay_name, relay_count)
@@ -285,9 +285,9 @@ class Library(object):
                 try:
                     self.niSwitch_GetRelayName_cfunc = self._library.niSwitch_GetRelayName
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_GetRelayName was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_GetRelayName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_GetRelayName_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetRelayName_cfunc(vi, index, relay_name_buffer_size, relay_name_buffer)
@@ -298,9 +298,9 @@ class Library(object):
                 try:
                     self.niSwitch_GetRelayPosition_cfunc = self._library.niSwitch_GetRelayPosition
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_GetRelayPosition was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_GetRelayPosition_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niSwitch_GetRelayPosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetRelayPosition_cfunc(vi, relay_name, relay_position)
@@ -311,9 +311,9 @@ class Library(object):
                 try:
                     self.niSwitch_InitWithTopology_cfunc = self._library.niSwitch_InitWithTopology
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_InitWithTopology was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_InitWithTopology_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niSwitch_InitWithTopology_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_InitWithTopology_cfunc(resource_name, topology, simulate, reset_device, vi)
@@ -324,9 +324,9 @@ class Library(object):
                 try:
                     self.niSwitch_InitiateScan_cfunc = self._library.niSwitch_InitiateScan
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_InitiateScan was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_InitiateScan_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niSwitch_InitiateScan_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_InitiateScan_cfunc(vi)
@@ -337,9 +337,9 @@ class Library(object):
                 try:
                     self.niSwitch_LockSession_cfunc = self._library.niSwitch_LockSession
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_LockSession was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niSwitch_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_LockSession_cfunc(vi, caller_has_lock)
@@ -350,9 +350,9 @@ class Library(object):
                 try:
                     self.niSwitch_RelayControl_cfunc = self._library.niSwitch_RelayControl
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_RelayControl was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_RelayControl_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niSwitch_RelayControl_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_RelayControl_cfunc(vi, relay_name, relay_action)
@@ -363,9 +363,9 @@ class Library(object):
                 try:
                     self.niSwitch_ResetWithDefaults_cfunc = self._library.niSwitch_ResetWithDefaults
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_ResetWithDefaults was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niSwitch_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_ResetWithDefaults_cfunc(vi)
@@ -376,9 +376,9 @@ class Library(object):
                 try:
                     self.niSwitch_RouteScanAdvancedOutput_cfunc = self._library.niSwitch_RouteScanAdvancedOutput
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_RouteScanAdvancedOutput was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_RouteScanAdvancedOutput_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ViBoolean]  # noqa: F405
                 self.niSwitch_RouteScanAdvancedOutput_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_RouteScanAdvancedOutput_cfunc(vi, scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
@@ -389,9 +389,9 @@ class Library(object):
                 try:
                     self.niSwitch_RouteTriggerInput_cfunc = self._library.niSwitch_RouteTriggerInput
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_RouteTriggerInput was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_RouteTriggerInput_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ViBoolean]  # noqa: F405
                 self.niSwitch_RouteTriggerInput_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_RouteTriggerInput_cfunc(vi, trigger_input_connector, trigger_input_bus_line, invert)
@@ -402,9 +402,9 @@ class Library(object):
                 try:
                     self.niSwitch_SendSoftwareTrigger_cfunc = self._library.niSwitch_SendSoftwareTrigger
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_SendSoftwareTrigger was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_SendSoftwareTrigger_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niSwitch_SendSoftwareTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SendSoftwareTrigger_cfunc(vi)
@@ -415,9 +415,9 @@ class Library(object):
                 try:
                     self.niSwitch_SetAttributeViBoolean_cfunc = self._library.niSwitch_SetAttributeViBoolean
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_SetAttributeViBoolean was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
                 self.niSwitch_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -428,9 +428,9 @@ class Library(object):
                 try:
                     self.niSwitch_SetAttributeViInt32_cfunc = self._library.niSwitch_SetAttributeViInt32
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_SetAttributeViInt32 was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niSwitch_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -441,9 +441,9 @@ class Library(object):
                 try:
                     self.niSwitch_SetAttributeViReal64_cfunc = self._library.niSwitch_SetAttributeViReal64
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_SetAttributeViReal64 was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
                 self.niSwitch_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -454,9 +454,9 @@ class Library(object):
                 try:
                     self.niSwitch_SetAttributeViString_cfunc = self._library.niSwitch_SetAttributeViString
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_SetAttributeViString was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -467,9 +467,9 @@ class Library(object):
                 try:
                     self.niSwitch_SetPath_cfunc = self._library.niSwitch_SetPath
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_SetPath was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_SetPath_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_SetPath_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetPath_cfunc(vi, path_list)
@@ -480,9 +480,9 @@ class Library(object):
                 try:
                     self.niSwitch_UnlockSession_cfunc = self._library.niSwitch_UnlockSession
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_UnlockSession was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niSwitch_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_UnlockSession_cfunc(vi, caller_has_lock)
@@ -493,9 +493,9 @@ class Library(object):
                 try:
                     self.niSwitch_WaitForDebounce_cfunc = self._library.niSwitch_WaitForDebounce
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_WaitForDebounce was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_WaitForDebounce_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
                 self.niSwitch_WaitForDebounce_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_WaitForDebounce_cfunc(vi, maximum_time_ms)
@@ -506,9 +506,9 @@ class Library(object):
                 try:
                     self.niSwitch_WaitForScanComplete_cfunc = self._library.niSwitch_WaitForScanComplete
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_WaitForScanComplete was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_WaitForScanComplete_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
                 self.niSwitch_WaitForScanComplete_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_WaitForScanComplete_cfunc(vi, maximum_time_ms)
@@ -519,9 +519,9 @@ class Library(object):
                 try:
                     self.niSwitch_close_cfunc = self._library.niSwitch_close
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_close was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_close_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niSwitch_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_close_cfunc(vi)
@@ -532,9 +532,9 @@ class Library(object):
                 try:
                     self.niSwitch_error_message_cfunc = self._library.niSwitch_error_message
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_error_message was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_error_message_cfunc(vi, error_code, error_message)
@@ -545,9 +545,9 @@ class Library(object):
                 try:
                     self.niSwitch_reset_cfunc = self._library.niSwitch_reset
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_reset was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_reset_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niSwitch_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_reset_cfunc(vi)
@@ -558,9 +558,9 @@ class Library(object):
                 try:
                     self.niSwitch_self_test_cfunc = self._library.niSwitch_self_test
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niSwitch_self_test was not found in the NI-SWITCH runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niSwitch_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_self_test_cfunc(vi, self_test_result, self_test_message)

@@ -74,9 +74,9 @@ class Library(object):
                 try:
                     self.niDMM_Abort_cfunc = self._library.niDMM_Abort
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_Abort was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_Abort_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Abort_cfunc(vi)
@@ -87,9 +87,9 @@ class Library(object):
                 try:
                     self.niDMM_ConfigureMeasurementAbsolute_cfunc = self._library.niDMM_ConfigureMeasurementAbsolute
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ConfigureMeasurementAbsolute was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ConfigureMeasurementAbsolute_cfunc.argtypes = [ViSession, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureMeasurementAbsolute_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureMeasurementAbsolute_cfunc(vi, measurement_function, range, resolution_absolute)
@@ -100,9 +100,9 @@ class Library(object):
                 try:
                     self.niDMM_ConfigureMeasurementDigits_cfunc = self._library.niDMM_ConfigureMeasurementDigits
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ConfigureMeasurementDigits was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ConfigureMeasurementDigits_cfunc.argtypes = [ViSession, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureMeasurementDigits_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureMeasurementDigits_cfunc(vi, measurement_function, range, resolution_digits)
@@ -113,9 +113,9 @@ class Library(object):
                 try:
                     self.niDMM_ConfigureMultiPoint_cfunc = self._library.niDMM_ConfigureMultiPoint
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ConfigureMultiPoint was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ConfigureMultiPoint_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ViInt32, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureMultiPoint_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureMultiPoint_cfunc(vi, trigger_count, sample_count, sample_trigger, sample_interval)
@@ -126,9 +126,9 @@ class Library(object):
                 try:
                     self.niDMM_ConfigureRTDCustom_cfunc = self._library.niDMM_ConfigureRTDCustom
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ConfigureRTDCustom was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ConfigureRTDCustom_cfunc.argtypes = [ViSession, ViReal64, ViReal64, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureRTDCustom_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureRTDCustom_cfunc(vi, rtd_a, rtd_b, rtd_c)
@@ -139,9 +139,9 @@ class Library(object):
                 try:
                     self.niDMM_ConfigureRTDType_cfunc = self._library.niDMM_ConfigureRTDType
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ConfigureRTDType was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ConfigureRTDType_cfunc.argtypes = [ViSession, ViInt32, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureRTDType_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureRTDType_cfunc(vi, rtd_type, rtd_resistance)
@@ -152,9 +152,9 @@ class Library(object):
                 try:
                     self.niDMM_ConfigureThermistorCustom_cfunc = self._library.niDMM_ConfigureThermistorCustom
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ConfigureThermistorCustom was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ConfigureThermistorCustom_cfunc.argtypes = [ViSession, ViReal64, ViReal64, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureThermistorCustom_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureThermistorCustom_cfunc(vi, thermistor_a, thermistor_b, thermistor_c)
@@ -165,9 +165,9 @@ class Library(object):
                 try:
                     self.niDMM_ConfigureThermocouple_cfunc = self._library.niDMM_ConfigureThermocouple
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ConfigureThermocouple was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ConfigureThermocouple_cfunc.argtypes = [ViSession, ViInt32, ViInt32]  # noqa: F405
                 self.niDMM_ConfigureThermocouple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureThermocouple_cfunc(vi, thermocouple_type, reference_junction_type)
@@ -178,9 +178,9 @@ class Library(object):
                 try:
                     self.niDMM_ConfigureTrigger_cfunc = self._library.niDMM_ConfigureTrigger
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ConfigureTrigger was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ConfigureTrigger_cfunc.argtypes = [ViSession, ViInt32, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureTrigger_cfunc(vi, trigger_source, trigger_delay)
@@ -191,9 +191,9 @@ class Library(object):
                 try:
                     self.niDMM_ConfigureWaveformAcquisition_cfunc = self._library.niDMM_ConfigureWaveformAcquisition
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ConfigureWaveformAcquisition was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ConfigureWaveformAcquisition_cfunc.argtypes = [ViSession, ViInt32, ViReal64, ViReal64, ViInt32]  # noqa: F405
                 self.niDMM_ConfigureWaveformAcquisition_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureWaveformAcquisition_cfunc(vi, measurement_function, range, rate, waveform_points)
@@ -204,9 +204,9 @@ class Library(object):
                 try:
                     self.niDMM_Disable_cfunc = self._library.niDMM_Disable
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_Disable was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_Disable_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Disable_cfunc(vi)
@@ -217,9 +217,9 @@ class Library(object):
                 try:
                     self.niDMM_ExportAttributeConfigurationBuffer_cfunc = self._library.niDMM_ExportAttributeConfigurationBuffer
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ExportAttributeConfigurationBuffer was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ExportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
                 self.niDMM_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ExportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
@@ -230,9 +230,9 @@ class Library(object):
                 try:
                     self.niDMM_ExportAttributeConfigurationFile_cfunc = self._library.niDMM_ExportAttributeConfigurationFile
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ExportAttributeConfigurationFile was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ExportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ExportAttributeConfigurationFile_cfunc(vi, file_path)
@@ -243,9 +243,9 @@ class Library(object):
                 try:
                     self.niDMM_Fetch_cfunc = self._library.niDMM_Fetch
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_Fetch was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_Fetch_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_Fetch_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Fetch_cfunc(vi, maximum_time, reading)
@@ -256,9 +256,9 @@ class Library(object):
                 try:
                     self.niDMM_FetchMultiPoint_cfunc = self._library.niDMM_FetchMultiPoint
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_FetchMultiPoint was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_FetchMultiPoint_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_FetchMultiPoint_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_FetchMultiPoint_cfunc(vi, maximum_time, array_size, reading_array, actual_number_of_points)
@@ -269,9 +269,9 @@ class Library(object):
                 try:
                     self.niDMM_FetchWaveform_cfunc = self._library.niDMM_FetchWaveform
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_FetchWaveform was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_FetchWaveform_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_FetchWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_FetchWaveform_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
@@ -282,9 +282,9 @@ class Library(object):
                 try:
                     self.niDMM_GetAttributeViBoolean_cfunc = self._library.niDMM_GetAttributeViBoolean
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_GetAttributeViBoolean was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDMM_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -295,9 +295,9 @@ class Library(object):
                 try:
                     self.niDMM_GetAttributeViInt32_cfunc = self._library.niDMM_GetAttributeViInt32
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_GetAttributeViInt32 was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -308,9 +308,9 @@ class Library(object):
                 try:
                     self.niDMM_GetAttributeViReal64_cfunc = self._library.niDMM_GetAttributeViReal64
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_GetAttributeViReal64 was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -321,9 +321,9 @@ class Library(object):
                 try:
                     self.niDMM_GetAttributeViString_cfunc = self._library.niDMM_GetAttributeViString
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_GetAttributeViString was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
@@ -334,9 +334,9 @@ class Library(object):
                 try:
                     self.niDMM_GetCalDateAndTime_cfunc = self._library.niDMM_GetCalDateAndTime
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_GetCalDateAndTime was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_GetCalDateAndTime_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_GetCalDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetCalDateAndTime_cfunc(vi, cal_type, month, day, year, hour, minute)
@@ -347,9 +347,9 @@ class Library(object):
                 try:
                     self.niDMM_GetDevTemp_cfunc = self._library.niDMM_GetDevTemp
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_GetDevTemp was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_GetDevTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_GetDevTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetDevTemp_cfunc(vi, options, temperature)
@@ -360,9 +360,9 @@ class Library(object):
                 try:
                     self.niDMM_GetError_cfunc = self._library.niDMM_GetError
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_GetError was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetError_cfunc(vi, error_code, buffer_size, description)
@@ -373,9 +373,9 @@ class Library(object):
                 try:
                     self.niDMM_GetExtCalRecommendedInterval_cfunc = self._library.niDMM_GetExtCalRecommendedInterval
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_GetExtCalRecommendedInterval was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetExtCalRecommendedInterval_cfunc(vi, months)
@@ -386,9 +386,9 @@ class Library(object):
                 try:
                     self.niDMM_GetLastCalTemp_cfunc = self._library.niDMM_GetLastCalTemp
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_GetLastCalTemp was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_GetLastCalTemp_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_GetLastCalTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetLastCalTemp_cfunc(vi, cal_type, temperature)
@@ -399,9 +399,9 @@ class Library(object):
                 try:
                     self.niDMM_GetSelfCalSupported_cfunc = self._library.niDMM_GetSelfCalSupported
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_GetSelfCalSupported was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_GetSelfCalSupported_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDMM_GetSelfCalSupported_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetSelfCalSupported_cfunc(vi, self_cal_supported)
@@ -412,9 +412,9 @@ class Library(object):
                 try:
                     self.niDMM_ImportAttributeConfigurationBuffer_cfunc = self._library.niDMM_ImportAttributeConfigurationBuffer
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ImportAttributeConfigurationBuffer was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
                 self.niDMM_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ImportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
@@ -425,9 +425,9 @@ class Library(object):
                 try:
                     self.niDMM_ImportAttributeConfigurationFile_cfunc = self._library.niDMM_ImportAttributeConfigurationFile
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ImportAttributeConfigurationFile was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ImportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ImportAttributeConfigurationFile_cfunc(vi, file_path)
@@ -438,9 +438,9 @@ class Library(object):
                 try:
                     self.niDMM_InitWithOptions_cfunc = self._library.niDMM_InitWithOptions
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_InitWithOptions was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_InitWithOptions_cfunc.argtypes = [ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niDMM_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
@@ -451,9 +451,9 @@ class Library(object):
                 try:
                     self.niDMM_Initiate_cfunc = self._library.niDMM_Initiate
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_Initiate was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_Initiate_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Initiate_cfunc(vi)
@@ -464,9 +464,9 @@ class Library(object):
                 try:
                     self.niDMM_LockSession_cfunc = self._library.niDMM_LockSession
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_LockSession was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDMM_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_LockSession_cfunc(vi, caller_has_lock)
@@ -477,9 +477,9 @@ class Library(object):
                 try:
                     self.niDMM_PerformOpenCableComp_cfunc = self._library.niDMM_PerformOpenCableComp
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_PerformOpenCableComp was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_PerformOpenCableComp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_PerformOpenCableComp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_PerformOpenCableComp_cfunc(vi, conductance, susceptance)
@@ -490,9 +490,9 @@ class Library(object):
                 try:
                     self.niDMM_PerformShortCableComp_cfunc = self._library.niDMM_PerformShortCableComp
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_PerformShortCableComp was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_PerformShortCableComp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_PerformShortCableComp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_PerformShortCableComp_cfunc(vi, resistance, reactance)
@@ -503,9 +503,9 @@ class Library(object):
                 try:
                     self.niDMM_Read_cfunc = self._library.niDMM_Read
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_Read was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_Read_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_Read_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Read_cfunc(vi, maximum_time, reading)
@@ -516,9 +516,9 @@ class Library(object):
                 try:
                     self.niDMM_ReadMultiPoint_cfunc = self._library.niDMM_ReadMultiPoint
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ReadMultiPoint was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ReadMultiPoint_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_ReadMultiPoint_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ReadMultiPoint_cfunc(vi, maximum_time, array_size, reading_array, actual_number_of_points)
@@ -529,9 +529,9 @@ class Library(object):
                 try:
                     self.niDMM_ReadStatus_cfunc = self._library.niDMM_ReadStatus
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ReadStatus was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ReadStatus_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt16)]  # noqa: F405
                 self.niDMM_ReadStatus_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ReadStatus_cfunc(vi, acquisition_backlog, acquisition_status)
@@ -542,9 +542,9 @@ class Library(object):
                 try:
                     self.niDMM_ReadWaveform_cfunc = self._library.niDMM_ReadWaveform
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ReadWaveform was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ReadWaveform_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_ReadWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ReadWaveform_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
@@ -555,9 +555,9 @@ class Library(object):
                 try:
                     self.niDMM_ResetWithDefaults_cfunc = self._library.niDMM_ResetWithDefaults
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_ResetWithDefaults was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ResetWithDefaults_cfunc(vi)
@@ -568,9 +568,9 @@ class Library(object):
                 try:
                     self.niDMM_SelfCal_cfunc = self._library.niDMM_SelfCal
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_SelfCal was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_SelfCal_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_SelfCal_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SelfCal_cfunc(vi)
@@ -581,9 +581,9 @@ class Library(object):
                 try:
                     self.niDMM_SendSoftwareTrigger_cfunc = self._library.niDMM_SendSoftwareTrigger
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_SendSoftwareTrigger was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_SendSoftwareTrigger_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_SendSoftwareTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SendSoftwareTrigger_cfunc(vi)
@@ -594,9 +594,9 @@ class Library(object):
                 try:
                     self.niDMM_SetAttributeViBoolean_cfunc = self._library.niDMM_SetAttributeViBoolean
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_SetAttributeViBoolean was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
                 self.niDMM_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -607,9 +607,9 @@ class Library(object):
                 try:
                     self.niDMM_SetAttributeViInt32_cfunc = self._library.niDMM_SetAttributeViInt32
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_SetAttributeViInt32 was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niDMM_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -620,9 +620,9 @@ class Library(object):
                 try:
                     self.niDMM_SetAttributeViReal64_cfunc = self._library.niDMM_SetAttributeViReal64
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_SetAttributeViReal64 was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
                 self.niDMM_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -633,9 +633,9 @@ class Library(object):
                 try:
                     self.niDMM_SetAttributeViString_cfunc = self._library.niDMM_SetAttributeViString
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_SetAttributeViString was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -646,9 +646,9 @@ class Library(object):
                 try:
                     self.niDMM_UnlockSession_cfunc = self._library.niDMM_UnlockSession
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_UnlockSession was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDMM_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_UnlockSession_cfunc(vi, caller_has_lock)
@@ -659,9 +659,9 @@ class Library(object):
                 try:
                     self.niDMM_close_cfunc = self._library.niDMM_close
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_close was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_close_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_close_cfunc(vi)
@@ -672,9 +672,9 @@ class Library(object):
                 try:
                     self.niDMM_error_message_cfunc = self._library.niDMM_error_message
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_error_message was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_error_message_cfunc(vi, error_code, error_message)
@@ -685,9 +685,9 @@ class Library(object):
                 try:
                     self.niDMM_reset_cfunc = self._library.niDMM_reset
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_reset was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_reset_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_reset_cfunc(vi)
@@ -698,9 +698,9 @@ class Library(object):
                 try:
                     self.niDMM_self_test_cfunc = self._library.niDMM_self_test
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDMM_self_test was not found in the NI-DMM runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDMM_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_self_test_cfunc(vi, self_test_result, self_test_message)

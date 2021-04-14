@@ -79,9 +79,9 @@ class Library(object):
                 try:
                     self.niDCPower_Abort_cfunc = self._library.niDCPower_Abort
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_Abort was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_Abort_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Abort_cfunc(vi)
@@ -92,9 +92,9 @@ class Library(object):
                 try:
                     self.niDCPower_CalSelfCalibrate_cfunc = self._library.niDCPower_CalSelfCalibrate
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_CalSelfCalibrate was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_CalSelfCalibrate_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_CalSelfCalibrate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_CalSelfCalibrate_cfunc(vi, channel_name)
@@ -105,9 +105,9 @@ class Library(object):
                 try:
                     self.niDCPower_ClearLatchedOutputCutoffState_cfunc = self._library.niDCPower_ClearLatchedOutputCutoffState
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_ClearLatchedOutputCutoffState was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_ClearLatchedOutputCutoffState_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niDCPower_ClearLatchedOutputCutoffState_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ClearLatchedOutputCutoffState_cfunc(vi, channel_name, output_cutoff_reason)
@@ -118,9 +118,9 @@ class Library(object):
                 try:
                     self.niDCPower_Commit_cfunc = self._library.niDCPower_Commit
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_Commit was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_Commit_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_Commit_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Commit_cfunc(vi)
@@ -131,9 +131,9 @@ class Library(object):
                 try:
                     self.niDCPower_ConfigureApertureTime_cfunc = self._library.niDCPower_ConfigureApertureTime
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_ConfigureApertureTime was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_ConfigureApertureTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32]  # noqa: F405
                 self.niDCPower_ConfigureApertureTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureApertureTime_cfunc(vi, channel_name, aperture_time, units)
@@ -144,9 +144,9 @@ class Library(object):
                 try:
                     self.niDCPower_CreateAdvancedSequence_cfunc = self._library.niDCPower_CreateAdvancedSequence
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_CreateAdvancedSequence was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_CreateAdvancedSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32), ViBoolean]  # noqa: F405
                 self.niDCPower_CreateAdvancedSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_CreateAdvancedSequence_cfunc(vi, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence)
@@ -157,9 +157,9 @@ class Library(object):
                 try:
                     self.niDCPower_CreateAdvancedSequenceStep_cfunc = self._library.niDCPower_CreateAdvancedSequenceStep
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_CreateAdvancedSequenceStep was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_CreateAdvancedSequenceStep_cfunc.argtypes = [ViSession, ViBoolean]  # noqa: F405
                 self.niDCPower_CreateAdvancedSequenceStep_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_CreateAdvancedSequenceStep_cfunc(vi, set_as_active_step)
@@ -170,9 +170,9 @@ class Library(object):
                 try:
                     self.niDCPower_DeleteAdvancedSequence_cfunc = self._library.niDCPower_DeleteAdvancedSequence
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_DeleteAdvancedSequence was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_DeleteAdvancedSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_DeleteAdvancedSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_DeleteAdvancedSequence_cfunc(vi, sequence_name)
@@ -183,9 +183,9 @@ class Library(object):
                 try:
                     self.niDCPower_Disable_cfunc = self._library.niDCPower_Disable
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_Disable was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_Disable_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Disable_cfunc(vi)
@@ -196,9 +196,9 @@ class Library(object):
                 try:
                     self.niDCPower_ExportAttributeConfigurationBuffer_cfunc = self._library.niDCPower_ExportAttributeConfigurationBuffer
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_ExportAttributeConfigurationBuffer was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_ExportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
                 self.niDCPower_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ExportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
@@ -209,9 +209,9 @@ class Library(object):
                 try:
                     self.niDCPower_ExportAttributeConfigurationFile_cfunc = self._library.niDCPower_ExportAttributeConfigurationFile
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_ExportAttributeConfigurationFile was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_ExportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ExportAttributeConfigurationFile_cfunc(vi, file_path)
@@ -222,9 +222,9 @@ class Library(object):
                 try:
                     self.niDCPower_FetchMultiple_cfunc = self._library.niDCPower_FetchMultiple
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_FetchMultiple was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_FetchMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViBoolean), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_FetchMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_FetchMultiple_cfunc(vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count)
@@ -235,9 +235,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetAttributeViBoolean_cfunc = self._library.niDCPower_GetAttributeViBoolean
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetAttributeViBoolean was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDCPower_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -248,9 +248,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetAttributeViInt32_cfunc = self._library.niDCPower_GetAttributeViInt32
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetAttributeViInt32 was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -261,9 +261,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetAttributeViInt64_cfunc = self._library.niDCPower_GetAttributeViInt64
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetAttributeViInt64 was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt64)]  # noqa: F405
                 self.niDCPower_GetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -274,9 +274,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetAttributeViReal64_cfunc = self._library.niDCPower_GetAttributeViReal64
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetAttributeViReal64 was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -287,9 +287,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetAttributeViString_cfunc = self._library.niDCPower_GetAttributeViString
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetAttributeViString was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
@@ -300,9 +300,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetChannelName_cfunc = self._library.niDCPower_GetChannelName
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetChannelName was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetChannelName_cfunc(vi, index, buffer_size, channel_name)
@@ -313,9 +313,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetError_cfunc = self._library.niDCPower_GetError
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetError was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetError_cfunc(vi, code, buffer_size, description)
@@ -326,9 +326,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetExtCalLastDateAndTime_cfunc = self._library.niDCPower_GetExtCalLastDateAndTime
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetExtCalLastDateAndTime was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_GetExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetExtCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
@@ -339,9 +339,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetExtCalLastTemp_cfunc = self._library.niDCPower_GetExtCalLastTemp
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetExtCalLastTemp was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetExtCalLastTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_GetExtCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetExtCalLastTemp_cfunc(vi, temperature)
@@ -352,9 +352,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetExtCalRecommendedInterval_cfunc = self._library.niDCPower_GetExtCalRecommendedInterval
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetExtCalRecommendedInterval was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetExtCalRecommendedInterval_cfunc(vi, months)
@@ -365,9 +365,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetSelfCalLastDateAndTime_cfunc = self._library.niDCPower_GetSelfCalLastDateAndTime
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetSelfCalLastDateAndTime was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetSelfCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_GetSelfCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetSelfCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
@@ -378,9 +378,9 @@ class Library(object):
                 try:
                     self.niDCPower_GetSelfCalLastTemp_cfunc = self._library.niDCPower_GetSelfCalLastTemp
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_GetSelfCalLastTemp was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_GetSelfCalLastTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_GetSelfCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetSelfCalLastTemp_cfunc(vi, temperature)
@@ -391,9 +391,9 @@ class Library(object):
                 try:
                     self.niDCPower_ImportAttributeConfigurationBuffer_cfunc = self._library.niDCPower_ImportAttributeConfigurationBuffer
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_ImportAttributeConfigurationBuffer was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
                 self.niDCPower_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ImportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
@@ -404,9 +404,9 @@ class Library(object):
                 try:
                     self.niDCPower_ImportAttributeConfigurationFile_cfunc = self._library.niDCPower_ImportAttributeConfigurationFile
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_ImportAttributeConfigurationFile was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_ImportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ImportAttributeConfigurationFile_cfunc(vi, file_path)
@@ -417,9 +417,9 @@ class Library(object):
                 try:
                     self.niDCPower_InitializeWithChannels_cfunc = self._library.niDCPower_InitializeWithChannels
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_InitializeWithChannels was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_InitializeWithChannels_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niDCPower_InitializeWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_InitializeWithChannels_cfunc(resource_name, channels, reset, option_string, vi)
@@ -430,9 +430,9 @@ class Library(object):
                 try:
                     self.niDCPower_Initiate_cfunc = self._library.niDCPower_Initiate
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_Initiate was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_Initiate_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Initiate_cfunc(vi)
@@ -443,9 +443,9 @@ class Library(object):
                 try:
                     self.niDCPower_LockSession_cfunc = self._library.niDCPower_LockSession
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_LockSession was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDCPower_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_LockSession_cfunc(vi, caller_has_lock)
@@ -456,9 +456,9 @@ class Library(object):
                 try:
                     self.niDCPower_Measure_cfunc = self._library.niDCPower_Measure
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_Measure was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_Measure_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_Measure_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Measure_cfunc(vi, channel_name, measurement_type, measurement)
@@ -469,9 +469,9 @@ class Library(object):
                 try:
                     self.niDCPower_MeasureMultiple_cfunc = self._library.niDCPower_MeasureMultiple
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_MeasureMultiple was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_MeasureMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_MeasureMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_MeasureMultiple_cfunc(vi, channel_name, voltage_measurements, current_measurements)
@@ -482,9 +482,9 @@ class Library(object):
                 try:
                     self.niDCPower_ParseChannelCount_cfunc = self._library.niDCPower_ParseChannelCount
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_ParseChannelCount was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_ParseChannelCount_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViUInt32)]  # noqa: F405
                 self.niDCPower_ParseChannelCount_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ParseChannelCount_cfunc(vi, channels_string, number_of_channels)
@@ -495,9 +495,9 @@ class Library(object):
                 try:
                     self.niDCPower_QueryInCompliance_cfunc = self._library.niDCPower_QueryInCompliance
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_QueryInCompliance was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_QueryInCompliance_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDCPower_QueryInCompliance_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryInCompliance_cfunc(vi, channel_name, in_compliance)
@@ -508,9 +508,9 @@ class Library(object):
                 try:
                     self.niDCPower_QueryLatchedOutputCutoffState_cfunc = self._library.niDCPower_QueryLatchedOutputCutoffState
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_QueryLatchedOutputCutoffState was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_QueryLatchedOutputCutoffState_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDCPower_QueryLatchedOutputCutoffState_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryLatchedOutputCutoffState_cfunc(vi, channel_name, output_cutoff_reason, output_cutoff_state)
@@ -521,9 +521,9 @@ class Library(object):
                 try:
                     self.niDCPower_QueryMaxCurrentLimit_cfunc = self._library.niDCPower_QueryMaxCurrentLimit
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_QueryMaxCurrentLimit was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_QueryMaxCurrentLimit_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_QueryMaxCurrentLimit_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryMaxCurrentLimit_cfunc(vi, channel_name, voltage_level, max_current_limit)
@@ -534,9 +534,9 @@ class Library(object):
                 try:
                     self.niDCPower_QueryMaxVoltageLevel_cfunc = self._library.niDCPower_QueryMaxVoltageLevel
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_QueryMaxVoltageLevel was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_QueryMaxVoltageLevel_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_QueryMaxVoltageLevel_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryMaxVoltageLevel_cfunc(vi, channel_name, current_limit, max_voltage_level)
@@ -547,9 +547,9 @@ class Library(object):
                 try:
                     self.niDCPower_QueryMinCurrentLimit_cfunc = self._library.niDCPower_QueryMinCurrentLimit
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_QueryMinCurrentLimit was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_QueryMinCurrentLimit_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_QueryMinCurrentLimit_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryMinCurrentLimit_cfunc(vi, channel_name, voltage_level, min_current_limit)
@@ -560,9 +560,9 @@ class Library(object):
                 try:
                     self.niDCPower_QueryOutputState_cfunc = self._library.niDCPower_QueryOutputState
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_QueryOutputState was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_QueryOutputState_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDCPower_QueryOutputState_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryOutputState_cfunc(vi, channel_name, output_state, in_state)
@@ -573,9 +573,9 @@ class Library(object):
                 try:
                     self.niDCPower_ReadCurrentTemperature_cfunc = self._library.niDCPower_ReadCurrentTemperature
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_ReadCurrentTemperature was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_ReadCurrentTemperature_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_ReadCurrentTemperature_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ReadCurrentTemperature_cfunc(vi, temperature)
@@ -586,9 +586,9 @@ class Library(object):
                 try:
                     self.niDCPower_ResetDevice_cfunc = self._library.niDCPower_ResetDevice
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_ResetDevice was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_ResetDevice_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_ResetDevice_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ResetDevice_cfunc(vi)
@@ -599,9 +599,9 @@ class Library(object):
                 try:
                     self.niDCPower_ResetWithDefaults_cfunc = self._library.niDCPower_ResetWithDefaults
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_ResetWithDefaults was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ResetWithDefaults_cfunc(vi)
@@ -612,9 +612,9 @@ class Library(object):
                 try:
                     self.niDCPower_SendSoftwareEdgeTrigger_cfunc = self._library.niDCPower_SendSoftwareEdgeTrigger
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_SendSoftwareEdgeTrigger was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_SendSoftwareEdgeTrigger_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
                 self.niDCPower_SendSoftwareEdgeTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SendSoftwareEdgeTrigger_cfunc(vi, trigger)
@@ -625,9 +625,9 @@ class Library(object):
                 try:
                     self.niDCPower_SetAttributeViBoolean_cfunc = self._library.niDCPower_SetAttributeViBoolean
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_SetAttributeViBoolean was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
                 self.niDCPower_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -638,9 +638,9 @@ class Library(object):
                 try:
                     self.niDCPower_SetAttributeViInt32_cfunc = self._library.niDCPower_SetAttributeViInt32
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_SetAttributeViInt32 was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niDCPower_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -651,9 +651,9 @@ class Library(object):
                 try:
                     self.niDCPower_SetAttributeViInt64_cfunc = self._library.niDCPower_SetAttributeViInt64
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_SetAttributeViInt64 was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_SetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt64]  # noqa: F405
                 self.niDCPower_SetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -664,9 +664,9 @@ class Library(object):
                 try:
                     self.niDCPower_SetAttributeViReal64_cfunc = self._library.niDCPower_SetAttributeViReal64
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_SetAttributeViReal64 was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
                 self.niDCPower_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -677,9 +677,9 @@ class Library(object):
                 try:
                     self.niDCPower_SetAttributeViString_cfunc = self._library.niDCPower_SetAttributeViString
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_SetAttributeViString was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -690,9 +690,9 @@ class Library(object):
                 try:
                     self.niDCPower_SetSequence_cfunc = self._library.niDCPower_SetSequence
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_SetSequence was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_SetSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViUInt32]  # noqa: F405
                 self.niDCPower_SetSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetSequence_cfunc(vi, channel_name, values, source_delays, size)
@@ -703,9 +703,9 @@ class Library(object):
                 try:
                     self.niDCPower_UnlockSession_cfunc = self._library.niDCPower_UnlockSession
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_UnlockSession was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDCPower_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_UnlockSession_cfunc(vi, caller_has_lock)
@@ -716,9 +716,9 @@ class Library(object):
                 try:
                     self.niDCPower_WaitForEvent_cfunc = self._library.niDCPower_WaitForEvent
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_WaitForEvent was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_WaitForEvent_cfunc.argtypes = [ViSession, ViInt32, ViReal64]  # noqa: F405
                 self.niDCPower_WaitForEvent_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_WaitForEvent_cfunc(vi, event_id, timeout)
@@ -729,9 +729,9 @@ class Library(object):
                 try:
                     self.niDCPower_close_cfunc = self._library.niDCPower_close
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_close was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_close_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_close_cfunc(vi)
@@ -742,9 +742,9 @@ class Library(object):
                 try:
                     self.niDCPower_error_message_cfunc = self._library.niDCPower_error_message
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_error_message was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_error_message_cfunc(vi, error_code, error_message)
@@ -755,9 +755,9 @@ class Library(object):
                 try:
                     self.niDCPower_reset_cfunc = self._library.niDCPower_reset
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_reset was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_reset_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_reset_cfunc(vi)
@@ -768,9 +768,9 @@ class Library(object):
                 try:
                     self.niDCPower_self_test_cfunc = self._library.niDCPower_self_test
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function niDCPower_self_test was not found in the NI-DCPower runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.niDCPower_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_self_test_cfunc(vi, self_test_result, self_test_message)

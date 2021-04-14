@@ -54,9 +54,9 @@ class Library(object):
                 try:
                     self.${c_func_name}_cfunc = self._library.${c_func_name}
                 except AttributeError as e:
-                    raise AttributeError("A required function was not found in the instrument driver DLL. This might "
-                                         "be an indication that the version of the instrument driver is too old for "
-                                         "this version of the python API. Upgrade your instrument driver.") from e
+                    raise AttributeError("Function ${c_func_name} was not found in the ${driver_name} runtime. Please visit "
+                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
+                                         "install it.") from e
                 self.${c_func_name}_cfunc.argtypes = [${param_ctypes_library}]  # noqa: F405
                 self.${c_func_name}_cfunc.restype = ${f['returns']}  # noqa: F405
         return self.${c_func_name}_cfunc(${param_names_library})
