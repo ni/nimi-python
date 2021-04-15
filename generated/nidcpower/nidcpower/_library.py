@@ -18,14 +18,14 @@ class Library(object):
         self._func_lock = threading.Lock()
         self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
-        self.niDCPower_Abort_cfunc = None
+        self.niDCPower_AbortWithChannels_cfunc = None
         self.niDCPower_CalSelfCalibrate_cfunc = None
         self.niDCPower_ClearLatchedOutputCutoffState_cfunc = None
-        self.niDCPower_Commit_cfunc = None
+        self.niDCPower_CommitWithChannels_cfunc = None
         self.niDCPower_ConfigureApertureTime_cfunc = None
-        self.niDCPower_CreateAdvancedSequence_cfunc = None
-        self.niDCPower_CreateAdvancedSequenceStep_cfunc = None
-        self.niDCPower_DeleteAdvancedSequence_cfunc = None
+        self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc = None
+        self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc = None
+        self.niDCPower_DeleteAdvancedSequenceWithChannels_cfunc = None
         self.niDCPower_Disable_cfunc = None
         self.niDCPower_ExportAttributeConfigurationBuffer_cfunc = None
         self.niDCPower_ExportAttributeConfigurationFile_cfunc = None
@@ -36,6 +36,7 @@ class Library(object):
         self.niDCPower_GetAttributeViReal64_cfunc = None
         self.niDCPower_GetAttributeViString_cfunc = None
         self.niDCPower_GetChannelName_cfunc = None
+        self.niDCPower_GetChannelNameFromString_cfunc = None
         self.niDCPower_GetError_cfunc = None
         self.niDCPower_GetExtCalLastDateAndTime_cfunc = None
         self.niDCPower_GetExtCalLastTemp_cfunc = None
@@ -45,7 +46,7 @@ class Library(object):
         self.niDCPower_ImportAttributeConfigurationBuffer_cfunc = None
         self.niDCPower_ImportAttributeConfigurationFile_cfunc = None
         self.niDCPower_InitializeWithChannels_cfunc = None
-        self.niDCPower_Initiate_cfunc = None
+        self.niDCPower_InitiateWithChannels_cfunc = None
         self.niDCPower_LockSession_cfunc = None
         self.niDCPower_Measure_cfunc = None
         self.niDCPower_MeasureMultiple_cfunc = None
@@ -58,8 +59,9 @@ class Library(object):
         self.niDCPower_QueryOutputState_cfunc = None
         self.niDCPower_ReadCurrentTemperature_cfunc = None
         self.niDCPower_ResetDevice_cfunc = None
+        self.niDCPower_ResetWithChannels_cfunc = None
         self.niDCPower_ResetWithDefaults_cfunc = None
-        self.niDCPower_SendSoftwareEdgeTrigger_cfunc = None
+        self.niDCPower_SendSoftwareEdgeTriggerWithChannels_cfunc = None
         self.niDCPower_SetAttributeViBoolean_cfunc = None
         self.niDCPower_SetAttributeViInt32_cfunc = None
         self.niDCPower_SetAttributeViInt64_cfunc = None
@@ -67,19 +69,18 @@ class Library(object):
         self.niDCPower_SetAttributeViString_cfunc = None
         self.niDCPower_SetSequence_cfunc = None
         self.niDCPower_UnlockSession_cfunc = None
-        self.niDCPower_WaitForEvent_cfunc = None
+        self.niDCPower_WaitForEventWithChannels_cfunc = None
         self.niDCPower_close_cfunc = None
         self.niDCPower_error_message_cfunc = None
-        self.niDCPower_reset_cfunc = None
         self.niDCPower_self_test_cfunc = None
 
-    def niDCPower_Abort(self, vi):  # noqa: N802
+    def niDCPower_AbortWithChannels(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
-            if self.niDCPower_Abort_cfunc is None:
-                self.niDCPower_Abort_cfunc = self._library.niDCPower_Abort
-                self.niDCPower_Abort_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niDCPower_Abort_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_Abort_cfunc(vi)
+            if self.niDCPower_AbortWithChannels_cfunc is None:
+                self.niDCPower_AbortWithChannels_cfunc = self._library.niDCPower_AbortWithChannels
+                self.niDCPower_AbortWithChannels_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_AbortWithChannels_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_AbortWithChannels_cfunc(vi, channel_name)
 
     def niDCPower_CalSelfCalibrate(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
@@ -97,13 +98,13 @@ class Library(object):
                 self.niDCPower_ClearLatchedOutputCutoffState_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ClearLatchedOutputCutoffState_cfunc(vi, channel_name, output_cutoff_reason)
 
-    def niDCPower_Commit(self, vi):  # noqa: N802
+    def niDCPower_CommitWithChannels(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
-            if self.niDCPower_Commit_cfunc is None:
-                self.niDCPower_Commit_cfunc = self._library.niDCPower_Commit
-                self.niDCPower_Commit_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niDCPower_Commit_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_Commit_cfunc(vi)
+            if self.niDCPower_CommitWithChannels_cfunc is None:
+                self.niDCPower_CommitWithChannels_cfunc = self._library.niDCPower_CommitWithChannels
+                self.niDCPower_CommitWithChannels_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_CommitWithChannels_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_CommitWithChannels_cfunc(vi, channel_name)
 
     def niDCPower_ConfigureApertureTime(self, vi, channel_name, aperture_time, units):  # noqa: N802
         with self._func_lock:
@@ -113,29 +114,29 @@ class Library(object):
                 self.niDCPower_ConfigureApertureTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureApertureTime_cfunc(vi, channel_name, aperture_time, units)
 
-    def niDCPower_CreateAdvancedSequence(self, vi, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):  # noqa: N802
+    def niDCPower_CreateAdvancedSequenceStepWithChannels(self, vi, channel_name, set_as_active_step):  # noqa: N802
         with self._func_lock:
-            if self.niDCPower_CreateAdvancedSequence_cfunc is None:
-                self.niDCPower_CreateAdvancedSequence_cfunc = self._library.niDCPower_CreateAdvancedSequence
-                self.niDCPower_CreateAdvancedSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32), ViBoolean]  # noqa: F405
-                self.niDCPower_CreateAdvancedSequence_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_CreateAdvancedSequence_cfunc(vi, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence)
+            if self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc is None:
+                self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc = self._library.niDCPower_CreateAdvancedSequenceStepWithChannels
+                self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViBoolean]  # noqa: F405
+                self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc(vi, channel_name, set_as_active_step)
 
-    def niDCPower_CreateAdvancedSequenceStep(self, vi, set_as_active_step):  # noqa: N802
+    def niDCPower_CreateAdvancedSequenceWithChannels(self, vi, channel_name, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):  # noqa: N802
         with self._func_lock:
-            if self.niDCPower_CreateAdvancedSequenceStep_cfunc is None:
-                self.niDCPower_CreateAdvancedSequenceStep_cfunc = self._library.niDCPower_CreateAdvancedSequenceStep
-                self.niDCPower_CreateAdvancedSequenceStep_cfunc.argtypes = [ViSession, ViBoolean]  # noqa: F405
-                self.niDCPower_CreateAdvancedSequenceStep_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_CreateAdvancedSequenceStep_cfunc(vi, set_as_active_step)
+            if self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc is None:
+                self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc = self._library.niDCPower_CreateAdvancedSequenceWithChannels
+                self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32), ViBoolean]  # noqa: F405
+                self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc(vi, channel_name, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence)
 
-    def niDCPower_DeleteAdvancedSequence(self, vi, sequence_name):  # noqa: N802
+    def niDCPower_DeleteAdvancedSequenceWithChannels(self, vi, channel_name, sequence_name):  # noqa: N802
         with self._func_lock:
-            if self.niDCPower_DeleteAdvancedSequence_cfunc is None:
-                self.niDCPower_DeleteAdvancedSequence_cfunc = self._library.niDCPower_DeleteAdvancedSequence
-                self.niDCPower_DeleteAdvancedSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDCPower_DeleteAdvancedSequence_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_DeleteAdvancedSequence_cfunc(vi, sequence_name)
+            if self.niDCPower_DeleteAdvancedSequenceWithChannels_cfunc is None:
+                self.niDCPower_DeleteAdvancedSequenceWithChannels_cfunc = self._library.niDCPower_DeleteAdvancedSequenceWithChannels
+                self.niDCPower_DeleteAdvancedSequenceWithChannels_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_DeleteAdvancedSequenceWithChannels_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_DeleteAdvancedSequenceWithChannels_cfunc(vi, channel_name, sequence_name)
 
     def niDCPower_Disable(self, vi):  # noqa: N802
         with self._func_lock:
@@ -217,6 +218,14 @@ class Library(object):
                 self.niDCPower_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetChannelName_cfunc(vi, index, buffer_size, channel_name)
 
+    def niDCPower_GetChannelNameFromString(self, vi, indices, buffer_size, names):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetChannelNameFromString_cfunc is None:
+                self.niDCPower_GetChannelNameFromString_cfunc = self._library.niDCPower_GetChannelNameFromString
+                self.niDCPower_GetChannelNameFromString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_GetChannelNameFromString_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetChannelNameFromString_cfunc(vi, indices, buffer_size, names)
+
     def niDCPower_GetError(self, vi, code, buffer_size, description):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetError_cfunc is None:
@@ -289,13 +298,13 @@ class Library(object):
                 self.niDCPower_InitializeWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_InitializeWithChannels_cfunc(resource_name, channels, reset, option_string, vi)
 
-    def niDCPower_Initiate(self, vi):  # noqa: N802
+    def niDCPower_InitiateWithChannels(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
-            if self.niDCPower_Initiate_cfunc is None:
-                self.niDCPower_Initiate_cfunc = self._library.niDCPower_Initiate
-                self.niDCPower_Initiate_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niDCPower_Initiate_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_Initiate_cfunc(vi)
+            if self.niDCPower_InitiateWithChannels_cfunc is None:
+                self.niDCPower_InitiateWithChannels_cfunc = self._library.niDCPower_InitiateWithChannels
+                self.niDCPower_InitiateWithChannels_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_InitiateWithChannels_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_InitiateWithChannels_cfunc(vi, channel_name)
 
     def niDCPower_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
@@ -393,6 +402,14 @@ class Library(object):
                 self.niDCPower_ResetDevice_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ResetDevice_cfunc(vi)
 
+    def niDCPower_ResetWithChannels(self, vi, channel_name):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ResetWithChannels_cfunc is None:
+                self.niDCPower_ResetWithChannels_cfunc = self._library.niDCPower_ResetWithChannels
+                self.niDCPower_ResetWithChannels_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_ResetWithChannels_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ResetWithChannels_cfunc(vi, channel_name)
+
     def niDCPower_ResetWithDefaults(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ResetWithDefaults_cfunc is None:
@@ -401,13 +418,13 @@ class Library(object):
                 self.niDCPower_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ResetWithDefaults_cfunc(vi)
 
-    def niDCPower_SendSoftwareEdgeTrigger(self, vi, trigger):  # noqa: N802
+    def niDCPower_SendSoftwareEdgeTriggerWithChannels(self, vi, channel_name, trigger):  # noqa: N802
         with self._func_lock:
-            if self.niDCPower_SendSoftwareEdgeTrigger_cfunc is None:
-                self.niDCPower_SendSoftwareEdgeTrigger_cfunc = self._library.niDCPower_SendSoftwareEdgeTrigger
-                self.niDCPower_SendSoftwareEdgeTrigger_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
-                self.niDCPower_SendSoftwareEdgeTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_SendSoftwareEdgeTrigger_cfunc(vi, trigger)
+            if self.niDCPower_SendSoftwareEdgeTriggerWithChannels_cfunc is None:
+                self.niDCPower_SendSoftwareEdgeTriggerWithChannels_cfunc = self._library.niDCPower_SendSoftwareEdgeTriggerWithChannels
+                self.niDCPower_SendSoftwareEdgeTriggerWithChannels_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
+                self.niDCPower_SendSoftwareEdgeTriggerWithChannels_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_SendSoftwareEdgeTriggerWithChannels_cfunc(vi, channel_name, trigger)
 
     def niDCPower_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
@@ -465,13 +482,13 @@ class Library(object):
                 self.niDCPower_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_UnlockSession_cfunc(vi, caller_has_lock)
 
-    def niDCPower_WaitForEvent(self, vi, event_id, timeout):  # noqa: N802
+    def niDCPower_WaitForEventWithChannels(self, vi, channel_name, event_id, timeout):  # noqa: N802
         with self._func_lock:
-            if self.niDCPower_WaitForEvent_cfunc is None:
-                self.niDCPower_WaitForEvent_cfunc = self._library.niDCPower_WaitForEvent
-                self.niDCPower_WaitForEvent_cfunc.argtypes = [ViSession, ViInt32, ViReal64]  # noqa: F405
-                self.niDCPower_WaitForEvent_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_WaitForEvent_cfunc(vi, event_id, timeout)
+            if self.niDCPower_WaitForEventWithChannels_cfunc is None:
+                self.niDCPower_WaitForEventWithChannels_cfunc = self._library.niDCPower_WaitForEventWithChannels
+                self.niDCPower_WaitForEventWithChannels_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64]  # noqa: F405
+                self.niDCPower_WaitForEventWithChannels_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_WaitForEventWithChannels_cfunc(vi, channel_name, event_id, timeout)
 
     def niDCPower_close(self, vi):  # noqa: N802
         with self._func_lock:
@@ -488,14 +505,6 @@ class Library(object):
                 self.niDCPower_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_error_message_cfunc(vi, error_code, error_message)
-
-    def niDCPower_reset(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_reset_cfunc is None:
-                self.niDCPower_reset_cfunc = self._library.niDCPower_reset
-                self.niDCPower_reset_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niDCPower_reset_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_reset_cfunc(vi)
 
     def niDCPower_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:
