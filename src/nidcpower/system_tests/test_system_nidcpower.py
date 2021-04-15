@@ -348,3 +348,99 @@ def test_channel_format_types():
         assert simulated_session.channel_count == 12
 
 
+@pytest.mark.parametrize(
+    'resource_name,channels,independent_channels',
+    [
+        ('Dev1', None, False),
+        ('Dev1', '', False),
+        ('Dev1', '0', False),
+        ('Dev1', '0', True)
+    ]
+)
+def test_init_issues_deprecation_warnings(resource_name, channels, independent_channels):
+    """
+    Tests that we receive a deprecation warning any time independent_channels is False or a
+    channels argument is supplied.
+    """
+
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
+    with pytest.deprecated_call():
+        with nidcpower.Session(resource_name, channels, options=options, independent_channels=independent_channels):
+            pass
+
+
+@pytest.mark.parametrize(
+    'resource_name,channels',
+    [
+        ('Dev1', None),
+        ('Dev1', ''),
+        ('Dev1', '0'),
+        ('Dev1', '0,1')
+    ]
+)
+def test_init_backwards_compatibility_with_initialize_with_channels(resource_name, channels):
+    """
+    Tests that session opens without exception for valid initialize with channels args.
+    """
+
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
+    with nidcpower.Session(resource_name, channels, options=options, independent_channels=False):
+        pass
+
+
+@pytest.mark.parametrize(
+    'resource_name,channels',
+    [
+        ('Dev1', None),
+        ('Dev1', ''),
+        ('Dev1', '0'),  # backwards compatibility check
+        ('Dev1', '0,1'),  # backwards compatibility check
+        ('Dev1/0', None),
+        ('Dev1/0', ''),
+        ('Dev1/0,Dev1/1', None),
+        ('Dev1/0,Dev2/1', None),
+        ('Dev1/0,Dev2/1', '')
+    ]
+)
+def test_init_with_independent_channels(resource_name, channels):
+    """
+    Tests that session opens without exception for valid initialize with independent channels args.
+    """
+
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4145', 'BoardType': 'PXIe'}}
+    with nidcpower.Session(resource_name, channels, options=options, independent_channels=True):
+        pass
+
+
+def test_init_raises_value_error_for_multi_instrument_resource_name_and_channels_arg():
+    """
+    Tests that a value error is thrown when a multi-instrument resource name is provided with
+    a channels argument. How to combine the two arguments is undefined.
+    """
+
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
+    with pytest.raises(ValueError):
+        with nidcpower.Session("Dev1,Dev2", "0", options=options, independent_channels=True):
+            pass
+
+
+@pytest.mark.parametrize(
+    'resource_name,channels,independent_channels,expected_error_code',
+    [
+        ('Dev1/0', '0', True, -1074097793),  # combines to 'Dev1/0/0'
+        ('Dev1/0', 'Dev1/0', False, -1074135008),
+        ('Dev1/0,Dev2/0', 'Dev1/0', False, -1074135008)
+    ]
+)
+def test_init_raises_driver_errors_for_invalid_arguments(resource_name, channels, independent_channels, expected_error_code):
+    """
+    Tests for driver errors that should occur for invalid initialization arguments.
+    """
+
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
+    with pytest.raises(nidcpower.errors.DriverError) as e:
+        with nidcpower.Session(resource_name, channels, options=options, independent_channels=independent_channels) as session:
+            # multi-instrument resource names are valid for simulated initialize with channels
+            # sessions, so we make a driver call on channels and ensure that errors
+            session.channels[channels].output_function = nidcpower.OutputFunction.DC_VOLTAGE
+    assert e.value.code == expected_error_code
