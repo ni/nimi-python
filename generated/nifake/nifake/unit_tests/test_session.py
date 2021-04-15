@@ -6,7 +6,9 @@ import math
 import nifake
 import nifake.errors
 import numpy
+import platform
 import warnings
+
 
 from mock import patch
 
@@ -64,6 +66,17 @@ class TestSession(object):
         ret_val = self.get_ctypes_pointer_for_buffer_side_effect_items[self.get_ctypes_pointer_for_buffer_side_effect_count]
         self.get_ctypes_pointer_for_buffer_side_effect_count += 1
         return ret_val
+
+    def test_driver_too_old_error(self):
+        if platform.architecture() == '32bit':
+            ctypes_patcher = patch('ctypes.CDLL')
+        else:
+            ctypes_patcher = patch('ctypes.WinDLL')
+
+        session = nifake.Session('dev1')
+
+        patched_ctypes = ctypes_patcher.start()
+        patched_ctypes.
 
     # Session management
 

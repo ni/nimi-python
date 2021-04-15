@@ -87,7 +87,7 @@ class Library(object):
 
     def _get_library_function(self, name):
         try:
-            function = getattr(self._library, 'fred')
+            function = getattr(self._library, name)
         except AttributeError as e:
             raise errors.DriverTooOldError() from e
         return function
