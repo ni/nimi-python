@@ -5019,16 +5019,13 @@ class Session(_SessionBase):
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-        CreateAdvancedSequenceStep
+        create_advanced_sequence_step
 
         Note:
         This method is not supported on all devices. Refer to `Supported
         Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
 
         Args:
             sequence_name (str): Specifies the name of the sequence to create.

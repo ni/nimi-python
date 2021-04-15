@@ -361,7 +361,7 @@ create_advanced_sequence
             `Programming
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-            :py:meth:`nidcpower.Session.CreateAdvancedSequenceStep`
+            :py:meth:`nidcpower.Session.create_advanced_sequence_step`
 
             
 
@@ -369,8 +369,6 @@ create_advanced_sequence
                 Methods by
                 Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
                 for more information about supported devices.
-
-            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
