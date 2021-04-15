@@ -2,6 +2,7 @@
 # This file was generated
 
 import ctypes
+import niscope.errors as errors
 import threading
 
 from niscope._visatype import *  # noqa: F403,H303
@@ -84,15 +85,17 @@ class Library(object):
         self.niScope_reset_cfunc = None
         self.niScope_self_test_cfunc = None
 
+    def _get_library_function(self, name):
+        try:
+            function = getattr(self._library, 'fred')
+        except AttributeError as e:
+            raise errors.DriverTooOldError() from e
+        return function
+
     def niScope_Abort(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_Abort_cfunc is None:
-                try:
-                    self.niScope_Abort_cfunc = self._library.niScope_Abort
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_Abort was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_Abort_cfunc = self._get_library_function('niScope_Abort')
                 self.niScope_Abort_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Abort_cfunc(vi)
@@ -100,12 +103,7 @@ class Library(object):
     def niScope_AcquisitionStatus(self, vi, acquisition_status):  # noqa: N802
         with self._func_lock:
             if self.niScope_AcquisitionStatus_cfunc is None:
-                try:
-                    self.niScope_AcquisitionStatus_cfunc = self._library.niScope_AcquisitionStatus
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_AcquisitionStatus was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_AcquisitionStatus_cfunc = self._get_library_function('niScope_AcquisitionStatus')
                 self.niScope_AcquisitionStatus_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niScope_AcquisitionStatus_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_AcquisitionStatus_cfunc(vi, acquisition_status)
@@ -113,12 +111,7 @@ class Library(object):
     def niScope_ActualMeasWfmSize(self, vi, array_meas_function, meas_waveform_size):  # noqa: N802
         with self._func_lock:
             if self.niScope_ActualMeasWfmSize_cfunc is None:
-                try:
-                    self.niScope_ActualMeasWfmSize_cfunc = self._library.niScope_ActualMeasWfmSize
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ActualMeasWfmSize was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ActualMeasWfmSize_cfunc = self._get_library_function('niScope_ActualMeasWfmSize')
                 self.niScope_ActualMeasWfmSize_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niScope_ActualMeasWfmSize_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ActualMeasWfmSize_cfunc(vi, array_meas_function, meas_waveform_size)
@@ -126,12 +119,7 @@ class Library(object):
     def niScope_ActualNumWfms(self, vi, channel_list, num_wfms):  # noqa: N802
         with self._func_lock:
             if self.niScope_ActualNumWfms_cfunc is None:
-                try:
-                    self.niScope_ActualNumWfms_cfunc = self._library.niScope_ActualNumWfms
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ActualNumWfms was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ActualNumWfms_cfunc = self._get_library_function('niScope_ActualNumWfms')
                 self.niScope_ActualNumWfms_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niScope_ActualNumWfms_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ActualNumWfms_cfunc(vi, channel_list, num_wfms)
@@ -139,12 +127,7 @@ class Library(object):
     def niScope_AddWaveformProcessing(self, vi, channel_list, meas_function):  # noqa: N802
         with self._func_lock:
             if self.niScope_AddWaveformProcessing_cfunc is None:
-                try:
-                    self.niScope_AddWaveformProcessing_cfunc = self._library.niScope_AddWaveformProcessing
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_AddWaveformProcessing was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_AddWaveformProcessing_cfunc = self._get_library_function('niScope_AddWaveformProcessing')
                 self.niScope_AddWaveformProcessing_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niScope_AddWaveformProcessing_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_AddWaveformProcessing_cfunc(vi, channel_list, meas_function)
@@ -152,12 +135,7 @@ class Library(object):
     def niScope_AutoSetup(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_AutoSetup_cfunc is None:
-                try:
-                    self.niScope_AutoSetup_cfunc = self._library.niScope_AutoSetup
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_AutoSetup was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_AutoSetup_cfunc = self._get_library_function('niScope_AutoSetup')
                 self.niScope_AutoSetup_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_AutoSetup_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_AutoSetup_cfunc(vi)
@@ -165,12 +143,7 @@ class Library(object):
     def niScope_CalFetchDate(self, vi, which_one, year, month, day):  # noqa: N802
         with self._func_lock:
             if self.niScope_CalFetchDate_cfunc is None:
-                try:
-                    self.niScope_CalFetchDate_cfunc = self._library.niScope_CalFetchDate
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_CalFetchDate was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_CalFetchDate_cfunc = self._get_library_function('niScope_CalFetchDate')
                 self.niScope_CalFetchDate_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niScope_CalFetchDate_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_CalFetchDate_cfunc(vi, which_one, year, month, day)
@@ -178,12 +151,7 @@ class Library(object):
     def niScope_CalFetchTemperature(self, vi, which_one, temperature):  # noqa: N802
         with self._func_lock:
             if self.niScope_CalFetchTemperature_cfunc is None:
-                try:
-                    self.niScope_CalFetchTemperature_cfunc = self._library.niScope_CalFetchTemperature
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_CalFetchTemperature was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_CalFetchTemperature_cfunc = self._get_library_function('niScope_CalFetchTemperature')
                 self.niScope_CalFetchTemperature_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niScope_CalFetchTemperature_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_CalFetchTemperature_cfunc(vi, which_one, temperature)
@@ -191,12 +159,7 @@ class Library(object):
     def niScope_CalSelfCalibrate(self, vi, channel_list, option):  # noqa: N802
         with self._func_lock:
             if self.niScope_CalSelfCalibrate_cfunc is None:
-                try:
-                    self.niScope_CalSelfCalibrate_cfunc = self._library.niScope_CalSelfCalibrate
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_CalSelfCalibrate was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_CalSelfCalibrate_cfunc = self._get_library_function('niScope_CalSelfCalibrate')
                 self.niScope_CalSelfCalibrate_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niScope_CalSelfCalibrate_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_CalSelfCalibrate_cfunc(vi, channel_list, option)
@@ -204,12 +167,7 @@ class Library(object):
     def niScope_ClearWaveformMeasurementStats(self, vi, channel_list, clearable_measurement_function):  # noqa: N802
         with self._func_lock:
             if self.niScope_ClearWaveformMeasurementStats_cfunc is None:
-                try:
-                    self.niScope_ClearWaveformMeasurementStats_cfunc = self._library.niScope_ClearWaveformMeasurementStats
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ClearWaveformMeasurementStats was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ClearWaveformMeasurementStats_cfunc = self._get_library_function('niScope_ClearWaveformMeasurementStats')
                 self.niScope_ClearWaveformMeasurementStats_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niScope_ClearWaveformMeasurementStats_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ClearWaveformMeasurementStats_cfunc(vi, channel_list, clearable_measurement_function)
@@ -217,12 +175,7 @@ class Library(object):
     def niScope_ClearWaveformProcessing(self, vi, channel_list):  # noqa: N802
         with self._func_lock:
             if self.niScope_ClearWaveformProcessing_cfunc is None:
-                try:
-                    self.niScope_ClearWaveformProcessing_cfunc = self._library.niScope_ClearWaveformProcessing
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ClearWaveformProcessing was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ClearWaveformProcessing_cfunc = self._get_library_function('niScope_ClearWaveformProcessing')
                 self.niScope_ClearWaveformProcessing_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_ClearWaveformProcessing_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ClearWaveformProcessing_cfunc(vi, channel_list)
@@ -230,12 +183,7 @@ class Library(object):
     def niScope_Commit(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_Commit_cfunc is None:
-                try:
-                    self.niScope_Commit_cfunc = self._library.niScope_Commit
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_Commit was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_Commit_cfunc = self._get_library_function('niScope_Commit')
                 self.niScope_Commit_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_Commit_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Commit_cfunc(vi)
@@ -243,12 +191,7 @@ class Library(object):
     def niScope_ConfigureChanCharacteristics(self, vi, channel_list, input_impedance, max_input_frequency):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureChanCharacteristics_cfunc is None:
-                try:
-                    self.niScope_ConfigureChanCharacteristics_cfunc = self._library.niScope_ConfigureChanCharacteristics
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureChanCharacteristics was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureChanCharacteristics_cfunc = self._get_library_function('niScope_ConfigureChanCharacteristics')
                 self.niScope_ConfigureChanCharacteristics_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureChanCharacteristics_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureChanCharacteristics_cfunc(vi, channel_list, input_impedance, max_input_frequency)
@@ -256,12 +199,7 @@ class Library(object):
     def niScope_ConfigureEqualizationFilterCoefficients(self, vi, channel_list, number_of_coefficients, coefficients):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureEqualizationFilterCoefficients_cfunc is None:
-                try:
-                    self.niScope_ConfigureEqualizationFilterCoefficients_cfunc = self._library.niScope_ConfigureEqualizationFilterCoefficients
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureEqualizationFilterCoefficients was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureEqualizationFilterCoefficients_cfunc = self._get_library_function('niScope_ConfigureEqualizationFilterCoefficients')
                 self.niScope_ConfigureEqualizationFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niScope_ConfigureEqualizationFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureEqualizationFilterCoefficients_cfunc(vi, channel_list, number_of_coefficients, coefficients)
@@ -269,12 +207,7 @@ class Library(object):
     def niScope_ConfigureHorizontalTiming(self, vi, min_sample_rate, min_num_pts, ref_position, num_records, enforce_realtime):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureHorizontalTiming_cfunc is None:
-                try:
-                    self.niScope_ConfigureHorizontalTiming_cfunc = self._library.niScope_ConfigureHorizontalTiming
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureHorizontalTiming was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureHorizontalTiming_cfunc = self._get_library_function('niScope_ConfigureHorizontalTiming')
                 self.niScope_ConfigureHorizontalTiming_cfunc.argtypes = [ViSession, ViReal64, ViInt32, ViReal64, ViInt32, ViBoolean]  # noqa: F405
                 self.niScope_ConfigureHorizontalTiming_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureHorizontalTiming_cfunc(vi, min_sample_rate, min_num_pts, ref_position, num_records, enforce_realtime)
@@ -282,12 +215,7 @@ class Library(object):
     def niScope_ConfigureRefLevels(self, vi, low, mid, high):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureRefLevels_cfunc is None:
-                try:
-                    self.niScope_ConfigureRefLevels_cfunc = self._library.niScope_ConfigureRefLevels
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureRefLevels was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureRefLevels_cfunc = self._get_library_function('niScope_ConfigureRefLevels')
                 self.niScope_ConfigureRefLevels_cfunc.argtypes = [ViSession, ViReal64, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureRefLevels_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureRefLevels_cfunc(vi, low, mid, high)
@@ -295,12 +223,7 @@ class Library(object):
     def niScope_ConfigureTriggerDigital(self, vi, trigger_source, slope, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerDigital_cfunc is None:
-                try:
-                    self.niScope_ConfigureTriggerDigital_cfunc = self._library.niScope_ConfigureTriggerDigital
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureTriggerDigital was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureTriggerDigital_cfunc = self._get_library_function('niScope_ConfigureTriggerDigital')
                 self.niScope_ConfigureTriggerDigital_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureTriggerDigital_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerDigital_cfunc(vi, trigger_source, slope, holdoff, delay)
@@ -308,12 +231,7 @@ class Library(object):
     def niScope_ConfigureTriggerEdge(self, vi, trigger_source, level, slope, trigger_coupling, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerEdge_cfunc is None:
-                try:
-                    self.niScope_ConfigureTriggerEdge_cfunc = self._library.niScope_ConfigureTriggerEdge
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureTriggerEdge was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureTriggerEdge_cfunc = self._get_library_function('niScope_ConfigureTriggerEdge')
                 self.niScope_ConfigureTriggerEdge_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureTriggerEdge_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerEdge_cfunc(vi, trigger_source, level, slope, trigger_coupling, holdoff, delay)
@@ -321,12 +239,7 @@ class Library(object):
     def niScope_ConfigureTriggerHysteresis(self, vi, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerHysteresis_cfunc is None:
-                try:
-                    self.niScope_ConfigureTriggerHysteresis_cfunc = self._library.niScope_ConfigureTriggerHysteresis
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureTriggerHysteresis was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureTriggerHysteresis_cfunc = self._get_library_function('niScope_ConfigureTriggerHysteresis')
                 self.niScope_ConfigureTriggerHysteresis_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViReal64, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureTriggerHysteresis_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerHysteresis_cfunc(vi, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay)
@@ -334,12 +247,7 @@ class Library(object):
     def niScope_ConfigureTriggerImmediate(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerImmediate_cfunc is None:
-                try:
-                    self.niScope_ConfigureTriggerImmediate_cfunc = self._library.niScope_ConfigureTriggerImmediate
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureTriggerImmediate was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureTriggerImmediate_cfunc = self._get_library_function('niScope_ConfigureTriggerImmediate')
                 self.niScope_ConfigureTriggerImmediate_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_ConfigureTriggerImmediate_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerImmediate_cfunc(vi)
@@ -347,12 +255,7 @@ class Library(object):
     def niScope_ConfigureTriggerSoftware(self, vi, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerSoftware_cfunc is None:
-                try:
-                    self.niScope_ConfigureTriggerSoftware_cfunc = self._library.niScope_ConfigureTriggerSoftware
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureTriggerSoftware was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureTriggerSoftware_cfunc = self._get_library_function('niScope_ConfigureTriggerSoftware')
                 self.niScope_ConfigureTriggerSoftware_cfunc.argtypes = [ViSession, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureTriggerSoftware_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerSoftware_cfunc(vi, holdoff, delay)
@@ -360,12 +263,7 @@ class Library(object):
     def niScope_ConfigureTriggerVideo(self, vi, trigger_source, enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerVideo_cfunc is None:
-                try:
-                    self.niScope_ConfigureTriggerVideo_cfunc = self._library.niScope_ConfigureTriggerVideo
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureTriggerVideo was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureTriggerVideo_cfunc = self._get_library_function('niScope_ConfigureTriggerVideo')
                 self.niScope_ConfigureTriggerVideo_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViBoolean, ViInt32, ViInt32, ViInt32, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureTriggerVideo_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerVideo_cfunc(vi, trigger_source, enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay)
@@ -373,12 +271,7 @@ class Library(object):
     def niScope_ConfigureTriggerWindow(self, vi, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerWindow_cfunc is None:
-                try:
-                    self.niScope_ConfigureTriggerWindow_cfunc = self._library.niScope_ConfigureTriggerWindow
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureTriggerWindow was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureTriggerWindow_cfunc = self._get_library_function('niScope_ConfigureTriggerWindow')
                 self.niScope_ConfigureTriggerWindow_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViReal64, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureTriggerWindow_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerWindow_cfunc(vi, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff, delay)
@@ -386,12 +279,7 @@ class Library(object):
     def niScope_ConfigureVertical(self, vi, channel_list, range, offset, coupling, probe_attenuation, enabled):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureVertical_cfunc is None:
-                try:
-                    self.niScope_ConfigureVertical_cfunc = self._library.niScope_ConfigureVertical
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ConfigureVertical was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ConfigureVertical_cfunc = self._get_library_function('niScope_ConfigureVertical')
                 self.niScope_ConfigureVertical_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViReal64, ViInt32, ViReal64, ViBoolean]  # noqa: F405
                 self.niScope_ConfigureVertical_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureVertical_cfunc(vi, channel_list, range, offset, coupling, probe_attenuation, enabled)
@@ -399,12 +287,7 @@ class Library(object):
     def niScope_Disable(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_Disable_cfunc is None:
-                try:
-                    self.niScope_Disable_cfunc = self._library.niScope_Disable
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_Disable was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_Disable_cfunc = self._get_library_function('niScope_Disable')
                 self.niScope_Disable_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Disable_cfunc(vi)
@@ -412,12 +295,7 @@ class Library(object):
     def niScope_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         with self._func_lock:
             if self.niScope_ExportAttributeConfigurationBuffer_cfunc is None:
-                try:
-                    self.niScope_ExportAttributeConfigurationBuffer_cfunc = self._library.niScope_ExportAttributeConfigurationBuffer
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ExportAttributeConfigurationBuffer was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ExportAttributeConfigurationBuffer_cfunc = self._get_library_function('niScope_ExportAttributeConfigurationBuffer')
                 self.niScope_ExportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
                 self.niScope_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ExportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
@@ -425,12 +303,7 @@ class Library(object):
     def niScope_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niScope_ExportAttributeConfigurationFile_cfunc is None:
-                try:
-                    self.niScope_ExportAttributeConfigurationFile_cfunc = self._library.niScope_ExportAttributeConfigurationFile
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ExportAttributeConfigurationFile was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ExportAttributeConfigurationFile_cfunc = self._get_library_function('niScope_ExportAttributeConfigurationFile')
                 self.niScope_ExportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ExportAttributeConfigurationFile_cfunc(vi, file_path)
@@ -438,12 +311,7 @@ class Library(object):
     def niScope_Fetch(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_Fetch_cfunc is None:
-                try:
-                    self.niScope_Fetch_cfunc = self._library.niScope_Fetch
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_Fetch was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_Fetch_cfunc = self._get_library_function('niScope_Fetch')
                 self.niScope_Fetch_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_Fetch_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Fetch_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
@@ -451,12 +319,7 @@ class Library(object):
     def niScope_FetchArrayMeasurement(self, vi, channel_list, timeout, array_meas_function, measurement_waveform_size, meas_wfm, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchArrayMeasurement_cfunc is None:
-                try:
-                    self.niScope_FetchArrayMeasurement_cfunc = self._library.niScope_FetchArrayMeasurement
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_FetchArrayMeasurement was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_FetchArrayMeasurement_cfunc = self._get_library_function('niScope_FetchArrayMeasurement')
                 self.niScope_FetchArrayMeasurement_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchArrayMeasurement_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchArrayMeasurement_cfunc(vi, channel_list, timeout, array_meas_function, measurement_waveform_size, meas_wfm, wfm_info)
@@ -464,12 +327,7 @@ class Library(object):
     def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchBinary16_cfunc is None:
-                try:
-                    self.niScope_FetchBinary16_cfunc = self._library.niScope_FetchBinary16
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_FetchBinary16 was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_FetchBinary16_cfunc = self._get_library_function('niScope_FetchBinary16')
                 self.niScope_FetchBinary16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViInt16), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchBinary16_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchBinary16_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
@@ -477,12 +335,7 @@ class Library(object):
     def niScope_FetchBinary32(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchBinary32_cfunc is None:
-                try:
-                    self.niScope_FetchBinary32_cfunc = self._library.niScope_FetchBinary32
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_FetchBinary32 was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_FetchBinary32_cfunc = self._get_library_function('niScope_FetchBinary32')
                 self.niScope_FetchBinary32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchBinary32_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchBinary32_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
@@ -490,12 +343,7 @@ class Library(object):
     def niScope_FetchBinary8(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchBinary8_cfunc is None:
-                try:
-                    self.niScope_FetchBinary8_cfunc = self._library.niScope_FetchBinary8
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_FetchBinary8 was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_FetchBinary8_cfunc = self._get_library_function('niScope_FetchBinary8')
                 self.niScope_FetchBinary8_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViInt8), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchBinary8_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchBinary8_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
@@ -503,12 +351,7 @@ class Library(object):
     def niScope_FetchMeasurementStats(self, vi, channel_list, timeout, scalar_meas_function, result, mean, stdev, min, max, num_in_stats):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchMeasurementStats_cfunc is None:
-                try:
-                    self.niScope_FetchMeasurementStats_cfunc = self._library.niScope_FetchMeasurementStats
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_FetchMeasurementStats was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_FetchMeasurementStats_cfunc = self._get_library_function('niScope_FetchMeasurementStats')
                 self.niScope_FetchMeasurementStats_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niScope_FetchMeasurementStats_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchMeasurementStats_cfunc(vi, channel_list, timeout, scalar_meas_function, result, mean, stdev, min, max, num_in_stats)
@@ -516,12 +359,7 @@ class Library(object):
     def niScope_GetAttributeViBoolean(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViBoolean_cfunc is None:
-                try:
-                    self.niScope_GetAttributeViBoolean_cfunc = self._library.niScope_GetAttributeViBoolean
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_GetAttributeViBoolean was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_GetAttributeViBoolean_cfunc = self._get_library_function('niScope_GetAttributeViBoolean')
                 self.niScope_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niScope_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViBoolean_cfunc(vi, channel_list, attribute_id, value)
@@ -529,12 +367,7 @@ class Library(object):
     def niScope_GetAttributeViInt32(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViInt32_cfunc is None:
-                try:
-                    self.niScope_GetAttributeViInt32_cfunc = self._library.niScope_GetAttributeViInt32
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_GetAttributeViInt32 was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_GetAttributeViInt32_cfunc = self._get_library_function('niScope_GetAttributeViInt32')
                 self.niScope_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niScope_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViInt32_cfunc(vi, channel_list, attribute_id, value)
@@ -542,12 +375,7 @@ class Library(object):
     def niScope_GetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViInt64_cfunc is None:
-                try:
-                    self.niScope_GetAttributeViInt64_cfunc = self._library.niScope_GetAttributeViInt64
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_GetAttributeViInt64 was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_GetAttributeViInt64_cfunc = self._get_library_function('niScope_GetAttributeViInt64')
                 self.niScope_GetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt64)]  # noqa: F405
                 self.niScope_GetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViInt64_cfunc(vi, channel_list, attribute_id, value)
@@ -555,12 +383,7 @@ class Library(object):
     def niScope_GetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViReal64_cfunc is None:
-                try:
-                    self.niScope_GetAttributeViReal64_cfunc = self._library.niScope_GetAttributeViReal64
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_GetAttributeViReal64 was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_GetAttributeViReal64_cfunc = self._get_library_function('niScope_GetAttributeViReal64')
                 self.niScope_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niScope_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViReal64_cfunc(vi, channel_list, attribute_id, value)
@@ -568,12 +391,7 @@ class Library(object):
     def niScope_GetAttributeViString(self, vi, channel_list, attribute_id, buf_size, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViString_cfunc is None:
-                try:
-                    self.niScope_GetAttributeViString_cfunc = self._library.niScope_GetAttributeViString
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_GetAttributeViString was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_GetAttributeViString_cfunc = self._get_library_function('niScope_GetAttributeViString')
                 self.niScope_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViString_cfunc(vi, channel_list, attribute_id, buf_size, value)
@@ -581,12 +399,7 @@ class Library(object):
     def niScope_GetEqualizationFilterCoefficients(self, vi, channel, number_of_coefficients, coefficients):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetEqualizationFilterCoefficients_cfunc is None:
-                try:
-                    self.niScope_GetEqualizationFilterCoefficients_cfunc = self._library.niScope_GetEqualizationFilterCoefficients
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_GetEqualizationFilterCoefficients was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_GetEqualizationFilterCoefficients_cfunc = self._get_library_function('niScope_GetEqualizationFilterCoefficients')
                 self.niScope_GetEqualizationFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niScope_GetEqualizationFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetEqualizationFilterCoefficients_cfunc(vi, channel, number_of_coefficients, coefficients)
@@ -594,12 +407,7 @@ class Library(object):
     def niScope_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetError_cfunc is None:
-                try:
-                    self.niScope_GetError_cfunc = self._library.niScope_GetError
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_GetError was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_GetError_cfunc = self._get_library_function('niScope_GetError')
                 self.niScope_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetError_cfunc(vi, error_code, buffer_size, description)
@@ -607,12 +415,7 @@ class Library(object):
     def niScope_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         with self._func_lock:
             if self.niScope_ImportAttributeConfigurationBuffer_cfunc is None:
-                try:
-                    self.niScope_ImportAttributeConfigurationBuffer_cfunc = self._library.niScope_ImportAttributeConfigurationBuffer
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ImportAttributeConfigurationBuffer was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ImportAttributeConfigurationBuffer_cfunc = self._get_library_function('niScope_ImportAttributeConfigurationBuffer')
                 self.niScope_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
                 self.niScope_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ImportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
@@ -620,12 +423,7 @@ class Library(object):
     def niScope_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niScope_ImportAttributeConfigurationFile_cfunc is None:
-                try:
-                    self.niScope_ImportAttributeConfigurationFile_cfunc = self._library.niScope_ImportAttributeConfigurationFile
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ImportAttributeConfigurationFile was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ImportAttributeConfigurationFile_cfunc = self._get_library_function('niScope_ImportAttributeConfigurationFile')
                 self.niScope_ImportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ImportAttributeConfigurationFile_cfunc(vi, file_path)
@@ -633,12 +431,7 @@ class Library(object):
     def niScope_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_InitWithOptions_cfunc is None:
-                try:
-                    self.niScope_InitWithOptions_cfunc = self._library.niScope_InitWithOptions
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_InitWithOptions was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_InitWithOptions_cfunc = self._get_library_function('niScope_InitWithOptions')
                 self.niScope_InitWithOptions_cfunc.argtypes = [ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niScope_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
@@ -646,12 +439,7 @@ class Library(object):
     def niScope_InitiateAcquisition(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_InitiateAcquisition_cfunc is None:
-                try:
-                    self.niScope_InitiateAcquisition_cfunc = self._library.niScope_InitiateAcquisition
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_InitiateAcquisition was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_InitiateAcquisition_cfunc = self._get_library_function('niScope_InitiateAcquisition')
                 self.niScope_InitiateAcquisition_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_InitiateAcquisition_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_InitiateAcquisition_cfunc(vi)
@@ -659,12 +447,7 @@ class Library(object):
     def niScope_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niScope_LockSession_cfunc is None:
-                try:
-                    self.niScope_LockSession_cfunc = self._library.niScope_LockSession
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_LockSession was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_LockSession_cfunc = self._get_library_function('niScope_LockSession')
                 self.niScope_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niScope_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_LockSession_cfunc(vi, caller_has_lock)
@@ -672,12 +455,7 @@ class Library(object):
     def niScope_ProbeCompensationSignalStart(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_ProbeCompensationSignalStart_cfunc is None:
-                try:
-                    self.niScope_ProbeCompensationSignalStart_cfunc = self._library.niScope_ProbeCompensationSignalStart
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ProbeCompensationSignalStart was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ProbeCompensationSignalStart_cfunc = self._get_library_function('niScope_ProbeCompensationSignalStart')
                 self.niScope_ProbeCompensationSignalStart_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_ProbeCompensationSignalStart_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ProbeCompensationSignalStart_cfunc(vi)
@@ -685,12 +463,7 @@ class Library(object):
     def niScope_ProbeCompensationSignalStop(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_ProbeCompensationSignalStop_cfunc is None:
-                try:
-                    self.niScope_ProbeCompensationSignalStop_cfunc = self._library.niScope_ProbeCompensationSignalStop
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ProbeCompensationSignalStop was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ProbeCompensationSignalStop_cfunc = self._get_library_function('niScope_ProbeCompensationSignalStop')
                 self.niScope_ProbeCompensationSignalStop_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_ProbeCompensationSignalStop_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ProbeCompensationSignalStop_cfunc(vi)
@@ -698,12 +471,7 @@ class Library(object):
     def niScope_Read(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_Read_cfunc is None:
-                try:
-                    self.niScope_Read_cfunc = self._library.niScope_Read
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_Read was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_Read_cfunc = self._get_library_function('niScope_Read')
                 self.niScope_Read_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_Read_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Read_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
@@ -711,12 +479,7 @@ class Library(object):
     def niScope_ResetDevice(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_ResetDevice_cfunc is None:
-                try:
-                    self.niScope_ResetDevice_cfunc = self._library.niScope_ResetDevice
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ResetDevice was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ResetDevice_cfunc = self._get_library_function('niScope_ResetDevice')
                 self.niScope_ResetDevice_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_ResetDevice_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ResetDevice_cfunc(vi)
@@ -724,12 +487,7 @@ class Library(object):
     def niScope_ResetWithDefaults(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_ResetWithDefaults_cfunc is None:
-                try:
-                    self.niScope_ResetWithDefaults_cfunc = self._library.niScope_ResetWithDefaults
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_ResetWithDefaults was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_ResetWithDefaults_cfunc = self._get_library_function('niScope_ResetWithDefaults')
                 self.niScope_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ResetWithDefaults_cfunc(vi)
@@ -737,12 +495,7 @@ class Library(object):
     def niScope_SendSoftwareTriggerEdge(self, vi, which_trigger):  # noqa: N802
         with self._func_lock:
             if self.niScope_SendSoftwareTriggerEdge_cfunc is None:
-                try:
-                    self.niScope_SendSoftwareTriggerEdge_cfunc = self._library.niScope_SendSoftwareTriggerEdge
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_SendSoftwareTriggerEdge was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_SendSoftwareTriggerEdge_cfunc = self._get_library_function('niScope_SendSoftwareTriggerEdge')
                 self.niScope_SendSoftwareTriggerEdge_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
                 self.niScope_SendSoftwareTriggerEdge_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SendSoftwareTriggerEdge_cfunc(vi, which_trigger)
@@ -750,12 +503,7 @@ class Library(object):
     def niScope_SetAttributeViBoolean(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_SetAttributeViBoolean_cfunc is None:
-                try:
-                    self.niScope_SetAttributeViBoolean_cfunc = self._library.niScope_SetAttributeViBoolean
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_SetAttributeViBoolean was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_SetAttributeViBoolean_cfunc = self._get_library_function('niScope_SetAttributeViBoolean')
                 self.niScope_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
                 self.niScope_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViBoolean_cfunc(vi, channel_list, attribute_id, value)
@@ -763,12 +511,7 @@ class Library(object):
     def niScope_SetAttributeViInt32(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_SetAttributeViInt32_cfunc is None:
-                try:
-                    self.niScope_SetAttributeViInt32_cfunc = self._library.niScope_SetAttributeViInt32
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_SetAttributeViInt32 was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_SetAttributeViInt32_cfunc = self._get_library_function('niScope_SetAttributeViInt32')
                 self.niScope_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niScope_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViInt32_cfunc(vi, channel_list, attribute_id, value)
@@ -776,12 +519,7 @@ class Library(object):
     def niScope_SetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_SetAttributeViInt64_cfunc is None:
-                try:
-                    self.niScope_SetAttributeViInt64_cfunc = self._library.niScope_SetAttributeViInt64
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_SetAttributeViInt64 was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_SetAttributeViInt64_cfunc = self._get_library_function('niScope_SetAttributeViInt64')
                 self.niScope_SetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt64]  # noqa: F405
                 self.niScope_SetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViInt64_cfunc(vi, channel_list, attribute_id, value)
@@ -789,12 +527,7 @@ class Library(object):
     def niScope_SetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_SetAttributeViReal64_cfunc is None:
-                try:
-                    self.niScope_SetAttributeViReal64_cfunc = self._library.niScope_SetAttributeViReal64
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_SetAttributeViReal64 was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_SetAttributeViReal64_cfunc = self._get_library_function('niScope_SetAttributeViReal64')
                 self.niScope_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
                 self.niScope_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViReal64_cfunc(vi, channel_list, attribute_id, value)
@@ -802,12 +535,7 @@ class Library(object):
     def niScope_SetAttributeViString(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_SetAttributeViString_cfunc is None:
-                try:
-                    self.niScope_SetAttributeViString_cfunc = self._library.niScope_SetAttributeViString
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_SetAttributeViString was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_SetAttributeViString_cfunc = self._get_library_function('niScope_SetAttributeViString')
                 self.niScope_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViString_cfunc(vi, channel_list, attribute_id, value)
@@ -815,12 +543,7 @@ class Library(object):
     def niScope_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niScope_UnlockSession_cfunc is None:
-                try:
-                    self.niScope_UnlockSession_cfunc = self._library.niScope_UnlockSession
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_UnlockSession was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_UnlockSession_cfunc = self._get_library_function('niScope_UnlockSession')
                 self.niScope_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niScope_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_UnlockSession_cfunc(vi, caller_has_lock)
@@ -828,12 +551,7 @@ class Library(object):
     def niScope_close(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_close_cfunc is None:
-                try:
-                    self.niScope_close_cfunc = self._library.niScope_close
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_close was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_close_cfunc = self._get_library_function('niScope_close')
                 self.niScope_close_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_close_cfunc(vi)
@@ -841,12 +559,7 @@ class Library(object):
     def niScope_error_message(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:
             if self.niScope_error_message_cfunc is None:
-                try:
-                    self.niScope_error_message_cfunc = self._library.niScope_error_message
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_error_message was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_error_message_cfunc = self._get_library_function('niScope_error_message')
                 self.niScope_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_error_message_cfunc(vi, error_code, error_message)
@@ -854,12 +567,7 @@ class Library(object):
     def niScope_reset(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_reset_cfunc is None:
-                try:
-                    self.niScope_reset_cfunc = self._library.niScope_reset
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_reset was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_reset_cfunc = self._get_library_function('niScope_reset')
                 self.niScope_reset_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_reset_cfunc(vi)
@@ -867,12 +575,7 @@ class Library(object):
     def niScope_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:
             if self.niScope_self_test_cfunc is None:
-                try:
-                    self.niScope_self_test_cfunc = self._library.niScope_self_test
-                except AttributeError as e:
-                    raise AttributeError("Function niScope_self_test was not found in the NI-SCOPE runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niScope_self_test_cfunc = self._get_library_function('niScope_self_test')
                 self.niScope_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_self_test_cfunc(vi, self_test_result, self_test_message)

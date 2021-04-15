@@ -2,6 +2,7 @@
 # This file was generated
 
 import ctypes
+import nidmm.errors as errors
 import threading
 
 from nidmm._visatype import *  # noqa: F403,H303
@@ -68,15 +69,17 @@ class Library(object):
         self.niDMM_reset_cfunc = None
         self.niDMM_self_test_cfunc = None
 
+    def _get_library_function(self, name):
+        try:
+            function = getattr(self._library, 'fred')
+        except AttributeError as e:
+            raise errors.DriverTooOldError() from e
+        return function
+
     def niDMM_Abort(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDMM_Abort_cfunc is None:
-                try:
-                    self.niDMM_Abort_cfunc = self._library.niDMM_Abort
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_Abort was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_Abort_cfunc = self._get_library_function('niDMM_Abort')
                 self.niDMM_Abort_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Abort_cfunc(vi)
@@ -84,12 +87,7 @@ class Library(object):
     def niDMM_ConfigureMeasurementAbsolute(self, vi, measurement_function, range, resolution_absolute):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ConfigureMeasurementAbsolute_cfunc is None:
-                try:
-                    self.niDMM_ConfigureMeasurementAbsolute_cfunc = self._library.niDMM_ConfigureMeasurementAbsolute
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ConfigureMeasurementAbsolute was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ConfigureMeasurementAbsolute_cfunc = self._get_library_function('niDMM_ConfigureMeasurementAbsolute')
                 self.niDMM_ConfigureMeasurementAbsolute_cfunc.argtypes = [ViSession, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureMeasurementAbsolute_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureMeasurementAbsolute_cfunc(vi, measurement_function, range, resolution_absolute)
@@ -97,12 +95,7 @@ class Library(object):
     def niDMM_ConfigureMeasurementDigits(self, vi, measurement_function, range, resolution_digits):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ConfigureMeasurementDigits_cfunc is None:
-                try:
-                    self.niDMM_ConfigureMeasurementDigits_cfunc = self._library.niDMM_ConfigureMeasurementDigits
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ConfigureMeasurementDigits was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ConfigureMeasurementDigits_cfunc = self._get_library_function('niDMM_ConfigureMeasurementDigits')
                 self.niDMM_ConfigureMeasurementDigits_cfunc.argtypes = [ViSession, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureMeasurementDigits_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureMeasurementDigits_cfunc(vi, measurement_function, range, resolution_digits)
@@ -110,12 +103,7 @@ class Library(object):
     def niDMM_ConfigureMultiPoint(self, vi, trigger_count, sample_count, sample_trigger, sample_interval):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ConfigureMultiPoint_cfunc is None:
-                try:
-                    self.niDMM_ConfigureMultiPoint_cfunc = self._library.niDMM_ConfigureMultiPoint
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ConfigureMultiPoint was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ConfigureMultiPoint_cfunc = self._get_library_function('niDMM_ConfigureMultiPoint')
                 self.niDMM_ConfigureMultiPoint_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ViInt32, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureMultiPoint_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureMultiPoint_cfunc(vi, trigger_count, sample_count, sample_trigger, sample_interval)
@@ -123,12 +111,7 @@ class Library(object):
     def niDMM_ConfigureRTDCustom(self, vi, rtd_a, rtd_b, rtd_c):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ConfigureRTDCustom_cfunc is None:
-                try:
-                    self.niDMM_ConfigureRTDCustom_cfunc = self._library.niDMM_ConfigureRTDCustom
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ConfigureRTDCustom was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ConfigureRTDCustom_cfunc = self._get_library_function('niDMM_ConfigureRTDCustom')
                 self.niDMM_ConfigureRTDCustom_cfunc.argtypes = [ViSession, ViReal64, ViReal64, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureRTDCustom_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureRTDCustom_cfunc(vi, rtd_a, rtd_b, rtd_c)
@@ -136,12 +119,7 @@ class Library(object):
     def niDMM_ConfigureRTDType(self, vi, rtd_type, rtd_resistance):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ConfigureRTDType_cfunc is None:
-                try:
-                    self.niDMM_ConfigureRTDType_cfunc = self._library.niDMM_ConfigureRTDType
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ConfigureRTDType was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ConfigureRTDType_cfunc = self._get_library_function('niDMM_ConfigureRTDType')
                 self.niDMM_ConfigureRTDType_cfunc.argtypes = [ViSession, ViInt32, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureRTDType_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureRTDType_cfunc(vi, rtd_type, rtd_resistance)
@@ -149,12 +127,7 @@ class Library(object):
     def niDMM_ConfigureThermistorCustom(self, vi, thermistor_a, thermistor_b, thermistor_c):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ConfigureThermistorCustom_cfunc is None:
-                try:
-                    self.niDMM_ConfigureThermistorCustom_cfunc = self._library.niDMM_ConfigureThermistorCustom
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ConfigureThermistorCustom was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ConfigureThermistorCustom_cfunc = self._get_library_function('niDMM_ConfigureThermistorCustom')
                 self.niDMM_ConfigureThermistorCustom_cfunc.argtypes = [ViSession, ViReal64, ViReal64, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureThermistorCustom_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureThermistorCustom_cfunc(vi, thermistor_a, thermistor_b, thermistor_c)
@@ -162,12 +135,7 @@ class Library(object):
     def niDMM_ConfigureThermocouple(self, vi, thermocouple_type, reference_junction_type):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ConfigureThermocouple_cfunc is None:
-                try:
-                    self.niDMM_ConfigureThermocouple_cfunc = self._library.niDMM_ConfigureThermocouple
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ConfigureThermocouple was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ConfigureThermocouple_cfunc = self._get_library_function('niDMM_ConfigureThermocouple')
                 self.niDMM_ConfigureThermocouple_cfunc.argtypes = [ViSession, ViInt32, ViInt32]  # noqa: F405
                 self.niDMM_ConfigureThermocouple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureThermocouple_cfunc(vi, thermocouple_type, reference_junction_type)
@@ -175,12 +143,7 @@ class Library(object):
     def niDMM_ConfigureTrigger(self, vi, trigger_source, trigger_delay):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ConfigureTrigger_cfunc is None:
-                try:
-                    self.niDMM_ConfigureTrigger_cfunc = self._library.niDMM_ConfigureTrigger
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ConfigureTrigger was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ConfigureTrigger_cfunc = self._get_library_function('niDMM_ConfigureTrigger')
                 self.niDMM_ConfigureTrigger_cfunc.argtypes = [ViSession, ViInt32, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureTrigger_cfunc(vi, trigger_source, trigger_delay)
@@ -188,12 +151,7 @@ class Library(object):
     def niDMM_ConfigureWaveformAcquisition(self, vi, measurement_function, range, rate, waveform_points):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ConfigureWaveformAcquisition_cfunc is None:
-                try:
-                    self.niDMM_ConfigureWaveformAcquisition_cfunc = self._library.niDMM_ConfigureWaveformAcquisition
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ConfigureWaveformAcquisition was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ConfigureWaveformAcquisition_cfunc = self._get_library_function('niDMM_ConfigureWaveformAcquisition')
                 self.niDMM_ConfigureWaveformAcquisition_cfunc.argtypes = [ViSession, ViInt32, ViReal64, ViReal64, ViInt32]  # noqa: F405
                 self.niDMM_ConfigureWaveformAcquisition_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureWaveformAcquisition_cfunc(vi, measurement_function, range, rate, waveform_points)
@@ -201,12 +159,7 @@ class Library(object):
     def niDMM_Disable(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDMM_Disable_cfunc is None:
-                try:
-                    self.niDMM_Disable_cfunc = self._library.niDMM_Disable
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_Disable was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_Disable_cfunc = self._get_library_function('niDMM_Disable')
                 self.niDMM_Disable_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Disable_cfunc(vi)
@@ -214,12 +167,7 @@ class Library(object):
     def niDMM_ExportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ExportAttributeConfigurationBuffer_cfunc is None:
-                try:
-                    self.niDMM_ExportAttributeConfigurationBuffer_cfunc = self._library.niDMM_ExportAttributeConfigurationBuffer
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ExportAttributeConfigurationBuffer was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ExportAttributeConfigurationBuffer_cfunc = self._get_library_function('niDMM_ExportAttributeConfigurationBuffer')
                 self.niDMM_ExportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
                 self.niDMM_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ExportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
@@ -227,12 +175,7 @@ class Library(object):
     def niDMM_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ExportAttributeConfigurationFile_cfunc is None:
-                try:
-                    self.niDMM_ExportAttributeConfigurationFile_cfunc = self._library.niDMM_ExportAttributeConfigurationFile
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ExportAttributeConfigurationFile was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ExportAttributeConfigurationFile_cfunc = self._get_library_function('niDMM_ExportAttributeConfigurationFile')
                 self.niDMM_ExportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ExportAttributeConfigurationFile_cfunc(vi, file_path)
@@ -240,12 +183,7 @@ class Library(object):
     def niDMM_Fetch(self, vi, maximum_time, reading):  # noqa: N802
         with self._func_lock:
             if self.niDMM_Fetch_cfunc is None:
-                try:
-                    self.niDMM_Fetch_cfunc = self._library.niDMM_Fetch
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_Fetch was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_Fetch_cfunc = self._get_library_function('niDMM_Fetch')
                 self.niDMM_Fetch_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_Fetch_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Fetch_cfunc(vi, maximum_time, reading)
@@ -253,12 +191,7 @@ class Library(object):
     def niDMM_FetchMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
         with self._func_lock:
             if self.niDMM_FetchMultiPoint_cfunc is None:
-                try:
-                    self.niDMM_FetchMultiPoint_cfunc = self._library.niDMM_FetchMultiPoint
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_FetchMultiPoint was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_FetchMultiPoint_cfunc = self._get_library_function('niDMM_FetchMultiPoint')
                 self.niDMM_FetchMultiPoint_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_FetchMultiPoint_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_FetchMultiPoint_cfunc(vi, maximum_time, array_size, reading_array, actual_number_of_points)
@@ -266,12 +199,7 @@ class Library(object):
     def niDMM_FetchWaveform(self, vi, maximum_time, array_size, waveform_array, actual_number_of_points):  # noqa: N802
         with self._func_lock:
             if self.niDMM_FetchWaveform_cfunc is None:
-                try:
-                    self.niDMM_FetchWaveform_cfunc = self._library.niDMM_FetchWaveform
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_FetchWaveform was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_FetchWaveform_cfunc = self._get_library_function('niDMM_FetchWaveform')
                 self.niDMM_FetchWaveform_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_FetchWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_FetchWaveform_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
@@ -279,12 +207,7 @@ class Library(object):
     def niDMM_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetAttributeViBoolean_cfunc is None:
-                try:
-                    self.niDMM_GetAttributeViBoolean_cfunc = self._library.niDMM_GetAttributeViBoolean
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_GetAttributeViBoolean was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_GetAttributeViBoolean_cfunc = self._get_library_function('niDMM_GetAttributeViBoolean')
                 self.niDMM_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDMM_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -292,12 +215,7 @@ class Library(object):
     def niDMM_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetAttributeViInt32_cfunc is None:
-                try:
-                    self.niDMM_GetAttributeViInt32_cfunc = self._library.niDMM_GetAttributeViInt32
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_GetAttributeViInt32 was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_GetAttributeViInt32_cfunc = self._get_library_function('niDMM_GetAttributeViInt32')
                 self.niDMM_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -305,12 +223,7 @@ class Library(object):
     def niDMM_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetAttributeViReal64_cfunc is None:
-                try:
-                    self.niDMM_GetAttributeViReal64_cfunc = self._library.niDMM_GetAttributeViReal64
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_GetAttributeViReal64 was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_GetAttributeViReal64_cfunc = self._get_library_function('niDMM_GetAttributeViReal64')
                 self.niDMM_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -318,12 +231,7 @@ class Library(object):
     def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetAttributeViString_cfunc is None:
-                try:
-                    self.niDMM_GetAttributeViString_cfunc = self._library.niDMM_GetAttributeViString
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_GetAttributeViString was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_GetAttributeViString_cfunc = self._get_library_function('niDMM_GetAttributeViString')
                 self.niDMM_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
@@ -331,12 +239,7 @@ class Library(object):
     def niDMM_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetCalDateAndTime_cfunc is None:
-                try:
-                    self.niDMM_GetCalDateAndTime_cfunc = self._library.niDMM_GetCalDateAndTime
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_GetCalDateAndTime was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_GetCalDateAndTime_cfunc = self._get_library_function('niDMM_GetCalDateAndTime')
                 self.niDMM_GetCalDateAndTime_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_GetCalDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetCalDateAndTime_cfunc(vi, cal_type, month, day, year, hour, minute)
@@ -344,12 +247,7 @@ class Library(object):
     def niDMM_GetDevTemp(self, vi, options, temperature):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetDevTemp_cfunc is None:
-                try:
-                    self.niDMM_GetDevTemp_cfunc = self._library.niDMM_GetDevTemp
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_GetDevTemp was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_GetDevTemp_cfunc = self._get_library_function('niDMM_GetDevTemp')
                 self.niDMM_GetDevTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_GetDevTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetDevTemp_cfunc(vi, options, temperature)
@@ -357,12 +255,7 @@ class Library(object):
     def niDMM_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetError_cfunc is None:
-                try:
-                    self.niDMM_GetError_cfunc = self._library.niDMM_GetError
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_GetError was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_GetError_cfunc = self._get_library_function('niDMM_GetError')
                 self.niDMM_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetError_cfunc(vi, error_code, buffer_size, description)
@@ -370,12 +263,7 @@ class Library(object):
     def niDMM_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetExtCalRecommendedInterval_cfunc is None:
-                try:
-                    self.niDMM_GetExtCalRecommendedInterval_cfunc = self._library.niDMM_GetExtCalRecommendedInterval
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_GetExtCalRecommendedInterval was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_GetExtCalRecommendedInterval_cfunc = self._get_library_function('niDMM_GetExtCalRecommendedInterval')
                 self.niDMM_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetExtCalRecommendedInterval_cfunc(vi, months)
@@ -383,12 +271,7 @@ class Library(object):
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetLastCalTemp_cfunc is None:
-                try:
-                    self.niDMM_GetLastCalTemp_cfunc = self._library.niDMM_GetLastCalTemp
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_GetLastCalTemp was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_GetLastCalTemp_cfunc = self._get_library_function('niDMM_GetLastCalTemp')
                 self.niDMM_GetLastCalTemp_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_GetLastCalTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetLastCalTemp_cfunc(vi, cal_type, temperature)
@@ -396,12 +279,7 @@ class Library(object):
     def niDMM_GetSelfCalSupported(self, vi, self_cal_supported):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetSelfCalSupported_cfunc is None:
-                try:
-                    self.niDMM_GetSelfCalSupported_cfunc = self._library.niDMM_GetSelfCalSupported
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_GetSelfCalSupported was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_GetSelfCalSupported_cfunc = self._get_library_function('niDMM_GetSelfCalSupported')
                 self.niDMM_GetSelfCalSupported_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDMM_GetSelfCalSupported_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetSelfCalSupported_cfunc(vi, self_cal_supported)
@@ -409,12 +287,7 @@ class Library(object):
     def niDMM_ImportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ImportAttributeConfigurationBuffer_cfunc is None:
-                try:
-                    self.niDMM_ImportAttributeConfigurationBuffer_cfunc = self._library.niDMM_ImportAttributeConfigurationBuffer
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ImportAttributeConfigurationBuffer was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ImportAttributeConfigurationBuffer_cfunc = self._get_library_function('niDMM_ImportAttributeConfigurationBuffer')
                 self.niDMM_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
                 self.niDMM_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ImportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
@@ -422,12 +295,7 @@ class Library(object):
     def niDMM_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ImportAttributeConfigurationFile_cfunc is None:
-                try:
-                    self.niDMM_ImportAttributeConfigurationFile_cfunc = self._library.niDMM_ImportAttributeConfigurationFile
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ImportAttributeConfigurationFile was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ImportAttributeConfigurationFile_cfunc = self._get_library_function('niDMM_ImportAttributeConfigurationFile')
                 self.niDMM_ImportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ImportAttributeConfigurationFile_cfunc(vi, file_path)
@@ -435,12 +303,7 @@ class Library(object):
     def niDMM_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niDMM_InitWithOptions_cfunc is None:
-                try:
-                    self.niDMM_InitWithOptions_cfunc = self._library.niDMM_InitWithOptions
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_InitWithOptions was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_InitWithOptions_cfunc = self._get_library_function('niDMM_InitWithOptions')
                 self.niDMM_InitWithOptions_cfunc.argtypes = [ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niDMM_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
@@ -448,12 +311,7 @@ class Library(object):
     def niDMM_Initiate(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDMM_Initiate_cfunc is None:
-                try:
-                    self.niDMM_Initiate_cfunc = self._library.niDMM_Initiate
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_Initiate was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_Initiate_cfunc = self._get_library_function('niDMM_Initiate')
                 self.niDMM_Initiate_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Initiate_cfunc(vi)
@@ -461,12 +319,7 @@ class Library(object):
     def niDMM_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niDMM_LockSession_cfunc is None:
-                try:
-                    self.niDMM_LockSession_cfunc = self._library.niDMM_LockSession
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_LockSession was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_LockSession_cfunc = self._get_library_function('niDMM_LockSession')
                 self.niDMM_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDMM_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_LockSession_cfunc(vi, caller_has_lock)
@@ -474,12 +327,7 @@ class Library(object):
     def niDMM_PerformOpenCableComp(self, vi, conductance, susceptance):  # noqa: N802
         with self._func_lock:
             if self.niDMM_PerformOpenCableComp_cfunc is None:
-                try:
-                    self.niDMM_PerformOpenCableComp_cfunc = self._library.niDMM_PerformOpenCableComp
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_PerformOpenCableComp was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_PerformOpenCableComp_cfunc = self._get_library_function('niDMM_PerformOpenCableComp')
                 self.niDMM_PerformOpenCableComp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_PerformOpenCableComp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_PerformOpenCableComp_cfunc(vi, conductance, susceptance)
@@ -487,12 +335,7 @@ class Library(object):
     def niDMM_PerformShortCableComp(self, vi, resistance, reactance):  # noqa: N802
         with self._func_lock:
             if self.niDMM_PerformShortCableComp_cfunc is None:
-                try:
-                    self.niDMM_PerformShortCableComp_cfunc = self._library.niDMM_PerformShortCableComp
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_PerformShortCableComp was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_PerformShortCableComp_cfunc = self._get_library_function('niDMM_PerformShortCableComp')
                 self.niDMM_PerformShortCableComp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_PerformShortCableComp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_PerformShortCableComp_cfunc(vi, resistance, reactance)
@@ -500,12 +343,7 @@ class Library(object):
     def niDMM_Read(self, vi, maximum_time, reading):  # noqa: N802
         with self._func_lock:
             if self.niDMM_Read_cfunc is None:
-                try:
-                    self.niDMM_Read_cfunc = self._library.niDMM_Read
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_Read was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_Read_cfunc = self._get_library_function('niDMM_Read')
                 self.niDMM_Read_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_Read_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Read_cfunc(vi, maximum_time, reading)
@@ -513,12 +351,7 @@ class Library(object):
     def niDMM_ReadMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ReadMultiPoint_cfunc is None:
-                try:
-                    self.niDMM_ReadMultiPoint_cfunc = self._library.niDMM_ReadMultiPoint
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ReadMultiPoint was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ReadMultiPoint_cfunc = self._get_library_function('niDMM_ReadMultiPoint')
                 self.niDMM_ReadMultiPoint_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_ReadMultiPoint_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ReadMultiPoint_cfunc(vi, maximum_time, array_size, reading_array, actual_number_of_points)
@@ -526,12 +359,7 @@ class Library(object):
     def niDMM_ReadStatus(self, vi, acquisition_backlog, acquisition_status):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ReadStatus_cfunc is None:
-                try:
-                    self.niDMM_ReadStatus_cfunc = self._library.niDMM_ReadStatus
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ReadStatus was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ReadStatus_cfunc = self._get_library_function('niDMM_ReadStatus')
                 self.niDMM_ReadStatus_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt16)]  # noqa: F405
                 self.niDMM_ReadStatus_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ReadStatus_cfunc(vi, acquisition_backlog, acquisition_status)
@@ -539,12 +367,7 @@ class Library(object):
     def niDMM_ReadWaveform(self, vi, maximum_time, array_size, waveform_array, actual_number_of_points):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ReadWaveform_cfunc is None:
-                try:
-                    self.niDMM_ReadWaveform_cfunc = self._library.niDMM_ReadWaveform
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ReadWaveform was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ReadWaveform_cfunc = self._get_library_function('niDMM_ReadWaveform')
                 self.niDMM_ReadWaveform_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_ReadWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ReadWaveform_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
@@ -552,12 +375,7 @@ class Library(object):
     def niDMM_ResetWithDefaults(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ResetWithDefaults_cfunc is None:
-                try:
-                    self.niDMM_ResetWithDefaults_cfunc = self._library.niDMM_ResetWithDefaults
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_ResetWithDefaults was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_ResetWithDefaults_cfunc = self._get_library_function('niDMM_ResetWithDefaults')
                 self.niDMM_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ResetWithDefaults_cfunc(vi)
@@ -565,12 +383,7 @@ class Library(object):
     def niDMM_SelfCal(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDMM_SelfCal_cfunc is None:
-                try:
-                    self.niDMM_SelfCal_cfunc = self._library.niDMM_SelfCal
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_SelfCal was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_SelfCal_cfunc = self._get_library_function('niDMM_SelfCal')
                 self.niDMM_SelfCal_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_SelfCal_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SelfCal_cfunc(vi)
@@ -578,12 +391,7 @@ class Library(object):
     def niDMM_SendSoftwareTrigger(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDMM_SendSoftwareTrigger_cfunc is None:
-                try:
-                    self.niDMM_SendSoftwareTrigger_cfunc = self._library.niDMM_SendSoftwareTrigger
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_SendSoftwareTrigger was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_SendSoftwareTrigger_cfunc = self._get_library_function('niDMM_SendSoftwareTrigger')
                 self.niDMM_SendSoftwareTrigger_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_SendSoftwareTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SendSoftwareTrigger_cfunc(vi)
@@ -591,12 +399,7 @@ class Library(object):
     def niDMM_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDMM_SetAttributeViBoolean_cfunc is None:
-                try:
-                    self.niDMM_SetAttributeViBoolean_cfunc = self._library.niDMM_SetAttributeViBoolean
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_SetAttributeViBoolean was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_SetAttributeViBoolean_cfunc = self._get_library_function('niDMM_SetAttributeViBoolean')
                 self.niDMM_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
                 self.niDMM_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -604,12 +407,7 @@ class Library(object):
     def niDMM_SetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDMM_SetAttributeViInt32_cfunc is None:
-                try:
-                    self.niDMM_SetAttributeViInt32_cfunc = self._library.niDMM_SetAttributeViInt32
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_SetAttributeViInt32 was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_SetAttributeViInt32_cfunc = self._get_library_function('niDMM_SetAttributeViInt32')
                 self.niDMM_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niDMM_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -617,12 +415,7 @@ class Library(object):
     def niDMM_SetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDMM_SetAttributeViReal64_cfunc is None:
-                try:
-                    self.niDMM_SetAttributeViReal64_cfunc = self._library.niDMM_SetAttributeViReal64
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_SetAttributeViReal64 was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_SetAttributeViReal64_cfunc = self._get_library_function('niDMM_SetAttributeViReal64')
                 self.niDMM_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
                 self.niDMM_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -630,12 +423,7 @@ class Library(object):
     def niDMM_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDMM_SetAttributeViString_cfunc is None:
-                try:
-                    self.niDMM_SetAttributeViString_cfunc = self._library.niDMM_SetAttributeViString
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_SetAttributeViString was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_SetAttributeViString_cfunc = self._get_library_function('niDMM_SetAttributeViString')
                 self.niDMM_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
@@ -643,12 +431,7 @@ class Library(object):
     def niDMM_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niDMM_UnlockSession_cfunc is None:
-                try:
-                    self.niDMM_UnlockSession_cfunc = self._library.niDMM_UnlockSession
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_UnlockSession was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_UnlockSession_cfunc = self._get_library_function('niDMM_UnlockSession')
                 self.niDMM_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDMM_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_UnlockSession_cfunc(vi, caller_has_lock)
@@ -656,12 +439,7 @@ class Library(object):
     def niDMM_close(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDMM_close_cfunc is None:
-                try:
-                    self.niDMM_close_cfunc = self._library.niDMM_close
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_close was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_close_cfunc = self._get_library_function('niDMM_close')
                 self.niDMM_close_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_close_cfunc(vi)
@@ -669,12 +447,7 @@ class Library(object):
     def niDMM_error_message(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:
             if self.niDMM_error_message_cfunc is None:
-                try:
-                    self.niDMM_error_message_cfunc = self._library.niDMM_error_message
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_error_message was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_error_message_cfunc = self._get_library_function('niDMM_error_message')
                 self.niDMM_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_error_message_cfunc(vi, error_code, error_message)
@@ -682,12 +455,7 @@ class Library(object):
     def niDMM_reset(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDMM_reset_cfunc is None:
-                try:
-                    self.niDMM_reset_cfunc = self._library.niDMM_reset
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_reset was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_reset_cfunc = self._get_library_function('niDMM_reset')
                 self.niDMM_reset_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_reset_cfunc(vi)
@@ -695,12 +463,7 @@ class Library(object):
     def niDMM_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:
             if self.niDMM_self_test_cfunc is None:
-                try:
-                    self.niDMM_self_test_cfunc = self._library.niDMM_self_test
-                except AttributeError as e:
-                    raise AttributeError("Function niDMM_self_test was not found in the NI-DMM runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.niDMM_self_test_cfunc = self._get_library_function('niDMM_self_test')
                 self.niDMM_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_self_test_cfunc(vi, self_test_result, self_test_message)

@@ -15,6 +15,7 @@ functions = helper.filter_library_functions(functions)
 %>\
 
 import ctypes
+import ${module_name}.errors as errors
 import threading
 
 from ${module_name}._visatype import *  # noqa: F403,H303
@@ -38,6 +39,13 @@ class Library(object):
 % for func_name in sorted(functions):
         self.${c_function_prefix}${func_name}_cfunc = None
 % endfor
+
+    def _get_library_function(self, name):
+        try:
+            function = getattr(self._library, name)
+        except AttributeError as e:
+            raise errors.DriverTooOldError() from e
+        return function
 % for func_name in sorted(functions):
 <%
     f = functions[func_name]
@@ -51,12 +59,7 @@ class Library(object):
     def ${c_func_name}(${param_names_method}):  # noqa: N802
         with self._func_lock:
             if self.${c_func_name}_cfunc is None:
-                try:
-                    self.${c_func_name}_cfunc = self._library.${c_func_name}
-                except AttributeError as e:
-                    raise AttributeError("Function ${c_func_name} was not found in the ${driver_name} runtime. Please visit "
-                                         "http://www.ni.com/downloads/drivers/ to download a newer version and "
-                                         "install it.") from e
+                self.${c_func_name}_cfunc = self._get_library_function('${c_func_name}')
                 self.${c_func_name}_cfunc.argtypes = [${param_ctypes_library}]  # noqa: F405
                 self.${c_func_name}_cfunc.restype = ${f['returns']}  # noqa: F405
         return self.${c_func_name}_cfunc(${param_names_library})
