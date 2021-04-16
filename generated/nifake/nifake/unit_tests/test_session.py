@@ -67,17 +67,6 @@ class TestSession(object):
         self.get_ctypes_pointer_for_buffer_side_effect_count += 1
         return ret_val
 
-    def test_driver_too_old_error(self):
-        if platform.architecture() == '32bit':
-            ctypes_patcher = patch('ctypes.CDLL')
-        else:
-            ctypes_patcher = patch('ctypes.WinDLL')
-
-        session = nifake.Session('dev1')
-
-        patched_ctypes = ctypes_patcher.start()
-        patched_ctypes.
-
     # Session management
 
     def test_init_with_options_and_close(self):
@@ -1535,3 +1524,25 @@ def test_dunder_version():
     print('Version = {}'.format(nifake.__version__))
     assert type(nifake.__version__) is str
 
+
+def test_library_error():
+    if platform.architecture()[0] == '64bit':
+        ctypes_class_name = 'ctypes.CDLL'
+    else:
+        ctypes_class_name = 'ctypes.WinDLL'
+    mock_ctypes = patch(ctypes_class_name).start()
+    mock_ctypes_instance = mock_ctypes.return_value
+    # These methods are called as part of session creation
+    mock_ctypes_instance.niFake_InitWithOptions.return_value = 0
+    mock_ctypes_instance.niFake_LockSession.return_value = 0
+    mock_ctypes_instance.niFake_UnlockSession.return_value = 0
+    # Ensure that function is not found in runtime
+    delattr(mock_ctypes_instance, 'niFake_Abort')
+    session = nifake.Session('dev1')
+
+    try:
+        session.abort()
+        assert False
+    except nifake.errors.DriverTooOldError as e:
+        message = e.args[0]
+        assert message.startswith("A function was not found in the NI-FAKE runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.")
