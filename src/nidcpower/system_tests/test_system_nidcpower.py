@@ -420,7 +420,7 @@ def test_rep_cap_method_error(multiple_channel_session):
 
 def test_rep_cap_attribute_error(multiple_channel_session):
     try:
-        aperture_time = session.channels['4162/0'].aperture_time
+        session.channels['4162/0'].aperture_time
         assert False
     except nidcpower.Error as e:
         assert e.code == -1074135008
