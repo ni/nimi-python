@@ -118,7 +118,16 @@ def test_reset(session):
     assert channel.output_enabled is True
 
 
-def test_reset_rep_cap(independent_channel_session):
+def test_reset_rep_cap_all(independent_channel_session):
+    assert independent_channel_session.channels['4162/0', '4162/1'].output_enabled is True
+    independent_channel_session.channels['4162/0', '4162/1'].output_enabled = False
+    independent_channel_session.channels['4162/0', '4162/1'].reset()
+    assert independent_channel_session.channels['4162/0'].output_enabled is True
+    assert independent_channel_session.channels['4162/1'].output_enabled is True
+    assert independent_channel_session.channels['4162/0', '4162/1'].output_enabled is True
+
+
+def test_reset_rep_cap_subset(independent_channel_session):
     assert independent_channel_session.channels['4162/0'].output_enabled is True
     assert independent_channel_session.channels['4162/1'].output_enabled is True
     independent_channel_session.channels['4162/0'].output_enabled = False
@@ -255,6 +264,12 @@ def test_commit(single_channel_session):
     single_channel_session.commit()
 
 
+def test_commit_rep_cap(independent_channel_session):
+    non_default_current_limit = 0.00021
+    independent_channel_session['4162/1'].current_limit = non_default_current_limit
+    independent_channel_session['4162/1'].commit()
+
+
 def test_import_export_buffer(single_channel_session):
     test_value_1 = 1
     test_value_2 = 2
@@ -388,4 +403,25 @@ def test_channel_format_types():
     with nidcpower.Session(resource_name='4162', reset=False, options='Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
         assert simulated_session.channel_count == 12
 
+
+def test_rep_cap_all_channels(multiple_channel_session):
+    # no error for non-independent channel session when specifying all channels
+    multiple_channel_session.channels['4162/0', '4162/1'].reset()
+
+
+def test_rep_cap_method_error(multiple_channel_session):
+    try:
+        session.channels['4162/0'].reset()
+        assert False
+    except AttributeError as e:
+        assert str(e) == "'_SessionBase' object has no attribute 'reset'"
+
+
+def test_rep_cap_attribute_error(multiple_channel_session):
+    try:
+        aperture_time = session.channels['4162/0'].aperture_time
+        assert False
+    except nidcpower.Error as e:
+        assert e.code == -1074135008
+        assert e.description.find('Unknown channel or repeated capability name') != -1
 
