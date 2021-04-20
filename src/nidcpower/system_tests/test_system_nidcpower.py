@@ -29,7 +29,8 @@ def independent_channel_session():
         yield simulated_session
 
 
-@pytest.fixture(scope='function', params=[('4162', ''), ('4162', '0'), ('4162', [0, 1])])
+# this fixture can be used to test with different types of sessions
+@pytest.fixture(scope='function', params=[('4162', ''), ('4162', '0'), ('4162', [0, 1]), (('4162/0', '4162/1'), '')])
 def sessions(request):
     with nidcpower.Session(request.param[0], request.param[1], False,
                            'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
