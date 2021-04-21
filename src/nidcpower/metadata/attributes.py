@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.7.0d409
+# This file is generated from NI-DCPower API metadata version 21.0.0d52
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -102,7 +102,7 @@ attributes = {
     },
     1050511: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': 'Contains the name of the manufacturer for the device you are currently using.'
         },
@@ -159,7 +159,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'documentation': {
-            'description': '\nSpecifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.\nDefault Value: NIDCPOWER_VAL_AUTOMATIC\nis set to NIDCPOWER_VAL_AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this attribute, the power source selection only occurs after you call the  niDCPower_Initiate function.\n',
+            'description': '\nSpecifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.\nDefault Value: NIDCPOWER_VAL_AUTOMATIC\nis set to NIDCPOWER_VAL_AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this attribute, the power source selection only occurs after you call the  niDCPower_InitiateWithChannels function.\n',
             'note': 'Automatic selection is not persistent and occurs only at the time this attribute'
         },
         'enum': 'PowerSource',
@@ -856,7 +856,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': '\nSpecifies whether to take continuous measurements. Call the niDCPower_Abort function to stop continuous measurements.  When this attribute is set to VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to  NIDCPOWER_VAL_SINGLE_POINT, the NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER. When this attribute is set to  VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the NIDCPOWER_ATTR_MEASURE_WHEN  attribute must be set to NIDCPOWER_VAL_ON_MEASURE_TRIGGER.\nfor information about supported devices.\nDefault Value: VI_TRUE\n',
+            'description': '\nSpecifies whether to take continuous measurements. Call the niDCPower_AbortWithChannels function to stop continuous measurements.  When this attribute is set to VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to  NIDCPOWER_VAL_SINGLE_POINT, the NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER. When this attribute is set to  VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the NIDCPOWER_ATTR_MEASURE_WHEN  attribute must be set to NIDCPOWER_VAL_ON_MEASURE_TRIGGER.\nfor information about supported devices.\nDefault Value: VI_TRUE\n',
             'note': '\nThis attribute is not available in a session involving multiple channels.\n'
         },
         'lv_property': 'Measurement:Measure Record Length Is Finite',
@@ -965,7 +965,7 @@ attributes = {
     },
     1150073: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the niDCPower_ResetDevice function is called or the machine  is powered down.\nThis attribute affects the behavior of the niDCPower_CalSelfCalibrate function. When set to  NIDCPOWER_VAL_KEEP_IN_MEMORY, the values calculated by the niDCPower_CalSelfCalibrate function are used in  the existing session, as well as in all further sessions until you call the niDCPower_ResetDevice function  or restart the machine. When you set this property to NIDCPOWER_VAL_WRITE_TO_EEPROM, the values calculated  by the niDCPower_CalSelfCalibrate function are written to hardware and used in the existing session and  in all subsequent sessions until another call to the niDCPower_CalSelfCalibrate function is made.\nabout supported devices.\nDefault Value: NIDCPOWER_VAL_KEEP_IN_MEMORY\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information'
@@ -1333,7 +1333,7 @@ attributes = {
     },
     1150152: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': 'Contains the serial number for the device you are currently using.'
         },
@@ -1868,7 +1868,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': '\nSpecifies whether the output is enabled (VI_TRUE) or disabled (VI_FALSE).\nDepending on the value you specify for the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute, you also must set the  voltage level or current level in addition to  enabling the output\nthe niDCPower_Initiate function. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.\nDefault Value: The default value is VI_TRUE if you use the niDCPower_InitializeWithChannels function to open  the session. Otherwise the default value is VI_FALSE, including when you use a calibration session or the deprecated programming model.\n',
+            'description': '\nSpecifies whether the output is enabled (VI_TRUE) or disabled (VI_FALSE).\nDepending on the value you specify for the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute, you also must set the  voltage level or current level in addition to  enabling the output\nthe niDCPower_InitiateWithChannels function. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.\nDefault Value: The default value is VI_TRUE if you use the niDCPower_InitializeWithChannels function to open  the session. Otherwise the default value is VI_FALSE, including when you use a calibration session or the deprecated programming model.\n',
             'note': 'If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call'
         },
         'lv_property': 'Source:Output Enabled',
