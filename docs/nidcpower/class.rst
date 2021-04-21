@@ -154,6 +154,11 @@ abort
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
 
 clear_latched_output_cutoff_state
 ---------------------------------
@@ -253,6 +258,11 @@ commit
 
             
 
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
 configure_aperture_time
@@ -505,7 +515,7 @@ create_advanced_sequence_step
 
             Creates a new advanced sequence step in the advanced sequence specified
             by the Active advanced sequence. When you create an advanced sequence
-            step, each property you passed to the :py:meth:`nidcpower.Session._create_advanced_sequence`
+            step, each property you passed to the :py:meth:`nidcpower.Session.create_advanced_sequence`
             method is reset to its default value for that step unless otherwise
             specified.
 
@@ -524,7 +534,7 @@ create_advanced_sequence_step
             `Programming
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-            :py:meth:`nidcpower.Session._create_advanced_sequence`
+            :py:meth:`nidcpower.Session.create_advanced_sequence`
 
             
 
@@ -533,6 +543,11 @@ create_advanced_sequence_step
                 Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
                 for more information about supported devices.
 
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param set_as_active_step:
@@ -577,6 +592,11 @@ delete_advanced_sequence
                 Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
                 for more information about supported devices.
 
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param sequence_name:
@@ -1170,6 +1190,11 @@ initiate
             .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
 
 lock
 ----
@@ -1369,13 +1394,11 @@ query_latched_output_cutoff_state
     .. py:method:: query_latched_output_cutoff_state(output_cutoff_reason)
 
             Discovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.
-            If a limit was exceeded, the state is latched until you clear it with the :py:meth:`nidcpower.Session.clear_latched_output_cutoff_state` method or the :py:meth:`nidcpower.Session.ResetWithChannels` method.
+            If a limit was exceeded, the state is latched until you clear it with the :py:meth:`nidcpower.Session.clear_latched_output_cutoff_state` method or the :py:meth:`nidcpower.Session.reset` method.
 
             outputCutoffReason specifies the conditions for which an output is disconnected.
 
             
-
-            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
             .. tip:: This method requires repeated capabilities. If called directly on the
@@ -1639,6 +1662,11 @@ reset
             
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
 
 reset_device
 ------------
@@ -1779,6 +1807,11 @@ send_software_edge_trigger
                 for more information about supported devices.
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
 
             :param trigger:
 
@@ -1903,6 +1936,11 @@ wait_for_event
                 Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
                 for more information about supported devices.
 
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param event_id:
@@ -3686,6 +3724,14 @@ instrument_manufacturer
 
         Contains the name of the manufacturer for the device you are currently using.
 
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -3695,7 +3741,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -6696,6 +6742,12 @@ self_calibration_persistence
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------------------------+
@@ -6705,7 +6757,7 @@ self_calibration_persistence
             +----------------+----------------------------------+
             | Permissions    | read-write                       |
             +----------------+----------------------------------+
-            | Channel Based  | No                               |
+            | Channel Based  | Yes                              |
             +----------------+----------------------------------+
             | Resettable     | No                               |
             +----------------+----------------------------------+
@@ -7178,6 +7230,14 @@ serial_number
 
         Contains the serial number for the device you are currently using.
 
+
+
+
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -7187,7 +7247,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
