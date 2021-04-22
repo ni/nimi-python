@@ -43,6 +43,7 @@ def test_get_channel_name(session):
     name = session.get_channel_name(1)
     assert name == '0'
 
+
 def test_get_channel_names(multi_instrument_session):
     # Once we have support for independent channels, we should update this test to include
     # the instrument names in the expected channel names -- or possibly add a separate test
