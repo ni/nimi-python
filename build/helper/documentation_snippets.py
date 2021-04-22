@@ -1,28 +1,30 @@
 # Different documentation snippets we add to the generated documentation
+import typing
 
-rep_cap_method_desc = '''
+
+rep_cap_method_desc: str = '''
 This method requires repeated capabilities. If called directly on the
 {0}.Session object, then the method will use all repeated capabilities in the session.
 You can specify a subset of repeated capabilities using the Python index notation on an
 {0}.Session repeated capabilities container, and calling this method on the result.
 '''
 
-rep_cap_attr_desc = '''
+rep_cap_attr_desc: str = '''
 This property can use repeated capabilities. If set or get directly on the
 {0}.Session object, then the set/get will use all repeated capabilities in the session.
 You can specify a subset of repeated capabilities using the Python index notation on an
 {0}.Session repeated capabilities container, and calling set/get value on the result.
 '''
 
-func_note_text = '''
+func_note_text: str = '''
 One or more of the referenced functions are not in the Python API for this driver.
 '''
 
-attr_note_text = '''
+attr_note_text: str = '''
 One or more of the referenced attributes are not in the Python API for this driver.
 '''
 
-enum_note_text = '''
+enum_note_text: str = '''
 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 '''
 
@@ -30,8 +32,8 @@ session_return_text = '''
 A session object representing the device.
 '''
 
-options_table_header = ['Attribute', 'Default']
-options_table_body = [
+options_table_header: typing.Sequence[str] = ['Attribute', 'Default']
+options_table_body: typing.Sequence[typing.Sequence[str]] = [
     ['range_check', 'True'],
     ['query_instrument_status', 'False'],
     ['cache', 'True'],
@@ -40,7 +42,7 @@ options_table_body = [
     ['driver_setup', '{}'],
 ]
 
-options_text = '''
+options_text: str = '''
 Specifies the initial value of certain attributes for the session. The
 syntax for **options** is a dictionary of attributes with an assigned
 value. For example:
@@ -54,20 +56,20 @@ Advanced Example:
 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
 '''
 
-default_close_function_doc = '''
+default_close_function_doc: str = '''
 Closes the driver session and cleans up. After calling this the Session object
 is no longer valid and cannot be used.
 '''
 
-close_function_note = '''
+close_function_note: str = '''
 This function is not needed when using the session context manager
 '''
 
-default_initiate_function_doc = '''
+default_initiate_function_doc: str = '''
 Calls initiate
 '''
 
-initiate_function_note = '''
+initiate_function_note: str = '''
 This function will return a Python context manager that will initiate on entering and abort on exit.
 '''
 

@@ -15,10 +15,13 @@ from .metadata_find import find_custom_type
 from .metadata_find import find_size_parameter
 from .metadata_merge_dicts import merge_helper
 
+from . import nimi_python_types
+
 import codecs
 import copy
 import os
 import pprint
+import typing
 
 pp = pprint.PrettyPrinter(indent=4, width=80)
 
@@ -26,28 +29,26 @@ pp = pprint.PrettyPrinter(indent=4, width=80)
 
 
 # These functions can be used by any type, function, attribute or enum
-
-
-def _add_name(n, name):
+def _add_name(n: typing.Any, name: str) -> typing.Dict[str, typing.Any]:
     '''Adds a name' key/value pair to the function metadata'''
     assert 'name' not in n, "'name' is already populated which means issue #372 is closed, rendering _add_name() redundant."
     n['name'] = name
     return n
 
 
-def _add_codegen_method(n):
+def _add_codegen_method(n: typing.Any) -> None:
     '''Add 'codegen_method' as public if it isn't already there'''
     if 'codegen_method' not in n:
         n['codegen_method'] = 'public'
 
 
-def _add_enum(n):
+def _add_enum(n: typing.Any) -> None:
     '''Add 'enum' as None if it isn't already there'''
     if 'enum' not in n:
         n['enum'] = None
 
 
-def _add_python_method_name(function, name):
+def _add_python_method_name(function: nimi_python_types.Function, name: str) -> nimi_python_types.Function:
     '''Adds a python_name' key/value pair to the function metadata if not already specified'''
     if 'python_name' not in function:
         if function['codegen_method'] == 'private':
@@ -58,14 +59,15 @@ def _add_python_method_name(function, name):
     return function
 
 
-def _add_python_parameter_name(parameter):
+def _add_python_parameter_name(parameter: nimi_python_types.Parameter) -> nimi_python_types.Parameter:
     '''Adds a python_name key/value pair to the parameter metadata'''
     if 'python_name' not in parameter:
         parameter['python_name'] = camelcase_to_snakecase(parameter['name'])
     return parameter
 
 
-def _add_python_type(item, config):
+# This function is generic and can operate on a couple of types
+def _add_python_type(item: typing.Any, config: nimi_python_types.Config) -> typing.Dict[str, typing.Any]:
     '''Adds the type to use in the Python API and the documentation to the item metadata, if not already there'''
     if 'python_type' not in item:
         if item['enum'] is None:
@@ -82,20 +84,27 @@ def _add_python_type(item, config):
     return item
 
 
-def _add_ctypes_variable_name(parameter):
+def _add_ctypes_variable_name(parameter: nimi_python_types.Parameter) -> nimi_python_types.Parameter:
     '''Adds a ctypes_variable_name key/value pair to the parameter metadata for a corresponding ctypes variable'''
+    assert isinstance(parameter['python_name'], str)
     parameter['ctypes_variable_name'] = parameter['python_name'] + '_ctype'
     return parameter
 
 
-def _add_ctypes_type(parameter, config):
+def _add_ctypes_type(parameter: nimi_python_types.Parameter, config: nimi_python_types.Config) -> nimi_python_types.Parameter:
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
+    assert isinstance(parameter['type'], str)
     parameter['ctypes_type'] = parameter['type']
-    module_name = ''
-    custom_type = find_custom_type(parameter, config)
+    assert isinstance(parameter['ctypes_type'], str)
+    module_name: str = ''
+    custom_type: nimi_python_types.CustomType = find_custom_type(parameter, config)
     if custom_type is not None:
+        assert isinstance(custom_type['file_name'], str)
         module_name = custom_type['file_name'] + '.'
 
+    assert isinstance(parameter['is_string'], bool)
+    assert isinstance(parameter['is_buffer'], bool)
+    assert isinstance(parameter['direction'], str)
     if parameter['is_string']:
         parameter['ctypes_type_library_call'] = 'ctypes.POINTER(ViChar)'
     elif parameter['direction'] == 'out' or parameter['is_buffer'] is True:
@@ -106,7 +115,7 @@ def _add_ctypes_type(parameter, config):
     return parameter
 
 
-def _add_numpy_info(parameter, parameters, config):
+def _add_numpy_info(parameter: nimi_python_types.Parameter, parameters: nimi_python_types.Parameters, config: nimi_python_types.Config) -> nimi_python_types.Parameter:
     '''Adds the following numpy-related information:
 
              numpy: Default to False unless already set. True for buffers that allow being passed as a numpy.ndarray.
@@ -119,7 +128,9 @@ def _add_numpy_info(parameter, parameters, config):
     if parameter['numpy']:
         parameter['numpy_type'] = get_numpy_type_for_api_type(parameter['type'], config)
 
-        if parameter['size']['mechanism'] == 'passed-in':
+        size: nimi_python_types.Size = parameter['size']  # type: ignore
+        assert isinstance(size['mechanism'], str)
+        if size['mechanism'] == 'passed-in':
             size_param = find_size_parameter(parameter, parameters)
             if size_param:
                 size_param['use_in_python_api'] = False
@@ -127,7 +138,7 @@ def _add_numpy_info(parameter, parameters, config):
     return parameter
 
 
-def _add_is_error_handling(f):
+def _add_is_error_handling(f: nimi_python_types.Function) -> nimi_python_types.Function:
     '''Adds is_error_handling information to the function metadata if it isn't already defined. Defaults to False.'''
     # TODO(marcoskirsch): The information is added in functions_addon.py. I think we can instead infer from method
     # name but I am not sure if it's a good idea (heuristics vs being explicit - both error prone in different ways).
@@ -137,7 +148,7 @@ def _add_is_error_handling(f):
     return f
 
 
-def _add_buffer_info(parameter, config):
+def _add_buffer_info(parameter: nimi_python_types.Parameter, config: nimi_python_types.Config) -> nimi_python_types.Parameter:
     '''Adds buffer information to the parameter metadata
 
     These are the pieces of information that will be added to metadata:
@@ -152,13 +163,14 @@ def _add_buffer_info(parameter, config):
     assert 'is_string' not in parameter, "'is_string' should not be set by metadata or in addons"
     assert 'use_list' not in parameter, "'use_list' should not be set by metadata or in addons"
 
-    is_string = False
-    use_array = False
-    use_list = False
-    original_type = parameter['type']
+    is_string: bool = False
+    use_array: bool = False
+    use_list: bool = False
+    assert isinstance(parameter['type'], str)
+    original_type: str = parameter['type']
 
     # We set all string types to ViString, and say it is NOT a buffer/array
-    string_types = ['ViConstString', 'ViRsrc', 'ViString', 'ViChar[]', ]
+    string_types: typing.List[str] = ['ViConstString', 'ViRsrc', 'ViString', 'ViChar[]', ]
     if original_type in string_types:
         is_string = True
     elif original_type.find('[]') > 0:
@@ -171,8 +183,14 @@ def _add_buffer_info(parameter, config):
             use_array = True
 
     # If 'is_buffer' is in the parameter information and False, we also force 'use_list' and 'use_array' to False
-    use_list = parameter['is_buffer'] if 'is_buffer' in parameter else use_list
-    use_array = parameter['is_buffer'] if 'is_buffer' in parameter else use_array
+    if 'is_buffer' in parameter:
+        assert isinstance(parameter['is_buffer'], bool)
+        is_buffer: bool = parameter['is_buffer']
+        use_list = is_buffer
+        use_array = is_buffer
+    else:
+        use_list = use_list
+        use_array = use_array
 
     # If not populated, assume {'mechanism': 'fixed', 'value': 1}
     parameter['size'] = parameter['size'] if 'size' in parameter else {'mechanism': 'fixed', 'value': 1}
@@ -187,7 +205,7 @@ def _add_buffer_info(parameter, config):
     return parameter
 
 
-def _add_library_method_call_snippet(parameter):
+def _add_library_method_call_snippet(parameter: nimi_python_types.Parameter) -> None:
     '''Code snippet for calling a method of Library for this parameter.'''
     if parameter['direction'] == 'out' and not parameter['is_buffer'] and not parameter['is_string']:
         parameter['library_method_call_snippet'] = 'None if {0} is None else (ctypes.pointer({0}))'.format(parameter['ctypes_variable_name'])
@@ -195,19 +213,25 @@ def _add_library_method_call_snippet(parameter):
         parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
 
 
-def _add_default_value_name(parameter):
+def _add_default_value_name(parameter: nimi_python_types.Parameter) -> None:
     '''Declaration with default value, if set'''
+    name_with_default: str
+    name_for_init: str
+    assert isinstance(parameter['python_name'], str)
     if 'default_value' in parameter:
         if 'enum' in parameter and parameter['enum'] is not None and parameter['default_value'] is not None:
+            assert isinstance(parameter['default_value'], str)
             name_with_default = parameter['python_name'] + "=enums." + parameter['default_value']
         else:
             name_with_default = parameter['python_name'] + "=" + str(parameter['default_value'])
 
         if 'python_api_converter_name' in parameter:
+            assert isinstance(parameter['python_api_converter_name'], str)
             name_for_init = '_converters.{0}({1}, self._encoding)'.format(parameter['python_api_converter_name'], parameter['python_name'])
         elif parameter['use_in_python_api']:
             name_for_init = parameter['python_name']
         else:
+            assert isinstance(parameter['default_value'], str)
             name_for_init = parameter['default_value']
 
     else:
@@ -218,10 +242,13 @@ def _add_default_value_name(parameter):
     parameter['python_name_or_default_for_init'] = str(name_for_init)
 
 
-def _add_default_value_name_for_docs(parameter, module_name):
+def _add_default_value_name_for_docs(parameter: nimi_python_types.Parameter, module_name: str) -> None:
     '''Declaration with default value, if set'''
+    name: str
+    assert isinstance(parameter['python_name'], str)
     if 'default_value' in parameter:
         if 'enum' in parameter and parameter['enum'] is not None and parameter['default_value'] is not None:
+            assert isinstance(parameter['default_value'], str)
             name = parameter['python_name'] + "=" + module_name + '.' + parameter['default_value']
         else:
             name = parameter['python_name'] + "=" + str(parameter['default_value'])
@@ -236,29 +263,36 @@ def _add_default_value_name_for_docs(parameter, module_name):
 _repeated_capability_parameter_names = ['channelName', 'channelList', 'channel', 'channelNameList', 'channelsString']
 
 
-def _add_method_templates(f):
+def _add_method_templates(f: nimi_python_types.Function) -> None:
     '''Adds a list of 'method_template_filenames' value to function metadata if not found. This are the mako templates that will be used to render the method.'''
     if 'method_templates' not in f:
         f['method_templates'] = [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ]
     # Prefix the templates with a / so mako can find them. Not sure mako it works this way.
-    for method_template in f['method_templates']:
+    method_template: nimi_python_types.MethodTemplate
+    method_templates: nimi_python_types.MethodTemplates = f['method_templates']  # type: ignore
+    for method_template in method_templates:
+        assert isinstance(method_template['session_filename'], str)
         method_template['session_filename'] = '/' + method_template['session_filename'] if method_template['session_filename'][0] != '/' else method_template['session_filename']
         # Some functions don't get code-generated documentation (i.e. private methods) so no need to specify template for those.
         if 'documentation_filename' in method_template and method_template['documentation_filename'] is not None:
+            assert isinstance(method_template['documentation_filename'], str)
             method_template['documentation_filename'] = '/' + method_template['documentation_filename'] if method_template['documentation_filename'][0] != '/' else method_template['documentation_filename']
 
 
-def _add_has_repeated_capability(f):
+def _add_has_repeated_capability(f: nimi_python_types.Function) -> None:
     '''Adds a boolean 'has_repeated_capability' to the function metadata by inferring it from its parameter names, if not previously populated.'''
     if 'has_repeated_capability' not in f:
         f['has_repeated_capability'] = False
-        for p in f['parameters']:
+        p: nimi_python_types.Parameter
+        params: nimi_python_types.Parameters = f['parameters']  # type: ignore
+        for p in params:
             if p['is_repeated_capability']:
                 f['has_repeated_capability'] = True
+                assert isinstance(p['repeated_capability_type'], str)
                 f['repeated_capability_type'] = p['repeated_capability_type']
 
 
-def _add_render_in_session_base(f):
+def _add_render_in_session_base(f: nimi_python_types.Function) -> None:
     '''Adds a boolean 'render_in_session_base' to the function metadata if not previously populated.
 
     This tells the code generator to render those methods in _SessionBase class and not Session.
@@ -268,7 +302,7 @@ def _add_render_in_session_base(f):
         f['render_in_session_base'] = f['has_repeated_capability'] or f['is_error_handling']
 
 
-def _add_is_repeated_capability(parameter):
+def _add_is_repeated_capability(parameter: nimi_python_types.Parameter) -> None:
     '''Adds a boolean 'is_repeated_capability' to the parameter metadata by inferring it from its name, if not previously populated.'''
     if 'is_repeated_capability' not in parameter:
         if parameter['name'] in _repeated_capability_parameter_names:
@@ -278,7 +312,7 @@ def _add_is_repeated_capability(parameter):
             parameter['is_repeated_capability'] = False
 
 
-def _add_use_session_lock(f):
+def _add_use_session_lock(f: nimi_python_types.Function) -> None:
     '''Set 'use_session_lock' to True unless it already exists
 
     Only nimodinst doesn't have session locking and the modinst session.py.mako doesn't even look at this
@@ -286,27 +320,33 @@ def _add_use_session_lock(f):
     f['use_session_lock'] = True if 'use_session_lock' not in f else f['use_session_lock']
 
 
-def _add_is_session_handle(parameter):
+def _add_is_session_handle(parameter: nimi_python_types.Parameter) -> None:
     '''Adds a boolean 'is_session_handle' to the parameter metadata by inferring it from its type, if not previously populated.'''
     if 'is_session_handle' not in parameter:
+        assert isinstance(parameter['type'], str)
+        assert isinstance(parameter['direction'], str)
         parameter['is_session_handle'] = parameter['type'] == 'ViSession' and parameter['direction'] == 'in'
 
 
-def _fix_type(parameter):
+def _fix_type(parameter: nimi_python_types.Parameter) -> None:
     '''Replace any spaces in the parameter type with an underscore.'''
+    assert isinstance(parameter['type'], str)
     parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' []', '[]').replace(' ', '_')
 
 
-def _add_use_in_python_api(p, parameters):
+def _add_use_in_python_api(p: nimi_python_types.Parameter, parameters: nimi_python_types.Parameters) -> None:
     '''Add 'use_in_python_api' if not there with value of True'''
     if 'use_in_python_api' not in p:
         p['use_in_python_api'] = True
 
-    if p['size']['mechanism'] == 'len' or p['size']['mechanism'] == 'ivi-dance':
+    size: nimi_python_types.Size = p['size']  # type: ignore
+    size_param: nimi_python_types.Parameter
+    assert isinstance(size['mechanism'], str)
+    if size['mechanism'] == 'len' or size['mechanism'] == 'ivi-dance':
         size_param = find_size_parameter(p, parameters)
         size_param['use_in_python_api'] = False
 
-    if p['size']['mechanism'] == 'ivi-dance-with-a-twist':
+    if size['mechanism'] == 'ivi-dance-with-a-twist':
         # We have two parameters to remove from the API
         size_param = find_size_parameter(p, parameters)
         size_param['use_in_python_api'] = False
@@ -314,25 +354,31 @@ def _add_use_in_python_api(p, parameters):
         size_param['use_in_python_api'] = False
 
 
-def _setup_init_function(functions, config):
+def _setup_init_function(functions: nimi_python_types.Functions, config: nimi_python_types.Config) -> None:
     '''Copy the selected init function to a known name and update information about it for documentation purposes'''
     try:
-        init_function = copy.deepcopy(functions[config['init_function']])
+        init_function: nimi_python_types.Function = copy.deepcopy(functions[config['init_function']])  # type: ignore
         init_function['codegen_method'] = 'no'
 
         # Change the init_function information for generating the docstring
         # We are assuming the last parameter is vi out
-        for p in init_function['parameters']:
+        p: nimi_python_types.Parameter
+        params: nimi_python_types.Parameters = init_function['parameters']  # type: ignore
+        for p in params:
+            docs: nimi_python_types.Documentation = p['documentation']  # type: ignore
+            assert isinstance(p['name'], str)
+            assert isinstance(p['python_name'], str)
+            assert isinstance(config['module_name'], str)
             if p['name'] == config['session_handle_parameter_name']:
-                p['documentation']['description'] = session_return_text
+                docs['description'] = session_return_text
                 p['type_in_documentation'] = config['module_name'] + '.Session'
                 p['python_name'] = 'session'
             elif p['python_name'] == 'option_string':
                 p['python_name'] = 'options'
                 p['python_name_with_default'] = 'options={}'
-                p['documentation']['description'] = options_text
-                p['documentation']['table_header'] = options_table_header
-                p['documentation']['table_body'] = options_table_body
+                docs['description'] = options_text
+                docs['table_header'] = options_table_header
+                docs['table_body'] = options_table_body
                 # Additional options documentation may be added in metadata __init__ if it is driver specific
 
         functions['_init_function'] = init_function
@@ -345,79 +391,94 @@ def _setup_init_function(functions, config):
             print("Couldn't find {} init function".format(config['init_function']))
 
 
-def add_all_function_metadata(functions, config):
+def add_all_function_metadata(functions: nimi_python_types.Functions, config: nimi_python_types.Config) -> nimi_python_types.Functions:
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     functions = merge_helper(functions, 'functions', config, use_re=True)
 
+    f: str
+    function: nimi_python_types.Function
     for f in functions:
-        _add_codegen_method(functions[f])
+        function = functions[f]
+        _add_codegen_method(function)
         # Some drivers do not have any documentation, so make sure the
         # documentation key exists
-        if 'documentation' not in functions[f]:
-            functions[f]['documentation'] = {}
+        if 'documentation' not in function:
+            function['documentation'] = {}
 
     for f in functions:
-        _add_name(functions[f], f)
-        _add_python_method_name(functions[f], f)
-        _add_is_error_handling(functions[f])
-        _add_method_templates(functions[f])
-        _add_use_session_lock(functions[f])
-        for p in functions[f]['parameters']:
+        function = functions[f]
+        _add_name(function, f)
+        _add_python_method_name(function, f)
+        _add_is_error_handling(function)
+        _add_method_templates(function)
+        _add_use_session_lock(function)
+
+        p: nimi_python_types.Parameter
+        params: nimi_python_types.Parameters = function['parameters']  # type: ignore
+        for p in params:
             if 'documentation' not in p:
-                p['documentation'] = {}
+                nothing: nimi_python_types.EmptyMapping = {}
+                p['documentation'] = nothing
             _add_enum(p)
             _fix_type(p)
             _add_buffer_info(p, config)
-            _add_use_in_python_api(p, functions[f]['parameters'])
+            _add_use_in_python_api(p, params)
             _add_python_parameter_name(p)
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p, config)
-            _add_numpy_info(p, functions[f]['parameters'], config)
+            _add_numpy_info(p, params, config)
             _add_default_value_name(p)
+            assert isinstance(config['module_name'], str)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
             _add_is_session_handle(p)
             _add_library_method_call_snippet(p)
 
         # We can't do these until the parameters have been processed
-        _add_has_repeated_capability(functions[f])
-        _add_render_in_session_base(functions[f])
+        _add_has_repeated_capability(function)
+        _add_render_in_session_base(function)
 
     _setup_init_function(functions, config)
 
     return functions
 
 
-def _add_python_name(a, attributes):
+def _add_python_name(a: int, attributes: nimi_python_types.Attributes) -> None:
     '''Adds 'python_name' - lower case + leading '_' if first character is a digit'''
-    if 'python_name' not in attributes[a]:
-        n = attributes[a]['name'].lower()
-        if attributes[a]['codegen_method'] == 'private':
+    attr: nimi_python_types.Attribute = attributes[a]
+    if 'python_name' not in attr:
+        assert isinstance(attr['name'], str)
+        n = attr['name'].lower()
+        assert isinstance(attr['codegen_method'], str)
+        if attr['codegen_method'] == 'private':
             n = '_' + n
 
-        attributes[a]['python_name'] = n
+        attr['python_name'] = n
 
-    assert not attributes[a]['python_name'][0].isdigit()
+    assert isinstance(attr['python_name'], str)
+    assert not attr['python_name'][0].isdigit()
 
 
-def _add_default_attribute_class(a, attributes):
+def _add_default_attribute_class(a: int, attributes: nimi_python_types.Attributes) -> None:
     '''Set 'attribute_class' if not set.
 
     By default, the 'attribute_class' is only based on the 'type'.
     It can be set in attributes_addon if we want to convert to/from a different datatype, such as hightime.timedelta
     '''
-    if 'attribute_class' not in attributes[a]:
-        attributes[a]['attribute_class'] = 'Attribute' + attributes[a]['type']
+    attr: nimi_python_types.Attribute = attributes[a]
+    if 'attribute_class' not in attr:
+        assert isinstance(attr['type'], str)
+        attr['attribute_class'] = 'Attribute' + attr['type']
 
 
-def _add_repeated_capability_type(a, attributes):
+def _add_repeated_capability_type(a: int, attributes: nimi_python_types.Attributes) -> None:
     '''Add 'repeated_capability_type' if not already there.'''
     if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based']:
         attributes[a]['repeated_capability_type'] = 'channels'
 
 
-def add_all_attribute_metadata(attributes, config):
+def add_all_attribute_metadata(attributes: nimi_python_types.Attributes, config: nimi_python_types.Config) -> nimi_python_types.Attributes:
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     attributes = merge_helper(attributes, 'attributes', config, use_re=False)
 
@@ -432,72 +493,105 @@ def add_all_attribute_metadata(attributes, config):
     return attributes
 
 
-def _add_enum_codegen_method(enums, config):
+def _add_enum_codegen_method(enums: nimi_python_types.Enums, config: nimi_python_types.Config) -> None:
     '''Adds 'codegen_method' that will determine whether and how the enum is code genned. Default is public
 
     Set all to 'no', then go through all functions and attributes and set to least restrictive use
     '''
-    for e in enums:
-        if 'codegen_method' not in enums[e]:
-            enums[e]['codegen_method'] = 'no'
+    attrs: nimi_python_types.Attributes = config['attributes']  # type: ignore
+    functions: nimi_python_types.Functions = config['functions']  # type: ignore
+
+    e: nimi_python_types.Enum
+    e_name: typing.Optional[str]
+    for e_name in enums:
+        e = enums[e_name]
+        if 'codegen_method' not in e:
+            e['codegen_method'] = 'no'
 
     # Iterate through all codegen functions and set any enum parameters to the same level
-    for f in filter_codegen_functions(config['functions']):
-        f_codegen_method = config['functions'][f]['codegen_method']
+    for f in filter_codegen_functions(functions):
+        assert isinstance(f, str)
+        function: nimi_python_types.Function = functions[f]
+        assert isinstance(function['codegen_method'], str)
+        f_codegen_method: str = function['codegen_method']
         if f_codegen_method != 'no':
-            for p in config['functions'][f]['parameters']:
-                e = p['enum']
-                if e is not None and e not in enums:
+            p: nimi_python_types.Parameter
+            params: nimi_python_types.Parameters = function['parameters']  # type: ignore
+            for p in params:
+                e_name = p['enum']  # type: ignore
+                if e_name is not None and e_name not in enums:
                     print('Missing enum {0} referenced by function {1}'.format(e, f))
-                elif e is not None:
-                    if f_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
-                        enums[e]['codegen_method'] = f_codegen_method
+                elif e_name is not None:
+                    e = enums[e_name]
+                    assert isinstance(e['codegen_method'], str)
+                    if f_codegen_method == 'private' and e['codegen_method'] == 'no':
+                        e['codegen_method'] = f_codegen_method
                     elif f_codegen_method == 'public' or f_codegen_method == 'python-only':
-                        enums[e]['codegen_method'] = 'public'
+                        e['codegen_method'] = 'public'
 
     # Iterate through all codegen attributes and set any enum parameters to the same level
-    for a in filter_codegen_attributes(config['attributes']):
-        a_codegen_method = config['attributes'][a]['codegen_method']
+    for a in filter_codegen_attributes(attrs):
+        assert isinstance(a, int)
+        attr: nimi_python_types.Attribute = attrs[a]
+        assert isinstance(attr['codegen_method'], str)
+        a_codegen_method: str = attr['codegen_method']
         if a_codegen_method != 'no':
-            e = config['attributes'][a]['enum']
-            if e is not None and e not in enums:
+            e_name = attr['enum']  # type: ignore
+            if e_name is not None and e_name not in enums:
                 print('Missing enum {0} referenced by attribute {1}'.format(e, a))
-            elif e is not None:
-                if a_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
-                    enums[e]['codegen_method'] = a_codegen_method
+            elif e_name is not None:
+                e = enums[e_name]
+                assert isinstance(e['codegen_method'], str)
+                if a_codegen_method == 'private' and e['codegen_method'] == 'no':
+                    e['codegen_method'] = a_codegen_method
                 elif a_codegen_method == 'public':
-                    enums[e]['codegen_method'] = a_codegen_method
+                    e['codegen_method'] = a_codegen_method
 
 
-def _add_enum_value_python_name(enum_info, config):
+def _add_enum_value_python_name(enum_info: nimi_python_types.Enum, config: nimi_python_types.Config) -> nimi_python_types.Enum:
     '''Add 'python_name' for all values, removing any common prefixes and suffixes'''
-    for v in enum_info['values']:
-        if 'python_name' not in v:
-            v['python_name'] = v['name'].replace('{0}_VAL_'.format(config['module_name'].upper()), '')
+    val: nimi_python_types.Value
+    vals: nimi_python_types.Values = enum_info['values']  # type: ignore
+    for val in vals:
+        if 'python_name' not in val:
+            assert isinstance(val['name'], str)
+            assert isinstance(config['module_name'], str)
+            val['python_name'] = str(val['name']).replace('{0}_VAL_'.format(str(config['module_name']).upper()), '')
+
+    names: typing.List[str] = []
+    for val in vals:
+        assert isinstance(val['python_name'], str)
+        names.append(val['python_name'])
 
     # We are using an os.path function do find any common prefix. So that we don't
     # get 'O' in 'ON' and 'OFF' we remove characters at the end until they are '_'
-    names = [v['python_name'] for v in enum_info['values']]
-    prefix = os.path.commonprefix(names)
+    prefix: str = os.path.commonprefix(names)
     while len(prefix) > 0 and prefix[-1] != '_':
         prefix = prefix[:-1]
 
     # If the prefix is in the whitelist, we don't want to remove it so set to empty string
-    if 'enum_whitelist_prefix' in config and prefix in config['enum_whitelist_prefix']:
+    suffix_list: nimi_python_types.WhiteListSuffix = config.get('enum_whitelist_suffix', None)  # type: ignore
+    if suffix_list and prefix in suffix_list:
         prefix = ''
 
     # We only remove the prefix if there is one and it isn't '_'.
     # '_' only means the name starts with a number
     if len(prefix) > 0 and prefix != '_':
-        for v in enum_info['values']:
-            assert v['python_name'].startswith(prefix), '{0} does not start with {1}'.format(v['name'], prefix)
-            v['prefix'] = prefix
-            v['python_name'] = v['python_name'].replace(prefix, '')
+        for val in vals:
+            assert isinstance(val['python_name'], str)
+            assert val['python_name'].startswith(prefix), '{0} does not start with {1}'.format(val['name'], prefix)
+            val['prefix'] = prefix
+            val['python_name'] = val['python_name'].replace(prefix, '')
 
     # Now we need to look for common suffixes
     # Using the slow method of reversing a string for readability
-    rev_names = [''.join(reversed(v['python_name'])) for v in enum_info['values']]
-    suffix = os.path.commonprefix(rev_names)
+    name_list: typing.List[str] = []
+    for val in vals:
+        assert isinstance(val['python_name'], str)
+        name_list.append(val['python_name'])
+    val_name: str
+    rev_names: typing.List[str] = [''.join(reversed(val_name)) for val_name in name_list]
+    suffix: str = os.path.commonprefix(rev_names)
     while len(suffix) > 0 and suffix[-1] != '_':
         suffix = suffix[:-1]
 
@@ -505,27 +599,31 @@ def _add_enum_value_python_name(enum_info, config):
     suffix = ''.join(reversed(suffix))
 
     # If the suffix is in the whitelist, we don't want to remove it so set to empty string
-    if 'enum_whitelist_suffix' in config and suffix in config['enum_whitelist_suffix']:
+    if suffix_list and suffix in suffix_list:
         suffix = ''
 
     # We only remove the suffix if there is one.
     # '_' only means the name starts with a number
     if len(suffix) > 0:
-        for v in enum_info['values']:
-            assert v['python_name'].endswith(suffix), '{0} does not end with {1}'.format(v['name'], suffix)
-            v['suffix'] = suffix
-            v['python_name'] = v['python_name'].replace(suffix, '')
+        for val in vals:
+            assert isinstance(val['name'], str)
+            assert isinstance(val['python_name'], str)
+            assert val['python_name'].endswith(suffix), '{0} does not end with {1}'.format(val['name'], suffix)
+            val['suffix'] = suffix
+            val['python_name'] = val['python_name'].replace(suffix, '')
 
     # We need to check again to see if we have any values that start with a digit
     # If we are not going to code generate this enum, we don't care about this
-    for v in enum_info['values']:
-        if enum_info['codegen_method'] != 'no' and v['python_name'][0].isdigit():
-            raise ValueError('Invalid name: {}'.format(v['python_name']))  # pragma: no cover
+    for val in vals:
+        assert isinstance(enum_info['codegen_method'], str)
+        assert isinstance(val['python_name'], str)
+        if enum_info['codegen_method'] != 'no' and val['python_name'][0].isdigit():
+            raise ValueError('Invalid name: {}'.format(val['python_name']))  # pragma: no cover
 
     return enum_info
 
 
-def fixup_enum_names(config):
+def fixup_enum_names(config: nimi_python_types.Config) -> None:
     '''Fix enum types for private enums
 
     Now that we have all the metadata calculated, we need to fix any enum types in attributes and functions
@@ -533,30 +631,54 @@ def fixup_enum_names(config):
     whether the enum would be private or not. We couldn't because we needed to process all the functions and
     attributes first.
     '''
+    attrs: nimi_python_types.Attributes = config['attributes']  # type: ignore
+    enums: nimi_python_types.Enums = config['enums']  # type: ignore
+    functions: nimi_python_types.Functions = config['functions']  # type: ignore
+
+    # Define some types
+    e: nimi_python_types.Enum
+
     # Check all the functions that will be code generated
-    for f in config['functions']:
-        if config['functions'][f]['codegen_method'] != 'no':
-            for p in config['functions'][f]['parameters']:
-                if p['enum'] is not None and config['enums'][p['enum']]['codegen_method'] == 'private':
-                    # We need to update the python type since the enum is private
-                    p['python_type'] = 'enums.' + config['enums'][p['enum']]['python_name']
+    for f_name in functions:
+        assert isinstance(f_name, str)
+        function: nimi_python_types.Function = functions[f_name]
+        assert isinstance(function['codegen_method'], str)
+        if function['codegen_method'] != 'no':
+            params: nimi_python_types.Parameters = function['parameters']  # type: ignore
+            for p in params:
+                if p['enum'] is not None:
+                    assert isinstance(p['enum'], str)
+                    e = enums[p['enum']]
+                    assert isinstance(e['codegen_method'], str)
+                    if e['codegen_method'] == 'private':
+                        # We need to update the python type since the enum is private
+                        assert isinstance(e['python_name'], str)
+                        p['python_type'] = 'enums.' + e['python_name']
 
     # Check all attributes that will be code generated
-    for a in config['attributes']:
-        attr = config['attributes'][a]
+    for a in attrs:
+        assert isinstance(a, int)
+        attr: nimi_python_types.Attribute = attrs[a]
+        assert isinstance(attr['codegen_method'], str)
         if attr['codegen_method'] != 'no':
-            if attr['enum'] is not None and config['enums'][attr['enum']]['codegen_method'] == 'private':
-                # We need to update the python type since the enum is private
-                attr['python_type'] = 'enums.' + config['enums'][attr['enum']]['python_name']
+            if attr['enum'] is not None:
+                assert isinstance(attr['enum'], str)
+                e = enums[attr['enum']]
+                assert isinstance(e['codegen_method'], str)
+                if e['codegen_method'] == 'private':
+                    # We need to update the python type since the enum is private
+                    assert isinstance(e['python_name'], str)
+                    attr['python_type'] = 'enums.' + e['python_name']
 
 
-def add_all_enum_metadata(enums, config):
+def add_all_enum_metadata(enums: nimi_python_types.Enums, config: nimi_python_types.Config) -> nimi_python_types.Enums:
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     enums = merge_helper(enums, 'enums', config, use_re=False)
 
     # Workaround for NI Internal CAR #675174
     try:
-        replacement_enums = config['modules']['metadata.enums_addon'].__getattribute__('replacement_enums')
+        mods: typing.Any = config['modules']
+        replacement_enums: nimi_python_types.Enums = mods['metadata.enums_addon'].__getattribute__('replacement_enums')
         for e in replacement_enums:
             enums[e] = replacement_enums[e]
     except AttributeError:
@@ -565,12 +687,19 @@ def add_all_enum_metadata(enums, config):
     _add_enum_codegen_method(enums, config)
     for e in enums:
         enums[e] = _add_enum_value_python_name(enums[e], config)
-        enums[e]['python_name'] = ('_' if enums[e]['codegen_method'] == 'private' else '') + (enums[e]['python_name'] if 'python_name' in enums[e] else e)
+        assert isinstance(enums[e]['codegen_method'], str)
+        prefix: str = '_' if enums[e]['codegen_method'] == 'private' else ''
+        if 'python_name' in enums[e]:
+            assert isinstance(enums[e]['python_name'], str)
+            name: str = str(enums[e]['python_name'])
+            enums[e]['python_name'] = prefix + name
+        else:
+            enums[e]['python_name'] = prefix + e
 
     return enums
 
 
-def add_all_config_metadata(config):
+def add_all_config_metadata(config: nimi_python_types.Config) -> nimi_python_types.Config:
     '''add_all_config_metadata
 
     Ensure all defaults added to config
@@ -586,7 +715,12 @@ def add_all_config_metadata(config):
     return config
 
 
-def add_all_metadata(functions, attributes, enums, config, persist_output=True):
+def add_all_metadata(
+        functions: nimi_python_types.Functions,
+        attributes: nimi_python_types.Attributes,
+        enums: nimi_python_types.Enums,
+        config: nimi_python_types.Config,
+        persist_output: bool = True) -> nimi_python_types.Config:
     '''merge and add all additional metadata_dir
 
     Updates all parameters
@@ -611,11 +745,13 @@ def add_all_metadata(functions, attributes, enums, config, persist_output=True):
     fixup_enum_names(config)
 
     pp_persist = pprint.PrettyPrinter(indent=4, width=200)
-    metadata_dir = os.path.join('generated', 'processed_metadata')
+    metadata_dir: str = os.path.join('generated', 'processed_metadata')
 
     # If we are not persisting the output (I.e. during a test) we return early
     if not persist_output:
         return config
+
+    assert isinstance(config['module_name'], str)
 
     if not os.path.exists(metadata_dir):
         os.makedirs(metadata_dir)
@@ -635,7 +771,7 @@ def add_all_metadata(functions, attributes, enums, config, persist_output=True):
 
     # We need to make a copy so we can delete functions, attributes and enums since
     # they are already in individual files
-    config_copy = copy.deepcopy(config)
+    config_copy: nimi_python_types.Config = copy.deepcopy(config)
     del config_copy['functions']
     del config_copy['attributes']
     del config_copy['enums']
@@ -672,63 +808,108 @@ def _compare_dicts(actual, expected):
         assert k in actual, 'Key {0} not in actual'.format(k)
 
 
-functions_input = {
+actual_parameters1: nimi_python_types.Parameters = [
+    {
+        'direction': 'in',
+        'enum': None,
+        'name': 'vi',
+        'type': 'ViSession',
+        'documentation': {
+            'description': 'Identifies a particular instrument session.',
+        },
+    },
+    {
+        'direction': 'in',
+        'enum': None,
+        'name': 'channelName',
+        'type': 'ViString',
+        'documentation': {
+            'description': 'The channel to call this on.',
+        },
+    },
+    {
+        'direction': 'in',
+        'documentation': {
+            'description': 'buffer size input',
+        },
+        'enum': None,
+        'name': 'pinDataBufferSize',
+        'type': 'ViInt32'
+    },
+    {
+        'direction': 'out',
+        'documentation': {
+            'description': 'buffer size output',
+        },
+        'enum': None,
+        'name': 'actualNumPinData',
+        'type': 'ViInt32'
+    },
+    {
+        'direction': 'out',
+        'documentation': {
+            'description': 'buffer',
+        },
+        'enum': None,
+        'name': 'expectedPinStates',
+        'size': {
+            'mechanism': 'ivi-dance-with-a-twist',
+            'value': 'pinDataBufferSize',
+            'value_twist': 'actualNumPinData'
+        },
+        'type': 'ViUInt8[]'
+    },
+]
+
+actual_parameters2: nimi_python_types.Parameters = [
+    {
+        'direction': 'in',
+        'enum': None,
+        'name': 'vi',
+        'type': 'ViSession',
+        'documentation': {
+            'description': 'Identifies a particular instrument session.',
+        },
+    },
+    {
+        'direction': 'out',
+        'enum': None,
+        'name': 'status',
+        'type': 'ViString',
+        'documentation': {
+            'description': 'Return a device status',
+        },
+    },
+    {
+        'direction': 'in',
+        'documentation': {
+            'description': 'buffer size',
+        },
+        'enum': None,
+        'name': 'dataBufferSize',
+        'type': 'ViInt32'
+    },
+    {
+        'direction': 'out',
+        'documentation': {
+            'description': 'buffer',
+        },
+        'enum': None,
+        'name': 'data',
+        'size': {
+            'mechanism': 'ivi-dance',
+            'value': 'dataBufferSize'
+        },
+        'type': 'ViUInt32[]'
+    },
+]
+
+functions_input: nimi_python_types.Functions = {
     'MakeAFoo': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
         'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'vi',
-                'type': 'ViSession',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.',
-                },
-            },
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'channelName',
-                'type': 'ViString',
-                'documentation': {
-                    'description': 'The channel to call this on.',
-                },
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'buffer size input',
-                },
-                'enum': None,
-                'name': 'pinDataBufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'buffer size output',
-                },
-                'enum': None,
-                'name': 'actualNumPinData',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'buffer',
-                },
-                'enum': None,
-                'name': 'expectedPinStates',
-                'size': {
-                    'mechanism': 'ivi-dance-with-a-twist',
-                    'value': 'pinDataBufferSize',
-                    'value_twist': 'actualNumPinData'
-                },
-                'type': 'ViUInt8[]'
-            },
-        ],
+        'parameters': actual_parameters1,
         'documentation': {
             'description': 'Performs a foo, and performs it well.',
         },
@@ -736,56 +917,309 @@ functions_input = {
     'MakeAPrivateMethod': {
         'codegen_method': 'private',
         'returns': 'ViStatus',
-        'parameters': [
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'vi',
-                'type': 'ViSession',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.',
-                },
-            },
-            {
-                'direction': 'out',
-                'enum': None,
-                'name': 'status',
-                'type': 'ViString',
-                'documentation': {
-                    'description': 'Return a device status',
-                },
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'buffer size',
-                },
-                'enum': None,
-                'name': 'dataBufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'buffer',
-                },
-                'enum': None,
-                'name': 'data',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'dataBufferSize'
-                },
-                'type': 'ViUInt32[]'
-            },
-        ],
+        'parameters': actual_parameters2,
         'documentation': {
             'description': 'Perform actions as method defined',
         },
     },
 }
 
+expected_parameters1: nimi_python_types.Parameters = [
+    {
+        'ctypes_type': 'ViSession',
+        'ctypes_variable_name': 'vi_ctype',
+        'ctypes_type_library_call': 'ViSession',
+        'direction': 'in',
+        'documentation': {
+            'description': 'Identifies a particular instrument session.'
+        },
+        'is_repeated_capability': False,
+        'is_session_handle': True,
+        'enum': None,
+        'numpy': False,
+        'python_type': 'int',
+        'type_in_documentation': 'int',
+        'type_in_documentation_was_calculated': True,
+        'use_array': False,
+        'is_buffer': False,
+        'use_list': False,
+        'is_string': False,
+        'name': 'vi',
+        'python_name': 'vi',
+        'python_name_with_default': 'vi',
+        'python_name_with_doc_default': 'vi',
+        'size': {
+            'mechanism': 'fixed',
+            'value': 1
+        },
+        'type': 'ViSession',
+        'library_method_call_snippet': 'vi_ctype',
+        'use_in_python_api': True,
+        'python_name_or_default_for_init': 'vi',
+    },
+    {
+        'ctypes_type': 'ViString',
+        'ctypes_variable_name': 'channel_name_ctype',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+        'direction': 'in',
+        'documentation': {
+            'description': 'The channel to call this on.'
+        },
+        'is_repeated_capability': True,
+        'repeated_capability_type': 'channels',
+        'is_session_handle': False,
+        'enum': None,
+        'numpy': False,
+        'python_type': 'str',
+        'type_in_documentation': 'str',
+        'type_in_documentation_was_calculated': True,
+        'use_array': False,
+        'is_buffer': False,
+        'use_list': False,
+        'is_string': True,
+        'name': 'channelName',
+        'python_name': 'channel_name',
+        'python_name_with_default': 'channel_name',
+        'python_name_with_doc_default': 'channel_name',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViString',
+        'library_method_call_snippet': 'channel_name_ctype',
+        'use_in_python_api': True,
+        'python_name_or_default_for_init': 'channel_name',
+    },
+    {
+        'ctypes_type': 'ViInt32',
+        'ctypes_variable_name': 'pin_data_buffer_size_ctype',
+        'ctypes_type_library_call': 'ViInt32',
+        'direction': 'in',
+        'documentation': {
+            'description': 'buffer size input',
+        },
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'enum': None,
+        'numpy': False,
+        'python_type': 'int',
+        'type_in_documentation': 'int',
+        'type_in_documentation_was_calculated': True,
+        'use_array': False,
+        'is_buffer': False,
+        'use_list': False,
+        'is_string': False,
+        'name': 'pinDataBufferSize',
+        'python_name': 'pin_data_buffer_size',
+        'python_name_with_default': 'pin_data_buffer_size',
+        'python_name_with_doc_default': 'pin_data_buffer_size',
+        'size': {
+            'mechanism': 'fixed',
+            'value': 1
+        },
+        'type': 'ViInt32',
+        'library_method_call_snippet': 'pin_data_buffer_size_ctype',
+        'use_in_python_api': False,
+        'python_name_or_default_for_init': 'pin_data_buffer_size',
+    },
+    {
+        'ctypes_type': 'ViInt32',
+        'ctypes_variable_name': 'actual_num_pin_data_ctype',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
+        'direction': 'out',
+        'documentation': {
+            'description': 'buffer size output',
+        },
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'enum': None,
+        'numpy': False,
+        'python_type': 'int',
+        'type_in_documentation': 'int',
+        'type_in_documentation_was_calculated': True,
+        'use_array': False,
+        'is_buffer': False,
+        'use_list': False,
+        'is_string': False,
+        'name': 'actualNumPinData',
+        'python_name': 'actual_num_pin_data',
+        'python_name_with_default': 'actual_num_pin_data',
+        'python_name_with_doc_default': 'actual_num_pin_data',
+        'size': {
+            'mechanism': 'fixed',
+            'value': 1
+        },
+        'type': 'ViInt32',
+        'library_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
+        'use_in_python_api': False,
+        'python_name_or_default_for_init': 'actual_num_pin_data',
+    },
+    {
+        'ctypes_type': 'ViUInt8',
+        'ctypes_variable_name': 'expected_pin_states_ctype',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViUInt8)',
+        'direction': 'out',
+        'documentation': {
+            'description': 'buffer',
+        },
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'enum': None,
+        'numpy': False,
+        'python_type': 'int',
+        'type_in_documentation': 'int',
+        'type_in_documentation_was_calculated': True,
+        'use_array': False,
+        'is_buffer': True,
+        'use_list': True,
+        'is_string': False,
+        'name': 'expectedPinStates',
+        'original_type': 'ViUInt8[]',
+        'python_name': 'expected_pin_states',
+        'python_name_with_default': 'expected_pin_states',
+        'python_name_with_doc_default': 'expected_pin_states',
+        'size': {
+            'mechanism': 'ivi-dance-with-a-twist',
+            'value': 'pinDataBufferSize',
+            'value_twist': 'actualNumPinData'
+        },
+        'type': 'ViUInt8',
+        'library_method_call_snippet': 'expected_pin_states_ctype',
+        'use_in_python_api': True,
+        'python_name_or_default_for_init': 'expected_pin_states',
+    },
+]
 
-functions_expected = {
+expected_parameters2: nimi_python_types.Parameters = [
+    {
+        'direction': 'in',
+        'enum': None,
+        'numpy': False,
+        'name': 'vi',
+        'type': 'ViSession',
+        'documentation': {
+            'description': 'Identifies a particular instrument session.'
+        },
+        'python_name': 'vi',
+        'python_type': 'int',
+        'type_in_documentation': 'int',
+        'type_in_documentation_was_calculated': True,
+        'ctypes_variable_name': 'vi_ctype',
+        'ctypes_type': 'ViSession',
+        'ctypes_type_library_call': 'ViSession',
+        'size': {
+            'mechanism': 'fixed',
+            'value': 1
+        },
+        'use_array': False,
+        'is_buffer': False,
+        'use_list': False,
+        'is_string': False,
+        'python_name_with_default': 'vi',
+        'python_name_with_doc_default': 'vi',
+        'is_repeated_capability': False,
+        'is_session_handle': True,
+        'library_method_call_snippet': 'vi_ctype',
+        'use_in_python_api': True,
+        'python_name_or_default_for_init': 'vi',
+    },
+    {
+        'direction': 'out',
+        'enum': None,
+        'numpy': False,
+        'name': 'status',
+        'type': 'ViString',
+        'documentation': {
+            'description': 'Return a device status'
+        },
+        'python_name': 'status',
+        'python_type': 'str',
+        'type_in_documentation': 'str',
+        'type_in_documentation_was_calculated': True,
+        'ctypes_variable_name': 'status_ctype',
+        'ctypes_type': 'ViString',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+        'size': {
+            'mechanism': 'fixed',
+            'value': 1
+        },
+        'use_array': False,
+        'is_buffer': False,
+        'use_list': False,
+        'is_string': True,
+        'python_name_with_default': 'status',
+        'python_name_with_doc_default': 'status',
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'status_ctype',
+        'use_in_python_api': True,
+        'python_name_or_default_for_init': 'status',
+    },
+    {
+        'ctypes_type': 'ViInt32',
+        'ctypes_variable_name': 'data_buffer_size_ctype',
+        'ctypes_type_library_call': 'ViInt32',
+        'direction': 'in',
+        'documentation': {
+            'description': 'buffer size',
+        },
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'enum': None,
+        'numpy': False,
+        'python_type': 'int',
+        'type_in_documentation': 'int',
+        'type_in_documentation_was_calculated': True,
+        'use_array': False,
+        'is_buffer': False,
+        'use_list': False,
+        'is_string': False,
+        'name': 'dataBufferSize',
+        'python_name': 'data_buffer_size',
+        'python_name_with_default': 'data_buffer_size',
+        'python_name_with_doc_default': 'data_buffer_size',
+        'size': {
+            'mechanism': 'fixed',
+            'value': 1
+        },
+        'type': 'ViInt32',
+        'library_method_call_snippet': 'data_buffer_size_ctype',
+        'use_in_python_api': False,
+        'python_name_or_default_for_init': 'data_buffer_size',
+    },
+    {
+        'ctypes_type': 'ViUInt32',
+        'ctypes_variable_name': 'data_ctype',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViUInt32)',
+        'direction': 'out',
+        'documentation': {
+            'description': 'buffer',
+        },
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'enum': None,
+        'numpy': False,
+        'python_type': 'int',
+        'type_in_documentation': 'int',
+        'type_in_documentation_was_calculated': True,
+        'use_array': False,
+        'is_buffer': True,
+        'use_list': True,
+        'is_string': False,
+        'name': 'data',
+        'original_type': 'ViUInt32[]',
+        'python_name': 'data',
+        'python_name_with_default': 'data',
+        'python_name_with_doc_default': 'data',
+        'size': {
+            'mechanism': 'ivi-dance',
+            'value': 'dataBufferSize',
+        },
+        'type': 'ViUInt32',
+        'library_method_call_snippet': 'data_ctype',
+        'use_in_python_api': True,
+        'python_name_or_default_for_init': 'data',
+    },
+]
+
+functions_expected: nimi_python_types.Functions = {
     'MakeAFoo': {
         'name': 'MakeAFoo',
         'codegen_method': 'public',
@@ -798,168 +1232,7 @@ functions_expected = {
         'is_error_handling': False,
         'render_in_session_base': True,
         'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
-        'parameters': [
-            {
-                'ctypes_type': 'ViSession',
-                'ctypes_variable_name': 'vi_ctype',
-                'ctypes_type_library_call': 'ViSession',
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.'
-                },
-                'is_repeated_capability': False,
-                'is_session_handle': True,
-                'enum': None,
-                'numpy': False,
-                'python_type': 'int',
-                'type_in_documentation': 'int',
-                'type_in_documentation_was_calculated': True,
-                'use_array': False,
-                'is_buffer': False,
-                'use_list': False,
-                'is_string': False,
-                'name': 'vi',
-                'python_name': 'vi',
-                'python_name_with_default': 'vi',
-                'python_name_with_doc_default': 'vi',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 1
-                },
-                'type': 'ViSession',
-                'library_method_call_snippet': 'vi_ctype',
-                'use_in_python_api': True,
-                'python_name_or_default_for_init': 'vi',
-            },
-            {
-                'ctypes_type': 'ViString',
-                'ctypes_variable_name': 'channel_name_ctype',
-                'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
-                'direction': 'in',
-                'documentation': {
-                    'description': 'The channel to call this on.'
-                },
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
-                'is_session_handle': False,
-                'enum': None,
-                'numpy': False,
-                'python_type': 'str',
-                'type_in_documentation': 'str',
-                'type_in_documentation_was_calculated': True,
-                'use_array': False,
-                'is_buffer': False,
-                'use_list': False,
-                'is_string': True,
-                'name': 'channelName',
-                'python_name': 'channel_name',
-                'python_name_with_default': 'channel_name',
-                'python_name_with_doc_default': 'channel_name',
-                'size': {'mechanism': 'fixed', 'value': 1},
-                'type': 'ViString',
-                'library_method_call_snippet': 'channel_name_ctype',
-                'use_in_python_api': True,
-                'python_name_or_default_for_init': 'channel_name',
-            },
-            {
-                'ctypes_type': 'ViInt32',
-                'ctypes_variable_name': 'pin_data_buffer_size_ctype',
-                'ctypes_type_library_call': 'ViInt32',
-                'direction': 'in',
-                'documentation': {
-                    'description': 'buffer size input',
-                },
-                'is_repeated_capability': False,
-                'is_session_handle': False,
-                'enum': None,
-                'numpy': False,
-                'python_type': 'int',
-                'type_in_documentation': 'int',
-                'type_in_documentation_was_calculated': True,
-                'use_array': False,
-                'is_buffer': False,
-                'use_list': False,
-                'is_string': False,
-                'name': 'pinDataBufferSize',
-                'python_name': 'pin_data_buffer_size',
-                'python_name_with_default': 'pin_data_buffer_size',
-                'python_name_with_doc_default': 'pin_data_buffer_size',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 1
-                },
-                'type': 'ViInt32',
-                'library_method_call_snippet': 'pin_data_buffer_size_ctype',
-                'use_in_python_api': False,
-                'python_name_or_default_for_init': 'pin_data_buffer_size',
-            },
-            {
-                'ctypes_type': 'ViInt32',
-                'ctypes_variable_name': 'actual_num_pin_data_ctype',
-                'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
-                'direction': 'out',
-                'documentation': {
-                    'description': 'buffer size output',
-                },
-                'is_repeated_capability': False,
-                'is_session_handle': False,
-                'enum': None,
-                'numpy': False,
-                'python_type': 'int',
-                'type_in_documentation': 'int',
-                'type_in_documentation_was_calculated': True,
-                'use_array': False,
-                'is_buffer': False,
-                'use_list': False,
-                'is_string': False,
-                'name': 'actualNumPinData',
-                'python_name': 'actual_num_pin_data',
-                'python_name_with_default': 'actual_num_pin_data',
-                'python_name_with_doc_default': 'actual_num_pin_data',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 1
-                },
-                'type': 'ViInt32',
-                'library_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
-                'use_in_python_api': False,
-                'python_name_or_default_for_init': 'actual_num_pin_data',
-            },
-            {
-                'ctypes_type': 'ViUInt8',
-                'ctypes_variable_name': 'expected_pin_states_ctype',
-                'ctypes_type_library_call': 'ctypes.POINTER(ViUInt8)',
-                'direction': 'out',
-                'documentation': {
-                    'description': 'buffer',
-                },
-                'is_repeated_capability': False,
-                'is_session_handle': False,
-                'enum': None,
-                'numpy': False,
-                'python_type': 'int',
-                'type_in_documentation': 'int',
-                'type_in_documentation_was_calculated': True,
-                'use_array': False,
-                'is_buffer': True,
-                'use_list': True,
-                'is_string': False,
-                'name': 'expectedPinStates',
-                'original_type': 'ViUInt8[]',
-                'python_name': 'expected_pin_states',
-                'python_name_with_default': 'expected_pin_states',
-                'python_name_with_doc_default': 'expected_pin_states',
-                'size': {
-                    'mechanism': 'ivi-dance-with-a-twist',
-                    'value': 'pinDataBufferSize',
-                    'value_twist': 'actualNumPinData'
-                },
-                'type': 'ViUInt8',
-                'library_method_call_snippet': 'expected_pin_states_ctype',
-                'use_in_python_api': True,
-                'python_name_or_default_for_init': 'expected_pin_states',
-            },
-        ],
+        'parameters': expected_parameters1,
         'python_name': 'make_a_foo',
         'returns': 'ViStatus',
     },
@@ -968,137 +1241,7 @@ functions_expected = {
         'returns': 'ViStatus',
         'use_session_lock': True,
         'method_templates': [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'enum': None,
-                'numpy': False,
-                'name': 'vi',
-                'type': 'ViSession',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.'
-                },
-                'python_name': 'vi',
-                'python_type': 'int',
-                'type_in_documentation': 'int',
-                'type_in_documentation_was_calculated': True,
-                'ctypes_variable_name': 'vi_ctype',
-                'ctypes_type': 'ViSession',
-                'ctypes_type_library_call': 'ViSession',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 1
-                },
-                'use_array': False,
-                'is_buffer': False,
-                'use_list': False,
-                'is_string': False,
-                'python_name_with_default': 'vi',
-                'python_name_with_doc_default': 'vi',
-                'is_repeated_capability': False,
-                'is_session_handle': True,
-                'library_method_call_snippet': 'vi_ctype',
-                'use_in_python_api': True,
-                'python_name_or_default_for_init': 'vi',
-            },
-            {
-                'direction': 'out',
-                'enum': None,
-                'numpy': False,
-                'name': 'status',
-                'type': 'ViString',
-                'documentation': {
-                    'description': 'Return a device status'
-                },
-                'python_name': 'status',
-                'python_type': 'str',
-                'type_in_documentation': 'str',
-                'type_in_documentation_was_calculated': True,
-                'ctypes_variable_name': 'status_ctype',
-                'ctypes_type': 'ViString',
-                'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 1
-                },
-                'use_array': False,
-                'is_buffer': False,
-                'use_list': False,
-                'is_string': True,
-                'python_name_with_default': 'status',
-                'python_name_with_doc_default': 'status',
-                'is_repeated_capability': False,
-                'is_session_handle': False,
-                'library_method_call_snippet': 'status_ctype',
-                'use_in_python_api': True,
-                'python_name_or_default_for_init': 'status',
-            },
-            {
-                'ctypes_type': 'ViInt32',
-                'ctypes_variable_name': 'data_buffer_size_ctype',
-                'ctypes_type_library_call': 'ViInt32',
-                'direction': 'in',
-                'documentation': {
-                    'description': 'buffer size',
-                },
-                'is_repeated_capability': False,
-                'is_session_handle': False,
-                'enum': None,
-                'numpy': False,
-                'python_type': 'int',
-                'type_in_documentation': 'int',
-                'type_in_documentation_was_calculated': True,
-                'use_array': False,
-                'is_buffer': False,
-                'use_list': False,
-                'is_string': False,
-                'name': 'dataBufferSize',
-                'python_name': 'data_buffer_size',
-                'python_name_with_default': 'data_buffer_size',
-                'python_name_with_doc_default': 'data_buffer_size',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 1
-                },
-                'type': 'ViInt32',
-                'library_method_call_snippet': 'data_buffer_size_ctype',
-                'use_in_python_api': False,
-                'python_name_or_default_for_init': 'data_buffer_size',
-            },
-            {
-                'ctypes_type': 'ViUInt32',
-                'ctypes_variable_name': 'data_ctype',
-                'ctypes_type_library_call': 'ctypes.POINTER(ViUInt32)',
-                'direction': 'out',
-                'documentation': {
-                    'description': 'buffer',
-                },
-                'is_repeated_capability': False,
-                'is_session_handle': False,
-                'enum': None,
-                'numpy': False,
-                'python_type': 'int',
-                'type_in_documentation': 'int',
-                'type_in_documentation_was_calculated': True,
-                'use_array': False,
-                'is_buffer': True,
-                'use_list': True,
-                'is_string': False,
-                'name': 'data',
-                'original_type': 'ViUInt32[]',
-                'python_name': 'data',
-                'python_name_with_default': 'data',
-                'python_name_with_doc_default': 'data',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'dataBufferSize',
-                },
-                'type': 'ViUInt32',
-                'library_method_call_snippet': 'data_ctype',
-                'use_in_python_api': True,
-                'python_name_or_default_for_init': 'data',
-            },
-        ],
+        'parameters': expected_parameters2,
         'documentation': {
             'description': 'Perform actions as method defined'
         },
@@ -1111,7 +1254,7 @@ functions_expected = {
 }
 
 
-attributes_input = {
+attributes_input: nimi_python_types.Attributes = {
     1000000: {
         'access': 'read-write',
         'channel_based': False,
@@ -1127,7 +1270,7 @@ attributes_input = {
 }
 
 
-attributes_expected = {
+attributes_expected: nimi_python_types.Attributes = {
     1000000: {
         'access': 'read-write',
         'channel_based': False,
@@ -1147,7 +1290,7 @@ attributes_expected = {
 }
 
 
-enums_input = {
+enums_input: nimi_python_types.Enums = {
     'Color': {
         'values': [
             {
@@ -1183,7 +1326,7 @@ enums_input = {
 }
 
 
-enums_expected = {
+enums_expected: nimi_python_types.Enums = {
     'Color': {
         'codegen_method': 'no',
         'python_name': 'Color',
@@ -1197,7 +1340,7 @@ enums_expected = {
 }
 
 
-config_input = {
+config_input: nimi_python_types.Config = {
     'metadata_version': '1.0',
     'module_name': 'nifake',
     'module_version': '1.1.1.dev0',
@@ -1238,7 +1381,7 @@ config_input = {
 }
 
 
-config_expected = {
+config_expected: nimi_python_types.Config = {
     'metadata_version': '1.0',
     'module_name': 'nifake',
     'module_version': '1.1.1.dev0',
@@ -1281,46 +1424,46 @@ config_expected = {
 }
 
 
-def _do_the_test_add_functions_metadata(functions, expected):
-    actual = copy.deepcopy(functions)
+def _do_the_test_add_functions_metadata(functions: nimi_python_types.Functions, expected: nimi_python_types.Functions) -> None:
+    actual: nimi_python_types.Functions = copy.deepcopy(functions)
     actual = add_all_function_metadata(actual, config_input)
     _compare_dicts(actual, expected)
 
 
-def test_add_functions_metadata_simple():
+def test_add_functions_metadata_simple() -> None:
     _do_the_test_add_functions_metadata(functions=functions_input, expected=functions_expected)
 
 
-def _do_the_test_add_attributes_metadata(attributes, expected):
-    actual = copy.deepcopy(attributes)
+def _do_the_test_add_attributes_metadata(attributes: nimi_python_types.Attributes, expected: nimi_python_types.Attributes) -> None:
+    actual: nimi_python_types.Attributes = copy.deepcopy(attributes)
     actual = add_all_attribute_metadata(actual, config_input)
     _compare_dicts(actual, expected)
 
 
-def test_add_attributes_metadata_simple():
+def test_add_attributes_metadata_simple() -> None:
     _do_the_test_add_attributes_metadata(attributes=attributes_input, expected=attributes_expected)
 
 
-def _do_the_test_add_enums_metadata(enums, expected):
-    actual = copy.deepcopy(enums)
+def _do_the_test_add_enums_metadata(enums: nimi_python_types.Enums, expected: nimi_python_types.Enums) -> None:
+    actual: nimi_python_types.Enums = copy.deepcopy(enums)
     actual = add_all_enum_metadata(actual, config_input)
     _compare_dicts(actual, expected)
 
 
-def test_add_enums_metadata_simple():
+def test_add_enums_metadata_simple() -> None:
     _do_the_test_add_enums_metadata(enums_input, expected=enums_expected)
 
 
-def _do_the_test_add_all_metadata(functions, attributes, enums, config, expected):
+def _do_the_test_add_all_metadata(functions: nimi_python_types.Functions, attributes: nimi_python_types.Attributes, enums: nimi_python_types.Enums, config: nimi_python_types.Config, expected: nimi_python_types.Config) -> None:
     actual = add_all_metadata(functions, attributes, enums, config, persist_output=False)
     _compare_dicts(actual, expected)
 
 
-def test_add_all_metadata_defaults():
-    actual_functions = copy.deepcopy(functions_input)
-    actual_attributes = copy.deepcopy(attributes_input)
-    actual_enums = copy.deepcopy(enums_input)
-    actual_config = copy.deepcopy(config_input)
+def test_add_all_metadata_defaults() -> None:
+    actual_functions: nimi_python_types.Functions = copy.deepcopy(functions_input)
+    actual_attributes: nimi_python_types.Attributes = copy.deepcopy(attributes_input)
+    actual_enums: nimi_python_types.Enums = copy.deepcopy(enums_input)
+    actual_config: nimi_python_types.Config = copy.deepcopy(config_input)
     _do_the_test_add_all_metadata(
         functions=actual_functions,
         attributes=actual_attributes,
@@ -1329,13 +1472,13 @@ def test_add_all_metadata_defaults():
         expected=config_expected)
 
 
-def test_add_all_metadata():
-    actual_functions = copy.deepcopy(functions_input)
-    actual_attributes = copy.deepcopy(attributes_input)
-    actual_enums = copy.deepcopy(enums_input)
-    actual_config = copy.deepcopy(config_input)
+def test_add_all_metadata() -> None:
+    actual_functions: nimi_python_types.Functions = copy.deepcopy(functions_input)
+    actual_attributes: nimi_python_types.Attributes = copy.deepcopy(attributes_input)
+    actual_enums: nimi_python_types.Enums = copy.deepcopy(enums_input)
+    actual_config: nimi_python_types.Config = copy.deepcopy(config_input)
     actual_config['use_locking'] = False
-    expected = copy.deepcopy(config_expected)
+    expected: nimi_python_types.Config = copy.deepcopy(config_expected)
     expected['use_locking'] = False
     _do_the_test_add_all_metadata(
         functions=actual_functions,

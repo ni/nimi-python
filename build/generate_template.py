@@ -7,17 +7,18 @@ from mako.lookup import TemplateLookup
 from mako.template import Template
 import pprint
 import sys
+import typing
 
 pp = pprint.PrettyPrinter(indent=4)
 
 
-def generate_template(template_name, template_params, dest_file, in_zip_file=False):
+def generate_template(template_name: str, template_params: typing.Dict[str, typing.Any], dest_file: str, in_zip_file: bool = False):
     try:
         template_params['encoding_tag'] = '# -*- coding: utf-8 -*-'
-        module_name = template_params['metadata'].config['module_name']
+        module_name: str = template_params['metadata'].config['module_name']
         lookup = TemplateLookup(directories=['build/templates', 'src/{0}/templates'.format(module_name)])
         template = Template(filename=template_name, lookup=lookup)
-        rendered_template = template.render(template_parameters=template_params)
+        rendered_template: str = template.render(template_parameters=template_params)
 
     except Exception:
         # Because mako expands into python, we catch all errors, not just MakoException.
@@ -47,14 +48,9 @@ def generate_template(template_name, template_params, dest_file, in_zip_file=Fal
         sys.exit(1)
 
     logging.debug(rendered_template)
-    if sys.version_info.major < 3:
-        file_handle_public = codecs.open(dest_file, mode="w", encoding='utf-8')
-        file_handle_public.write(rendered_template)
-        file_handle_public.close()
-    else:
-        file_handle_public = open(dest_file, 'wb')
-        file_handle_public.write(bytes(rendered_template, "UTF-8"))
-        file_handle_public.close()
+    file_handle_public = codecs.open(dest_file, mode="w", encoding='utf-8')
+    file_handle_public.write(rendered_template)
+    file_handle_public.close()
 
 
 
