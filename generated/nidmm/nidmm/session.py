@@ -1042,10 +1042,10 @@ class _SessionBase(object):
 
 
 class Session(_SessionBase):
-    '''An NI-DMM session to a National Instruments Digital Multimeter'''
+    '''An NI-DMM session to a NI Digital Multimeter'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
-        r'''An NI-DMM session to a National Instruments Digital Multimeter
+        r'''An NI-DMM session to a NI Digital Multimeter
 
         This method completes the following tasks:
 

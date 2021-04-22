@@ -27,7 +27,7 @@ def example(resource_name, options, samples, gain, offset, gen_time):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Continuously generates an arbitrary waveform.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments Arbitrary Waveform Generator')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a NI Arbitrary Waveform Generator')
     parser.add_argument('-s', '--samples', default=100000, type=int, help='Number of samples')
     parser.add_argument('-g', '--gain', default=1.0, type=float, help='Gain')
     parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC offset (V)')

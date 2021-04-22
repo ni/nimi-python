@@ -1,6 +1,6 @@
 This is the MIT license: http://www.opensource.org/licenses/mit-license.php
 
-Copyright (c) 2017-2020, National Instruments Corp.
+© 2021 National Instruments Corporation. All rights reserved.
 NI-Digital Pattern Driver, NI-DMM, NI-DCPower, NI-FGEN, NI-SCOPE, NI-SWITCH, NI Switch Executive,
 NI-ModInst, NI-TClk are trademarks of National Instruments.
 

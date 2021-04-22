@@ -17,7 +17,7 @@ def example(resource_name, options, waveform, frequency, amplitude, offset, phas
 def _main(argsv):
     supported_waveforms = list(nifgen.Waveform.__members__.keys())[:-1]  # no support for user-defined waveforms in example
     parser = argparse.ArgumentParser(description='Generates the standard function.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments Function Generator')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a NI Function Generator')
     parser.add_argument('-w', '--waveform', default=supported_waveforms[0], choices=supported_waveforms, type=str.upper, help='Standard waveform')
     parser.add_argument('-f', '--frequency', default=1000, type=float, help='Frequency (Hz)')
     parser.add_argument('-a', '--amplitude', default=1.0, type=float, help='Amplitude (Vpk-pk)')

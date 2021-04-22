@@ -38,7 +38,7 @@ def example(resource_name, channels, options, voltage1, voltage2, delay):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Outputs voltage 1, waits for source delay, and then takes a measurement. Then orepeat with voltage 2.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments SMU')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a NI SMU')
     parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
     parser.add_argument('-v1', '--voltage1', default=1.0, type=float, help='Voltage level 1 (V)')
     parser.add_argument('-v2', '--voltage2', default=2.0, type=float, help='Voltage level 2 (V)')
