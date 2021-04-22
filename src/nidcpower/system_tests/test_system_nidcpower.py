@@ -30,10 +30,11 @@ def independent_channel_session():
 
 
 # this fixture can be used to test with different types of sessions
-@pytest.fixture(scope='function', params=[('4162', ''), ('4162', '0'), ('4162', [0, 1]), (('4162/0', '4162/1'), '')])
+@pytest.fixture(scope='function', params=[('4162', '', false), ('4162', [0, 1], false), (('4162/0', '4162/1'), '', true)])
 def sessions(request):
     with nidcpower.Session(request.param[0], request.param[1], False,
-                           'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+                           'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe',
+                           independent_channels=request.param[2]) as simulated_session:
         yield simulated_session
 
 
@@ -406,23 +407,24 @@ def test_channel_format_types():
 
 
 def test_rep_cap_all_channels(multiple_channel_session):
-    # no error for non-independent channel session when specifying all channels
-    multiple_channel_session.channels['4162/0', '4162/1'].reset()
+    # no error for non-independent channel session when specifying all channels by number
+    multiple_channel_session.channels['0', '1'].reset()
 
 
 def test_rep_cap_method_error(multiple_channel_session):
     try:
-        session.channels['4162/0'].reset()
+        multiple_channel_session.channels['0'].reset()
         assert False
-    except AttributeError as e:
-        assert str(e) == "'_SessionBase' object has no attribute 'reset'"
+    except nidcpower.Error as e:
+        assert e.code == -1074118494  # NIDCPOWER_ERROR_CHANNEL_NAME_NOT_ALLOWED_IN_OBSOLETE_SESSION
+        assert e.description.find('The channel name string must represent all channels in the session because the session was not initialized with independent channels. To specify a subset of channels for this function, first initialize the session with independent channels.') != -1
 
 
 def test_rep_cap_attribute_error(multiple_channel_session):
     try:
-        session.channels['4162/0'].aperture_time
+        multiple_channel_session.channels['0'].instrument_model
         assert False
     except nidcpower.Error as e:
-        assert e.code == -1074135008
-        assert e.description.find('Unknown channel or repeated capability name') != -1
+        assert e.code == -1074134971  # IVI_ERROR_CHANNEL_NAME_NOT_ALLOWED
+        assert e.description.find('The channel or repeated capability name is not allowed.') != -1
 
