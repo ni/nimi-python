@@ -147,6 +147,45 @@ class OutputCapacitance(Enum):
     '''
 
 
+class OutputCutoffReason(Enum):
+    ALL = -1
+    r'''
+    Queries any output cutoff condition; clears all output cutoff conditions.
+    '''
+    VOLTAGE_OUTPUT_HIGH = 1
+    r'''
+    Queries or clears cutoff conditions when the output exceeded the high cutoff limit for voltage output.
+    '''
+    VOLTAGE_OUTPUT_LOW = 2
+    r'''
+    Queries or clears cutoff conditions when the output fell below the low cutoff limit for voltage output.
+    '''
+    CURRENT_MEASURE_HIGH = 4
+    r'''
+    Queries or clears cutoff conditions when the measured current exceeded the high cutoff limit for current output.
+    '''
+    CURRENT_MEASURE_LOW = 8
+    r'''
+    Queries or clears cutoff conditions when the measured current fell below the low cutoff limit for current output.
+    '''
+    VOLTAGE_CHANGE_HIGH = 16
+    r'''
+    Queries or clears cutoff conditions when the voltage slew rate increased beyond the positive change cutoff for voltage output.
+    '''
+    VOLTAGE_CHANGE_LOW = 32
+    r'''
+    Queries or clears cutoff conditions when the voltage slew rate decreased beyond the negative change cutoff for voltage output.
+    '''
+    CURRENT_CHANGE_HIGH = 64
+    r'''
+    Queries or clears cutoff conditions when the current slew rate increased beyond the positive change cutoff for current output.
+    '''
+    CURRENT_CHANGE_LOW = 128
+    r'''
+    Queries or clears cutoff conditions when the current slew rate decreased beyond the negative change cutoff for current output.
+    '''
+
+
 class OutputFunction(Enum):
     DC_VOLTAGE = 1006
     r'''

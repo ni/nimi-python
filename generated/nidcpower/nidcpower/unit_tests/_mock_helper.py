@@ -16,20 +16,22 @@ class MockFunctionCallError(Exception):
 class SideEffectsHelper(object):
     def __init__(self):
         self._defaults = {}
-        self._defaults['Abort'] = {}
-        self._defaults['Abort']['return'] = 0
+        self._defaults['AbortWithChannels'] = {}
+        self._defaults['AbortWithChannels']['return'] = 0
         self._defaults['CalSelfCalibrate'] = {}
         self._defaults['CalSelfCalibrate']['return'] = 0
-        self._defaults['Commit'] = {}
-        self._defaults['Commit']['return'] = 0
+        self._defaults['ClearLatchedOutputCutoffState'] = {}
+        self._defaults['ClearLatchedOutputCutoffState']['return'] = 0
+        self._defaults['CommitWithChannels'] = {}
+        self._defaults['CommitWithChannels']['return'] = 0
         self._defaults['ConfigureApertureTime'] = {}
         self._defaults['ConfigureApertureTime']['return'] = 0
-        self._defaults['CreateAdvancedSequence'] = {}
-        self._defaults['CreateAdvancedSequence']['return'] = 0
-        self._defaults['CreateAdvancedSequenceStep'] = {}
-        self._defaults['CreateAdvancedSequenceStep']['return'] = 0
-        self._defaults['DeleteAdvancedSequence'] = {}
-        self._defaults['DeleteAdvancedSequence']['return'] = 0
+        self._defaults['CreateAdvancedSequenceStepWithChannels'] = {}
+        self._defaults['CreateAdvancedSequenceStepWithChannels']['return'] = 0
+        self._defaults['CreateAdvancedSequenceWithChannels'] = {}
+        self._defaults['CreateAdvancedSequenceWithChannels']['return'] = 0
+        self._defaults['DeleteAdvancedSequenceWithChannels'] = {}
+        self._defaults['DeleteAdvancedSequenceWithChannels']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
         self._defaults['ExportAttributeConfigurationBuffer'] = {}
@@ -95,8 +97,8 @@ class SideEffectsHelper(object):
         self._defaults['InitializeWithChannels'] = {}
         self._defaults['InitializeWithChannels']['return'] = 0
         self._defaults['InitializeWithChannels']['vi'] = None
-        self._defaults['Initiate'] = {}
-        self._defaults['Initiate']['return'] = 0
+        self._defaults['InitiateWithChannels'] = {}
+        self._defaults['InitiateWithChannels']['return'] = 0
         self._defaults['LockSession'] = {}
         self._defaults['LockSession']['return'] = 0
         self._defaults['LockSession']['callerHasLock'] = None
@@ -113,6 +115,9 @@ class SideEffectsHelper(object):
         self._defaults['QueryInCompliance'] = {}
         self._defaults['QueryInCompliance']['return'] = 0
         self._defaults['QueryInCompliance']['inCompliance'] = None
+        self._defaults['QueryLatchedOutputCutoffState'] = {}
+        self._defaults['QueryLatchedOutputCutoffState']['return'] = 0
+        self._defaults['QueryLatchedOutputCutoffState']['outputCutoffState'] = None
         self._defaults['QueryMaxCurrentLimit'] = {}
         self._defaults['QueryMaxCurrentLimit']['return'] = 0
         self._defaults['QueryMaxCurrentLimit']['maxCurrentLimit'] = None
@@ -130,10 +135,12 @@ class SideEffectsHelper(object):
         self._defaults['ReadCurrentTemperature']['temperature'] = None
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
+        self._defaults['ResetWithChannels'] = {}
+        self._defaults['ResetWithChannels']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
         self._defaults['ResetWithDefaults']['return'] = 0
-        self._defaults['SendSoftwareEdgeTrigger'] = {}
-        self._defaults['SendSoftwareEdgeTrigger']['return'] = 0
+        self._defaults['SendSoftwareEdgeTriggerWithChannels'] = {}
+        self._defaults['SendSoftwareEdgeTriggerWithChannels']['return'] = 0
         self._defaults['SetAttributeViBoolean'] = {}
         self._defaults['SetAttributeViBoolean']['return'] = 0
         self._defaults['SetAttributeViInt32'] = {}
@@ -149,15 +156,13 @@ class SideEffectsHelper(object):
         self._defaults['UnlockSession'] = {}
         self._defaults['UnlockSession']['return'] = 0
         self._defaults['UnlockSession']['callerHasLock'] = None
-        self._defaults['WaitForEvent'] = {}
-        self._defaults['WaitForEvent']['return'] = 0
+        self._defaults['WaitForEventWithChannels'] = {}
+        self._defaults['WaitForEventWithChannels']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['error_message'] = {}
         self._defaults['error_message']['return'] = 0
         self._defaults['error_message']['errorMessage'] = None
-        self._defaults['reset'] = {}
-        self._defaults['reset']['return'] = 0
         self._defaults['self_test'] = {}
         self._defaults['self_test']['return'] = 0
         self._defaults['self_test']['selfTestResult'] = None
@@ -169,40 +174,45 @@ class SideEffectsHelper(object):
     def __setitem__(self, func, val):
         self._defaults[func] = val
 
-    def niDCPower_Abort(self, vi):  # noqa: N802
-        if self._defaults['Abort']['return'] != 0:
-            return self._defaults['Abort']['return']
-        return self._defaults['Abort']['return']
+    def niDCPower_AbortWithChannels(self, vi, channel_name):  # noqa: N802
+        if self._defaults['AbortWithChannels']['return'] != 0:
+            return self._defaults['AbortWithChannels']['return']
+        return self._defaults['AbortWithChannels']['return']
 
     def niDCPower_CalSelfCalibrate(self, vi, channel_name):  # noqa: N802
         if self._defaults['CalSelfCalibrate']['return'] != 0:
             return self._defaults['CalSelfCalibrate']['return']
         return self._defaults['CalSelfCalibrate']['return']
 
-    def niDCPower_Commit(self, vi):  # noqa: N802
-        if self._defaults['Commit']['return'] != 0:
-            return self._defaults['Commit']['return']
-        return self._defaults['Commit']['return']
+    def niDCPower_ClearLatchedOutputCutoffState(self, vi, channel_name, output_cutoff_reason):  # noqa: N802
+        if self._defaults['ClearLatchedOutputCutoffState']['return'] != 0:
+            return self._defaults['ClearLatchedOutputCutoffState']['return']
+        return self._defaults['ClearLatchedOutputCutoffState']['return']
+
+    def niDCPower_CommitWithChannels(self, vi, channel_name):  # noqa: N802
+        if self._defaults['CommitWithChannels']['return'] != 0:
+            return self._defaults['CommitWithChannels']['return']
+        return self._defaults['CommitWithChannels']['return']
 
     def niDCPower_ConfigureApertureTime(self, vi, channel_name, aperture_time, units):  # noqa: N802
         if self._defaults['ConfigureApertureTime']['return'] != 0:
             return self._defaults['ConfigureApertureTime']['return']
         return self._defaults['ConfigureApertureTime']['return']
 
-    def niDCPower_CreateAdvancedSequence(self, vi, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):  # noqa: N802
-        if self._defaults['CreateAdvancedSequence']['return'] != 0:
-            return self._defaults['CreateAdvancedSequence']['return']
-        return self._defaults['CreateAdvancedSequence']['return']
+    def niDCPower_CreateAdvancedSequenceStepWithChannels(self, vi, channel_name, set_as_active_step):  # noqa: N802
+        if self._defaults['CreateAdvancedSequenceStepWithChannels']['return'] != 0:
+            return self._defaults['CreateAdvancedSequenceStepWithChannels']['return']
+        return self._defaults['CreateAdvancedSequenceStepWithChannels']['return']
 
-    def niDCPower_CreateAdvancedSequenceStep(self, vi, set_as_active_step):  # noqa: N802
-        if self._defaults['CreateAdvancedSequenceStep']['return'] != 0:
-            return self._defaults['CreateAdvancedSequenceStep']['return']
-        return self._defaults['CreateAdvancedSequenceStep']['return']
+    def niDCPower_CreateAdvancedSequenceWithChannels(self, vi, channel_name, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):  # noqa: N802
+        if self._defaults['CreateAdvancedSequenceWithChannels']['return'] != 0:
+            return self._defaults['CreateAdvancedSequenceWithChannels']['return']
+        return self._defaults['CreateAdvancedSequenceWithChannels']['return']
 
-    def niDCPower_DeleteAdvancedSequence(self, vi, sequence_name):  # noqa: N802
-        if self._defaults['DeleteAdvancedSequence']['return'] != 0:
-            return self._defaults['DeleteAdvancedSequence']['return']
-        return self._defaults['DeleteAdvancedSequence']['return']
+    def niDCPower_DeleteAdvancedSequenceWithChannels(self, vi, channel_name, sequence_name):  # noqa: N802
+        if self._defaults['DeleteAdvancedSequenceWithChannels']['return'] != 0:
+            return self._defaults['DeleteAdvancedSequenceWithChannels']['return']
+        return self._defaults['DeleteAdvancedSequenceWithChannels']['return']
 
     def niDCPower_Disable(self, vi):  # noqa: N802
         if self._defaults['Disable']['return'] != 0:
@@ -457,10 +467,10 @@ class SideEffectsHelper(object):
             vi.contents.value = self._defaults['InitializeWithChannels']['vi']
         return self._defaults['InitializeWithChannels']['return']
 
-    def niDCPower_Initiate(self, vi):  # noqa: N802
-        if self._defaults['Initiate']['return'] != 0:
-            return self._defaults['Initiate']['return']
-        return self._defaults['Initiate']['return']
+    def niDCPower_InitiateWithChannels(self, vi, channel_name):  # noqa: N802
+        if self._defaults['InitiateWithChannels']['return'] != 0:
+            return self._defaults['InitiateWithChannels']['return']
+        return self._defaults['InitiateWithChannels']['return']
 
     def niDCPower_LockSession(self, vi, caller_has_lock):  # noqa: N802
         if self._defaults['LockSession']['return'] != 0:
@@ -529,6 +539,16 @@ class SideEffectsHelper(object):
             in_compliance.contents.value = self._defaults['QueryInCompliance']['inCompliance']
         return self._defaults['QueryInCompliance']['return']
 
+    def niDCPower_QueryLatchedOutputCutoffState(self, vi, channel_name, output_cutoff_reason, output_cutoff_state):  # noqa: N802
+        if self._defaults['QueryLatchedOutputCutoffState']['return'] != 0:
+            return self._defaults['QueryLatchedOutputCutoffState']['return']
+        # output_cutoff_state
+        if self._defaults['QueryLatchedOutputCutoffState']['outputCutoffState'] is None:
+            raise MockFunctionCallError("niDCPower_QueryLatchedOutputCutoffState", param='outputCutoffState')
+        if output_cutoff_state is not None:
+            output_cutoff_state.contents.value = self._defaults['QueryLatchedOutputCutoffState']['outputCutoffState']
+        return self._defaults['QueryLatchedOutputCutoffState']['return']
+
     def niDCPower_QueryMaxCurrentLimit(self, vi, channel_name, voltage_level, max_current_limit):  # noqa: N802
         if self._defaults['QueryMaxCurrentLimit']['return'] != 0:
             return self._defaults['QueryMaxCurrentLimit']['return']
@@ -584,15 +604,20 @@ class SideEffectsHelper(object):
             return self._defaults['ResetDevice']['return']
         return self._defaults['ResetDevice']['return']
 
+    def niDCPower_ResetWithChannels(self, vi, channel_name):  # noqa: N802
+        if self._defaults['ResetWithChannels']['return'] != 0:
+            return self._defaults['ResetWithChannels']['return']
+        return self._defaults['ResetWithChannels']['return']
+
     def niDCPower_ResetWithDefaults(self, vi):  # noqa: N802
         if self._defaults['ResetWithDefaults']['return'] != 0:
             return self._defaults['ResetWithDefaults']['return']
         return self._defaults['ResetWithDefaults']['return']
 
-    def niDCPower_SendSoftwareEdgeTrigger(self, vi, trigger):  # noqa: N802
-        if self._defaults['SendSoftwareEdgeTrigger']['return'] != 0:
-            return self._defaults['SendSoftwareEdgeTrigger']['return']
-        return self._defaults['SendSoftwareEdgeTrigger']['return']
+    def niDCPower_SendSoftwareEdgeTriggerWithChannels(self, vi, channel_name, trigger):  # noqa: N802
+        if self._defaults['SendSoftwareEdgeTriggerWithChannels']['return'] != 0:
+            return self._defaults['SendSoftwareEdgeTriggerWithChannels']['return']
+        return self._defaults['SendSoftwareEdgeTriggerWithChannels']['return']
 
     def niDCPower_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['SetAttributeViBoolean']['return'] != 0:
@@ -634,10 +659,10 @@ class SideEffectsHelper(object):
             caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
         return self._defaults['UnlockSession']['return']
 
-    def niDCPower_WaitForEvent(self, vi, event_id, timeout):  # noqa: N802
-        if self._defaults['WaitForEvent']['return'] != 0:
-            return self._defaults['WaitForEvent']['return']
-        return self._defaults['WaitForEvent']['return']
+    def niDCPower_WaitForEventWithChannels(self, vi, channel_name, event_id, timeout):  # noqa: N802
+        if self._defaults['WaitForEventWithChannels']['return'] != 0:
+            return self._defaults['WaitForEventWithChannels']['return']
+        return self._defaults['WaitForEventWithChannels']['return']
 
     def niDCPower_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
@@ -657,11 +682,6 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             error_message[i] = test_value[i]
         return self._defaults['error_message']['return']
-
-    def niDCPower_reset(self, vi):  # noqa: N802
-        if self._defaults['reset']['return'] != 0:
-            return self._defaults['reset']['return']
-        return self._defaults['reset']['return']
 
     def niDCPower_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         if self._defaults['self_test']['return'] != 0:
@@ -684,20 +704,22 @@ class SideEffectsHelper(object):
 
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
-        mock_library.niDCPower_Abort.side_effect = MockFunctionCallError("niDCPower_Abort")
-        mock_library.niDCPower_Abort.return_value = 0
+        mock_library.niDCPower_AbortWithChannels.side_effect = MockFunctionCallError("niDCPower_AbortWithChannels")
+        mock_library.niDCPower_AbortWithChannels.return_value = 0
         mock_library.niDCPower_CalSelfCalibrate.side_effect = MockFunctionCallError("niDCPower_CalSelfCalibrate")
         mock_library.niDCPower_CalSelfCalibrate.return_value = 0
-        mock_library.niDCPower_Commit.side_effect = MockFunctionCallError("niDCPower_Commit")
-        mock_library.niDCPower_Commit.return_value = 0
+        mock_library.niDCPower_ClearLatchedOutputCutoffState.side_effect = MockFunctionCallError("niDCPower_ClearLatchedOutputCutoffState")
+        mock_library.niDCPower_ClearLatchedOutputCutoffState.return_value = 0
+        mock_library.niDCPower_CommitWithChannels.side_effect = MockFunctionCallError("niDCPower_CommitWithChannels")
+        mock_library.niDCPower_CommitWithChannels.return_value = 0
         mock_library.niDCPower_ConfigureApertureTime.side_effect = MockFunctionCallError("niDCPower_ConfigureApertureTime")
         mock_library.niDCPower_ConfigureApertureTime.return_value = 0
-        mock_library.niDCPower_CreateAdvancedSequence.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequence")
-        mock_library.niDCPower_CreateAdvancedSequence.return_value = 0
-        mock_library.niDCPower_CreateAdvancedSequenceStep.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceStep")
-        mock_library.niDCPower_CreateAdvancedSequenceStep.return_value = 0
-        mock_library.niDCPower_DeleteAdvancedSequence.side_effect = MockFunctionCallError("niDCPower_DeleteAdvancedSequence")
-        mock_library.niDCPower_DeleteAdvancedSequence.return_value = 0
+        mock_library.niDCPower_CreateAdvancedSequenceStepWithChannels.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceStepWithChannels")
+        mock_library.niDCPower_CreateAdvancedSequenceStepWithChannels.return_value = 0
+        mock_library.niDCPower_CreateAdvancedSequenceWithChannels.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceWithChannels")
+        mock_library.niDCPower_CreateAdvancedSequenceWithChannels.return_value = 0
+        mock_library.niDCPower_DeleteAdvancedSequenceWithChannels.side_effect = MockFunctionCallError("niDCPower_DeleteAdvancedSequenceWithChannels")
+        mock_library.niDCPower_DeleteAdvancedSequenceWithChannels.return_value = 0
         mock_library.niDCPower_Disable.side_effect = MockFunctionCallError("niDCPower_Disable")
         mock_library.niDCPower_Disable.return_value = 0
         mock_library.niDCPower_ExportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niDCPower_ExportAttributeConfigurationBuffer")
@@ -736,8 +758,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_ImportAttributeConfigurationFile.return_value = 0
         mock_library.niDCPower_InitializeWithChannels.side_effect = MockFunctionCallError("niDCPower_InitializeWithChannels")
         mock_library.niDCPower_InitializeWithChannels.return_value = 0
-        mock_library.niDCPower_Initiate.side_effect = MockFunctionCallError("niDCPower_Initiate")
-        mock_library.niDCPower_Initiate.return_value = 0
+        mock_library.niDCPower_InitiateWithChannels.side_effect = MockFunctionCallError("niDCPower_InitiateWithChannels")
+        mock_library.niDCPower_InitiateWithChannels.return_value = 0
         mock_library.niDCPower_LockSession.side_effect = MockFunctionCallError("niDCPower_LockSession")
         mock_library.niDCPower_LockSession.return_value = 0
         mock_library.niDCPower_Measure.side_effect = MockFunctionCallError("niDCPower_Measure")
@@ -748,6 +770,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_ParseChannelCount.return_value = 0
         mock_library.niDCPower_QueryInCompliance.side_effect = MockFunctionCallError("niDCPower_QueryInCompliance")
         mock_library.niDCPower_QueryInCompliance.return_value = 0
+        mock_library.niDCPower_QueryLatchedOutputCutoffState.side_effect = MockFunctionCallError("niDCPower_QueryLatchedOutputCutoffState")
+        mock_library.niDCPower_QueryLatchedOutputCutoffState.return_value = 0
         mock_library.niDCPower_QueryMaxCurrentLimit.side_effect = MockFunctionCallError("niDCPower_QueryMaxCurrentLimit")
         mock_library.niDCPower_QueryMaxCurrentLimit.return_value = 0
         mock_library.niDCPower_QueryMaxVoltageLevel.side_effect = MockFunctionCallError("niDCPower_QueryMaxVoltageLevel")
@@ -760,10 +784,12 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_ReadCurrentTemperature.return_value = 0
         mock_library.niDCPower_ResetDevice.side_effect = MockFunctionCallError("niDCPower_ResetDevice")
         mock_library.niDCPower_ResetDevice.return_value = 0
+        mock_library.niDCPower_ResetWithChannels.side_effect = MockFunctionCallError("niDCPower_ResetWithChannels")
+        mock_library.niDCPower_ResetWithChannels.return_value = 0
         mock_library.niDCPower_ResetWithDefaults.side_effect = MockFunctionCallError("niDCPower_ResetWithDefaults")
         mock_library.niDCPower_ResetWithDefaults.return_value = 0
-        mock_library.niDCPower_SendSoftwareEdgeTrigger.side_effect = MockFunctionCallError("niDCPower_SendSoftwareEdgeTrigger")
-        mock_library.niDCPower_SendSoftwareEdgeTrigger.return_value = 0
+        mock_library.niDCPower_SendSoftwareEdgeTriggerWithChannels.side_effect = MockFunctionCallError("niDCPower_SendSoftwareEdgeTriggerWithChannels")
+        mock_library.niDCPower_SendSoftwareEdgeTriggerWithChannels.return_value = 0
         mock_library.niDCPower_SetAttributeViBoolean.side_effect = MockFunctionCallError("niDCPower_SetAttributeViBoolean")
         mock_library.niDCPower_SetAttributeViBoolean.return_value = 0
         mock_library.niDCPower_SetAttributeViInt32.side_effect = MockFunctionCallError("niDCPower_SetAttributeViInt32")
@@ -778,13 +804,11 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_SetSequence.return_value = 0
         mock_library.niDCPower_UnlockSession.side_effect = MockFunctionCallError("niDCPower_UnlockSession")
         mock_library.niDCPower_UnlockSession.return_value = 0
-        mock_library.niDCPower_WaitForEvent.side_effect = MockFunctionCallError("niDCPower_WaitForEvent")
-        mock_library.niDCPower_WaitForEvent.return_value = 0
+        mock_library.niDCPower_WaitForEventWithChannels.side_effect = MockFunctionCallError("niDCPower_WaitForEventWithChannels")
+        mock_library.niDCPower_WaitForEventWithChannels.return_value = 0
         mock_library.niDCPower_close.side_effect = MockFunctionCallError("niDCPower_close")
         mock_library.niDCPower_close.return_value = 0
         mock_library.niDCPower_error_message.side_effect = MockFunctionCallError("niDCPower_error_message")
         mock_library.niDCPower_error_message.return_value = 0
-        mock_library.niDCPower_reset.side_effect = MockFunctionCallError("niDCPower_reset")
-        mock_library.niDCPower_reset.return_value = 0
         mock_library.niDCPower_self_test.side_effect = MockFunctionCallError("niDCPower_self_test")
         mock_library.niDCPower_self_test.return_value = 0

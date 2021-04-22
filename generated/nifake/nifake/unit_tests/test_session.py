@@ -6,6 +6,7 @@ import math
 import nifake
 import nifake.errors
 import numpy
+import platform
 import warnings
 
 from mock import patch
@@ -1522,3 +1523,26 @@ def test_dunder_version():
     print('Version = {}'.format(nifake.__version__))
     assert type(nifake.__version__) is str
 
+
+def test_library_error():
+    if platform.architecture()[0] == '64bit':
+        ctypes_class_name = 'ctypes.CDLL'
+    else:
+        ctypes_class_name = 'ctypes.WinDLL'
+    mock_ctypes = patch(ctypes_class_name).start()
+    mock_ctypes_instance = mock_ctypes.return_value
+    # Ensure these methods return 0 because they are called in session creation
+    mock_ctypes_instance.niFake_InitWithOptions.return_value = 0
+    mock_ctypes_instance.niFake_LockSession.return_value = 0
+    mock_ctypes_instance.niFake_UnlockSession.return_value = 0
+    # Delete function to simulate missing function from driver runtime
+    delattr(mock_ctypes_instance, 'niFake_Abort')
+
+    session = nifake.Session('dev1')
+
+    try:
+        session.abort()
+        assert False
+    except nifake.errors.DriverTooOldError as e:
+        message = e.args[0]
+        assert message == 'A function was not found in the NI-FAKE runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.'

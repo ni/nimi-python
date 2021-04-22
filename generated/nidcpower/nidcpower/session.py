@@ -55,7 +55,7 @@ def get_ctypes_and_array(value, array_type):
 class _Acquisition(object):
     def __init__(self, session):
         self._session = session
-        self._session._initiate()
+        self._session._initiate_with_channels()
 
     def __enter__(self):
         return self
@@ -326,12 +326,6 @@ class _SessionBase(object):
     power source to generate power. Use the power_source_in_use property to retrieve this information.
 
     Note: This property does not necessarily indicate if the device is using the auxiliary
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
@@ -821,6 +815,12 @@ class _SessionBase(object):
     '''Type: str
 
     Contains the name of the manufacturer for the device you are currently using.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     instrument_model = _attributes.AttributeViString(1050512)
     '''Type: str
@@ -1067,6 +1067,163 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
+    output_cutoff_current_change_limit_high = _attributes.AttributeViReal64(1150295)
+    '''Type: float
+
+    Specifies a limit for positive current slew rate, in amps per microsecond, for output cutoff.
+    If the current increases at a rate that exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.CURRENT_CHANGE_HIGH as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_current_change_limit_low = _attributes.AttributeViReal64(1150239)
+    '''Type: float
+
+    Specifies a limit for negative current slew rate, in amps per microsecond, for output cutoff.
+    If the current decreases at a rate that exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.CURRENT_CHANGE_LOW as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_current_measure_limit_high = _attributes.AttributeViReal64(1150237)
+    '''Type: float
+
+    Specifies a high limit current value, in amps, for output cutoff.
+    If the measured current exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.CURRENT_MEASURE_HIGH as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_current_measure_limit_low = _attributes.AttributeViReal64(1150293)
+    '''Type: float
+
+    Specifies a low limit current value, in amps, for output cutoff.
+    If the measured current falls below this limit, the output is disconnected.
+
+    To find out whether an output has fallen below this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.CURRENT_MEASURE_LOW as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_current_overrange_enabled = _attributes.AttributeViBoolean(1150240)
+    '''Type: bool
+
+    Enables or disables current overrange functionality for output cutoff. If enabled, the output is disconnected when the measured current saturates the current range.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.VOLTAGE_OUTPUT_HIGH as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_enabled = _attributes.AttributeViBoolean(1150235)
+    '''Type: bool
+
+    Enables or disables output cutoff functionality. If enabled, you can define output cutoffs that, if exceeded, cause the output of the specified channel(s) to be disconnected.
+    When this property is disabled, all other output cutoff properties are ignored.
+
+    Note: Refer to Supported Properties by Device for information about supported devices. Instruments that do not support this property behave as if this property were set to False.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_voltage_change_limit_high = _attributes.AttributeViReal64(1150294)
+    '''Type: float
+
+    Specifies a limit for positive voltage slew rate, in volts per microsecond, for output cutoff.
+    If the voltage increases at a rate that exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state with OutputCutoffReason.VOLTAGE_CHANGE_HIGH as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_voltage_change_limit_low = _attributes.AttributeViReal64(1150238)
+    '''Type: float
+
+    Specifies a limit for negative voltage slew rate, in volts per microsecond, for output cutoff.
+    If the voltage decreases at a rate that exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state with OutputCutoffReason.VOLTAGE_CHANGE_LOW as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_voltage_output_limit_high = _attributes.AttributeViReal64(1150236)
+    '''Type: float
+
+    Specifies a high limit voltage value, in volts, for output cutoff.
+    If the voltage output exceeds this limit, the output is disconnected.
+
+    To find out whether an output has exceeded this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.VOLTAGE_OUTPUT_HIGH as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
+    output_cutoff_voltage_output_limit_low = _attributes.AttributeViReal64(1150292)
+    '''Type: float
+
+    Specifies a low limit voltage value, in volts, for output cutoff.
+    If the voltage output falls below this limit, the output is disconnected.
+
+    To find out whether an output has fallen below this limit, call the query_latched_output_cutoff_state method with OutputCutoffReason.VOLTAGE_OUTPUT_LOW as the output cutoff reason.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     output_enabled = _attributes.AttributeViBoolean(1250006)
     '''Type: bool
 
@@ -1220,12 +1377,6 @@ class _SessionBase(object):
     '''Type: enums.PowerSourceInUse
 
     Indicates whether the device is using the internal or auxiliary power source to generate power.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     pulse_bias_current_level = _attributes.AttributeViReal64(1150088)
     '''Type: float
@@ -1979,6 +2130,12 @@ class _SessionBase(object):
     Default Value: SelfCalibrationPersistence.KEEP_IN_MEMORY
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     sense = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Sense, 1150013)
     '''Type: enums.Sense
@@ -2159,6 +2316,12 @@ class _SessionBase(object):
     '''Type: str
 
     Contains the serial number for the device you are currently using.
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     shutdown_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150275)
     '''Type: enums.TriggerType
@@ -2602,6 +2765,46 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
+    def abort(self):
+        r'''abort
+
+        Transitions the NI-DCPower session from the Running state to the
+        Uncommitted state. If a sequence is running, it is stopped. Any
+        configuration methods called after this method are not applied until
+        the initiate method is called. If power output is enabled
+        when you call the abort method, the output channels remain
+        in their current state and continue providing power.
+
+        Use the ConfigureOutputEnabled method to disable power
+        output on a per channel basis. Use the reset method to
+        disable output on all channels.
+
+        Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for information about the
+        specific NI-DCPower software states.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDCPower_AbortWithChannels(vi_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def self_cal(self):
         r'''self_cal
 
@@ -2646,6 +2849,83 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def clear_latched_output_cutoff_state(self, output_cutoff_reason):
+        r'''clear_latched_output_cutoff_state
+
+        Clears the state of an output cutoff that was engaged.
+        To clear the state for all output cutoff reasons, use OutputCutoffReason.ALL.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            output_cutoff_reason (enums.OutputCutoffReason): Specifies the reasons for which to clear the output cutoff state.
+
+                +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.ALL                  | Clears all output cutoff conditions                                                                             |
+                +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_OUTPUT_HIGH  | Clears cutoffs caused when the output exceeded the high cutoff limit for voltage output                         |
+                +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_OUTPUT_LOW   | Clears cutoffs caused when the output fell below the low cutoff limit for voltage output                        |
+                +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_MEASURE_HIGH | Clears cutoffs caused when the measured current exceeded the high cutoff limit for current output               |
+                +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_MEASURE_LOW  | Clears cutoffs caused when the measured current fell below the low cutoff limit for current output              |
+                +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_CHANGE_HIGH  | Clears cutoffs caused when the voltage slew rate increased beyond the positive change cutoff for voltage output |
+                +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_CHANGE_LOW   | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for voltage output |
+                +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_CHANGE_HIGH  | Clears cutoffs caused when the current slew rate increased beyond the positive change cutoff for current output |
+                +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_CHANGE_LOW   | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output |
+                +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+
+        '''
+        if type(output_cutoff_reason) is not enums.OutputCutoffReason:
+            raise TypeError('Parameter output_cutoff_reason must be of type ' + str(enums.OutputCutoffReason))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        output_cutoff_reason_ctype = _visatype.ViInt32(output_cutoff_reason.value)  # case S130
+        error_code = self._library.niDCPower_ClearLatchedOutputCutoffState(vi_ctype, channel_name_ctype, output_cutoff_reason_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def commit(self):
+        r'''commit
+
+        Applies previously configured settings to the device. Calling this
+        method moves the NI-DCPower session from the Uncommitted state into
+        the Committed state. After calling this method, modifying any
+        property reverts the NI-DCPower session to the Uncommitted state. Use
+        the initiate method to transition to the Running state.
+        Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for details about the specific
+        NI-DCPower software states.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDCPower_CommitWithChannels(vi_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
         r'''configure_aperture_time
 
@@ -2684,11 +2964,11 @@ class _SessionBase(object):
             units (enums.ApertureTimeUnits): Specifies the units for **apertureTime**.
                 **Defined Values**:
 
-                +--------------------------------------------+------------------------------+
-                | ApertureTimeUnits.SECONDS (1028)           | Specifies seconds.           |
-                +--------------------------------------------+------------------------------+
-                | ApertureTimeUnits.POWER_LINE_CYCLES (1029) | Specifies Power Line Cycles. |
-                +--------------------------------------------+------------------------------+
+                +-------------------------------------+------------------------------+
+                | ApertureTimeUnits.SECONDS           | Specifies seconds.           |
+                +-------------------------------------+------------------------------+
+                | ApertureTimeUnits.POWER_LINE_CYCLES | Specifies Power Line Cycles. |
+                +-------------------------------------+------------------------------+
 
         '''
         if type(units) is not enums.ApertureTimeUnits:
@@ -2698,6 +2978,277 @@ class _SessionBase(object):
         aperture_time_ctype = _visatype.ViReal64(aperture_time)  # case S150
         units_ctype = _visatype.ViInt32(units.value)  # case S130
         error_code = self._library.niDCPower_ConfigureApertureTime(vi_ctype, channel_name_ctype, aperture_time_ctype, units_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def create_advanced_sequence_step(self, set_as_active_step=True):
+        r'''create_advanced_sequence_step
+
+        Creates a new advanced sequence step in the advanced sequence specified
+        by the Active advanced sequence. When you create an advanced sequence
+        step, each property you passed to the create_advanced_sequence
+        method is reset to its default value for that step unless otherwise
+        specified.
+
+        **Support for this Method**
+
+        You must set the source mode to Sequence to use this method.
+
+        Using the set_sequence method with Advanced Sequence
+        methods is unsupported.
+
+        **Related Topics**:
+
+        `Advanced Sequence
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        create_advanced_sequence
+
+        Note:
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+        for more information about supported devices.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            set_as_active_step (bool): Specifies that this current step in the active sequence is active.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
+        error_code = self._library.niDCPower_CreateAdvancedSequenceStepWithChannels(vi_ctype, channel_name_ctype, set_as_active_step_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def _create_advanced_sequence_with_channels(self, sequence_name, attribute_ids, set_as_active_sequence):
+        r'''_create_advanced_sequence_with_channels
+
+        Creates an empty advanced sequence. Call the
+        create_advanced_sequence_step method to add steps to the
+        active advanced sequence.
+
+        You can create multiple advanced sequences in a session.
+
+        **Support for this method**
+
+        You must set the source mode to Sequence to use this method.
+
+        Using the set_sequence method with Advanced Sequence
+        methods is unsupported.
+
+        Use this method in the Uncommitted or Committed programming states.
+        Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for more information about
+        NI-DCPower programming states.
+
+        **Related Topics**:
+
+        `Advanced Sequence
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        create_advanced_sequence_step
+
+        Note:
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+        for more information about supported devices.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            sequence_name (str): Specifies the name of the sequence to create.
+
+            attribute_ids (list of int): Specifies the properties you reconfigure per step in the advanced
+                sequence. The following table lists which properties can be configured
+                in an advanced sequence for each NI-DCPower device that supports
+                advanced sequencing. A Yes indicates that the property can be configured
+                in advanced sequencing. An No indicates that the property cannot be
+                configured in advanced sequencing.
+
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | Property                       | PXIe-4135 | PXIe-4136 | PXIe-4137 | PXIe-4138 | PXIe-4139 | PXIe-4140/4142/4144 | PXIe-4141/4143/4145 | PXIe-4162/4163 |
+                +================================+===========+===========+===========+===========+===========+=====================+=====================+================+
+                | dc_noise_rejection             | Yes       | No        | Yes       | No        | Yes       | No                  | No                  | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | aperture_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | measure_record_length          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | sense                          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | ovp_enabled                    | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | ovp_limit                      | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_delay               | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_off_time                 | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_on_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | source_delay                   | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_enabled                 | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_function                | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_resistance              | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | transient_response             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+
+            set_as_active_sequence (bool): Specifies that this current sequence is active.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
+        attribute_id_count_ctype = _visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case S160
+        attribute_ids_ctype = get_ctypes_pointer_for_buffer(value=attribute_ids, library_type=_visatype.ViInt32)  # case B550
+        set_as_active_sequence_ctype = _visatype.ViBoolean(set_as_active_sequence)  # case S150
+        error_code = self._library.niDCPower_CreateAdvancedSequenceWithChannels(vi_ctype, channel_name_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def delete_advanced_sequence(self, sequence_name):
+        r'''delete_advanced_sequence
+
+        Deletes a previously created advanced sequence and all the advanced
+        sequence steps in the advanced sequence.
+
+        **Support for this Method**
+
+        You must set the source mode to Sequence to use this method.
+
+        Using the set_sequence method with Advanced Sequence
+        methods is unsupported.
+
+        **Related Topics**:
+
+        `Advanced Sequence
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Note:
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+        for more information about supported devices.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            sequence_name (str): specifies the name of the sequence to delete.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
+        error_code = self._library.niDCPower_DeleteAdvancedSequenceWithChannels(vi_ctype, channel_name_ctype, sequence_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3191,6 +3742,35 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
+    def _initiate_with_channels(self):
+        r'''_initiate_with_channels
+
+        Starts generation or acquisition, causing the NI-DCPower session to
+        leave the Uncommitted state or Committed state and enter the Running
+        state. To return to the Uncommitted state call the abort
+        method. Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for information about the
+        specific NI-DCPower software states.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDCPower_InitiateWithChannels(vi_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def lock(self):
         '''lock
 
@@ -3256,11 +3836,11 @@ class _SessionBase(object):
             measurement_type (enums.MeasurementTypes): Specifies whether a voltage or current value is measured.
                 **Defined Values**:
 
-                +------------------------------+------------------------------+
-                | MeasurementTypes.VOLTAGE (1) | The device measures voltage. |
-                +------------------------------+------------------------------+
-                | MeasurementTypes.CURRENT (0) | The device measures current. |
-                +------------------------------+------------------------------+
+                +--------------------------+------------------------------+
+                | MeasurementTypes.VOLTAGE | The device measures voltage. |
+                +--------------------------+------------------------------+
+                | MeasurementTypes.CURRENT | The device measures current. |
+                +--------------------------+------------------------------+
 
 
         Returns:
@@ -3387,6 +3967,65 @@ class _SessionBase(object):
         return bool(in_compliance_ctype.value)
 
     @ivi_synchronized
+    def query_latched_output_cutoff_state(self, output_cutoff_reason):
+        r'''query_latched_output_cutoff_state
+
+        Discovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.
+        If a limit was exceeded, the state is latched until you clear it with the clear_latched_output_cutoff_state method or the reset method.
+
+        outputCutoffReason specifies the conditions for which an output is disconnected.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            output_cutoff_reason (enums.OutputCutoffReason): Specifies which output cutoff conditions to query.
+
+                +-----------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.ALL                  | Any output cutoff condition was met                                                  |
+                +-----------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_OUTPUT_HIGH  | The output exceeded the high cutoff limit for voltage output                         |
+                +-----------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_OUTPUT_LOW   | The output fell below the low cutoff limit for voltage output                        |
+                +-----------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_MEASURE_HIGH | The measured current exceeded the high cutoff limit for current output               |
+                +-----------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_MEASURE_LOW  | The measured current fell below the low cutoff limit for current output              |
+                +-----------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_CHANGE_HIGH  | The voltage slew rate increased beyond the positive change cutoff for voltage output |
+                +-----------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.VOLTAGE_CHANGE_LOW   | The voltage slew rate decreased beyond the negative change cutoff for voltage output |
+                +-----------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_CHANGE_HIGH  | The current slew rate increased beyond the positive change cutoff for current output |
+                +-----------------------------------------+--------------------------------------------------------------------------------------+
+                | OutputCutoffReason.CURRENT_CHANGE_LOW   | The current slew rate decreased beyond the negative change cutoff for current output |
+                +-----------------------------------------+--------------------------------------------------------------------------------------+
+
+
+        Returns:
+            output_cutoff_state (bool): Specifies whether an output cutoff has engaged.
+
+                +-------+------------------------------------------------------------------------------+
+                | True  | An output cutoff has engaged for the conditions in **output cutoff reason**. |
+                +-------+------------------------------------------------------------------------------+
+                | False | No output cutoff has engaged.                                                |
+                +-------+------------------------------------------------------------------------------+
+
+        '''
+        if type(output_cutoff_reason) is not enums.OutputCutoffReason:
+            raise TypeError('Parameter output_cutoff_reason must be of type ' + str(enums.OutputCutoffReason))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        output_cutoff_reason_ctype = _visatype.ViInt32(output_cutoff_reason.value)  # case S130
+        output_cutoff_state_ctype = _visatype.ViBoolean()  # case S220
+        error_code = self._library.niDCPower_QueryLatchedOutputCutoffState(vi_ctype, channel_name_ctype, output_cutoff_reason_ctype, None if output_cutoff_state_ctype is None else (ctypes.pointer(output_cutoff_state_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return bool(output_cutoff_state_ctype.value)
+
+    @ivi_synchronized
     def query_max_current_limit(self, voltage_level):
         r'''query_max_current_limit
 
@@ -3500,11 +4139,11 @@ class _SessionBase(object):
             output_state (enums.OutputStates): Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
-                +--------------------------+-------------------------------------------------------------------+
-                | OutputStates.VOLTAGE (0) | The device maintains a constant voltage by adjusting the current. |
-                +--------------------------+-------------------------------------------------------------------+
-                | OutputStates.CURRENT (1) | The device maintains a constant current by adjusting the voltage. |
-                +--------------------------+-------------------------------------------------------------------+
+                +----------------------+-------------------------------------------------------------------+
+                | OutputStates.VOLTAGE | The device maintains a constant voltage by adjusting the current. |
+                +----------------------+-------------------------------------------------------------------+
+                | OutputStates.CURRENT | The device maintains a constant current by adjusting the voltage. |
+                +----------------------+-------------------------------------------------------------------+
 
 
         Returns:
@@ -3521,6 +4160,83 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_QueryOutputState(vi_ctype, channel_name_ctype, output_state_ctype, None if in_state_ctype is None else (ctypes.pointer(in_state_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_state_ctype.value)
+
+    @ivi_synchronized
+    def reset(self):
+        r'''reset
+
+        Resets the device to a known state. This method disables power
+        generation, resets session properties to their default values, commits
+        the session properties, and leaves the session in the Uncommitted state.
+        Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+        more information about NI-DCPower software states.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDCPower_ResetWithChannels(vi_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def send_software_edge_trigger(self, trigger):
+        r'''send_software_edge_trigger
+
+        Asserts the specified trigger. This method can override an external
+        edge trigger.
+
+        **Related Topics:**
+
+        `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
+
+        Note:
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+        for more information about supported devices.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            trigger (enums.SendSoftwareEdgeTriggerType): Specifies which trigger to assert.
+                **Defined Values:**
+
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_START_TRIGGER            | Asserts the Start trigger.            |
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_SOURCE_TRIGGER           | Asserts the Source trigger.           |
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_MEASURE_TRIGGER          | Asserts the Measure trigger.          |
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER | Asserts the Sequence Advance trigger. |
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_PULSE_TRIGGER            | Asserts the Pulse trigger.            |
+                +----------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_SHUTDOWN_TRIGGER         | Asserts the Shutdown trigger.         |
+                +----------------------------------------+---------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+        '''
+        if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
+            raise TypeError('Parameter trigger must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
+        error_code = self._library.niDCPower_SendSoftwareEdgeTriggerWithChannels(vi_ctype, channel_name_ctype, trigger_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -3871,6 +4587,70 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
+    @ivi_synchronized
+    def wait_for_event(self, event_id, timeout=hightime.timedelta(seconds=10.0)):
+        r'''wait_for_event
+
+        Waits until the device has generated the specified event.
+
+        The session monitors whether each type of event has occurred at least
+        once since the last time this method or the initiate
+        method were called. If an event has only been generated once and you
+        call this method successively, the method times out. Individual
+        events must be generated between separate calls of this method.
+
+        Note:
+        Refer to `Supported Methods by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+        for more information about supported devices.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            event_id (enums.Event): Specifies which event to wait for.
+                **Defined Values:**
+
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT             | Waits for the Source Complete event.             |
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT            | Waits for the Measure Complete event.            |
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT | Waits for the Sequence Iteration Complete event. |
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT        | Waits for the Sequence Engine Done event.        |
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_PULSE_COMPLETE_EVENT              | Waits for the Pulse Complete event.              |
+                +-------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT     | Waits for the Ready for Pulse Trigger event.     |
+                +-------------------------------------------------+--------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete, in
+                seconds. If the method does not complete within this time interval,
+                NI-DCPower returns an error.
+
+                Note:
+                When setting the timeout interval, ensure you take into account any
+                triggers so that the timeout interval is long enough for your
+                application.
+
+        '''
+        if type(event_id) is not enums.Event:
+            raise TypeError('Parameter event_id must be of type ' + str(enums.Event))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
+        error_code = self._library.niDCPower_WaitForEventWithChannels(vi_ctype, channel_name_ctype, event_id_ctype, timeout_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def _error_message(self, error_code):
         r'''_error_message
 
@@ -4028,6 +4808,12 @@ class Session(_SessionBase):
 
         Note:
         This method will return a Python context manager that will initiate on entering and abort on exit.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
         '''
         return _Acquisition(self)
 
@@ -4060,313 +4846,6 @@ class Session(_SessionBase):
         self._vi = 0
 
     ''' These are code-generated '''
-
-    @ivi_synchronized
-    def abort(self):
-        r'''abort
-
-        Transitions the NI-DCPower session from the Running state to the
-        Uncommitted state. If a sequence is running, it is stopped. Any
-        configuration methods called after this method are not applied until
-        the initiate method is called. If power output is enabled
-        when you call the abort method, the output channels remain
-        in their current state and continue providing power.
-
-        Use the ConfigureOutputEnabled method to disable power
-        output on a per channel basis. Use the reset method to
-        disable output on all channels.
-
-        Refer to the `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
-        the *NI DC Power Supplies and SMUs Help* for information about the
-        specific NI-DCPower software states.
-
-        **Related Topics:**
-
-        `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_Abort(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def commit(self):
-        r'''commit
-
-        Applies previously configured settings to the device. Calling this
-        method moves the NI-DCPower session from the Uncommitted state into
-        the Committed state. After calling this method, modifying any
-        property reverts the NI-DCPower session to the Uncommitted state. Use
-        the initiate method to transition to the Running state.
-        Refer to the `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
-        the *NI DC Power Supplies and SMUs Help* for details about the specific
-        NI-DCPower software states.
-
-        **Related Topics:**
-
-        `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_Commit(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def _create_advanced_sequence(self, sequence_name, attribute_ids, set_as_active_sequence):
-        r'''_create_advanced_sequence
-
-        Creates an empty advanced sequence. Call the
-        create_advanced_sequence_step method to add steps to the
-        active advanced sequence.
-
-        You can create multiple advanced sequences in a session.
-
-        **Support for this method**
-
-        You must set the source mode to Sequence to use this method.
-
-        Using the set_sequence method with Advanced Sequence
-        methods is unsupported.
-
-        Use this method in the Uncommitted or Committed programming states.
-        Refer to the `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
-        the *NI DC Power Supplies and SMUs Help* for more information about
-        NI-DCPower programming states.
-
-        **Related Topics**:
-
-        `Advanced Sequence
-        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
-
-        `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
-        create_advanced_sequence_step
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            sequence_name (str): Specifies the name of the sequence to create.
-
-            attribute_ids (list of int): Specifies the properties you reconfigure per step in the advanced
-                sequence. The following table lists which properties can be configured
-                in an advanced sequence for each NI-DCPower device that supports
-                advanced sequencing. A Yes indicates that the property can be configured
-                in advanced sequencing. An No indicates that the property cannot be
-                configured in advanced sequencing.
-
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | Property                       | PXIe-4135 | PXIe-4136 | PXIe-4137 | PXIe-4138 | PXIe-4139 | PXIe-4140/4142/4144 | PXIe-4141/4143/4145 | PXIe-4162/4163 |
-                +================================+===========+===========+===========+===========+===========+=====================+=====================+================+
-                | dc_noise_rejection             | Yes       | No        | Yes       | No        | Yes       | No                  | No                  | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | aperture_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | measure_record_length          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | sense                          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | ovp_enabled                    | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | ovp_limit                      | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_delay               | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_off_time                 | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_on_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | source_delay                   | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | output_enabled                 | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | output_function                | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | output_resistance              | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | transient_response             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-
-            set_as_active_sequence (bool): Specifies that this current sequence is active.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
-        attribute_id_count_ctype = _visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case S160
-        attribute_ids_ctype = get_ctypes_pointer_for_buffer(value=attribute_ids, library_type=_visatype.ViInt32)  # case B550
-        set_as_active_sequence_ctype = _visatype.ViBoolean(set_as_active_sequence)  # case S150
-        error_code = self._library.niDCPower_CreateAdvancedSequence(vi_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def create_advanced_sequence_step(self, set_as_active_step=True):
-        r'''create_advanced_sequence_step
-
-        Creates a new advanced sequence step in the advanced sequence specified
-        by the Active advanced sequence. When you create an advanced sequence
-        step, each property you passed to the _create_advanced_sequence
-        method is reset to its default value for that step unless otherwise
-        specified.
-
-        **Support for this Method**
-
-        You must set the source mode to Sequence to use this method.
-
-        Using the set_sequence method with Advanced Sequence
-        methods is unsupported.
-
-        **Related Topics**:
-
-        `Advanced Sequence
-        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
-
-        `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
-        _create_advanced_sequence
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            set_as_active_step (bool): Specifies that this current step in the active sequence is active.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
-        error_code = self._library.niDCPower_CreateAdvancedSequenceStep(vi_ctype, set_as_active_step_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def delete_advanced_sequence(self, sequence_name):
-        r'''delete_advanced_sequence
-
-        Deletes a previously created advanced sequence and all the advanced
-        sequence steps in the advanced sequence.
-
-        **Support for this Method**
-
-        You must set the source mode to Sequence to use this method.
-
-        Using the set_sequence method with Advanced Sequence
-        methods is unsupported.
-
-        **Related Topics**:
-
-        `Advanced Sequence
-        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
-
-        `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            sequence_name (str): specifies the name of the sequence to delete.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_DeleteAdvancedSequence(vi_ctype, sequence_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
 
     @ivi_synchronized
     def disable(self):
@@ -4675,7 +5154,7 @@ class Session(_SessionBase):
                 raise TypeError('{0} is not a valid property: {1}'.format(prop, type(Session.__base__.__dict__[prop])))
             attribute_ids_used.add(Session.__base__.__dict__[prop]._attribute_id)
 
-        self._create_advanced_sequence(sequence_name, list(attribute_ids_used), set_as_active_sequence)
+        self._create_advanced_sequence_with_channels(sequence_name, list(attribute_ids_used), set_as_active_sequence)
 
     @ivi_synchronized
     def get_channel_name(self, index):
@@ -5073,28 +5552,6 @@ class Session(_SessionBase):
         return int(vi_ctype.value)
 
     @ivi_synchronized
-    def _initiate(self):
-        r'''_initiate
-
-        Starts generation or acquisition, causing the NI-DCPower session to
-        leave the Uncommitted state or Committed state and enter the Running
-        state. To return to the Uncommitted state call the abort
-        method. Refer to the `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
-        the *NI DC Power Supplies and SMUs Help* for information about the
-        specific NI-DCPower software states.
-
-        **Related Topics:**
-
-        `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_Initiate(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def read_current_temperature(self):
         r'''read_current_temperature
 
@@ -5151,110 +5608,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    @ivi_synchronized
-    def send_software_edge_trigger(self, trigger):
-        r'''send_software_edge_trigger
-
-        Asserts the specified trigger. This method can override an external
-        edge trigger.
-
-        **Related Topics:**
-
-        `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            trigger (enums.SendSoftwareEdgeTriggerType): Specifies which trigger to assert.
-                **Defined Values:**
-
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_START_TRIGGER (1034)            | Asserts the Start trigger.            |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_TRIGGER (1035)           | Asserts the Source trigger.           |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_TRIGGER (1036)          | Asserts the Measure trigger.          |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER (1037) | Asserts the Sequence Advance trigger. |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_PULSE_TRIGGER (1053)            | Asserts the Pulse trigger.            |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SHUTDOWN_TRIGGER (1118)         | Asserts the Shutdown trigger.         |
-                +-----------------------------------------------+---------------------------------------+
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        '''
-        if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
-            raise TypeError('Parameter trigger must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        error_code = self._library.niDCPower_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def wait_for_event(self, event_id, timeout=hightime.timedelta(seconds=10.0)):
-        r'''wait_for_event
-
-        Waits until the device has generated the specified event.
-
-        The session monitors whether each type of event has occurred at least
-        once since the last time this method or the initiate
-        method were called. If an event has only been generated once and you
-        call this method successively, the method times out. Individual
-        events must be generated between separate calls of this method.
-
-        Note:
-        Refer to `Supported Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            event_id (enums.Event): Specifies which event to wait for.
-                **Defined Values:**
-
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT (1030)             | Waits for the Source Complete event.             |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT (1031)            | Waits for the Measure Complete event.            |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT (1032) | Waits for the Sequence Iteration Complete event. |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT (1033)        | Waits for the Sequence Engine Done event.        |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_PULSE_COMPLETE_EVENT (1051 )             | Waits for the Pulse Complete event.              |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
-                +--------------------------------------------------------+--------------------------------------------------+
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete, in
-                seconds. If the method does not complete within this time interval,
-                NI-DCPower returns an error.
-
-                Note:
-                When setting the timeout interval, ensure you take into account any
-                triggers so that the timeout interval is long enough for your
-                application.
-
-        '''
-        if type(event_id) is not enums.Event:
-            raise TypeError('Parameter event_id must be of type ' + str(enums.Event))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        error_code = self._library.niDCPower_WaitForEvent(vi_ctype, event_id_ctype, timeout_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _close(self):
         r'''_close
 
@@ -5307,22 +5660,6 @@ class Session(_SessionBase):
         if code:
             raise errors.SelfTestError(code, msg)
         return None
-
-    @ivi_synchronized
-    def reset(self):
-        r'''reset
-
-        Resets the device to a known state. This method disables power
-        generation, resets session properties to their default values, commits
-        the session properties, and leaves the session in the Uncommitted state.
-        Refer to the `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
-        more information about NI-DCPower software states.
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_reset(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
 
     @ivi_synchronized
     def _self_test(self):
