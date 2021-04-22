@@ -4677,10 +4677,10 @@ class _SessionBase(object):
 
 
 class Session(_SessionBase):
-    '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
+    '''An NI-DCPower session to a NI Programmable Power Supply or Source Measure Unit.'''
 
     def __init__(self, resource_name, channels=None, reset=False, options={}):
-        r'''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
+        r'''An NI-DCPower session to a NI Programmable Power Supply or Source Measure Unit.
 
         Creates and returns a new NI-DCPower session to the power supply or SMU
         specified in **resource name** to be used in all subsequent NI-DCPower

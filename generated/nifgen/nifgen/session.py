@@ -2947,10 +2947,10 @@ class _SessionBase(object):
 
 
 class Session(_SessionBase):
-    '''An NI-FGEN session to a National Instruments Signal Generator.'''
+    '''An NI-FGEN session to a NI Signal Generator.'''
 
     def __init__(self, resource_name, channel_name=None, reset_device=False, options={}):
-        r'''An NI-FGEN session to a National Instruments Signal Generator.
+        r'''An NI-FGEN session to a NI Signal Generator.
 
         Creates and returns a new NI-FGEN session to the specified channel of a
         waveform generator that is used in all subsequent NI-FGEN method

@@ -15,7 +15,7 @@ def example(resource_name, options, function, range, digits, samples, triggers):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Performs a multipoint measurement using the NI-DMM API.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments Digital Multimeter.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a NI Digital Multimeter.')
     parser.add_argument('-f', '--function', default='DC_VOLTS', choices=nidmm.Function.__members__.keys(), type=str.upper, help='Measurement function.')
     parser.add_argument('-r', '--range', default=10, type=float, help='Measurement range.')
     parser.add_argument('-d', '--digits', default=6.5, type=float, help='Digits of resolution for the measurement.')

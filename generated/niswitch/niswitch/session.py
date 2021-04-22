@@ -1208,10 +1208,10 @@ class _SessionBase(object):
 
 
 class Session(_SessionBase):
-    '''An NI-SWITCH session to a National Instruments Switch Module'''
+    '''An NI-SWITCH session to a NI Switch Module'''
 
     def __init__(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
-        r'''An NI-SWITCH session to a National Instruments Switch Module
+        r'''An NI-SWITCH session to a NI Switch Module
 
         Returns a session handle used to identify the switch in all subsequent
         instrument driver calls and sets the topology of the switch.
