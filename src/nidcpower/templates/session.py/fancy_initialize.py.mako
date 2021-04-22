@@ -1,6 +1,9 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Dispatches to the proper initialize method based on input parameters.'''
+    '''
+    Dispatches to the proper initialize method based on input parameters.
+    Stores independent_channels argument in an instance variable for use by session lock and unlock.
+    '''
     import build.helper as helper
 
     suffix = method_template['method_python_name_suffix']
@@ -11,11 +14,10 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
 
+        self._independent_channels = independent_channels  # cache for use by lock and unlock overrides
+
         if independent_channels:
             if channels:
-                # if we have a channels arg, we need to try and combine it with the resource name
-                # before calling into initialize with independent channels
-
                 import warnings
                 warnings.warn(
                     "Attempting to initialize an independent channels session with a channels argument. "
@@ -25,6 +27,8 @@
                     DeprecationWarning
                 )
 
+                # if we have a channels arg, we need to try and combine it with the resource name
+                # before calling into initialize with independent channels
                 if "," in resource_name:
                     raise ValueError(
                         "Channels can't be combined with multiple devices in resource name. "

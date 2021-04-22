@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.7.0d8
+# This file is generated from NI-DCPower API metadata version 21.0.0d9999
 functions = {
-    'Abort': {
+    'AbortWithChannels': {
         'documentation': {
-            'description': '\nTransitions the NI-DCPower session from the Running state to the\nUncommitted state. If a sequence is running, it is stopped. Any\nconfiguration functions called after this function are not applied until\nthe niDCPower_Initiate function is called. If power output is enabled\nwhen you call the niDCPower_Abort function, the output channels remain\nin their current state and continue providing power.\n\nUse the niDCPower_ConfigureOutputEnabled function to disable power\noutput on a per channel basis. Use the niDCPower_reset function to\ndisable output on all channels.\n\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for information about the\nspecific NI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
+            'description': '\nTransitions the NI-DCPower session from the Running state to the\nUncommitted state. If a sequence is running, it is stopped. Any\nconfiguration functions called after this function are not applied until\nthe niDCPower_InitiateWithChannels function is called. If power output is enabled\nwhen you call the niDCPower_AbortWithChannels function, the output channels remain\nin their current state and continue providing power.\n\nUse the niDCPower_ConfigureOutputEnabled function to disable power\noutput on a per channel basis. Use the niDCPower_reset function to\ndisable output on all channels.\n\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for information about the\nspecific NI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
         'parameters': [
             {
@@ -13,8 +13,14 @@ functions = {
                 },
                 'name': 'vi',
                 'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
             }
         ],
+        'python_name': 'abort',
         'returns': 'ViStatus'
     },
     'CalSelfCalibrate': {
@@ -43,9 +49,9 @@ functions = {
         'python_name': 'self_cal',
         'returns': 'ViStatus'
     },
-    'Commit': {
+    'ClearLatchedOutputCutoffState': {
         'documentation': {
-            'description': '\nApplies previously configured settings to the device. Calling this\nfunction moves the NI-DCPower session from the Uncommitted state into\nthe Committed state. After calling this function, modifying any\nattribute reverts the NI-DCPower session to the Uncommitted state. Use\nthe niDCPower_Initiate function to transition to the Running state.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for details about the specific\nNI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
+            'description': 'Clears the state of an output cutoff that was engaged.\nTo clear the state for all output cutoff reasons, use NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL.\n'
         },
         'parameters': [
             {
@@ -55,8 +61,85 @@ functions = {
                 },
                 'name': 'vi',
                 'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the reasons for which to clear the output cutoff state.\n',
+                    'table_body': [
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL',
+                            'Clears all output cutoff conditions'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_HIGH',
+                            'Clears cutoffs caused when the output exceeded the high cutoff limit for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_LOW',
+                            'Clears cutoffs caused when the output fell below the low cutoff limit for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_HIGH',
+                            'Clears cutoffs caused when the measured current exceeded the high cutoff limit for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_LOW',
+                            'Clears cutoffs caused when the measured current fell below the low cutoff limit for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_HIGH',
+                            'Clears cutoffs caused when the voltage slew rate increased beyond the positive change cutoff for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_LOW',
+                            'Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_HIGH',
+                            'Clears cutoffs caused when the current slew rate increased beyond the positive change cutoff for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
+                            'Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output'
+                        ]
+                    ]
+                },
+                'enum': 'OutputCutoffReason',
+                'name': 'outputCutoffReason',
+                'type': 'ViInt32'
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'CommitWithChannels': {
+        'documentation': {
+            'description': '\nApplies previously configured settings to the device. Calling this\nfunction moves the NI-DCPower session from the Uncommitted state into\nthe Committed state. After calling this function, modifying any\nattribute reverts the NI-DCPower session to the Uncommitted state. Use\nthe niDCPower_InitiateWithChannels function to transition to the Running state.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for details about the specific\nNI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            }
+        ],
+        'python_name': 'commit',
         'returns': 'ViStatus'
     },
     'ConfigureApertureTime': {
@@ -96,11 +179,11 @@ functions = {
                     'description': '\nSpecifies the units for **apertureTime**.\n**Defined Values**:\n',
                     'table_body': [
                         [
-                            'NIDCPOWER_VAL_SECONDS (1028)',
+                            'NIDCPOWER_VAL_SECONDS',
                             'Specifies seconds.'
                         ],
                         [
-                            'NIDCPOWER_VAL_POWER_LINE_CYCLES (1029)',
+                            'NIDCPOWER_VAL_POWER_LINE_CYCLES',
                             'Specifies Power Line Cycles.'
                         ]
                     ]
@@ -112,10 +195,9 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'CreateAdvancedSequence': {
-        'codegen_method': 'private',
+    'CreateAdvancedSequenceStepWithChannels': {
         'documentation': {
-            'description': '\nCreates an empty advanced sequence. Call the\nniDCPower_CreateAdvancedSequenceStep function to add steps to the\nactive advanced sequence.\n\nYou can create multiple advanced sequences in a session.\n\n**Support for this function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\nUse this function in the Uncommitted or Committed programming states.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nNI-DCPower programming states.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceStep\n',
+            'description': '\nCreates a new advanced sequence step in the advanced sequence specified\nby the Active advanced sequence. When you create an advanced sequence\nstep, each attribute you passed to the niDCPower_CreateAdvancedSequenceWithChannels\nfunction is reset to its default value for that step unless otherwise\nspecified.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceWithChannels\n',
             'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
         },
         'parameters': [
@@ -126,6 +208,45 @@ functions = {
                 },
                 'name': 'vi',
                 'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'default_value': True,
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies that this current step in the active sequence is active.'
+                },
+                'name': 'setAsActiveStep',
+                'type': 'ViBoolean'
+            }
+        ],
+        'python_name': 'create_advanced_sequence_step',
+        'returns': 'ViStatus'
+    },
+    'CreateAdvancedSequenceWithChannels': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nCreates an empty advanced sequence. Call the\nniDCPower_CreateAdvancedSequenceStepWithChannels function to add steps to the\nactive advanced sequence.\n\nYou can create multiple advanced sequences in a session.\n\n**Support for this function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\nUse this function in the Uncommitted or Committed programming states.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nNI-DCPower programming states.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceStepWithChannels\n',
+            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+        },
+        'method_name_for_documentation': 'create_advanced_sequence',
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
             },
             {
                 'direction': 'in',
@@ -751,33 +872,7 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'CreateAdvancedSequenceStep': {
-        'documentation': {
-            'description': '\nCreates a new advanced sequence step in the advanced sequence specified\nby the Active advanced sequence. When you create an advanced sequence\nstep, each attribute you passed to the niDCPower_CreateAdvancedSequence\nfunction is reset to its default value for that step unless otherwise\nspecified.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequence\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'default_value': True,
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies that this current step in the active sequence is active.'
-                },
-                'name': 'setAsActiveStep',
-                'type': 'ViBoolean'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'DeleteAdvancedSequence': {
+    'DeleteAdvancedSequenceWithChannels': {
         'documentation': {
             'description': '\nDeletes a previously created advanced sequence and all the advanced\nsequence steps in the advanced sequence.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n',
             'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
@@ -793,6 +888,11 @@ functions = {
             },
             {
                 'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
                 'documentation': {
                     'description': 'specifies the name of the sequence to delete.'
                 },
@@ -800,11 +900,12 @@ functions = {
                 'type': 'ViConstString'
             }
         ],
+        'python_name': 'delete_advanced_sequence',
         'returns': 'ViStatus'
     },
     'Disable': {
         'documentation': {
-            'description': '\nThis function performs the same actions as the niDCPower_reset\nfunction, except that this function also immediately sets the\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute to VI_FALSE.\n\nThis function opens the output relay on devices that have an output\nrelay.\n'
+            'description': '\nThis function performs the same actions as the niDCPower_ResetWithChannels\nfunction, except that this function also immediately sets the\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute to VI_FALSE.\n\nThis function opens the output relay on devices that have an output\nrelay.\n'
         },
         'parameters': [
             {
@@ -886,7 +987,7 @@ functions = {
     'FancyFetchMultiple': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nReturns a list of named tuples (Measurement) that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_Initiate before calling this function.\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n\n',
+            'description': '\nReturns a list of named tuples (Measurement) that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n\n',
             'note': 'This function is not supported on all devices. Refer to `Supported Functions by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.'
         },
         'method_templates': [
@@ -950,6 +1051,101 @@ functions = {
         'python_name': 'fetch_multiple',
         'returns': 'ViStatus'
     },
+    'FancyInitialize': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nCreates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a\nsession handle to be used in all subsequent NI-DCPower method calls.\n\nDriver initialization will be dispatched to either niDCPower_InitializeWithChannels\n(deprecated) or niDCPower_InitializeWithIndependentChannels depending on the value of the\nindependent_channels argument.\n\nIf independent_channels is True, this method will combine the channels argument (if any)\nwith the resource_name argument then call niDCPower_InitializeWithIndependentChannels. If a\nchannels argument is supplied, resource_name must refer to a single instrument.\n\nIf independent_channels is False, this method will issue a deprecation warning then pass\nthe remaining arguments directly to niDCPower_InitializeWithChannels.\n\nConsult the documentation for the initialization method you intend to use for more\ninformation.'
+        },
+        'method_name_for_documentation': '__init__',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_initialize'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIf independent_channels is True (default), this\nargument specifies the NI-DCPower resources to use in the session. NI-DCPower\nresources can be names of the instrument(s) assigned by Measurement & Automation\nExplorer (MAX) and the channel(s) to initialize. Specify the instrument(s) and\nchannel(s) using the form PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or\nPXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3, where PXI1Slot3 and PXI1Slot4 are\ninstrument resource names and 0, 2, and 3 are channels.\n\nIf independent_channels is False, this parameter specifies the resource_name\nassigned by Measurement & Automation Explorer (MAX), for example "PXI1Slot3" where\n"PXI1Slot3" is an instrument\'s resource_name. resource_name can also be a logical\nIVI name.'
+                },
+                'name': 'resourceName',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'type': 'ViString',
+                'type_in_documentation': 'str, list, tuple'
+            },
+            {
+                'default_value': None,
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies which output channel(s) to include in a\nnew session. Specify multiple channels by using a channel list or a channel range. A\nchannel list is a comma (,) separated sequence of channel names (for example, 0,2\nspecifies channels 0 and 2). A channel range is a lower bound channel followed by a\nhyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2\nspecifies channels 0, 1, and 2).\n\nIf independent_channels is True and a channels argument is supplied, resource_name\nwill be combined with channels to form a resource string that specifies the\ninstrument and channel(s). This operation is only valid if resource_name refers to a\nsingle device. To create a session across channels on multiple devices, do not\nprovide a channels argument and use a resource_name of the form described above.'
+                },
+                'is_repeated_capability': False,
+                'name': 'channels',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'type': 'ViString',
+                'type_in_documentation': 'str, list, range, tuple'
+            },
+            {
+                'default_value': False,
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIf independent_channels is True (default), specifies whether to reset\nchannel(s) during the initialization procedure. Otherwise, specifies whether to\nreset the device during the initialization procedure.\n\nSee the target initialization method for more details.'
+                },
+                'name': 'reset',
+                'type': 'ViBoolean'
+            },
+            {
+                'default_value': '""',
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the initial value of certain properties for the session.\nThe syntax for optionString is a list of properties with an assigned value where 1\nis True and 0 is False. For example:\n\nSimulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>\n\nTo simulate a multi-instrument session when independent_channels is True, set\nSimulate to 1 and list multiple instruments for DriverSetup. For example:\n\nSimulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;\nBoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;\nBoardType:<bus connector>\n\nYou do not have to specify a value for all the properties. If you do not specify a\nvalue for a property, the default value is used.'
+                },
+                'name': 'optionString',
+                'python_api_converter_name': 'convert_init_with_options_dictionary',
+                'type': 'ViString',
+                'type_in_documentation': 'dict'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns a session handle that you use to identify the device in all\nsubsequent NI-DCPower method calls.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'default_value': True,
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies whether to initialize the session with\nindependent channels. If true, this method dispatches the initialization routine\nto niDCPower_InitializeWithIndependentChannels. Otherwise, initialization is\nperformed by niDCPower_InitializeWithChannels.\n\nNote: Initializing a session with niDCPower_InitializeWithChannels is deprecated.'
+                },
+                'name': 'independentChannels',
+                'type': 'ViBoolean'
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
+    'FancyLockSession': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'lock',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_lock'
+            }
+        ],
+        'parameters': [
+        ],
+        'render_in_session_base': False,
+        'returns': None,
+        'use_session_lock': False
+    },
     'FancyMeasureMultiple': {
         'codegen_method': 'python-only',
         'documentation': {
@@ -997,10 +1193,29 @@ functions = {
         'python_name': 'measure_multiple',
         'returns': 'ViStatus'
     },
+    'FancyUnlockSession': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'unlock',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_unlock'
+            }
+        ],
+        'parameters': [
+        ],
+        'python_name': 'unlock',
+        'render_in_session_base': False,
+        'returns': None,
+        'use_session_lock': False
+    },
     'FetchMultiple': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nReturns an array of voltage measurements, an array of current\nmeasurements, and an array of compliance measurements that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_Initiate before calling this function.\n\nRefer to the `Acquiring\nMeasurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__\nand `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nconfiguring this function.\n',
+            'description': '\nReturns an array of voltage measurements, an array of current\nmeasurements, and an array of compliance measurements that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nRefer to the `Acquiring\nMeasurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__\nand `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nconfiguring this function.\n',
             'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
         },
         'method_name_for_documentation': 'fetch_multiple',
@@ -1350,6 +1565,57 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'GetChannelNameFromString': {
+        'documentation': {
+            'description': '\nReturns a list of channel names for given channel indices.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIndex list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
+                },
+                'name': 'index',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'python_name': 'indices',
+                'type': 'ViConstString',
+                'type_in_documentation': 'basic sequence types or str or int'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe number of elements in the ViChar array you specify for name.\n'
+                },
+                'name': 'bufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'The channel name(s) at the specified indices.'
+                },
+                'name': 'channelName',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'python_name': 'names',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufferSize'
+                },
+                'type': 'ViChar[]',
+                'type_in_documentation': 'list of str'
+            }
+        ],
+        'python_name': 'get_channel_names',
         'returns': 'ViStatus'
     },
     'GetError': {
@@ -1727,9 +1993,8 @@ functions = {
     'InitializeWithChannels': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCreates and returns a new NI-DCPower session to the power supply or SMU\nspecified in **resource name** to be used in all subsequent NI-DCPower\nfunction calls. With this function, you can optionally set the initial\nstate of the following session attributes:\n\n-  NIDCPOWER_ATTR_SIMULATE\n-  NIDCPOWER_ATTR_DRIVER_SETUP\n\nAfter calling this function, the session will be in the Uncommitted\nstate. Refer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\ndetails about specific software states.\n\nTo place the device in a known start-up state when creating a new\nsession, set **reset** to VI_TRUE. This action is equivalent to using\nthe niDCPower_reset function immediately after initializing the\nsession.\n\nTo open a session and leave the device in its existing configuration\nwithout passing through a transitional output state, set **reset** to\nVI_FALSE. Then configure the device as in the previous session,\nchanging only the desired settings, and then call the\nniDCPower_Initiate function.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
+            'description': '\nCreates and returns a new NI-DCPower session to the power supply or SMU\nspecified in **resource name** to be used in all subsequent NI-DCPower\nfunction calls. With this function, you can optionally set the initial\nstate of the following session attributes:\n\n-  NIDCPOWER_ATTR_SIMULATE\n-  NIDCPOWER_ATTR_DRIVER_SETUP\n\nAfter calling this function, the session will be in the Uncommitted\nstate. Refer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\ndetails about specific software states.\n\nTo place the device in a known start-up state when creating a new\nsession, set **reset** to VI_TRUE. This action is equivalent to using\nthe niDCPower_ResetWithChannels function immediately after initializing the\nsession.\n\nTo open a session and leave the device in its existing configuration\nwithout passing through a transitional output state, set **reset** to\nVI_FALSE. Then configure the device as in the previous session,\nchanging only the desired settings, and then call the\nniDCPower_InitiateWithChannels function.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
-        'method_name_for_documentation': '__init__',
         'parameters': [
             {
                 'direction': 'in',
@@ -1740,19 +2005,15 @@ functions = {
                 'type': 'ViRsrc'
             },
             {
-                'default_value': None,
                 'direction': 'in',
                 'documentation': {
                     'description': '\nSpecifies which output channel(s) to include in a new session. Specify\nmultiple channels by using a channel list or a channel range. A channel\nlist is a comma (,) separated sequence of channel names (for example,\n0,2 specifies channels 0 and 2). A channel range is a lower bound\nchannel followed by a hyphen (-) or colon (:) followed by an upper bound\nchannel (for example, 0-2 specifies channels 0, 1, and 2). In the\nRunning state, multiple output channel configurations are performed\nsequentially based on the order specified in this parameter. If you do\nnot specify any channels, by default all channels on the device are\nincluded in the session.\n'
                 },
                 'is_repeated_capability': False,
                 'name': 'channels',
-                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
-                'type': 'ViConstString',
-                'type_in_documentation': 'str, list, range, tuple'
+                'type': 'ViConstString'
             },
             {
-                'default_value': False,
                 'direction': 'in',
                 'documentation': {
                     'description': '\nSpecifies whether to reset the device during the initialization\nprocedure.\n'
@@ -1761,15 +2022,12 @@ functions = {
                 'type': 'ViBoolean'
             },
             {
-                'default_value': '""',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nSpecifies the initial value of certain attributes for the session. The\nsyntax for **optionString** is a list of attributes with an assigned\nvalue where 1 is VI_TRUE and 0 is VI_FALSE. For example:\n\n"Simulate=0"\n\nYou do not have to specify a value for all the attributes. If you do not\nspecify a value for an attribute, the default value is used.\n\nFor more information about simulating a device, refer to `Simulating a\nPower Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.\n'
                 },
                 'name': 'optionString',
-                'python_api_converter_name': 'convert_init_with_options_dictionary',
-                'type': 'ViConstString',
-                'type_in_documentation': 'dict'
+                'type': 'ViConstString'
             },
             {
                 'direction': 'out',
@@ -1783,10 +2041,52 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'Initiate': {
+    'InitializeWithIndependentChannels': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nStarts generation or acquisition, causing the NI-DCPower session to\nleave the Uncommitted state or Committed state and enter the Running\nstate. To return to the Uncommitted state call the niDCPower_Abort\nfunction. Refer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for information about the\nspecific NI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
+            'description': '\nCreates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a\nsession handle to be used in all subsequent NI-DCPower function calls.\n\nAfter calling this function, the specified channel or channels will be in the Uncommitted\nstate.\n\nWith this function and channel-based NI-DCPower functions and attributes, you can use any\nchannels in the session independently. For example, you can initiate a subset of channels in\nthe session with niDCPower_InitiateWithChannels, and the other channels in the session\nremain in the Uncommitted state.\n\nDetails of Independent Channel Operation:\nWhen you initialize with independent channels, each channel steps through the NI-DCPower\nprogramming state model independently of all other channels, and you can specify a subset\nof channels for most operations.\n\nNote: You can make concurrent calls to a session from multiple threads, but the session\nexecutes the calls one at a time. If you specify multiple channels for a function or\nattribute, the session may perform the operation on multiple channels in parallel, though\nthis is not guaranteed, and some operations may execute sequentially.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the NI-DCPower resources to use in the session.\nNI-DCPower resources can be names of the instrument(s) assigned by Measurement &\nAutomation Explorer (MAX) and the channel(s) to initialize. Specify the\ninstrument(s) and channel(s) using the form PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3\nor PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3, where PXI1Slot3 and PXI1Slot4 are\ninstrument resource names and 0, 2, and 3 are channels.\n\nIf you pass "" for this control, all channels of the instrument(s) are included in\nthe session.'
+                },
+                'name': 'resourceName',
+                'type': 'ViRsrc'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies whether to reset channel(s) during the initialization procedure.\nThe default is VI_FALSE.\n\nTo place channel(s) in a known startup state when creating a new session, set reset\nto VI_TRUE. This action is equivalent to using the niDCPower_ResetWithChannels\nfunction immediately after initializing the session.\n\nTo open a session and leave the channel(s) in an existing configuration without\npassing through a transitional output state, set reset to VI_FALSE. Next, configure\nthe channel(s) as in the previous session, change the desired settings, and then\ncall the niDCPower_InitiateWithChannels function to write both settings.'
+                },
+                'name': 'reset',
+                'type': 'ViBoolean'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the initial value of certain attributes for the session.\nThe syntax for optionString is a list of attributes with an assigned value where 1\nis VI_TRUE and 0 is VI_FALSE. For example:\n\nSimulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>\n\nTo simulate a multi-instrument session, set Simulate to 1 and list multiple\ninstruments for DriverSetup. For example:\n\nSimulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;\nBoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;\nBoardType:<bus connector>\n\nYou do not have to specify a value for all the attributes. If you do not specify a\nvalue for an attribute, the default value is used.'
+                },
+                'name': 'optionString',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nReturns a session handle that you use to identify the session in all\nsubsequent NI-DCPower function calls.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
+    'InitiateWithChannels': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nStarts generation or acquisition, causing the NI-DCPower session to\nleave the Uncommitted state or Committed state and enter the Running\nstate. To return to the Uncommitted state call the niDCPower_AbortWithChannels\nfunction. Refer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for information about the\nspecific NI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
         'method_name_for_documentation': 'initiate',
         'parameters': [
@@ -1797,6 +2097,11 @@ functions = {
                 },
                 'name': 'vi',
                 'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
             }
         ],
         'returns': 'ViStatus'
@@ -1862,11 +2167,11 @@ functions = {
                     'description': '\nSpecifies whether a voltage or current value is measured.\n**Defined Values**:\n',
                     'table_body': [
                         [
-                            'NIDCPOWER_VAL_MEASURE_VOLTAGE (1)',
+                            'NIDCPOWER_VAL_MEASURE_VOLTAGE',
                             'The device measures voltage.'
                         ],
                         [
-                            'NIDCPOWER_VAL_MEASURE_CURRENT (0)',
+                            'NIDCPOWER_VAL_MEASURE_CURRENT',
                             'The device measures current.'
                         ]
                     ]
@@ -1989,6 +2294,95 @@ functions = {
                     'description': 'Returns whether the device output channel is in compliance.'
                 },
                 'name': 'inCompliance',
+                'type': 'ViBoolean'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'QueryLatchedOutputCutoffState': {
+        'documentation': {
+            'description': '\nDiscovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.\nIf a limit was exceeded, the state is latched until you clear it with the niDCPower_ClearLatchedOutputCutoffState function or the niDCPower_ResetWithChannels function.\n\noutputCutoffReason specifies the conditions for which an output is disconnected.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies which output cutoff conditions to query.\n',
+                    'table_body': [
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL',
+                            'Any output cutoff condition was met'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_HIGH',
+                            'The output exceeded the high cutoff limit for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_LOW',
+                            'The output fell below the low cutoff limit for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_HIGH',
+                            'The measured current exceeded the high cutoff limit for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_LOW',
+                            'The measured current fell below the low cutoff limit for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_HIGH',
+                            'The voltage slew rate increased beyond the positive change cutoff for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_LOW',
+                            'The voltage slew rate decreased beyond the negative change cutoff for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_HIGH',
+                            'The current slew rate increased beyond the positive change cutoff for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
+                            'The current slew rate decreased beyond the negative change cutoff for current output'
+                        ]
+                    ]
+                },
+                'enum': 'OutputCutoffReason',
+                'name': 'outputCutoffReason',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Specifies whether an output cutoff has engaged.\n',
+                    'table_body': [
+                        [
+                            'VI_TRUE',
+                            'An output cutoff has engaged for the conditions in **output cutoff reason**.'
+                        ],
+                        [
+                            'VI_FALSE',
+                            'No output cutoff has engaged.'
+                        ]
+                    ]
+                },
+                'name': 'outputCutoffState',
                 'type': 'ViBoolean'
             }
         ],
@@ -2141,11 +2535,11 @@ functions = {
                     'description': '\nSpecifies the output state of the output channel that is being queried.\n**Defined Values**:\n',
                     'table_body': [
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE (0)',
+                            'NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE',
                             'The device maintains a constant voltage by adjusting the current.'
                         ],
                         [
-                            'NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT (1)',
+                            'NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT',
                             'The device maintains a constant current by adjusting the voltage.'
                         ]
                     ]
@@ -2205,9 +2599,31 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'ResetWithChannels': {
+        'documentation': {
+            'description': '\nResets the device to a known state. This function disables power\ngeneration, resets session attributes to their default values, commits\nthe session attributes, and leaves the session in the Uncommitted state.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\nmore information about NI-DCPower software states.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            }
+        ],
+        'python_name': 'reset',
+        'returns': 'ViStatus'
+    },
     'ResetWithDefaults': {
         'documentation': {
-            'description': "\nResets the device to a known state. This function disables power\ngeneration, resets session attributes to their default values, commits\nthe session attributes, and leaves the session in the\n`Running <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#running')>`__\nstate. In addition to exhibiting the behavior of the niDCPower_reset\nfunction, this function can assign user-defined default values for\nconfigurable attributes from the IVI configuration.\n"
+            'description': "\nResets the device to a known state. This function disables power\ngeneration, resets session attributes to their default values, commits\nthe session attributes, and leaves the session in the\n`Running <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#running')>`__\nstate. In addition to exhibiting the behavior of the niDCPower_ResetWithChannels\nfunction, this function can assign user-defined default values for\nconfigurable attributes from the IVI configuration.\n"
         },
         'parameters': [
             {
@@ -2221,7 +2637,7 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'SendSoftwareEdgeTrigger': {
+    'SendSoftwareEdgeTriggerWithChannels': {
         'documentation': {
             'description': '\nAsserts the specified trigger. This function can override an external\nedge trigger.\n\n**Related Topics:**\n\n`Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__\n',
             'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
@@ -2237,31 +2653,36 @@ functions = {
             },
             {
                 'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
                 'documentation': {
                     'description': '\nSpecifies which trigger to assert.\n**Defined Values:**\n',
                     'table_body': [
                         [
-                            'NIDCPOWER_VAL_START_TRIGGER (1034)',
+                            'NIDCPOWER_VAL_START_TRIGGER',
                             'Asserts the Start trigger.'
                         ],
                         [
-                            'NIDCPOWER_VAL_SOURCE_TRIGGER (1035)',
+                            'NIDCPOWER_VAL_SOURCE_TRIGGER',
                             'Asserts the Source trigger.'
                         ],
                         [
-                            'NIDCPOWER_VAL_MEASURE_TRIGGER (1036)',
+                            'NIDCPOWER_VAL_MEASURE_TRIGGER',
                             'Asserts the Measure trigger.'
                         ],
                         [
-                            'NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER (1037)',
+                            'NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER',
                             'Asserts the Sequence Advance trigger.'
                         ],
                         [
-                            'NIDCPOWER_VAL_PULSE_TRIGGER (1053)',
+                            'NIDCPOWER_VAL_PULSE_TRIGGER',
                             'Asserts the Pulse trigger.'
                         ],
                         [
-                            'NIDCPOWER_VAL_SHUTDOWN_TRIGGER (1118)',
+                            'NIDCPOWER_VAL_SHUTDOWN_TRIGGER',
                             'Asserts the Shutdown trigger.'
                         ]
                     ]
@@ -2271,6 +2692,7 @@ functions = {
                 'type': 'ViInt32'
             }
         ],
+        'python_name': 'send_software_edge_trigger',
         'returns': 'ViStatus'
     },
     'SetAttributeViBoolean': {
@@ -2574,9 +2996,9 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'WaitForEvent': {
+    'WaitForEventWithChannels': {
         'documentation': {
-            'description': '\nWaits until the device has generated the specified event.\n\nThe session monitors whether each type of event has occurred at least\nonce since the last time this function or the niDCPower_Initiate\nfunction were called. If an event has only been generated once and you\ncall this function successively, the function times out. Individual\nevents must be generated between separate calls of this function.\n',
+            'description': '\nWaits until the device has generated the specified event.\n\nThe session monitors whether each type of event has occurred at least\nonce since the last time this function or the niDCPower_InitiateWithChannels\nfunction were called. If an event has only been generated once and you\ncall this function successively, the function times out. Individual\nevents must be generated between separate calls of this function.\n',
             'note': "\nRefer to `Supported Functions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
         },
         'parameters': [
@@ -2590,31 +3012,36 @@ functions = {
             },
             {
                 'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
                 'documentation': {
                     'description': '\nSpecifies which event to wait for.\n**Defined Values:**\n',
                     'table_body': [
                         [
-                            'NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT (1030)',
+                            'NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT',
                             'Waits for the Source Complete event.'
                         ],
                         [
-                            'NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT (1031)',
+                            'NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT',
                             'Waits for the Measure Complete event.'
                         ],
                         [
-                            'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT (1032)',
+                            'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT',
                             'Waits for the Sequence Iteration Complete event.'
                         ],
                         [
-                            'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT (1033)',
+                            'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT',
                             'Waits for the Sequence Engine Done event.'
                         ],
                         [
-                            'NIDCPOWER_VAL_PULSE_COMPLETE_EVENT (1051 )',
+                            'NIDCPOWER_VAL_PULSE_COMPLETE_EVENT',
                             'Waits for the Pulse Complete event.'
                         ],
                         [
-                            'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)',
+                            'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT',
                             'Waits for the Ready for Pulse Trigger event.'
                         ]
                     ]
@@ -2636,12 +3063,13 @@ functions = {
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
+        'python_name': 'wait_for_event',
         'returns': 'ViStatus'
     },
     'close': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCloses the session specified in **vi** and deallocates the resources\nthat NI-DCPower reserves. If power output is enabled when you call this\nfunction, the output channels remain in their existing state and\ncontinue providing power. Use the niDCPower_ConfigureOutputEnabled\nfunction to disable power output on a per channel basis. Use the\nniDCPower_reset function to disable power output on all channel(s).\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
+            'description': '\nCloses the session specified in **vi** and deallocates the resources\nthat NI-DCPower reserves. If power output is enabled when you call this\nfunction, the output channels remain in their existing state and\ncontinue providing power. Use the niDCPower_ConfigureOutputEnabled\nfunction to disable power output on a per channel basis. Use the\nniDCPower_ResetWithChannels function to disable power output on all channel(s).\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
         'parameters': [
             {
@@ -2699,7 +3127,7 @@ functions = {
     'fancy_self_test': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nPerforms the device self-test routine and returns the test result(s).\nCalling this function implicitly calls the niDCPower_reset function.\n\nWhen calling niDCPower_self_test with the PXIe-4162/4163, specify all\nchannels of your PXIe-4162/4163 with the channels input of\nniDCPower_InitializeWithChannels. You cannot self test a subset of\nPXIe-4162/4163 channels.\n\nRaises `SelfTestError` on self test failure. Attributes on exception object:\n\n- code - failure code from driver\n- message - status message from driver\n',
+            'description': '\nPerforms the device self-test routine and returns the test result(s).\nCalling this function implicitly calls the niDCPower_ResetWithChannels function.\n\nWhen calling niDCPower_self_test with the PXIe-4162/4163, specify all\nchannels of your PXIe-4162/4163 with the channels input of\nniDCPower_InitializeWithChannels. You cannot self test a subset of\nPXIe-4162/4163 channels.\n\nRaises `SelfTestError` on self test failure. Attributes on exception object:\n\n- code - failure code from driver\n- message - status message from driver\n',
             'table_body': [
                 [
                     '0',
@@ -2735,26 +3163,10 @@ functions = {
         'python_name': 'self_test',
         'returns': 'ViStatus'
     },
-    'reset': {
-        'documentation': {
-            'description': '\nResets the device to a known state. This function disables power\ngeneration, resets session attributes to their default values, commits\nthe session attributes, and leaves the session in the Uncommitted state.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\nmore information about NI-DCPower software states.\n'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'self_test': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nPerforms the device self-test routine and returns the test result(s).\nCalling this function implicitly calls the niDCPower_reset function.\n\nWhen calling niDCPower_self_test with the PXIe-4162/4163, specify all\nchannels of your PXIe-4162/4163 with the channels input of\nniDCPower_InitializeWithChannels. You cannot self test a subset of\nPXIe-4162/4163 channels.\n'
+            'description': '\nPerforms the device self-test routine and returns the test result(s).\nCalling this function implicitly calls the niDCPower_ResetWithChannels function.\n\nWhen calling niDCPower_self_test with the PXIe-4162/4163, specify all\nchannels of your PXIe-4162/4163 with the channels input of\nniDCPower_InitializeWithChannels. You cannot self test a subset of\nPXIe-4162/4163 channels.\n'
         },
         'method_name_for_documentation': 'self_test',
         'parameters': [

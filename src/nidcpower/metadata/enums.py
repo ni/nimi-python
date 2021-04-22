@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.7.0d8
+# This file is generated from NI-DCPower API metadata version 21.0.0d9999
 enums = {
     'ApertureTimeUnits': {
         'values': [
@@ -372,6 +372,73 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_HIGH',
                 'value': 1011
+            }
+        ]
+    },
+    'OutputCutoffReason': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Queries any output cutoff condition; clears all output cutoff conditions.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL',
+                'value': -1
+            },
+            {
+                'documentation': {
+                    'description': 'Queries or clears cutoff conditions when the output exceeded the high cutoff limit for voltage output.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_HIGH',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Queries or clears cutoff conditions when the output fell below the low cutoff limit for voltage output.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_LOW',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Queries or clears cutoff conditions when the measured current exceeded the high cutoff limit for current output.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_HIGH',
+                'value': 4
+            },
+            {
+                'documentation': {
+                    'description': 'Queries or clears cutoff conditions when the measured current fell below the low cutoff limit for current output.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_LOW',
+                'value': 8
+            },
+            {
+                'documentation': {
+                    'description': 'Queries or clears cutoff conditions when the voltage slew rate increased beyond the positive change cutoff for voltage output.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_HIGH',
+                'value': 16
+            },
+            {
+                'documentation': {
+                    'description': 'Queries or clears cutoff conditions when the voltage slew rate decreased beyond the negative change cutoff for voltage output.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_LOW',
+                'value': 32
+            },
+            {
+                'documentation': {
+                    'description': 'Queries or clears cutoff conditions when the current slew rate increased beyond the positive change cutoff for current output.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_HIGH',
+                'value': 64
+            },
+            {
+                'documentation': {
+                    'description': 'Queries or clears cutoff conditions when the current slew rate decreased beyond the negative change cutoff for current output.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
+                'value': 128
             }
         ]
     },
