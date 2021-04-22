@@ -3693,10 +3693,10 @@ class _SessionBase(object):
         return attribute_value_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_channel_names(self, index):
+    def get_channel_names(self, indices):
         r'''get_channel_names
 
-        Returns a comma-separated list of channel names from a string index list.
+        Returns a list of channel names for given channel indices.
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -3705,7 +3705,7 @@ class _SessionBase(object):
         nidcpower.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            index (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
 
                 -   A comma-separated list—for example, "0,2,3,1"
                 -   A range using a hyphen—for example, "0-3"
@@ -3715,20 +3715,20 @@ class _SessionBase(object):
 
 
         Returns:
-            channel_name (list of str): The returned channel name(s) at the specified index.
+            names (list of str): The channel name(s) at the specified indices.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(index).encode(self._encoding))  # case C040
+        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
         buffer_size_ctype = _visatype.ViInt32()  # case S170
-        channel_name_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        names_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_comma_separated_string_to_list(channel_name_ctype.value.decode(self._encoding))
+        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
 
     def _get_error(self):
         r'''_get_error

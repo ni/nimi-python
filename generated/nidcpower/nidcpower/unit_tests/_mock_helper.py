@@ -345,14 +345,14 @@ class SideEffectsHelper(object):
         channel_name.value = self._defaults['GetChannelName']['channelName'].encode('ascii')
         return self._defaults['GetChannelName']['return']
 
-    def niDCPower_GetChannelNameFromString(self, vi, index, buffer_size, channel_name):  # noqa: N802
+    def niDCPower_GetChannelNameFromString(self, vi, indices, buffer_size, names):  # noqa: N802
         if self._defaults['GetChannelNameFromString']['return'] != 0:
             return self._defaults['GetChannelNameFromString']['return']
         if self._defaults['GetChannelNameFromString']['channelName'] is None:
             raise MockFunctionCallError("niDCPower_GetChannelNameFromString", param='channelName')
         if buffer_size.value == 0:
             return len(self._defaults['GetChannelNameFromString']['channelName'])
-        channel_name.value = self._defaults['GetChannelNameFromString']['channelName'].encode('ascii')
+        names.value = self._defaults['GetChannelNameFromString']['channelName'].encode('ascii')
         return self._defaults['GetChannelNameFromString']['return']
 
     def niDCPower_GetError(self, vi, code, buffer_size, description):  # noqa: N802

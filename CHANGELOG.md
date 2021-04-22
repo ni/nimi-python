@@ -33,7 +33,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
-        * `get_channel_names` - [#1386](https://github.com/ni/nimi-python/issues/1386) 
+        * `get_channel_names` - [#1588](https://github.com/ni/nimi-python/issues/1588) 
         * API parity with NI-DCPower 20.7.0 by adding Output Cutoff functionality.
             * Properties added:
                 * `output_cutoff_current_change_limit_high`
@@ -51,7 +51,6 @@ All notable changes to this project will be documented in this file.
                 * `query_latched_output_cutoff_state`
     * #### Changed
     * #### Removed
-        * `get_channel_name` and `get_channel_name_from_string` - [#1386](https://github.com/ni/nimi-python/issues/1386)
     * #### Changed
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)

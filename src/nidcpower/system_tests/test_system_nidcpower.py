@@ -39,10 +39,15 @@ def test_self_cal(session):
     session.self_cal()
 
 
+def test_get_channel_name(session):
+    name = session.get_channel_name(1)
+    assert name == '0'
+
 def test_get_channel_names(multi_instrument_session):
     # Once we have support for independent channels, we should update this test to include
     # the instrument names in the expected channel names -- or possibly add a separate test
     # expected_string = ['{0}/{1}'.format(instruments[0], x) for x in range(12)]
+    # (Tracked on GitHub by #1582)
     expected_string = ['{0}'.format(x) for x in range(12)]
     channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
     assert multi_instrument_session.get_channel_names(indices=channel_indices) == expected_string

@@ -863,9 +863,9 @@ get_channel_names
 
     .. py:currentmodule:: nidcpower.Session
 
-    .. py:method:: get_channel_names(index)
+    .. py:method:: get_channel_names(indices)
 
-            Returns a comma-separated list of channel names from a string index list.
+            Returns a list of channel names for given channel indices.
 
             
 
@@ -876,7 +876,7 @@ get_channel_names
                 nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param index:
+            :param indices:
 
 
                 Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
@@ -890,13 +890,13 @@ get_channel_names
                 
 
 
-            :type index: basic sequence types or str or int
+            :type indices: basic sequence types or str or int
 
             :rtype: list of str
             :return:
 
 
-                    The returned channel name(s) at the specified index.
+                    The channel name(s) at the specified indices.
 
                     
 

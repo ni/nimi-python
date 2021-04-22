@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0d52
+# This file is generated from NI-DCPower API metadata version 21.0.0d69
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -1455,7 +1455,7 @@ functions = {
     },
     'GetChannelNameFromString': {
         'documentation': {
-            'description': '\nReturns a comma-separated list of channel names from a string index list.'
+            'description': '\nReturns a list of channel names for given channel indices.'
         },
         'parameters': [
             {
@@ -1473,6 +1473,7 @@ functions = {
                 },
                 'name': 'index',
                 'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'python_name': 'indices',
                 'type': 'ViConstString',
                 'type_in_documentation': 'basic sequence types or str or int'
             },
@@ -1487,10 +1488,11 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned channel name(s) at the specified index.'
+                    'description': 'The channel name(s) at the specified indices.'
                 },
                 'name': 'channelName',
                 'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'python_name': 'names',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'bufferSize'
