@@ -5,21 +5,43 @@ import pytest
 import tempfile
 
 
-@pytest.fixture(scope='function')
-def session():
-    with nidcpower.Session('4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+@pytest.fixture(scope='function', params=[False, True])
+def session(request):
+    with nidcpower.Session(
+        '4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', request.param
+    ) as simulated_session:
         yield simulated_session
 
 
 @pytest.fixture(scope='function')
-def single_channel_session():
-    with nidcpower.Session('4162', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+def ind_channels_session():
+    with nidcpower.Session(
+        '4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', True
+    ) as simulated_session:
         yield simulated_session
 
 
 @pytest.fixture(scope='function')
-def multiple_channel_session():
-    with nidcpower.Session('4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+def synced_channels_session():
+    with nidcpower.Session(
+        '4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', False
+    ) as simulated_session:
+        yield simulated_session
+
+
+@pytest.fixture(scope='function', params=[False, True])
+def single_channel_session(request):
+    with nidcpower.Session(
+        '4162', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', request.param
+    ) as simulated_session:
+        yield simulated_session
+
+
+@pytest.fixture(scope='function', params=[False, True])
+def multiple_channel_session(request):
+    with nidcpower.Session(
+        '4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', request.param
+    ) as simulated_session:
         yield simulated_session
 
 
@@ -31,8 +53,13 @@ def test_self_cal(session):
     session.self_cal()
 
 
-def test_get_channel_name(session):
-    name = session.get_channel_name(1)
+def test_get_channel_name_ind_channels(ind_channels_session):
+    name = ind_channels_session.get_channel_name(1)
+    assert name == '4162/0'
+
+
+def test_get_channel_name_synced_channels(synced_channels_session):
+    name = synced_channels_session.get_channel_name(1)
     assert name == '0'
 
 
@@ -300,9 +327,9 @@ def test_create_and_delete_advanced_sequence_bad_type(single_channel_session):
         pass
 
 
-def test_send_software_edge_trigger_error(session):
+def test_send_software_edge_trigger_error(synced_channels_session):
     try:
-        session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
+        synced_channels_session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
         assert False
     except nidcpower.Error as e:
         assert e.code == -1074118587  # Error : Function not available in multichannel session
