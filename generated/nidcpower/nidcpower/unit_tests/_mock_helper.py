@@ -39,6 +39,9 @@ class SideEffectsHelper(object):
         self._defaults['ExportAttributeConfigurationBuffer']['configuration'] = None
         self._defaults['ExportAttributeConfigurationFile'] = {}
         self._defaults['ExportAttributeConfigurationFile']['return'] = 0
+        self._defaults['FancyInitialize'] = {}
+        self._defaults['FancyInitialize']['return'] = 0
+        self._defaults['FancyInitialize']['vi'] = None
         self._defaults['FetchMultiple'] = {}
         self._defaults['FetchMultiple']['return'] = 0
         self._defaults['FetchMultiple']['voltageMeasurements'] = None
@@ -63,6 +66,9 @@ class SideEffectsHelper(object):
         self._defaults['GetChannelName'] = {}
         self._defaults['GetChannelName']['return'] = 0
         self._defaults['GetChannelName']['channelName'] = None
+        self._defaults['GetChannelNameFromString'] = {}
+        self._defaults['GetChannelNameFromString']['return'] = 0
+        self._defaults['GetChannelNameFromString']['channelName'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['code'] = None
@@ -97,6 +103,9 @@ class SideEffectsHelper(object):
         self._defaults['InitializeWithChannels'] = {}
         self._defaults['InitializeWithChannels']['return'] = 0
         self._defaults['InitializeWithChannels']['vi'] = None
+        self._defaults['InitializeWithIndependentChannels'] = {}
+        self._defaults['InitializeWithIndependentChannels']['return'] = 0
+        self._defaults['InitializeWithIndependentChannels']['vi'] = None
         self._defaults['InitiateWithChannels'] = {}
         self._defaults['InitiateWithChannels']['return'] = 0
         self._defaults['LockSession'] = {}
@@ -239,6 +248,16 @@ class SideEffectsHelper(object):
             return self._defaults['ExportAttributeConfigurationFile']['return']
         return self._defaults['ExportAttributeConfigurationFile']['return']
 
+    def niDCPower_FancyInitialize(self, resource_name, channels, reset, option_string, vi, independent_channels):  # noqa: N802
+        if self._defaults['FancyInitialize']['return'] != 0:
+            return self._defaults['FancyInitialize']['return']
+        # vi
+        if self._defaults['FancyInitialize']['vi'] is None:
+            raise MockFunctionCallError("niDCPower_FancyInitialize", param='vi')
+        if vi is not None:
+            vi.contents.value = self._defaults['FancyInitialize']['vi']
+        return self._defaults['FancyInitialize']['return']
+
     def niDCPower_FetchMultiple(self, vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count):  # noqa: N802
         if self._defaults['FetchMultiple']['return'] != 0:
             return self._defaults['FetchMultiple']['return']
@@ -341,6 +360,16 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetChannelName']['channelName'])
         channel_name.value = self._defaults['GetChannelName']['channelName'].encode('ascii')
         return self._defaults['GetChannelName']['return']
+
+    def niDCPower_GetChannelNameFromString(self, vi, indices, buffer_size, names):  # noqa: N802
+        if self._defaults['GetChannelNameFromString']['return'] != 0:
+            return self._defaults['GetChannelNameFromString']['return']
+        if self._defaults['GetChannelNameFromString']['channelName'] is None:
+            raise MockFunctionCallError("niDCPower_GetChannelNameFromString", param='channelName')
+        if buffer_size.value == 0:
+            return len(self._defaults['GetChannelNameFromString']['channelName'])
+        names.value = self._defaults['GetChannelNameFromString']['channelName'].encode('ascii')
+        return self._defaults['GetChannelNameFromString']['return']
 
     def niDCPower_GetError(self, vi, code, buffer_size, description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
@@ -466,6 +495,16 @@ class SideEffectsHelper(object):
         if vi is not None:
             vi.contents.value = self._defaults['InitializeWithChannels']['vi']
         return self._defaults['InitializeWithChannels']['return']
+
+    def niDCPower_InitializeWithIndependentChannels(self, resource_name, reset, option_string, vi):  # noqa: N802
+        if self._defaults['InitializeWithIndependentChannels']['return'] != 0:
+            return self._defaults['InitializeWithIndependentChannels']['return']
+        # vi
+        if self._defaults['InitializeWithIndependentChannels']['vi'] is None:
+            raise MockFunctionCallError("niDCPower_InitializeWithIndependentChannels", param='vi')
+        if vi is not None:
+            vi.contents.value = self._defaults['InitializeWithIndependentChannels']['vi']
+        return self._defaults['InitializeWithIndependentChannels']['return']
 
     def niDCPower_InitiateWithChannels(self, vi, channel_name):  # noqa: N802
         if self._defaults['InitiateWithChannels']['return'] != 0:
@@ -726,6 +765,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_ExportAttributeConfigurationBuffer.return_value = 0
         mock_library.niDCPower_ExportAttributeConfigurationFile.side_effect = MockFunctionCallError("niDCPower_ExportAttributeConfigurationFile")
         mock_library.niDCPower_ExportAttributeConfigurationFile.return_value = 0
+        mock_library.niDCPower_FancyInitialize.side_effect = MockFunctionCallError("niDCPower_FancyInitialize")
+        mock_library.niDCPower_FancyInitialize.return_value = 0
         mock_library.niDCPower_FetchMultiple.side_effect = MockFunctionCallError("niDCPower_FetchMultiple")
         mock_library.niDCPower_FetchMultiple.return_value = 0
         mock_library.niDCPower_GetAttributeViBoolean.side_effect = MockFunctionCallError("niDCPower_GetAttributeViBoolean")
@@ -740,6 +781,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_GetAttributeViString.return_value = 0
         mock_library.niDCPower_GetChannelName.side_effect = MockFunctionCallError("niDCPower_GetChannelName")
         mock_library.niDCPower_GetChannelName.return_value = 0
+        mock_library.niDCPower_GetChannelNameFromString.side_effect = MockFunctionCallError("niDCPower_GetChannelNameFromString")
+        mock_library.niDCPower_GetChannelNameFromString.return_value = 0
         mock_library.niDCPower_GetError.side_effect = MockFunctionCallError("niDCPower_GetError")
         mock_library.niDCPower_GetError.return_value = 0
         mock_library.niDCPower_GetExtCalLastDateAndTime.side_effect = MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime")
@@ -758,6 +801,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_ImportAttributeConfigurationFile.return_value = 0
         mock_library.niDCPower_InitializeWithChannels.side_effect = MockFunctionCallError("niDCPower_InitializeWithChannels")
         mock_library.niDCPower_InitializeWithChannels.return_value = 0
+        mock_library.niDCPower_InitializeWithIndependentChannels.side_effect = MockFunctionCallError("niDCPower_InitializeWithIndependentChannels")
+        mock_library.niDCPower_InitializeWithIndependentChannels.return_value = 0
         mock_library.niDCPower_InitiateWithChannels.side_effect = MockFunctionCallError("niDCPower_InitiateWithChannels")
         mock_library.niDCPower_InitiateWithChannels.return_value = 0
         mock_library.niDCPower_LockSession.side_effect = MockFunctionCallError("niDCPower_LockSession")

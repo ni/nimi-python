@@ -8,13 +8,42 @@
 
     suffix = method_template['method_python_name_suffix']
 %>\
+    # create a weak value dict for storing references to session objects
+    import weakref
+    _sessions = weakref.WeakValueDictionary()
+
+    # cache super class lock and unlock methods for decorating via monkey patching
+    _super_lock_session = _SessionBase._lock_session
+    _super_unlock = _SessionBase.unlock
+
+    # create fancy functions
+    @staticmethod
+    def _fancy_lock_session(self):
+        session = Session._sessions[self._vi]
+        if hasattr(session, '_pylock'):
+            session._pylock.acquire()
+            return
+        else:
+            return Session._super_lock_session(self)
+
+    @staticmethod
+    def _fancy_unlock(self):
+        session = Session._sessions[self._vi]
+        if hasattr(session, '_pylock'):
+            session._pylock.release()
+            return
+        else:
+            return Session._super_unlock(self)
+
+    # monkey patch super class lock and unlock methods to use this class' fancy functions
+    _SessionBase._lock_session = lambda self: Session._fancy_lock_session(self)
+    _SessionBase.unlock = lambda self: Session._fancy_unlock(self)
+
     def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-
-        self._independent_channels = independent_channels  # cache for use by lock and unlock overrides
 
         if independent_channels:
             if channels:
@@ -38,10 +67,25 @@
                 channel_list = (f"{resource_name}/{channel}" for channel in channels.split(","))
                 resource_name = ",".join(channel_list)
 
-            return self._initialize_with_independent_channels(resource_name, reset, option_string)
+            self._vi = self._initialize_with_independent_channels(resource_name, reset, option_string)
 
         else:
             import warnings
             warnings.warn("Initializing session without independent channels enabled.", DeprecationWarning)
-            return self._initialize_with_channels(resource_name, channels, reset, option_string)
+            self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
+
+        # cache session before calling lock to avoid a key error in fancy functions
+        self._sessions[self._vi] = self
+
+        # test to see if runtime supports locking session
+        try:
+            self.lock()  # self._pylock not yet defined, will dispatch to driver lock
+        except errors.DriverError:
+            self._get_error()  # clear error from lock
+            import threading
+            self._pylock = threading.RLock()  # define a recursive lock to be used henceforth
+        else:
+            self.unlock()  # lock succeeded, unlock session
+
+        return self._vi
 

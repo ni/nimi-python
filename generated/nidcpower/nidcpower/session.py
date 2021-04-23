@@ -707,8 +707,8 @@ class _SessionBase(object):
     '''Type: str
 
     Indicates the Driver Setup string that you specified when initializing the driver.
-    Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This property is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the __init__ method or through the  IVI Configuration Utility.
-    You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the __init__ method. If you do not specify a Driver Setup string, this property returns an empty string.
+    Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This property is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the _initialize_with_channels method or through the  IVI Configuration Utility.
+    You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the _initialize_with_channels method. If you do not specify a Driver Setup string, this property returns an empty string.
     '''
     exported_measure_trigger_output_terminal = _attributes.AttributeViString(1150037)
     '''Type: str
@@ -859,7 +859,7 @@ class _SessionBase(object):
     '''Type: str
 
     Contains the logical name you specified when opening the current IVI session.
-    You can pass a logical name to the __init__ method.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a method section in the IVI Configuration file. The method section specifies a physical  device and initial user options.
+    You can pass a logical name to the _initialize_with_channels method.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a method section in the IVI Configuration file. The method section specifies a physical  device and initial user options.
     '''
     measure_buffer_size = _attributes.AttributeViInt32(1150077)
     '''Type: int
@@ -1230,7 +1230,7 @@ class _SessionBase(object):
     Specifies whether the output is enabled (True) or disabled (False).
     Depending on the value you specify for the output_function property, you also must set the  voltage level or current level in addition to  enabling the output
     the initiate method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
-    Default Value: The default value is True if you use the __init__ method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
+    Default Value: The default value is True if you use the _initialize_with_channels method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
     Note: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
 
@@ -2016,7 +2016,7 @@ class _SessionBase(object):
     Specifies whether NI-DCPower queries the device status after each operation.
     Querying the device status is useful for debugging. After you validate your program, you can set this  property to False to disable status checking and maximize performance.
     NI-DCPower ignores status checking for particular properties regardless of the setting of this property.
-    Use the __init__ method to override this value.
+    Use the _initialize_with_channels method to override this value.
     Default Value: True
     '''
     ready_for_pulse_trigger_event_output_terminal = _attributes.AttributeViString(1150102)
@@ -3692,6 +3692,44 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
+    def get_channel_names(self, indices):
+        r'''get_channel_names
+
+        Returns a list of channel names for given channel indices.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            names (list of str): The channel name(s) at the specified indices.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        names_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
+
     def _get_error(self):
         r'''_get_error
 
@@ -4679,57 +4717,58 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
 
-    def __init__(self, resource_name, channels=None, reset=False, options={}):
+    def __init__(self, resource_name, channels=None, reset=False, options={}, independent_channels=True):
         r'''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
 
-        Creates and returns a new NI-DCPower session to the power supply or SMU
-        specified in **resource name** to be used in all subsequent NI-DCPower
-        method calls. With this method, you can optionally set the initial
-        state of the following session properties:
+        Creates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a
+        session handle to be used in all subsequent NI-DCPower method calls.
 
-        -  simulate
-        -  driver_setup
+        Driver initialization will be dispatched to either _initialize_with_channels
+        (deprecated) or _initialize_with_independent_channels depending on the value of the
+        independent_channels argument.
 
-        After calling this method, the session will be in the Uncommitted
-        state. Refer to the `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
-        details about specific software states.
+        If independent_channels is True, this method will combine the channels argument (if any)
+        with the resource_name argument then call _initialize_with_independent_channels. If a
+        channels argument is supplied, resource_name must refer to a single instrument.
 
-        To place the device in a known start-up state when creating a new
-        session, set **reset** to True. This action is equivalent to using
-        the reset method immediately after initializing the
-        session.
+        If independent_channels is False, this method will issue a deprecation warning then pass
+        the remaining arguments directly to _initialize_with_channels.
 
-        To open a session and leave the device in its existing configuration
-        without passing through a transitional output state, set **reset** to
-        False. Then configure the device as in the previous session,
-        changing only the desired settings, and then call the
-        initiate method.
-
-        **Related Topics:**
-
-        `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+        Consult the documentation for the initialization method you intend to use for more
+        information.
 
         Args:
-            resource_name (str): Specifies the **resourceName** assigned by Measurement & Automation
-                Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
-                instrument's **resourceName**. **resourceName** can also be a logical
+            resource_name (str, list, tuple): If independent_channels is True (default), this
+                argument specifies the NI-DCPower resources to use in the session. NI-DCPower
+                resources can be names of the instrument(s) assigned by Measurement & Automation
+                Explorer (MAX) and the channel(s) to initialize. Specify the instrument(s) and
+                channel(s) using the form PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or
+                PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3, where PXI1Slot3 and PXI1Slot4 are
+                instrument resource names and 0, 2, and 3 are channels.
+
+                If independent_channels is False, this parameter specifies the resource_name
+                assigned by Measurement & Automation Explorer (MAX), for example "PXI1Slot3" where
+                "PXI1Slot3" is an instrument's resource_name. resource_name can also be a logical
                 IVI name.
 
-            channels (str, list, range, tuple): Specifies which output channel(s) to include in a new session. Specify
-                multiple channels by using a channel list or a channel range. A channel
-                list is a comma (,) separated sequence of channel names (for example,
-                0,2 specifies channels 0 and 2). A channel range is a lower bound
-                channel followed by a hyphen (-) or colon (:) followed by an upper bound
-                channel (for example, 0-2 specifies channels 0, 1, and 2). In the
-                Running state, multiple output channel configurations are performed
-                sequentially based on the order specified in this parameter. If you do
-                not specify any channels, by default all channels on the device are
-                included in the session.
+            channels (str, list, range, tuple): Specifies which output channel(s) to include in a
+                new session. Specify multiple channels by using a channel list or a channel range. A
+                channel list is a comma (,) separated sequence of channel names (for example, 0,2
+                specifies channels 0 and 2). A channel range is a lower bound channel followed by a
+                hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2
+                specifies channels 0, 1, and 2).
 
-            reset (bool): Specifies whether to reset the device during the initialization
-                procedure.
+                If independent_channels is True and a channels argument is supplied, resource_name
+                will be combined with channels to form a resource string that specifies the
+                instrument and channel(s). This operation is only valid if resource_name refers to a
+                single device. To create a session across channels on multiple devices, do not
+                provide a channels argument and use a resource_name of the form described above.
+
+            reset (bool): If independent_channels is True (default), specifies whether to reset
+                channel(s) during the initialization procedure. Otherwise, specifies whether to
+                reset the device during the initialization procedure.
+
+                See the target initialization method for more details.
 
             options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
@@ -4759,20 +4798,28 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
+            independent_channels (bool): Specifies whether to initialize the session with
+                independent channels. If true, this method dispatches the initialization routine
+                to _initialize_with_independent_channels. Otherwise, initialization is
+                performed by _initialize_with_channels.
+
+                Note: Initializing a session with _initialize_with_channels is deprecated.
+
 
         Returns:
             session (nidcpower.Session): A session object representing the device.
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
+        resource_name = _converters.convert_repeated_capabilities_without_prefix(resource_name)
         channels = _converters.convert_repeated_capabilities_without_prefix(channels)
         options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
-        self._vi = 0  # This must be set before calling _initialize_with_channels().
-        self._vi = self._initialize_with_channels(resource_name, channels, reset, options)
+        self._vi = 0  # This must be set before calling _fancy_initialize().
+        self._vi = self._fancy_initialize(resource_name, channels, reset, options, independent_channels)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -4780,6 +4827,7 @@ class Session(_SessionBase):
         param_list.append("channels=" + pp.pformat(channels))
         param_list.append("reset=" + pp.pformat(reset))
         param_list.append("options=" + pp.pformat(options))
+        param_list.append("independent_channels=" + pp.pformat(independent_channels))
         self._param_list = ', '.join(param_list)
 
         self._is_frozen = True
@@ -4889,7 +4937,7 @@ class Session(_SessionBase):
         NI‑DCPower sessions that were initialized with different channels, the
         configurations of the exporting channels are mapped to the importing
         channels in the order you specify in the **channelName** input to the
-        __init__ method.
+        _initialize_with_channels method.
 
         For example, if your entry for **channelName** is 0,1 for the exporting
         session and 1,2 for the importing session:
@@ -4954,7 +5002,7 @@ class Session(_SessionBase):
         NI‑DCPower sessions that were initialized with different channels, the
         configurations of the exporting channels are mapped to the importing
         channels in the order you specify in the **channelName** input to the
-        __init__ method.
+        _initialize_with_channels method.
 
         For example, if your entry for **channelName** is 0,1 for the exporting
         session and 1,2 for the importing session:
@@ -5155,6 +5203,164 @@ class Session(_SessionBase):
             attribute_ids_used.add(Session.__base__.__dict__[prop]._attribute_id)
 
         self._create_advanced_sequence_with_channels(sequence_name, list(attribute_ids_used), set_as_active_sequence)
+
+    # create a weak value dict for storing references to session objects
+    import weakref
+    _sessions = weakref.WeakValueDictionary()
+
+    # cache super class lock and unlock methods for decorating via monkey patching
+    _super_lock_session = _SessionBase._lock_session
+    _super_unlock = _SessionBase.unlock
+
+    # create fancy functions
+    @staticmethod
+    def _fancy_lock_session(self):
+        session = Session._sessions[self._vi]
+        if hasattr(session, '_pylock'):
+            session._pylock.acquire()
+            return
+        else:
+            return Session._super_lock_session(self)
+
+    @staticmethod
+    def _fancy_unlock(self):
+        session = Session._sessions[self._vi]
+        if hasattr(session, '_pylock'):
+            session._pylock.release()
+            return
+        else:
+            return Session._super_unlock(self)
+
+    # monkey patch super class lock and unlock methods to use this class' fancy functions
+    _SessionBase._lock_session = lambda self: Session._fancy_lock_session(self)
+    _SessionBase.unlock = lambda self: Session._fancy_unlock(self)
+
+    def _fancy_initialize(self, resource_name, channels=None, reset=False, option_string="", independent_channels=True):
+        '''_fancy_initialize
+
+        Creates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a
+        session handle to be used in all subsequent NI-DCPower method calls.
+
+        Driver initialization will be dispatched to either _initialize_with_channels
+        (deprecated) or _initialize_with_independent_channels depending on the value of the
+        independent_channels argument.
+
+        If independent_channels is True, this method will combine the channels argument (if any)
+        with the resource_name argument then call _initialize_with_independent_channels. If a
+        channels argument is supplied, resource_name must refer to a single instrument.
+
+        If independent_channels is False, this method will issue a deprecation warning then pass
+        the remaining arguments directly to _initialize_with_channels.
+
+        Consult the documentation for the initialization method you intend to use for more
+        information.
+
+        Args:
+            resource_name (str, list, tuple): If independent_channels is True (default), this
+                argument specifies the NI-DCPower resources to use in the session. NI-DCPower
+                resources can be names of the instrument(s) assigned by Measurement & Automation
+                Explorer (MAX) and the channel(s) to initialize. Specify the instrument(s) and
+                channel(s) using the form PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or
+                PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3, where PXI1Slot3 and PXI1Slot4 are
+                instrument resource names and 0, 2, and 3 are channels.
+
+                If independent_channels is False, this parameter specifies the resource_name
+                assigned by Measurement & Automation Explorer (MAX), for example "PXI1Slot3" where
+                "PXI1Slot3" is an instrument's resource_name. resource_name can also be a logical
+                IVI name.
+
+            channels (str, list, range, tuple): Specifies which output channel(s) to include in a
+                new session. Specify multiple channels by using a channel list or a channel range. A
+                channel list is a comma (,) separated sequence of channel names (for example, 0,2
+                specifies channels 0 and 2). A channel range is a lower bound channel followed by a
+                hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2
+                specifies channels 0, 1, and 2).
+
+                If independent_channels is True and a channels argument is supplied, resource_name
+                will be combined with channels to form a resource string that specifies the
+                instrument and channel(s). This operation is only valid if resource_name refers to a
+                single device. To create a session across channels on multiple devices, do not
+                provide a channels argument and use a resource_name of the form described above.
+
+            reset (bool): If independent_channels is True (default), specifies whether to reset
+                channel(s) during the initialization procedure. Otherwise, specifies whether to
+                reset the device during the initialization procedure.
+
+                See the target initialization method for more details.
+
+            option_string (dict): Specifies the initial value of certain properties for the session.
+                The syntax for optionString is a list of properties with an assigned value where 1
+                is True and 0 is False. For example:
+
+                Simulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>
+
+                To simulate a multi-instrument session when independent_channels is True, set
+                Simulate to 1 and list multiple instruments for DriverSetup. For example:
+
+                Simulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;
+                BoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;
+                BoardType:<bus connector>
+
+                You do not have to specify a value for all the properties. If you do not specify a
+                value for a property, the default value is used.
+
+            independent_channels (bool): Specifies whether to initialize the session with
+                independent channels. If true, this method dispatches the initialization routine
+                to _initialize_with_independent_channels. Otherwise, initialization is
+                performed by _initialize_with_channels.
+
+                Note: Initializing a session with _initialize_with_channels is deprecated.
+
+
+        Returns:
+            vi (int): Returns a session handle that you use to identify the device in all
+                subsequent NI-DCPower method calls.
+
+        '''
+
+        if independent_channels:
+            if channels:
+                import warnings
+                warnings.warn(
+                    "Attempting to initialize an independent channels session with a channels argument. "
+                    "Channels will be combined with the resource name to form a fully-qualified channel list. "
+                    "To avoid this warning, use a fully-qualified channel list as the resource name instead "
+                    "of providing a channels argument.",
+                    DeprecationWarning
+                )
+
+                # if we have a channels arg, we need to try and combine it with the resource name
+                # before calling into initialize with independent channels
+                if "," in resource_name:
+                    raise ValueError(
+                        "Channels can't be combined with multiple devices in resource name. "
+                        "Use a single device in the resource name or provide a list of fully-qualified channels "
+                        "as the resource name instead of supplying a channels argument."
+                    )
+                channel_list = (f"{resource_name}/{channel}" for channel in channels.split(","))
+                resource_name = ",".join(channel_list)
+
+            self._vi = self._initialize_with_independent_channels(resource_name, reset, option_string)
+
+        else:
+            import warnings
+            warnings.warn("Initializing session without independent channels enabled.", DeprecationWarning)
+            self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
+
+        # cache session before calling lock to avoid a key error in fancy functions
+        self._sessions[self._vi] = self
+
+        # test to see if runtime supports locking session
+        try:
+            self.lock()  # self._pylock not yet defined, will dispatch to driver lock
+        except errors.DriverError:
+            self._get_error()  # clear error from lock
+            import threading
+            self._pylock = threading.RLock()  # define a recursive lock to be used henceforth
+        else:
+            self.unlock()  # lock succeeded, unlock session
+
+        return self._vi
 
     @ivi_synchronized
     def get_channel_name(self, index):
@@ -5376,7 +5582,7 @@ class Session(_SessionBase):
         NI‑DCPower sessions that were initialized with different channels, the
         configurations of the exporting channels are mapped to the importing
         channels in the order you specify in the **channelName** input to the
-        __init__ method.
+        _initialize_with_channels method.
 
         For example, if your entry for **channelName** is 0,1 for the exporting
         session and 1,2 for the importing session:
@@ -5435,7 +5641,7 @@ class Session(_SessionBase):
         NI‑DCPower sessions that were initialized with different channels, the
         configurations of the exporting channels are mapped to the importing
         channels in the order you specify in the **channelName** input to the
-        __init__ method.
+        _initialize_with_channels method.
 
         For example, if your entry for **channelName** is 0,1 for the exporting
         session and 1,2 for the importing session:
@@ -5472,7 +5678,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _initialize_with_channels(self, resource_name, channels=None, reset=False, option_string=""):
+    def _initialize_with_channels(self, resource_name, channels, reset, option_string):
         r'''_initialize_with_channels
 
         Creates and returns a new NI-DCPower session to the power supply or SMU
@@ -5510,7 +5716,7 @@ class Session(_SessionBase):
                 instrument's **resourceName**. **resourceName** can also be a logical
                 IVI name.
 
-            channels (str, list, range, tuple): Specifies which output channel(s) to include in a new session. Specify
+            channels (str): Specifies which output channel(s) to include in a new session. Specify
                 multiple channels by using a channel list or a channel range. A channel
                 list is a comma (,) separated sequence of channel names (for example,
                 0,2 specifies channels 0 and 2). A channel range is a lower bound
@@ -5524,7 +5730,7 @@ class Session(_SessionBase):
             reset (bool): Specifies whether to reset the device during the initialization
                 procedure.
 
-            option_string (dict): Specifies the initial value of certain properties for the session. The
+            option_string (str): Specifies the initial value of certain properties for the session. The
                 syntax for **optionString** is a list of properties with an assigned
                 value where 1 is True and 0 is False. For example:
 
@@ -5543,11 +5749,88 @@ class Session(_SessionBase):
 
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        channels_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(channels).encode(self._encoding))  # case C040
+        channels_ctype = ctypes.create_string_buffer(channels.encode(self._encoding))  # case C020
         reset_ctype = _visatype.ViBoolean(reset)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niDCPower_InitializeWithChannels(resource_name_ctype, channels_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(vi_ctype.value)
+
+    def _initialize_with_independent_channels(self, resource_name, reset, option_string):
+        r'''_initialize_with_independent_channels
+
+        Creates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a
+        session handle to be used in all subsequent NI-DCPower method calls.
+
+        After calling this method, the specified channel or channels will be in the Uncommitted
+        state.
+
+        With this method and channel-based NI-DCPower methods and properties, you can use any
+        channels in the session independently. For example, you can initiate a subset of channels in
+        the session with initiate, and the other channels in the session
+        remain in the Uncommitted state.
+
+        Details of Independent Channel Operation:
+        When you initialize with independent channels, each channel steps through the NI-DCPower
+        programming state model independently of all other channels, and you can specify a subset
+        of channels for most operations.
+
+        Note: You can make concurrent calls to a session from multiple threads, but the session
+        executes the calls one at a time. If you specify multiple channels for a method or
+        property, the session may perform the operation on multiple channels in parallel, though
+        this is not guaranteed, and some operations may execute sequentially.
+
+        Args:
+            resource_name (str): Specifies the NI-DCPower resources to use in the session.
+                NI-DCPower resources can be names of the instrument(s) assigned by Measurement &
+                Automation Explorer (MAX) and the channel(s) to initialize. Specify the
+                instrument(s) and channel(s) using the form PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3
+                or PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3, where PXI1Slot3 and PXI1Slot4 are
+                instrument resource names and 0, 2, and 3 are channels.
+
+                If you pass "" for this control, all channels of the instrument(s) are included in
+                the session.
+
+            reset (bool): Specifies whether to reset channel(s) during the initialization procedure.
+                The default is False.
+
+                To place channel(s) in a known startup state when creating a new session, set reset
+                to True. This action is equivalent to using the reset
+                method immediately after initializing the session.
+
+                To open a session and leave the channel(s) in an existing configuration without
+                passing through a transitional output state, set reset to False. Next, configure
+                the channel(s) as in the previous session, change the desired settings, and then
+                call the initiate method to write both settings.
+
+            option_string (str): Specifies the initial value of certain properties for the session.
+                The syntax for optionString is a list of properties with an assigned value where 1
+                is True and 0 is False. For example:
+
+                Simulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>
+
+                To simulate a multi-instrument session, set Simulate to 1 and list multiple
+                instruments for DriverSetup. For example:
+
+                Simulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;
+                BoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;
+                BoardType:<bus connector>
+
+                You do not have to specify a value for all the properties. If you do not specify a
+                value for a property, the default value is used.
+
+
+        Returns:
+            vi (int): Returns a session handle that you use to identify the session in all
+                subsequent NI-DCPower method calls.
+
+        '''
+        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
+        reset_ctype = _visatype.ViBoolean(reset)  # case S150
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
+        vi_ctype = _visatype.ViSession()  # case S220
+        error_code = self._library.niDCPower_InitializeWithIndependentChannels(resource_name_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -5640,7 +5923,7 @@ class Session(_SessionBase):
 
         When calling self_test with the PXIe-4162/4163, specify all
         channels of your PXIe-4162/4163 with the channels input of
-        __init__. You cannot self test a subset of
+        _initialize_with_channels. You cannot self test a subset of
         PXIe-4162/4163 channels.
 
         Raises `SelfTestError` on self test failure. Properties on exception object:
@@ -5670,7 +5953,7 @@ class Session(_SessionBase):
 
         When calling self_test with the PXIe-4162/4163, specify all
         channels of your PXIe-4162/4163 with the channels input of
-        __init__. You cannot self test a subset of
+        _initialize_with_channels. You cannot self test a subset of
         PXIe-4162/4163 channels.
 
         Returns:
