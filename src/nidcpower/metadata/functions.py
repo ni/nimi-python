@@ -1128,24 +1128,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'FancyLockSession': {
-        'codegen_method': 'python-only',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'method_templates': [
-            {
-                'documentation_filename': 'lock',
-                'method_python_name_suffix': '',
-                'session_filename': 'fancy_lock'
-            }
-        ],
-        'parameters': [
-        ],
-        'render_in_session_base': False,
-        'returns': None,
-        'use_session_lock': False
-    },
     'FancyMeasureMultiple': {
         'codegen_method': 'python-only',
         'documentation': {
@@ -1192,25 +1174,6 @@ functions = {
         ],
         'python_name': 'measure_multiple',
         'returns': 'ViStatus'
-    },
-    'FancyUnlockSession': {
-        'codegen_method': 'python-only',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'method_templates': [
-            {
-                'documentation_filename': 'unlock',
-                'method_python_name_suffix': '',
-                'session_filename': 'fancy_unlock'
-            }
-        ],
-        'parameters': [
-        ],
-        'python_name': 'unlock',
-        'render_in_session_base': False,
-        'returns': None,
-        'use_session_lock': False
     },
     'FetchMultiple': {
         'codegen_method': 'private',
