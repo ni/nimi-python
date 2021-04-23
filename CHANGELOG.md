@@ -48,6 +48,7 @@ All notable changes to this project will be documented in this file.
         * Methods added:
             * `clear_latched_output_cutoff_state`
             * `query_latched_output_cutoff_state`
+        * Capability to initialize a session with independent channels via new independent_channels argument in session constructor.
     * #### Changed
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
