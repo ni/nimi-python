@@ -4,9 +4,6 @@ import os
 import pytest
 import tempfile
 
-instruments = ['PXI1Slot2', 'PXI1Slot5']
-
-
 @pytest.fixture(scope='function')
 def session():
     with nidcpower.Session('4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
@@ -15,6 +12,7 @@ def session():
 
 @pytest.fixture(scope='function')
 def multi_instrument_session():
+    instruments = ['PXI1Slot2', 'PXI1Slot5']
     with nidcpower.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
         yield simulated_session
 
