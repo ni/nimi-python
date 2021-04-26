@@ -5,8 +5,8 @@ config = {
     'c_function_prefix': 'niDCPower_',
     'close_function': 'close',
     'context_manager_name': {
-        'abort_function': 'Abort',
-        'initiate_function': 'Initiate',
+        'abort_function': 'AbortWithChannels',
+        'initiate_function': 'InitiateWithChannels',
         'task': 'acquisition'
     },
     'custom_types': [

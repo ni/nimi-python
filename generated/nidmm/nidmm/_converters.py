@@ -70,13 +70,19 @@ def _(repeated_capability, prefix):
     if len(rc) > 1:
         if len(rc) > 2:
             raise errors.InvalidRepeatedCapabilityError("Multiple '-' or ':'", repeated_capability)
-        start = int(rc[0])
-        end = int(rc[1])
-        if end < start:
-            rng = range(start, end - 1, -1)
+        try:
+            start = int(rc[0])
+            end = int(rc[1])
+        except ValueError:
+            # This exception is raised when repeated_capability is of the form "dev/0-1". rc[0] == "dev/0" in this case.
+            # Just return the repeated_capability string as-is in that case.
+            pass
         else:
-            rng = range(start, end + 1)
-        return _convert_repeated_capabilities(rng, prefix)
+            if end < start:
+                rng = range(start, end - 1, -1)
+            else:
+                rng = range(start, end + 1)
+            return _convert_repeated_capabilities(rng, prefix)
 
     # If we made it here, it must be a simple item so we remove any prefix and return
     return [repeated_capability.replace(prefix, '').strip()]

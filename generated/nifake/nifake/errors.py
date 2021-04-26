@@ -57,6 +57,13 @@ class DriverNotInstalledError(Error):
         super(DriverNotInstalledError, self).__init__('The NI-FAKE runtime could not be loaded. Make sure it is installed and its bitness matches that of your Python interpreter. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
 
 
+class DriverTooOldError(Error):
+    '''An error due to using this module with an older version of the driver runtime.'''
+
+    def __init__(self):
+        super(DriverTooOldError, self).__init__('A function was not found in the NI-FAKE runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.')
+
+
 class InvalidRepeatedCapabilityError(Error):
     '''An error due to an invalid character in a repeated capability'''
 

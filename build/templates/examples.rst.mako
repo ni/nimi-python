@@ -55,6 +55,6 @@ ${helper.get_rst_header_snippet(os.path.basename(e), '-')}
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(${os.path.basename(e)}) <${example_url_base}/${e}>`_
+   :caption: `(${os.path.basename(e)}) <${example_url_base}/${e.replace('\\', '/')}>`_
 
 % endfor

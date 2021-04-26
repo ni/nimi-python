@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0d9999
+# This file is generated from NI-DCPower API metadata version 21.0.0d52
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -111,7 +111,7 @@ attributes = {
     },
     1050511: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': 'Contains the name of the manufacturer for the device you are currently using.'
         },
@@ -173,7 +173,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'documentation': {
-            'description': '\nSpecifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.\nDefault Value: NIDCPOWER_VAL_AUTOMATIC\nis set to NIDCPOWER_VAL_AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this attribute, the power source selection only occurs after you call the  niDCPower_Initiate function.\n',
+            'description': '\nSpecifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.\nDefault Value: NIDCPOWER_VAL_AUTOMATIC\nis set to NIDCPOWER_VAL_AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this attribute, the power source selection only occurs after you call the  niDCPower_InitiateWithChannels function.\n',
             'note': 'Automatic selection is not persistent and occurs only at the time this attribute'
         },
         'enum': 'PowerSource',
@@ -927,7 +927,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': '\nSpecifies whether to take continuous measurements. Call the niDCPower_Abort function to stop continuous measurements.  When this attribute is set to VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to  NIDCPOWER_VAL_SINGLE_POINT, the NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER. When this attribute is set to  VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the NIDCPOWER_ATTR_MEASURE_WHEN  attribute must be set to NIDCPOWER_VAL_ON_MEASURE_TRIGGER.\nfor information about supported devices.\nDefault Value: VI_TRUE\n',
+            'description': '\nSpecifies whether to take continuous measurements. Call the niDCPower_AbortWithChannels function to stop continuous measurements.  When this attribute is set to VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to  NIDCPOWER_VAL_SINGLE_POINT, the NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER. When this attribute is set to  VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the NIDCPOWER_ATTR_MEASURE_WHEN  attribute must be set to NIDCPOWER_VAL_ON_MEASURE_TRIGGER.\nfor information about supported devices.\nDefault Value: VI_TRUE\n',
             'note': '\nThis attribute is not available in a session involving multiple channels.\n'
         },
         'instrument_based': False,
@@ -1045,7 +1045,7 @@ attributes = {
     },
     1150073: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the niDCPower_ResetDevice function is called or the machine  is powered down.\nThis attribute affects the behavior of the niDCPower_CalSelfCalibrate function. When set to  NIDCPOWER_VAL_KEEP_IN_MEMORY, the values calculated by the niDCPower_CalSelfCalibrate function are used in  the existing session, as well as in all further sessions until you call the niDCPower_ResetDevice function  or restart the machine. When you set this property to NIDCPOWER_VAL_WRITE_TO_EEPROM, the values calculated  by the niDCPower_CalSelfCalibrate function are written to hardware and used in the existing session and  in all subsequent sessions until another call to the niDCPower_CalSelfCalibrate function is made.\nabout supported devices.\nDefault Value: NIDCPOWER_VAL_KEEP_IN_MEMORY\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information'
@@ -1443,7 +1443,7 @@ attributes = {
     },
     1150152: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': 'Contains the serial number for the device you are currently using.'
         },
@@ -1679,6 +1679,78 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32'
     },
+    1150235: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nEnables or disables output cutoff functionality. If enabled, you can define output cutoffs that, if exceeded, cause the output of the specified channel(s) to be disconnected.\nWhen this attribute is disabled, all other output cutoff attributes are ignored.',
+            'note': 'Refer to Supported Attributes by Device for information about supported devices. Instruments that do not support this attribute behave as if this attribute were set to VI_FALSE.'
+        },
+        'lv_property': 'Source:Output Cutoff:Enabled',
+        'name': 'OUTPUT_CUTOFF_ENABLED',
+        'resettable': False,
+        'type': 'ViBoolean'
+    },
+    1150236: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies a high limit voltage value, in volts, for output cutoff.\nIf the voltage output exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_HIGH as the output cutoff reason.\n',
+            'note': 'Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'lv_property': 'Source:Output Cutoff:Voltage Output Limit High',
+        'name': 'OUTPUT_CUTOFF_VOLTAGE_OUTPUT_LIMIT_HIGH',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150237: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies a high limit current value, in amps, for output cutoff.\nIf the measured current exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_HIGH as the output cutoff reason.\n',
+            'note': 'Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'lv_property': 'Source:Output Cutoff:Current Measure Limit High',
+        'name': 'OUTPUT_CUTOFF_CURRENT_MEASURE_LIMIT_HIGH',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150238: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies a limit for negative voltage slew rate, in volts per microsecond, for output cutoff.\nIf the voltage decreases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_LOW as the output cutoff reason.\n',
+            'note': 'Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'lv_property': 'Source:Output Cutoff:Voltage Change Limit Low',
+        'name': 'OUTPUT_CUTOFF_VOLTAGE_CHANGE_LIMIT_LOW',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150239: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies a limit for negative current slew rate, in amps per microsecond, for output cutoff.\nIf the current decreases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW as the output cutoff reason.\n',
+            'note': 'Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'lv_property': 'Source:Output Cutoff:Current Change Limit Low',
+        'name': 'OUTPUT_CUTOFF_CURRENT_CHANGE_LIMIT_LOW',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150240: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nEnables or disables current overrange functionality for output cutoff. If enabled, the output is disconnected when the measured current saturates the current range.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_HIGH as the output cutoff reason.\n',
+            'note': 'Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'lv_property': 'Source:Output Cutoff:Current Overrange Enabled',
+        'name': 'OUTPUT_CUTOFF_CURRENT_OVERRANGE_ENABLED',
+        'resettable': False,
+        'type': 'ViBoolean'
+    },
     1150244: {
         'access': 'read-write',
         'channel_based': True,
@@ -1829,6 +1901,54 @@ attributes = {
         'resettable': False,
         'type': 'ViString'
     },
+    1150292: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies a low limit voltage value, in volts, for output cutoff.\nIf the voltage output falls below this limit, the output is disconnected.\n\nTo find out whether an output has fallen below this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_LOW as the output cutoff reason.\n',
+            'note': 'Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'lv_property': 'Source:Output Cutoff:Voltage Output Limit Low',
+        'name': 'OUTPUT_CUTOFF_VOLTAGE_OUTPUT_LIMIT_LOW',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150293: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies a low limit current value, in amps, for output cutoff.\nIf the measured current falls below this limit, the output is disconnected.\n\nTo find out whether an output has fallen below this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_LOW as the output cutoff reason.\n',
+            'note': 'Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'lv_property': 'Source:Output Cutoff:Current Measure Limit Low',
+        'name': 'OUTPUT_CUTOFF_CURRENT_MEASURE_LIMIT_LOW',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150294: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies a limit for positive voltage slew rate, in volts per microsecond, for output cutoff.\nIf the voltage increases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_HIGH as the output cutoff reason.\n',
+            'note': 'Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'lv_property': 'Source:Output Cutoff:Voltage Change Limit High',
+        'name': 'OUTPUT_CUTOFF_VOLTAGE_CHANGE_LIMIT_HIGH',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
+    1150295: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies a limit for positive current slew rate, in amps per microsecond, for output cutoff.\nIf the current increases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_HIGH as the output cutoff reason.\n',
+            'note': 'Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'lv_property': 'Source:Output Cutoff:Current Change Limit High',
+        'name': 'OUTPUT_CUTOFF_CURRENT_CHANGE_LIMIT_HIGH',
+        'resettable': False,
+        'type': 'ViReal64'
+    },
     1250001: {
         'access': 'read-write',
         'channel_based': True,
@@ -1893,7 +2013,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': True,
         'documentation': {
-            'description': '\nSpecifies whether the output is enabled (VI_TRUE) or disabled (VI_FALSE).\nDepending on the value you specify for the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute, you also must set the  voltage level or current level in addition to  enabling the output\nthe niDCPower_Initiate function. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.\nDefault Value: The default value is VI_TRUE if you use the niDCPower_InitializeWithChannels function to open  the session. Otherwise the default value is VI_FALSE, including when you use a calibration session or the deprecated programming model.\n',
+            'description': '\nSpecifies whether the output is enabled (VI_TRUE) or disabled (VI_FALSE).\nDepending on the value you specify for the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute, you also must set the  voltage level or current level in addition to  enabling the output\nthe niDCPower_InitiateWithChannels function. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.\nDefault Value: The default value is VI_TRUE if you use the niDCPower_InitializeWithChannels function to open  the session. Otherwise the default value is VI_FALSE, including when you use a calibration session or the deprecated programming model.\n',
             'note': 'If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call'
         },
         'instrument_based': False,
