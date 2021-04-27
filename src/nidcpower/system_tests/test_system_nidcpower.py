@@ -4,6 +4,7 @@ import os
 import pytest
 import tempfile
 
+
 @pytest.fixture(scope='function')
 def session():
     with nidcpower.Session('4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
