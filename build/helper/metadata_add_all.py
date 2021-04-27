@@ -62,6 +62,8 @@ def _add_python_parameter_name(parameter):
     '''Adds a python_name key/value pair to the parameter metadata'''
     if 'python_name' not in parameter:
         parameter['python_name'] = camelcase_to_snakecase(parameter['name'])
+    else:
+        parameter['python_name_override'] = True
     return parameter
 
 
@@ -271,7 +273,10 @@ def _add_render_in_session_base(f):
 def _add_is_repeated_capability(parameter):
     '''Adds a boolean 'is_repeated_capability' to the parameter metadata by inferring it from its name, if not previously populated.'''
     if 'is_repeated_capability' not in parameter:
-        if parameter['name'] in _repeated_capability_parameter_names:
+        param_name = parameter['name']
+        if 'python_name_override' in parameter and parameter['python_name_override']:
+            param_name = parameter['python_name']
+        if param_name in _repeated_capability_parameter_names:
             parameter['is_repeated_capability'] = True
             parameter['repeated_capability_type'] = 'channels'
         else:
