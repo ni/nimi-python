@@ -411,14 +411,6 @@ def _add_default_attribute_class(a, attributes):
         attributes[a]['attribute_class'] = 'Attribute' + attributes[a]['type']
 
 
-def _add_repeated_capability_type(a, attributes):
-    '''Add 'repeated_capability_type' if not already there.'''
-    if 'repeated_capability_type' not in attributes[a] and 'channel_based' in attributes[a] and attributes[a]['channel_based']:
-        attributes[a]['repeated_capability_type'] = 'channels'
-    if 'repeated_capability_type' not in attributes[a] and 'instrument_based' in attributes[a] and attributes[a]['instrument_based']:
-        attributes[a]['repeated_capability_type'] = 'instruments'
-
-
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     attributes = merge_helper(attributes, 'attributes', config, use_re=False)
@@ -428,7 +420,6 @@ def add_all_attribute_metadata(attributes, config):
         _add_enum(attributes[a])
         _add_python_name(a, attributes)
         _add_python_type(attributes[a], config)
-        _add_repeated_capability_type(a, attributes)
         _add_default_attribute_class(a, attributes)
 
     return attributes
@@ -1116,8 +1107,6 @@ functions_expected = {
 attributes_input = {
     1000000: {
         'access': 'read-write',
-        'channel_based': False,
-        'instrument_based': False,
         'enum': None,
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
@@ -1133,8 +1122,6 @@ attributes_input = {
 attributes_expected = {
     1000000: {
         'access': 'read-write',
-        'channel_based': False,
-        'instrument_based': False,
         'codegen_method': 'public',
         'documentation': {'description': 'An attribute of type bool with read/write access.'},
         'enum': None,

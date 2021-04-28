@@ -14,6 +14,7 @@ from build.helper.documentation_helper import as_rest_table  # noqa: F401
 from build.helper.documentation_helper import find_attribute_by_name  # noqa: F401
 from build.helper.documentation_helper import find_enum_by_value  # noqa: F401
 from build.helper.documentation_helper import format_type_for_rst_documentation  # noqa: F401
+from build.helper.documentation_helper import get_attr_repeated_caps  # noqa: F401
 from build.helper.documentation_helper import get_documentation_for_node_docstring  # noqa: F401
 from build.helper.documentation_helper import get_documentation_for_node_rst  # noqa: F401
 from build.helper.documentation_helper import get_function_docstring  # noqa: F401

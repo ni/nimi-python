@@ -76,8 +76,7 @@ table_contents = [
          ('Characteristic', 'Value'),
          ('Datatype', a['type_in_documentation']),
          ('Permissions', a['access']),
-         ('Channel Based', 'Yes' if 'channel_based' in a and a['channel_based'] else 'No'),
-         ('Instrument Based', 'Yes' if 'instrument_based' in a and a['instrument_based'] else 'No'),
+         ('Repeated Capabilities', helper.get_attr_repeated_caps(a)),
          ('Resettable', 'Yes' if a['resettable'] else 'No'),
          ]
 table = helper.as_rest_table(table_contents)
