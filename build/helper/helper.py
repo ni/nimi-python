@@ -45,6 +45,13 @@ def camelcase_to_snakecase(camelcase_string):
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
 
+def snakecase_to_camelcase(snakecase_string):
+    '''Converts a snake_case string to camelCase'''
+    # https://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
+    c1 = ''.join(word.title() for word in snakecase_string.split('_'))
+    return c1[0].lower() + c1[1:]
+
+
 # TODO(marcoskirsch): not being used
 def function_to_method_name(f):
     '''Returns an appropriate session method name for a given function'''

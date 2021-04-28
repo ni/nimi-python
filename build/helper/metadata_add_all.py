@@ -9,6 +9,7 @@ from .documentation_snippets import session_return_text
 from .helper import camelcase_to_snakecase
 from .helper import get_numpy_type_for_api_type
 from .helper import get_python_type_for_api_type
+from .helper import snakecase_to_camelcase
 from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
 from .metadata_find import find_custom_type
@@ -62,6 +63,7 @@ def _add_python_parameter_name(parameter):
     '''Adds a python_name key/value pair to the parameter metadata'''
     if 'python_name' not in parameter:
         parameter['python_name'] = camelcase_to_snakecase(parameter['name'])
+        parameter['python_name_override'] = False
     else:
         parameter['python_name_override'] = True
     return parameter
@@ -273,10 +275,11 @@ def _add_render_in_session_base(f):
 def _add_is_repeated_capability(parameter):
     '''Adds a boolean 'is_repeated_capability' to the parameter metadata by inferring it from its name, if not previously populated.'''
     if 'is_repeated_capability' not in parameter:
-        param_name = parameter['name']
-        if 'python_name_override' in parameter and parameter['python_name_override']:
-            param_name = parameter['python_name']
-        if param_name in _repeated_capability_parameter_names:
+        if parameter['python_name_override']:
+            is_rep = snakecase_to_camelcase(parameter['python_name']) in _repeated_capability_parameter_names
+        else:
+            is_rep = parameter['name'] in _repeated_capability_parameter_names
+        if is_rep:
             parameter['is_repeated_capability'] = True
             parameter['repeated_capability_type'] = 'channels'
         else:
@@ -835,6 +838,7 @@ functions_expected = {
                 'library_method_call_snippet': 'vi_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
+                'python_name_override': False,
             },
             {
                 'ctypes_type': 'ViString',
@@ -865,6 +869,7 @@ functions_expected = {
                 'library_method_call_snippet': 'channel_name_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'channel_name',
+                'python_name_override': False,
             },
             {
                 'ctypes_type': 'ViInt32',
@@ -897,6 +902,7 @@ functions_expected = {
                 'library_method_call_snippet': 'pin_data_buffer_size_ctype',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'pin_data_buffer_size',
+                'python_name_override': False,
             },
             {
                 'ctypes_type': 'ViInt32',
@@ -929,6 +935,7 @@ functions_expected = {
                 'library_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'actual_num_pin_data',
+                'python_name_override': False,
             },
             {
                 'ctypes_type': 'ViUInt8',
@@ -963,6 +970,7 @@ functions_expected = {
                 'library_method_call_snippet': 'expected_pin_states_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'expected_pin_states',
+                'python_name_override': False,
             },
         ],
         'python_name': 'make_a_foo',
@@ -1005,6 +1013,7 @@ functions_expected = {
                 'library_method_call_snippet': 'vi_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
+                'python_name_override': False,
             },
             {
                 'direction': 'out',
@@ -1037,6 +1046,7 @@ functions_expected = {
                 'library_method_call_snippet': 'status_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
+                'python_name_override': False,
             },
             {
                 'ctypes_type': 'ViInt32',
@@ -1069,6 +1079,7 @@ functions_expected = {
                 'library_method_call_snippet': 'data_buffer_size_ctype',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'data_buffer_size',
+                'python_name_override': False,
             },
             {
                 'ctypes_type': 'ViUInt32',
@@ -1102,6 +1113,7 @@ functions_expected = {
                 'library_method_call_snippet': 'data_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'data',
+                'python_name_override': False,
             },
         ],
         'documentation': {
