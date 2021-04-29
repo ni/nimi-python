@@ -1119,7 +1119,7 @@ functions = {
                 'default_value': True,
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies whether to initialize the session with\nindependent channels. If true, this method dispatches the initialization routine\nto niDCPower_InitializeWithIndependentChannels. Otherwise, initialization is\nperformed by niDCPower_InitializeWithChannels.\n\nNote: Initializing a session with niDCPower_InitializeWithChannels is deprecated.'
+                    'description': '\nSpecifies whether to initialize the session with\nindependent channels. Set this argument to False on legacy applications or if you\nare unable to upgrade your NI-DCPower driver runtime.'
                 },
                 'name': 'independentChannels',
                 'type': 'ViBoolean'

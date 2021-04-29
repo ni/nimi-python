@@ -122,11 +122,8 @@ Session
         
 
         Specifies whether to initialize the session with
-        independent channels. If true, this method dispatches the initialization routine
-        to :py:meth:`nidcpower.Session._initialize_with_independent_channels`. Otherwise, initialization is
-        performed by :py:meth:`nidcpower.Session._initialize_with_channels`.
-
-        Note: Initializing a session with :py:meth:`nidcpower.Session._initialize_with_channels` is deprecated.
+        independent channels. Set this argument to False on legacy applications or if you
+        are unable to upgrade your NI-DCPower driver runtime.
 
         
 
