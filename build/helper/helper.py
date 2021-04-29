@@ -49,7 +49,9 @@ def snakecase_to_camelcase(snakecase_string):
     '''Converts a snake_case string to camelCase'''
     # https://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
     c1 = ''.join(word.title() for word in snakecase_string.split('_'))
-    return c1[0].lower() + c1[1:]
+    if len(c1) > 0:
+        c1 = c1[0].lower() + c1[1:]
+    return c1
 
 
 # TODO(marcoskirsch): not being used
@@ -240,4 +242,47 @@ def test_get_development_status():
     config['module_version'] = '19.9.9'
     assert get_development_status(config) == '5 - Production/Stable'
 
+
+def test_camelcase_to_snakecase():
+    camel = 'channelNameList'
+    expected_snake = 'channel_name_list'
+    actual_snake = camelcase_to_snakecase(camel)
+    assert actual_snake == expected_snake
+
+    camel = 'channelName'
+    expected_snake = 'channel_name'
+    actual_snake = camelcase_to_snakecase(camel)
+    assert actual_snake == expected_snake
+
+    camel = 'channel'
+    expected_snake = 'channel'
+    actual_snake = camelcase_to_snakecase(camel)
+    assert actual_snake == expected_snake
+
+    camel = ''
+    expected_snake = ''
+    actual_snake = camelcase_to_snakecase(camel)
+    assert actual_snake == expected_snake
+
+
+def test_snakecase_to_camelcase():
+    snake = 'channel_name_list'
+    expected_camel = 'channelNameList'
+    actual_camel = snakecase_to_camelcase(snake)
+    assert actual_camel == expected_camel
+
+    snake = 'channel_name'
+    expected_camel = 'channelName'
+    actual_camel = snakecase_to_camelcase(snake)
+    assert actual_camel == expected_camel
+
+    snake = 'channel'
+    expected_camel = 'channel'
+    actual_camel = snakecase_to_camelcase(snake)
+    assert actual_camel == expected_camel
+
+    snake = ''
+    expected_camel = ''
+    actual_camel = snakecase_to_camelcase(snake)
+    assert actual_camel == expected_camel
 
