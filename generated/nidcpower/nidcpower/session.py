@@ -5276,29 +5276,32 @@ class Session(_SessionBase):
 
         '''
         if independent_channels:
+            resource_string = resource_name  # store potential modifications to resource_name in a separate variable
+
             if channels:
+                # if we have a channels arg, we need to try and combine it with the resource name
+                # before calling into initialize with independent channels
+                channel_list = (f"{resource_name}/{channel}" for channel in channels.split(","))
+                resource_string = ",".join(channel_list)
+
                 import warnings
                 warnings.warn(
-                    "Attempting to initialize an independent channels session with a channels argument. "
-                    "Channels will be combined with the resource name to form a fully-qualified channel list. "
-                    "To avoid this warning, use a fully-qualified channel list as the resource name instead "
-                    "of providing a channels argument.",
+                    "Attempting to initialize an independent channels session with a channels argument. The resource "
+                    f"name '{resource_name}' will be combined with the channels '{channels}' to form the "
+                    f"fully-qualified channel list '{resource_string}'. To avoid this warning, use a fully-qualified "
+                    "channel list as the resource name instead of providing a channels argument.",
                     DeprecationWarning
                 )
 
-                # if we have a channels arg, we need to try and combine it with the resource name
-                # before calling into initialize with independent channels
                 if "," in resource_name:
                     raise ValueError(
-                        "Channels can't be combined with multiple devices in resource name. "
-                        "Use a single device in the resource name or provide a list of fully-qualified channels "
-                        "as the resource name instead of supplying a channels argument."
+                        f"Channels can't be combined with multiple devices in the resource name '{resource_name}'. Use "
+                        "a single device in the resource name or provide a list of fully-qualified channels as the "
+                        "resource name instead of supplying a channels argument."
                     )
-                channel_list = (f"{resource_name}/{channel}" for channel in channels.split(","))
-                resource_name = ",".join(channel_list)
 
             # TODO(smooresni): Modify this line as described in https://github.com/ni/nimi-python/issues/1596
-            self._vi = self._initialize_with_independent_channels(resource_name, reset, option_string)
+            self._vi = self._initialize_with_independent_channels(resource_string, reset, option_string)
 
         else:
             import warnings
