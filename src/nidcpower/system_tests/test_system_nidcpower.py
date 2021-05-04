@@ -14,7 +14,7 @@ def session(request):
 
 
 @pytest.fixture(scope='function')
-def ind_channels_session():
+def independent_channels_session():
     with nidcpower.Session(
         '4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', True
     ) as simulated_session:
@@ -22,7 +22,7 @@ def ind_channels_session():
 
 
 @pytest.fixture(scope='function')
-def synced_channels_session():
+def synchronized_channels_session():
     with nidcpower.Session(
         '4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', False
     ) as simulated_session:
@@ -53,13 +53,13 @@ def test_self_cal(session):
     session.self_cal()
 
 
-def test_get_channel_name_ind_channels(ind_channels_session):
-    name = ind_channels_session.get_channel_name(1)
+def test_get_channel_name_independent_channels(independent_channels_session):
+    name = independent_channels_session.get_channel_name(1)
     assert name == '4162/0'
 
 
-def test_get_channel_name_synced_channels(synced_channels_session):
-    name = synced_channels_session.get_channel_name(1)
+def test_get_channel_name_synchronized_channels(synchronized_channels_session):
+    name = synchronized_channels_session.get_channel_name(1)
     assert name == '0'
 
 
@@ -327,9 +327,9 @@ def test_create_and_delete_advanced_sequence_bad_type(single_channel_session):
         pass
 
 
-def test_send_software_edge_trigger_error(synced_channels_session):
+def test_send_software_edge_trigger_error(synchronized_channels_session):
     try:
-        synced_channels_session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
+        synchronized_channels_session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
         assert False
     except nidcpower.Error as e:
         assert e.code == -1074118587  # Error : Function not available in multichannel session
@@ -439,7 +439,7 @@ def test_init_with_independent_channels(resource_name, channels):
         pass
 
 
-def test_init_raises_value_error_for_multi_instrument_resource_name_and_channels_arg():
+def test_init_raises_value_error_for_multi_instrument_resource_name_and_channels_argument():
     """
     Tests that a value error is thrown when a multi-instrument resource name is provided with
     a channels argument. How to combine the two arguments is undefined.
