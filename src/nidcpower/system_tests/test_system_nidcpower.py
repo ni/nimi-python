@@ -385,11 +385,11 @@ def test_channel_format_types():
     ]
 )
 def test_init_issues_deprecation_warnings(resource_name, channels, independent_channels):
-    """
-    Tests that we receive a deprecation warning any time independent_channels is False or a
-    channels argument is supplied.
-    """
+    """Tests for deprecation warnings for legacy initialization options.
 
+    A deprecation warning should occur any time independent_channels is False or a channels
+    argument is supplied.
+    """
     options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
     with pytest.deprecated_call():
         with nidcpower.Session(resource_name, channels, options=options, independent_channels=independent_channels):
@@ -406,10 +406,7 @@ def test_init_issues_deprecation_warnings(resource_name, channels, independent_c
     ]
 )
 def test_init_backwards_compatibility_with_initialize_with_channels(resource_name, channels):
-    """
-    Tests that session opens without exception for valid initialize with channels args.
-    """
-
+    """Tests that legacy sessions open without exception for valid arguments."""
     options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
     with nidcpower.Session(resource_name, channels, options=options, independent_channels=False):
         pass
@@ -430,21 +427,18 @@ def test_init_backwards_compatibility_with_initialize_with_channels(resource_nam
     ]
 )
 def test_init_with_independent_channels(resource_name, channels):
-    """
-    Tests that session opens without exception for valid initialize with independent channels args.
-    """
-
+    """Tests that independent channels sessions open without exception for valid arguments."""
     options = {'Simulate': True, 'DriverSetup': {'Model': '4145', 'BoardType': 'PXIe'}}
     with nidcpower.Session(resource_name, channels, options=options, independent_channels=True):
         pass
 
 
 def test_init_raises_value_error_for_multi_instrument_resource_name_and_channels_argument():
-    """
+    """Combining channels with multiple instruments is invalid.
+
     Tests that a value error is thrown when a multi-instrument resource name is provided with
     a channels argument. How to combine the two arguments is undefined.
     """
-
     options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
     with pytest.raises(ValueError):
         with nidcpower.Session("Dev1,Dev2", "0", options=options, independent_channels=True):
@@ -460,10 +454,7 @@ def test_init_raises_value_error_for_multi_instrument_resource_name_and_channels
     ]
 )
 def test_init_raises_driver_errors_for_invalid_arguments(resource_name, channels, independent_channels, expected_error_code):
-    """
-    Tests for driver errors that should occur for invalid initialization arguments.
-    """
-
+    """Tests for driver errors that should occur for invalid initialization arguments."""
     options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
     with pytest.raises(nidcpower.errors.DriverError) as e:
         with nidcpower.Session(resource_name, channels, options=options, independent_channels=independent_channels) as session:
