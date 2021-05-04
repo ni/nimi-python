@@ -5163,7 +5163,7 @@ class Session(_SessionBase):
 
         self._create_advanced_sequence_with_channels(sequence_name, list(attribute_ids_used), set_as_active_sequence)
 
-    # TODO: Remove the following code as described in issue 1596. https://github.com/ni/nimi-python/issues/1596
+    # TODO(smooresni): Remove the following code as described in issue 1596. https://github.com/ni/nimi-python/issues/1596
 
     # create a weak value dict for storing references to session objects
     import weakref
@@ -5297,17 +5297,17 @@ class Session(_SessionBase):
                 channel_list = (f"{resource_name}/{channel}" for channel in channels.split(","))
                 resource_name = ",".join(channel_list)
 
-            # TODO: Modify this line as described in issue 1596. https://github.com/ni/nimi-python/issues/1596
+            # TODO(smooresni): Modify this line as described in https://github.com/ni/nimi-python/issues/1596
             self._vi = self._initialize_with_independent_channels(resource_name, reset, option_string)
 
         else:
             import warnings
             warnings.warn("Initializing session without independent channels enabled.", DeprecationWarning)
 
-            # TODO: Modify this line as described in issue 1596. https://github.com/ni/nimi-python/issues/1596
+            # TODO(smooresni): Modify this line as described in https://github.com/ni/nimi-python/issues/1596
             self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
 
-        # TODO: Remove the following code as described in issue 1596. https://github.com/ni/nimi-python/issues/1596
+        # TODO(smooresni): Remove the following code as described in https://github.com/ni/nimi-python/issues/1596
         # cache session before calling lock to avoid a key error in fancy functions
         self._sessions[self._vi] = self
 
