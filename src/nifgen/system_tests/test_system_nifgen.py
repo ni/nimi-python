@@ -11,17 +11,6 @@ import warnings
 # Set up some global information we need
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
 
-# We need a lock file so multiple tests aren't hitting the db at the same time
-# Trying to create simulated DAQmx devices at the same time (which can happen when running
-# tox with --parallel N, or when two different drivers are being tested at the same time on
-# the same machine, can result in an internal error:
-# -2147220733: MAX:  (Hex 0x80040303) Internal error: The requested object was not found in
-# the configuration database. Please note the steps you performed that led to this error and
-# contact technical support at http://ni.com/support.
-# This is filed as internal bug 255545
-daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
-daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
-
 
 def get_test_file_path(file_name):
     return os.path.join(test_files_base_dir, file_name)
@@ -31,15 +20,6 @@ def get_test_file_path(file_name):
 def session():
     with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
         yield simulated_session
-
-
-@pytest.fixture(scope='function')
-def session_5421():
-    with daqmx_sim_db_lock:
-        simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI')
-    yield simulated_session
-    with daqmx_sim_db_lock:
-        simulated_session.close()
 
 
 def test_self_test(session):
@@ -75,10 +55,9 @@ def test_method_get_self_cal_supported(session):
     assert session.get_self_cal_supported() in [True, False]
 
 
-# TODO(sbethur): When internal bug# 999932 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1375)
-def test_get_self_cal_last_date_and_time(session_5421):
+def test_get_self_cal_last_date_and_time(session):
     try:
-        session_5421.get_self_cal_last_date_and_time()
+        session.get_self_cal_last_date_and_time()
         assert False
     except nifgen.Error as e:
         assert e.code == -1074118632  # This operation is not supported for simulated device
@@ -249,32 +228,30 @@ def test_create_arb_sequence(session):
     assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
 
 
-# TODO(sbethur): When internal bug# 227842 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1376)
-def test_create_advanced_arb_sequence(session_5421):
+def test_create_advanced_arb_sequence(session):
     seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-    waveform_handles_array = [session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data)]
+    waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
     marker_location_array = [0, 16, 32]
     sample_counts_array = [256, 128, 64]
     loop_counts_array = [10, 20, 30]
-    session_5421.output_mode = nifgen.OutputMode.SEQ
+    session.output_mode = nifgen.OutputMode.SEQ
     # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
-    assert ([], seq_handle_base + 0) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array)
-    assert ([], seq_handle_base + 1) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array)
-    assert (marker_location_array, seq_handle_base + 2) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
-    assert (marker_location_array, seq_handle_base + 3) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
+    assert ([], seq_handle_base + 0) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array)
+    assert ([], seq_handle_base + 1) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array)
+    assert (marker_location_array, seq_handle_base + 2) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
+    assert (marker_location_array, seq_handle_base + 3) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
 
 
-# TODO(sbethur): When internal bug# 227842 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1376)
-def test_create_advanced_arb_sequence_wrong_size(session_5421):
+def test_create_advanced_arb_sequence_wrong_size(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-    waveform_handles_array = [session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data)]
+    waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
     marker_location_array = [0, 16]
     loop_counts_array = [10, 20, 30]
-    session_5421.output_mode = nifgen.OutputMode.SEQ
+    session.output_mode = nifgen.OutputMode.SEQ
     # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
     try:
-        session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
+        session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
         assert False
     except ValueError:
         pass
