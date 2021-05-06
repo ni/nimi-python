@@ -32,7 +32,6 @@ from build.helper.helper import get_array_type_for_api_type  # noqa: F401
 from build.helper.helper import get_development_status  # noqa: F401
 from build.helper.helper import get_numpy_type_for_api_type  # noqa: F401
 from build.helper.helper import get_python_type_for_api_type  # noqa: F401
-from build.helper.helper import snakecase_to_camelcase  # noqa: F401
 from build.helper.helper import sorted_attrs  # noqa: F401
 
 from build.helper.metadata_add_all import add_all_metadata  # noqa: F401

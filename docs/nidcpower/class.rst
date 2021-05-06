@@ -870,6 +870,11 @@ get_channel_names
             
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidcpower.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
+
 
             :param indices:
 
