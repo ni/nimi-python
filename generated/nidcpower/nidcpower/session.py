@@ -5281,22 +5281,22 @@ class Session(_SessionBase):
             if channels:
                 # if we have a channels arg, we need to try and combine it with the resource name
                 # before calling into initialize with independent channels
-                channel_list = (f"{resource_name}/{channel}" for channel in channels.split(","))
+                channel_list = (resource_name + "/" + channel for channel in channels.split(","))
                 resource_string = ",".join(channel_list)
 
                 import warnings
                 warnings.warn(
                     "Attempting to initialize an independent channels session with a channels argument. The resource "
-                    f"name '{resource_name}' will be combined with the channels '{channels}' to form the "
-                    f"fully-qualified channel list '{resource_string}'. To avoid this warning, use a fully-qualified "
-                    "channel list as the resource name instead of providing a channels argument.",
+                    "name '" + resource_name + "' will be combined with the channels '" + channels + "' to form the "
+                    "fully-qualified channel list '" + resource_string + "'. To avoid this warning, use a "
+                    "fully-qualified channel list as the resource name instead of providing a channels argument.",
                     DeprecationWarning
                 )
 
                 if "," in resource_name:
                     raise ValueError(
-                        f"Channels can't be combined with multiple devices in the resource name '{resource_name}'. Use "
-                        "a single device in the resource name or provide a list of fully-qualified channels as the "
+                        "Channels can't be combined with multiple devices in the resource name '" + resource_name + "'. "
+                        "Use a single device in the resource name or provide a list of fully-qualified channels as the "
                         "resource name instead of supplying a channels argument."
                     )
 
