@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0d52
+# This file is generated from NI-DCPower API metadata version 21.0.0d69
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -1451,6 +1451,57 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'GetChannelNameFromString': {
+        'documentation': {
+            'description': '\nReturns a list of channel names for given channel indices.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIndex list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
+                },
+                'name': 'index',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'python_name': 'indices',
+                'type': 'ViConstString',
+                'type_in_documentation': 'basic sequence types or str or int'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe number of elements in the ViChar array you specify for name.\n'
+                },
+                'name': 'bufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'The channel name(s) at the specified indices.'
+                },
+                'name': 'channelName',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'python_name': 'names',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufferSize'
+                },
+                'type': 'ViChar[]',
+                'type_in_documentation': 'list of str'
+            }
+        ],
+        'python_name': 'get_channel_names',
         'returns': 'ViStatus'
     },
     'GetError': {
