@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0d133
+# This file is generated from NI-DCPower API metadata version 21.0.0d9999
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -1054,7 +1054,7 @@ functions = {
     'FancyInitialize': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCreates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a\nsession handle to be used in all subsequent NI-DCPower method calls.\n\nDriver initialization will be dispatched to either niDCPower_InitializeWithChannels\n(deprecated) or niDCPower_InitializeWithIndependentChannels depending on the value of the\nindependent_channels argument.\n\nIf independent_channels is True, this method will combine the channels argument (if any)\nwith the resource_name argument then call niDCPower_InitializeWithIndependentChannels. If a\nchannels argument is supplied, resource_name must refer to a single instrument.\n\nIf independent_channels is False, this method will issue a deprecation warning then pass\nthe remaining arguments directly to niDCPower_InitializeWithChannels.\n\nConsult the documentation for the initialization method you intend to use for more\ninformation.'
+            'description': '\nCreates and returns a new NI-DCPower session to the specified instrument(s) and channel(s)\nin **resource name** to be used in all subsequent NI-DCPower function calls. With this function,\nyou can optionally set the initial state of the following session attributes:\n\n-  NIDCPOWER_ATTR_SIMULATE\n-  NIDCPOWER_ATTR_DRIVER_SETUP\n\nAfter calling this function, the specified channel or channels will be in the Uncommitted\nstate. Refer to the `Programming States\n<REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for details about specific\nsoftware states.\n\nTo place channel(s) in a known start-up state when creating a new session, set **reset** to\nVI_TRUE. This action is equivalent to using the niDCPower_ResetWithChannels function immediately after initializing the\nsession.\n\nTo open a session and leave the channel(s) in an existing configuration without passing\nthrough a transitional output state, set **reset** to VI_FALSE. Next, configure the channel(s)\nas in the previous session, change the desired settings, and then call the niDCPower_InitiateWithChannels function\nto write both settings.\n\n**Details of Independent Channel Operation**\n\nWith this function and channel-based NI-DCPower functions and attributes, you can use any\nchannels in the session independently. For example, you can initiate a subset of channels in\nthe session with niDCPower_InitiateWithChannels, and the other channels in the session remain in the Uncommitted\nstate.\n\nWhen you initialize with independent channels, each channel steps through the NI-DCPower\nprogramming state model independently of all other channels, and you can specify a subset of\nchannels for most operations.\n\n**Note** You can make concurrent calls to a session from multiple threads, but the session\nexecutes the calls one at a time. If you specify multiple channels for a function or attribute,\nthe session may perform the operation on multiple channels in parallel, though this is not\nguaranteed, and some operations may execute sequentially.\n\n**Related Topics:**\n\n`Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
         'method_name_for_documentation': '__init__',
         'method_templates': [
@@ -1068,7 +1068,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nIf independent_channels is True (default), this\nargument specifies the NI-DCPower resources to use in the session. NI-DCPower\nresources can be names of the instrument(s) assigned by Measurement & Automation\nExplorer (MAX) and the channel(s) to initialize. Specify the instrument(s) and\nchannel(s) using the form PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or\nPXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3, where PXI1Slot3 and PXI1Slot4 are\ninstrument resource names and 0, 2, and 3 are channels.\n\nIf independent_channels is False, this parameter specifies the resource_name\nassigned by Measurement & Automation Explorer (MAX), for example "PXI1Slot3" where\n"PXI1Slot3" is an instrument\'s resource_name. resource_name can also be a logical\nIVI name.'
+                    'description': '\nSpecifies the **resourceName** assigned by Measurement\n& Automation Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an\ninstrument\'s **resourceName**. **resourceName** can also be a logical IVI name.\n\nIf independent_channels is True, resource_name can be names of the instrument(s)\nassigned by Measurement & Automation Explorer (MAX) and the channel(s) to\ninitialize. Specify the instrument(s) and channel(s) using the form\nPXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3,\nwhere PXI1Slot3 and PXI1Slot4 are instrument resource names and 0, 2, and 3 are\nchannels. If you exclude a channels string after an instrument resource name, all\nchannels of the instrument are included in the session.\n'
                 },
                 'name': 'resourceName',
                 'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
@@ -1079,7 +1079,7 @@ functions = {
                 'default_value': None,
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies which output channel(s) to include in a\nnew session. Specify multiple channels by using a channel list or a channel range. A\nchannel list is a comma (,) separated sequence of channel names (for example, 0,2\nspecifies channels 0 and 2). A channel range is a lower bound channel followed by a\nhyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2\nspecifies channels 0, 1, and 2).\n\nIf independent_channels is True and a channels argument is supplied, resource_name\nwill be combined with channels to form a resource string that specifies the\ninstrument and channel(s). This operation is only valid if resource_name refers to a\nsingle device. To create a session across channels on multiple devices, do not\nprovide a channels argument and use a resource_name of the form described above.'
+                    'description': '\nSpecifies which output channel(s) to include in a\nnew session. Specify multiple channels by using a channel list or a channel range.\nA channel list is a comma (,) separated sequence of channel names (for example, 0,2\nspecifies channels 0 and 2). A channel range is a lower bound channel followed by a\nhyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2\nspecifies channels 0, 1, and 2). In the Running state, multiple output channel\nconfigurations are performed sequentially based on the order specified in this\nparameter. If you do not specify any channels, by default all channels on the device\nare included in the session.\n\nIf independent_channels is False, this argument specifies which channels to include\nin a legacy synchronized channels session. Otherwise, this argument specifies which\nchannels to include in an independent channels session for the resource specified by\nresource_name.\n\nInitializing an independent channels session with a channels argument is deprecated.\nFor new applications, set this argument to None and use a fully-qualified channel\nlist as the resource_name.\n'
                 },
                 'is_repeated_capability': False,
                 'name': 'channels',
@@ -1091,7 +1091,7 @@ functions = {
                 'default_value': False,
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nIf independent_channels is True (default), specifies whether to reset\nchannel(s) during the initialization procedure. Otherwise, specifies whether to\nreset the device during the initialization procedure.\n\nSee the target initialization method for more details.'
+                    'description': '\nSpecifies whether to reset channel(s) during the initialization procedure.\n'
                 },
                 'name': 'reset',
                 'type': 'ViBoolean'
@@ -1100,7 +1100,7 @@ functions = {
                 'default_value': '""',
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the initial value of certain properties for the session.\nThe syntax for optionString is a list of properties with an assigned value where 1\nis True and 0 is False. For example:\n\nSimulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>\n\nTo simulate a multi-instrument session when independent_channels is True, set\nSimulate to 1 and list multiple instruments for DriverSetup. For example:\n\nSimulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;\nBoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;\nBoardType:<bus connector>\n\nYou do not have to specify a value for all the properties. If you do not specify a\nvalue for a property, the default value is used.'
+                    'description': '\nSpecifies the initial value of certain attributes for the session.\nThe syntax for **optionString** is a list of attributes with an assigned value where\n1 is VI_TRUE and 0 is VI_FALSE. For example:\n\nSimulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>\n\nTo simulate a multi-instrument session when independent_channels is True, set\nSimulate to 1 and list multiple instruments for DriverSetup. For example:\n\nSimulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;\nBoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;\nBoardType:<bus connector>\n\nYou do not have to specify a value for all the attributes. If you do not specify a\nvalue for an attribute, the default value is used.\n\nFor more information about simulating a device, refer to `Simulating a Power Supply\nor SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.\n'
                 },
                 'name': 'optionString',
                 'python_api_converter_name': 'convert_init_with_options_dictionary',
@@ -1110,7 +1110,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns a session handle that you use to identify the device in all\nsubsequent NI-DCPower method calls.'
+                    'description': '\nReturns a session handle that you use to identify the device in all\nsubsequent NI-DCPower function calls.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -1119,7 +1119,7 @@ functions = {
                 'default_value': True,
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies whether to initialize the session with\nindependent channels. Set this argument to False on legacy applications or if you\nare unable to upgrade your NI-DCPower driver runtime.'
+                    'description': '\nSpecifies whether to initialize the session with\nindependent channels. Set this argument to False on legacy applications or if you\nare unable to upgrade your NI-DCPower driver runtime.\n'
                 },
                 'name': 'independentChannels',
                 'type': 'ViBoolean'
@@ -1530,6 +1530,58 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'GetChannelNameFromString': {
+        'documentation': {
+            'description': '\nReturns a list of channel names for given channel indices.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIndex list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
+                },
+                'name': 'index',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'python_name': 'indices',
+                'type': 'ViConstString',
+                'type_in_documentation': 'basic sequence types or str or int'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe number of elements in the ViChar array you specify for name.\n'
+                },
+                'name': 'bufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'The channel name(s) at the specified indices.'
+                },
+                'is_repeated_capability': False,
+                'name': 'channelName',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'python_name': 'names',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufferSize'
+                },
+                'type': 'ViChar[]',
+                'type_in_documentation': 'list of str'
+            }
+        ],
+        'python_name': 'get_channel_names',
+        'returns': 'ViStatus'
+    },
     'GetError': {
         'codegen_method': 'private',
         'documentation': {
@@ -1905,7 +1957,7 @@ functions = {
     'InitializeWithChannels': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCreates and returns a new NI-DCPower session to the power supply or SMU\nspecified in **resource name** to be used in all subsequent NI-DCPower\nfunction calls. With this function, you can optionally set the initial\nstate of the following session attributes:\n\n-  NIDCPOWER_ATTR_SIMULATE\n-  NIDCPOWER_ATTR_DRIVER_SETUP\n\nAfter calling this function, the session will be in the Uncommitted\nstate. Refer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\ndetails about specific software states.\n\nTo place the device in a known start-up state when creating a new\nsession, set **reset** to VI_TRUE. This action is equivalent to using\nthe niDCPower_ResetWithChannels function immediately after initializing the\nsession.\n\nTo open a session and leave the device in its existing configuration\nwithout passing through a transitional output state, set **reset** to\nVI_FALSE. Then configure the device as in the previous session,\nchanging only the desired settings, and then call the\nniDCPower_InitiateWithChannels function.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
+            'description': '\nCreates and returns a new NI-DCPower session to the power supply or SMU\nspecified in **resource name** to be used in all subsequent NI-DCPower\nfunction calls. With this function, you can optionally set the initial\nstate of the following session attributes:\n\n-  NIDCPOWER_ATTR_SIMULATE\n-  NIDCPOWER_ATTR_DRIVER_SETUP\n\nAfter calling this function, the session will be in the Uncommitted\nstate. Refer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\ndetails about specific software states.\n\nTo place the device in a known start-up state when creating a new\nsession, set **reset** to VI_TRUE. This action is equivalent to using\nthe niDCPower_ResetWithChannels function immediately after initializing the\nsession.\n\nTo open a session and leave the device in its existing configuration\nwithout passing through a transitional output state, set **reset** to\nVI_FALSE. Then configure the device as in the previous session,\nchanging only the desired settings, and then call the\nniDCPower_InitiateWithChannels function.\n\n**Related Topics:**\n\n`Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
         'parameters': [
             {
@@ -1936,7 +1988,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the initial value of certain attributes for the session. The\nsyntax for **optionString** is a list of attributes with an assigned\nvalue where 1 is VI_TRUE and 0 is VI_FALSE. For example:\n\n"Simulate=0"\n\nYou do not have to specify a value for all the attributes. If you do not\nspecify a value for an attribute, the default value is used.\n\nFor more information about simulating a device, refer to `Simulating a\nPower Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.\n'
+                    'description': '\nSpecifies the initial value of certain attributes for the session.\nThe syntax for **optionString** is a list of attributes with an assigned\nvalue where 1 is VI_TRUE and 0 is VI_FALSE. For example:\n\n"Simulate=0"\n\nYou do not have to specify a value for all the attributes. If you do not\nspecify a value for an attribute, the default value is used.\n\nFor more information about simulating a device, refer to `Simulating a\nPower Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.\n'
                 },
                 'name': 'optionString',
                 'type': 'ViConstString'
@@ -1956,13 +2008,13 @@ functions = {
     'InitializeWithIndependentChannels': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCreates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a\nsession handle to be used in all subsequent NI-DCPower function calls.\n\nAfter calling this function, the specified channel or channels will be in the Uncommitted\nstate.\n\nWith this function and channel-based NI-DCPower functions and attributes, you can use any\nchannels in the session independently. For example, you can initiate a subset of channels in\nthe session with niDCPower_InitiateWithChannels, and the other channels in the session\nremain in the Uncommitted state.\n\nDetails of Independent Channel Operation:\nWhen you initialize with independent channels, each channel steps through the NI-DCPower\nprogramming state model independently of all other channels, and you can specify a subset\nof channels for most operations.\n\nNote: You can make concurrent calls to a session from multiple threads, but the session\nexecutes the calls one at a time. If you specify multiple channels for a function or\nattribute, the session may perform the operation on multiple channels in parallel, though\nthis is not guaranteed, and some operations may execute sequentially.'
+            'description': '\nCreates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a\nsession handle to be used in all subsequent NI-DCPower function calls.\n\nAfter calling this function, the specified channel or channels will be in the Uncommitted\nstate.\n\nWith this function and channel-based NI-DCPower functions and attributes, you can use any\nchannels in the session independently. For example, you can initiate a subset of channels in\nthe session with niDCPower_InitiateWithChannels, and the other channels in the session\nremain in the Uncommitted state.\n\n**Details of Independent Channel Operation**\n\nWhen you initialize with independent channels, each channel steps through the NI-DCPower\nprogramming state model independently of all other channels, and you can specify a subset\nof channels for most operations.\n\n**Note** You can make concurrent calls to a session from multiple threads, but the session\nexecutes the calls one at a time. If you specify multiple channels for a function or\nattribute, the session may perform the operation on multiple channels in parallel, though\nthis is not guaranteed, and some operations may execute sequentially.\n\n**Related Topics:**\n\n`Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
         'parameters': [
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the NI-DCPower resources to use in the session.\nNI-DCPower resources can be names of the instrument(s) assigned by Measurement &\nAutomation Explorer (MAX) and the channel(s) to initialize. Specify the\ninstrument(s) and channel(s) using the form PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3\nor PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3, where PXI1Slot3 and PXI1Slot4 are\ninstrument resource names and 0, 2, and 3 are channels.\n\nIf you pass "" for this control, all channels of the instrument(s) are included in\nthe session.'
+                    'description': '\nSpecifies the NI-DCPower resources to use in the session.\nNI-DCPower resources can be names of the instrument(s) assigned by Measurement &\nAutomation Explorer (MAX) and the channel(s) to initialize. Specify the\ninstrument(s) and channel(s) using the form PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3\nor PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3, where PXI1Slot3 and PXI1Slot4 are\ninstrument resource names and 0, 2, and 3 are channels.\n\nIf you pass "" for this control, all channels of the instrument(s) are included in\nthe session.\n'
                 },
                 'name': 'resourceName',
                 'type': 'ViRsrc'
@@ -1970,7 +2022,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies whether to reset channel(s) during the initialization procedure.\nThe default is VI_FALSE.\n\nTo place channel(s) in a known startup state when creating a new session, set reset\nto VI_TRUE. This action is equivalent to using the niDCPower_ResetWithChannels\nfunction immediately after initializing the session.\n\nTo open a session and leave the channel(s) in an existing configuration without\npassing through a transitional output state, set reset to VI_FALSE. Next, configure\nthe channel(s) as in the previous session, change the desired settings, and then\ncall the niDCPower_InitiateWithChannels function to write both settings.'
+                    'description': '\nSpecifies whether to reset channel(s) during the initialization procedure.\nThe default is VI_FALSE.\n\nTo place channel(s) in a known startup state when creating a new session, set\n**reset** to VI_TRUE. This action is equivalent to using the niDCPower_ResetWithChannels\nfunction immediately after initializing the session.\n\nTo open a session and leave the channel(s) in an existing configuration without\npassing through a transitional output state, set **reset** to VI_FALSE. Next, configure\nthe channel(s) as in the previous session, change the desired settings, and then\ncall the niDCPower_InitiateWithChannels function to write both settings.\n'
                 },
                 'name': 'reset',
                 'type': 'ViBoolean'
@@ -1978,7 +2030,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the initial value of certain attributes for the session.\nThe syntax for optionString is a list of attributes with an assigned value where 1\nis VI_TRUE and 0 is VI_FALSE. For example:\n\nSimulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>\n\nTo simulate a multi-instrument session, set Simulate to 1 and list multiple\ninstruments for DriverSetup. For example:\n\nSimulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;\nBoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;\nBoardType:<bus connector>\n\nYou do not have to specify a value for all the attributes. If you do not specify a\nvalue for an attribute, the default value is used.'
+                    'description': '\nSpecifies the initial value of certain attributes for the session.\nThe syntax for **optionString** is a list of attributes with an assigned value where\n1 is VI_TRUE and 0 is VI_FALSE. For example:\n\nSimulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>\n\nTo simulate a multi-instrument session, set Simulate to 1 and list multiple\ninstruments for DriverSetup. For example:\n\nSimulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;\nBoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;\nBoardType:<bus connector>\n\nYou do not have to specify a value for all the attributes. If you do not specify a\nvalue for an attribute, the default value is used.\n\nFor more information about simulating a device, refer to `Simulating a\nPower Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.\n'
                 },
                 'name': 'optionString',
                 'type': 'ViConstString'

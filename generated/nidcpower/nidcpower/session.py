@@ -2729,6 +2729,7 @@ class _SessionBase(object):
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
+        self.instruments = _RepeatedCapabilities(self, '', repeated_capability_list)
 
         self._is_frozen = freeze_it
 
@@ -4682,55 +4683,80 @@ class Session(_SessionBase):
     def __init__(self, resource_name, channels=None, reset=False, options={}, independent_channels=True):
         r'''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
 
-        Creates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a
-        session handle to be used in all subsequent NI-DCPower method calls.
+        Creates and returns a new NI-DCPower session to the specified instrument(s) and channel(s)
+        in **resource name** to be used in all subsequent NI-DCPower method calls. With this method,
+        you can optionally set the initial state of the following session properties:
 
-        Driver initialization will be dispatched to either _initialize_with_channels
-        (deprecated) or _initialize_with_independent_channels depending on the value of the
-        independent_channels argument.
+        -  simulate
+        -  driver_setup
 
-        If independent_channels is True, this method will combine the channels argument (if any)
-        with the resource_name argument then call _initialize_with_independent_channels. If a
-        channels argument is supplied, resource_name must refer to a single instrument.
+        After calling this method, the specified channel or channels will be in the Uncommitted
+        state. Refer to the `Programming States
+        <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for details about specific
+        software states.
 
-        If independent_channels is False, this method will issue a deprecation warning then pass
-        the remaining arguments directly to _initialize_with_channels.
+        To place channel(s) in a known start-up state when creating a new session, set **reset** to
+        True. This action is equivalent to using the reset method immediately after initializing the
+        session.
 
-        Consult the documentation for the initialization method you intend to use for more
-        information.
+        To open a session and leave the channel(s) in an existing configuration without passing
+        through a transitional output state, set **reset** to False. Next, configure the channel(s)
+        as in the previous session, change the desired settings, and then call the initiate method
+        to write both settings.
+
+        **Details of Independent Channel Operation**
+
+        With this method and channel-based NI-DCPower methods and properties, you can use any
+        channels in the session independently. For example, you can initiate a subset of channels in
+        the session with initiate, and the other channels in the session remain in the Uncommitted
+        state.
+
+        When you initialize with independent channels, each channel steps through the NI-DCPower
+        programming state model independently of all other channels, and you can specify a subset of
+        channels for most operations.
+
+        **Note** You can make concurrent calls to a session from multiple threads, but the session
+        executes the calls one at a time. If you specify multiple channels for a method or property,
+        the session may perform the operation on multiple channels in parallel, though this is not
+        guaranteed, and some operations may execute sequentially.
+
+        **Related Topics:**
+
+        `Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Args:
-            resource_name (str, list, tuple): If independent_channels is True (default), this
-                argument specifies the NI-DCPower resources to use in the session. NI-DCPower
-                resources can be names of the instrument(s) assigned by Measurement & Automation
-                Explorer (MAX) and the channel(s) to initialize. Specify the instrument(s) and
-                channel(s) using the form PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or
-                PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3, where PXI1Slot3 and PXI1Slot4 are
-                instrument resource names and 0, 2, and 3 are channels.
+            resource_name (str, list, tuple): Specifies the **resourceName** assigned by Measurement
+                & Automation Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
+                instrument's **resourceName**. **resourceName** can also be a logical IVI name.
 
-                If independent_channels is False, this parameter specifies the resource_name
-                assigned by Measurement & Automation Explorer (MAX), for example "PXI1Slot3" where
-                "PXI1Slot3" is an instrument's resource_name. resource_name can also be a logical
-                IVI name.
+                If independent_channels is True, resource_name can be names of the instrument(s)
+                assigned by Measurement & Automation Explorer (MAX) and the channel(s) to
+                initialize. Specify the instrument(s) and channel(s) using the form
+                PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3,
+                where PXI1Slot3 and PXI1Slot4 are instrument resource names and 0, 2, and 3 are
+                channels. If you exclude a channels string after an instrument resource name, all
+                channels of the instrument are included in the session.
 
             channels (str, list, range, tuple): Specifies which output channel(s) to include in a
-                new session. Specify multiple channels by using a channel list or a channel range. A
-                channel list is a comma (,) separated sequence of channel names (for example, 0,2
+                new session. Specify multiple channels by using a channel list or a channel range.
+                A channel list is a comma (,) separated sequence of channel names (for example, 0,2
                 specifies channels 0 and 2). A channel range is a lower bound channel followed by a
                 hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2
-                specifies channels 0, 1, and 2).
+                specifies channels 0, 1, and 2). In the Running state, multiple output channel
+                configurations are performed sequentially based on the order specified in this
+                parameter. If you do not specify any channels, by default all channels on the device
+                are included in the session.
 
-                If independent_channels is True and a channels argument is supplied, resource_name
-                will be combined with channels to form a resource string that specifies the
-                instrument and channel(s). This operation is only valid if resource_name refers to a
-                single device. To create a session across channels on multiple devices, do not
-                provide a channels argument and use a resource_name of the form described above.
+                If independent_channels is False, this argument specifies which channels to include
+                in a legacy synchronized channels session. Otherwise, this argument specifies which
+                channels to include in an independent channels session for the resource specified by
+                resource_name.
 
-            reset (bool): If independent_channels is True (default), specifies whether to reset
-                channel(s) during the initialization procedure. Otherwise, specifies whether to
-                reset the device during the initialization procedure.
+                Initializing an independent channels session with a channels argument is deprecated.
+                For new applications, set this argument to None and use a fully-qualified channel
+                list as the resource_name.
 
-                See the target initialization method for more details.
+            reset (bool): Specifies whether to reset channel(s) during the initialization procedure.
 
             options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
@@ -5199,59 +5225,84 @@ class Session(_SessionBase):
     def _fancy_initialize(self, resource_name, channels=None, reset=False, option_string="", independent_channels=True):
         '''_fancy_initialize
 
-        Creates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a
-        session handle to be used in all subsequent NI-DCPower method calls.
+        Creates and returns a new NI-DCPower session to the specified instrument(s) and channel(s)
+        in **resource name** to be used in all subsequent NI-DCPower method calls. With this method,
+        you can optionally set the initial state of the following session properties:
 
-        Driver initialization will be dispatched to either _initialize_with_channels
-        (deprecated) or _initialize_with_independent_channels depending on the value of the
-        independent_channels argument.
+        -  simulate
+        -  driver_setup
 
-        If independent_channels is True, this method will combine the channels argument (if any)
-        with the resource_name argument then call _initialize_with_independent_channels. If a
-        channels argument is supplied, resource_name must refer to a single instrument.
+        After calling this method, the specified channel or channels will be in the Uncommitted
+        state. Refer to the `Programming States
+        <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for details about specific
+        software states.
 
-        If independent_channels is False, this method will issue a deprecation warning then pass
-        the remaining arguments directly to _initialize_with_channels.
+        To place channel(s) in a known start-up state when creating a new session, set **reset** to
+        True. This action is equivalent to using the reset method immediately after initializing the
+        session.
 
-        Consult the documentation for the initialization method you intend to use for more
-        information.
+        To open a session and leave the channel(s) in an existing configuration without passing
+        through a transitional output state, set **reset** to False. Next, configure the channel(s)
+        as in the previous session, change the desired settings, and then call the initiate method
+        to write both settings.
+
+        **Details of Independent Channel Operation**
+
+        With this method and channel-based NI-DCPower methods and properties, you can use any
+        channels in the session independently. For example, you can initiate a subset of channels in
+        the session with initiate, and the other channels in the session remain in the Uncommitted
+        state.
+
+        When you initialize with independent channels, each channel steps through the NI-DCPower
+        programming state model independently of all other channels, and you can specify a subset of
+        channels for most operations.
+
+        **Note** You can make concurrent calls to a session from multiple threads, but the session
+        executes the calls one at a time. If you specify multiple channels for a method or property,
+        the session may perform the operation on multiple channels in parallel, though this is not
+        guaranteed, and some operations may execute sequentially.
+
+        **Related Topics:**
+
+        `Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Args:
-            resource_name (str, list, tuple): If independent_channels is True (default), this
-                argument specifies the NI-DCPower resources to use in the session. NI-DCPower
-                resources can be names of the instrument(s) assigned by Measurement & Automation
-                Explorer (MAX) and the channel(s) to initialize. Specify the instrument(s) and
-                channel(s) using the form PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or
-                PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3, where PXI1Slot3 and PXI1Slot4 are
-                instrument resource names and 0, 2, and 3 are channels.
+            resource_name (str, list, tuple): Specifies the **resourceName** assigned by Measurement
+                & Automation Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
+                instrument's **resourceName**. **resourceName** can also be a logical IVI name.
 
-                If independent_channels is False, this parameter specifies the resource_name
-                assigned by Measurement & Automation Explorer (MAX), for example "PXI1Slot3" where
-                "PXI1Slot3" is an instrument's resource_name. resource_name can also be a logical
-                IVI name.
+                If independent_channels is True, resource_name can be names of the instrument(s)
+                assigned by Measurement & Automation Explorer (MAX) and the channel(s) to
+                initialize. Specify the instrument(s) and channel(s) using the form
+                PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3,
+                where PXI1Slot3 and PXI1Slot4 are instrument resource names and 0, 2, and 3 are
+                channels. If you exclude a channels string after an instrument resource name, all
+                channels of the instrument are included in the session.
 
             channels (str, list, range, tuple): Specifies which output channel(s) to include in a
-                new session. Specify multiple channels by using a channel list or a channel range. A
-                channel list is a comma (,) separated sequence of channel names (for example, 0,2
+                new session. Specify multiple channels by using a channel list or a channel range.
+                A channel list is a comma (,) separated sequence of channel names (for example, 0,2
                 specifies channels 0 and 2). A channel range is a lower bound channel followed by a
                 hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2
-                specifies channels 0, 1, and 2).
+                specifies channels 0, 1, and 2). In the Running state, multiple output channel
+                configurations are performed sequentially based on the order specified in this
+                parameter. If you do not specify any channels, by default all channels on the device
+                are included in the session.
 
-                If independent_channels is True and a channels argument is supplied, resource_name
-                will be combined with channels to form a resource string that specifies the
-                instrument and channel(s). This operation is only valid if resource_name refers to a
-                single device. To create a session across channels on multiple devices, do not
-                provide a channels argument and use a resource_name of the form described above.
+                If independent_channels is False, this argument specifies which channels to include
+                in a legacy synchronized channels session. Otherwise, this argument specifies which
+                channels to include in an independent channels session for the resource specified by
+                resource_name.
 
-            reset (bool): If independent_channels is True (default), specifies whether to reset
-                channel(s) during the initialization procedure. Otherwise, specifies whether to
-                reset the device during the initialization procedure.
+                Initializing an independent channels session with a channels argument is deprecated.
+                For new applications, set this argument to None and use a fully-qualified channel
+                list as the resource_name.
 
-                See the target initialization method for more details.
+            reset (bool): Specifies whether to reset channel(s) during the initialization procedure.
 
             option_string (dict): Specifies the initial value of certain properties for the session.
-                The syntax for optionString is a list of properties with an assigned value where 1
-                is True and 0 is False. For example:
+                The syntax for **optionString** is a list of properties with an assigned value where
+                1 is True and 0 is False. For example:
 
                 Simulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>
 
@@ -5264,6 +5315,9 @@ class Session(_SessionBase):
 
                 You do not have to specify a value for all the properties. If you do not specify a
                 value for a property, the default value is used.
+
+                For more information about simulating a device, refer to `Simulating a Power Supply
+                or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.
 
             independent_channels (bool): Specifies whether to initialize the session with
                 independent channels. Set this argument to False on legacy applications or if you
@@ -5354,6 +5408,38 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def get_channel_names(self, indices):
+        r'''get_channel_names
+
+        Returns a list of channel names for given channel indices.
+
+        Args:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            names (list of str): The channel name(s) at the specified indices.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        names_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
 
     @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
@@ -5671,8 +5757,7 @@ class Session(_SessionBase):
 
         **Related Topics:**
 
-        `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+        `Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Args:
             resource_name (str): Specifies the **resourceName** assigned by Measurement & Automation
@@ -5694,8 +5779,8 @@ class Session(_SessionBase):
             reset (bool): Specifies whether to reset the device during the initialization
                 procedure.
 
-            option_string (str): Specifies the initial value of certain properties for the session. The
-                syntax for **optionString** is a list of properties with an assigned
+            option_string (str): Specifies the initial value of certain properties for the session.
+                The syntax for **optionString** is a list of properties with an assigned
                 value where 1 is True and 0 is False. For example:
 
                 "Simulate=0"
@@ -5735,15 +5820,20 @@ class Session(_SessionBase):
         the session with initiate, and the other channels in the session
         remain in the Uncommitted state.
 
-        Details of Independent Channel Operation:
+        **Details of Independent Channel Operation**
+
         When you initialize with independent channels, each channel steps through the NI-DCPower
         programming state model independently of all other channels, and you can specify a subset
         of channels for most operations.
 
-        Note: You can make concurrent calls to a session from multiple threads, but the session
+        **Note** You can make concurrent calls to a session from multiple threads, but the session
         executes the calls one at a time. If you specify multiple channels for a method or
         property, the session may perform the operation on multiple channels in parallel, though
         this is not guaranteed, and some operations may execute sequentially.
+
+        **Related Topics:**
+
+        `Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Args:
             resource_name (str): Specifies the NI-DCPower resources to use in the session.
@@ -5759,18 +5849,18 @@ class Session(_SessionBase):
             reset (bool): Specifies whether to reset channel(s) during the initialization procedure.
                 The default is False.
 
-                To place channel(s) in a known startup state when creating a new session, set reset
-                to True. This action is equivalent to using the reset
+                To place channel(s) in a known startup state when creating a new session, set
+                **reset** to True. This action is equivalent to using the reset
                 method immediately after initializing the session.
 
                 To open a session and leave the channel(s) in an existing configuration without
-                passing through a transitional output state, set reset to False. Next, configure
+                passing through a transitional output state, set **reset** to False. Next, configure
                 the channel(s) as in the previous session, change the desired settings, and then
                 call the initiate method to write both settings.
 
             option_string (str): Specifies the initial value of certain properties for the session.
-                The syntax for optionString is a list of properties with an assigned value where 1
-                is True and 0 is False. For example:
+                The syntax for **optionString** is a list of properties with an assigned value where
+                1 is True and 0 is False. For example:
 
                 Simulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>
 
@@ -5783,6 +5873,9 @@ class Session(_SessionBase):
 
                 You do not have to specify a value for all the properties. If you do not specify a
                 value for a property, the default value is used.
+
+                For more information about simulating a device, refer to `Simulating a
+                Power Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.
 
 
         Returns:
