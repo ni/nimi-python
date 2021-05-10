@@ -1490,6 +1490,7 @@ functions = {
                 'documentation': {
                     'description': 'The channel name(s) at the specified indices.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelName',
                 'python_api_converter_name': 'convert_comma_separated_string_to_list',
                 'python_name': 'names',
