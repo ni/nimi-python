@@ -18,6 +18,7 @@ def independent_channels_session():
     with nidcpower.Session(
         '4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', True
     ) as simulated_session:
+        yield simulated_session
 
 
 @pytest.fixture(scope='function')
