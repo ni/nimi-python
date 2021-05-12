@@ -33,21 +33,24 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * `get_channel_names` - [#1588](https://github.com/ni/nimi-python/issues/1588) 
         * API parity with NI-DCPower 20.7.0 by adding Output Cutoff functionality.
-        * Properties added:
-            * `output_cutoff_current_change_limit_high`
-            * `output_cutoff_current_change_limit_low`
-            * `output_cutoff_current_measure_limit_high`
-            * `output_cutoff_current_measure_limit_low`
-            * `output_cutoff_current_overrange_enabled`
-            * `output_cutoff_enabled`
-            * `output_cutoff_voltage_change_limit_high`
-            * `output_cutoff_voltage_change_limit_low`
-            * `output_cutoff_voltage_output_limit_high`
-            * `output_cutoff_voltage_output_limit_low`
-        * Methods added:
-            * `clear_latched_output_cutoff_state`
-            * `query_latched_output_cutoff_state`
+            * Properties added:
+                * `output_cutoff_current_change_limit_high`
+                * `output_cutoff_current_change_limit_low`
+                * `output_cutoff_current_measure_limit_high`
+                * `output_cutoff_current_measure_limit_low`
+                * `output_cutoff_current_overrange_enabled`
+                * `output_cutoff_enabled`
+                * `output_cutoff_voltage_change_limit_high`
+                * `output_cutoff_voltage_change_limit_low`
+                * `output_cutoff_voltage_output_limit_high`
+                * `output_cutoff_voltage_output_limit_low`
+            * Methods added:
+                * `clear_latched_output_cutoff_state`
+                * `query_latched_output_cutoff_state`
+    * #### Changed
+    * #### Removed
     * #### Changed
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
