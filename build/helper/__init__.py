@@ -7,14 +7,13 @@ from build.helper.codegen_helper import IviDanceStep  # noqa: F401
 
 from build.helper.parameter_usage_options import ParameterUsageOptions  # noqa: F401
 
-from build.helper.documentation_helper import add_attribute_rep_cap_tip_docstring  # noqa: F401
-from build.helper.documentation_helper import add_attribute_rep_cap_tip_rst  # noqa: F401
+from build.helper.documentation_helper import add_attribute_rep_cap_tip  # noqa: F401
 from build.helper.documentation_helper import add_notes_re_links  # noqa: F401
 from build.helper.documentation_helper import as_rest_table  # noqa: F401
 from build.helper.documentation_helper import find_attribute_by_name  # noqa: F401
 from build.helper.documentation_helper import find_enum_by_value  # noqa: F401
 from build.helper.documentation_helper import format_type_for_rst_documentation  # noqa: F401
-from build.helper.documentation_helper import get_attr_repeated_caps  # noqa: F401
+from build.helper.documentation_helper import get_attribute_repeated_caps  # noqa: F401
 from build.helper.documentation_helper import get_documentation_for_node_docstring  # noqa: F401
 from build.helper.documentation_helper import get_documentation_for_node_rst  # noqa: F401
 from build.helper.documentation_helper import get_function_docstring  # noqa: F401
