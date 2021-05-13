@@ -3693,44 +3693,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
-    @ivi_synchronized
-    def get_channel_names(self, indices):
-        r'''get_channel_names
-
-        Returns a list of channel names for given channel indices.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidcpower.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
-
-                -   A comma-separated list—for example, "0,2,3,1"
-                -   A range using a hyphen—for example, "0-3"
-                -   A range using a colon—for example, "0:3 "
-
-                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
-
-
-        Returns:
-            names (list of str): The channel name(s) at the specified indices.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        names_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
-
     def _get_error(self):
         r'''_get_error
 
@@ -3810,20 +3772,21 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    # TODO(smooresni): Replace with session lock per GitHub issue [1596](https://github.com/ni/nimi-python/issues/1596)
     def lock(self):
         '''lock
 
-        Obtains a multithread lock on the device session. Before doing so, the
+        Obtains a multi-threaded lock on the instrument driver. Before doing so, the
         software waits until all other execution threads release their locks
-        on the device session.
+        on the driver.
 
-        Other threads may have obtained a lock on this session for the
+        Other threads may have obtained a lock on this driver for the
         following reasons:
 
             -  The application called the lock method.
-            -  A call to NI-DCPower locked the session.
+            -  A call to NI-DCPower locked the driver.
             -  After a call to the lock method returns
-               successfully, no other threads can access the device session until
+               successfully, no other threads can access the driver until
                you call the unlock method or exit out of the with block when using
                lock context manager.
             -  Use the lock method and the
@@ -3832,7 +3795,7 @@ class _SessionBase(object):
                settings through the end of the sequence.
 
         You can safely make nested calls to the lock method
-        within the same thread. To completely unlock the session, you must
+        within the same thread. To completely unlock the driver, you must
         balance each call to the lock method with a call to
         the unlock method.
 
@@ -3845,14 +3808,17 @@ class _SessionBase(object):
         # that will handle the unlock for them
         return _Lock(self)
 
+    # create python lock class variable; it is important the variable has class scope since
+    # new instances of _SessionBase are constructed in __getitem__ of _RepeatedCapabilities
+    import threading
+    _pylock = threading.RLock()
+
     def _lock_session(self):
         '''_lock_session
 
-        Actual call to driver
+        Actual call to python lock
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_LockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        self._pylock.acquire()
         return
 
     @ivi_synchronized
@@ -4614,16 +4580,15 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    # TODO(smooresni): Replace with session lock per GitHub issue [1596](https://github.com/ni/nimi-python/issues/1596)
     def unlock(self):
         '''unlock
 
-        Releases a lock that you acquired on an device session using
+        Releases a lock that you acquired on the driver using
         lock. Refer to lock for additional
-        information on session locks.
+        information on driver locks.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_UnlockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        self._pylock.release()
         return
 
     @ivi_synchronized
@@ -4721,7 +4686,7 @@ class Session(_SessionBase):
     def __init__(self, resource_name, channels=None, reset=False, options={}, independent_channels=True):
         r'''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
 
-        Creates and returns a new NI-DCPower session to the specified instrument(s) and channel(s)
+        Creates and returns a new NI-DCPower session to the instrument(s) and channel(s) specified
         in **resource name** to be used in all subsequent NI-DCPower method calls. With this method,
         you can optionally set the initial state of the following session properties:
 
@@ -4758,16 +4723,12 @@ class Session(_SessionBase):
         the session may perform the operation on multiple channels in parallel, though this is not
         guaranteed, and some operations may execute sequentially.
 
-        **Related Topics:**
-
-        `Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
         Args:
             resource_name (str, list, tuple): Specifies the **resourceName** assigned by Measurement
                 & Automation Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
                 instrument's **resourceName**. **resourceName** can also be a logical IVI name.
 
-                If independent_channels is True, resource_name can be names of the instrument(s)
+                If independent_channels is True, **resource name** can be names of the instrument(s)
                 assigned by Measurement & Automation Explorer (MAX) and the channel(s) to
                 initialize. Specify the instrument(s) and channel(s) using the form
                 PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3,
@@ -4782,17 +4743,20 @@ class Session(_SessionBase):
                 hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2
                 specifies channels 0, 1, and 2). In the Running state, multiple output channel
                 configurations are performed sequentially based on the order specified in this
-                parameter. If you do not specify any channels, by default all channels on the device
-                are included in the session.
+                parameter.
 
                 If independent_channels is False, this argument specifies which channels to include
-                in a legacy synchronized channels session. Otherwise, this argument specifies which
-                channels to include in an independent channels session for the resource specified by
-                resource_name.
+                in a legacy synchronized channels session. If you do not specify any channels, by
+                default all channels on the device are included in the session.
+
+                If independent_channels is True, this argument combines with **resource name** to
+                specify which channels to include in an independent channels session. If the
+                combination of **channels** and **resource name** does not specify any channels, by
+                default all channels on the device are included in the session.
 
                 Initializing an independent channels session with a channels argument is deprecated.
-                For new applications, set this argument to None and use a fully-qualified channel
-                list as the resource_name.
+                For new applications, set this argument to None and specify the channels in
+                **resource name**.
 
             reset (bool): Specifies whether to reset channel(s) during the initialization procedure.
 
@@ -4826,7 +4790,7 @@ class Session(_SessionBase):
 
             independent_channels (bool): Specifies whether to initialize the session with
                 independent channels. Set this argument to False on legacy applications or if you
-                are unable to upgrade your NI-DCPower driver runtime.
+                are unable to upgrade your NI-DCPower driver runtime to 20.6 or higher.
 
 
         Returns:
@@ -5227,43 +5191,10 @@ class Session(_SessionBase):
 
         self._create_advanced_sequence_with_channels(sequence_name, list(attribute_ids_used), set_as_active_sequence)
 
-    # TODO(smooresni): Remove the following code as described in issue 1596. https://github.com/ni/nimi-python/issues/1596
-
-    # create a weak value dict for storing references to session objects
-    import weakref
-    _sessions = weakref.WeakValueDictionary()
-
-    # cache super class lock and unlock methods for decorating via monkey patching
-    _super_lock_session = _SessionBase._lock_session
-    _super_unlock = _SessionBase.unlock
-
-    # create fancy functions
-    @staticmethod
-    def _fancy_lock_session(self):
-        session = Session._sessions[self._vi]
-        if hasattr(session, '_pylock'):
-            session._pylock.acquire()
-            return
-        else:
-            return Session._super_lock_session(self)
-
-    @staticmethod
-    def _fancy_unlock(self):
-        session = Session._sessions[self._vi]
-        if hasattr(session, '_pylock'):
-            session._pylock.release()
-            return
-        else:
-            return Session._super_unlock(self)
-
-    # monkey patch super class lock and unlock methods to use this class' fancy functions
-    _SessionBase._lock_session = lambda self: Session._fancy_lock_session(self)
-    _SessionBase.unlock = lambda self: Session._fancy_unlock(self)
-
     def _fancy_initialize(self, resource_name, channels=None, reset=False, option_string="", independent_channels=True):
         '''_fancy_initialize
 
-        Creates and returns a new NI-DCPower session to the specified instrument(s) and channel(s)
+        Creates and returns a new NI-DCPower session to the instrument(s) and channel(s) specified
         in **resource name** to be used in all subsequent NI-DCPower method calls. With this method,
         you can optionally set the initial state of the following session properties:
 
@@ -5300,16 +5231,12 @@ class Session(_SessionBase):
         the session may perform the operation on multiple channels in parallel, though this is not
         guaranteed, and some operations may execute sequentially.
 
-        **Related Topics:**
-
-        `Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
         Args:
             resource_name (str, list, tuple): Specifies the **resourceName** assigned by Measurement
                 & Automation Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
                 instrument's **resourceName**. **resourceName** can also be a logical IVI name.
 
-                If independent_channels is True, resource_name can be names of the instrument(s)
+                If independent_channels is True, **resource name** can be names of the instrument(s)
                 assigned by Measurement & Automation Explorer (MAX) and the channel(s) to
                 initialize. Specify the instrument(s) and channel(s) using the form
                 PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3,
@@ -5324,17 +5251,20 @@ class Session(_SessionBase):
                 hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2
                 specifies channels 0, 1, and 2). In the Running state, multiple output channel
                 configurations are performed sequentially based on the order specified in this
-                parameter. If you do not specify any channels, by default all channels on the device
-                are included in the session.
+                parameter.
 
                 If independent_channels is False, this argument specifies which channels to include
-                in a legacy synchronized channels session. Otherwise, this argument specifies which
-                channels to include in an independent channels session for the resource specified by
-                resource_name.
+                in a legacy synchronized channels session. If you do not specify any channels, by
+                default all channels on the device are included in the session.
+
+                If independent_channels is True, this argument combines with **resource name** to
+                specify which channels to include in an independent channels session. If the
+                combination of **channels** and **resource name** does not specify any channels, by
+                default all channels on the device are included in the session.
 
                 Initializing an independent channels session with a channels argument is deprecated.
-                For new applications, set this argument to None and use a fully-qualified channel
-                list as the resource_name.
+                For new applications, set this argument to None and specify the channels in
+                **resource name**.
 
             reset (bool): Specifies whether to reset channel(s) during the initialization procedure.
 
@@ -5354,12 +5284,9 @@ class Session(_SessionBase):
                 You do not have to specify a value for all the properties. If you do not specify a
                 value for a property, the default value is used.
 
-                For more information about simulating a device, refer to `Simulating a Power Supply
-                or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.
-
             independent_channels (bool): Specifies whether to initialize the session with
                 independent channels. Set this argument to False on legacy applications or if you
-                are unable to upgrade your NI-DCPower driver runtime.
+                are unable to upgrade your NI-DCPower driver runtime to 20.6 or higher.
 
 
         Returns:
@@ -5392,31 +5319,13 @@ class Session(_SessionBase):
                         "resource name instead of supplying a channels argument."
                     )
 
-            # TODO(smooresni): Modify this line as described in https://github.com/ni/nimi-python/issues/1596
-            self._vi = self._initialize_with_independent_channels(resource_string, reset, option_string)
+            return self._initialize_with_independent_channels(resource_string, reset, option_string)
 
         else:
             import warnings
             warnings.warn("Initializing session without independent channels enabled.", DeprecationWarning)
 
-            # TODO(smooresni): Modify this line as described in https://github.com/ni/nimi-python/issues/1596
-            self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
-
-        # TODO(smooresni): Remove the following code as described in https://github.com/ni/nimi-python/issues/1596
-        # cache session before calling lock to avoid a key error in fancy functions
-        self._sessions[self._vi] = self
-
-        # test to see if runtime supports locking session
-        try:
-            self.lock()  # self._pylock not yet defined, will dispatch to driver lock
-        except errors.DriverError:
-            self._get_error()  # clear error from lock
-            import threading
-            self._pylock = threading.RLock()  # define a recursive lock to be used henceforth
-        else:
-            self.unlock()  # lock succeeded, unlock session
-
-        return self._vi
+            return self._initialize_with_channels(resource_name, channels, reset, option_string)
 
     @ivi_synchronized
     def get_channel_name(self, index):

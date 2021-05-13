@@ -1054,7 +1054,7 @@ functions = {
     'FancyInitialize': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCreates and returns a new NI-DCPower session to the specified instrument(s) and channel(s)\nin **resource name** to be used in all subsequent NI-DCPower function calls. With this function,\nyou can optionally set the initial state of the following session attributes:\n\n-  NIDCPOWER_ATTR_SIMULATE\n-  NIDCPOWER_ATTR_DRIVER_SETUP\n\nAfter calling this function, the specified channel or channels will be in the Uncommitted\nstate. Refer to the `Programming States\n<REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for details about specific\nsoftware states.\n\nTo place channel(s) in a known start-up state when creating a new session, set **reset** to\nVI_TRUE. This action is equivalent to using the niDCPower_ResetWithChannels function immediately after initializing the\nsession.\n\nTo open a session and leave the channel(s) in an existing configuration without passing\nthrough a transitional output state, set **reset** to VI_FALSE. Next, configure the channel(s)\nas in the previous session, change the desired settings, and then call the niDCPower_InitiateWithChannels function\nto write both settings.\n\n**Details of Independent Channel Operation**\n\nWith this function and channel-based NI-DCPower functions and attributes, you can use any\nchannels in the session independently. For example, you can initiate a subset of channels in\nthe session with niDCPower_InitiateWithChannels, and the other channels in the session remain in the Uncommitted\nstate.\n\nWhen you initialize with independent channels, each channel steps through the NI-DCPower\nprogramming state model independently of all other channels, and you can specify a subset of\nchannels for most operations.\n\n**Note** You can make concurrent calls to a session from multiple threads, but the session\nexecutes the calls one at a time. If you specify multiple channels for a function or attribute,\nthe session may perform the operation on multiple channels in parallel, though this is not\nguaranteed, and some operations may execute sequentially.\n\n**Related Topics:**\n\n`Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
+            'description': '\nCreates and returns a new NI-DCPower session to the instrument(s) and channel(s) specified\nin **resource name** to be used in all subsequent NI-DCPower function calls. With this function,\nyou can optionally set the initial state of the following session attributes:\n\n-  NIDCPOWER_ATTR_SIMULATE\n-  NIDCPOWER_ATTR_DRIVER_SETUP\n\nAfter calling this function, the specified channel or channels will be in the Uncommitted\nstate. Refer to the `Programming States\n<REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for details about specific\nsoftware states.\n\nTo place channel(s) in a known start-up state when creating a new session, set **reset** to\nVI_TRUE. This action is equivalent to using the niDCPower_ResetWithChannels function immediately after initializing the\nsession.\n\nTo open a session and leave the channel(s) in an existing configuration without passing\nthrough a transitional output state, set **reset** to VI_FALSE. Next, configure the channel(s)\nas in the previous session, change the desired settings, and then call the niDCPower_InitiateWithChannels function\nto write both settings.\n\n**Details of Independent Channel Operation**\n\nWith this function and channel-based NI-DCPower functions and attributes, you can use any\nchannels in the session independently. For example, you can initiate a subset of channels in\nthe session with niDCPower_InitiateWithChannels, and the other channels in the session remain in the Uncommitted\nstate.\n\nWhen you initialize with independent channels, each channel steps through the NI-DCPower\nprogramming state model independently of all other channels, and you can specify a subset of\nchannels for most operations.\n\n**Note** You can make concurrent calls to a session from multiple threads, but the session\nexecutes the calls one at a time. If you specify multiple channels for a function or attribute,\nthe session may perform the operation on multiple channels in parallel, though this is not\nguaranteed, and some operations may execute sequentially.\n'
         },
         'method_name_for_documentation': '__init__',
         'method_templates': [
@@ -1068,7 +1068,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the **resourceName** assigned by Measurement\n& Automation Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an\ninstrument\'s **resourceName**. **resourceName** can also be a logical IVI name.\n\nIf independent_channels is True, resource_name can be names of the instrument(s)\nassigned by Measurement & Automation Explorer (MAX) and the channel(s) to\ninitialize. Specify the instrument(s) and channel(s) using the form\nPXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3,\nwhere PXI1Slot3 and PXI1Slot4 are instrument resource names and 0, 2, and 3 are\nchannels. If you exclude a channels string after an instrument resource name, all\nchannels of the instrument are included in the session.\n'
+                    'description': '\nSpecifies the **resourceName** assigned by Measurement\n& Automation Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an\ninstrument\'s **resourceName**. **resourceName** can also be a logical IVI name.\n\nIf independent_channels is True, **resource name** can be names of the instrument(s)\nassigned by Measurement & Automation Explorer (MAX) and the channel(s) to\ninitialize. Specify the instrument(s) and channel(s) using the form\nPXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3,\nwhere PXI1Slot3 and PXI1Slot4 are instrument resource names and 0, 2, and 3 are\nchannels. If you exclude a channels string after an instrument resource name, all\nchannels of the instrument are included in the session.\n'
                 },
                 'name': 'resourceName',
                 'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
@@ -1079,7 +1079,7 @@ functions = {
                 'default_value': None,
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies which output channel(s) to include in a\nnew session. Specify multiple channels by using a channel list or a channel range.\nA channel list is a comma (,) separated sequence of channel names (for example, 0,2\nspecifies channels 0 and 2). A channel range is a lower bound channel followed by a\nhyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2\nspecifies channels 0, 1, and 2). In the Running state, multiple output channel\nconfigurations are performed sequentially based on the order specified in this\nparameter. If you do not specify any channels, by default all channels on the device\nare included in the session.\n\nIf independent_channels is False, this argument specifies which channels to include\nin a legacy synchronized channels session. Otherwise, this argument specifies which\nchannels to include in an independent channels session for the resource specified by\nresource_name.\n\nInitializing an independent channels session with a channels argument is deprecated.\nFor new applications, set this argument to None and use a fully-qualified channel\nlist as the resource_name.\n'
+                    'description': '\nSpecifies which output channel(s) to include in a\nnew session. Specify multiple channels by using a channel list or a channel range.\nA channel list is a comma (,) separated sequence of channel names (for example, 0,2\nspecifies channels 0 and 2). A channel range is a lower bound channel followed by a\nhyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2\nspecifies channels 0, 1, and 2). In the Running state, multiple output channel\nconfigurations are performed sequentially based on the order specified in this\nparameter.\n\nIf independent_channels is False, this argument specifies which channels to include\nin a legacy synchronized channels session. If you do not specify any channels, by\ndefault all channels on the device are included in the session.\n\nIf independent_channels is True, this argument combines with **resource name** to\nspecify which channels to include in an independent channels session. If the\ncombination of **channels** and **resource name** does not specify any channels, by\ndefault all channels on the device are included in the session.\n\nInitializing an independent channels session with a channels argument is deprecated.\nFor new applications, set this argument to None and specify the channels in\n**resource name**.\n'
                 },
                 'is_repeated_capability': False,
                 'name': 'channels',
@@ -1100,7 +1100,7 @@ functions = {
                 'default_value': '""',
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the initial value of certain attributes for the session.\nThe syntax for **optionString** is a list of attributes with an assigned value where\n1 is VI_TRUE and 0 is VI_FALSE. For example:\n\nSimulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>\n\nTo simulate a multi-instrument session when independent_channels is True, set\nSimulate to 1 and list multiple instruments for DriverSetup. For example:\n\nSimulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;\nBoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;\nBoardType:<bus connector>\n\nYou do not have to specify a value for all the attributes. If you do not specify a\nvalue for an attribute, the default value is used.\n\nFor more information about simulating a device, refer to `Simulating a Power Supply\nor SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.\n'
+                    'description': '\nSpecifies the initial value of certain attributes for the session.\nThe syntax for **optionString** is a list of attributes with an assigned value where\n1 is VI_TRUE and 0 is VI_FALSE. For example:\n\nSimulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>\n\nTo simulate a multi-instrument session when independent_channels is True, set\nSimulate to 1 and list multiple instruments for DriverSetup. For example:\n\nSimulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;\nBoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;\nBoardType:<bus connector>\n\nYou do not have to specify a value for all the attributes. If you do not specify a\nvalue for an attribute, the default value is used.\n'
                 },
                 'name': 'optionString',
                 'python_api_converter_name': 'convert_init_with_options_dictionary',
@@ -1119,7 +1119,7 @@ functions = {
                 'default_value': True,
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies whether to initialize the session with\nindependent channels. Set this argument to False on legacy applications or if you\nare unable to upgrade your NI-DCPower driver runtime.\n'
+                    'description': '\nSpecifies whether to initialize the session with\nindependent channels. Set this argument to False on legacy applications or if you\nare unable to upgrade your NI-DCPower driver runtime to 20.6 or higher.\n'
                 },
                 'name': 'independentChannels',
                 'type': 'ViBoolean'
@@ -1528,57 +1528,6 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
-        'returns': 'ViStatus'
-    },
-    'GetChannelNameFromString': {
-        'documentation': {
-            'description': '\nReturns a list of channel names for given channel indices.'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nIndex list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
-                },
-                'name': 'index',
-                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
-                'python_name': 'indices',
-                'type': 'ViConstString',
-                'type_in_documentation': 'basic sequence types or str or int'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe number of elements in the ViChar array you specify for name.\n'
-                },
-                'name': 'bufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'The channel name(s) at the specified indices.'
-                },
-                'name': 'channelName',
-                'python_api_converter_name': 'convert_comma_separated_string_to_list',
-                'python_name': 'names',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
-                },
-                'type': 'ViChar[]',
-                'type_in_documentation': 'list of str'
-            }
-        ],
-        'python_name': 'get_channel_names',
         'returns': 'ViStatus'
     },
     'GetChannelNameFromString': {
@@ -2129,7 +2078,7 @@ functions = {
             {
                 'documentation_filename': 'lock',
                 'method_python_name_suffix': '',
-                'session_filename': 'lock'
+                'session_filename': 'fancy_lock'
             }
         ],
         'parameters': [
@@ -2985,7 +2934,7 @@ functions = {
             {
                 'documentation_filename': 'unlock',
                 'method_python_name_suffix': '',
-                'session_filename': 'unlock'
+                'session_filename': 'fancy_unlock'
             }
         ],
         'parameters': [

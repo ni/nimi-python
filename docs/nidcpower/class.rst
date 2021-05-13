@@ -7,7 +7,7 @@ Session
 
     
 
-    Creates and returns a new NI-DCPower session to the specified instrument(s) and channel(s)
+    Creates and returns a new NI-DCPower session to the instrument(s) and channel(s) specified
     in **resource name** to be used in all subsequent NI-DCPower method calls. With this method,
     you can optionally set the initial state of the following session properties:
 
@@ -44,10 +44,6 @@ Session
     the session may perform the operation on multiple channels in parallel, though this is not
     guaranteed, and some operations may execute sequentially.
 
-    **Related Topics:**
-
-    `Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
     
 
 
@@ -59,7 +55,7 @@ Session
         & Automation Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
         instrument's **resourceName**. **resourceName** can also be a logical IVI name.
 
-        If independent_channels is True, resource_name can be names of the instrument(s)
+        If independent_channels is True, **resource name** can be names of the instrument(s)
         assigned by Measurement & Automation Explorer (MAX) and the channel(s) to
         initialize. Specify the instrument(s) and channel(s) using the form
         PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3,
@@ -82,17 +78,20 @@ Session
         hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2
         specifies channels 0, 1, and 2). In the Running state, multiple output channel
         configurations are performed sequentially based on the order specified in this
-        parameter. If you do not specify any channels, by default all channels on the device
-        are included in the session.
+        parameter.
 
         If independent_channels is False, this argument specifies which channels to include
-        in a legacy synchronized channels session. Otherwise, this argument specifies which
-        channels to include in an independent channels session for the resource specified by
-        resource_name.
+        in a legacy synchronized channels session. If you do not specify any channels, by
+        default all channels on the device are included in the session.
+
+        If independent_channels is True, this argument combines with **resource name** to
+        specify which channels to include in an independent channels session. If the
+        combination of **channels** and **resource name** does not specify any channels, by
+        default all channels on the device are included in the session.
 
         Initializing an independent channels session with a channels argument is deprecated.
-        For new applications, set this argument to None and use a fully-qualified channel
-        list as the resource_name.
+        For new applications, set this argument to None and specify the channels in
+        **resource name**.
 
         
 
@@ -148,7 +147,7 @@ Session
 
         Specifies whether to initialize the session with
         independent channels. Set this argument to False on legacy applications or if you
-        are unable to upgrade your NI-DCPower driver runtime.
+        are unable to upgrade your NI-DCPower driver runtime to 20.6 or higher.
 
         
 
@@ -907,11 +906,6 @@ get_channel_names
 
             
 
-
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param indices:
