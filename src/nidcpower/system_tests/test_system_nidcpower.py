@@ -14,17 +14,10 @@ def session(request):
 
 
 @pytest.fixture(scope='function')
-def independent_channels_session():
-    with nidcpower.Session(
-        '4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', True
-    ) as simulated_session:
-        yield simulated_session
-
-
-@pytest.fixture(scope='function')
 def multi_instrument_session():
-    instruments = ['PXI1Slot2', 'PXI1Slot5']
-    with nidcpower.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+    with nidcpower.Session(
+        '4162_01,4162_02', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', True
+    ) as simulated_session:
         yield simulated_session
 
 
@@ -60,9 +53,9 @@ def test_self_cal(session):
     session.self_cal()
 
 
-def test_get_channel_name_independent_channels(independent_channels_session):
-    name = independent_channels_session.get_channel_name(1)
-    assert name == '4162/0'
+def test_get_channel_name_independent_channels(multi_instrument_session):
+    name = multi_instrument_session.get_channel_name(1)
+    assert name == '4162_01/0'
 
 
 def test_get_channel_name_synchronized_channels(synchronized_channels_session):
@@ -70,14 +63,16 @@ def test_get_channel_name_synchronized_channels(synchronized_channels_session):
     assert name == '0'
 
 
-def test_get_channel_names(multi_instrument_session):
-    # Once we have support for independent channels, we should update this test to include
-    # the instrument names in the expected channel names -- or possibly add a separate test
-    # expected_string = ['{0}/{1}'.format(instruments[0], x) for x in range(12)]
-    # (Tracked on GitHub by #1582)
-    expected_string = ['{0}'.format(x) for x in range(12)]
+def test_get_channel_names_independent_channels(multi_instrument_session):
+    expected_string = ['4162_01/{0}'.format(x) for x in range(12)]
     channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
-    assert multi_instrument_session.get_channel_names(indices=channel_indices) == expected_string
+    assert multi_instrument_session.get_channel_names(channel_indices) == expected_string
+
+
+def test_get_channel_names_sychronized_channels(synchronized_channels_session):
+    expected_string = [str(x) for x in range(12)]
+    channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
+    assert synchronized_channels_session.get_channel_names(channel_indices) == expected_string
 
 
 def test_get_attribute_string(session):
