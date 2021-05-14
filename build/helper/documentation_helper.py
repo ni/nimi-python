@@ -127,8 +127,10 @@ def add_attribute_rep_cap_tip(attr, config):
         if 'documentation' not in attr:
             attr['documentation'] = {}
 
-        capability_type_string = get_attribute_repeated_caps_with_conjunction(attr)
-        attr['documentation']['tip'] = rep_cap_attr_desc.format(capability_type_string, config['module_name'])
+        multi_capability = get_attribute_repeated_caps_with_conjunction(attr)
+        single_capability = attr['supported_rep_caps'][0]
+        example_attribute = get_example_attribute_for_repeated_cap_type(config['module_name'], single_capability)
+        attr['documentation']['tip'] = rep_cap_attr_desc.format(config['module_name'], multi_capability, single_capability, example_attribute)
 
 
 def get_documentation_for_node_rst(node, config, indent=0):
@@ -888,6 +890,26 @@ def get_attribute_repeated_caps_with_conjunction(attr):
     return caps
 
 
+# Arbitrary set of example attributes that support a given repeated capability type, for a given module. Used to customize the doc tips of each attribute
+_example_repeated_cap_attributes = {
+    ('nidcpower', 'channels'): 'active_advanced_sequence_step',
+    ('nidcpower', 'instruments'): 'instrument_firmware_revision',
+    ('niscope', 'channels'): 'channel_enabled',
+    ('niscope', 'instruments'): 'instrument_firmware_revision',
+    ('nidigital', 'channels'): 'selected_function',
+    ('nidigital', 'instruments'): 'instrument_firmware_revision',
+    ('niswitch', 'channels'): 'is_configuration_channel'
+}
+
+
+def get_example_attribute_for_repeated_cap_type(module, cap_type):
+    '''Returns an arbitrary attribute that supports the specified repeated capability for a given module'''
+    dict_key = (module, cap_type)
+    if dict_key not in _example_repeated_cap_attributes:
+        raise ValueError('There are no attributes in {0} with the \'{1}\' repeated capability type'.format(module, cap_type))
+    return _example_repeated_cap_attributes[dict_key]
+
+
 # Unit Tests
 
 
@@ -1354,6 +1376,14 @@ def test_get_attribute_repeated_caps_with_conjunction():
     expected_caps = 'None'
     actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
     assert actual_caps == expected_caps
+
+
+def test_get_example_attribute_for_repeated_cap_type():
+    module = 'nidcpower'
+    cap_type = 'channels'
+    expected_attribute = 'active_advanced_sequence_step'
+    actual_attribute = get_example_attribute_for_repeated_cap_type(module, cap_type)
+    assert actual_attribute == expected_attribute
 
 
 def test_get_function_docstring_default():
