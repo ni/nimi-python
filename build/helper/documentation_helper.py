@@ -1334,6 +1334,28 @@ def test_get_attribute_repeated_caps():
     assert actual_caps == expected_caps
 
 
+def test_get_attribute_repeated_caps_with_conjunction():
+    attr = {'supported_rep_caps': ['channels', 'instruments', 'pins']}
+    expected_caps = 'channels, instruments and pins'
+    actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
+    assert actual_caps == expected_caps
+
+    attr = {'supported_rep_caps': ['channels', 'instruments']}
+    expected_caps = 'channels and instruments'
+    actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
+    assert actual_caps == expected_caps
+
+    attr = {'supported_rep_caps': ['channels']}
+    expected_caps = 'channels'
+    actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
+    assert actual_caps == expected_caps
+
+    attr = {'supported_rep_caps': []}
+    expected_caps = 'None'
+    actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
+    assert actual_caps == expected_caps
+
+
 def test_get_function_docstring_default():
     function = config['functions']['GetTurtleID']
     actual_function_docstring = get_function_docstring(function, numpy=False, config=config, indent=0)
