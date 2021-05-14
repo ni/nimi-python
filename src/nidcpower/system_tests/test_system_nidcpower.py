@@ -69,7 +69,7 @@ def test_get_channel_names_independent_channels(multi_instrument_session):
     assert multi_instrument_session.get_channel_names(channel_indices) == expected_string
 
 
-def test_get_channel_names_sychronized_channels(synchronized_channels_session):
+def test_get_channel_names_synchronized_channels(synchronized_channels_session):
     expected_string = [str(x) for x in range(12)]
     channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
     assert synchronized_channels_session.get_channel_names(channel_indices) == expected_string
