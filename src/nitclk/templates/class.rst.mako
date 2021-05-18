@@ -88,9 +88,10 @@ table_contents = [
          ('Characteristic', 'Value'),
          ('Datatype', a['type_in_documentation']),
          ('Permissions', a['access']),
-         ('Repeated Capabilities', helper.get_attribute_repeated_caps(a)),
-         ('Resettable', 'Yes' if a['resettable'] else 'No'),
          ]
+if helper.module_supports_repeated_caps(config):
+    table_contents.append(('Repeated Capabilities', helper.get_attribute_repeated_caps(a)))
+  
 table = helper.as_rest_table(table_contents)
 
 helper.add_attribute_rep_cap_tip(a, config)

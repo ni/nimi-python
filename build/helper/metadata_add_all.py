@@ -1110,7 +1110,6 @@ attributes_input = {
         'enum': None,
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
-        'resettable': False,
         'type': 'ViBoolean',
         'documentation': {
             'description': 'An attribute of type bool with read/write access.',
@@ -1128,7 +1127,6 @@ attributes_expected = {
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
         'python_name': 'read_write_bool',
-        'resettable': False,
         'type': 'ViBoolean',
         'python_type': 'bool',
         'type_in_documentation': 'bool',

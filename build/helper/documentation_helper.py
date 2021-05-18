@@ -902,6 +902,12 @@ _example_repeated_cap_attributes = {
 }
 
 
+def module_supports_repeated_caps(config):
+    if 'repeated_capabilities' in config:
+        return len(config['repeated_capabilities']) > 0
+    return False
+
+
 def get_example_attribute_for_repeated_cap_type(module, cap_type):
     '''Returns an arbitrary attribute that supports the specified repeated capability for a given module'''
     dict_key = (module, cap_type)
@@ -1209,7 +1215,6 @@ wanted to choose.''',
             'enum': None,
             'lv_property': 'Fake attributes:Read Write Bool',
             'name': 'READ_WRITE_BOOL',
-            'resettable': 'No',
             'type': 'ViBoolean',
             'documentation': {
                 'description': 'An attribute of type bool with read/write access.',
@@ -1384,6 +1389,23 @@ def test_get_example_attribute_for_repeated_cap_type():
     expected_attribute = 'active_advanced_sequence_step'
     actual_attribute = get_example_attribute_for_repeated_cap_type(module, cap_type)
     assert actual_attribute == expected_attribute
+
+
+def test_module_supports_repeated_caps():
+    config = {'repeated_capabilities': [{'python_name': 'channels'}]}
+    expected_value = True
+    actual_value = module_supports_repeated_caps(config)
+    assert actual_value == expected_value
+
+    config = {'repeated_capabilities': []}
+    expected_value = False
+    actual_value = module_supports_repeated_caps(config)
+    assert actual_value == expected_value
+
+    config = {}
+    expected_value = False
+    actual_value = module_supports_repeated_caps(config)
+    assert actual_value == expected_value
 
 
 def test_get_function_docstring_default():
@@ -1585,7 +1607,6 @@ def test_add_notes_re_links():
             'enum': None,
             'lv_property': 'Fake attributes:Read Write Bool',
             'name': 'READ_WRITE_BOOL',
-            'resettable': 'No',
             'type': 'ViBoolean',
             'documentation': {
                 'description': 'An attribute of type bool with read/write access.',

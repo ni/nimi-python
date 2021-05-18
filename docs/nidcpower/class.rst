@@ -2015,8 +2015,6 @@ active_advanced_sequence
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2051,8 +2049,6 @@ active_advanced_sequence_step
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2095,8 +2091,6 @@ actual_power_allocation
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2134,8 +2128,6 @@ aperture_time
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2175,8 +2167,6 @@ aperture_time_units
             +-----------------------+-------------------------+
             | Repeated Capabilities | channels                |
             +-----------------------+-------------------------+
-            | Resettable            | No                      |
-            +-----------------------+-------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2211,8 +2201,6 @@ autorange
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2249,8 +2237,6 @@ autorange_aperture_time_mode
             +-----------------------+---------------------------------+
             | Repeated Capabilities | channels                        |
             +-----------------------+---------------------------------+
-            | Resettable            | No                              |
-            +-----------------------+---------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2285,8 +2271,6 @@ autorange_behavior
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
             | Repeated Capabilities | channels                |
-            +-----------------------+-------------------------+
-            | Resettable            | No                      |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -2323,8 +2307,6 @@ autorange_minimum_aperture_time
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2359,8 +2341,6 @@ autorange_minimum_aperture_time_units
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
             | Repeated Capabilities | channels                |
-            +-----------------------+-------------------------+
-            | Resettable            | No                      |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -2397,8 +2377,6 @@ autorange_minimum_current_range
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2433,8 +2411,6 @@ autorange_minimum_voltage_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2471,8 +2447,6 @@ autorange_threshold_mode
             +-----------------------+------------------------------+
             | Repeated Capabilities | channels                     |
             +-----------------------+------------------------------+
-            | Resettable            | No                           |
-            +-----------------------+------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2508,8 +2482,6 @@ auto_zero
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
             +-----------------------+----------------+
-            | Resettable            | No             |
-            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2541,8 +2513,6 @@ auxiliary_power_source_available
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2567,8 +2537,6 @@ channel_count
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2623,8 +2591,6 @@ compliance_limit_symmetry
             +-----------------------+-------------------------------+
             | Repeated Capabilities | channels                      |
             +-----------------------+-------------------------------+
-            | Resettable            | No                            |
-            +-----------------------+-------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2662,8 +2628,6 @@ current_compensation_frequency
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2700,8 +2664,6 @@ current_gain_bandwidth
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2741,8 +2703,6 @@ current_level
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2779,8 +2739,6 @@ current_level_autorange
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2821,8 +2779,6 @@ current_level_range
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2861,8 +2817,6 @@ current_limit
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2900,8 +2854,6 @@ current_limit_autorange
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2929,8 +2881,6 @@ current_limit_behavior
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2990,8 +2940,6 @@ current_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3053,8 +3001,6 @@ current_limit_low
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3094,8 +3040,6 @@ current_limit_range
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3133,8 +3077,6 @@ current_pole_zero_ratio
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3171,8 +3113,6 @@ dc_noise_rejection
             | Permissions           | read-write             |
             +-----------------------+------------------------+
             | Repeated Capabilities | channels               |
-            +-----------------------+------------------------+
-            | Resettable            | No                     |
             +-----------------------+------------------------+
 
         .. tip::
@@ -3212,8 +3152,6 @@ digital_edge_measure_trigger_input_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3250,8 +3188,6 @@ digital_edge_pulse_trigger_input_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3291,8 +3227,6 @@ digital_edge_sequence_advance_trigger_input_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3329,8 +3263,6 @@ digital_edge_shutdown_trigger_input_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3370,8 +3302,6 @@ digital_edge_source_trigger_input_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3410,8 +3340,6 @@ digital_edge_start_trigger_input_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3438,8 +3366,6 @@ driver_setup
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3479,8 +3405,6 @@ exported_measure_trigger_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3517,8 +3441,6 @@ exported_pulse_trigger_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3558,8 +3480,6 @@ exported_sequence_advance_trigger_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3597,8 +3517,6 @@ exported_source_trigger_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3638,8 +3556,6 @@ exported_start_trigger_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3672,8 +3588,6 @@ fetch_backlog
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3708,8 +3622,6 @@ instrument_firmware_revision
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
             +-----------------------+-------------+
-            | Resettable            | No          |
-            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3743,8 +3655,6 @@ instrument_manufacturer
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
             +-----------------------+-------------+
-            | Resettable            | No          |
-            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3777,8 +3687,6 @@ instrument_model
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -3817,8 +3725,6 @@ interlock_input_open
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
             +-----------------------+-------------+
-            | Resettable            | No          |
-            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3846,8 +3752,6 @@ io_resource_descriptor
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3873,8 +3777,6 @@ logical_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3915,8 +3817,6 @@ measure_buffer_size
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3955,8 +3855,6 @@ measure_complete_event_delay
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
             +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
-            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3994,8 +3892,6 @@ measure_complete_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4032,8 +3928,6 @@ measure_complete_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -4075,8 +3969,6 @@ measure_complete_event_pulse_width
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4113,8 +4005,6 @@ measure_record_delta_time
             | Permissions           | read only                                                   |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -4154,8 +4044,6 @@ measure_record_length
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4192,8 +4080,6 @@ measure_record_length_is_finite
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4232,8 +4118,6 @@ measure_trigger_type
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
             +-----------------------+-------------------+
-            | Resettable            | No                |
-            +-----------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4268,8 +4152,6 @@ measure_when
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
-            +-----------------------+-------------------+
-            | Resettable            | No                |
             +-----------------------+-------------------+
 
         .. tip::
@@ -4310,8 +4192,6 @@ merged_channels
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4348,8 +4228,6 @@ output_capacitance
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
             | Repeated Capabilities | channels                |
-            +-----------------------+-------------------------+
-            | Resettable            | No                      |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -4390,8 +4268,6 @@ output_connected
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4429,8 +4305,6 @@ output_cutoff_current_change_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4470,8 +4344,6 @@ output_cutoff_current_change_limit_low
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4509,8 +4381,6 @@ output_cutoff_current_measure_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4550,8 +4420,6 @@ output_cutoff_current_measure_limit_low
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4589,8 +4457,6 @@ output_cutoff_current_overrange_enabled
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4626,8 +4492,6 @@ output_cutoff_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4667,8 +4531,6 @@ output_cutoff_voltage_change_limit_high
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4706,8 +4568,6 @@ output_cutoff_voltage_change_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4747,8 +4607,6 @@ output_cutoff_voltage_output_limit_high
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4787,8 +4645,6 @@ output_cutoff_voltage_output_limit_low
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4826,8 +4682,6 @@ output_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4878,8 +4732,6 @@ output_function
             +-----------------------+----------------------+
             | Repeated Capabilities | channels             |
             +-----------------------+----------------------+
-            | Resettable            | No                   |
-            +-----------------------+----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4917,8 +4769,6 @@ output_resistance
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4953,8 +4803,6 @@ overranging_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4994,8 +4842,6 @@ ovp_enabled
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5033,8 +4879,6 @@ ovp_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5077,8 +4921,6 @@ power_allocation_mode
             +-----------------------+---------------------------+
             | Repeated Capabilities | channels                  |
             +-----------------------+---------------------------+
-            | Resettable            | No                        |
-            +-----------------------+---------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5118,8 +4960,6 @@ power_line_frequency
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5151,8 +4991,6 @@ power_source
             +-----------------------+-------------------+
             | Repeated Capabilities | None              |
             +-----------------------+-------------------+
-            | Resettable            | No                |
-            +-----------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5177,8 +5015,6 @@ power_source_in_use
             | Permissions           | read only              |
             +-----------------------+------------------------+
             | Repeated Capabilities | None                   |
-            +-----------------------+------------------------+
-            | Resettable            | No                     |
             +-----------------------+------------------------+
 
         .. tip::
@@ -5217,8 +5053,6 @@ pulse_bias_current_level
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5255,8 +5089,6 @@ pulse_bias_current_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5321,8 +5153,6 @@ pulse_bias_current_limit_high
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5386,8 +5216,6 @@ pulse_bias_current_limit_low
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5424,8 +5252,6 @@ pulse_bias_delay
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5464,8 +5290,6 @@ pulse_bias_voltage_level
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5502,8 +5326,6 @@ pulse_bias_voltage_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5568,8 +5390,6 @@ pulse_bias_voltage_limit_high
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5633,8 +5453,6 @@ pulse_bias_voltage_limit_low
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5672,8 +5490,6 @@ pulse_complete_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5709,8 +5525,6 @@ pulse_complete_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -5750,8 +5564,6 @@ pulse_complete_event_pulse_width
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5788,8 +5600,6 @@ pulse_current_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5829,8 +5639,6 @@ pulse_current_level_range
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5867,8 +5675,6 @@ pulse_current_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5933,8 +5739,6 @@ pulse_current_limit_high
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5998,8 +5802,6 @@ pulse_current_limit_low
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6038,8 +5840,6 @@ pulse_current_limit_range
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6076,8 +5876,6 @@ pulse_off_time
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -6116,8 +5914,6 @@ pulse_on_time
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
             +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
-            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6153,8 +5949,6 @@ pulse_trigger_type
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
-            +-----------------------+-------------------+
-            | Resettable            | No                |
             +-----------------------+-------------------+
 
         .. tip::
@@ -6192,8 +5986,6 @@ pulse_voltage_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6233,8 +6025,6 @@ pulse_voltage_level_range
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6271,8 +6061,6 @@ pulse_voltage_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6337,8 +6125,6 @@ pulse_voltage_limit_high
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6402,8 +6188,6 @@ pulse_voltage_limit_low
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6442,8 +6226,6 @@ pulse_voltage_limit_range
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6472,8 +6254,6 @@ query_instrument_status
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6511,8 +6291,6 @@ ready_for_pulse_trigger_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6548,8 +6326,6 @@ ready_for_pulse_trigger_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -6588,8 +6364,6 @@ ready_for_pulse_trigger_event_pulse_width
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6634,8 +6408,6 @@ requested_power_allocation
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6673,8 +6445,6 @@ reset_average_before_measurement
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6719,8 +6489,6 @@ samples_to_average
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6759,8 +6527,6 @@ self_calibration_persistence
             +-----------------------+----------------------------------+
             | Repeated Capabilities | instruments                      |
             +-----------------------+----------------------------------+
-            | Resettable            | No                               |
-            +-----------------------+----------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6795,8 +6561,6 @@ sense
             | Permissions           | read-write  |
             +-----------------------+-------------+
             | Repeated Capabilities | channels    |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -6835,8 +6599,6 @@ sequence_advance_trigger_type
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
             +-----------------------+-------------------+
-            | Resettable            | No                |
-            +-----------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6874,8 +6636,6 @@ sequence_engine_done_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6912,8 +6672,6 @@ sequence_engine_done_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -6955,8 +6713,6 @@ sequence_engine_done_event_pulse_width
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6994,8 +6750,6 @@ sequence_iteration_complete_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7032,8 +6786,6 @@ sequence_iteration_complete_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -7075,8 +6827,6 @@ sequence_iteration_complete_event_pulse_width
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7116,8 +6866,6 @@ sequence_loop_count
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7156,8 +6904,6 @@ sequence_loop_count_is_finite
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7186,8 +6932,6 @@ sequence_step_delta_time
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7214,8 +6958,6 @@ sequence_step_delta_time_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7248,8 +6990,6 @@ serial_number
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -7287,8 +7027,6 @@ shutdown_trigger_type
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
             +-----------------------+-------------------+
-            | Resettable            | No                |
-            +-----------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7314,8 +7052,6 @@ simulate
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7354,8 +7090,6 @@ source_complete_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7392,8 +7126,6 @@ source_complete_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -7435,8 +7167,6 @@ source_complete_event_pulse_width
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7475,8 +7205,6 @@ source_delay
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
             +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
-            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7510,8 +7238,6 @@ source_mode
             | Permissions           | read-write       |
             +-----------------------+------------------+
             | Repeated Capabilities | channels         |
-            +-----------------------+------------------+
-            | Resettable            | No               |
             +-----------------------+------------------+
 
         .. tip::
@@ -7550,8 +7276,6 @@ source_trigger_type
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
             +-----------------------+-------------------+
-            | Resettable            | No                |
-            +-----------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7576,8 +7300,6 @@ specific_driver_description
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -7604,8 +7326,6 @@ specific_driver_prefix
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7631,8 +7351,6 @@ specific_driver_revision
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7657,8 +7375,6 @@ specific_driver_vendor
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -7697,8 +7413,6 @@ start_trigger_type
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
             +-----------------------+-------------------+
-            | Resettable            | No                |
-            +-----------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7723,8 +7437,6 @@ supported_instrument_models
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -7763,8 +7475,6 @@ transient_response
             +-----------------------+-------------------------+
             | Repeated Capabilities | channels                |
             +-----------------------+-------------------------+
-            | Resettable            | No                      |
-            +-----------------------+-------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7802,8 +7512,6 @@ voltage_compensation_frequency
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7840,8 +7548,6 @@ voltage_gain_bandwidth
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7881,8 +7587,6 @@ voltage_level
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7919,8 +7623,6 @@ voltage_level_autorange
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7961,8 +7663,6 @@ voltage_level_range
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8001,8 +7701,6 @@ voltage_limit
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8039,8 +7737,6 @@ voltage_limit_autorange
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -8102,8 +7798,6 @@ voltage_limit_high
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8164,8 +7858,6 @@ voltage_limit_low
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8205,8 +7897,6 @@ voltage_limit_range
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8243,8 +7933,6 @@ voltage_pole_zero_ratio
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
