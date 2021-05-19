@@ -684,6 +684,8 @@ functions_input = {
                 'direction': 'in',
                 'enum': None,
                 'name': 'channelName',
+                'python_name': 'name',
+                'is_repeated_capability': False,
                 'type': 'ViString',
                 'documentation': {
                     'description': 'The channel to call this on.',
@@ -786,10 +788,9 @@ functions_expected = {
         'documentation': {
             'description': 'Performs a foo, and performs it well.'
         },
-        'has_repeated_capability': True,
-        'repeated_capability_type': 'channels',
+        'has_repeated_capability': False,
         'is_error_handling': False,
-        'render_in_session_base': True,
+        'render_in_session_base': False,
         'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
         'parameters': [
             {
@@ -826,14 +827,13 @@ functions_expected = {
             },
             {
                 'ctypes_type': 'ViString',
-                'ctypes_variable_name': 'channel_name_ctype',
+                'ctypes_variable_name': 'name_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'The channel to call this on.'
                 },
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
+                'is_repeated_capability': False,
                 'is_session_handle': False,
                 'enum': None,
                 'numpy': False,
@@ -845,14 +845,14 @@ functions_expected = {
                 'use_list': False,
                 'is_string': True,
                 'name': 'channelName',
-                'python_name': 'channel_name',
-                'python_name_with_default': 'channel_name',
-                'python_name_with_doc_default': 'channel_name',
+                'python_name': 'name',
+                'python_name_with_default': 'name',
+                'python_name_with_doc_default': 'name',
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'ViString',
-                'library_method_call_snippet': 'channel_name_ctype',
+                'library_method_call_snippet': 'name_ctype',
                 'use_in_python_api': True,
-                'python_name_or_default_for_init': 'channel_name',
+                'python_name_or_default_for_init': 'name',
             },
             {
                 'ctypes_type': 'ViInt32',
