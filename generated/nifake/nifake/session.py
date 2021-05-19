@@ -153,14 +153,6 @@ class _SessionBase(object):
     Property in seconds
     '''
     read_write_double_with_repeated_capability = _attributes.AttributeViReal64(1000009)
-    '''Type: float
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nifake.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifake.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     read_write_int64 = _attributes.AttributeViInt64(1000006)
     '''Type: int
 

@@ -163,7 +163,7 @@ class _SessionBase(object):
 
 % for attribute in helper.sorted_attrs(helper.filter_codegen_attributes(attributes)):
 <%
-helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
+helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 %>\
     %if attributes[attribute]['enum']:
     ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute})
