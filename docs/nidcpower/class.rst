@@ -51,17 +51,17 @@ Session
     :param resource_name:
         
 
-        Specifies the **resourceName** assigned by Measurement
-        & Automation Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
+        Specifies the **resourceName** as seen in Measurement
+        & Automation Explorer (MAX) or lsni, for example "PXI1Slot3" where "PXI1Slot3" is an
         instrument's **resourceName**. **resourceName** can also be a logical IVI name.
 
         If independent_channels is True, **resource name** can be names of the instrument(s)
-        assigned by Measurement & Automation Explorer (MAX) and the channel(s) to
-        initialize. Specify the instrument(s) and channel(s) using the form
-        PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3,
-        where PXI1Slot3 and PXI1Slot4 are instrument resource names and 0, 2, and 3 are
-        channels. If you exclude a channels string after an instrument resource name, all
-        channels of the instrument are included in the session.
+        and the channel(s) to initialize. Specify the instrument(s) and channel(s) using the
+        form "PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or
+        PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3", where "PXI1Slot3" and "PXI1Slot4" are
+        instrument resource names followed by channels. If you exclude a channels string
+        after an instrument resource name, all channels of the instrument(s) are included in
+        the session.
 
         
 
@@ -71,27 +71,23 @@ Session
     :param channels:
         
 
-        Specifies which output channel(s) to include in a
-        new session. Specify multiple channels by using a channel list or a channel range.
-        A channel list is a comma (,) separated sequence of channel names (for example, 0,2
-        specifies channels 0 and 2). A channel range is a lower bound channel followed by a
-        hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2
-        specifies channels 0, 1, and 2). In the Running state, multiple output channel
-        configurations are performed sequentially based on the order specified in this
-        parameter.
+        For new applications, set this argument to None and
+        specify the channels in **resource name**.
+
+        Specifies which output channel(s) to include in a new session. Specify multiple
+        channels by using a channel list or a channel range. A channel list is a comma (,)
+        separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).
+        A channel range is a lower bound channel followed by a hyphen (-) or colon (:)
+        followed by an upper bound channel (for example, 0-2 specifies channels 0, 1,
+        and 2).
 
         If independent_channels is False, this argument specifies which channels to include
         in a legacy synchronized channels session. If you do not specify any channels, by
         default all channels on the device are included in the session.
 
         If independent_channels is True, this argument combines with **resource name** to
-        specify which channels to include in an independent channels session. If the
-        combination of **channels** and **resource name** does not specify any channels, by
-        default all channels on the device are included in the session.
-
-        Initializing an independent channels session with a channels argument is deprecated.
-        For new applications, set this argument to None and specify the channels in
-        **resource name**.
+        specify which channels to include in an independent channels session. Initializing
+        an independent channels session with a channels argument is deprecated.
 
         
 
@@ -693,7 +689,7 @@ export_attribute_configuration_buffer
             NI‑DCPower sessions that were initialized with different channels, the
             configurations of the exporting channels are mapped to the importing
             channels in the order you specify in the **channelName** input to the
-            :py:meth:`nidcpower.Session._initialize_with_channels` method.
+            :py:meth:`nidcpower.Session.__init__` method.
 
             For example, if your entry for **channelName** is 0,1 for the exporting
             session and 1,2 for the importing session:
@@ -757,7 +753,7 @@ export_attribute_configuration_file
             NI‑DCPower sessions that were initialized with different channels, the
             configurations of the exporting channels are mapped to the importing
             channels in the order you specify in the **channelName** input to the
-            :py:meth:`nidcpower.Session._initialize_with_channels` method.
+            :py:meth:`nidcpower.Session.__init__` method.
 
             For example, if your entry for **channelName** is 0,1 for the exporting
             session and 1,2 for the importing session:
@@ -1094,7 +1090,7 @@ import_attribute_configuration_buffer
             NI‑DCPower sessions that were initialized with different channels, the
             configurations of the exporting channels are mapped to the importing
             channels in the order you specify in the **channelName** input to the
-            :py:meth:`nidcpower.Session._initialize_with_channels` method.
+            :py:meth:`nidcpower.Session.__init__` method.
 
             For example, if your entry for **channelName** is 0,1 for the exporting
             session and 1,2 for the importing session:
@@ -1157,7 +1153,7 @@ import_attribute_configuration_file
             NI‑DCPower sessions that were initialized with different channels, the
             configurations of the exporting channels are mapped to the importing
             channels in the order you specify in the **channelName** input to the
-            :py:meth:`nidcpower.Session._initialize_with_channels` method.
+            :py:meth:`nidcpower.Session.__init__` method.
 
             For example, if your entry for **channelName** is 0,1 for the exporting
             session and 1,2 for the importing session:
@@ -1799,7 +1795,7 @@ self_test
 
             When calling :py:meth:`nidcpower.Session.self_test` with the PXIe-4162/4163, specify all
             channels of your PXIe-4162/4163 with the channels input of
-            :py:meth:`nidcpower.Session._initialize_with_channels`. You cannot self test a subset of
+            :py:meth:`nidcpower.Session.__init__`. You cannot self test a subset of
             PXIe-4162/4163 channels.
 
             Raises `SelfTestError` on self test failure. Properties on exception object:
@@ -3457,8 +3453,8 @@ driver_setup
     .. py:attribute:: driver_setup
 
         Indicates the Driver Setup string that you specified when initializing the driver.
-        Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This property is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the :py:meth:`nidcpower.Session._initialize_with_channels` method or through the  IVI Configuration Utility.
-        You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the :py:meth:`nidcpower.Session._initialize_with_channels` method. If you do not specify a Driver Setup string, this property returns an empty string.
+        Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This property is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the :py:meth:`nidcpower.Session.__init__` method or through the  IVI Configuration Utility.
+        You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the :py:meth:`nidcpower.Session.__init__` method. If you do not specify a Driver Setup string, this property returns an empty string.
 
         The following table lists the characteristics of this property.
 
@@ -3893,7 +3889,7 @@ logical_name
     .. py:attribute:: logical_name
 
         Contains the logical name you specified when opening the current IVI session.
-        You can pass a logical name to the :py:meth:`nidcpower.Session._initialize_with_channels` method.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a method section in the IVI Configuration file. The method section specifies a physical  device and initial user options.
+        You can pass a logical name to the :py:meth:`nidcpower.Session.__init__` method.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a method section in the IVI Configuration file. The method section specifies a physical  device and initial user options.
 
         The following table lists the characteristics of this property.
 
@@ -4836,7 +4832,7 @@ output_enabled
         Specifies whether the output is enabled (True) or disabled (False).
         Depending on the value you specify for the :py:attr:`nidcpower.Session.output_function` property, you also must set the  voltage level or current level in addition to  enabling the output
         the :py:meth:`nidcpower.Session.initiate` method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
-        Default Value: The default value is True if you use the :py:meth:`nidcpower.Session._initialize_with_channels` method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
+        Default Value: The default value is True if you use the :py:meth:`nidcpower.Session.__init__` method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
 
 
@@ -6491,7 +6487,7 @@ query_instrument_status
         Specifies whether NI-DCPower queries the device status after each operation.
         Querying the device status is useful for debugging. After you validate your program, you can set this  property to False to disable status checking and maximize performance.
         NI-DCPower ignores status checking for particular properties regardless of the setting of this property.
-        Use the :py:meth:`nidcpower.Session._initialize_with_channels` method to override this value.
+        Use the :py:meth:`nidcpower.Session.__init__` method to override this value.
         Default Value: True
 
         The following table lists the characteristics of this property.
