@@ -392,7 +392,7 @@ class SideEffectsHelper(object):
             wfm_info_ref[i] = test_value[i]
         return self._defaults['Fetch']['return']
 
-    def niScope_FetchArrayMeasurement(self, vi, channel_list, timeout, array_meas_function, measurement_waveform_size, meas_wfm, wfm_info):  # noqa: N802
+    def niScope_FetchArrayMeasurement(self, vi, channel_list, timeout, array_meas_function, meas_wfm_size, meas_wfm, wfm_info):  # noqa: N802
         if self._defaults['FetchArrayMeasurement']['return'] != 0:
             return self._defaults['FetchArrayMeasurement']['return']
         # meas_wfm

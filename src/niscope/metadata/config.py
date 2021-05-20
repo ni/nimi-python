@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.5.0d7
+# This file is generated from NI-SCOPE API metadata version 21.0.0d3
 config = {
-    'api_version': '20.5.0d7',
+    'api_version': '21.0.0d3',
     'c_function_prefix': 'niScope_',
     'close_function': 'close',
     'context_manager_name': {
@@ -50,5 +50,5 @@ config = {
     ],
     'session_class_description': 'An NI-SCOPE session to a National Instruments Digitizer.',
     'session_handle_parameter_name': 'vi',
-    'uses_nitclk': True,
+    'uses_nitclk': True
 }

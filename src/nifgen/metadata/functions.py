@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 20.0.0d5
+# This file is generated from NI-FGEN API metadata version 20.7.0d242
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -1655,7 +1655,7 @@ functions = {
                 'name': 'months',
                 'python_api_converter_name': 'convert_month_to_timedelta',
                 'type': 'ViInt32',
-                'type_in_documentation': 'hightime.timedelta'
+                'type_in_documentation': 'datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -1735,7 +1735,7 @@ functions = {
                     'description': 'Indicates date and time of the last calibration.'
                 },
                 'name': 'month',
-                'type': 'hightime.datetime'
+                'type': 'datetime.datetime'
             }
         ],
         'python_name': 'get_ext_cal_last_date_and_time',
@@ -1769,7 +1769,7 @@ functions = {
                     'description': 'Returns the date and time the device was last calibrated.'
                 },
                 'name': 'month',
-                'type': 'hightime.datetime'
+                'type': 'datetime.datetime'
             }
         ],
         'python_name': 'get_self_cal_last_date_and_time',
@@ -2018,7 +2018,7 @@ functions = {
                 },
                 'is_repeated_capability': False,
                 'name': 'channelName',
-                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'python_api_converter_name': 'convert_repeated_capabilities_from_init',
                 'type': 'ViString',
                 'type_in_documentation': 'str, list, range, tuple'
             },
@@ -2435,27 +2435,23 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Trigger specifies the type of software trigger to send',
+                    'description': '\nSets the clock mode of the signal generator.\n\n****Defined Values****\n',
                     'table_body': [
                         [
-                            'NIFGEN_VAL_START_TRIGGER'
+                            'NIFGEN_VAL_DIVIDE_DOWN'
                         ],
                         [
-                            'NIFGEN_VAL_SCRIPT_TRIGGER'
+                            'NIFGEN_VAL_HIGH_RESOLUTION'
                         ],
-                    ],
-                    'table_header': [
-                        'Defined Values',
-                    ],
+                        [
+                            'NIFGEN_VAL_AUTOMATIC'
+                        ]
+                    ]
                 },
-                'enum': 'Trigger',
                 'name': 'trigger',
-                'type': 'ViInt32',
+                'type': 'ViInt32'
             },
             {
-                'documentation': {
-                    'description': 'Trigger ID specifies the Script Trigger to use for triggering.',
-                },
                 'direction': 'in',
                 'name': 'triggerId',
                 'type': 'ViString'

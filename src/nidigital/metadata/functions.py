@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 19.5.0d7
+# This file is generated from NI-Digital Pattern Driver API metadata version 21.0.0d3
 functions = {
     'Abort': {
         'documentation': {
@@ -48,8 +48,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'Comma-delimited list of strings in the form of ``siteN`` , where ``N`` is the site number. If you enter an empty string, this function applies the levels and initial states to all sites.\n'
                 },
@@ -73,37 +71,31 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': 'None',
+                'default_value': '""',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Comma-delimited list of pins, pin groups, or channels to initialize to a high state.\n'
                 },
                 'name': 'initialStateHighPins',
-                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
-                'type': 'ViConstString',
-                'type_in_documentation': 'basic sequence types or str',
+                'type': 'ViConstString'
             },
             {
-                'default_value': 'None',
+                'default_value': '""',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Comma-delimited list of pins, pin groups, or channels to initialize to a low state.\n'
                 },
                 'name': 'initialStateLowPins',
-                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
-                'type': 'ViConstString',
-                'type_in_documentation': 'basic sequence types or str',
+                'type': 'ViConstString'
             },
             {
-                'default_value': 'None',
+                'default_value': '""',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Comma-delimited list of pins, pin groups, or channels to initialize to a non-drive state (X)\n'
                 },
                 'name': 'initialStateTristatePins',
-                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
-                'type': 'ViConstString',
-                'type_in_documentation': 'basic sequence types or str',
+                'type': 'ViConstString'
             }
         ],
         'returns': 'ViStatus'
@@ -143,19 +135,18 @@ functions = {
                     'description': 'TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the repeated capabilities. If the repeated capabilities contain pin names, you must specify offsets for each site in the channel map per pin.\n'
                 },
                 'name': 'offsets',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'size': {
                     'mechanism': 'len',
                     'value': 'numOffsets'
                 },
                 'type': 'ViReal64[]',
-                'type_in_documentation': 'basic sequence of hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
     },
     'BurstPattern': {
-        'codegen_method': 'private',
         'documentation': {
             'description': 'Uses the **startLabel** you specify to burst the pattern on the sites you specify and provides the option to wait for the burst to complete. Digital pins retain their state at the end of a pattern burst until the first vector of a subsequent pattern burst, a call to niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTiming.\n'
         },
@@ -170,8 +161,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'The sites on which to burst the pattern as a comma-delimited list of strings in the form site\\ ``N``, where ``N`` is the site number. If you specify an empty string, the pattern is burst on all sites.\n'
                 },
@@ -219,7 +208,6 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClearError': {
-        'codegen_method': 'no',
         'documentation': {
             'description': 'Clears the error information for the current execution thread and the IVI session you specify. If you pass VI_NULL for the **vi** parameter, this function clears the error information only for the current execution thread.\n'
         },
@@ -303,7 +291,6 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClockGenerator_Initiate': {
-        'codegen_method': 'no',
         'documentation': {
             'description': 'Initiates clock generation on the specified channel(s) or pin(s) and pin group(s).\n'
         },
@@ -407,8 +394,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'A comma-delimited list of strings in the form of site\\ ``N``, where ``N`` is the site number. If you specify an empty string, the function returns pass or fail results for all sites. If the string is empty, all sites are configured for pattern bursting.\n'
                 },
@@ -433,8 +418,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'List of pin and pin group names for which to configure the time set edges.\n'
                 },
@@ -443,10 +426,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -457,7 +440,7 @@ functions = {
                 'name': 'strobeEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -477,8 +460,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'List of pin and pin group names for which to configure the time set edges.\n'
                 },
@@ -487,10 +468,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -501,7 +482,7 @@ functions = {
                 'name': 'strobeEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -511,7 +492,7 @@ functions = {
                 'name': 'strobe2Edge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -531,8 +512,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'List of pin and pin group names for which to configure the time set edges.\n'
                 },
@@ -541,10 +520,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -564,7 +543,7 @@ functions = {
                 'name': 'driveOnEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -574,7 +553,7 @@ functions = {
                 'name': 'driveDataEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -584,7 +563,7 @@ functions = {
                 'name': 'driveReturnEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -594,7 +573,7 @@ functions = {
                 'name': 'driveOffEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -614,8 +593,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'List of pin and pin group names for which to configure the time set edges.\n'
                 },
@@ -624,10 +601,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -647,7 +624,7 @@ functions = {
                 'name': 'driveOnEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -657,7 +634,7 @@ functions = {
                 'name': 'driveDataEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -667,7 +644,7 @@ functions = {
                 'name': 'driveReturnEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -677,7 +654,7 @@ functions = {
                 'name': 'driveOffEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -687,7 +664,7 @@ functions = {
                 'name': 'driveData2Edge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
             {
                 'direction': 'in',
@@ -697,7 +674,7 @@ functions = {
                 'name': 'driveReturn2Edge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -717,8 +694,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'List of pin and pin group names for which to configure the time set edges.\n'
                 },
@@ -727,10 +702,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -760,8 +735,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'List of pin and pin group names for which to configure the time set edges.\n'
                 },
@@ -770,10 +743,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -793,7 +766,7 @@ functions = {
                 'name': 'time',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -813,8 +786,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'List of pin and pin group names for which to configure the time set edges.\n'
                 },
@@ -823,10 +794,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -855,10 +826,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -869,7 +840,7 @@ functions = {
                 'name': 'period',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -985,8 +956,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'List of capture pins from the waveform. The **pinList** must match the capture pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data captured by the niDigital_FetchCaptureWaveform function.\n'
                 },
@@ -1019,8 +988,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'List of capture pins from the waveform. The **pinList** must match the capture pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data captured by the niDigital_FetchCaptureWaveform function.\n'
                 },
@@ -1111,8 +1078,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'Source pins for the waveform. The **pinList** must match the source pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data written by the niDigital_WriteSourceWaveform function.\n'
                 },
@@ -1154,8 +1119,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'Source pins for the waveform. The **pinList** must match the source pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data written by the niDigital_WriteSourceWaveform function.\n'
                 },
@@ -1254,8 +1217,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'Comma-delimited list of strings in the form of site\\ ``N``, where ``N`` is the site number. If you enter an empty string, the function disables all sites.\n'
                 },
@@ -1280,8 +1241,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'Comma-delimited list of strings in the form of site\\ ``N``, where ``N`` is the site number. If you enter an empty string, the function enables all sites.\n'
                 },
@@ -1346,8 +1305,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'Site numbers listed as a comma-delimited list of strings of form site\\ ``N``, where ``N`` is the site number. If you enter an empty string, the function fetches data from all sites.\n'
                 },
@@ -1434,8 +1391,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The function returns an error if more than one site is specified.\n'
                 },
@@ -1509,8 +1464,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The function returns an error if more than one site is specified.\n'
                 },
@@ -1617,8 +1570,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The function returns an error if more than one site is specified.\n'
                 },
@@ -1714,10 +1665,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'channelName',
                 'documentation': {
                     'description': 'List of channel names or list of pins. Do not pass a mix of channel names and pin names. An empty string denotes all digital pattern instrument channels.\n\nPin names and pin groups apply to all enabled sites, unless the pin name explicitly specifies the site. You can specify a pin in a specific site using the form site\\ ``N``/pinName\\ ````, where ``N`` is the site number. This function ignores pins that are not mapped to the digital pattern instrument.\n\nSpecify channel names using the form ``PXI1Slot3``/``0``,\\ ``2-3`` or ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``, where ``PXI1Slot3`` is the instrument resource name and ``0``, ``2``, ``3`` are channel names. To specify channels from multiple instruments, use the form ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``,\\ ``PXI1Slot4``/``2-3``. The instruments must be in the same chassis.\n'
                 },
+                'name': 'channelList',
                 'type': 'ViConstString'
             },
             {
@@ -1755,10 +1706,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'channelName',
                 'documentation': {
                     'description': 'List of channel names or list of pins. Do not pass a mix of channel names and pin names. An empty string denotes all digital pattern instrument channels.\n\nPin names and pin groups apply to all enabled sites, unless the pin name explicitly specifies the site. You can specify a pin in a specific site using the form site\\ ``N``/pinName\\ ````, where ``N`` is the site number. This function ignores pins that are not mapped to the digital pattern instrument.\n\nSpecify channel names using the form ``PXI1Slot3``/``0``,\\ ``2-3`` or ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``, where ``PXI1Slot3`` is the instrument resource name and ``0``, ``2``, ``3`` are channel names. To specify channels from multiple instruments, use the form ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``,\\ ``PXI1Slot4``/``2-3``. The instruments must be in the same chassis.\n'
                 },
+                'name': 'channelList',
                 'type': 'ViConstString'
             },
             {
@@ -1796,10 +1747,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'channelName',
                 'documentation': {
                     'description': 'List of channel names or list of pins. Do not pass a mix of channel names and pin names. An empty string denotes all digital pattern instrument channels.\n\nPin names and pin groups apply to all enabled sites, unless the pin name explicitly specifies the site. You can specify a pin in a specific site using the form site\\ ``N``/pinName\\ ````, where ``N`` is the site number. This function ignores pins that are not mapped to the digital pattern instrument.\n\nSpecify channel names using the form ``PXI1Slot3``/``0``,\\ ``2-3`` or ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``, where ``PXI1Slot3`` is the instrument resource name and ``0``, ``2``, ``3`` are channel names. To specify channels from multiple instruments, use the form ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``,\\ ``PXI1Slot4``/``2-3``. The instruments must be in the same chassis.\n'
                 },
+                'name': 'channelList',
                 'type': 'ViConstString'
             },
             {
@@ -1837,10 +1788,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'channelName',
                 'documentation': {
                     'description': 'List of channel names or list of pins. Do not pass a mix of channel names and pin names. An empty string denotes all digital pattern instrument channels.\n\nPin names and pin groups apply to all enabled sites, unless the pin name explicitly specifies the site. You can specify a pin in a specific site using the form site\\ ``N``/pinName\\ ````, where ``N`` is the site number. This function ignores pins that are not mapped to the digital pattern instrument.\n\nSpecify channel names using the form ``PXI1Slot3``/``0``,\\ ``2-3`` or ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``, where ``PXI1Slot3`` is the instrument resource name and ``0``, ``2``, ``3`` are channel names. To specify channels from multiple instruments, use the form ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``,\\ ``PXI1Slot4``/``2-3``. The instruments must be in the same chassis.\n'
                 },
+                'name': 'channelList',
                 'type': 'ViConstString'
             },
             {
@@ -1878,10 +1829,10 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'channelName',
                 'documentation': {
                     'description': 'List of channel names or list of pins. Do not pass a mix of channel names and pin names. An empty string denotes all digital pattern instrument channels.\n\nPin names and pin groups apply to all enabled sites, unless the pin name explicitly specifies the site. You can specify a pin in a specific site using the form site\\ ``N``/pinName\\ ````, where ``N`` is the site number. This function ignores pins that are not mapped to the digital pattern instrument.\n\nSpecify channel names using the form ``PXI1Slot3``/``0``,\\ ``2-3`` or ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``, where ``PXI1Slot3`` is the instrument resource name and ``0``, ``2``, ``3`` are channel names. To specify channels from multiple instruments, use the form ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``,\\ ``PXI1Slot4``/``2-3``. The instruments must be in the same chassis.\n'
                 },
+                'name': 'channelList',
                 'type': 'ViConstString'
             },
             {
@@ -1916,7 +1867,6 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetChannelName': {
-        'codegen_method': 'no',
         'documentation': {
             'description': 'Returns the channel name that corresponds to the index you specify. Channel indexes are one-based. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **nameBufferSize**. If the current value of the attribute, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the function copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the function places "123" into the buffer and returns 7. If you want to call this function just to get the required buffer size, you can pass 0 for **nameBufferSize** and VI_NULL for the name.\n'
         },
@@ -1958,6 +1908,7 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
+        'render_in_session_base': True,
         'returns': 'ViStatus'
     },
     'GetChannelNameFromString': {
@@ -1978,10 +1929,8 @@ functions = {
                 'documentation': {
                     'description': 'Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
                 },
-                'name': 'indices',
-                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
-                'type': 'ViConstString',
-                'type_in_documentation': 'basic sequence types or str or int',
+                'name': 'index',
+                'type': 'ViConstString'
             },
             {
                 'direction': 'in',
@@ -1996,18 +1945,14 @@ functions = {
                 'documentation': {
                     'description': 'The returned channel name(s) at the specified index.\n'
                 },
-                'name': 'names',
-                'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'name': 'name',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'nameBufferSize'
                 },
-                'type': 'ViChar[]',
-                'type_in_documentation': 'list of str',
+                'type': 'ViChar[]'
             }
         ],
-        'python_name': 'get_channel_names',
-        'render_in_session_base': True,  # Used in FancyGetPinResultsPinInformation()
         'returns': 'ViStatus'
     },
     'GetError': {
@@ -2112,31 +2057,7 @@ functions = {
     },
     'GetHistoryRAMSampleCount': {
         'documentation': {
-            'description': 'Returns the number of samples History RAM acquired on the last pattern burst.\n',
-            'note': """\nBefore bursting a pattern, you must configure the History RAM trigger and specify which cycles to acquire.
-
-NIDIGITAL_ATTR_HISTORY_RAM_TRIGGER_TYPE should be used to specify the trigger condition on which History RAM
-starts acquiring pattern information.
-
-If History RAM trigger is configured as NIDIGITAL_VAL_CYCLE_NUMBER,
-NIDIGITAL_ATTR_CYCLE_NUMBER_HISTORY_RAM_TRIGGER_CYCLE_NUMBER should be used to specify the cycle number on which
-History RAM starts acquiring pattern information.
-
-If History RAM trigger is configured as NIDIGITAL_VAL_PATTERN_LABEL,
-NIDIGITAL_ATTR_PATTERN_LABEL_HISTORY_RAM_TRIGGER_LABEL should be used to specify the pattern label from which to
-start acquiring pattern information.
-NIDIGITAL_ATTR_PATTERN_LABEL_HISTORY_RAM_TRIGGER_VECTOR_OFFSET should be used to specify the number of vectors
-following the specified pattern label from which to start acquiring pattern information.
-NIDIGITAL_ATTR_PATTERN_LABEL_HISTORY_RAM_TRIGGER_CYCLE_OFFSET should be used to specify the number of cycles
-following the specified pattern label and vector offset from which to start acquiring pattern information.
-
-For all History RAM trigger conditions, NIDIGITAL_ATTR_HISTORY_RAM_PRETRIGGER_SAMPLES should be used to specify
-the number of samples to acquire before the trigger conditions are met. If you configure History RAM to only
-acquire failed cycles, you must set NIDIGITAL_ATTR_HISTORY_RAM_PRETRIGGER_SAMPLES to 0.
-
-NIDIGITAL_ATTR_HISTORY_RAM_CYCLES_TO_ACQUIRE should be used to specify which cycles History RAM acquires after
-the trigger conditions are met.
-""",
+            'description': 'Returns the number of samples History RAM acquired on the last pattern burst.\n'
         },
         'parameters': [
             {
@@ -2149,8 +2070,6 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The function returns an error if more than one site is specified.\n'
                 },
@@ -2199,7 +2118,6 @@ the trigger conditions are met.
                 'type': 'ViChar[]'
             }
         ],
-        'render_in_session_base': True,  # Called from FancyFetchHistoryRAMCycleInformation() which uses rep cap
         'returns': 'ViStatus'
     },
     'GetPatternPinList': {
@@ -2242,8 +2160,7 @@ the trigger conditions are met.
                     'mechanism': 'ivi-dance',
                     'value': 'pinListBufferSize'
                 },
-                'type': 'ViChar[]',
-                'type_in_documentation': 'list of str',
+                'type': 'ViChar[]'
             }
         ],
         'python_name': 'get_pattern_pin_names',
@@ -2376,7 +2293,6 @@ the trigger conditions are met.
         'returns': 'ViStatus'
     },
     'GetSitePassFail': {
-        'codegen_method': 'private',
         'documentation': {
             'description': 'Returns the pass or fail results for each site.\n'
         },
@@ -2391,8 +2307,6 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'A comma-delimited list of strings in the form of site\\ ``N``, where ``N`` is the site number. If you specify an empty string, the function returns pass or fail results for all sites.\n'
                 },
@@ -2432,7 +2346,6 @@ the trigger conditions are met.
         'returns': 'ViStatus'
     },
     'GetSiteResultsSiteNumbers': {
-        'codegen_method': 'private',
         'documentation': {
             'description': 'Returns the site numbers that correspond to per-site data read from the digital pattern instrument. The function returns site numbers in the same order as values read using the niDigital_GetSitePassFail and niDigital_FetchCaptureWaveformU32 functions. Use this function to match values the previously listed functions return with site numbers.\n'
         },
@@ -2447,8 +2360,6 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'Site numbers listed as a comma-delimited list of strings of form site\\ ``N``, where ``N`` is the site number.\n'
                 },
@@ -2511,8 +2422,6 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'Name of the specified pin.\n'
                 },
@@ -2521,10 +2430,10 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -2554,8 +2463,6 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'Name of the specified pin.\n'
                 },
@@ -2564,10 +2471,10 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -2585,9 +2492,7 @@ the trigger conditions are met.
                     'description': 'Time from the beginning of the vector period in which to place the edge.\n'
                 },
                 'name': 'time',
-                'python_api_converter_name': 'convert_seconds_real64_to_timedelta',
-                'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta'
+                'type': 'ViReal64'
             }
         ],
         'returns': 'ViStatus'
@@ -2607,8 +2512,6 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'Name of the specified pin.\n'
                 },
@@ -2617,10 +2520,10 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -2665,7 +2568,6 @@ the trigger conditions are met.
                 'type': 'ViChar[]'
             }
         ],
-        'render_in_session_base': True,  # Called from FancyFetchHistoryRAMCycleInformation() which uses rep cap
         'returns': 'ViStatus'
     },
     'GetTimeSetPeriod': {
@@ -2683,10 +2585,10 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'timeSetName',
                 'documentation': {
                     'description': 'The specified time set name.\n'
                 },
+                'name': 'timeSet',
                 'type': 'ViConstString'
             },
             {
@@ -2695,9 +2597,7 @@ the trigger conditions are met.
                     'description': 'Returned period, in seconds, that the edge is configured to.\n'
                 },
                 'name': 'period',
-                'python_api_converter_name': 'convert_seconds_real64_to_timedelta',
-                'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta'
+                'type': 'ViReal64'
             }
         ],
         'returns': 'ViStatus'
@@ -2817,8 +2717,6 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The function returns an error if more than one site is specified.\n'
                 },
@@ -2837,7 +2735,6 @@ the trigger conditions are met.
         'returns': 'ViStatus'
     },
     'LoadLevels': {
-        'codegen_method': 'private',
         'documentation': {
             'description': 'Loads a levels sheet from a specified file.\n'
         },
@@ -2852,10 +2749,10 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'filePath',
                 'documentation': {
                     'description': 'Absolute file path to the specified levels sheet file.\n'
                 },
+                'name': 'levelsFilePath',
                 'type': 'ViConstString'
             }
         ],
@@ -2892,25 +2789,24 @@ the trigger conditions are met.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession',
                 'documentation': {
                     'description': 'The specified instrument session the niDigital_init or niDigital_InitWithOptions function returns.\n'
                 },
+                'name': 'vi',
+                'type': 'ViSession'
             },
             {
                 'direction': 'in',
-                'name': 'filePath',
                 'documentation': {
                     'description': 'Absolute file path to a pin map file created with the Digital Pattern Editor or the NI TestStand Semiconductor Module.\n'
                 },
+                'name': 'pinMapFilePath',
                 'type': 'ViConstString'
             }
         ],
         'returns': 'ViStatus'
     },
     'LoadSpecifications': {
-        'codegen_method': 'private',
         'documentation': {
             'description': 'Loads a specifications sheet from a specified file.\n'
         },
@@ -2925,17 +2821,16 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'filePath',
                 'documentation': {
                     'description': 'Absolute file path to a specifications file.\n'
                 },
+                'name': 'specificationsFilePath',
                 'type': 'ViConstString'
             }
         ],
         'returns': 'ViStatus'
     },
     'LoadTiming': {
-        'codegen_method': 'private',
         'documentation': {
             'description': 'Loads a timing sheet from a specified file.\n'
         },
@@ -2950,10 +2845,10 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'filePath',
                 'documentation': {
                     'description': 'Absolute file path to the specified timing sheet file.\n'
                 },
+                'name': 'timingFilePath',
                 'type': 'ViConstString'
             }
         ],
@@ -3202,7 +3097,6 @@ the trigger conditions are met.
         'returns': 'ViStatus'
     },
     'ResetAttribute': {
-        'codegen_method': 'no',
         'documentation': {
             'description': 'Resets the attribute to its default value.\n'
         },
@@ -3217,10 +3111,10 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'channelName',
                 'documentation': {
                     'description': 'List of channel names or list of pins. Do not pass a mix of channel names and pin names. An empty string denotes all digital pattern instrument channels.\n\nPin names and pin groups apply to all enabled sites, unless the pin name explicitly specifies the site. You can specify a pin in a specific site using the form site\\ ``N``/pinName\\ ````, where ``N`` is the site number. This function ignores pins that are not mapped to the digital pattern instrument.\n\nSpecify channel names using the form ``PXI1Slot3``/``0``,\\ ``2-3`` or ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``, where ``PXI1Slot3`` is the instrument resource name and ``0``, ``2``, ``3`` are channel names. To specify channels from multiple instruments, use the form ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``,\\ ``PXI1Slot4``/``2-3``. The instruments must be in the same chassis.\n'
                 },
+                'name': 'channelList',
                 'type': 'ViConstString'
             },
             {
@@ -3272,44 +3166,27 @@ the trigger conditions are met.
         },
         'parameters': [
             {
+                'direction': 'in',
                 'documentation': {
                     'description': 'The specified instrument session the niDigital_init or niDigital_InitWithOptions function returns.\n'
                 },
-                'direction': 'in',
                 'name': 'vi',
                 'type': 'ViSession'
             },
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Trigger specifies the trigger you want to override.',
-                    'table_body': [
-                        [
-                            'NIDIGITAL_VAL_START_TRIGGER',
-                            'Overrides the Start trigger. You must specify an empty string in the trigger_identifier parameter.'
-                        ],
-                        [
-                            'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER',
-                            'Specifies to route a conditional jump trigger. You must specify a conditional jump trigger in the trigger_identifier parameter.'
-                        ],
-                    ],
-                    'table_header': [
-                        'Defined Values',
-                    ],
+                    'description': 'The trigger you want to override.\n\n-   NIDIGITAL_VAL_START_TRIGGER: Overrides the Start trigger. You must specify an empty string in the **triggerIdentifier** parameter.\n-   NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER: Overrides the conditional jump trigger. You must specify a conditional jump trigger instance in the **triggerIdentifier** parameter.\n'
                 },
                 'enum': 'SoftwareTrigger',
                 'name': 'trigger',
                 'type': 'ViInt32'
             },
             {
-                'documentation': {
-                    'description': """Trigger Identifier specifies the instance of the trigger you want to override.
-If trigger is specified as NIDIGITAL_VAL_START_TRIGGER, this parameter must be an empty string. If trigger is
-specified as NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER, allowed values are conditionalJumpTrigger0,
-conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
-"""
-                },
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies which instance of the conditional jump trigger you want to override.\n\n-   VI_NULL ("")\n-   NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER0 ("conditionalJumpTrigger0")\n-   NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER1 ("conditionalJumpTrigger1")\n-   NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER2 ("conditionalJumpTrigger2")\n-   NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER3 ("conditionalJumpTrigger3")\n'
+                },
                 'name': 'triggerIdentifier',
                 'type': 'ViConstString'
             }
@@ -3332,10 +3209,10 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             },
             {
                 'direction': 'in',
-                'name': 'channelName',
                 'documentation': {
                     'description': 'List of channel names or list of pins. Do not pass a mix of channel names and pin names. An empty string denotes all digital pattern instrument channels.\n\nPin names and pin groups apply to all enabled sites, unless the pin name explicitly specifies the site. You can specify a pin in a specific site using the form site\\ ``N``/pinName\\ ````, where ``N`` is the site number. This function ignores pins that are not mapped to the digital pattern instrument.\n\nSpecify channel names using the form ``PXI1Slot3``/``0``,\\ ``2-3`` or ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``, where ``PXI1Slot3`` is the instrument resource name and ``0``, ``2``, ``3`` are channel names. To specify channels from multiple instruments, use the form ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``,\\ ``PXI1Slot4``/``2-3``. The instruments must be in the same chassis.\n'
                 },
+                'name': 'channelList',
                 'type': 'ViConstString'
             },
             {
@@ -3373,10 +3250,10 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             },
             {
                 'direction': 'in',
-                'name': 'channelName',
                 'documentation': {
                     'description': 'List of channel names or list of pins. Do not pass a mix of channel names and pin names. An empty string denotes all digital pattern instrument channels.\n\nPin names and pin groups apply to all enabled sites, unless the pin name explicitly specifies the site. You can specify a pin in a specific site using the form site\\ ``N``/pinName\\ ````, where ``N`` is the site number. This function ignores pins that are not mapped to the digital pattern instrument.\n\nSpecify channel names using the form ``PXI1Slot3``/``0``,\\ ``2-3`` or ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``, where ``PXI1Slot3`` is the instrument resource name and ``0``, ``2``, ``3`` are channel names. To specify channels from multiple instruments, use the form ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``,\\ ``PXI1Slot4``/``2-3``. The instruments must be in the same chassis.\n'
                 },
+                'name': 'channelList',
                 'type': 'ViConstString'
             },
             {
@@ -3414,10 +3291,10 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             },
             {
                 'direction': 'in',
-                'name': 'channelName',
                 'documentation': {
                     'description': 'List of channel names or list of pins. Do not pass a mix of channel names and pin names. An empty string denotes all digital pattern instrument channels.\n\nPin names and pin groups apply to all enabled sites, unless the pin name explicitly specifies the site. You can specify a pin in a specific site using the form site\\ ``N``/pinName\\ ````, where ``N`` is the site number. This function ignores pins that are not mapped to the digital pattern instrument.\n\nSpecify channel names using the form ``PXI1Slot3``/``0``,\\ ``2-3`` or ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``, where ``PXI1Slot3`` is the instrument resource name and ``0``, ``2``, ``3`` are channel names. To specify channels from multiple instruments, use the form ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``,\\ ``PXI1Slot4``/``2-3``. The instruments must be in the same chassis.\n'
                 },
+                'name': 'channelList',
                 'type': 'ViConstString'
             },
             {
@@ -3455,10 +3332,10 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             },
             {
                 'direction': 'in',
-                'name': 'channelName',
                 'documentation': {
                     'description': 'List of channel names or list of pins. Do not pass a mix of channel names and pin names. An empty string denotes all digital pattern instrument channels.\n\nPin names and pin groups apply to all enabled sites, unless the pin name explicitly specifies the site. You can specify a pin in a specific site using the form site\\ ``N``/pinName\\ ````, where ``N`` is the site number. This function ignores pins that are not mapped to the digital pattern instrument.\n\nSpecify channel names using the form ``PXI1Slot3``/``0``,\\ ``2-3`` or ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``, where ``PXI1Slot3`` is the instrument resource name and ``0``, ``2``, ``3`` are channel names. To specify channels from multiple instruments, use the form ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``,\\ ``PXI1Slot4``/``2-3``. The instruments must be in the same chassis.\n'
                 },
+                'name': 'channelList',
                 'type': 'ViConstString'
             },
             {
@@ -3496,10 +3373,10 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             },
             {
                 'direction': 'in',
-                'name': 'channelName',
                 'documentation': {
                     'description': 'List of channel names or list of pins. Do not pass a mix of channel names and pin names. An empty string denotes all digital pattern instrument channels.\n\nPin names and pin groups apply to all enabled sites, unless the pin name explicitly specifies the site. You can specify a pin in a specific site using the form site\\ ``N``/pinName\\ ````, where ``N`` is the site number. This function ignores pins that are not mapped to the digital pattern instrument.\n\nSpecify channel names using the form ``PXI1Slot3``/``0``,\\ ``2-3`` or ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``, where ``PXI1Slot3`` is the instrument resource name and ``0``, ``2``, ``3`` are channel names. To specify channels from multiple instruments, use the form ``PXI1Slot3``/``0``,\\ ``PXI1Slot3``/``2-3``,\\ ``PXI1Slot4``/``2-3``. The instruments must be in the same chassis.\n'
                 },
+                'name': 'channelList',
                 'type': 'ViConstString'
             },
             {
@@ -3565,14 +3442,12 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
                     'description': 'Measured TDR offsets specified in seconds.\n'
                 },
                 'name': 'offsets',
-                'python_api_converter_name': 'convert_seconds_real64_to_timedeltas',
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'offsetsBufferSize',
                     'value_twist': 'actualNumOffsets'
                 },
-                'type': 'ViReal64[]',
-                'type_in_documentation': 'list of hightime.timedelta'
+                'type': 'ViReal64[]'
             },
             {
                 'direction': 'out',
@@ -3611,7 +3486,6 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
         'returns': 'ViStatus'
     },
     'UnloadSpecifications': {
-        'codegen_method': 'private',
         'documentation': {
             'description': 'Unloads the given specifications sheet present in the previously loaded specifications file that you select. You must call the niDigital_LoadSpecifications function to reload the file with updated specifications values. You must then call the niDigital_ApplyLevelsAndTiming function in order to apply the levels and timing values that reference the updated specifications values.\n'
         },
@@ -3626,10 +3500,10 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             },
             {
                 'direction': 'in',
-                'name': 'filePath',
                 'documentation': {
                     'description': 'Absolute file path to a loaded specifications file.\n'
                 },
+                'name': 'specificationsFilePath',
                 'type': 'ViConstString'
             }
         ],
@@ -3855,8 +3729,6 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'documentation': {
                     'description': 'Site numbers listed as a comma-delimited list of strings of form site\\ ``N``, where ``N`` is the site number.\n'
                 },

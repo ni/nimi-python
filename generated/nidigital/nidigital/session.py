@@ -131,16 +131,34 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the current that the DUT sources to the active load while outputting a voltage above VCOM.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     active_load_iol = _attributes.AttributeViReal64(1150012)
     '''Type: float
 
     Specifies the current that the DUT sinks from the active load while outputting a voltage below VCOM.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     active_load_vcom = _attributes.AttributeViReal64(1150014)
     '''Type: float
 
     Specifies the voltage level at which the active load circuit switches between sourcing current and sinking current.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     cache = _attributes.AttributeViBoolean(1050004)
     '''Type: bool
@@ -156,16 +174,34 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the frequency for the clock generator.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     clock_generator_is_running = _attributes.AttributeViBoolean(1150074)
     '''Type: bool
 
     Indicates whether the clock generator is running.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     conditional_jump_trigger_terminal_name = _attributes.AttributeViString(1150040)
     '''Type: str
 
     Specifies the terminal name from which the exported conditional jump trigger signal may be routed to other instruments through the PXI trigger bus. You can use this signal to trigger other instruments when the conditional jump trigger instance asserts on the digital pattern instrument.
+
+    Tip:
+    This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     conditional_jump_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150033)
     '''Type: enums.TriggerType
@@ -181,6 +217,12 @@ class _SessionBase(object):
     +--------------------------+------------------------------------------------------------------+
     | TriggerType.SOFTWARE     | Configures the conditional jump trigger for software triggering. |
     +--------------------------+------------------------------------------------------------------+
+
+    Tip:
+    This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     cycle_number_history_ram_trigger_cycle_number = _attributes.AttributeViInt64(1150044)
     '''Type: int
@@ -199,6 +241,12 @@ class _SessionBase(object):
     +---------------------+---------------------------------------------------------------+
     | DigitalEdge.FALLING | Specifies the signal transition from high level to low level. |
     +---------------------+---------------------------------------------------------------+
+
+    Tip:
+    This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     digital_edge_conditional_jump_trigger_source = _attributes.AttributeViString(1150034)
     '''Type: str
@@ -210,6 +258,12 @@ class _SessionBase(object):
     +==============================================+
     | String identifier to any valid terminal name |
     +----------------------------------------------+
+
+    Tip:
+    This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150031)
     '''Type: enums.DigitalEdge
@@ -280,6 +334,12 @@ class _SessionBase(object):
     +---------------+-------------------------+
     | PXI_Trig7     | PXI trigger line 7      |
     +---------------+-------------------------+
+
+    Tip:
+    This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     exported_pattern_opcode_event_output_terminal = _attributes.AttributeViString(1150041)
     '''Type: str
@@ -305,6 +365,12 @@ class _SessionBase(object):
     +-----------------+--------------------+
     | PXI_Trig7       | PXI trigger line 7 |
     +-----------------+--------------------+
+
+    Tip:
+    This property can use repeated capabilities for pattern opcode events. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150032)
     '''Type: str
@@ -355,6 +421,12 @@ class _SessionBase(object):
     '''Type: float in seconds or datetime.timedelta
 
     Specifies the measurement time for the frequency counter.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     group_capabilities = _attributes.AttributeViString(1050401)
     '''Type: str
@@ -377,18 +449,18 @@ class _SessionBase(object):
     | 0-INT64_MAX   |
     +---------------+
     '''
-    history_ram_cycles_to_acquire = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HistoryRAMCyclesToAcquire, 1150047)
-    '''Type: enums.HistoryRAMCyclesToAcquire
+    history_ram_cycles_to_acquire = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HramCyclesToAcquire, 1150047)
+    '''Type: enums.HramCyclesToAcquire
 
     Configures which cycles History RAM acquires after the trigger conditions are met. If you configure History RAM to only acquire failed cycles, you must set the pretrigger samples for History RAM to 0.
 
-    +----------------------------------+-----------------------------------------------------------------------------------+
-    | Defined Values:                  |                                                                                   |
-    +==================================+===================================================================================+
-    | HistoryRAMCyclesToAcquire.FAILED | Only acquires cycles that fail a compare after the triggering conditions are met. |
-    +----------------------------------+-----------------------------------------------------------------------------------+
-    | HistoryRAMCyclesToAcquire.ALL    | Acquires all cycles after the triggering conditions are met.                      |
-    +----------------------------------+-----------------------------------------------------------------------------------+
+    +----------------------------+-----------------------------------------------------------------------------------+
+    | Defined Values:            |                                                                                   |
+    +============================+===================================================================================+
+    | HramCyclesToAcquire.FAILED | Only acquires cycles that fail a compare after the triggering conditions are met. |
+    +----------------------------+-----------------------------------------------------------------------------------+
+    | HramCyclesToAcquire.ALL    | Acquires all cycles after the triggering conditions are met.                      |
+    +----------------------------+-----------------------------------------------------------------------------------+
     '''
     history_ram_max_samples_to_acquire_per_site = _attributes.AttributeViInt32(1150077)
     '''Type: int
@@ -413,25 +485,31 @@ class _SessionBase(object):
 
     Specifies the number of samples to acquire before the trigger conditions are met. If you configure History RAM to only acquire failed cycles, you must set the pretrigger samples for History RAM to 0.
     '''
-    history_ram_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HistoryRAMTriggerType, 1150043)
-    '''Type: enums.HistoryRAMTriggerType
+    history_ram_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HramTriggerType, 1150043)
+    '''Type: enums.HramTriggerType
 
     Specifies the type of trigger condition on which History RAM starts acquiring pattern information.
 
-    +-------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-    | Defined Values:                     |                                                                                                                                     |
-    +=====================================+=====================================================================================================================================+
-    | HistoryRAMTriggerType.FIRST_FAILURE | Starts acquiring pattern information in History RAM on the first failed cycle in a pattern burst.                                   |
-    +-------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-    | HistoryRAMTriggerType.CYCLE_NUMBER  | Starts acquiring pattern information in History RAM starting from a specified cycle number.                                         |
-    +-------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-    | HistoryRAMTriggerType.PATTERN_LABEL | Starts acquiring pattern information in History RAM starting from a specified pattern label, augmented by vector and cycle offsets. |
-    +-------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+    | Defined Values:               |                                                                                                                                     |
+    +===============================+=====================================================================================================================================+
+    | HramTriggerType.FIRST_FAILURE | Starts acquiring pattern information in History RAM on the first failed cycle in a pattern burst.                                   |
+    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+    | HramTriggerType.CYCLE_NUMBER  | Starts acquiring pattern information in History RAM starting from a specified cycle number.                                         |
+    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+    | HramTriggerType.PATTERN_LABEL | Starts acquiring pattern information in History RAM starting from a specified pattern label, augmented by vector and cycle offsets. |
+    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
     '''
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
     Returns a string that contains the firmware revision information for the digital pattern instrument.
+
+    Tip:
+    This property can use repeated capabilities for instruments. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
@@ -467,6 +545,12 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether the pattern comparisons are masked or not. When set to True for a specified pin, failures on that pin will be masked.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     pattern_label_history_ram_trigger_cycle_offset = _attributes.AttributeViInt64(1150045)
     '''Type: int
@@ -487,16 +571,34 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the terminal name for the output trigger signal of the specified instance of a Pattern Opcode Event. You can use this terminal name as an input signal source for another trigger.
+
+    Tip:
+    This property can use repeated capabilities for pattern opcode events. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_allow_extended_voltage_range = _attributes.AttributeViBoolean(1150076)
     '''Type: bool
 
     Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to True, this property enables extended voltage range operation. Review specification deviations for application suitability before using this property. NI recommends setting this property to False when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output method set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the selected_function property to Off before sourcing a voltage level that requires a range change.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_aperture_time = _attributes.AttributeViReal64(1150037)
     '''Type: float
 
     Specifies the measurement aperture time for the PPMU. The ppmu_aperture_time_units property sets the units of the PPMU aperture time.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUApertureTimeUnits, 1150038)
     '''Type: enums.PPMUApertureTimeUnits
@@ -508,6 +610,12 @@ class _SessionBase(object):
     +===============================+=========================================+
     | PPMUApertureTimeUnits.SECONDS | Specifies the aperture time in seconds. |
     +-------------------------------+-----------------------------------------+
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_current_level = _attributes.AttributeViReal64(1150019)
     '''Type: float
@@ -516,16 +624,34 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_current_level_range = _attributes.AttributeViReal64(1150020)
     '''Type: float
 
     Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_current_limit = _attributes.AttributeViReal64(1150054)
     '''Type: float
 
     Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage. The PXIe-6570/6571 does not support the ppmu_current_limit property and only allows configuration of the ppmu_current_limit_range property.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_current_limit_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUCurrentLimitBehavior, 1150064)
     '''Type: enums.PPMUCurrentLimitBehavior
@@ -537,16 +663,34 @@ class _SessionBase(object):
     +===================================+=========================================================================================================================================+
     | PPMUCurrentLimitBehavior.REGULATE | Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached. |
     +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_current_limit_range = _attributes.AttributeViReal64(1150017)
     '''Type: float
 
     Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_current_limit_supported = _attributes.AttributeViBoolean(1150055)
     '''Type: bool
 
     Returns whether the device supports configuration of a current limit when you set the ppmu_output_function property to DC Voltage.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_output_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUOutputFunction, 1150015)
     '''Type: enums.PPMUOutputFunction
@@ -560,21 +704,45 @@ class _SessionBase(object):
     +----------------------------+--------------------------------------------+
     | PPMUOutputFunction.CURRENT | Specifies the output method to DC Current. |
     +----------------------------+--------------------------------------------+
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_voltage_level = _attributes.AttributeViReal64(1150016)
     '''Type: float
 
     Specifies the voltage level, in volts, that the PPMU forces to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_voltage_limit_high = _attributes.AttributeViReal64(1150022)
     '''Type: float
 
     Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ppmu_voltage_limit_low = _attributes.AttributeViReal64(1150021)
     '''Type: float
 
     Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     query_instrument_status = _attributes.AttributeViBoolean(1050003)
     '''Type: bool
@@ -611,6 +779,12 @@ class _SessionBase(object):
     +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
     Note: You can make PPMU voltage measurements using the ppmu_measure method from within any selected_function.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     sequencer_flag_terminal_name = _attributes.AttributeViString(1150059)
     '''Type: str
@@ -621,6 +795,12 @@ class _SessionBase(object):
     '''Type: str
 
     Returns the serial number of the device.
+
+    Tip:
+    This property can use repeated capabilities for instruments. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -696,9 +876,15 @@ class _SessionBase(object):
     Specifies whether TDR Channels are connected to an open circuit or a short to ground.
     '''
     tdr_offset = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+    '''Type: float in seconds or datetime.timedelta
 
     Specifies the TDR Offset.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     termination_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminationMode, 1150006)
     '''Type: enums.TerminationMode
@@ -714,9 +900,15 @@ class _SessionBase(object):
     +-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | TerminationMode.HIGH_Z      | Specifies that, for non-drive pin states (L, H, X, V, M, E), the pin driver is put in a high-impedance state and the active load is disabled.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
     +-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     timing_absolute_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150072)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+    '''Type: float in seconds or datetime.timedelta
 
     Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the timing_absolute_delay_enabled property is set to True, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the timing_absolute_delay_enabled property is False, this property will return 0.0. Changing the timing_absolute_delay_enabled property from False to True will set the timing_absolute_delay value back to your previously set value.
     '''
@@ -729,26 +921,56 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic high (1).
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     vil = _attributes.AttributeViReal64(1150007)
     '''Type: float
 
     Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic low (0).
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     voh = _attributes.AttributeViReal64(1150010)
     '''Type: float
 
     Specifies the output voltage from the DUT above which the comparator on the digital pattern test instrument interprets a logic high (H).
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     vol = _attributes.AttributeViReal64(1150009)
     '''Type: float
 
     Specifies the output voltage from the DUT below which the comparator on the digital pattern test instrument interprets a logic low (L).
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     vterm = _attributes.AttributeViReal64(1150011)
     '''Type: float
 
     Specifies the termination voltage the digital pattern instrument applies during non-drive cycles when the termination mode is set to V :sub:`term`. The instrument applies the termination voltage through a 50 Ω parallel termination resistance.
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
@@ -772,7 +994,6 @@ class _SessionBase(object):
         self.instruments = _RepeatedCapabilities(self, '', repeated_capability_list)
         self.pattern_opcode_events = _RepeatedCapabilities(self, 'patternOpcodeEvent', repeated_capability_list)
         self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger', repeated_capability_list)
-        self.sites = _RepeatedCapabilities(self, 'site', repeated_capability_list)
 
         self._is_frozen = freeze_it
 
@@ -809,41 +1030,6 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def apply_levels_and_timing(self, levels_sheet, timing_sheet, initial_state_high_pins=None, initial_state_low_pins=None, initial_state_tristate_pins=None):
-        r'''apply_levels_and_timing
-
-        Applies digital levels and timing values defined in previously loaded levels and timing sheets. When applying a levels sheet, only the levels specified in the sheet are affected. Any levels not specified in the sheet remain unchanged. When applying a timing sheet, all existing time sets are deleted before the new time sets are loaded.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            levels_sheet (str): Name of the levels sheet to apply. Use the name of the sheet or pass the absolute file path you use in the load_specifications_levels_and_timing method. The name of the levels sheet is the file name without the directory and file extension.
-
-            timing_sheet (str): Name of the timing sheet to apply. Use the name of the sheet or pass the absolute file path that you use in the load_specifications_levels_and_timing method. The name of the timing sheet is the file name without the directory and file extension.
-
-            initial_state_high_pins (basic sequence types or str): Comma-delimited list of pins, pin groups, or channels to initialize to a high state.
-
-            initial_state_low_pins (basic sequence types or str): Comma-delimited list of pins, pin groups, or channels to initialize to a low state.
-
-            initial_state_tristate_pins (basic sequence types or str): Comma-delimited list of pins, pin groups, or channels to initialize to a non-drive state (X)
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        levels_sheet_ctype = ctypes.create_string_buffer(levels_sheet.encode(self._encoding))  # case C020
-        timing_sheet_ctype = ctypes.create_string_buffer(timing_sheet.encode(self._encoding))  # case C020
-        initial_state_high_pins_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(initial_state_high_pins).encode(self._encoding))  # case C040
-        initial_state_low_pins_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(initial_state_low_pins).encode(self._encoding))  # case C040
-        initial_state_tristate_pins_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(initial_state_tristate_pins).encode(self._encoding))  # case C040
-        error_code = self._library.niDigital_ApplyLevelsAndTiming(vi_ctype, site_list_ctype, levels_sheet_ctype, timing_sheet_ctype, initial_state_high_pins_ctype, initial_state_low_pins_ctype, initial_state_tristate_pins_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def apply_tdr_offsets(self, offsets):
         r'''apply_tdr_offsets
 
@@ -856,47 +1042,15 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            offsets (basic sequence of hightime.timedelta, datetime.timedelta, or float in seconds): TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the repeated capabilities. If the repeated capabilities contain pin names, you must specify offsets for each site in the channel map per pin.
+            offsets (float in seconds or datetime.timedelta): TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the repeated capabilities. If the repeated capabilities contain pin names, you must specify offsets for each site in the channel map per pin.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         num_offsets_ctype = _visatype.ViInt32(0 if offsets is None else len(offsets))  # case S160
-        offsets_converted = _converters.convert_timedeltas_to_seconds_real64(offsets)  # case B520
+        offsets_converted = _converters.convert_timedelta_to_seconds_real64(offsets)  # case B520
         offsets_ctype = get_ctypes_pointer_for_buffer(value=offsets_converted, library_type=_visatype.ViReal64)  # case B520
         error_code = self._library.niDigital_ApplyTDROffsets(vi_ctype, channel_list_ctype, num_offsets_ctype, offsets_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def _burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_burst_pattern
-
-        Uses the **startLabel** you specify to burst the pattern on the sites you specify and provides the option to wait for the burst to complete. Digital pins retain their state at the end of a pattern burst until the first vector of a subsequent pattern burst, a call to write_static, or a call to apply_levels_and_timing.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            start_label (str): Pattern name or exported pattern label from which to start bursting the pattern.
-
-            select_digital_function (bool): A Boolean that specifies whether to select the digital method for the pins in the pattern prior to bursting.
-
-            wait_until_done (bool): A Boolean that indicates whether to wait until the bursting is complete.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Maximum time (in seconds) allowed for this method to complete. If this method does not complete within this time interval, this method returns an error.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        start_label_ctype = ctypes.create_string_buffer(start_label.encode(self._encoding))  # case C020
-        select_digital_function_ctype = _visatype.ViBoolean(select_digital_function)  # case S150
-        wait_until_done_ctype = _visatype.ViBoolean(wait_until_done)  # case S150
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        error_code = self._library.niDigital_BurstPattern(vi_ctype, site_list_ctype, start_label_ctype, select_digital_function_ctype, wait_until_done_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -945,6 +1099,24 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def clock_generator_initiate(self):
+        r'''clock_generator_initiate
+
+        Initiates clock generation on the specified channel(s) or pin(s) and pin group(s).
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDigital_ClockGenerator_Initiate(vi_ctype, channel_list_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def configure_active_load_levels(self, iol, ioh, vcom):
         r'''configure_active_load_levels
 
@@ -970,274 +1142,6 @@ class _SessionBase(object):
         ioh_ctype = _visatype.ViReal64(ioh)  # case S150
         vcom_ctype = _visatype.ViReal64(vcom)  # case S150
         error_code = self._library.niDigital_ConfigureActiveLoadLevels(vi_ctype, channel_list_ctype, iol_ctype, ioh_ctype, vcom_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_pattern_burst_sites(self):
-        r'''configure_pattern_burst_sites
-
-        Configures which sites burst the pattern on the next call to the initiate method. The pattern burst sites can also be modified through the repeated capabilities for the burst_pattern method. If a site has been disabled through the disable_sites method, the site does not burst a pattern even if included in the pattern burst sites.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDigital_ConfigurePatternBurstSites(vi_ctype, site_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_compare_edges_strobe(self, time_set_name, strobe_edge):
-        r'''configure_time_set_compare_edges_strobe
-
-        Configures the strobe edge time for the specified pins. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            time_set_name (str): The specified time set name.
-
-            strobe_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Time when the comparison happens within a vector period.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe(vi_ctype, pin_list_ctype, time_set_name_ctype, strobe_edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_compare_edges_strobe2x(self, time_set_name, strobe_edge, strobe2_edge):
-        r'''configure_time_set_compare_edges_strobe2x
-
-        Configures the compare strobes for the specified pins in the time set, including the 2x strobe. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            time_set_name (str): The specified time set name.
-
-            strobe_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Time when the comparison happens within a vector period.
-
-            strobe2_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Time when the comparison happens for the second DUT cycle within a vector period.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
-        strobe2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe2_edge)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe2x(vi_ctype, pin_list_ctype, time_set_name_ctype, strobe_edge_ctype, strobe2_edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_drive_edges(self, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):
-        r'''configure_time_set_drive_edges
-
-        Configures the drive format and drive edge placement for the specified pins. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            time_set_name (str): The specified time set name.
-
-            format (enums.DriveFormat): Drive format of the time set.
-
-                -   DriveFormat.NR: Non-return.
-                -   DriveFormat.RL: Return to low.
-                -   DriveFormat.RH: Return to high.
-                -   DriveFormat.SBC: Surround by complement.
-
-            drive_on_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Delay, in seconds, from the beginning of the vector period for turning on the pin driver.This option applies only when the prior vector left the pin in a non-drive pin state (L, H, X, V, M, E). For the SBC format, this option specifies the delay from the beginning of the vector period at which the complement of the pattern value is driven.
-
-            drive_data_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Delay, in seconds, from the beginning of the vector period until the pattern data is driven to the pattern value.The ending state from the previous vector persists until this point.
-
-            drive_return_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Delay, in seconds, from the beginning of the vector period until the pin changes from the pattern data to the return value, as specified in the format.
-
-            drive_off_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Delay, in seconds, from the beginning of the vector period to turn off the pin driver when the next vector period uses a non-drive symbol (L, H, X, V, M, E).
-
-        '''
-        if type(format) is not enums.DriveFormat:
-            raise TypeError('Parameter format must be of type ' + str(enums.DriveFormat))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        format_ctype = _visatype.ViInt32(format.value)  # case S130
-        drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
-        drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
-        drive_return_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return_edge)  # case S140
-        drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges(vi_ctype, pin_list_ctype, time_set_name_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_drive_edges2x(self, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):
-        r'''configure_time_set_drive_edges2x
-
-        Configures the drive edges of the pins in the time set, including 2x edges. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            time_set_name (str): The specified time set name.
-
-            format (enums.DriveFormat): Drive format of the time set.
-
-                -   DriveFormat.NR: Non-return.
-                -   DriveFormat.RL: Return to low.
-                -   DriveFormat.RH: Return to high.
-                -   DriveFormat.SBC: Surround by complement.
-
-            drive_on_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Delay, in seconds, from the beginning of the vector period for turning on the pin driver.This option applies only when the prior vector left the pin in a non-drive pin state (L, H, X, V, M, E). For the SBC format, this option specifies the delay from the beginning of the vector period at which the complement of the pattern value is driven.
-
-            drive_data_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Delay, in seconds, from the beginning of the vector period until the pattern data is driven to the pattern value.The ending state from the previous vector persists until this point.
-
-            drive_return_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Delay, in seconds, from the beginning of the vector period until the pin changes from the pattern data to the return value, as specified in the format.
-
-            drive_off_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Delay, in seconds, from the beginning of the vector period to turn off the pin driver when the next vector period uses a non-drive symbol (L, H, X, V, M, E).
-
-            drive_data2_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Delay, in seconds, from the beginning of the vector period until the pattern data in the second DUT cycle is driven to the pattern value.
-
-            drive_return2_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Delay, in seconds, from the beginning of the vector period until the pin changes from the pattern data in the second DUT cycle to the return value, as specified in the format.
-
-        '''
-        if type(format) is not enums.DriveFormat:
-            raise TypeError('Parameter format must be of type ' + str(enums.DriveFormat))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        format_ctype = _visatype.ViInt32(format.value)  # case S130
-        drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
-        drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
-        drive_return_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return_edge)  # case S140
-        drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
-        drive_data2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data2_edge)  # case S140
-        drive_return2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return2_edge)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges2x(vi_ctype, pin_list_ctype, time_set_name_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype, drive_data2_edge_ctype, drive_return2_edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_drive_format(self, time_set_name, drive_format):
-        r'''configure_time_set_drive_format
-
-        Configures the drive format for the pins specified in the **pinList**. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            time_set_name (str): The specified time set name.
-
-            drive_format (enums.DriveFormat): Drive format of the time set.
-
-                -   DriveFormat.NR: Non-return.
-                -   DriveFormat.RL: Return to low.
-                -   DriveFormat.RH: Return to high.
-                -   DriveFormat.SBC: Surround by complement.
-
-        '''
-        if type(drive_format) is not enums.DriveFormat:
-            raise TypeError('Parameter drive_format must be of type ' + str(enums.DriveFormat))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        drive_format_ctype = _visatype.ViInt32(drive_format.value)  # case S130
-        error_code = self._library.niDigital_ConfigureTimeSetDriveFormat(vi_ctype, pin_list_ctype, time_set_name_ctype, drive_format_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_edge(self, time_set_name, edge, time):
-        r'''configure_time_set_edge
-
-        Configures the edge placement for the pins specified in the pin list. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            time_set_name (str): The specified time set name.
-
-            edge (enums.TimeSetEdgeType): Name of the edge.
-
-                -   TimeSetEdgeType.DRIVE_ON
-                -   TimeSetEdgeType.DRIVE_DATA
-                -   TimeSetEdgeType.DRIVE_RETURN
-                -   TimeSetEdgeType.DRIVE_OFF
-                -   TimeSetEdgeType.COMPARE_STROBE
-                -   TimeSetEdgeType.DRIVE_DATA2
-                -   TimeSetEdgeType.DRIVE_RETURN2
-                -   TimeSetEdgeType.COMPARE_STROBE2
-
-            time (hightime.timedelta, datetime.timedelta, or float in seconds): The time from the beginning of the vector period in which to place the edge.
-
-        '''
-        if type(edge) is not enums.TimeSetEdgeType:
-            raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdgeType))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        time_ctype = _converters.convert_timedelta_to_seconds_real64(time)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetEdge(vi_ctype, pin_list_ctype, time_set_name_ctype, edge_ctype, time_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_edge_multiplier(self, time_set_name, edge_multiplier):
-        r'''configure_time_set_edge_multiplier
-
-        Configures the edge multiplier of the pins in the time set. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            time_set_name (str): The specified time set name.
-
-            edge_multiplier (int): The specified edge multiplier for the pins in the pin list.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        edge_multiplier_ctype = _visatype.ViInt32(edge_multiplier)  # case S150
-        error_code = self._library.niDigital_ConfigureTimeSetEdgeMultiplier(vi_ctype, pin_list_ctype, time_set_name_ctype, edge_multiplier_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1273,172 +1177,6 @@ class _SessionBase(object):
         voh_ctype = _visatype.ViReal64(voh)  # case S150
         vterm_ctype = _visatype.ViReal64(vterm)  # case S150
         error_code = self._library.niDigital_ConfigureVoltageLevels(vi_ctype, channel_list_ctype, vil_ctype, vih_ctype, vol_ctype, voh_ctype, vterm_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def create_capture_waveform_parallel(self, waveform_name):
-        r'''create_capture_waveform_parallel
-
-        Sets the capture waveform settings for parallel acquisition. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            waveform_name (str): Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_CreateCaptureWaveformParallel(vi_ctype, pin_list_ctype, waveform_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def create_capture_waveform_serial(self, waveform_name, sample_width, bit_order):
-        r'''create_capture_waveform_serial
-
-        Sets the capture waveform settings for serial acquisition. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            waveform_name (str): Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.
-
-            sample_width (int): Width in bits of each serial sample. Valid values are between 1 and 32.
-
-            bit_order (enums.BitOrder): Order in which to shift the bits.
-
-                -   BitOrder.MSB: Specifies the bit order by most significant bit first.
-                -   BitOrder.LSB: Specifies the bit order by least significant bit first.
-
-        '''
-        if type(bit_order) is not enums.BitOrder:
-            raise TypeError('Parameter bit_order must be of type ' + str(enums.BitOrder))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        sample_width_ctype = _visatype.ViUInt32(sample_width)  # case S150
-        bit_order_ctype = _visatype.ViInt32(bit_order.value)  # case S130
-        error_code = self._library.niDigital_CreateCaptureWaveformSerial(vi_ctype, pin_list_ctype, waveform_name_ctype, sample_width_ctype, bit_order_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def create_source_waveform_parallel(self, waveform_name, data_mapping):
-        r'''create_source_waveform_parallel
-
-        Sets the source waveform settings required for parallel sourcing. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
-
-            data_mapping (enums.SourceDataMapping): Parameter that specifies how to map data on multiple sites.
-
-                -   SourceDataMapping.BROADCAST: Broadcasts the waveform you specify to all sites.
-                -   SourceDataMapping.SITE_UNIQUE: Sources unique waveform data to each site.
-
-        '''
-        if type(data_mapping) is not enums.SourceDataMapping:
-            raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceDataMapping))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        data_mapping_ctype = _visatype.ViInt32(data_mapping.value)  # case S130
-        error_code = self._library.niDigital_CreateSourceWaveformParallel(vi_ctype, pin_list_ctype, waveform_name_ctype, data_mapping_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def create_source_waveform_serial(self, waveform_name, data_mapping, sample_width, bit_order):
-        r'''create_source_waveform_serial
-
-        Sets the source waveform settings required for serial sourcing. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
-
-            data_mapping (enums.SourceDataMapping): Parameter that specifies how to map data on multiple sites.
-
-                -   SourceDataMapping.BROADCAST: Broadcasts the waveform you specify to all sites.
-                -   SourceDataMapping.SITE_UNIQUE: Sources unique waveform data to each site.
-
-            sample_width (int): Width in bits of each serial sample. Valid values are between 1 and 32.
-
-            bit_order (enums.BitOrder): Order in which to shift the bits.
-
-                -   BitOrder.MSB: Specifies the bit order by most significant bit first.
-                -   BitOrder.LSB: Specifies the bit order by least significant bit first.
-
-        '''
-        if type(data_mapping) is not enums.SourceDataMapping:
-            raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceDataMapping))
-        if type(bit_order) is not enums.BitOrder:
-            raise TypeError('Parameter bit_order must be of type ' + str(enums.BitOrder))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        data_mapping_ctype = _visatype.ViInt32(data_mapping.value)  # case S130
-        sample_width_ctype = _visatype.ViUInt32(sample_width)  # case S150
-        bit_order_ctype = _visatype.ViInt32(bit_order.value)  # case S130
-        error_code = self._library.niDigital_CreateSourceWaveformSerial(vi_ctype, pin_list_ctype, waveform_name_ctype, data_mapping_ctype, sample_width_ctype, bit_order_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def disable_sites(self):
-        r'''disable_sites
-
-        Disables specified sites. Disabled sites are not included in pattern bursts initiated by the initiate method or the burst_pattern method, even if the site is specified in the list of pattern burst sites in configure_pattern_burst_sites method or in the repeated capabilities for the burst_pattern method. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the ppmu_measure method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDigital_DisableSites(vi_ctype, site_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def enable_sites(self):
-        r'''enable_sites
-
-        Enables the sites you specify. All sites are enabled by default.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDigital_EnableSites(vi_ctype, site_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1573,11 +1311,11 @@ class _SessionBase(object):
         history_ram_trigger_type should be used to specify the trigger condition on which History RAM
         starts acquiring pattern information.
 
-        If History RAM trigger is configured as HistoryRAMTriggerType.CYCLE_NUMBER,
+        If History RAM trigger is configured as HramTriggerType.CYCLE_NUMBER,
         cycle_number_history_ram_trigger_cycle_number should be used to specify the cycle number on which
         History RAM starts acquiring pattern information.
 
-        If History RAM trigger is configured as HistoryRAMTriggerType.PATTERN_LABEL,
+        If History RAM trigger is configured as HramTriggerType.PATTERN_LABEL,
         pattern_label_history_ram_trigger_label should be used to specify the pattern label from which to
         start acquiring pattern information.
         pattern_label_history_ram_trigger_vector_offset should be used to specify the number of vectors
@@ -1772,128 +1510,6 @@ class _SessionBase(object):
         return dict(zip(site_list, result_list))
 
     @ivi_synchronized
-    def _fetch_history_ram_cycle_information(self, sample_index):
-        r'''_fetch_history_ram_cycle_information
-
-        Gets the per-cycle pattern information acquired for the specified cycle.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            sample_index (int): The index of the History RAM sample to fetch. Each History RAM sample contains information about a single cycle in the pattern burst.
-
-
-        Returns:
-            pattern_index (int): The returned index of the pattern for the acquired cycle. Use _get_pattern_name to get the name of the pattern from its index.
-
-            time_set_index (int): The returned time set for the acquired cycle. Use _get_time_set_name to get the name of the time set from its index.
-
-            vector_number (int): The returned vector number within the pattern for the acquired cycle. Vector numbers start at 0 from the beginning of the pattern.
-
-            cycle_number (int): Returns the cycle number acquired by this History RAM sample. Cycle numbers start at 0 from the beginning of the pattern burst.
-
-            num_dut_cycles (int): The returned number of DUT cycles contained in the cycle acquired by this History RAM sample. This is only needed if the pattern uses the edge multiplier feature.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
-        pattern_index_ctype = _visatype.ViInt32()  # case S220
-        time_set_index_ctype = _visatype.ViInt32()  # case S220
-        vector_number_ctype = _visatype.ViInt64()  # case S220
-        cycle_number_ctype = _visatype.ViInt64()  # case S220
-        num_dut_cycles_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_FetchHistoryRAMCycleInformation(vi_ctype, site_ctype, sample_index_ctype, None if pattern_index_ctype is None else (ctypes.pointer(pattern_index_ctype)), None if time_set_index_ctype is None else (ctypes.pointer(time_set_index_ctype)), None if vector_number_ctype is None else (ctypes.pointer(vector_number_ctype)), None if cycle_number_ctype is None else (ctypes.pointer(cycle_number_ctype)), None if num_dut_cycles_ctype is None else (ctypes.pointer(num_dut_cycles_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(pattern_index_ctype.value), int(time_set_index_ctype.value), int(vector_number_ctype.value), int(cycle_number_ctype.value), int(num_dut_cycles_ctype.value)
-
-    @ivi_synchronized
-    def _fetch_history_ram_cycle_pin_data(self, pin_list, sample_index, dut_cycle_index):
-        r'''_fetch_history_ram_cycle_pin_data
-
-        Gets the per-pin pattern data acquired for the specified cycle.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            pin_list (str): The specified pins for which to retrieve History RAM data. If empty, the pin list from the pattern containing the start label is used. Call get_pattern_pin_names or GetPatternPinIndexeswith the start label to retrieve the pins associated with the pattern burst.
-
-                Note:
-                One or more of the referenced methods are not in the Python API for this driver.
-
-            sample_index (int): The index of the History RAM sample to fetch. Each History RAM sample contains information about a single cycle in the pattern burst.
-
-            dut_cycle_index (int): The specified index of the DUT cycle. If the pattern does not use the edge multiplier feature, pass 0 for this parameter. For History RAM samples that contain multiple DUT cycles, indicated by the **numDutCycles** value returned by _fetch_history_ram_cycle_information, call this method multiple times to retrieve pin states for each DUT cycle. The DUT cycle index should start at 0.
-
-
-        Returns:
-            expected_pin_states (list of enums.PinState): The returned pin state as expected by the loaded pattern in the order specified in **pinList**. Pins without defined edges in the specified DUT cycle will return PinState.NOT_A_PIN_STATE
-
-            actual_pin_states (list of enums.PinState): The returned pin state acquired by History RAM in the order specified in **pinList**. Pins without defined edges in the specified DUT cycle will return PinState.NOT_A_PIN_STATE
-
-            per_pin_pass_fail (list of bool): The returned pass fail information for pins in the order specified in **pinList**. Pins without defined edges in the specified DUT cycle will return pass (True).
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
-        dut_cycle_index_ctype = _visatype.ViInt32(dut_cycle_index)  # case S150
-        pin_data_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        expected_pin_states_ctype = None  # case B610
-        actual_pin_states_ctype = None  # case B610
-        per_pin_pass_fail_ctype = None  # case B610
-        actual_num_pin_data_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        pin_data_buffer_size_ctype = _visatype.ViInt32(actual_num_pin_data_ctype.value)  # case S200
-        expected_pin_states_size = actual_num_pin_data_ctype.value  # case B620
-        expected_pin_states_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=expected_pin_states_size)  # case B620
-        actual_pin_states_size = actual_num_pin_data_ctype.value  # case B620
-        actual_pin_states_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=actual_pin_states_size)  # case B620
-        per_pin_pass_fail_size = actual_num_pin_data_ctype.value  # case B620
-        per_pin_pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=per_pin_pass_fail_size)  # case B620
-        error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [enums.PinState(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [enums.PinState(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
-
-    @ivi_synchronized
-    def _fetch_history_ram_scan_cycle_number(self, sample_index):
-        r'''_fetch_history_ram_scan_cycle_number
-
-        Fetches the History RAM Scan Cycle Number for the sample index. If the sample is not from a scan vector, the scan cycle number will be returned as -1.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            sample_index (int): The index of the History RAM sample to fetch. Each History RAM sample contains information about a single cycle in the pattern burst.
-
-
-        Returns:
-            scan_cycle_number (int): Returns the scan cycle number acquired by this History RAM sample. Scan cycle numbers start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not have a scan opcode.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
-        scan_cycle_number_ctype = _visatype.ViInt64()  # case S220
-        error_code = self._library.niDigital_FetchHistoryRAMScanCycleNumber(vi_ctype, site_ctype, sample_index_ctype, None if scan_cycle_number_ctype is None else (ctypes.pointer(scan_cycle_number_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(scan_cycle_number_ctype.value)
-
-    @ivi_synchronized
     def frequency_counter_measure_frequency(self):
         r'''frequency_counter_measure_frequency
 
@@ -1944,10 +1560,10 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
         value_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niDigital_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
+        error_code = self._library.niDigital_GetAttributeViBoolean(vi_ctype, channel_list_ctype, attribute_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(value_ctype.value)
 
@@ -1972,10 +1588,10 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
         value_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
+        error_code = self._library.niDigital_GetAttributeViInt32(vi_ctype, channel_list_ctype, attribute_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
@@ -2000,10 +1616,10 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
         value_ctype = _visatype.ViInt64()  # case S220
-        error_code = self._library.niDigital_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
+        error_code = self._library.niDigital_GetAttributeViInt64(vi_ctype, channel_list_ctype, attribute_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
@@ -2028,10 +1644,10 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
         value_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDigital_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
+        error_code = self._library.niDigital_GetAttributeViReal64(vi_ctype, channel_list_ctype, attribute_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(value_ctype.value)
 
@@ -2056,49 +1672,43 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         value_ctype = None  # case C050
-        error_code = self._library.niDigital_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_ctype, buffer_size_ctype, value_ctype)
+        error_code = self._library.niDigital_GetAttributeViString(vi_ctype, channel_list_ctype, attribute_ctype, buffer_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         value_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDigital_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_ctype, buffer_size_ctype, value_ctype)
+        error_code = self._library.niDigital_GetAttributeViString(vi_ctype, channel_list_ctype, attribute_ctype, buffer_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_channel_names(self, indices):
-        r'''get_channel_names
+    def get_channel_name(self, index):
+        r'''get_channel_name
 
-        Returns a comma-separated list of channel names from a string index list.
+        Returns the channel name that corresponds to the index you specify. Channel indexes are one-based. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **nameBufferSize**. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the method copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for **nameBufferSize** and VI_NULL for the name.
 
         Args:
-            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
-
-                -   A comma-separated list—for example, "0,2,3,1"
-                -   A range using a hyphen—for example, "0-3"
-                -   A range using a colon—for example, "0:3 "
-
-                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+            index (int): Specifies a one-based index for the desired channel in the session. Valid values are from one to the total number of channels in the session.
 
 
         Returns:
-            names (list of str): The returned channel name(s) at the specified index.
+            name (str): The returned channel name(s) at the specified index.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
+        index_ctype = _visatype.ViInt32(index)  # case S150
         name_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        names_ctype = None  # case C050
-        error_code = self._library.niDigital_GetChannelNameFromString(vi_ctype, indices_ctype, name_buffer_size_ctype, names_ctype)
+        name_ctype = None  # case C050
+        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        names_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDigital_GetChannelNameFromString(vi_ctype, indices_ctype, name_buffer_size_ctype, names_ctype)
+        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
+        return name_ctype.value.decode(self._encoding)
 
     def _get_error(self):
         r'''_get_error
@@ -2154,80 +1764,6 @@ class _SessionBase(object):
         error_code = self._library.niDigital_GetFailCount(vi_ctype, channel_list_ctype, buffer_size_ctype, failure_count_ctype, None if actual_num_read_ctype is None else (ctypes.pointer(actual_num_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(failure_count_ctype[i]) for i in range(buffer_size_ctype.value)]
-
-    @ivi_synchronized
-    def get_history_ram_sample_count(self):
-        r'''get_history_ram_sample_count
-
-        Returns the number of samples History RAM acquired on the last pattern burst.
-
-        Note:
-        Before bursting a pattern, you must configure the History RAM trigger and specify which cycles to acquire.
-
-        history_ram_trigger_type should be used to specify the trigger condition on which History RAM
-        starts acquiring pattern information.
-
-        If History RAM trigger is configured as HistoryRAMTriggerType.CYCLE_NUMBER,
-        cycle_number_history_ram_trigger_cycle_number should be used to specify the cycle number on which
-        History RAM starts acquiring pattern information.
-
-        If History RAM trigger is configured as HistoryRAMTriggerType.PATTERN_LABEL,
-        pattern_label_history_ram_trigger_label should be used to specify the pattern label from which to
-        start acquiring pattern information.
-        pattern_label_history_ram_trigger_vector_offset should be used to specify the number of vectors
-        following the specified pattern label from which to start acquiring pattern information.
-        pattern_label_history_ram_trigger_cycle_offset should be used to specify the number of cycles
-        following the specified pattern label and vector offset from which to start acquiring pattern information.
-
-        For all History RAM trigger conditions, history_ram_pretrigger_samples should be used to specify
-        the number of samples to acquire before the trigger conditions are met. If you configure History RAM to only
-        acquire failed cycles, you must set history_ram_pretrigger_samples to 0.
-
-        history_ram_cycles_to_acquire should be used to specify which cycles History RAM acquires after
-        the trigger conditions are met.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Returns:
-            sample_count (int): The returned number of samples that History RAM acquired.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        sample_count_ctype = _visatype.ViInt64()  # case S220
-        error_code = self._library.niDigital_GetHistoryRAMSampleCount(vi_ctype, site_ctype, None if sample_count_ctype is None else (ctypes.pointer(sample_count_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(sample_count_ctype.value)
-
-    @ivi_synchronized
-    def _get_pattern_name(self, pattern_index):
-        r'''_get_pattern_name
-
-        TBD
-
-        Args:
-            pattern_index (int):
-
-
-        Returns:
-            name (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pattern_index_ctype = _visatype.ViInt32(pattern_index)  # case S150
-        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        name_ctype = None  # case C050
-        error_code = self._library.niDigital_GetPatternName(vi_ctype, pattern_index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDigital_GetPatternName(vi_ctype, pattern_index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
     def _get_pin_name(self, pin_index):
@@ -2296,228 +1832,6 @@ class _SessionBase(object):
         error_code = self._library.niDigital_GetPinResultsPinInformation(vi_ctype, channel_list_ctype, buffer_size_ctype, pin_indexes_ctype, site_numbers_ctype, channel_indexes_ctype, None if actual_num_values_ctype is None else (ctypes.pointer(actual_num_values_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(pin_indexes_ctype[i]) for i in range(buffer_size_ctype.value)], [int(site_numbers_ctype[i]) for i in range(buffer_size_ctype.value)], [int(channel_indexes_ctype[i]) for i in range(buffer_size_ctype.value)]
-
-    @ivi_synchronized
-    def _get_site_pass_fail(self):
-        r'''_get_site_pass_fail
-
-        Returns the pass or fail results for each site.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Returns:
-            pass_fail (list of bool): The returned array of pass (True) and fail results for the sites you specify in the repeated capabilities. If sites span multiple digital pattern instruments, you must use an AND operator for the partial results for those sites returned by each instrument. If a site is disabled or not enabled for burst, the method does not return data for that site. Use the SortSiteResultsViBoolean method to order and combine the data to match the repeated capabilities. You can also use the _get_site_results_site_numbers method to determine the order of the sites returned from this method call so that you can match the pass array with site numbers.
-
-                Note:
-                One or more of the referenced methods are not in the Python API for this driver.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        pass_fail_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        pass_fail_ctype = None  # case B610
-        actual_num_sites_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        pass_fail_buffer_size_ctype = _visatype.ViInt32(actual_num_sites_ctype.value)  # case S200
-        pass_fail_size = actual_num_sites_ctype.value  # case B620
-        pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=pass_fail_size)  # case B620
-        error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [bool(pass_fail_ctype[i]) for i in range(pass_fail_buffer_size_ctype.value)]
-
-    @ivi_synchronized
-    def _get_site_results_site_numbers(self, site_result_type):
-        r'''_get_site_results_site_numbers
-
-        Returns the site numbers that correspond to per-site data read from the digital pattern instrument. The method returns site numbers in the same order as values read using the _get_site_pass_fail and fetch_capture_waveform_u32 methods. Use this method to match values the previously listed methods return with site numbers.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            site_result_type (enums.SiteResultType): The type of data specified in the results array.
-
-                -   _SiteResultType.PASS_FAIL: Get site numbers for pass/fail data.
-                -   _SiteResultType.CAPTURE_WAVEFORM: Get site numbers for capture waveforms.
-
-
-        Returns:
-            site_numbers (list of int): The returned array of site numbers that correspond to the values specified by **siteResultType**.
-
-        '''
-        if type(site_result_type) is not enums._SiteResultType:
-            raise TypeError('Parameter site_result_type must be of type ' + str(enums._SiteResultType))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        site_result_type_ctype = _visatype.ViInt32(site_result_type.value)  # case S130
-        site_numbers_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        site_numbers_ctype = None  # case B610
-        actual_num_site_numbers_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        site_numbers_buffer_size_ctype = _visatype.ViInt32(actual_num_site_numbers_ctype.value)  # case S200
-        site_numbers_size = actual_num_site_numbers_ctype.value  # case B620
-        site_numbers_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=site_numbers_size)  # case B620
-        error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)]
-
-    @ivi_synchronized
-    def get_time_set_drive_format(self, time_set_name):
-        r'''get_time_set_drive_format
-
-        Returns the drive format of a pin in the specified time set.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            time_set_name (str): The specified time set name.
-
-
-        Returns:
-            format (enums.DriveFormat): Returned drive format of the time set for the specified pin.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        format_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetTimeSetDriveFormat(vi_ctype, pin_ctype, time_set_name_ctype, None if format_ctype is None else (ctypes.pointer(format_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return enums.DriveFormat(format_ctype.value)
-
-    @ivi_synchronized
-    def get_time_set_edge(self, time_set_name, edge):
-        r'''get_time_set_edge
-
-        Returns the edge time of a pin in the specified time set.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            time_set_name (str): The specified time set name.
-
-            edge (enums.TimeSetEdgeType): Name of the edge.
-
-                -   TimeSetEdgeType.DRIVE_ON
-                -   TimeSetEdgeType.DRIVE_DATA
-                -   TimeSetEdgeType.DRIVE_RETURN
-                -   TimeSetEdgeType.DRIVE_OFF
-                -   TimeSetEdgeType.COMPARE_STROBE
-                -   TimeSetEdgeType.DRIVE_DATA2
-                -   TimeSetEdgeType.DRIVE_RETURN2
-                -   TimeSetEdgeType.COMPARE_STROBE2
-
-
-        Returns:
-            time (hightime.timedelta): Time from the beginning of the vector period in which to place the edge.
-
-        '''
-        if type(edge) is not enums.TimeSetEdgeType:
-            raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdgeType))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        time_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDigital_GetTimeSetEdge(vi_ctype, pin_ctype, time_set_name_ctype, edge_ctype, None if time_ctype is None else (ctypes.pointer(time_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_seconds_real64_to_timedelta(float(time_ctype.value))
-
-    @ivi_synchronized
-    def get_time_set_edge_multiplier(self, time_set_name):
-        r'''get_time_set_edge_multiplier
-
-        Returns the edge multiplier of the specified time set.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            time_set_name (str): The specified time set name.
-
-
-        Returns:
-            edge_multiplier (int): Returned edge multiplier of the time set for the specified pin.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        edge_multiplier_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetTimeSetEdgeMultiplier(vi_ctype, pin_ctype, time_set_name_ctype, None if edge_multiplier_ctype is None else (ctypes.pointer(edge_multiplier_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(edge_multiplier_ctype.value)
-
-    @ivi_synchronized
-    def _get_time_set_name(self, time_set_index):
-        r'''_get_time_set_name
-
-        TBD
-
-        Args:
-            time_set_index (int):
-
-
-        Returns:
-            name (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        time_set_index_ctype = _visatype.ViInt32(time_set_index)  # case S150
-        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        name_ctype = None  # case C050
-        error_code = self._library.niDigital_GetTimeSetName(vi_ctype, time_set_index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDigital_GetTimeSetName(vi_ctype, time_set_index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return name_ctype.value.decode(self._encoding)
-
-    @ivi_synchronized
-    def is_site_enabled(self):
-        r'''is_site_enabled
-
-        Checks if a specified site is enabled.
-
-        Note: The method returns an error if more than one site is specified.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Returns:
-            enable (bool): Boolean value that returns whether the site is enabled or disabled.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        enable_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niDigital_IsSiteEnabled(vi_ctype, site_ctype, None if enable_ctype is None else (ctypes.pointer(enable_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(enable_ctype.value)
 
     def lock(self):
         '''lock
@@ -2658,6 +1972,29 @@ class _SessionBase(object):
         return [enums.PinState(data_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
+    def reset_attribute(self, attribute_id):
+        r'''reset_attribute
+
+        Resets the property to its default value.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            attribute_id (int): Pass the ID of a property.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        error_code = self._library.niDigital_ResetAttribute(vi_ctype, channel_list_ctype, attribute_id_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute, value):
         r'''_set_attribute_vi_boolean
 
@@ -2676,10 +2013,10 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
         value_ctype = _visatype.ViBoolean(value)  # case S150
-        error_code = self._library.niDigital_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_ctype, value_ctype)
+        error_code = self._library.niDigital_SetAttributeViBoolean(vi_ctype, channel_list_ctype, attribute_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2702,10 +2039,10 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
         value_ctype = _visatype.ViInt32(value)  # case S150
-        error_code = self._library.niDigital_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_ctype, value_ctype)
+        error_code = self._library.niDigital_SetAttributeViInt32(vi_ctype, channel_list_ctype, attribute_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2728,10 +2065,10 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
         value_ctype = _visatype.ViInt64(value)  # case S150
-        error_code = self._library.niDigital_SetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_ctype, value_ctype)
+        error_code = self._library.niDigital_SetAttributeViInt64(vi_ctype, channel_list_ctype, attribute_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2754,10 +2091,10 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
         value_ctype = _visatype.ViReal64(value)  # case S150
-        error_code = self._library.niDigital_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_ctype, value_ctype)
+        error_code = self._library.niDigital_SetAttributeViReal64(vi_ctype, channel_list_ctype, attribute_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2780,10 +2117,10 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
         value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_ctype, value_ctype)
+        error_code = self._library.niDigital_SetAttributeViString(vi_ctype, channel_list_ctype, attribute_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2804,7 +2141,7 @@ class _SessionBase(object):
 
 
         Returns:
-            offsets (list of hightime.timedelta): Measured TDR offsets specified in seconds.
+            offsets (list of float): Measured TDR offsets specified in seconds.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2820,7 +2157,7 @@ class _SessionBase(object):
         offsets_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=offsets_size)  # case B620
         error_code = self._library.niDigital_TDR(vi_ctype, channel_list_ctype, apply_offsets_ctype, offsets_buffer_size_ctype, offsets_ctype, None if actual_num_offsets_ctype is None else (ctypes.pointer(actual_num_offsets_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_seconds_real64_to_timedeltas([float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)])
+        return [float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)]
 
     def unlock(self):
         '''unlock
@@ -2832,39 +2169,6 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDigital_UnlockSession(vi_ctype, None)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return
-
-    @ivi_synchronized
-    def _write_source_waveform_site_unique_u32(self, waveform_name, num_waveforms, samples_per_waveform, waveform_data):
-        r'''_write_source_waveform_site_unique_u32
-
-        Writes one waveform per site. Use this write method if you set the parameter of the create source waveform method to Site Unique.
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
-
-            num_waveforms (int): Number of waveforms.
-
-            samples_per_waveform (int): Number of samples per waveform.
-
-            waveform_data (array.array("L")): An array of samples to use as source data. Data for each site must be appended sequentially in the array (non-interleaved).
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        num_waveforms_ctype = _visatype.ViInt32(num_waveforms)  # case S150
-        samples_per_waveform_ctype = _visatype.ViInt32(samples_per_waveform)  # case S150
-        waveform_data_array = get_ctypes_and_array(value=waveform_data, array_type="L")  # case B550
-        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViUInt32)  # case B550
-        error_code = self._library.niDigital_WriteSourceWaveformSiteUniqueU32(vi_ctype, site_list_ctype, waveform_name_ctype, num_waveforms_ctype, samples_per_waveform_ctype, waveform_data_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
@@ -3052,6 +2356,76 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def apply_levels_and_timing(self, site_list, levels_sheet, timing_sheet, initial_state_high_pins="", initial_state_low_pins="", initial_state_tristate_pins=""):
+        r'''apply_levels_and_timing
+
+        Applies digital levels and timing values defined in previously loaded levels and timing sheets. When applying a levels sheet, only the levels specified in the sheet are affected. Any levels not specified in the sheet remain unchanged. When applying a timing sheet, all existing time sets are deleted before the new time sets are loaded.
+
+        Args:
+            site_list (str): Comma-delimited list of strings in the form of ``siteN`` , where ``N`` is the site number. If you enter an empty string, this method applies the levels and initial states to all sites.
+
+            levels_sheet (str): Name of the levels sheet to apply. Use the name of the sheet or pass the absolute file path you use in the load_specifications_levels_and_timing method. The name of the levels sheet is the file name without the directory and file extension.
+
+            timing_sheet (str): Name of the timing sheet to apply. Use the name of the sheet or pass the absolute file path that you use in the load_specifications_levels_and_timing method. The name of the timing sheet is the file name without the directory and file extension.
+
+            initial_state_high_pins (str): Comma-delimited list of pins, pin groups, or channels to initialize to a high state.
+
+            initial_state_low_pins (str): Comma-delimited list of pins, pin groups, or channels to initialize to a low state.
+
+            initial_state_tristate_pins (str): Comma-delimited list of pins, pin groups, or channels to initialize to a non-drive state (X)
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        levels_sheet_ctype = ctypes.create_string_buffer(levels_sheet.encode(self._encoding))  # case C020
+        timing_sheet_ctype = ctypes.create_string_buffer(timing_sheet.encode(self._encoding))  # case C020
+        initial_state_high_pins_ctype = ctypes.create_string_buffer(initial_state_high_pins.encode(self._encoding))  # case C020
+        initial_state_low_pins_ctype = ctypes.create_string_buffer(initial_state_low_pins.encode(self._encoding))  # case C020
+        initial_state_tristate_pins_ctype = ctypes.create_string_buffer(initial_state_tristate_pins.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_ApplyLevelsAndTiming(vi_ctype, site_list_ctype, levels_sheet_ctype, timing_sheet_ctype, initial_state_high_pins_ctype, initial_state_low_pins_ctype, initial_state_tristate_pins_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def burst_pattern(self, site_list, start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.timedelta(seconds=10.0)):
+        r'''burst_pattern
+
+        Uses the **startLabel** you specify to burst the pattern on the sites you specify and provides the option to wait for the burst to complete. Digital pins retain their state at the end of a pattern burst until the first vector of a subsequent pattern burst, a call to write_static, or a call to apply_levels_and_timing.
+
+        Args:
+            site_list (str): The sites on which to burst the pattern as a comma-delimited list of strings in the form site\ ``N``, where ``N`` is the site number. If you specify an empty string, the pattern is burst on all sites.
+
+            start_label (str): Pattern name or exported pattern label from which to start bursting the pattern.
+
+            select_digital_function (bool): A Boolean that specifies whether to select the digital method for the pins in the pattern prior to bursting.
+
+            wait_until_done (bool): A Boolean that indicates whether to wait until the bursting is complete.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Maximum time (in seconds) allowed for this method to complete. If this method does not complete within this time interval, this method returns an error.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        start_label_ctype = ctypes.create_string_buffer(start_label.encode(self._encoding))  # case C020
+        select_digital_function_ctype = _visatype.ViBoolean(select_digital_function)  # case S150
+        wait_until_done_ctype = _visatype.ViBoolean(wait_until_done)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
+        error_code = self._library.niDigital_BurstPattern(vi_ctype, site_list_ctype, start_label_ctype, select_digital_function_ctype, wait_until_done_ctype, timeout_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def clear_error(self):
+        r'''clear_error
+
+        Clears the error information for the current execution thread and the IVI session you specify. If you pass VI_NULL for the **vi** parameter, this method clears the error information only for the current execution thread.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niDigital_ClearError(vi_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def commit(self):
         r'''commit
 
@@ -3063,21 +2437,259 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_time_set_period(self, time_set_name, period):
+    def configure_pattern_burst_sites(self, site_list):
+        r'''configure_pattern_burst_sites
+
+        Configures which sites burst the pattern on the next call to the initiate method. The pattern burst sites can also be modified through the repeated capabilities for the burst_pattern method. If a site has been disabled through the disable_sites method, the site does not burst a pattern even if included in the pattern burst sites.
+
+        Args:
+            site_list (str): A comma-delimited list of strings in the form of site\ ``N``, where ``N`` is the site number. If you specify an empty string, the method returns pass or fail results for all sites. If the string is empty, all sites are configured for pattern bursting.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_ConfigurePatternBurstSites(vi_ctype, site_list_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_compare_edges_strobe(self, pin_list, time_set, strobe_edge):
+        r'''configure_time_set_compare_edges_strobe
+
+        Configures the strobe edge time for the specified pins. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
+
+        Args:
+            pin_list (str): List of pin and pin group names for which to configure the time set edges.
+
+            time_set (str): The specified time set name.
+
+            strobe_edge (float in seconds or datetime.timedelta): Time when the comparison happens within a vector period.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
+        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_compare_edges_strobe2x(self, pin_list, time_set, strobe_edge, strobe2_edge):
+        r'''configure_time_set_compare_edges_strobe2x
+
+        Configures the compare strobes for the specified pins in the time set, including the 2x strobe. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
+
+        Args:
+            pin_list (str): List of pin and pin group names for which to configure the time set edges.
+
+            time_set (str): The specified time set name.
+
+            strobe_edge (float in seconds or datetime.timedelta): Time when the comparison happens within a vector period.
+
+            strobe2_edge (float in seconds or datetime.timedelta): Time when the comparison happens for the second DUT cycle within a vector period.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
+        strobe2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe2_edge)  # case S140
+        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe2x(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype, strobe2_edge_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_drive_edges(self, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):
+        r'''configure_time_set_drive_edges
+
+        Configures the drive format and drive edge placement for the specified pins. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
+
+        Args:
+            pin_list (str): List of pin and pin group names for which to configure the time set edges.
+
+            time_set (str): The specified time set name.
+
+            format (enums.DriveFormat): Drive format of the time set.
+
+                -   DriveFormat.NR: Non-return.
+                -   DriveFormat.RL: Return to low.
+                -   DriveFormat.RH: Return to high.
+                -   DriveFormat.SBC: Surround by complement.
+
+            drive_on_edge (float in seconds or datetime.timedelta): Delay, in seconds, from the beginning of the vector period for turning on the pin driver.This option applies only when the prior vector left the pin in a non-drive pin state (L, H, X, V, M, E). For the SBC format, this option specifies the delay from the beginning of the vector period at which the complement of the pattern value is driven.
+
+            drive_data_edge (float in seconds or datetime.timedelta): Delay, in seconds, from the beginning of the vector period until the pattern data is driven to the pattern value.The ending state from the previous vector persists until this point.
+
+            drive_return_edge (float in seconds or datetime.timedelta): Delay, in seconds, from the beginning of the vector period until the pin changes from the pattern data to the return value, as specified in the format.
+
+            drive_off_edge (float in seconds or datetime.timedelta): Delay, in seconds, from the beginning of the vector period to turn off the pin driver when the next vector period uses a non-drive symbol (L, H, X, V, M, E).
+
+        '''
+        if type(format) is not enums.DriveFormat:
+            raise TypeError('Parameter format must be of type ' + str(enums.DriveFormat))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        format_ctype = _visatype.ViInt32(format.value)  # case S130
+        drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
+        drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
+        drive_return_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return_edge)  # case S140
+        drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
+        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_drive_edges2x(self, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):
+        r'''configure_time_set_drive_edges2x
+
+        Configures the drive edges of the pins in the time set, including 2x edges. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
+
+        Args:
+            pin_list (str): List of pin and pin group names for which to configure the time set edges.
+
+            time_set (str): The specified time set name.
+
+            format (enums.DriveFormat): Drive format of the time set.
+
+                -   DriveFormat.NR: Non-return.
+                -   DriveFormat.RL: Return to low.
+                -   DriveFormat.RH: Return to high.
+                -   DriveFormat.SBC: Surround by complement.
+
+            drive_on_edge (float in seconds or datetime.timedelta): Delay, in seconds, from the beginning of the vector period for turning on the pin driver.This option applies only when the prior vector left the pin in a non-drive pin state (L, H, X, V, M, E). For the SBC format, this option specifies the delay from the beginning of the vector period at which the complement of the pattern value is driven.
+
+            drive_data_edge (float in seconds or datetime.timedelta): Delay, in seconds, from the beginning of the vector period until the pattern data is driven to the pattern value.The ending state from the previous vector persists until this point.
+
+            drive_return_edge (float in seconds or datetime.timedelta): Delay, in seconds, from the beginning of the vector period until the pin changes from the pattern data to the return value, as specified in the format.
+
+            drive_off_edge (float in seconds or datetime.timedelta): Delay, in seconds, from the beginning of the vector period to turn off the pin driver when the next vector period uses a non-drive symbol (L, H, X, V, M, E).
+
+            drive_data2_edge (float in seconds or datetime.timedelta): Delay, in seconds, from the beginning of the vector period until the pattern data in the second DUT cycle is driven to the pattern value.
+
+            drive_return2_edge (float in seconds or datetime.timedelta): Delay, in seconds, from the beginning of the vector period until the pin changes from the pattern data in the second DUT cycle to the return value, as specified in the format.
+
+        '''
+        if type(format) is not enums.DriveFormat:
+            raise TypeError('Parameter format must be of type ' + str(enums.DriveFormat))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        format_ctype = _visatype.ViInt32(format.value)  # case S130
+        drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
+        drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
+        drive_return_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return_edge)  # case S140
+        drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
+        drive_data2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data2_edge)  # case S140
+        drive_return2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return2_edge)  # case S140
+        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges2x(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype, drive_data2_edge_ctype, drive_return2_edge_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_drive_format(self, pin_list, time_set, drive_format):
+        r'''configure_time_set_drive_format
+
+        Configures the drive format for the pins specified in the **pinList**. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
+
+        Args:
+            pin_list (str): List of pin and pin group names for which to configure the time set edges.
+
+            time_set (str): The specified time set name.
+
+            drive_format (enums.DriveFormat): Drive format of the time set.
+
+                -   DriveFormat.NR: Non-return.
+                -   DriveFormat.RL: Return to low.
+                -   DriveFormat.RH: Return to high.
+                -   DriveFormat.SBC: Surround by complement.
+
+        '''
+        if type(drive_format) is not enums.DriveFormat:
+            raise TypeError('Parameter drive_format must be of type ' + str(enums.DriveFormat))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        drive_format_ctype = _visatype.ViInt32(drive_format.value)  # case S130
+        error_code = self._library.niDigital_ConfigureTimeSetDriveFormat(vi_ctype, pin_list_ctype, time_set_ctype, drive_format_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_edge(self, pin_list, time_set, edge, time):
+        r'''configure_time_set_edge
+
+        Configures the edge placement for the pins specified in the pin list. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
+
+        Args:
+            pin_list (str): List of pin and pin group names for which to configure the time set edges.
+
+            time_set (str): The specified time set name.
+
+            edge (enums.TimeSetEdgeType): Name of the edge.
+
+                -   TimeSetEdgeType.DRIVE_ON
+                -   TimeSetEdgeType.DRIVE_DATA
+                -   TimeSetEdgeType.DRIVE_RETURN
+                -   TimeSetEdgeType.DRIVE_OFF
+                -   TimeSetEdgeType.COMPARE_STROBE
+                -   TimeSetEdgeType.DRIVE_DATA2
+                -   TimeSetEdgeType.DRIVE_RETURN2
+                -   TimeSetEdgeType.COMPARE_STROBE2
+
+            time (float in seconds or datetime.timedelta): The time from the beginning of the vector period in which to place the edge.
+
+        '''
+        if type(edge) is not enums.TimeSetEdgeType:
+            raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdgeType))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
+        time_ctype = _converters.convert_timedelta_to_seconds_real64(time)  # case S140
+        error_code = self._library.niDigital_ConfigureTimeSetEdge(vi_ctype, pin_list_ctype, time_set_ctype, edge_ctype, time_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_edge_multiplier(self, pin_list, time_set, edge_multiplier):
+        r'''configure_time_set_edge_multiplier
+
+        Configures the edge multiplier of the pins in the time set. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
+
+        Args:
+            pin_list (str): List of pin and pin group names for which to configure the time set edges.
+
+            time_set (str): The specified time set name.
+
+            edge_multiplier (int): The specified edge multiplier for the pins in the pin list.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        edge_multiplier_ctype = _visatype.ViInt32(edge_multiplier)  # case S150
+        error_code = self._library.niDigital_ConfigureTimeSetEdgeMultiplier(vi_ctype, pin_list_ctype, time_set_ctype, edge_multiplier_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_period(self, time_set, period):
         r'''configure_time_set_period
 
         Configures the period of a time set. Use this method to modify time set values after applying a timing sheet with the apply_levels_and_timing method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to apply_levels_and_timing; it only affects the values of the current timing context.
 
         Args:
-            time_set_name (str): The specified time set name.
+            time_set (str): The specified time set name.
 
-            period (hightime.timedelta, datetime.timedelta, or float in seconds): Period for this time set, in seconds.
+            period (float in seconds or datetime.timedelta): Period for this time set, in seconds.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
         period_ctype = _converters.convert_timedelta_to_seconds_real64(period)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetPeriod(vi_ctype, time_set_name_ctype, period_ctype)
+        error_code = self._library.niDigital_ConfigureTimeSetPeriod(vi_ctype, time_set_ctype, period_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3101,6 +2713,61 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def create_capture_waveform_parallel(self, pin_list, waveform_name):
+        r'''create_capture_waveform_parallel
+
+        Sets the capture waveform settings for parallel acquisition. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
+
+        Args:
+            pin_list (str): List of capture pins from the waveform. The **pinList** must match the capture pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data captured by the FetchCaptureWaveform method.
+
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
+
+            waveform_name (str): Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_CreateCaptureWaveformParallel(vi_ctype, pin_list_ctype, waveform_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def create_capture_waveform_serial(self, pin_list, waveform_name, sample_width, bit_order):
+        r'''create_capture_waveform_serial
+
+        Sets the capture waveform settings for serial acquisition. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
+
+        Args:
+            pin_list (str): List of capture pins from the waveform. The **pinList** must match the capture pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data captured by the FetchCaptureWaveform method.
+
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
+
+            waveform_name (str): Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.
+
+            sample_width (int): Width in bits of each serial sample. Valid values are between 1 and 32.
+
+            bit_order (enums.BitOrder): Order in which to shift the bits.
+
+                -   BitOrder.MSB: Specifies the bit order by most significant bit first.
+                -   BitOrder.LSB: Specifies the bit order by least significant bit first.
+
+        '''
+        if type(bit_order) is not enums.BitOrder:
+            raise TypeError('Parameter bit_order must be of type ' + str(enums.BitOrder))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        sample_width_ctype = _visatype.ViUInt32(sample_width)  # case S150
+        bit_order_ctype = _visatype.ViInt32(bit_order.value)  # case S130
+        error_code = self._library.niDigital_CreateCaptureWaveformSerial(vi_ctype, pin_list_ctype, waveform_name_ctype, sample_width_ctype, bit_order_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def create_source_waveform_from_file_tdms(self, waveform_name, waveform_file_path, write_waveform_data=True):
         r'''create_source_waveform_from_file_tdms
 
@@ -3119,6 +2786,77 @@ class Session(_SessionBase):
         waveform_file_path_ctype = ctypes.create_string_buffer(waveform_file_path.encode(self._encoding))  # case C020
         write_waveform_data_ctype = _visatype.ViBoolean(write_waveform_data)  # case S150
         error_code = self._library.niDigital_CreateSourceWaveformFromFileTDMS(vi_ctype, waveform_name_ctype, waveform_file_path_ctype, write_waveform_data_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def create_source_waveform_parallel(self, pin_list, waveform_name, data_mapping):
+        r'''create_source_waveform_parallel
+
+        Sets the source waveform settings required for parallel sourcing. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
+
+        Args:
+            pin_list (str): Source pins for the waveform. The **pinList** must match the source pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data written by the WriteSourceWaveform method.
+
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
+
+            waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
+
+            data_mapping (enums.SourceDataMapping): Parameter that specifies how to map data on multiple sites.
+
+                -   SourceDataMapping.BROADCAST: Broadcasts the waveform you specify to all sites.
+                -   SourceDataMapping.SITE_UNIQUE: Sources unique waveform data to each site.
+
+        '''
+        if type(data_mapping) is not enums.SourceDataMapping:
+            raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceDataMapping))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        data_mapping_ctype = _visatype.ViInt32(data_mapping.value)  # case S130
+        error_code = self._library.niDigital_CreateSourceWaveformParallel(vi_ctype, pin_list_ctype, waveform_name_ctype, data_mapping_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def create_source_waveform_serial(self, pin_list, waveform_name, data_mapping, sample_width, bit_order):
+        r'''create_source_waveform_serial
+
+        Sets the source waveform settings required for serial sourcing. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
+
+        Args:
+            pin_list (str): Source pins for the waveform. The **pinList** must match the source pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data written by the WriteSourceWaveform method.
+
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
+
+            waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
+
+            data_mapping (enums.SourceDataMapping): Parameter that specifies how to map data on multiple sites.
+
+                -   SourceDataMapping.BROADCAST: Broadcasts the waveform you specify to all sites.
+                -   SourceDataMapping.SITE_UNIQUE: Sources unique waveform data to each site.
+
+            sample_width (int): Width in bits of each serial sample. Valid values are between 1 and 32.
+
+            bit_order (enums.BitOrder): Order in which to shift the bits.
+
+                -   BitOrder.MSB: Specifies the bit order by most significant bit first.
+                -   BitOrder.LSB: Specifies the bit order by least significant bit first.
+
+        '''
+        if type(data_mapping) is not enums.SourceDataMapping:
+            raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceDataMapping))
+        if type(bit_order) is not enums.BitOrder:
+            raise TypeError('Parameter bit_order must be of type ' + str(enums.BitOrder))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        data_mapping_ctype = _visatype.ViInt32(data_mapping.value)  # case S130
+        sample_width_ctype = _visatype.ViUInt32(sample_width)  # case S150
+        bit_order_ctype = _visatype.ViInt32(bit_order.value)  # case S130
+        error_code = self._library.niDigital_CreateSourceWaveformSerial(vi_ctype, pin_list_ctype, waveform_name_ctype, data_mapping_ctype, sample_width_ctype, bit_order_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3146,6 +2884,38 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDigital_DeleteAllTimeSets(vi_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def disable_sites(self, site_list):
+        r'''disable_sites
+
+        Disables specified sites. Disabled sites are not included in pattern bursts initiated by the initiate method or the burst_pattern method, even if the site is specified in the list of pattern burst sites in configure_pattern_burst_sites method or in the repeated capabilities for the burst_pattern method. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the ppmu_measure method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
+
+        Args:
+            site_list (str): Comma-delimited list of strings in the form of site\ ``N``, where ``N`` is the site number. If you enter an empty string, the method disables all sites.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_DisableSites(vi_ctype, site_list_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def enable_sites(self, site_list):
+        r'''enable_sites
+
+        Enables the sites you specify. All sites are enabled by default.
+
+        Args:
+            site_list (str): Comma-delimited list of strings in the form of site\ ``N``, where ``N`` is the site number. If you enter an empty string, the method enables all sites.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_EnableSites(vi_ctype, site_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3203,23 +2973,6 @@ class Session(_SessionBase):
         if code:
             raise errors.SelfTestError(code, msg)
         return None
-
-    @ivi_synchronized
-    def unload_specifications(self, file_paths):
-        '''unload_specifications
-
-        Unloads the given specifications sheets present in the previously loaded
-        specifications files that you select.
-
-        You must call load_specifications_levels_and_timing to reload the files with updated
-        specifications values. You must then call apply_levels_and_timing in order to apply
-        the levels and timing values that reference the updated specifications values.
-
-        Args:
-            file_paths (str or basic sequence of str): Absolute file path of one or more loaded specifications files.
-
-        '''
-        self._call_method_with_iterable(self._unload_specifications, file_paths)
 
     @ivi_synchronized
     def write_source_waveform_site_unique(self, waveform_name, waveform_data):
@@ -3281,6 +3034,195 @@ class Session(_SessionBase):
         self.sites[site_list]._write_source_waveform_site_unique_u32(waveform_name, len(waveform_data), actual_samples_per_waveform, data)
 
     @ivi_synchronized
+    def _fetch_history_ram_cycle_information(self, site, sample_index):
+        r'''_fetch_history_ram_cycle_information
+
+        Gets the per-cycle pattern information acquired for the specified cycle.
+
+        Args:
+            site (str): Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The method returns an error if more than one site is specified.
+
+            sample_index (int): The index of the History RAM sample to fetch. Each History RAM sample contains information about a single cycle in the pattern burst.
+
+
+        Returns:
+            pattern_index (int): The returned index of the pattern for the acquired cycle. Use _get_pattern_name to get the name of the pattern from its index.
+
+            time_set_index (int): The returned time set for the acquired cycle. Use _get_time_set_name to get the name of the time set from its index.
+
+            vector_number (int): The returned vector number within the pattern for the acquired cycle. Vector numbers start at 0 from the beginning of the pattern.
+
+            cycle_number (int): Returns the cycle number acquired by this History RAM sample. Cycle numbers start at 0 from the beginning of the pattern burst.
+
+            num_dut_cycles (int): The returned number of DUT cycles contained in the cycle acquired by this History RAM sample. This is only needed if the pattern uses the edge multiplier feature.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
+        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
+        pattern_index_ctype = _visatype.ViInt32()  # case S220
+        time_set_index_ctype = _visatype.ViInt32()  # case S220
+        vector_number_ctype = _visatype.ViInt64()  # case S220
+        cycle_number_ctype = _visatype.ViInt64()  # case S220
+        num_dut_cycles_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_FetchHistoryRAMCycleInformation(vi_ctype, site_ctype, sample_index_ctype, None if pattern_index_ctype is None else (ctypes.pointer(pattern_index_ctype)), None if time_set_index_ctype is None else (ctypes.pointer(time_set_index_ctype)), None if vector_number_ctype is None else (ctypes.pointer(vector_number_ctype)), None if cycle_number_ctype is None else (ctypes.pointer(cycle_number_ctype)), None if num_dut_cycles_ctype is None else (ctypes.pointer(num_dut_cycles_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(pattern_index_ctype.value), int(time_set_index_ctype.value), int(vector_number_ctype.value), int(cycle_number_ctype.value), int(num_dut_cycles_ctype.value)
+
+    @ivi_synchronized
+    def _fetch_history_ram_cycle_pin_data(self, site, pin_list, sample_index, dut_cycle_index):
+        r'''_fetch_history_ram_cycle_pin_data
+
+        Gets the per-pin pattern data acquired for the specified cycle.
+
+        Args:
+            site (str): Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The method returns an error if more than one site is specified.
+
+            pin_list (str): The specified pins for which to retrieve History RAM data. If empty, the pin list from the pattern containing the start label is used. Call get_pattern_pin_names or GetPatternPinIndexeswith the start label to retrieve the pins associated with the pattern burst.
+
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
+
+            sample_index (int): The index of the History RAM sample to fetch. Each History RAM sample contains information about a single cycle in the pattern burst.
+
+            dut_cycle_index (int): The specified index of the DUT cycle. If the pattern does not use the edge multiplier feature, pass 0 for this parameter. For History RAM samples that contain multiple DUT cycles, indicated by the **numDutCycles** value returned by _fetch_history_ram_cycle_information, call this method multiple times to retrieve pin states for each DUT cycle. The DUT cycle index should start at 0.
+
+
+        Returns:
+            expected_pin_states (list of enums.PinState): The returned pin state as expected by the loaded pattern in the order specified in **pinList**. Pins without defined edges in the specified DUT cycle will return PinState.NOT_A_PIN_STATE
+
+            actual_pin_states (list of enums.PinState): The returned pin state acquired by History RAM in the order specified in **pinList**. Pins without defined edges in the specified DUT cycle will return PinState.NOT_A_PIN_STATE
+
+            per_pin_pass_fail (list of bool): The returned pass fail information for pins in the order specified in **pinList**. Pins without defined edges in the specified DUT cycle will return pass (True).
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
+        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
+        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
+        dut_cycle_index_ctype = _visatype.ViInt32(dut_cycle_index)  # case S150
+        pin_data_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
+        expected_pin_states_ctype = None  # case B610
+        actual_pin_states_ctype = None  # case B610
+        per_pin_pass_fail_ctype = None  # case B610
+        actual_num_pin_data_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        pin_data_buffer_size_ctype = _visatype.ViInt32(actual_num_pin_data_ctype.value)  # case S200
+        expected_pin_states_size = actual_num_pin_data_ctype.value  # case B620
+        expected_pin_states_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=expected_pin_states_size)  # case B620
+        actual_pin_states_size = actual_num_pin_data_ctype.value  # case B620
+        actual_pin_states_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=actual_pin_states_size)  # case B620
+        per_pin_pass_fail_size = actual_num_pin_data_ctype.value  # case B620
+        per_pin_pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=per_pin_pass_fail_size)  # case B620
+        error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [enums.PinState(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [enums.PinState(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
+
+    @ivi_synchronized
+    def _fetch_history_ram_scan_cycle_number(self, site, sample_index):
+        r'''_fetch_history_ram_scan_cycle_number
+
+        Fetches the History RAM Scan Cycle Number for the sample index. If the sample is not from a scan vector, the scan cycle number will be returned as -1.
+
+        Args:
+            site (str): Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The method returns an error if more than one site is specified.
+
+            sample_index (int): The index of the History RAM sample to fetch. Each History RAM sample contains information about a single cycle in the pattern burst.
+
+
+        Returns:
+            scan_cycle_number (int): Returns the scan cycle number acquired by this History RAM sample. Scan cycle numbers start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not have a scan opcode.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
+        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
+        scan_cycle_number_ctype = _visatype.ViInt64()  # case S220
+        error_code = self._library.niDigital_FetchHistoryRAMScanCycleNumber(vi_ctype, site_ctype, sample_index_ctype, None if scan_cycle_number_ctype is None else (ctypes.pointer(scan_cycle_number_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(scan_cycle_number_ctype.value)
+
+    @ivi_synchronized
+    def get_channel_name_from_string(self, index):
+        r'''get_channel_name_from_string
+
+        Returns a comma-separated list of channel names from a string index list.
+
+        Args:
+            index (str): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            name (str): The returned channel name(s) at the specified index.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = ctypes.create_string_buffer(index.encode(self._encoding))  # case C020
+        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        name_ctype = None  # case C050
+        error_code = self._library.niDigital_GetChannelNameFromString(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDigital_GetChannelNameFromString(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return name_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def get_history_ram_sample_count(self, site):
+        r'''get_history_ram_sample_count
+
+        Returns the number of samples History RAM acquired on the last pattern burst.
+
+        Args:
+            site (str): Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The method returns an error if more than one site is specified.
+
+
+        Returns:
+            sample_count (int): The returned number of samples that History RAM acquired.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
+        sample_count_ctype = _visatype.ViInt64()  # case S220
+        error_code = self._library.niDigital_GetHistoryRAMSampleCount(vi_ctype, site_ctype, None if sample_count_ctype is None else (ctypes.pointer(sample_count_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(sample_count_ctype.value)
+
+    @ivi_synchronized
+    def _get_pattern_name(self, pattern_index):
+        r'''_get_pattern_name
+
+        TBD
+
+        Args:
+            pattern_index (int):
+
+
+        Returns:
+            name (str):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pattern_index_ctype = _visatype.ViInt32(pattern_index)  # case S150
+        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        name_ctype = None  # case C050
+        error_code = self._library.niDigital_GetPatternName(vi_ctype, pattern_index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDigital_GetPatternName(vi_ctype, pattern_index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return name_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
     def get_pattern_pin_names(self, start_label):
         r'''get_pattern_pin_names
 
@@ -3291,7 +3233,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            pin_list (list of str): List of pins referenced by the pattern with the **startLabel**.
+            pin_list (str): List of pins referenced by the pattern with the **startLabel**.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3307,25 +3249,204 @@ class Session(_SessionBase):
         return _converters.convert_comma_separated_string_to_list(pin_list_ctype.value.decode(self._encoding))
 
     @ivi_synchronized
-    def get_time_set_period(self, time_set_name):
+    def get_site_pass_fail(self, site_list):
+        r'''get_site_pass_fail
+
+        Returns the pass or fail results for each site.
+
+        Args:
+            site_list (str): A comma-delimited list of strings in the form of site\ ``N``, where ``N`` is the site number. If you specify an empty string, the method returns pass or fail results for all sites.
+
+
+        Returns:
+            pass_fail (list of bool): The returned array of pass (True) and fail results for the sites you specify in the repeated capabilities. If sites span multiple digital pattern instruments, you must use an AND operator for the partial results for those sites returned by each instrument. If a site is disabled or not enabled for burst, the method does not return data for that site. Use the SortSiteResultsViBoolean method to order and combine the data to match the repeated capabilities. You can also use the get_site_results_site_numbers method to determine the order of the sites returned from this method call so that you can match the pass array with site numbers.
+
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        pass_fail_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
+        pass_fail_ctype = None  # case B610
+        actual_num_sites_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        pass_fail_buffer_size_ctype = _visatype.ViInt32(actual_num_sites_ctype.value)  # case S200
+        pass_fail_size = actual_num_sites_ctype.value  # case B620
+        pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=pass_fail_size)  # case B620
+        error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [bool(pass_fail_ctype[i]) for i in range(pass_fail_buffer_size_ctype.value)]
+
+    @ivi_synchronized
+    def get_site_results_site_numbers(self, site_list, site_result_type):
+        r'''get_site_results_site_numbers
+
+        Returns the site numbers that correspond to per-site data read from the digital pattern instrument. The method returns site numbers in the same order as values read using the get_site_pass_fail and fetch_capture_waveform_u32 methods. Use this method to match values the previously listed methods return with site numbers.
+
+        Args:
+            site_list (str): Site numbers listed as a comma-delimited list of strings of form site\ ``N``, where ``N`` is the site number.
+
+            site_result_type (enums.SiteResultType): The type of data specified in the results array.
+
+                -   SiteResultType.PASS_FAIL: Get site numbers for pass/fail data.
+                -   SiteResultType.CAPTURE_WAVEFORM: Get site numbers for capture waveforms.
+
+
+        Returns:
+            site_numbers (list of int): The returned array of site numbers that correspond to the values specified by **siteResultType**.
+
+        '''
+        if type(site_result_type) is not enums.SiteResultType:
+            raise TypeError('Parameter site_result_type must be of type ' + str(enums.SiteResultType))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        site_result_type_ctype = _visatype.ViInt32(site_result_type.value)  # case S130
+        site_numbers_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
+        site_numbers_ctype = None  # case B610
+        actual_num_site_numbers_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        site_numbers_buffer_size_ctype = _visatype.ViInt32(actual_num_site_numbers_ctype.value)  # case S200
+        site_numbers_size = actual_num_site_numbers_ctype.value  # case B620
+        site_numbers_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=site_numbers_size)  # case B620
+        error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)]
+
+    @ivi_synchronized
+    def get_time_set_drive_format(self, pin, time_set):
+        r'''get_time_set_drive_format
+
+        Returns the drive format of a pin in the specified time set.
+
+        Args:
+            pin (str): Name of the specified pin.
+
+            time_set (str): The specified time set name.
+
+
+        Returns:
+            format (enums.DriveFormat): Returned drive format of the time set for the specified pin.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_ctype = ctypes.create_string_buffer(pin.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        format_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_GetTimeSetDriveFormat(vi_ctype, pin_ctype, time_set_ctype, None if format_ctype is None else (ctypes.pointer(format_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return enums.DriveFormat(format_ctype.value)
+
+    @ivi_synchronized
+    def get_time_set_edge(self, pin, time_set, edge):
+        r'''get_time_set_edge
+
+        Returns the edge time of a pin in the specified time set.
+
+        Args:
+            pin (str): Name of the specified pin.
+
+            time_set (str): The specified time set name.
+
+            edge (enums.TimeSetEdgeType): Name of the edge.
+
+                -   TimeSetEdgeType.DRIVE_ON
+                -   TimeSetEdgeType.DRIVE_DATA
+                -   TimeSetEdgeType.DRIVE_RETURN
+                -   TimeSetEdgeType.DRIVE_OFF
+                -   TimeSetEdgeType.COMPARE_STROBE
+                -   TimeSetEdgeType.DRIVE_DATA2
+                -   TimeSetEdgeType.DRIVE_RETURN2
+                -   TimeSetEdgeType.COMPARE_STROBE2
+
+
+        Returns:
+            time (float): Time from the beginning of the vector period in which to place the edge.
+
+        '''
+        if type(edge) is not enums.TimeSetEdgeType:
+            raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdgeType))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_ctype = ctypes.create_string_buffer(pin.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
+        time_ctype = _visatype.ViReal64()  # case S220
+        error_code = self._library.niDigital_GetTimeSetEdge(vi_ctype, pin_ctype, time_set_ctype, edge_ctype, None if time_ctype is None else (ctypes.pointer(time_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(time_ctype.value)
+
+    @ivi_synchronized
+    def get_time_set_edge_multiplier(self, pin, time_set):
+        r'''get_time_set_edge_multiplier
+
+        Returns the edge multiplier of the specified time set.
+
+        Args:
+            pin (str): Name of the specified pin.
+
+            time_set (str): The specified time set name.
+
+
+        Returns:
+            edge_multiplier (int): Returned edge multiplier of the time set for the specified pin.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_ctype = ctypes.create_string_buffer(pin.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        edge_multiplier_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_GetTimeSetEdgeMultiplier(vi_ctype, pin_ctype, time_set_ctype, None if edge_multiplier_ctype is None else (ctypes.pointer(edge_multiplier_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(edge_multiplier_ctype.value)
+
+    @ivi_synchronized
+    def _get_time_set_name(self, time_set_index):
+        r'''_get_time_set_name
+
+        TBD
+
+        Args:
+            time_set_index (int):
+
+
+        Returns:
+            name (str):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        time_set_index_ctype = _visatype.ViInt32(time_set_index)  # case S150
+        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        name_ctype = None  # case C050
+        error_code = self._library.niDigital_GetTimeSetName(vi_ctype, time_set_index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDigital_GetTimeSetName(vi_ctype, time_set_index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return name_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def get_time_set_period(self, time_set):
         r'''get_time_set_period
 
         Returns the period of the specified time set.
 
         Args:
-            time_set_name (str): The specified time set name.
+            time_set (str): The specified time set name.
 
 
         Returns:
-            period (hightime.timedelta): Returned period, in seconds, that the edge is configured to.
+            period (float): Returned period, in seconds, that the edge is configured to.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
         period_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDigital_GetTimeSetPeriod(vi_ctype, time_set_name_ctype, None if period_ctype is None else (ctypes.pointer(period_ctype)))
+        error_code = self._library.niDigital_GetTimeSetPeriod(vi_ctype, time_set_ctype, None if period_ctype is None else (ctypes.pointer(period_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_seconds_real64_to_timedelta(float(period_ctype.value))
+        return float(period_ctype.value)
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         r'''_init_with_options
@@ -3391,18 +3512,41 @@ class Session(_SessionBase):
         return bool(done_ctype.value)
 
     @ivi_synchronized
-    def _load_levels(self, file_path):
-        r'''_load_levels
+    def is_site_enabled(self, site):
+        r'''is_site_enabled
+
+        Checks if a specified site is enabled.
+
+        Note: The method returns an error if more than one site is specified.
+
+        Args:
+            site (str): Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The method returns an error if more than one site is specified.
+
+
+        Returns:
+            enable (bool): Boolean value that returns whether the site is enabled or disabled.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
+        enable_ctype = _visatype.ViBoolean()  # case S220
+        error_code = self._library.niDigital_IsSiteEnabled(vi_ctype, site_ctype, None if enable_ctype is None else (ctypes.pointer(enable_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return bool(enable_ctype.value)
+
+    @ivi_synchronized
+    def load_levels(self, levels_file_path):
+        r'''load_levels
 
         Loads a levels sheet from a specified file.
 
         Args:
-            file_path (str): Absolute file path to the specified levels sheet file.
+            levels_file_path (str): Absolute file path to the specified levels sheet file.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_LoadLevels(vi_ctype, file_path_ctype)
+        levels_file_path_ctype = ctypes.create_string_buffer(levels_file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_LoadLevels(vi_ctype, levels_file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3423,50 +3567,50 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def load_pin_map(self, file_path):
+    def load_pin_map(self, pin_map_file_path):
         r'''load_pin_map
 
         Loads a pin map file. You can load only a single pin and channel map file during an NI-Digital Pattern Driver session. To switch pin maps, create a new session or call the reset method.
 
         Args:
-            file_path (str): Absolute file path to a pin map file created with the Digital Pattern Editor or the NI TestStand Semiconductor Module.
+            pin_map_file_path (str): Absolute file path to a pin map file created with the Digital Pattern Editor or the NI TestStand Semiconductor Module.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_LoadPinMap(vi_ctype, file_path_ctype)
+        pin_map_file_path_ctype = ctypes.create_string_buffer(pin_map_file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_LoadPinMap(vi_ctype, pin_map_file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def _load_specifications(self, file_path):
-        r'''_load_specifications
+    def load_specifications(self, specifications_file_path):
+        r'''load_specifications
 
         Loads a specifications sheet from a specified file.
 
         Args:
-            file_path (str): Absolute file path to a specifications file.
+            specifications_file_path (str): Absolute file path to a specifications file.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_LoadSpecifications(vi_ctype, file_path_ctype)
+        specifications_file_path_ctype = ctypes.create_string_buffer(specifications_file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_LoadSpecifications(vi_ctype, specifications_file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def _load_timing(self, file_path):
-        r'''_load_timing
+    def load_timing(self, timing_file_path):
+        r'''load_timing
 
         Loads a timing sheet from a specified file.
 
         Args:
-            file_path (str): Absolute file path to the specified timing sheet file.
+            timing_file_path (str): Absolute file path to the specified timing sheet file.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_LoadTiming(vi_ctype, file_path_ctype)
+        timing_file_path_ctype = ctypes.create_string_buffer(timing_file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_LoadTiming(vi_ctype, timing_file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3573,23 +3717,21 @@ class Session(_SessionBase):
         Forces a particular edge-based trigger to occur regardless of how the specified trigger is configured. You can use this method as a software override.
 
         Args:
-            trigger (enums.SoftwareTrigger): Trigger specifies the trigger you want to override.
+            trigger (enums.SoftwareTrigger): The trigger you want to override.
 
-                +----------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
-                | Defined Values                   |                                                                                                                                 |
-                +==================================+=================================================================================================================================+
-                | SoftwareTrigger.START            | Overrides the Start trigger. You must specify an empty string in the trigger_identifier parameter.                              |
-                +----------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
-                | SoftwareTrigger.CONDITIONAL_JUMP | Specifies to route a conditional jump trigger. You must specify a conditional jump trigger in the trigger_identifier parameter. |
-                +----------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
+                -   SoftwareTrigger.START: Overrides the Start trigger. You must specify an empty string in the **triggerIdentifier** parameter.
+                -   SoftwareTrigger.CONDITIONAL_JUMP: Overrides the conditional jump trigger. You must specify a conditional jump trigger instance in the **triggerIdentifier** parameter.
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            trigger_identifier (str): Trigger Identifier specifies the instance of the trigger you want to override.
-                If trigger is specified as NIDIGITAL_VAL_START_TRIGGER, this parameter must be an empty string. If trigger is
-                specified as NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER, allowed values are conditionalJumpTrigger0,
-                conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
+            trigger_identifier (str): Specifies which instance of the conditional jump trigger you want to override.
+
+                -   VI_NULL ("")
+                -   NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER0 ("conditionalJumpTrigger0")
+                -   NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER1 ("conditionalJumpTrigger1")
+                -   NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER2 ("conditionalJumpTrigger2")
+                -   NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER3 ("conditionalJumpTrigger3")
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3621,18 +3763,18 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _unload_specifications(self, file_path):
-        r'''_unload_specifications
+    def unload_specifications(self, specifications_file_path):
+        r'''unload_specifications
 
-        Unloads the given specifications sheet present in the previously loaded specifications file that you select. You must call the _load_specifications method to reload the file with updated specifications values. You must then call the apply_levels_and_timing method in order to apply the levels and timing values that reference the updated specifications values.
+        Unloads the given specifications sheet present in the previously loaded specifications file that you select. You must call the load_specifications method to reload the file with updated specifications values. You must then call the apply_levels_and_timing method in order to apply the levels and timing values that reference the updated specifications values.
 
         Args:
-            file_path (str): Absolute file path to a loaded specifications file.
+            specifications_file_path (str): Absolute file path to a loaded specifications file.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_UnloadSpecifications(vi_ctype, file_path_ctype)
+        specifications_file_path_ctype = ctypes.create_string_buffer(specifications_file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_UnloadSpecifications(vi_ctype, specifications_file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3752,6 +3894,35 @@ class Session(_SessionBase):
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         waveform_file_path_ctype = ctypes.create_string_buffer(waveform_file_path.encode(self._encoding))  # case C020
         error_code = self._library.niDigital_WriteSourceWaveformDataFromFileTDMS(vi_ctype, waveform_name_ctype, waveform_file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def _write_source_waveform_site_unique_u32(self, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data):
+        r'''_write_source_waveform_site_unique_u32
+
+        Writes one waveform per site. Use this write method if you set the parameter of the create source waveform method to Site Unique.
+
+        Args:
+            site_list (str): Site numbers listed as a comma-delimited list of strings of form site\ ``N``, where ``N`` is the site number.
+
+            waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
+
+            num_waveforms (int): Number of waveforms.
+
+            samples_per_waveform (int): Number of samples per waveform.
+
+            waveform_data (array.array("L")): An array of samples to use as source data. Data for each site must be appended sequentially in the array (non-interleaved).
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        num_waveforms_ctype = _visatype.ViInt32(num_waveforms)  # case S150
+        samples_per_waveform_ctype = _visatype.ViInt32(samples_per_waveform)  # case S150
+        waveform_data_array = get_ctypes_and_array(value=waveform_data, array_type="L")  # case B550
+        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViUInt32)  # case B550
+        error_code = self._library.niDigital_WriteSourceWaveformSiteUniqueU32(vi_ctype, site_list_ctype, waveform_name_ctype, num_waveforms_ctype, samples_per_waveform_ctype, waveform_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

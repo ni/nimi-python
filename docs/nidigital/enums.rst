@@ -130,12 +130,12 @@ FrequencyMeasurementMode
 
 
 
-HistoryRAMCyclesToAcquire
--------------------------
+HramCyclesToAcquire
+-------------------
 
-.. py:class:: HistoryRAMCyclesToAcquire
+.. py:class:: HramCyclesToAcquire
 
-    .. py:attribute:: HistoryRAMCyclesToAcquire.FAILED
+    .. py:attribute:: HramCyclesToAcquire.FAILED
 
 
 
@@ -145,7 +145,7 @@ HistoryRAMCyclesToAcquire
 
 
 
-    .. py:attribute:: HistoryRAMCyclesToAcquire.ALL
+    .. py:attribute:: HramCyclesToAcquire.ALL
 
 
 
@@ -155,12 +155,12 @@ HistoryRAMCyclesToAcquire
 
 
 
-HistoryRAMTriggerType
----------------------
+HramTriggerType
+---------------
 
-.. py:class:: HistoryRAMTriggerType
+.. py:class:: HramTriggerType
 
-    .. py:attribute:: HistoryRAMTriggerType.FIRST_FAILURE
+    .. py:attribute:: HramTriggerType.FIRST_FAILURE
 
 
 
@@ -170,7 +170,7 @@ HistoryRAMTriggerType
 
 
 
-    .. py:attribute:: HistoryRAMTriggerType.CYCLE_NUMBER
+    .. py:attribute:: HramTriggerType.CYCLE_NUMBER
 
 
 
@@ -180,7 +180,7 @@ HistoryRAMTriggerType
 
 
 
-    .. py:attribute:: HistoryRAMTriggerType.PATTERN_LABEL
+    .. py:attribute:: HramTriggerType.PATTERN_LABEL
 
 
 
@@ -430,6 +430,16 @@ SelectedFunction
 
 
 
+    .. py:attribute:: SelectedFunction.RIO
+
+
+
+        Yields control of the specified pin(s) to LabVIEW FPGA.
+
+        
+
+
+
 SequencerFlag
 -------------
 
@@ -520,6 +530,31 @@ SequencerRegister
 
 
 
+SiteResultType
+--------------
+
+.. py:class:: SiteResultType
+
+    .. py:attribute:: SiteResultType.PASS_FAIL
+
+
+
+        Pass/fail site result.
+
+        
+
+
+
+    .. py:attribute:: SiteResultType.CAPTURE_WAVEFORM
+
+
+
+        Capture waveform site result.
+
+        
+
+
+
 SoftwareTrigger
 ---------------
 
@@ -529,19 +564,7 @@ SoftwareTrigger
 
 
 
-        Overrides the start trigger.
-
-        
-
-
-
     .. py:attribute:: SoftwareTrigger.CONDITIONAL_JUMP
-
-
-
-        Specifies to route a pattern opcode event signal.
-
-        
 
 
 

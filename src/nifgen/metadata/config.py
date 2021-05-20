@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 20.0.0d5
+# This file is generated from NI-FGEN API metadata version 20.7.0d242
 config = {
-    'api_version': '20.0.0d5',
+    'api_version': '20.7.0d242',
     'c_function_prefix': 'niFgen_',
     'close_function': 'close',
     'context_manager_name': {
@@ -53,5 +53,5 @@ config = {
     ],
     'session_class_description': 'An NI-FGEN session to a National Instruments Signal Generator.',
     'session_handle_parameter_name': 'vi',
-    'uses_nitclk': True,
+    'uses_nitclk': True
 }

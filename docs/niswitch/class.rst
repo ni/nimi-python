@@ -1229,6 +1229,14 @@ analog_bus_sharing_enable
         Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  property to True for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  False, which disables sharing of the analog bus.
         Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI Switches Help for more information about sharing the analog bus.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -1238,7 +1246,7 @@ analog_bus_sharing_enable
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | No         |
             +-----------------------+------------+
@@ -1257,6 +1265,14 @@ bandwidth
         This channel-based property returns the bandwidth for the channel.
         The units are hertz.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1266,7 +1282,7 @@ bandwidth
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -1312,6 +1328,14 @@ characteristic_impedance
         This channel-based property returns the characteristic impedance for the  channel.
         The units are ohms.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1321,7 +1345,7 @@ characteristic_impedance
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -1567,6 +1591,14 @@ is_configuration_channel
         Set this property to True to mark the channel as a configuration  channel.  Set this property to False to mark the channel as available  for external connections.
         After you identify a channel as a configuration channel, you cannot  use that channel for external connections.  The :py:meth:`niswitch.Session.connect` method  returns the NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL error when you attempt  to establish a connection between a configuration channel and any other  channel.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -1576,7 +1608,7 @@ is_configuration_channel
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | No         |
             +-----------------------+------------+
@@ -1648,6 +1680,14 @@ is_source_channel
 
         This channel-based property specifies whether you want to identify the  channel as a source channel.  Typically, you set this property to True  when you attach the channel to a power supply, a method generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The :py:meth:`niswitch.Session.connect` method  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -1657,7 +1697,7 @@ is_source_channel
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | No         |
             +-----------------------+------------+
@@ -1735,6 +1775,14 @@ max_ac_voltage
         This channel-based property returns the maximum AC voltage the channel  can switch.
         The units are volts RMS.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1744,7 +1792,7 @@ max_ac_voltage
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -1763,6 +1811,14 @@ max_carry_ac_current
         This channel-based property returns the maximum AC current the channel  can carry.
         The units are amperes RMS.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1772,7 +1828,7 @@ max_carry_ac_current
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -1791,6 +1847,14 @@ max_carry_ac_power
         This channel-based property returns the maximum AC power the channel can  carry.
         The units are volt-amperes.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1800,7 +1864,7 @@ max_carry_ac_power
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -1819,6 +1883,14 @@ max_carry_dc_current
         This channel-based property returns the maximum DC current the channel  can carry.
         The units are amperes.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1828,7 +1900,7 @@ max_carry_dc_current
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -1847,6 +1919,14 @@ max_carry_dc_power
         This channel-based property returns the maximum DC power the channel can  carry.
         The units are watts.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1856,7 +1936,7 @@ max_carry_dc_power
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -1875,6 +1955,14 @@ max_dc_voltage
         This channel-based property returns the maximum DC voltage the channel  can switch.
         The units are volts.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1884,7 +1972,7 @@ max_dc_voltage
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -1903,6 +1991,14 @@ max_switching_ac_current
         This channel-based property returns the maximum AC current the channel  can switch.
         The units are amperes RMS.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1912,7 +2008,7 @@ max_switching_ac_current
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -1931,6 +2027,14 @@ max_switching_ac_power
         This channel-based property returns the maximum AC power the channel can  switch.
         The units are volt-amperes.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1940,7 +2044,7 @@ max_switching_ac_power
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -1959,6 +2063,14 @@ max_switching_dc_current
         This channel-based property returns the maximum DC current the channel  can switch.
         The units are amperes.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1968,7 +2080,7 @@ max_switching_dc_current
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -1987,6 +2099,14 @@ max_switching_dc_power
         This channel-based property returns the maximum DC power the channel can  switch.
         The units are watts.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1996,7 +2116,7 @@ max_switching_dc_power
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -2313,6 +2433,12 @@ settling_time
 
         .. note:: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-------------------------------------------------------------+
@@ -2322,7 +2448,7 @@ settling_time
             +-----------------------+-------------------------------------------------------------+
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
+            | Repeated Capabilities | channels                                                    |
             +-----------------------+-------------------------------------------------------------+
             | Resettable            | No                                                          |
             +-----------------------+-------------------------------------------------------------+
@@ -2562,6 +2688,14 @@ wire_mode
         This property returns the wire mode of the switch device.
         This property affects the values of the :py:attr:`niswitch.Session.num_of_rows` and  :py:attr:`niswitch.Session.num_of_columns` properties.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -2571,7 +2705,7 @@ wire_mode
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+

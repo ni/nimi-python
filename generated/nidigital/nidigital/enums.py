@@ -60,7 +60,7 @@ class FrequencyMeasurementMode(Enum):
     '''
 
 
-class HistoryRAMCyclesToAcquire(Enum):
+class HramCyclesToAcquire(Enum):
     FAILED = 2303
     r'''
     Acquires failed cycles.
@@ -71,7 +71,7 @@ class HistoryRAMCyclesToAcquire(Enum):
     '''
 
 
-class HistoryRAMTriggerType(Enum):
+class HramTriggerType(Enum):
     FIRST_FAILURE = 2200
     r'''
     First Failure History RAM trigger
@@ -194,6 +194,10 @@ class SelectedFunction(Enum):
     r'''
     The I/O switch connecting the instrument channel is open to the I/O connector. If the PPMU is sourcing, it is stopped prior to opening the I/O switch.
     '''
+    RIO = 1104
+    r'''
+    Yields control of the specified pin(s) to LabVIEW FPGA.
+    '''
 
 
 class SequencerFlag(Enum):
@@ -222,7 +226,7 @@ class SequencerRegister(Enum):
     REGISTER15 = 'reg15'
 
 
-class _SiteResultType(Enum):
+class SiteResultType(Enum):
     PASS_FAIL = 3300
     r'''
     Pass/fail site result.
@@ -235,13 +239,7 @@ class _SiteResultType(Enum):
 
 class SoftwareTrigger(Enum):
     START = 2000
-    r'''
-    Overrides the start trigger.
-    '''
     CONDITIONAL_JUMP = 2001
-    r'''
-    Specifies to route a pattern opcode event signal.
-    '''
 
 
 class SourceDataMapping(Enum):

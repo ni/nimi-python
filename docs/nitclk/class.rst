@@ -160,7 +160,7 @@ configure_for_homogeneous_triggers
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: (Driver Session or nitclk.SessionReference)
 
 finish_sync_pulse_sender_synchronize
 ------------------------------------
@@ -183,7 +183,7 @@ finish_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: list of (nimi-python Session class or nitclk.SessionReference)
+        :type sessions: (Driver Session or nitclk.SessionReference)
         :param min_time:
 
 
@@ -224,7 +224,7 @@ initiate
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: (Driver Session or nitclk.SessionReference)
 
 is_done
 -------
@@ -248,7 +248,7 @@ is_done
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: (Driver Session or nitclk.SessionReference)
 
         :rtype: bool
         :return:
@@ -269,7 +269,7 @@ setup_for_sync_pulse_sender_synchronize
 
     .. py:function:: setup_for_sync_pulse_sender_synchronize(sessions, min_time=hightime.timedelta(seconds=0.0))
 
-        Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
+        Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization.
 
         
 
@@ -283,7 +283,7 @@ setup_for_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: (Driver Session or nitclk.SessionReference)
         :param min_time:
 
 
@@ -325,7 +325,7 @@ synchronize
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: (Driver Session or nitclk.SessionReference)
         :param min_tclk_period:
 
 
@@ -362,7 +362,7 @@ synchronize_to_sync_pulse_sender
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: (Driver Session or nitclk.SessionReference)
         :param min_time:
 
 
@@ -406,7 +406,7 @@ wait_until_done
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: (Driver Session or nitclk.SessionReference)
         :param timeout:
 
 
@@ -440,6 +440,34 @@ SessionReference
         nitclk session
     :type session_number: int, nimi-python Session class, SessionReference
 
+
+conditional_jump_trigger_master_session
+---------------------------------------
+
+    .. py:currentmodule:: nitclk.SessionReference
+
+    .. py:attribute:: conditional_jump_trigger_master_session
+
+        
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------------------------------+
+            | Characteristic        | Value                                     |
+            +=======================+===========================================+
+            | Datatype              | Driver Session or nitclk.SessionReference |
+            +-----------------------+-------------------------------------------+
+            | Permissions           | read-write                                |
+            +-----------------------+-------------------------------------------+
+            | Repeated Capabilities | None                                      |
+            +-----------------------+-------------------------------------------+
+            | Resettable            | No                                        |
+            +-----------------------+-------------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NITCLK_ATTR_CONDITIONAL_JUMP_TRIGGER_MASTER_SESSION**
 
 exported_sync_pulse_output_terminal
 -----------------------------------
@@ -597,23 +625,53 @@ sample_clock_delay
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------------------------------------+
-            | Characteristic        | Value                                                       |
-            +=======================+=============================================================+
-            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +-----------------------+-------------------------------------------------------------+
-            | Permissions           | read-write                                                  |
-            +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
-            +-----------------------+-------------------------------------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
+            | Resettable            | No         |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - LabVIEW Property: **Sample Clock Delay**
                 - C Attribute: **NITCLK_ATTR_SAMPLE_CLOCK_DELAY**
+
+script_trigger_master_session
+-----------------------------
+
+    .. py:currentmodule:: nitclk.SessionReference
+
+    .. py:attribute:: script_trigger_master_session
+
+        Specifies the script trigger master session.
+        For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------------------------------+
+            | Characteristic        | Value                                     |
+            +=======================+===========================================+
+            | Datatype              | Driver Session or nitclk.SessionReference |
+            +-----------------------+-------------------------------------------+
+            | Permissions           | read-write                                |
+            +-----------------------+-------------------------------------------+
+            | Repeated Capabilities | None                                      |
+            +-----------------------+-------------------------------------------+
+            | Resettable            | No                                        |
+            +-----------------------+-------------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Script Trigger Master Session**
+                - C Attribute: **NITCLK_ATTR_SCRIPT_TRIGGER_MASTER_SESSION**
 
 sequencer_flag_master_session
 -----------------------------
@@ -797,17 +855,17 @@ tclk_actual_period
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | float     |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +-----------------------+----------------------------------------+
+            | Characteristic        | Value                                  |
+            +=======================+========================================+
+            | Datatype              | float in seconds or datetime.timedelta |
+            +-----------------------+----------------------------------------+
+            | Permissions           | read only                              |
+            +-----------------------+----------------------------------------+
+            | Repeated Capabilities | None                                   |
+            +-----------------------+----------------------------------------+
+            | Resettable            | No                                     |
+            +-----------------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

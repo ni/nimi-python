@@ -120,19 +120,23 @@ apply_levels_and_timing
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: apply_levels_and_timing(levels_sheet, timing_sheet, initial_state_high_pins=None, initial_state_low_pins=None, initial_state_tristate_pins=None)
+    .. py:method:: apply_levels_and_timing(site_list, levels_sheet, timing_sheet, initial_state_high_pins="", initial_state_low_pins="", initial_state_tristate_pins="")
 
             Applies digital levels and timing values defined in previously loaded levels and timing sheets. When applying a levels sheet, only the levels specified in the sheet are affected. Any levels not specified in the sheet remain unchanged. When applying a timing sheet, all existing time sets are deleted before the new time sets are loaded.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param site_list:
 
 
+                Comma-delimited list of strings in the form of ``siteN`` , where ``N`` is the site number. If you enter an empty string, this method applies the levels and initial states to all sites.
+
+                
+
+
+            :type site_list: str
             :param levels_sheet:
 
 
@@ -159,7 +163,7 @@ apply_levels_and_timing
                 
 
 
-            :type initial_state_high_pins: basic sequence types or str
+            :type initial_state_high_pins: str
             :param initial_state_low_pins:
 
 
@@ -168,7 +172,7 @@ apply_levels_and_timing
                 
 
 
-            :type initial_state_low_pins: basic sequence types or str
+            :type initial_state_low_pins: str
             :param initial_state_tristate_pins:
 
 
@@ -177,7 +181,7 @@ apply_levels_and_timing
                 
 
 
-            :type initial_state_tristate_pins: basic sequence types or str
+            :type initial_state_tristate_pins: str
 
 apply_tdr_offsets
 -----------------
@@ -205,7 +209,7 @@ apply_tdr_offsets
                 
 
 
-            :type offsets: basic sequence of hightime.timedelta, datetime.timedelta, or float in seconds
+            :type offsets: float in seconds or datetime.timedelta
 
 burst_pattern
 -------------
@@ -277,6 +281,19 @@ burst_pattern
 
 
 
+clear_error
+-----------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: clear_error()
+
+            Clears the error information for the current execution thread and the IVI session you specify. If you pass VI_NULL for the **vi** parameter, this method clears the error information only for the current execution thread.
+
+            
+
+
+
 clock_generator_abort
 ---------------------
 
@@ -331,6 +348,24 @@ clock_generator_generate_clock
 
 
             :type select_digital_function: bool
+
+clock_generator_initiate
+------------------------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: clock_generator_initiate()
+
+            Initiates clock generation on the specified channel(s) or pin(s) and pin group(s).
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.
+
 
 close
 -----
@@ -411,38 +446,47 @@ configure_pattern_burst_sites
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_pattern_burst_sites()
+    .. py:method:: configure_pattern_burst_sites(site_list)
 
             Configures which sites burst the pattern on the next call to the initiate method. The pattern burst sites can also be modified through the repeated capabilities for the :py:meth:`nidigital.Session.burst_pattern` method. If a site has been disabled through the :py:meth:`nidigital.Session.disable_sites` method, the site does not burst a pattern even if included in the pattern burst sites.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
 
+            :param site_list:
+
+
+                A comma-delimited list of strings in the form of site\ ``N``, where ``N`` is the site number. If you specify an empty string, the method returns pass or fail results for all sites. If the string is empty, all sites are configured for pattern bursting.
+
+                
+
+
+            :type site_list: str
 
 configure_time_set_compare_edges_strobe
 ---------------------------------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_compare_edges_strobe(time_set_name, strobe_edge)
+    .. py:method:: configure_time_set_compare_edges_strobe(pin_list, time_set, strobe_edge)
 
             Configures the strobe edge time for the specified pins. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin_list:
 
 
-            :param time_set_name:
+                List of pin and pin group names for which to configure the time set edges.
+
+                
+
+
+            :type pin_list: str
+            :param time_set:
 
 
                 The specified time set name.
@@ -450,7 +494,7 @@ configure_time_set_compare_edges_strobe
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
             :param strobe_edge:
 
 
@@ -459,27 +503,31 @@ configure_time_set_compare_edges_strobe
                 
 
 
-            :type strobe_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type strobe_edge: float in seconds or datetime.timedelta
 
 configure_time_set_compare_edges_strobe2x
 -----------------------------------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_compare_edges_strobe2x(time_set_name, strobe_edge, strobe2_edge)
+    .. py:method:: configure_time_set_compare_edges_strobe2x(pin_list, time_set, strobe_edge, strobe2_edge)
 
             Configures the compare strobes for the specified pins in the time set, including the 2x strobe. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin_list:
 
 
-            :param time_set_name:
+                List of pin and pin group names for which to configure the time set edges.
+
+                
+
+
+            :type pin_list: str
+            :param time_set:
 
 
                 The specified time set name.
@@ -487,7 +535,7 @@ configure_time_set_compare_edges_strobe2x
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
             :param strobe_edge:
 
 
@@ -496,7 +544,7 @@ configure_time_set_compare_edges_strobe2x
                 
 
 
-            :type strobe_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type strobe_edge: float in seconds or datetime.timedelta
             :param strobe2_edge:
 
 
@@ -505,27 +553,31 @@ configure_time_set_compare_edges_strobe2x
                 
 
 
-            :type strobe2_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type strobe2_edge: float in seconds or datetime.timedelta
 
 configure_time_set_drive_edges
 ------------------------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_drive_edges(time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
+    .. py:method:: configure_time_set_drive_edges(pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
 
             Configures the drive format and drive edge placement for the specified pins. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin_list:
 
 
-            :param time_set_name:
+                List of pin and pin group names for which to configure the time set edges.
+
+                
+
+
+            :type pin_list: str
+            :param time_set:
 
 
                 The specified time set name.
@@ -533,7 +585,7 @@ configure_time_set_drive_edges
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
             :param format:
 
 
@@ -556,7 +608,7 @@ configure_time_set_drive_edges
                 
 
 
-            :type drive_on_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type drive_on_edge: float in seconds or datetime.timedelta
             :param drive_data_edge:
 
 
@@ -565,7 +617,7 @@ configure_time_set_drive_edges
                 
 
 
-            :type drive_data_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type drive_data_edge: float in seconds or datetime.timedelta
             :param drive_return_edge:
 
 
@@ -574,7 +626,7 @@ configure_time_set_drive_edges
                 
 
 
-            :type drive_return_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type drive_return_edge: float in seconds or datetime.timedelta
             :param drive_off_edge:
 
 
@@ -583,27 +635,31 @@ configure_time_set_drive_edges
                 
 
 
-            :type drive_off_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type drive_off_edge: float in seconds or datetime.timedelta
 
 configure_time_set_drive_edges2x
 --------------------------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_drive_edges2x(time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
+    .. py:method:: configure_time_set_drive_edges2x(pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
 
             Configures the drive edges of the pins in the time set, including 2x edges. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin_list:
 
 
-            :param time_set_name:
+                List of pin and pin group names for which to configure the time set edges.
+
+                
+
+
+            :type pin_list: str
+            :param time_set:
 
 
                 The specified time set name.
@@ -611,7 +667,7 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
             :param format:
 
 
@@ -634,7 +690,7 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type drive_on_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type drive_on_edge: float in seconds or datetime.timedelta
             :param drive_data_edge:
 
 
@@ -643,7 +699,7 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type drive_data_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type drive_data_edge: float in seconds or datetime.timedelta
             :param drive_return_edge:
 
 
@@ -652,7 +708,7 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type drive_return_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type drive_return_edge: float in seconds or datetime.timedelta
             :param drive_off_edge:
 
 
@@ -661,7 +717,7 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type drive_off_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type drive_off_edge: float in seconds or datetime.timedelta
             :param drive_data2_edge:
 
 
@@ -670,7 +726,7 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type drive_data2_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type drive_data2_edge: float in seconds or datetime.timedelta
             :param drive_return2_edge:
 
 
@@ -679,27 +735,31 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type drive_return2_edge: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type drive_return2_edge: float in seconds or datetime.timedelta
 
 configure_time_set_drive_format
 -------------------------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_drive_format(time_set_name, drive_format)
+    .. py:method:: configure_time_set_drive_format(pin_list, time_set, drive_format)
 
             Configures the drive format for the pins specified in the **pinList**. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin_list:
 
 
-            :param time_set_name:
+                List of pin and pin group names for which to configure the time set edges.
+
+                
+
+
+            :type pin_list: str
+            :param time_set:
 
 
                 The specified time set name.
@@ -707,7 +767,7 @@ configure_time_set_drive_format
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
             :param drive_format:
 
 
@@ -728,20 +788,24 @@ configure_time_set_edge
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_edge(time_set_name, edge, time)
+    .. py:method:: configure_time_set_edge(pin_list, time_set, edge, time)
 
             Configures the edge placement for the pins specified in the pin list. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin_list:
 
 
-            :param time_set_name:
+                List of pin and pin group names for which to configure the time set edges.
+
+                
+
+
+            :type pin_list: str
+            :param time_set:
 
 
                 The specified time set name.
@@ -749,7 +813,7 @@ configure_time_set_edge
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
             :param edge:
 
 
@@ -776,27 +840,31 @@ configure_time_set_edge
                 
 
 
-            :type time: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type time: float in seconds or datetime.timedelta
 
 configure_time_set_edge_multiplier
 ----------------------------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_edge_multiplier(time_set_name, edge_multiplier)
+    .. py:method:: configure_time_set_edge_multiplier(pin_list, time_set, edge_multiplier)
 
             Configures the edge multiplier of the pins in the time set. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin_list:
 
 
-            :param time_set_name:
+                List of pin and pin group names for which to configure the time set edges.
+
+                
+
+
+            :type pin_list: str
+            :param time_set:
 
 
                 The specified time set name.
@@ -804,7 +872,7 @@ configure_time_set_edge_multiplier
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
             :param edge_multiplier:
 
 
@@ -820,7 +888,7 @@ configure_time_set_period
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_period(time_set_name, period)
+    .. py:method:: configure_time_set_period(time_set, period)
 
             Configures the period of a time set. Use this method to modify time set values after applying a timing sheet with the :py:meth:`nidigital.Session.apply_levels_and_timing` method, or to create time sets programmatically without the use of timing sheets. This method does not modify the timing sheet file or the timing sheet contents that will be used in future calls to :py:meth:`nidigital.Session.apply_levels_and_timing`; it only affects the values of the current timing context.
 
@@ -828,7 +896,7 @@ configure_time_set_period
 
 
 
-            :param time_set_name:
+            :param time_set:
 
 
                 The specified time set name.
@@ -836,7 +904,7 @@ configure_time_set_period
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
             :param period:
 
 
@@ -845,7 +913,7 @@ configure_time_set_period
                 
 
 
-            :type period: hightime.timedelta, datetime.timedelta, or float in seconds
+            :type period: float in seconds or datetime.timedelta
 
 configure_voltage_levels
 ------------------------
@@ -948,19 +1016,25 @@ create_capture_waveform_parallel
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: create_capture_waveform_parallel(waveform_name)
+    .. py:method:: create_capture_waveform_parallel(pin_list, waveform_name)
 
             Sets the capture waveform settings for parallel acquisition. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin_list:
 
 
+                List of capture pins from the waveform. The **pinList** must match the capture pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data captured by the :py:meth:`nidigital.Session.FetchCaptureWaveform` method.
+
+                
+
+                .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+
+            :type pin_list: str
             :param waveform_name:
 
 
@@ -976,19 +1050,25 @@ create_capture_waveform_serial
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: create_capture_waveform_serial(waveform_name, sample_width, bit_order)
+    .. py:method:: create_capture_waveform_serial(pin_list, waveform_name, sample_width, bit_order)
 
             Sets the capture waveform settings for serial acquisition. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin_list:
 
 
+                List of capture pins from the waveform. The **pinList** must match the capture pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data captured by the :py:meth:`nidigital.Session.FetchCaptureWaveform` method.
+
+                
+
+                .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+
+            :type pin_list: str
             :param waveform_name:
 
 
@@ -1066,19 +1146,25 @@ create_source_waveform_parallel
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: create_source_waveform_parallel(waveform_name, data_mapping)
+    .. py:method:: create_source_waveform_parallel(pin_list, waveform_name, data_mapping)
 
             Sets the source waveform settings required for parallel sourcing. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin_list:
 
 
+                Source pins for the waveform. The **pinList** must match the source pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data written by the :py:meth:`nidigital.Session.WriteSourceWaveform` method.
+
+                
+
+                .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+
+            :type pin_list: str
             :param waveform_name:
 
 
@@ -1106,19 +1192,25 @@ create_source_waveform_serial
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: create_source_waveform_serial(waveform_name, data_mapping, sample_width, bit_order)
+    .. py:method:: create_source_waveform_serial(pin_list, waveform_name, data_mapping, sample_width, bit_order)
 
             Sets the source waveform settings required for serial sourcing. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin_list:
 
 
+                Source pins for the waveform. The **pinList** must match the source pins in the pattern that references the waveform. The pin order in the **pinList** determines the bit positions of the data written by the :py:meth:`nidigital.Session.WriteSourceWaveform` method.
+
+                
+
+                .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+
+            :type pin_list: str
             :param waveform_name:
 
 
@@ -1203,36 +1295,46 @@ disable_sites
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: disable_sites()
+    .. py:method:: disable_sites(site_list)
 
             Disables specified sites. Disabled sites are not included in pattern bursts initiated by the initiate method or the :py:meth:`nidigital.Session.burst_pattern` method, even if the site is specified in the list of pattern burst sites in :py:meth:`nidigital.Session.configure_pattern_burst_sites` method or in the repeated capabilities for the :py:meth:`nidigital.Session.burst_pattern` method. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital method, digital pattern instrument channels mapped to disabled sites are not affected by the method. The methods that return per-pin data, such as the :py:meth:`nidigital.Session.ppmu_measure` method, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this method with the Semiconductor Module.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
 
+            :param site_list:
+
+
+                Comma-delimited list of strings in the form of site\ ``N``, where ``N`` is the site number. If you enter an empty string, the method disables all sites.
+
+                
+
+
+            :type site_list: str
 
 enable_sites
 ------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: enable_sites()
+    .. py:method:: enable_sites(site_list)
 
             Enables the sites you specify. All sites are enabled by default.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
 
+            :param site_list:
+
+
+                Comma-delimited list of strings in the form of site\ ``N``, where ``N`` is the site number. If you enter an empty string, the method enables all sites.
+
+                
+
+
+            :type site_list: str
 
 fetch_capture_waveform
 ----------------------
@@ -1321,11 +1423,11 @@ fetch_history_ram_cycle_information
                 :py:attr:`nidigital.Session.history_ram_trigger_type` should be used to specify the trigger condition on which History RAM
                 starts acquiring pattern information.
 
-                If History RAM trigger is configured as :py:data:`~nidigital.HistoryRAMTriggerType.CYCLE_NUMBER`,
+                If History RAM trigger is configured as :py:data:`~nidigital.HramTriggerType.CYCLE_NUMBER`,
                 :py:attr:`nidigital.Session.cycle_number_history_ram_trigger_cycle_number` should be used to specify the cycle number on which
                 History RAM starts acquiring pattern information.
 
-                If History RAM trigger is configured as :py:data:`~nidigital.HistoryRAMTriggerType.PATTERN_LABEL`,
+                If History RAM trigger is configured as :py:data:`~nidigital.HramTriggerType.PATTERN_LABEL`,
                 :py:attr:`nidigital.Session.pattern_label_history_ram_trigger_label` should be used to specify the pattern label from which to
                 start acquiring pattern information.
                 :py:attr:`nidigital.Session.pattern_label_history_ram_trigger_vector_offset` should be used to specify the number of vectors
@@ -1429,12 +1531,45 @@ frequency_counter_measure_frequency
 
 
 
-get_channel_names
------------------
+get_channel_name
+----------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_channel_names(indices)
+    .. py:method:: get_channel_name(index)
+
+            Returns the channel name that corresponds to the index you specify. Channel indexes are one-based. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **nameBufferSize**. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the method copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for **nameBufferSize** and VI_NULL for the name.
+
+            
+
+
+
+            :param index:
+
+
+                Specifies a one-based index for the desired channel in the session. Valid values are from one to the total number of channels in the session.
+
+                
+
+
+            :type index: int
+
+            :rtype: str
+            :return:
+
+
+                    The returned channel name(s) at the specified index.
+
+                    
+
+
+
+get_channel_name_from_string
+----------------------------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: get_channel_name_from_string(index)
 
             Returns a comma-separated list of channel names from a string index list.
 
@@ -1442,7 +1577,7 @@ get_channel_names
 
 
 
-            :param indices:
+            :param index:
 
 
                 Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
@@ -1456,9 +1591,9 @@ get_channel_names
                 
 
 
-            :type indices: basic sequence types or str or int
+            :type index: str
 
-            :rtype: list of str
+            :rtype: str
             :return:
 
 
@@ -1501,42 +1636,23 @@ get_history_ram_sample_count
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_history_ram_sample_count()
+    .. py:method:: get_history_ram_sample_count(site)
 
             Returns the number of samples History RAM acquired on the last pattern burst.
 
             
 
-            .. note:: Before bursting a pattern, you must configure the History RAM trigger and specify which cycles to acquire.
-
-                :py:attr:`nidigital.Session.history_ram_trigger_type` should be used to specify the trigger condition on which History RAM
-                starts acquiring pattern information.
-
-                If History RAM trigger is configured as :py:data:`~nidigital.HistoryRAMTriggerType.CYCLE_NUMBER`,
-                :py:attr:`nidigital.Session.cycle_number_history_ram_trigger_cycle_number` should be used to specify the cycle number on which
-                History RAM starts acquiring pattern information.
-
-                If History RAM trigger is configured as :py:data:`~nidigital.HistoryRAMTriggerType.PATTERN_LABEL`,
-                :py:attr:`nidigital.Session.pattern_label_history_ram_trigger_label` should be used to specify the pattern label from which to
-                start acquiring pattern information.
-                :py:attr:`nidigital.Session.pattern_label_history_ram_trigger_vector_offset` should be used to specify the number of vectors
-                following the specified pattern label from which to start acquiring pattern information.
-                :py:attr:`nidigital.Session.pattern_label_history_ram_trigger_cycle_offset` should be used to specify the number of cycles
-                following the specified pattern label and vector offset from which to start acquiring pattern information.
-
-                For all History RAM trigger conditions, :py:attr:`nidigital.Session.history_ram_pretrigger_samples` should be used to specify
-                the number of samples to acquire before the trigger conditions are met. If you configure History RAM to only
-                acquire failed cycles, you must set :py:attr:`nidigital.Session.history_ram_pretrigger_samples` to 0.
-
-                :py:attr:`nidigital.Session.history_ram_cycles_to_acquire` should be used to specify which cycles History RAM acquires after
-                the trigger conditions are met.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            :param site:
 
+
+                Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The method returns an error if more than one site is specified.
+
+                
+
+
+            :type site: str
 
             :rtype: int
             :return:
@@ -1571,7 +1687,7 @@ get_pattern_pin_names
 
             :type start_label: str
 
-            :rtype: list of str
+            :rtype: str
             :return:
 
 
@@ -1618,24 +1734,76 @@ get_site_pass_fail
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_site_pass_fail()
+    .. py:method:: get_site_pass_fail(site_list)
 
-            Returns dictionary where each key is a site number and value is pass/fail
+            Returns the pass or fail results for each site.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param site_list:
 
 
-            :rtype: { int: bool, int: bool, ... }
+                A comma-delimited list of strings in the form of site\ ``N``, where ``N`` is the site number. If you specify an empty string, the method returns pass or fail results for all sites.
+
+                
+
+
+            :type site_list: str
+
+            :rtype: list of bool
             :return:
 
 
-                    Dictionary where each key is a site number and value is pass/fail
+                    The returned array of pass (True) and fail results for the sites you specify in the repeated capabilities. If sites span multiple digital pattern instruments, you must use an AND operator for the partial results for those sites returned by each instrument. If a site is disabled or not enabled for burst, the method does not return data for that site. Use the :py:meth:`nidigital.Session.SortSiteResultsViBoolean` method to order and combine the data to match the repeated capabilities. You can also use the :py:meth:`nidigital.Session.get_site_results_site_numbers` method to determine the order of the sites returned from this method call so that you can match the pass array with site numbers.
+
+                    
+
+                    .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+
+
+get_site_results_site_numbers
+-----------------------------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: get_site_results_site_numbers(site_list, site_result_type)
+
+            Returns the site numbers that correspond to per-site data read from the digital pattern instrument. The method returns site numbers in the same order as values read using the :py:meth:`nidigital.Session.get_site_pass_fail` and :py:meth:`nidigital.Session.fetch_capture_waveform_u32` methods. Use this method to match values the previously listed methods return with site numbers.
+
+            
+
+
+
+            :param site_list:
+
+
+                Site numbers listed as a comma-delimited list of strings of form site\ ``N``, where ``N`` is the site number.
+
+                
+
+
+            :type site_list: str
+            :param site_result_type:
+
+
+                The type of data specified in the results array.
+
+                -   :py:data:`~nidigital.SiteResultType.PASS_FAIL`: Get site numbers for pass/fail data.
+                -   :py:data:`~nidigital.SiteResultType.CAPTURE_WAVEFORM`: Get site numbers for capture waveforms.
+
+                
+
+
+            :type site_result_type: :py:data:`nidigital.SiteResultType`
+
+            :rtype: list of int
+            :return:
+
+
+                    The returned array of site numbers that correspond to the values specified by **siteResultType**.
 
                     
 
@@ -1646,20 +1814,24 @@ get_time_set_drive_format
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_drive_format(time_set_name)
+    .. py:method:: get_time_set_drive_format(pin, time_set)
 
             Returns the drive format of a pin in the specified time set.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin:
 
 
-            :param time_set_name:
+                Name of the specified pin.
+
+                
+
+
+            :type pin: str
+            :param time_set:
 
 
                 The specified time set name.
@@ -1667,7 +1839,7 @@ get_time_set_drive_format
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
 
             :rtype: :py:data:`nidigital.DriveFormat`
             :return:
@@ -1684,20 +1856,24 @@ get_time_set_edge
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_edge(time_set_name, edge)
+    .. py:method:: get_time_set_edge(pin, time_set, edge)
 
             Returns the edge time of a pin in the specified time set.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin:
 
 
-            :param time_set_name:
+                Name of the specified pin.
+
+                
+
+
+            :type pin: str
+            :param time_set:
 
 
                 The specified time set name.
@@ -1705,7 +1881,7 @@ get_time_set_edge
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
             :param edge:
 
 
@@ -1725,7 +1901,7 @@ get_time_set_edge
 
             :type edge: :py:data:`nidigital.TimeSetEdgeType`
 
-            :rtype: hightime.timedelta
+            :rtype: float
             :return:
 
 
@@ -1740,20 +1916,24 @@ get_time_set_edge_multiplier
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_edge_multiplier(time_set_name)
+    .. py:method:: get_time_set_edge_multiplier(pin, time_set)
 
             Returns the edge multiplier of the specified time set.
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+            :param pin:
 
 
-            :param time_set_name:
+                Name of the specified pin.
+
+                
+
+
+            :type pin: str
+            :param time_set:
 
 
                 The specified time set name.
@@ -1761,7 +1941,7 @@ get_time_set_edge_multiplier
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
 
             :rtype: int
             :return:
@@ -1778,7 +1958,7 @@ get_time_set_period
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_period(time_set_name)
+    .. py:method:: get_time_set_period(time_set)
 
             Returns the period of the specified time set.
 
@@ -1786,7 +1966,7 @@ get_time_set_period
 
 
 
-            :param time_set_name:
+            :param time_set:
 
 
                 The specified time set name.
@@ -1794,9 +1974,9 @@ get_time_set_period
                 
 
 
-            :type time_set_name: str
+            :type time_set: str
 
-            :rtype: hightime.timedelta
+            :rtype: float
             :return:
 
 
@@ -1849,7 +2029,7 @@ is_site_enabled
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: is_site_enabled()
+    .. py:method:: is_site_enabled(site)
 
             Checks if a specified site is enabled.
 
@@ -1858,11 +2038,16 @@ is_site_enabled
             .. note:: The method returns an error if more than one site is specified.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
 
+            :param site:
+
+
+                Site specified as a string in the form of ``siteN``, where ``N`` is the site number. The method returns an error if more than one site is specified.
+
+                
+
+
+            :type site: str
 
             :rtype: bool
             :return:
@@ -1873,6 +2058,29 @@ is_site_enabled
                     
 
 
+
+load_levels
+-----------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: load_levels(levels_file_path)
+
+            Loads a levels sheet from a specified file.
+
+            
+
+
+
+            :param levels_file_path:
+
+
+                Absolute file path to the specified levels sheet file.
+
+                
+
+
+            :type levels_file_path: str
 
 load_pattern
 ------------
@@ -1902,7 +2110,7 @@ load_pin_map
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: load_pin_map(file_path)
+    .. py:method:: load_pin_map(pin_map_file_path)
 
             Loads a pin map file. You can load only a single pin and channel map file during an NI-Digital Pattern Driver session. To switch pin maps, create a new session or call the :py:meth:`nidigital.Session.reset` method.
 
@@ -1910,7 +2118,7 @@ load_pin_map
 
 
 
-            :param file_path:
+            :param pin_map_file_path:
 
 
                 Absolute file path to a pin map file created with the Digital Pattern Editor or the NI TestStand Semiconductor Module.
@@ -1918,7 +2126,30 @@ load_pin_map
                 
 
 
-            :type file_path: str
+            :type pin_map_file_path: str
+
+load_specifications
+-------------------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: load_specifications(specifications_file_path)
+
+            Loads a specifications sheet from a specified file.
+
+            
+
+
+
+            :param specifications_file_path:
+
+
+                Absolute file path to a specifications file.
+
+                
+
+
+            :type specifications_file_path: str
 
 load_specifications_levels_and_timing
 -------------------------------------
@@ -1965,6 +2196,29 @@ load_specifications_levels_and_timing
 
 
             :type timing_file_paths: str or basic sequence of str
+
+load_timing
+-----------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: load_timing(timing_file_path)
+
+            Loads a timing sheet from a specified file.
+
+            
+
+
+
+            :param timing_file_path:
+
+
+                Absolute file path to the specified timing sheet file.
+
+                
+
+
+            :type timing_file_path: str
 
 lock
 ----
@@ -2213,6 +2467,34 @@ reset
 
 
 
+reset_attribute
+---------------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: reset_attribute(attribute_id)
+
+            Resets the property to its default value.
+
+            
+
+
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.
+
+
+            :param attribute_id:
+
+
+                Pass the ID of a property.
+
+                
+
+
+            :type attribute_id: int
+
 reset_device
 ------------
 
@@ -2285,15 +2567,12 @@ send_software_edge_trigger
             :param trigger:
 
 
-                Trigger specifies the trigger you want to override.
+                The trigger you want to override.
 
-                +--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
-                | Defined Values                                         |                                                                                                                                 |
-                +========================================================+=================================================================================================================================+
-                | :py:data:`~nidigital.SoftwareTrigger.START`            | Overrides the Start trigger. You must specify an empty string in the trigger_identifier parameter.                              |
-                +--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nidigital.SoftwareTrigger.CONDITIONAL_JUMP` | Specifies to route a conditional jump trigger. You must specify a conditional jump trigger in the trigger_identifier parameter. |
-                +--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
+                -   :py:data:`~nidigital.SoftwareTrigger.START`: Overrides the Start trigger. You must specify an empty string in the **triggerIdentifier** parameter.
+                -   :py:data:`~nidigital.SoftwareTrigger.CONDITIONAL_JUMP`: Overrides the conditional jump trigger. You must specify a conditional jump trigger instance in the **triggerIdentifier** parameter.
+
+                
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -2302,10 +2581,13 @@ send_software_edge_trigger
             :param trigger_identifier:
 
 
-                Trigger Identifier specifies the instance of the trigger you want to override.
-                If trigger is specified as :py:data:`~nidigital.NIDIGITAL_VAL_START_TRIGGER`, this parameter must be an empty string. If trigger is
-                specified as :py:data:`~nidigital.NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER`, allowed values are conditionalJumpTrigger0,
-                conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
+                Specifies which instance of the conditional jump trigger you want to override.
+
+                -   VI_NULL ("")
+                -   :py:data:`~nidigital.NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER0` ("conditionalJumpTrigger0")
+                -   :py:data:`~nidigital.NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER1` ("conditionalJumpTrigger1")
+                -   :py:data:`~nidigital.NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER2` ("conditionalJumpTrigger2")
+                -   :py:data:`~nidigital.NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER3` ("conditionalJumpTrigger3")
 
                 
 
@@ -2342,7 +2624,7 @@ tdr
 
             :type apply_offsets: bool
 
-            :rtype: list of hightime.timedelta
+            :rtype: list of float
             :return:
 
 
@@ -2380,28 +2662,23 @@ unload_specifications
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: unload_specifications(file_paths)
+    .. py:method:: unload_specifications(specifications_file_path)
 
-            Unloads the given specifications sheets present in the previously loaded
-            specifications files that you select.
-
-            You must call :py:meth:`nidigital.Session.load_specifications_levels_and_timing` to reload the files with updated
-            specifications values. You must then call :py:meth:`nidigital.Session.apply_levels_and_timing` in order to apply
-            the levels and timing values that reference the updated specifications values.
+            Unloads the given specifications sheet present in the previously loaded specifications file that you select. You must call the :py:meth:`nidigital.Session.load_specifications` method to reload the file with updated specifications values. You must then call the :py:meth:`nidigital.Session.apply_levels_and_timing` method in order to apply the levels and timing values that reference the updated specifications values.
 
             
 
 
 
-            :param file_paths:
+            :param specifications_file_path:
 
 
-                Absolute file path of one or more loaded specifications files.
+                Absolute file path to a loaded specifications file.
 
                 
 
 
-            :type file_paths: str or basic sequence of str
+            :type specifications_file_path: str
 
 unlock
 ------
@@ -2666,6 +2943,14 @@ active_load_ioh
 
         Specifies the current that the DUT sources to the active load while outputting a voltage above VCOM.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -2675,7 +2960,7 @@ active_load_ioh
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -2692,6 +2977,14 @@ active_load_iol
 
         Specifies the current that the DUT sinks from the active load while outputting a voltage below VCOM.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -2701,7 +2994,7 @@ active_load_iol
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -2718,6 +3011,14 @@ active_load_vcom
 
         Specifies the voltage level at which the active load circuit switches between sourcing current and sinking current.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -2727,7 +3028,7 @@ active_load_vcom
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -2796,6 +3097,14 @@ clock_generator_frequency
 
         Specifies the frequency for the clock generator.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -2805,7 +3114,7 @@ clock_generator_frequency
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -2822,6 +3131,14 @@ clock_generator_is_running
 
         Indicates whether the clock generator is running.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -2831,7 +3148,7 @@ clock_generator_is_running
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -2848,19 +3165,27 @@ conditional_jump_trigger_terminal_name
 
         Specifies the terminal name from which the exported conditional jump trigger signal may be routed to other instruments through the PXI trigger bus. You can use this signal to trigger other instruments when the conditional jump trigger instance asserts on the digital pattern instrument.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +-----------------------+---------------------------+
+            | Characteristic        | Value                     |
+            +=======================+===========================+
+            | Datatype              | str                       |
+            +-----------------------+---------------------------+
+            | Permissions           | read only                 |
+            +-----------------------+---------------------------+
+            | Repeated Capabilities | conditional jump triggers |
+            +-----------------------+---------------------------+
+            | Resettable            | No                        |
+            +-----------------------+---------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2884,19 +3209,25 @@ conditional_jump_trigger_type
         | :py:data:`~nidigital.TriggerType.SOFTWARE`     | Configures the conditional jump trigger for software triggering. |
         +------------------------------------------------+------------------------------------------------------------------+
 
+
+        .. tip:: This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------+
-            | Characteristic        | Value             |
-            +=======================+===================+
-            | Datatype              | enums.TriggerType |
-            +-----------------------+-------------------+
-            | Permissions           | read-write        |
-            +-----------------------+-------------------+
-            | Repeated Capabilities | None              |
-            +-----------------------+-------------------+
-            | Resettable            | Yes               |
-            +-----------------------+-------------------+
+            +-----------------------+---------------------------+
+            | Characteristic        | Value                     |
+            +=======================+===========================+
+            | Datatype              | enums.TriggerType         |
+            +-----------------------+---------------------------+
+            | Permissions           | read-write                |
+            +-----------------------+---------------------------+
+            | Repeated Capabilities | conditional jump triggers |
+            +-----------------------+---------------------------+
+            | Resettable            | Yes                       |
+            +-----------------------+---------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2944,19 +3275,25 @@ digital_edge_conditional_jump_trigger_edge
         | :py:data:`~nidigital.DigitalEdge.FALLING` | Specifies the signal transition from high level to low level. |
         +-------------------------------------------+---------------------------------------------------------------+
 
+
+        .. tip:: This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------+
-            | Characteristic        | Value             |
-            +=======================+===================+
-            | Datatype              | enums.DigitalEdge |
-            +-----------------------+-------------------+
-            | Permissions           | read-write        |
-            +-----------------------+-------------------+
-            | Repeated Capabilities | None              |
-            +-----------------------+-------------------+
-            | Resettable            | Yes               |
-            +-----------------------+-------------------+
+            +-----------------------+---------------------------+
+            | Characteristic        | Value                     |
+            +=======================+===========================+
+            | Datatype              | enums.DigitalEdge         |
+            +-----------------------+---------------------------+
+            | Permissions           | read-write                |
+            +-----------------------+---------------------------+
+            | Repeated Capabilities | conditional jump triggers |
+            +-----------------------+---------------------------+
+            | Resettable            | Yes                       |
+            +-----------------------+---------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2976,19 +3313,25 @@ digital_edge_conditional_jump_trigger_source
         | String identifier to any valid terminal name |
         +----------------------------------------------+
 
+
+        .. tip:: This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
+            +-----------------------+---------------------------+
+            | Characteristic        | Value                     |
+            +=======================+===========================+
+            | Datatype              | str                       |
+            +-----------------------+---------------------------+
+            | Permissions           | read-write                |
+            +-----------------------+---------------------------+
+            | Repeated Capabilities | conditional jump triggers |
+            +-----------------------+---------------------------+
+            | Resettable            | Yes                       |
+            +-----------------------+---------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3130,19 +3473,25 @@ exported_conditional_jump_trigger_output_terminal
         | PXI_Trig7     | PXI trigger line 7      |
         +---------------+-------------------------+
 
+
+        .. tip:: This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
+            +-----------------------+---------------------------+
+            | Characteristic        | Value                     |
+            +=======================+===========================+
+            | Datatype              | str                       |
+            +-----------------------+---------------------------+
+            | Permissions           | read-write                |
+            +-----------------------+---------------------------+
+            | Repeated Capabilities | conditional jump triggers |
+            +-----------------------+---------------------------+
+            | Resettable            | Yes                       |
+            +-----------------------+---------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3176,19 +3525,25 @@ exported_pattern_opcode_event_output_terminal
         | PXI_Trig7       | PXI trigger line 7 |
         +-----------------+--------------------+
 
+
+        .. tip:: This property can use repeated capabilities for pattern opcode events. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
+            +-----------------------+-----------------------+
+            | Characteristic        | Value                 |
+            +=======================+=======================+
+            | Datatype              | str                   |
+            +-----------------------+-----------------------+
+            | Permissions           | read-write            |
+            +-----------------------+-----------------------+
+            | Repeated Capabilities | pattern opcode events |
+            +-----------------------+-----------------------+
+            | Resettable            | Yes                   |
+            +-----------------------+-----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3310,6 +3665,14 @@ frequency_counter_measurement_time
 
         Specifies the measurement time for the frequency counter.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+----------------------------------------+
@@ -3319,7 +3682,7 @@ frequency_counter_measurement_time
             +-----------------------+----------------------------------------+
             | Permissions           | read-write                             |
             +-----------------------+----------------------------------------+
-            | Repeated Capabilities | None                                   |
+            | Repeated Capabilities | channels                               |
             +-----------------------+----------------------------------------+
             | Resettable            | Yes                                    |
             +-----------------------+----------------------------------------+
@@ -3420,27 +3783,27 @@ history_ram_cycles_to_acquire
 
         Configures which cycles History RAM acquires after the trigger conditions are met. If you configure History RAM to only acquire failed cycles, you must set the pretrigger samples for History RAM to 0.
 
-        +--------------------------------------------------------+-----------------------------------------------------------------------------------+
-        | Defined Values:                                        |                                                                                   |
-        +========================================================+===================================================================================+
-        | :py:data:`~nidigital.HistoryRAMCyclesToAcquire.FAILED` | Only acquires cycles that fail a compare after the triggering conditions are met. |
-        +--------------------------------------------------------+-----------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.HistoryRAMCyclesToAcquire.ALL`    | Acquires all cycles after the triggering conditions are met.                      |
-        +--------------------------------------------------------+-----------------------------------------------------------------------------------+
+        +--------------------------------------------------+-----------------------------------------------------------------------------------+
+        | Defined Values:                                  |                                                                                   |
+        +==================================================+===================================================================================+
+        | :py:data:`~nidigital.HramCyclesToAcquire.FAILED` | Only acquires cycles that fail a compare after the triggering conditions are met. |
+        +--------------------------------------------------+-----------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.HramCyclesToAcquire.ALL`    | Acquires all cycles after the triggering conditions are met.                      |
+        +--------------------------------------------------+-----------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------------------+
-            | Characteristic        | Value                           |
-            +=======================+=================================+
-            | Datatype              | enums.HistoryRAMCyclesToAcquire |
-            +-----------------------+---------------------------------+
-            | Permissions           | read-write                      |
-            +-----------------------+---------------------------------+
-            | Repeated Capabilities | None                            |
-            +-----------------------+---------------------------------+
-            | Resettable            | Yes                             |
-            +-----------------------+---------------------------------+
+            +-----------------------+---------------------------+
+            | Characteristic        | Value                     |
+            +=======================+===========================+
+            | Datatype              | enums.HramCyclesToAcquire |
+            +-----------------------+---------------------------+
+            | Permissions           | read-write                |
+            +-----------------------+---------------------------+
+            | Repeated Capabilities | None                      |
+            +-----------------------+---------------------------+
+            | Resettable            | Yes                       |
+            +-----------------------+---------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3540,29 +3903,29 @@ history_ram_trigger_type
 
         Specifies the type of trigger condition on which History RAM starts acquiring pattern information.
 
-        +-----------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-        | Defined Values:                                           |                                                                                                                                     |
-        +===========================================================+=====================================================================================================================================+
-        | :py:data:`~nidigital.HistoryRAMTriggerType.FIRST_FAILURE` | Starts acquiring pattern information in History RAM on the first failed cycle in a pattern burst.                                   |
-        +-----------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.HistoryRAMTriggerType.CYCLE_NUMBER`  | Starts acquiring pattern information in History RAM starting from a specified cycle number.                                         |
-        +-----------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidigital.HistoryRAMTriggerType.PATTERN_LABEL` | Starts acquiring pattern information in History RAM starting from a specified pattern label, augmented by vector and cycle offsets. |
-        +-----------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+        +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+        | Defined Values:                                     |                                                                                                                                     |
+        +=====================================================+=====================================================================================================================================+
+        | :py:data:`~nidigital.HramTriggerType.FIRST_FAILURE` | Starts acquiring pattern information in History RAM on the first failed cycle in a pattern burst.                                   |
+        +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.HramTriggerType.CYCLE_NUMBER`  | Starts acquiring pattern information in History RAM starting from a specified cycle number.                                         |
+        +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidigital.HramTriggerType.PATTERN_LABEL` | Starts acquiring pattern information in History RAM starting from a specified pattern label, augmented by vector and cycle offsets. |
+        +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------------+
-            | Characteristic        | Value                       |
-            +=======================+=============================+
-            | Datatype              | enums.HistoryRAMTriggerType |
-            +-----------------------+-----------------------------+
-            | Permissions           | read-write                  |
-            +-----------------------+-----------------------------+
-            | Repeated Capabilities | None                        |
-            +-----------------------+-----------------------------+
-            | Resettable            | Yes                         |
-            +-----------------------+-----------------------------+
+            +-----------------------+-----------------------+
+            | Characteristic        | Value                 |
+            +=======================+=======================+
+            | Datatype              | enums.HramTriggerType |
+            +-----------------------+-----------------------+
+            | Permissions           | read-write            |
+            +-----------------------+-----------------------+
+            | Repeated Capabilities | None                  |
+            +-----------------------+-----------------------+
+            | Resettable            | Yes                   |
+            +-----------------------+-----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3576,19 +3939,27 @@ instrument_firmware_revision
 
         Returns a string that contains the firmware revision information for the digital pattern instrument.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | str         |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
+            | Resettable            | No          |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3758,6 +4129,14 @@ mask_compare
 
         Specifies whether the pattern comparisons are masked or not. When set to True for a specified pin, failures on that pin will be masked.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3767,7 +4146,7 @@ mask_compare
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -3862,19 +4241,27 @@ pattern_opcode_event_terminal_name
 
         Specifies the terminal name for the output trigger signal of the specified instance of a Pattern Opcode Event. You can use this terminal name as an input signal source for another trigger.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for pattern opcode events. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +-----------------------+-----------------------+
+            | Characteristic        | Value                 |
+            +=======================+=======================+
+            | Datatype              | str                   |
+            +-----------------------+-----------------------+
+            | Permissions           | read only             |
+            +-----------------------+-----------------------+
+            | Repeated Capabilities | pattern opcode events |
+            +-----------------------+-----------------------+
+            | Resettable            | No                    |
+            +-----------------------+-----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3888,6 +4275,14 @@ ppmu_allow_extended_voltage_range
 
         Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to True, this property enables extended voltage range operation. Review specification deviations for application suitability before using this property. NI recommends setting this property to False when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output method set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the :py:attr:`nidigital.Session.selected_function` property to Off before sourcing a voltage level that requires a range change.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3897,7 +4292,7 @@ ppmu_allow_extended_voltage_range
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -3914,6 +4309,14 @@ ppmu_aperture_time
 
         Specifies the measurement aperture time for the PPMU. The :py:attr:`nidigital.Session.ppmu_aperture_time_units` property sets the units of the PPMU aperture time.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3923,7 +4326,7 @@ ppmu_aperture_time
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -3946,6 +4349,12 @@ ppmu_aperture_time_units
         | :py:data:`~nidigital.PPMUApertureTimeUnits.SECONDS` | Specifies the aperture time in seconds. |
         +-----------------------------------------------------+-----------------------------------------+
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------------------------+
@@ -3955,7 +4364,7 @@ ppmu_aperture_time_units
             +-----------------------+-----------------------------+
             | Permissions           | read-write                  |
             +-----------------------+-----------------------------+
-            | Repeated Capabilities | None                        |
+            | Repeated Capabilities | channels                    |
             +-----------------------+-----------------------------+
             | Resettable            | Yes                         |
             +-----------------------+-----------------------------+
@@ -3976,6 +4385,12 @@ ppmu_current_level
 
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3985,7 +4400,7 @@ ppmu_current_level
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4002,6 +4417,14 @@ ppmu_current_level_range
 
         Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Current.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4011,7 +4434,7 @@ ppmu_current_level_range
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4028,6 +4451,14 @@ ppmu_current_limit
 
         Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Voltage. The PXIe-6570/6571 does not support the :py:attr:`nidigital.Session.ppmu_current_limit` property and only allows configuration of the :py:attr:`nidigital.Session.ppmu_current_limit_range` property.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4037,7 +4468,7 @@ ppmu_current_limit
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4060,6 +4491,12 @@ ppmu_current_limit_behavior
         | :py:data:`~nidigital.PPMUCurrentLimitBehavior.REGULATE` | Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached. |
         +---------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+--------------------------------+
@@ -4069,7 +4506,7 @@ ppmu_current_limit_behavior
             +-----------------------+--------------------------------+
             | Permissions           | read-write                     |
             +-----------------------+--------------------------------+
-            | Repeated Capabilities | None                           |
+            | Repeated Capabilities | channels                       |
             +-----------------------+--------------------------------+
             | Resettable            | Yes                            |
             +-----------------------+--------------------------------+
@@ -4086,6 +4523,14 @@ ppmu_current_limit_range
 
         Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Voltage.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4095,7 +4540,7 @@ ppmu_current_limit_range
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4112,6 +4557,14 @@ ppmu_current_limit_supported
 
         Returns whether the device supports configuration of a current limit when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Voltage.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -4121,7 +4574,7 @@ ppmu_current_limit_supported
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -4146,6 +4599,12 @@ ppmu_output_function
         | :py:data:`~nidigital.PPMUOutputFunction.CURRENT` | Specifies the output method to DC Current. |
         +--------------------------------------------------+--------------------------------------------+
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+--------------------------+
@@ -4155,7 +4614,7 @@ ppmu_output_function
             +-----------------------+--------------------------+
             | Permissions           | read-write               |
             +-----------------------+--------------------------+
-            | Repeated Capabilities | None                     |
+            | Repeated Capabilities | channels                 |
             +-----------------------+--------------------------+
             | Resettable            | Yes                      |
             +-----------------------+--------------------------+
@@ -4172,6 +4631,14 @@ ppmu_voltage_level
 
         Specifies the voltage level, in volts, that the PPMU forces to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Voltage.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4181,7 +4648,7 @@ ppmu_voltage_level
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4198,6 +4665,14 @@ ppmu_voltage_limit_high
 
         Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Current.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4207,7 +4682,7 @@ ppmu_voltage_limit_high
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4224,6 +4699,14 @@ ppmu_voltage_limit_low
 
         Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the :py:attr:`nidigital.Session.ppmu_output_function` property to DC Current.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4233,7 +4716,7 @@ ppmu_voltage_limit_low
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4344,6 +4827,12 @@ selected_function
 
         .. note:: You can make PPMU voltage measurements using the :py:meth:`nidigital.Session.ppmu_measure` method from within any :py:attr:`nidigital.Session.selected_function`.
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------------------+
@@ -4353,7 +4842,7 @@ selected_function
             +-----------------------+------------------------+
             | Permissions           | read-write             |
             +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
+            | Repeated Capabilities | channels               |
             +-----------------------+------------------------+
             | Resettable            | Yes                    |
             +-----------------------+------------------------+
@@ -4396,19 +4885,27 @@ serial_number
 
         Returns the serial number of the device.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | str         |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
+            | Resettable            | No          |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4746,19 +5243,27 @@ tdr_offset
 
         Specifies the TDR Offset.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------------------------------------+
-            | Characteristic        | Value                                                       |
-            +=======================+=============================================================+
-            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +-----------------------+-------------------------------------------------------------+
-            | Permissions           | read-write                                                  |
-            +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
-            +-----------------------+-------------------------------------------------------------+
+            +-----------------------+----------------------------------------+
+            | Characteristic        | Value                                  |
+            +=======================+========================================+
+            | Datatype              | float in seconds or datetime.timedelta |
+            +-----------------------+----------------------------------------+
+            | Permissions           | read-write                             |
+            +-----------------------+----------------------------------------+
+            | Repeated Capabilities | channels                               |
+            +-----------------------+----------------------------------------+
+            | Resettable            | Yes                                    |
+            +-----------------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4782,6 +5287,12 @@ termination_mode
         | :py:data:`~nidigital.TerminationMode.HIGH_Z`      | Specifies that, for non-drive pin states (L, H, X, V, M, E), the pin driver is put in a high-impedance state and the active load is disabled.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
         +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------------------+
@@ -4791,7 +5302,7 @@ termination_mode
             +-----------------------+-----------------------+
             | Permissions           | read-write            |
             +-----------------------+-----------------------+
-            | Repeated Capabilities | None                  |
+            | Repeated Capabilities | channels              |
             +-----------------------+-----------------------+
             | Resettable            | Yes                   |
             +-----------------------+-----------------------+
@@ -4810,17 +5321,17 @@ timing_absolute_delay
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------------------------------------+
-            | Characteristic        | Value                                                       |
-            +=======================+=============================================================+
-            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +-----------------------+-------------------------------------------------------------+
-            | Permissions           | read-write                                                  |
-            +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
-            +-----------------------+-------------------------------------------------------------+
+            +-----------------------+----------------------------------------+
+            | Characteristic        | Value                                  |
+            +=======================+========================================+
+            | Datatype              | float in seconds or datetime.timedelta |
+            +-----------------------+----------------------------------------+
+            | Permissions           | read-write                             |
+            +-----------------------+----------------------------------------+
+            | Repeated Capabilities | None                                   |
+            +-----------------------+----------------------------------------+
+            | Resettable            | Yes                                    |
+            +-----------------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4860,6 +5371,14 @@ vih
 
         Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic high (1).
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4869,7 +5388,7 @@ vih
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4886,6 +5405,14 @@ vil
 
         Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic low (0).
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4895,7 +5422,7 @@ vil
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4912,6 +5439,14 @@ voh
 
         Specifies the output voltage from the DUT above which the comparator on the digital pattern test instrument interprets a logic high (H).
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4921,7 +5456,7 @@ voh
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4938,6 +5473,14 @@ vol
 
         Specifies the output voltage from the DUT below which the comparator on the digital pattern test instrument interprets a logic low (L).
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4947,7 +5490,7 @@ vol
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4964,6 +5507,14 @@ vterm
 
         Specifies the termination voltage the digital pattern instrument applies during non-drive cycles when the termination mode is set to V :sub:`term`. The instrument applies the termination voltage through a 50 Ω parallel termination resistance.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4973,7 +5524,7 @@ vterm
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+

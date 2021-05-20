@@ -391,7 +391,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_GetLastExtCalLastDateAndTime_cfunc is None:
                 self.niFgen_GetLastExtCalLastDateAndTime_cfunc = self._get_library_function('niFgen_GetLastExtCalLastDateAndTime')
-                self.niFgen_GetLastExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(hightime.datetime)]  # noqa: F405
+                self.niFgen_GetLastExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(datetime.datetime)]  # noqa: F405
                 self.niFgen_GetLastExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetLastExtCalLastDateAndTime_cfunc(vi, month)
 
@@ -399,7 +399,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_GetLastSelfCalLastDateAndTime_cfunc is None:
                 self.niFgen_GetLastSelfCalLastDateAndTime_cfunc = self._get_library_function('niFgen_GetLastSelfCalLastDateAndTime')
-                self.niFgen_GetLastSelfCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(hightime.datetime)]  # noqa: F405
+                self.niFgen_GetLastSelfCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(datetime.datetime)]  # noqa: F405
                 self.niFgen_GetLastSelfCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetLastSelfCalLastDateAndTime_cfunc(vi, month)
 

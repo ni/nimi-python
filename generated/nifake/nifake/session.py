@@ -153,6 +153,14 @@ class _SessionBase(object):
     Property in seconds
     '''
     read_write_double_with_repeated_capability = _attributes.AttributeViReal64(1000009)
+    '''Type: float
+
+    Tip:
+    This property can use repeated capabilities for channels. If set or get directly on the
+    nifake.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifake.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     read_write_int64 = _attributes.AttributeViInt64(1000006)
     '''Type: int
 
@@ -182,6 +190,12 @@ class _SessionBase(object):
         - Basic sequence types (list, tuple, range, slice) of other supported types
 
     A property with read/write access, that represents a repeated capability
+
+    Tip:
+    This property can use repeated capabilities for instruments. If set or get directly on the
+    nifake.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifake.Session repeated capabilities container, and calling set/get value on the result.
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
@@ -771,7 +785,7 @@ class Session(_SessionBase):
     def accept_list_of_durations_in_seconds(self, delays):
         r'''accept_list_of_durations_in_seconds
 
-        Accepts list of floats or hightime.timedelta instances representing time delays.
+        Accepts list of hightime.timedelta or datetime.timedelta or float instances representing time delays.
 
         Args:
             delays (hightime.timedelta, datetime.timedelta, or float in seconds): A collection of time delay values.
@@ -1745,45 +1759,45 @@ class Session(_SessionBase):
         return int(output_ctype.value)
 
     @ivi_synchronized
-    def write_waveform(self, waveform):
+    def write_waveform(self, wfm):
         r'''write_waveform
 
         Writes waveform to the driver
 
         Args:
-            waveform (array.array("d")): Waveform data.
+            wfm (array.array("d")): Waveform data.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        number_of_samples_ctype = _visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
-        waveform_array = get_ctypes_and_array(value=waveform, array_type="d")  # case B550
-        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B550
-        error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
+        number_of_samples_ctype = _visatype.ViInt32(0 if wfm is None else len(wfm))  # case S160
+        wfm_array = get_ctypes_and_array(value=wfm, array_type="d")  # case B550
+        wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm_array, library_type=_visatype.ViReal64)  # case B550
+        error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, wfm_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def write_waveform_numpy(self, waveform):
+    def write_waveform_numpy(self, wfm):
         r'''write_waveform
 
         Writes waveform to the driver
 
         Args:
-            waveform (numpy.array(dtype=numpy.float64)): Waveform data.
+            wfm (numpy.array(dtype=numpy.float64)): Waveform data.
 
         '''
         import numpy
 
-        if type(waveform) is not numpy.ndarray:
-            raise TypeError('waveform must be {0}, is {1}'.format(numpy.ndarray, type(waveform)))
-        if numpy.isfortran(waveform) is True:
-            raise TypeError('waveform must be in C-order')
-        if waveform.dtype is not numpy.dtype('float64'):
-            raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
+        if type(wfm) is not numpy.ndarray:
+            raise TypeError('wfm must be {0}, is {1}'.format(numpy.ndarray, type(wfm)))
+        if numpy.isfortran(wfm) is True:
+            raise TypeError('wfm must be in C-order')
+        if wfm.dtype is not numpy.dtype('float64'):
+            raise TypeError('wfm must be numpy.ndarray of dtype=float64, is ' + str(wfm.dtype))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        number_of_samples_ctype = _visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
-        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
-        error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
+        number_of_samples_ctype = _visatype.ViInt32(0 if wfm is None else len(wfm))  # case S160
+        wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm)  # case B510
+        error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, wfm_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

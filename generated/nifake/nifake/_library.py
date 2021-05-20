@@ -528,13 +528,13 @@ class Library(object):
                 self.niFake_Use64BitNumber_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Use64BitNumber_cfunc(vi, input, output)
 
-    def niFake_WriteWaveform(self, vi, number_of_samples, waveform):  # noqa: N802
+    def niFake_WriteWaveform(self, vi, number_of_samples, wfm):  # noqa: N802
         with self._func_lock:
             if self.niFake_WriteWaveform_cfunc is None:
                 self.niFake_WriteWaveform_cfunc = self._get_library_function('niFake_WriteWaveform')
                 self.niFake_WriteWaveform_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFake_WriteWaveform_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_WriteWaveform_cfunc(vi, number_of_samples, waveform)
+        return self.niFake_WriteWaveform_cfunc(vi, number_of_samples, wfm)
 
     def niFake_close(self, vi):  # noqa: N802
         with self._func_lock:

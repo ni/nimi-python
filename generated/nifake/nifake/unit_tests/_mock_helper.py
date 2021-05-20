@@ -820,7 +820,7 @@ class SideEffectsHelper(object):
             output.contents.value = self._defaults['Use64BitNumber']['output']
         return self._defaults['Use64BitNumber']['return']
 
-    def niFake_WriteWaveform(self, vi, number_of_samples, waveform):  # noqa: N802
+    def niFake_WriteWaveform(self, vi, number_of_samples, wfm):  # noqa: N802
         if self._defaults['WriteWaveform']['return'] != 0:
             return self._defaults['WriteWaveform']['return']
         return self._defaults['WriteWaveform']['return']

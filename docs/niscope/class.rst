@@ -219,13 +219,15 @@ add_waveform_processing
             before the measurement. The processing is added on a per channel basis,
             and the processing measurements are completed in the same order they are
             registered. All measurement library parameters—the properties starting
-            with "meas_"—are cached at the time of registering the
+            with :py:attr:`niscope.Session.MEAS`—are cached at the time of registering the
             processing, and this set of parameters is used during the processing
             step. The processing measurements are streamed, so the result of the
             first processing step is used as the input for the next step. The
             processing is done before any other measurements.
 
             
+
+            .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
             .. tip:: This method requires repeated capabilities. If called directly on the
@@ -2688,6 +2690,14 @@ bandpass_filter_enabled
 
         Enables the bandpass filter on the specificed channel.  The default value is FALSE.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -2697,7 +2707,7 @@ bandpass_filter_enabled
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -2891,6 +2901,14 @@ channel_enabled
         True  (1) - Acquire data on this channel
         False (0) - Don't acquire data on this channel
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -2900,7 +2918,7 @@ channel_enabled
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -2918,6 +2936,14 @@ channel_terminal_configuration
 
         Specifies the terminal configuration for the channel.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------------------------+
@@ -2927,7 +2953,7 @@ channel_terminal_configuration
             +-----------------------+-----------------------------+
             | Permissions           | read-write                  |
             +-----------------------+-----------------------------+
-            | Repeated Capabilities | None                        |
+            | Repeated Capabilities | channels                    |
             +-----------------------+-----------------------------+
             | Resettable            | Yes                         |
             +-----------------------+-----------------------------+
@@ -3026,19 +3052,27 @@ device_temperature
 
         Returns the temperature of the device in degrees Celsius from the onboard sensor.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | float     |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | float       |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
+            | Resettable            | No          |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3119,6 +3153,14 @@ enable_time_interleaved_sampling
         True  (1) - Use multiple interleaved ADCs on this channel
         False (0) - Use only this channel's ADC to acquire data for this channel
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3128,7 +3170,7 @@ enable_time_interleaved_sampling
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -3289,6 +3331,14 @@ equalization_filter_enabled
 
         Enables the onboard signal processing FIR block. This block is connected directly to the input signal.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3298,7 +3348,7 @@ equalization_filter_enabled
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -3316,6 +3366,14 @@ equalization_num_coefficients
 
         Returns the number of coefficients that the FIR filter can accept.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer.  However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -3325,7 +3383,7 @@ equalization_num_coefficients
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -3428,6 +3486,14 @@ flex_fir_antialias_filter_type
         The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass antialias filter.
         Use this property to select from several types of filters to achieve desired filtering characteristics.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+----------------------------------+
@@ -3437,7 +3503,7 @@ flex_fir_antialias_filter_type
             +-----------------------+----------------------------------+
             | Permissions           | read-write                       |
             +-----------------------+----------------------------------+
-            | Repeated Capabilities | None                             |
+            | Repeated Capabilities | channels                         |
             +-----------------------+----------------------------------+
             | Resettable            | Yes                              |
             +-----------------------+----------------------------------+
@@ -3572,6 +3638,14 @@ high_pass_filter_frequency
         **Related topics:**
         `Digital Filtering <digitizers.chm::/Digital_Filtering_Overview.html>`__
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3581,7 +3655,7 @@ high_pass_filter_frequency
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -3820,6 +3894,14 @@ input_impedance
 
         Specifies the input impedance for the channel in Ohms.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3829,7 +3911,7 @@ input_impedance
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -3847,19 +3929,27 @@ instrument_firmware_revision
 
         A string that contains the firmware revision information for the instrument you are currently using.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | str         |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
+            | Resettable            | No          |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3936,6 +4026,12 @@ interleaving_offset_correction_enabled
 
         .. note:: If disabled, warranted specifications are not guaranteed.
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3945,7 +4041,7 @@ interleaving_offset_correction_enabled
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -3993,21 +4089,24 @@ is_probe_comp_on
 
     .. py:attribute:: is_probe_comp_on
 
-        
+        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | bool      |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | bool        |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
+            | Resettable            | No          |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4090,6 +4189,12 @@ max_input_frequency
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4099,7 +4204,7 @@ max_input_frequency
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4172,6 +4277,14 @@ meas_array_gain
         Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to :py:data:`~niscope.ArrayMeasurement.ARRAY_GAIN` for more information.
         Default: 1.0
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4181,7 +4294,7 @@ meas_array_gain
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4200,6 +4313,14 @@ meas_array_offset
         Every element of an array is added to this scalar value during the Array Offset measurement. Refer to :py:data:`~niscope.ArrayMeasurement.ARRAY_OFFSET` for more information.
         Default: 0.0
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4209,7 +4330,7 @@ meas_array_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4228,6 +4349,14 @@ meas_chan_high_ref_level
         Stores the high reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as :py:attr:`niscope.Session.meas_high_ref` if you use this property to set various channels to different values.
         Default: 90%
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4237,7 +4366,7 @@ meas_chan_high_ref_level
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4256,6 +4385,14 @@ meas_chan_low_ref_level
         Stores the low reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as :py:attr:`niscope.Session.meas_low_ref` if you use this property to set various channels to different values.
         Default: 10%
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4265,7 +4402,7 @@ meas_chan_low_ref_level
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4284,6 +4421,14 @@ meas_chan_mid_ref_level
         Stores the mid reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as :py:attr:`niscope.Session.meas_mid_ref` if you use this property to set various channels to different values.
         Default: 50%
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4293,7 +4438,7 @@ meas_chan_mid_ref_level
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4312,6 +4457,14 @@ meas_filter_center_freq
         The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by :py:attr:`niscope.Session.meas_filter_width`, where the cutoff frequencies are the center ± width.
         Default: 1.0e6 Hz
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4321,7 +4474,7 @@ meas_filter_center_freq
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4340,6 +4493,14 @@ meas_filter_cutoff_freq
         Specifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter.
         Default: 1.0e6 Hz
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4349,7 +4510,7 @@ meas_filter_cutoff_freq
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4368,6 +4529,14 @@ meas_filter_order
         Specifies the order of an IIR filter. All positive integers are valid.
         Default: 2
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4377,7 +4546,7 @@ meas_filter_order
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4396,6 +4565,14 @@ meas_filter_ripple
         Specifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.
         Default: 0.1 dB
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4405,7 +4582,7 @@ meas_filter_ripple
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4424,6 +4601,14 @@ meas_filter_taps
         Defines the number of taps (coefficients) for an FIR filter.
         Default: 25
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4433,7 +4618,7 @@ meas_filter_taps
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4452,6 +4637,14 @@ meas_filter_transient_waveform_percent
         The percentage (0 - 100%) of the IIR filtered waveform to eliminate from the beginning of the waveform. This allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition.
         Default: 20.0%
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4461,7 +4654,7 @@ meas_filter_transient_waveform_percent
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4488,6 +4681,12 @@ meas_filter_type
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------------+
@@ -4497,7 +4696,7 @@ meas_filter_type
             +-----------------------+------------------+
             | Permissions           | read-write       |
             +-----------------------+------------------+
-            | Repeated Capabilities | None             |
+            | Repeated Capabilities | channels         |
             +-----------------------+------------------+
             | Resettable            | Yes              |
             +-----------------------+------------------+
@@ -4516,6 +4715,14 @@ meas_filter_width
         Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at :py:attr:`niscope.Session.meas_filter_center_freq` ± one-half width.
         Default: 1.0e3 Hz
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4525,7 +4732,7 @@ meas_filter_width
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4551,6 +4758,14 @@ meas_fir_filter_window
         The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
         Default: :py:data:`~niscope.FIRFilterWindow.NONE`
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------------------+
@@ -4560,7 +4775,7 @@ meas_fir_filter_window
             +-----------------------+-----------------------+
             | Permissions           | read-write            |
             +-----------------------+-----------------------+
-            | Repeated Capabilities | None                  |
+            | Repeated Capabilities | channels              |
             +-----------------------+-----------------------+
             | Resettable            | Yes                   |
             +-----------------------+-----------------------+
@@ -4605,6 +4820,14 @@ meas_hysteresis_percent
         Digital hysteresis that is used in several of the scalar waveform measurements. This property specifies the percentage of the full-scale vertical range for the hysteresis window size.
         Default: 2%
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4614,7 +4837,7 @@ meas_hysteresis_percent
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4637,6 +4860,12 @@ meas_interpolation_sampling_factor
 
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4646,7 +4875,7 @@ meas_interpolation_sampling_factor
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4665,6 +4894,14 @@ meas_last_acq_histogram_size
         Specifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high.
         Default: 256
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4674,7 +4911,7 @@ meas_last_acq_histogram_size
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4745,6 +4982,14 @@ meas_other_channel
         Specifies the second channel for two-channel measurements, such as :py:data:`~niscope.ArrayMeasurement.ADD_CHANNELS`. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
         Default: '0'
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4754,7 +4999,7 @@ meas_other_channel
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4780,6 +5025,12 @@ meas_percentage_method
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------------------+
@@ -4789,7 +5040,7 @@ meas_percentage_method
             +-----------------------+------------------------+
             | Permissions           | read-write             |
             +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
+            | Repeated Capabilities | channels               |
             +-----------------------+------------------------+
             | Resettable            | Yes                    |
             +-----------------------+------------------------+
@@ -4808,6 +5059,14 @@ meas_polynomial_interpolation_order
         Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
         Default: 1
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4817,7 +5076,7 @@ meas_polynomial_interpolation_order
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4842,6 +5101,12 @@ meas_ref_level_units
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+---------------------+
@@ -4851,7 +5116,7 @@ meas_ref_level_units
             +-----------------------+---------------------+
             | Permissions           | read-write          |
             +-----------------------+---------------------+
-            | Repeated Capabilities | None                |
+            | Repeated Capabilities | channels            |
             +-----------------------+---------------------+
             | Resettable            | Yes                 |
             +-----------------------+---------------------+
@@ -4870,6 +5135,14 @@ meas_time_histogram_high_time
         Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
         Default: 5.0e-4 seconds
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-------------------------------------------------------------+
@@ -4879,7 +5152,7 @@ meas_time_histogram_high_time
             +-----------------------+-------------------------------------------------------------+
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
+            | Repeated Capabilities | channels                                                    |
             +-----------------------+-------------------------------------------------------------+
             | Resettable            | Yes                                                         |
             +-----------------------+-------------------------------------------------------------+
@@ -4898,6 +5171,14 @@ meas_time_histogram_high_volts
         Specifies the highest voltage value included in the multiple-acquisition time histogram. The units are always volts.
         Default: 10.0 V
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4907,7 +5188,7 @@ meas_time_histogram_high_volts
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4926,6 +5207,14 @@ meas_time_histogram_low_time
         Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
         Default: -5.0e-4 seconds
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-------------------------------------------------------------+
@@ -4935,7 +5224,7 @@ meas_time_histogram_low_time
             +-----------------------+-------------------------------------------------------------+
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
+            | Repeated Capabilities | channels                                                    |
             +-----------------------+-------------------------------------------------------------+
             | Resettable            | Yes                                                         |
             +-----------------------+-------------------------------------------------------------+
@@ -4954,6 +5243,14 @@ meas_time_histogram_low_volts
         Specifies the lowest voltage value included in the multiple acquisition time histogram. The units are always volts.
         Default: -10.0 V
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4963,7 +5260,7 @@ meas_time_histogram_low_volts
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -4982,6 +5279,14 @@ meas_time_histogram_size
         Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with :py:meth:`niscope.Session.clear_waveform_measurement_stats`.
         Default: 256
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4991,7 +5296,7 @@ meas_time_histogram_size
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -5010,6 +5315,14 @@ meas_voltage_histogram_high_volts
         Specifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.
         Default: 10.0 V
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -5019,7 +5332,7 @@ meas_voltage_histogram_high_volts
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -5038,6 +5351,14 @@ meas_voltage_histogram_low_volts
         Specifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.
         Default: -10.0 V
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -5047,7 +5368,7 @@ meas_voltage_histogram_low_volts
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -5066,6 +5387,14 @@ meas_voltage_histogram_size
         Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method :py:meth:`niscope.Session.clear_waveform_measurement_stats`.
         Default: 256
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -5075,7 +5404,7 @@ meas_voltage_histogram_size
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -5126,19 +5455,27 @@ onboard_memory_size
 
         Returns the total combined amount of onboard memory for all channels in bytes.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | int         |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
+            | Resettable            | No          |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5180,19 +5517,27 @@ pll_lock_status
 
         If TRUE, the PLL has remained locked to the external reference clock since it was last checked. If FALSE,  the PLL has become unlocked from the external reference clock since it was last checked.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | bool      |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | bool        |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
+            | Resettable            | No          |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5262,6 +5607,14 @@ probe_attenuation
         Valid Values:
         Any positive real number. Typical values are 1, 10, and 100.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -5271,7 +5624,7 @@ probe_attenuation
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -6068,19 +6421,27 @@ serial_number
 
         Returns the serial number of the device.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | str         |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
+            | Resettable            | No          |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6102,6 +6463,12 @@ accessory_gain
 
         .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -6111,7 +6478,7 @@ accessory_gain
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -6135,6 +6502,12 @@ accessory_offset
 
         .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -6144,7 +6517,7 @@ accessory_offset
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
             | Resettable            | No        |
             +-----------------------+-----------+
@@ -6896,6 +7269,14 @@ vertical_coupling
 
         Specifies how the digitizer couples the input signal for the channel.  When input coupling changes, the input stage takes a finite amount of time to settle.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------------------+
@@ -6905,7 +7286,7 @@ vertical_coupling
             +-----------------------+------------------------+
             | Permissions           | read-write             |
             +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
+            | Repeated Capabilities | channels               |
             +-----------------------+------------------------+
             | Resettable            | Yes                    |
             +-----------------------+------------------------+
@@ -6927,6 +7308,12 @@ vertical_offset
 
         .. note:: This property is not supported by all digitizers.Refer to the NI High-Speed Digitizers Help for a list of vertical offsets supported for each device.
 
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -6936,7 +7323,7 @@ vertical_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+
@@ -6955,6 +7342,14 @@ vertical_range
         Specifies the absolute value of the input range for a channel in volts.  For example, to acquire a sine wave that spans between -5 and +5 V, set this property to 10.0 V.
         Refer to the NI High-Speed Digitizers Help for a list of supported vertical ranges for each device.  If the specified range is not supported by a device, the value is coerced up to the next valid range.
 
+
+
+
+        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -6964,7 +7359,7 @@ vertical_range
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
             | Resettable            | Yes        |
             +-----------------------+------------+

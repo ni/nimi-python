@@ -867,7 +867,7 @@ def add_notes_re_links(config):
 def get_attribute_repeated_caps(attr):
     '''Creates a comma-separated string representing the attribute's repeated capabilities. Returns 'None' if there are no repeated capabilities'''
     if 'supported_rep_caps' in attr and len(attr['supported_rep_caps']) > 0:
-        supported_rep_caps = attr['supported_rep_caps']
+        supported_rep_caps = [item.replace('_', ' ') for item in attr['supported_rep_caps']]
         caps = ', '.join(supported_rep_caps)
     else:
         caps = 'None'
@@ -877,7 +877,7 @@ def get_attribute_repeated_caps(attr):
 def get_attribute_repeated_caps_with_conjunction(attr):
     '''Creates a comma-separated string, with terminating 'and', representing the attribute's repeated capabilities. Returns 'None' if there are no repeated capabilities'''
     if 'supported_rep_caps' in attr and len(attr['supported_rep_caps']) > 0:
-        supported_rep_caps = attr['supported_rep_caps']
+        supported_rep_caps = [item.replace('_', ' ') for item in attr['supported_rep_caps']]
         num_items = len(supported_rep_caps)
         if num_items > 1:
             caps = ', '.join(supported_rep_caps[:-1]) + ' and ' + supported_rep_caps[num_items - 1]

@@ -1597,7 +1597,7 @@ get_ext_cal_last_date_and_time
 
 
 
-            :rtype: hightime.datetime
+            :rtype: datetime.datetime
             :return:
 
 
@@ -1646,7 +1646,7 @@ get_ext_cal_recommended_interval
 
 
 
-            :rtype: hightime.timedelta
+            :rtype: datetime.timedelta
             :return:
 
 
@@ -1708,7 +1708,7 @@ get_self_cal_last_date_and_time
 
 
 
-            :rtype: hightime.datetime
+            :rtype: datetime.datetime
             :return:
 
 
@@ -2294,24 +2294,22 @@ send_software_edge_trigger
             :param trigger:
 
 
-                Trigger specifies the type of software trigger to send
+                Sets the clock mode of the signal generator.
 
-                +-----------------------------------+
-                | Defined Values                    |
-                +===================================+
-                | :py:data:`~nifgen.Trigger.START`  |
-                +-----------------------------------+
-                | :py:data:`~nifgen.Trigger.SCRIPT` |
-                +-----------------------------------+
+                ****Defined Values****
 
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                +----------------------------------------------+
+                | :py:data:`~nifgen.ClockMode.DIVIDE_DOWN`     |
+                +----------------------------------------------+
+                | :py:data:`~nifgen.ClockMode.HIGH_RESOLUTION` |
+                +----------------------------------------------+
+                | :py:data:`~nifgen.ClockMode.AUTOMATIC`       |
+                +----------------------------------------------+
 
 
-            :type trigger: :py:data:`nifgen.Trigger`
+            :type trigger: int
             :param trigger_id:
 
-
-                Trigger ID specifies the Script Trigger to use for triggering.
 
                 
 
@@ -5697,17 +5695,17 @@ streaming_write_timeout
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------------------------------------+
-            | Characteristic        | Value                                                       |
-            +=======================+=============================================================+
-            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +-----------------------+-------------------------------------------------------------+
-            | Permissions           | read-write                                                  |
-            +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
-            +-----------------------+-------------------------------------------------------------+
+            +-----------------------+----------------------------------------+
+            | Characteristic        | Value                                  |
+            +=======================+========================================+
+            | Datatype              | float in seconds or datetime.timedelta |
+            +-----------------------+----------------------------------------+
+            | Permissions           | read-write                             |
+            +-----------------------+----------------------------------------+
+            | Repeated Capabilities | None                                   |
+            +-----------------------+----------------------------------------+
+            | Resettable            | Yes                                    |
+            +-----------------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

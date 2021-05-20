@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 1.2.0d9
+# This file is generated from NI-FAKE API metadata version 21.0.0d11
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -21,7 +21,7 @@ functions = {
     'AcceptListOfDurationsInSeconds': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Accepts list of floats or hightime.timedelta instances representing time delays.'
+            'description': 'Accepts list of hightime.timedelta or datetime.timedelta or float instances representing time delays.'
         },
         'parameters': [
             {
@@ -2373,6 +2373,7 @@ functions = {
                 },
                 'name': 'waveform',
                 'numpy': True,
+                'python_name': 'wfm',
                 'size': {
                     'mechanism': 'len',
                     'value': 'numberOfSamples'

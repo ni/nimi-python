@@ -821,7 +821,7 @@ class _SessionBase(object):
     Use in conjunction with streaming_space_available_in_waveform.
     '''
     streaming_write_timeout = _attributes.AttributeViReal64TimeDeltaSeconds(1150409)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+    '''Type: float in seconds or datetime.timedelta
 
     Specifies the maximum amount of time allowed to complete a streaming write operation.
     '''
@@ -2071,20 +2071,19 @@ class _SessionBase(object):
         NI 5401/5411/5431.
 
         Args:
-            trigger (enums.Trigger): Trigger specifies the type of software trigger to send
+            trigger (int): Sets the clock mode of the signal generator.
 
-                +----------------+
-                | Defined Values |
-                +================+
-                | Trigger.START  |
-                +----------------+
-                | Trigger.SCRIPT |
-                +----------------+
+                ****Defined Values****
 
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                +---------------------------+
+                | ClockMode.DIVIDE_DOWN     |
+                +---------------------------+
+                | ClockMode.HIGH_RESOLUTION |
+                +---------------------------+
+                | ClockMode.AUTOMATIC       |
+                +---------------------------+
 
-            trigger_id (str): Trigger ID specifies the Script Trigger to use for triggering.
+            trigger_id (str):
 
         '''
         if trigger is None or trigger_id is None:
@@ -3003,7 +3002,7 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        channel_name = _converters.convert_repeated_capabilities_without_prefix(channel_name)
+        channel_name = _converters.convert_repeated_capabilities_from_init(channel_name)
         options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
@@ -3693,7 +3692,7 @@ class Session(_SessionBase):
         months.
 
         Returns:
-            months (hightime.timedelta): Specifies the recommended interval between external calibrations in
+            months (datetime.timedelta): Specifies the recommended interval between external calibrations in
                 months.
 
         '''
@@ -3743,7 +3742,7 @@ class Session(_SessionBase):
         Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this method returns 14 for the **hour** parameter and 30 for the **minute** parameter.
 
         Returns:
-            month (hightime.datetime): Indicates date and time of the last calibration.
+            month (datetime.datetime): Indicates date and time of the last calibration.
 
         '''
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
@@ -3756,7 +3755,7 @@ class Session(_SessionBase):
         Returns the date and time of the last successful self-calibration.
 
         Returns:
-            month (hightime.datetime): Returns the date and time the device was last calibrated.
+            month (datetime.datetime): Returns the date and time the device was last calibrated.
 
         '''
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
@@ -4030,7 +4029,7 @@ class Session(_SessionBase):
 
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        channel_name_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(channel_name).encode(self._encoding))  # case C040
+        channel_name_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_from_init(channel_name).encode(self._encoding))  # case C040
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
         option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
         vi_ctype = _visatype.ViSession()  # case S220
