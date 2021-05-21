@@ -1251,6 +1251,7 @@ class _SessionBase(object):
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
+        self.instruments = _RepeatedCapabilities(self, '', repeated_capability_list)
 
         self._is_frozen = freeze_it
 
@@ -1320,10 +1321,10 @@ class _SessionBase(object):
         channel list parsing for you.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Returns:
             num_wfms (int): Returns the number of records times the number of channels; if you are
@@ -1353,10 +1354,10 @@ class _SessionBase(object):
         processing is done before any other measurements.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             meas_function (enums.ArrayMeasurement): The `array
@@ -1398,10 +1399,10 @@ class _SessionBase(object):
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
@@ -1437,10 +1438,10 @@ class _SessionBase(object):
         are also cleared with this method.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             clearable_measurement_function (enums.ClearableMeasurement): The `scalar
@@ -1471,10 +1472,10 @@ class _SessionBase(object):
         processing is also done before any other measurements.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1490,10 +1491,10 @@ class _SessionBase(object):
         the channel—the input impedance and the bandwidth.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             input_impedance (float): The input impedance for the channel; NI-SCOPE sets
@@ -1524,10 +1525,10 @@ class _SessionBase(object):
         Coefficient values should be between +1 and –1.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
@@ -1556,10 +1557,10 @@ class _SessionBase(object):
         attenuation, and the channel.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             range (float): Specifies the vertical range Refer to vertical_range for
@@ -1605,10 +1606,10 @@ class _SessionBase(object):
         Note: Some functionality, such as time stamping, is not supported in all digitizers.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method raises.
@@ -1685,10 +1686,10 @@ class _SessionBase(object):
         digitizers.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             array_meas_function (enums.ArrayMeasurement): The array measurement to perform.
@@ -1790,10 +1791,10 @@ class _SessionBase(object):
         differently.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The scalar measurement to be performed on each fetched waveform.
@@ -1858,10 +1859,10 @@ class _SessionBase(object):
         Retrieves the custom coefficients for the equalization FIR filter on the device. This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. Because this filter is a generic FIR filter, any coefficients are valid. Coefficient values should be between +1 and –1.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
         '''
         return self._get_equalization_filter_coefficients(self.equalization_num_coefficients)
 
@@ -1882,10 +1883,10 @@ class _SessionBase(object):
         Note: Some functionality, such as time stamping, is not supported in all digitizers.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method raises.
@@ -1970,10 +1971,10 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2070,10 +2071,10 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2191,10 +2192,10 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             array_meas_function (enums.ArrayMeasurement): The `array
@@ -2296,10 +2297,10 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2421,10 +2422,10 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2546,10 +2547,10 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2665,10 +2666,10 @@ class _SessionBase(object):
         Note: Some functionality, such as time stamping, is not supported in all digitizers.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             waveform (array.array("d")): numpy array of the appropriate type and size that should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
@@ -2785,10 +2786,10 @@ class _SessionBase(object):
         differently.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -2855,10 +2856,10 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             attribute_id (int): The ID of a property.
@@ -2891,10 +2892,10 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             attribute_id (int): The ID of a property.
@@ -2926,10 +2927,10 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             attribute_id (int): The ID of a property.
@@ -2961,10 +2962,10 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             attribute_id (int): The ID of a property.
@@ -3008,10 +3009,10 @@ class _SessionBase(object):
         you can pass 0 for the **bufSize** and VI_NULL for the **value**.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             attribute_id (int): The ID of a property.
@@ -3047,10 +3048,10 @@ class _SessionBase(object):
         Coefficient values should be between +1 and –1.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             number_of_coefficients (int): The number of coefficients being passed in the **coefficients** array.
@@ -3188,10 +3189,10 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -3294,10 +3295,10 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             attribute_id (int): The ID of a property.
@@ -3342,10 +3343,10 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             attribute_id (int): The ID of a property.
@@ -3390,10 +3391,10 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             attribute_id (int): The ID of a property.
@@ -3438,10 +3439,10 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             attribute_id (int): The ID of a property.
@@ -3488,10 +3489,10 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session repeated capabilities container, and calling this method on the result.
+        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Args:
             attribute_id (int): The ID of a property.

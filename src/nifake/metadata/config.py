@@ -47,12 +47,18 @@ config = {
     'module_name': 'nifake',
     'repeated_capabilities': [
         {
+			'example_attribute': 'read_write_double_with_repeated_capability',
             'prefix': '',
             'python_name': 'channels'
         },
         {
             'prefix': 'site',
             'python_name': 'sites',
+        },
+        {
+			'example_attribute': 'read_write_string_repeated_capability',
+            'prefix': '',
+            'python_name': 'instruments'
         },
     ],
     'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',

@@ -1,17 +1,21 @@
 # Different documentation snippets we add to the generated documentation
 
 rep_cap_method_desc = '''
-This method requires repeated capabilities. If called directly on the
-{0}.Session object, then the method will use all repeated capabilities in the session.
-You can specify a subset of repeated capabilities using the Python index notation on an
-{0}.Session repeated capabilities container, and calling this method on the result.
+This method can be called for specific {1} within your :py:class:`{0}.Session` object.
+Use Python index notation on the repeated capabilities container {1} to specify a subset,
+and then call this method on the result.
+To call the method for all {1}, you can call it directly on the :py:class:`{0}.Session`.
 '''
 
 rep_cap_attr_desc = '''
-This property can be set/get to specific {1} within your {0}.Session object. Use Python index notation on the repeated capabilities container `{2}` to specify a subset.
-Example: `my_session.{2}[ ... ].{3}`,
-To set/get on all, you can call the property directly on the {0}.Session:
-`my_session.{3}`.
+This property can be set/get to specific {1} within your :py:class:`{0}.Session` object.
+Use Python index notation on the repeated capabilities container {1} to specify a subset.
+
+Example: :py:attr:`my_session.{2}[ ... ].{3}`
+
+To set/get on all {1}, you can call the property directly on the :py:class:`{0}.Session`.
+
+Example: :py:attr:`my_session.{3}`
 '''
 
 func_note_text = '''

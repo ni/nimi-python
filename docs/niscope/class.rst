@@ -228,10 +228,10 @@ add_waveform_processing
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
             :param meas_function:
@@ -343,10 +343,10 @@ clear_waveform_measurement_stats
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
             :param clearable_measurement_function:
@@ -380,10 +380,10 @@ clear_waveform_processing
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
 close
@@ -435,10 +435,10 @@ configure_chan_characteristics
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
             :param input_impedance:
@@ -480,10 +480,10 @@ configure_equalization_filter_coefficients
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
             :param coefficients:
@@ -1194,10 +1194,10 @@ configure_vertical
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
             :param range:
@@ -1368,10 +1368,10 @@ fetch
             .. note:: Some functionality, such as time stamping, is not supported in all digitizers.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
             :param num_samples:
@@ -1476,10 +1476,10 @@ fetch_array_measurement
                 digitizers.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
             :param array_meas_function:
@@ -1610,10 +1610,10 @@ fetch_into
             .. note:: Some functionality, such as time stamping, is not supported in all digitizers.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
             :param waveform:
@@ -1747,10 +1747,10 @@ fetch_measurement_stats
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
             :param scalar_meas_function:
@@ -1846,10 +1846,10 @@ get_equalization_filter_coefficients
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
 get_ext_cal_last_date_and_time
@@ -2146,10 +2146,10 @@ read
             .. note:: Some functionality, such as time stamping, is not supported in all digitizers.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
             :param num_samples:
@@ -2312,10 +2312,10 @@ self_cal
             .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`niscope.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
 
 
             :param option:

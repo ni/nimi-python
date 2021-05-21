@@ -168,10 +168,10 @@ allocate_named_waveform
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param waveform_name:
@@ -212,10 +212,10 @@ allocate_waveform
                 this method.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param waveform_size:
@@ -348,10 +348,10 @@ clear_user_standard_waveform
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
 close
@@ -436,10 +436,10 @@ configure_arb_sequence
                 this method.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param sequence_handle:
@@ -516,10 +516,10 @@ configure_arb_waveform
                 this method.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param waveform_handle:
@@ -606,10 +606,10 @@ configure_freq_list
                 this method.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param frequency_list_handle:
@@ -716,10 +716,10 @@ configure_standard_waveform
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param waveform:
@@ -1193,10 +1193,10 @@ create_waveform_from_file_f64
                 outputs.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param file_name:
@@ -1265,10 +1265,10 @@ create_waveform_from_file_i16
                 generate different voltage outputs.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param file_name:
@@ -1330,10 +1330,10 @@ create_waveform_numpy
             .. note:: You must set :py:attr:`nifgen.Session.output_mode` to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ` before calling this method.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param waveform_data_array:
@@ -1381,10 +1381,10 @@ define_user_standard_waveform
                 :py:data:`~nifgen.OutputMode.FREQ_LIST` before calling this method.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param waveform_data_array:
@@ -1416,10 +1416,10 @@ delete_script
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param script_name:
@@ -1447,10 +1447,10 @@ delete_waveform
             .. note:: The signal generator must not be in the Generating state when you call this method.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param waveform_name_or_handle:
@@ -2337,10 +2337,10 @@ set_next_write_position
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param waveform_name_or_handle:
@@ -2430,10 +2430,10 @@ write_script
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param script:
@@ -2466,10 +2466,10 @@ write_waveform
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
 
             :param waveform_name_or_handle:

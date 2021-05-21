@@ -127,10 +127,10 @@ apply_levels_and_timing
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param levels_sheet:
@@ -191,10 +191,10 @@ apply_tdr_offsets
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param offsets:
@@ -223,10 +223,10 @@ burst_pattern
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param start_label:
@@ -289,10 +289,10 @@ clock_generator_abort
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
 clock_generator_generate_clock
@@ -307,10 +307,10 @@ clock_generator_generate_clock
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param frequency:
@@ -372,10 +372,10 @@ configure_active_load_levels
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param iol:
@@ -418,10 +418,10 @@ configure_pattern_burst_sites
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
 
 configure_time_set_compare_edges_strobe
@@ -436,10 +436,10 @@ configure_time_set_compare_edges_strobe
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param time_set_name:
@@ -473,10 +473,10 @@ configure_time_set_compare_edges_strobe2x
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param time_set_name:
@@ -519,10 +519,10 @@ configure_time_set_drive_edges
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param time_set_name:
@@ -597,10 +597,10 @@ configure_time_set_drive_edges2x
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param time_set_name:
@@ -693,10 +693,10 @@ configure_time_set_drive_format
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param time_set_name:
@@ -735,10 +735,10 @@ configure_time_set_edge
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param time_set_name:
@@ -790,10 +790,10 @@ configure_time_set_edge_multiplier
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param time_set_name:
@@ -859,10 +859,10 @@ configure_voltage_levels
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param vil:
@@ -955,10 +955,10 @@ create_capture_waveform_parallel
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param waveform_name:
@@ -983,10 +983,10 @@ create_capture_waveform_serial
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param waveform_name:
@@ -1073,10 +1073,10 @@ create_source_waveform_parallel
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param waveform_name:
@@ -1113,10 +1113,10 @@ create_source_waveform_serial
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param waveform_name:
@@ -1210,10 +1210,10 @@ disable_sites
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
 
 enable_sites
@@ -1228,10 +1228,10 @@ enable_sites
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
 
 fetch_capture_waveform
@@ -1246,10 +1246,10 @@ fetch_capture_waveform
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param waveform_name:
@@ -1341,10 +1341,10 @@ fetch_history_ram_cycle_information
                 the trigger conditions are met.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param position:
@@ -1413,10 +1413,10 @@ frequency_counter_measure_frequency
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :rtype: list of float
@@ -1480,10 +1480,10 @@ get_fail_count
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :rtype: list of int
@@ -1532,10 +1532,10 @@ get_history_ram_sample_count
                 the trigger conditions are met.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :rtype: int
@@ -1593,10 +1593,10 @@ get_pin_results_pin_information
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :rtype: list of PinInfo
@@ -1625,10 +1625,10 @@ get_site_pass_fail
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :rtype: { int: bool, int: bool, ... }
@@ -1653,10 +1653,10 @@ get_time_set_drive_format
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param time_set_name:
@@ -1691,10 +1691,10 @@ get_time_set_edge
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param time_set_name:
@@ -1747,10 +1747,10 @@ get_time_set_edge_multiplier
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param time_set_name:
@@ -1858,10 +1858,10 @@ is_site_enabled
             .. note:: The method returns an error if more than one site is specified.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :rtype: bool
@@ -2027,10 +2027,10 @@ ppmu_measure
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param measurement_type:
@@ -2068,10 +2068,10 @@ ppmu_source
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
 read_sequencer_flag
@@ -2174,10 +2174,10 @@ read_static
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :rtype: list of :py:data:`nidigital.PinState`
@@ -2326,10 +2326,10 @@ tdr
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param apply_offsets:
@@ -2633,10 +2633,10 @@ write_static
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
 
             :param state:

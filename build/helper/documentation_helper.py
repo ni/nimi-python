@@ -129,7 +129,7 @@ def add_attribute_rep_cap_tip(attr, config):
 
         multi_capability = get_attribute_repeated_caps_with_conjunction(attr)
         single_capability = attr['supported_rep_caps'][0]
-        example_attribute = get_example_attribute_for_repeated_cap_type(config['module_name'], single_capability)
+        example_attribute = get_example_attribute_for_repeated_cap_type(config, single_capability)
         attr['documentation']['tip'] = rep_cap_attr_desc.format(config['module_name'], multi_capability, single_capability, example_attribute)
 
 
@@ -493,7 +493,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'])
+        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['repeated_capability_type'])
 
     rst = '.. py:{0}:: {1}{2}('.format(method_or_function, function['python_name'], suffix)
     rst += get_params_snippet(function, session_method) + ')'
@@ -568,7 +568,7 @@ def get_function_docstring(function, numpy, config, indent=0):
 
     docstring = ''
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'])
+        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['repeated_capability_type'])
 
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
@@ -882,24 +882,12 @@ def get_attribute_repeated_caps_with_conjunction(attr):
         supported_rep_caps = attr['supported_rep_caps']
         num_items = len(supported_rep_caps)
         if num_items > 1:
-            caps = ', '.join(supported_rep_caps[:-1]) + ' and ' + supported_rep_caps[num_items - 1]
+            caps = ', '.join(supported_rep_caps[:-1]) + ' or ' + supported_rep_caps[num_items - 1]
         else:
             caps = supported_rep_caps[0]
     else:
         caps = 'None'
     return caps
-
-
-# Arbitrary set of example attributes that support a given repeated capability type, for a given module. Used to customize the doc tips of each attribute
-_example_repeated_cap_attributes = {
-    ('nidcpower', 'channels'): 'active_advanced_sequence_step',
-    ('nidcpower', 'instruments'): 'instrument_firmware_revision',
-    ('niscope', 'channels'): 'channel_enabled',
-    ('niscope', 'instruments'): 'instrument_firmware_revision',
-    ('nidigital', 'channels'): 'selected_function',
-    ('nidigital', 'instruments'): 'instrument_firmware_revision',
-    ('niswitch', 'channels'): 'is_configuration_channel'
-}
 
 
 def module_supports_repeated_caps(config):
@@ -908,12 +896,15 @@ def module_supports_repeated_caps(config):
     return False
 
 
-def get_example_attribute_for_repeated_cap_type(module, cap_type):
+def get_example_attribute_for_repeated_cap_type(module_info, cap_type):
     '''Returns an arbitrary attribute that supports the specified repeated capability for a given module'''
-    dict_key = (module, cap_type)
-    if dict_key not in _example_repeated_cap_attributes:
-        raise ValueError('There are no attributes in {0} with the \'{1}\' repeated capability type'.format(module, cap_type))
-    return _example_repeated_cap_attributes[dict_key]
+    repcap_info = module_info['repeated_capabilities']
+    for repcap in repcap_info:
+        if 'python_name' in repcap and repcap['python_name'] == cap_type:
+            if 'example_attribute' in repcap:
+                return repcap['example_attribute']
+
+    raise ValueError('There are no attributes in {0} with the \'{1}\' repeated capability type'.format(module_info['module_name'], cap_type))
 
 
 # Unit Tests
@@ -1363,12 +1354,12 @@ def test_get_attribute_repeated_caps():
 
 def test_get_attribute_repeated_caps_with_conjunction():
     attr = {'supported_rep_caps': ['channels', 'instruments', 'pins']}
-    expected_caps = 'channels, instruments and pins'
+    expected_caps = 'channels, instruments or pins'
     actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
     assert actual_caps == expected_caps
 
     attr = {'supported_rep_caps': ['channels', 'instruments']}
-    expected_caps = 'channels and instruments'
+    expected_caps = 'channels or instruments'
     actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
     assert actual_caps == expected_caps
 
@@ -1384,10 +1375,21 @@ def test_get_attribute_repeated_caps_with_conjunction():
 
 
 def test_get_example_attribute_for_repeated_cap_type():
-    module = 'nidcpower'
-    cap_type = 'channels'
-    expected_attribute = 'active_advanced_sequence_step'
-    actual_attribute = get_example_attribute_for_repeated_cap_type(module, cap_type)
+    config = {
+        'repeated_capabilities': [
+            {
+                'python_name': 'channels',
+                'example_attribute': 'active_advanced_sequence_step'
+            },
+            {
+                'python_name': 'instruments',
+                'example_attribute': 'instrument_firmware_revision'
+            }
+        ]
+    }
+    cap_type = 'instruments'
+    expected_attribute = 'instrument_firmware_revision'
+    actual_attribute = get_example_attribute_for_repeated_cap_type(config, cap_type)
     assert actual_attribute == expected_attribute
 
 
