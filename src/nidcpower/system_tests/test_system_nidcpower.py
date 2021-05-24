@@ -5,48 +5,44 @@ import pytest
 import tempfile
 
 
-@pytest.fixture(scope='function')
-def session():
-    with nidcpower.Session('4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+@pytest.fixture(scope='function', params=[False, True])
+def session(request):
+    with nidcpower.Session(
+        '4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', request.param
+    ) as simulated_session:
         yield simulated_session
 
 
 @pytest.fixture(scope='function')
 def multi_instrument_session():
-    instruments = ['PXI1Slot2', 'PXI1Slot5']
-    with nidcpower.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+    with nidcpower.Session(
+            '4162_01,4162_02', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', True
+    ) as simulated_session:
         yield simulated_session
 
 
 @pytest.fixture(scope='function')
-def single_channel_session():
-    with nidcpower.Session('4162', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+def synchronized_channels_session():
+    with nidcpower.Session(
+        '4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', False
+    ) as simulated_session:
         yield simulated_session
 
 
-@pytest.fixture(scope='function')
-def multiple_channel_session():
-    with nidcpower.Session('4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+@pytest.fixture(scope='function', params=[False, True])
+def single_channel_session(request):
+    with nidcpower.Session(
+            '4162', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', request.param
+    ) as simulated_session:
         yield simulated_session
 
 
-@pytest.fixture(scope='function')
-def independent_channel_session():
-    with nidcpower.Session(['4162/0', '4162/1'], False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+@pytest.fixture(scope='function', params=[False, True])
+def multiple_channel_session(request):
+    with nidcpower.Session(
+        '4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', request.param
+    ) as simulated_session:
         yield simulated_session
-
-
-# this fixture can be used to test with different types of sessions
-@pytest.fixture(scope='function', params=[('4162', '', false), ('4162', [0, 1], false), (('4162/0', '4162/1'), '', true)])
-def sessions(request):
-    with nidcpower.Session(request.param[0], request.param[1], False,
-                           'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe',
-                           independent_channels=request.param[2]) as simulated_session:
-        yield simulated_session
-
-
-def test_self_test(sessions):
-    sessions.self_test()
 
 
 def test_self_cal(session):
@@ -137,23 +133,25 @@ def test_reset(session):
     assert channel.output_enabled is True
 
 
-def test_reset_rep_cap_all(independent_channel_session):
-    assert independent_channel_session.channels['4162/0', '4162/1'].output_enabled is True
-    independent_channel_session.channels['4162/0', '4162/1'].output_enabled = False
-    independent_channel_session.channels['4162/0', '4162/1'].reset()
-    assert independent_channel_session.channels['4162/0'].output_enabled is True
-    assert independent_channel_session.channels['4162/1'].output_enabled is True
-    assert independent_channel_session.channels['4162/0', '4162/1'].output_enabled is True
+def test_reset_repeated_capabilities_all_channels(multiple_channel_session):
+    all_channels = multiple_channel_session.channels['4162/0-11']
+    assert all_channels.output_enabled is True
+    all_channels.output_enabled = False
+    all_channels.reset()
+    assert all_channels.output_enabled is True
+    assert multiple_channel_session.channels['4162/0'].output_enabled is True
 
 
-def test_reset_rep_cap_subset(independent_channel_session):
-    assert independent_channel_session.channels['4162/0'].output_enabled is True
-    assert independent_channel_session.channels['4162/1'].output_enabled is True
-    independent_channel_session.channels['4162/0'].output_enabled = False
-    independent_channel_session.channels['4162/1'].output_enabled = False
-    independent_channel_session.channels['4162/0'].reset()
-    assert independent_channel_session.channels['4162/0'].output_enabled is True
-    assert independent_channel_session.channels['4162/1'].output_enabled is False
+def test_reset_repeated_capabilities_one_channel(multiple_channel_session):
+    channel_one = multiple_channel_session.channels['4162/1']
+    channel_two = multiple_channel_session.channels['4162/2']
+    assert channel_one.output_enabled is True
+    assert channel_two.output_enabled is True
+    channel_one.output_enabled = False
+    channel_two.output_enabled = False
+    channel_one.reset()
+    assert channel_one.output_enabled is True
+    assert channel_two.output_enabled is False
 
 
 def test_disable(session):
@@ -283,10 +281,10 @@ def test_commit(single_channel_session):
     single_channel_session.commit()
 
 
-def test_commit_rep_cap(independent_channel_session):
+def test_commit_repeated_capabilities(multiple_channel_session):
     non_default_current_limit = 0.00021
-    independent_channel_session['4162/1'].current_limit = non_default_current_limit
-    independent_channel_session['4162/1'].commit()
+    multiple_channel_session['4162/1'].current_limit = non_default_current_limit
+    multiple_channel_session['4162/1'].commit()
 
 
 def test_import_export_buffer(single_channel_session):
@@ -335,11 +333,11 @@ def test_create_and_delete_advanced_sequence(single_channel_session):
         pass
 
 
-def test_create_and_delete_advanced_sequence_rep_cap(independent_channel_session):
+def test_create_and_delete_advanced_sequence_repeated_capabilities(multiple_channel_session):
     properties_used = ['output_function', 'voltage_level']
     sequence_name = 'my_sequence'
-    channel_session = independent_channel_session.channels['4162/0']
-    session.source_mode = nidcpower.SourceMode.SEQUENCE
+    channel_session = multiple_channel_session.channels['4162/0']
+    channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
     channel_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
     channel_session.create_advanced_sequence_step(set_as_active_step=True)
     assert channel_session.active_advanced_sequence == sequence_name
@@ -423,23 +421,28 @@ def test_channel_format_types():
         assert simulated_session.channel_count == 12
 
 
-def test_rep_cap_all_channels(multiple_channel_session):
+def test_repeated_capabilities_method_all_channels(synchronized_channels_session):
     # no error for non-independent channel session when specifying all channels by number
-    multiple_channel_session.channels['0', '1'].reset()
+    synchronized_channels_session.channels['0-11'].reset()
 
 
-def test_rep_cap_method_error(multiple_channel_session):
+def test_repeated_capabilities_attribute_all_channels(synchronized_channels_session):
+    # no error for non-independent channel session when specifying all channels by number
+    instrument_model = synchronized_channels_session.channels['0-11'].instrument_model
+
+
+def test_repeated_capabilities_method_error(synchronized_channels_session):
     try:
-        multiple_channel_session.channels['0'].reset()
+        synchronized_channels_session.channels['0'].reset()
         assert False
     except nidcpower.Error as e:
         assert e.code == -1074118494  # NIDCPOWER_ERROR_CHANNEL_NAME_NOT_ALLOWED_IN_OBSOLETE_SESSION
         assert e.description.find('The channel name string must represent all channels in the session because the session was not initialized with independent channels. To specify a subset of channels for this function, first initialize the session with independent channels.') != -1
 
 
-def test_rep_cap_attribute_error(multiple_channel_session):
+def test_repeated_capabilities_attribute_error(synchronized_channels_session):
     try:
-        multiple_channel_session.channels['0'].instrument_model
+        synchronized_channels_session.channels['0'].instrument_model
         assert False
     except nidcpower.Error as e:
         assert e.code == -1074134971  # IVI_ERROR_CHANNEL_NAME_NOT_ALLOWED
