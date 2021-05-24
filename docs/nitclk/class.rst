@@ -461,17 +461,17 @@ exported_sync_pulse_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
+            | Resettable            | No         |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -499,17 +499,17 @@ exported_tclk_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
+            | Resettable            | No         |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -529,17 +529,17 @@ pause_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
-            | Channel Based  | No                                        |
-            +----------------+-------------------------------------------+
-            | Resettable     | No                                        |
-            +----------------+-------------------------------------------+
+            +-----------------------+-------------------------------------------+
+            | Characteristic        | Value                                     |
+            +=======================+===========================================+
+            | Datatype              | Driver Session or nitclk.SessionReference |
+            +-----------------------+-------------------------------------------+
+            | Permissions           | read-write                                |
+            +-----------------------+-------------------------------------------+
+            | Repeated Capabilities | None                                      |
+            +-----------------------+-------------------------------------------+
+            | Resettable            | No                                        |
+            +-----------------------+-------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -559,17 +559,17 @@ ref_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
-            | Channel Based  | No                                        |
-            +----------------+-------------------------------------------+
-            | Resettable     | No                                        |
-            +----------------+-------------------------------------------+
+            +-----------------------+-------------------------------------------+
+            | Characteristic        | Value                                     |
+            +=======================+===========================================+
+            | Datatype              | Driver Session or nitclk.SessionReference |
+            +-----------------------+-------------------------------------------+
+            | Permissions           | read-write                                |
+            +-----------------------+-------------------------------------------+
+            | Repeated Capabilities | None                                      |
+            +-----------------------+-------------------------------------------+
+            | Resettable            | No                                        |
+            +-----------------------+-------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -597,17 +597,17 @@ sample_clock_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------------------------+
-            | Characteristic | Value                                                       |
-            +================+=============================================================+
-            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +----------------+-------------------------------------------------------------+
-            | Permissions    | read-write                                                  |
-            +----------------+-------------------------------------------------------------+
-            | Channel Based  | No                                                          |
-            +----------------+-------------------------------------------------------------+
-            | Resettable     | No                                                          |
-            +----------------+-------------------------------------------------------------+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | None                                                        |
+            +-----------------------+-------------------------------------------------------------+
+            | Resettable            | No                                                          |
+            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -629,17 +629,17 @@ sequencer_flag_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
-            | Channel Based  | No                                        |
-            +----------------+-------------------------------------------+
-            | Resettable     | No                                        |
-            +----------------+-------------------------------------------+
+            +-----------------------+-------------------------------------------+
+            | Characteristic        | Value                                     |
+            +=======================+===========================================+
+            | Datatype              | Driver Session or nitclk.SessionReference |
+            +-----------------------+-------------------------------------------+
+            | Permissions           | read-write                                |
+            +-----------------------+-------------------------------------------+
+            | Repeated Capabilities | None                                      |
+            +-----------------------+-------------------------------------------+
+            | Resettable            | No                                        |
+            +-----------------------+-------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -659,17 +659,17 @@ start_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
-            | Channel Based  | No                                        |
-            +----------------+-------------------------------------------+
-            | Resettable     | No                                        |
-            +----------------+-------------------------------------------+
+            +-----------------------+-------------------------------------------+
+            | Characteristic        | Value                                     |
+            +=======================+===========================================+
+            | Datatype              | Driver Session or nitclk.SessionReference |
+            +-----------------------+-------------------------------------------+
+            | Permissions           | read-write                                |
+            +-----------------------+-------------------------------------------+
+            | Repeated Capabilities | None                                      |
+            +-----------------------+-------------------------------------------+
+            | Resettable            | No                                        |
+            +-----------------------+-------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -692,17 +692,17 @@ sync_pulse_clock_source
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
+            | Resettable            | No         |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -730,17 +730,17 @@ sync_pulse_sender_sync_pulse_source
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
+            | Resettable            | No         |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -768,17 +768,17 @@ sync_pulse_source
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
+            | Resettable            | No         |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -797,17 +797,17 @@ tclk_actual_period
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +-----------------------+-----------+
+            | Characteristic        | Value     |
+            +=======================+===========+
+            | Datatype              | float     |
+            +-----------------------+-----------+
+            | Permissions           | read only |
+            +-----------------------+-----------+
+            | Repeated Capabilities | None      |
+            +-----------------------+-----------+
+            | Resettable            | No        |
+            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

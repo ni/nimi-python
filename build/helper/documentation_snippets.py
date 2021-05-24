@@ -8,10 +8,10 @@ You can specify a subset of repeated capabilities using the Python index notatio
 '''
 
 rep_cap_attr_desc = '''
-This property can use repeated capabilities. If set or get directly on the
-{0}.Session object, then the set/get will use all repeated capabilities in the session.
+This property can use repeated capabilities for {0}. If set or get directly on the
+{1}.Session object, then the set/get will use all repeated capabilities in the session.
 You can specify a subset of repeated capabilities using the Python index notation on an
-{0}.Session repeated capabilities container, and calling set/get value on the result.
+{1}.Session repeated capabilities container, and calling set/get value on the result.
 '''
 
 func_note_text = '''

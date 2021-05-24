@@ -121,17 +121,18 @@ def get_rst_admonition_snippet(node, admonition, d, config, indent=0):
         return ''
 
 
-def add_attribute_rep_cap_tip_rst(attr, config):
-    '''Add the appropriate (r/w/rw/none) rst formatted tip for an attribute'''
-    if 'repeated_capability_type' in attr:
+def add_attribute_rep_cap_tip(attr, config):
+    '''Add the appropriate docstring formatted repeated capability tip for an attribute'''
+    if 'supported_rep_caps' in attr:
         if 'documentation' not in attr:
             attr['documentation'] = {}
 
-        attr['documentation']['tip'] = rep_cap_attr_desc.format(config['module_name'])
+        capability_type_string = get_attribute_repeated_caps_with_conjunction(attr)
+        attr['documentation']['tip'] = rep_cap_attr_desc.format(capability_type_string, config['module_name'])
 
 
 def get_documentation_for_node_rst(node, config, indent=0):
-    '''Returns any documentaion information formatted for rst
+    '''Returns any documentation information formatted for rst
 
     Documentation will be in the following order (if existing)
     - 'caution' admonition
@@ -193,17 +194,8 @@ def get_docstring_admonition_snippet(node, admonition, d, config, indent=0, extr
         return ''
 
 
-def add_attribute_rep_cap_tip_docstring(attr, config):
-    '''Add the appropriate (r/w/rw/none) docstring formatted tip for an attribute'''
-    if 'repeated_capability_type' in attr:
-        if 'documentation' not in attr:
-            attr['documentation'] = {}
-
-        attr['documentation']['tip'] = rep_cap_attr_desc.format(config['module_name'])
-
-
 def get_documentation_for_node_docstring(node, config, indent=0):
-    '''Returns any documentaion information formatted for docstring
+    '''Returns any documentation information formatted for docstring
 
     Documentation will be in the following order (if existing)
     - 'caution' admonition
@@ -872,6 +864,30 @@ def add_notes_re_links(config):
             _check_documentation(v['documentation'], config)
 
 
+def get_attribute_repeated_caps(attr):
+    '''Creates a comma-separated string representing the attribute's repeated capabilities. Returns 'None' if there are no repeated capabilities'''
+    if 'supported_rep_caps' in attr and len(attr['supported_rep_caps']) > 0:
+        supported_rep_caps = attr['supported_rep_caps']
+        caps = ', '.join(supported_rep_caps)
+    else:
+        caps = 'None'
+    return caps
+
+
+def get_attribute_repeated_caps_with_conjunction(attr):
+    '''Creates a comma-separated string, with terminating 'and', representing the attribute's repeated capabilities. Returns 'None' if there are no repeated capabilities'''
+    if 'supported_rep_caps' in attr and len(attr['supported_rep_caps']) > 0:
+        supported_rep_caps = attr['supported_rep_caps']
+        num_items = len(supported_rep_caps)
+        if num_items > 1:
+            caps = ', '.join(supported_rep_caps[:-1]) + ' and ' + supported_rep_caps[num_items - 1]
+        else:
+            caps = supported_rep_caps[0]
+    else:
+        caps = 'None'
+    return caps
+
+
 # Unit Tests
 
 
@@ -1168,7 +1184,6 @@ wanted to choose.''',
     'attributes': {
         1000000: {
             'access': 'read-write',
-            'channel_based': 'False',
             'enum': None,
             'lv_property': 'Fake attributes:Read Write Bool',
             'name': 'READ_WRITE_BOOL',
@@ -1295,6 +1310,50 @@ def test_get_function_rst_numpy():
             Number of samples actually fetched.
 '''
     assert_rst_strings_are_equal(expected_fuction_rst, actual_function_rst)
+
+
+def test_get_attribute_repeated_caps():
+    attr = {'supported_rep_caps': ['channels', 'instruments', 'pins']}
+    expected_caps = 'channels, instruments, pins'
+    actual_caps = get_attribute_repeated_caps(attr)
+    assert actual_caps == expected_caps
+
+    attr = {'supported_rep_caps': ['channels']}
+    expected_caps = 'channels'
+    actual_caps = get_attribute_repeated_caps(attr)
+    assert actual_caps == expected_caps
+
+    attr = {'supported_rep_caps': []}
+    expected_caps = 'None'
+    actual_caps = get_attribute_repeated_caps(attr)
+    assert actual_caps == expected_caps
+
+    attr = {}
+    expected_caps = 'None'
+    actual_caps = get_attribute_repeated_caps(attr)
+    assert actual_caps == expected_caps
+
+
+def test_get_attribute_repeated_caps_with_conjunction():
+    attr = {'supported_rep_caps': ['channels', 'instruments', 'pins']}
+    expected_caps = 'channels, instruments and pins'
+    actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
+    assert actual_caps == expected_caps
+
+    attr = {'supported_rep_caps': ['channels', 'instruments']}
+    expected_caps = 'channels and instruments'
+    actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
+    assert actual_caps == expected_caps
+
+    attr = {'supported_rep_caps': ['channels']}
+    expected_caps = 'channels'
+    actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
+    assert actual_caps == expected_caps
+
+    attr = {'supported_rep_caps': []}
+    expected_caps = 'None'
+    actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
+    assert actual_caps == expected_caps
 
 
 def test_get_function_docstring_default():
@@ -1493,7 +1552,6 @@ def test_add_notes_re_links():
     attributes = {
         1000000: {
             'access': 'read-write',
-            'channel_based': 'False',
             'enum': None,
             'lv_property': 'Fake attributes:Read Write Bool',
             'name': 'READ_WRITE_BOOL',

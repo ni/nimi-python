@@ -233,4 +233,3 @@ def test_get_development_status():
     config['module_version'] = '19.9.9'
     assert get_development_status(config) == '5 - Production/Stable'
 
-
