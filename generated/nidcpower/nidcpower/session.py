@@ -132,7 +132,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -145,7 +145,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -164,7 +164,7 @@ class _SessionBase(object):
      This property returns -1 when the power_allocation_mode property is set to PowerAllocationMode.DISABLED.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -180,7 +180,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -196,7 +196,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -209,7 +209,7 @@ class _SessionBase(object):
     Note: Autoranging begins at module startup and remains active until the module is reconfigured or reset.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -222,7 +222,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -235,7 +235,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -248,7 +248,7 @@ class _SessionBase(object):
     Note: For smaller ranges, the value is scaled up to account for noise. The factor used to scale the value is derived from the module capabilities.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -261,7 +261,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -274,7 +274,7 @@ class _SessionBase(object):
     Note: The maximum range used is the range that includes the value specified in the compliance limit property, voltage_limit_range property or current_limit_range property, depending on the selected output_function. This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -287,7 +287,7 @@ class _SessionBase(object):
     Note: The maximum range used is the range that includes the value specified in the compliance limit property, voltage_limit_range property or current_limit_range property, depending on the selected output_function. This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -300,7 +300,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -313,7 +313,7 @@ class _SessionBase(object):
     Default Value: The default value for the NI PXI-4132 is AutoZero.ON. The default value for  all other devices is AutoZero.OFF, which is the only supported value for these devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -359,7 +359,7 @@ class _SessionBase(object):
     information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -374,7 +374,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -389,7 +389,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -405,7 +405,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current level to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -420,7 +420,7 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -437,7 +437,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current level range to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -453,7 +453,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -468,7 +468,7 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -477,7 +477,7 @@ class _SessionBase(object):
     '''Type: int
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -517,7 +517,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -557,7 +557,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -574,7 +574,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -589,7 +589,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -604,7 +604,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -620,7 +620,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -635,7 +635,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -651,7 +651,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -666,7 +666,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -682,7 +682,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -698,7 +698,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -721,7 +721,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -736,7 +736,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -752,7 +752,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -768,7 +768,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -784,7 +784,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -795,7 +795,7 @@ class _SessionBase(object):
     Returns the number of measurements acquired that have not been fetched yet.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -806,7 +806,7 @@ class _SessionBase(object):
     Contains the firmware revision information for the device you are currently using.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for instruments. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -817,7 +817,7 @@ class _SessionBase(object):
     Contains the name of the manufacturer for the device you are currently using.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for instruments. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -828,7 +828,7 @@ class _SessionBase(object):
     Contains the model number or name of the device that you are currently using.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for instruments. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -843,7 +843,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for instruments. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -873,7 +873,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -889,7 +889,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -904,7 +904,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -919,7 +919,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -937,7 +937,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -952,7 +952,7 @@ class _SessionBase(object):
     Note: This property is not available when Auto Zero is configured to Once because the amount of time between the first
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -969,7 +969,7 @@ class _SessionBase(object):
     This property is not available in a session involving multiple channels.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -985,7 +985,7 @@ class _SessionBase(object):
     This property is not available in a session involving multiple channels.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1000,7 +1000,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1013,7 +1013,7 @@ class _SessionBase(object):
     Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the fetch_multiple method.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1030,7 +1030,7 @@ class _SessionBase(object):
     Default Value: Refer to the Supported Properties by Device topic for the default value by device.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1045,7 +1045,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1062,7 +1062,7 @@ class _SessionBase(object):
     Note: Only disconnect the output when disconnecting is necessary for your application. For example, a battery connected
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1078,7 +1078,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1094,7 +1094,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1110,7 +1110,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1126,7 +1126,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1141,7 +1141,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1155,7 +1155,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices. Instruments that do not support this property behave as if this property were set to False.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1171,7 +1171,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1187,7 +1187,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1203,7 +1203,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1219,7 +1219,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1235,7 +1235,7 @@ class _SessionBase(object):
     Note: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1262,7 +1262,7 @@ class _SessionBase(object):
     compliance_limit_symmetry
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1277,7 +1277,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic for information
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1290,7 +1290,7 @@ class _SessionBase(object):
     Default Value: False
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1306,7 +1306,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1322,7 +1322,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1341,7 +1341,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to the Supported Properties by Device topic for information about supported devices. Devices that do not support this property behave as if this property were set to PowerAllocationMode.DISABLED.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1359,7 +1359,7 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1388,7 +1388,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1403,7 +1403,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1446,7 +1446,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1489,7 +1489,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1504,7 +1504,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1519,7 +1519,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1534,7 +1534,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1577,7 +1577,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1620,7 +1620,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1635,7 +1635,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1649,7 +1649,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1665,7 +1665,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1680,7 +1680,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1696,7 +1696,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1711,7 +1711,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1754,7 +1754,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1797,7 +1797,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1813,7 +1813,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1828,7 +1828,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1843,7 +1843,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1857,7 +1857,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1872,7 +1872,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1888,7 +1888,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1903,7 +1903,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1946,7 +1946,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -1989,7 +1989,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2005,7 +2005,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the output_enabled property for more information about enabling the output channel.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2028,7 +2028,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2042,7 +2042,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2058,7 +2058,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2079,7 +2079,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2095,7 +2095,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2116,7 +2116,7 @@ class _SessionBase(object):
     NI PXIe-4154—500
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2132,7 +2132,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for instruments. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2145,7 +2145,7 @@ class _SessionBase(object):
     Default Value: The default value is Sense.LOCAL if the device supports local sense.  Otherwise, the default and only supported value is Sense.REMOTE.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2160,7 +2160,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2175,7 +2175,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2190,7 +2190,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2208,7 +2208,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2223,7 +2223,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2238,7 +2238,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2256,7 +2256,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2273,7 +2273,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2289,7 +2289,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. When the
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2298,7 +2298,7 @@ class _SessionBase(object):
     '''Type: float
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2307,7 +2307,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2318,7 +2318,7 @@ class _SessionBase(object):
     Contains the serial number for the device you are currently using.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for instruments. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2332,7 +2332,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2353,7 +2353,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2368,7 +2368,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2386,7 +2386,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2403,7 +2403,7 @@ class _SessionBase(object):
     Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2415,7 +2415,7 @@ class _SessionBase(object):
     Default value: SourceMode.SINGLE_POINT
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2430,7 +2430,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2465,7 +2465,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2485,7 +2485,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2500,7 +2500,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2515,7 +2515,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2531,7 +2531,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified voltage level to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2546,7 +2546,7 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2563,7 +2563,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified voltage level range to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2579,7 +2579,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current level to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2594,7 +2594,7 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2634,7 +2634,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2674,7 +2674,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2691,7 +2691,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified voltage limit range to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2706,7 +2706,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities. If set or get directly on the
+    This property can use repeated capabilities for channels. If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
@@ -2729,6 +2729,7 @@ class _SessionBase(object):
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
+        self.instruments = _RepeatedCapabilities(self, '', repeated_capability_list)
 
         self._is_frozen = freeze_it
 
@@ -5184,6 +5185,38 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def get_channel_names(self, indices):
+        r'''get_channel_names
+
+        Returns a list of channel names for given channel indices.
+
+        Args:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            names (list of str): The channel name(s) at the specified indices.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        names_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
 
     @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):

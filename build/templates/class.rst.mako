@@ -76,12 +76,12 @@ table_contents = [
          ('Characteristic', 'Value'),
          ('Datatype', a['type_in_documentation']),
          ('Permissions', a['access']),
-         ('Channel Based', 'Yes' if a['channel_based'] else 'No'),
+         ('Repeated Capabilities', helper.get_attribute_repeated_caps(a)),
          ('Resettable', 'Yes' if a['resettable'] else 'No'),
          ]
 table = helper.as_rest_table(table_contents)
 
-helper.add_attribute_rep_cap_tip_rst(a, config)
+helper.add_attribute_rep_cap_tip(a, config)
 
 desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 %>\
