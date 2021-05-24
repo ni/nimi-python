@@ -30,9 +30,9 @@
 
                 if "," in resource_name:
                     raise ValueError(
-                        "Channels can't be combined with multiple devices in the resource name '" + resource_name + "'. "
-                        "Use a single device in the resource name or provide a list of fully-qualified channels as the "
-                        "resource name instead of supplying a channels argument."
+                        "Channels cannot be combined with multiple instruments in the resource name '" + resource_name + "'. "
+                        "Specify a list of fully-qualified channels as the resource name instead of supplying a "
+                        "channels argument."
                     )
 
             return self._initialize_with_independent_channels(resource_string, reset, option_string)
