@@ -4694,9 +4694,7 @@ class Session(_SessionBase):
         -  driver_setup
 
         After calling this method, the specified channel or channels will be in the Uncommitted
-        state. Refer to the `Programming States
-        <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for details about specific
-        software states.
+        state.
 
         To place channel(s) in a known start-up state when creating a new session, set **reset** to
         True. This action is equivalent to using the reset method immediately after initializing the
@@ -4724,9 +4722,9 @@ class Session(_SessionBase):
         guaranteed, and some operations may execute sequentially.
 
         Args:
-            resource_name (str, list, tuple): Specifies the **resourceName** as seen in Measurement
+            resource_name (str, list, tuple): Specifies the **resource name** as seen in Measurement
                 & Automation Explorer (MAX) or lsni, for example "PXI1Slot3" where "PXI1Slot3" is an
-                instrument's **resourceName**. **resourceName** can also be a logical IVI name.
+                instrument's **resource name**. **resource name** can also be a logical IVI name.
 
                 If independent_channels is True, **resource name** can be names of the instrument(s)
                 and the channel(s) to initialize. Specify the instrument(s) and channel(s) using the
@@ -5198,9 +5196,7 @@ class Session(_SessionBase):
         -  driver_setup
 
         After calling this method, the specified channel or channels will be in the Uncommitted
-        state. Refer to the `Programming States
-        <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for details about specific
-        software states.
+        state.
 
         To place channel(s) in a known start-up state when creating a new session, set **reset** to
         True. This action is equivalent to using the reset method immediately after initializing the
@@ -5228,9 +5224,9 @@ class Session(_SessionBase):
         guaranteed, and some operations may execute sequentially.
 
         Args:
-            resource_name (str, list, tuple): Specifies the **resourceName** as seen in Measurement
+            resource_name (str, list, tuple): Specifies the **resource name** as seen in Measurement
                 & Automation Explorer (MAX) or lsni, for example "PXI1Slot3" where "PXI1Slot3" is an
-                instrument's **resourceName**. **resourceName** can also be a logical IVI name.
+                instrument's **resource name**. **resource name** can also be a logical IVI name.
 
                 If independent_channels is True, **resource name** can be names of the instrument(s)
                 and the channel(s) to initialize. Specify the instrument(s) and channel(s) using the
