@@ -4,7 +4,13 @@ rep_cap_method_desc = '''
 This method can be called for specific {1} within your :py:class:`{0}.Session` object.
 Use Python index notation on the repeated capabilities container {1} to specify a subset,
 and then call this method on the result.
+
+Example: :py:meth:`my_session.{1}[ ... ].{2}`
+
 To call the method for all {1}, you can call it directly on the :py:class:`{0}.Session`.
+
+Example: :py:meth:`my_session.{2}`
+
 '''
 
 rep_cap_attr_desc = '''

@@ -818,7 +818,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].apply_levels_and_timing`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.apply_levels_and_timing`
 
         Args:
             levels_sheet (str): Name of the levels sheet to apply. Use the name of the sheet or pass the absolute file path you use in the load_specifications_levels_and_timing method. The name of the levels sheet is the file name without the directory and file extension.
@@ -853,7 +858,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].apply_tdr_offsets`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.apply_tdr_offsets`
 
         Args:
             offsets (basic sequence of hightime.timedelta, datetime.timedelta, or float in seconds): TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the repeated capabilities. If the repeated capabilities contain pin names, you must specify offsets for each site in the channel map per pin.
@@ -878,7 +888,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ]._burst_pattern`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._burst_pattern`
 
         Args:
             start_label (str): Pattern name or exported pattern label from which to start bursting the pattern.
@@ -910,7 +925,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].clock_generator_abort`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.clock_generator_abort`
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -928,7 +948,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].clock_generator_generate_clock`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.clock_generator_generate_clock`
 
         Args:
             frequency (float): The frequency of the clock generation, in Hz.
@@ -954,7 +979,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].configure_active_load_levels`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_active_load_levels`
 
         Args:
             iol (float): Maximum current that the DUT sinks while outputting a voltage below V\ :sub:`COM`.
@@ -983,7 +1013,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].configure_pattern_burst_sites`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_pattern_burst_sites`
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1001,7 +1036,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].configure_time_set_compare_edges_strobe`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_time_set_compare_edges_strobe`
 
         Args:
             time_set_name (str): The specified time set name.
@@ -1027,7 +1067,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].configure_time_set_compare_edges_strobe2x`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_time_set_compare_edges_strobe2x`
 
         Args:
             time_set_name (str): The specified time set name.
@@ -1056,7 +1101,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].configure_time_set_drive_edges`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_time_set_drive_edges`
 
         Args:
             time_set_name (str): The specified time set name.
@@ -1101,7 +1151,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].configure_time_set_drive_edges2x`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_time_set_drive_edges2x`
 
         Args:
             time_set_name (str): The specified time set name.
@@ -1152,7 +1207,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].configure_time_set_drive_format`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_time_set_drive_format`
 
         Args:
             time_set_name (str): The specified time set name.
@@ -1185,7 +1245,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].configure_time_set_edge`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_time_set_edge`
 
         Args:
             time_set_name (str): The specified time set name.
@@ -1225,7 +1290,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].configure_time_set_edge_multiplier`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_time_set_edge_multiplier`
 
         Args:
             time_set_name (str): The specified time set name.
@@ -1251,7 +1321,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].configure_voltage_levels`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_voltage_levels`
 
         Args:
             vil (float): Voltage that the instrument will apply to the input of the DUT when the pin driver drives a logic low (0).
@@ -1286,7 +1361,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].create_capture_waveform_parallel`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.create_capture_waveform_parallel`
 
         Args:
             waveform_name (str): Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.
@@ -1309,7 +1389,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].create_capture_waveform_serial`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.create_capture_waveform_serial`
 
         Args:
             waveform_name (str): Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.
@@ -1343,7 +1428,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].create_source_waveform_parallel`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.create_source_waveform_parallel`
 
         Args:
             waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
@@ -1374,7 +1464,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].create_source_waveform_serial`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.create_source_waveform_serial`
 
         Args:
             waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
@@ -1416,7 +1511,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].disable_sites`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.disable_sites`
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1434,7 +1534,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].enable_sites`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.enable_sites`
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1456,7 +1561,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].burst_pattern`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.burst_pattern`
 
         Args:
             start_label (str): Pattern name or exported pattern label from which to start bursting the pattern.
@@ -1490,7 +1600,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].fetch_capture_waveform`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.fetch_capture_waveform`
 
         Args:
             waveform_name (str): Waveform name you create with the create capture waveform method. Use the waveform_name parameter with capture_start opcode in your pattern.
@@ -1596,7 +1711,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].fetch_history_ram_cycle_information`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.fetch_history_ram_cycle_information`
 
         Args:
             position (int): Sample index from which to start fetching pattern information.
@@ -1722,7 +1842,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].get_pin_results_pin_information`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.get_pin_results_pin_information`
 
         Returns:
             pin_info (list of PinInfo): List of named tuples with fields:
@@ -1758,7 +1883,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].get_site_pass_fail`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.get_site_pass_fail`
 
         Returns:
             pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail
@@ -1781,7 +1911,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ]._fetch_history_ram_cycle_information`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._fetch_history_ram_cycle_information`
 
         Args:
             sample_index (int): The index of the History RAM sample to fetch. Each History RAM sample contains information about a single cycle in the pattern burst.
@@ -1821,7 +1956,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ]._fetch_history_ram_cycle_pin_data`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._fetch_history_ram_cycle_pin_data`
 
         Args:
             pin_list (str): The specified pins for which to retrieve History RAM data. If empty, the pin list from the pattern containing the start label is used. Call get_pattern_pin_names or GetPatternPinIndexeswith the start label to retrieve the pins associated with the pattern burst.
@@ -1875,7 +2015,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ]._fetch_history_ram_scan_cycle_number`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._fetch_history_ram_scan_cycle_number`
 
         Args:
             sample_index (int): The index of the History RAM sample to fetch. Each History RAM sample contains information about a single cycle in the pattern burst.
@@ -1903,7 +2048,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].frequency_counter_measure_frequency`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.frequency_counter_measure_frequency`
 
         Returns:
             frequencies (list of float): The returned frequency counter measurement, in Hz.This method returns -1 if the measurement is invalid for the channel.
@@ -1933,7 +2083,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_boolean`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_boolean`
 
         Args:
             attribute (int): The ID of a property.
@@ -1961,7 +2116,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int32`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_int32`
 
         Args:
             attribute (int): The ID of a property.
@@ -1989,7 +2149,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int64`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_int64`
 
         Args:
             attribute (int): The ID of a property.
@@ -2017,7 +2182,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_real64`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_real64`
 
         Args:
             attribute (int): The ID of a property.
@@ -2045,7 +2215,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_string`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_string`
 
         Args:
             attribute (int): The ID of a property.
@@ -2135,7 +2310,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].get_fail_count`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.get_fail_count`
 
         Returns:
             failure_count (list of int): Number of failures in an array. If a site is disabled or not enabled for burst, the method does not return data for that site. You can also use the get_pin_results_pin_information method to obtain a sorted list of returned sites and channels.
@@ -2190,7 +2370,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].get_history_ram_sample_count`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.get_history_ram_sample_count`
 
         Returns:
             sample_count (int): The returned number of samples that History RAM acquired.
@@ -2265,7 +2450,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_pin_results_pin_information`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_pin_results_pin_information`
 
         Returns:
             pin_indexes (list of int): The returned index of the pins corresponding to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.
@@ -2307,7 +2497,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ]._get_site_pass_fail`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_site_pass_fail`
 
         Returns:
             pass_fail (list of bool): The returned array of pass (True) and fail results for the sites you specify in the repeated capabilities. If sites span multiple digital pattern instruments, you must use an AND operator for the partial results for those sites returned by each instrument. If a site is disabled or not enabled for burst, the method does not return data for that site. Use the SortSiteResultsViBoolean method to order and combine the data to match the repeated capabilities. You can also use the _get_site_results_site_numbers method to determine the order of the sites returned from this method call so that you can match the pass array with site numbers.
@@ -2340,7 +2535,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ]._get_site_results_site_numbers`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_site_results_site_numbers`
 
         Args:
             site_result_type (enums.SiteResultType): The type of data specified in the results array.
@@ -2380,7 +2580,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].get_time_set_drive_format`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.get_time_set_drive_format`
 
         Args:
             time_set_name (str): The specified time set name.
@@ -2408,7 +2613,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].get_time_set_edge`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.get_time_set_edge`
 
         Args:
             time_set_name (str): The specified time set name.
@@ -2450,7 +2660,12 @@ class _SessionBase(object):
         This method can be called for specific pins within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container pins to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].get_time_set_edge_multiplier`
+
         To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.get_time_set_edge_multiplier`
 
         Args:
             time_set_name (str): The specified time set name.
@@ -2506,7 +2721,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].is_site_enabled`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.is_site_enabled`
 
         Returns:
             enable (bool): Boolean value that returns whether the site is enabled or disabled.
@@ -2574,7 +2794,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].ppmu_measure`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.ppmu_measure`
 
         Args:
             measurement_type (enums.PPMUMeasurementType): Parameter that specifies whether the PPMU measures voltage or current from the DUT.
@@ -2614,7 +2839,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].ppmu_source`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.ppmu_source`
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -2632,7 +2862,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].read_static`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.read_static`
 
         Returns:
             data (list of enums.PinState): The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the method does not return data for that site. You can also use the get_pin_results_pin_information method to obtain a sorted list of returned sites and channels.
@@ -2667,7 +2902,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_boolean`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_boolean`
 
         Args:
             attribute (int): The ID of a property.
@@ -2693,7 +2933,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int32`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_int32`
 
         Args:
             attribute (int): The ID of a property.
@@ -2719,7 +2964,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int64`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_int64`
 
         Args:
             attribute (int): The ID of a property.
@@ -2745,7 +2995,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_real64`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_real64`
 
         Args:
             attribute (int): The ID of a property.
@@ -2771,7 +3026,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_string`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_string`
 
         Args:
             attribute (int): The ID of a property.
@@ -2797,7 +3057,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].tdr`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.tdr`
 
         Args:
             apply_offsets (bool): A Boolean that specifies whether to apply the measured TDR offsets. If you need to adjust the measured offsets prior to applying, set this input to False, and call the apply_tdr_offsets method to specify the adjusted TDR offsets values.
@@ -2844,7 +3109,12 @@ class _SessionBase(object):
         This method can be called for specific sites within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container sites to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ]._write_source_waveform_site_unique_u32`
+
         To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._write_source_waveform_site_unique_u32`
 
         Args:
             waveform_name (str): The name to assign to the waveform. Use the waveform_name  with source_start opcode in your pattern.
@@ -2877,7 +3147,12 @@ class _SessionBase(object):
         This method can be called for specific channels within your :py:class:`nidigital.Session` object.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].write_static`
+
         To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.write_static`
 
         Args:
             state (enums.WriteStaticPinState): Parameter that specifies one of the following digital states to assign to the pin.

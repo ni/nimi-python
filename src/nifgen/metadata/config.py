@@ -39,17 +39,14 @@ config = {
     'module_name': 'nifgen',
     'repeated_capabilities': [
         {
-            'example_attribute': 'output_enabled',
             'prefix': '',
             'python_name': 'channels'
         },
         {
-            'example_attribute': 'script_trigger_type',
             'prefix': 'ScriptTrigger',
             'python_name': 'script_triggers'
         },
         {
-            'example_attribute': 'arb_marker_position',
             'prefix': 'Marker',
             'python_name': 'markers'
         }

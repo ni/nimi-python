@@ -39,7 +39,6 @@ config = {
     'module_name': 'niswitch',
     'repeated_capabilities': [
         {
-			'example_attribute': 'is_configuration_channel',
             'prefix': '',
             'python_name': 'channels'
         }

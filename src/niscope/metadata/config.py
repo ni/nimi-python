@@ -44,12 +44,10 @@ config = {
     'module_name': 'niscope',
     'repeated_capabilities': [
         {
-			'example_attribute': 'channel_enabled',
             'prefix': '',
             'python_name': 'channels'
         },
         {
-            'example_attribute': 'instrument_firmware_revision',
             'prefix': '',
             'python_name': 'instruments',
         },

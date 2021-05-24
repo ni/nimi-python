@@ -39,12 +39,10 @@ config = {
     'module_name': 'nidcpower',
     'repeated_capabilities': [
         {
-            'example_attribute': 'active_advanced_sequence_step',
             'prefix': '',
             'python_name': 'channels'
         },
         {
-            'example_attribute': 'instrument_firmware_revision',
             'prefix': '',
             'python_name': 'instruments'
         }

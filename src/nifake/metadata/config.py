@@ -47,7 +47,6 @@ config = {
     'module_name': 'nifake',
     'repeated_capabilities': [
         {
-			'example_attribute': 'read_write_double_with_repeated_capability',
             'prefix': '',
             'python_name': 'channels'
         },
@@ -56,7 +55,6 @@ config = {
             'python_name': 'sites',
         },
         {
-			'example_attribute': 'read_write_string_repeated_capability',
             'prefix': '',
             'python_name': 'instruments'
         },

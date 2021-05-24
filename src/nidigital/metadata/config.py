@@ -41,7 +41,6 @@ config = {
     'module_name': 'nidigital',
     'repeated_capabilities': [
         {
-			'example_attribute': 'selected_function',
             'prefix': '',
             'python_name': 'channels'
         },
@@ -50,17 +49,14 @@ config = {
             'python_name': 'pins'
         },
         {
-			'example_attribute': 'instrument_firmware_revision',
             'prefix': '',
             'python_name': 'instruments'
         },
         {
-			'example_attribute': 'pattern opcode event terminal name',
             'prefix': 'patternOpcodeEvent',
             'python_name': 'pattern_opcode_events'
         },
         {
-			'example_attribute': 'conditional jump trigger terminal name',
             'prefix': 'conditionalJumpTrigger',
             'python_name': 'conditional_jump_triggers'
         },

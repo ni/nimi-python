@@ -157,7 +157,12 @@ abort
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].abort`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.abort`
 
 
 clear_latched_output_cutoff_state
@@ -176,7 +181,12 @@ clear_latched_output_cutoff_state
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].clear_latched_output_cutoff_state`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.clear_latched_output_cutoff_state`
 
 
             :param output_cutoff_reason:
@@ -262,7 +272,12 @@ commit
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].commit`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.commit`
 
 
 configure_aperture_time
@@ -299,7 +314,12 @@ configure_aperture_time
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].configure_aperture_time`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.configure_aperture_time`
 
 
             :param aperture_time:
@@ -547,7 +567,12 @@ create_advanced_sequence_step
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].create_advanced_sequence_step`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.create_advanced_sequence_step`
 
 
             :param set_as_active_step:
@@ -596,7 +621,12 @@ delete_advanced_sequence
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].delete_advanced_sequence`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.delete_advanced_sequence`
 
 
             :param sequence_name:
@@ -784,7 +814,12 @@ fetch_multiple
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].fetch_multiple`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.fetch_multiple`
 
 
             :param count:
@@ -1188,7 +1223,12 @@ initiate
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].initiate`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.initiate`
 
 
 lock
@@ -1259,7 +1299,12 @@ measure
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].measure`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.measure`
 
 
             :param measurement_type:
@@ -1315,7 +1360,12 @@ measure_multiple
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].measure_multiple`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.measure_multiple`
 
 
             :rtype: list of Measurement
@@ -1368,7 +1418,12 @@ query_in_compliance
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_in_compliance`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_in_compliance`
 
 
             :rtype: bool
@@ -1399,7 +1454,12 @@ query_latched_output_cutoff_state
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_latched_output_cutoff_state`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_latched_output_cutoff_state`
 
 
             :param output_cutoff_reason:
@@ -1460,7 +1520,12 @@ query_max_current_limit
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_max_current_limit`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_max_current_limit`
 
 
             :param voltage_level:
@@ -1501,7 +1566,12 @@ query_max_voltage_level
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_max_voltage_level`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_max_voltage_level`
 
 
             :param current_limit:
@@ -1542,7 +1612,12 @@ query_min_current_limit
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_min_current_limit`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_min_current_limit`
 
 
             :param voltage_level:
@@ -1587,7 +1662,12 @@ query_output_state
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_output_state`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_output_state`
 
 
             :param output_state:
@@ -1660,7 +1740,12 @@ reset
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].reset`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.reset`
 
 
 reset_device
@@ -1747,7 +1832,12 @@ self_cal
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].self_cal`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.self_cal`
 
 
 self_test
@@ -1805,7 +1895,12 @@ send_software_edge_trigger
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].send_software_edge_trigger`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.send_software_edge_trigger`
 
 
             :param trigger:
@@ -1867,7 +1962,12 @@ set_sequence
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].set_sequence`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.set_sequence`
 
 
             :param values:
@@ -1935,7 +2035,12 @@ wait_for_event
             .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].wait_for_event`
+
                 To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.wait_for_event`
 
 
             :param event_id:
@@ -1997,11 +2102,11 @@ active_advanced_sequence
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.active_advanced_sequence`
 
         The following table lists the characteristics of this property.
 
@@ -2081,11 +2186,11 @@ actual_power_allocation
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].actual_power_allocation`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.actual_power_allocation`
 
         The following table lists the characteristics of this property.
 
@@ -2123,11 +2228,11 @@ aperture_time
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].aperture_time`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.aperture_time`
 
         The following table lists the characteristics of this property.
 
@@ -2165,11 +2270,11 @@ aperture_time_units
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].aperture_time_units`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.aperture_time_units`
 
         The following table lists the characteristics of this property.
 
@@ -2204,11 +2309,11 @@ autorange
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].autorange`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.autorange`
 
         The following table lists the characteristics of this property.
 
@@ -2243,11 +2348,11 @@ autorange_aperture_time_mode
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].autorange_aperture_time_mode`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.autorange_aperture_time_mode`
 
         The following table lists the characteristics of this property.
 
@@ -2282,11 +2387,11 @@ autorange_behavior
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].autorange_behavior`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.autorange_behavior`
 
         The following table lists the characteristics of this property.
 
@@ -2321,11 +2426,11 @@ autorange_minimum_aperture_time
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_aperture_time`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.autorange_minimum_aperture_time`
 
         The following table lists the characteristics of this property.
 
@@ -2360,11 +2465,11 @@ autorange_minimum_aperture_time_units
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_aperture_time_units`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.autorange_minimum_aperture_time_units`
 
         The following table lists the characteristics of this property.
 
@@ -2399,11 +2504,11 @@ autorange_minimum_current_range
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_current_range`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.autorange_minimum_current_range`
 
         The following table lists the characteristics of this property.
 
@@ -2438,11 +2543,11 @@ autorange_minimum_voltage_range
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_voltage_range`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.autorange_minimum_voltage_range`
 
         The following table lists the characteristics of this property.
 
@@ -2477,11 +2582,11 @@ autorange_threshold_mode
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].autorange_threshold_mode`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.autorange_threshold_mode`
 
         The following table lists the characteristics of this property.
 
@@ -2516,11 +2621,11 @@ auto_zero
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].auto_zero`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.auto_zero`
 
         The following table lists the characteristics of this property.
 
@@ -2629,11 +2734,11 @@ compliance_limit_symmetry
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].compliance_limit_symmetry`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.compliance_limit_symmetry`
 
         The following table lists the characteristics of this property.
 
@@ -2670,11 +2775,11 @@ current_compensation_frequency
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_compensation_frequency`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_compensation_frequency`
 
         The following table lists the characteristics of this property.
 
@@ -2711,11 +2816,11 @@ current_gain_bandwidth
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_gain_bandwidth`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_gain_bandwidth`
 
         The following table lists the characteristics of this property.
 
@@ -2753,11 +2858,11 @@ current_level
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_level`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_level`
 
         The following table lists the characteristics of this property.
 
@@ -2794,11 +2899,11 @@ current_level_autorange
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_level_autorange`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_level_autorange`
 
         The following table lists the characteristics of this property.
 
@@ -2837,11 +2942,11 @@ current_level_range
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_level_range`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_level_range`
 
         The following table lists the characteristics of this property.
 
@@ -2879,11 +2984,11 @@ current_limit
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_limit`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_limit`
 
         The following table lists the characteristics of this property.
 
@@ -2920,11 +3025,11 @@ current_limit_autorange
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_limit_autorange`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_limit_autorange`
 
         The following table lists the characteristics of this property.
 
@@ -2952,11 +3057,11 @@ current_limit_behavior
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_limit_behavior`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_limit_behavior`
 
         The following table lists the characteristics of this property.
 
@@ -3015,11 +3120,11 @@ current_limit_high
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_limit_high`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -3079,11 +3184,11 @@ current_limit_low
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_limit_low`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -3122,11 +3227,11 @@ current_limit_range
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_limit_range`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_limit_range`
 
         The following table lists the characteristics of this property.
 
@@ -3163,11 +3268,11 @@ current_pole_zero_ratio
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].current_pole_zero_ratio`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.current_pole_zero_ratio`
 
         The following table lists the characteristics of this property.
 
@@ -3204,11 +3309,11 @@ dc_noise_rejection
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].dc_noise_rejection`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.dc_noise_rejection`
 
         The following table lists the characteristics of this property.
 
@@ -3246,11 +3351,11 @@ digital_edge_measure_trigger_input_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_measure_trigger_input_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.digital_edge_measure_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3287,11 +3392,11 @@ digital_edge_pulse_trigger_input_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_pulse_trigger_input_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.digital_edge_pulse_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3329,11 +3434,11 @@ digital_edge_sequence_advance_trigger_input_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_sequence_advance_trigger_input_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.digital_edge_sequence_advance_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3370,11 +3475,11 @@ digital_edge_shutdown_trigger_input_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_shutdown_trigger_input_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.digital_edge_shutdown_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3412,11 +3517,11 @@ digital_edge_source_trigger_input_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_source_trigger_input_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.digital_edge_source_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3454,11 +3559,11 @@ digital_edge_start_trigger_input_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_start_trigger_input_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.digital_edge_start_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3523,11 +3628,11 @@ exported_measure_trigger_output_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].exported_measure_trigger_output_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.exported_measure_trigger_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3564,11 +3669,11 @@ exported_pulse_trigger_output_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].exported_pulse_trigger_output_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.exported_pulse_trigger_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3606,11 +3711,11 @@ exported_sequence_advance_trigger_output_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].exported_sequence_advance_trigger_output_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.exported_sequence_advance_trigger_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3648,11 +3753,11 @@ exported_source_trigger_output_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].exported_source_trigger_output_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.exported_source_trigger_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3690,11 +3795,11 @@ exported_start_trigger_output_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].exported_start_trigger_output_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.exported_start_trigger_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3727,11 +3832,11 @@ fetch_backlog
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].fetch_backlog`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.fetch_backlog`
 
         The following table lists the characteristics of this property.
 
@@ -3801,11 +3906,11 @@ instrument_manufacturer
         .. tip:: This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container instruments to specify a subset.
 
-            Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
+            Example: :py:attr:`my_session.instruments[ ... ].instrument_manufacturer`
 
             To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.instrument_firmware_revision`
+            Example: :py:attr:`my_session.instrument_manufacturer`
 
         The following table lists the characteristics of this property.
 
@@ -3838,11 +3943,11 @@ instrument_model
         .. tip:: This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container instruments to specify a subset.
 
-            Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
+            Example: :py:attr:`my_session.instruments[ ... ].instrument_model`
 
             To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.instrument_firmware_revision`
+            Example: :py:attr:`my_session.instrument_model`
 
         The following table lists the characteristics of this property.
 
@@ -3879,11 +3984,11 @@ interlock_input_open
         .. tip:: This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container instruments to specify a subset.
 
-            Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
+            Example: :py:attr:`my_session.instruments[ ... ].interlock_input_open`
 
             To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.instrument_firmware_revision`
+            Example: :py:attr:`my_session.interlock_input_open`
 
         The following table lists the characteristics of this property.
 
@@ -3975,11 +4080,11 @@ measure_buffer_size
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].measure_buffer_size`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.measure_buffer_size`
 
         The following table lists the characteristics of this property.
 
@@ -4017,11 +4122,11 @@ measure_complete_event_delay
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_delay`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.measure_complete_event_delay`
 
         The following table lists the characteristics of this property.
 
@@ -4058,11 +4163,11 @@ measure_complete_event_output_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_output_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.measure_complete_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -4099,11 +4204,11 @@ measure_complete_event_pulse_polarity
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_pulse_polarity`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.measure_complete_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -4143,11 +4248,11 @@ measure_complete_event_pulse_width
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_pulse_width`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.measure_complete_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -4184,11 +4289,11 @@ measure_record_delta_time
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].measure_record_delta_time`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.measure_record_delta_time`
 
         The following table lists the characteristics of this property.
 
@@ -4226,11 +4331,11 @@ measure_record_length
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].measure_record_length`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.measure_record_length`
 
         The following table lists the characteristics of this property.
 
@@ -4267,11 +4372,11 @@ measure_record_length_is_finite
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].measure_record_length_is_finite`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.measure_record_length_is_finite`
 
         The following table lists the characteristics of this property.
 
@@ -4308,11 +4413,11 @@ measure_trigger_type
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].measure_trigger_type`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.measure_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -4347,11 +4452,11 @@ measure_when
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].measure_when`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.measure_when`
 
         The following table lists the characteristics of this property.
 
@@ -4390,11 +4495,11 @@ merged_channels
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].merged_channels`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.merged_channels`
 
         The following table lists the characteristics of this property.
 
@@ -4431,11 +4536,11 @@ output_capacitance
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_capacitance`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_capacitance`
 
         The following table lists the characteristics of this property.
 
@@ -4474,11 +4579,11 @@ output_connected
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_connected`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_connected`
 
         The following table lists the characteristics of this property.
 
@@ -4516,11 +4621,11 @@ output_cutoff_current_change_limit_high
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_change_limit_high`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_cutoff_current_change_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -4558,11 +4663,11 @@ output_cutoff_current_change_limit_low
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_change_limit_low`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_cutoff_current_change_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -4600,11 +4705,11 @@ output_cutoff_current_measure_limit_high
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_measure_limit_high`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_cutoff_current_measure_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -4642,11 +4747,11 @@ output_cutoff_current_measure_limit_low
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_measure_limit_low`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_cutoff_current_measure_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -4683,11 +4788,11 @@ output_cutoff_current_overrange_enabled
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_overrange_enabled`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_cutoff_current_overrange_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -4723,11 +4828,11 @@ output_cutoff_enabled
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_enabled`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_cutoff_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -4765,11 +4870,11 @@ output_cutoff_voltage_change_limit_high
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_change_limit_high`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_cutoff_voltage_change_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -4807,11 +4912,11 @@ output_cutoff_voltage_change_limit_low
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_change_limit_low`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_cutoff_voltage_change_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -4849,11 +4954,11 @@ output_cutoff_voltage_output_limit_high
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_output_limit_high`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_cutoff_voltage_output_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -4891,11 +4996,11 @@ output_cutoff_voltage_output_limit_low
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_output_limit_low`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_cutoff_voltage_output_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -4933,11 +5038,11 @@ output_enabled
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_enabled`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -4986,11 +5091,11 @@ output_function
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_function`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_function`
 
         The following table lists the characteristics of this property.
 
@@ -5027,11 +5132,11 @@ output_resistance
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].output_resistance`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.output_resistance`
 
         The following table lists the characteristics of this property.
 
@@ -5066,11 +5171,11 @@ overranging_enabled
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].overranging_enabled`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.overranging_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -5108,11 +5213,11 @@ ovp_enabled
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].ovp_enabled`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.ovp_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -5150,11 +5255,11 @@ ovp_limit
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].ovp_limit`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.ovp_limit`
 
         The following table lists the characteristics of this property.
 
@@ -5195,11 +5300,11 @@ power_allocation_mode
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].power_allocation_mode`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.power_allocation_mode`
 
         The following table lists the characteristics of this property.
 
@@ -5238,11 +5343,11 @@ power_line_frequency
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].power_line_frequency`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.power_line_frequency`
 
         The following table lists the characteristics of this property.
 
@@ -5335,11 +5440,11 @@ pulse_bias_current_level
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_level`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_bias_current_level`
 
         The following table lists the characteristics of this property.
 
@@ -5376,11 +5481,11 @@ pulse_bias_current_limit
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_limit`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_bias_current_limit`
 
         The following table lists the characteristics of this property.
 
@@ -5443,11 +5548,11 @@ pulse_bias_current_limit_high
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_limit_high`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_bias_current_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -5510,11 +5615,11 @@ pulse_bias_current_limit_low
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_limit_low`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_bias_current_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -5551,11 +5656,11 @@ pulse_bias_delay
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_delay`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_bias_delay`
 
         The following table lists the characteristics of this property.
 
@@ -5592,11 +5697,11 @@ pulse_bias_voltage_level
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_level`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_bias_voltage_level`
 
         The following table lists the characteristics of this property.
 
@@ -5633,11 +5738,11 @@ pulse_bias_voltage_limit
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_limit`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_bias_voltage_limit`
 
         The following table lists the characteristics of this property.
 
@@ -5700,11 +5805,11 @@ pulse_bias_voltage_limit_high
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_limit_high`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_bias_voltage_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -5767,11 +5872,11 @@ pulse_bias_voltage_limit_low
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_limit_low`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_bias_voltage_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -5808,11 +5913,11 @@ pulse_complete_event_output_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_complete_event_output_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_complete_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -5848,11 +5953,11 @@ pulse_complete_event_pulse_polarity
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_complete_event_pulse_polarity`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_complete_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -5890,11 +5995,11 @@ pulse_complete_event_pulse_width
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_complete_event_pulse_width`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_complete_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -5931,11 +6036,11 @@ pulse_current_level
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_level`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_current_level`
 
         The following table lists the characteristics of this property.
 
@@ -5973,11 +6078,11 @@ pulse_current_level_range
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_level_range`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_current_level_range`
 
         The following table lists the characteristics of this property.
 
@@ -6014,11 +6119,11 @@ pulse_current_limit
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_current_limit`
 
         The following table lists the characteristics of this property.
 
@@ -6081,11 +6186,11 @@ pulse_current_limit_high
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit_high`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_current_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -6148,11 +6253,11 @@ pulse_current_limit_low
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit_low`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_current_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -6190,11 +6295,11 @@ pulse_current_limit_range
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit_range`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_current_limit_range`
 
         The following table lists the characteristics of this property.
 
@@ -6231,11 +6336,11 @@ pulse_off_time
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_off_time`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_off_time`
 
         The following table lists the characteristics of this property.
 
@@ -6272,11 +6377,11 @@ pulse_on_time
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_on_time`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_on_time`
 
         The following table lists the characteristics of this property.
 
@@ -6312,11 +6417,11 @@ pulse_trigger_type
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_trigger_type`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -6353,11 +6458,11 @@ pulse_voltage_level
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_level`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_voltage_level`
 
         The following table lists the characteristics of this property.
 
@@ -6395,11 +6500,11 @@ pulse_voltage_level_range
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_level_range`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_voltage_level_range`
 
         The following table lists the characteristics of this property.
 
@@ -6436,11 +6541,11 @@ pulse_voltage_limit
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_voltage_limit`
 
         The following table lists the characteristics of this property.
 
@@ -6503,11 +6608,11 @@ pulse_voltage_limit_high
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit_high`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_voltage_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -6570,11 +6675,11 @@ pulse_voltage_limit_low
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit_low`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_voltage_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -6612,11 +6717,11 @@ pulse_voltage_limit_range
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit_range`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.pulse_voltage_limit_range`
 
         The following table lists the characteristics of this property.
 
@@ -6681,11 +6786,11 @@ ready_for_pulse_trigger_event_output_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].ready_for_pulse_trigger_event_output_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.ready_for_pulse_trigger_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -6721,11 +6826,11 @@ ready_for_pulse_trigger_event_pulse_polarity
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].ready_for_pulse_trigger_event_pulse_polarity`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.ready_for_pulse_trigger_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -6763,11 +6868,11 @@ ready_for_pulse_trigger_event_pulse_width
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].ready_for_pulse_trigger_event_pulse_width`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.ready_for_pulse_trigger_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -6810,11 +6915,11 @@ requested_power_allocation
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].requested_power_allocation`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.requested_power_allocation`
 
         The following table lists the characteristics of this property.
 
@@ -6852,11 +6957,11 @@ reset_average_before_measurement
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].reset_average_before_measurement`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.reset_average_before_measurement`
 
         The following table lists the characteristics of this property.
 
@@ -6899,11 +7004,11 @@ samples_to_average
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].samples_to_average`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.samples_to_average`
 
         The following table lists the characteristics of this property.
 
@@ -6941,11 +7046,11 @@ self_calibration_persistence
         .. tip:: This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container instruments to specify a subset.
 
-            Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
+            Example: :py:attr:`my_session.instruments[ ... ].self_calibration_persistence`
 
             To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.instrument_firmware_revision`
+            Example: :py:attr:`my_session.self_calibration_persistence`
 
         The following table lists the characteristics of this property.
 
@@ -6980,11 +7085,11 @@ sense
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sense`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sense`
 
         The following table lists the characteristics of this property.
 
@@ -7021,11 +7126,11 @@ sequence_advance_trigger_type
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sequence_advance_trigger_type`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sequence_advance_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -7062,11 +7167,11 @@ sequence_engine_done_event_output_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_output_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sequence_engine_done_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -7103,11 +7208,11 @@ sequence_engine_done_event_pulse_polarity
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_pulse_polarity`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sequence_engine_done_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -7147,11 +7252,11 @@ sequence_engine_done_event_pulse_width
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_pulse_width`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sequence_engine_done_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -7188,11 +7293,11 @@ sequence_iteration_complete_event_output_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_output_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sequence_iteration_complete_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -7229,11 +7334,11 @@ sequence_iteration_complete_event_pulse_polarity
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_pulse_polarity`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sequence_iteration_complete_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -7273,11 +7378,11 @@ sequence_iteration_complete_event_pulse_width
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_pulse_width`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sequence_iteration_complete_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -7316,11 +7421,11 @@ sequence_loop_count
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sequence_loop_count`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sequence_loop_count`
 
         The following table lists the characteristics of this property.
 
@@ -7358,11 +7463,11 @@ sequence_loop_count_is_finite
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sequence_loop_count_is_finite`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sequence_loop_count_is_finite`
 
         The following table lists the characteristics of this property.
 
@@ -7390,11 +7495,11 @@ sequence_step_delta_time
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sequence_step_delta_time`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sequence_step_delta_time`
 
         The following table lists the characteristics of this property.
 
@@ -7421,11 +7526,11 @@ sequence_step_delta_time_enabled
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].sequence_step_delta_time_enabled`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.sequence_step_delta_time_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -7457,11 +7562,11 @@ serial_number
         .. tip:: This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container instruments to specify a subset.
 
-            Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
+            Example: :py:attr:`my_session.instruments[ ... ].serial_number`
 
             To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.instrument_firmware_revision`
+            Example: :py:attr:`my_session.serial_number`
 
         The following table lists the characteristics of this property.
 
@@ -7497,11 +7602,11 @@ shutdown_trigger_type
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].shutdown_trigger_type`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.shutdown_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -7564,11 +7669,11 @@ source_complete_event_output_terminal
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].source_complete_event_output_terminal`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.source_complete_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -7605,11 +7710,11 @@ source_complete_event_pulse_polarity
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].source_complete_event_pulse_polarity`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.source_complete_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -7649,11 +7754,11 @@ source_complete_event_pulse_width
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].source_complete_event_pulse_width`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.source_complete_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -7691,11 +7796,11 @@ source_delay
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].source_delay`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.source_delay`
 
         The following table lists the characteristics of this property.
 
@@ -7729,11 +7834,11 @@ source_mode
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].source_mode`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.source_mode`
 
         The following table lists the characteristics of this property.
 
@@ -7770,11 +7875,11 @@ source_trigger_type
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].source_trigger_type`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.source_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -7911,11 +8016,11 @@ start_trigger_type
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].start_trigger_type`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.start_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -7977,11 +8082,11 @@ transient_response
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].transient_response`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.transient_response`
 
         The following table lists the characteristics of this property.
 
@@ -8018,11 +8123,11 @@ voltage_compensation_frequency
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].voltage_compensation_frequency`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.voltage_compensation_frequency`
 
         The following table lists the characteristics of this property.
 
@@ -8059,11 +8164,11 @@ voltage_gain_bandwidth
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].voltage_gain_bandwidth`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.voltage_gain_bandwidth`
 
         The following table lists the characteristics of this property.
 
@@ -8101,11 +8206,11 @@ voltage_level
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].voltage_level`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.voltage_level`
 
         The following table lists the characteristics of this property.
 
@@ -8142,11 +8247,11 @@ voltage_level_autorange
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].voltage_level_autorange`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.voltage_level_autorange`
 
         The following table lists the characteristics of this property.
 
@@ -8185,11 +8290,11 @@ voltage_level_range
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].voltage_level_range`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.voltage_level_range`
 
         The following table lists the characteristics of this property.
 
@@ -8227,11 +8332,11 @@ voltage_limit
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].voltage_limit`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.voltage_limit`
 
         The following table lists the characteristics of this property.
 
@@ -8268,11 +8373,11 @@ voltage_limit_autorange
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].voltage_limit_autorange`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.voltage_limit_autorange`
 
         The following table lists the characteristics of this property.
 
@@ -8332,11 +8437,11 @@ voltage_limit_high
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].voltage_limit_high`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.voltage_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -8396,11 +8501,11 @@ voltage_limit_low
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].voltage_limit_low`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.voltage_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -8439,11 +8544,11 @@ voltage_limit_range
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].voltage_limit_range`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.voltage_limit_range`
 
         The following table lists the characteristics of this property.
 
@@ -8480,11 +8585,11 @@ voltage_pole_zero_ratio
         .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+            Example: :py:attr:`my_session.channels[ ... ].voltage_pole_zero_ratio`
 
             To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
-            Example: :py:attr:`my_session.active_advanced_sequence_step`
+            Example: :py:attr:`my_session.voltage_pole_zero_ratio`
 
         The following table lists the characteristics of this property.
 
