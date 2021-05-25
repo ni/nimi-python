@@ -33,11 +33,8 @@ def example(resource_name, options, voltage_max, current_max, points_per_output_
 
         with session.initiate():
             session.wait_for_event(nidcpower.Event.SEQUENCE_ENGINE_DONE)
-            channels = resource_name.split(',')
-            measurement_group = [None] * len(channels)
-            for i, channel in enumerate(channels):
-                channel_name = channel.strip()
-                measurement_group[i] = session.channels[channel_name].fetch_multiple(points_per_output_function * 2, timeout=timeout)
+            channels = [name.strip() for name in resource_name.split(',')]
+            measurement_group = [session.channels[name].fetch_multiple(points_per_output_function * 2, timeout=timeout) for name in channels]
 
         session.delete_advanced_sequence(sequence_name='my_sequence')
         line_format = '{:<15} {:<4} {:<10} {:<10} {:<6}'
