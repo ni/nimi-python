@@ -1,20 +1,20 @@
 # Different documentation snippets we add to the generated documentation
 
 rep_cap_method_desc = '''
-This method can be called for specific {1} within your :py:class:`{0}.Session` object.
+This method can be called on specific {1} within your :py:class:`{0}.Session` instance.
 Use Python index notation on the repeated capabilities container {1} to specify a subset,
 and then call this method on the result.
 
 Example: :py:meth:`my_session.{1}[ ... ].{2}`
 
-To call the method for all {1}, you can call it directly on the :py:class:`{0}.Session`.
+To call the method on all {1}, you can call it directly on the :py:class:`{0}.Session`.
 
 Example: :py:meth:`my_session.{2}`
 
 '''
 
 rep_cap_attr_desc = '''
-This property can be set/get to specific {1} within your :py:class:`{0}.Session` object.
+This property can be set/get on specific {1} within your :py:class:`{0}.Session` instance.
 Use Python index notation on the repeated capabilities container {1} to specify a subset.
 
 Example: :py:attr:`my_session.{2}[ ... ].{3}`
