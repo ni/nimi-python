@@ -28,9 +28,9 @@ def example(resource_name, options, voltage1, voltage2, delay):
         session.voltage_level = voltage1
 
         with session.initiate():
-            channels = resource_name.split(',')
-            for i, channel in enumerate(channels):
-                channel_name = channel.strip()
+            channel_indices = '0-{0}'.format(session.channel_count - 1)
+            channels = session.get_channel_names(channel_indices)
+            for channel_name in channels:
                 print('Channel: {0}'.format(channel_name))
                 print('---------------------------------')
                 print('Voltage 1:')
@@ -44,7 +44,7 @@ def example(resource_name, options, voltage1, voltage2, delay):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Outputs voltage 1, waits for source delay, and then takes a measurement. Then orepeat with voltage 2.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2/0, PXI1Slot3/1', help='Resource name of National Instruments SMUs')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2/0, PXI1Slot3/0-1', help='Resource name of National Instruments SMUs')
     parser.add_argument('-v1', '--voltage1', default=1.0, type=float, help='Voltage level 1 (V)')
     parser.add_argument('-v2', '--voltage2', default=2.0, type=float, help='Voltage level 2 (V)')
     parser.add_argument('-d', '--delay', default=0.05, type=float, help='Source delay (s)')
