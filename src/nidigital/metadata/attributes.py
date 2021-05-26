@@ -146,7 +146,7 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'documentation': {
-            'description': 'Returns a string ("National Instruments") that contains the name of the manufacturer of the digital pattern instrument.\n'
+            'description': 'Returns a string ("NI") that contains the name of the manufacturer of the digital pattern instrument.\n'
         },
         'name': 'INSTRUMENT_MANUFACTURER',
         'resettable': False,
@@ -166,7 +166,7 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'documentation': {
-            'description': 'Returns a string ("National Instruments") that contains the name of the vendor that supplies the NI-Digital Pattern Driver.\n'
+            'description': 'Returns a string ("NI") that contains the name of the vendor that supplies the NI-Digital Pattern Driver.\n'
         },
         'name': 'SPECIFIC_DRIVER_VENDOR',
         'resettable': False,

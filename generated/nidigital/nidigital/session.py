@@ -436,7 +436,7 @@ class _SessionBase(object):
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
 
-    Returns a string ("National Instruments") that contains the name of the manufacturer of the digital pattern instrument.
+    Returns a string ("NI") that contains the name of the manufacturer of the digital pattern instrument.
     '''
     instrument_model = _attributes.AttributeViString(1050512)
     '''Type: str
@@ -655,7 +655,7 @@ class _SessionBase(object):
     specific_driver_vendor = _attributes.AttributeViString(1050513)
     '''Type: str
 
-    Returns a string ("National Instruments") that contains the name of the vendor that supplies the NI-Digital Pattern Driver.
+    Returns a string ("NI") that contains the name of the vendor that supplies the NI-Digital Pattern Driver.
     '''
     start_label = _attributes.AttributeViString(1150023)
     '''Type: str

@@ -39,6 +39,6 @@ config = {
     'module_name': 'nidmm',
     'repeated_capabilities': [
     ],
-    'session_class_description': 'An NI-DMM session to a National Instruments Digital Multimeter',
+    'session_class_description': 'An NI-DMM session to a NI Digital Multimeter',
     'session_handle_parameter_name': 'vi'
 }

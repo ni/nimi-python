@@ -48,7 +48,7 @@ config = {
             'python_name': 'channels'
         }
     ],
-    'session_class_description': 'An NI-SCOPE session to a National Instruments Digitizer.',
+    'session_class_description': 'An NI-SCOPE session to a NI Digitizer.',
     'session_handle_parameter_name': 'vi',
     'uses_nitclk': True,
 }

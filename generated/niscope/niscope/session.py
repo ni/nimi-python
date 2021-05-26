@@ -3076,7 +3076,8 @@ class _SessionBase(object):
     def _get_error(self):
         r'''_get_error
 
-        Reads an error code and message from the error queue. NI digitizers do not contain an error queue. Errors are
+        Reads an error code and message from the error queue. National
+        Instruments digitizers do not contain an error queue. Errors are
         reported as they occur. Therefore, this method does not detect errors.
 
         Note:

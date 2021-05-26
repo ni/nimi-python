@@ -3600,7 +3600,7 @@ instrument_manufacturer
 
     .. py:attribute:: instrument_manufacturer
 
-        Returns a string ("National Instruments") that contains the name of the manufacturer of the digital pattern instrument.
+        Returns a string ("NI") that contains the name of the manufacturer of the digital pattern instrument.
 
         The following table lists the characteristics of this property.
 
@@ -4576,7 +4576,7 @@ specific_driver_vendor
 
     .. py:attribute:: specific_driver_vendor
 
-        Returns a string ("National Instruments") that contains the name of the vendor that supplies the NI-Digital Pattern Driver.
+        Returns a string ("NI") that contains the name of the vendor that supplies the NI-Digital Pattern Driver.
 
         The following table lists the characteristics of this property.
 

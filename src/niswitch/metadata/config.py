@@ -43,6 +43,6 @@ config = {
             'python_name': 'channels'
         }
     ],
-    'session_class_description': 'An NI-SWITCH session to a National Instruments Switch Module',
+    'session_class_description': 'An NI-SWITCH session to a NI Switch Module',
     'session_handle_parameter_name': 'vi'
 }
