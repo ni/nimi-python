@@ -108,7 +108,7 @@ html_static_path = ['_static']
 
 # Fix wide tables of RTD per https://github.com/rtfd/sphinx_rtd_theme/issues/117#issuecomment-41571653
 def setup(app):
-    app.add_stylesheet('theme_overrides.css')
+    app.add_css_file('theme_overrides.css')
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.

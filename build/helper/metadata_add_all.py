@@ -411,12 +411,6 @@ def _add_default_attribute_class(a, attributes):
         attributes[a]['attribute_class'] = 'Attribute' + attributes[a]['type']
 
 
-def _add_repeated_capability_type(a, attributes):
-    '''Add 'repeated_capability_type' if not already there.'''
-    if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based']:
-        attributes[a]['repeated_capability_type'] = 'channels'
-
-
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     attributes = merge_helper(attributes, 'attributes', config, use_re=False)
@@ -426,7 +420,6 @@ def add_all_attribute_metadata(attributes, config):
         _add_enum(attributes[a])
         _add_python_name(a, attributes)
         _add_python_type(attributes[a], config)
-        _add_repeated_capability_type(a, attributes)
         _add_default_attribute_class(a, attributes)
 
     return attributes
@@ -691,6 +684,8 @@ functions_input = {
                 'direction': 'in',
                 'enum': None,
                 'name': 'channelName',
+                'python_name': 'name',
+                'is_repeated_capability': False,
                 'type': 'ViString',
                 'documentation': {
                     'description': 'The channel to call this on.',
@@ -793,10 +788,9 @@ functions_expected = {
         'documentation': {
             'description': 'Performs a foo, and performs it well.'
         },
-        'has_repeated_capability': True,
-        'repeated_capability_type': 'channels',
+        'has_repeated_capability': False,
         'is_error_handling': False,
-        'render_in_session_base': True,
+        'render_in_session_base': False,
         'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
         'parameters': [
             {
@@ -833,14 +827,13 @@ functions_expected = {
             },
             {
                 'ctypes_type': 'ViString',
-                'ctypes_variable_name': 'channel_name_ctype',
+                'ctypes_variable_name': 'name_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'The channel to call this on.'
                 },
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
+                'is_repeated_capability': False,
                 'is_session_handle': False,
                 'enum': None,
                 'numpy': False,
@@ -852,14 +845,14 @@ functions_expected = {
                 'use_list': False,
                 'is_string': True,
                 'name': 'channelName',
-                'python_name': 'channel_name',
-                'python_name_with_default': 'channel_name',
-                'python_name_with_doc_default': 'channel_name',
+                'python_name': 'name',
+                'python_name_with_default': 'name',
+                'python_name_with_doc_default': 'name',
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'ViString',
-                'library_method_call_snippet': 'channel_name_ctype',
+                'library_method_call_snippet': 'name_ctype',
                 'use_in_python_api': True,
-                'python_name_or_default_for_init': 'channel_name',
+                'python_name_or_default_for_init': 'name',
             },
             {
                 'ctypes_type': 'ViInt32',
@@ -1114,7 +1107,6 @@ functions_expected = {
 attributes_input = {
     1000000: {
         'access': 'read-write',
-        'channel_based': False,
         'enum': None,
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
@@ -1130,7 +1122,6 @@ attributes_input = {
 attributes_expected = {
     1000000: {
         'access': 'read-write',
-        'channel_based': False,
         'codegen_method': 'public',
         'documentation': {'description': 'An attribute of type bool with read/write access.'},
         'enum': None,

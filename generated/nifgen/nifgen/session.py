@@ -190,12 +190,6 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     arb_offset = _attributes.AttributeViReal64(1250203)
     '''Type: float
@@ -273,34 +267,16 @@ class _SessionBase(object):
     '''Type: int
 
     Specifies the bit number to assign to the Data Marker Event.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     data_marker_event_level_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DataMarkerEventLevelPolarity, 1150338)
     '''Type: enums.DataMarkerEventLevelPolarity
 
     Specifies the output polarity of the Data marker event.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     data_marker_event_output_terminal = _attributes.AttributeViString(1150339)
     '''Type: str
 
     Specifies the destination terminal for the Data Marker Event.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     data_transfer_block_size = _attributes.AttributeViInt32(1150241)
     '''Type: int
@@ -339,23 +315,11 @@ class _SessionBase(object):
     '''Type: enums.ScriptTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     digital_edge_script_trigger_source = _attributes.AttributeViString(1150291)
     '''Type: str
 
     Specifies the source terminal for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerDigitalEdgeEdge, 1150282)
     '''Type: enums.StartTriggerDigitalEdgeEdge
@@ -450,12 +414,6 @@ class _SessionBase(object):
 
     Specifies the output terminal for the exported Script trigger.
     Setting this property to an empty string means that when you commit the session, the signal is removed from that terminal and, if possible, the terminal is tristated.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150283)
     '''Type: str
@@ -639,12 +597,6 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the destination terminal for the Marker Event.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_freq_list_duration = _attributes.AttributeViReal64(1150213)
     '''Type: float
@@ -798,12 +750,6 @@ class _SessionBase(object):
     '''Type: enums.ScriptTriggerType
 
     Specifies the Script trigger type. Depending upon the value of this property, additional properties may need to be configured to fully configure the trigger.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     serial_number = _attributes.AttributeViString(1150243)
     '''Type: str

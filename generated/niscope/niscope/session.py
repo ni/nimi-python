@@ -204,12 +204,6 @@ class _SessionBase(object):
     '''Type: bool
 
     Enables the bandpass filter on the specificed channel.  The default value is FALSE.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     binary_sample_width = _attributes.AttributeViInt32(1150005)
     '''Type: int
@@ -285,23 +279,11 @@ class _SessionBase(object):
     Valid Values:
     True  (1) - Acquire data on this channel
     False (0) - Don't acquire data on this channel
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     channel_terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminalConfiguration, 1150107)
     '''Type: enums.TerminalConfiguration
 
     Specifies the terminal configuration for the channel.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     data_transfer_block_size = _attributes.AttributeViInt32(1150316)
     '''Type: int
@@ -322,12 +304,6 @@ class _SessionBase(object):
     '''Type: float
 
     Returns the temperature of the device in degrees Celsius from the onboard sensor.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     enabled_channels = _attributes.AttributeViString(1150140)
     '''Type: str
@@ -356,12 +332,6 @@ class _SessionBase(object):
     Valid Values:
     True  (1) - Use multiple interleaved ADCs on this channel
     False (0) - Use only this channel's ADC to acquire data for this channel
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     end_of_acquisition_event_output_terminal = _attributes.AttributeViString(1150101)
     '''Type: str
@@ -400,23 +370,11 @@ class _SessionBase(object):
     '''Type: bool
 
     Enables the onboard signal processing FIR block. This block is connected directly to the input signal.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     equalization_num_coefficients = _attributes.AttributeViInt32(1150312)
     '''Type: int
 
     Returns the number of coefficients that the FIR filter can accept.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer.  However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     exported_advance_trigger_output_terminal = _attributes.AttributeViString(1150109)
     '''Type: str
@@ -471,12 +429,6 @@ class _SessionBase(object):
 
     The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass antialias filter.
     Use this property to select from several types of filters to achieve desired filtering characteristics.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     fpga_bitfile_path = _attributes.AttributeViString(1150375)
     '''Type: str
@@ -512,12 +464,6 @@ class _SessionBase(object):
     0 90 450
     **Related topics:**
     `Digital Filtering <digitizers.chm::/Digital_Filtering_Overview.html>`__
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     horz_enforce_realtime = _attributes.AttributeViBoolean(1150004)
     '''Type: bool
@@ -568,23 +514,11 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the input impedance for the channel in Ohms.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
     A string that contains the firmware revision information for the instrument you are currently using.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
@@ -606,12 +540,6 @@ class _SessionBase(object):
     Sampling <digitizers.chm::/TimeInterleavedSampling.html>`__
 
     Note: If disabled, warranted specifications are not guaranteed.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
     '''Type: str
@@ -623,14 +551,6 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     is_probe_comp_on = _attributes.AttributeViBoolean(1150066)
-    '''Type: bool
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     logical_name = _attributes.AttributeViString(1050305)
     '''Type: str
 
@@ -658,12 +578,6 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_real_time_sampling_rate = _attributes.AttributeViReal64(1150073)
     '''Type: float
@@ -680,132 +594,66 @@ class _SessionBase(object):
 
     Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to ArrayMeasurement.ARRAY_GAIN for more information.
     Default: 1.0
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_array_offset = _attributes.AttributeViReal64(1150044)
     '''Type: float
 
     Every element of an array is added to this scalar value during the Array Offset measurement. Refer to ArrayMeasurement.ARRAY_OFFSET for more information.
     Default: 0.0
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_chan_high_ref_level = _attributes.AttributeViReal64(1150040)
     '''Type: float
 
     Stores the high reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_high_ref if you use this property to set various channels to different values.
     Default: 90%
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_chan_low_ref_level = _attributes.AttributeViReal64(1150038)
     '''Type: float
 
     Stores the low reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_low_ref if you use this property to set various channels to different values.
     Default: 10%
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_chan_mid_ref_level = _attributes.AttributeViReal64(1150039)
     '''Type: float
 
     Stores the mid reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_mid_ref if you use this property to set various channels to different values.
     Default: 50%
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_filter_center_freq = _attributes.AttributeViReal64(1150032)
     '''Type: float
 
     The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by meas_filter_width, where the cutoff frequencies are the center ± width.
     Default: 1.0e6 Hz
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_filter_cutoff_freq = _attributes.AttributeViReal64(1150031)
     '''Type: float
 
     Specifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter.
     Default: 1.0e6 Hz
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_filter_order = _attributes.AttributeViInt32(1150036)
     '''Type: int
 
     Specifies the order of an IIR filter. All positive integers are valid.
     Default: 2
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_filter_ripple = _attributes.AttributeViReal64(1150033)
     '''Type: float
 
     Specifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.
     Default: 0.1 dB
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_filter_taps = _attributes.AttributeViInt32(1150037)
     '''Type: int
 
     Defines the number of taps (coefficients) for an FIR filter.
     Default: 25
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_filter_transient_waveform_percent = _attributes.AttributeViReal64(1150034)
     '''Type: float
 
     The percentage (0 - 100%) of the IIR filtered waveform to eliminate from the beginning of the waveform. This allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition.
     Default: 20.0%
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FilterType, 1150035)
     '''Type: enums.FilterType
@@ -819,24 +667,12 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_filter_width = _attributes.AttributeViReal64(1150041)
     '''Type: float
 
     Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at meas_filter_center_freq ± one-half width.
     Default: 1.0e3 Hz
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FIRFilterWindow, 1150042)
     '''Type: enums.FIRFilterWindow
@@ -850,12 +686,6 @@ class _SessionBase(object):
     ArrayMeasurement.BLACKMAN_WINDOW
     The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
     Default: FIRFilterWindow.NONE
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_high_ref = _attributes.AttributeViReal64(1250607)
     meas_hysteresis_percent = _attributes.AttributeViReal64(1150019)
@@ -863,12 +693,6 @@ class _SessionBase(object):
 
     Digital hysteresis that is used in several of the scalar waveform measurements. This property specifies the percentage of the full-scale vertical range for the hysteresis window size.
     Default: 2%
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_interpolation_sampling_factor = _attributes.AttributeViReal64(1150030)
     '''Type: float
@@ -878,24 +702,12 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_last_acq_histogram_size = _attributes.AttributeViInt32(1150020)
     '''Type: int
 
     Specifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high.
     Default: 256
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_low_ref = _attributes.AttributeViReal64(1250608)
     meas_mid_ref = _attributes.AttributeViReal64(1250609)
@@ -904,12 +716,6 @@ class _SessionBase(object):
 
     Specifies the second channel for two-channel measurements, such as ArrayMeasurement.ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
     Default: '0'
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_percentage_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PercentageMethod, 1150045)
     '''Type: enums.PercentageMethod
@@ -922,24 +728,12 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_polynomial_interpolation_order = _attributes.AttributeViInt32(1150029)
     '''Type: int
 
     Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
     Default: 1
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefLevelUnits, 1150016)
     '''Type: enums.RefLevelUnits
@@ -951,108 +745,54 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_time_histogram_high_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150028)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
     Default: 5.0e-4 seconds
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_time_histogram_high_volts = _attributes.AttributeViReal64(1150026)
     '''Type: float
 
     Specifies the highest voltage value included in the multiple-acquisition time histogram. The units are always volts.
     Default: 10.0 V
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_time_histogram_low_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150027)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
     Default: -5.0e-4 seconds
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_time_histogram_low_volts = _attributes.AttributeViReal64(1150025)
     '''Type: float
 
     Specifies the lowest voltage value included in the multiple acquisition time histogram. The units are always volts.
     Default: -10.0 V
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_time_histogram_size = _attributes.AttributeViInt32(1150024)
     '''Type: int
 
     Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with clear_waveform_measurement_stats.
     Default: 256
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_voltage_histogram_high_volts = _attributes.AttributeViReal64(1150023)
     '''Type: float
 
     Specifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.
     Default: 10.0 V
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_voltage_histogram_low_volts = _attributes.AttributeViReal64(1150022)
     '''Type: float
 
     Specifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.
     Default: -10.0 V
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     meas_voltage_histogram_size = _attributes.AttributeViInt32(1150021)
     '''Type: int
 
     Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method clear_waveform_measurement_stats.
     Default: 256
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     min_sample_rate = _attributes.AttributeViReal64(1150009)
     '''Type: float
@@ -1068,12 +808,6 @@ class _SessionBase(object):
     '''Type: int
 
     Returns the total combined amount of onboard memory for all channels in bytes.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     output_clock_source = _attributes.AttributeViString(1150003)
     '''Type: str
@@ -1084,12 +818,6 @@ class _SessionBase(object):
     '''Type: bool
 
     If TRUE, the PLL has remained locked to the external reference clock since it was last checked. If FALSE,  the PLL has become unlocked from the external reference clock since it was last checked.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     points_done = _attributes.AttributeViReal64(1150082)
     '''Type: float
@@ -1107,12 +835,6 @@ class _SessionBase(object):
     Specifies the probe attenuation for the input channel. For example, for a 10:1 probe,  set this property to 10.0.
     Valid Values:
     Any positive real number. Typical values are 1, 10, and 100.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     ready_for_advance_event_output_terminal = _attributes.AttributeViString(1150112)
     '''Type: str
@@ -1288,12 +1010,6 @@ class _SessionBase(object):
     '''Type: str
 
     Returns the serial number of the device.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     accessory_gain = _attributes.AttributeViReal64(1150279)
     '''Type: float
@@ -1305,12 +1021,6 @@ class _SessionBase(object):
 
     Note:
     This property is supported only by the NI PXI-5900 differential amplifier.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     accessory_offset = _attributes.AttributeViReal64(1150280)
     '''Type: float
@@ -1322,12 +1032,6 @@ class _SessionBase(object):
 
     Note:
     This property is supported only by the NI PXI-5900 differential amplifier.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -1491,12 +1195,6 @@ class _SessionBase(object):
     '''Type: enums.VerticalCoupling
 
     Specifies how the digitizer couples the input signal for the channel.  When input coupling changes, the input stage takes a finite amount of time to settle.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     vertical_offset = _attributes.AttributeViReal64(1250002)
     '''Type: float
@@ -1504,24 +1202,12 @@ class _SessionBase(object):
     Specifies the location of the center of the range. The value is with respect to ground and is in volts.  For example, to acquire a sine wave that spans between 0.0 and 10.0 V, set this property to 5.0 V.
 
     Note: This property is not supported by all digitizers.Refer to the NI High-Speed Digitizers Help for a list of vertical offsets supported for each device.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     vertical_range = _attributes.AttributeViReal64(1250001)
     '''Type: float
 
     Specifies the absolute value of the input range for a channel in volts.  For example, to acquire a sine wave that spans between -5 and +5 V, set this property to 10.0 V.
     Refer to the NI High-Speed Digitizers Help for a list of supported vertical ranges for each device.  If the specified range is not supported by a device, the value is coerced up to the next valid range.
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.
     '''
     width_condition = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WidthCondition, 1250504)
     '''Type: enums.WidthCondition
