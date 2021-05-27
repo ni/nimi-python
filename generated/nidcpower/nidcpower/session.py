@@ -3776,17 +3776,17 @@ class _SessionBase(object):
     def lock(self):
         '''lock
 
-        Obtains a multi-threaded lock on the instrument driver. Before doing so, the
+        Obtains a multithread lock on the device session. Before doing so, the
         software waits until all other execution threads release their locks
-        on the driver.
+        on the device session.
 
-        Other threads may have obtained a lock on this driver for the
+        Other threads may have obtained a lock on this session for the
         following reasons:
 
             -  The application called the lock method.
-            -  A call to NI-DCPower locked the driver.
+            -  A call to NI-DCPower locked the session.
             -  After a call to the lock method returns
-               successfully, no other threads can access the driver until
+               successfully, no other threads can access the device session until
                you call the unlock method or exit out of the with block when using
                lock context manager.
             -  Use the lock method and the
@@ -3795,7 +3795,7 @@ class _SessionBase(object):
                settings through the end of the sequence.
 
         You can safely make nested calls to the lock method
-        within the same thread. To completely unlock the driver, you must
+        within the same thread. To completely unlock the session, you must
         balance each call to the lock method with a call to
         the unlock method.
 
@@ -3816,7 +3816,7 @@ class _SessionBase(object):
     def _lock_session(self):
         '''_lock_session
 
-        Actual call to python lock
+        Actual call to driver
         '''
         self._pylock.acquire()
         return
@@ -4584,9 +4584,9 @@ class _SessionBase(object):
     def unlock(self):
         '''unlock
 
-        Releases a lock that you acquired on the driver using
+        Releases a lock that you acquired on an device session using
         lock. Refer to lock for additional
-        information on driver locks.
+        information on session locks.
         '''
         self._pylock.release()
         return

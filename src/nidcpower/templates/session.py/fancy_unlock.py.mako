@@ -12,9 +12,9 @@
     def ${f['python_name']}(self):
         '''${f['python_name']}
 
-        Releases a lock that you acquired on the driver using
+        Releases a lock that you acquired on an device session using
         lock. Refer to lock for additional
-        information on driver locks.
+        information on session locks.
         '''
         self._pylock.release()
         return

@@ -12,17 +12,17 @@
     def ${f['python_name']}(self):
         '''${f['python_name']}
 
-        Obtains a multi-threaded lock on the instrument driver. Before doing so, the
+        Obtains a multithread lock on the device session. Before doing so, the
         software waits until all other execution threads release their locks
-        on the driver.
+        on the device session.
 
-        Other threads may have obtained a lock on this driver for the
+        Other threads may have obtained a lock on this session for the
         following reasons:
 
             -  The application called the lock method.
-            -  A call to ${config['driver_name']} locked the driver.
+            -  A call to ${config['driver_name']} locked the session.
             -  After a call to the lock method returns
-               successfully, no other threads can access the driver until
+               successfully, no other threads can access the device session until
                you call the unlock method or exit out of the with block when using
                lock context manager.
             -  Use the lock method and the
@@ -31,7 +31,7 @@
                settings through the end of the sequence.
 
         You can safely make nested calls to the lock method
-        within the same thread. To completely unlock the driver, you must
+        within the same thread. To completely unlock the session, you must
         balance each call to the lock method with a call to
         the unlock method.
 
@@ -52,7 +52,7 @@
     def _lock_session(self):
         '''_lock_session
 
-        Actual call to python lock
+        Actual call to driver
         '''
         self._pylock.acquire()
         return
