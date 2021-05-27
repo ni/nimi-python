@@ -4724,7 +4724,8 @@ class Session(_SessionBase):
         Args:
             resource_name (str, list, tuple): Specifies the **resource name** as seen in Measurement
                 & Automation Explorer (MAX) or lsni, for example "PXI1Slot3" where "PXI1Slot3" is an
-                instrument's **resource name**. **resource name** can also be a logical IVI name.
+                instrument's **resource name**. If independent_channels is False, **resource name**
+                can also be a logical IVI name.
 
                 If independent_channels is True, **resource name** can be names of the instrument(s)
                 and the channel(s) to initialize. Specify the instrument(s) and channel(s) using the
@@ -4734,8 +4735,8 @@ class Session(_SessionBase):
                 after an instrument resource name, all channels of the instrument(s) are included in
                 the session.
 
-            channels (str, list, range, tuple): For new applications, set this argument to None and
-                specify the channels in **resource name**.
+            channels (str, list, range, tuple): For new applications, use the default value of None
+                and specify the channels in **resource name**.
 
                 Specifies which output channel(s) to include in a new session. Specify multiple
                 channels by using a channel list or a channel range. A channel list is a comma (,)
@@ -5226,7 +5227,8 @@ class Session(_SessionBase):
         Args:
             resource_name (str, list, tuple): Specifies the **resource name** as seen in Measurement
                 & Automation Explorer (MAX) or lsni, for example "PXI1Slot3" where "PXI1Slot3" is an
-                instrument's **resource name**. **resource name** can also be a logical IVI name.
+                instrument's **resource name**. If independent_channels is False, **resource name**
+                can also be a logical IVI name.
 
                 If independent_channels is True, **resource name** can be names of the instrument(s)
                 and the channel(s) to initialize. Specify the instrument(s) and channel(s) using the
@@ -5236,8 +5238,8 @@ class Session(_SessionBase):
                 after an instrument resource name, all channels of the instrument(s) are included in
                 the session.
 
-            channels (str, list, range, tuple): For new applications, set this argument to None and
-                specify the channels in **resource name**.
+            channels (str, list, range, tuple): For new applications, use the default value of None
+                and specify the channels in **resource name**.
 
                 Specifies which output channel(s) to include in a new session. Specify multiple
                 channels by using a channel list or a channel range. A channel list is a comma (,)
