@@ -19,6 +19,7 @@ ${template_parameters['encoding_tag']}
         session_context_manager = '_' + config['context_manager_name']['task'].title()
         session_context_manager_initiate = functions[config['context_manager_name']['initiate_function']]['python_name']
         session_context_manager_abort = functions[config['context_manager_name']['abort_function']]['python_name']
+        render_initiate_in_session_base = functions[config['context_manager_name']['initiate_function']]['render_in_session_base']
 %>\
 import array  # noqa: F401
 import ctypes
@@ -240,6 +241,15 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         except errors.Error:
             return "Failed to retrieve error description."
 
+% if session_context_manager is not None and render_initiate_in_session_base:
+    def initiate(self):
+        '''initiate
+
+        ${helper.get_function_docstring(helper.initiate_function_def_for_doc(functions, config), False, config, indent=8)}
+        '''
+        return ${session_context_manager}(self)
+
+% endif
     ''' These are code-generated '''
 
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
@@ -291,7 +301,7 @@ class Session(_SessionBase):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
-% if session_context_manager is not None:
+% if session_context_manager is not None and not render_initiate_in_session_base:
     def initiate(self):
         '''initiate
 
