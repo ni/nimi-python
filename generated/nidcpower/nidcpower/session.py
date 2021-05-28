@@ -3331,6 +3331,33 @@ class _SessionBase(object):
         except errors.Error:
             return "Failed to retrieve error description."
 
+    def initiate(self):
+        '''initiate
+
+        Starts generation or acquisition, causing the NI-DCPower session to
+        leave the Uncommitted state or Committed state and enter the Running
+        state. To return to the Uncommitted state call the abort
+        method. Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for information about the
+        specific NI-DCPower software states.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Note:
+        This method will return a Python context manager that will initiate on entering and abort on exit.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.
+        '''
+        return _Acquisition(self)
+
     ''' These are code-generated '''
 
     @ivi_synchronized
@@ -5533,38 +5560,6 @@ class Session(_SessionBase):
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
-
-    def initiate(self):
-        '''initiate
-
-        Starts generation or acquisition, causing the NI-DCPower session to
-        leave the Uncommitted state or Committed state and enter the Running
-        state. To return to the Uncommitted state call the abort
-        method. Refer to the `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
-        the *NI DC Power Supplies and SMUs Help* for information about the
-        specific NI-DCPower software states.
-
-        **Related Topics:**
-
-        `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
-        Note:
-        This method will return a Python context manager that will initiate on entering and abort on exit.
-
-        Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].initiate`
-
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
-
-        Example: :py:meth:`my_session.initiate`
-        '''
-        return _Acquisition(self)
 
     def close(self):
         '''close
