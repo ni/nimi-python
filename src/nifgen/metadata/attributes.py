@@ -9,7 +9,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1050007: {
@@ -20,7 +19,6 @@ attributes = {
         },
         'lv_property': '',
         'name': 'DRIVER_SETUP',
-        'resettable': True,
         'type': 'ViString'
     },
     1050203: {
@@ -32,7 +30,6 @@ attributes = {
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count',
         'name': 'NUM_CHANNELS',
         'python_name': 'channel_count',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1050304: {
@@ -43,7 +40,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:Advanced Session Information:Resource Descriptor',
         'name': 'IO_RESOURCE_DESCRIPTOR',
-        'resettable': False,
         'type': 'ViString'
     },
     1050305: {
@@ -54,7 +50,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:Advanced Session Information:Logical Name',
         'name': 'LOGICAL_NAME',
-        'resettable': False,
         'type': 'ViString'
     },
     1050327: {
@@ -65,7 +60,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
-        'resettable': False,
         'type': 'ViString'
     },
     1050503: {
@@ -77,7 +71,6 @@ attributes = {
         'lv_property': 'Instrument:Obsolete:Major Version',
         'name': 'SPECIFIC_DRIVER_MAJOR_VERSION',
         'python_name': 'major_version',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1050504: {
@@ -89,7 +82,6 @@ attributes = {
         'lv_property': 'Instrument:Obsolete:Minor Version',
         'name': 'SPECIFIC_DRIVER_MINOR_VERSION',
         'python_name': 'minor_version',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1050510: {
@@ -100,7 +92,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:Instrument Identification:Firmware Revision',
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
-        'resettable': False,
         'type': 'ViString'
     },
     1050511: {
@@ -111,7 +102,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:Instrument Identification:Manufacturer',
         'name': 'INSTRUMENT_MANUFACTURER',
-        'resettable': False,
         'type': 'ViString'
     },
     1050512: {
@@ -122,7 +112,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:Instrument Identification:Model',
         'name': 'INSTRUMENT_MODEL',
-        'resettable': False,
         'type': 'ViString'
     },
     1050513: {
@@ -133,7 +122,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Driver Vendor',
         'name': 'SPECIFIC_DRIVER_VENDOR',
-        'resettable': False,
         'type': 'ViString'
     },
     1050514: {
@@ -144,7 +132,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Description',
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
-        'resettable': False,
         'type': 'ViString'
     },
     1050551: {
@@ -155,7 +142,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Revision',
         'name': 'SPECIFIC_DRIVER_REVISION',
-        'resettable': False,
         'type': 'ViString'
     },
     1150101: {
@@ -166,7 +152,6 @@ attributes = {
         },
         'lv_property': 'Output:Advanced:Digital Pattern Enabled',
         'name': 'DIGITAL_PATTERN_ENABLED',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1150102: {
@@ -177,7 +162,6 @@ attributes = {
         },
         'lv_property': 'Output:Filters:Digital Filter Enabled',
         'name': 'DIGITAL_FILTER_ENABLED',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1150103: {
@@ -188,7 +172,6 @@ attributes = {
         },
         'lv_property': 'Output:Filters:Analog Filter Enabled',
         'name': 'ANALOG_FILTER_ENABLED',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1150104: {
@@ -199,7 +182,6 @@ attributes = {
         },
         'lv_property': 'Instrument:5401/5411/5431:Filter Correction Frequency',
         'name': 'FILTER_CORRECTION_FREQUENCY',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150107: {
@@ -210,7 +192,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Reference Clock:Frequency',
         'name': 'REF_CLOCK_FREQUENCY',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1150108: {
@@ -222,7 +203,6 @@ attributes = {
         'enum': 'TriggerMode',
         'lv_property': 'Triggers:Trigger Mode',
         'name': 'TRIGGER_MODE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150110: {
@@ -234,7 +214,6 @@ attributes = {
         'enum': 'ClockMode',
         'lv_property': 'Clocks:Sample Clock:Mode',
         'name': 'CLOCK_MODE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150112: {
@@ -247,7 +226,6 @@ attributes = {
         'enum': 'SampleClockSource',
         'lv_property': 'Clocks:Sample Clock:Source',
         'name': 'SAMPLE_CLOCK_SOURCE',
-        'resettable': True,
         'type': 'ViString'
     },
     1150113: {
@@ -260,7 +238,6 @@ attributes = {
         'enum': 'ReferenceClockSource',
         'lv_property': 'Clocks:Reference Clock:Source',
         'name': 'REFERENCE_CLOCK_SOURCE',
-        'resettable': True,
         'type': 'ViString'
     },
     1150208: {
@@ -271,7 +248,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Frequency List Mode:Frequency List Handle',
         'name': 'FREQ_LIST_HANDLE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150209: {
@@ -282,7 +258,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Frequency List Mode:Maximum Number Of Frequency Lists',
         'name': 'MAX_NUM_FREQ_LISTS',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150210: {
@@ -293,7 +268,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Frequency List Mode:Minimum Frequency List Length',
         'name': 'MIN_FREQ_LIST_LENGTH',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150211: {
@@ -304,7 +278,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Frequency List Mode:Maximum Frequency List Length',
         'name': 'MAX_FREQ_LIST_LENGTH',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150212: {
@@ -315,7 +288,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Frequency List Mode:Minimum Frequency List Duration',
         'name': 'MIN_FREQ_LIST_DURATION',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150213: {
@@ -326,7 +298,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Frequency List Mode:Maximum Frequency List Duration',
         'name': 'MAX_FREQ_LIST_DURATION',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150214: {
@@ -337,7 +308,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Frequency List Mode:Frequency List Duration Quantum',
         'name': 'FREQ_LIST_DURATION_QUANTUM',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150215: {
@@ -349,7 +319,6 @@ attributes = {
         'enum': 'BusType',
         'lv_property': 'Instrument:Bus Type',
         'name': 'BUS_TYPE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150218: {
@@ -360,7 +329,6 @@ attributes = {
         },
         'lv_property': 'Output:Filters:Digital Filter Interpolation Factor',
         'name': 'DIGITAL_FILTER_INTERPOLATION_FACTOR',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150219: {
@@ -371,7 +339,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Sample Clock:Exported Sample Clock Divisor',
         'name': 'EXPORTED_SAMPLE_CLOCK_DIVISOR',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150220: {
@@ -382,7 +349,6 @@ attributes = {
         },
         'lv_property': 'Output:Load Impedance',
         'name': 'LOAD_IMPEDANCE',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1150222: {
@@ -394,7 +360,6 @@ attributes = {
         'enum': 'AnalogPath',
         'lv_property': 'Output:Analog Path',
         'name': 'ANALOG_PATH',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150230: {
@@ -405,7 +370,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Sample Clock Timebase:Exported Sample Clock Timebase Divisor',
         'name': 'EXPORTED_SAMPLE_CLOCK_TIMEBASE_DIVISOR',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150233: {
@@ -416,7 +380,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Advanced:External Clock Delay Binary Value',
         'name': 'EXTERNAL_CLOCK_DELAY_BINARY_VALUE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150234: {
@@ -427,7 +390,6 @@ attributes = {
         },
         'lv_property': 'Output:Data Mask:Analog Data Mask',
         'name': 'ANALOG_DATA_MASK',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150235: {
@@ -438,7 +400,6 @@ attributes = {
         },
         'lv_property': 'Output:Data Mask:Analog Static Value',
         'name': 'ANALOG_STATIC_VALUE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150236: {
@@ -449,7 +410,6 @@ attributes = {
         },
         'lv_property': 'Output:Data Mask:Digital Data Mask',
         'name': 'DIGITAL_DATA_MASK',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150237: {
@@ -460,7 +420,6 @@ attributes = {
         },
         'lv_property': 'Output:Data Mask:Digital Static Value',
         'name': 'DIGITAL_STATIC_VALUE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150238: {
@@ -472,7 +431,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Standard Function Mode:Buffer Size',
         'name': 'FUNC_BUFFER_SIZE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150239: {
@@ -484,7 +442,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Standard Function Mode:Maximum Buffer Size',
         'name': 'FUNC_MAX_BUFFER_SIZE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150240: {
@@ -495,7 +452,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Data Transfer:File Transfer Block Size',
         'name': 'FILE_TRANSFER_BLOCK_SIZE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150241: {
@@ -506,7 +462,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Data Transfer:Data Transfer Block Size',
         'name': 'DATA_TRANSFER_BLOCK_SIZE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150242: {
@@ -517,7 +472,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Memory Size',
         'name': 'MEMORY_SIZE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150243: {
@@ -528,7 +482,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Serial Number',
         'name': 'SERIAL_NUMBER',
-        'resettable': False,
         'type': 'ViString'
     },
     1150254: {
@@ -539,7 +492,6 @@ attributes = {
         },
         'lv_property': 'Output:Digital Gain',
         'name': 'DIGITAL_GAIN',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1150270: {
@@ -551,7 +503,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Script Mode:Script to Generate',
         'name': 'SCRIPT_TO_GENERATE',
-        'resettable': False,
         'type': 'ViString'
     },
     1150271: {
@@ -562,7 +513,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Marker Events Count',
         'name': 'MARKER_EVENTS_COUNT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150272: {
@@ -573,7 +523,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Script Triggers Count',
         'name': 'SCRIPT_TRIGGERS_COUNT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150273: {
@@ -584,7 +533,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Data Marker Events Count',
         'name': 'DATA_MARKER_EVENTS_COUNT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150280: {
@@ -596,7 +544,6 @@ attributes = {
         'enum': 'StartTriggerType',
         'lv_property': 'Triggers:Start:Trigger Type',
         'name': 'START_TRIGGER_TYPE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150281: {
@@ -607,7 +554,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Start:Digital Edge:Source',
         'name': 'DIGITAL_EDGE_START_TRIGGER_SOURCE',
-        'resettable': True,
         'type': 'ViString'
     },
     1150282: {
@@ -619,7 +565,6 @@ attributes = {
         'enum': 'StartTriggerDigitalEdgeEdge',
         'lv_property': 'Triggers:Start:Digital Edge:Edge',
         'name': 'DIGITAL_EDGE_START_TRIGGER_EDGE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150283: {
@@ -630,7 +575,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Start:Output Terminal',
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
-        'resettable': True,
         'type': 'ViString'
     },
     1150290: {
@@ -643,7 +587,6 @@ attributes = {
         'lv_property': 'Triggers:Script:Trigger Type',
         'name': 'SCRIPT_TRIGGER_TYPE',
         'repeated_capability_type': 'script_triggers',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150291: {
@@ -655,7 +598,6 @@ attributes = {
         'lv_property': 'Triggers:Script:Digital Edge:Source',
         'name': 'DIGITAL_EDGE_SCRIPT_TRIGGER_SOURCE',
         'repeated_capability_type': 'script_triggers',
-        'resettable': True,
         'type': 'ViString'
     },
     1150292: {
@@ -668,7 +610,6 @@ attributes = {
         'lv_property': 'Triggers:Script:Digital Edge:Edge',
         'name': 'DIGITAL_EDGE_SCRIPT_TRIGGER_EDGE',
         'repeated_capability_type': 'script_triggers',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150295: {
@@ -680,7 +621,6 @@ attributes = {
         'lv_property': 'Triggers:Script:Output Terminal',
         'name': 'EXPORTED_SCRIPT_TRIGGER_OUTPUT_TERMINAL',
         'repeated_capability_type': 'script_triggers',
-        'resettable': True,
         'type': 'ViString'
     },
     1150310: {
@@ -691,7 +631,6 @@ attributes = {
         },
         'lv_property': 'Events:Ready For Start:Output Terminal',
         'name': 'READY_FOR_START_EVENT_OUTPUT_TERMINAL',
-        'resettable': True,
         'type': 'ViString'
     },
     1150312: {
@@ -703,7 +642,6 @@ attributes = {
         'lv_property': 'Events:Marker:Output Terminal',
         'name': 'MARKER_EVENT_OUTPUT_TERMINAL',
         'repeated_capability_type': 'markers',
-        'resettable': True,
         'type': 'ViString'
     },
     1150314: {
@@ -714,7 +652,6 @@ attributes = {
         },
         'lv_property': 'Events:Started:Output Terminal',
         'name': 'STARTED_EVENT_OUTPUT_TERMINAL',
-        'resettable': True,
         'type': 'ViString'
     },
     1150315: {
@@ -725,7 +662,6 @@ attributes = {
         },
         'lv_property': 'Events:Done:Output Terminal',
         'name': 'DONE_EVENT_OUTPUT_TERMINAL',
-        'resettable': True,
         'type': 'ViString'
     },
     1150320: {
@@ -736,7 +672,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Sample Clock:Export Output Terminal',
         'name': 'EXPORTED_SAMPLE_CLOCK_OUTPUT_TERMINAL',
-        'resettable': True,
         'type': 'ViString'
     },
     1150321: {
@@ -747,7 +682,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Reference Clock:Export Output Terminal',
         'name': 'EXPORTED_REFERENCE_CLOCK_OUTPUT_TERMINAL',
-        'resettable': True,
         'type': 'ViString'
     },
     1150322: {
@@ -758,7 +692,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Reference Clock:Onboard Reference Clock:Export Output Terminal',
         'name': 'EXPORTED_ONBOARD_REFERENCE_CLOCK_OUTPUT_TERMINAL',
-        'resettable': True,
         'type': 'ViString'
     },
     1150323: {
@@ -769,7 +702,6 @@ attributes = {
         },
         'lv_property': 'Output:Filters:Flatness Correction Enabled',
         'name': 'FLATNESS_CORRECTION_ENABLED',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1150324: {
@@ -780,7 +712,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Data Transfer:Streaming:Streaming Waveform Handle',
         'name': 'STREAMING_WAVEFORM_HANDLE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150325: {
@@ -791,7 +722,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Data Transfer:Streaming:Space Available in Streaming Waveform',
         'name': 'STREAMING_SPACE_AVAILABLE_IN_WAVEFORM',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150326: {
@@ -802,7 +732,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Data Transfer:Streaming:Streaming Waveform Name',
         'name': 'STREAMING_WAVEFORM_NAME',
-        'resettable': True,
         'type': 'ViString'
     },
     1150327: {
@@ -814,7 +743,6 @@ attributes = {
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Marker Position',
         'name': 'ARB_MARKER_POSITION',
         'repeated_capability_type': 'markers',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150328: {
@@ -825,7 +753,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Repeat Count',
         'name': 'ARB_REPEAT_COUNT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150329: {
@@ -837,7 +764,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Sample Clock Timebase:Export Output Terminal',
         'name': 'EXPORTED_SAMPLE_CLOCK_TIMEBASE_OUTPUT_TERMINAL',
-        'resettable': True,
         'type': 'ViString'
     },
     1150337: {
@@ -849,7 +775,6 @@ attributes = {
         'lv_property': 'Events:Data Marker:Data Bit Number',
         'name': 'DATA_MARKER_EVENT_DATA_BIT_NUMBER',
         'repeated_capability_type': 'markers',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150338: {
@@ -862,7 +787,6 @@ attributes = {
         'lv_property': 'Events:Data Marker:Level:Active Level',
         'name': 'DATA_MARKER_EVENT_LEVEL_POLARITY',
         'repeated_capability_type': 'markers',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150339: {
@@ -874,7 +798,6 @@ attributes = {
         'lv_property': 'Events:Data Marker:Output Terminal',
         'name': 'DATA_MARKER_EVENT_OUTPUT_TERMINAL',
         'repeated_capability_type': 'markers',
-        'resettable': True,
         'type': 'ViString'
     },
     1150344: {
@@ -885,7 +808,6 @@ attributes = {
         },
         'lv_property': 'Events:Marker:Advanced:All Marker Events Live Status',
         'name': 'ALL_MARKER_EVENTS_LIVE_STATUS',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150349: {
@@ -896,7 +818,6 @@ attributes = {
         },
         'lv_property': 'Events:Marker:Advanced:All Marker Events Latched Status',
         'name': 'ALL_MARKER_EVENTS_LATCHED_STATUS',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150365: {
@@ -908,7 +829,6 @@ attributes = {
         'enum': 'TerminalConfiguration',
         'lv_property': 'Output:Terminal Configuration',
         'name': 'TERMINAL_CONFIGURATION',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150366: {
@@ -919,7 +839,6 @@ attributes = {
         },
         'lv_property': 'Output:Common Mode Offset',
         'name': 'COMMON_MODE_OFFSET',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1150367: {
@@ -932,7 +851,6 @@ attributes = {
         'enum': 'SampleClockTimebaseSource',
         'lv_property': 'Clocks:Sample Clock Timebase:Source',
         'name': 'SAMPLE_CLOCK_TIMEBASE_SOURCE',
-        'resettable': True,
         'type': 'ViString'
     },
     1150368: {
@@ -944,7 +862,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Sample Clock Timebase:Rate',
         'name': 'SAMPLE_CLOCK_TIMEBASE_RATE',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1150369: {
@@ -955,7 +872,6 @@ attributes = {
         },
         'lv_property': 'Output:Channel Delay',
         'name': 'CHANNEL_DELAY',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1150373: {
@@ -966,7 +882,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Data Transfer:Maximum Bandwidth',
         'name': 'DATA_TRANSFER_MAXIMUM_BANDWIDTH',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1150374: {
@@ -978,7 +893,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Data Transfer:Advanced:Preferred Packet Size',
         'name': 'DATA_TRANSFER_PREFERRED_PACKET_SIZE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150375: {
@@ -989,7 +903,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Data Transfer:Advanced:Maximum In-Flight Read Requests',
         'name': 'DATA_TRANSFER_MAXIMUM_IN_FLIGHT_READS',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150376: {
@@ -1000,7 +913,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Advanced:External Sample Clock Multiplier',
         'name': 'EXTERNAL_SAMPLE_CLOCK_MULTIPLIER',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1150377: {
@@ -1012,7 +924,6 @@ attributes = {
         'enum': 'IdleBehavior',
         'lv_property': 'Output:Advanced:Idle Behavior',
         'name': 'IDLE_BEHAVIOR',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150378: {
@@ -1023,7 +934,6 @@ attributes = {
         },
         'lv_property': 'Output:Advanced:Idle Value',
         'name': 'IDLE_VALUE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150379: {
@@ -1035,7 +945,6 @@ attributes = {
         'enum': 'WaitBehavior',
         'lv_property': 'Output:Advanced:Wait Behavior',
         'name': 'WAIT_BEHAVIOR',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150380: {
@@ -1046,7 +955,6 @@ attributes = {
         },
         'lv_property': 'Output:Advanced:Wait Value',
         'name': 'WAIT_VALUE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150390: {
@@ -1057,7 +965,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:Instrument Identification:Module Revision',
         'name': 'MODULE_REVISION',
-        'resettable': False,
         'type': 'ViString'
     },
     1150409: {
@@ -1069,7 +976,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Data Transfer:Streaming:Streaming Write Timeout',
         'name': 'STREAMING_WRITE_TIMEOUT',
-        'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
@@ -1081,7 +987,6 @@ attributes = {
         },
         'lv_property': 'Output:Advanced:AUX Power Enabled',
         'name': 'AUX_POWER_ENABLED',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1150412: {
@@ -1092,7 +997,6 @@ attributes = {
         },
         'lv_property': 'Instrument:FPGA Bitfile Path',
         'name': 'FPGA_BITFILE_PATH',
-        'resettable': False,
         'type': 'ViString'
     },
     1150413: {
@@ -1104,7 +1008,6 @@ attributes = {
         },
         'lv_property': 'Output:Absolute Delay',
         'name': 'ABSOLUTE_DELAY',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1250001: {
@@ -1117,7 +1020,6 @@ attributes = {
         'enum': 'OutputMode',
         'lv_property': 'Output:Output Mode',
         'name': 'OUTPUT_MODE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250003: {
@@ -1128,7 +1030,6 @@ attributes = {
         },
         'lv_property': 'Output:Output Enabled',
         'name': 'OUTPUT_ENABLED',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1250004: {
@@ -1139,7 +1040,6 @@ attributes = {
         },
         'lv_property': 'Output:Output Impedance',
         'name': 'OUTPUT_IMPEDANCE',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1250101: {
@@ -1151,7 +1051,6 @@ attributes = {
         'enum': 'Waveform',
         'lv_property': 'Standard Function:Waveform',
         'name': 'FUNC_WAVEFORM',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250102: {
@@ -1163,7 +1062,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Amplitude',
         'name': 'FUNC_AMPLITUDE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250103: {
@@ -1174,7 +1072,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:DC Offset',
         'name': 'FUNC_DC_OFFSET',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250104: {
@@ -1186,7 +1083,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Standard Function Mode:Frequency',
         'name': 'FUNC_FREQUENCY',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250105: {
@@ -1198,7 +1094,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Start Phase',
         'name': 'FUNC_START_PHASE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250106: {
@@ -1210,7 +1105,6 @@ attributes = {
         },
         'lv_property': 'Standard Function:Duty Cycle High',
         'name': 'FUNC_DUTY_CYCLE_HIGH',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250201: {
@@ -1221,7 +1115,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Arbitrary Waveform Handle',
         'name': 'ARB_WAVEFORM_HANDLE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250202: {
@@ -1232,7 +1125,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Gain',
         'name': 'ARB_GAIN',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1250203: {
@@ -1243,7 +1135,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Offset',
         'name': 'ARB_OFFSET',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1250204: {
@@ -1254,7 +1145,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Sample Clock:Rate',
         'name': 'ARB_SAMPLE_RATE',
-        'resettable': True,
         'type': 'ViReal64'
     },
     1250205: {
@@ -1265,7 +1155,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Capabilities:Max Number of Waveforms',
         'name': 'MAX_NUM_WAVEFORMS',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250206: {
@@ -1276,7 +1165,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Capabilities:Waveform Quantum',
         'name': 'WAVEFORM_QUANTUM',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250207: {
@@ -1287,7 +1175,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Capabilities:Min Waveform Size',
         'name': 'MIN_WAVEFORM_SIZE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250208: {
@@ -1298,7 +1185,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Capabilities:Max Waveform Size',
         'name': 'MAX_WAVEFORM_SIZE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250211: {
@@ -1309,7 +1195,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Arbitrary Sequence Handle',
         'name': 'ARB_SEQUENCE_HANDLE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250212: {
@@ -1320,7 +1205,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Max Number of Sequences',
         'name': 'MAX_NUM_SEQUENCES',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250213: {
@@ -1331,7 +1215,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Min Sequence Length',
         'name': 'MIN_SEQUENCE_LENGTH',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250214: {
@@ -1342,7 +1225,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Max Sequence Length',
         'name': 'MAX_SEQUENCE_LENGTH',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250215: {
@@ -1353,7 +1235,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Max Loop Count',
         'name': 'MAX_LOOP_COUNT',
-        'resettable': False,
         'type': 'ViInt32'
     }
 }

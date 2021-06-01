@@ -74,17 +74,13 @@ bus_number
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -100,17 +96,13 @@ chassis_number
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -126,17 +118,13 @@ device_model
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -152,17 +140,13 @@ device_name
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -178,17 +162,13 @@ max_pciexpress_link_width
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -204,17 +184,13 @@ pciexpress_link_width
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -230,17 +206,13 @@ serial_number
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -256,17 +228,13 @@ slot_number
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -282,17 +250,13 @@ socket_number
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

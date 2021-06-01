@@ -9,7 +9,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1050007: {
@@ -20,7 +19,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Driver Setup',
         'name': 'DRIVER_SETUP',
-        'resettable': False,
         'type': 'ViString'
     },
     1050203: {
@@ -31,7 +29,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Capabilities:Channel Count',
         'name': 'CHANNEL_COUNT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1050304: {
@@ -42,7 +39,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor',
         'name': 'IO_RESOURCE_DESCRIPTOR',
-        'resettable': False,
         'type': 'ViString'
     },
     1050305: {
@@ -53,7 +49,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Logical Name',
         'name': 'LOGICAL_NAME',
-        'resettable': False,
         'type': 'ViString'
     },
     1050327: {
@@ -64,7 +59,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
-        'resettable': False,
         'type': 'ViString'
     },
     1050503: {
@@ -75,7 +69,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Version Info:Specific Driver Major Version',
         'name': 'SPECIFIC_DRIVER_MAJOR_VERSION',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1050504: {
@@ -86,7 +79,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Version Info:Specific Driver Minor Version',
         'name': 'SPECIFIC_DRIVER_MINOR_VERSION',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1050510: {
@@ -97,7 +89,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision',
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
-        'resettable': False,
         'type': 'ViString'
     },
     1050511: {
@@ -108,7 +99,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer',
         'name': 'INSTRUMENT_MANUFACTURER',
-        'resettable': False,
         'type': 'ViString'
     },
     1050512: {
@@ -119,7 +109,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Instrument Model',
         'name': 'INSTRUMENT_MODEL',
-        'resettable': False,
         'type': 'ViString'
     },
     1050513: {
@@ -130,7 +119,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor',
         'name': 'SPECIFIC_DRIVER_VENDOR',
-        'resettable': False,
         'type': 'ViString'
     },
     1050514: {
@@ -141,7 +129,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description',
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
-        'resettable': False,
         'type': 'ViString'
     },
     1050551: {
@@ -152,7 +139,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Version Info:Specific Driver Revision',
         'name': 'SPECIFIC_DRIVER_REVISION',
-        'resettable': False,
         'type': 'ViString'
     },
     1150014: {
@@ -164,7 +150,6 @@ attributes = {
         'enum': 'OperationMode',
         'lv_property': 'Configuration:Advanced:Operation Mode',
         'name': 'OPERATION_MODE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150018: {
@@ -175,7 +160,6 @@ attributes = {
         },
         'lv_property': 'Waveform Acquisition:Waveform Rate',
         'name': 'WAVEFORM_RATE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150019: {
@@ -186,7 +170,6 @@ attributes = {
         },
         'lv_property': 'Waveform Acquisition:Waveform Points',
         'name': 'WAVEFORM_POINTS',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150022: {
@@ -198,7 +181,6 @@ attributes = {
         'enum': 'ADCCalibration',
         'lv_property': 'Configuration:Measurement Options:ADC Calibration',
         'name': 'ADC_CALIBRATION',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150023: {
@@ -209,7 +191,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Offset Compensated Ohms',
         'name': 'OFFSET_COMP_OHMS',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150025: {
@@ -220,7 +201,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Current Source',
         'name': 'CURRENT_SOURCE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150026: {
@@ -232,7 +212,6 @@ attributes = {
         'enum': 'DCNoiseRejection',
         'lv_property': 'Configuration:Measurement Options:DC Noise Rejection',
         'name': 'DC_NOISE_REJECTION',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150027: {
@@ -244,7 +223,6 @@ attributes = {
         'enum': 'WaveformCoupling',
         'lv_property': 'Waveform Acquisition:Waveform Coupling',
         'name': 'WAVEFORM_COUPLING',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150028: {
@@ -256,7 +234,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Advanced:Settle Time',
         'name': 'SETTLE_TIME',
-        'resettable': False,
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
@@ -268,7 +245,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Input Resistance',
         'name': 'INPUT_RESISTANCE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150032: {
@@ -279,7 +255,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Advanced:Number Of Averages',
         'name': 'NUMBER_OF_AVERAGES',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150037: {
@@ -290,7 +265,6 @@ attributes = {
         },
         'lv_property': 'Multi Point Acquisition:Advanced:Buffer Size',
         'name': 'BUFFER_SIZE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150044: {
@@ -301,7 +275,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Frequency Voltage Auto Range Value',
         'name': 'FREQ_VOLTAGE_AUTO_RANGE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150045: {
@@ -313,7 +286,6 @@ attributes = {
         'enum': 'CableCompensationType',
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type',
         'name': 'CABLE_COMP_TYPE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150046: {
@@ -324,7 +296,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance',
         'name': 'SHORT_CABLE_COMP_REACTANCE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150047: {
@@ -335,7 +306,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance',
         'name': 'SHORT_CABLE_COMP_RESISTANCE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150048: {
@@ -346,7 +316,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance',
         'name': 'OPEN_CABLE_COMP_SUSCEPTANCE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150049: {
@@ -357,7 +326,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance',
         'name': 'OPEN_CABLE_COMP_CONDUCTANCE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150052: {
@@ -369,7 +337,6 @@ attributes = {
         'enum': 'LCCalculationModel',
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model',
         'name': 'LC_CALCULATION_MODEL',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150053: {
@@ -380,7 +347,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias',
         'name': 'DC_BIAS',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150054: {
@@ -391,7 +357,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Instrument Serial Number',
         'name': 'SERIAL_NUMBER',
-        'resettable': False,
         'type': 'ViString'
     },
     1150055: {
@@ -402,7 +367,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average',
         'name': 'LC_NUMBER_MEAS_TO_AVERAGE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150061: {
@@ -413,7 +377,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Instrument Product ID',
         'name': 'INSTRUMENT_PRODUCT_ID',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150120: {
@@ -425,7 +388,6 @@ attributes = {
         'enum': 'RTDType',
         'lv_property': 'Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type',
         'name': 'TEMP_RTD_TYPE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150121: {
@@ -436,7 +398,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A',
         'name': 'TEMP_RTD_A',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150122: {
@@ -447,7 +408,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B',
         'name': 'TEMP_RTD_B',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150123: {
@@ -458,7 +418,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C',
         'name': 'TEMP_RTD_C',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150124: {
@@ -470,7 +429,6 @@ attributes = {
         'enum': 'ThermistorType',
         'lv_property': 'Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type',
         'name': 'TEMP_THERMISTOR_TYPE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150125: {
@@ -481,7 +439,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Temperature:Thermistor:Thermistor A',
         'name': 'TEMP_THERMISTOR_A',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150126: {
@@ -492,7 +449,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Temperature:Thermistor:Thermistor B',
         'name': 'TEMP_THERMISTOR_B',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1150127: {
@@ -503,7 +459,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Temperature:Thermistor:Thermistor C',
         'name': 'TEMP_THERMISTOR_C',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250001: {
@@ -515,7 +470,6 @@ attributes = {
         'enum': 'Function',
         'lv_property': 'Configuration:Function',
         'name': 'FUNCTION',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250002: {
@@ -526,7 +480,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Range',
         'name': 'RANGE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250003: {
@@ -537,7 +490,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Digits Resolution',
         'name': 'RESOLUTION_DIGITS',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250004: {
@@ -549,7 +501,6 @@ attributes = {
         'enum': 'TriggerSource',
         'lv_property': 'Trigger:Trigger Source',
         'name': 'TRIGGER_SOURCE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250005: {
@@ -561,7 +512,6 @@ attributes = {
         },
         'lv_property': 'Trigger:Trigger Delay',
         'name': 'TRIGGER_DELAY',
-        'resettable': False,
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
@@ -573,7 +523,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Min Frequency',
         'name': 'AC_MIN_FREQ',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250007: {
@@ -584,7 +533,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Max Frequency',
         'name': 'AC_MAX_FREQ',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250008: {
@@ -595,7 +543,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Absolute Resolution',
         'name': 'RESOLUTION_ABSOLUTE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250101: {
@@ -606,7 +553,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Frequency Voltage Range',
         'name': 'FREQ_VOLTAGE_RANGE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250201: {
@@ -618,7 +564,6 @@ attributes = {
         'enum': 'TransducerType',
         'lv_property': 'Configuration:Measurement Options:Temperature:Transducer Type',
         'name': 'TEMP_TRANSDUCER_TYPE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250231: {
@@ -630,7 +575,6 @@ attributes = {
         'enum': 'ThermocoupleType',
         'lv_property': 'Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type',
         'name': 'TEMP_TC_TYPE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250232: {
@@ -642,7 +586,6 @@ attributes = {
         'enum': 'ThermocoupleReferenceJunctionType',
         'lv_property': 'Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type',
         'name': 'TEMP_TC_REF_JUNC_TYPE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250233: {
@@ -653,7 +596,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction',
         'name': 'TEMP_TC_FIXED_REF_JUNC',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250242: {
@@ -664,7 +606,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance',
         'name': 'TEMP_RTD_RES',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250301: {
@@ -675,7 +616,6 @@ attributes = {
         },
         'lv_property': 'Multi Point Acquisition:Sample Count',
         'name': 'SAMPLE_COUNT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250302: {
@@ -687,7 +627,6 @@ attributes = {
         'enum': 'SampleTrigger',
         'lv_property': 'Multi Point Acquisition:Sample Trigger',
         'name': 'SAMPLE_TRIGGER',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250303: {
@@ -699,7 +638,6 @@ attributes = {
         },
         'lv_property': 'Multi Point Acquisition:Sample Interval',
         'name': 'SAMPLE_INTERVAL',
-        'resettable': False,
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
@@ -711,7 +649,6 @@ attributes = {
         },
         'lv_property': 'Multi Point Acquisition:Trigger Count',
         'name': 'TRIGGER_COUNT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250305: {
@@ -723,7 +660,6 @@ attributes = {
         'enum': 'MeasurementCompleteDest',
         'lv_property': 'Trigger:Measurement Complete Dest',
         'name': 'MEAS_COMPLETE_DEST',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250321: {
@@ -734,7 +670,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Advanced:Aperture Time',
         'name': 'APERTURE_TIME',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250322: {
@@ -746,7 +681,6 @@ attributes = {
         'enum': 'ApertureTimeUnits',
         'lv_property': 'Configuration:Advanced:Aperture Time Units',
         'name': 'APERTURE_TIME_UNITS',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250331: {
@@ -757,7 +691,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Auto Range Value',
         'name': 'AUTO_RANGE_VALUE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250332: {
@@ -769,7 +702,6 @@ attributes = {
         'enum': 'AutoZero',
         'lv_property': 'Configuration:Measurement Options:Auto Zero',
         'name': 'AUTO_ZERO',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250333: {
@@ -780,7 +712,6 @@ attributes = {
         },
         'lv_property': 'Configuration:Measurement Options:Powerline Frequency',
         'name': 'POWERLINE_FREQ',
-        'resettable': False,
         'type': 'ViReal64'
     }
 }

@@ -8,7 +8,6 @@ attributes = {
             'description': 'The name of the device, which can be used to open an instrument driver session for that device'
         },
         'name': 'DEVICE_NAME',
-        'resettable': False,
         'type': 'ViString'
     },
     1: {
@@ -18,7 +17,6 @@ attributes = {
             'description': 'The model of the device (for example, NI PXI-5122)'
         },
         'name': 'DEVICE_MODEL',
-        'resettable': False,
         'type': 'ViString'
     },
     2: {
@@ -28,7 +26,6 @@ attributes = {
             'description': 'The serial number of the device'
         },
         'name': 'SERIAL_NUMBER',
-        'resettable': False,
         'type': 'ViString'
     },
     3: {
@@ -36,7 +33,6 @@ attributes = {
         'channel_based': False,
         'codegen_method': 'no',
         'name': 'IVI_CLASS',
-        'resettable': False,
         'type': 'ViString'
     },
     4: {
@@ -44,7 +40,6 @@ attributes = {
         'channel_based': False,
         'codegen_method': 'no',
         'name': 'SPECIFIC_DRIVER_PREFIX',
-        'resettable': False,
         'type': 'ViString'
     },
     5: {
@@ -52,7 +47,6 @@ attributes = {
         'channel_based': False,
         'codegen_method': 'no',
         'name': 'DEVICE_GUID',
-        'resettable': False,
         'type': 'ViString'
     },
     6: {
@@ -60,7 +54,6 @@ attributes = {
         'channel_based': False,
         'codegen_method': 'no',
         'name': 'DRIVER_VERSION',
-        'resettable': False,
         'type': 'ViString'
     },
     10: {
@@ -70,7 +63,6 @@ attributes = {
             'description': 'The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.'
         },
         'name': 'SLOT_NUMBER',
-        'resettable': False,
         'type': 'ViInt32'
     },
     11: {
@@ -80,7 +72,6 @@ attributes = {
             'description': 'The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.'
         },
         'name': 'CHASSIS_NUMBER',
-        'resettable': False,
         'type': 'ViInt32'
     },
     12: {
@@ -90,7 +81,6 @@ attributes = {
             'description': 'The bus on which the device has been enumerated.'
         },
         'name': 'BUS_NUMBER',
-        'resettable': False,
         'type': 'ViInt32'
     },
     13: {
@@ -100,7 +90,6 @@ attributes = {
             'description': 'The socket number on which the device has been enumerated'
         },
         'name': 'SOCKET_NUMBER',
-        'resettable': False,
         'type': 'ViInt32'
     },
     14: {
@@ -108,7 +97,6 @@ attributes = {
         'channel_based': False,
         'codegen_method': 'no',
         'name': 'PRODUCT_CODE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     15: {
@@ -116,7 +104,6 @@ attributes = {
         'channel_based': False,
         'codegen_method': 'no',
         'name': 'PXI_SEGMENT_NUMBER',
-        'resettable': False,
         'type': 'ViInt32'
     },
     16: {
@@ -124,7 +111,6 @@ attributes = {
         'channel_based': False,
         'codegen_method': 'no',
         'name': 'DEVICE_HANDLE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     17: {
@@ -134,7 +120,6 @@ attributes = {
             'description': '**PCIEXPRESS_LINK_WIDTH**'
         },
         'name': 'PCIEXPRESS_LINK_WIDTH',
-        'resettable': False,
         'type': 'ViInt32'
     },
     18: {
@@ -144,7 +129,6 @@ attributes = {
             'description': '**MAX_PCIEXPRESS_LINK_WIDTH**'
         },
         'name': 'MAX_PCIEXPRESS_LINK_WIDTH',
-        'resettable': False,
         'type': 'ViInt32'
     },
     19: {
@@ -152,7 +136,6 @@ attributes = {
         'channel_based': False,
         'codegen_method': 'no',
         'name': 'NUMBER_REGISTERED_DEVICES',
-        'resettable': False,
         'type': 'ViInt32'
     },
     20: {
@@ -160,7 +143,6 @@ attributes = {
         'channel_based': False,
         'codegen_method': 'no',
         'name': 'FUNCTION_NUMBER',
-        'resettable': False,
         'type': 'ViInt32'
     },
     21: {
@@ -168,7 +150,6 @@ attributes = {
         'channel_based': False,
         'codegen_method': 'no',
         'name': 'SESSION_TYPE',
-        'resettable': False,
         'type': 'ViInt32'
     }
 }

@@ -9,7 +9,6 @@ attributes = {
         },
         'lv_property': 'Sync Pulse Source',
         'name': 'SYNC_PULSE_SOURCE',
-        'resettable': False,
         'type': 'ViString'
     },
     2: {
@@ -20,7 +19,6 @@ attributes = {
         },
         'lv_property': 'Export Sync Pulse Output Terminal',
         'name': 'EXPORTED_SYNC_PULSE_OUTPUT_TERMINAL',
-        'resettable': False,
         'type': 'ViString'
     },
     3: {
@@ -32,7 +30,6 @@ attributes = {
         },
         'lv_property': 'Start Trigger Master Session',
         'name': 'START_TRIGGER_MASTER_SESSION',
-        'resettable': False,
         'type': 'ViSession',
         'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
@@ -45,7 +42,6 @@ attributes = {
         },
         'lv_property': 'Reference Trigger Master Session',
         'name': 'REF_TRIGGER_MASTER_SESSION',
-        'resettable': False,
         'type': 'ViSession',
         'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
@@ -59,7 +55,6 @@ attributes = {
         },
         'lv_property': 'Script Trigger Master Session',
         'name': 'SCRIPT_TRIGGER_MASTER_SESSION',
-        'resettable': False,
         'type': 'ViSession',
         'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
@@ -72,7 +67,6 @@ attributes = {
         },
         'lv_property': 'Pause Trigger Master Session',
         'name': 'PAUSE_TRIGGER_MASTER_SESSION',
-        'resettable': False,
         'type': 'ViSession',
         'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
@@ -84,7 +78,6 @@ attributes = {
         },
         'lv_property': 'Period',
         'name': 'TCLK_ACTUAL_PERIOD',
-        'resettable': False,
         'type': 'ViReal64',
     },
     9: {
@@ -95,7 +88,6 @@ attributes = {
         },
         'lv_property': 'Output Terminal',
         'name': 'EXPORTED_TCLK_OUTPUT_TERMINAL',
-        'resettable': False,
         'type': 'ViString',
     },
     10: {
@@ -106,7 +98,6 @@ attributes = {
         },
         'lv_property': 'Sync Pulse Clock Source',
         'name': 'SYNC_PULSE_CLOCK_SOURCE',
-        'resettable': False,
         'type': 'ViString'
     },
     11: {
@@ -119,7 +110,6 @@ attributes = {
         },
         'lv_property': 'Sample Clock Delay',
         'name': 'SAMPLE_CLOCK_DELAY',
-        'resettable': False,
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
     },
@@ -131,7 +121,6 @@ attributes = {
         },
         'lv_property': 'External Pulse Source',
         'name': 'SYNC_PULSE_SENDER_SYNC_PULSE_SOURCE',
-        'resettable': False,
         'type': 'ViString'
     },
     16: {
@@ -143,7 +132,6 @@ attributes = {
         },
         'lv_property': 'Sequencer Flag Master Session',
         'name': 'SEQUENCER_FLAG_MASTER_SESSION',
-        'resettable': False,
         'type': 'ViSession',
         'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     }

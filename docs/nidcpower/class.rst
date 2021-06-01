@@ -154,10 +154,15 @@ abort
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].abort`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.abort`
 
 
 clear_latched_output_cutoff_state
@@ -173,10 +178,15 @@ clear_latched_output_cutoff_state
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].clear_latched_output_cutoff_state`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.clear_latched_output_cutoff_state`
 
 
             :param output_cutoff_reason:
@@ -259,10 +269,15 @@ commit
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].commit`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.commit`
 
 
 configure_aperture_time
@@ -296,10 +311,15 @@ configure_aperture_time
                 for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].configure_aperture_time`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.configure_aperture_time`
 
 
             :param aperture_time:
@@ -544,10 +564,15 @@ create_advanced_sequence_step
                 for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].create_advanced_sequence_step`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.create_advanced_sequence_step`
 
 
             :param set_as_active_step:
@@ -593,10 +618,15 @@ delete_advanced_sequence
                 for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].delete_advanced_sequence`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.delete_advanced_sequence`
 
 
             :param sequence_name:
@@ -781,10 +811,15 @@ fetch_multiple
             .. note:: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].fetch_multiple`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.fetch_multiple`
 
 
             :param count:
@@ -1185,10 +1220,15 @@ initiate
             .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].initiate`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.initiate`
 
 
 lock
@@ -1256,10 +1296,15 @@ measure
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].measure`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.measure`
 
 
             :param measurement_type:
@@ -1312,10 +1357,15 @@ measure_multiple
             .. note:: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].measure_multiple`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.measure_multiple`
 
 
             :rtype: list of Measurement
@@ -1365,10 +1415,15 @@ query_in_compliance
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_in_compliance`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_in_compliance`
 
 
             :rtype: bool
@@ -1396,10 +1451,15 @@ query_latched_output_cutoff_state
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_latched_output_cutoff_state`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_latched_output_cutoff_state`
 
 
             :param output_cutoff_reason:
@@ -1457,10 +1517,15 @@ query_max_current_limit
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_max_current_limit`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_max_current_limit`
 
 
             :param voltage_level:
@@ -1498,10 +1563,15 @@ query_max_voltage_level
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_max_voltage_level`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_max_voltage_level`
 
 
             :param current_limit:
@@ -1539,10 +1609,15 @@ query_min_current_limit
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_min_current_limit`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_min_current_limit`
 
 
             :param voltage_level:
@@ -1584,10 +1659,15 @@ query_output_state
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].query_output_state`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.query_output_state`
 
 
             :param output_state:
@@ -1657,10 +1737,15 @@ reset
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].reset`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.reset`
 
 
 reset_device
@@ -1744,10 +1829,15 @@ self_cal
                 for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].self_cal`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.self_cal`
 
 
 self_test
@@ -1802,10 +1892,15 @@ send_software_edge_trigger
                 for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].send_software_edge_trigger`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.send_software_edge_trigger`
 
 
             :param trigger:
@@ -1864,10 +1959,15 @@ set_sequence
                 for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].set_sequence`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.set_sequence`
 
 
             :param values:
@@ -1932,10 +2032,15 @@ wait_for_event
                 for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidcpower.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].wait_for_event`
+
+                To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.wait_for_event`
 
 
             :param event_id:
@@ -1994,10 +2099,14 @@ active_advanced_sequence
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.active_advanced_sequence`
 
         The following table lists the characteristics of this property.
 
@@ -2009,8 +2118,6 @@ active_advanced_sequence
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2031,10 +2138,14 @@ active_advanced_sequence_step
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.active_advanced_sequence_step`
 
         The following table lists the characteristics of this property.
 
@@ -2046,8 +2157,6 @@ active_advanced_sequence_step
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2074,10 +2183,14 @@ actual_power_allocation
              This property returns -1 when the :py:attr:`nidcpower.Session.power_allocation_mode` property is set to :py:data:`~nidcpower.PowerAllocationMode.DISABLED`.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].actual_power_allocation`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.actual_power_allocation`
 
         The following table lists the characteristics of this property.
 
@@ -2089,8 +2202,6 @@ actual_power_allocation
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2114,10 +2225,14 @@ aperture_time
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].aperture_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.aperture_time`
 
         The following table lists the characteristics of this property.
 
@@ -2129,8 +2244,6 @@ aperture_time
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2154,10 +2267,14 @@ aperture_time_units
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].aperture_time_units`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.aperture_time_units`
 
         The following table lists the characteristics of this property.
 
@@ -2169,8 +2286,6 @@ aperture_time_units
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
             | Repeated Capabilities | channels                |
-            +-----------------------+-------------------------+
-            | Resettable            | No                      |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -2191,10 +2306,14 @@ autorange
         .. note:: Autoranging begins at module startup and remains active until the module is reconfigured or reset.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].autorange`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.autorange`
 
         The following table lists the characteristics of this property.
 
@@ -2206,8 +2325,6 @@ autorange
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2228,10 +2345,14 @@ autorange_aperture_time_mode
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].autorange_aperture_time_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.autorange_aperture_time_mode`
 
         The following table lists the characteristics of this property.
 
@@ -2243,8 +2364,6 @@ autorange_aperture_time_mode
             | Permissions           | read-write                      |
             +-----------------------+---------------------------------+
             | Repeated Capabilities | channels                        |
-            +-----------------------+---------------------------------+
-            | Resettable            | No                              |
             +-----------------------+---------------------------------+
 
         .. tip::
@@ -2265,10 +2384,14 @@ autorange_behavior
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].autorange_behavior`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.autorange_behavior`
 
         The following table lists the characteristics of this property.
 
@@ -2280,8 +2403,6 @@ autorange_behavior
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
             | Repeated Capabilities | channels                |
-            +-----------------------+-------------------------+
-            | Resettable            | No                      |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -2302,10 +2423,14 @@ autorange_minimum_aperture_time
         .. note:: For smaller ranges, the value is scaled up to account for noise. The factor used to scale the value is derived from the module capabilities.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_aperture_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.autorange_minimum_aperture_time`
 
         The following table lists the characteristics of this property.
 
@@ -2317,8 +2442,6 @@ autorange_minimum_aperture_time
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2339,10 +2462,14 @@ autorange_minimum_aperture_time_units
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_aperture_time_units`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.autorange_minimum_aperture_time_units`
 
         The following table lists the characteristics of this property.
 
@@ -2354,8 +2481,6 @@ autorange_minimum_aperture_time_units
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
             | Repeated Capabilities | channels                |
-            +-----------------------+-------------------------+
-            | Resettable            | No                      |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -2376,10 +2501,14 @@ autorange_minimum_current_range
         .. note:: The maximum range used is the range that includes the value specified in the compliance limit property, :py:attr:`nidcpower.Session.voltage_limit_range` property or :py:attr:`nidcpower.Session.current_limit_range` property, depending on the selected :py:attr:`nidcpower.Session.output_function`. This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_current_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.autorange_minimum_current_range`
 
         The following table lists the characteristics of this property.
 
@@ -2391,8 +2520,6 @@ autorange_minimum_current_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2413,10 +2540,14 @@ autorange_minimum_voltage_range
         .. note:: The maximum range used is the range that includes the value specified in the compliance limit property, :py:attr:`nidcpower.Session.voltage_limit_range` property or :py:attr:`nidcpower.Session.current_limit_range` property, depending on the selected :py:attr:`nidcpower.Session.output_function`. This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_voltage_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.autorange_minimum_voltage_range`
 
         The following table lists the characteristics of this property.
 
@@ -2428,8 +2559,6 @@ autorange_minimum_voltage_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2450,10 +2579,14 @@ autorange_threshold_mode
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].autorange_threshold_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.autorange_threshold_mode`
 
         The following table lists the characteristics of this property.
 
@@ -2465,8 +2598,6 @@ autorange_threshold_mode
             | Permissions           | read-write                   |
             +-----------------------+------------------------------+
             | Repeated Capabilities | channels                     |
-            +-----------------------+------------------------------+
-            | Resettable            | No                           |
             +-----------------------+------------------------------+
 
         .. tip::
@@ -2487,10 +2618,14 @@ auto_zero
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].auto_zero`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.auto_zero`
 
         The following table lists the characteristics of this property.
 
@@ -2502,8 +2637,6 @@ auto_zero
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -2536,8 +2669,6 @@ auxiliary_power_source_available
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2562,8 +2693,6 @@ channel_count
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2602,10 +2731,14 @@ compliance_limit_symmetry
             information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].compliance_limit_symmetry`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.compliance_limit_symmetry`
 
         The following table lists the characteristics of this property.
 
@@ -2617,8 +2750,6 @@ compliance_limit_symmetry
             | Permissions           | read-write                    |
             +-----------------------+-------------------------------+
             | Repeated Capabilities | channels                      |
-            +-----------------------+-------------------------------+
-            | Resettable            | No                            |
             +-----------------------+-------------------------------+
 
         .. tip::
@@ -2641,10 +2772,14 @@ current_compensation_frequency
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_compensation_frequency`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_compensation_frequency`
 
         The following table lists the characteristics of this property.
 
@@ -2656,8 +2791,6 @@ current_compensation_frequency
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2680,10 +2813,14 @@ current_gain_bandwidth
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_gain_bandwidth`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_gain_bandwidth`
 
         The following table lists the characteristics of this property.
 
@@ -2695,8 +2832,6 @@ current_gain_bandwidth
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2720,10 +2855,14 @@ current_level
         .. note:: The channel must be enabled for the specified current level to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_level`
 
         The following table lists the characteristics of this property.
 
@@ -2735,8 +2874,6 @@ current_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2759,10 +2896,14 @@ current_level_autorange
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_level_autorange`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_level_autorange`
 
         The following table lists the characteristics of this property.
 
@@ -2774,8 +2915,6 @@ current_level_autorange
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2800,10 +2939,14 @@ current_level_range
         .. note:: The channel must be enabled for the specified current level range to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_level_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_level_range`
 
         The following table lists the characteristics of this property.
 
@@ -2815,8 +2958,6 @@ current_level_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2840,10 +2981,14 @@ current_limit
         .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_limit`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_limit`
 
         The following table lists the characteristics of this property.
 
@@ -2855,8 +3000,6 @@ current_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2879,10 +3022,14 @@ current_limit_autorange
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_limit_autorange`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_limit_autorange`
 
         The following table lists the characteristics of this property.
 
@@ -2894,8 +3041,6 @@ current_limit_autorange
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2909,10 +3054,14 @@ current_limit_behavior
 
     .. py:attribute:: current_limit_behavior
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_limit_behavior`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_limit_behavior`
 
         The following table lists the characteristics of this property.
 
@@ -2924,8 +3073,6 @@ current_limit_behavior
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -2970,10 +3117,14 @@ current_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -2985,8 +3136,6 @@ current_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3032,10 +3181,14 @@ current_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -3047,8 +3200,6 @@ current_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3073,10 +3224,14 @@ current_limit_range
         .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_limit_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_limit_range`
 
         The following table lists the characteristics of this property.
 
@@ -3088,8 +3243,6 @@ current_limit_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3112,10 +3265,14 @@ current_pole_zero_ratio
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_pole_zero_ratio`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_pole_zero_ratio`
 
         The following table lists the characteristics of this property.
 
@@ -3127,8 +3284,6 @@ current_pole_zero_ratio
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3151,10 +3306,14 @@ dc_noise_rejection
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].dc_noise_rejection`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.dc_noise_rejection`
 
         The following table lists the characteristics of this property.
 
@@ -3166,8 +3325,6 @@ dc_noise_rejection
             | Permissions           | read-write             |
             +-----------------------+------------------------+
             | Repeated Capabilities | channels               |
-            +-----------------------+------------------------+
-            | Resettable            | No                     |
             +-----------------------+------------------------+
 
         .. tip::
@@ -3191,10 +3348,14 @@ digital_edge_measure_trigger_input_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_measure_trigger_input_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_measure_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3206,8 +3367,6 @@ digital_edge_measure_trigger_input_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3230,10 +3389,14 @@ digital_edge_pulse_trigger_input_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_pulse_trigger_input_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_pulse_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3245,8 +3408,6 @@ digital_edge_pulse_trigger_input_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3270,10 +3431,14 @@ digital_edge_sequence_advance_trigger_input_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic in
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_sequence_advance_trigger_input_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_sequence_advance_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3285,8 +3450,6 @@ digital_edge_sequence_advance_trigger_input_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3309,10 +3472,14 @@ digital_edge_shutdown_trigger_input_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_shutdown_trigger_input_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_shutdown_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3324,8 +3491,6 @@ digital_edge_shutdown_trigger_input_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3349,10 +3514,14 @@ digital_edge_source_trigger_input_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_source_trigger_input_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_source_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3364,8 +3533,6 @@ digital_edge_source_trigger_input_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3389,10 +3556,14 @@ digital_edge_start_trigger_input_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].digital_edge_start_trigger_input_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_start_trigger_input_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3404,8 +3575,6 @@ digital_edge_start_trigger_input_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3434,8 +3603,6 @@ driver_setup
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3458,10 +3625,14 @@ exported_measure_trigger_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].exported_measure_trigger_output_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.exported_measure_trigger_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3473,8 +3644,6 @@ exported_measure_trigger_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3497,10 +3666,14 @@ exported_pulse_trigger_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].exported_pulse_trigger_output_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.exported_pulse_trigger_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3512,8 +3685,6 @@ exported_pulse_trigger_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3537,10 +3708,14 @@ exported_sequence_advance_trigger_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].exported_sequence_advance_trigger_output_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.exported_sequence_advance_trigger_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3552,8 +3727,6 @@ exported_sequence_advance_trigger_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3577,10 +3750,14 @@ exported_source_trigger_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].exported_source_trigger_output_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.exported_source_trigger_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3592,8 +3769,6 @@ exported_source_trigger_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3617,10 +3792,14 @@ exported_start_trigger_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].exported_start_trigger_output_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.exported_start_trigger_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3632,8 +3811,6 @@ exported_start_trigger_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3652,10 +3829,14 @@ fetch_backlog
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].fetch_backlog`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.fetch_backlog`
 
         The following table lists the characteristics of this property.
 
@@ -3667,8 +3848,6 @@ fetch_backlog
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3687,10 +3866,14 @@ instrument_firmware_revision
 
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.instrument_firmware_revision`
 
         The following table lists the characteristics of this property.
 
@@ -3702,8 +3885,6 @@ instrument_firmware_revision
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -3722,10 +3903,14 @@ instrument_manufacturer
 
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].instrument_manufacturer`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.instrument_manufacturer`
 
         The following table lists the characteristics of this property.
 
@@ -3737,8 +3922,6 @@ instrument_manufacturer
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -3757,10 +3940,14 @@ instrument_model
 
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].instrument_model`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.instrument_model`
 
         The following table lists the characteristics of this property.
 
@@ -3772,8 +3959,6 @@ instrument_model
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -3796,10 +3981,14 @@ interlock_input_open
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].interlock_input_open`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.interlock_input_open`
 
         The following table lists the characteristics of this property.
 
@@ -3811,8 +4000,6 @@ interlock_input_open
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -3841,8 +4028,6 @@ io_resource_descriptor
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3869,8 +4054,6 @@ logical_name
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3894,10 +4077,14 @@ measure_buffer_size
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_buffer_size`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_buffer_size`
 
         The following table lists the characteristics of this property.
 
@@ -3909,8 +4096,6 @@ measure_buffer_size
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -3934,10 +4119,14 @@ measure_complete_event_delay
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_delay`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_complete_event_delay`
 
         The following table lists the characteristics of this property.
 
@@ -3949,8 +4138,6 @@ measure_complete_event_delay
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -3973,10 +4160,14 @@ measure_complete_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_output_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_complete_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3988,8 +4179,6 @@ measure_complete_event_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4012,10 +4201,14 @@ measure_complete_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_pulse_polarity`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_complete_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -4027,8 +4220,6 @@ measure_complete_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -4054,10 +4245,14 @@ measure_complete_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_pulse_width`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_complete_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -4069,8 +4264,6 @@ measure_complete_event_pulse_width
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4093,10 +4286,14 @@ measure_record_delta_time
         .. note:: This property is not available when Auto Zero is configured to Once because the amount of time between the first
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_record_delta_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_record_delta_time`
 
         The following table lists the characteristics of this property.
 
@@ -4108,8 +4305,6 @@ measure_record_delta_time
             | Permissions           | read only                                                   |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -4133,10 +4328,14 @@ measure_record_length
         .. note:: This property is not available in a session involving multiple channels.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_record_length`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_record_length`
 
         The following table lists the characteristics of this property.
 
@@ -4148,8 +4347,6 @@ measure_record_length
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4172,10 +4369,14 @@ measure_record_length_is_finite
         .. note:: This property is not available in a session involving multiple channels.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_record_length_is_finite`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_record_length_is_finite`
 
         The following table lists the characteristics of this property.
 
@@ -4187,8 +4388,6 @@ measure_record_length_is_finite
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4211,10 +4410,14 @@ measure_trigger_type
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_trigger_type`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -4226,8 +4429,6 @@ measure_trigger_type
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
-            +-----------------------+-------------------+
-            | Resettable            | No                |
             +-----------------------+-------------------+
 
         .. tip::
@@ -4248,10 +4449,14 @@ measure_when
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_when`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_when`
 
         The following table lists the characteristics of this property.
 
@@ -4263,8 +4468,6 @@ measure_when
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
-            +-----------------------+-------------------+
-            | Resettable            | No                |
             +-----------------------+-------------------+
 
         .. tip::
@@ -4289,10 +4492,14 @@ merged_channels
             Default Value: Refer to the Supported Properties by Device topic for the default value by device.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].merged_channels`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.merged_channels`
 
         The following table lists the characteristics of this property.
 
@@ -4304,8 +4511,6 @@ merged_channels
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4328,10 +4533,14 @@ output_capacitance
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_capacitance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_capacitance`
 
         The following table lists the characteristics of this property.
 
@@ -4343,8 +4552,6 @@ output_capacitance
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
             | Repeated Capabilities | channels                |
-            +-----------------------+-------------------------+
-            | Resettable            | No                      |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -4369,10 +4576,14 @@ output_connected
         .. note:: Only disconnect the output when disconnecting is necessary for your application. For example, a battery connected
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_connected`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_connected`
 
         The following table lists the characteristics of this property.
 
@@ -4384,8 +4595,6 @@ output_connected
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4409,10 +4618,14 @@ output_cutoff_current_change_limit_high
         .. note:: Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_change_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_current_change_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -4424,8 +4637,6 @@ output_cutoff_current_change_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4449,10 +4660,14 @@ output_cutoff_current_change_limit_low
         .. note:: Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_change_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_current_change_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -4464,8 +4679,6 @@ output_cutoff_current_change_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4489,10 +4702,14 @@ output_cutoff_current_measure_limit_high
         .. note:: Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_measure_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_current_measure_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -4504,8 +4721,6 @@ output_cutoff_current_measure_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4529,10 +4744,14 @@ output_cutoff_current_measure_limit_low
         .. note:: Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_measure_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_current_measure_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -4544,8 +4763,6 @@ output_cutoff_current_measure_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4568,10 +4785,14 @@ output_cutoff_current_overrange_enabled
         .. note:: Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_overrange_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_current_overrange_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -4583,8 +4804,6 @@ output_cutoff_current_overrange_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4606,10 +4825,14 @@ output_cutoff_enabled
         .. note:: Refer to Supported Properties by Device for information about supported devices. Instruments that do not support this property behave as if this property were set to False.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -4621,8 +4844,6 @@ output_cutoff_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4646,10 +4867,14 @@ output_cutoff_voltage_change_limit_high
         .. note:: Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_change_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_voltage_change_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -4661,8 +4886,6 @@ output_cutoff_voltage_change_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4686,10 +4909,14 @@ output_cutoff_voltage_change_limit_low
         .. note:: Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_change_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_voltage_change_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -4701,8 +4928,6 @@ output_cutoff_voltage_change_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4726,10 +4951,14 @@ output_cutoff_voltage_output_limit_high
         .. note:: Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_output_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_voltage_output_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -4741,8 +4970,6 @@ output_cutoff_voltage_output_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4766,10 +4993,14 @@ output_cutoff_voltage_output_limit_low
         .. note:: Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_output_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_voltage_output_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -4781,8 +5012,6 @@ output_cutoff_voltage_output_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4806,10 +5035,14 @@ output_enabled
         .. note:: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -4821,8 +5054,6 @@ output_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4857,10 +5088,14 @@ output_function
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_function`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_function`
 
         The following table lists the characteristics of this property.
 
@@ -4872,8 +5107,6 @@ output_function
             | Permissions           | read-write           |
             +-----------------------+----------------------+
             | Repeated Capabilities | channels             |
-            +-----------------------+----------------------+
-            | Resettable            | No                   |
             +-----------------------+----------------------+
 
         .. tip::
@@ -4896,10 +5129,14 @@ output_resistance
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic for information
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_resistance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_resistance`
 
         The following table lists the characteristics of this property.
 
@@ -4911,8 +5148,6 @@ output_resistance
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4933,10 +5168,14 @@ overranging_enabled
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].overranging_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.overranging_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -4948,8 +5187,6 @@ overranging_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -4973,10 +5210,14 @@ ovp_enabled
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ovp_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.ovp_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -4988,8 +5229,6 @@ ovp_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5013,10 +5252,14 @@ ovp_limit
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ovp_limit`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.ovp_limit`
 
         The following table lists the characteristics of this property.
 
@@ -5028,8 +5271,6 @@ ovp_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5056,10 +5297,14 @@ power_allocation_mode
         .. note:: This property is not supported by all devices. Refer to the Supported Properties by Device topic for information about supported devices. Devices that do not support this property behave as if this property were set to :py:data:`~nidcpower.PowerAllocationMode.DISABLED`.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].power_allocation_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.power_allocation_mode`
 
         The following table lists the characteristics of this property.
 
@@ -5071,8 +5316,6 @@ power_allocation_mode
             | Permissions           | read-write                |
             +-----------------------+---------------------------+
             | Repeated Capabilities | channels                  |
-            +-----------------------+---------------------------+
-            | Resettable            | No                        |
             +-----------------------+---------------------------+
 
         .. tip::
@@ -5097,10 +5340,14 @@ power_line_frequency
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].power_line_frequency`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.power_line_frequency`
 
         The following table lists the characteristics of this property.
 
@@ -5112,8 +5359,6 @@ power_line_frequency
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5146,8 +5391,6 @@ power_source
             +-----------------------+-------------------+
             | Repeated Capabilities | None              |
             +-----------------------+-------------------+
-            | Resettable            | No                |
-            +-----------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5173,8 +5416,6 @@ power_source_in_use
             +-----------------------+------------------------+
             | Repeated Capabilities | None                   |
             +-----------------------+------------------------+
-            | Resettable            | No                     |
-            +-----------------------+------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5196,10 +5437,14 @@ pulse_bias_current_level
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_bias_current_level`
 
         The following table lists the characteristics of this property.
 
@@ -5211,8 +5456,6 @@ pulse_bias_current_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5235,10 +5478,14 @@ pulse_bias_current_limit
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_limit`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_bias_current_limit`
 
         The following table lists the characteristics of this property.
 
@@ -5250,8 +5497,6 @@ pulse_bias_current_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5300,10 +5545,14 @@ pulse_bias_current_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_bias_current_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -5315,8 +5564,6 @@ pulse_bias_current_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5365,10 +5612,14 @@ pulse_bias_current_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_bias_current_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -5380,8 +5631,6 @@ pulse_bias_current_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5404,10 +5653,14 @@ pulse_bias_delay
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_delay`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_bias_delay`
 
         The following table lists the characteristics of this property.
 
@@ -5419,8 +5672,6 @@ pulse_bias_delay
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5443,10 +5694,14 @@ pulse_bias_voltage_level
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_bias_voltage_level`
 
         The following table lists the characteristics of this property.
 
@@ -5458,8 +5713,6 @@ pulse_bias_voltage_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5482,10 +5735,14 @@ pulse_bias_voltage_limit
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_limit`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_bias_voltage_limit`
 
         The following table lists the characteristics of this property.
 
@@ -5497,8 +5754,6 @@ pulse_bias_voltage_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5547,10 +5802,14 @@ pulse_bias_voltage_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_bias_voltage_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -5562,8 +5821,6 @@ pulse_bias_voltage_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5612,10 +5869,14 @@ pulse_bias_voltage_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_bias_voltage_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -5627,8 +5888,6 @@ pulse_bias_voltage_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5651,10 +5910,14 @@ pulse_complete_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_complete_event_output_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_complete_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -5666,8 +5929,6 @@ pulse_complete_event_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5689,10 +5950,14 @@ pulse_complete_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_complete_event_pulse_polarity`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_complete_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -5704,8 +5969,6 @@ pulse_complete_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -5729,10 +5992,14 @@ pulse_complete_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_complete_event_pulse_width`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_complete_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -5744,8 +6011,6 @@ pulse_complete_event_pulse_width
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5768,10 +6033,14 @@ pulse_current_level
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_current_level`
 
         The following table lists the characteristics of this property.
 
@@ -5783,8 +6052,6 @@ pulse_current_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5808,10 +6075,14 @@ pulse_current_level_range
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_level_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_current_level_range`
 
         The following table lists the characteristics of this property.
 
@@ -5823,8 +6094,6 @@ pulse_current_level_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5847,10 +6116,14 @@ pulse_current_limit
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_current_limit`
 
         The following table lists the characteristics of this property.
 
@@ -5862,8 +6135,6 @@ pulse_current_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5912,10 +6183,14 @@ pulse_current_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_current_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -5927,8 +6202,6 @@ pulse_current_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5977,10 +6250,14 @@ pulse_current_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_current_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -5992,8 +6269,6 @@ pulse_current_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6017,10 +6292,14 @@ pulse_current_limit_range
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_current_limit_range`
 
         The following table lists the characteristics of this property.
 
@@ -6032,8 +6311,6 @@ pulse_current_limit_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6056,10 +6333,14 @@ pulse_off_time
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_off_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_off_time`
 
         The following table lists the characteristics of this property.
 
@@ -6071,8 +6352,6 @@ pulse_off_time
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -6095,10 +6374,14 @@ pulse_on_time
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_on_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_on_time`
 
         The following table lists the characteristics of this property.
 
@@ -6110,8 +6393,6 @@ pulse_on_time
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -6133,10 +6414,14 @@ pulse_trigger_type
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_trigger_type`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -6148,8 +6433,6 @@ pulse_trigger_type
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
-            +-----------------------+-------------------+
-            | Resettable            | No                |
             +-----------------------+-------------------+
 
         .. tip::
@@ -6172,10 +6455,14 @@ pulse_voltage_level
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_voltage_level`
 
         The following table lists the characteristics of this property.
 
@@ -6187,8 +6474,6 @@ pulse_voltage_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6212,10 +6497,14 @@ pulse_voltage_level_range
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_level_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_voltage_level_range`
 
         The following table lists the characteristics of this property.
 
@@ -6227,8 +6516,6 @@ pulse_voltage_level_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6251,10 +6538,14 @@ pulse_voltage_limit
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_voltage_limit`
 
         The following table lists the characteristics of this property.
 
@@ -6266,8 +6557,6 @@ pulse_voltage_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6316,10 +6605,14 @@ pulse_voltage_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_voltage_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -6331,8 +6624,6 @@ pulse_voltage_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6381,10 +6672,14 @@ pulse_voltage_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_voltage_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -6396,8 +6691,6 @@ pulse_voltage_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6421,10 +6714,14 @@ pulse_voltage_limit_range
         .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.pulse_voltage_limit_range`
 
         The following table lists the characteristics of this property.
 
@@ -6436,8 +6733,6 @@ pulse_voltage_limit_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6468,8 +6763,6 @@ query_instrument_status
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6490,10 +6783,14 @@ ready_for_pulse_trigger_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ready_for_pulse_trigger_event_output_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.ready_for_pulse_trigger_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -6505,8 +6802,6 @@ ready_for_pulse_trigger_event_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6528,10 +6823,14 @@ ready_for_pulse_trigger_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ready_for_pulse_trigger_event_pulse_polarity`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.ready_for_pulse_trigger_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -6543,8 +6842,6 @@ ready_for_pulse_trigger_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -6568,10 +6865,14 @@ ready_for_pulse_trigger_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ready_for_pulse_trigger_event_pulse_width`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.ready_for_pulse_trigger_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -6583,8 +6884,6 @@ ready_for_pulse_trigger_event_pulse_width
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6613,10 +6912,14 @@ requested_power_allocation
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].requested_power_allocation`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.requested_power_allocation`
 
         The following table lists the characteristics of this property.
 
@@ -6628,8 +6931,6 @@ requested_power_allocation
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6653,10 +6954,14 @@ reset_average_before_measurement
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].reset_average_before_measurement`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.reset_average_before_measurement`
 
         The following table lists the characteristics of this property.
 
@@ -6668,8 +6973,6 @@ reset_average_before_measurement
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6698,10 +7001,14 @@ samples_to_average
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].samples_to_average`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.samples_to_average`
 
         The following table lists the characteristics of this property.
 
@@ -6713,8 +7020,6 @@ samples_to_average
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6738,10 +7043,14 @@ self_calibration_persistence
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].self_calibration_persistence`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.self_calibration_persistence`
 
         The following table lists the characteristics of this property.
 
@@ -6753,8 +7062,6 @@ self_calibration_persistence
             | Permissions           | read-write                       |
             +-----------------------+----------------------------------+
             | Repeated Capabilities | instruments                      |
-            +-----------------------+----------------------------------+
-            | Resettable            | No                               |
             +-----------------------+----------------------------------+
 
         .. tip::
@@ -6775,10 +7082,14 @@ sense
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sense`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sense`
 
         The following table lists the characteristics of this property.
 
@@ -6790,8 +7101,6 @@ sense
             | Permissions           | read-write  |
             +-----------------------+-------------+
             | Repeated Capabilities | channels    |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -6814,10 +7123,14 @@ sequence_advance_trigger_type
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_advance_trigger_type`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_advance_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -6829,8 +7142,6 @@ sequence_advance_trigger_type
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
-            +-----------------------+-------------------+
-            | Resettable            | No                |
             +-----------------------+-------------------+
 
         .. tip::
@@ -6853,10 +7164,14 @@ sequence_engine_done_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_output_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_engine_done_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -6868,8 +7183,6 @@ sequence_engine_done_event_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6892,10 +7205,14 @@ sequence_engine_done_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_pulse_polarity`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_engine_done_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -6907,8 +7224,6 @@ sequence_engine_done_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -6934,10 +7249,14 @@ sequence_engine_done_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_pulse_width`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_engine_done_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -6949,8 +7268,6 @@ sequence_engine_done_event_pulse_width
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -6973,10 +7290,14 @@ sequence_iteration_complete_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_output_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_iteration_complete_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -6988,8 +7309,6 @@ sequence_iteration_complete_event_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7012,10 +7331,14 @@ sequence_iteration_complete_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_pulse_polarity`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_iteration_complete_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -7027,8 +7350,6 @@ sequence_iteration_complete_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -7054,10 +7375,14 @@ sequence_iteration_complete_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic in
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_pulse_width`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_iteration_complete_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -7069,8 +7394,6 @@ sequence_iteration_complete_event_pulse_width
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7095,10 +7418,14 @@ sequence_loop_count
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_loop_count`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_loop_count`
 
         The following table lists the characteristics of this property.
 
@@ -7110,8 +7437,6 @@ sequence_loop_count
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7135,10 +7460,14 @@ sequence_loop_count_is_finite
         .. note:: This property is not supported by all devices. When the
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_loop_count_is_finite`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_loop_count_is_finite`
 
         The following table lists the characteristics of this property.
 
@@ -7150,8 +7479,6 @@ sequence_loop_count_is_finite
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7165,10 +7492,14 @@ sequence_step_delta_time
 
     .. py:attribute:: sequence_step_delta_time
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_step_delta_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_step_delta_time`
 
         The following table lists the characteristics of this property.
 
@@ -7181,8 +7512,6 @@ sequence_step_delta_time
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7194,10 +7523,14 @@ sequence_step_delta_time_enabled
 
     .. py:attribute:: sequence_step_delta_time_enabled
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_step_delta_time_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_step_delta_time_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -7209,8 +7542,6 @@ sequence_step_delta_time_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7228,10 +7559,14 @@ serial_number
 
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].serial_number`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.serial_number`
 
         The following table lists the characteristics of this property.
 
@@ -7243,8 +7578,6 @@ serial_number
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -7266,10 +7599,14 @@ shutdown_trigger_type
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].shutdown_trigger_type`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.shutdown_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -7281,8 +7618,6 @@ shutdown_trigger_type
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
-            +-----------------------+-------------------+
-            | Resettable            | No                |
             +-----------------------+-------------------+
 
         .. tip::
@@ -7310,8 +7645,6 @@ simulate
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7333,10 +7666,14 @@ source_complete_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].source_complete_event_output_terminal`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.source_complete_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -7348,8 +7685,6 @@ source_complete_event_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7372,10 +7707,14 @@ source_complete_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].source_complete_event_pulse_polarity`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.source_complete_event_pulse_polarity`
 
         The following table lists the characteristics of this property.
 
@@ -7387,8 +7726,6 @@ source_complete_event_pulse_polarity
             | Permissions           | read-write     |
             +-----------------------+----------------+
             | Repeated Capabilities | channels       |
-            +-----------------------+----------------+
-            | Resettable            | No             |
             +-----------------------+----------------+
 
         .. tip::
@@ -7414,10 +7751,14 @@ source_complete_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].source_complete_event_pulse_width`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.source_complete_event_pulse_width`
 
         The following table lists the characteristics of this property.
 
@@ -7429,8 +7770,6 @@ source_complete_event_pulse_width
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7454,10 +7793,14 @@ source_delay
         .. note:: Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].source_delay`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.source_delay`
 
         The following table lists the characteristics of this property.
 
@@ -7469,8 +7812,6 @@ source_delay
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -7490,10 +7831,14 @@ source_mode
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].source_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.source_mode`
 
         The following table lists the characteristics of this property.
 
@@ -7505,8 +7850,6 @@ source_mode
             | Permissions           | read-write       |
             +-----------------------+------------------+
             | Repeated Capabilities | channels         |
-            +-----------------------+------------------+
-            | Resettable            | No               |
             +-----------------------+------------------+
 
         .. tip::
@@ -7529,10 +7872,14 @@ source_trigger_type
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].source_trigger_type`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.source_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -7544,8 +7891,6 @@ source_trigger_type
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
-            +-----------------------+-------------------+
-            | Resettable            | No                |
             +-----------------------+-------------------+
 
         .. tip::
@@ -7572,8 +7917,6 @@ specific_driver_description
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7598,8 +7941,6 @@ specific_driver_prefix
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -7626,8 +7967,6 @@ specific_driver_revision
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7653,8 +7992,6 @@ specific_driver_vendor
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7676,10 +8013,14 @@ start_trigger_type
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].start_trigger_type`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.start_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -7691,8 +8032,6 @@ start_trigger_type
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | channels          |
-            +-----------------------+-------------------+
-            | Resettable            | No                |
             +-----------------------+-------------------+
 
         .. tip::
@@ -7719,8 +8058,6 @@ supported_instrument_models
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7742,10 +8079,14 @@ transient_response
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].transient_response`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.transient_response`
 
         The following table lists the characteristics of this property.
 
@@ -7757,8 +8098,6 @@ transient_response
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
             | Repeated Capabilities | channels                |
-            +-----------------------+-------------------------+
-            | Resettable            | No                      |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -7781,10 +8120,14 @@ voltage_compensation_frequency
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voltage_compensation_frequency`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.voltage_compensation_frequency`
 
         The following table lists the characteristics of this property.
 
@@ -7796,8 +8139,6 @@ voltage_compensation_frequency
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7820,10 +8161,14 @@ voltage_gain_bandwidth
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voltage_gain_bandwidth`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.voltage_gain_bandwidth`
 
         The following table lists the characteristics of this property.
 
@@ -7835,8 +8180,6 @@ voltage_gain_bandwidth
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7860,10 +8203,14 @@ voltage_level
         .. note:: The channel must be enabled for the specified voltage level to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voltage_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.voltage_level`
 
         The following table lists the characteristics of this property.
 
@@ -7875,8 +8222,6 @@ voltage_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7899,10 +8244,14 @@ voltage_level_autorange
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voltage_level_autorange`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.voltage_level_autorange`
 
         The following table lists the characteristics of this property.
 
@@ -7914,8 +8263,6 @@ voltage_level_autorange
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7940,10 +8287,14 @@ voltage_level_range
         .. note:: The channel must be enabled for the specified voltage level range to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voltage_level_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.voltage_level_range`
 
         The following table lists the characteristics of this property.
 
@@ -7955,8 +8306,6 @@ voltage_level_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -7980,10 +8329,14 @@ voltage_limit
         .. note:: The channel must be enabled for the specified current level to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voltage_limit`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.voltage_limit`
 
         The following table lists the characteristics of this property.
 
@@ -7995,8 +8348,6 @@ voltage_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -8019,10 +8370,14 @@ voltage_limit_autorange
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voltage_limit_autorange`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.voltage_limit_autorange`
 
         The following table lists the characteristics of this property.
 
@@ -8034,8 +8389,6 @@ voltage_limit_autorange
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -8081,10 +8434,14 @@ voltage_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voltage_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.voltage_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -8096,8 +8453,6 @@ voltage_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -8143,10 +8498,14 @@ voltage_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voltage_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.voltage_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -8158,8 +8517,6 @@ voltage_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -8184,10 +8541,14 @@ voltage_limit_range
         .. note:: The channel must be enabled for the specified voltage limit range to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voltage_limit_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.voltage_limit_range`
 
         The following table lists the characteristics of this property.
 
@@ -8199,8 +8560,6 @@ voltage_limit_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -8223,10 +8582,14 @@ voltage_pole_zero_ratio
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voltage_pole_zero_ratio`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.voltage_pole_zero_ratio`
 
         The following table lists the characteristics of this property.
 
@@ -8238,8 +8601,6 @@ voltage_pole_zero_ratio
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::

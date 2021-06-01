@@ -127,8 +127,9 @@ def add_attribute_rep_cap_tip(attr, config):
         if 'documentation' not in attr:
             attr['documentation'] = {}
 
-        capability_type_string = get_attribute_repeated_caps_with_conjunction(attr)
-        attr['documentation']['tip'] = rep_cap_attr_desc.format(capability_type_string, config['module_name'])
+        multi_capability = get_attribute_repeated_caps_with_conjunction(attr)
+        single_capability = attr['supported_rep_caps'][0]
+        attr['documentation']['tip'] = rep_cap_attr_desc.format(config['module_name'], multi_capability, single_capability, attr['python_name'])
 
 
 def get_documentation_for_node_rst(node, config, indent=0):
@@ -491,7 +492,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'])
+        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['repeated_capability_type'], function['python_name'])
 
     rst = '.. py:{0}:: {1}{2}('.format(method_or_function, function['python_name'], suffix)
     rst += get_params_snippet(function, session_method) + ')'
@@ -566,7 +567,7 @@ def get_function_docstring(function, numpy, config, indent=0):
 
     docstring = ''
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'])
+        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['repeated_capability_type'], function['python_name'])
 
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
@@ -880,12 +881,18 @@ def get_attribute_repeated_caps_with_conjunction(attr):
         supported_rep_caps = attr['supported_rep_caps']
         num_items = len(supported_rep_caps)
         if num_items > 1:
-            caps = ', '.join(supported_rep_caps[:-1]) + ' and ' + supported_rep_caps[num_items - 1]
+            caps = ', '.join(supported_rep_caps[:-1]) + ' or ' + supported_rep_caps[num_items - 1]
         else:
             caps = supported_rep_caps[0]
     else:
         caps = 'None'
     return caps
+
+
+def module_supports_repeated_caps(config):
+    if 'repeated_capabilities' in config:
+        return len(config['repeated_capabilities']) > 0
+    return False
 
 
 # Unit Tests
@@ -1187,7 +1194,6 @@ wanted to choose.''',
             'enum': None,
             'lv_property': 'Fake attributes:Read Write Bool',
             'name': 'READ_WRITE_BOOL',
-            'resettable': 'No',
             'type': 'ViBoolean',
             'documentation': {
                 'description': 'An attribute of type bool with read/write access.',
@@ -1336,12 +1342,12 @@ def test_get_attribute_repeated_caps():
 
 def test_get_attribute_repeated_caps_with_conjunction():
     attr = {'supported_rep_caps': ['channels', 'instruments', 'pins']}
-    expected_caps = 'channels, instruments and pins'
+    expected_caps = 'channels, instruments or pins'
     actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
     assert actual_caps == expected_caps
 
     attr = {'supported_rep_caps': ['channels', 'instruments']}
-    expected_caps = 'channels and instruments'
+    expected_caps = 'channels or instruments'
     actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
     assert actual_caps == expected_caps
 
@@ -1354,6 +1360,23 @@ def test_get_attribute_repeated_caps_with_conjunction():
     expected_caps = 'None'
     actual_caps = get_attribute_repeated_caps_with_conjunction(attr)
     assert actual_caps == expected_caps
+
+
+def test_module_supports_repeated_caps():
+    config = {'repeated_capabilities': [{'python_name': 'channels'}]}
+    expected_value = True
+    actual_value = module_supports_repeated_caps(config)
+    assert actual_value == expected_value
+
+    config = {'repeated_capabilities': []}
+    expected_value = False
+    actual_value = module_supports_repeated_caps(config)
+    assert actual_value == expected_value
+
+    config = {}
+    expected_value = False
+    actual_value = module_supports_repeated_caps(config)
+    assert actual_value == expected_value
 
 
 def test_get_function_docstring_default():
@@ -1555,7 +1578,6 @@ def test_add_notes_re_links():
             'enum': None,
             'lv_property': 'Fake attributes:Read Write Bool',
             'name': 'READ_WRITE_BOOL',
-            'resettable': 'No',
             'type': 'ViBoolean',
             'documentation': {
                 'description': 'An attribute of type bool with read/write access.',

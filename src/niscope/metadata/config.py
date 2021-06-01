@@ -46,7 +46,11 @@ config = {
         {
             'prefix': '',
             'python_name': 'channels'
-        }
+        },
+        {
+            'prefix': '',
+            'python_name': 'instruments',
+        },
     ],
     'session_class_description': 'An NI-SCOPE session to a National Instruments Digitizer.',
     'session_handle_parameter_name': 'vi',
