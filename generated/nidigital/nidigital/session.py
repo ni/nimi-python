@@ -133,10 +133,14 @@ class _SessionBase(object):
     Specifies the current that the DUT sources to the active load while outputting a voltage above VCOM.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].active_load_ioh`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.active_load_ioh`
     '''
     active_load_iol = _attributes.AttributeViReal64(1150012)
     '''Type: float
@@ -144,10 +148,14 @@ class _SessionBase(object):
     Specifies the current that the DUT sinks from the active load while outputting a voltage below VCOM.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].active_load_iol`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.active_load_iol`
     '''
     active_load_vcom = _attributes.AttributeViReal64(1150014)
     '''Type: float
@@ -155,10 +163,14 @@ class _SessionBase(object):
     Specifies the voltage level at which the active load circuit switches between sourcing current and sinking current.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].active_load_vcom`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.active_load_vcom`
     '''
     cache = _attributes.AttributeViBoolean(1050004)
     '''Type: bool
@@ -176,10 +188,14 @@ class _SessionBase(object):
     Specifies the frequency for the clock generator.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].clock_generator_frequency`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.clock_generator_frequency`
     '''
     clock_generator_is_running = _attributes.AttributeViBoolean(1150074)
     '''Type: bool
@@ -187,10 +203,14 @@ class _SessionBase(object):
     Indicates whether the clock generator is running.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].clock_generator_is_running`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.clock_generator_is_running`
     '''
     conditional_jump_trigger_terminal_name = _attributes.AttributeViString(1150040)
     '''Type: str
@@ -198,10 +218,14 @@ class _SessionBase(object):
     Specifies the terminal name from which the exported conditional jump trigger signal may be routed to other instruments through the PXI trigger bus. You can use this signal to trigger other instruments when the conditional jump trigger instance asserts on the digital pattern instrument.
 
     Tip:
-    This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific conditional jump triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container conditional jump triggers to specify a subset.
+
+    Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].conditional_jump_trigger_terminal_name`
+
+    To set/get on all conditional jump triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.conditional_jump_trigger_terminal_name`
     '''
     conditional_jump_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150033)
     '''Type: enums.TriggerType
@@ -219,10 +243,14 @@ class _SessionBase(object):
     +--------------------------+------------------------------------------------------------------+
 
     Tip:
-    This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific conditional jump triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container conditional jump triggers to specify a subset.
+
+    Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].conditional_jump_trigger_type`
+
+    To set/get on all conditional jump triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.conditional_jump_trigger_type`
     '''
     cycle_number_history_ram_trigger_cycle_number = _attributes.AttributeViInt64(1150044)
     '''Type: int
@@ -243,10 +271,14 @@ class _SessionBase(object):
     +---------------------+---------------------------------------------------------------+
 
     Tip:
-    This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific conditional jump triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container conditional jump triggers to specify a subset.
+
+    Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].digital_edge_conditional_jump_trigger_edge`
+
+    To set/get on all conditional jump triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.digital_edge_conditional_jump_trigger_edge`
     '''
     digital_edge_conditional_jump_trigger_source = _attributes.AttributeViString(1150034)
     '''Type: str
@@ -260,10 +292,14 @@ class _SessionBase(object):
     +----------------------------------------------+
 
     Tip:
-    This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific conditional jump triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container conditional jump triggers to specify a subset.
+
+    Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].digital_edge_conditional_jump_trigger_source`
+
+    To set/get on all conditional jump triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.digital_edge_conditional_jump_trigger_source`
     '''
     digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150031)
     '''Type: enums.DigitalEdge
@@ -336,10 +372,14 @@ class _SessionBase(object):
     +---------------+-------------------------+
 
     Tip:
-    This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific conditional jump triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container conditional jump triggers to specify a subset.
+
+    Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].exported_conditional_jump_trigger_output_terminal`
+
+    To set/get on all conditional jump triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.exported_conditional_jump_trigger_output_terminal`
     '''
     exported_pattern_opcode_event_output_terminal = _attributes.AttributeViString(1150041)
     '''Type: str
@@ -367,10 +407,14 @@ class _SessionBase(object):
     +-----------------+--------------------+
 
     Tip:
-    This property can use repeated capabilities for pattern opcode events. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific pattern opcode events within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container pattern opcode events to specify a subset.
+
+    Example: :py:attr:`my_session.pattern_opcode_events[ ... ].exported_pattern_opcode_event_output_terminal`
+
+    To set/get on all pattern opcode events, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.exported_pattern_opcode_event_output_terminal`
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150032)
     '''Type: str
@@ -423,10 +467,14 @@ class _SessionBase(object):
     Specifies the measurement time for the frequency counter.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].frequency_counter_measurement_time`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.frequency_counter_measurement_time`
     '''
     group_capabilities = _attributes.AttributeViString(1050401)
     '''Type: str
@@ -506,10 +554,14 @@ class _SessionBase(object):
     Returns a string that contains the firmware revision information for the digital pattern instrument.
 
     Tip:
-    This property can use repeated capabilities for instruments. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific instruments within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+    Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
+
+    To set/get on all instruments, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.instrument_firmware_revision`
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
@@ -547,10 +599,14 @@ class _SessionBase(object):
     Specifies whether the pattern comparisons are masked or not. When set to True for a specified pin, failures on that pin will be masked.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].mask_compare`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.mask_compare`
     '''
     pattern_label_history_ram_trigger_cycle_offset = _attributes.AttributeViInt64(1150045)
     '''Type: int
@@ -573,10 +629,14 @@ class _SessionBase(object):
     Specifies the terminal name for the output trigger signal of the specified instance of a Pattern Opcode Event. You can use this terminal name as an input signal source for another trigger.
 
     Tip:
-    This property can use repeated capabilities for pattern opcode events. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific pattern opcode events within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container pattern opcode events to specify a subset.
+
+    Example: :py:attr:`my_session.pattern_opcode_events[ ... ].pattern_opcode_event_terminal_name`
+
+    To set/get on all pattern opcode events, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.pattern_opcode_event_terminal_name`
     '''
     ppmu_allow_extended_voltage_range = _attributes.AttributeViBoolean(1150076)
     '''Type: bool
@@ -584,10 +644,14 @@ class _SessionBase(object):
     Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to True, this property enables extended voltage range operation. Review specification deviations for application suitability before using this property. NI recommends setting this property to False when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output method set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the selected_function property to Off before sourcing a voltage level that requires a range change.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_allow_extended_voltage_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_allow_extended_voltage_range`
     '''
     ppmu_aperture_time = _attributes.AttributeViReal64(1150037)
     '''Type: float
@@ -595,10 +659,14 @@ class _SessionBase(object):
     Specifies the measurement aperture time for the PPMU. The ppmu_aperture_time_units property sets the units of the PPMU aperture time.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_aperture_time`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_aperture_time`
     '''
     ppmu_aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUApertureTimeUnits, 1150038)
     '''Type: enums.PPMUApertureTimeUnits
@@ -612,10 +680,14 @@ class _SessionBase(object):
     +-------------------------------+-----------------------------------------+
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_aperture_time_units`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_aperture_time_units`
     '''
     ppmu_current_level = _attributes.AttributeViReal64(1150019)
     '''Type: float
@@ -626,10 +698,14 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_level`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_level`
     '''
     ppmu_current_level_range = _attributes.AttributeViReal64(1150020)
     '''Type: float
@@ -637,10 +713,14 @@ class _SessionBase(object):
     Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_level_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_level_range`
     '''
     ppmu_current_limit = _attributes.AttributeViReal64(1150054)
     '''Type: float
@@ -648,10 +728,14 @@ class _SessionBase(object):
     Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage. The PXIe-6570/6571 does not support the ppmu_current_limit property and only allows configuration of the ppmu_current_limit_range property.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_limit`
     '''
     ppmu_current_limit_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUCurrentLimitBehavior, 1150064)
     '''Type: enums.PPMUCurrentLimitBehavior
@@ -665,10 +749,14 @@ class _SessionBase(object):
     +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_behavior`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_limit_behavior`
     '''
     ppmu_current_limit_range = _attributes.AttributeViReal64(1150017)
     '''Type: float
@@ -676,10 +764,14 @@ class _SessionBase(object):
     Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_limit_range`
     '''
     ppmu_current_limit_supported = _attributes.AttributeViBoolean(1150055)
     '''Type: bool
@@ -687,10 +779,14 @@ class _SessionBase(object):
     Returns whether the device supports configuration of a current limit when you set the ppmu_output_function property to DC Voltage.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_supported`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_limit_supported`
     '''
     ppmu_output_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUOutputFunction, 1150015)
     '''Type: enums.PPMUOutputFunction
@@ -706,10 +802,14 @@ class _SessionBase(object):
     +----------------------------+--------------------------------------------+
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_output_function`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_output_function`
     '''
     ppmu_voltage_level = _attributes.AttributeViReal64(1150016)
     '''Type: float
@@ -717,10 +817,14 @@ class _SessionBase(object):
     Specifies the voltage level, in volts, that the PPMU forces to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_level`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_voltage_level`
     '''
     ppmu_voltage_limit_high = _attributes.AttributeViReal64(1150022)
     '''Type: float
@@ -728,10 +832,14 @@ class _SessionBase(object):
     Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_limit_high`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_voltage_limit_high`
     '''
     ppmu_voltage_limit_low = _attributes.AttributeViReal64(1150021)
     '''Type: float
@@ -739,10 +847,14 @@ class _SessionBase(object):
     Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_limit_low`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_voltage_limit_low`
     '''
     query_instrument_status = _attributes.AttributeViBoolean(1050003)
     '''Type: bool
@@ -781,10 +893,14 @@ class _SessionBase(object):
     Note: You can make PPMU voltage measurements using the ppmu_measure method from within any selected_function.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].selected_function`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.selected_function`
     '''
     sequencer_flag_terminal_name = _attributes.AttributeViString(1150059)
     '''Type: str
@@ -797,10 +913,14 @@ class _SessionBase(object):
     Returns the serial number of the device.
 
     Tip:
-    This property can use repeated capabilities for instruments. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific instruments within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+    Example: :py:attr:`my_session.instruments[ ... ].serial_number`
+
+    To set/get on all instruments, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.serial_number`
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -881,10 +1001,14 @@ class _SessionBase(object):
     Specifies the TDR Offset.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].tdr_offset`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tdr_offset`
     '''
     termination_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminationMode, 1150006)
     '''Type: enums.TerminationMode
@@ -902,10 +1026,14 @@ class _SessionBase(object):
     +-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].termination_mode`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.termination_mode`
     '''
     timing_absolute_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150072)
     '''Type: float in seconds or datetime.timedelta
@@ -923,10 +1051,14 @@ class _SessionBase(object):
     Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic high (1).
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].vih`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.vih`
     '''
     vil = _attributes.AttributeViReal64(1150007)
     '''Type: float
@@ -934,10 +1066,14 @@ class _SessionBase(object):
     Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic low (0).
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].vil`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.vil`
     '''
     voh = _attributes.AttributeViReal64(1150010)
     '''Type: float
@@ -945,10 +1081,14 @@ class _SessionBase(object):
     Specifies the output voltage from the DUT above which the comparator on the digital pattern test instrument interprets a logic high (H).
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].voh`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.voh`
     '''
     vol = _attributes.AttributeViReal64(1150009)
     '''Type: float
@@ -956,10 +1096,14 @@ class _SessionBase(object):
     Specifies the output voltage from the DUT below which the comparator on the digital pattern test instrument interprets a logic low (L).
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].vol`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.vol`
     '''
     vterm = _attributes.AttributeViReal64(1150011)
     '''Type: float
@@ -967,10 +1111,14 @@ class _SessionBase(object):
     Specifies the termination voltage the digital pattern instrument applies during non-drive cycles when the termination mode is set to V :sub:`term`. The instrument applies the termination voltage through a 50 Ω parallel termination resistance.
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].vterm`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.vterm`
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
@@ -1036,10 +1184,15 @@ class _SessionBase(object):
         Applies the correction for propagation delay offsets to a digital pattern instrument. Use this method to apply TDR offsets that are stored from a past measurement or are measured by means other than the tdr method. Also use this method to apply correction for offsets if the **applyOffsets** input of the tdr method was set to False at the time of measurement.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].apply_tdr_offsets`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.apply_tdr_offsets`
 
         Args:
             offsets (float in seconds or datetime.timedelta): TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the repeated capabilities. If the repeated capabilities contain pin names, you must specify offsets for each site in the channel map per pin.
@@ -1061,10 +1214,15 @@ class _SessionBase(object):
         Stops clock generation on the specified channel(s) or pin(s) and pin group(s).
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].clock_generator_abort`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.clock_generator_abort`
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1079,10 +1237,15 @@ class _SessionBase(object):
         Configures clock generator frequency and initiates clock generation on the specified channel(s) or pin(s) and pin group(s).
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].clock_generator_generate_clock`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.clock_generator_generate_clock`
 
         Args:
             frequency (float): The frequency of the clock generation, in Hz.
@@ -1105,10 +1268,15 @@ class _SessionBase(object):
         Initiates clock generation on the specified channel(s) or pin(s) and pin group(s).
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].clock_generator_initiate`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.clock_generator_initiate`
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1123,10 +1291,15 @@ class _SessionBase(object):
         Configures I\ :sub:`OL`, I\ :sub:`OH`, and V\ :sub:`COM` levels for the active load on the pins you specify. The DUT sources or sinks current based on the level values. To enable active load, set the termination mode to TerminationMode.ACTIVE_LOAD. To disable active load, set the termination mode of the instrument to TerminationMode.HIGH_Z or TerminationMode.VTERM.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].configure_active_load_levels`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_active_load_levels`
 
         Args:
             iol (float): Maximum current that the DUT sinks while outputting a voltage below V\ :sub:`COM`.
@@ -1152,10 +1325,15 @@ class _SessionBase(object):
         Configures voltage levels for the pins you specify.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].configure_voltage_levels`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.configure_voltage_levels`
 
         Args:
             vil (float): Voltage that the instrument will apply to the input of the DUT when the pin driver drives a logic low (0).
@@ -1191,10 +1369,15 @@ class _SessionBase(object):
         write_static, or a call to apply_levels_and_timing.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container sites to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].burst_pattern`
+
+        To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.burst_pattern`
 
         Args:
             start_label (str): Pattern name or exported pattern label from which to start bursting the pattern.
@@ -1225,10 +1408,15 @@ class _SessionBase(object):
         Returns dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container sites to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].fetch_capture_waveform`
+
+        To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.fetch_capture_waveform`
 
         Args:
             waveform_name (str): Waveform name you create with the create capture waveform method. Use the waveform_name parameter with capture_start opcode in your pattern.
@@ -1331,10 +1519,15 @@ class _SessionBase(object):
         the trigger conditions are met.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container pins to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.pins[ ... ].fetch_history_ram_cycle_information`
+
+        To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.fetch_history_ram_cycle_information`
 
         Args:
             position (int): Sample index from which to start fetching pattern information.
@@ -1457,10 +1650,15 @@ class _SessionBase(object):
         Returns the pin names, site numbers, and channel names that correspond to per-pin data read from the digital pattern instrument. The method returns pin information in the same order as values read using the read_static method, ppmu_measure method, and get_fail_count method. Use this method to match values the previously listed methods return with pins, sites, and instrument channels.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].get_pin_results_pin_information`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.get_pin_results_pin_information`
 
         Returns:
             pin_info (list of PinInfo): List of named tuples with fields:
@@ -1493,10 +1691,15 @@ class _SessionBase(object):
         Returns dictionary where each key is a site number and value is pass/fail
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container sites to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].get_site_pass_fail`
+
+        To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.get_site_pass_fail`
 
         Returns:
             pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail
@@ -1516,10 +1719,15 @@ class _SessionBase(object):
         Measures the frequency on the specified channel(s) over the specified measurement time. All channels in the repeated capabilities should have the same measurement time.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].frequency_counter_measure_frequency`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.frequency_counter_measure_frequency`
 
         Returns:
             frequencies (list of float): The returned frequency counter measurement, in Hz.This method returns -1 if the measurement is invalid for the channel.
@@ -1546,10 +1754,15 @@ class _SessionBase(object):
         Queries the value of a ViBoolean property. Use this method to get the values of digital pattern instrument-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_boolean`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_boolean`
 
         Args:
             attribute (int): The ID of a property.
@@ -1574,10 +1787,15 @@ class _SessionBase(object):
         Queries the value of a ViInt32 property. Use this method to get the values of digital pattern instrument-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_int32`
 
         Args:
             attribute (int): The ID of a property.
@@ -1602,10 +1820,15 @@ class _SessionBase(object):
         Queries the value of a ViInt64 property. Use this method to get the values of digital pattern instrument-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_int64`
 
         Args:
             attribute (int): The ID of a property.
@@ -1630,10 +1853,15 @@ class _SessionBase(object):
         This method queries the value of a ViReal64 property. Use this method to get the values of digital pattern instrument-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_real64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_real64`
 
         Args:
             attribute (int): The ID of a property.
@@ -1658,10 +1886,15 @@ class _SessionBase(object):
         Queries the value of a ViString property. Use this method to get the values of digital pattern instrument-specific properties and inherent IVI properties. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **bufferSize**. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the **bufferSize**, the method copies (bufferSize - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the **bufferSize** you must pass to get the entire value. For example, if the value is "123456" and the **bufferSize** is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for the **bufferSize** and VI_NULL for the value.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_string`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_string`
 
         Args:
             attribute (int): The ID of a property.
@@ -1742,10 +1975,15 @@ class _SessionBase(object):
         Returns the comparison fail count for pins in the repeated capabilities.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].get_fail_count`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.get_fail_count`
 
         Returns:
             failure_count (list of int): Number of failures in an array. If a site is disabled or not enabled for burst, the method does not return data for that site. You can also use the get_pin_results_pin_information method to obtain a sorted list of returned sites and channels.
@@ -1798,10 +2036,15 @@ class _SessionBase(object):
         Returns the pin names, site numbers, and channel names that correspond to per-pin data read from the digital pattern instrument. The method returns pin information in the same order as values read using the read_static method, ppmu_measure method, and get_fail_count method. Use this method to match values the previously listed methods return with pins, sites, and instrument channels.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_pin_results_pin_information`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._get_pin_results_pin_information`
 
         Returns:
             pin_indexes (list of int): The returned index of the pins corresponding to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.
@@ -1885,10 +2128,15 @@ class _SessionBase(object):
         Instructs the PPMU to measure voltage or current. This method can be called to take a voltage measurement even if the pin method is not set to PPMU.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].ppmu_measure`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.ppmu_measure`
 
         Args:
             measurement_type (enums.PPMUMeasurementType): Parameter that specifies whether the PPMU measures voltage or current from the DUT.
@@ -1925,10 +2173,15 @@ class _SessionBase(object):
         Starts sourcing voltage or current from the PPMU. This method automatically selects the PPMU method. Changes to PPMU source settings do not take effect until you call this method. If you modify source settings after you call this method, you must call this method again for changes in the configuration to take effect.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].ppmu_source`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.ppmu_source`
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1943,10 +2196,15 @@ class _SessionBase(object):
         Reads the current state of comparators for pins you specify in the repeated capabilities. If there are uncommitted changes to levels or the termination mode, this method commits the changes to the pins.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].read_static`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.read_static`
 
         Returns:
             data (list of enums.PinState): The returned array of pin states read from the channels in the repeated capabilities. Data is returned in the order you specify in the repeated capabilities. If a site is disabled, the method does not return data for that site. You can also use the get_pin_results_pin_information method to obtain a sorted list of returned sites and channels.
@@ -1978,10 +2236,15 @@ class _SessionBase(object):
         Resets the property to its default value.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].reset_attribute`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.reset_attribute`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -2001,10 +2264,15 @@ class _SessionBase(object):
         Sets the value of a ViBoolean property. Use this method to set the values of digital pattern instrument-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_boolean`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_boolean`
 
         Args:
             attribute (int): The ID of a property.
@@ -2027,10 +2295,15 @@ class _SessionBase(object):
         Sets the value of a ViInt32 property. Use this method to set the values of digital pattern instrument-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_int32`
 
         Args:
             attribute (int): The ID of a property.
@@ -2053,10 +2326,15 @@ class _SessionBase(object):
         Sets the value of a ViInt64 property. Use this method to set the values of digital pattern instrument-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_int64`
 
         Args:
             attribute (int): The ID of a property.
@@ -2079,10 +2357,15 @@ class _SessionBase(object):
         Sets the value of a ViIntReal64 property. Use this method to set the values of digital pattern instrument-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_real64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_real64`
 
         Args:
             attribute (int): The ID of a property.
@@ -2105,10 +2388,15 @@ class _SessionBase(object):
         Sets the value of a ViString property. Use this method to set the values of digital pattern instrument-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_string`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_string`
 
         Args:
             attribute (int): The ID of a property.
@@ -2131,10 +2419,15 @@ class _SessionBase(object):
         Measures propagation delays through cables, connectors, and load boards using Time-Domain Reflectometry (TDR). Ensure that the channels and pins you select are connected to an open circuit.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].tdr`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.tdr`
 
         Args:
             apply_offsets (bool): A Boolean that specifies whether to apply the measured TDR offsets. If you need to adjust the measured offsets prior to applying, set this input to False, and call the apply_tdr_offsets method to specify the adjusted TDR offsets values.
@@ -2178,10 +2471,15 @@ class _SessionBase(object):
         Writes a static state to the specified pins. The selected pins remain in the specified state until the next pattern burst or call to this method. If there are uncommitted changes to levels or the termination mode, this method commits the changes to the pins. This method does not change the selected pin method. If you write a static state to a pin that does not have the Digital method selected, the new static state is stored by the instrument, and affects the state of the pin the next time you change the selected method to Digital.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].write_static`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.write_static`
 
         Args:
             state (enums.WriteStaticPinState): Parameter that specifies one of the following digital states to assign to the pin.

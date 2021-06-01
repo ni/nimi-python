@@ -8,7 +8,6 @@ attributes = {
         },
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1000001: {
@@ -18,7 +17,6 @@ attributes = {
         },
         'lv_property': 'Fake attributes:Read Write Float',
         'name': 'READ_WRITE_DOUBLE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1000002: {
@@ -28,7 +26,6 @@ attributes = {
         },
         'lv_property': 'Fake attributes:Read Write String',
         'name': 'READ_WRITE_STRING',
-        'resettable': False,
         'type': 'ViString'
     },
     1000003: {
@@ -39,7 +36,6 @@ attributes = {
         'enum': 'Color',
         'lv_property': 'Fake attributes:Read Write Color',
         'name': 'READ_WRITE_COLOR',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1000004: {
@@ -49,7 +45,6 @@ attributes = {
         },
         'lv_property': 'Fake attributes:Read Write Int',
         'name': 'READ_WRITE_INTEGER',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1000005: {
@@ -60,7 +55,6 @@ attributes = {
         'enum': 'FloatEnum',
         'lv_property': 'Fake attributes:Float enum',
         'name': 'FLOAT_ENUM',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1000006: {
@@ -70,7 +64,6 @@ attributes = {
         },
         'lv_property': 'Fake attributes:Read Write long long',
         'name': 'READ_WRITE_INT64',
-        'resettable': False,
         'type': 'ViInt64'
     },
     1000007: {
@@ -81,7 +74,6 @@ attributes = {
         },
         'lv_property': 'Fake attributes:Read Write Double with Converter',
         'name': 'READ_WRITE_DOUBLE_WITH_CONVERTER',
-        'resettable': False,
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
@@ -93,14 +85,12 @@ attributes = {
         },
         'lv_property': 'Fake attributes:Read Write Int with Converter',
         'name': 'READ_WRITE_INTEGER_WITH_CONVERTER',
-        'resettable': False,
         'type': 'ViInt32',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in milliseconds'
     },
     1000009: {
         'access': 'read-write',
         'name': 'READ_WRITE_DOUBLE_WITH_REPEATED_CAPABILITY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -114,7 +104,6 @@ attributes = {
         },
         'lv_property': 'Fake attributes:Read Write String Repeated Capability',
         'name': 'READ_WRITE_STRING_REPEATED_CAPABILITY',
-        'resettable': False,
         'supported_rep_caps': [
             'instruments'
         ],

@@ -343,16 +343,16 @@ enums = {
     'AttributeRetrievalModes': {
         'values': [
             {
+                'name': 'NISCOPE_VAL_ATTRIBUTE_RETRIEVAL_MODE_DESIRED',
+                'value': 1
+            },
+            {
                 'name': 'NISCOPE_VAL_ATTRIBUTE_RETRIEVAL_MODE_COERCED',
                 'value': 0
             },
             {
                 'name': 'NISCOPE_VAL_ATTRIBUTE_RETRIEVAL_MODE_DEFAULT',
                 'value': 2
-            },
-            {
-                'name': 'NISCOPE_VAL_ATTRIBUTE_RETRIEVAL_MODE_DESIRED',
-                'value': 1
             }
         ]
     },

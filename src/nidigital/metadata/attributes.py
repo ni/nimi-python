@@ -7,7 +7,6 @@ attributes = {
             'description': 'Checks the range and validates parameter and attribute values you pass to NI-Digital Pattern Driver functions. Ranges are always checked, regardless of the attribute setting.\n'
         },
         'name': 'RANGE_CHECK',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1050003: {
@@ -16,7 +15,6 @@ attributes = {
             'description': 'Specifies whether the NI-Digital Pattern Driver queries the digital pattern instrument status after each operation. The instrument status is always queried, regardless of the attribute setting.\n'
         },
         'name': 'QUERY_INSTRUMENT_STATUS',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1050004: {
@@ -25,7 +23,6 @@ attributes = {
             'description': 'Specifies whether to cache the value of attributes. When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument. This significantly increases execution speed. Caching is always enabled in the driver, regardless of the value of this attribute.'
         },
         'name': 'CACHE',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1050005: {
@@ -34,7 +31,6 @@ attributes = {
             'description': 'Simulates I/O operations. After you open a session, you cannot change the simulation state. Use the niDigital_InitWithOptions function to enable simulation.\n'
         },
         'name': 'SIMULATE',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1050006: {
@@ -43,7 +39,6 @@ attributes = {
             'description': 'Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type attributes. Enabling record value coercions is not supported.\n'
         },
         'name': 'RECORD_COERCIONS',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1050007: {
@@ -52,7 +47,6 @@ attributes = {
             'description': 'This attribute returns initial values for NI-Digital Pattern Driver attributes as a string.\n'
         },
         'name': 'DRIVER_SETUP',
-        'resettable': False,
         'type': 'ViString'
     },
     1050021: {
@@ -61,7 +55,6 @@ attributes = {
             'description': 'This attribute is not supported.\n'
         },
         'name': 'INTERCHANGE_CHECK',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1050203: {
@@ -70,7 +63,6 @@ attributes = {
             'description': 'Returns the number of channels that the specific digital pattern instrument driver supports.\n'
         },
         'name': 'CHANNEL_COUNT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1050302: {
@@ -79,7 +71,6 @@ attributes = {
             'description': 'Returns a string that contains the prefix for the NI-Digital Pattern driver.\n'
         },
         'name': 'SPECIFIC_DRIVER_PREFIX',
-        'resettable': False,
         'type': 'ViString'
     },
     1050304: {
@@ -88,7 +79,6 @@ attributes = {
             'description': 'Returns a string that contains the resource descriptor that the NI-Digital Pattern Driver uses to identify the digital pattern instrument.\n'
         },
         'name': 'IO_RESOURCE_DESCRIPTOR',
-        'resettable': False,
         'type': 'ViString'
     },
     1050305: {
@@ -97,7 +87,6 @@ attributes = {
             'description': 'Returns a string containing the logical name that you specified when opening the current IVI session. This attribute is not supported.\n'
         },
         'name': 'LOGICAL_NAME',
-        'resettable': False,
         'type': 'ViString'
     },
     1050327: {
@@ -106,7 +95,6 @@ attributes = {
             'description': 'Returns a comma delimited string that contains the supported digital pattern instrument models for the specific driver.\n'
         },
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
-        'resettable': False,
         'type': 'ViString'
     },
     1050401: {
@@ -115,7 +103,6 @@ attributes = {
             'description': 'Returns a string that contains a comma-separated list of class-extension groups that the driver implements.\n'
         },
         'name': 'GROUP_CAPABILITIES',
-        'resettable': False,
         'type': 'ViString'
     },
     1050510: {
@@ -124,7 +111,6 @@ attributes = {
             'description': 'Returns a string that contains the firmware revision information for the digital pattern instrument.\n'
         },
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
-        'resettable': False,
         'supported_rep_caps': [
             'instruments'
         ],
@@ -136,7 +122,6 @@ attributes = {
             'description': 'Returns a string ("National Instruments") that contains the name of the manufacturer of the digital pattern instrument.\n'
         },
         'name': 'INSTRUMENT_MANUFACTURER',
-        'resettable': False,
         'type': 'ViString'
     },
     1050512: {
@@ -145,7 +130,6 @@ attributes = {
             'description': 'Returns a string that contains the model number or name of the digital pattern instrument.\n'
         },
         'name': 'INSTRUMENT_MODEL',
-        'resettable': False,
         'type': 'ViString'
     },
     1050513: {
@@ -154,7 +138,6 @@ attributes = {
             'description': 'Returns a string ("National Instruments") that contains the name of the vendor that supplies the NI-Digital Pattern Driver.\n'
         },
         'name': 'SPECIFIC_DRIVER_VENDOR',
-        'resettable': False,
         'type': 'ViString'
     },
     1050514: {
@@ -163,7 +146,6 @@ attributes = {
             'description': 'Returns a string that contains a brief description of the NI-Digital Pattern driver.\n'
         },
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
-        'resettable': False,
         'type': 'ViString'
     },
     1050515: {
@@ -172,7 +154,6 @@ attributes = {
             'description': 'Returns the major version number of the class specification with which NI-Digital is compliant. This attribute is not supported.\n'
         },
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1050516: {
@@ -181,7 +162,6 @@ attributes = {
             'description': 'Returns the minor version number of the class specification with which NI-Digital is compliant. This attribute is not supported.\n'
         },
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1050551: {
@@ -190,7 +170,6 @@ attributes = {
             'description': 'Returns a string that contains additional version information about the NI-Digital Pattern Driver. For example, the driver can return Driver: NI-Digital 16.0 as the value of this attribute.\n'
         },
         'name': 'SPECIFIC_DRIVER_REVISION',
-        'resettable': False,
         'type': 'ViString'
     },
     1150001: {
@@ -199,7 +178,6 @@ attributes = {
             'description': 'Returns the serial number of the device.\n'
         },
         'name': 'SERIAL_NUMBER',
-        'resettable': False,
         'supported_rep_caps': [
             'instruments'
         ],
@@ -235,7 +213,6 @@ attributes = {
         },
         'enum': 'SelectedFunction',
         'name': 'SELECTED_FUNCTION',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -265,7 +242,6 @@ attributes = {
         },
         'enum': 'TerminationMode',
         'name': 'TERMINATION_MODE',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -277,7 +253,6 @@ attributes = {
             'description': 'Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic low (0).\n'
         },
         'name': 'VIL',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -289,7 +264,6 @@ attributes = {
             'description': 'Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic high (1).\n'
         },
         'name': 'VIH',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -301,7 +275,6 @@ attributes = {
             'description': 'Specifies the output voltage from the DUT below which the comparator on the digital pattern test instrument interprets a logic low (L).\n'
         },
         'name': 'VOL',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -313,7 +286,6 @@ attributes = {
             'description': 'Specifies the output voltage from the DUT above which the comparator on the digital pattern test instrument interprets a logic high (H).\n'
         },
         'name': 'VOH',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -325,7 +297,6 @@ attributes = {
             'description': 'Specifies the termination voltage the digital pattern instrument applies during non-drive cycles when the termination mode is set to V :sub:`term`. The instrument applies the termination voltage through a 50 Ω parallel termination resistance.\n'
         },
         'name': 'VTERM',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -337,7 +308,6 @@ attributes = {
             'description': 'Specifies the current that the DUT sinks from the active load while outputting a voltage below VCOM.\n'
         },
         'name': 'ACTIVE_LOAD_IOL',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -349,7 +319,6 @@ attributes = {
             'description': 'Specifies the current that the DUT sources to the active load while outputting a voltage above VCOM.\n'
         },
         'name': 'ACTIVE_LOAD_IOH',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -361,7 +330,6 @@ attributes = {
             'description': 'Specifies the voltage level at which the active load circuit switches between sourcing current and sinking current.\n'
         },
         'name': 'ACTIVE_LOAD_VCOM',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -387,7 +355,6 @@ attributes = {
         },
         'enum': 'PPMUOutputFunction',
         'name': 'PPMU_OUTPUT_FUNCTION',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -399,7 +366,6 @@ attributes = {
             'description': 'Specifies the voltage level, in volts, that the PPMU forces to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Voltage.\n'
         },
         'name': 'PPMU_VOLTAGE_LEVEL',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -411,7 +377,6 @@ attributes = {
             'description': 'Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Voltage.\n'
         },
         'name': 'PPMU_CURRENT_LIMIT_RANGE',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -423,7 +388,6 @@ attributes = {
             'description': 'Specifies the current level, in amps, that the PPMU forces to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Current. Specify valid values for the current level using the niDigital_PPMU_ConfigureCurrentLevelRange function.\n'
         },
         'name': 'PPMU_CURRENT_LEVEL',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -435,7 +399,6 @@ attributes = {
             'description': 'Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Current.\n'
         },
         'name': 'PPMU_CURRENT_LEVEL_RANGE',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -447,7 +410,6 @@ attributes = {
             'description': 'Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Current.\n'
         },
         'name': 'PPMU_VOLTAGE_LIMIT_LOW',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -459,7 +421,6 @@ attributes = {
             'description': 'Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Current.\n'
         },
         'name': 'PPMU_VOLTAGE_LIMIT_HIGH',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -471,7 +432,6 @@ attributes = {
             'description': 'Specifies the pattern name or exported pattern label from which to start bursting the pattern.\n'
         },
         'name': 'START_LABEL',
-        'resettable': True,
         'type': 'ViString'
     },
     1150029: {
@@ -498,7 +458,6 @@ attributes = {
         },
         'enum': 'TriggerType',
         'name': 'START_TRIGGER_TYPE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150030: {
@@ -544,7 +503,6 @@ attributes = {
             ]
         },
         'name': 'DIGITAL_EDGE_START_TRIGGER_SOURCE',
-        'resettable': True,
         'type': 'ViString'
     },
     1150031: {
@@ -567,7 +525,6 @@ attributes = {
         },
         'enum': 'DigitalEdge',
         'name': 'DIGITAL_EDGE_START_TRIGGER_EDGE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150032: {
@@ -617,7 +574,6 @@ attributes = {
             ]
         },
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
-        'resettable': True,
         'type': 'ViString'
     },
     1150033: {
@@ -644,7 +600,6 @@ attributes = {
         },
         'enum': 'TriggerType',
         'name': 'CONDITIONAL_JUMP_TRIGGER_TYPE',
-        'resettable': True,
         'supported_rep_caps': [
             'conditional_jump_triggers'
         ],
@@ -664,7 +619,6 @@ attributes = {
             ]
         },
         'name': 'DIGITAL_EDGE_CONDITIONAL_JUMP_TRIGGER_SOURCE',
-        'resettable': True,
         'supported_rep_caps': [
             'conditional_jump_triggers'
         ],
@@ -690,7 +644,6 @@ attributes = {
         },
         'enum': 'DigitalEdge',
         'name': 'DIGITAL_EDGE_CONDITIONAL_JUMP_TRIGGER_EDGE',
-        'resettable': True,
         'supported_rep_caps': [
             'conditional_jump_triggers'
         ],
@@ -743,7 +696,6 @@ attributes = {
             ]
         },
         'name': 'EXPORTED_CONDITIONAL_JUMP_TRIGGER_OUTPUT_TERMINAL',
-        'resettable': True,
         'supported_rep_caps': [
             'conditional_jump_triggers'
         ],
@@ -755,7 +707,6 @@ attributes = {
             'description': 'Specifies the measurement aperture time for the PPMU. The NIDIGITAL_ATTR_PPMU_APERTURE_TIME_UNITS attribute sets the units of the PPMU aperture time.\n'
         },
         'name': 'PPMU_APERTURE_TIME',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -777,7 +728,6 @@ attributes = {
         },
         'enum': 'PPMUApertureTimeUnits',
         'name': 'PPMU_APERTURE_TIME_UNITS',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -789,7 +739,6 @@ attributes = {
             'description': 'Specifies the terminal name for the output trigger signal of the Start trigger. You can use this terminal name as an input signal source for another trigger.\n'
         },
         'name': 'START_TRIGGER_TERMINAL_NAME',
-        'resettable': False,
         'type': 'ViString'
     },
     1150040: {
@@ -798,7 +747,6 @@ attributes = {
             'description': 'Specifies the terminal name from which the exported conditional jump trigger signal may be routed to other instruments through the PXI trigger bus. You can use this signal to trigger other instruments when the conditional jump trigger instance asserts on the digital pattern instrument.\n'
         },
         'name': 'CONDITIONAL_JUMP_TRIGGER_TERMINAL_NAME',
-        'resettable': False,
         'supported_rep_caps': [
             'conditional_jump_triggers'
         ],
@@ -847,7 +795,6 @@ attributes = {
             ]
         },
         'name': 'EXPORTED_PATTERN_OPCODE_EVENT_OUTPUT_TERMINAL',
-        'resettable': True,
         'supported_rep_caps': [
             'pattern_opcode_events'
         ],
@@ -859,7 +806,6 @@ attributes = {
             'description': 'Specifies the terminal name for the output trigger signal of the specified instance of a Pattern Opcode Event. You can use this terminal name as an input signal source for another trigger.\n'
         },
         'name': 'PATTERN_OPCODE_EVENT_TERMINAL_NAME',
-        'resettable': False,
         'supported_rep_caps': [
             'pattern_opcode_events'
         ],
@@ -889,7 +835,6 @@ attributes = {
         },
         'enum': 'HramTriggerType',
         'name': 'HISTORY_RAM_TRIGGER_TYPE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150044: {
@@ -898,7 +843,6 @@ attributes = {
             'description': 'Specifies the cycle number on which History RAM starts acquiring pattern information when configured for a cycle number trigger.\n'
         },
         'name': 'CYCLE_NUMBER_HISTORY_RAM_TRIGGER_CYCLE_NUMBER',
-        'resettable': True,
         'type': 'ViInt64'
     },
     1150045: {
@@ -907,7 +851,6 @@ attributes = {
             'description': 'Specifies the number of cycles that follow the specified pattern label and vector offset, after which History RAM will start acquiring pattern information when configured for a pattern label trigger.\n'
         },
         'name': 'PATTERN_LABEL_HISTORY_RAM_TRIGGER_CYCLE_OFFSET',
-        'resettable': True,
         'type': 'ViInt64'
     },
     1150046: {
@@ -916,7 +859,6 @@ attributes = {
             'description': 'Specifies the pattern label, augmented by the vector and cycle offset, to determine the point where History RAM will start acquiring pattern information when configured for a pattern label trigger.\n'
         },
         'name': 'PATTERN_LABEL_HISTORY_RAM_TRIGGER_LABEL',
-        'resettable': True,
         'type': 'ViString'
     },
     1150047: {
@@ -939,7 +881,6 @@ attributes = {
         },
         'enum': 'HramCyclesToAcquire',
         'name': 'HISTORY_RAM_CYCLES_TO_ACQUIRE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150048: {
@@ -948,7 +889,6 @@ attributes = {
             'description': 'Specifies the number of samples to acquire before the trigger conditions are met. If you configure History RAM to only acquire failed cycles, you must set the pretrigger samples for History RAM to 0.\n'
         },
         'name': 'HISTORY_RAM_PRETRIGGER_SAMPLES',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150051: {
@@ -958,7 +898,6 @@ attributes = {
             'description': 'Specifies the TDR Offset.\n'
         },
         'name': 'TDR_OFFSET',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -971,7 +910,6 @@ attributes = {
             'description': 'Specifies the number of vectors that follow the specified pattern label, after which History RAM will start acquiring pattern information when configured for a pattern label trigger.\n'
         },
         'name': 'PATTERN_LABEL_HISTORY_RAM_TRIGGER_VECTOR_OFFSET',
-        'resettable': True,
         'type': 'ViInt64'
     },
     1150054: {
@@ -980,7 +918,6 @@ attributes = {
             'description': 'Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This attribute is applicable only when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Voltage. The PXIe-6570/6571 does not support the NIDIGITAL_ATTR_PPMU_CURRENT_LIMIT attribute and only allows configuration of the NIDIGITAL_ATTR_PPMU_CURRENT_LIMIT_RANGE attribute.\n'
         },
         'name': 'PPMU_CURRENT_LIMIT',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -992,7 +929,6 @@ attributes = {
             'description': 'Returns whether the device supports configuration of a current limit when you set the NIDIGITAL_ATTR_PPMU_OUTPUT_FUNCTION attribute to DC Voltage.\n'
         },
         'name': 'PPMU_CURRENT_LIMIT_SUPPORTED',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1004,7 +940,6 @@ attributes = {
             'description': 'Specifies the terminal name for the output trigger signal of the Sequencer Flags trigger. You can use this terminal name as an input signal source for another trigger.\n'
         },
         'name': 'SEQUENCER_FLAG_TERMINAL_NAME',
-        'resettable': False,
         'type': 'ViString'
     },
     1150060: {
@@ -1013,7 +948,6 @@ attributes = {
             'description': 'Specifies whether the pattern comparisons are masked or not. When set to VI_TRUE for a specified pin, failures on that pin will be masked.\n'
         },
         'name': 'MASK_COMPARE',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1025,7 +959,6 @@ attributes = {
             'description': 'Specifies whether keep_alive opcodes should behave like halt opcodes.\n'
         },
         'name': 'HALT_ON_KEEP_ALIVE_OPCODE',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1150063: {
@@ -1034,7 +967,6 @@ attributes = {
             'description': 'Returns VI_TRUE if the digital pattern instrument is driving the keep alive pattern.\n'
         },
         'name': 'IS_KEEP_ALIVE_ACTIVE',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1150064: {
@@ -1053,7 +985,6 @@ attributes = {
         },
         'enum': 'PPMUCurrentLimitBehavior',
         'name': 'PPMU_CURRENT_LIMIT_BEHAVIOR',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1066,7 +997,6 @@ attributes = {
             'description': 'Specifies the measurement time for the frequency counter.\n'
         },
         'name': 'FREQUENCY_COUNTER_MEASUREMENT_TIME',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1079,7 +1009,6 @@ attributes = {
             'description': 'Specifies whether the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY attribute should be applied to adjust the digital pattern instrument timing reference relative to other instruments in the system. Do not use this feature with digital pattern instruments in a Semiconductor Test System (STS). Timing absolute delay conflicts with the adjustment performed during STS timing calibration. When set to VI_TRUE, the digital pattern instrument automatically adjusts the timing absolute delay to correct the instrument timing reference relative to other instruments in the system for better timing alignment among synchronized instruments.\n'
         },
         'name': 'TIMING_ABSOLUTE_DELAY_ENABLED',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1150072: {
@@ -1089,7 +1018,6 @@ attributes = {
             'description': 'Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY_ENABLED attribute is set to VI_TRUE, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY_ENABLED attribute is VI_FALSE, this attribute will return 0.0. Changing the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY_ENABLED attribute from VI_FALSE to VI_TRUE will set the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY value back to your previously set value.\n'
         },
         'name': 'TIMING_ABSOLUTE_DELAY',
-        'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
@@ -1099,7 +1027,6 @@ attributes = {
             'description': 'Specifies the frequency for the clock generator.\n'
         },
         'name': 'CLOCK_GENERATOR_FREQUENCY',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1111,7 +1038,6 @@ attributes = {
             'description': 'Indicates whether the clock generator is running.\n'
         },
         'name': 'CLOCK_GENERATOR_IS_RUNNING',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1123,7 +1049,6 @@ attributes = {
             'description': 'Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to VI_TRUE, this attribute enables extended voltage range operation. Review specification deviations for application suitability before using this attribute. NI recommends setting this attribute to VI_FALSE when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output function set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the NIDIGITAL_ATTR_SELECTED_FUNCTION attribute to Off before sourcing a voltage level that requires a range change.\n'
         },
         'name': 'PPMU_ALLOW_EXTENDED_VOLTAGE_RANGE',
-        'resettable': True,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1135,7 +1060,6 @@ attributes = {
             'description': 'Specifies the maximum number of History RAM samples to acquire per site. If the property is set to -1, it will acquire until the History RAM buffer is full.\n'
         },
         'name': 'HISTORY_RAM_MAX_SAMPLES_TO_ACQUIRE_PER_SITE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150078: {
@@ -1157,7 +1081,6 @@ attributes = {
             ]
         },
         'name': 'HISTORY_RAM_NUMBER_OF_SAMPLES_IS_FINITE',
-        'resettable': True,
         'type': 'ViBoolean'
     },
     1150079: {
@@ -1174,7 +1097,6 @@ attributes = {
             ]
         },
         'name': 'HISTORY_RAM_BUFFER_SIZE_PER_SITE',
-        'resettable': True,
         'type': 'ViInt64'
     },
     1150081: {
@@ -1184,7 +1106,6 @@ attributes = {
         },
         'enum': 'TDREndpointTermination',
         'name': 'TDR_ENDPOINT_TERMINATION',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150084: {
@@ -1207,7 +1128,6 @@ attributes = {
         },
         'enum': 'FrequencyMeasurementMode',
         'name': 'FREQUENCY_COUNTER_MEASUREMENT_MODE',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150085: {
@@ -1216,7 +1136,6 @@ attributes = {
             'description': 'Specifies whether hysteresis is enabled for the frequency counters of the digital pattern instrument.\n'
         },
         'name': 'FREQUENCY_COUNTER_HYSTERESIS_ENABLED',
-        'resettable': True,
         'type': 'ViBoolean'
     }
 }

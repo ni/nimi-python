@@ -195,10 +195,15 @@ apply_tdr_offsets
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].apply_tdr_offsets`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.apply_tdr_offsets`
 
 
             :param offsets:
@@ -227,10 +232,15 @@ burst_pattern
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.sites[ ... ].burst_pattern`
+
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.burst_pattern`
 
 
             :param start_label:
@@ -306,10 +316,15 @@ clock_generator_abort
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].clock_generator_abort`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.clock_generator_abort`
 
 
 clock_generator_generate_clock
@@ -324,10 +339,15 @@ clock_generator_generate_clock
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].clock_generator_generate_clock`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.clock_generator_generate_clock`
 
 
             :param frequency:
@@ -361,10 +381,15 @@ clock_generator_initiate
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].clock_generator_initiate`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.clock_generator_initiate`
 
 
 close
@@ -407,10 +432,15 @@ configure_active_load_levels
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].configure_active_load_levels`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_active_load_levels`
 
 
             :param iol:
@@ -927,10 +957,15 @@ configure_voltage_levels
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].configure_voltage_levels`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_voltage_levels`
 
 
             :param vil:
@@ -1348,10 +1383,15 @@ fetch_capture_waveform
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.sites[ ... ].fetch_capture_waveform`
+
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.fetch_capture_waveform`
 
 
             :param waveform_name:
@@ -1443,10 +1483,15 @@ fetch_history_ram_cycle_information
                 the trigger conditions are met.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].fetch_history_ram_cycle_information`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.fetch_history_ram_cycle_information`
 
 
             :param position:
@@ -1515,10 +1560,15 @@ frequency_counter_measure_frequency
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].frequency_counter_measure_frequency`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.frequency_counter_measure_frequency`
 
 
             :rtype: list of float
@@ -1615,10 +1665,15 @@ get_fail_count
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_fail_count`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.get_fail_count`
 
 
             :rtype: list of int
@@ -1709,10 +1764,15 @@ get_pin_results_pin_information
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_pin_results_pin_information`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.get_pin_results_pin_information`
 
 
             :rtype: list of PinInfo
@@ -2281,10 +2341,15 @@ ppmu_measure
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].ppmu_measure`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.ppmu_measure`
 
 
             :param measurement_type:
@@ -2322,10 +2387,15 @@ ppmu_source
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].ppmu_source`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.ppmu_source`
 
 
 read_sequencer_flag
@@ -2428,10 +2498,15 @@ read_static
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].read_static`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.read_static`
 
 
             :rtype: list of :py:data:`nidigital.PinState`
@@ -2479,10 +2554,15 @@ reset_attribute
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].reset_attribute`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.reset_attribute`
 
 
             :param attribute_id:
@@ -2608,10 +2688,15 @@ tdr
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].tdr`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.tdr`
 
 
             :param apply_offsets:
@@ -2910,10 +2995,15 @@ write_static
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].write_static`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.write_static`
 
 
             :param state:
@@ -2946,10 +3036,14 @@ active_load_ioh
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].active_load_ioh`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.active_load_ioh`
 
         The following table lists the characteristics of this property.
 
@@ -2961,8 +3055,6 @@ active_load_ioh
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -2980,10 +3072,14 @@ active_load_iol
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].active_load_iol`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.active_load_iol`
 
         The following table lists the characteristics of this property.
 
@@ -2995,8 +3091,6 @@ active_load_iol
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3014,10 +3108,14 @@ active_load_vcom
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].active_load_vcom`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.active_load_vcom`
 
         The following table lists the characteristics of this property.
 
@@ -3029,8 +3127,6 @@ active_load_vcom
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3056,8 +3152,6 @@ cache
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3082,8 +3176,6 @@ channel_count
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3100,10 +3192,14 @@ clock_generator_frequency
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].clock_generator_frequency`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.clock_generator_frequency`
 
         The following table lists the characteristics of this property.
 
@@ -3115,8 +3211,6 @@ clock_generator_frequency
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3134,10 +3228,14 @@ clock_generator_is_running
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].clock_generator_is_running`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.clock_generator_is_running`
 
         The following table lists the characteristics of this property.
 
@@ -3149,8 +3247,6 @@ clock_generator_is_running
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3168,10 +3264,14 @@ conditional_jump_trigger_terminal_name
 
 
 
-        .. tip:: This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific conditional jump triggers within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container conditional jump triggers to specify a subset.
+
+            Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].conditional_jump_trigger_terminal_name`
+
+            To set/get on all conditional jump triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.conditional_jump_trigger_terminal_name`
 
         The following table lists the characteristics of this property.
 
@@ -3183,8 +3283,6 @@ conditional_jump_trigger_terminal_name
             | Permissions           | read only                 |
             +-----------------------+---------------------------+
             | Repeated Capabilities | conditional jump triggers |
-            +-----------------------+---------------------------+
-            | Resettable            | No                        |
             +-----------------------+---------------------------+
 
         .. tip::
@@ -3210,10 +3308,14 @@ conditional_jump_trigger_type
         +------------------------------------------------+------------------------------------------------------------------+
 
 
-        .. tip:: This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific conditional jump triggers within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container conditional jump triggers to specify a subset.
+
+            Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].conditional_jump_trigger_type`
+
+            To set/get on all conditional jump triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.conditional_jump_trigger_type`
 
         The following table lists the characteristics of this property.
 
@@ -3225,8 +3327,6 @@ conditional_jump_trigger_type
             | Permissions           | read-write                |
             +-----------------------+---------------------------+
             | Repeated Capabilities | conditional jump triggers |
-            +-----------------------+---------------------------+
-            | Resettable            | Yes                       |
             +-----------------------+---------------------------+
 
         .. tip::
@@ -3252,8 +3352,6 @@ cycle_number_history_ram_trigger_cycle_number
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3276,10 +3374,14 @@ digital_edge_conditional_jump_trigger_edge
         +-------------------------------------------+---------------------------------------------------------------+
 
 
-        .. tip:: This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific conditional jump triggers within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container conditional jump triggers to specify a subset.
+
+            Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].digital_edge_conditional_jump_trigger_edge`
+
+            To set/get on all conditional jump triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_conditional_jump_trigger_edge`
 
         The following table lists the characteristics of this property.
 
@@ -3291,8 +3393,6 @@ digital_edge_conditional_jump_trigger_edge
             | Permissions           | read-write                |
             +-----------------------+---------------------------+
             | Repeated Capabilities | conditional jump triggers |
-            +-----------------------+---------------------------+
-            | Resettable            | Yes                       |
             +-----------------------+---------------------------+
 
         .. tip::
@@ -3314,10 +3414,14 @@ digital_edge_conditional_jump_trigger_source
         +----------------------------------------------+
 
 
-        .. tip:: This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific conditional jump triggers within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container conditional jump triggers to specify a subset.
+
+            Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].digital_edge_conditional_jump_trigger_source`
+
+            To set/get on all conditional jump triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_conditional_jump_trigger_source`
 
         The following table lists the characteristics of this property.
 
@@ -3329,8 +3433,6 @@ digital_edge_conditional_jump_trigger_source
             | Permissions           | read-write                |
             +-----------------------+---------------------------+
             | Repeated Capabilities | conditional jump triggers |
-            +-----------------------+---------------------------+
-            | Resettable            | Yes                       |
             +-----------------------+---------------------------+
 
         .. tip::
@@ -3363,8 +3465,6 @@ digital_edge_start_trigger_edge
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | None              |
-            +-----------------------+-------------------+
-            | Resettable            | Yes               |
             +-----------------------+-------------------+
 
         .. tip::
@@ -3410,8 +3510,6 @@ digital_edge_start_trigger_source
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3435,8 +3533,6 @@ driver_setup
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3474,10 +3570,14 @@ exported_conditional_jump_trigger_output_terminal
         +---------------+-------------------------+
 
 
-        .. tip:: This property can use repeated capabilities for conditional jump triggers. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific conditional jump triggers within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container conditional jump triggers to specify a subset.
+
+            Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].exported_conditional_jump_trigger_output_terminal`
+
+            To set/get on all conditional jump triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.exported_conditional_jump_trigger_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3489,8 +3589,6 @@ exported_conditional_jump_trigger_output_terminal
             | Permissions           | read-write                |
             +-----------------------+---------------------------+
             | Repeated Capabilities | conditional jump triggers |
-            +-----------------------+---------------------------+
-            | Resettable            | Yes                       |
             +-----------------------+---------------------------+
 
         .. tip::
@@ -3526,10 +3624,14 @@ exported_pattern_opcode_event_output_terminal
         +-----------------+--------------------+
 
 
-        .. tip:: This property can use repeated capabilities for pattern opcode events. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific pattern opcode events within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container pattern opcode events to specify a subset.
+
+            Example: :py:attr:`my_session.pattern_opcode_events[ ... ].exported_pattern_opcode_event_output_terminal`
+
+            To set/get on all pattern opcode events, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.exported_pattern_opcode_event_output_terminal`
 
         The following table lists the characteristics of this property.
 
@@ -3541,8 +3643,6 @@ exported_pattern_opcode_event_output_terminal
             | Permissions           | read-write            |
             +-----------------------+-----------------------+
             | Repeated Capabilities | pattern opcode events |
-            +-----------------------+-----------------------+
-            | Resettable            | Yes                   |
             +-----------------------+-----------------------+
 
         .. tip::
@@ -3590,8 +3690,6 @@ exported_start_trigger_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3615,8 +3713,6 @@ frequency_counter_hysteresis_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3650,8 +3746,6 @@ frequency_counter_measurement_mode
             +-----------------------+--------------------------------+
             | Repeated Capabilities | None                           |
             +-----------------------+--------------------------------+
-            | Resettable            | Yes                            |
-            +-----------------------+--------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3668,10 +3762,14 @@ frequency_counter_measurement_time
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].frequency_counter_measurement_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.frequency_counter_measurement_time`
 
         The following table lists the characteristics of this property.
 
@@ -3683,8 +3781,6 @@ frequency_counter_measurement_time
             | Permissions           | read-write                             |
             +-----------------------+----------------------------------------+
             | Repeated Capabilities | channels                               |
-            +-----------------------+----------------------------------------+
-            | Resettable            | Yes                                    |
             +-----------------------+----------------------------------------+
 
         .. tip::
@@ -3710,8 +3806,6 @@ group_capabilities
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3735,8 +3829,6 @@ halt_on_keep_alive_opcode
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3767,8 +3859,6 @@ history_ram_buffer_size_per_site
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3802,8 +3892,6 @@ history_ram_cycles_to_acquire
             +-----------------------+---------------------------+
             | Repeated Capabilities | None                      |
             +-----------------------+---------------------------+
-            | Resettable            | Yes                       |
-            +-----------------------+---------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3827,8 +3915,6 @@ history_ram_max_samples_to_acquire_per_site
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3862,8 +3948,6 @@ history_ram_number_of_samples_is_finite
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3887,8 +3971,6 @@ history_ram_pretrigger_samples
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3924,8 +4006,6 @@ history_ram_trigger_type
             +-----------------------+-----------------------+
             | Repeated Capabilities | None                  |
             +-----------------------+-----------------------+
-            | Resettable            | Yes                   |
-            +-----------------------+-----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3942,10 +4022,14 @@ instrument_firmware_revision
 
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.instrument_firmware_revision`
 
         The following table lists the characteristics of this property.
 
@@ -3957,8 +4041,6 @@ instrument_firmware_revision
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -3984,8 +4066,6 @@ instrument_manufacturer
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4009,8 +4089,6 @@ instrument_model
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -4036,8 +4114,6 @@ interchange_check
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4061,8 +4137,6 @@ io_resource_descriptor
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -4088,8 +4162,6 @@ is_keep_alive_active
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4114,8 +4186,6 @@ logical_name
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4132,10 +4202,14 @@ mask_compare
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].mask_compare`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.mask_compare`
 
         The following table lists the characteristics of this property.
 
@@ -4147,8 +4221,6 @@ mask_compare
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4174,8 +4246,6 @@ pattern_label_history_ram_trigger_cycle_offset
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4199,8 +4269,6 @@ pattern_label_history_ram_trigger_label
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4226,8 +4294,6 @@ pattern_label_history_ram_trigger_vector_offset
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4244,10 +4310,14 @@ pattern_opcode_event_terminal_name
 
 
 
-        .. tip:: This property can use repeated capabilities for pattern opcode events. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific pattern opcode events within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container pattern opcode events to specify a subset.
+
+            Example: :py:attr:`my_session.pattern_opcode_events[ ... ].pattern_opcode_event_terminal_name`
+
+            To set/get on all pattern opcode events, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.pattern_opcode_event_terminal_name`
 
         The following table lists the characteristics of this property.
 
@@ -4259,8 +4329,6 @@ pattern_opcode_event_terminal_name
             | Permissions           | read only             |
             +-----------------------+-----------------------+
             | Repeated Capabilities | pattern opcode events |
-            +-----------------------+-----------------------+
-            | Resettable            | No                    |
             +-----------------------+-----------------------+
 
         .. tip::
@@ -4278,10 +4346,14 @@ ppmu_allow_extended_voltage_range
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_allow_extended_voltage_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_allow_extended_voltage_range`
 
         The following table lists the characteristics of this property.
 
@@ -4293,8 +4365,6 @@ ppmu_allow_extended_voltage_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4312,10 +4382,14 @@ ppmu_aperture_time
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_aperture_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_aperture_time`
 
         The following table lists the characteristics of this property.
 
@@ -4327,8 +4401,6 @@ ppmu_aperture_time
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4350,10 +4422,14 @@ ppmu_aperture_time_units
         +-----------------------------------------------------+-----------------------------------------+
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_aperture_time_units`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_aperture_time_units`
 
         The following table lists the characteristics of this property.
 
@@ -4365,8 +4441,6 @@ ppmu_aperture_time_units
             | Permissions           | read-write                  |
             +-----------------------+-----------------------------+
             | Repeated Capabilities | channels                    |
-            +-----------------------+-----------------------------+
-            | Resettable            | Yes                         |
             +-----------------------+-----------------------------+
 
         .. tip::
@@ -4386,10 +4460,14 @@ ppmu_current_level
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_current_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_current_level`
 
         The following table lists the characteristics of this property.
 
@@ -4401,8 +4479,6 @@ ppmu_current_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4420,10 +4496,14 @@ ppmu_current_level_range
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_current_level_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_current_level_range`
 
         The following table lists the characteristics of this property.
 
@@ -4435,8 +4515,6 @@ ppmu_current_level_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4454,10 +4532,14 @@ ppmu_current_limit
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_current_limit`
 
         The following table lists the characteristics of this property.
 
@@ -4469,8 +4551,6 @@ ppmu_current_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4492,10 +4572,14 @@ ppmu_current_limit_behavior
         +---------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_behavior`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_current_limit_behavior`
 
         The following table lists the characteristics of this property.
 
@@ -4507,8 +4591,6 @@ ppmu_current_limit_behavior
             | Permissions           | read-write                     |
             +-----------------------+--------------------------------+
             | Repeated Capabilities | channels                       |
-            +-----------------------+--------------------------------+
-            | Resettable            | Yes                            |
             +-----------------------+--------------------------------+
 
         .. tip::
@@ -4526,10 +4608,14 @@ ppmu_current_limit_range
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_current_limit_range`
 
         The following table lists the characteristics of this property.
 
@@ -4541,8 +4627,6 @@ ppmu_current_limit_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4560,10 +4644,14 @@ ppmu_current_limit_supported
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_supported`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_current_limit_supported`
 
         The following table lists the characteristics of this property.
 
@@ -4575,8 +4663,6 @@ ppmu_current_limit_supported
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -4600,10 +4686,14 @@ ppmu_output_function
         +--------------------------------------------------+--------------------------------------------+
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_output_function`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_output_function`
 
         The following table lists the characteristics of this property.
 
@@ -4615,8 +4705,6 @@ ppmu_output_function
             | Permissions           | read-write               |
             +-----------------------+--------------------------+
             | Repeated Capabilities | channels                 |
-            +-----------------------+--------------------------+
-            | Resettable            | Yes                      |
             +-----------------------+--------------------------+
 
         .. tip::
@@ -4634,10 +4722,14 @@ ppmu_voltage_level
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_voltage_level`
 
         The following table lists the characteristics of this property.
 
@@ -4649,8 +4741,6 @@ ppmu_voltage_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4668,10 +4758,14 @@ ppmu_voltage_limit_high
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_voltage_limit_high`
 
         The following table lists the characteristics of this property.
 
@@ -4683,8 +4777,6 @@ ppmu_voltage_limit_high
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4702,10 +4794,14 @@ ppmu_voltage_limit_low
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.ppmu_voltage_limit_low`
 
         The following table lists the characteristics of this property.
 
@@ -4717,8 +4813,6 @@ ppmu_voltage_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4744,8 +4838,6 @@ query_instrument_status
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4770,8 +4862,6 @@ range_check
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4795,8 +4885,6 @@ record_coercions
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4828,10 +4916,14 @@ selected_function
         .. note:: You can make PPMU voltage measurements using the :py:meth:`nidigital.Session.ppmu_measure` method from within any :py:attr:`nidigital.Session.selected_function`.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].selected_function`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.selected_function`
 
         The following table lists the characteristics of this property.
 
@@ -4843,8 +4935,6 @@ selected_function
             | Permissions           | read-write             |
             +-----------------------+------------------------+
             | Repeated Capabilities | channels               |
-            +-----------------------+------------------------+
-            | Resettable            | Yes                    |
             +-----------------------+------------------------+
 
         .. tip::
@@ -4870,8 +4960,6 @@ sequencer_flag_terminal_name
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4888,10 +4976,14 @@ serial_number
 
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].serial_number`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.serial_number`
 
         The following table lists the characteristics of this property.
 
@@ -4903,8 +4995,6 @@ serial_number
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -4930,8 +5020,6 @@ simulate
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4955,8 +5043,6 @@ specific_driver_class_spec_major_version
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -4982,8 +5068,6 @@ specific_driver_class_spec_minor_version
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5007,8 +5091,6 @@ specific_driver_description
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -5034,8 +5116,6 @@ specific_driver_prefix
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5059,8 +5139,6 @@ specific_driver_revision
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -5086,8 +5164,6 @@ specific_driver_vendor
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5112,8 +5188,6 @@ start_label
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5137,8 +5211,6 @@ start_trigger_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -5176,8 +5248,6 @@ start_trigger_type
             +-----------------------+-------------------+
             | Repeated Capabilities | None              |
             +-----------------------+-------------------+
-            | Resettable            | Yes               |
-            +-----------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5201,8 +5271,6 @@ supported_instrument_models
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -5228,8 +5296,6 @@ tdr_endpoint_termination
             +-----------------------+------------------------------+
             | Repeated Capabilities | None                         |
             +-----------------------+------------------------------+
-            | Resettable            | Yes                          |
-            +-----------------------+------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5246,10 +5312,14 @@ tdr_offset
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].tdr_offset`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.tdr_offset`
 
         The following table lists the characteristics of this property.
 
@@ -5261,8 +5331,6 @@ tdr_offset
             | Permissions           | read-write                             |
             +-----------------------+----------------------------------------+
             | Repeated Capabilities | channels                               |
-            +-----------------------+----------------------------------------+
-            | Resettable            | Yes                                    |
             +-----------------------+----------------------------------------+
 
         .. tip::
@@ -5288,10 +5356,14 @@ termination_mode
         +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].termination_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.termination_mode`
 
         The following table lists the characteristics of this property.
 
@@ -5303,8 +5375,6 @@ termination_mode
             | Permissions           | read-write            |
             +-----------------------+-----------------------+
             | Repeated Capabilities | channels              |
-            +-----------------------+-----------------------+
-            | Resettable            | Yes                   |
             +-----------------------+-----------------------+
 
         .. tip::
@@ -5330,8 +5400,6 @@ timing_absolute_delay
             +-----------------------+----------------------------------------+
             | Repeated Capabilities | None                                   |
             +-----------------------+----------------------------------------+
-            | Resettable            | Yes                                    |
-            +-----------------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5356,8 +5424,6 @@ timing_absolute_delay_enabled
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5374,10 +5440,14 @@ vih
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].vih`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.vih`
 
         The following table lists the characteristics of this property.
 
@@ -5389,8 +5459,6 @@ vih
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5408,10 +5476,14 @@ vil
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].vil`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.vil`
 
         The following table lists the characteristics of this property.
 
@@ -5423,8 +5495,6 @@ vil
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5442,10 +5512,14 @@ voh
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].voh`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.voh`
 
         The following table lists the characteristics of this property.
 
@@ -5457,8 +5531,6 @@ voh
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5476,10 +5548,14 @@ vol
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].vol`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.vol`
 
         The following table lists the characteristics of this property.
 
@@ -5491,8 +5567,6 @@ vol
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5510,10 +5584,14 @@ vterm
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].vterm`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.vterm`
 
         The following table lists the characteristics of this property.
 
@@ -5525,8 +5603,6 @@ vterm
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::

@@ -230,10 +230,15 @@ add_waveform_processing
             .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].add_waveform_processing`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.add_waveform_processing`
 
 
             :param meas_function:
@@ -345,10 +350,15 @@ clear_waveform_measurement_stats
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].clear_waveform_measurement_stats`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.clear_waveform_measurement_stats`
 
 
             :param clearable_measurement_function:
@@ -382,10 +392,15 @@ clear_waveform_processing
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].clear_waveform_processing`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.clear_waveform_processing`
 
 
 close
@@ -437,10 +452,15 @@ configure_chan_characteristics
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].configure_chan_characteristics`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.configure_chan_characteristics`
 
 
             :param input_impedance:
@@ -482,10 +502,15 @@ configure_equalization_filter_coefficients
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].configure_equalization_filter_coefficients`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.configure_equalization_filter_coefficients`
 
 
             :param coefficients:
@@ -1196,10 +1221,15 @@ configure_vertical
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].configure_vertical`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.configure_vertical`
 
 
             :param range:
@@ -1370,10 +1400,15 @@ fetch
             .. note:: Some functionality, such as time stamping, is not supported in all digitizers.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].fetch`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.fetch`
 
 
             :param num_samples:
@@ -1478,10 +1513,15 @@ fetch_array_measurement
                 digitizers.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].fetch_array_measurement`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.fetch_array_measurement`
 
 
             :param array_meas_function:
@@ -1612,10 +1652,15 @@ fetch_into
             .. note:: Some functionality, such as time stamping, is not supported in all digitizers.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].fetch`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.fetch`
 
 
             :param waveform:
@@ -1749,10 +1794,15 @@ fetch_measurement_stats
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].fetch_measurement_stats`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.fetch_measurement_stats`
 
 
             :param scalar_meas_function:
@@ -1848,10 +1898,15 @@ get_equalization_filter_coefficients
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_equalization_filter_coefficients`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.get_equalization_filter_coefficients`
 
 
 get_ext_cal_last_date_and_time
@@ -2148,10 +2203,15 @@ read
             .. note:: Some functionality, such as time stamping, is not supported in all digitizers.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].read`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.read`
 
 
             :param num_samples:
@@ -2314,10 +2374,15 @@ self_cal
             .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                niscope.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`niscope.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].self_cal`
+
+                To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
+
+                Example: :py:meth:`my_session.self_cal`
 
 
             :param option:
@@ -2441,8 +2506,6 @@ absolute_sample_clock_offset
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | None                                                        |
             +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
-            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2468,8 +2531,6 @@ acquisition_start_time
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | None                                                        |
             +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
-            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2494,8 +2555,6 @@ acquisition_type
             | Permissions           | read-write            |
             +-----------------------+-----------------------+
             | Repeated Capabilities | None                  |
-            +-----------------------+-----------------------+
-            | Resettable            | Yes                   |
             +-----------------------+-----------------------+
 
         .. tip::
@@ -2539,8 +2598,6 @@ acq_arm_source
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2565,8 +2622,6 @@ advance_trigger_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2593,8 +2648,6 @@ adv_trig_src
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2619,8 +2672,6 @@ allow_more_records_than_memory
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -2647,8 +2698,6 @@ arm_ref_trig_src
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2674,8 +2723,6 @@ backlog
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2693,10 +2740,14 @@ bandpass_filter_enabled
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].bandpass_filter_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.bandpass_filter_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -2708,8 +2759,6 @@ bandpass_filter_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -2738,8 +2787,6 @@ binary_sample_width
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -2789,8 +2836,6 @@ cable_sense_mode
             +-----------------------+----------------------+
             | Repeated Capabilities | None                 |
             +-----------------------+----------------------+
-            | Resettable            | Yes                  |
-            +-----------------------+----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2814,8 +2859,6 @@ cable_sense_signal_enable
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -2855,8 +2898,6 @@ cable_sense_voltage
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2882,8 +2923,6 @@ channel_count
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2904,10 +2943,14 @@ channel_enabled
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].channel_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.channel_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -2919,8 +2962,6 @@ channel_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -2939,10 +2980,14 @@ channel_terminal_configuration
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].channel_terminal_configuration`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.channel_terminal_configuration`
 
         The following table lists the characteristics of this property.
 
@@ -2954,8 +2999,6 @@ channel_terminal_configuration
             | Permissions           | read-write                  |
             +-----------------------+-----------------------------+
             | Repeated Capabilities | channels                    |
-            +-----------------------+-----------------------------+
-            | Resettable            | Yes                         |
             +-----------------------+-----------------------------+
 
         .. tip::
@@ -2982,8 +3025,6 @@ data_transfer_block_size
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3008,8 +3049,6 @@ data_transfer_maximum_bandwidth
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3036,8 +3075,6 @@ data_transfer_preferred_packet_size
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3055,10 +3092,14 @@ device_temperature
 
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].device_temperature`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.device_temperature`
 
         The following table lists the characteristics of this property.
 
@@ -3070,8 +3111,6 @@ device_temperature
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -3105,8 +3144,6 @@ enabled_channels
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3134,8 +3171,6 @@ enable_dc_restore
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3156,10 +3191,14 @@ enable_time_interleaved_sampling
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].enable_time_interleaved_sampling`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.enable_time_interleaved_sampling`
 
         The following table lists the characteristics of this property.
 
@@ -3171,8 +3210,6 @@ enable_time_interleaved_sampling
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3200,8 +3237,6 @@ end_of_acquisition_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3226,8 +3261,6 @@ end_of_acquisition_event_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3255,8 +3288,6 @@ end_of_record_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3281,8 +3312,6 @@ end_of_record_event_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3315,8 +3344,6 @@ end_of_record_to_advance_trigger_holdoff
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | None                                                        |
             +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
-            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3334,10 +3361,14 @@ equalization_filter_enabled
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].equalization_filter_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.equalization_filter_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -3349,8 +3380,6 @@ equalization_filter_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3369,10 +3398,14 @@ equalization_num_coefficients
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].equalization_num_coefficients`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.equalization_num_coefficients`
 
         The following table lists the characteristics of this property.
 
@@ -3384,8 +3417,6 @@ equalization_num_coefficients
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3413,8 +3444,6 @@ exported_advance_trigger_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3440,8 +3469,6 @@ exported_ref_trigger_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3469,8 +3496,6 @@ exported_start_trigger_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3489,10 +3514,14 @@ flex_fir_antialias_filter_type
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].flex_fir_antialias_filter_type`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.flex_fir_antialias_filter_type`
 
         The following table lists the characteristics of this property.
 
@@ -3504,8 +3533,6 @@ flex_fir_antialias_filter_type
             | Permissions           | read-write                       |
             +-----------------------+----------------------------------+
             | Repeated Capabilities | channels                         |
-            +-----------------------+----------------------------------+
-            | Resettable            | Yes                              |
             +-----------------------+----------------------------------+
 
         .. tip::
@@ -3536,8 +3563,6 @@ fpga_bitfile_path
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3563,8 +3588,6 @@ glitch_condition
             +-----------------------+-----------------------+
             | Repeated Capabilities | None                  |
             +-----------------------+-----------------------+
-            | Resettable            | Yes                   |
-            +-----------------------+-----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3588,8 +3611,6 @@ glitch_polarity
             | Permissions           | read-write           |
             +-----------------------+----------------------+
             | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
-            | Resettable            | Yes                  |
             +-----------------------+----------------------+
 
         .. tip::
@@ -3617,8 +3638,6 @@ glitch_width
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3641,10 +3660,14 @@ high_pass_filter_frequency
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].high_pass_filter_frequency`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.high_pass_filter_frequency`
 
         The following table lists the characteristics of this property.
 
@@ -3656,8 +3679,6 @@ high_pass_filter_frequency
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3683,8 +3704,6 @@ horz_enforce_realtime
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3712,8 +3731,6 @@ horz_min_num_pts
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3738,8 +3755,6 @@ horz_num_records
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3767,8 +3782,6 @@ horz_record_length
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3794,8 +3807,6 @@ horz_record_ref_position
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3823,8 +3834,6 @@ horz_sample_rate
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3851,8 +3860,6 @@ horz_time_per_record
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | None                                                        |
             +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
-            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3878,8 +3885,6 @@ input_clock_source
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3897,10 +3902,14 @@ input_impedance
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].input_impedance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.input_impedance`
 
         The following table lists the characteristics of this property.
 
@@ -3912,8 +3921,6 @@ input_impedance
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3932,10 +3939,14 @@ instrument_firmware_revision
 
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.instrument_firmware_revision`
 
         The following table lists the characteristics of this property.
 
@@ -3947,8 +3958,6 @@ instrument_firmware_revision
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -3975,8 +3984,6 @@ instrument_manufacturer
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4002,8 +4009,6 @@ instrument_model
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4027,10 +4032,14 @@ interleaving_offset_correction_enabled
         .. note:: If disabled, warranted specifications are not guaranteed.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].interleaving_offset_correction_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.interleaving_offset_correction_enabled`
 
         The following table lists the characteristics of this property.
 
@@ -4042,8 +4051,6 @@ interleaving_offset_correction_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4075,8 +4082,6 @@ io_resource_descriptor
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4089,10 +4094,14 @@ is_probe_comp_on
 
     .. py:attribute:: is_probe_comp_on
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].is_probe_comp_on`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.is_probe_comp_on`
 
         The following table lists the characteristics of this property.
 
@@ -4104,8 +4113,6 @@ is_probe_comp_on
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -4135,8 +4142,6 @@ logical_name
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4161,8 +4166,6 @@ master_enable
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4190,10 +4193,14 @@ max_input_frequency
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_input_frequency`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.max_input_frequency`
 
         The following table lists the characteristics of this property.
 
@@ -4205,8 +4212,6 @@ max_input_frequency
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4233,8 +4238,6 @@ max_real_time_sampling_rate
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4260,8 +4263,6 @@ max_ris_rate
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4280,10 +4281,14 @@ meas_array_gain
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_array_gain`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_array_gain`
 
         The following table lists the characteristics of this property.
 
@@ -4295,8 +4300,6 @@ meas_array_gain
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4316,10 +4319,14 @@ meas_array_offset
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_array_offset`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_array_offset`
 
         The following table lists the characteristics of this property.
 
@@ -4331,8 +4338,6 @@ meas_array_offset
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4352,10 +4357,14 @@ meas_chan_high_ref_level
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_chan_high_ref_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_chan_high_ref_level`
 
         The following table lists the characteristics of this property.
 
@@ -4367,8 +4376,6 @@ meas_chan_high_ref_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4388,10 +4395,14 @@ meas_chan_low_ref_level
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_chan_low_ref_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_chan_low_ref_level`
 
         The following table lists the characteristics of this property.
 
@@ -4403,8 +4414,6 @@ meas_chan_low_ref_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4424,10 +4433,14 @@ meas_chan_mid_ref_level
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_chan_mid_ref_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_chan_mid_ref_level`
 
         The following table lists the characteristics of this property.
 
@@ -4439,8 +4452,6 @@ meas_chan_mid_ref_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4460,10 +4471,14 @@ meas_filter_center_freq
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_center_freq`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_center_freq`
 
         The following table lists the characteristics of this property.
 
@@ -4475,8 +4490,6 @@ meas_filter_center_freq
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4496,10 +4509,14 @@ meas_filter_cutoff_freq
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_cutoff_freq`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_cutoff_freq`
 
         The following table lists the characteristics of this property.
 
@@ -4511,8 +4528,6 @@ meas_filter_cutoff_freq
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4532,10 +4547,14 @@ meas_filter_order
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_order`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_order`
 
         The following table lists the characteristics of this property.
 
@@ -4547,8 +4566,6 @@ meas_filter_order
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4568,10 +4585,14 @@ meas_filter_ripple
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_ripple`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_ripple`
 
         The following table lists the characteristics of this property.
 
@@ -4583,8 +4604,6 @@ meas_filter_ripple
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4604,10 +4623,14 @@ meas_filter_taps
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_taps`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_taps`
 
         The following table lists the characteristics of this property.
 
@@ -4619,8 +4642,6 @@ meas_filter_taps
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4640,10 +4661,14 @@ meas_filter_transient_waveform_percent
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_transient_waveform_percent`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_transient_waveform_percent`
 
         The following table lists the characteristics of this property.
 
@@ -4655,8 +4680,6 @@ meas_filter_transient_waveform_percent
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4682,10 +4705,14 @@ meas_filter_type
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_type`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_type`
 
         The following table lists the characteristics of this property.
 
@@ -4697,8 +4724,6 @@ meas_filter_type
             | Permissions           | read-write       |
             +-----------------------+------------------+
             | Repeated Capabilities | channels         |
-            +-----------------------+------------------+
-            | Resettable            | Yes              |
             +-----------------------+------------------+
 
         .. tip::
@@ -4718,10 +4743,14 @@ meas_filter_width
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_width`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_width`
 
         The following table lists the characteristics of this property.
 
@@ -4733,8 +4762,6 @@ meas_filter_width
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4761,10 +4788,14 @@ meas_fir_filter_window
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_fir_filter_window`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_fir_filter_window`
 
         The following table lists the characteristics of this property.
 
@@ -4776,8 +4807,6 @@ meas_fir_filter_window
             | Permissions           | read-write            |
             +-----------------------+-----------------------+
             | Repeated Capabilities | channels              |
-            +-----------------------+-----------------------+
-            | Resettable            | Yes                   |
             +-----------------------+-----------------------+
 
         .. tip::
@@ -4804,8 +4833,6 @@ meas_high_ref
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4823,10 +4850,14 @@ meas_hysteresis_percent
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_hysteresis_percent`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_hysteresis_percent`
 
         The following table lists the characteristics of this property.
 
@@ -4838,8 +4869,6 @@ meas_hysteresis_percent
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4861,10 +4890,14 @@ meas_interpolation_sampling_factor
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_interpolation_sampling_factor`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_interpolation_sampling_factor`
 
         The following table lists the characteristics of this property.
 
@@ -4876,8 +4909,6 @@ meas_interpolation_sampling_factor
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4897,10 +4928,14 @@ meas_last_acq_histogram_size
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_last_acq_histogram_size`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_last_acq_histogram_size`
 
         The following table lists the characteristics of this property.
 
@@ -4912,8 +4947,6 @@ meas_last_acq_histogram_size
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4940,8 +4973,6 @@ meas_low_ref
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4966,8 +4997,6 @@ meas_mid_ref
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4985,10 +5014,14 @@ meas_other_channel
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_other_channel`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_other_channel`
 
         The following table lists the characteristics of this property.
 
@@ -5000,8 +5033,6 @@ meas_other_channel
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5026,10 +5057,14 @@ meas_percentage_method
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_percentage_method`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_percentage_method`
 
         The following table lists the characteristics of this property.
 
@@ -5041,8 +5076,6 @@ meas_percentage_method
             | Permissions           | read-write             |
             +-----------------------+------------------------+
             | Repeated Capabilities | channels               |
-            +-----------------------+------------------------+
-            | Resettable            | Yes                    |
             +-----------------------+------------------------+
 
         .. tip::
@@ -5062,10 +5095,14 @@ meas_polynomial_interpolation_order
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_polynomial_interpolation_order`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_polynomial_interpolation_order`
 
         The following table lists the characteristics of this property.
 
@@ -5077,8 +5114,6 @@ meas_polynomial_interpolation_order
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5102,10 +5137,14 @@ meas_ref_level_units
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_ref_level_units`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_ref_level_units`
 
         The following table lists the characteristics of this property.
 
@@ -5117,8 +5156,6 @@ meas_ref_level_units
             | Permissions           | read-write          |
             +-----------------------+---------------------+
             | Repeated Capabilities | channels            |
-            +-----------------------+---------------------+
-            | Resettable            | Yes                 |
             +-----------------------+---------------------+
 
         .. tip::
@@ -5138,10 +5175,14 @@ meas_time_histogram_high_time
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_time_histogram_high_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_time_histogram_high_time`
 
         The following table lists the characteristics of this property.
 
@@ -5153,8 +5194,6 @@ meas_time_histogram_high_time
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -5174,10 +5213,14 @@ meas_time_histogram_high_volts
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_time_histogram_high_volts`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_time_histogram_high_volts`
 
         The following table lists the characteristics of this property.
 
@@ -5189,8 +5232,6 @@ meas_time_histogram_high_volts
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5210,10 +5251,14 @@ meas_time_histogram_low_time
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_time_histogram_low_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_time_histogram_low_time`
 
         The following table lists the characteristics of this property.
 
@@ -5225,8 +5270,6 @@ meas_time_histogram_low_time
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -5246,10 +5289,14 @@ meas_time_histogram_low_volts
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_time_histogram_low_volts`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_time_histogram_low_volts`
 
         The following table lists the characteristics of this property.
 
@@ -5261,8 +5308,6 @@ meas_time_histogram_low_volts
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5282,10 +5327,14 @@ meas_time_histogram_size
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_time_histogram_size`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_time_histogram_size`
 
         The following table lists the characteristics of this property.
 
@@ -5297,8 +5346,6 @@ meas_time_histogram_size
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5318,10 +5365,14 @@ meas_voltage_histogram_high_volts
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_voltage_histogram_high_volts`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_voltage_histogram_high_volts`
 
         The following table lists the characteristics of this property.
 
@@ -5333,8 +5384,6 @@ meas_voltage_histogram_high_volts
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5354,10 +5403,14 @@ meas_voltage_histogram_low_volts
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_voltage_histogram_low_volts`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_voltage_histogram_low_volts`
 
         The following table lists the characteristics of this property.
 
@@ -5369,8 +5422,6 @@ meas_voltage_histogram_low_volts
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5390,10 +5441,14 @@ meas_voltage_histogram_size
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_voltage_histogram_size`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_voltage_histogram_size`
 
         The following table lists the characteristics of this property.
 
@@ -5405,8 +5460,6 @@ meas_voltage_histogram_size
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5439,8 +5492,6 @@ min_sample_rate
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5458,10 +5509,14 @@ onboard_memory_size
 
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].onboard_memory_size`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.onboard_memory_size`
 
         The following table lists the characteristics of this property.
 
@@ -5473,8 +5528,6 @@ onboard_memory_size
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -5501,8 +5554,6 @@ output_clock_source
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5520,10 +5571,14 @@ pll_lock_status
 
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].pll_lock_status`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.pll_lock_status`
 
         The following table lists the characteristics of this property.
 
@@ -5535,8 +5590,6 @@ pll_lock_status
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -5563,8 +5616,6 @@ points_done
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5590,8 +5641,6 @@ poll_interval
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5610,10 +5659,14 @@ probe_attenuation
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].probe_attenuation`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.probe_attenuation`
 
         The following table lists the characteristics of this property.
 
@@ -5625,8 +5678,6 @@ probe_attenuation
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -5654,8 +5705,6 @@ ready_for_advance_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5680,8 +5729,6 @@ ready_for_advance_event_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -5709,8 +5756,6 @@ ready_for_ref_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5735,8 +5780,6 @@ ready_for_ref_event_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -5764,8 +5807,6 @@ ready_for_start_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5790,8 +5831,6 @@ ready_for_start_event_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -5818,8 +5857,6 @@ records_done
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5844,8 +5881,6 @@ record_arm_source
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -5872,8 +5907,6 @@ ref_clk_rate
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5898,8 +5931,6 @@ ref_trigger_detector_location
             | Permissions           | read-write                       |
             +-----------------------+----------------------------------+
             | Repeated Capabilities | None                             |
-            +-----------------------+----------------------------------+
-            | Resettable            | Yes                              |
             +-----------------------+----------------------------------+
 
         .. tip::
@@ -5926,8 +5957,6 @@ ref_trigger_minimum_quiet_time
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | None                                                        |
             +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
-            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5952,8 +5981,6 @@ ref_trigger_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -5980,8 +6007,6 @@ ref_trig_tdc_enable
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6006,8 +6031,6 @@ resolution
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -6037,8 +6060,6 @@ ris_in_auto_setup_enable
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6064,8 +6085,6 @@ ris_method
             +-----------------------+-----------------+
             | Repeated Capabilities | None            |
             +-----------------------+-----------------+
-            | Resettable            | Yes             |
-            +-----------------------+-----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6090,8 +6109,6 @@ ris_num_averages
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -6120,8 +6137,6 @@ runt_high_threshold
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6147,8 +6162,6 @@ runt_low_threshold
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -6186,8 +6199,6 @@ runt_polarity
             +-----------------------+--------------------+
             | Repeated Capabilities | None               |
             +-----------------------+--------------------+
-            | Resettable            | Yes                |
-            +-----------------------+--------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6211,8 +6222,6 @@ runt_time_condition
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
             | Repeated Capabilities | None                    |
-            +-----------------------+-------------------------+
-            | Resettable            | Yes                     |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -6240,8 +6249,6 @@ runt_time_high_limit
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6268,8 +6275,6 @@ runt_time_low_limit
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6293,8 +6298,6 @@ sample_mode
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -6320,8 +6323,6 @@ samp_clk_timebase_div
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -6352,8 +6353,6 @@ sample_clock_timebase_multiplier
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6377,8 +6376,6 @@ samp_clk_timebase_rate
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -6405,8 +6402,6 @@ samp_clk_timebase_src
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6424,10 +6419,14 @@ serial_number
 
 
 
-        .. tip:: This property can use repeated capabilities for instruments. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].serial_number`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.serial_number`
 
         The following table lists the characteristics of this property.
 
@@ -6439,8 +6438,6 @@ serial_number
             | Permissions           | read only   |
             +-----------------------+-------------+
             | Repeated Capabilities | instruments |
-            +-----------------------+-------------+
-            | Resettable            | No          |
             +-----------------------+-------------+
 
         .. tip::
@@ -6464,10 +6461,14 @@ accessory_gain
         .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].accessory_gain`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.accessory_gain`
 
         The following table lists the characteristics of this property.
 
@@ -6479,8 +6480,6 @@ accessory_gain
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -6503,10 +6502,14 @@ accessory_offset
         .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].accessory_offset`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.accessory_offset`
 
         The following table lists the characteristics of this property.
 
@@ -6518,8 +6521,6 @@ accessory_offset
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -6546,8 +6547,6 @@ simulate
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6572,8 +6571,6 @@ specific_driver_description
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -6600,8 +6597,6 @@ specific_driver_revision
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6626,8 +6621,6 @@ specific_driver_vendor
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -6656,8 +6649,6 @@ start_to_ref_trigger_holdoff
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | None                                                        |
             +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
-            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6682,8 +6673,6 @@ start_trigger_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -6710,8 +6699,6 @@ supported_instrument_models
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6737,8 +6724,6 @@ trigger_auto_triggered
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6763,8 +6748,6 @@ trigger_coupling
             | Permissions           | read-write            |
             +-----------------------+-----------------------+
             | Repeated Capabilities | None                  |
-            +-----------------------+-----------------------+
-            | Resettable            | Yes                   |
             +-----------------------+-----------------------+
 
         .. tip::
@@ -6792,8 +6775,6 @@ trigger_delay_time
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | None                                                        |
             +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
-            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6820,8 +6801,6 @@ trigger_holdoff
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | None                                                        |
             +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
-            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6846,8 +6825,6 @@ trigger_hysteresis
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -6877,8 +6854,6 @@ trigger_impedance
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6905,8 +6880,6 @@ trigger_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -6936,8 +6909,6 @@ trigger_modifier
             +-----------------------+-----------------------+
             | Repeated Capabilities | None                  |
             +-----------------------+-----------------------+
-            | Resettable            | Yes                   |
-            +-----------------------+-----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6962,8 +6933,6 @@ trigger_slope
             | Permissions           | read-write         |
             +-----------------------+--------------------+
             | Repeated Capabilities | None               |
-            +-----------------------+--------------------+
-            | Resettable            | Yes                |
             +-----------------------+--------------------+
 
         .. tip::
@@ -6990,8 +6959,6 @@ trigger_source
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7016,8 +6983,6 @@ trigger_type
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | None              |
-            +-----------------------+-------------------+
-            | Resettable            | Yes               |
             +-----------------------+-------------------+
 
         .. tip::
@@ -7053,8 +7018,6 @@ trigger_window_high_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -7092,8 +7055,6 @@ trigger_window_low_level
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7118,8 +7079,6 @@ trigger_window_mode
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
             | Repeated Capabilities | None                    |
-            +-----------------------+-------------------------+
-            | Resettable            | Yes                     |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -7146,8 +7105,6 @@ tv_trigger_event
             +-----------------------+-------------------------+
             | Repeated Capabilities | None                    |
             +-----------------------+-------------------------+
-            | Resettable            | Yes                     |
-            +-----------------------+-------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7172,8 +7129,6 @@ tv_trigger_line_number
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -7200,8 +7155,6 @@ tv_trigger_polarity
             +-----------------------+---------------------+
             | Repeated Capabilities | None                |
             +-----------------------+---------------------+
-            | Resettable            | Yes                 |
-            +-----------------------+---------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7226,8 +7179,6 @@ tv_trigger_signal_format
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
             | Repeated Capabilities | None                    |
-            +-----------------------+-------------------------+
-            | Resettable            | Yes                     |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -7254,8 +7205,6 @@ use_spec_initial_x
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7272,10 +7221,14 @@ vertical_coupling
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].vertical_coupling`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.vertical_coupling`
 
         The following table lists the characteristics of this property.
 
@@ -7287,8 +7240,6 @@ vertical_coupling
             | Permissions           | read-write             |
             +-----------------------+------------------------+
             | Repeated Capabilities | channels               |
-            +-----------------------+------------------------+
-            | Resettable            | Yes                    |
             +-----------------------+------------------------+
 
         .. tip::
@@ -7309,10 +7260,14 @@ vertical_offset
         .. note:: This property is not supported by all digitizers.Refer to the NI High-Speed Digitizers Help for a list of vertical offsets supported for each device.
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].vertical_offset`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.vertical_offset`
 
         The following table lists the characteristics of this property.
 
@@ -7324,8 +7279,6 @@ vertical_offset
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -7345,10 +7298,14 @@ vertical_range
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].vertical_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.vertical_range`
 
         The following table lists the characteristics of this property.
 
@@ -7360,8 +7317,6 @@ vertical_range
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -7387,8 +7342,6 @@ width_condition
             | Permissions           | read-write           |
             +-----------------------+----------------------+
             | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
-            | Resettable            | Yes                  |
             +-----------------------+----------------------+
 
         .. tip::
@@ -7416,8 +7369,6 @@ width_high_threshold
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7444,8 +7395,6 @@ width_low_threshold
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7469,8 +7418,6 @@ width_polarity
             | Permissions           | read-write          |
             +-----------------------+---------------------+
             | Repeated Capabilities | None                |
-            +-----------------------+---------------------+
-            | Resettable            | Yes                 |
             +-----------------------+---------------------+
 
         .. tip::

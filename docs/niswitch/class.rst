@@ -1232,10 +1232,14 @@ analog_bus_sharing_enable
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].analog_bus_sharing_enable`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.analog_bus_sharing_enable`
 
         The following table lists the characteristics of this property.
 
@@ -1247,8 +1251,6 @@ analog_bus_sharing_enable
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -1268,10 +1270,14 @@ bandwidth
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].bandwidth`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.bandwidth`
 
         The following table lists the characteristics of this property.
 
@@ -1283,8 +1289,6 @@ bandwidth
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -1311,8 +1315,6 @@ channel_count
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1331,10 +1333,14 @@ characteristic_impedance
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].characteristic_impedance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.characteristic_impedance`
 
         The following table lists the characteristics of this property.
 
@@ -1346,8 +1352,6 @@ characteristic_impedance
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -1375,8 +1379,6 @@ continuous_scan
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1402,8 +1404,6 @@ digital_filter_enable
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -1436,8 +1436,6 @@ driver_setup
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1462,8 +1460,6 @@ handshaking_initiation
             | Permissions           | read-write                  |
             +-----------------------+-----------------------------+
             | Repeated Capabilities | None                        |
-            +-----------------------+-----------------------------+
-            | Resettable            | No                          |
             +-----------------------+-----------------------------+
 
         .. tip::
@@ -1490,8 +1486,6 @@ instrument_firmware_revision
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1517,8 +1511,6 @@ instrument_manufacturer
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1543,8 +1535,6 @@ instrument_model
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -1573,8 +1563,6 @@ io_resource_descriptor
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1594,10 +1582,14 @@ is_configuration_channel
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].is_configuration_channel`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.is_configuration_channel`
 
         The following table lists the characteristics of this property.
 
@@ -1609,8 +1601,6 @@ is_configuration_channel
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -1637,8 +1627,6 @@ is_debounced
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1664,8 +1652,6 @@ is_scanning
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1683,10 +1669,14 @@ is_source_channel
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].is_source_channel`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.is_source_channel`
 
         The following table lists the characteristics of this property.
 
@@ -1698,8 +1688,6 @@ is_source_channel
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | channels   |
-            +-----------------------+------------+
-            | Resettable            | No         |
             +-----------------------+------------+
 
         .. tip::
@@ -1725,8 +1713,6 @@ is_waiting_for_trig
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -1758,8 +1744,6 @@ logical_name
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1778,10 +1762,14 @@ max_ac_voltage
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_ac_voltage`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_ac_voltage`
 
         The following table lists the characteristics of this property.
 
@@ -1793,8 +1781,6 @@ max_ac_voltage
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -1814,10 +1800,14 @@ max_carry_ac_current
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_carry_ac_current`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_carry_ac_current`
 
         The following table lists the characteristics of this property.
 
@@ -1829,8 +1819,6 @@ max_carry_ac_current
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -1850,10 +1838,14 @@ max_carry_ac_power
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_carry_ac_power`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_carry_ac_power`
 
         The following table lists the characteristics of this property.
 
@@ -1865,8 +1857,6 @@ max_carry_ac_power
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -1886,10 +1876,14 @@ max_carry_dc_current
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_carry_dc_current`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_carry_dc_current`
 
         The following table lists the characteristics of this property.
 
@@ -1901,8 +1895,6 @@ max_carry_dc_current
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -1922,10 +1914,14 @@ max_carry_dc_power
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_carry_dc_power`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_carry_dc_power`
 
         The following table lists the characteristics of this property.
 
@@ -1937,8 +1933,6 @@ max_carry_dc_power
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -1958,10 +1952,14 @@ max_dc_voltage
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_dc_voltage`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_dc_voltage`
 
         The following table lists the characteristics of this property.
 
@@ -1973,8 +1971,6 @@ max_dc_voltage
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -1994,10 +1990,14 @@ max_switching_ac_current
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_switching_ac_current`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_switching_ac_current`
 
         The following table lists the characteristics of this property.
 
@@ -2009,8 +2009,6 @@ max_switching_ac_current
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2030,10 +2028,14 @@ max_switching_ac_power
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_switching_ac_power`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_switching_ac_power`
 
         The following table lists the characteristics of this property.
 
@@ -2045,8 +2047,6 @@ max_switching_ac_power
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2066,10 +2066,14 @@ max_switching_dc_current
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_switching_dc_current`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_switching_dc_current`
 
         The following table lists the characteristics of this property.
 
@@ -2081,8 +2085,6 @@ max_switching_dc_current
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2102,10 +2104,14 @@ max_switching_dc_power
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_switching_dc_power`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_switching_dc_power`
 
         The following table lists the characteristics of this property.
 
@@ -2117,8 +2123,6 @@ max_switching_dc_power
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2144,8 +2148,6 @@ number_of_relays
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2173,8 +2175,6 @@ num_of_columns
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2200,8 +2200,6 @@ num_of_rows
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2229,8 +2227,6 @@ power_down_latching_relays_after_debounce
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2256,8 +2252,6 @@ scan_advanced_output
             +-----------------------+--------------------------+
             | Repeated Capabilities | None                     |
             +-----------------------+--------------------------+
-            | Resettable            | No                       |
-            +-----------------------+--------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2282,8 +2276,6 @@ scan_advanced_polarity
             | Permissions           | read-write                 |
             +-----------------------+----------------------------+
             | Repeated Capabilities | None                       |
-            +-----------------------+----------------------------+
-            | Resettable            | No                         |
             +-----------------------+----------------------------+
 
         .. tip::
@@ -2314,8 +2306,6 @@ scan_delay
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | None                                                        |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -2352,8 +2342,6 @@ scan_list
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2385,8 +2373,6 @@ scan_mode
             +-----------------------+----------------+
             | Repeated Capabilities | None           |
             +-----------------------+----------------+
-            | Resettable            | No             |
-            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2412,8 +2398,6 @@ serial_number
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2434,10 +2418,14 @@ settling_time
         .. note:: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].settling_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.settling_time`
 
         The following table lists the characteristics of this property.
 
@@ -2449,8 +2437,6 @@ settling_time
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | channels                                                    |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | No                                                          |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -2482,8 +2468,6 @@ simulate
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | No         |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2508,8 +2492,6 @@ specific_driver_description
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2536,8 +2518,6 @@ specific_driver_revision
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2562,8 +2542,6 @@ specific_driver_vendor
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2590,8 +2568,6 @@ supported_instrument_models
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2616,8 +2592,6 @@ temperature
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2644,8 +2618,6 @@ trigger_input
             +-----------------------+--------------------+
             | Repeated Capabilities | None               |
             +-----------------------+--------------------+
-            | Resettable            | No                 |
-            +-----------------------+--------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2671,8 +2643,6 @@ trigger_input_polarity
             +-----------------------+----------------------------+
             | Repeated Capabilities | None                       |
             +-----------------------+----------------------------+
-            | Resettable            | No                         |
-            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2691,10 +2661,14 @@ wire_mode
 
 
 
-        .. tip:: This property can use repeated capabilities for channels. If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].wire_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.wire_mode`
 
         The following table lists the characteristics of this property.
 
@@ -2706,8 +2680,6 @@ wire_mode
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::

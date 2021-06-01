@@ -8,7 +8,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1050007: {
@@ -18,7 +17,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Driver Setup',
         'name': 'DRIVER_SETUP',
-        'resettable': False,
         'type': 'ViString'
     },
     1050203: {
@@ -28,7 +26,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Channel Count',
         'name': 'CHANNEL_COUNT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1050304: {
@@ -38,7 +35,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:IO Resource Descriptor',
         'name': 'IO_RESOURCE_DESCRIPTOR',
-        'resettable': False,
         'type': 'ViString'
     },
     1050305: {
@@ -48,7 +44,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Logical Name',
         'name': 'LOGICAL_NAME',
-        'resettable': False,
         'type': 'ViString'
     },
     1050327: {
@@ -58,7 +53,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
-        'resettable': False,
         'type': 'ViString'
     },
     1050510: {
@@ -68,7 +62,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Firmware Revision',
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
-        'resettable': False,
         'type': 'ViString'
     },
     1050511: {
@@ -78,7 +71,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Manufacturer',
         'name': 'INSTRUMENT_MANUFACTURER',
-        'resettable': False,
         'type': 'ViString'
     },
     1050512: {
@@ -88,7 +80,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Model',
         'name': 'INSTRUMENT_MODEL',
-        'resettable': False,
         'type': 'ViString'
     },
     1050513: {
@@ -98,7 +89,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Vendor',
         'name': 'SPECIFIC_DRIVER_VENDOR',
-        'resettable': False,
         'type': 'ViString'
     },
     1050514: {
@@ -108,7 +98,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Description',
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
-        'resettable': False,
         'type': 'ViString'
     },
     1050551: {
@@ -118,7 +107,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Revision',
         'name': 'SPECIFIC_DRIVER_REVISION',
-        'resettable': False,
         'type': 'ViString'
     },
     1150004: {
@@ -128,7 +116,6 @@ attributes = {
         },
         'lv_property': 'Scanning Configuration:Is Waiting for Trigger?',
         'name': 'IS_WAITING_FOR_TRIG',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1150010: {
@@ -139,7 +126,6 @@ attributes = {
         'enum': 'TriggerInputPolarity',
         'lv_property': 'Scanning Configuration:Trigger Input Polarity',
         'name': 'TRIGGER_INPUT_POLARITY',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150011: {
@@ -147,7 +133,6 @@ attributes = {
         'enum': 'ScanAdvancedPolarity',
         'lv_property': 'Scanning Configuration:Scan Advanced Polarity',
         'name': 'SCAN_ADVANCED_POLARITY',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150013: {
@@ -155,7 +140,6 @@ attributes = {
         'enum': 'HandshakingInitiation',
         'lv_property': 'Scanning Configuration:Handshaking Initiation',
         'name': 'HANDSHAKING_INITIATION',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150014: {
@@ -165,7 +149,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Number of Relays',
         'name': 'NUMBER_OF_RELAYS',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150015: {
@@ -175,7 +158,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Serial Number',
         'name': 'SERIAL_NUMBER',
-        'resettable': False,
         'type': 'ViString'
     },
     1150016: {
@@ -185,7 +167,6 @@ attributes = {
         },
         'lv_property': 'Scanning Configuration:Digital Filter Enable',
         'name': 'DIGITAL_FILTER_ENABLE',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1150017: {
@@ -195,7 +176,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Power Down Latching Relays After Debounce',
         'name': 'POWER_DOWN_LATCHING_RELAYS_AFTER_DEBOUNCE',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1150018: {
@@ -205,7 +185,6 @@ attributes = {
         },
         'lv_property': 'Channel Configuration:Analog Bus Sharing Enable',
         'name': 'ANALOG_BUS_SHARING_ENABLE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -218,7 +197,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Temperature',
         'name': 'TEMPERATURE',
-        'resettable': False,
         'type': 'ViReal64'
     },
     1250001: {
@@ -228,7 +206,6 @@ attributes = {
         },
         'lv_property': 'Channel Configuration:Is Source Channel',
         'name': 'IS_SOURCE_CHANNEL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -241,7 +218,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Is Debounced',
         'name': 'IS_DEBOUNCED',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1250003: {
@@ -251,7 +227,6 @@ attributes = {
         },
         'lv_property': 'Channel Configuration:Is Configuration Channel',
         'name': 'IS_CONFIGURATION_CHANNEL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -266,7 +241,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Settling Time',
         'name': 'SETTLING_TIME',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -280,7 +254,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Bandwidth',
         'name': 'BANDWIDTH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -293,7 +266,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Maximum DC Voltage',
         'name': 'MAX_DC_VOLTAGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -306,7 +278,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Maximum AC Voltage',
         'name': 'MAX_AC_VOLTAGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -319,7 +290,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Maximum Switching DC Current',
         'name': 'MAX_SWITCHING_DC_CURRENT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -332,7 +302,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Maximum Switching AC Current',
         'name': 'MAX_SWITCHING_AC_CURRENT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -345,7 +314,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Maximum Carry DC Current',
         'name': 'MAX_CARRY_DC_CURRENT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -358,7 +326,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Maximum Carry AC Current',
         'name': 'MAX_CARRY_AC_CURRENT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -371,7 +338,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Maximum Switching DC Power',
         'name': 'MAX_SWITCHING_DC_POWER',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -384,7 +350,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Maximum Switching AC Power',
         'name': 'MAX_SWITCHING_AC_POWER',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -397,7 +362,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Maximum Carry DC Power',
         'name': 'MAX_CARRY_DC_POWER',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -410,7 +374,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Maximum Carry AC Power',
         'name': 'MAX_CARRY_AC_POWER',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -423,7 +386,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Characteristic Impedance',
         'name': 'CHARACTERISTIC_IMPEDANCE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -436,7 +398,6 @@ attributes = {
         },
         'lv_property': 'Module Characteristics:Wire mode',
         'name': 'WIRE_MODE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -449,7 +410,6 @@ attributes = {
         },
         'lv_property': 'Matrix Configuration:Number of Rows',
         'name': 'NUM_OF_ROWS',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250019: {
@@ -459,7 +419,6 @@ attributes = {
         },
         'lv_property': 'Matrix Configuration:Number of Columns',
         'name': 'NUM_OF_COLUMNS',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250020: {
@@ -469,7 +428,6 @@ attributes = {
         },
         'lv_property': 'Scanning Configuration:Scan List',
         'name': 'SCAN_LIST',
-        'resettable': False,
         'type': 'ViString'
     },
     1250021: {
@@ -480,7 +438,6 @@ attributes = {
         'enum': 'ScanMode',
         'lv_property': 'Scanning Configuration:Scan Mode',
         'name': 'SCAN_MODE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250022: {
@@ -491,7 +448,6 @@ attributes = {
         'enum': 'TriggerInput',
         'lv_property': 'Scanning Configuration:Trigger Input',
         'name': 'TRIGGER_INPUT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250023: {
@@ -502,7 +458,6 @@ attributes = {
         'enum': 'ScanAdvancedOutput',
         'lv_property': 'Scanning Configuration:Scan Advanced Output',
         'name': 'SCAN_ADVANCED_OUTPUT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1250024: {
@@ -512,7 +467,6 @@ attributes = {
         },
         'lv_property': 'Scanning Configuration:Is Scanning',
         'name': 'IS_SCANNING',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1250025: {
@@ -524,7 +478,6 @@ attributes = {
         },
         'lv_property': 'Scanning Configuration:Scan Delay',
         'name': 'SCAN_DELAY',
-        'resettable': False,
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
@@ -535,7 +488,6 @@ attributes = {
         },
         'lv_property': 'Scanning Configuration:Continuous Scan',
         'name': 'CONTINUOUS_SCAN',
-        'resettable': False,
         'type': 'ViBoolean'
     }
 }

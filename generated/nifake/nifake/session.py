@@ -156,10 +156,14 @@ class _SessionBase(object):
     '''Type: float
 
     Tip:
-    This property can use repeated capabilities for channels. If set or get directly on the
-    nifake.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifake.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific channels within your :py:class:`nifake.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].read_write_double_with_repeated_capability`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifake.Session`.
+
+    Example: :py:attr:`my_session.read_write_double_with_repeated_capability`
     '''
     read_write_int64 = _attributes.AttributeViInt64(1000006)
     '''Type: int
@@ -192,10 +196,14 @@ class _SessionBase(object):
     A property with read/write access, that represents a repeated capability
 
     Tip:
-    This property can use repeated capabilities for instruments. If set or get directly on the
-    nifake.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nifake.Session repeated capabilities container, and calling set/get value on the result.
+    This property can be set/get on specific instruments within your :py:class:`nifake.Session` instance.
+    Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+    Example: :py:attr:`my_session.instruments[ ... ].read_write_string_repeated_capability`
+
+    To set/get on all instruments, you can call the property directly on the :py:class:`nifake.Session`.
+
+    Example: :py:attr:`my_session.read_write_string_repeated_capability`
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
@@ -258,10 +266,15 @@ class _SessionBase(object):
         Queries the value of a ViBoolean property.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_boolean`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_boolean`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -286,10 +299,15 @@ class _SessionBase(object):
         Queries the value of a ViInt32 property.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_int32`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -314,10 +332,15 @@ class _SessionBase(object):
         Queries the value of a ViInt64 property.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_int64`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -342,10 +365,15 @@ class _SessionBase(object):
         Queries the value of a ViReal property.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_real64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_real64`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -370,10 +398,15 @@ class _SessionBase(object):
         Queries the value of a ViBoolean property.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_string`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_string`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -471,10 +504,15 @@ class _SessionBase(object):
         Acquires a single measurement and returns the measured value.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].read_from_channel`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session.read_from_channel`
 
         Args:
             maximum_time (hightime.timedelta): Specifies the **maximum_time** allowed in milliseconds.
@@ -499,10 +537,15 @@ class _SessionBase(object):
         This method sets the value of a ViBoolean property.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_boolean`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_boolean`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -525,10 +568,15 @@ class _SessionBase(object):
         This method sets the value of a ViInt32 property.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_int32`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -551,10 +599,15 @@ class _SessionBase(object):
         This method sets the value of a ViInt64 property.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_int64`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -577,10 +630,15 @@ class _SessionBase(object):
         This method sets the value of a ViReal64 property.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_real64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_real64`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -603,10 +661,15 @@ class _SessionBase(object):
         This method sets the value of a ViString property.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_string`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_string`
 
         Args:
             attribute_id (int): Pass the ID of a property.
