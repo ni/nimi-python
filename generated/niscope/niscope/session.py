@@ -1321,13 +1321,13 @@ class _SessionBase(object):
         channel list parsing for you.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._actual_num_wfms`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._actual_num_wfms`
 
@@ -1359,13 +1359,13 @@ class _SessionBase(object):
         processing is done before any other measurements.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].add_waveform_processing`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.add_waveform_processing`
 
@@ -1409,13 +1409,13 @@ class _SessionBase(object):
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].self_cal`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.self_cal`
 
@@ -1453,13 +1453,13 @@ class _SessionBase(object):
         are also cleared with this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].clear_waveform_measurement_stats`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.clear_waveform_measurement_stats`
 
@@ -1492,13 +1492,13 @@ class _SessionBase(object):
         processing is also done before any other measurements.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].clear_waveform_processing`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.clear_waveform_processing`
         '''
@@ -1516,13 +1516,13 @@ class _SessionBase(object):
         the channel—the input impedance and the bandwidth.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].configure_chan_characteristics`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.configure_chan_characteristics`
 
@@ -1555,13 +1555,13 @@ class _SessionBase(object):
         Coefficient values should be between +1 and –1.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].configure_equalization_filter_coefficients`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.configure_equalization_filter_coefficients`
 
@@ -1592,13 +1592,13 @@ class _SessionBase(object):
         attenuation, and the channel.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].configure_vertical`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.configure_vertical`
 
@@ -1646,13 +1646,13 @@ class _SessionBase(object):
         Note: Some functionality, such as time stamping, is not supported in all digitizers.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].fetch`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.fetch`
 
@@ -1731,13 +1731,13 @@ class _SessionBase(object):
         digitizers.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].fetch_array_measurement`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.fetch_array_measurement`
 
@@ -1841,13 +1841,13 @@ class _SessionBase(object):
         differently.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].fetch_measurement_stats`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.fetch_measurement_stats`
 
@@ -1914,13 +1914,13 @@ class _SessionBase(object):
         Retrieves the custom coefficients for the equalization FIR filter on the device. This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. Because this filter is a generic FIR filter, any coefficients are valid. Coefficient values should be between +1 and –1.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].get_equalization_filter_coefficients`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.get_equalization_filter_coefficients`
         '''
@@ -1943,13 +1943,13 @@ class _SessionBase(object):
         Note: Some functionality, such as time stamping, is not supported in all digitizers.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].read`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.read`
 
@@ -2036,13 +2036,13 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._fetch`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._fetch`
 
@@ -2141,13 +2141,13 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._fetch`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._fetch`
 
@@ -2267,13 +2267,13 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._fetch_array_measurement`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._fetch_array_measurement`
 
@@ -2377,13 +2377,13 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._fetch_binary16`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._fetch_binary16`
 
@@ -2507,13 +2507,13 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._fetch_binary32`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._fetch_binary32`
 
@@ -2637,13 +2637,13 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._fetch_binary8`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._fetch_binary8`
 
@@ -2761,13 +2761,13 @@ class _SessionBase(object):
         Note: Some functionality, such as time stamping, is not supported in all digitizers.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].fetch`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session.fetch`
 
@@ -2886,13 +2886,13 @@ class _SessionBase(object):
         differently.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._fetch_measurement_stats`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._fetch_measurement_stats`
 
@@ -2961,13 +2961,13 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_boolean`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_boolean`
 
@@ -3002,13 +3002,13 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int32`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_int32`
 
@@ -3042,13 +3042,13 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_int64`
 
@@ -3082,13 +3082,13 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_real64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_real64`
 
@@ -3134,13 +3134,13 @@ class _SessionBase(object):
         you can pass 0 for the **bufSize** and VI_NULL for the **value**.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_string`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_string`
 
@@ -3178,13 +3178,13 @@ class _SessionBase(object):
         Coefficient values should be between +1 and –1.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_equalization_filter_coefficients`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._get_equalization_filter_coefficients`
 
@@ -3324,13 +3324,13 @@ class _SessionBase(object):
         more information.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._read`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._read`
 
@@ -3435,13 +3435,13 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_boolean`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_boolean`
 
@@ -3488,13 +3488,13 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int32`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_int32`
 
@@ -3541,13 +3541,13 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_int64`
 
@@ -3594,13 +3594,13 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_real64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_real64`
 
@@ -3649,13 +3649,13 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niscope.Session` object.
+        This method can be called on specific channels within your :py:class:`niscope.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_string`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niscope.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niscope.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_string`
 

@@ -132,7 +132,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence`
@@ -149,7 +149,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].active_advanced_sequence_step`
@@ -172,7 +172,7 @@ class _SessionBase(object):
      This property returns -1 when the power_allocation_mode property is set to PowerAllocationMode.DISABLED.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].actual_power_allocation`
@@ -192,7 +192,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].aperture_time`
@@ -212,7 +212,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].aperture_time_units`
@@ -229,7 +229,7 @@ class _SessionBase(object):
     Note: Autoranging begins at module startup and remains active until the module is reconfigured or reset.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].autorange`
@@ -246,7 +246,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].autorange_aperture_time_mode`
@@ -263,7 +263,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].autorange_behavior`
@@ -280,7 +280,7 @@ class _SessionBase(object):
     Note: For smaller ranges, the value is scaled up to account for noise. The factor used to scale the value is derived from the module capabilities.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_aperture_time`
@@ -297,7 +297,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_aperture_time_units`
@@ -314,7 +314,7 @@ class _SessionBase(object):
     Note: The maximum range used is the range that includes the value specified in the compliance limit property, voltage_limit_range property or current_limit_range property, depending on the selected output_function. This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_current_range`
@@ -331,7 +331,7 @@ class _SessionBase(object):
     Note: The maximum range used is the range that includes the value specified in the compliance limit property, voltage_limit_range property or current_limit_range property, depending on the selected output_function. This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].autorange_minimum_voltage_range`
@@ -348,7 +348,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].autorange_threshold_mode`
@@ -365,7 +365,7 @@ class _SessionBase(object):
     Default Value: The default value for the NI PXI-4132 is AutoZero.ON. The default value for  all other devices is AutoZero.OFF, which is the only supported value for these devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].auto_zero`
@@ -415,7 +415,7 @@ class _SessionBase(object):
     information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].compliance_limit_symmetry`
@@ -434,7 +434,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_compensation_frequency`
@@ -453,7 +453,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_gain_bandwidth`
@@ -473,7 +473,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current level to take effect. Refer to the
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_level`
@@ -492,7 +492,7 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_level_autorange`
@@ -513,7 +513,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current level range to take effect. Refer to the
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_level_range`
@@ -533,7 +533,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_limit`
@@ -552,7 +552,7 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_limit_autorange`
@@ -565,7 +565,7 @@ class _SessionBase(object):
     '''Type: int
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_limit_behavior`
@@ -609,7 +609,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_limit_high`
@@ -653,7 +653,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_limit_low`
@@ -674,7 +674,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_limit_range`
@@ -693,7 +693,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].current_pole_zero_ratio`
@@ -712,7 +712,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].dc_noise_rejection`
@@ -732,7 +732,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].digital_edge_measure_trigger_input_terminal`
@@ -751,7 +751,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].digital_edge_pulse_trigger_input_terminal`
@@ -771,7 +771,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].digital_edge_sequence_advance_trigger_input_terminal`
@@ -790,7 +790,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].digital_edge_shutdown_trigger_input_terminal`
@@ -810,7 +810,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].digital_edge_source_trigger_input_terminal`
@@ -830,7 +830,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].digital_edge_start_trigger_input_terminal`
@@ -857,7 +857,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].exported_measure_trigger_output_terminal`
@@ -876,7 +876,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].exported_pulse_trigger_output_terminal`
@@ -896,7 +896,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].exported_sequence_advance_trigger_output_terminal`
@@ -916,7 +916,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].exported_source_trigger_output_terminal`
@@ -936,7 +936,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].exported_start_trigger_output_terminal`
@@ -951,7 +951,7 @@ class _SessionBase(object):
     Returns the number of measurements acquired that have not been fetched yet.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].fetch_backlog`
@@ -966,7 +966,7 @@ class _SessionBase(object):
     Contains the firmware revision information for the device you are currently using.
 
     Tip:
-    This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container instruments to specify a subset.
 
     Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
@@ -981,7 +981,7 @@ class _SessionBase(object):
     Contains the name of the manufacturer for the device you are currently using.
 
     Tip:
-    This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container instruments to specify a subset.
 
     Example: :py:attr:`my_session.instruments[ ... ].instrument_manufacturer`
@@ -996,7 +996,7 @@ class _SessionBase(object):
     Contains the model number or name of the device that you are currently using.
 
     Tip:
-    This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container instruments to specify a subset.
 
     Example: :py:attr:`my_session.instruments[ ... ].instrument_model`
@@ -1015,7 +1015,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
     Tip:
-    This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container instruments to specify a subset.
 
     Example: :py:attr:`my_session.instruments[ ... ].interlock_input_open`
@@ -1049,7 +1049,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].measure_buffer_size`
@@ -1069,7 +1069,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_delay`
@@ -1088,7 +1088,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_output_terminal`
@@ -1107,7 +1107,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_pulse_polarity`
@@ -1129,7 +1129,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_pulse_width`
@@ -1148,7 +1148,7 @@ class _SessionBase(object):
     Note: This property is not available when Auto Zero is configured to Once because the amount of time between the first
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].measure_record_delta_time`
@@ -1169,7 +1169,7 @@ class _SessionBase(object):
     This property is not available in a session involving multiple channels.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].measure_record_length`
@@ -1189,7 +1189,7 @@ class _SessionBase(object):
     This property is not available in a session involving multiple channels.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].measure_record_length_is_finite`
@@ -1208,7 +1208,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].measure_trigger_type`
@@ -1225,7 +1225,7 @@ class _SessionBase(object):
     Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the fetch_multiple method.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].measure_when`
@@ -1246,7 +1246,7 @@ class _SessionBase(object):
     Default Value: Refer to the Supported Properties by Device topic for the default value by device.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].merged_channels`
@@ -1265,7 +1265,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_capacitance`
@@ -1286,7 +1286,7 @@ class _SessionBase(object):
     Note: Only disconnect the output when disconnecting is necessary for your application. For example, a battery connected
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_connected`
@@ -1306,7 +1306,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_change_limit_high`
@@ -1326,7 +1326,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_change_limit_low`
@@ -1346,7 +1346,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_measure_limit_high`
@@ -1366,7 +1366,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_measure_limit_low`
@@ -1385,7 +1385,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_cutoff_current_overrange_enabled`
@@ -1403,7 +1403,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices. Instruments that do not support this property behave as if this property were set to False.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_cutoff_enabled`
@@ -1423,7 +1423,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_change_limit_high`
@@ -1443,7 +1443,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_change_limit_low`
@@ -1463,7 +1463,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_output_limit_high`
@@ -1483,7 +1483,7 @@ class _SessionBase(object):
     Note: Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_output_limit_low`
@@ -1503,7 +1503,7 @@ class _SessionBase(object):
     Note: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_enabled`
@@ -1534,7 +1534,7 @@ class _SessionBase(object):
     compliance_limit_symmetry
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_function`
@@ -1553,7 +1553,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic for information
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].output_resistance`
@@ -1570,7 +1570,7 @@ class _SessionBase(object):
     Default Value: False
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].overranging_enabled`
@@ -1590,7 +1590,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].ovp_enabled`
@@ -1610,7 +1610,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].ovp_limit`
@@ -1633,7 +1633,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to the Supported Properties by Device topic for information about supported devices. Devices that do not support this property behave as if this property were set to PowerAllocationMode.DISABLED.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].power_allocation_mode`
@@ -1655,7 +1655,7 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].power_line_frequency`
@@ -1688,7 +1688,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_level`
@@ -1707,7 +1707,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_limit`
@@ -1754,7 +1754,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_limit_high`
@@ -1801,7 +1801,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_bias_current_limit_low`
@@ -1820,7 +1820,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_bias_delay`
@@ -1839,7 +1839,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_level`
@@ -1858,7 +1858,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_limit`
@@ -1905,7 +1905,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_limit_high`
@@ -1952,7 +1952,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_bias_voltage_limit_low`
@@ -1971,7 +1971,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_complete_event_output_terminal`
@@ -1989,7 +1989,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_complete_event_pulse_polarity`
@@ -2009,7 +2009,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_complete_event_pulse_width`
@@ -2028,7 +2028,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_current_level`
@@ -2048,7 +2048,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_current_level_range`
@@ -2067,7 +2067,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit`
@@ -2114,7 +2114,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit_high`
@@ -2161,7 +2161,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit_low`
@@ -2181,7 +2181,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_current_limit_range`
@@ -2200,7 +2200,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_off_time`
@@ -2219,7 +2219,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_on_time`
@@ -2237,7 +2237,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_trigger_type`
@@ -2256,7 +2256,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_level`
@@ -2276,7 +2276,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_level_range`
@@ -2295,7 +2295,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit`
@@ -2342,7 +2342,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit_high`
@@ -2389,7 +2389,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit_low`
@@ -2409,7 +2409,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the output_enabled property for more information about enabling the output channel.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].pulse_voltage_limit_range`
@@ -2436,7 +2436,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].ready_for_pulse_trigger_event_output_terminal`
@@ -2454,7 +2454,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].ready_for_pulse_trigger_event_pulse_polarity`
@@ -2474,7 +2474,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].ready_for_pulse_trigger_event_pulse_width`
@@ -2499,7 +2499,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].requested_power_allocation`
@@ -2519,7 +2519,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].reset_average_before_measurement`
@@ -2544,7 +2544,7 @@ class _SessionBase(object):
     NI PXIe-4154—500
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].samples_to_average`
@@ -2564,7 +2564,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
     Tip:
-    This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container instruments to specify a subset.
 
     Example: :py:attr:`my_session.instruments[ ... ].self_calibration_persistence`
@@ -2581,7 +2581,7 @@ class _SessionBase(object):
     Default Value: The default value is Sense.LOCAL if the device supports local sense.  Otherwise, the default and only supported value is Sense.REMOTE.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sense`
@@ -2600,7 +2600,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sequence_advance_trigger_type`
@@ -2619,7 +2619,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_output_terminal`
@@ -2638,7 +2638,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_pulse_polarity`
@@ -2660,7 +2660,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_pulse_width`
@@ -2679,7 +2679,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_output_terminal`
@@ -2698,7 +2698,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_pulse_polarity`
@@ -2720,7 +2720,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_pulse_width`
@@ -2741,7 +2741,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sequence_loop_count`
@@ -2761,7 +2761,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. When the
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sequence_loop_count_is_finite`
@@ -2774,7 +2774,7 @@ class _SessionBase(object):
     '''Type: float
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sequence_step_delta_time`
@@ -2787,7 +2787,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].sequence_step_delta_time_enabled`
@@ -2802,7 +2802,7 @@ class _SessionBase(object):
     Contains the serial number for the device you are currently using.
 
     Tip:
-    This property can be set/get to specific instruments within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container instruments to specify a subset.
 
     Example: :py:attr:`my_session.instruments[ ... ].serial_number`
@@ -2820,7 +2820,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].shutdown_trigger_type`
@@ -2845,7 +2845,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].source_complete_event_output_terminal`
@@ -2864,7 +2864,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].source_complete_event_pulse_polarity`
@@ -2886,7 +2886,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].source_complete_event_pulse_width`
@@ -2907,7 +2907,7 @@ class _SessionBase(object):
     Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].source_delay`
@@ -2923,7 +2923,7 @@ class _SessionBase(object):
     Default value: SourceMode.SINGLE_POINT
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].source_mode`
@@ -2942,7 +2942,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].source_trigger_type`
@@ -2981,7 +2981,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].start_trigger_type`
@@ -3005,7 +3005,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].transient_response`
@@ -3024,7 +3024,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].voltage_compensation_frequency`
@@ -3043,7 +3043,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].voltage_gain_bandwidth`
@@ -3063,7 +3063,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified voltage level to take effect. Refer to the
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].voltage_level`
@@ -3082,7 +3082,7 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].voltage_level_autorange`
@@ -3103,7 +3103,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified voltage level range to take effect. Refer to the
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].voltage_level_range`
@@ -3123,7 +3123,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current level to take effect. Refer to the
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].voltage_limit`
@@ -3142,7 +3142,7 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].voltage_limit_autorange`
@@ -3186,7 +3186,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].voltage_limit_high`
@@ -3230,7 +3230,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].voltage_limit_low`
@@ -3251,7 +3251,7 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified voltage limit range to take effect. Refer to the
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].voltage_limit_range`
@@ -3270,7 +3270,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can be set/get to specific channels within your :py:class:`nidcpower.Session` object.
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
     Use Python index notation on the repeated capabilities container channels to specify a subset.
 
     Example: :py:attr:`my_session.channels[ ... ].voltage_pole_zero_ratio`
@@ -3351,10 +3351,15 @@ class _SessionBase(object):
         This method will return a Python context manager that will initiate on entering and abort on exit.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidcpower.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].initiate`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.initiate`
         '''
         return _Acquisition(self)
 
@@ -3389,13 +3394,13 @@ class _SessionBase(object):
         One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].abort`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.abort`
         '''
@@ -3438,13 +3443,13 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].self_cal`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.self_cal`
         '''
@@ -3462,13 +3467,13 @@ class _SessionBase(object):
         To clear the state for all output cutoff reasons, use OutputCutoffReason.ALL.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].clear_latched_output_cutoff_state`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.clear_latched_output_cutoff_state`
 
@@ -3525,13 +3530,13 @@ class _SessionBase(object):
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].commit`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.commit`
         '''
@@ -3568,13 +3573,13 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].configure_aperture_time`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.configure_aperture_time`
 
@@ -3636,13 +3641,13 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].create_advanced_sequence_step`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.create_advanced_sequence_step`
 
@@ -3697,13 +3702,13 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._create_advanced_sequence_with_channels`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._create_advanced_sequence_with_channels`
 
@@ -3867,13 +3872,13 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].delete_advanced_sequence`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.delete_advanced_sequence`
 
@@ -3907,13 +3912,13 @@ class _SessionBase(object):
         Note: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].fetch_multiple`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.fetch_multiple`
 
@@ -3959,13 +3964,13 @@ class _SessionBase(object):
         Note: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].measure_multiple`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.measure_multiple`
 
@@ -4008,13 +4013,13 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._fetch_multiple`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._fetch_multiple`
 
@@ -4072,13 +4077,13 @@ class _SessionBase(object):
           properties and inherent IVI properties.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_boolean`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_boolean`
 
@@ -4130,13 +4135,13 @@ class _SessionBase(object):
           properties and inherent IVI properties.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int32`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_int32`
 
@@ -4188,13 +4193,13 @@ class _SessionBase(object):
           properties and inherent IVI properties.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_int64`
 
@@ -4246,13 +4251,13 @@ class _SessionBase(object):
           properties and inherent IVI properties.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_real64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_real64`
 
@@ -4304,13 +4309,13 @@ class _SessionBase(object):
           properties and inherent IVI properties.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_string`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_string`
 
@@ -4436,13 +4441,13 @@ class _SessionBase(object):
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._initiate_with_channels`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._initiate_with_channels`
         '''
@@ -4508,13 +4513,13 @@ class _SessionBase(object):
         method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].measure`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.measure`
 
@@ -4555,13 +4560,13 @@ class _SessionBase(object):
         on the specified output channel(s).
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._measure_multiple`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._measure_multiple`
 
@@ -4596,13 +4601,13 @@ class _SessionBase(object):
         Returns the number of channels.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._parse_channel_count`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._parse_channel_count`
 
@@ -4646,13 +4651,13 @@ class _SessionBase(object):
         One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].query_in_compliance`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.query_in_compliance`
 
@@ -4677,13 +4682,13 @@ class _SessionBase(object):
         outputCutoffReason specifies the conditions for which an output is disconnected.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].query_latched_output_cutoff_state`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.query_latched_output_cutoff_state`
 
@@ -4739,13 +4744,13 @@ class _SessionBase(object):
         channel is set to the specified **voltageLevel**.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].query_max_current_limit`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.query_max_current_limit`
 
@@ -4775,13 +4780,13 @@ class _SessionBase(object):
         channel is set to the specified **currentLimit**.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].query_max_voltage_level`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.query_max_voltage_level`
 
@@ -4811,13 +4816,13 @@ class _SessionBase(object):
         channel is set to the specified **voltageLevel**.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].query_min_current_limit`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.query_min_current_limit`
 
@@ -4851,13 +4856,13 @@ class _SessionBase(object):
         `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].query_output_state`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.query_output_state`
 
@@ -4899,13 +4904,13 @@ class _SessionBase(object):
         more information about NI-DCPower software states.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].reset`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.reset`
         '''
@@ -4933,13 +4938,13 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].send_software_edge_trigger`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.send_software_edge_trigger`
 
@@ -4983,13 +4988,13 @@ class _SessionBase(object):
           device-specific properties and inherent IVI properties.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_boolean`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_boolean`
 
@@ -5044,13 +5049,13 @@ class _SessionBase(object):
           device-specific properties and inherent IVI properties.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int32`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_int32`
 
@@ -5105,13 +5110,13 @@ class _SessionBase(object):
           device-specific properties and inherent IVI properties.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_int64`
 
@@ -5166,13 +5171,13 @@ class _SessionBase(object):
           device-specific properties and inherent IVI properties.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_real64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_real64`
 
@@ -5227,13 +5232,13 @@ class _SessionBase(object):
           device-specific properties and inherent IVI properties.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_string`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_string`
 
@@ -5306,13 +5311,13 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].set_sequence`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.set_sequence`
 
@@ -5371,13 +5376,13 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nidcpower.Session` object.
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].wait_for_event`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.wait_for_event`
 
