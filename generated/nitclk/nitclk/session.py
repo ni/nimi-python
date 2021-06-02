@@ -204,13 +204,13 @@ class SessionReference(object):
         Gets the value of an NI-TClk ViReal64 property.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nitclk.Session` object.
+        This method can be called on specific channels within your :py:class:`nitclk.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_real64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nitclk.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nitclk.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_real64`
 
@@ -237,13 +237,13 @@ class SessionReference(object):
         Gets the value of an NI-TClk ViSession property.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nitclk.Session` object.
+        This method can be called on specific channels within your :py:class:`nitclk.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_session`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nitclk.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nitclk.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_session`
 
@@ -283,13 +283,13 @@ class SessionReference(object):
         for bufSize and VI_NULL for the value.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nitclk.Session` object.
+        This method can be called on specific channels within your :py:class:`nitclk.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_string`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nitclk.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nitclk.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_string`
 
@@ -353,13 +353,13 @@ class SessionReference(object):
         methods as much as possible.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nitclk.Session` object.
+        This method can be called on specific channels within your :py:class:`nitclk.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_real64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nitclk.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nitclk.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_real64`
 
@@ -388,13 +388,13 @@ class SessionReference(object):
         high-level methods as much as possible.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nitclk.Session` object.
+        This method can be called on specific channels within your :py:class:`nitclk.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_session`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nitclk.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nitclk.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_session`
 
@@ -426,13 +426,13 @@ class SessionReference(object):
         high-level methods as much as possible.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nitclk.Session` object.
+        This method can be called on specific channels within your :py:class:`nitclk.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_string`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nitclk.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nitclk.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_string`
 

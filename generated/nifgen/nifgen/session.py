@@ -921,13 +921,13 @@ class _SessionBase(object):
         Waveform methods.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].allocate_named_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.allocate_named_waveform`
 
@@ -960,13 +960,13 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].allocate_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.allocate_waveform`
 
@@ -995,13 +995,13 @@ class _SessionBase(object):
         define_user_standard_waveform method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].clear_user_standard_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.clear_user_standard_waveform`
         '''
@@ -1024,13 +1024,13 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].configure_arb_sequence`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.configure_arb_sequence`
 
@@ -1093,13 +1093,13 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].configure_arb_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.configure_arb_waveform`
 
@@ -1173,13 +1173,13 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].configure_freq_list`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.configure_freq_list`
 
@@ -1269,13 +1269,13 @@ class _SessionBase(object):
         One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].configure_standard_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.configure_standard_waveform`
 
@@ -1387,13 +1387,13 @@ class _SessionBase(object):
         Note: You must set output_mode to OutputMode.ARB or OutputMode.SEQ before calling this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].create_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.create_waveform`
 
@@ -1440,13 +1440,13 @@ class _SessionBase(object):
         OutputMode.SEQ before calling this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._create_waveform_f64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._create_waveform_f64`
 
@@ -1492,13 +1492,13 @@ class _SessionBase(object):
         OutputMode.SEQ before calling this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._create_waveform_f64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._create_waveform_f64`
 
@@ -1552,13 +1552,13 @@ class _SessionBase(object):
         outputs.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].create_waveform_from_file_f64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.create_waveform_from_file_f64`
 
@@ -1619,13 +1619,13 @@ class _SessionBase(object):
         generate different voltage outputs.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].create_waveform_from_file_i16`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.create_waveform_from_file_i16`
 
@@ -1685,13 +1685,13 @@ class _SessionBase(object):
         OutputMode.SEQ before calling this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._create_waveform_i16`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._create_waveform_i16`
 
@@ -1747,13 +1747,13 @@ class _SessionBase(object):
         OutputMode.FREQ_LIST before calling this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].define_user_standard_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.define_user_standard_waveform`
 
@@ -1788,13 +1788,13 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._delete_named_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._delete_named_waveform`
 
@@ -1816,13 +1816,13 @@ class _SessionBase(object):
         Deletes the specified script from onboard memory.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].delete_script`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.delete_script`
 
@@ -1847,13 +1847,13 @@ class _SessionBase(object):
         Note: The signal generator must not be in the Generating state when you call this method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].delete_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.delete_waveform`
 
@@ -1882,13 +1882,13 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_boolean`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_boolean`
 
@@ -1923,13 +1923,13 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int32`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_int32`
 
@@ -1966,13 +1966,13 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_real64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_real64`
 
@@ -2027,13 +2027,13 @@ class _SessionBase(object):
         parameter.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_string`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_string`
 
@@ -2249,13 +2249,13 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_boolean`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_boolean`
 
@@ -2308,13 +2308,13 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int32`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_int32`
 
@@ -2367,13 +2367,13 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_real64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_real64`
 
@@ -2426,13 +2426,13 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_string`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_string`
 
@@ -2475,13 +2475,13 @@ class _SessionBase(object):
         -  CreateWaveformFromFileHWS
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_named_waveform_next_write_position`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._set_named_waveform_next_write_position`
 
@@ -2529,13 +2529,13 @@ class _SessionBase(object):
         create_waveform method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].set_next_write_position`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.set_next_write_position`
 
@@ -2583,13 +2583,13 @@ class _SessionBase(object):
         -  CreateWaveformFromFileHWS
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_waveform_next_write_position`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._set_waveform_next_write_position`
 
@@ -2654,13 +2654,13 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._write_binary16_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._write_binary16_waveform`
 
@@ -2715,13 +2715,13 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._write_named_waveform_f64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._write_named_waveform_f64`
 
@@ -2767,13 +2767,13 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._write_named_waveform_f64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._write_named_waveform_f64`
 
@@ -2817,13 +2817,13 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._write_named_waveform_i16`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._write_named_waveform_i16`
 
@@ -2859,13 +2859,13 @@ class _SessionBase(object):
         generation of waveforms.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].write_script`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.write_script`
 
@@ -2908,13 +2908,13 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._write_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._write_waveform`
 
@@ -2961,13 +2961,13 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._write_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session._write_waveform`
 
@@ -3008,13 +3008,13 @@ class _SessionBase(object):
         set_next_write_position method.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`nifgen.Session` object.
+        This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ].write_waveform`
 
-        To call the method for all channels, you can call it directly on the :py:class:`nifgen.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`nifgen.Session`.
 
         Example: :py:meth:`my_session.write_waveform`
 

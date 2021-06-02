@@ -479,13 +479,13 @@ class _SessionBase(object):
         invalid.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niswitch.Session` object.
+        This method can be called on specific channels within your :py:class:`niswitch.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_boolean`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niswitch.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niswitch.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_boolean`
 
@@ -538,13 +538,13 @@ class _SessionBase(object):
         invalid.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niswitch.Session` object.
+        This method can be called on specific channels within your :py:class:`niswitch.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int32`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niswitch.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niswitch.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_int32`
 
@@ -597,13 +597,13 @@ class _SessionBase(object):
         invalid.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niswitch.Session` object.
+        This method can be called on specific channels within your :py:class:`niswitch.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_real64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niswitch.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niswitch.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_real64`
 
@@ -668,13 +668,13 @@ class _SessionBase(object):
         a negative number for the Array Size parameter.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niswitch.Session` object.
+        This method can be called on specific channels within your :py:class:`niswitch.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_string`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niswitch.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niswitch.Session`.
 
         Example: :py:meth:`my_session._get_attribute_vi_string`
 
@@ -847,13 +847,13 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niswitch.Session` object.
+        This method can be called on specific channels within your :py:class:`niswitch.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_boolean`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niswitch.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niswitch.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_boolean`
 
@@ -918,13 +918,13 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niswitch.Session` object.
+        This method can be called on specific channels within your :py:class:`niswitch.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int32`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niswitch.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niswitch.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_int32`
 
@@ -989,13 +989,13 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niswitch.Session` object.
+        This method can be called on specific channels within your :py:class:`niswitch.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_real64`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niswitch.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niswitch.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_real64`
 
@@ -1060,13 +1060,13 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Tip:
-        This method can be called for specific channels within your :py:class:`niswitch.Session` object.
+        This method can be called on specific channels within your :py:class:`niswitch.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
         Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_string`
 
-        To call the method for all channels, you can call it directly on the :py:class:`niswitch.Session`.
+        To call the method on all channels, you can call it directly on the :py:class:`niswitch.Session`.
 
         Example: :py:meth:`my_session._set_attribute_vi_string`
 

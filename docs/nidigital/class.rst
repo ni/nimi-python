@@ -127,13 +127,13 @@ apply_levels_and_timing
             
 
 
-            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container sites to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.sites[ ... ].apply_levels_and_timing`
 
-                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.apply_levels_and_timing`
 
@@ -196,13 +196,13 @@ apply_tdr_offsets
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].apply_tdr_offsets`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.apply_tdr_offsets`
 
@@ -233,13 +233,13 @@ burst_pattern
             
 
 
-            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container sites to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.sites[ ... ].burst_pattern`
 
-                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.burst_pattern`
 
@@ -304,13 +304,13 @@ clock_generator_abort
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].clock_generator_abort`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.clock_generator_abort`
 
@@ -327,13 +327,13 @@ clock_generator_generate_clock
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].clock_generator_generate_clock`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.clock_generator_generate_clock`
 
@@ -397,13 +397,13 @@ configure_active_load_levels
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].configure_active_load_levels`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.configure_active_load_levels`
 
@@ -448,13 +448,13 @@ configure_pattern_burst_sites
             
 
 
-            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container sites to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.sites[ ... ].configure_pattern_burst_sites`
 
-                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.configure_pattern_burst_sites`
 
@@ -471,13 +471,13 @@ configure_time_set_compare_edges_strobe
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].configure_time_set_compare_edges_strobe`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.configure_time_set_compare_edges_strobe`
 
@@ -513,13 +513,13 @@ configure_time_set_compare_edges_strobe2x
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].configure_time_set_compare_edges_strobe2x`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.configure_time_set_compare_edges_strobe2x`
 
@@ -564,13 +564,13 @@ configure_time_set_drive_edges
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].configure_time_set_drive_edges`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.configure_time_set_drive_edges`
 
@@ -647,13 +647,13 @@ configure_time_set_drive_edges2x
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].configure_time_set_drive_edges2x`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.configure_time_set_drive_edges2x`
 
@@ -748,13 +748,13 @@ configure_time_set_drive_format
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].configure_time_set_drive_format`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.configure_time_set_drive_format`
 
@@ -795,13 +795,13 @@ configure_time_set_edge
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].configure_time_set_edge`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.configure_time_set_edge`
 
@@ -855,13 +855,13 @@ configure_time_set_edge_multiplier
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].configure_time_set_edge_multiplier`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.configure_time_set_edge_multiplier`
 
@@ -929,13 +929,13 @@ configure_voltage_levels
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].configure_voltage_levels`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.configure_voltage_levels`
 
@@ -1030,13 +1030,13 @@ create_capture_waveform_parallel
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].create_capture_waveform_parallel`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.create_capture_waveform_parallel`
 
@@ -1063,13 +1063,13 @@ create_capture_waveform_serial
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].create_capture_waveform_serial`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.create_capture_waveform_serial`
 
@@ -1158,13 +1158,13 @@ create_source_waveform_parallel
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].create_source_waveform_parallel`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.create_source_waveform_parallel`
 
@@ -1203,13 +1203,13 @@ create_source_waveform_serial
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].create_source_waveform_serial`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.create_source_waveform_serial`
 
@@ -1305,13 +1305,13 @@ disable_sites
             
 
 
-            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container sites to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.sites[ ... ].disable_sites`
 
-                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.disable_sites`
 
@@ -1328,13 +1328,13 @@ enable_sites
             
 
 
-            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container sites to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.sites[ ... ].enable_sites`
 
-                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.enable_sites`
 
@@ -1351,13 +1351,13 @@ fetch_capture_waveform
             
 
 
-            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container sites to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.sites[ ... ].fetch_capture_waveform`
 
-                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.fetch_capture_waveform`
 
@@ -1451,13 +1451,13 @@ fetch_history_ram_cycle_information
                 the trigger conditions are met.
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].fetch_history_ram_cycle_information`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.fetch_history_ram_cycle_information`
 
@@ -1528,13 +1528,13 @@ frequency_counter_measure_frequency
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].frequency_counter_measure_frequency`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.frequency_counter_measure_frequency`
 
@@ -1600,13 +1600,13 @@ get_fail_count
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].get_fail_count`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.get_fail_count`
 
@@ -1657,13 +1657,13 @@ get_history_ram_sample_count
                 the trigger conditions are met.
 
 
-            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container sites to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.sites[ ... ].get_history_ram_sample_count`
 
-                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.get_history_ram_sample_count`
 
@@ -1723,13 +1723,13 @@ get_pin_results_pin_information
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].get_pin_results_pin_information`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.get_pin_results_pin_information`
 
@@ -1760,13 +1760,13 @@ get_site_pass_fail
             
 
 
-            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container sites to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.sites[ ... ].get_site_pass_fail`
 
-                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.get_site_pass_fail`
 
@@ -1793,13 +1793,13 @@ get_time_set_drive_format
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].get_time_set_drive_format`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.get_time_set_drive_format`
 
@@ -1836,13 +1836,13 @@ get_time_set_edge
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].get_time_set_edge`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.get_time_set_edge`
 
@@ -1897,13 +1897,13 @@ get_time_set_edge_multiplier
             
 
 
-            .. tip:: This method can be called for specific pins within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container pins to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.pins[ ... ].get_time_set_edge_multiplier`
 
-                To call the method for all pins, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.get_time_set_edge_multiplier`
 
@@ -2013,13 +2013,13 @@ is_site_enabled
             .. note:: The method returns an error if more than one site is specified.
 
 
-            .. tip:: This method can be called for specific sites within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container sites to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.sites[ ... ].is_site_enabled`
 
-                To call the method for all sites, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.is_site_enabled`
 
@@ -2187,13 +2187,13 @@ ppmu_measure
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].ppmu_measure`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.ppmu_measure`
 
@@ -2233,13 +2233,13 @@ ppmu_source
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].ppmu_source`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.ppmu_source`
 
@@ -2344,13 +2344,13 @@ read_static
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].read_static`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.read_static`
 
@@ -2501,13 +2501,13 @@ tdr
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].tdr`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.tdr`
 
@@ -2813,13 +2813,13 @@ write_static
             
 
 
-            .. tip:: This method can be called for specific channels within your :py:class:`nidigital.Session` object.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
                 and then call this method on the result.
 
                 Example: :py:meth:`my_session.channels[ ... ].write_static`
 
-                To call the method for all channels, you can call it directly on the :py:class:`nidigital.Session`.
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
 
                 Example: :py:meth:`my_session.write_static`
 
