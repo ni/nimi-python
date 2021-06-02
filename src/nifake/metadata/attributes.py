@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 1.2.0d9
+# This file is generated from NI-FAKE API metadata version 21.0.0d11
 attributes = {
     1000000: {
         'access': 'read-write',
-        'channel_based': False,
         'documentation': {
             'description': 'An attribute of type bool with read/write access.'
         },
@@ -13,7 +12,6 @@ attributes = {
     },
     1000001: {
         'access': 'read-write',
-        'channel_based': False,
         'documentation': {
             'description': 'An attribute of type float with read/write access.'
         },
@@ -23,7 +21,6 @@ attributes = {
     },
     1000002: {
         'access': 'read-write',
-        'channel_based': False,
         'documentation': {
             'description': 'An attribute of type string with read/write access.'
         },
@@ -33,7 +30,6 @@ attributes = {
     },
     1000003: {
         'access': 'read-write',
-        'channel_based': False,
         'documentation': {
             'description': 'An attribute of type Color with read/write access.'
         },
@@ -44,7 +40,6 @@ attributes = {
     },
     1000004: {
         'access': 'read-write',
-        'channel_based': False,
         'documentation': {
             'description': 'An attribute of type integer with read/write access.'
         },
@@ -54,7 +49,6 @@ attributes = {
     },
     1000005: {
         'access': 'read-write',
-        'channel_based': False,
         'documentation': {
             'description': 'An attribute with an enum that is also a float'
         },
@@ -65,7 +59,6 @@ attributes = {
     },
     1000006: {
         'access': 'read-write',
-        'channel_based': False,
         'documentation': {
             'description': 'An attribute of type 64-bit integer with read/write access.'
         },
@@ -76,7 +69,6 @@ attributes = {
     1000007: {
         'access': 'read-write',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-        'channel_based': False,
         'documentation': {
             'description': 'Attribute in seconds'
         },
@@ -88,7 +80,6 @@ attributes = {
     1000008: {
         'access': 'read-write',
         'attribute_class': 'AttributeViInt32TimeDeltaMilliseconds',
-        'channel_based': False,
         'documentation': {
             'description': 'Attribute in milliseconds'
         },
@@ -99,19 +90,23 @@ attributes = {
     },
     1000009: {
         'access': 'read-write',
-        'channel_based': True,
         'name': 'READ_WRITE_DOUBLE_WITH_REPEATED_CAPABILITY',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViReal64'
     },
     1000010: {
         'access': 'read-write',
         'attribute_class': 'AttributeViStringRepeatedCapability',
-        'channel_based': False,
         'documentation': {
             'description': 'An attribute with read/write access, that represents a repeated capability'
         },
         'lv_property': 'Fake attributes:Read Write String Repeated Capability',
         'name': 'READ_WRITE_STRING_REPEATED_CAPABILITY',
+        'supported_rep_caps': [
+            'instruments'
+        ],
         'type': 'ViString',
         'type_in_documentation': '''Any repeated capability type, as defined in nimi-python:
         - str

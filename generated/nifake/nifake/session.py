@@ -153,6 +153,18 @@ class _SessionBase(object):
     Property in seconds
     '''
     read_write_double_with_repeated_capability = _attributes.AttributeViReal64(1000009)
+    '''Type: float
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifake.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].read_write_double_with_repeated_capability`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifake.Session`.
+
+    Example: :py:attr:`my_session.read_write_double_with_repeated_capability`
+    '''
     read_write_int64 = _attributes.AttributeViInt64(1000006)
     '''Type: int
 
@@ -182,6 +194,16 @@ class _SessionBase(object):
         - Basic sequence types (list, tuple, range, slice) of other supported types
 
     A property with read/write access, that represents a repeated capability
+
+    Tip:
+    This property can be set/get on specific instruments within your :py:class:`nifake.Session` instance.
+    Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+    Example: :py:attr:`my_session.instruments[ ... ].read_write_string_repeated_capability`
+
+    To set/get on all instruments, you can call the property directly on the :py:class:`nifake.Session`.
+
+    Example: :py:attr:`my_session.read_write_string_repeated_capability`
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
