@@ -813,6 +813,7 @@ attributes = {
     },
     1150043: {
         'access': 'read-write',
+        'enum': 'HistoryRAMTriggerType',
         'documentation': {
             'description': 'Specifies the type of trigger condition on which History RAM starts acquiring pattern information.\n',
             'table_body': [
@@ -833,7 +834,6 @@ attributes = {
                 'Defined Values:'
             ]
         },
-        'enum': 'HramTriggerType',
         'name': 'HISTORY_RAM_TRIGGER_TYPE',
         'type': 'ViInt32'
     },
@@ -863,6 +863,7 @@ attributes = {
     },
     1150047: {
         'access': 'read-write',
+        'enum': 'HistoryRAMCyclesToAcquire',
         'documentation': {
             'description': 'Configures which cycles History RAM acquires after the trigger conditions are met. If you configure History RAM to only acquire failed cycles, you must set the pretrigger samples for History RAM to 0.\n',
             'table_body': [
@@ -879,7 +880,6 @@ attributes = {
                 'Defined Values:'
             ]
         },
-        'enum': 'HramCyclesToAcquire',
         'name': 'HISTORY_RAM_CYCLES_TO_ACQUIRE',
         'type': 'ViInt32'
     },
@@ -902,7 +902,7 @@ attributes = {
             'channels'
         ],
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150052: {
         'access': 'read-write',
@@ -1019,7 +1019,7 @@ attributes = {
         },
         'name': 'TIMING_ABSOLUTE_DELAY',
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150073: {
         'access': 'read-write',

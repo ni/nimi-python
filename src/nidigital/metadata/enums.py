@@ -122,25 +122,7 @@ enums = {
             }
         ]
     },
-    'FrequencyMeasurementMode': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Frequency measurements are made serially for groups of channels associated with a single frequency counter for each group.\n\nMaximum frequency measured: 200 MHz.'
-                },
-                'name': 'NIDIGITAL_VAL_BANKED',
-                'value': 3700
-            },
-            {
-                'documentation': {
-                    'description': 'Frequency measurements are made by multiple frequency counters in parallel.\n\nMaximum frequency measured: 100 MHz.'
-                },
-                'name': 'NIDIGITAL_VAL_PARALLEL',
-                'value': 3701
-            }
-        ]
-    },
-    'HramCyclesToAcquire': {
+    'HistoryRAMCyclesToAcquire': {
         'values': [
             {
                 'documentation': {
@@ -158,7 +140,7 @@ enums = {
             }
         ]
     },
-    'HramTriggerType': {
+    'HistoryRAMTriggerType': {
         'values': [
             {
                 'documentation': {
@@ -180,6 +162,24 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_PATTERN_LABEL',
                 'value': 2202
+            }
+        ]
+    },
+    'FrequencyMeasurementMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Frequency measurements are made serially for groups of channels associated with a single frequency counter for each group.\n\nMaximum frequency measured: 200 MHz.'
+                },
+                'name': 'NIDIGITAL_VAL_BANKED',
+                'value': 3700
+            },
+            {
+                'documentation': {
+                    'description': 'Frequency measurements are made by multiple frequency counters in parallel.\n\nMaximum frequency measured: 100 MHz.'
+                },
+                'name': 'NIDIGITAL_VAL_PARALLEL',
+                'value': 3701
             }
         ]
     },
@@ -268,8 +268,8 @@ enums = {
                     'description': 'A digital state of 0.'
                 },
                 'name': 'NIDIGITAL_VAL_0',
-                'pretty_name': '0',
                 'python_name': 'ZERO',
+                'pretty_name': '0',
                 'value': 0
             },
             {
@@ -277,8 +277,8 @@ enums = {
                     'description': 'A digital state of 1.'
                 },
                 'name': 'NIDIGITAL_VAL_1',
-                'pretty_name': '1',
                 'python_name': 'ONE',
+                'pretty_name': '1',
                 'value': 1
             },
             {
@@ -377,13 +377,6 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_DISCONNECT',
                 'value': 1103
-            },
-            {
-                'documentation': {
-                    'description': 'Yields control of the specified pin(s) to LabVIEW FPGA.'
-                },
-                'name': 'NIDIGITAL_VAL_RIO',
-                'value': 1104
             }
         ]
     },
@@ -496,10 +489,16 @@ enums = {
     'SoftwareTrigger': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Overrides the start trigger.'
+                },
                 'name': 'NIDIGITAL_VAL_START_TRIGGER',
                 'value': 2000
             },
             {
+                'documentation': {
+                    'description': 'Specifies to route a pattern opcode event signal.'
+                },
                 'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER',
                 'value': 2001
             }
@@ -698,8 +697,8 @@ enums = {
                     'description': 'Specifies to drive low.'
                 },
                 'name': 'NIDIGITAL_VAL_0',
-                'pretty_name': '0',
                 'python_name': 'ZERO',
+                'pretty_name': '0',
                 'value': 0
             },
             {
@@ -707,8 +706,8 @@ enums = {
                     'description': 'Specifies to drive high.'
                 },
                 'name': 'NIDIGITAL_VAL_1',
-                'pretty_name': '1',
                 'python_name': 'ONE',
+                'pretty_name': '1',
                 'value': 1
             },
             {

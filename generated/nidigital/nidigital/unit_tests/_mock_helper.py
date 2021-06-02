@@ -26,14 +26,10 @@ class SideEffectsHelper(object):
         self._defaults['ApplyTDROffsets']['return'] = 0
         self._defaults['BurstPattern'] = {}
         self._defaults['BurstPattern']['return'] = 0
-        self._defaults['ClearError'] = {}
-        self._defaults['ClearError']['return'] = 0
         self._defaults['ClockGenerator_Abort'] = {}
         self._defaults['ClockGenerator_Abort']['return'] = 0
         self._defaults['ClockGenerator_GenerateClock'] = {}
         self._defaults['ClockGenerator_GenerateClock']['return'] = 0
-        self._defaults['ClockGenerator_Initiate'] = {}
-        self._defaults['ClockGenerator_Initiate']['return'] = 0
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
         self._defaults['ConfigureActiveLoadLevels'] = {}
@@ -113,12 +109,9 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['value'] = None
-        self._defaults['GetChannelName'] = {}
-        self._defaults['GetChannelName']['return'] = 0
-        self._defaults['GetChannelName']['name'] = None
         self._defaults['GetChannelNameFromString'] = {}
         self._defaults['GetChannelNameFromString']['return'] = 0
-        self._defaults['GetChannelNameFromString']['name'] = None
+        self._defaults['GetChannelNameFromString']['names'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
@@ -208,8 +201,6 @@ class SideEffectsHelper(object):
         self._defaults['ReadStatic']['return'] = 0
         self._defaults['ReadStatic']['actualNumRead'] = None
         self._defaults['ReadStatic']['data'] = None
-        self._defaults['ResetAttribute'] = {}
-        self._defaults['ResetAttribute']['return'] = 0
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['SelfCalibrate'] = {}
@@ -294,11 +285,6 @@ class SideEffectsHelper(object):
             return self._defaults['BurstPattern']['return']
         return self._defaults['BurstPattern']['return']
 
-    def niDigital_ClearError(self, vi):  # noqa: N802
-        if self._defaults['ClearError']['return'] != 0:
-            return self._defaults['ClearError']['return']
-        return self._defaults['ClearError']['return']
-
     def niDigital_ClockGenerator_Abort(self, vi, channel_list):  # noqa: N802
         if self._defaults['ClockGenerator_Abort']['return'] != 0:
             return self._defaults['ClockGenerator_Abort']['return']
@@ -308,11 +294,6 @@ class SideEffectsHelper(object):
         if self._defaults['ClockGenerator_GenerateClock']['return'] != 0:
             return self._defaults['ClockGenerator_GenerateClock']['return']
         return self._defaults['ClockGenerator_GenerateClock']['return']
-
-    def niDigital_ClockGenerator_Initiate(self, vi, channel_list):  # noqa: N802
-        if self._defaults['ClockGenerator_Initiate']['return'] != 0:
-            return self._defaults['ClockGenerator_Initiate']['return']
-        return self._defaults['ClockGenerator_Initiate']['return']
 
     def niDigital_Commit(self, vi):  # noqa: N802
         if self._defaults['Commit']['return'] != 0:
@@ -329,42 +310,42 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigurePatternBurstSites']['return']
         return self._defaults['ConfigurePatternBurstSites']['return']
 
-    def niDigital_ConfigureTimeSetCompareEdgesStrobe(self, vi, pin_list, time_set, strobe_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetCompareEdgesStrobe(self, vi, pin_list, time_set_name, strobe_edge):  # noqa: N802
         if self._defaults['ConfigureTimeSetCompareEdgesStrobe']['return'] != 0:
             return self._defaults['ConfigureTimeSetCompareEdgesStrobe']['return']
         return self._defaults['ConfigureTimeSetCompareEdgesStrobe']['return']
 
-    def niDigital_ConfigureTimeSetCompareEdgesStrobe2x(self, vi, pin_list, time_set, strobe_edge, strobe2_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetCompareEdgesStrobe2x(self, vi, pin_list, time_set_name, strobe_edge, strobe2_edge):  # noqa: N802
         if self._defaults['ConfigureTimeSetCompareEdgesStrobe2x']['return'] != 0:
             return self._defaults['ConfigureTimeSetCompareEdgesStrobe2x']['return']
         return self._defaults['ConfigureTimeSetCompareEdgesStrobe2x']['return']
 
-    def niDigital_ConfigureTimeSetDriveEdges(self, vi, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveEdges(self, vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):  # noqa: N802
         if self._defaults['ConfigureTimeSetDriveEdges']['return'] != 0:
             return self._defaults['ConfigureTimeSetDriveEdges']['return']
         return self._defaults['ConfigureTimeSetDriveEdges']['return']
 
-    def niDigital_ConfigureTimeSetDriveEdges2x(self, vi, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveEdges2x(self, vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):  # noqa: N802
         if self._defaults['ConfigureTimeSetDriveEdges2x']['return'] != 0:
             return self._defaults['ConfigureTimeSetDriveEdges2x']['return']
         return self._defaults['ConfigureTimeSetDriveEdges2x']['return']
 
-    def niDigital_ConfigureTimeSetDriveFormat(self, vi, pin_list, time_set, drive_format):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveFormat(self, vi, pin_list, time_set_name, drive_format):  # noqa: N802
         if self._defaults['ConfigureTimeSetDriveFormat']['return'] != 0:
             return self._defaults['ConfigureTimeSetDriveFormat']['return']
         return self._defaults['ConfigureTimeSetDriveFormat']['return']
 
-    def niDigital_ConfigureTimeSetEdge(self, vi, pin_list, time_set, edge, time):  # noqa: N802
+    def niDigital_ConfigureTimeSetEdge(self, vi, pin_list, time_set_name, edge, time):  # noqa: N802
         if self._defaults['ConfigureTimeSetEdge']['return'] != 0:
             return self._defaults['ConfigureTimeSetEdge']['return']
         return self._defaults['ConfigureTimeSetEdge']['return']
 
-    def niDigital_ConfigureTimeSetEdgeMultiplier(self, vi, pin_list, time_set, edge_multiplier):  # noqa: N802
+    def niDigital_ConfigureTimeSetEdgeMultiplier(self, vi, pin_list, time_set_name, edge_multiplier):  # noqa: N802
         if self._defaults['ConfigureTimeSetEdgeMultiplier']['return'] != 0:
             return self._defaults['ConfigureTimeSetEdgeMultiplier']['return']
         return self._defaults['ConfigureTimeSetEdgeMultiplier']['return']
 
-    def niDigital_ConfigureTimeSetPeriod(self, vi, time_set, period):  # noqa: N802
+    def niDigital_ConfigureTimeSetPeriod(self, vi, time_set_name, period):  # noqa: N802
         if self._defaults['ConfigureTimeSetPeriod']['return'] != 0:
             return self._defaults['ConfigureTimeSetPeriod']['return']
         return self._defaults['ConfigureTimeSetPeriod']['return']
@@ -524,7 +505,7 @@ class SideEffectsHelper(object):
             frequencies_ref[i] = self._defaults['FrequencyCounter_MeasureFrequency']['frequencies'][i]
         return self._defaults['FrequencyCounter_MeasureFrequency']['return']
 
-    def niDigital_GetAttributeViBoolean(self, vi, channel_list, attribute, value):  # noqa: N802
+    def niDigital_GetAttributeViBoolean(self, vi, channel_name, attribute, value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
             return self._defaults['GetAttributeViBoolean']['return']
         # value
@@ -534,7 +515,7 @@ class SideEffectsHelper(object):
             value.contents.value = self._defaults['GetAttributeViBoolean']['value']
         return self._defaults['GetAttributeViBoolean']['return']
 
-    def niDigital_GetAttributeViInt32(self, vi, channel_list, attribute, value):  # noqa: N802
+    def niDigital_GetAttributeViInt32(self, vi, channel_name, attribute, value):  # noqa: N802
         if self._defaults['GetAttributeViInt32']['return'] != 0:
             return self._defaults['GetAttributeViInt32']['return']
         # value
@@ -544,7 +525,7 @@ class SideEffectsHelper(object):
             value.contents.value = self._defaults['GetAttributeViInt32']['value']
         return self._defaults['GetAttributeViInt32']['return']
 
-    def niDigital_GetAttributeViInt64(self, vi, channel_list, attribute, value):  # noqa: N802
+    def niDigital_GetAttributeViInt64(self, vi, channel_name, attribute, value):  # noqa: N802
         if self._defaults['GetAttributeViInt64']['return'] != 0:
             return self._defaults['GetAttributeViInt64']['return']
         # value
@@ -554,7 +535,7 @@ class SideEffectsHelper(object):
             value.contents.value = self._defaults['GetAttributeViInt64']['value']
         return self._defaults['GetAttributeViInt64']['return']
 
-    def niDigital_GetAttributeViReal64(self, vi, channel_list, attribute, value):  # noqa: N802
+    def niDigital_GetAttributeViReal64(self, vi, channel_name, attribute, value):  # noqa: N802
         if self._defaults['GetAttributeViReal64']['return'] != 0:
             return self._defaults['GetAttributeViReal64']['return']
         # value
@@ -564,7 +545,7 @@ class SideEffectsHelper(object):
             value.contents.value = self._defaults['GetAttributeViReal64']['value']
         return self._defaults['GetAttributeViReal64']['return']
 
-    def niDigital_GetAttributeViString(self, vi, channel_list, attribute, buffer_size, value):  # noqa: N802
+    def niDigital_GetAttributeViString(self, vi, channel_name, attribute, buffer_size, value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
         if self._defaults['GetAttributeViString']['value'] is None:
@@ -574,24 +555,14 @@ class SideEffectsHelper(object):
         value.value = self._defaults['GetAttributeViString']['value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
-    def niDigital_GetChannelName(self, vi, index, name_buffer_size, name):  # noqa: N802
-        if self._defaults['GetChannelName']['return'] != 0:
-            return self._defaults['GetChannelName']['return']
-        if self._defaults['GetChannelName']['name'] is None:
-            raise MockFunctionCallError("niDigital_GetChannelName", param='name')
-        if name_buffer_size.value == 0:
-            return len(self._defaults['GetChannelName']['name'])
-        name.value = self._defaults['GetChannelName']['name'].encode('ascii')
-        return self._defaults['GetChannelName']['return']
-
-    def niDigital_GetChannelNameFromString(self, vi, index, name_buffer_size, name):  # noqa: N802
+    def niDigital_GetChannelNameFromString(self, vi, indices, name_buffer_size, names):  # noqa: N802
         if self._defaults['GetChannelNameFromString']['return'] != 0:
             return self._defaults['GetChannelNameFromString']['return']
-        if self._defaults['GetChannelNameFromString']['name'] is None:
-            raise MockFunctionCallError("niDigital_GetChannelNameFromString", param='name')
+        if self._defaults['GetChannelNameFromString']['names'] is None:
+            raise MockFunctionCallError("niDigital_GetChannelNameFromString", param='names')
         if name_buffer_size.value == 0:
-            return len(self._defaults['GetChannelNameFromString']['name'])
-        name.value = self._defaults['GetChannelNameFromString']['name'].encode('ascii')
+            return len(self._defaults['GetChannelNameFromString']['names'])
+        names.value = self._defaults['GetChannelNameFromString']['names'].encode('ascii')
         return self._defaults['GetChannelNameFromString']['return']
 
     def niDigital_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
@@ -749,7 +720,7 @@ class SideEffectsHelper(object):
             site_numbers_ref[i] = self._defaults['GetSiteResultsSiteNumbers']['siteNumbers'][i]
         return self._defaults['GetSiteResultsSiteNumbers']['return']
 
-    def niDigital_GetTimeSetDriveFormat(self, vi, pin, time_set, format):  # noqa: N802
+    def niDigital_GetTimeSetDriveFormat(self, vi, pin, time_set_name, format):  # noqa: N802
         if self._defaults['GetTimeSetDriveFormat']['return'] != 0:
             return self._defaults['GetTimeSetDriveFormat']['return']
         # format
@@ -759,7 +730,7 @@ class SideEffectsHelper(object):
             format.contents.value = self._defaults['GetTimeSetDriveFormat']['format']
         return self._defaults['GetTimeSetDriveFormat']['return']
 
-    def niDigital_GetTimeSetEdge(self, vi, pin, time_set, edge, time):  # noqa: N802
+    def niDigital_GetTimeSetEdge(self, vi, pin, time_set_name, edge, time):  # noqa: N802
         if self._defaults['GetTimeSetEdge']['return'] != 0:
             return self._defaults['GetTimeSetEdge']['return']
         # time
@@ -769,7 +740,7 @@ class SideEffectsHelper(object):
             time.contents.value = self._defaults['GetTimeSetEdge']['time']
         return self._defaults['GetTimeSetEdge']['return']
 
-    def niDigital_GetTimeSetEdgeMultiplier(self, vi, pin, time_set, edge_multiplier):  # noqa: N802
+    def niDigital_GetTimeSetEdgeMultiplier(self, vi, pin, time_set_name, edge_multiplier):  # noqa: N802
         if self._defaults['GetTimeSetEdgeMultiplier']['return'] != 0:
             return self._defaults['GetTimeSetEdgeMultiplier']['return']
         # edge_multiplier
@@ -789,7 +760,7 @@ class SideEffectsHelper(object):
         name.value = self._defaults['GetTimeSetName']['name'].encode('ascii')
         return self._defaults['GetTimeSetName']['return']
 
-    def niDigital_GetTimeSetPeriod(self, vi, time_set, period):  # noqa: N802
+    def niDigital_GetTimeSetPeriod(self, vi, time_set_name, period):  # noqa: N802
         if self._defaults['GetTimeSetPeriod']['return'] != 0:
             return self._defaults['GetTimeSetPeriod']['return']
         # period
@@ -834,7 +805,7 @@ class SideEffectsHelper(object):
             enable.contents.value = self._defaults['IsSiteEnabled']['enable']
         return self._defaults['IsSiteEnabled']['return']
 
-    def niDigital_LoadLevels(self, vi, levels_file_path):  # noqa: N802
+    def niDigital_LoadLevels(self, vi, file_path):  # noqa: N802
         if self._defaults['LoadLevels']['return'] != 0:
             return self._defaults['LoadLevels']['return']
         return self._defaults['LoadLevels']['return']
@@ -844,17 +815,17 @@ class SideEffectsHelper(object):
             return self._defaults['LoadPattern']['return']
         return self._defaults['LoadPattern']['return']
 
-    def niDigital_LoadPinMap(self, vi, pin_map_file_path):  # noqa: N802
+    def niDigital_LoadPinMap(self, vi, file_path):  # noqa: N802
         if self._defaults['LoadPinMap']['return'] != 0:
             return self._defaults['LoadPinMap']['return']
         return self._defaults['LoadPinMap']['return']
 
-    def niDigital_LoadSpecifications(self, vi, specifications_file_path):  # noqa: N802
+    def niDigital_LoadSpecifications(self, vi, file_path):  # noqa: N802
         if self._defaults['LoadSpecifications']['return'] != 0:
             return self._defaults['LoadSpecifications']['return']
         return self._defaults['LoadSpecifications']['return']
 
-    def niDigital_LoadTiming(self, vi, timing_file_path):  # noqa: N802
+    def niDigital_LoadTiming(self, vi, file_path):  # noqa: N802
         if self._defaults['LoadTiming']['return'] != 0:
             return self._defaults['LoadTiming']['return']
         return self._defaults['LoadTiming']['return']
@@ -934,11 +905,6 @@ class SideEffectsHelper(object):
             data_ref[i] = self._defaults['ReadStatic']['data'][i]
         return self._defaults['ReadStatic']['return']
 
-    def niDigital_ResetAttribute(self, vi, channel_list, attribute_id):  # noqa: N802
-        if self._defaults['ResetAttribute']['return'] != 0:
-            return self._defaults['ResetAttribute']['return']
-        return self._defaults['ResetAttribute']['return']
-
     def niDigital_ResetDevice(self, vi):  # noqa: N802
         if self._defaults['ResetDevice']['return'] != 0:
             return self._defaults['ResetDevice']['return']
@@ -954,27 +920,27 @@ class SideEffectsHelper(object):
             return self._defaults['SendSoftwareEdgeTrigger']['return']
         return self._defaults['SendSoftwareEdgeTrigger']['return']
 
-    def niDigital_SetAttributeViBoolean(self, vi, channel_list, attribute, value):  # noqa: N802
+    def niDigital_SetAttributeViBoolean(self, vi, channel_name, attribute, value):  # noqa: N802
         if self._defaults['SetAttributeViBoolean']['return'] != 0:
             return self._defaults['SetAttributeViBoolean']['return']
         return self._defaults['SetAttributeViBoolean']['return']
 
-    def niDigital_SetAttributeViInt32(self, vi, channel_list, attribute, value):  # noqa: N802
+    def niDigital_SetAttributeViInt32(self, vi, channel_name, attribute, value):  # noqa: N802
         if self._defaults['SetAttributeViInt32']['return'] != 0:
             return self._defaults['SetAttributeViInt32']['return']
         return self._defaults['SetAttributeViInt32']['return']
 
-    def niDigital_SetAttributeViInt64(self, vi, channel_list, attribute, value):  # noqa: N802
+    def niDigital_SetAttributeViInt64(self, vi, channel_name, attribute, value):  # noqa: N802
         if self._defaults['SetAttributeViInt64']['return'] != 0:
             return self._defaults['SetAttributeViInt64']['return']
         return self._defaults['SetAttributeViInt64']['return']
 
-    def niDigital_SetAttributeViReal64(self, vi, channel_list, attribute, value):  # noqa: N802
+    def niDigital_SetAttributeViReal64(self, vi, channel_name, attribute, value):  # noqa: N802
         if self._defaults['SetAttributeViReal64']['return'] != 0:
             return self._defaults['SetAttributeViReal64']['return']
         return self._defaults['SetAttributeViReal64']['return']
 
-    def niDigital_SetAttributeViString(self, vi, channel_list, attribute, value):  # noqa: N802
+    def niDigital_SetAttributeViString(self, vi, channel_name, attribute, value):  # noqa: N802
         if self._defaults['SetAttributeViString']['return'] != 0:
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
@@ -1004,7 +970,7 @@ class SideEffectsHelper(object):
             return self._defaults['UnloadAllPatterns']['return']
         return self._defaults['UnloadAllPatterns']['return']
 
-    def niDigital_UnloadSpecifications(self, vi, specifications_file_path):  # noqa: N802
+    def niDigital_UnloadSpecifications(self, vi, file_path):  # noqa: N802
         if self._defaults['UnloadSpecifications']['return'] != 0:
             return self._defaults['UnloadSpecifications']['return']
         return self._defaults['UnloadSpecifications']['return']
@@ -1109,14 +1075,10 @@ class SideEffectsHelper(object):
         mock_library.niDigital_ApplyTDROffsets.return_value = 0
         mock_library.niDigital_BurstPattern.side_effect = MockFunctionCallError("niDigital_BurstPattern")
         mock_library.niDigital_BurstPattern.return_value = 0
-        mock_library.niDigital_ClearError.side_effect = MockFunctionCallError("niDigital_ClearError")
-        mock_library.niDigital_ClearError.return_value = 0
         mock_library.niDigital_ClockGenerator_Abort.side_effect = MockFunctionCallError("niDigital_ClockGenerator_Abort")
         mock_library.niDigital_ClockGenerator_Abort.return_value = 0
         mock_library.niDigital_ClockGenerator_GenerateClock.side_effect = MockFunctionCallError("niDigital_ClockGenerator_GenerateClock")
         mock_library.niDigital_ClockGenerator_GenerateClock.return_value = 0
-        mock_library.niDigital_ClockGenerator_Initiate.side_effect = MockFunctionCallError("niDigital_ClockGenerator_Initiate")
-        mock_library.niDigital_ClockGenerator_Initiate.return_value = 0
         mock_library.niDigital_Commit.side_effect = MockFunctionCallError("niDigital_Commit")
         mock_library.niDigital_Commit.return_value = 0
         mock_library.niDigital_ConfigureActiveLoadLevels.side_effect = MockFunctionCallError("niDigital_ConfigureActiveLoadLevels")
@@ -1179,8 +1141,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_GetAttributeViReal64.return_value = 0
         mock_library.niDigital_GetAttributeViString.side_effect = MockFunctionCallError("niDigital_GetAttributeViString")
         mock_library.niDigital_GetAttributeViString.return_value = 0
-        mock_library.niDigital_GetChannelName.side_effect = MockFunctionCallError("niDigital_GetChannelName")
-        mock_library.niDigital_GetChannelName.return_value = 0
         mock_library.niDigital_GetChannelNameFromString.side_effect = MockFunctionCallError("niDigital_GetChannelNameFromString")
         mock_library.niDigital_GetChannelNameFromString.return_value = 0
         mock_library.niDigital_GetError.side_effect = MockFunctionCallError("niDigital_GetError")
@@ -1241,8 +1201,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_ReadSequencerRegister.return_value = 0
         mock_library.niDigital_ReadStatic.side_effect = MockFunctionCallError("niDigital_ReadStatic")
         mock_library.niDigital_ReadStatic.return_value = 0
-        mock_library.niDigital_ResetAttribute.side_effect = MockFunctionCallError("niDigital_ResetAttribute")
-        mock_library.niDigital_ResetAttribute.return_value = 0
         mock_library.niDigital_ResetDevice.side_effect = MockFunctionCallError("niDigital_ResetDevice")
         mock_library.niDigital_ResetDevice.return_value = 0
         mock_library.niDigital_SelfCalibrate.side_effect = MockFunctionCallError("niDigital_SelfCalibrate")
