@@ -1717,7 +1717,8 @@ functions = {
                     'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Default Value: None (returns all available samples).\n',
                     'note': '\nUse the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the\nnumber of samples to fetch when performing a measurement. For more\ninformation about when to use this attribute, refer to the `NI\nKnowledgeBase <javascript:WWW(WWW_KB_MEAS)>`__.\n'
                 },
-                'name': 'measurementWaveformSize',
+                'name': 'measWfmSize',
+                'python_name': 'measurementWaveformSize',
                 'type': 'ViInt32'
             },
             {
