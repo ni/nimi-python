@@ -3,38 +3,44 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, channels=None, reset=False, options={})
+.. py:class:: Session(self, resource_name, channels=None, reset=False, options={}, independent_channels=True)
 
     
 
-    Creates and returns a new NI-DCPower session to the power supply or SMU
-    specified in **resource name** to be used in all subsequent NI-DCPower
-    method calls. With this method, you can optionally set the initial
-    state of the following session properties:
+    Creates and returns a new NI-DCPower session to the instrument(s) and channel(s) specified
+    in **resource name** to be used in all subsequent NI-DCPower method calls. With this method,
+    you can optionally set the initial state of the following session properties:
 
     -  :py:attr:`nidcpower.Session.simulate`
     -  :py:attr:`nidcpower.Session.driver_setup`
 
-    After calling this method, the session will be in the Uncommitted
-    state. Refer to the `Programming
-    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
-    details about specific software states.
+    After calling this method, the specified channel or channels will be in the Uncommitted
+    state.
 
-    To place the device in a known start-up state when creating a new
-    session, set **reset** to True. This action is equivalent to using
-    the :py:meth:`nidcpower.Session.reset` method immediately after initializing the
+    To place channel(s) in a known start-up state when creating a new session, set **reset** to
+    True. This action is equivalent to using the :py:meth:`nidcpower.Session.reset` method immediately after initializing the
     session.
 
-    To open a session and leave the device in its existing configuration
-    without passing through a transitional output state, set **reset** to
-    False. Then configure the device as in the previous session,
-    changing only the desired settings, and then call the
-    :py:meth:`nidcpower.Session.initiate` method.
+    To open a session and leave the channel(s) in an existing configuration without passing
+    through a transitional output state, set **reset** to False. Next, configure the channel(s)
+    as in the previous session, change the desired settings, and then call the :py:meth:`nidcpower.Session.initiate` method
+    to write both settings.
 
-    **Related Topics:**
+    **Details of Independent Channel Operation**
 
-    `Programming
-    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+    With this method and channel-based NI-DCPower methods and properties, you can use any
+    channels in the session independently. For example, you can initiate a subset of channels in
+    the session with :py:meth:`nidcpower.Session.initiate`, and the other channels in the session remain in the Uncommitted
+    state.
+
+    When you initialize with independent channels, each channel steps through the NI-DCPower
+    programming state model independently of all other channels, and you can specify a subset of
+    channels for most operations.
+
+    **Note** You can make concurrent calls to a session from multiple threads, but the session
+    executes the calls one at a time. If you specify multiple channels for a method or property,
+    the session may perform the operation on multiple channels in parallel, though this is not
+    guaranteed, and some operations may execute sequentially.
 
     
 
@@ -43,29 +49,44 @@ Session
     :param resource_name:
         
 
-        Specifies the **resourceName** assigned by Measurement & Automation
-        Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
-        instrument's **resourceName**. **resourceName** can also be a logical
-        IVI name.
+        Specifies the **resource name** as seen in Measurement
+        & Automation Explorer (MAX) or lsni, for example "PXI1Slot3" where "PXI1Slot3" is an
+        instrument's **resource name**. If independent_channels is False, **resource name**
+        can also be a logical IVI name.
+
+        If independent_channels is True, **resource name** can be names of the instrument(s)
+        and the channel(s) to initialize. Specify the instrument(s) and channel(s) using the
+        form "PXI1Slot3/0,PXI1Slot3/2-3,PXI1Slot4/2-3 or
+        PXI1Slot3/0,PXI1Slot3/2:3,PXI1Slot4/2:3", where "PXI1Slot3" and "PXI1Slot4" are
+        instrument resource names followed by channels. If you exclude a channels string
+        after an instrument resource name, all channels of the instrument(s) are included in
+        the session.
 
         
 
 
-    :type resource_name: str
+    :type resource_name: str, list, tuple
 
     :param channels:
         
 
-        Specifies which output channel(s) to include in a new session. Specify
-        multiple channels by using a channel list or a channel range. A channel
-        list is a comma (,) separated sequence of channel names (for example,
-        0,2 specifies channels 0 and 2). A channel range is a lower bound
-        channel followed by a hyphen (-) or colon (:) followed by an upper bound
-        channel (for example, 0-2 specifies channels 0, 1, and 2). In the
-        Running state, multiple output channel configurations are performed
-        sequentially based on the order specified in this parameter. If you do
-        not specify any channels, by default all channels on the device are
-        included in the session.
+        For new applications, use the default value of None
+        and specify the channels in **resource name**.
+
+        Specifies which output channel(s) to include in a new session. Specify multiple
+        channels by using a channel list or a channel range. A channel list is a comma (,)
+        separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).
+        A channel range is a lower bound channel followed by a hyphen (-) or colon (:)
+        followed by an upper bound channel (for example, 0-2 specifies channels 0, 1,
+        and 2).
+
+        If independent_channels is False, this argument specifies which channels to include
+        in a legacy synchronized channels session. If you do not specify any channels, by
+        default all channels on the device are included in the session.
+
+        If independent_channels is True, this argument combines with **resource name** to
+        specify which channels to include in an independent channels session. Initializing
+        an independent channels session with a channels argument is deprecated.
 
         
 
@@ -75,8 +96,7 @@ Session
     :param reset:
         
 
-        Specifies whether to reset the device during the initialization
-        procedure.
+        Specifies whether to reset channel(s) during the initialization procedure.
 
         
 
@@ -116,6 +136,18 @@ Session
 
 
     :type options: dict
+
+    :param independent_channels:
+        
+
+        Specifies whether to initialize the session with
+        independent channels. Set this argument to False on legacy applications or if you
+        are unable to upgrade your NI-DCPower driver runtime to 20.6 or higher.
+
+        
+
+
+    :type independent_channels: bool
 
 
 Methods

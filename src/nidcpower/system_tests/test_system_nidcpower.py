@@ -5,28 +5,43 @@ import pytest
 import tempfile
 
 
-@pytest.fixture(scope='function')
-def session():
-    with nidcpower.Session('4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+@pytest.fixture(scope='function', params=[False, True])
+def session(request):
+    with nidcpower.Session(
+        '4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', request.param
+    ) as simulated_session:
         yield simulated_session
 
 
 @pytest.fixture(scope='function')
 def multi_instrument_session():
-    instruments = ['PXI1Slot2', 'PXI1Slot5']
-    with nidcpower.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+    with nidcpower.Session(
+        '4162_01,4162_02', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', True
+    ) as simulated_session:
         yield simulated_session
 
 
 @pytest.fixture(scope='function')
-def single_channel_session():
-    with nidcpower.Session('4162', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+def synchronized_channels_session():
+    with nidcpower.Session(
+        '4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', False
+    ) as simulated_session:
         yield simulated_session
 
 
-@pytest.fixture(scope='function')
-def multiple_channel_session():
-    with nidcpower.Session('4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+@pytest.fixture(scope='function', params=[False, True])
+def single_channel_session(request):
+    with nidcpower.Session(
+        '4162', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', request.param
+    ) as simulated_session:
+        yield simulated_session
+
+
+@pytest.fixture(scope='function', params=[False, True])
+def multiple_channel_session(request):
+    with nidcpower.Session(
+        '4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', request.param
+    ) as simulated_session:
         yield simulated_session
 
 
@@ -38,19 +53,26 @@ def test_self_cal(session):
     session.self_cal()
 
 
-def test_get_channel_name(session):
-    name = session.get_channel_name(1)
+def test_get_channel_name_independent_channels(multi_instrument_session):
+    name = multi_instrument_session.get_channel_name(1)
+    assert name == '4162_01/0'
+
+
+def test_get_channel_name_synchronized_channels(synchronized_channels_session):
+    name = synchronized_channels_session.get_channel_name(1)
     assert name == '0'
 
 
-def test_get_channel_names(multi_instrument_session):
-    # Once we have support for independent channels, we should update this test to include
-    # the instrument names in the expected channel names -- or possibly add a separate test
-    # expected_string = ['{0}/{1}'.format(instruments[0], x) for x in range(12)]
-    # (Tracked on GitHub by #1582)
-    expected_string = ['{0}'.format(x) for x in range(12)]
+def test_get_channel_names_independent_channels(multi_instrument_session):
+    expected_string = ['4162_01/{0}'.format(x) for x in range(12)]
     channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
-    assert multi_instrument_session.get_channel_names(indices=channel_indices) == expected_string
+    assert multi_instrument_session.get_channel_names(channel_indices) == expected_string
+
+
+def test_get_channel_names_synchronized_channels(synchronized_channels_session):
+    expected_string = [str(x) for x in range(12)]
+    channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
+    assert synchronized_channels_session.get_channel_names(channel_indices) == expected_string
 
 
 def test_get_attribute_string(session):
@@ -317,9 +339,9 @@ def test_create_and_delete_advanced_sequence_bad_type(single_channel_session):
         pass
 
 
-def test_send_software_edge_trigger_error(session):
+def test_send_software_edge_trigger_error(synchronized_channels_session):
     try:
-        session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
+        synchronized_channels_session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
         assert False
     except nidcpower.Error as e:
         assert e.code == -1074118587  # Error : Function not available in multichannel session
@@ -365,3 +387,90 @@ def test_channel_format_types():
         assert simulated_session.channel_count == 12
 
 
+@pytest.mark.parametrize(
+    'resource_name,channels,independent_channels',
+    [
+        ('Dev1', None, False),
+        ('Dev1', '', False),
+        ('Dev1', '0', False),
+        ('Dev1', '0', True)
+    ]
+)
+def test_init_issues_deprecation_warnings(resource_name, channels, independent_channels):
+    """Tests for deprecation warnings for legacy initialization options.
+
+    A deprecation warning should occur any time independent_channels is False or a channels
+    argument is supplied.
+    """
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
+    with pytest.deprecated_call():
+        with nidcpower.Session(resource_name, channels, options=options, independent_channels=independent_channels):
+            pass
+
+
+@pytest.mark.parametrize(
+    'resource_name,channels',
+    [
+        ('Dev1', None),
+        ('Dev1', ''),
+        ('Dev1', '0'),
+        ('Dev1', '0,1')
+    ]
+)
+def test_init_backwards_compatibility_with_initialize_with_channels(resource_name, channels):
+    """Tests that legacy sessions open without exception for valid arguments."""
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
+    with nidcpower.Session(resource_name, channels, options=options, independent_channels=False):
+        pass
+
+
+@pytest.mark.parametrize(
+    'resource_name,channels',
+    [
+        ('Dev1', None),
+        ('Dev1', ''),
+        ('Dev1', '0'),  # backwards compatibility check
+        ('Dev1', '0,1'),  # backwards compatibility check
+        ('Dev1/0', None),
+        ('Dev1/0', ''),
+        ('Dev1/0,Dev1/1', None),
+        ('Dev1/0,Dev2/1', None),
+        ('Dev1/0,Dev2/1', '')
+    ]
+)
+def test_init_with_independent_channels(resource_name, channels):
+    """Tests that independent channels sessions open without exception for valid arguments."""
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
+    with nidcpower.Session(resource_name, channels, options=options, independent_channels=True):
+        pass
+
+
+def test_init_raises_value_error_for_multi_instrument_resource_name_and_channels_argument():
+    """Combining channels with multiple instruments is invalid.
+
+    Tests that a value error is thrown when a multi-instrument resource name is provided with
+    a channels argument. How to combine the two arguments is undefined.
+    """
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
+    with pytest.raises(ValueError):
+        with nidcpower.Session("Dev1,Dev2", "0", options=options, independent_channels=True):
+            pass
+
+
+@pytest.mark.parametrize(
+    'resource_name,channels,independent_channels,expected_error_code',
+    [
+        ('Dev1/0', '0', True, -1074097793),  # combines to 'Dev1/0/0'
+        ('Dev1/0', 'Dev1/0', False, -1074135008),
+        ('Dev1/0,Dev2/0', 'Dev1/0', False, -1074135008)
+    ]
+)
+def test_init_raises_driver_errors_for_invalid_arguments(resource_name, channels, independent_channels, expected_error_code):
+    """Tests for driver errors that should occur for invalid initialization arguments."""
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
+    with pytest.raises(nidcpower.errors.DriverError) as e:
+        with nidcpower.Session(resource_name, channels, options=options, independent_channels=independent_channels) as session:
+            # multi-instrument resource names are valid for simulated initialize with channels
+            # sessions, so we make a driver call on channels and ensure that errors
+            session.channels[channels].output_function = nidcpower.OutputFunction.DC_VOLTAGE
+    assert e.value.code == expected_error_code

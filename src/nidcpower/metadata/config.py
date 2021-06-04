@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0d153
+# This file is generated from NI-DCPower API metadata version 21.0.0d251
 config = {
-    'api_version': '21.0.0d153',
+    'api_version': '21.0.0d251',
     'c_function_prefix': 'niDCPower_',
     'close_function': 'close',
     'context_manager_name': {
@@ -16,7 +16,7 @@ config = {
         'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
-    'init_function': 'InitializeWithChannels',
+    'init_function': 'FancyInitialize',
     'library_info': {
         'Linux': {
             '64bit': {
