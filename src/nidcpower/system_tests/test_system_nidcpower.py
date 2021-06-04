@@ -440,7 +440,7 @@ def test_init_backwards_compatibility_with_initialize_with_channels(resource_nam
 )
 def test_init_with_independent_channels(resource_name, channels):
     """Tests that independent channels sessions open without exception for valid arguments."""
-    options = {'Simulate': True, 'DriverSetup': {'Model': '4145', 'BoardType': 'PXIe'}}
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
     with nidcpower.Session(resource_name, channels, options=options, independent_channels=True):
         pass
 
