@@ -214,7 +214,8 @@ attributes = {
         'enum': 'SelectedFunction',
         'name': 'SELECTED_FUNCTION',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViInt32'
     },
@@ -243,7 +244,8 @@ attributes = {
         'enum': 'TerminationMode',
         'name': 'TERMINATION_MODE',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViInt32'
     },
@@ -254,7 +256,8 @@ attributes = {
         },
         'name': 'VIL',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -265,7 +268,8 @@ attributes = {
         },
         'name': 'VIH',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -276,7 +280,8 @@ attributes = {
         },
         'name': 'VOL',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -287,7 +292,8 @@ attributes = {
         },
         'name': 'VOH',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -298,7 +304,8 @@ attributes = {
         },
         'name': 'VTERM',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -309,7 +316,8 @@ attributes = {
         },
         'name': 'ACTIVE_LOAD_IOL',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -320,7 +328,8 @@ attributes = {
         },
         'name': 'ACTIVE_LOAD_IOH',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -331,7 +340,8 @@ attributes = {
         },
         'name': 'ACTIVE_LOAD_VCOM',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -356,7 +366,8 @@ attributes = {
         'enum': 'PPMUOutputFunction',
         'name': 'PPMU_OUTPUT_FUNCTION',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViInt32'
     },
@@ -367,7 +378,8 @@ attributes = {
         },
         'name': 'PPMU_VOLTAGE_LEVEL',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -378,7 +390,8 @@ attributes = {
         },
         'name': 'PPMU_CURRENT_LIMIT_RANGE',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -389,7 +402,8 @@ attributes = {
         },
         'name': 'PPMU_CURRENT_LEVEL',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -400,7 +414,8 @@ attributes = {
         },
         'name': 'PPMU_CURRENT_LEVEL_RANGE',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -411,7 +426,8 @@ attributes = {
         },
         'name': 'PPMU_VOLTAGE_LIMIT_LOW',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -422,7 +438,8 @@ attributes = {
         },
         'name': 'PPMU_VOLTAGE_LIMIT_HIGH',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -708,7 +725,8 @@ attributes = {
         },
         'name': 'PPMU_APERTURE_TIME',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -729,7 +747,8 @@ attributes = {
         'enum': 'PPMUApertureTimeUnits',
         'name': 'PPMU_APERTURE_TIME_UNITS',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViInt32'
     },
@@ -899,7 +918,8 @@ attributes = {
         },
         'name': 'TDR_OFFSET',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
@@ -919,7 +939,8 @@ attributes = {
         },
         'name': 'PPMU_CURRENT_LIMIT',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -930,7 +951,8 @@ attributes = {
         },
         'name': 'PPMU_CURRENT_LIMIT_SUPPORTED',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViBoolean'
     },
@@ -949,7 +971,8 @@ attributes = {
         },
         'name': 'MASK_COMPARE',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViBoolean'
     },
@@ -986,7 +1009,8 @@ attributes = {
         'enum': 'PPMUCurrentLimitBehavior',
         'name': 'PPMU_CURRENT_LIMIT_BEHAVIOR',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViInt32'
     },
@@ -998,7 +1022,8 @@ attributes = {
         },
         'name': 'FREQUENCY_COUNTER_MEASUREMENT_TIME',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
@@ -1018,6 +1043,9 @@ attributes = {
             'description': 'Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY_ENABLED attribute is set to VI_TRUE, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY_ENABLED attribute is VI_FALSE, this attribute will return 0.0. Changing the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY_ENABLED attribute from VI_FALSE to VI_TRUE will set the NIDIGITAL_ATTR_TIMING_ABSOLUTE_DELAY value back to your previously set value.\n'
         },
         'name': 'TIMING_ABSOLUTE_DELAY',
+        'supported_rep_caps': [
+            'instruments'
+        ],
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
@@ -1028,7 +1056,8 @@ attributes = {
         },
         'name': 'CLOCK_GENERATOR_FREQUENCY',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViReal64'
     },
@@ -1039,7 +1068,8 @@ attributes = {
         },
         'name': 'CLOCK_GENERATOR_IS_RUNNING',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViBoolean'
     },
@@ -1050,7 +1080,8 @@ attributes = {
         },
         'name': 'PPMU_ALLOW_EXTENDED_VOLTAGE_RANGE',
         'supported_rep_caps': [
-            'channels'
+            'channels',
+            'pins'
         ],
         'type': 'ViBoolean'
     },

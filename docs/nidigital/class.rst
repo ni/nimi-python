@@ -2854,26 +2854,26 @@ active_load_ioh
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].active_load_ioh`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.active_load_ioh`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2890,26 +2890,26 @@ active_load_iol
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].active_load_iol`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.active_load_iol`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2926,26 +2926,26 @@ active_load_vcom
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].active_load_vcom`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.active_load_vcom`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3010,26 +3010,26 @@ clock_generator_frequency
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].clock_generator_frequency`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.clock_generator_frequency`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3046,26 +3046,26 @@ clock_generator_is_running
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].clock_generator_is_running`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.clock_generator_is_running`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | bool      |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | bool           |
+            +-----------------------+----------------+
+            | Permissions           | read only      |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3580,12 +3580,12 @@ frequency_counter_measurement_time
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].frequency_counter_measurement_time`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.frequency_counter_measurement_time`
 
@@ -3598,7 +3598,7 @@ frequency_counter_measurement_time
             +-----------------------+----------------------------------------+
             | Permissions           | read-write                             |
             +-----------------------+----------------------------------------+
-            | Repeated Capabilities | channels                               |
+            | Repeated Capabilities | channels, pins                         |
             +-----------------------+----------------------------------------+
 
         .. tip::
@@ -4020,26 +4020,26 @@ mask_compare
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].mask_compare`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.mask_compare`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | bool           |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4164,26 +4164,26 @@ ppmu_allow_extended_voltage_range
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_allow_extended_voltage_range`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_allow_extended_voltage_range`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | bool           |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4200,26 +4200,26 @@ ppmu_aperture_time
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_aperture_time`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_aperture_time`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4240,12 +4240,12 @@ ppmu_aperture_time_units
         +-----------------------------------------------------+-----------------------------------------+
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_aperture_time_units`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_aperture_time_units`
 
@@ -4258,7 +4258,7 @@ ppmu_aperture_time_units
             +-----------------------+-----------------------------+
             | Permissions           | read-write                  |
             +-----------------------+-----------------------------+
-            | Repeated Capabilities | channels                    |
+            | Repeated Capabilities | channels, pins              |
             +-----------------------+-----------------------------+
 
         .. tip::
@@ -4278,26 +4278,26 @@ ppmu_current_level
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_current_level`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_current_level`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4314,26 +4314,26 @@ ppmu_current_level_range
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_current_level_range`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_current_level_range`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4350,26 +4350,26 @@ ppmu_current_limit
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_current_limit`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4390,12 +4390,12 @@ ppmu_current_limit_behavior
         +---------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_behavior`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_current_limit_behavior`
 
@@ -4408,7 +4408,7 @@ ppmu_current_limit_behavior
             +-----------------------+--------------------------------+
             | Permissions           | read-write                     |
             +-----------------------+--------------------------------+
-            | Repeated Capabilities | channels                       |
+            | Repeated Capabilities | channels, pins                 |
             +-----------------------+--------------------------------+
 
         .. tip::
@@ -4426,26 +4426,26 @@ ppmu_current_limit_range
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_range`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_current_limit_range`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4462,26 +4462,26 @@ ppmu_current_limit_supported
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_supported`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_current_limit_supported`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | bool      |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | channels  |
-            +-----------------------+-----------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | bool           |
+            +-----------------------+----------------+
+            | Permissions           | read only      |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4504,12 +4504,12 @@ ppmu_output_function
         +--------------------------------------------------+--------------------------------------------+
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_output_function`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_output_function`
 
@@ -4522,7 +4522,7 @@ ppmu_output_function
             +-----------------------+--------------------------+
             | Permissions           | read-write               |
             +-----------------------+--------------------------+
-            | Repeated Capabilities | channels                 |
+            | Repeated Capabilities | channels, pins           |
             +-----------------------+--------------------------+
 
         .. tip::
@@ -4540,26 +4540,26 @@ ppmu_voltage_level
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_level`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_voltage_level`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4576,26 +4576,26 @@ ppmu_voltage_limit_high
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_limit_high`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_voltage_limit_high`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4612,26 +4612,26 @@ ppmu_voltage_limit_low
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_limit_low`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.ppmu_voltage_limit_low`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4734,12 +4734,12 @@ selected_function
         .. note:: You can make PPMU voltage measurements using the :py:meth:`nidigital.Session.ppmu_measure` method from within any :py:attr:`nidigital.Session.selected_function`.
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].selected_function`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.selected_function`
 
@@ -4752,7 +4752,7 @@ selected_function
             +-----------------------+------------------------+
             | Permissions           | read-write             |
             +-----------------------+------------------------+
-            | Repeated Capabilities | channels               |
+            | Repeated Capabilities | channels, pins         |
             +-----------------------+------------------------+
 
         .. tip::
@@ -5130,12 +5130,12 @@ tdr_offset
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].tdr_offset`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.tdr_offset`
 
@@ -5148,7 +5148,7 @@ tdr_offset
             +-----------------------+-------------------------------------------------------------+
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | channels                                                    |
+            | Repeated Capabilities | channels, pins                                              |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -5174,12 +5174,12 @@ termination_mode
         +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].termination_mode`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.termination_mode`
 
@@ -5192,7 +5192,7 @@ termination_mode
             +-----------------------+-----------------------+
             | Permissions           | read-write            |
             +-----------------------+-----------------------+
-            | Repeated Capabilities | channels              |
+            | Repeated Capabilities | channels, pins        |
             +-----------------------+-----------------------+
 
         .. tip::
@@ -5207,6 +5207,18 @@ timing_absolute_delay
 
         Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the :py:attr:`nidigital.Session.timing_absolute_delay_enabled` property is set to True, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the :py:attr:`nidigital.Session.timing_absolute_delay_enabled` property is False, this property will return 0.0. Changing the :py:attr:`nidigital.Session.timing_absolute_delay_enabled` property from False to True will set the :py:attr:`nidigital.Session.timing_absolute_delay` value back to your previously set value.
 
+
+
+
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].timing_absolute_delay`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.timing_absolute_delay`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-------------------------------------------------------------+
@@ -5216,7 +5228,7 @@ timing_absolute_delay
             +-----------------------+-------------------------------------------------------------+
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
+            | Repeated Capabilities | instruments                                                 |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -5258,26 +5270,26 @@ vih
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].vih`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.vih`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5294,26 +5306,26 @@ vil
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].vil`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.vil`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5330,26 +5342,26 @@ voh
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].voh`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.voh`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5366,26 +5378,26 @@ vol
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].vol`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.vol`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5402,26 +5414,26 @@ vterm
 
 
 
-        .. tip:: This property can be set/get on specific channels within your :py:class:`nidigital.Session` instance.
-            Use Python index notation on the repeated capabilities container channels to specify a subset.
+        .. tip:: This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
 
             Example: :py:attr:`my_session.channels[ ... ].vterm`
 
-            To set/get on all channels, you can call the property directly on the :py:class:`nidigital.Session`.
+            To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
 
             Example: :py:attr:`my_session.vterm`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | float          |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | channels, pins |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
