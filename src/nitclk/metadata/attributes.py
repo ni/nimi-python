@@ -28,7 +28,7 @@ attributes = {
         'lv_property': 'Start Trigger Master Session',
         'name': 'START_TRIGGER_MASTER_SESSION',
         'type': 'ViSession',
-        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference'
     },
     4: {
         'access': 'read-write',
@@ -39,19 +39,7 @@ attributes = {
         'lv_property': 'Reference Trigger Master Session',
         'name': 'REF_TRIGGER_MASTER_SESSION',
         'type': 'ViSession',
-        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
-    },
-    5: {
-        'access': 'read-write',
-        'attribute_class': 'AttributeSessionReference',
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the script trigger master session.\nFor external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.\n'
-        },
-        'lv_property': 'Script Trigger Master Session',
-        'name': 'SCRIPT_TRIGGER_MASTER_SESSION',
-        'type': 'ViSession',
-        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference'
     },
     6: {
         'access': 'read-write',
@@ -62,7 +50,7 @@ attributes = {
         'lv_property': 'Pause Trigger Master Session',
         'name': 'PAUSE_TRIGGER_MASTER_SESSION',
         'type': 'ViSession',
-        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference'
     },
     8: {
         'access': 'read only',
@@ -71,7 +59,7 @@ attributes = {
         },
         'lv_property': 'Period',
         'name': 'TCLK_ACTUAL_PERIOD',
-        'type': 'ViReal64',
+        'type': 'ViReal64'
     },
     9: {
         'access': 'read-write',
@@ -80,7 +68,7 @@ attributes = {
         },
         'lv_property': 'Output Terminal',
         'name': 'EXPORTED_TCLK_OUTPUT_TERMINAL',
-        'type': 'ViString',
+        'type': 'ViString'
     },
     10: {
         'access': 'read-write',
@@ -101,7 +89,7 @@ attributes = {
         'lv_property': 'Sample Clock Delay',
         'name': 'SAMPLE_CLOCK_DELAY',
         'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     13: {
         'access': 'read-write',
@@ -121,6 +109,6 @@ attributes = {
         'lv_property': 'Sequencer Flag Master Session',
         'name': 'SEQUENCER_FLAG_MASTER_SESSION',
         'type': 'ViSession',
-        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference'
     }
 }

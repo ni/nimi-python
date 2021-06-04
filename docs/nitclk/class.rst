@@ -37,7 +37,6 @@ configure_for_homogeneous_triggers
         routing, along with the following NI-TClk properties:
         :py:attr:`nitclk.SessionReference.start_trigger_master_session`
         :py:attr:`nitclk.SessionReference.ref_trigger_master_session`
-        :py:attr:`nitclk.SessionReference.script_trigger_master_session`
         :py:attr:`nitclk.SessionReference.pause_trigger_master_session`
         :py:func:`nitclk.configure_for_homogeneous_triggers` affects the following clocks and
         triggers: - Reference clocks - Start triggers - Reference triggers -
@@ -108,25 +107,7 @@ configure_for_homogeneous_triggers
         timebase rates, and/or the sample counts are different in acquisition
         sessions sharing the reference trigger, you should also set the holdoff
         properties for the reference trigger master using the instrument driver.
-        Script Triggers :py:func:`nitclk.configure_for_homogeneous_triggers` configures
-        sessions that support script triggers to share them, if the script
-        triggers are None (no trigger configured) for all except one session.
-        The script triggers are shared in the following ways: - Implicitly
-        exporting the script trigger from the session whose script trigger is
-        not None - Configuring the other sessions that support the script
-        trigger for digital-edge script triggers with sources corresponding to
-        the exported script trigger - Setting
-        :py:attr:`nitclk.SessionReference.script_trigger_master_session` to the session that is
-        exporting the trigger for all sessions that support script triggers If
-        the script triggers are configured for all sessions that support script
-        triggers, :py:func:`nitclk.configure_for_homogeneous_triggers` does not affect script
-        triggers. Script triggers are considered to be configured for all
-        sessions if either one or the other of the following conditions are
-        true: - No session has a script trigger that is None - One session has a
-        script trigger that is None and all other sessions have script triggers
-        other than None. The one session with the None trigger must have
-        :py:attr:`nitclk.SessionReference.script_trigger_master_session` set to itself, indicating
-        that the session itself is the script trigger master Pause Triggers
+        Pause Triggers
         :py:func:`nitclk.configure_for_homogeneous_triggers` configures generation sessions
         that support pause triggers to share them, if the pause triggers are
         None (no trigger configured) for all except one session. The pause
@@ -183,7 +164,7 @@ finish_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: list of (nimi-python Session class or nitclk.SessionReference)
+        :type sessions: list of (Driver Session or nitclk.SessionReference)
         :param min_time:
 
 

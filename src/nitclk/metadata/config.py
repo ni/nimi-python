@@ -4,10 +4,14 @@ config = {
     'api_version': '255.0.0d0',
     'c_function_prefix': 'niTClk_',
     'close_function': None,
+    'context_manager_name': {
+    },
     'custom_types': [
     ],
     'driver_name': 'NI-TClk',
-    'extra_errors_used': [],
+    'extra_errors_used': [
+    ],
+    'init_function': None,
     'library_info': {
         'Linux': {
             '64bit': {
@@ -30,5 +34,6 @@ config = {
     'module_name': 'nitclk',
     'repeated_capabilities': [
     ],
-    'session_handle_parameter_name': 'session_number',
+    'session_class_description': 'An NI-TClk session.',
+    'session_handle_parameter_name': 'session_number'
 }
