@@ -21,11 +21,11 @@ config = {
         },
         'Windows': {
             '32bit': {
-                'name': 'nimodinst.dll',
+                'name': 'niModInst.dll',
                 'type': 'windll'
             },
             '64bit': {
-                'name': 'nimodinst_64.dll',
+                'name': 'niModInst_64.dll',
                 'type': 'cdll'
             }
         }

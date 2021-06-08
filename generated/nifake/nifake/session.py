@@ -849,7 +849,7 @@ class Session(_SessionBase):
     def accept_list_of_durations_in_seconds(self, delays):
         r'''accept_list_of_durations_in_seconds
 
-        Accepts list of floats or hightime.timedelta instances representing time delays.
+        Accepts list of hightime.timedelta or datetime.timedelta or float instances representing time delays.
 
         Args:
             delays (hightime.timedelta, datetime.timedelta, or float in seconds): A collection of time delay values.

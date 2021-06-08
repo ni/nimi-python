@@ -21,11 +21,11 @@ config = {
         },
         'Windows': {
             '32bit': {
-                'name': 'nitclk.dll',
+                'name': 'niTClk.dll',
                 'type': 'windll'
             },
             '64bit': {
-                'name': 'nitclk_64.dll',
+                'name': 'niTClk_64.dll',
                 'type': 'cdll'
             }
         }
