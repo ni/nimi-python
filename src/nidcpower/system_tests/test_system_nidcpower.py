@@ -429,7 +429,10 @@ def test_init_issues_deprecation_warnings(resource_name, channels, independent_c
         ('Dev1', None),
         ('Dev1', ''),
         ('Dev1', '0'),
-        ('Dev1', '0,1')
+        ('Dev1', '0,1'),
+        (['Dev1'], [0, 1]),
+        (('Dev1',), (0, 1)),
+        ('Dev1', range(2))
     ]
 )
 def test_init_backwards_compatibility_with_initialize_with_channels(resource_name, channels):
@@ -450,7 +453,9 @@ def test_init_backwards_compatibility_with_initialize_with_channels(resource_nam
         ('Dev1/0', ''),
         ('Dev1/0,Dev1/1', None),
         ('Dev1/0,Dev2/1', None),
-        ('Dev1/0,Dev2/1', '')
+        ('Dev1/0,Dev2/1', ''),
+        (['Dev1/0', 'Dev1/1'], ''),  # construct with list
+        (('Dev1/0', 'Dev1/1'), '')  # construct with tuple
     ]
 )
 def test_init_with_independent_channels(resource_name, channels):
@@ -489,3 +494,48 @@ def test_init_raises_driver_errors_for_invalid_arguments(resource_name, channels
             # sessions, so we make a driver call on channels and ensure that errors
             session.channels[channels].output_function = nidcpower.OutputFunction.DC_VOLTAGE
     assert e.value.code == expected_error_code
+
+
+@pytest.mark.skip('This test is failing. Need to troubleshoot.')
+@pytest.mark.parametrize('session', [False], indirect=True)
+def test_repeated_capabilities_on_attribute_when_all_channels_are_specified(session):
+    '''No error for non-independent channel session when specifying all channels by number.'''
+    assert session.channels['0-11'].instrument_model
+
+
+def test_repeated_capabilities_on_method_when_all_channels_are_specified(session):
+    '''Sessions should not error when specifying all channels by number.'''
+    assert session.channels['0'].output_enabled is True
+    session.channels['0'].output_enabled = False
+    session.channels['0-11'].reset()
+    assert session.channels['0'].output_enabled is True
+
+
+@pytest.mark.parametrize('session', [False], indirect=True)
+def test_error_channel_name_not_allowed_in_obsolete_session(session):
+    with pytest.raises(nidcpower.Error) as e:
+        session.channels['0'].reset()
+    assert e.value.code == -1074118494  # NIDCPOWER_ERROR_CHANNEL_NAME_NOT_ALLOWED_IN_OBSOLETE_SESSION
+    assert e.value.description.find('The channel name string must represent all channels in the session because the session was not initialized with independent channels. To specify a subset of channels for this function, first initialize the session with independent channels.') != -1
+
+
+@pytest.mark.parametrize('session', [False], indirect=True)
+def test_error_channel_name_not_allowed(session):
+    with pytest.raises(nidcpower.Error) as e:
+        session.channels['0'].instrument_model
+    assert e.value.code == -1074134971  # IVI_ERROR_CHANNEL_NAME_NOT_ALLOWED
+    assert e.value.description.find('The channel or repeated capability name is not allowed.') != -1
+
+
+@pytest.mark.parametrize('session', [True], indirect=True)
+def test_reset_with_repeated_capabilities_all_channels(session):
+    all_channels = session.channels['4162/0-11']
+    assert all_channels.output_enabled is True
+    all_channels.output_enabled = False
+    all_channels.reset()
+    assert all_channels.output_enabled is True
+    assert session.channels['4162/0'].output_enabled is True
+
+
+def test_repeated_capabilities_with_initiate(session):
+    session.channels['0-11'].initiate()
