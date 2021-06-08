@@ -30,6 +30,7 @@ class Library(object):
         self.niDCPower_Disable_cfunc = None
         self.niDCPower_ExportAttributeConfigurationBuffer_cfunc = None
         self.niDCPower_ExportAttributeConfigurationFile_cfunc = None
+        self.niDCPower_FancyInitialize_cfunc = None
         self.niDCPower_FetchMultiple_cfunc = None
         self.niDCPower_GetAttributeViBoolean_cfunc = None
         self.niDCPower_GetAttributeViInt32_cfunc = None
@@ -47,6 +48,7 @@ class Library(object):
         self.niDCPower_ImportAttributeConfigurationBuffer_cfunc = None
         self.niDCPower_ImportAttributeConfigurationFile_cfunc = None
         self.niDCPower_InitializeWithChannels_cfunc = None
+        self.niDCPower_InitializeWithIndependentChannels_cfunc = None
         self.niDCPower_InitiateWithChannels_cfunc = None
         self.niDCPower_LockSession_cfunc = None
         self.niDCPower_Measure_cfunc = None
@@ -169,6 +171,14 @@ class Library(object):
                 self.niDCPower_ExportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ExportAttributeConfigurationFile_cfunc(vi, file_path)
+
+    def niDCPower_FancyInitialize(self, resource_name, channels, reset, option_string, vi, independent_channels):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_FancyInitialize_cfunc is None:
+                self.niDCPower_FancyInitialize_cfunc = self._get_library_function('niDCPower_FancyInitialize')
+                self.niDCPower_FancyInitialize_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession), ViBoolean]  # noqa: F405
+                self.niDCPower_FancyInitialize_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_FancyInitialize_cfunc(resource_name, channels, reset, option_string, vi, independent_channels)
 
     def niDCPower_FetchMultiple(self, vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count):  # noqa: N802
         with self._func_lock:
@@ -305,6 +315,14 @@ class Library(object):
                 self.niDCPower_InitializeWithChannels_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niDCPower_InitializeWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_InitializeWithChannels_cfunc(resource_name, channels, reset, option_string, vi)
+
+    def niDCPower_InitializeWithIndependentChannels(self, resource_name, reset, option_string, vi):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_InitializeWithIndependentChannels_cfunc is None:
+                self.niDCPower_InitializeWithIndependentChannels_cfunc = self._get_library_function('niDCPower_InitializeWithIndependentChannels')
+                self.niDCPower_InitializeWithIndependentChannels_cfunc.argtypes = [ctypes.POINTER(ViChar), ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
+                self.niDCPower_InitializeWithIndependentChannels_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_InitializeWithIndependentChannels_cfunc(resource_name, reset, option_string, vi)
 
     def niDCPower_InitiateWithChannels(self, vi, channel_name):  # noqa: N802
         with self._func_lock:

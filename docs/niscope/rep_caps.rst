@@ -35,4 +35,16 @@ channels
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 
+instruments
+-----------
+
+    .. py:attribute:: niscope.Session.instruments[]
+
+        .. code:: python
+
+            session.instruments['0-2'].channel_enabled = True
+
+        passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+
 

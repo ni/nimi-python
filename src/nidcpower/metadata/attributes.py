@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0d153
+# This file is generated from NI-DCPower API metadata version 21.0.0d251
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -8,7 +8,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Query Instrument Status',
         'name': 'QUERY_INSTRUMENT_STATUS',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1050005: {
@@ -18,7 +17,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1050007: {
@@ -28,7 +26,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Driver Setup',
         'name': 'DRIVER_SETUP',
-        'resettable': False,
         'type': 'ViString'
     },
     1050203: {
@@ -38,7 +35,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Channel Count',
         'name': 'CHANNEL_COUNT',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1050302: {
@@ -48,7 +44,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Prefix',
         'name': 'SPECIFIC_DRIVER_PREFIX',
-        'resettable': False,
         'type': 'ViString'
     },
     1050304: {
@@ -58,7 +53,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Resource Descriptor',
         'name': 'IO_RESOURCE_DESCRIPTOR',
-        'resettable': False,
         'type': 'ViString'
     },
     1050305: {
@@ -68,7 +62,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Logical Name',
         'name': 'LOGICAL_NAME',
-        'resettable': False,
         'type': 'ViString'
     },
     1050327: {
@@ -78,7 +71,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
-        'resettable': False,
         'type': 'ViString'
     },
     1050510: {
@@ -88,7 +80,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Firmware Revision',
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
-        'resettable': False,
         'supported_rep_caps': [
             'instruments'
         ],
@@ -101,7 +92,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Manufacturer',
         'name': 'INSTRUMENT_MANUFACTURER',
-        'resettable': False,
         'supported_rep_caps': [
             'instruments'
         ],
@@ -114,7 +104,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Model',
         'name': 'INSTRUMENT_MODEL',
-        'resettable': False,
         'supported_rep_caps': [
             'instruments'
         ],
@@ -127,7 +116,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Vendor',
         'name': 'SPECIFIC_DRIVER_VENDOR',
-        'resettable': False,
         'type': 'ViString'
     },
     1050514: {
@@ -137,7 +125,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Description',
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
-        'resettable': False,
         'type': 'ViString'
     },
     1050551: {
@@ -147,7 +134,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Revision',
         'name': 'SPECIFIC_DRIVER_REVISION',
-        'resettable': False,
         'type': 'ViString'
     },
     1150000: {
@@ -159,7 +145,6 @@ attributes = {
         'enum': 'PowerSource',
         'lv_property': 'Advanced:Power Source',
         'name': 'POWER_SOURCE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150001: {
@@ -170,7 +155,6 @@ attributes = {
         'enum': 'PowerSourceInUse',
         'lv_property': 'Advanced:Power Source In Use',
         'name': 'POWER_SOURCE_IN_USE',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150002: {
@@ -181,7 +165,6 @@ attributes = {
         },
         'lv_property': 'Advanced:Auxiliary Power Source Available',
         'name': 'AUXILIARY_POWER_SOURCE_AVAILABLE',
-        'resettable': False,
         'type': 'ViBoolean'
     },
     1150003: {
@@ -191,7 +174,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Samples To Average',
         'name': 'SAMPLES_TO_AVERAGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -205,7 +187,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Voltage:Current Limit Range',
         'name': 'CURRENT_LIMIT_RANGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -219,7 +200,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Voltage:Voltage Level Range',
         'name': 'VOLTAGE_LEVEL_RANGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -233,7 +213,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Advanced:Reset Average Before Measurement',
         'name': 'RESET_AVERAGE_BEFORE_MEASUREMENT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -246,7 +225,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Overranging Enabled',
         'name': 'OVERRANGING_ENABLED',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -260,7 +238,6 @@ attributes = {
         'enum': 'OutputFunction',
         'lv_property': 'Source:Output Function',
         'name': 'OUTPUT_FUNCTION',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -274,7 +251,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Current:Current Level',
         'name': 'CURRENT_LEVEL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -288,7 +264,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Current:Voltage Limit',
         'name': 'VOLTAGE_LIMIT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -302,7 +277,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Current:Current Level Range',
         'name': 'CURRENT_LEVEL_RANGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -316,7 +290,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Current:Voltage Limit Range',
         'name': 'VOLTAGE_LIMIT_RANGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -330,7 +303,6 @@ attributes = {
         'enum': 'Sense',
         'lv_property': 'Measurement:Sense',
         'name': 'SENSE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -345,7 +317,6 @@ attributes = {
         'enum': 'OutputCapacitance',
         'lv_property': 'Source:Advanced:Output Capacitance',
         'name': 'OUTPUT_CAPACITANCE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -359,7 +330,6 @@ attributes = {
         'lv_property': 'Source:DC Voltage:Voltage Level Autorange',
         'name': 'VOLTAGE_LEVEL_AUTORANGE',
         'python_type': 'bool',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -373,7 +343,6 @@ attributes = {
         'lv_property': 'Source:DC Voltage:Current Limit Autorange',
         'name': 'CURRENT_LIMIT_AUTORANGE',
         'python_type': 'bool',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -387,7 +356,6 @@ attributes = {
         'lv_property': 'Source:DC Current:Current Level Autorange',
         'name': 'CURRENT_LEVEL_AUTORANGE',
         'python_type': 'bool',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -401,7 +369,6 @@ attributes = {
         'lv_property': 'Source:DC Current:Voltage Limit Autorange',
         'name': 'VOLTAGE_LIMIT_AUTORANGE',
         'python_type': 'bool',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -415,7 +382,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Power Line Frequency',
         'name': 'POWER_LINE_FREQUENCY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -430,7 +396,6 @@ attributes = {
         'enum': 'TriggerType',
         'lv_property': 'Triggers:Start Trigger:Trigger Type',
         'name': 'START_TRIGGER_TYPE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -444,7 +409,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Start Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_START_TRIGGER_INPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -458,7 +422,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Start Trigger:Export Output Terminal',
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -472,7 +435,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Sequence Loop Count',
         'name': 'SEQUENCE_LOOP_COUNT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -487,7 +449,6 @@ attributes = {
         'enum': 'TriggerType',
         'lv_property': 'Triggers:Sequence Advance Trigger:Trigger Type',
         'name': 'SEQUENCE_ADVANCE_TRIGGER_TYPE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -501,7 +462,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Sequence Advance Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_SEQUENCE_ADVANCE_TRIGGER_INPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -515,7 +475,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Sequence Advance Trigger:Export Output Terminal',
         'name': 'EXPORTED_SEQUENCE_ADVANCE_TRIGGER_OUTPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -530,7 +489,6 @@ attributes = {
         'enum': 'TriggerType',
         'lv_property': 'Triggers:Source Trigger:Trigger Type',
         'name': 'SOURCE_TRIGGER_TYPE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -544,7 +502,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Source Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_SOURCE_TRIGGER_INPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -558,7 +515,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Source Trigger:Export Output Terminal',
         'name': 'EXPORTED_SOURCE_TRIGGER_OUTPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -573,7 +529,6 @@ attributes = {
         'enum': 'TriggerType',
         'lv_property': 'Triggers:Measure Trigger:Trigger Type',
         'name': 'MEASURE_TRIGGER_TYPE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -587,7 +542,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Measure Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_MEASURE_TRIGGER_INPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -601,7 +555,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Measure Trigger:Export Output Terminal',
         'name': 'EXPORTED_MEASURE_TRIGGER_OUTPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -616,7 +569,6 @@ attributes = {
         'enum': 'Polarity',
         'lv_property': 'Events:Sequence Iteration Complete Event:Pulse:Polarity',
         'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT_PULSE_POLARITY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -630,7 +582,6 @@ attributes = {
         },
         'lv_property': 'Events:Sequence Iteration Complete Event:Pulse:Width',
         'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT_PULSE_WIDTH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -644,7 +595,6 @@ attributes = {
         },
         'lv_property': 'Events:Sequence Iteration Complete Event:Output Terminal',
         'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT_OUTPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -659,7 +609,6 @@ attributes = {
         'enum': 'Polarity',
         'lv_property': 'Events:Source Complete Event:Pulse:Polarity',
         'name': 'SOURCE_COMPLETE_EVENT_PULSE_POLARITY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -673,7 +622,6 @@ attributes = {
         },
         'lv_property': 'Events:Source Complete Event:Pulse:Width',
         'name': 'SOURCE_COMPLETE_EVENT_PULSE_WIDTH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -687,7 +635,6 @@ attributes = {
         },
         'lv_property': 'Events:Source Complete Event:Output Terminal',
         'name': 'SOURCE_COMPLETE_EVENT_OUTPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -702,7 +649,6 @@ attributes = {
         'enum': 'Polarity',
         'lv_property': 'Events:Measure Complete Event:Pulse:Polarity',
         'name': 'MEASURE_COMPLETE_EVENT_PULSE_POLARITY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -716,7 +662,6 @@ attributes = {
         },
         'lv_property': 'Events:Measure Complete Event:Pulse:Width',
         'name': 'MEASURE_COMPLETE_EVENT_PULSE_WIDTH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -731,7 +676,6 @@ attributes = {
         },
         'lv_property': 'Events:Measure Complete Event:Event Delay',
         'name': 'MEASURE_COMPLETE_EVENT_DELAY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -746,7 +690,6 @@ attributes = {
         },
         'lv_property': 'Events:Measure Complete Event:Output Terminal',
         'name': 'MEASURE_COMPLETE_EVENT_OUTPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -761,7 +704,6 @@ attributes = {
         'enum': 'Polarity',
         'lv_property': 'Events:Sequence Engine Done Event:Pulse:Polarity',
         'name': 'SEQUENCE_ENGINE_DONE_EVENT_PULSE_POLARITY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -775,7 +717,6 @@ attributes = {
         },
         'lv_property': 'Events:Sequence Engine Done Event:Pulse:Width',
         'name': 'SEQUENCE_ENGINE_DONE_EVENT_PULSE_WIDTH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -789,7 +730,6 @@ attributes = {
         },
         'lv_property': 'Events:Sequence Engine Done Event:Output Terminal',
         'name': 'SEQUENCE_ENGINE_DONE_EVENT_OUTPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -804,7 +744,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Source Delay',
         'name': 'SOURCE_DELAY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -819,7 +758,6 @@ attributes = {
         'enum': 'SourceMode',
         'lv_property': 'Source:Source Mode',
         'name': 'SOURCE_MODE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -833,7 +771,6 @@ attributes = {
         'enum': 'AutoZero',
         'lv_property': 'Measurement:Auto Zero',
         'name': 'AUTO_ZERO',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -846,7 +783,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Fetch Backlog',
         'name': 'FETCH_BACKLOG',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -860,7 +796,6 @@ attributes = {
         'enum': 'MeasureWhen',
         'lv_property': 'Measurement:Advanced:Measure When',
         'name': 'MEASURE_WHEN',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -874,7 +809,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Aperture Time',
         'name': 'APERTURE_TIME',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -889,7 +823,6 @@ attributes = {
         'enum': 'ApertureTimeUnits',
         'lv_property': 'Measurement:Aperture Time Units',
         'name': 'APERTURE_TIME_UNITS',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -903,7 +836,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Connected',
         'name': 'OUTPUT_CONNECTED',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -917,7 +849,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Resistance',
         'name': 'OUTPUT_RESISTANCE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -932,7 +863,6 @@ attributes = {
         'enum': 'TransientResponse',
         'lv_property': 'Source:Transient Response',
         'name': 'TRANSIENT_RESPONSE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -946,7 +876,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Measure Record Length',
         'name': 'MEASURE_RECORD_LENGTH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -960,7 +889,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Measure Record Length Is Finite',
         'name': 'MEASURE_RECORD_LENGTH_IS_FINITE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -975,7 +903,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Measure Record Delta Time',
         'name': 'MEASURE_RECORD_DELTA_TIME',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -991,7 +918,6 @@ attributes = {
         'enum': 'DCNoiseRejection',
         'lv_property': 'Measurement:Advanced:DC Noise Rejection',
         'name': 'DC_NOISE_REJECTION',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1005,7 +931,6 @@ attributes = {
         },
         'lv_property': 'Source:Custom Transient Response:Voltage:Gain Bandwidth',
         'name': 'VOLTAGE_GAIN_BANDWIDTH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1019,7 +944,6 @@ attributes = {
         },
         'lv_property': 'Source:Custom Transient Response:Voltage:Compensation Frequency',
         'name': 'VOLTAGE_COMPENSATION_FREQUENCY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1033,7 +957,6 @@ attributes = {
         },
         'lv_property': 'Source:Custom Transient Response:Voltage:Pole-Zero Ratio',
         'name': 'VOLTAGE_POLE_ZERO_RATIO',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1047,7 +970,6 @@ attributes = {
         },
         'lv_property': 'Source:Custom Transient Response:Current:Gain Bandwidth',
         'name': 'CURRENT_GAIN_BANDWIDTH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1061,7 +983,6 @@ attributes = {
         },
         'lv_property': 'Source:Custom Transient Response:Current:Compensation Frequency',
         'name': 'CURRENT_COMPENSATION_FREQUENCY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1075,7 +996,6 @@ attributes = {
         },
         'lv_property': 'Source:Custom Transient Response:Current:Pole-Zero Ratio',
         'name': 'CURRENT_POLE_ZERO_RATIO',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1090,7 +1010,6 @@ attributes = {
         'enum': 'SelfCalibrationPersistence',
         'lv_property': 'Advanced:Self-Calibration Persistence',
         'name': 'SELF_CALIBRATION_PERSISTENCE',
-        'resettable': False,
         'supported_rep_caps': [
             'instruments'
         ],
@@ -1104,7 +1023,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Active Advanced Sequence',
         'name': 'ACTIVE_ADVANCED_SEQUENCE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1118,7 +1036,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Active Advanced Sequence Step',
         'name': 'ACTIVE_ADVANCED_SEQUENCE_STEP',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1132,7 +1049,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Advanced:Measure Buffer Size',
         'name': 'MEASURE_BUFFER_SIZE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1146,7 +1062,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Sequence Loop Count Is Finite',
         'name': 'SEQUENCE_LOOP_COUNT_IS_FINITE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1160,7 +1075,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Voltage Level',
         'name': 'PULSE_VOLTAGE_LEVEL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1174,7 +1088,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Current Limit',
         'name': 'PULSE_CURRENT_LIMIT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1188,7 +1101,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Bias Voltage Level',
         'name': 'PULSE_BIAS_VOLTAGE_LEVEL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1202,7 +1114,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Bias Current Limit',
         'name': 'PULSE_BIAS_CURRENT_LIMIT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1216,7 +1127,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Voltage Level Range',
         'name': 'PULSE_VOLTAGE_LEVEL_RANGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1230,7 +1140,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Current Limit Range',
         'name': 'PULSE_CURRENT_LIMIT_RANGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1244,7 +1153,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Current:Pulse Current Level',
         'name': 'PULSE_CURRENT_LEVEL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1258,7 +1166,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Current:Pulse Voltage Limit',
         'name': 'PULSE_VOLTAGE_LIMIT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1272,7 +1179,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Current:Pulse Bias Current Level',
         'name': 'PULSE_BIAS_CURRENT_LEVEL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1286,7 +1192,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Current:Pulse Bias Voltage Limit',
         'name': 'PULSE_BIAS_VOLTAGE_LIMIT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1300,7 +1205,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Current:Pulse Current Level Range',
         'name': 'PULSE_CURRENT_LEVEL_RANGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1314,7 +1218,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Current:Pulse Voltage Limit Range',
         'name': 'PULSE_VOLTAGE_LIMIT_RANGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1328,7 +1231,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Pulse Bias Delay',
         'name': 'PULSE_BIAS_DELAY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1343,7 +1245,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Pulse On Time',
         'name': 'PULSE_ON_TIME',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1359,7 +1260,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Pulse Off Time',
         'name': 'PULSE_OFF_TIME',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1375,7 +1275,6 @@ attributes = {
         'enum': 'TriggerType',
         'lv_property': 'Triggers:Pulse Trigger:Trigger Type',
         'name': 'PULSE_TRIGGER_TYPE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1389,7 +1288,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Pulse Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_PULSE_TRIGGER_INPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1403,7 +1301,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Pulse Trigger:Export Output Terminal',
         'name': 'EXPORTED_PULSE_TRIGGER_OUTPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1417,7 +1314,6 @@ attributes = {
         },
         'lv_property': 'Events:Pulse Complete Event:Output Terminal',
         'name': 'PULSE_COMPLETE_EVENT_OUTPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1432,7 +1328,6 @@ attributes = {
         'enum': 'Polarity',
         'lv_property': 'Events:Pulse Complete Event:Pulse:Polarity',
         'name': 'PULSE_COMPLETE_EVENT_PULSE_POLARITY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1446,7 +1341,6 @@ attributes = {
         },
         'lv_property': 'Events:Pulse Complete Event:Pulse:Width',
         'name': 'PULSE_COMPLETE_EVENT_PULSE_WIDTH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1460,7 +1354,6 @@ attributes = {
         },
         'lv_property': 'Events:Ready For Pulse Trigger Event:Output Terminal',
         'name': 'READY_FOR_PULSE_TRIGGER_EVENT_OUTPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1475,7 +1368,6 @@ attributes = {
         'enum': 'Polarity',
         'lv_property': 'Events:Ready For Pulse Trigger Event:Pulse:Polarity',
         'name': 'READY_FOR_PULSE_TRIGGER_EVENT_PULSE_POLARITY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1489,7 +1381,6 @@ attributes = {
         },
         'lv_property': 'Events:Ready For Pulse Trigger Event:Pulse:Width',
         'name': 'READY_FOR_PULSE_TRIGGER_EVENT_PULSE_WIDTH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1503,7 +1394,6 @@ attributes = {
         },
         'lv_property': 'Advanced:Interlock Input Open',
         'name': 'INTERLOCK_INPUT_OPEN',
-        'resettable': False,
         'supported_rep_caps': [
             'instruments'
         ],
@@ -1516,7 +1406,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Serial Number',
         'name': 'SERIAL_NUMBER',
-        'resettable': False,
         'supported_rep_caps': [
             'instruments'
         ],
@@ -1531,7 +1420,6 @@ attributes = {
         'enum': 'ComplianceLimitSymmetry',
         'lv_property': 'Source:Advanced:Compliance Limit Symmetry',
         'name': 'COMPLIANCE_LIMIT_SYMMETRY',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1545,7 +1433,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Current:Voltage Limit High',
         'name': 'VOLTAGE_LIMIT_HIGH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1559,7 +1446,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Current:Voltage Limit Low',
         'name': 'VOLTAGE_LIMIT_LOW',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1573,7 +1459,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Voltage:Current Limit High',
         'name': 'CURRENT_LIMIT_HIGH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1587,7 +1472,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Voltage:Current Limit Low',
         'name': 'CURRENT_LIMIT_LOW',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1601,7 +1485,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Current:Pulse Voltage Limit High',
         'name': 'PULSE_VOLTAGE_LIMIT_HIGH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1615,7 +1498,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Current:Pulse Voltage Limit Low',
         'name': 'PULSE_VOLTAGE_LIMIT_LOW',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1629,7 +1511,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Current:Pulse Bias Voltage Limit High',
         'name': 'PULSE_BIAS_VOLTAGE_LIMIT_HIGH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1643,7 +1524,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Current:Pulse Bias Voltage Limit Low',
         'name': 'PULSE_BIAS_VOLTAGE_LIMIT_LOW',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1657,7 +1537,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Current Limit High',
         'name': 'PULSE_CURRENT_LIMIT_HIGH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1671,7 +1550,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Current Limit Low',
         'name': 'PULSE_CURRENT_LIMIT_LOW',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1685,7 +1563,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Bias Current Limit High',
         'name': 'PULSE_BIAS_CURRENT_LIMIT_HIGH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1699,7 +1576,6 @@ attributes = {
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Bias Current Limit Low',
         'name': 'PULSE_BIAS_CURRENT_LIMIT_LOW',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1708,7 +1584,6 @@ attributes = {
     1150198: {
         'access': 'read-write',
         'name': 'SEQUENCE_STEP_DELTA_TIME',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1717,7 +1592,6 @@ attributes = {
     1150199: {
         'access': 'read-write',
         'name': 'SEQUENCE_STEP_DELTA_TIME_ENABLED',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1731,7 +1605,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Actual Power Allocation',
         'name': 'ACTUAL_POWER_ALLOCATION',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1745,7 +1618,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Requested Power Allocation',
         'name': 'REQUESTED_POWER_ALLOCATION',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1760,7 +1632,6 @@ attributes = {
         'enum': 'PowerAllocationMode',
         'lv_property': 'Source:Advanced:Power Allocation Mode',
         'name': 'POWER_ALLOCATION_MODE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1774,7 +1645,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Cutoff:Enabled',
         'name': 'OUTPUT_CUTOFF_ENABLED',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1788,7 +1658,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Cutoff:Voltage Output Limit High',
         'name': 'OUTPUT_CUTOFF_VOLTAGE_OUTPUT_LIMIT_HIGH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1802,7 +1671,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Cutoff:Current Measure Limit High',
         'name': 'OUTPUT_CUTOFF_CURRENT_MEASURE_LIMIT_HIGH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1816,7 +1684,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Cutoff:Voltage Change Limit Low',
         'name': 'OUTPUT_CUTOFF_VOLTAGE_CHANGE_LIMIT_LOW',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1830,7 +1697,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Cutoff:Current Change Limit Low',
         'name': 'OUTPUT_CUTOFF_CURRENT_CHANGE_LIMIT_LOW',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1844,7 +1710,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Cutoff:Current Overrange Enabled',
         'name': 'OUTPUT_CUTOFF_CURRENT_OVERRANGE_ENABLED',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1859,7 +1724,6 @@ attributes = {
         'lv_property': 'Measurement:Autorange',
         'name': 'AUTORANGE',
         'python_type': 'bool',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1874,7 +1738,6 @@ attributes = {
         'enum': 'AutorangeBehavior',
         'lv_property': 'Measurement:Advanced:Autorange Behavior',
         'name': 'AUTORANGE_BEHAVIOR',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1889,7 +1752,6 @@ attributes = {
         'enum': 'AutorangeApertureTimeMode',
         'lv_property': 'Measurement:Advanced:Autorange Aperture Time Mode',
         'name': 'AUTORANGE_APERTURE_TIME_MODE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1903,7 +1765,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Advanced:Autorange Minimum Aperture Time',
         'name': 'AUTORANGE_MINIMUM_APERTURE_TIME',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1918,7 +1779,6 @@ attributes = {
         'enum': 'ApertureTimeUnits',
         'lv_property': 'Measurement:Advanced:Autorange Minimum Aperture Time Units',
         'name': 'AUTORANGE_MINIMUM_APERTURE_TIME_UNITS',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1933,7 +1793,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:Merged Channels',
         'name': 'MERGED_CHANNELS',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1947,7 +1806,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Advanced:Autorange Minimum Current Range',
         'name': 'AUTORANGE_MINIMUM_CURRENT_RANGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1961,7 +1819,6 @@ attributes = {
         },
         'lv_property': 'Measurement:Advanced:Autorange Minimum Voltage Range',
         'name': 'AUTORANGE_MINIMUM_VOLTAGE_RANGE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1976,7 +1833,6 @@ attributes = {
         'enum': 'AutorangeThresholdMode',
         'lv_property': 'Measurement:Advanced:Autorange Threshold Mode',
         'name': 'AUTORANGE_THRESHOLD_MODE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -1991,7 +1847,6 @@ attributes = {
         'enum': 'TriggerType',
         'lv_property': 'Triggers:Shutdown Trigger:Trigger Type',
         'name': 'SHUTDOWN_TRIGGER_TYPE',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -2005,7 +1860,6 @@ attributes = {
         },
         'lv_property': 'Triggers:Shutdown Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_SHUTDOWN_TRIGGER_INPUT_TERMINAL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -2019,7 +1873,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Cutoff:Voltage Output Limit Low',
         'name': 'OUTPUT_CUTOFF_VOLTAGE_OUTPUT_LIMIT_LOW',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -2033,7 +1886,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Cutoff:Current Measure Limit Low',
         'name': 'OUTPUT_CUTOFF_CURRENT_MEASURE_LIMIT_LOW',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -2047,7 +1899,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Cutoff:Voltage Change Limit High',
         'name': 'OUTPUT_CUTOFF_VOLTAGE_CHANGE_LIMIT_HIGH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -2061,7 +1912,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Cutoff:Current Change Limit High',
         'name': 'OUTPUT_CUTOFF_CURRENT_CHANGE_LIMIT_HIGH',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -2075,7 +1925,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Voltage:Voltage Level',
         'name': 'VOLTAGE_LEVEL',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -2089,7 +1938,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:OVP Enabled',
         'name': 'OVP_ENABLED',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -2103,7 +1951,6 @@ attributes = {
         },
         'lv_property': 'Source:Advanced:OVP Limit',
         'name': 'OVP_LIMIT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -2112,7 +1959,6 @@ attributes = {
     1250004: {
         'access': 'read-write',
         'name': 'CURRENT_LIMIT_BEHAVIOR',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -2126,7 +1972,6 @@ attributes = {
         },
         'lv_property': 'Source:DC Voltage:Current Limit',
         'name': 'CURRENT_LIMIT',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],
@@ -2140,7 +1985,6 @@ attributes = {
         },
         'lv_property': 'Source:Output Enabled',
         'name': 'OUTPUT_ENABLED',
-        'resettable': False,
         'supported_rep_caps': [
             'channels'
         ],

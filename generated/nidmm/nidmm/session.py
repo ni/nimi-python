@@ -580,10 +580,15 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidmm.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidmm.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_boolean`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidmm.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_boolean`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -618,10 +623,15 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidmm.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidmm.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidmm.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_int32`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -656,10 +666,15 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidmm.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidmm.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_real64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidmm.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_real64`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -697,10 +712,15 @@ class _SessionBase(object):
            parameter.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidmm.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidmm.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_string`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidmm.Session`.
+
+        Example: :py:meth:`my_session._get_attribute_vi_string`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -837,10 +857,15 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidmm.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidmm.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_boolean`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidmm.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_boolean`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -887,10 +912,15 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidmm.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidmm.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidmm.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_int32`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -937,10 +967,15 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidmm.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidmm.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_real64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidmm.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_real64`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -987,10 +1022,15 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidmm.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.
+        This method can be called on specific channels within your :py:class:`nidmm.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_string`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidmm.Session`.
+
+        Example: :py:meth:`my_session._set_attribute_vi_string`
 
         Args:
             attribute_id (int): Pass the ID of a property.

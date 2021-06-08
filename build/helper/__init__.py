@@ -21,6 +21,7 @@ from build.helper.documentation_helper import get_function_rst  # noqa: F401
 from build.helper.documentation_helper import get_indented_docstring_snippet  # noqa: F401
 from build.helper.documentation_helper import get_rst_header_snippet  # noqa: F401
 from build.helper.documentation_helper import get_rst_picture_reference  # noqa: F401
+from build.helper.documentation_helper import module_supports_repeated_caps  # noqa: F401
 from build.helper.documentation_helper import rep_cap_method_desc  # noqa: F401
 from build.helper.documentation_helper import square_up_tables  # noqa: F401
 

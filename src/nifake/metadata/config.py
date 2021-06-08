@@ -54,6 +54,10 @@ config = {
             'prefix': 'site',
             'python_name': 'sites',
         },
+        {
+            'prefix': '',
+            'python_name': 'instruments'
+        },
     ],
     'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
     'session_handle_parameter_name': 'vi',

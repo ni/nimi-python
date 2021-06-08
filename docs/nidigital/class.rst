@@ -127,10 +127,15 @@ apply_levels_and_timing
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.sites[ ... ].apply_levels_and_timing`
+
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.apply_levels_and_timing`
 
 
             :param levels_sheet:
@@ -191,10 +196,15 @@ apply_tdr_offsets
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].apply_tdr_offsets`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.apply_tdr_offsets`
 
 
             :param offsets:
@@ -223,10 +233,15 @@ burst_pattern
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.sites[ ... ].burst_pattern`
+
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.burst_pattern`
 
 
             :param start_label:
@@ -289,10 +304,15 @@ clock_generator_abort
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].clock_generator_abort`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.clock_generator_abort`
 
 
 clock_generator_generate_clock
@@ -307,10 +327,15 @@ clock_generator_generate_clock
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].clock_generator_generate_clock`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.clock_generator_generate_clock`
 
 
             :param frequency:
@@ -372,10 +397,15 @@ configure_active_load_levels
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].configure_active_load_levels`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_active_load_levels`
 
 
             :param iol:
@@ -418,10 +448,15 @@ configure_pattern_burst_sites
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.sites[ ... ].configure_pattern_burst_sites`
+
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_pattern_burst_sites`
 
 
 configure_time_set_compare_edges_strobe
@@ -436,10 +471,15 @@ configure_time_set_compare_edges_strobe
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].configure_time_set_compare_edges_strobe`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_time_set_compare_edges_strobe`
 
 
             :param time_set_name:
@@ -473,10 +513,15 @@ configure_time_set_compare_edges_strobe2x
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].configure_time_set_compare_edges_strobe2x`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_time_set_compare_edges_strobe2x`
 
 
             :param time_set_name:
@@ -519,10 +564,15 @@ configure_time_set_drive_edges
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].configure_time_set_drive_edges`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_time_set_drive_edges`
 
 
             :param time_set_name:
@@ -597,10 +647,15 @@ configure_time_set_drive_edges2x
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].configure_time_set_drive_edges2x`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_time_set_drive_edges2x`
 
 
             :param time_set_name:
@@ -693,10 +748,15 @@ configure_time_set_drive_format
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].configure_time_set_drive_format`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_time_set_drive_format`
 
 
             :param time_set_name:
@@ -735,10 +795,15 @@ configure_time_set_edge
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].configure_time_set_edge`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_time_set_edge`
 
 
             :param time_set_name:
@@ -790,10 +855,15 @@ configure_time_set_edge_multiplier
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].configure_time_set_edge_multiplier`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_time_set_edge_multiplier`
 
 
             :param time_set_name:
@@ -859,10 +929,15 @@ configure_voltage_levels
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].configure_voltage_levels`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.configure_voltage_levels`
 
 
             :param vil:
@@ -955,10 +1030,15 @@ create_capture_waveform_parallel
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].create_capture_waveform_parallel`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.create_capture_waveform_parallel`
 
 
             :param waveform_name:
@@ -983,10 +1063,15 @@ create_capture_waveform_serial
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].create_capture_waveform_serial`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.create_capture_waveform_serial`
 
 
             :param waveform_name:
@@ -1073,10 +1158,15 @@ create_source_waveform_parallel
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].create_source_waveform_parallel`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.create_source_waveform_parallel`
 
 
             :param waveform_name:
@@ -1113,10 +1203,15 @@ create_source_waveform_serial
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].create_source_waveform_serial`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.create_source_waveform_serial`
 
 
             :param waveform_name:
@@ -1210,10 +1305,15 @@ disable_sites
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.sites[ ... ].disable_sites`
+
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.disable_sites`
 
 
 enable_sites
@@ -1228,10 +1328,15 @@ enable_sites
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.sites[ ... ].enable_sites`
+
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.enable_sites`
 
 
 fetch_capture_waveform
@@ -1246,10 +1351,15 @@ fetch_capture_waveform
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.sites[ ... ].fetch_capture_waveform`
+
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.fetch_capture_waveform`
 
 
             :param waveform_name:
@@ -1341,10 +1451,15 @@ fetch_history_ram_cycle_information
                 the trigger conditions are met.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].fetch_history_ram_cycle_information`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.fetch_history_ram_cycle_information`
 
 
             :param position:
@@ -1413,10 +1528,15 @@ frequency_counter_measure_frequency
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].frequency_counter_measure_frequency`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.frequency_counter_measure_frequency`
 
 
             :rtype: list of float
@@ -1480,10 +1600,15 @@ get_fail_count
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_fail_count`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.get_fail_count`
 
 
             :rtype: list of int
@@ -1532,10 +1657,15 @@ get_history_ram_sample_count
                 the trigger conditions are met.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.sites[ ... ].get_history_ram_sample_count`
+
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.get_history_ram_sample_count`
 
 
             :rtype: int
@@ -1593,10 +1723,15 @@ get_pin_results_pin_information
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_pin_results_pin_information`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.get_pin_results_pin_information`
 
 
             :rtype: list of PinInfo
@@ -1625,10 +1760,15 @@ get_site_pass_fail
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.sites[ ... ].get_site_pass_fail`
+
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.get_site_pass_fail`
 
 
             :rtype: { int: bool, int: bool, ... }
@@ -1653,10 +1793,15 @@ get_time_set_drive_format
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].get_time_set_drive_format`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.get_time_set_drive_format`
 
 
             :param time_set_name:
@@ -1691,10 +1836,15 @@ get_time_set_edge
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].get_time_set_edge`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.get_time_set_edge`
 
 
             :param time_set_name:
@@ -1747,10 +1897,15 @@ get_time_set_edge_multiplier
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific pins within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container pins to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.pins[ ... ].get_time_set_edge_multiplier`
+
+                To call the method on all pins, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.get_time_set_edge_multiplier`
 
 
             :param time_set_name:
@@ -1858,10 +2013,15 @@ is_site_enabled
             .. note:: The method returns an error if more than one site is specified.
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific sites within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container sites to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.sites[ ... ].is_site_enabled`
+
+                To call the method on all sites, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.is_site_enabled`
 
 
             :rtype: bool
@@ -2027,10 +2187,15 @@ ppmu_measure
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].ppmu_measure`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.ppmu_measure`
 
 
             :param measurement_type:
@@ -2068,10 +2233,15 @@ ppmu_source
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].ppmu_source`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.ppmu_source`
 
 
 read_sequencer_flag
@@ -2174,10 +2344,15 @@ read_static
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].read_static`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.read_static`
 
 
             :rtype: list of :py:data:`nidigital.PinState`
@@ -2326,10 +2501,15 @@ tdr
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].tdr`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.tdr`
 
 
             :param apply_offsets:
@@ -2633,10 +2813,15 @@ write_static
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
+            .. tip:: This method can be called on specific channels within your :py:class:`nidigital.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].write_static`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidigital.Session`.
+
+                Example: :py:meth:`my_session.write_static`
 
 
             :param state:
@@ -2677,8 +2862,6 @@ active_load_ioh
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2702,8 +2885,6 @@ active_load_iol
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -2729,8 +2910,6 @@ active_load_vcom
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2754,8 +2933,6 @@ cache
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -2781,8 +2958,6 @@ channel_count
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2806,8 +2981,6 @@ clock_generator_frequency
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -2833,8 +3006,6 @@ clock_generator_is_running
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2858,8 +3029,6 @@ conditional_jump_trigger_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -2895,8 +3064,6 @@ conditional_jump_trigger_type
             +-----------------------+-------------------+
             | Repeated Capabilities | None              |
             +-----------------------+-------------------+
-            | Resettable            | Yes               |
-            +-----------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2920,8 +3087,6 @@ cycle_number_history_ram_trigger_cycle_number
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -2955,8 +3120,6 @@ digital_edge_conditional_jump_trigger_edge
             +-----------------------+-------------------+
             | Repeated Capabilities | None              |
             +-----------------------+-------------------+
-            | Resettable            | Yes               |
-            +-----------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2986,8 +3149,6 @@ digital_edge_conditional_jump_trigger_source
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3020,8 +3181,6 @@ digital_edge_start_trigger_edge
             | Permissions           | read-write        |
             +-----------------------+-------------------+
             | Repeated Capabilities | None              |
-            +-----------------------+-------------------+
-            | Resettable            | Yes               |
             +-----------------------+-------------------+
 
         .. tip::
@@ -3067,8 +3226,6 @@ digital_edge_start_trigger_source
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3092,8 +3249,6 @@ driver_setup
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3141,8 +3296,6 @@ exported_conditional_jump_trigger_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3186,8 +3339,6 @@ exported_pattern_opcode_event_output_terminal
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3235,8 +3386,6 @@ exported_start_trigger_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3260,8 +3409,6 @@ frequency_counter_hysteresis_enabled
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3295,8 +3442,6 @@ frequency_counter_measurement_mode
             +-----------------------+--------------------------------+
             | Repeated Capabilities | None                           |
             +-----------------------+--------------------------------+
-            | Resettable            | Yes                            |
-            +-----------------------+--------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3320,8 +3465,6 @@ frequency_counter_measurement_time
             | Permissions           | read-write                             |
             +-----------------------+----------------------------------------+
             | Repeated Capabilities | None                                   |
-            +-----------------------+----------------------------------------+
-            | Resettable            | Yes                                    |
             +-----------------------+----------------------------------------+
 
         .. tip::
@@ -3347,8 +3490,6 @@ group_capabilities
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3372,8 +3513,6 @@ halt_on_keep_alive_opcode
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3404,8 +3543,6 @@ history_ram_buffer_size_per_site
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3439,8 +3576,6 @@ history_ram_cycles_to_acquire
             +-----------------------+---------------------------------+
             | Repeated Capabilities | None                            |
             +-----------------------+---------------------------------+
-            | Resettable            | Yes                             |
-            +-----------------------+---------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3464,8 +3599,6 @@ history_ram_max_samples_to_acquire_per_site
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3499,8 +3632,6 @@ history_ram_number_of_samples_is_finite
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3524,8 +3655,6 @@ history_ram_pretrigger_samples
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3561,8 +3690,6 @@ history_ram_trigger_type
             +-----------------------+-----------------------------+
             | Repeated Capabilities | None                        |
             +-----------------------+-----------------------------+
-            | Resettable            | Yes                         |
-            +-----------------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3586,8 +3713,6 @@ instrument_firmware_revision
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3613,8 +3738,6 @@ instrument_manufacturer
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3638,8 +3761,6 @@ instrument_model
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3665,8 +3786,6 @@ interchange_check
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3690,8 +3809,6 @@ io_resource_descriptor
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3717,8 +3834,6 @@ is_keep_alive_active
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3742,8 +3857,6 @@ logical_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -3769,8 +3882,6 @@ mask_compare
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3794,8 +3905,6 @@ pattern_label_history_ram_trigger_cycle_offset
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3821,8 +3930,6 @@ pattern_label_history_ram_trigger_label
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3846,8 +3953,6 @@ pattern_label_history_ram_trigger_vector_offset
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3873,8 +3978,6 @@ pattern_opcode_event_terminal_name
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3899,8 +4002,6 @@ ppmu_allow_extended_voltage_range
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3924,8 +4025,6 @@ ppmu_aperture_time
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -3957,8 +4056,6 @@ ppmu_aperture_time_units
             +-----------------------+-----------------------------+
             | Repeated Capabilities | None                        |
             +-----------------------+-----------------------------+
-            | Resettable            | Yes                         |
-            +-----------------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3987,8 +4084,6 @@ ppmu_current_level
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4013,8 +4108,6 @@ ppmu_current_level_range
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4038,8 +4131,6 @@ ppmu_current_limit
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4071,8 +4162,6 @@ ppmu_current_limit_behavior
             +-----------------------+--------------------------------+
             | Repeated Capabilities | None                           |
             +-----------------------+--------------------------------+
-            | Resettable            | Yes                            |
-            +-----------------------+--------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4097,8 +4186,6 @@ ppmu_current_limit_range
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4122,8 +4209,6 @@ ppmu_current_limit_supported
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -4157,8 +4242,6 @@ ppmu_output_function
             +-----------------------+--------------------------+
             | Repeated Capabilities | None                     |
             +-----------------------+--------------------------+
-            | Resettable            | Yes                      |
-            +-----------------------+--------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4182,8 +4265,6 @@ ppmu_voltage_level
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4209,8 +4290,6 @@ ppmu_voltage_limit_high
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4234,8 +4313,6 @@ ppmu_voltage_limit_low
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4261,8 +4338,6 @@ query_instrument_status
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4287,8 +4362,6 @@ range_check
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4312,8 +4385,6 @@ record_coercions
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4355,8 +4426,6 @@ selected_function
             +-----------------------+------------------------+
             | Repeated Capabilities | None                   |
             +-----------------------+------------------------+
-            | Resettable            | Yes                    |
-            +-----------------------+------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4380,8 +4449,6 @@ sequencer_flag_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -4407,8 +4474,6 @@ serial_number
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4432,8 +4497,6 @@ simulate
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4459,8 +4522,6 @@ specific_driver_class_spec_major_version
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4484,8 +4545,6 @@ specific_driver_class_spec_minor_version
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -4511,8 +4570,6 @@ specific_driver_description
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4536,8 +4593,6 @@ specific_driver_prefix
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -4563,8 +4618,6 @@ specific_driver_revision
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
             +-----------------------+-----------+
-            | Resettable            | No        |
-            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4588,8 +4641,6 @@ specific_driver_vendor
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -4615,8 +4666,6 @@ start_label
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4640,8 +4689,6 @@ start_trigger_terminal_name
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -4679,8 +4726,6 @@ start_trigger_type
             +-----------------------+-------------------+
             | Repeated Capabilities | None              |
             +-----------------------+-------------------+
-            | Resettable            | Yes               |
-            +-----------------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4704,8 +4749,6 @@ supported_instrument_models
             | Permissions           | read only |
             +-----------------------+-----------+
             | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-            | Resettable            | No        |
             +-----------------------+-----------+
 
         .. tip::
@@ -4731,8 +4774,6 @@ tdr_endpoint_termination
             +-----------------------+------------------------------+
             | Repeated Capabilities | None                         |
             +-----------------------+------------------------------+
-            | Resettable            | Yes                          |
-            +-----------------------+------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4756,8 +4797,6 @@ tdr_offset
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | None                                                        |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -4793,8 +4832,6 @@ termination_mode
             +-----------------------+-----------------------+
             | Repeated Capabilities | None                  |
             +-----------------------+-----------------------+
-            | Resettable            | Yes                   |
-            +-----------------------+-----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4818,8 +4855,6 @@ timing_absolute_delay
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
             | Repeated Capabilities | None                                                        |
-            +-----------------------+-------------------------------------------------------------+
-            | Resettable            | Yes                                                         |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -4845,8 +4880,6 @@ timing_absolute_delay_enabled
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4870,8 +4903,6 @@ vih
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4897,8 +4928,6 @@ vil
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4922,8 +4951,6 @@ voh
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
@@ -4949,8 +4976,6 @@ vol
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
-            | Resettable            | Yes        |
-            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4974,8 +4999,6 @@ vterm
             | Permissions           | read-write |
             +-----------------------+------------+
             | Repeated Capabilities | None       |
-            +-----------------------+------------+
-            | Resettable            | Yes        |
             +-----------------------+------------+
 
         .. tip::
