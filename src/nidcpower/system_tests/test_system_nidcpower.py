@@ -5,17 +5,48 @@ import pytest
 import tempfile
 
 
-@pytest.fixture(scope='function', params=[False, True])
+def pytest_generate_tests(metafunc):
+    '''Parametrizes the "session" fixture by examining the the markers set for a test.
+
+    By default, the session fixture is parametrized so each test runs twice. Once with a legacy
+    Synchronized Channels session and once with an Independent Channels session. To limit the
+    session used for a test to only a legacy session, decorate the test with
+    @pytest.mark.legacy_session_only. To limit the session used for a test to only an Independent
+    Channels session, decorate the test with @pytest.mark.independent_channels_session_only.
+    '''
+
+    if 'session' in metafunc.fixturenames:
+        # fixtures can't be parametrized more than once. this approach prevents exclusive
+        # markers from being set on the same test
+
+        legacy_session_only = metafunc.definition.get_closest_marker('legacy_session_only')
+        independent_channels_session_only = metafunc.definition.get_closest_marker('independent_channels_session_only')
+
+        if legacy_session_only:
+            metafunc.parametrize('session', [False], indirect=True)
+        if independent_channels_session_only:
+            metafunc.parametrize('session', [True], indirect=True)
+        if not legacy_session_only and not independent_channels_session_only:
+            metafunc.parametrize('session', [False, True], indirect=True)
+
+
+@pytest.fixture(scope='function')
 def session(request):
     '''Creates an NI-DCPower Session.
 
-    This fixture is parameterized. By default, all dependent tests will be run twice. First with a
-    legacy, Synchronized Channels session. Second with an Independent Channels session. Dependent
-    tests can override this behavior by using markers. For example, to limit the session to a legacy
-    session, decorate the test with @pytest.mark.parametrize('session', [False], indirect=True).
-
-    Markers can also be used to override the default initializer arguments. For example,
+    Markers can be used to override the default initializer arguments. For example,
     @pytest.mark.resource_name('4162/0') will override the default resource name.
+
+    Available markers include:
+        @pytest.mark.resource_name
+        @pytest.mark.channels
+        @pytest.mark.reset
+        @pytest.mark.options
+        @pytest.mark.independent_channels
+
+    By default, all dependent tests will run twice. First with a legacy Synchronized Channels
+    session. Second with an Independent Channels session. Dependent tests can override this behavior
+    by using markers. Refer to the documentation in pytest_generate_tests for more information.
     '''
 
     # set default values
@@ -45,26 +76,26 @@ def test_self_cal(session):
     session.self_cal()
 
 
-@pytest.mark.parametrize('session', [True], indirect=True)
+@pytest.mark.independent_channels_session_only
 def test_get_channel_name_independent_channels(session):
     name = session.get_channel_name(1)
     assert name == '4162/0'
 
 
-@pytest.mark.parametrize('session', [False], indirect=True)
+@pytest.mark.legacy_session_only
 def test_get_channel_name_synchronized_channels(session):
     name = session.get_channel_name(1)
     assert name == '0'
 
 
-@pytest.mark.parametrize('session', [True], indirect=True)
+@pytest.mark.independent_channels_session_only
 def test_get_channel_names_independent_channels(session):
     expected_string = ['4162/{0}'.format(x) for x in range(12)]
     channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
     assert session.get_channel_names(channel_indices) == expected_string
 
 
-@pytest.mark.parametrize('session', [False], indirect=True)
+@pytest.mark.legacy_session_only
 def test_get_channel_names_synchronized_channels(session):
     expected_string = [str(x) for x in range(12)]
     channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
@@ -353,7 +384,7 @@ def test_create_and_delete_advanced_sequence_bad_type(session):
         pass
 
 
-@pytest.mark.parametrize('session', [False], indirect=True)
+@pytest.mark.legacy_session_only
 def test_send_software_edge_trigger_error(session):
     try:
         session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
@@ -496,13 +527,6 @@ def test_init_raises_driver_errors_for_invalid_arguments(resource_name, channels
     assert e.value.code == expected_error_code
 
 
-@pytest.mark.skip('This test is failing. Need to troubleshoot.')
-@pytest.mark.parametrize('session', [False], indirect=True)
-def test_repeated_capabilities_on_attribute_when_all_channels_are_specified(session):
-    '''No error for non-independent channel session when specifying all channels by number.'''
-    assert session.channels['0-11'].instrument_model
-
-
 def test_repeated_capabilities_on_method_when_all_channels_are_specified(session):
     '''Sessions should not error when specifying all channels by number.'''
     assert session.channels['0'].output_enabled is True
@@ -511,7 +535,7 @@ def test_repeated_capabilities_on_method_when_all_channels_are_specified(session
     assert session.channels['0'].output_enabled is True
 
 
-@pytest.mark.parametrize('session', [False], indirect=True)
+@pytest.mark.legacy_session_only
 def test_error_channel_name_not_allowed_in_obsolete_session(session):
     with pytest.raises(nidcpower.Error) as e:
         session.channels['0'].reset()
@@ -519,22 +543,12 @@ def test_error_channel_name_not_allowed_in_obsolete_session(session):
     assert e.value.description.find('The channel name string must represent all channels in the session because the session was not initialized with independent channels. To specify a subset of channels for this function, first initialize the session with independent channels.') != -1
 
 
-@pytest.mark.parametrize('session', [False], indirect=True)
+@pytest.mark.legacy_session_only
 def test_error_channel_name_not_allowed(session):
     with pytest.raises(nidcpower.Error) as e:
         session.channels['0'].instrument_model
     assert e.value.code == -1074134971  # IVI_ERROR_CHANNEL_NAME_NOT_ALLOWED
     assert e.value.description.find('The channel or repeated capability name is not allowed.') != -1
-
-
-@pytest.mark.parametrize('session', [True], indirect=True)
-def test_reset_with_repeated_capabilities_all_channels(session):
-    all_channels = session.channels['4162/0-11']
-    assert all_channels.output_enabled is True
-    all_channels.output_enabled = False
-    all_channels.reset()
-    assert all_channels.output_enabled is True
-    assert session.channels['4162/0'].output_enabled is True
 
 
 def test_repeated_capabilities_with_initiate(session):
