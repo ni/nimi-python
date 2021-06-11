@@ -23,6 +23,11 @@ functions_additional_create_advanced_sequence = {
             },
             {
                 'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
                 'name': 'SequenceName',
                 'type': 'ViString',
                 'documentation': {
