@@ -214,6 +214,47 @@ def test_measure_multiple(session):
         assert measurements[1].current == 0.00001
 
 
+def test_abort_repeated_capabilities(multi_instrument_session):
+    multi_instrument_session.channels['4162_01/0'].abort()
+
+
+def test_commit_repeated_capabilities(multi_instrument_session):
+    multi_instrument_session.channels['4162_01/0'].commit()
+
+
+def test_create_and_delete_advanced_sequence_repeated_capabilities(multi_instrument_session):
+    single_channel_session = multi_instrument_session.channels['4162_01/0']
+    properties_used = ['output_function', 'voltage_level']
+    sequence_name = 'my_sequence'
+    single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
+    single_channel_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+    single_channel_session.create_advanced_sequence_step(set_as_active_step=True)
+    assert single_channel_session.active_advanced_sequence == sequence_name
+    single_channel_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+    single_channel_session.voltage_level = 1
+    single_channel_session.delete_advanced_sequence(sequence_name=sequence_name)
+    try:
+        single_channel_session.active_advanced_sequence = sequence_name
+        assert False
+    except nidcpower.errors.DriverError:
+        pass
+
+
+def test_reset_repeated_capabilities(multi_instrument_session):
+    multi_instrument_session.channels['4162_01/0'].reset()
+
+
+def test_send_software_edge_trigger_repeated_capabilities(multi_instrument_session):
+    multi_instrument_session.channels['4162_01/0'].initiate()
+    multi_instrument_session.channels['4162_01/0'].send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
+
+
+def test_wait_for_event_repeated_capabilities(multi_instrument_session):
+    single_channel_session = multi_instrument_session.channels['4162_01/0']
+    with single_channel_session.initiate():
+        single_channel_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE)
+
+
 def test_query_max_current_limit(single_channel_session):
     max_current_limit = single_channel_session.query_max_current_limit(6)
     expected_max_current_limit = 0.1  # for a simulated 4162 max current limit should be 0.1 for 6V Voltage level
