@@ -482,9 +482,15 @@ def test_init_issues_deprecation_warnings(resource_name, channels, independent_c
     argument is supplied.
     """
     options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
-    with pytest.deprecated_call():
+    with pytest.deprecated_call() as dc:
         with nidcpower.Session(resource_name, channels, options=options, independent_channels=independent_channels):
             pass
+    assert len(dc.list) == 1  # assert only 1 deprecation warning was thrown
+    message = dc.list[0].message.args[0]
+    if not independent_channels:
+        assert message.find('Initializing session without independent channels enabled.') != -1
+    if channels and independent_channels:
+        assert message.find('Attempting to initialize an independent channels session with a channels argument.') != -1
 
 
 @pytest.mark.parametrize(
