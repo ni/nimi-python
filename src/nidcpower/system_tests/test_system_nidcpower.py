@@ -486,7 +486,7 @@ def test_init_issues_deprecation_warnings(resource_name, channels, independent_c
         with nidcpower.Session(resource_name, channels, options=options, independent_channels=independent_channels):
             pass
     assert len(dc.list) == 1  # assert only 1 deprecation warning was thrown
-    message = dc.list[0].message.args[0]
+    message = dc.list[0].message.args[0]  # grabs the deprecation warning message
     if not independent_channels:
         assert message.find('Initializing session without independent channels enabled.') != -1
     if channels and independent_channels:
@@ -525,7 +525,9 @@ def test_init_backwards_compatibility_with_initialize_with_channels(resource_nam
         ('Dev1/0,Dev2/1', None),
         ('Dev1/0,Dev2/1', ''),
         (['Dev1/0', 'Dev1/1'], ''),  # construct with list
-        (('Dev1/0', 'Dev1/1'), '')  # construct with tuple
+        (('Dev1/0', 'Dev1/1'), ''),  # construct with tuple
+        ('Dev1/0-3', None),
+        ('Dev1/0:3', None)
     ]
 )
 def test_init_with_independent_channels(resource_name, channels):
