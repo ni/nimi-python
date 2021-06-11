@@ -596,3 +596,18 @@ def test_error_channel_name_not_allowed(session):
 @pytest.mark.include_legacy_session
 def test_repeated_capabilities_with_initiate(session):
     session.channels['0-11'].initiate()
+
+
+@pytest.mark.resource_name('Dev1,Dev2')
+def test_repeated_capabilities_with_initiate_multi_instrument_session(session):
+    session.channels['Dev1/0-11,Dev2/0-11'].initiate()
+
+
+@pytest.mark.resource_name('Dev1/0')
+def test_repeated_capabilities_with_initiate_fully_qualified_channel_name(session):
+    session.channels['Dev1/0'].initiate()
+
+
+@pytest.mark.resource_name('Dev1/0-3,Dev2/0,Dev3/0:3')
+def test_repeated_capabilities_with_initiate_and_get_channel_names(session):
+    session.channels[session.get_channel_names('0:8')].initiate()
