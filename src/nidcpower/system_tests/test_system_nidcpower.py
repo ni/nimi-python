@@ -6,13 +6,13 @@ import tempfile
 
 
 def pytest_generate_tests(metafunc):
-    '''Parametrizes the "session" fixture by examining the the markers set for a test.
+    """Parametrizes the "session" fixture by examining the the markers set for a test.
 
     By default, the session fixture is parametrized so each test runs once with an Independent
     Channels session. To also run a test with a legacy Synchronized Channels session, decorate the
     test with the custom marker @pytest.mark.include_legacy_session. To run a test with only a
     legacy session, decorate the test with @pytest.mark.legacy_session_only.
-    '''
+    """
 
     if 'session' in metafunc.fixturenames:
         # fixtures can't be parametrized more than once. this approach prevents exclusive
@@ -31,7 +31,7 @@ def pytest_generate_tests(metafunc):
 
 @pytest.fixture(scope='function')
 def session(request):
-    '''Creates an NI-DCPower Session.
+    """Creates an NI-DCPower Session.
 
     Markers can be used to override the default initializer arguments. For example,
     @pytest.mark.resource_name('4162/0') will override the default resource name.
@@ -46,7 +46,7 @@ def session(request):
     By default, all dependent tests will run once with an Independent Channels session. Dependent
     tests can override this behavior by using custom markers. Refer to the documentation in
     pytest_generate_tests for more information.
-    '''
+    """
 
     # set default values
     init_args = {
@@ -90,6 +90,13 @@ def test_get_channel_name_synchronized_channels(session):
 
 def test_get_channel_names_independent_channels(session):
     expected_string = ['4162/{0}'.format(x) for x in range(12)]
+    channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
+    assert session.get_channel_names(channel_indices) == expected_string
+
+
+@pytest.mark.resource_name('Dev1/0-5,Dev2/0-5')
+def test_get_channel_names_multiple_instruments(session):
+    expected_string = ['{0}/{1}'.format(name, channel) for name in ['Dev1', 'Dev2'] for channel in range(6)]
     channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
     assert session.get_channel_names(channel_indices) == expected_string
 
@@ -550,27 +557,48 @@ def test_init_raises_value_error_for_multi_instrument_resource_name_and_channels
 
 
 @pytest.mark.parametrize(
-    'resource_name,channels,independent_channels,expected_error_code',
+    'resource_name,channels',
     [
-        ('Dev1/0', '0', True, -1074097793),  # combines to 'Dev1/0/0'
-        ('Dev1/0', 'Dev1/0', False, -1074135008),
-        ('Dev1/0,Dev2/0', 'Dev1/0', False, -1074135008)
+        ('Dev1/0', '0'),  # combines to 'Dev1/0/0'
+        ('Dev1/0', '0,1'),  # combines to 'Dev1/0/0,1'
+        ('Dev1/0', '0:3'),  # combines to 'Dev1/0/0:3'
+        ('Dev1/0', '0-3'),  # combines to 'Dev1/0/0-3'
+        ('Dev1/0', range(4))  # combines to 'Dev1/0/0-3'
     ]
 )
-def test_init_raises_driver_errors_for_invalid_arguments(resource_name, channels, independent_channels, expected_error_code):
+def test_init_raises_driver_errors_for_invalid_arguments(resource_name, channels):
     """Tests for driver errors that should occur for invalid initialization arguments."""
     options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
     with pytest.raises(nidcpower.errors.DriverError) as e:
-        with nidcpower.Session(resource_name, channels, options=options, independent_channels=independent_channels) as session:
-            # multi-instrument resource names are valid for simulated initialize with channels
-            # sessions, so we make a driver call on channels and ensure that errors
-            session.channels[channels].output_function = nidcpower.OutputFunction.DC_VOLTAGE
-    assert e.value.code == expected_error_code
+        with nidcpower.Session(resource_name, channels, options=options):
+            pass
+    assert e.value.code == -1074097793
+    assert e.value.description.find('The specified device cannot be found.') != -1
+
+
+@pytest.mark.parametrize(
+    'resource_name,channels',
+    [
+        ('Dev1/0', None),
+        ('Dev1/0', 'Dev1/0'),
+        ('Dev1/0,Dev2/0', 'Dev1/0'),
+        ('Dev1,Dev2', '')
+    ]
+)
+def test_init_raises_driver_errors_for_invalid_arguments_legacy_session(resource_name, channels):
+    """Multi-instrument resource names are valid for simulated initialize with channels sessions.
+    So, we attempt to initialize a true session and assert an unsupported device exception is raised.
+    """
+    with pytest.raises(nidcpower.errors.DriverError) as e:
+        with nidcpower.Session(resource_name, channels, independent_channels=False):
+            pass
+    assert e.value.code == -1074118656
+    assert e.value.description.find('The device is not supported with this driver or version.') != -1
 
 
 @pytest.mark.include_legacy_session
 def test_repeated_capabilities_on_method_when_all_channels_are_specified(session):
-    '''Sessions should not error when specifying all channels by number.'''
+    """Sessions should not error when specifying all channels by number."""
     assert session.channels['0'].output_enabled is True
     session.channels['0'].output_enabled = False
     session.channels['0-11'].reset()
@@ -578,7 +606,7 @@ def test_repeated_capabilities_on_method_when_all_channels_are_specified(session
 
 
 @pytest.mark.legacy_session_only
-def test_error_channel_name_not_allowed_in_obsolete_session(session):
+def test_error_channel_name_not_allowed_in_legacy_session(session):
     with pytest.raises(nidcpower.Error) as e:
         session.channels['0'].reset()
     assert e.value.code == -1074118494  # NIDCPOWER_ERROR_CHANNEL_NAME_NOT_ALLOWED_IN_OBSOLETE_SESSION
@@ -593,21 +621,58 @@ def test_error_channel_name_not_allowed(session):
     assert e.value.description.find('The channel or repeated capability name is not allowed.') != -1
 
 
-@pytest.mark.include_legacy_session
-def test_repeated_capabilities_with_initiate(session):
-    session.channels['0-11'].initiate()
-
-
 @pytest.mark.resource_name('Dev1,Dev2')
-def test_repeated_capabilities_with_initiate_multi_instrument_session(session):
-    session.channels['Dev1/0-11,Dev2/0-11'].initiate()
+@pytest.mark.parametrize(
+    'channels',
+    [
+        'Dev1/0-11,Dev2/0-11',
+        'Dev1/2:5,Dev2/4:7',
+        'Dev1/10,Dev2/11',
+        'Dev1/3,Dev2/0:11'
+    ]
+)
+def test_repeated_capabilities_with_initiate_multi_instrument_session(session, channels):
+    session.channels[channels].initiate()
 
 
-@pytest.mark.resource_name('Dev1/0')
-def test_repeated_capabilities_with_initiate_fully_qualified_channel_name(session):
-    session.channels['Dev1/0'].initiate()
+@pytest.mark.resource_name('Dev1')
+@pytest.mark.parametrize('channels', ['Dev1/0', 'Dev1/9-11', '', '0', '4:6', '2-10', '0-11'])
+def test_repeated_capabilities_with_initiate_single_instrument_session(session, channels):
+    session.channels[channels].initiate()
+
+
+@pytest.mark.legacy_session_only
+@pytest.mark.parametrize('channels', ['', '0-11'])
+def test_repeated_capabilities_with_initiate_legacy_session(session, channels):
+    session.channels[channels].initiate()
 
 
 @pytest.mark.resource_name('Dev1/0-3,Dev2/0,Dev3/0:3')
-def test_repeated_capabilities_with_initiate_and_get_channel_names(session):
-    session.channels[session.get_channel_names('0:8')].initiate()
+@pytest.mark.parametrize('indices', ('0:8', range(9)))
+def test_repeated_capabilities_with_initiate_and_get_channel_names(session, indices):
+    session.channels[session.get_channel_names(indices)].initiate()
+
+
+@pytest.mark.resource_name('Dev1/0')
+@pytest.mark.parametrize('channels', ('1', '0-1', 1))
+def test_invalid_channels_repeated_capabilities(session, channels):
+    with pytest.raises(nidcpower.Error) as e:
+        session.channels[channels].output_function = nidcpower.OutputFunction.DC_VOLTAGE
+    assert e.value.code == -1074135008
+    assert e.value.description.find('Unknown channel or repeated capability name.') != -1
+
+
+@pytest.mark.resource_name('Dev1,Dev2,Dev3')
+@pytest.mark.parametrize(
+    'device_name',
+    [
+        'Dev1',
+        'Dev2',
+        'Dev3',
+        'Dev1,Dev2',
+        'Dev1,Dev2,Dev3',
+        ''
+    ]
+)
+def test_instruments_repeated_capability(session, device_name):
+    assert session.instruments[device_name].instrument_model == 'NI PXIe-4162'
