@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # This file is generated from NI-TClk API metadata version 255.0.0d0
-
 functions = {
     'ConfigureForHomogeneousTriggers': {
         'documentation': {
@@ -28,7 +27,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
+                'type_in_documentation': 'list of instrument-specific sessions or nitclk.SessionReference instances'
             }
         ],
         'returns': 'ViStatus'
@@ -59,7 +58,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
+                'type_in_documentation': 'list of instrument-specific sessions or nitclk.SessionReference instances'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -267,7 +266,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
+                'type_in_documentation': 'list of instrument-specific sessions or nitclk.SessionReference instances'
             }
         ],
         'returns': 'ViStatus'
@@ -298,7 +297,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
+                'type_in_documentation': 'list of instrument-specific sessions or nitclk.SessionReference instances'
             },
             {
                 'direction': 'out',
@@ -461,7 +460,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
+                'type_in_documentation': 'list of instrument-specific sessions or nitclk.SessionReference instances'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -503,7 +502,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
+                'type_in_documentation': 'list of instrument-specific sessions or nitclk.SessionReference instances'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -545,7 +544,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
+                'type_in_documentation': 'list of instrument-specific sessions or nitclk.SessionReference instances'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -587,7 +586,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
+                'type_in_documentation': 'list of instrument-specific sessions or nitclk.SessionReference instances'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
