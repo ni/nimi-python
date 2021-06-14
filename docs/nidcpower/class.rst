@@ -423,6 +423,16 @@ create_advanced_sequence
                 for more information about supported devices.
 
 
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].create_advanced_sequence`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.create_advanced_sequence`
+
 
             :param sequence_name:
 
