@@ -586,9 +586,12 @@ def test_init_raises_driver_errors_for_invalid_arguments(resource_name, channels
     ]
 )
 def test_init_raises_driver_errors_for_invalid_arguments_legacy_session(resource_name, channels):
-    """Multi-instrument resource names are valid for simulated initialize with channels sessions.
-    So, we attempt to initialize a true session and assert an unsupported device exception is raised.
+    """Tests invalid initializer arguments for legacy initialize with channels sessions.
+
+    Multi-instrument resource names are valid for simulated initialize with channels sessions. So,
+    we attempt to initialize a true session and assert an unsupported device exception is raised.
     """
+
     with pytest.raises(nidcpower.errors.DriverError) as e:
         with nidcpower.Session(resource_name, channels, independent_channels=False):
             pass
