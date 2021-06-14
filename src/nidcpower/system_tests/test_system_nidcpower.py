@@ -681,7 +681,6 @@ def test_instruments_repeated_capability(session, device_name):
     assert session.instruments[device_name].instrument_model == 'NI PXIe-4162'
 
 
-@pytest.mark.skip('Requires PR 1626 to be merged before this test will pass.')
 @pytest.mark.resource_name('Dev1/0:3, Dev2/0:3')
 @pytest.mark.parametrize(
     'channels',
