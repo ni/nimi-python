@@ -8,7 +8,7 @@ The `nitclk` module provides synchronization facilites to allow multiple instrum
 respond to triggers, to align Sample Clocks on multiple instruments, and/or to simultaneously start multiple
 instruments.
 
-It consists of a set of functions that act on a list of :py:class:`SessionReference` objects or nimi-python `Session`
+It consists of a set of functions that act on a list of :py:class:`SessionReference` objects or instrument `Session`
 objects for drivers that support NI-TClk. :py:class:`SessionReference` also has a set of properties for configuration.
 
 .. code:: python
@@ -141,7 +141,7 @@ configure_for_homogeneous_triggers
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument sessions or nitclk.SessionReference instances
 
 finish_sync_pulse_sender_synchronize
 ------------------------------------
@@ -164,7 +164,7 @@ finish_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument sessions or nitclk.SessionReference instances
         :param min_time:
 
 
@@ -205,7 +205,7 @@ initiate
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument sessions or nitclk.SessionReference instances
 
 is_done
 -------
@@ -229,7 +229,7 @@ is_done
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument sessions or nitclk.SessionReference instances
 
         :rtype: bool
         :return:
@@ -264,7 +264,7 @@ setup_for_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument sessions or nitclk.SessionReference instances
         :param min_time:
 
 
@@ -306,7 +306,7 @@ synchronize
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument sessions or nitclk.SessionReference instances
         :param min_tclk_period:
 
 
@@ -343,7 +343,7 @@ synchronize_to_sync_pulse_sender
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument sessions or nitclk.SessionReference instances
         :param min_time:
 
 
@@ -387,7 +387,7 @@ wait_until_done
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument sessions or nitclk.SessionReference instances
         :param timeout:
 
 
@@ -502,13 +502,13 @@ pause_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
+            +----------------+--------------------------------------------------------+
+            | Characteristic | Value                                                  |
+            +================+========================================================+
+            | Datatype       | instrument session or nitclk.SessionReference instance |
+            +----------------+--------------------------------------------------------+
+            | Permissions    | read-write                                             |
+            +----------------+--------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -528,13 +528,13 @@ ref_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
+            +----------------+--------------------------------------------------------+
+            | Characteristic | Value                                                  |
+            +================+========================================================+
+            | Datatype       | instrument session or nitclk.SessionReference instance |
+            +----------------+--------------------------------------------------------+
+            | Permissions    | read-write                                             |
+            +----------------+--------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -590,13 +590,13 @@ sequencer_flag_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
+            +----------------+--------------------------------------------------------+
+            | Characteristic | Value                                                  |
+            +================+========================================================+
+            | Datatype       | instrument session or nitclk.SessionReference instance |
+            +----------------+--------------------------------------------------------+
+            | Permissions    | read-write                                             |
+            +----------------+--------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -616,13 +616,13 @@ start_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
+            +----------------+--------------------------------------------------------+
+            | Characteristic | Value                                                  |
+            +================+========================================================+
+            | Datatype       | instrument session or nitclk.SessionReference instance |
+            +----------------+--------------------------------------------------------+
+            | Permissions    | read-write                                             |
+            +----------------+--------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

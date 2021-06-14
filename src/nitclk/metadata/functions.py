@@ -28,7 +28,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)'
+                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
             }
         ],
         'returns': 'ViStatus'
@@ -59,7 +59,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)'
+                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -267,7 +267,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)'
+                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
             }
         ],
         'returns': 'ViStatus'
@@ -298,7 +298,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)'
+                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
             },
             {
                 'direction': 'out',
@@ -461,7 +461,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)'
+                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -503,7 +503,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)'
+                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -545,7 +545,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)'
+                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -587,7 +587,7 @@ functions = {
                     'value': 'sessionCount'
                 },
                 'type': 'ViSession[]',
-                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)'
+                'type_in_documentation': 'list of instrument sessions or nitclk.SessionReference instances'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',

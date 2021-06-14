@@ -28,7 +28,7 @@ attributes = {
         'lv_property': 'Start Trigger Master Session',
         'name': 'START_TRIGGER_MASTER_SESSION',
         'type': 'ViSession',
-        'type_in_documentation': 'Driver Session or nitclk.SessionReference'
+        'type_in_documentation': 'instrument session or nitclk.SessionReference instance'
     },
     4: {
         'access': 'read-write',
@@ -39,7 +39,7 @@ attributes = {
         'lv_property': 'Reference Trigger Master Session',
         'name': 'REF_TRIGGER_MASTER_SESSION',
         'type': 'ViSession',
-        'type_in_documentation': 'Driver Session or nitclk.SessionReference'
+        'type_in_documentation': 'instrument session or nitclk.SessionReference instance'
     },
     6: {
         'access': 'read-write',
@@ -50,7 +50,7 @@ attributes = {
         'lv_property': 'Pause Trigger Master Session',
         'name': 'PAUSE_TRIGGER_MASTER_SESSION',
         'type': 'ViSession',
-        'type_in_documentation': 'Driver Session or nitclk.SessionReference'
+        'type_in_documentation': 'instrument session or nitclk.SessionReference instance'
     },
     8: {
         'access': 'read only',
@@ -109,6 +109,6 @@ attributes = {
         'lv_property': 'Sequencer Flag Master Session',
         'name': 'SEQUENCER_FLAG_MASTER_SESSION',
         'type': 'ViSession',
-        'type_in_documentation': 'Driver Session or nitclk.SessionReference'
+        'type_in_documentation': 'instrument session or nitclk.SessionReference instance'
     }
 }
