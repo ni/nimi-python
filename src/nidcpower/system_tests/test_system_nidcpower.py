@@ -676,3 +676,92 @@ def test_invalid_channels_repeated_capabilities(session, channels):
 )
 def test_instruments_repeated_capability(session, device_name):
     assert session.instruments[device_name].instrument_model == 'NI PXIe-4162'
+
+
+@pytest.mark.skip('Requires PR 1626 to be merged before this test will pass.')
+@pytest.mark.resource_name('Dev1/0:3, Dev2/0:3')
+@pytest.mark.parametrize(
+    'channels',
+    [
+        'Dev1/0',
+        'Dev1/0-3',
+        'Dev2/0',
+        'Dev2/0:3',
+        'Dev1/0,Dev2/0',
+        'Dev1/0:1,Dev2/2-3',
+        'Dev1/3,Dev2/0-3'
+    ]
+)
+def test_create_and_delete_advanced_sequence_repeated_capabilities(session, channels):
+    channels_session = session.channels[channels]
+    properties_used = ['output_function', 'voltage_level']
+    sequence_name = 'my_sequence'
+    channels_session.source_mode = nidcpower.SourceMode.SEQUENCE
+    channels_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+    channels_session.create_advanced_sequence_step(set_as_active_step=True)
+    assert channels_session.active_advanced_sequence == sequence_name
+    channels_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+    channels_session.voltage_level = 1
+    channels_session.delete_advanced_sequence(sequence_name=sequence_name)
+    try:
+        channels_session.active_advanced_sequence = sequence_name
+        assert False
+    except nidcpower.errors.DriverError:
+        pass
+
+
+@pytest.mark.resource_name('Dev1/0:3, Dev2/0:3')
+@pytest.mark.parametrize('method', ['abort', 'commit', 'reset'])
+@pytest.mark.parametrize(
+    'channels',
+    [
+        'Dev1/0',
+        'Dev1/0-3',
+        'Dev2/0',
+        'Dev2/0:3',
+        'Dev1/0,Dev2/0',
+        'Dev1/0:1,Dev2/2-3',
+        'Dev1/3,Dev2/0-3'
+    ]
+)
+def test_repeated_capabilities_parameterless_methods(session, channels, method):
+    """Double parametrize markers of this method results in nested parameterization of the test."""
+    getattr(session.channels[channels], method)()  # get method by name then invoke it
+
+
+@pytest.mark.resource_name('Dev1/0:3, Dev2/0:3')
+@pytest.mark.parametrize(
+    'channels',
+    [
+        'Dev1/0',
+        'Dev1/0-3',
+        'Dev2/0',
+        'Dev2/0:3',
+        'Dev1/0,Dev2/0',
+        'Dev1/0:1,Dev2/2-3',
+        'Dev1/3,Dev2/0-3'
+    ]
+)
+def test_send_software_edge_trigger_repeated_capabilities(session, channels):
+    channels_session = session.channels[channels]
+    channels_session.initiate()
+    channels_session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
+
+
+@pytest.mark.resource_name('Dev1/0:3, Dev2/0:3')
+@pytest.mark.parametrize(
+    'channels',
+    [
+        'Dev1/0',
+        'Dev1/0-3',
+        'Dev2/0',
+        'Dev2/0:3',
+        'Dev1/0,Dev2/0',
+        'Dev1/0:1,Dev2/2-3',
+        'Dev1/3,Dev2/0-3'
+    ]
+)
+def test_wait_for_event_repeated_capabilities(session, channels):
+    channels_session = session.channels[channels]
+    with channels_session.initiate():
+        channels_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE)
