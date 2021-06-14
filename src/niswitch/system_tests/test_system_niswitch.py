@@ -61,6 +61,7 @@ def test_channel_connection(session):
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
 
 
+@pytest.mark.skip(reason="TODO(sbethur): Intermittent failures, GitHub issue #1622.")
 def test_continuous_software_scanning(session_2532):
     scan_list = 'r0->c0; r1->c1'
     session_2532.scan_list = scan_list
@@ -107,6 +108,7 @@ def test_vi_real64_attribute(session):
     assert session.settling_time.total_seconds() == 0.1
 
 
+@pytest.mark.skip(reason="TODO(sbethur): Intermittent failures, GitHub issue #1622.")
 def test_enum_attribute(session_2532):
     assert session_2532.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
 
