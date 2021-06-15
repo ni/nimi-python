@@ -1,8 +1,8 @@
+import os
+import tempfile
+import pytest
 import hightime
 import nidcpower
-import os
-import pytest
-import tempfile
 
 
 def pytest_generate_tests(metafunc):
@@ -67,28 +67,20 @@ def session(request):
         yield simulated_session
 
 
-@pytest.mark.include_legacy_session
 def test_self_test(session):
     session.self_test()
 
 
-@pytest.mark.include_legacy_session
 def test_self_cal(session):
     session.self_cal()
 
 
-def test_get_channel_name_independent_channels(session):
+def test_get_channel_name(session):
     name = session.get_channel_name(1)
     assert name == '4162/0'
 
 
-@pytest.mark.legacy_session_only
-def test_get_channel_name_synchronized_channels(session):
-    name = session.get_channel_name(1)
-    assert name == '0'
-
-
-def test_get_channel_names_independent_channels(session):
+def test_get_channel_names(session):
     expected_string = ['4162/{0}'.format(x) for x in range(12)]
     channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
     assert session.get_channel_names(channel_indices) == expected_string
@@ -101,41 +93,27 @@ def test_get_channel_names_multiple_instruments(session):
     assert session.get_channel_names(channel_indices) == expected_string
 
 
-@pytest.mark.legacy_session_only
-def test_get_channel_names_synchronized_channels(session):
-    expected_string = [str(x) for x in range(12)]
-    channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
-    assert session.get_channel_names(channel_indices) == expected_string
-
-
-@pytest.mark.include_legacy_session
 def test_get_attribute_string(session):
     model = session.instrument_model
     assert model == 'NI PXIe-4162'
 
 
-@pytest.mark.include_legacy_session
 def test_error_message():
-    try:
+    with pytest.raises(nidcpower.Error) as e:
         # We pass in an invalid model name to force going to error_message
         with nidcpower.Session('4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
-            assert False
-    except nidcpower.Error as e:
-        assert e.code == -1074134964
-        assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1
+            pass
+    assert e.value.code == -1074134964
+    assert e.value.description.find('The option string parameter contains an entry with an unknown option value.') != -1
 
 
-@pytest.mark.include_legacy_session
 def test_get_error(session):
-    try:
+    with pytest.raises(nidcpower.Error) as e:
         session.instrument_model = ''
-        assert False
-    except nidcpower.Error as e:
-        assert e.code == -1074135027  # Error : Attribute is read-only.
-        assert e.description.find('Attribute is read-only.') != -1
+    assert e.value.code == -1074135027  # Error : Attribute is read-only.
+    assert e.value.description.find('Attribute is read-only.') != -1
 
 
-@pytest.mark.include_legacy_session
 def test_get_self_cal_last_date_and_time(session):
     last_cal = session.get_self_cal_last_date_and_time()
     assert last_cal.year == 1940
@@ -145,19 +123,16 @@ def test_get_self_cal_last_date_and_time(session):
     assert last_cal.minute == 0
 
 
-@pytest.mark.include_legacy_session
 def test_get_self_cal_last_temp(session):
     temperature = session.get_self_cal_last_temp()
     assert temperature == 25.0
 
 
-@pytest.mark.include_legacy_session
 def test_read_current_temperature(session):
     temperature = session.read_current_temperature()
     assert temperature == 25.0
 
 
-@pytest.mark.include_legacy_session
 def test_reset_device(session):
     channel = session.channels['0']
     default_output_function = channel.output_function
@@ -168,7 +143,6 @@ def test_reset_device(session):
     assert function_after_reset == default_output_function
 
 
-@pytest.mark.include_legacy_session
 def test_reset_with_default(session):
     channel = session.channels['0']
     assert channel.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
@@ -177,7 +151,6 @@ def test_reset_with_default(session):
     assert channel.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
 
 
-@pytest.mark.include_legacy_session
 def test_reset(session):
     channel = session.channels['0']
     assert channel.output_enabled is True
@@ -186,7 +159,6 @@ def test_reset(session):
     assert channel.output_enabled is True
 
 
-@pytest.mark.include_legacy_session
 def test_disable(session):
     channel = session.channels['0']
     assert channel.output_enabled is True
@@ -195,7 +167,6 @@ def test_disable(session):
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_measure(session):
     session.source_mode = nidcpower.SourceMode.SINGLE_POINT
     session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
@@ -208,7 +179,6 @@ def test_measure(session):
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_query_output_state(session):
     with session.initiate():
         assert session.query_output_state(nidcpower.OutputStates.VOLTAGE) is True   # since default function is DCVolt when initiated output state for DC Volt\DC current should be True and False respectively
@@ -216,7 +186,6 @@ def test_query_output_state(session):
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_config_aperture_time(session):
     expected_default_aperture_time = 0.01666
     default_aperture_time = session.aperture_time
@@ -232,7 +201,6 @@ def test_config_aperture_time(session):
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_fetch_multiple(session):
     session.source_mode = nidcpower.SourceMode.SINGLE_POINT
     session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
@@ -249,7 +217,6 @@ def test_fetch_multiple(session):
         assert measurements[1].current == 0.00001
 
 
-@pytest.mark.include_legacy_session
 def test_measure_multiple(session):
     with session.initiate():
         # session is open to all 12 channels on the device
@@ -267,74 +234,53 @@ def test_measure_multiple(session):
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_query_max_current_limit(session):
     max_current_limit = session.query_max_current_limit(6)
-    expected_max_current_limit = 0.1  # for a simulated 4162 max current limit should be 0.1 for 6V Voltage level
-    max_current_limit_in_range = abs(max_current_limit - expected_max_current_limit) <= max(1e-09 * max(abs(max_current_limit), abs(expected_max_current_limit)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert max_current_limit_in_range is True
+    assert max_current_limit == pytest.approx(0.1, 1e-9)  # for a simulated 4162 max current limit should be 0.1 for 6V Voltage level
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_query_max_voltage_level(session):
     max_voltage_level = session.query_max_voltage_level(0.03)
-    expected_max_voltage_level = 24  # for a simulated 4162 max voltage level should be 24V for 30mA current limit
-    max_voltage_level_in_range = abs(max_voltage_level - expected_max_voltage_level) <= max(1e-09 * max(abs(max_voltage_level), abs(expected_max_voltage_level)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert max_voltage_level_in_range is True
+    assert max_voltage_level == pytest.approx(24, 1e-9)  # for a simulated 4162 max voltage level should be 24V for 30mA current limit
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_query_min_current_limit(session):
     min_current_limit = session.query_min_current_limit(0.03)
-    expected_min_current_limit = 0.0000001  # for a simulated 4162 min_current_limit should be 1uA for 6V voltage level
-    min_current_limit_in_range = abs(min_current_limit - expected_min_current_limit) <= max(1e-09 * max(abs(min_current_limit), abs(expected_min_current_limit)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert min_current_limit_in_range is True
+    assert min_current_limit == pytest.approx(0.1e-6, 1e-9)  # for a simulated 4162 min_current_limit should be 0.1uA for 30mV voltage level
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_set_sequence_with_source_delays(session):
     session.set_sequence([0.1, 0.2, 0.3], [0.001, 0.002, 0.003])
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_set_sequence_with_too_many_source_delays(session):
-    try:
+    with pytest.raises(ValueError):
         session.set_sequence([0.1, 0.2, 0.3], [0.001, 0.002, 0.003, 0.004])
-        assert False
-    except ValueError:
-        pass
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_set_sequence_with_too_few_source_delays(session):
-    try:
+    with pytest.raises(ValueError):
         session.set_sequence([0.1, 0.2, 0.3, 0.4], [0.001, 0.002])
-        assert False
-    except ValueError:
-        pass
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_wait_for_event_default_timeout(session):
     with session.initiate():
         session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE)
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_wait_for_event_with_timeout(session):
     with session.initiate():
         session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, hightime.timedelta(seconds=0.5))
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_commit(session):
     non_default_current_limit = 0.00021
     session.current_limit = non_default_current_limit
@@ -342,7 +288,6 @@ def test_commit(session):
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_import_export_buffer(session):
     test_value_1 = 1
     test_value_2 = 2
@@ -356,7 +301,6 @@ def test_import_export_buffer(session):
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_import_export_file(session):
     test_value_1 = 1
     test_value_2 = 2
@@ -375,7 +319,6 @@ def test_import_export_file(session):
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_create_and_delete_advanced_sequence(session):
     properties_used = ['output_function', 'voltage_level']
     sequence_name = 'my_sequence'
@@ -386,52 +329,37 @@ def test_create_and_delete_advanced_sequence(session):
     session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
     session.voltage_level = 1
     session.delete_advanced_sequence(sequence_name=sequence_name)
-    try:
+    with pytest.raises(nidcpower.errors.DriverError):
         session.active_advanced_sequence = sequence_name
-        assert False
-    except nidcpower.errors.DriverError:
-        pass
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_create_and_delete_advanced_sequence_bad_name(session):
     properties_used = ['output_function_bad', 'voltage_level']
     sequence_name = 'my_sequence'
     session.source_mode = nidcpower.SourceMode.SEQUENCE
-    try:
+    with pytest.raises(KeyError):
         session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
-        assert False
-    except KeyError:
-        pass
 
 
 @pytest.mark.channels('0')
-@pytest.mark.include_legacy_session
 def test_create_and_delete_advanced_sequence_bad_type(session):
     properties_used = ['unlock', 'voltage_level']
     sequence_name = 'my_sequence'
     session.source_mode = nidcpower.SourceMode.SEQUENCE
-    try:
+    with pytest.raises(TypeError):
         session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
-        assert False
-    except TypeError:
-        pass
 
 
 @pytest.mark.legacy_session_only
 def test_send_software_edge_trigger_error(session):
-    try:
+    with pytest.raises(nidcpower.Error) as e:
         session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
-        assert False
-    except nidcpower.Error as e:
-        assert e.code == -1074118587  # Error : Function not available in multichannel session
-        assert e.description.find('The requested function is not available when multiple channels are present in the same session.') != -1
+    assert e.value.code == -1074118587  # Error : Function not available in multichannel session
+    assert e.value.description.find('The requested function is not available when multiple channels are present in the same session.') != -1
 
 
-@pytest.mark.include_legacy_session
 def test_get_ext_cal_last_date_and_time(session):
-    print(type(session))
     last_cal = session.get_ext_cal_last_date_and_time()
     assert last_cal.year == 1940
     assert last_cal.month == 3
@@ -440,35 +368,37 @@ def test_get_ext_cal_last_date_and_time(session):
     assert last_cal.minute == 0
 
 
-@pytest.mark.include_legacy_session
 def test_get_ext_cal_last_temp(session):
     temperature = session.get_ext_cal_last_temp()
     assert temperature == 25.0
 
 
-@pytest.mark.include_legacy_session
 def test_get_ext_cal_recommended_interval(session):
     interval = session.get_ext_cal_recommended_interval()
     assert interval.days == 365
 
 
-@pytest.mark.include_legacy_session
 def test_set_get_vi_int_64_attribute(session):
     session.channels['0'].active_advanced_sequence_step = 1
     read_advanced_sequence_step = session.channels['0'].active_advanced_sequence_step
     assert read_advanced_sequence_step == 1
 
 
-@pytest.mark.include_legacy_session
-def test_channel_format_types():
-    with nidcpower.Session('4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
-        assert simulated_session.channel_count == 2
-    with nidcpower.Session('4162', range(2), False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
-        assert simulated_session.channel_count == 2
-    with nidcpower.Session('4162', '0,1', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
-        assert simulated_session.channel_count == 2
-    with nidcpower.Session('4162', None, False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
-        assert simulated_session.channel_count == 12
+@pytest.mark.parametrize(
+    'channels,expected_channel_count',
+    [
+        ([0, 1], 2),
+        (range(2), 2),
+        ('0,1', 2),
+        (None, 12)
+    ]
+)
+def test_channels_argument_format(channels, expected_channel_count):
+    with nidcpower.Session('4162', channels, False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+        assert simulated_session.channel_count == expected_channel_count
+
+
+def test_default_channels_argument():
     with nidcpower.Session(resource_name='4162', reset=False, options='Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
         assert simulated_session.channel_count == 12
 
@@ -647,6 +577,7 @@ def test_repeated_capabilities_with_initiate_single_instrument_session(session, 
 @pytest.mark.legacy_session_only
 @pytest.mark.parametrize('channels', ['', '0-11'])
 def test_repeated_capabilities_with_initiate_legacy_session(session, channels):
+    """Initiate should work on legacy sessions when all channels are specified."""
     session.channels[channels].initiate()
 
 
@@ -705,11 +636,8 @@ def test_create_and_delete_advanced_sequence_repeated_capabilities(session, chan
     channels_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
     channels_session.voltage_level = 1
     channels_session.delete_advanced_sequence(sequence_name=sequence_name)
-    try:
+    with pytest.raises(nidcpower.errors.DriverError):
         channels_session.active_advanced_sequence = sequence_name
-        assert False
-    except nidcpower.errors.DriverError:
-        pass
 
 
 @pytest.mark.resource_name('Dev1/0:3, Dev2/0:3')
