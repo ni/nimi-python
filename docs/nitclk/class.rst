@@ -502,13 +502,13 @@ pause_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------------------------------------------------------------+
-            | Characteristic | Value                                                           |
-            +================+=================================================================+
-            | Datatype       | instrument-specific session or nitclk.SessionReference instance |
-            +----------------+-----------------------------------------------------------------+
-            | Permissions    | read-write                                                      |
-            +----------------+-----------------------------------------------------------------+
+            +----------------+-----------------------------------------------------------------------+
+            | Characteristic | Value                                                                 |
+            +================+=======================================================================+
+            | Datatype       | instrument-specific session or an instance of nitclk.SessionReference |
+            +----------------+-----------------------------------------------------------------------+
+            | Permissions    | read-write                                                            |
+            +----------------+-----------------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -528,13 +528,13 @@ ref_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------------------------------------------------------------+
-            | Characteristic | Value                                                           |
-            +================+=================================================================+
-            | Datatype       | instrument-specific session or nitclk.SessionReference instance |
-            +----------------+-----------------------------------------------------------------+
-            | Permissions    | read-write                                                      |
-            +----------------+-----------------------------------------------------------------+
+            +----------------+-----------------------------------------------------------------------+
+            | Characteristic | Value                                                                 |
+            +================+=======================================================================+
+            | Datatype       | instrument-specific session or an instance of nitclk.SessionReference |
+            +----------------+-----------------------------------------------------------------------+
+            | Permissions    | read-write                                                            |
+            +----------------+-----------------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -590,13 +590,13 @@ sequencer_flag_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------------------------------------------------------------+
-            | Characteristic | Value                                                           |
-            +================+=================================================================+
-            | Datatype       | instrument-specific session or nitclk.SessionReference instance |
-            +----------------+-----------------------------------------------------------------+
-            | Permissions    | read-write                                                      |
-            +----------------+-----------------------------------------------------------------+
+            +----------------+-----------------------------------------------------------------------+
+            | Characteristic | Value                                                                 |
+            +================+=======================================================================+
+            | Datatype       | instrument-specific session or an instance of nitclk.SessionReference |
+            +----------------+-----------------------------------------------------------------------+
+            | Permissions    | read-write                                                            |
+            +----------------+-----------------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -616,13 +616,13 @@ start_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------------------------------------------------------------+
-            | Characteristic | Value                                                           |
-            +================+=================================================================+
-            | Datatype       | instrument-specific session or nitclk.SessionReference instance |
-            +----------------+-----------------------------------------------------------------+
-            | Permissions    | read-write                                                      |
-            +----------------+-----------------------------------------------------------------+
+            +----------------+-----------------------------------------------------------------------+
+            | Characteristic | Value                                                                 |
+            +================+=======================================================================+
+            | Datatype       | instrument-specific session or an instance of nitclk.SessionReference |
+            +----------------+-----------------------------------------------------------------------+
+            | Permissions    | read-write                                                            |
+            +----------------+-----------------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

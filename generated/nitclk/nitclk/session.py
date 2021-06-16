@@ -76,13 +76,13 @@ class SessionReference(object):
     Default Value is empty string
     '''
     pause_trigger_master_session = _attributes.AttributeSessionReference(6)
-    '''Type: instrument-specific session or nitclk.SessionReference instance
+    '''Type: instrument-specific session or an instance of nitclk.SessionReference
 
     Specifies the pause trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
     '''
     ref_trigger_master_session = _attributes.AttributeSessionReference(4)
-    '''Type: instrument-specific session or nitclk.SessionReference instance
+    '''Type: instrument-specific session or an instance of nitclk.SessionReference
 
     Specifies the reference trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
@@ -100,7 +100,7 @@ class SessionReference(object):
     Note: Sample clock delay is supported for generation sessions only; it is
     '''
     sequencer_flag_master_session = _attributes.AttributeSessionReference(16)
-    '''Type: instrument-specific session or nitclk.SessionReference instance
+    '''Type: instrument-specific session or an instance of nitclk.SessionReference
 
     Specifies the sequencer flag master session.
     For external triggers, the session that originally receives the trigger.
@@ -108,7 +108,7 @@ class SessionReference(object):
     originally generates the trigger.
     '''
     start_trigger_master_session = _attributes.AttributeSessionReference(3)
-    '''Type: instrument-specific session or nitclk.SessionReference instance
+    '''Type: instrument-specific session or an instance of nitclk.SessionReference
 
     Specifies the start trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
