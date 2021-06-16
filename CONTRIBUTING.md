@@ -70,8 +70,8 @@ In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Test
 1. On a terminal, CD to the **[nimi-python](https://github.com/ni/nimi-python)** root
    directory. Then type:
 
-         * python3 -m tox -e build_test,codegen,installers,flake8,docs,pkg
-         * tox
+    * python3 -m tox -e build_test,codegen,installers,flake8,docs,pkg
+    * tox
 
    The first line will
 
