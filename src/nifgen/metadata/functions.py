@@ -2442,21 +2442,21 @@ functions = {
                         ],
                         [
                             'NIFGEN_VAL_SCRIPT_TRIGGER'
-                        ],
+                        ]
                     ],
                     'table_header': [
-                        'Defined Values',
-                    ],
+                        'Defined Values'
+                    ]
                 },
                 'enum': 'Trigger',
                 'name': 'trigger',
-                'type': 'ViInt32',
+                'type': 'ViInt32'
             },
             {
-                'documentation': {
-                    'description': 'Trigger ID specifies the Script Trigger to use for triggering.',
-                },
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Trigger ID specifies the Script Trigger to use for triggering.'
+                },
                 'name': 'triggerId',
                 'type': 'ViString'
             }

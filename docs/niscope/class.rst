@@ -2735,6 +2735,18 @@ bandpass_filter_enabled
 
         Enables the bandpass filter on the specificed channel.  The default value is FALSE.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].bandpass_filter_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.bandpass_filter_enabled`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -2744,7 +2756,7 @@ bandpass_filter_enabled
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -2926,6 +2938,18 @@ channel_enabled
         True  (1) - Acquire data on this channel
         False (0) - Don't acquire data on this channel
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].channel_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.channel_enabled`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -2935,7 +2959,7 @@ channel_enabled
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -2951,6 +2975,18 @@ channel_terminal_configuration
 
         Specifies the terminal configuration for the channel.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].channel_terminal_configuration`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.channel_terminal_configuration`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------------------------+
@@ -2960,7 +2996,7 @@ channel_terminal_configuration
             +-----------------------+-----------------------------+
             | Permissions           | read-write                  |
             +-----------------------+-----------------------------+
-            | Repeated Capabilities | None                        |
+            | Repeated Capabilities | channels                    |
             +-----------------------+-----------------------------+
 
         .. tip::
@@ -3051,17 +3087,29 @@ device_temperature
 
         Returns the temperature of the device in degrees Celsius from the onboard sensor.
 
+
+
+
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].device_temperature`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.device_temperature`
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | float     |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | float       |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3138,6 +3186,18 @@ enable_time_interleaved_sampling
         True  (1) - Use multiple interleaved ADCs on this channel
         False (0) - Use only this channel's ADC to acquire data for this channel
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].enable_time_interleaved_sampling`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.enable_time_interleaved_sampling`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3147,7 +3207,7 @@ enable_time_interleaved_sampling
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -3296,6 +3356,18 @@ equalization_filter_enabled
 
         Enables the onboard signal processing FIR block. This block is connected directly to the input signal.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].equalization_filter_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.equalization_filter_enabled`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3305,7 +3377,7 @@ equalization_filter_enabled
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -3321,6 +3393,18 @@ equalization_num_coefficients
 
         Returns the number of coefficients that the FIR filter can accept.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer.  However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].equalization_num_coefficients`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.equalization_num_coefficients`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -3330,7 +3414,7 @@ equalization_num_coefficients
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -3425,6 +3509,18 @@ flex_fir_antialias_filter_type
         The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass antialias filter.
         Use this property to select from several types of filters to achieve desired filtering characteristics.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].flex_fir_antialias_filter_type`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.flex_fir_antialias_filter_type`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+----------------------------------+
@@ -3434,7 +3530,7 @@ flex_fir_antialias_filter_type
             +-----------------------+----------------------------------+
             | Permissions           | read-write                       |
             +-----------------------+----------------------------------+
-            | Repeated Capabilities | None                             |
+            | Repeated Capabilities | channels                         |
             +-----------------------+----------------------------------+
 
         .. tip::
@@ -3559,6 +3655,18 @@ high_pass_filter_frequency
         **Related topics:**
         `Digital Filtering <digitizers.chm::/Digital_Filtering_Overview.html>`__
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].high_pass_filter_frequency`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.high_pass_filter_frequency`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3568,7 +3676,7 @@ high_pass_filter_frequency
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -3789,6 +3897,18 @@ input_impedance
 
         Specifies the input impedance for the channel in Ohms.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].input_impedance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.input_impedance`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3798,7 +3918,7 @@ input_impedance
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -3814,17 +3934,29 @@ instrument_firmware_revision
 
         A string that contains the firmware revision information for the instrument you are currently using.
 
+
+
+
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.instrument_firmware_revision`
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | str         |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3897,6 +4029,16 @@ interleaving_offset_correction_enabled
 
         .. note:: If disabled, warranted specifications are not guaranteed.
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].interleaving_offset_correction_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.interleaving_offset_correction_enabled`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3906,7 +4048,7 @@ interleaving_offset_correction_enabled
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -3950,19 +4092,26 @@ is_probe_comp_on
 
     .. py:attribute:: is_probe_comp_on
 
-        
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].is_probe_comp_on`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.is_probe_comp_on`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | bool      |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | bool        |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4041,6 +4190,16 @@ max_input_frequency
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_input_frequency`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.max_input_frequency`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4050,7 +4209,7 @@ max_input_frequency
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4117,6 +4276,18 @@ meas_array_gain
         Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to :py:data:`~niscope.ArrayMeasurement.ARRAY_GAIN` for more information.
         Default: 1.0
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_array_gain`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_array_gain`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4126,7 +4297,7 @@ meas_array_gain
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4143,6 +4314,18 @@ meas_array_offset
         Every element of an array is added to this scalar value during the Array Offset measurement. Refer to :py:data:`~niscope.ArrayMeasurement.ARRAY_OFFSET` for more information.
         Default: 0.0
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_array_offset`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_array_offset`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4152,7 +4335,7 @@ meas_array_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4169,6 +4352,18 @@ meas_chan_high_ref_level
         Stores the high reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as :py:attr:`niscope.Session.meas_high_ref` if you use this property to set various channels to different values.
         Default: 90%
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_chan_high_ref_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_chan_high_ref_level`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4178,7 +4373,7 @@ meas_chan_high_ref_level
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4195,6 +4390,18 @@ meas_chan_low_ref_level
         Stores the low reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as :py:attr:`niscope.Session.meas_low_ref` if you use this property to set various channels to different values.
         Default: 10%
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_chan_low_ref_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_chan_low_ref_level`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4204,7 +4411,7 @@ meas_chan_low_ref_level
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4221,6 +4428,18 @@ meas_chan_mid_ref_level
         Stores the mid reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as :py:attr:`niscope.Session.meas_mid_ref` if you use this property to set various channels to different values.
         Default: 50%
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_chan_mid_ref_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_chan_mid_ref_level`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4230,7 +4449,7 @@ meas_chan_mid_ref_level
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4247,6 +4466,18 @@ meas_filter_center_freq
         The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by :py:attr:`niscope.Session.meas_filter_width`, where the cutoff frequencies are the center ± width.
         Default: 1.0e6 Hz
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_center_freq`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_center_freq`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4256,7 +4487,7 @@ meas_filter_center_freq
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4273,6 +4504,18 @@ meas_filter_cutoff_freq
         Specifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter.
         Default: 1.0e6 Hz
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_cutoff_freq`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_cutoff_freq`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4282,7 +4525,7 @@ meas_filter_cutoff_freq
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4299,6 +4542,18 @@ meas_filter_order
         Specifies the order of an IIR filter. All positive integers are valid.
         Default: 2
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_order`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_order`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4308,7 +4563,7 @@ meas_filter_order
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4325,6 +4580,18 @@ meas_filter_ripple
         Specifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.
         Default: 0.1 dB
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_ripple`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_ripple`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4334,7 +4601,7 @@ meas_filter_ripple
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4351,6 +4618,18 @@ meas_filter_taps
         Defines the number of taps (coefficients) for an FIR filter.
         Default: 25
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_taps`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_taps`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4360,7 +4639,7 @@ meas_filter_taps
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4377,6 +4656,18 @@ meas_filter_transient_waveform_percent
         The percentage (0 - 100%) of the IIR filtered waveform to eliminate from the beginning of the waveform. This allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition.
         Default: 20.0%
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_transient_waveform_percent`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_transient_waveform_percent`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4386,7 +4677,7 @@ meas_filter_transient_waveform_percent
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4411,6 +4702,16 @@ meas_filter_type
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_type`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_type`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------------+
@@ -4420,7 +4721,7 @@ meas_filter_type
             +-----------------------+------------------+
             | Permissions           | read-write       |
             +-----------------------+------------------+
-            | Repeated Capabilities | None             |
+            | Repeated Capabilities | channels         |
             +-----------------------+------------------+
 
         .. tip::
@@ -4437,6 +4738,18 @@ meas_filter_width
         Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at :py:attr:`niscope.Session.meas_filter_center_freq` ± one-half width.
         Default: 1.0e3 Hz
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_filter_width`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_filter_width`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4446,7 +4759,7 @@ meas_filter_width
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4470,6 +4783,18 @@ meas_fir_filter_window
         The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
         Default: :py:data:`~niscope.FIRFilterWindow.NONE`
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_fir_filter_window`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_fir_filter_window`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------------------+
@@ -4479,7 +4804,7 @@ meas_fir_filter_window
             +-----------------------+-----------------------+
             | Permissions           | read-write            |
             +-----------------------+-----------------------+
-            | Repeated Capabilities | None                  |
+            | Repeated Capabilities | channels              |
             +-----------------------+-----------------------+
 
         .. tip::
@@ -4520,6 +4845,18 @@ meas_hysteresis_percent
         Digital hysteresis that is used in several of the scalar waveform measurements. This property specifies the percentage of the full-scale vertical range for the hysteresis window size.
         Default: 2%
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_hysteresis_percent`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_hysteresis_percent`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4529,7 +4866,7 @@ meas_hysteresis_percent
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4550,6 +4887,16 @@ meas_interpolation_sampling_factor
 
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_interpolation_sampling_factor`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_interpolation_sampling_factor`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4559,7 +4906,7 @@ meas_interpolation_sampling_factor
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4576,6 +4923,18 @@ meas_last_acq_histogram_size
         Specifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high.
         Default: 256
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_last_acq_histogram_size`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_last_acq_histogram_size`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4585,7 +4944,7 @@ meas_last_acq_histogram_size
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4650,6 +5009,18 @@ meas_other_channel
         Specifies the second channel for two-channel measurements, such as :py:data:`~niscope.ArrayMeasurement.ADD_CHANNELS`. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
         Default: '0'
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_other_channel`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_other_channel`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4659,7 +5030,7 @@ meas_other_channel
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4683,6 +5054,16 @@ meas_percentage_method
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_percentage_method`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_percentage_method`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------------------+
@@ -4692,7 +5073,7 @@ meas_percentage_method
             +-----------------------+------------------------+
             | Permissions           | read-write             |
             +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
+            | Repeated Capabilities | channels               |
             +-----------------------+------------------------+
 
         .. tip::
@@ -4709,6 +5090,18 @@ meas_polynomial_interpolation_order
         Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
         Default: 1
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_polynomial_interpolation_order`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_polynomial_interpolation_order`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4718,7 +5111,7 @@ meas_polynomial_interpolation_order
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4741,6 +5134,16 @@ meas_ref_level_units
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_ref_level_units`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_ref_level_units`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+---------------------+
@@ -4750,7 +5153,7 @@ meas_ref_level_units
             +-----------------------+---------------------+
             | Permissions           | read-write          |
             +-----------------------+---------------------+
-            | Repeated Capabilities | None                |
+            | Repeated Capabilities | channels            |
             +-----------------------+---------------------+
 
         .. tip::
@@ -4767,6 +5170,18 @@ meas_time_histogram_high_time
         Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
         Default: 5.0e-4 seconds
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_time_histogram_high_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_time_histogram_high_time`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-------------------------------------------------------------+
@@ -4776,7 +5191,7 @@ meas_time_histogram_high_time
             +-----------------------+-------------------------------------------------------------+
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
+            | Repeated Capabilities | channels                                                    |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -4793,6 +5208,18 @@ meas_time_histogram_high_volts
         Specifies the highest voltage value included in the multiple-acquisition time histogram. The units are always volts.
         Default: 10.0 V
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_time_histogram_high_volts`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_time_histogram_high_volts`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4802,7 +5229,7 @@ meas_time_histogram_high_volts
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4819,6 +5246,18 @@ meas_time_histogram_low_time
         Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
         Default: -5.0e-4 seconds
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_time_histogram_low_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_time_histogram_low_time`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-------------------------------------------------------------+
@@ -4828,7 +5267,7 @@ meas_time_histogram_low_time
             +-----------------------+-------------------------------------------------------------+
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
+            | Repeated Capabilities | channels                                                    |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -4845,6 +5284,18 @@ meas_time_histogram_low_volts
         Specifies the lowest voltage value included in the multiple acquisition time histogram. The units are always volts.
         Default: -10.0 V
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_time_histogram_low_volts`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_time_histogram_low_volts`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4854,7 +5305,7 @@ meas_time_histogram_low_volts
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4871,6 +5322,18 @@ meas_time_histogram_size
         Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with :py:meth:`niscope.Session.clear_waveform_measurement_stats`.
         Default: 256
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_time_histogram_size`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_time_histogram_size`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4880,7 +5343,7 @@ meas_time_histogram_size
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4897,6 +5360,18 @@ meas_voltage_histogram_high_volts
         Specifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.
         Default: 10.0 V
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_voltage_histogram_high_volts`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_voltage_histogram_high_volts`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4906,7 +5381,7 @@ meas_voltage_histogram_high_volts
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4923,6 +5398,18 @@ meas_voltage_histogram_low_volts
         Specifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.
         Default: -10.0 V
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_voltage_histogram_low_volts`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_voltage_histogram_low_volts`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4932,7 +5419,7 @@ meas_voltage_histogram_low_volts
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4949,6 +5436,18 @@ meas_voltage_histogram_size
         Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method :py:meth:`niscope.Session.clear_waveform_measurement_stats`.
         Default: 256
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].meas_voltage_histogram_size`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.meas_voltage_histogram_size`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4958,7 +5457,7 @@ meas_voltage_histogram_size
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -5005,17 +5504,29 @@ onboard_memory_size
 
         Returns the total combined amount of onboard memory for all channels in bytes.
 
+
+
+
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].onboard_memory_size`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.onboard_memory_size`
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | int         |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5055,17 +5566,29 @@ pll_lock_status
 
         If TRUE, the PLL has remained locked to the external reference clock since it was last checked. If FALSE,  the PLL has become unlocked from the external reference clock since it was last checked.
 
+
+
+
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].pll_lock_status`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.pll_lock_status`
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | bool      |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | bool        |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5131,6 +5654,18 @@ probe_attenuation
         Valid Values:
         Any positive real number. Typical values are 1, 10, and 100.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].probe_attenuation`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.probe_attenuation`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -5140,7 +5675,7 @@ probe_attenuation
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -5879,17 +6414,29 @@ serial_number
 
         Returns the serial number of the device.
 
+
+
+
+        .. tip:: This property can be set/get on specific instruments within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+            Example: :py:attr:`my_session.instruments[ ... ].serial_number`
+
+            To set/get on all instruments, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.serial_number`
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | str         |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | instruments |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5911,6 +6458,16 @@ accessory_gain
 
         .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].accessory_gain`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.accessory_gain`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -5920,7 +6477,7 @@ accessory_gain
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -5942,6 +6499,16 @@ accessory_offset
 
         .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].accessory_offset`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.accessory_offset`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -5951,7 +6518,7 @@ accessory_offset
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -6649,6 +7216,18 @@ vertical_coupling
 
         Specifies how the digitizer couples the input signal for the channel.  When input coupling changes, the input stage takes a finite amount of time to settle.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].vertical_coupling`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.vertical_coupling`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------------------+
@@ -6658,7 +7237,7 @@ vertical_coupling
             +-----------------------+------------------------+
             | Permissions           | read-write             |
             +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
+            | Repeated Capabilities | channels               |
             +-----------------------+------------------------+
 
         .. tip::
@@ -6678,6 +7257,16 @@ vertical_offset
 
         .. note:: This property is not supported by all digitizers.Refer to the NI High-Speed Digitizers Help for a list of vertical offsets supported for each device.
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].vertical_offset`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.vertical_offset`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -6687,7 +7276,7 @@ vertical_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -6704,6 +7293,18 @@ vertical_range
         Specifies the absolute value of the input range for a channel in volts.  For example, to acquire a sine wave that spans between -5 and +5 V, set this property to 10.0 V.
         Refer to the NI High-Speed Digitizers Help for a list of supported vertical ranges for each device.  If the specified range is not supported by a device, the value is coerced up to the next valid range.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niscope.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].vertical_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niscope.Session`.
+
+            Example: :py:attr:`my_session.vertical_range`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -6713,7 +7314,7 @@ vertical_range
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::

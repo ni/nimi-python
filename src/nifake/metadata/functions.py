@@ -21,7 +21,7 @@ functions = {
     'AcceptListOfDurationsInSeconds': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Accepts list of floats or hightime.timedelta instances representing time delays.'
+            'description': 'Accepts list of hightime.timedelta or datetime.timedelta or float instances representing time delays.'
         },
         'parameters': [
             {

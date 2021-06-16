@@ -8,7 +8,7 @@ The `nitclk` module provides synchronization facilites to allow multiple instrum
 respond to triggers, to align Sample Clocks on multiple instruments, and/or to simultaneously start multiple
 instruments.
 
-It consists of a set of functions that act on a list of :py:class:`SessionReference` objects or nimi-python `Session`
+It consists of a set of functions that act on a list of :py:class:`SessionReference` objects or instrument `Session`
 objects for drivers that support NI-TClk. :py:class:`SessionReference` also has a set of properties for configuration.
 
 .. code:: python
@@ -37,7 +37,6 @@ configure_for_homogeneous_triggers
         routing, along with the following NI-TClk properties:
         :py:attr:`nitclk.SessionReference.start_trigger_master_session`
         :py:attr:`nitclk.SessionReference.ref_trigger_master_session`
-        :py:attr:`nitclk.SessionReference.script_trigger_master_session`
         :py:attr:`nitclk.SessionReference.pause_trigger_master_session`
         :py:func:`nitclk.configure_for_homogeneous_triggers` affects the following clocks and
         triggers: - Reference clocks - Start triggers - Reference triggers -
@@ -108,25 +107,7 @@ configure_for_homogeneous_triggers
         timebase rates, and/or the sample counts are different in acquisition
         sessions sharing the reference trigger, you should also set the holdoff
         properties for the reference trigger master using the instrument driver.
-        Script Triggers :py:func:`nitclk.configure_for_homogeneous_triggers` configures
-        sessions that support script triggers to share them, if the script
-        triggers are None (no trigger configured) for all except one session.
-        The script triggers are shared in the following ways: - Implicitly
-        exporting the script trigger from the session whose script trigger is
-        not None - Configuring the other sessions that support the script
-        trigger for digital-edge script triggers with sources corresponding to
-        the exported script trigger - Setting
-        :py:attr:`nitclk.SessionReference.script_trigger_master_session` to the session that is
-        exporting the trigger for all sessions that support script triggers If
-        the script triggers are configured for all sessions that support script
-        triggers, :py:func:`nitclk.configure_for_homogeneous_triggers` does not affect script
-        triggers. Script triggers are considered to be configured for all
-        sessions if either one or the other of the following conditions are
-        true: - No session has a script trigger that is None - One session has a
-        script trigger that is None and all other sessions have script triggers
-        other than None. The one session with the None trigger must have
-        :py:attr:`nitclk.SessionReference.script_trigger_master_session` set to itself, indicating
-        that the session itself is the script trigger master Pause Triggers
+        Pause Triggers
         :py:func:`nitclk.configure_for_homogeneous_triggers` configures generation sessions
         that support pause triggers to share them, if the pause triggers are
         None (no trigger configured) for all except one session. The pause
@@ -160,7 +141,7 @@ configure_for_homogeneous_triggers
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument-specific sessions or nitclk.SessionReference instances
 
 finish_sync_pulse_sender_synchronize
 ------------------------------------
@@ -183,7 +164,7 @@ finish_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: list of (nimi-python Session class or nitclk.SessionReference)
+        :type sessions: list of instrument-specific sessions or nitclk.SessionReference instances
         :param min_time:
 
 
@@ -224,7 +205,7 @@ initiate
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument-specific sessions or nitclk.SessionReference instances
 
 is_done
 -------
@@ -248,7 +229,7 @@ is_done
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument-specific sessions or nitclk.SessionReference instances
 
         :rtype: bool
         :return:
@@ -283,7 +264,7 @@ setup_for_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument-specific sessions or nitclk.SessionReference instances
         :param min_time:
 
 
@@ -325,7 +306,7 @@ synchronize
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument-specific sessions or nitclk.SessionReference instances
         :param min_tclk_period:
 
 
@@ -362,7 +343,7 @@ synchronize_to_sync_pulse_sender
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument-specific sessions or nitclk.SessionReference instances
         :param min_time:
 
 
@@ -406,7 +387,7 @@ wait_until_done
             
 
 
-        :type sessions: list of (Driver Session or nitclk.SessionReference)
+        :type sessions: list of instrument-specific sessions or nitclk.SessionReference instances
         :param timeout:
 
 
@@ -521,13 +502,13 @@ pause_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
+            +----------------+-----------------------------------------------------------------------+
+            | Characteristic | Value                                                                 |
+            +================+=======================================================================+
+            | Datatype       | instrument-specific session or an instance of nitclk.SessionReference |
+            +----------------+-----------------------------------------------------------------------+
+            | Permissions    | read-write                                                            |
+            +----------------+-----------------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -547,13 +528,13 @@ ref_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
+            +----------------+-----------------------------------------------------------------------+
+            | Characteristic | Value                                                                 |
+            +================+=======================================================================+
+            | Datatype       | instrument-specific session or an instance of nitclk.SessionReference |
+            +----------------+-----------------------------------------------------------------------+
+            | Permissions    | read-write                                                            |
+            +----------------+-----------------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -609,13 +590,13 @@ sequencer_flag_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
+            +----------------+-----------------------------------------------------------------------+
+            | Characteristic | Value                                                                 |
+            +================+=======================================================================+
+            | Datatype       | instrument-specific session or an instance of nitclk.SessionReference |
+            +----------------+-----------------------------------------------------------------------+
+            | Permissions    | read-write                                                            |
+            +----------------+-----------------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -635,13 +616,13 @@ start_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------------------------+
-            | Characteristic | Value                                     |
-            +================+===========================================+
-            | Datatype       | Driver Session or nitclk.SessionReference |
-            +----------------+-------------------------------------------+
-            | Permissions    | read-write                                |
-            +----------------+-------------------------------------------+
+            +----------------+-----------------------------------------------------------------------+
+            | Characteristic | Value                                                                 |
+            +================+=======================================================================+
+            | Datatype       | instrument-specific session or an instance of nitclk.SessionReference |
+            +----------------+-----------------------------------------------------------------------+
+            | Permissions    | read-write                                                            |
+            +----------------+-----------------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

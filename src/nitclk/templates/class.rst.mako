@@ -32,7 +32,7 @@ The `nitclk` module provides synchronization facilites to allow multiple instrum
 respond to triggers, to align Sample Clocks on multiple instruments, and/or to simultaneously start multiple
 instruments.
 
-It consists of a set of functions that act on a list of :py:class:`SessionReference` objects or nimi-python `Session`
+It consists of a set of functions that act on a list of :py:class:`SessionReference` objects or instrument `Session`
 objects for drivers that support NI-TClk. :py:class:`SessionReference` also has a set of properties for configuration.
 
 .. code:: python

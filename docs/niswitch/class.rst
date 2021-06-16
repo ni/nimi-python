@@ -1229,6 +1229,18 @@ analog_bus_sharing_enable
         Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  property to True for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  False, which disables sharing of the analog bus.
         Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI Switches Help for more information about sharing the analog bus.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].analog_bus_sharing_enable`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.analog_bus_sharing_enable`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -1238,7 +1250,7 @@ analog_bus_sharing_enable
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -1255,6 +1267,18 @@ bandwidth
         This channel-based property returns the bandwidth for the channel.
         The units are hertz.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].bandwidth`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.bandwidth`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1264,7 +1288,7 @@ bandwidth
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -1306,6 +1330,18 @@ characteristic_impedance
         This channel-based property returns the characteristic impedance for the  channel.
         The units are ohms.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].characteristic_impedance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.characteristic_impedance`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1315,7 +1351,7 @@ characteristic_impedance
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -1543,6 +1579,18 @@ is_configuration_channel
         Set this property to True to mark the channel as a configuration  channel.  Set this property to False to mark the channel as available  for external connections.
         After you identify a channel as a configuration channel, you cannot  use that channel for external connections.  The :py:meth:`niswitch.Session.connect` method  returns the NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL error when you attempt  to establish a connection between a configuration channel and any other  channel.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].is_configuration_channel`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.is_configuration_channel`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -1552,7 +1600,7 @@ is_configuration_channel
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -1618,6 +1666,18 @@ is_source_channel
 
         This channel-based property specifies whether you want to identify the  channel as a source channel.  Typically, you set this property to True  when you attach the channel to a power supply, a method generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The :py:meth:`niswitch.Session.connect` method  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].is_source_channel`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.is_source_channel`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -1627,7 +1687,7 @@ is_source_channel
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -1699,6 +1759,18 @@ max_ac_voltage
         This channel-based property returns the maximum AC voltage the channel  can switch.
         The units are volts RMS.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_ac_voltage`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_ac_voltage`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1708,7 +1780,7 @@ max_ac_voltage
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -1725,6 +1797,18 @@ max_carry_ac_current
         This channel-based property returns the maximum AC current the channel  can carry.
         The units are amperes RMS.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_carry_ac_current`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_carry_ac_current`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1734,7 +1818,7 @@ max_carry_ac_current
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -1751,6 +1835,18 @@ max_carry_ac_power
         This channel-based property returns the maximum AC power the channel can  carry.
         The units are volt-amperes.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_carry_ac_power`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_carry_ac_power`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1760,7 +1856,7 @@ max_carry_ac_power
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -1777,6 +1873,18 @@ max_carry_dc_current
         This channel-based property returns the maximum DC current the channel  can carry.
         The units are amperes.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_carry_dc_current`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_carry_dc_current`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1786,7 +1894,7 @@ max_carry_dc_current
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -1803,6 +1911,18 @@ max_carry_dc_power
         This channel-based property returns the maximum DC power the channel can  carry.
         The units are watts.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_carry_dc_power`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_carry_dc_power`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1812,7 +1932,7 @@ max_carry_dc_power
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -1829,6 +1949,18 @@ max_dc_voltage
         This channel-based property returns the maximum DC voltage the channel  can switch.
         The units are volts.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_dc_voltage`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_dc_voltage`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1838,7 +1970,7 @@ max_dc_voltage
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -1855,6 +1987,18 @@ max_switching_ac_current
         This channel-based property returns the maximum AC current the channel  can switch.
         The units are amperes RMS.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_switching_ac_current`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_switching_ac_current`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1864,7 +2008,7 @@ max_switching_ac_current
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -1881,6 +2025,18 @@ max_switching_ac_power
         This channel-based property returns the maximum AC power the channel can  switch.
         The units are volt-amperes.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_switching_ac_power`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_switching_ac_power`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1890,7 +2046,7 @@ max_switching_ac_power
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -1907,6 +2063,18 @@ max_switching_dc_current
         This channel-based property returns the maximum DC current the channel  can switch.
         The units are amperes.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_switching_dc_current`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_switching_dc_current`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1916,7 +2084,7 @@ max_switching_dc_current
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -1933,6 +2101,18 @@ max_switching_dc_power
         This channel-based property returns the maximum DC power the channel can  switch.
         The units are watts.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].max_switching_dc_power`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.max_switching_dc_power`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -1942,7 +2122,7 @@ max_switching_dc_power
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::
@@ -2237,6 +2417,16 @@ settling_time
 
         .. note:: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].settling_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.settling_time`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-------------------------------------------------------------+
@@ -2246,7 +2436,7 @@ settling_time
             +-----------------------+-------------------------------------------------------------+
             | Permissions           | read-write                                                  |
             +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
+            | Repeated Capabilities | channels                                                    |
             +-----------------------+-------------------------------------------------------------+
 
         .. tip::
@@ -2468,6 +2658,18 @@ wire_mode
         This property returns the wire mode of the switch device.
         This property affects the values of the :py:attr:`niswitch.Session.num_of_rows` and  :py:attr:`niswitch.Session.num_of_columns` properties.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`niswitch.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].wire_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`niswitch.Session`.
+
+            Example: :py:attr:`my_session.wire_mode`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -2477,7 +2679,7 @@ wire_mode
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | channels  |
             +-----------------------+-----------+
 
         .. tip::

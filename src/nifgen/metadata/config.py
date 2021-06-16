@@ -53,5 +53,5 @@ config = {
     ],
     'session_class_description': 'An NI-FGEN session to a National Instruments Signal Generator.',
     'session_handle_parameter_name': 'vi',
-    'uses_nitclk': True,
+    'uses_nitclk': True
 }

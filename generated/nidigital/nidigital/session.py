@@ -131,16 +131,46 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the current that the DUT sources to the active load while outputting a voltage above VCOM.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].active_load_ioh`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.active_load_ioh`
     '''
     active_load_iol = _attributes.AttributeViReal64(1150012)
     '''Type: float
 
     Specifies the current that the DUT sinks from the active load while outputting a voltage below VCOM.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].active_load_iol`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.active_load_iol`
     '''
     active_load_vcom = _attributes.AttributeViReal64(1150014)
     '''Type: float
 
     Specifies the voltage level at which the active load circuit switches between sourcing current and sinking current.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].active_load_vcom`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.active_load_vcom`
     '''
     cache = _attributes.AttributeViBoolean(1050004)
     '''Type: bool
@@ -156,16 +186,46 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the frequency for the clock generator.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].clock_generator_frequency`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.clock_generator_frequency`
     '''
     clock_generator_is_running = _attributes.AttributeViBoolean(1150074)
     '''Type: bool
 
     Indicates whether the clock generator is running.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].clock_generator_is_running`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.clock_generator_is_running`
     '''
     conditional_jump_trigger_terminal_name = _attributes.AttributeViString(1150040)
     '''Type: str
 
     Specifies the terminal name from which the exported conditional jump trigger signal may be routed to other instruments through the PXI trigger bus. You can use this signal to trigger other instruments when the conditional jump trigger instance asserts on the digital pattern instrument.
+
+    Tip:
+    This property can be set/get on specific conditional_jump_triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container conditional_jump_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].conditional_jump_trigger_terminal_name`
+
+    To set/get on all conditional_jump_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.conditional_jump_trigger_terminal_name`
     '''
     conditional_jump_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150033)
     '''Type: enums.TriggerType
@@ -181,6 +241,16 @@ class _SessionBase(object):
     +--------------------------+------------------------------------------------------------------+
     | TriggerType.SOFTWARE     | Configures the conditional jump trigger for software triggering. |
     +--------------------------+------------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific conditional_jump_triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container conditional_jump_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].conditional_jump_trigger_type`
+
+    To set/get on all conditional_jump_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.conditional_jump_trigger_type`
     '''
     cycle_number_history_ram_trigger_cycle_number = _attributes.AttributeViInt64(1150044)
     '''Type: int
@@ -199,6 +269,16 @@ class _SessionBase(object):
     +---------------------+---------------------------------------------------------------+
     | DigitalEdge.FALLING | Specifies the signal transition from high level to low level. |
     +---------------------+---------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific conditional_jump_triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container conditional_jump_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].digital_edge_conditional_jump_trigger_edge`
+
+    To set/get on all conditional_jump_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.digital_edge_conditional_jump_trigger_edge`
     '''
     digital_edge_conditional_jump_trigger_source = _attributes.AttributeViString(1150034)
     '''Type: str
@@ -210,6 +290,16 @@ class _SessionBase(object):
     +==============================================+
     | String identifier to any valid terminal name |
     +----------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific conditional_jump_triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container conditional_jump_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].digital_edge_conditional_jump_trigger_source`
+
+    To set/get on all conditional_jump_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.digital_edge_conditional_jump_trigger_source`
     '''
     digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150031)
     '''Type: enums.DigitalEdge
@@ -280,6 +370,16 @@ class _SessionBase(object):
     +---------------+-------------------------+
     | PXI_Trig7     | PXI trigger line 7      |
     +---------------+-------------------------+
+
+    Tip:
+    This property can be set/get on specific conditional_jump_triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container conditional_jump_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.conditional_jump_triggers[ ... ].exported_conditional_jump_trigger_output_terminal`
+
+    To set/get on all conditional_jump_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.exported_conditional_jump_trigger_output_terminal`
     '''
     exported_pattern_opcode_event_output_terminal = _attributes.AttributeViString(1150041)
     '''Type: str
@@ -305,6 +405,16 @@ class _SessionBase(object):
     +-----------------+--------------------+
     | PXI_Trig7       | PXI trigger line 7 |
     +-----------------+--------------------+
+
+    Tip:
+    This property can be set/get on specific pattern_opcode_events within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container pattern_opcode_events to specify a subset.
+
+    Example: :py:attr:`my_session.pattern_opcode_events[ ... ].exported_pattern_opcode_event_output_terminal`
+
+    To set/get on all pattern_opcode_events, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.exported_pattern_opcode_event_output_terminal`
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150032)
     '''Type: str
@@ -355,6 +465,16 @@ class _SessionBase(object):
     '''Type: float in seconds or datetime.timedelta
 
     Specifies the measurement time for the frequency counter.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].frequency_counter_measurement_time`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.frequency_counter_measurement_time`
     '''
     group_capabilities = _attributes.AttributeViString(1050401)
     '''Type: str
@@ -432,6 +552,16 @@ class _SessionBase(object):
     '''Type: str
 
     Returns a string that contains the firmware revision information for the digital pattern instrument.
+
+    Tip:
+    This property can be set/get on specific instruments within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+    Example: :py:attr:`my_session.instruments[ ... ].instrument_firmware_revision`
+
+    To set/get on all instruments, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.instrument_firmware_revision`
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
@@ -467,6 +597,16 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether the pattern comparisons are masked or not. When set to True for a specified pin, failures on that pin will be masked.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].mask_compare`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.mask_compare`
     '''
     pattern_label_history_ram_trigger_cycle_offset = _attributes.AttributeViInt64(1150045)
     '''Type: int
@@ -487,16 +627,46 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the terminal name for the output trigger signal of the specified instance of a Pattern Opcode Event. You can use this terminal name as an input signal source for another trigger.
+
+    Tip:
+    This property can be set/get on specific pattern_opcode_events within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container pattern_opcode_events to specify a subset.
+
+    Example: :py:attr:`my_session.pattern_opcode_events[ ... ].pattern_opcode_event_terminal_name`
+
+    To set/get on all pattern_opcode_events, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.pattern_opcode_event_terminal_name`
     '''
     ppmu_allow_extended_voltage_range = _attributes.AttributeViBoolean(1150076)
     '''Type: bool
 
     Enables the instrument to operate in additional voltage ranges where instrument specifications may differ from standard ranges. When set to True, this property enables extended voltage range operation. Review specification deviations for application suitability before using this property. NI recommends setting this property to False when not using the extended voltage range to avoid unintentional use of this range. The extended voltage range is supported only for PPMU, with the output method set to DC Voltage. A voltage glitch may occur when you change the PPMU output voltage from a standard range to the extended voltage range, or vice-versa, while the PPMU is sourcing. NI recommends temporarily changing the selected_function property to Off before sourcing a voltage level that requires a range change.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_allow_extended_voltage_range`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_allow_extended_voltage_range`
     '''
     ppmu_aperture_time = _attributes.AttributeViReal64(1150037)
     '''Type: float
 
     Specifies the measurement aperture time for the PPMU. The ppmu_aperture_time_units property sets the units of the PPMU aperture time.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_aperture_time`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_aperture_time`
     '''
     ppmu_aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUApertureTimeUnits, 1150038)
     '''Type: enums.PPMUApertureTimeUnits
@@ -508,6 +678,16 @@ class _SessionBase(object):
     +===============================+=========================================+
     | PPMUApertureTimeUnits.SECONDS | Specifies the aperture time in seconds. |
     +-------------------------------+-----------------------------------------+
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_aperture_time_units`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_aperture_time_units`
     '''
     ppmu_current_level = _attributes.AttributeViReal64(1150019)
     '''Type: float
@@ -516,16 +696,46 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_level`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_level`
     '''
     ppmu_current_level_range = _attributes.AttributeViReal64(1150020)
     '''Type: float
 
     Specifies the range of valid values for the current level, in amps, that the PPMU forces to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_level_range`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_level_range`
     '''
     ppmu_current_limit = _attributes.AttributeViReal64(1150054)
     '''Type: float
 
     Specifies the current limit, in amps, that the output cannot exceed while the PPMU forces voltage to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage. The PXIe-6570/6571 does not support the ppmu_current_limit property and only allows configuration of the ppmu_current_limit_range property.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_limit`
     '''
     ppmu_current_limit_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUCurrentLimitBehavior, 1150064)
     '''Type: enums.PPMUCurrentLimitBehavior
@@ -537,16 +747,46 @@ class _SessionBase(object):
     +===================================+=========================================================================================================================================+
     | PPMUCurrentLimitBehavior.REGULATE | Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached. |
     +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_behavior`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_limit_behavior`
     '''
     ppmu_current_limit_range = _attributes.AttributeViReal64(1150017)
     '''Type: float
 
     Specifies the valid range, in amps, to which the current limit can be set while the PPMU forces voltage to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_range`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_limit_range`
     '''
     ppmu_current_limit_supported = _attributes.AttributeViBoolean(1150055)
     '''Type: bool
 
     Returns whether the device supports configuration of a current limit when you set the ppmu_output_function property to DC Voltage.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_current_limit_supported`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_current_limit_supported`
     '''
     ppmu_output_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUOutputFunction, 1150015)
     '''Type: enums.PPMUOutputFunction
@@ -560,21 +800,61 @@ class _SessionBase(object):
     +----------------------------+--------------------------------------------+
     | PPMUOutputFunction.CURRENT | Specifies the output method to DC Current. |
     +----------------------------+--------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_output_function`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_output_function`
     '''
     ppmu_voltage_level = _attributes.AttributeViReal64(1150016)
     '''Type: float
 
     Specifies the voltage level, in volts, that the PPMU forces to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Voltage.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_level`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_voltage_level`
     '''
     ppmu_voltage_limit_high = _attributes.AttributeViReal64(1150022)
     '''Type: float
 
     Specifies the maximum voltage limit, or high clamp voltage (V :sub:`CH` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_limit_high`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_voltage_limit_high`
     '''
     ppmu_voltage_limit_low = _attributes.AttributeViReal64(1150021)
     '''Type: float
 
     Specifies the minimum voltage limit, or low clamp voltage (V :sub:`CL` ), in volts, at the pin when the PPMU forces current to the DUT. This property is applicable only when you set the ppmu_output_function property to DC Current.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].ppmu_voltage_limit_low`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.ppmu_voltage_limit_low`
     '''
     query_instrument_status = _attributes.AttributeViBoolean(1050003)
     '''Type: bool
@@ -611,6 +891,16 @@ class _SessionBase(object):
     +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
     Note: You can make PPMU voltage measurements using the ppmu_measure method from within any selected_function.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].selected_function`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.selected_function`
     '''
     sequencer_flag_terminal_name = _attributes.AttributeViString(1150059)
     '''Type: str
@@ -621,6 +911,16 @@ class _SessionBase(object):
     '''Type: str
 
     Returns the serial number of the device.
+
+    Tip:
+    This property can be set/get on specific instruments within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+    Example: :py:attr:`my_session.instruments[ ... ].serial_number`
+
+    To set/get on all instruments, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.serial_number`
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -699,6 +999,16 @@ class _SessionBase(object):
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the TDR Offset.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].tdr_offset`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tdr_offset`
     '''
     termination_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminationMode, 1150006)
     '''Type: enums.TerminationMode
@@ -714,11 +1024,31 @@ class _SessionBase(object):
     +-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | TerminationMode.HIGH_Z      | Specifies that, for non-drive pin states (L, H, X, V, M, E), the pin driver is put in a high-impedance state and the active load is disabled.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
     +-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].termination_mode`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.termination_mode`
     '''
     timing_absolute_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150072)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies a timing delay, measured in seconds, and applies the delay to the digital pattern instrument in addition to TDR and calibration adjustments. If the timing_absolute_delay_enabled property is set to True, this value is the intermodule skew measured by NI-TClk. You can modify this value to override the timing delay and align the I/O timing of this instrument with another instrument that shares the same reference clock. If the timing_absolute_delay_enabled property is False, this property will return 0.0. Changing the timing_absolute_delay_enabled property from False to True will set the timing_absolute_delay value back to your previously set value.
+
+    Tip:
+    This property can be set/get on specific instruments within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container instruments to specify a subset.
+
+    Example: :py:attr:`my_session.instruments[ ... ].timing_absolute_delay`
+
+    To set/get on all instruments, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.timing_absolute_delay`
     '''
     timing_absolute_delay_enabled = _attributes.AttributeViBoolean(1150071)
     '''Type: bool
@@ -729,26 +1059,76 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic high (1).
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].vih`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.vih`
     '''
     vil = _attributes.AttributeViReal64(1150007)
     '''Type: float
 
     Specifies the voltage that the digital pattern instrument will apply to the input of the DUT when the test instrument drives a logic low (0).
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].vil`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.vil`
     '''
     voh = _attributes.AttributeViReal64(1150010)
     '''Type: float
 
     Specifies the output voltage from the DUT above which the comparator on the digital pattern test instrument interprets a logic high (H).
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].voh`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.voh`
     '''
     vol = _attributes.AttributeViReal64(1150009)
     '''Type: float
 
     Specifies the output voltage from the DUT below which the comparator on the digital pattern test instrument interprets a logic low (L).
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].vol`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.vol`
     '''
     vterm = _attributes.AttributeViReal64(1150011)
     '''Type: float
 
     Specifies the termination voltage the digital pattern instrument applies during non-drive cycles when the termination mode is set to V :sub:`term`. The instrument applies the termination voltage through a 50 Ω parallel termination resistance.
+
+    Tip:
+    This property can be set/get on specific channels or pins within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container channels or pins to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].vterm`
+
+    To set/get on all channels or pins, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.vterm`
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
