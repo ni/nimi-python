@@ -25,7 +25,7 @@ following installed:
 
 * [Python](https://www.python.org/downloads/)
     - If you're on Windows (Not Windows Subsystem for Linux)
-        - Install an x64 Python 3.x - anything between 3.4 to 3.8 should work
+        - Install at least one Python 3.x x64 - anything between 3.4 and 3.8 should work
         - Optional - 32 bit versions
         - Ensure pip support is installed for all versions
         - Install paths can either be in the appropriate Program Files for the bitness, or c:\pythonXY for 64 bit and c:\pythonXY-32 for 32 bit
@@ -70,8 +70,8 @@ In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Test
 1. On a terminal, CD to the **[nimi-python](https://github.com/ni/nimi-python)** root
    directory. Then type:
 
-         python3 -m tox -e build_test,codegen,installers,flake8,docs,pkg
-         tox
+         * python3 -m tox -e build_test,codegen,installers,flake8,docs,pkg
+         * tox
 
    The first line will
 
