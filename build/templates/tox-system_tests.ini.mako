@@ -98,4 +98,13 @@ passenv =
 
 [pytest]
 junit_family = xunit1
-
+% if module_name == 'nidcpower':
+markers = # Defines custom markers used by nidcpower system tests. Prevents PytestUnknownMarkWarning.
+    include_legacy_session: Include a legacy session in nidcpower system tests.
+    legacy_session_only: Exclude an independent channels session in nidcpower system tests.
+    resource_name: Overrides the default resource_name argument in the nidcpower session fixture.
+    channels: Overrides the default channels argument in the nidcpower session fixture.
+    reset: Overrides the default reset argument in the nidcpower session fixture.
+    options: Overrides the default options argument in the nidcpower session fixture.
+    independent_channels: Overrides the default independent_channels argument in the nidcpower session fixture.
+% endif
