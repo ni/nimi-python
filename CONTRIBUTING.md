@@ -24,24 +24,21 @@ In order to build **[nimi-python](https://github.com/ni/nimi-python)**, you must
 following installed:
 
 * [Python](https://www.python.org/downloads/)
-    - If you're on Windows (Not Windows Subsystem for Linux)
-        - Install at least one Python 3.x x64 - anything between 3.4 and 3.8 should work
-        - Optional - 32 bit versions
-        - Ensure pip support is installed for all versions
-        - Install paths can either be in the appropriate Program Files for the bitness, or c:\pythonXY for 64 bit and c:\pythonXY-32 for 32 bit
-    - Add ``python Install Path`` and ``python Install Path``\Scripts to Windows path
-    - Copy ``python Install Path``\python.exe to ``python Install Path``\python3.exe
+    - If you're on Windows 10 (not [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about))
+        - Install at least one 64-bit version of Python. The current supported versions are 3.6, 3.7 and 3.8
+        - Optionally, install also a 32-bit version of Python
+        - Ensure pip support is installed for each version
+    - Add ``Python install path`` and ``python install path``\Scripts to Windows path
+    - Copy ``Python install path``\python.exe to ``python install path``\python3.exe
 
 * [GNU Make](https://www.gnu.org/software/make/)
-    - If you're on Windows 10 (using Windows Subsystem for Linux)
+    - If you're using Windows Subsystem for Linux
         - Install and enable [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
-        - Install make
+        - Install make: ``sudo apt-get install make``
 
-                sudo apt-get install make
-
-    - If you're on Windows 7, 8 or 10 (not using WSL):
+    - If you're on Windows 10 (not using WSL):
         - [Install mingw (msys-base)](https://osdn.net/projects/mingw/).
-        - Add ``mingw Install Path``\msys\1.0\bin to Windows path.
+        - Add ``mingw install path``\msys\1.0\bin to Windows path.
 
     - If you're on macOS
         - Install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
@@ -54,11 +51,11 @@ following installed:
 
 * Additional Python Modules (install using [PyPI](https://pypi.python.org/pypi))
 
-        sudo pip install pytest tox tox-globinterpreter --upgrade
+        sudo pip install pytest tox --upgrade
 
-In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Tests:
+In order to run the **[nimi-python](https://github.com/ni/nimi-python)** system tests:
 
-* Install corresponding driver runtimes.
+* Install the corresponding driver runtimes.
     * Download the latest installers for NI-DMM, NI-SCOPE, NI-DCPower, NI-SWITCH, NI-FGEN, NI Switch Executive
     from [ni.com](http://www.ni.com/downloads/ni-drivers/)
     * NI-ModInst is included as part of these runtimes.
@@ -67,27 +64,17 @@ In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Test
 ### How to build
 
 1. Fork the repository on GitHub and clone it to your local system.
-1. On a terminal, CD to the **[nimi-python](https://github.com/ni/nimi-python)** root
-   directory. Then type:
+1. On a terminal, navigate to the **[nimi-python](https://github.com/ni/nimi-python)** root
+   directory. Then run the ``tox`` command. It will do the following, for each driver:
 
-    1. python3 -m tox -e build_test,codegen,installers,flake8,docs,pkg
-    1. tox
-
-   The first line will
-
-   * For each driver
       * Generate Python bindings
       * Generate [RST documentation](http://www.sphinx-doc.org/)
       * Create installer packages
-   * Run [flake8](http://flake8.pycqa.org/)
-   * Generate [HTML documentation](http://www.sphinx-doc.org/)
+      * Run [flake8](http://flake8.pycqa.org/)
+      * Generate [HTML documentation](http://www.sphinx-doc.org/)
+      * Iterate over all python versions and run the NI-FAKE unit tests for each installed version of Python
 
-   The second line will iterate over all python versions and run the NI-FAKE unit tests
-   for each version that is installed and registered using `tox --scan`
-
-1. To clean everything and start fresh, type:
-
-         python3 -m tox -e clean
+1. To clean everything and start fresh, type: ``tox -e clean``
 
 ### Running System Tests
 
@@ -102,17 +89,13 @@ This will work on Unix-based systems including Windows Subsystem for Linux.
 
     find generated | grep \.whl | xargs sudo python3 -m pip install -U
 
-Then run the system tests for the desired driver, for example:
+Once the Python bindings are installed, you can run the system tests for the desired driver. For example:
 
     pytest src/nidmm/system_tests
 
-You can also use tox to run the system tests using all installed 64 bit Python versions
+You can also use ``tox`` to run the system tests for the desired driver, *using all installed Python versions*. For example:
 
-    tox -e py27-system_tests,py34-system_tests,py35-system_tests,py36-system_tests
-
-You can also use tox to run the system tests using all installed 32 bit Python versions
-
-    tox --32 -e py27-system_tests,py34-system_tests,py35-system_tests,py36-system_tests
+    tox -c generated\nidmm\tox-system-tests.ini
 
 
 Contributing
