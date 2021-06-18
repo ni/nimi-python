@@ -1962,7 +1962,7 @@ functions = {
     },
     'GetChannelNameFromString': {
         'documentation': {
-            'description': 'Returns a comma-separated list of channel names from a string index list.\n'
+            'description': 'Returns a list of channel names for given channel indices.\n'
         },
         'parameters': [
             {
@@ -1994,7 +1994,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned channel name(s) at the specified index.\n'
+                    'description': 'The channel name(s) at the specified indices.\n'
                 },
                 'name': 'names',
                 'python_api_converter_name': 'convert_comma_separated_string_to_list',
