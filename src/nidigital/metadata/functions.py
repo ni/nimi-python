@@ -1962,7 +1962,7 @@ functions = {
     },
     'GetChannelNameFromString': {
         'documentation': {
-            'description': 'Returns a comma-separated list of channel names from a string index list.\n'
+            'description': 'Returns the comma-separated list of channel names from a string index list.\n'
         },
         'parameters': [
             {
