@@ -1917,21 +1917,6 @@ attributes = {
         ],
         'type': 'ViReal64'
     },
-    1150300: {
-        'access': 'read-write',
-        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-        'documentation': {
-            'description': '\nDelays disconnecting the output by the time you specify, in seconds, when a limit is exceeded.',
-            'note': 'Refer to Supported Attributes by Device for information about supported devices.'
-        },
-        'lv_property': 'Source:Output Cutoff:Delay',
-        'name': 'OUTPUT_CUTOFF_DELAY',
-        'supported_rep_caps': [
-            'channels'
-        ],
-        'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
-    },
     1250001: {
         'access': 'read-write',
         'documentation': {
