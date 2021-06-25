@@ -184,9 +184,9 @@ class _SessionBase(object):
     aperture_time = _attributes.AttributeViReal64(1150058)
     '''Type: float
 
-    Specifies the measurement aperture time for the channel configuration. Aperture time is specified in the units set by  the aperture_time_units property.
+    Specifies the measurement aperture time for the channel configuration. Aperture time is specified in the units set by the aperture_time_units property.
     for information about supported devices.
-    Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure  your measurements and for information about valid values.
+    Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements and for information about valid values.
     Default Value: 0.01666666 seconds
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
@@ -206,7 +206,7 @@ class _SessionBase(object):
 
     Specifies the units of the aperture_time property for the channel configuration.
     for information about supported devices.
-    Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about  how to configure your measurements and for information about valid values.
+    Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements and for information about valid values.
     Default Value: ApertureTimeUnits.SECONDS
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
@@ -224,9 +224,9 @@ class _SessionBase(object):
     autorange = _attributes.AttributeViInt32(1150244)
     '''Type: bool
 
-    Specifies whether the hardware automatically selects the best range to measure the signal.  Note the highest range the algorithm uses is dependent on the corresponding limit range property. The algorithm the hardware uses can be controlled using the autorange_aperture_time_mode property.
+    Specifies whether the hardware automatically selects the best range to measure the signal. Note the highest range the algorithm uses is dependent on the corresponding limit range property. The algorithm the hardware uses can be controlled using the autorange_aperture_time_mode property.
 
-    Note: Autoranging begins at module startup and remains active until the module is reconfigured or reset.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note: Autoranging begins at module startup and remains active until the module is reconfigured or reset. This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -275,9 +275,9 @@ class _SessionBase(object):
     autorange_minimum_aperture_time = _attributes.AttributeViReal64(1150247)
     '''Type: float
 
-    Specifies the measurement autorange aperture time used for the measurement autorange algorithm.  The aperture time is specified in the units set by the autorange_minimum_aperture_time_units property. This value will typically be smaller than the aperture time used for measurements.
+    Specifies the measurement autorange aperture time used for the measurement autorange algorithm. The aperture time is specified in the units set by the autorange_minimum_aperture_time_units property. This value will typically be smaller than the aperture time used for measurements.
 
-    Note: For smaller ranges, the value is scaled up to account for noise. The factor used to scale the value is derived from the module capabilities.  This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note: For smaller ranges, the value is scaled up to account for noise. The factor used to scale the value is derived from the module capabilities. This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -309,7 +309,7 @@ class _SessionBase(object):
     autorange_minimum_current_range = _attributes.AttributeViReal64(1150255)
     '''Type: float
 
-    Specifies the lowest range used during measurement autoranging.  Limiting the lowest range used during autoranging can improve the speed of the autoranging algorithm and minimize frequent and unpredictable range changes for noisy signals.
+    Specifies the lowest range used during measurement autoranging. Limiting the lowest range used during autoranging can improve the speed of the autoranging algorithm and minimize frequent and unpredictable range changes for noisy signals.
 
     Note: The maximum range used is the range that includes the value specified in the compliance limit property, voltage_limit_range property or current_limit_range property, depending on the selected output_function. This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
@@ -361,8 +361,8 @@ class _SessionBase(object):
     '''Type: enums.AutoZero
 
     Specifies the auto-zero method to use on the device.
-    Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information  about how to configure your measurements.
-    Default Value: The default value for the NI PXI-4132 is AutoZero.ON. The default value for  all other devices is AutoZero.OFF, which is the only supported value for these devices.
+    Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information about how to configure your measurements.
+    Default Value: The default value for the NI PXI-4132 is AutoZero.ON. The default value for all other devices is AutoZero.OFF, which is the only supported value for these devices.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -378,7 +378,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Indicates whether an auxiliary power source is connected to the device.
-    A value of False may indicate that the auxiliary input fuse has blown.  Refer to the Detecting Internal/Auxiliary Power topic in the NI DC Power Supplies and SMUs Help for  more information about internal and auxiliary power.
+    A value of False may indicate that the auxiliary input fuse has blown. Refer to the Detecting Internal/Auxiliary Power topic in the NI DC Power Supplies and SMUs Help for more information about internal and auxiliary power.
     power source to generate power. Use the power_source_in_use property to retrieve this information.
 
     Note: This property does not necessarily indicate if the device is using the auxiliary
@@ -386,7 +386,7 @@ class _SessionBase(object):
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
-    Indicates the number of channels that NI-DCPower supports for the instrument that was chosen when  the current session was opened. For channel-based properties, the IVI engine maintains a separate  cache value for each channel.
+    Indicates the number of channels that NI-DCPower supports for the instrument that was chosen when the current session was opened. For channel-based properties, the IVI engine maintains a separate cache value for each channel.
     '''
     compliance_limit_symmetry = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ComplianceLimitSymmetry, 1150184)
     '''Type: enums.ComplianceLimitSymmetry
@@ -427,9 +427,9 @@ class _SessionBase(object):
     current_compensation_frequency = _attributes.AttributeViReal64(1150071)
     '''Type: float
 
-    The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Current mode.
+    The frequency at which a pole-zero pair is added to the system when the channel is in Constant Current mode.
     for information about supported devices.
-    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the  transient_response property.
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -446,9 +446,9 @@ class _SessionBase(object):
     current_gain_bandwidth = _attributes.AttributeViReal64(1150070)
     '''Type: float
 
-    The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes.  This property takes effect when the channel is in Constant Current mode.
+    The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This property takes effect when the channel is in Constant Current mode.
     for information about supported devices.
-    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the  transient_response property.
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -468,7 +468,7 @@ class _SessionBase(object):
     Specifies the current level, in amps, that the device attempts to generate on the specified channel(s).
     This property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT.
     output_enabled property for more information about enabling the output channel.
-    Valid Values: The valid values for this property are defined by the values to which the  current_level_range property is set.
+    Valid Values: The valid values for this property are defined by the values to which the current_level_range property is set.
 
     Note: The channel must be enabled for the specified current level to take effect. Refer to the
 
@@ -485,10 +485,10 @@ class _SessionBase(object):
     current_level_autorange = _attributes.AttributeViInt32(1150017)
     '''Type: bool
 
-    Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.
-    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  current_level_range property. If you change the current_level_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the current_level_range  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
-    Query the current_level_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
-    The current_level_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_CURRENT.
+    Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for the specified channels.
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the current_level_range property. If you change the current_level_autorange property from AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the current_level_range property was set to (or the default value if the property was never set) and uses that value as the current level range.
+    Query the current_level_range property by using the _get_attribute_vi_int32 method for information about which range NI-DCPower automatically selects.
+    The current_level_autorange property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT.
     Default Value: AutoZero.OFF
 
     Tip:
@@ -505,8 +505,8 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the current level range, in amps, for the specified channel(s).
-    The range defines the valid value to which the current level can be set. Use the  current_level_autorange property to enable automatic selection of the current level range.
-    The current_level_range property is applicable only if the output_function property is  set to OutputFunction.DC_CURRENT.
+    The range defines the valid value to which the current level can be set. Use the current_level_autorange property to enable automatic selection of the current level range.
+    The current_level_range property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT.
     output_enabled property for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
@@ -525,10 +525,10 @@ class _SessionBase(object):
     current_limit = _attributes.AttributeViReal64(1250005)
     '''Type: float
 
-    Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level  on the specified channel(s).
-    This property is applicable only if the output_function property is set to  OutputFunction.DC_VOLTAGE and the compliance_limit_symmetry property is set to  ComplianceLimitSymmetry.SYMMETRIC.
+    Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level on the specified channel(s).
+    This property is applicable only if the output_function property is set to OutputFunction.DC_VOLTAGE and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
     output_enabled property for more information about enabling the output channel.
-    Valid Values: The valid values for this property are defined by the values to which  current_limit_range property is set.
+    Valid Values: The valid values for this property are defined by the values to which current_limit_range property is set.
 
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the
 
@@ -545,10 +545,10 @@ class _SessionBase(object):
     current_limit_autorange = _attributes.AttributeViInt32(1150016)
     '''Type: bool
 
-    Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).
-    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  current_limit_range property. If you change this property from AutoZero.ON to  AutoZero.OFF, NI-DCPower retains the last value the current_limit_range property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
-    Query the current_limit_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
-    The current_limit_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
+    Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the specified channel(s).
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the current_limit_range property. If you change this property from AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the current_limit_range property was set to (or the default value if the property was never set) and uses that value as the current limit range.
+    Query the current_limit_range property by using the _get_attribute_vi_int32 method for information about which range NI-DCPower automatically selects.
+    The current_limit_autorange property is applicable only if the output_function property is set to OutputFunction.DC_VOLTAGE.
     Default Value: AutoZero.OFF
 
     Tip:
@@ -666,8 +666,8 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the current limit range, in amps, for the specified channel(s).
-    The range defines the valid value to which the current limit can be set. Use the current_limit_autorange  property to enable automatic selection of the current limit range.
-    The current_limit_range property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
+    The range defines the valid value to which the current limit can be set. Use the current_limit_autorange property to enable automatic selection of the current limit range.
+    The current_limit_range property is applicable only if the output_function property is set to OutputFunction.DC_VOLTAGE.
     output_enabled property for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
@@ -686,7 +686,7 @@ class _SessionBase(object):
     current_pole_zero_ratio = _attributes.AttributeViReal64(1150072)
     '''Type: float
 
-    The ratio of the pole frequency to the zero frequency when the channel is in  Constant Current mode.
+    The ratio of the pole frequency to the zero frequency when the channel is in Constant Current mode.
     for information about supported devices.
     Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
@@ -705,7 +705,7 @@ class _SessionBase(object):
     dc_noise_rejection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DCNoiseRejection, 1150066)
     '''Type: enums.DCNoiseRejection
 
-    Determines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection,  NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies  and SMUs Help for more information about noise rejection.
+    Determines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection, NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies and SMUs Help for more information about noise rejection.
     for information about supported devices.
     Default Value: TransientResponse.NORMAL
 
@@ -724,10 +724,10 @@ class _SessionBase(object):
     digital_edge_measure_trigger_input_terminal = _attributes.AttributeViString(1150036)
     '''Type: str
 
-    Specifies the input terminal for the Measure trigger. This property is used only when the  measure_trigger_type property is set to TriggerType.DIGITAL_EDGE.
+    Specifies the input terminal for the Measure trigger. This property is used only when the measure_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     for this property.
-    You can specify any valid input terminal for this property. Valid terminals are listed in  Measurement & Automation Explorer under the Device Routes tab.
-    Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.
+    You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
+    Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -763,10 +763,10 @@ class _SessionBase(object):
     digital_edge_sequence_advance_trigger_input_terminal = _attributes.AttributeViString(1150028)
     '''Type: str
 
-    Specifies the input terminal for the Sequence Advance trigger. Use this property only when the  sequence_advance_trigger_type property is set to TriggerType.DIGITAL_EDGE.
+    Specifies the input terminal for the Sequence Advance trigger. Use this property only when the sequence_advance_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     the NI DC Power Supplies and SMUs Help for information about supported devices.
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
-    Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can  specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the  input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
+    Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
 
@@ -802,10 +802,10 @@ class _SessionBase(object):
     digital_edge_source_trigger_input_terminal = _attributes.AttributeViString(1150032)
     '''Type: str
 
-    Specifies the input terminal for the Source trigger. Use this property only when the  source_trigger_type property is set to TriggerType.DIGITAL_EDGE.
+    Specifies the input terminal for the Source trigger. Use this property only when the source_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     for information about supported devices.
-    You can specify any valid input terminal for this property. Valid terminals are listed  in Measurement & Automation Explorer under the Device Routes tab.
-    Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.
+    You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
+    Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -822,10 +822,10 @@ class _SessionBase(object):
     digital_edge_start_trigger_input_terminal = _attributes.AttributeViString(1150023)
     '''Type: str
 
-    Specifies the input terminal for the Start trigger. Use this property only when the start_trigger_type  property is set to TriggerType.DIGITAL_EDGE.
+    Specifies the input terminal for the Start trigger. Use this property only when the start_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     for information about supported devices.
-    You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation  Explorer under the Device Routes tab.
-    Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can  specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal  on Dev1 to be /Dev2/SourceCompleteEvent.
+    You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
+    Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -843,16 +843,16 @@ class _SessionBase(object):
     '''Type: str
 
     Indicates the Driver Setup string that you specified when initializing the driver.
-    Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This property is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the __init__ method or through the  IVI Configuration Utility.
-    You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the __init__ method. If you do not specify a Driver Setup string, this property returns an empty string.
+    Some cases exist where you must specify the instrument driver options at initialization time. An example of this case is specifying a particular device model from among a family of devices that the driver supports. This property is useful when simulating a device. You can specify the driver-specific options through the DriverSetup keyword in the optionsString parameter in the __init__ method or through the IVI Configuration Utility.
+    You can specify driver-specific options through the DriverSetup keyword in the optionsString parameter in the __init__ method. If you do not specify a Driver Setup string, this property returns an empty string.
     '''
     exported_measure_trigger_output_terminal = _attributes.AttributeViString(1150037)
     '''Type: str
 
     Specifies the output terminal for exporting the Measure trigger.
-    Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals  available on your device.
+    Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
     for information about supported devices.
-    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
+    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -889,9 +889,9 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the output terminal for exporting the Sequence Advance trigger.
-    Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals  available on your device.
+    Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
     for information about supported devices.
-    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
+    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -911,7 +911,7 @@ class _SessionBase(object):
     Specifies the output terminal for exporting the Source trigger.
     Refer to the Device Routes tab in MAX for a list of the terminals available on your device.
     for information about supported devices.
-    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
+    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -929,8 +929,8 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the output terminal for exporting the Start trigger.
-    Refer to the Device Routes tab in Measurement & Automation Explorer (MAX) for a list of the terminals available  on your device.
-    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0.
+    Refer to the Device Routes tab in Measurement & Automation Explorer (MAX) for a list of the terminals available on your device.
+    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0.
     for information about supported devices.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
@@ -1009,7 +1009,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Indicates whether the safety interlock circuit is open.
-    Refer to the Safety Interlock topic in the NI DC Power Supplies and SMUs Help for more information about  the safety interlock circuit.
+    Refer to the Safety Interlock topic in the NI DC Power Supplies and SMUs Help for more information about the safety interlock circuit.
     about supported devices.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
@@ -1028,14 +1028,14 @@ class _SessionBase(object):
     '''Type: str
 
     Indicates the resource descriptor NI-DCPower uses to identify the physical device.
-    If you initialize NI-DCPower with a logical name, this property contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
+    If you initialize NI-DCPower with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.
     If you initialize NI-DCPower with the resource descriptor, this property contains that value.
     '''
     logical_name = _attributes.AttributeViString(1050305)
     '''Type: str
 
     Contains the logical name you specified when opening the current IVI session.
-    You can pass a logical name to the __init__ method.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a method section in the IVI Configuration file. The method section specifies a physical  device and initial user options.
+    You can pass a logical name to the __init__ method. The IVI Configuration utility must contain an entry for the logical name. The logical name entry refers to a method section in the IVI Configuration file. The method section specifies a physical device and initial user options.
     '''
     measure_buffer_size = _attributes.AttributeViInt32(1150077)
     '''Type: int
@@ -1044,7 +1044,7 @@ class _SessionBase(object):
     The default value is the maximum number of samples that a device is capable of recording in one second.
     for information about supported devices.
     Valid Values: 1000 to 2147483647
-    Default Value: Varies by device. Refer to Supported Properties by Device topic in  the NI DC Power Supplies and SMUs Help for more information about default values.
+    Default Value: Varies by device. Refer to Supported Properties by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -1083,7 +1083,7 @@ class _SessionBase(object):
 
     Specifies the output terminal for exporting the Measure Complete event.
     for information about supported devices.
-    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
+    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -1120,11 +1120,11 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the width of the Measure Complete event, in seconds.
-    The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse  width value for PXI Express devices is 250 ns.
+    The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value for PXI Express devices is 250 ns.
     The maximum event pulse width value for all devices is 1.6 microseconds.
     for information about supported devices.
     Valid Values: 1.5e-7 to 1.6e-6
-    Default Value: The default value for PXI devices is 150 ns. The default value  for PXI Express devices is 250 ns.
+    Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -1141,7 +1141,7 @@ class _SessionBase(object):
     measure_record_delta_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150065)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
-    Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record.  Only query this property after the desired measurement settings are committed.
+    Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record. Only query this property after the desired measurement settings are committed.
     for information about supported devices.
     two measurements and the rest would differ.
 
@@ -1160,7 +1160,7 @@ class _SessionBase(object):
     measure_record_length = _attributes.AttributeViInt32(1150063)
     '''Type: int
 
-    Specifies how many measurements compose a measure record. When this property is set to a value greater than 1, the  measure_when property must be set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or  MeasureWhen.ON_MEASURE_TRIGGER.
+    Specifies how many measurements compose a measure record. When this property is set to a value greater than 1, the measure_when property must be set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or MeasureWhen.ON_MEASURE_TRIGGER.
     for information about supported devices.
     Valid Values: 1 to 16,777,216
     Default Value: 1
@@ -1181,7 +1181,7 @@ class _SessionBase(object):
     measure_record_length_is_finite = _attributes.AttributeViBoolean(1150064)
     '''Type: bool
 
-    Specifies whether to take continuous measurements. Call the abort method to stop continuous measurements.  When this property is set to False and the source_mode property is set to  SourceMode.SINGLE_POINT, the measure_when property must be set to  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or MeasureWhen.ON_MEASURE_TRIGGER. When this property is set to  False and the source_mode property is set to SourceMode.SEQUENCE, the measure_when  property must be set to MeasureWhen.ON_MEASURE_TRIGGER.
+    Specifies whether to take continuous measurements. Call the abort method to stop continuous measurements. When this property is set to False and the source_mode property is set to SourceMode.SINGLE_POINT, the measure_when property must be set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or MeasureWhen.ON_MEASURE_TRIGGER. When this property is set to False and the source_mode property is set to SourceMode.SEQUENCE, the measure_when property must be set to MeasureWhen.ON_MEASURE_TRIGGER.
     for information about supported devices.
     Default Value: True
 
@@ -1220,9 +1220,9 @@ class _SessionBase(object):
     measure_when = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MeasureWhen, 1150057)
     '''Type: enums.MeasureWhen
 
-    Specifies when the measure unit should acquire measurements. Unless this property is configured to  MeasureWhen.ON_MEASURE_TRIGGER, the measure_trigger_type property is ignored.
-    Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
-    Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the fetch_multiple method.
+    Specifies when the measure unit should acquire measurements. Unless this property is configured to MeasureWhen.ON_MEASURE_TRIGGER, the measure_trigger_type property is ignored.
+    Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements.
+    Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the fetch_multiple method.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1260,7 +1260,7 @@ class _SessionBase(object):
 
     Specifies whether to use a low or high capacitance on the output for the specified channel(s).
     for information about supported devices.
-    Refer to the NI PXI-4130 Output Capacitance Selection topic in the NI DC Power Supplies and SMUs Help for more  information about capacitance.
+    Refer to the NI PXI-4130 Output Capacitance Selection topic in the NI DC Power Supplies and SMUs Help for more information about capacitance.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -1277,10 +1277,10 @@ class _SessionBase(object):
     output_connected = _attributes.AttributeViBoolean(1150060)
     '''Type: bool
 
-    Specifies whether the output relay is connected (closed) or disconnected (open). The output_enabled  property does not change based on this property; they are independent of each other.
+    Specifies whether the output relay is connected (closed) or disconnected (open). The output_enabled property does not change based on this property; they are independent of each other.
     about supported devices.
     Set this property to False to disconnect the output terminal from the output.
-    to the output terminal might discharge unless the relay is disconnected. Excessive connecting and disconnecting of the  output can cause premature wear on the relay.
+    to the output terminal might discharge unless the relay is disconnected. Excessive connecting and disconnecting of the output can cause premature wear on the relay.
     Default Value: True
 
     Note: Only disconnect the output when disconnecting is necessary for your application. For example, a battery connected
@@ -1496,9 +1496,9 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether the output is enabled (True) or disabled (False).
-    Depending on the value you specify for the output_function property, you also must set the  voltage level or current level in addition to  enabling the output
-    the initiate method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
-    Default Value: The default value is True if you use the __init__ method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
+    Depending on the value you specify for the output_function property, you also must set the voltage level or current level in addition to enabling the output
+    the initiate method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for more information about NI-DCPower programming states.
+    Default Value: The default value is True if you use the __init__ method to open the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
     Note: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
 
@@ -1516,7 +1516,7 @@ class _SessionBase(object):
     '''Type: enums.OutputFunction
 
     Configures the method to generate on the specified channel(s).
-    When OutputFunction.DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following properties to configure the channel when  OutputFunction.DC_VOLTAGE is selected:
+    When OutputFunction.DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the output current is below the current limit. You can use the following properties to configure the channel when OutputFunction.DC_VOLTAGE is selected:
     voltage_level
     current_limit
     current_limit_high
@@ -1524,7 +1524,7 @@ class _SessionBase(object):
     voltage_level_range
     current_limit_range
     compliance_limit_symmetry
-    When OutputFunction.DC_CURRENT is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following properties to configure the channel when  OutputFunction.DC_CURRENT is selected:
+    When OutputFunction.DC_CURRENT is selected, the device generates the desired current level on the output as long as the output voltage is below the voltage limit. You can use the following properties to configure the channel when OutputFunction.DC_CURRENT is selected:
     current_level
     voltage_limit
     voltage_limit_high
@@ -1546,7 +1546,7 @@ class _SessionBase(object):
     output_resistance = _attributes.AttributeViReal64(1150061)
     '''Type: float
 
-    Specifies the output resistance that the device attempts to generate for the specified channel(s). This property is  available only when you set the output_function property on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.
+    Specifies the output resistance that the device attempts to generate for the specified channel(s). This property is available only when you set the output_function property on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.
     about supported devices.
     Default Value: 0.0
 
@@ -1565,7 +1565,7 @@ class _SessionBase(object):
     overranging_enabled = _attributes.AttributeViBoolean(1150007)
     '''Type: bool
 
-    Specifies whether NI-DCPower allows setting the voltage level, current level, voltage limit and current limit outside the  device specification limits. True means that overranging is enabled.
+    Specifies whether NI-DCPower allows setting the voltage level, current level, voltage limit and current limit outside the device specification limits. True means that overranging is enabled.
     Refer to the Ranges topic in the NI DC Power Supplies and SMUs Help for more information about overranging.
     Default Value: False
 
@@ -1583,7 +1583,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Enables (True) or disables (False) overvoltage protection (OVP).
-    Refer to the Output Overvoltage Protection topic in the NI DC Power Supplies and SMUs Help for more information about  overvoltage protection.
+    Refer to the Output Overvoltage Protection topic in the NI DC Power Supplies and SMUs Help for more information about overvoltage protection.
     for information about supported devices.
     Default Value: False
 
@@ -1645,7 +1645,7 @@ class _SessionBase(object):
     power_line_frequency = _attributes.AttributeViReal64(1150020)
     '''Type: float
 
-    Specifies the power line frequency for specified channel(s). NI-DCPower uses this value to select a timebase for setting the  aperture_time property in power line cycles (PLCs).
+    Specifies the power line frequency for specified channel(s). NI-DCPower uses this value to select a timebase for setting the aperture_time property in power line cycles (PLCs).
     in the NI DC Power Supplies and SMUs Help for information about supported devices.
     Default Value: NIDCPOWER_VAL_60_HERTZ
 
@@ -1667,9 +1667,9 @@ class _SessionBase(object):
     power_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PowerSource, 1150000)
     '''Type: enums.PowerSource
 
-    Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
+    Specifies the power source to use. NI-DCPower switches the power source used by the device to the specified value.
     Default Value: PowerSource.AUTOMATIC
-    is set to PowerSource.AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  initiate method.
+    is set to PowerSource.AUTOMATIC. However, if the session is in the Committed or Uncommitted state when you set this property, the power source selection only occurs after you call the initiate method.
 
     Note: Automatic selection is not persistent and occurs only at the time this property
     '''
@@ -2061,7 +2061,7 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
-    This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE and the compliance_limit_symmetry  property is set to ComplianceLimitSymmetry.SYMMETRIC.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_limit_range property.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
@@ -2289,7 +2289,7 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
-    This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT and the compliance_limit_symmetry property  is set to ComplianceLimitSymmetry.SYMMETRIC.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_voltage_limit_range property.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
@@ -2422,7 +2422,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower queries the device status after each operation.
-    Querying the device status is useful for debugging. After you validate your program, you can set this  property to False to disable status checking and maximize performance.
+    Querying the device status is useful for debugging. After you validate your program, you can set this property to False to disable status checking and maximize performance.
     NI-DCPower ignores status checking for particular properties regardless of the setting of this property.
     Use the __init__ method to override this value.
     Default Value: True
@@ -2490,8 +2490,8 @@ class _SessionBase(object):
      This property defines the power to source from the device only if the power_allocation_mode property is set to PowerAllocationMode.MANUAL.
 
      The power you request with this property may be incompatible with the power a given source configuration requires or the power the device can provide:
-      If the requested power is less than the power required for the source configuration, the device does not exceed the requested power, and NI-DCPower returns an error.
-      If the requested power is greater than the maximum per-channel or overall sourcing power, the device does not exceed the allowed power, and NI-DCPower returns an error.
+     If the requested power is less than the power required for the source configuration, the device does not exceed the requested power, and NI-DCPower returns an error.
+     If the requested power is greater than the maximum per-channel or overall sourcing power, the device does not exceed the allowed power, and NI-DCPower returns an error.
 
     Valid Values: [0, device per-channel maximum power]
      Default Value: Refer to the Supported Properties by Device topic for the default value by device.
@@ -2511,9 +2511,9 @@ class _SessionBase(object):
     reset_average_before_measurement = _attributes.AttributeViBoolean(1150006)
     '''Type: bool
 
-    Specifies whether the measurement returned from any measurement call starts with a new measurement call (True) or  returns a measurement that has already begun or completed(False).
+    Specifies whether the measurement returned from any measurement call starts with a new measurement call (True) or returns a measurement that has already begun or completed(False).
     for information about supported devices.
-    When you set the samples_to_average property in the Running state, the output channel measurements might  move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a  session, you can force a synchronization in the running state before you run the measure_multiple method. To  force a synchronization in the running state, set this property to True, and then run the measure_multiple  method, specifying all channels in the channel name parameter. You can set the  reset_average_before_measurement property to False after the measure_multiple method  completes.
+    When you set the samples_to_average property in the Running state, the output channel measurements might move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a session, you can force a synchronization in the running state before you run the measure_multiple method. To force a synchronization in the running state, set this property to True, and then run the measure_multiple method, specifying all channels in the channel name parameter. You can set the reset_average_before_measurement property to False after the measure_multiple method completes.
     Default Value: True
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
@@ -2532,7 +2532,7 @@ class _SessionBase(object):
     '''Type: int
 
     Specifies the number of samples to average when you take a measurement.
-    Increasing the number of samples to average decreases measurement noise but increases the time required to take  a measurement. Refer to the NI PXI-4110, NI PXI-4130, NI PXI-4132, or NI PXIe-4154 Averaging topic for  optional property settings to improve immunity to certain noise types, or refer to the NI PXIe-4140/4141  DC Noise Rejection, NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic for  information about improving noise immunity for those devices.
+    Increasing the number of samples to average decreases measurement noise but increases the time required to take a measurement. Refer to the NI PXI-4110, NI PXI-4130, NI PXI-4132, or NI PXIe-4154 Averaging topic for optional property settings to improve immunity to certain noise types, or refer to the NI PXIe-4140/4141  DC Noise Rejection, NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic for information about improving noise immunity for those devices.
     Default Value:
     NI PXI-4110 or NI PXI-4130—10
     NI PXI-4132—1
@@ -2556,8 +2556,8 @@ class _SessionBase(object):
     self_calibration_persistence = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SelfCalibrationPersistence, 1150073)
     '''Type: enums.SelfCalibrationPersistence
 
-    Specifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the reset_device method is called or the machine  is powered down.
-    This property affects the behavior of the self_cal method. When set to  SelfCalibrationPersistence.KEEP_IN_MEMORY, the values calculated by the self_cal method are used in  the existing session, as well as in all further sessions until you call the reset_device method  or restart the machine. When you set this property to SelfCalibrationPersistence.WRITE_TO_EEPROM, the values calculated  by the self_cal method are written to hardware and used in the existing session and  in all subsequent sessions until another call to the self_cal method is made.
+    Specifies whether the values calculated during self-calibration should be written to hardware to be used until the next self-calibration or only used until the reset_device method is called or the machine is powered down.
+    This property affects the behavior of the self_cal method. When set to SelfCalibrationPersistence.KEEP_IN_MEMORY, the values calculated by the self_cal method are used in the existing session, as well as in all further sessions until you call the reset_device method or restart the machine. When you set this property to SelfCalibrationPersistence.WRITE_TO_EEPROM, the values calculated by the self_cal method are written to hardware and used in the existing session and in all subsequent sessions until another call to the self_cal method is made.
     about supported devices.
     Default Value: SelfCalibrationPersistence.KEEP_IN_MEMORY
 
@@ -2577,8 +2577,8 @@ class _SessionBase(object):
     '''Type: enums.Sense
 
     Selects either local or remote sensing of the output voltage for the specified channel(s).
-    Refer to the Local and Remote Sense topic in the NI DC Power Supplies and SMUs Help for more  information about sensing voltage on supported channels and about devices that support local and/or remote sensing.
-    Default Value: The default value is Sense.LOCAL if the device supports local sense.  Otherwise, the default and only supported value is Sense.REMOTE.
+    Refer to the Local and Remote Sense topic in the NI DC Power Supplies and SMUs Help for more information about sensing voltage on supported channels and about devices that support local and/or remote sensing.
+    Default Value: The default value is Sense.LOCAL if the device supports local sense. Otherwise, the default and only supported value is Sense.REMOTE.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2614,7 +2614,7 @@ class _SessionBase(object):
 
     Specifies the output terminal for exporting the Sequence Engine Done Complete event.
     for information about supported devices.
-    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
+    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -2651,7 +2651,7 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the width of the Sequence Engine Done event, in seconds.
-    The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value  for PXI Express devices is 250 ns.
+    The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value for PXI Express devices is 250 ns.
     The maximum event pulse width value for all devices is 1.6 microseconds.
     for information about supported devices.
     Valid Values: 1.5e-7 to 1.6e-6 seconds
@@ -2674,7 +2674,7 @@ class _SessionBase(object):
 
     Specifies the output terminal for exporting the Sequence Iteration Complete event.
     for information about supported devices.
-    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
+    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -2711,7 +2711,7 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the width of the Sequence Iteration Complete event, in seconds.
-    The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width  value for PXI Express devices is 250 ns.
+    The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value for PXI Express devices is 250 ns.
     The maximum event pulse width value for all devices is 1.6 microseconds.
     the NI DC Power Supplies and SMUs Help for information about supported devices.
     Valid Values: 1.5e-7 to 1.6e-6 seconds
@@ -2733,8 +2733,8 @@ class _SessionBase(object):
     '''Type: int
 
     Specifies the number of times a sequence is run after initiation.
-    Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence  loop count.
-    for information about supported devices. When the sequence_loop_count_is_finite property  is set to False, the sequence_loop_count property is ignored.
+    Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence loop count.
+    for information about supported devices. When the sequence_loop_count_is_finite property is set to False, the sequence_loop_count property is ignored.
     Valid Range: 1 to 134217727
     Default Value: 1
 
@@ -2754,7 +2754,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether a sequence should repeat indefinitely.
-    Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about  infinite sequencing.
+    Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about infinite sequencing.
     sequence_loop_count_is_finite property is set to False,  the sequence_loop_count property is ignored.
     Default Value: True
 
@@ -2840,7 +2840,7 @@ class _SessionBase(object):
 
     Specifies the output terminal for exporting the Source Complete event.
     for information about supported devices.
-    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
+    Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -2878,7 +2878,7 @@ class _SessionBase(object):
 
     Specifies the width of the Source Complete event, in seconds.
     for information about supported devices.
-    The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value  for PXI Express devices is 250 ns.
+    The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value for PXI Express devices is 250 ns.
     The maximum event pulse width value for all devices is 1.6 microseconds
     Valid Values: 1.5e-7 to 1.6e-6 seconds
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
@@ -2898,7 +2898,7 @@ class _SessionBase(object):
     source_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
-    Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the  measure_when property is set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
+    Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the measure_when property is set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
     Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.
     Valid Values: 0 to 167 seconds
     Default Value: 0.01667 seconds
@@ -2919,7 +2919,7 @@ class _SessionBase(object):
     source_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SourceMode, 1150054)
     '''Type: enums.SourceMode
 
-    Specifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source  Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.
+    Specifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.
     Default value: SourceMode.SINGLE_POINT
 
     Tip:
@@ -2959,7 +2959,7 @@ class _SessionBase(object):
     specific_driver_prefix = _attributes.AttributeViString(1050302)
     '''Type: str
 
-    Contains the prefix for NI-DCPower. The name of each user-callable  method in NI-DCPower begins with this prefix.
+    Contains the prefix for NI-DCPower. The name of each user-callable method in NI-DCPower begins with this prefix.
     '''
     specific_driver_revision = _attributes.AttributeViString(1050551)
     '''Type: str
@@ -2998,7 +2998,7 @@ class _SessionBase(object):
     transient_response = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TransientResponse, 1150062)
     '''Type: enums.TransientResponse
 
-    Specifies the transient response. Refer to the Transient Response topic in the NI DC Power Supplies and SMUs Help  for more information about transient response.
+    Specifies the transient response. Refer to the Transient Response topic in the NI DC Power Supplies and SMUs Help for more information about transient response.
     for information about supported devices.
     Default Value: TransientResponse.NORMAL
 
@@ -3017,9 +3017,9 @@ class _SessionBase(object):
     voltage_compensation_frequency = _attributes.AttributeViReal64(1150068)
     '''Type: float
 
-    The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Voltage mode.
+    The frequency at which a pole-zero pair is added to the system when the channel is in Constant Voltage mode.
     for information about supported devices.
-    Default value: Determined by the value of the TransientResponse.NORMAL setting of  the transient_response property.
+    Default value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -3038,7 +3038,7 @@ class _SessionBase(object):
 
     The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This property takes effect when the channel is in Constant Voltage mode.
     for information about supported devices.
-    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the  transient_response property.
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -3058,7 +3058,7 @@ class _SessionBase(object):
     Specifies the voltage level, in volts, that the device attempts to generate on the specified channel(s).
     This property is applicable only if the output_function property is set to OutputFunction.DC_VOLTAGE.
     output_enabled property for more information about enabling the output channel.
-    Valid Values: The valid values for this property are defined by the values you specify for the  voltage_level_range property.
+    Valid Values: The valid values for this property are defined by the values you specify for the voltage_level_range property.
 
     Note: The channel must be enabled for the specified voltage level to take effect. Refer to the
 
@@ -3075,10 +3075,10 @@ class _SessionBase(object):
     voltage_level_autorange = _attributes.AttributeViInt32(1150015)
     '''Type: bool
 
-    Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).
-    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  voltage_level_range property. If you change the voltage_level_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_level_range  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
-    Query the voltage_level_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
-    The voltage_level_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
+    Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level for the specified channel(s).
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the voltage_level_range property. If you change the voltage_level_autorange property from AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_level_range property was set to (or the default value if the property was never set) and uses that value as the voltage level range.
+    Query the voltage_level_range property by using the _get_attribute_vi_int32 method for information about which range NI-DCPower automatically selects.
+    The voltage_level_autorange property is applicable only if the output_function property is set to OutputFunction.DC_VOLTAGE.
     Default Value: AutoZero.OFF
 
     Tip:
@@ -3095,8 +3095,8 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the voltage level range, in volts, for the specified channel(s).
-    The range defines the valid values to which the voltage level can be set. Use the voltage_level_autorange  property to enable automatic selection of the voltage level range.
-    The voltage_level_range property is applicable only if the output_function property is  set to OutputFunction.DC_VOLTAGE.
+    The range defines the valid values to which the voltage level can be set. Use the voltage_level_autorange property to enable automatic selection of the voltage level range.
+    The voltage_level_range property is applicable only if the output_function property is set to OutputFunction.DC_VOLTAGE.
     output_enabled property for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
@@ -3115,10 +3115,10 @@ class _SessionBase(object):
     voltage_limit = _attributes.AttributeViReal64(1150010)
     '''Type: float
 
-    Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level  on the specified channels.
-    This property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT  and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
+    Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level on the specified channels.
+    This property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
     output_enabled property for more information about enabling the output channel.
-    Valid Values: The valid values for this property are defined by the values to which the  voltage_limit_range property is set.
+    Valid Values: The valid values for this property are defined by the values to which the voltage_limit_range property is set.
 
     Note: The channel must be enabled for the specified current level to take effect. Refer to the
 
@@ -3135,10 +3135,10 @@ class _SessionBase(object):
     voltage_limit_autorange = _attributes.AttributeViInt32(1150018)
     '''Type: bool
 
-    Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).
-    If this property is set to AutoZero.ON, NI-DCPower ignores any changes you make to the  voltage_limit_range property. If you change the voltage_limit_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_limit_range  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
-    Query the voltage_limit_range property by using the _get_attribute_vi_int32 method to find out  which range NI-DCPower automatically selects.
-    The voltage_limit_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_CURRENT.
+    Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for the specified channel(s).
+    If this property is set to AutoZero.ON, NI-DCPower ignores any changes you make to the voltage_limit_range property. If you change the voltage_limit_autorange property from AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_limit_range property was set to (or the default value if the property was never set) and uses that value as the voltage limit range.
+    Query the voltage_limit_range property by using the _get_attribute_vi_int32 method to find out which range NI-DCPower automatically selects.
+    The voltage_limit_autorange property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT.
     Default Value: AutoZero.OFF
 
     Tip:
@@ -3243,8 +3243,8 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the voltage limit range, in volts, for the specified channel(s).
-    The range defines the valid values to which the voltage limit can be set. Use the voltage_limit_autorange  property to enable automatic selection of the voltage limit range.
-    The voltage_limit_range property is applicable only if the output_function property is  set to OutputFunction.DC_CURRENT.
+    The range defines the valid values to which the voltage limit can be set. Use the voltage_limit_autorange property to enable automatic selection of the voltage limit range.
+    The voltage_limit_range property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT.
     output_enabled property for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
@@ -3263,9 +3263,9 @@ class _SessionBase(object):
     voltage_pole_zero_ratio = _attributes.AttributeViReal64(1150069)
     '''Type: float
 
-    The ratio of the pole frequency to the zero frequency when the channel is in  Constant Voltage mode.
+    The ratio of the pole frequency to the zero frequency when the channel is in Constant Voltage mode.
     for information about supported devices.
-    Default value: Determined by the value of the TransientResponse.NORMAL setting of the  transient_response property.
+    Default value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
@@ -3334,7 +3334,7 @@ class _SessionBase(object):
     def initiate(self):
         '''initiate
 
-        Starts generation or acquisition, causing the NI-DCPower session to
+        Starts generation or acquisition, causing the specified channel(s) to
         leave the Uncommitted state or Committed state and enter the Running
         state. To return to the Uncommitted state call the abort
         method. Refer to the `Programming
@@ -3369,7 +3369,7 @@ class _SessionBase(object):
     def abort(self):
         r'''abort
 
-        Transitions the NI-DCPower session from the Running state to the
+        Transitions the specified channel(s) from the Running state to the
         Uncommitted state. If a sequence is running, it is stopped. Any
         configuration methods called after this method are not applied until
         the initiate method is called. If power output is enabled
@@ -3514,7 +3514,7 @@ class _SessionBase(object):
     def commit(self):
         r'''commit
 
-        Applies previously configured settings to the device. Calling this
+        Applies previously configured settings to the specified channel(s). Calling this
         method moves the NI-DCPower session from the Uncommitted state into
         the Committed state. After calling this method, modifying any
         property reverts the NI-DCPower session to the Uncommitted state. Use
@@ -3670,7 +3670,7 @@ class _SessionBase(object):
         create_advanced_sequence_step method to add steps to the
         active advanced sequence.
 
-        You can create multiple advanced sequences in a session.
+        You can create multiple advanced sequences for a channel.
 
         **Support for this method**
 
@@ -4606,7 +4606,7 @@ class _SessionBase(object):
     def _initiate_with_channels(self):
         r'''_initiate_with_channels
 
-        Starts generation or acquisition, causing the NI-DCPower session to
+        Starts generation or acquisition, causing the specified channel(s) to
         leave the Uncommitted state or Committed state and enter the Running
         state. To return to the Uncommitted state call the abort
         method. Refer to the `Programming
@@ -5079,7 +5079,7 @@ class _SessionBase(object):
     def reset(self):
         r'''reset
 
-        Resets the device to a known state. This method disables power
+        Resets the specified channel(s) to a known state. This method disables power
         generation, resets session properties to their default values, commits
         the session properties, and leaves the session in the Uncommitted state.
         Refer to the `Programming
@@ -5544,7 +5544,7 @@ class _SessionBase(object):
     def wait_for_event(self, event_id, timeout=hightime.timedelta(seconds=10.0)):
         r'''wait_for_event
 
-        Waits until the device has generated the specified event.
+        Waits until the specified channel(s) have generated the specified event.
 
         The session monitors whether each type of event has occurred at least
         once since the last time this method or the initiate
@@ -6109,7 +6109,7 @@ class Session(_SessionBase):
     def get_channel_names(self, indices):
         r'''get_channel_names
 
-        Returns a list of channel names for given channel indices.
+        Returns a list of channel names for the given channel indices.
 
         Args:
             indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
