@@ -25,7 +25,7 @@ following installed:
 
 * [Python](https://www.python.org/downloads/)
     - If you're on Windows 10 (not [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about))
-        - Install at least one 64-bit version of Python. The current supported versions are 3.6, 3.7 and 3.8
+        - Install the latest 64-bit Python version supported by nimi-python. Refer to the README for supported versions
         - Optionally, install also a 32-bit version of Python
         - Ensure pip support is installed for each version
     - Add ``Python install path`` and ``python install path``\Scripts to Windows path
