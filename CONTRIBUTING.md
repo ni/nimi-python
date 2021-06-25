@@ -57,7 +57,6 @@ In order to run the **[nimi-python](https://github.com/ni/nimi-python)** system 
 
 * Install the corresponding driver runtimes.
     * Download the latest installers for NI-DCPower, NI-Digital Pattern Driver, NI-DMM, NI-FGEN, NI-SCOPE, NI-SWITCH, and NI Switch Executive from [ni.com](http://www.ni.com/downloads/ni-drivers/)
-    from [ni.com](http://www.ni.com/downloads/ni-drivers/)
     * NI-ModInst is included as part of these runtimes.
     * NI-TClk is included as part of NI-SCOPE and NI-FGEN.
 
