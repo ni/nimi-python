@@ -1,8 +1,8 @@
-import os
-import tempfile
-import pytest
 import hightime
 import nidcpower
+import os
+import pytest
+import tempfile
 
 
 def pytest_generate_tests(metafunc):
