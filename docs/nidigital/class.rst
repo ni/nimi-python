@@ -1556,7 +1556,7 @@ get_channel_names
 
     .. py:method:: get_channel_names(indices)
 
-            Returns the comma-separated list of channel names from a string index list.
+            Returns a comma-separated list of channel names from a string index list.
 
             
 

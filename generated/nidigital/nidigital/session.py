@@ -2627,7 +2627,7 @@ class _SessionBase(object):
     def get_channel_names(self, indices):
         r'''get_channel_names
 
-        Returns the comma-separated list of channel names from a string index list.
+        Returns a comma-separated list of channel names from a string index list.
 
         Args:
             indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
