@@ -34,7 +34,7 @@ All notable changes to this project will be documented in this file.
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * `get_channel_names` - [#1588](https://github.com/ni/nimi-python/issues/1588)
-        * `create_advanced_sequence_commit_step`
+        * `create_advanced_sequence_commit_step` - [#1636](https://github.com/ni/nimi-python/issues/1636)
         * API parity with NI-DCPower 20.7.0 by adding Output Cutoff functionality.
             * Properties added:
                 * `output_cutoff_current_change_limit_high`
@@ -1106,5 +1106,4 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Changed
     * #### Removed
 -->
-
 
