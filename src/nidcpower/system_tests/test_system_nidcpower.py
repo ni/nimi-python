@@ -324,10 +324,13 @@ def test_create_and_delete_advanced_sequence(session):
     sequence_name = 'my_sequence'
     session.source_mode = nidcpower.SourceMode.SEQUENCE
     session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
-    session.create_advanced_sequence_step(set_as_active_step=True)
+    session.create_advanced_sequence_commit_step(set_as_active_step=True)
     assert session.active_advanced_sequence == sequence_name
     session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
     session.voltage_level = 1
+    session.create_advanced_sequence_step(set_as_active_step=True)
+    session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+    session.current_level = .5
     session.delete_advanced_sequence(sequence_name=sequence_name)
     with pytest.raises(nidcpower.errors.DriverError):
         session.active_advanced_sequence = sequence_name
@@ -631,10 +634,13 @@ def test_create_and_delete_advanced_sequence_repeated_capabilities(session, chan
     sequence_name = 'my_sequence'
     channels_session.source_mode = nidcpower.SourceMode.SEQUENCE
     channels_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
-    channels_session.create_advanced_sequence_step(set_as_active_step=True)
+    channels_session.create_advanced_sequence_commit_step(set_as_active_step=True)
     assert channels_session.active_advanced_sequence == sequence_name
     channels_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
     channels_session.voltage_level = 1
+    channels_session.create_advanced_sequence_step(set_as_active_step=True)
+    channels_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+    channels_session.voltage_level = .5
     channels_session.delete_advanced_sequence(sequence_name=sequence_name)
     with pytest.raises(nidcpower.errors.DriverError):
         channels_session.active_advanced_sequence = sequence_name

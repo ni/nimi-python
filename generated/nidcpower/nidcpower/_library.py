@@ -24,6 +24,7 @@ class Library(object):
         self.niDCPower_ClearLatchedOutputCutoffState_cfunc = None
         self.niDCPower_CommitWithChannels_cfunc = None
         self.niDCPower_ConfigureApertureTime_cfunc = None
+        self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc = None
         self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc = None
         self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc = None
         self.niDCPower_DeleteAdvancedSequenceWithChannels_cfunc = None
@@ -123,6 +124,14 @@ class Library(object):
                 self.niDCPower_ConfigureApertureTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32]  # noqa: F405
                 self.niDCPower_ConfigureApertureTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureApertureTime_cfunc(vi, channel_name, aperture_time, units)
+
+    def niDCPower_CreateAdvancedSequenceCommitStepWithChannels(self, vi, channel_name, set_as_active_step):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc is None:
+                self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc = self._get_library_function('niDCPower_CreateAdvancedSequenceCommitStepWithChannels')
+                self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViBoolean]  # noqa: F405
+                self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc(vi, channel_name, set_as_active_step)
 
     def niDCPower_CreateAdvancedSequenceStepWithChannels(self, vi, channel_name, set_as_active_step):  # noqa: N802
         with self._func_lock:
