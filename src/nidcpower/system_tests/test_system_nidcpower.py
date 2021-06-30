@@ -324,17 +324,24 @@ def test_create_and_delete_advanced_sequence(session):
     sequence_name = 'my_sequence'
     session.source_mode = nidcpower.SourceMode.SEQUENCE
     session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
-    session.create_advanced_sequence_commit_step(set_as_active_step=True)
+    session.create_advanced_sequence_step(set_as_active_step=True)
     assert session.active_advanced_sequence == sequence_name
     session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
     session.voltage_level = 1
-    session.create_advanced_sequence_step(set_as_active_step=True)
-    session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
-    session.current_level = .5
     session.delete_advanced_sequence(sequence_name=sequence_name)
     with pytest.raises(nidcpower.errors.DriverError):
         session.active_advanced_sequence = sequence_name
 
+@pytest.mark.channels('0')
+def test_create_advanced_sequence_commit_step(session):
+    properties_used = ['output_function', 'voltage_level']
+    sequence_name = 'my_sequence'
+    session.source_mode = nidcpower.SourceMode.SEQUENCE
+    session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+    with pytest.raises(nidcpower.Error) as e:
+        session.create_advanced_sequence_commit_step(set_as_active_step=True)
+    assert e.value.code == -1074118619  # NIDCPOWER_ERROR_OPERATION_NOT_SUPPORTED
+    assert e.value.description.find('This device does not support the requested operation.  Refer to the device documentation to determine which operations it supports.') != -1
 
 @pytest.mark.channels('0')
 def test_create_and_delete_advanced_sequence_bad_name(session):
@@ -634,17 +641,26 @@ def test_create_and_delete_advanced_sequence_repeated_capabilities(session, chan
     sequence_name = 'my_sequence'
     channels_session.source_mode = nidcpower.SourceMode.SEQUENCE
     channels_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
-    channels_session.create_advanced_sequence_commit_step(set_as_active_step=True)
+    channels_session.create_advanced_sequence_step(set_as_active_step=True)
     assert channels_session.active_advanced_sequence == sequence_name
     channels_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
     channels_session.voltage_level = 1
-    channels_session.create_advanced_sequence_step(set_as_active_step=True)
-    channels_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
-    channels_session.voltage_level = .5
     channels_session.delete_advanced_sequence(sequence_name=sequence_name)
     with pytest.raises(nidcpower.errors.DriverError):
         channels_session.active_advanced_sequence = sequence_name
 
+@pytest.mark.resource_name('Dev1/0, Dev2/0')
+@pytest.mark.parametrize('channels', ('Dev1/0', 'Dev2/0', 'Dev1/0,Dev2/0'))
+def test_create_advanced_sequence_commit_step_repeated_capabilities(session, channels):
+    channels_session = session.channels[channels]
+    properties_used = ['output_function', 'voltage_level']
+    sequence_name = 'my_sequence'
+    channels_session.source_mode = nidcpower.SourceMode.SEQUENCE
+    channels_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+    with pytest.raises(nidcpower.Error) as e:
+        channels_session.create_advanced_sequence_commit_step(set_as_active_step=True)
+    assert e.value.code == -1074118619  # NIDCPOWER_ERROR_OPERATION_NOT_SUPPORTED
+    assert e.value.description.find('This device does not support the requested operation.  Refer to the device documentation to determine which operations it supports.') != -1
 
 @pytest.mark.resource_name('Dev1/0:3, Dev2/0:3')
 @pytest.mark.parametrize('method', ['abort', 'commit', 'reset'])
