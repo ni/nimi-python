@@ -26,6 +26,8 @@ class SideEffectsHelper(object):
         self._defaults['CommitWithChannels']['return'] = 0
         self._defaults['ConfigureApertureTime'] = {}
         self._defaults['ConfigureApertureTime']['return'] = 0
+        self._defaults['CreateAdvancedSequenceCommitStepWithChannels'] = {}
+        self._defaults['CreateAdvancedSequenceCommitStepWithChannels']['return'] = 0
         self._defaults['CreateAdvancedSequenceStepWithChannels'] = {}
         self._defaults['CreateAdvancedSequenceStepWithChannels']['return'] = 0
         self._defaults['CreateAdvancedSequenceWithChannels'] = {}
@@ -207,6 +209,11 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureApertureTime']['return'] != 0:
             return self._defaults['ConfigureApertureTime']['return']
         return self._defaults['ConfigureApertureTime']['return']
+
+    def niDCPower_CreateAdvancedSequenceCommitStepWithChannels(self, vi, channel_name, set_as_active_step):  # noqa: N802
+        if self._defaults['CreateAdvancedSequenceCommitStepWithChannels']['return'] != 0:
+            return self._defaults['CreateAdvancedSequenceCommitStepWithChannels']['return']
+        return self._defaults['CreateAdvancedSequenceCommitStepWithChannels']['return']
 
     def niDCPower_CreateAdvancedSequenceStepWithChannels(self, vi, channel_name, set_as_active_step):  # noqa: N802
         if self._defaults['CreateAdvancedSequenceStepWithChannels']['return'] != 0:
@@ -753,6 +760,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_CommitWithChannels.return_value = 0
         mock_library.niDCPower_ConfigureApertureTime.side_effect = MockFunctionCallError("niDCPower_ConfigureApertureTime")
         mock_library.niDCPower_ConfigureApertureTime.return_value = 0
+        mock_library.niDCPower_CreateAdvancedSequenceCommitStepWithChannels.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceCommitStepWithChannels")
+        mock_library.niDCPower_CreateAdvancedSequenceCommitStepWithChannels.return_value = 0
         mock_library.niDCPower_CreateAdvancedSequenceStepWithChannels.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceStepWithChannels")
         mock_library.niDCPower_CreateAdvancedSequenceStepWithChannels.return_value = 0
         mock_library.niDCPower_CreateAdvancedSequenceWithChannels.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceWithChannels")

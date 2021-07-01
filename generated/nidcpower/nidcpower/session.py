@@ -3608,6 +3608,63 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def create_advanced_sequence_commit_step(self, set_as_active_step=True):
+        r'''create_advanced_sequence_commit_step
+
+        Creates a Commit step in the Active advanced sequence. A Commit step
+        configures channels to a user-defined known state before starting the advanced sequence.
+        When a Commit step exists in the Active advanced sequence, you cannot
+        set the output method to Pulse Voltage or Pulse Current in either
+        the Commit step (-1) or step 0. When you create an advanced sequence
+        step, each property you passed to the create_advanced_sequence
+        method is reset to its default value for that step unless otherwise specified.
+
+        **Support for this Method**
+
+        You must set the source mode to Sequence to use this method.
+
+        Using the set_sequence method with Advanced Sequence
+        methods is unsupported.
+
+        **Related Topics**:
+
+        `Advanced Sequence
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        create_advanced_sequence
+
+        Note:
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+        for more information about supported devices.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].create_advanced_sequence_commit_step`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.create_advanced_sequence_commit_step`
+
+        Args:
+            set_as_active_step (bool): Specifies whether the step created with this method is active in the Active advanced sequence.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
+        error_code = self._library.niDCPower_CreateAdvancedSequenceCommitStepWithChannels(vi_ctype, channel_name_ctype, set_as_active_step_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def create_advanced_sequence_step(self, set_as_active_step=True):
         r'''create_advanced_sequence_step
 
@@ -3652,7 +3709,7 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.create_advanced_sequence_step`
 
         Args:
-            set_as_active_step (bool): Specifies that this current step in the active sequence is active.
+            set_as_active_step (bool): Specifies whether the step created with this method is active in the Active advanced sequence.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

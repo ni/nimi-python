@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0d347
+# This file is generated from NI-DCPower API metadata version 21.3.0d12
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -195,6 +195,38 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'CreateAdvancedSequenceCommitStepWithChannels': {
+        'documentation': {
+            'description': '\nCreates a Commit step in the Active advanced sequence. A Commit step\nconfigures channels to a user-defined known state before starting the advanced sequence.\nWhen a Commit step exists in the Active advanced sequence, you cannot\nset the output function to Pulse Voltage or Pulse Current in either\nthe Commit step (-1) or step 0. When you create an advanced sequence\nstep, each attribute you passed to the niDCPower_CreateAdvancedSequenceWithChannels\nfunction is reset to its default value for that step unless otherwise specified.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceWithChannels\n',
+            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'default_value': True,
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies whether the step created with this function is active in the Active advanced sequence.'
+                },
+                'name': 'setAsActiveStep',
+                'type': 'ViBoolean'
+            }
+        ],
+        'python_name': 'create_advanced_sequence_commit_step',
+        'returns': 'ViStatus'
+    },
     'CreateAdvancedSequenceStepWithChannels': {
         'documentation': {
             'description': '\nCreates a new advanced sequence step in the advanced sequence specified\nby the Active advanced sequence. When you create an advanced sequence\nstep, each attribute you passed to the niDCPower_CreateAdvancedSequenceWithChannels\nfunction is reset to its default value for that step unless otherwise\nspecified.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceWithChannels\n',
@@ -218,7 +250,7 @@ functions = {
                 'default_value': True,
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies that this current step in the active sequence is active.'
+                    'description': 'Specifies whether the step created with this function is active in the Active advanced sequence.'
                 },
                 'name': 'setAsActiveStep',
                 'type': 'ViBoolean'
