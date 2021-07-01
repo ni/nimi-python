@@ -2627,7 +2627,7 @@ class _SessionBase(object):
     def get_channel_names(self, indices):
         r'''get_channel_names
 
-        Returns a comma-separated list of channel names from a string index list.
+        Returns a list of channel names for given channel indices.
 
         Args:
             indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
@@ -2640,7 +2640,7 @@ class _SessionBase(object):
 
 
         Returns:
-            names (list of str): The returned channel name(s) at the specified index.
+            names (list of str): The channel name(s) at the specified indices.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
