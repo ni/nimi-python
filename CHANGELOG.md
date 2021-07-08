@@ -50,7 +50,7 @@ All notable changes to this project will be documented in this file.
             * Methods added:
                 * `clear_latched_output_cutoff_state`
                 * `query_latched_output_cutoff_state`
-        * Support for independent operation of instrument channels. Initializing an nidcpower session
+        * Support for independent operation of instrument channels. Creating an `nidcpower.Session
           with independent channels allows you to use multiple instruments in the same session. With
           independent channels, you can configure multiple channels of the same instrument, or of
           multiple instruments, independently of one another within the same session.
@@ -1109,4 +1109,3 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Changed
     * #### Removed
 -->
-
