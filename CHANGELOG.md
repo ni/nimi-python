@@ -50,7 +50,10 @@ All notable changes to this project will be documented in this file.
             * Methods added:
                 * `clear_latched_output_cutoff_state`
                 * `query_latched_output_cutoff_state`
-        * Capability to initialize a session with independent channels via new independent_channels argument in session constructor.
+        * Support for independent operation of instrument channels. Initializing an nidcpower session
+          with independent channels allows you to use multiple instruments in the same session. With
+          independent channels, you can configure multiple channels of the same instrument, or of
+          multiple instruments, independently of one another within the same session.
     * #### Changed
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
