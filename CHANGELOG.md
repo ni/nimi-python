@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.4.0](#140---2021-07-09)
 * [1.3.3](#133---2021-02-26)
 * [1.3.2](#132---2020-09-18)
 * [1.3.1](#131---2020-06-08)
@@ -26,11 +26,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
-* ### ALL
-    * #### Added
-    * #### Changed
-    * #### Removed
+## 1.4.0 - 2021-07-09
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * `get_channel_names` - [#1588](https://github.com/ni/nimi-python/issues/1588)
@@ -54,40 +50,6 @@ All notable changes to this project will be documented in this file.
           with independent channels allows you to use multiple instruments in the same session. With
           independent channels, you can configure multiple channels of the same instrument, or of
           multiple instruments, independently of one another within the same session.
-    * #### Changed
-    * #### Removed
-* ### `nidigital` (NI-Digital Pattern Driver)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nidmm` (NI-DMM)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nifgen` (NI-FGEN)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niscope` (NI-SCOPE)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niswitch` (NI-SWITCH)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nitclk` (NI-TClk)
-    * #### Added
-    * #### Changed
-    * #### Removed
 
 
 ## 1.3.3 - 2021-02-26
