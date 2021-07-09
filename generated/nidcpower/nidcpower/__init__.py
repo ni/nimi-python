@@ -2,7 +2,7 @@
 # This file was generated
 
 
-__version__ = '1.3.4.dev0'
+__version__ = '1.4.0'
 
 from nidcpower.enums import *  # noqa: F403,F401,H303
 from nidcpower.errors import DriverWarning  # noqa: F401
@@ -64,7 +64,7 @@ def get_diagnostic_information():
     info['driver']['name'] = "NI-DCPower"
     info['driver']['version'] = driver_version
     info['module']['name'] = 'nidcpower'
-    info['module']['version'] = "1.3.4.dev0"
+    info['module']['version'] = "1.4.0"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()
