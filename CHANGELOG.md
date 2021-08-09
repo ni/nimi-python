@@ -34,6 +34,9 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * API parity with NI-DCPower 21.0.0.
+            * Properties added:
+                * `output_cutoff_delay`
     * #### Changed
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)

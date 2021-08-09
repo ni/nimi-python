@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0d347
+# This file is generated from NI-DCPower API metadata version 21.0.0f353
 enums = {
     'ApertureTimeUnits': {
         'values': [

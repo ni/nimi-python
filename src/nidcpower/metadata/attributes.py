@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0d347
+# This file is generated from NI-DCPower API metadata version 21.0.0f353
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -1916,6 +1916,21 @@ attributes = {
             'channels'
         ],
         'type': 'ViReal64'
+    },
+    1150300: {
+        'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
+        'documentation': {
+            'description': '\nDelays disconnecting the output by the time you specify, in seconds, when a limit is exceeded.',
+            'note': 'Refer to Supported Attributes by Device for information about supported devices.'
+        },
+        'lv_property': 'Source:Output Cutoff:Delay',
+        'name': 'OUTPUT_CUTOFF_DELAY',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1250001: {
         'access': 'read-write',

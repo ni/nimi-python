@@ -1394,6 +1394,23 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.output_cutoff_current_overrange_enabled`
     '''
+    output_cutoff_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150300)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+
+    Delays disconnecting the output by the time you specify, in seconds, when a limit is exceeded.
+
+    Note: Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].output_cutoff_delay`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.output_cutoff_delay`
+    '''
     output_cutoff_enabled = _attributes.AttributeViBoolean(1150235)
     '''Type: bool
 
