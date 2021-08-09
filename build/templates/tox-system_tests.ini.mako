@@ -6,7 +6,7 @@
     driver_name = config['driver_name']
     if config['uses_nitclk'] or module_name == 'nitclk':
         wheel_env_no_py = '{}-wheel_dep'.format(module_name)
-        wheel_env = 'py38-' + wheel_env_no_py + ','
+        wheel_env = 'py39-' + wheel_env_no_py + ','
         uses_other_wheel = True
         if module_name == 'nitclk':
             # nitclk system tests use niscope
@@ -23,7 +23,7 @@
 # test suite on all supported python versions. To use it, "pip install tox"
 # and then run "tox -c tox-system_tests.ini" from the driver directory. (generated/${module_name})
 [tox]
-envlist = ${wheel_env}py{35,36,37,38}-${module_name}-system_tests, py38-${module_name}-coverage
+envlist = ${wheel_env}py{36,37,38,39}-${module_name}-system_tests, py39-${module_name}-coverage
 skip_missing_interpreters=True
 ignore_basepython_conflict=True
 # We put the .tox directory outside of the Jenkins workspace so that it isn't wiped with the rest of the repo
@@ -83,7 +83,7 @@ deps =
     ${module_name}-coverage: codecov
 
 depends =
-    ${module_name}-coverage: py{35,36,37,38}-${module_name}-system_tests
+    ${module_name}-coverage: py{36,37,38,39}-${module_name}-system_tests
 % if uses_other_wheel:
     ${module_name}-system_tests: ${wheel_env}
 % endif

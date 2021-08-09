@@ -22,5 +22,5 @@ called through its public C API using the `ctypes <https://docs.python.org/2/lib
 **nimi-python** supports all the Operating Systems supported by the underlying driver.
 
 **nimi-python** follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions. At
-this time this includes Python 3.5 and above using CPython.
+this time this includes Python 3.6 and above using CPython.
 
