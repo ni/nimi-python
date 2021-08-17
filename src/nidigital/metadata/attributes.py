@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 21.0.0d3
+# This file is generated from NI-Digital Pattern Driver API metadata version 21.3.0d40
 attributes = {
     1050002: {
         'access': 'read-write',
@@ -1168,5 +1168,144 @@ attributes = {
         },
         'name': 'FREQUENCY_COUNTER_HYSTERESIS_ENABLED',
         'type': 'ViBoolean'
+    },
+    1150086: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Disables the rio trigger or configures it for hardware triggering.  The default value is NIDIGITAL_VAL_NONE.\n',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_NONE',
+                    'Disables the conditional jump trigger.'
+                ],
+                [
+                    'NIDIGITAL_VAL_DIGITAL_EDGE',
+                    'Configures the conditional jump trigger for hardware triggering.'
+                ]
+            ],
+            'table_header': [
+                'Valid Values:'
+            ]
+        },
+        'enum': 'TriggerType',
+        'name': 'RIO_TRIGGER_TYPE',
+        'supported_rep_caps': [
+            'rio_triggers'
+        ],
+        'type': 'ViInt32'
+    },
+    1150087: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Configures the digital trigger source terminal for a RIO trigger instance. The PXIe-6570/6571 supports triggering through the PXI trigger bus. You can specify source terminals in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The source terminal can also be a terminal from another device, in which case the NI-Digital Pattern Driver automatically finds a route (if one is available) from that terminal to the input terminal (going through a physical PXI backplane trigger line). For example, you can set the source terminal on Dev1 to be /Dev2/RIOTrigger0. The default value is VI_NULL.\n',
+            'table_body': [
+                [
+                    'String identifier to any valid terminal name'
+                ]
+            ],
+            'table_header': [
+                'Valid Values:'
+            ]
+        },
+        'name': 'DIGITAL_EDGE_RIO_TRIGGER_SOURCE',
+        'supported_rep_caps': [
+            'rio_triggers'
+        ],
+        'type': 'ViString'
+    },
+    1150088: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Configures the active edge of the incoming trigger signal for the RIO trigger instance. The default value is NIDIGITAL_VAL_RISING_EDGE.\n',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_RISING_EDGE',
+                    'Specifies the signal transition from low level to high level.'
+                ],
+                [
+                    'NIDIGITAL_VAL_FALLING_EDGE',
+                    'Specifies the signal transition from high level to low level.'
+                ]
+            ],
+            'table_header': [
+                'Valid Values:'
+            ]
+        },
+        'enum': 'DigitalEdge',
+        'name': 'DIGITAL_EDGE_RIO_TRIGGER_EDGE',
+        'supported_rep_caps': [
+            'rio_triggers'
+        ],
+        'type': 'ViInt32'
+    },
+    1150089: {
+        'access': 'read only',
+        'documentation': {
+            'description': 'Specifies the terminal name from which the exported RIO trigger signal may be routed to other instruments through the PXI trigger bus. You can use this signal to trigger other instruments when the RIO trigger instance asserts on the digital pattern instrument.\n'
+        },
+        'name': 'RIO_TRIGGER_TERMINAL_NAME',
+        'supported_rep_caps': [
+            'rio_triggers'
+        ],
+        'type': 'ViString'
+    },
+    1150090: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the destination terminal for exporting the RIO Event. Terminals can be specified in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.\n',
+            'table_body': [
+                [
+                    'PXI_Trig0',
+                    'PXI trigger line 0'
+                ],
+                [
+                    'PXI_Trig1',
+                    'PXI trigger line 1'
+                ],
+                [
+                    'PXI_Trig2',
+                    'PXI trigger line 2'
+                ],
+                [
+                    'PXI_Trig3',
+                    'PXI trigger line 3'
+                ],
+                [
+                    'PXI_Trig4',
+                    'PXI trigger line 4'
+                ],
+                [
+                    'PXI_Trig5',
+                    'PXI trigger line 5'
+                ],
+                [
+                    'PXI_Trig6',
+                    'PXI trigger line 6'
+                ],
+                [
+                    'PXI_Trig7',
+                    'PXI trigger line 7'
+                ]
+            ],
+            'table_header': [
+                'Defined Values:'
+            ]
+        },
+        'name': 'EXPORTED_RIO_EVENT_OUTPUT_TERMINAL',
+        'supported_rep_caps': [
+            'rio_events'
+        ],
+        'type': 'ViString'
+    },
+    1150091: {
+        'access': 'read only',
+        'documentation': {
+            'description': 'Specifies the terminal name for the output signal of the specified instance of a RIO Event. You can use this terminal name as an input signal source for another trigger.\n'
+        },
+        'name': 'RIO_EVENT_TERMINAL_NAME',
+        'supported_rep_caps': [
+            'rio_events'
+        ],
+        'type': 'ViString'
     }
 }

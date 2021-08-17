@@ -137,4 +137,56 @@ sites
         passes a string of :python:`'site0, site1, site2'` to the set attribute function.
 
 
+rio_events
+----------
+
+    .. py:attribute:: nidigital.Session.rio_events[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.rio_events['0-2'].channel_enabled = True
+
+        passes a string of :python:`'RIOEvent0, RIOEvent1, RIOEvent2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.rio_events['RIOEvent0-RIOEvent2'].channel_enabled = True
+
+        passes a string of :python:`'RIOEvent0, RIOEvent1, RIOEvent2'` to the set attribute function.
+
+
+rio_triggers
+------------
+
+    .. py:attribute:: nidigital.Session.rio_triggers[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.rio_triggers['0-2'].channel_enabled = True
+
+        passes a string of :python:`'RIOTrigger0, RIOTrigger1, RIOTrigger2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.rio_triggers['RIOTrigger0-RIOTrigger2'].channel_enabled = True
+
+        passes a string of :python:`'RIOTrigger0, RIOTrigger1, RIOTrigger2'` to the set attribute function.
+
+
 

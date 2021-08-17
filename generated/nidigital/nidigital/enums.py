@@ -194,6 +194,10 @@ class SelectedFunction(Enum):
     r'''
     The I/O switch connecting the instrument channel is open to the I/O connector. If the PPMU is sourcing, it is stopped prior to opening the I/O switch.
     '''
+    RIO = 1104
+    r'''
+    Yields control of the specified pin(s) to LabVIEW FPGA.
+    '''
 
 
 class SequencerFlag(Enum):

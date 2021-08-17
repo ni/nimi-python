@@ -43,6 +43,17 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
+        * API parity with NI-Digital Pattern Driver 21.0.0.
+            * Properties added:
+                * `digital_edge_rio_trigger_edge`
+                * `digital_edge_rio_trigger_source`
+                * `exported_rio_event_output_terminal`
+                * `rio_event_terminal_name`
+                * `rio_trigger_terminal_name`
+                * `rio_trigger_type`
+            * Repeated Capabilities added:
+                * `rio_events`
+                * `rio_triggers`
     * #### Changed
     * #### Removed
 * ### `nidmm` (NI-DMM)

@@ -3258,6 +3258,88 @@ digital_edge_conditional_jump_trigger_source
 
                 - C Attribute: **NIDIGITAL_ATTR_DIGITAL_EDGE_CONDITIONAL_JUMP_TRIGGER_SOURCE**
 
+digital_edge_rio_trigger_edge
+-----------------------------
+
+    .. py:attribute:: digital_edge_rio_trigger_edge
+
+        Configures the active edge of the incoming trigger signal for the RIO trigger instance. The default value is :py:data:`~nidigital.DigitalEdge.RISING`.
+
+        +-------------------------------------------+---------------------------------------------------------------+
+        | Valid Values:                             |                                                               |
+        +===========================================+===============================================================+
+        | :py:data:`~nidigital.DigitalEdge.RISING`  | Specifies the signal transition from low level to high level. |
+        +-------------------------------------------+---------------------------------------------------------------+
+        | :py:data:`~nidigital.DigitalEdge.FALLING` | Specifies the signal transition from high level to low level. |
+        +-------------------------------------------+---------------------------------------------------------------+
+
+
+        .. tip:: This property can be set/get on specific rio_triggers within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container rio_triggers to specify a subset.
+
+            Example: :py:attr:`my_session.rio_triggers[ ... ].digital_edge_rio_trigger_edge`
+
+            To set/get on all rio_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_rio_trigger_edge`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------+
+            | Characteristic        | Value             |
+            +=======================+===================+
+            | Datatype              | enums.DigitalEdge |
+            +-----------------------+-------------------+
+            | Permissions           | read-write        |
+            +-----------------------+-------------------+
+            | Repeated Capabilities | rio_triggers      |
+            +-----------------------+-------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIDIGITAL_ATTR_DIGITAL_EDGE_RIO_TRIGGER_EDGE**
+
+digital_edge_rio_trigger_source
+-------------------------------
+
+    .. py:attribute:: digital_edge_rio_trigger_source
+
+        Configures the digital trigger source terminal for a RIO trigger instance. The PXIe-6570/6571 supports triggering through the PXI trigger bus. You can specify source terminals in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The source terminal can also be a terminal from another device, in which case the NI-Digital Pattern Driver automatically finds a route (if one is available) from that terminal to the input terminal (going through a physical PXI backplane trigger line). For example, you can set the source terminal on Dev1 to be /Dev2/RIOTrigger0. The default value is VI_NULL.
+
+        +----------------------------------------------+
+        | Valid Values:                                |
+        +==============================================+
+        | String identifier to any valid terminal name |
+        +----------------------------------------------+
+
+
+        .. tip:: This property can be set/get on specific rio_triggers within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container rio_triggers to specify a subset.
+
+            Example: :py:attr:`my_session.rio_triggers[ ... ].digital_edge_rio_trigger_source`
+
+            To set/get on all rio_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_rio_trigger_source`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+--------------+
+            | Characteristic        | Value        |
+            +=======================+==============+
+            | Datatype              | str          |
+            +-----------------------+--------------+
+            | Permissions           | read-write   |
+            +-----------------------+--------------+
+            | Repeated Capabilities | rio_triggers |
+            +-----------------------+--------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIDIGITAL_ATTR_DIGITAL_EDGE_RIO_TRIGGER_SOURCE**
+
 digital_edge_start_trigger_edge
 -------------------------------
 
@@ -3467,6 +3549,60 @@ exported_pattern_opcode_event_output_terminal
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NIDIGITAL_ATTR_EXPORTED_PATTERN_OPCODE_EVENT_OUTPUT_TERMINAL**
+
+exported_rio_event_output_terminal
+----------------------------------
+
+    .. py:attribute:: exported_rio_event_output_terminal
+
+        Specifies the destination terminal for exporting the RIO Event. Terminals can be specified in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
+
+        +-----------------+--------------------+
+        | Defined Values: |                    |
+        +=================+====================+
+        | PXI_Trig0       | PXI trigger line 0 |
+        +-----------------+--------------------+
+        | PXI_Trig1       | PXI trigger line 1 |
+        +-----------------+--------------------+
+        | PXI_Trig2       | PXI trigger line 2 |
+        +-----------------+--------------------+
+        | PXI_Trig3       | PXI trigger line 3 |
+        +-----------------+--------------------+
+        | PXI_Trig4       | PXI trigger line 4 |
+        +-----------------+--------------------+
+        | PXI_Trig5       | PXI trigger line 5 |
+        +-----------------+--------------------+
+        | PXI_Trig6       | PXI trigger line 6 |
+        +-----------------+--------------------+
+        | PXI_Trig7       | PXI trigger line 7 |
+        +-----------------+--------------------+
+
+
+        .. tip:: This property can be set/get on specific rio_events within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container rio_events to specify a subset.
+
+            Example: :py:attr:`my_session.rio_events[ ... ].exported_rio_event_output_terminal`
+
+            To set/get on all rio_events, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.exported_rio_event_output_terminal`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | rio_events |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIDIGITAL_ATTR_EXPORTED_RIO_EVENT_OUTPUT_TERMINAL**
 
 exported_start_trigger_output_terminal
 --------------------------------------
@@ -4709,6 +4845,120 @@ record_coercions
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NIDIGITAL_ATTR_RECORD_COERCIONS**
+
+rio_event_terminal_name
+-----------------------
+
+    .. py:attribute:: rio_event_terminal_name
+
+        Specifies the terminal name for the output signal of the specified instance of a RIO Event. You can use this terminal name as an input signal source for another trigger.
+
+
+
+
+        .. tip:: This property can be set/get on specific rio_events within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container rio_events to specify a subset.
+
+            Example: :py:attr:`my_session.rio_events[ ... ].rio_event_terminal_name`
+
+            To set/get on all rio_events, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.rio_event_terminal_name`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read only  |
+            +-----------------------+------------+
+            | Repeated Capabilities | rio_events |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIDIGITAL_ATTR_RIO_EVENT_TERMINAL_NAME**
+
+rio_trigger_terminal_name
+-------------------------
+
+    .. py:attribute:: rio_trigger_terminal_name
+
+        Specifies the terminal name from which the exported RIO trigger signal may be routed to other instruments through the PXI trigger bus. You can use this signal to trigger other instruments when the RIO trigger instance asserts on the digital pattern instrument.
+
+
+
+
+        .. tip:: This property can be set/get on specific rio_triggers within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container rio_triggers to specify a subset.
+
+            Example: :py:attr:`my_session.rio_triggers[ ... ].rio_trigger_terminal_name`
+
+            To set/get on all rio_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.rio_trigger_terminal_name`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+--------------+
+            | Characteristic        | Value        |
+            +=======================+==============+
+            | Datatype              | str          |
+            +-----------------------+--------------+
+            | Permissions           | read only    |
+            +-----------------------+--------------+
+            | Repeated Capabilities | rio_triggers |
+            +-----------------------+--------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIDIGITAL_ATTR_RIO_TRIGGER_TERMINAL_NAME**
+
+rio_trigger_type
+----------------
+
+    .. py:attribute:: rio_trigger_type
+
+        Disables the rio trigger or configures it for hardware triggering.  The default value is :py:data:`~nidigital.TriggerType.NONE`.
+
+        +------------------------------------------------+------------------------------------------------------------------+
+        | Valid Values:                                  |                                                                  |
+        +================================================+==================================================================+
+        | :py:data:`~nidigital.TriggerType.NONE`         | Disables the conditional jump trigger.                           |
+        +------------------------------------------------+------------------------------------------------------------------+
+        | :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` | Configures the conditional jump trigger for hardware triggering. |
+        +------------------------------------------------+------------------------------------------------------------------+
+
+
+        .. tip:: This property can be set/get on specific rio_triggers within your :py:class:`nidigital.Session` instance.
+            Use Python index notation on the repeated capabilities container rio_triggers to specify a subset.
+
+            Example: :py:attr:`my_session.rio_triggers[ ... ].rio_trigger_type`
+
+            To set/get on all rio_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+            Example: :py:attr:`my_session.rio_trigger_type`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------+
+            | Characteristic        | Value             |
+            +=======================+===================+
+            | Datatype              | enums.TriggerType |
+            +-----------------------+-------------------+
+            | Permissions           | read-write        |
+            +-----------------------+-------------------+
+            | Repeated Capabilities | rio_triggers      |
+            +-----------------------+-------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIDIGITAL_ATTR_RIO_TRIGGER_TYPE**
 
 selected_function
 -----------------
