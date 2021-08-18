@@ -5,7 +5,7 @@ NI-SCOPE Python API Status
 +-------------------------------+------------------------+
 | NI-SCOPE (niscope)            |                        |
 +===============================+========================+
-| Driver Version Tested Against | 20.7.0                 |
+| Driver Version Tested Against | 21.0.0                 |
 +-------------------------------+------------------------+
 | PyPI Version                  | |niscopeLatestVersion| |
 +-------------------------------+------------------------+
