@@ -136,35 +136,35 @@ def test_instruments_rep_cap(multi_instrument_session):
 
 
 def test_pattern_opcode_events_rep_cap(multi_instrument_session):
-    assert '' == multi_instrument_session.pattern_opcode_events['patternOpcodeEvent3'].exported_pattern_opcode_event_output_terminal
+    assert '' == multi_instrument_session.pattern_opcode_events[3].exported_pattern_opcode_event_output_terminal
 
     requested_terminal_name = '/Dev1/PXI_Trig0'
-    multi_instrument_session.pattern_opcode_events['patternOpcodeEvent3'].exported_pattern_opcode_event_output_terminal = requested_terminal_name
-    assert requested_terminal_name == multi_instrument_session.pattern_opcode_events['patternOpcodeEvent3'].exported_pattern_opcode_event_output_terminal
+    multi_instrument_session.pattern_opcode_events[3].exported_pattern_opcode_event_output_terminal = requested_terminal_name
+    assert requested_terminal_name == multi_instrument_session.pattern_opcode_events[3].exported_pattern_opcode_event_output_terminal
 
 
 def test_conditional_jump_triggers_rep_cap(multi_instrument_session):
-    assert nidigital.TriggerType.NONE == multi_instrument_session.conditional_jump_triggers['conditionalJumpTrigger3'].conditional_jump_trigger_type
+    assert nidigital.TriggerType.NONE == multi_instrument_session.conditional_jump_triggers[3].conditional_jump_trigger_type
 
     requested_trigger_type = nidigital.TriggerType.DIGITAL_EDGE
-    multi_instrument_session.conditional_jump_triggers['conditionalJumpTrigger3'].conditional_jump_trigger_type = requested_trigger_type
-    assert requested_trigger_type == multi_instrument_session.conditional_jump_triggers['conditionalJumpTrigger3'].conditional_jump_trigger_type
+    multi_instrument_session.conditional_jump_triggers[3].conditional_jump_trigger_type = requested_trigger_type
+    assert requested_trigger_type == multi_instrument_session.conditional_jump_triggers[3].conditional_jump_trigger_type
 
 
 def test_rio_events_rep_cap(single_instrument_session):
-    assert '' == single_instrument_session.rio_events['RIOEvent3'].exported_rio_event_output_terminal
+    assert '' == single_instrument_session.rio_events[3].exported_rio_event_output_terminal
 
     requested_terminal_name = '/Dev1/PXI_Trig0'
-    single_instrument_session.rio_events['RIOEvent3'].exported_rio_event_output_terminal = requested_terminal_name
-    assert requested_terminal_name == single_instrument_session.rio_events['RIOEvent3'].exported_rio_event_output_terminal
+    single_instrument_session.rio_events[3].exported_rio_event_output_terminal = requested_terminal_name
+    assert requested_terminal_name == single_instrument_session.rio_events[3].exported_rio_event_output_terminal
 
 
 def test_rio_triggers_rep_cap(single_instrument_session):
-    assert nidigital.TriggerType.NONE == single_instrument_session.rio_triggers['RIOTrigger3'].rio_trigger_type
+    assert nidigital.TriggerType.NONE == single_instrument_session.rio_triggers[3].rio_trigger_type
 
     requested_trigger_type = nidigital.TriggerType.DIGITAL_EDGE
-    single_instrument_session.rio_triggers['RIOTrigger3'].rio_trigger_type = requested_trigger_type
-    assert requested_trigger_type == single_instrument_session.rio_triggers['RIOTrigger3'].rio_trigger_type
+    single_instrument_session.rio_triggers[3].rio_trigger_type = requested_trigger_type
+    assert requested_trigger_type == single_instrument_session.rio_triggers[3].rio_trigger_type
 
 
 def test_property_boolean(multi_instrument_session):
