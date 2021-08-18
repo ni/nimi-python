@@ -18,6 +18,12 @@ def multi_instrument_session():
         yield simulated_session
 
 
+@pytest.fixture(scope='function')
+def single_instrument_session():
+    with nidigital.Session(resource_name=instruments[0], options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
+        yield simulated_session
+
+
 def test_close():
     session = nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570')
     session.vil = 1
@@ -143,6 +149,22 @@ def test_conditional_jump_triggers_rep_cap(multi_instrument_session):
     requested_trigger_type = nidigital.TriggerType.DIGITAL_EDGE
     multi_instrument_session.conditional_jump_triggers['conditionalJumpTrigger3'].conditional_jump_trigger_type = requested_trigger_type
     assert requested_trigger_type == multi_instrument_session.conditional_jump_triggers['conditionalJumpTrigger3'].conditional_jump_trigger_type
+
+
+def test_rio_events_rep_cap(single_instrument_session):
+    assert '' == single_instrument_session.rio_events['RIOEvent3'].exported_rio_event_output_terminal
+
+    requested_terminal_name = '/Dev1/PXI_Trig0'
+    single_instrument_session.rio_events['RIOEvent3'].exported_rio_event_output_terminal = requested_terminal_name
+    assert requested_terminal_name == single_instrument_session.rio_events['RIOEvent3'].exported_rio_event_output_terminal
+
+
+def test_rio_triggers_rep_cap(single_instrument_session):
+    assert nidigital.TriggerType.NONE == single_instrument_session.rio_triggers['RIOTrigger3'].rio_trigger_type
+
+    requested_trigger_type = nidigital.TriggerType.DIGITAL_EDGE
+    single_instrument_session.rio_triggers['RIOTrigger3'].rio_trigger_type = requested_trigger_type
+    assert requested_trigger_type == single_instrument_session.rio_triggers['RIOTrigger3'].rio_trigger_type
 
 
 def test_property_boolean(multi_instrument_session):
