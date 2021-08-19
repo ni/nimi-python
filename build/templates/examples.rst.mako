@@ -1,8 +1,9 @@
 <%
     import build.helper as helper
 
-    config        = template_parameters['metadata'].config
-    module_name = config['module_name']
+    config         = template_parameters['metadata'].config
+    module_name    = config['module_name']
+    module_version = config['module_version']
 
     import glob
     import os
@@ -15,7 +16,7 @@
     #   1) URL to zip file containing all examples and in cases like nidigital, support files
     #   2) Code snippet and URL to example file in src folder, for each example
     #
-    #  - If there is dev or pre ('a', 'b', 'rc') in the VERSION file then:
+    #  - If there is dev or pre ('a', 'b', 'rc') in module_version then:
     #       - it means code generator is being run during development
     #       - (1) will link to the zip file created during last release and the text will include "..for latest version.."
     #       - (2) will include current code snippet and URL will point to master branch
@@ -30,16 +31,12 @@
 
     example_url_base = 'https://github.com/ni/nimi-python/blob/'
 
-    # We need to use the global version and not the module version since the release version will match the global version
-    # and may not match the module version
-    with open('./VERSION') as vf:
-        global_version = vf.read().strip()
     from packaging.version import Version
-    v = Version(global_version)
+    v = Version(module_version)
 
     if v.dev is None and v.pre is None:
         examples_zip_url_text = '`You can download all {0} examples here <{1}>`_'.format(module_name, released_zip_url)
-        example_url_base += str(v)
+        example_url_base += latest_release_version
     else:
         examples_zip_url_text = '`You can download all {0} examples for latest version here <{1}>`_'.format(module_name, released_zip_url)
         example_url_base += 'master'
