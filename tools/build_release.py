@@ -38,9 +38,9 @@ Steps
         * Change the "Unreleased" header to the version of the release
         * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
+    * Update contents of LATEST_RELEASE with the version of the release being created.
     * `python3 tools/build_release.py --update --release`
         * This will update all the versions to remove any '.devN'
-        * Update contents of LATEST_RELEASE with the version of the release being created.
         * Commit to branch
     * `python3 tools/build_release.py --build`
         * Clean and build to update generated files with new version
