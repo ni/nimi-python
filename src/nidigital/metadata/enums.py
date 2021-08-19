@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 19.5.0d7
+# This file is generated from NI-Digital Pattern Driver API metadata version 21.3.0d40
 enums = {
     'BitOrder': {
         'values': [
@@ -119,6 +119,13 @@ enums = {
             {
                 'name': 'NIDIGITAL_VAL_REF_CLOCK',
                 'value': 2003
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies to route a RIO event signal.'
+                },
+                'name': 'NIDIGITAL_VAL_RIO_EVENT',
+                'value': 2004
             }
         ]
     },
@@ -268,8 +275,8 @@ enums = {
                     'description': 'A digital state of 0.'
                 },
                 'name': 'NIDIGITAL_VAL_0',
-                'python_name': 'ZERO',
                 'pretty_name': '0',
+                'python_name': 'ZERO',
                 'value': 0
             },
             {
@@ -277,8 +284,8 @@ enums = {
                     'description': 'A digital state of 1.'
                 },
                 'name': 'NIDIGITAL_VAL_1',
-                'python_name': 'ONE',
                 'pretty_name': '1',
+                'python_name': 'ONE',
                 'value': 1
             },
             {
@@ -348,6 +355,86 @@ enums = {
             }
         ]
     },
+    'RIOEvent': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_RIO_EVENT0',
+                'value': 'RIOEvent0'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_EVENT1',
+                'value': 'RIOEvent1'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_EVENT2',
+                'value': 'RIOEvent2'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_EVENT3',
+                'value': 'RIOEvent3'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_EVENT4',
+                'value': 'RIOEvent4'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_EVENT5',
+                'value': 'RIOEvent5'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_EVENT6',
+                'value': 'RIOEvent6'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_EVENT7',
+                'value': 'RIOEvent7'
+            }
+        ]
+    },
+    'RIOTriggerId': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_RIO_TRIGGER0',
+                'python_name': 'RIO_TRIGGER0',
+                'value': 'RIOTrigger0'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_TRIGGER1',
+                'python_name': 'RIO_TRIGGER1',
+                'value': 'RIOTrigger1'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_TRIGGER2',
+                'python_name': 'RIO_TRIGGER2',
+                'value': 'RIOTrigger2'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_TRIGGER3',
+                'python_name': 'RIO_TRIGGER3',
+                'value': 'RIOTrigger3'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_TRIGGER4',
+                'python_name': 'RIO_TRIGGER4',
+                'value': 'RIOTrigger4'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_TRIGGER5',
+                'python_name': 'RIO_TRIGGER5',
+                'value': 'RIOTrigger5'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_TRIGGER6',
+                'python_name': 'RIO_TRIGGER6',
+                'value': 'RIOTrigger6'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RIO_TRIGGER7',
+                'python_name': 'RIO_TRIGGER7',
+                'value': 'RIOTrigger7'
+            }
+        ]
+    },
     'SelectedFunction': {
         'values': [
             {
@@ -377,6 +464,13 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_DISCONNECT',
                 'value': 1103
+            },
+            {
+                'documentation': {
+                    'description': 'Yields control of the specified pin(s) to LabVIEW FPGA.'
+                },
+                'name': 'NIDIGITAL_VAL_RIO',
+                'value': 1104
             }
         ]
     },
@@ -697,8 +791,8 @@ enums = {
                     'description': 'Specifies to drive low.'
                 },
                 'name': 'NIDIGITAL_VAL_0',
-                'python_name': 'ZERO',
                 'pretty_name': '0',
+                'python_name': 'ZERO',
                 'value': 0
             },
             {
@@ -706,8 +800,8 @@ enums = {
                     'description': 'Specifies to drive high.'
                 },
                 'name': 'NIDIGITAL_VAL_1',
-                'python_name': 'ONE',
                 'pretty_name': '1',
+                'python_name': 'ONE',
                 'value': 1
             },
             {

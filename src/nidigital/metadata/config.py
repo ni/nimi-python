@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 19.5.0d7
+# This file is generated from NI-Digital Pattern Driver API metadata version 21.3.0d40
 config = {
-    'api_version': '19.5.0d7',
+    'api_version': '21.3.0d40',
     'c_function_prefix': 'niDigital_',
     'close_function': 'close',
     'context_manager_name': {
@@ -64,8 +64,16 @@ config = {
             'prefix': 'site',
             'python_name': 'sites'
         },
+        {
+            'prefix': 'RIOEvent',
+            'python_name': 'rio_events'
+        },
+        {
+            'prefix': 'RIOTrigger',
+            'python_name': 'rio_triggers'
+        }
     ],
     'session_class_description': 'An NI-Digital Pattern Driver session',
     'session_handle_parameter_name': 'vi',
-    'uses_nitclk': True,
+    'uses_nitclk': True
 }

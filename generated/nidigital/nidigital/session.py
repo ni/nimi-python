@@ -301,6 +301,50 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.digital_edge_conditional_jump_trigger_source`
     '''
+    digital_edge_rio_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150088)
+    '''Type: enums.DigitalEdge
+
+    Configures the active edge of the incoming trigger signal for the RIO trigger instance. The default value is DigitalEdge.RISING.
+
+    +---------------------+---------------------------------------------------------------+
+    | Valid Values:       |                                                               |
+    +=====================+===============================================================+
+    | DigitalEdge.RISING  | Specifies the signal transition from low level to high level. |
+    +---------------------+---------------------------------------------------------------+
+    | DigitalEdge.FALLING | Specifies the signal transition from high level to low level. |
+    +---------------------+---------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific rio_triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container rio_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.rio_triggers[ ... ].digital_edge_rio_trigger_edge`
+
+    To set/get on all rio_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.digital_edge_rio_trigger_edge`
+    '''
+    digital_edge_rio_trigger_source = _attributes.AttributeViString(1150087)
+    '''Type: str
+
+    Configures the digital trigger source terminal for a RIO trigger instance. The PXIe-6570/6571 supports triggering through the PXI trigger bus. You can specify source terminals in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The source terminal can also be a terminal from another device, in which case the NI-Digital Pattern Driver automatically finds a route (if one is available) from that terminal to the input terminal (going through a physical PXI backplane trigger line). For example, you can set the source terminal on Dev1 to be /Dev2/RIOTrigger0. The default value is VI_NULL.
+
+    +----------------------------------------------+
+    | Valid Values:                                |
+    +==============================================+
+    | String identifier to any valid terminal name |
+    +----------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific rio_triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container rio_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.rio_triggers[ ... ].digital_edge_rio_trigger_source`
+
+    To set/get on all rio_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.digital_edge_rio_trigger_source`
+    '''
     digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150031)
     '''Type: enums.DigitalEdge
 
@@ -415,6 +459,41 @@ class _SessionBase(object):
     To set/get on all pattern_opcode_events, you can call the property directly on the :py:class:`nidigital.Session`.
 
     Example: :py:attr:`my_session.exported_pattern_opcode_event_output_terminal`
+    '''
+    exported_rio_event_output_terminal = _attributes.AttributeViString(1150090)
+    '''Type: str
+
+    Specifies the destination terminal for exporting the RIO Event. Terminals can be specified in one of two ways. If the digital pattern instrument is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
+
+    +-----------------+--------------------+
+    | Defined Values: |                    |
+    +=================+====================+
+    | PXI_Trig0       | PXI trigger line 0 |
+    +-----------------+--------------------+
+    | PXI_Trig1       | PXI trigger line 1 |
+    +-----------------+--------------------+
+    | PXI_Trig2       | PXI trigger line 2 |
+    +-----------------+--------------------+
+    | PXI_Trig3       | PXI trigger line 3 |
+    +-----------------+--------------------+
+    | PXI_Trig4       | PXI trigger line 4 |
+    +-----------------+--------------------+
+    | PXI_Trig5       | PXI trigger line 5 |
+    +-----------------+--------------------+
+    | PXI_Trig6       | PXI trigger line 6 |
+    +-----------------+--------------------+
+    | PXI_Trig7       | PXI trigger line 7 |
+    +-----------------+--------------------+
+
+    Tip:
+    This property can be set/get on specific rio_events within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container rio_events to specify a subset.
+
+    Example: :py:attr:`my_session.rio_events[ ... ].exported_rio_event_output_terminal`
+
+    To set/get on all rio_events, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.exported_rio_event_output_terminal`
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150032)
     '''Type: str
@@ -871,6 +950,59 @@ class _SessionBase(object):
 
     Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type properties. Enabling record value coercions is not supported.
     '''
+    rio_event_terminal_name = _attributes.AttributeViString(1150091)
+    '''Type: str
+
+    Specifies the terminal name for the output signal of the specified instance of a RIO Event. You can use this terminal name as an input signal source for another trigger.
+
+    Tip:
+    This property can be set/get on specific rio_events within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container rio_events to specify a subset.
+
+    Example: :py:attr:`my_session.rio_events[ ... ].rio_event_terminal_name`
+
+    To set/get on all rio_events, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.rio_event_terminal_name`
+    '''
+    rio_trigger_terminal_name = _attributes.AttributeViString(1150089)
+    '''Type: str
+
+    Specifies the terminal name from which the exported RIO trigger signal may be routed to other instruments through the PXI trigger bus. You can use this signal to trigger other instruments when the RIO trigger instance asserts on the digital pattern instrument.
+
+    Tip:
+    This property can be set/get on specific rio_triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container rio_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.rio_triggers[ ... ].rio_trigger_terminal_name`
+
+    To set/get on all rio_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.rio_trigger_terminal_name`
+    '''
+    rio_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150086)
+    '''Type: enums.TriggerType
+
+    Disables the rio trigger or configures it for hardware triggering.  The default value is TriggerType.NONE.
+
+    +--------------------------+------------------------------------------------------------------+
+    | Valid Values:            |                                                                  |
+    +==========================+==================================================================+
+    | TriggerType.NONE         | Disables the conditional jump trigger.                           |
+    +--------------------------+------------------------------------------------------------------+
+    | TriggerType.DIGITAL_EDGE | Configures the conditional jump trigger for hardware triggering. |
+    +--------------------------+------------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific rio_triggers within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container rio_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.rio_triggers[ ... ].rio_trigger_type`
+
+    To set/get on all rio_triggers, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.rio_trigger_type`
+    '''
     selected_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SelectedFunction, 1150004)
     '''Type: enums.SelectedFunction
 
@@ -1153,6 +1285,8 @@ class _SessionBase(object):
         self.pattern_opcode_events = _RepeatedCapabilities(self, 'patternOpcodeEvent', repeated_capability_list)
         self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger', repeated_capability_list)
         self.sites = _RepeatedCapabilities(self, 'site', repeated_capability_list)
+        self.rio_events = _RepeatedCapabilities(self, 'RIOEvent', repeated_capability_list)
+        self.rio_triggers = _RepeatedCapabilities(self, 'RIOTrigger', repeated_capability_list)
 
         self._is_frozen = freeze_it
 

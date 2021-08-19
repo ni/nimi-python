@@ -430,6 +430,16 @@ SelectedFunction
 
 
 
+    .. py:attribute:: SelectedFunction.RIO
+
+
+
+        Yields control of the specified pin(s) to LabVIEW FPGA.
+
+        
+
+
+
 SequencerFlag
 -------------
 
