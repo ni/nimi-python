@@ -1,6 +1,6 @@
 # We need to maintain the version here since it needs to be updated by the build process on GitHub
 config_additional_config = {
-    'module_version': '1.4.1',
+    'module_version': '1.4.2.dev0',
     'latest_runtime_version_tested_against': '21.0.0',
     'custom_types': [
         # Redundant, since waveform_info is also in the base config.py file. See issue 1495 (https://github.com/ni/nimi-python/issues/1495) 
