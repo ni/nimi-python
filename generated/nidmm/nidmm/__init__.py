@@ -2,7 +2,7 @@
 # This file was generated
 
 
-__version__ = '1.4.1'
+__version__ = '1.4.2.dev0'
 
 from nidmm.enums import *  # noqa: F403,F401,H303
 from nidmm.errors import DriverWarning  # noqa: F401
@@ -64,7 +64,7 @@ def get_diagnostic_information():
     info['driver']['name'] = "NI-DMM"
     info['driver']['version'] = driver_version
     info['module']['name'] = 'nidmm'
-    info['module']['version'] = "1.4.1"
+    info['module']['version'] = "1.4.2.dev0"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()
