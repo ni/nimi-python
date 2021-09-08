@@ -73,6 +73,7 @@ stages:
       dependsOn: Windows_nimi_bot_Validate_Codegen 
       workspace:
         clean: all
+      steps:
         - script: |
             . .venv/bin/activate || call .venv\Scripts\activate
             tools\system_tests.bat nimodinst
