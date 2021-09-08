@@ -69,14 +69,14 @@ stages:
             tools\system_tests.bat nifgen
           displayName: Running nifgen system tests(few tests are failing)
 
-    # - job: Windows_Running_niscope_system_tests
-    #   dependsOn: Windows_nimi_bot_Validate_Codegen 
-    #   workspace:
-    #     clean: all
-        # - script: |
-        #     . .venv/bin/activate || call .venv\Scripts\activate
-        #     tools\system_tests.bat nimodinst
-        #   displayName: Running nimodinst system tests(few tests are failing)
+    - job: Windows_Running_nimodinst_system_tests
+      dependsOn: Windows_nimi_bot_Validate_Codegen 
+      workspace:
+        clean: all
+        - script: |
+            . .venv/bin/activate || call .venv\Scripts\activate
+            tools\system_tests.bat nimodinst
+          displayName: Running nimodinst system tests(few tests are failing)
 
     - job: Windows_Running_niscope_system_tests
       dependsOn: Windows_nimi_bot_Validate_Codegen 
