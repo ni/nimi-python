@@ -59,26 +59,56 @@ stages:
         - script: | 
             tools\system_tests.bat nidmm
           displayName: Running nidmm system tests
-        # - script: | 
-        #     . .venv/bin/activate || call .venv\Scripts\activate
-        #     tools\system_tests.bat nifgen
-        #   displayName: Running nifgen system tests(few tests are failing)
+
+    - job: Windows_Running_nifgen_system_tests
+      dependsOn: Windows_nimi_bot_Validate_Codegen 
+      workspace:
+        clean: all
+        - script: | 
+            . .venv/bin/activate || call .venv\Scripts\activate
+            tools\system_tests.bat nifgen
+          displayName: Running nifgen system tests(few tests are failing)
+
+    # - job: Windows_Running_niscope_system_tests
+    #   dependsOn: Windows_nimi_bot_Validate_Codegen 
+    #   workspace:
+    #     clean: all
         # - script: |
         #     . .venv/bin/activate || call .venv\Scripts\activate
         #     tools\system_tests.bat nimodinst
         #   displayName: Running nimodinst system tests(few tests are failing)
-        # - script: |
-        #     tools\system_tests.bat niscope
-        #   displayName: Running niscope system tests
-        # - script: | 
-        #     tools\system_tests.bat nise
-        #   displayName: Running nise system tests
-        # - script: | 
-        #     tools\system_tests.bat niswitch
-        #   displayName: Running niswitch system tests
-        # - script: | 
-        #     tools\system_tests.bat nitclk
-        #   displayName: Running nitclk system tests         
+
+    - job: Windows_Running_niscope_system_tests
+      dependsOn: Windows_nimi_bot_Validate_Codegen 
+      workspace:
+        clean: all
+        - script: |
+            tools\system_tests.bat niscope
+          displayName: Running niscope system tests
+
+    - job: Windows_Running_nise_system_tests
+      dependsOn: Windows_nimi_bot_Validate_Codegen 
+      workspace:
+        clean: all
+        - script: | 
+            tools\system_tests.bat nise
+          displayName: Running nise system tests
+
+    - job: Windows_Running_niswitch_system_tests
+      dependsOn: Windows_nimi_bot_Validate_Codegen 
+      workspace:
+        clean: all
+        - script: | 
+            tools\system_tests.bat niswitch
+          displayName: Running niswitch system tests
+
+    - job: Windows_Running_nitclk_system_tests
+      dependsOn: Windows_nimi_bot_Validate_Codegen 
+      workspace:
+        clean: all
+        - script: | 
+            tools\system_tests.bat nitclk
+          displayName: Running nitclk system tests         
           
 
 
