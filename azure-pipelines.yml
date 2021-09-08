@@ -11,7 +11,7 @@ stages:
         - nimibot -equals True
         - agent.os -equals Windows_NT
     jobs:
-    - job: Windows_nimi_bot
+    - job: Windows_nimi_bot_Validate_Codegen
       workspace:
         clean: all
       steps:
@@ -32,23 +32,31 @@ stages:
                 print("Please re-generate the codegen using command 'tox -e codegen'", file=sys.stderr)
                 sys.exit(-1)
               sys.exit(0)
+
+    - job: Windows_Running_nidcpower_system_tests
+      dependsOn: Windows_nimi_bot_Validate_Codegen 
+      workspace:
+        clean: all
+      steps:
         - script: | 
-            "C:\Program Files\Python36\python.exe" -m venv .venv
-            . .venv/bin/activate || call .venv\Scripts\activate
-            python --version
-            python -m pip install --upgrade pip
-            python -m pip install tox
-          displayName: Create virtual environment
-        - script: | 
-            . .venv/bin/activate || call .venv\Scripts\activate
             tools\system_tests.bat nidcpower
           displayName: Running nidcpower system tests 
+
+    - job: Windows_Running_nidigital_system_tests
+      dependsOn: Windows_nimi_bot_Validate_Codegen 
+      workspace:
+        clean: all
+      steps:
         - script: | 
-            . .venv/bin/activate || call .venv\Scripts\activate
             tools\system_tests.bat nidigital
           displayName: Running nidigital system tests
+
+    - job: Windows_Running_nidigital_system_tests
+      dependsOn: Windows_nimi_bot_Validate_Codegen 
+      workspace:
+        clean: all
+      steps:
         - script: | 
-            . .venv/bin/activate || call .venv\Scripts\activate
             tools\system_tests.bat nidmm
           displayName: Running nidmm system tests
         # - script: | 
@@ -59,22 +67,18 @@ stages:
         #     . .venv/bin/activate || call .venv\Scripts\activate
         #     tools\system_tests.bat nimodinst
         #   displayName: Running nimodinst system tests(few tests are failing)
-        - script: |
-            . .venv/bin/activate || call .venv\Scripts\activate
-            tools\system_tests.bat niscope
-          displayName: Running niscope system tests
-        - script: | 
-            . .venv/bin/activate || call .venv\Scripts\activate
-            tools\system_tests.bat nise
-          displayName: Running nise system tests
-        - script: | 
-            . .venv/bin/activate || call .venv\Scripts\activate
-            tools\system_tests.bat niswitch
-          displayName: Running niswitch system tests
-        - script: | 
-            . .venv/bin/activate || call .venv\Scripts\activate
-            tools\system_tests.bat nitclk
-          displayName: Running nitclk system tests         
+        # - script: |
+        #     tools\system_tests.bat niscope
+        #   displayName: Running niscope system tests
+        # - script: | 
+        #     tools\system_tests.bat nise
+        #   displayName: Running nise system tests
+        # - script: | 
+        #     tools\system_tests.bat niswitch
+        #   displayName: Running niswitch system tests
+        # - script: | 
+        #     tools\system_tests.bat nitclk
+        #   displayName: Running nitclk system tests         
           
 
 
