@@ -51,7 +51,7 @@ stages:
             tools\system_tests.bat nidigital
           displayName: Running nidigital system tests
 
-    - job: Windows_Running_nidigital_system_tests
+    - job: Windows_Running_nidmm_system_tests
       dependsOn: Windows_nimi_bot_Validate_Codegen 
       workspace:
         clean: all
