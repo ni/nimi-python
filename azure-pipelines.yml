@@ -22,6 +22,9 @@ stages:
             script: |
               import os
               import sys
+              import subprocess
+
+              # To verify code is generated
               os.system('git config user.email "dummy@ni.com"')
               os.system('git config user.name "dummy"')
               commit_id_before_code_generator = os.system("git log -1 --format=%h")
@@ -31,6 +34,14 @@ stages:
               if commit_id_before_code_generator != commit_id_after_code_generator:
                 print("Please re-generate the codegen using command 'tox -e codegen'", file=sys.stderr)
                 sys.exit(-1)
+
+              # To verify code generated is not added in .gitignore list
+              output = subprocess.check_output(["git", "ls-files", "--others", "-i", "--exclude-standard"], shell=True).decode()
+              files_ignored = [ file_path for file_path in output.split("\n") if not file_path.startswith(".tox") and file_path]
+              if files_ignored:
+                print(f"{files_ignored} are generated using 'tox -e codegen', these files are not submitted as part of PR change due to paths added in .gitignore", file=sys.stderr)
+                sys.exit(-1)
+
               sys.exit(0)
 
     - job: Windows_Running_nidcpower_system_tests
