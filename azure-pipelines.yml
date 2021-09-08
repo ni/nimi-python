@@ -37,7 +37,7 @@ stages:
 
               # To verify code generated is not added in .gitignore list
               output = subprocess.check_output(["git", "ls-files", "--others", "-i", "--exclude-standard"], shell=True).decode()
-              files_ignored = [ file_path for file_path in output.split("\n") if not file_path.startswith(".tox") and file_path]
+              files_ignored = [ file_path for file_path in output.split("\n") if not file_path.startswith((".tox", 'commands.log', 'generated/driver_file_built', 'generated/printed_global_files', 'tools/__pycache__')) and file_path]
               if files_ignored:
                 print(f"{files_ignored} are generated using 'tox -e codegen', these files are not submitted as part of PR change due to paths added in .gitignore", file=sys.stderr)
                 sys.exit(-1)
