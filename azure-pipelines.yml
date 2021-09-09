@@ -3,6 +3,9 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+# A pipeline with no CI trigger
+trigger: none
+
 stages:
   - stage: Windows_nimi_bot
     pool:
