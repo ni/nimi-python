@@ -1,6 +1,7 @@
 # A pipeline with no CI trigger
 trigger: none
 
+
 stages:
   - stage: Windows_nimi_bot
     pool:
