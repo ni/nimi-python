@@ -30,7 +30,7 @@ stages:
         - nimibot -equals True
         - agent.os -equals Windows_NT
     jobs:
-    - job: Windows_nimi_bot_Validate_Codegen
+    - job: ensure_code_gen_up_to_date
       workspace:
         clean: all
       steps:
@@ -38,7 +38,7 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - task: PythonScript@0
-          displayName: Validate codegen
+          displayName: Ensure codegen up to date
           inputs:
             scriptSource: inline
             script: |
@@ -54,99 +54,125 @@ stages:
               os.system('git commit -a -m "test"')
               commit_id_after_code_generator = os.system("git log -1 --format=%h")
               if commit_id_before_code_generator != commit_id_after_code_generator:
-                print("Please re-generate the codegen using command 'tox -e codegen'", file=sys.stderr)
+                print("Run codegen and include the generated files in the PR", file=sys.stderr)
                 sys.exit(-1)
 
               # To verify code generated is not added in .gitignore list
-              output = subprocess.check_output(["git", "ls-files", "--others", "-i", "--exclude-standard"], shell=True).decode()
-              files_ignored = [ file_path for file_path in output.split("\n") if not file_path.startswith((".tox", 'commands.log', 'generated/driver_file_built', 'generated/printed_global_files', 'tools/__pycache__')) and file_path]
-              if files_ignored:
-                print(f"{files_ignored} are generated using 'tox -e codegen', these files are not submitted as part of PR change due to paths added in .gitignore", file=sys.stderr)
-                sys.exit(-1)
+              # output = subprocess.check_output(["git", "ls-files", "--others", "-i", "--exclude-standard"], shell=True).decode()
+              # files_ignored = [ file_path for file_path in output.split("\n") if not file_path.startswith((".tox", 'commands.log', 'generated/driver_file_built', 'generated/printed_global_files', 'tools/__pycache__')) and file_path]
+              # if files_ignored:
+              #   print(f"{files_ignored} are generated using 'tox -e codegen', these files are not submitted as part of PR change due to paths added in .gitignore", file=sys.stderr)
+              #   sys.exit(-1)
 
               sys.exit(0)
 
-    - job: Windows_Running_nidcpower_system_tests
-      dependsOn: Windows_nimi_bot_Validate_Codegen 
+    - job: nidcpower_system_tests_windows
+      dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
       steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: $(clone_depth)
         - script: | 
             tools\system_tests.bat nidcpower
-          displayName: Running nidcpower system tests 
+          displayName: nidcpower system tests windows
 
-    - job: Windows_Running_nidigital_system_tests
-      dependsOn: Windows_nimi_bot_Validate_Codegen 
+    - job: nidigital_system_tests_windows
+      dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
       steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: $(clone_depth)
         - script: | 
             tools\system_tests.bat nidigital
-          displayName: Running nidigital system tests
+          displayName: nidigital system tests windows
 
-    - job: Windows_Running_nidmm_system_tests
-      dependsOn: Windows_nimi_bot_Validate_Codegen 
+    - job: nidmm_system_tests_windows
+      dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
       steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: $(clone_depth)
         - script: | 
             tools\system_tests.bat nidmm
-          displayName: Running nidmm system tests
+          displayName: nidmm system tests windows
 
-    - job: Windows_Running_nifgen_system_tests
-      dependsOn: Windows_nimi_bot_Validate_Codegen 
+    - job: nifgen_system_tests_windows
+      dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
       steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: $(clone_depth)
         - script: | 
             tools\system_tests.bat nifgen
-          displayName: Running nifgen system tests(few tests are failing)
+          displayName: nifgen system tests windows
 
-    - job: Windows_Running_nimodinst_system_tests
-      dependsOn: Windows_nimi_bot_Validate_Codegen 
+    - job: nimodinst_system_tests_windows
+      dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
       steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: $(clone_depth)
         - script: |
-            . .venv/bin/activate || call .venv\Scripts\activate
             tools\system_tests.bat nimodinst
-          displayName: Running nimodinst system tests(few tests are failing)
+          displayName: nimodinst system tests windows
 
-    - job: Windows_Running_niscope_system_tests
-      dependsOn: Windows_nimi_bot_Validate_Codegen 
+    - job: niscope_system_tests_windows
+      dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
       steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: $(clone_depth)
         - script: |
             tools\system_tests.bat niscope
-          displayName: Running niscope system tests
+          displayName: niscope system tests windows
 
-    - job: Windows_Running_nise_system_tests
-      dependsOn: Windows_nimi_bot_Validate_Codegen 
+    - job: nise_system_tests_windows
+      dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
       steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: $(clone_depth)
         - script: | 
             tools\system_tests.bat nise
-          displayName: Running nise system tests
+          displayName: nise system tests windows
 
-    - job: Windows_Running_niswitch_system_tests
-      dependsOn: Windows_nimi_bot_Validate_Codegen 
+    - job: niswitch_system_tests_windows
+      dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
       steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: $(clone_depth)
         - script: | 
             tools\system_tests.bat niswitch
-          displayName: Running niswitch system tests
+          displayName: niswitch system tests windows
 
-    - job: Windows_Running_nitclk_system_tests
-      dependsOn: Windows_nimi_bot_Validate_Codegen 
+    - job: nitclk_system_tests_windows
+      dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
       steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: $(clone_depth)
         - script: | 
             tools\system_tests.bat nitclk
-          displayName: Running nitclk system tests         
+          displayName: nitclk system tests windows    
           
 
 
