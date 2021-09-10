@@ -18,7 +18,7 @@ pr:
   drafts: false
 
 stages:
-  - stage: Windows_nimi_bot
+  - stage: nimi_bot_windows
     pool:
       name: Users
       demands:
