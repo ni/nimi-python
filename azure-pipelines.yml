@@ -25,9 +25,8 @@ pr:
 stages:
   - stage: nimi_bot_windows
     pool:
-      name: Users
+      name: nimi-bot
       demands:
-        - nimibot -equals True
         - agent.os -equals Windows_NT
     jobs:
     - job: ensure_code_gen_up_to_date
