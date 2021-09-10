@@ -1,6 +1,22 @@
 # A pipeline with no CI trigger
 trigger: none
 
+# specific path
+pr:
+  branches:
+    include:
+    - master
+    - releases/*
+  paths:
+    exclude:
+    - CHANGELOG.md
+    - CONTRIBUTING.md
+    - .gitattributes
+    - .gitattributes
+    - LICENSE
+    - VERSION
+  drafts: false
+
 stages:
   - stage: Windows_nimi_bot
     pool:
@@ -13,6 +29,9 @@ stages:
       workspace:
         clean: all
       steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: 10
         - task: PythonScript@0
           displayName: Validate codegen
           inputs:
