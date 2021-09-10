@@ -1,3 +1,8 @@
+variables:
+- name: clone_depth
+  value: 10 
+  
+
 # A pipeline with no CI trigger
 trigger: none
 
@@ -31,7 +36,7 @@ stages:
       steps:
         - checkout: self  
           clean: true
-          fetchDepth: 10
+          fetchDepth: $(clone_depth)
         - task: PythonScript@0
           displayName: Validate codegen
           inputs:
