@@ -66,18 +66,6 @@ stages:
 
               sys.exit(0)
 
-    - job: nidcpower_system_tests_windows
-      dependsOn: ensure_code_gen_up_to_date 
-      workspace:
-        clean: all
-      steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - script: | 
-            tools\system_tests.bat nidcpower
-          displayName: nidcpower system tests windows
-
     - job: nidigital_system_tests_windows
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
@@ -90,7 +78,7 @@ stages:
             tools\system_tests.bat nidigital
           displayName: nidigital system tests windows
 
-    - job: nidmm_system_tests_windows
+    - job: nitclk_system_tests_windows
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
@@ -99,8 +87,8 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - script: | 
-            tools\system_tests.bat nidmm
-          displayName: nidmm system tests windows
+            tools\system_tests.bat nitclk
+          displayName: nitclk system tests windows    
 
     - job: nifgen_system_tests_windows
       dependsOn: ensure_code_gen_up_to_date 
@@ -114,7 +102,7 @@ stages:
             tools\system_tests.bat nifgen
           displayName: nifgen system tests windows
 
-    - job: nimodinst_system_tests_windows
+    - job: nidcpower_system_tests_windows
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
@@ -122,9 +110,21 @@ stages:
         - checkout: self  
           clean: true
           fetchDepth: $(clone_depth)
-        - script: |
-            tools\system_tests.bat nimodinst
-          displayName: nimodinst system tests windows
+        - script: | 
+            tools\system_tests.bat nidcpower
+          displayName: nidcpower system tests windows
+
+    - job: nidmm_system_tests_windows
+      dependsOn: ensure_code_gen_up_to_date 
+      workspace:
+        clean: all
+      steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: $(clone_depth)
+        - script: | 
+            tools\system_tests.bat nidmm
+          displayName: nidmm system tests windows
 
     - job: niscope_system_tests_windows
       dependsOn: ensure_code_gen_up_to_date 
@@ -137,6 +137,18 @@ stages:
         - script: |
             tools\system_tests.bat niscope
           displayName: niscope system tests windows
+
+    - job: nimodinst_system_tests_windows
+      dependsOn: ensure_code_gen_up_to_date 
+      workspace:
+        clean: all
+      steps:
+        - checkout: self  
+          clean: true
+          fetchDepth: $(clone_depth)
+        - script: |
+            tools\system_tests.bat nimodinst
+          displayName: nimodinst system tests windows
 
     - job: nise_system_tests_windows
       dependsOn: ensure_code_gen_up_to_date 
@@ -161,18 +173,3 @@ stages:
         - script: | 
             tools\system_tests.bat niswitch
           displayName: niswitch system tests windows
-
-    - job: nitclk_system_tests_windows
-      dependsOn: ensure_code_gen_up_to_date 
-      workspace:
-        clean: all
-      steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - script: | 
-            tools\system_tests.bat nitclk
-          displayName: nitclk system tests windows    
-          
-
-
