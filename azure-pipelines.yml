@@ -49,6 +49,7 @@ stages:
               os.system('git config user.email "dummy@ni.com"')
               os.system('git config user.name "dummy"')
               commit_id_before_code_generator = os.system("git log -1 --format=%h")
+              os.system("tox -e clean")
               os.system("tox -e codegen")
               os.system('git commit -a -m "test"')
               commit_id_after_code_generator = os.system("git log -1 --format=%h")
@@ -58,7 +59,7 @@ stages:
 
               sys.exit(0)
 
-    - job: nidigital_system_tests_windows
+    - job: nidigital_system_tests_win64
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
@@ -72,7 +73,7 @@ stages:
             tools\system_tests.bat nidigital
           displayName: nidigital system tests windows
 
-    - job: nitclk_system_tests_windows
+    - job: nitclk_system_tests_win64
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
@@ -86,7 +87,7 @@ stages:
             tools\system_tests.bat nitclk
           displayName: nitclk system tests windows    
 
-    - job: nifgen_system_tests_windows
+    - job: nifgen_system_tests_win64
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
@@ -100,7 +101,7 @@ stages:
             tools\system_tests.bat nifgen
           displayName: nifgen system tests windows
 
-    - job: nidcpower_system_tests_windows
+    - job: nidcpower_system_tests_win64
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
@@ -114,7 +115,7 @@ stages:
             tools\system_tests.bat nidcpower
           displayName: nidcpower system tests windows
 
-    - job: nidmm_system_tests_windows
+    - job: nidmm_system_tests_win64
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
@@ -128,7 +129,7 @@ stages:
             tools\system_tests.bat nidmm
           displayName: nidmm system tests windows
 
-    - job: niscope_system_tests_windows
+    - job: niscope_system_tests_win64
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
@@ -142,7 +143,7 @@ stages:
             tools\system_tests.bat niscope
           displayName: niscope system tests windows
 
-    - job: nimodinst_system_tests_windows
+    - job: nimodinst_system_tests_win64
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
@@ -156,7 +157,7 @@ stages:
             tools\system_tests.bat nimodinst
           displayName: nimodinst system tests windows
 
-    - job: nise_system_tests_windows
+    - job: nise_system_tests_win64
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
@@ -170,7 +171,7 @@ stages:
             tools\system_tests.bat nise
           displayName: nise system tests windows
 
-    - job: niswitch_system_tests_windows
+    - job: niswitch_system_tests_win64
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
