@@ -67,7 +67,8 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - script: | 
-            mkdir generated\\junit
+            mkdir generated\junit
+            mkdir generated\kibana
             tools\system_tests.bat nidigital
           displayName: nidigital system tests windows
 
@@ -80,7 +81,8 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - script: | 
-            mkdir generated\\junit
+            mkdir generated\junit
+            mkdir generated\kibana
             tools\system_tests.bat nitclk
           displayName: nitclk system tests windows    
 
@@ -93,7 +95,8 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - script: | 
-            mkdir generated\\junit
+            mkdir generated\junit
+            mkdir generated\kibana
             tools\system_tests.bat nifgen
           displayName: nifgen system tests windows
 
@@ -106,7 +109,8 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - script: | 
-            mkdir generated\\junit
+            mkdir generated\junit
+            mkdir generated\kibana
             tools\system_tests.bat nidcpower
           displayName: nidcpower system tests windows
 
@@ -119,7 +123,8 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - script: | 
-            mkdir generated\\junit
+            mkdir generated\junit
+            mkdir generated\kibana
             tools\system_tests.bat nidmm
           displayName: nidmm system tests windows
 
@@ -132,7 +137,8 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - script: |
-            mkdir generated\\junit
+            mkdir generated\junit
+            mkdir generated\kibana
             tools\system_tests.bat niscope
           displayName: niscope system tests windows
 
@@ -145,7 +151,8 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - script: |
-            mkdir generated\\junit
+            mkdir generated\junit
+            mkdir generated\kibana
             tools\system_tests.bat nimodinst
           displayName: nimodinst system tests windows
 
@@ -158,7 +165,8 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - script: | 
-            mkdir generated\\junit
+            mkdir generated\junit
+            mkdir generated\kibana
             tools\system_tests.bat nise
           displayName: nise system tests windows
 
@@ -171,6 +179,7 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - script: | 
-            mkdir generated\\junit
+            mkdir generated\junit
+            mkdir generated\kibana
             tools\system_tests.bat niswitch
           displayName: niswitch system tests windows
