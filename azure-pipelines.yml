@@ -23,11 +23,12 @@ pr:
   drafts: false
 
 stages:
-  - stage: nimi_bot_windows
+
+  - stage: nimi_bot_linux
     pool:
       name: nimi-bot
       demands:
-        - agent.os -equals Windows_NT
+        - agent.os -equals Windows_NT # This will be changed to Linux Flavor
     jobs:
     - job: ensure_code_gen_up_to_date
       workspace:
@@ -59,6 +60,12 @@ stages:
 
               sys.exit(0)
 
+  - stage: nimi_bot_windows
+    pool:
+      name: nimi-bot
+      demands:
+        - agent.os -equals Windows_NT
+    jobs:
     - job: nidigital_system_tests_win64
       dependsOn: ensure_code_gen_up_to_date 
       workspace:
