@@ -67,7 +67,6 @@ stages:
         - agent.os -equals Windows_NT
     jobs:
     - job: nidigital_system_tests_win64
-      dependsOn: ensure_code_gen_up_to_date 
       workspace:
         clean: all
       steps:
