@@ -28,7 +28,7 @@ stages:
     pool:
       name: nimi-bot
       demands:
-        - agent.os -equals Windows_NT # This will be changed to Linux Flavor
+        - agent.os -equals Windows_NT # This will be changed to Linux later
     jobs:
     - job: ensure_code_gen_up_to_date
       workspace:
