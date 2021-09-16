@@ -63,6 +63,8 @@ stages:
               if commit_id_before_code_generator != commit_id_after_code_generator:
                 print("Run codegen and include the generated files in the PR", file=sys.stderr)
                 sys.exit(-1)
+              print("codgen is up to date")
+              return 0
 
   - stage: nimi_bot_windows
     dependsOn: ensure_code_gen_up_to_date
