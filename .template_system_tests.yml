@@ -3,6 +3,7 @@ parameters:
   module_name: ""
   os_name: ""
 
+jobs:
 - job: ${{ parameters.module_name }}_system_tests_${{ parameters.os_name }}
   workspace:
     clean: all
