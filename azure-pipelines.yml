@@ -79,7 +79,7 @@ stages:
       workspace:
         clean: all
       steps:
-      - template: template_system_tests
+      - template: .template_system_tests
         parameters:
           module_name: nidigital
           os_name: win64
