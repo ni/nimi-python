@@ -58,6 +58,7 @@ stages:
               if os.system("tox -e codegen") != 0:
                 sys.exit(-1)
               if os.system('git commit -a -m "test"') != 0:
+                print("Unable to do commit the changes in git", file=sys.stderr)
                 sys.exit(-1)
               commit_id_after_code_generator = os.system("git log -1 --format=%h")
               if commit_id_before_code_generator != commit_id_after_code_generator:
