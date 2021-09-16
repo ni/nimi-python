@@ -26,7 +26,7 @@ stages:
 
   - stage: ensure_code_gen_up_to_date
     pool:
-      name: nimi-bot
+      name: Users
       demands:
         - nimi-bot -equals True
         - agent.os -equals Linux # This will be changed to Linux later
