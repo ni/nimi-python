@@ -48,12 +48,17 @@ stages:
               import subprocess
 
               # To verify code is generated
-              os.system('git config user.email "dummy@ni.com"')
-              os.system('git config user.name "dummy"')
+              if os.system('git config user.email "dummy@ni.com"') != 0:
+                sys.exit(-1)
+              if os.system('git config user.name "dummy"') != 0:
+                sys.exit(-1)
               commit_id_before_code_generator = os.system("git log -1 --format=%h")
-              os.system("tox -e clean")
-              os.system("tox -e codegen")
-              os.system('git commit -a -m "test"')
+              if os.system("tox -e clean") != 0:
+                sys.exit(-1)
+              if os.system("tox -e codegen") != 0:
+                sys.exit(-1)
+              if os.system('git commit -a -m "test"') != 0:
+                sys.exit(-1)
               commit_id_after_code_generator = os.system("git log -1 --format=%h")
               if commit_id_before_code_generator != commit_id_after_code_generator:
                 print("Run codegen and include the generated files in the PR", file=sys.stderr)
