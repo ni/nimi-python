@@ -98,8 +98,11 @@ stages:
         - script: | 
             mkdir generated\junit
             mkdir generated\kibana
-            tools\system_tests.bat nitclk
-          displayName: nitclk system tests win64    
+            cd generated\nitclk
+            python -m tox -c tox-system_tests.ini --parallel 4 --parallel-live
+          displayName: nitclk system tests win64
+          env:
+            TOX_PARALLEL_NO_SPINNER: 1
 
     - job: nifgen_system_tests_win64
       workspace:
