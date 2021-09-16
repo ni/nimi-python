@@ -79,14 +79,18 @@ stages:
       workspace:
         clean: all
       steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - script: | 
-            mkdir generated\junit
-            mkdir generated\kibana
-            tools\system_tests.bat nidigital
-          displayName: nidigital system tests win64
+      - template: template_system_tests
+        parameters:
+          module_name: nidigital
+          os_name: win64
+        # - checkout: self  
+        #   clean: true
+        #   fetchDepth: $(clone_depth)
+        # - script: | 
+        #     mkdir generated\junit
+        #     mkdir generated\kibana
+        #     tools\system_tests.bat nidigital
+        #   displayName: nidigital system tests win64
 
     - job: nitclk_system_tests_win64
       workspace:
