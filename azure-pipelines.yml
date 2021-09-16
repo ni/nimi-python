@@ -75,14 +75,18 @@ stages:
         - nimi-bot -equals True
         - agent.os -equals Windows_NT
     jobs:
-    - job: nidigital_system_tests_win64
-      workspace:
-        clean: all
-      steps:
-      - template: .template_system_tests.yml
-        parameters:
-          module_name: nidigital
-          os_name: win64
+    - template: .template_system_tests.yml
+      parameters:
+        module_name: nidigital
+        os_name: win64
+    # - job: nidigital_system_tests_win64
+    #   workspace:
+    #     clean: all
+    #   steps:
+    #   - template: .template_system_tests.yml
+    #     parameters:
+    #       module_name: nidigital
+    #       os_name: win64
         # - checkout: self  
         #   clean: true
         #   fetchDepth: $(clone_depth)
