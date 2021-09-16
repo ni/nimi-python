@@ -6,13 +6,10 @@ parameters:
 - job: ${{ parameters.module_name }}_system_tests_${{ parameters.os_name }}
   workspace:
     clean: all
-
   steps:
-  
     - checkout: self  
       clean: true
       fetchDepth: 10
-
     - script: |
         mkdir generated/junit
         mkdir generated/kibana
