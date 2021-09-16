@@ -29,7 +29,7 @@ stages:
       name: nimi-bot
       demands:
         - nimi-bot -equals True
-        - agent.os -equals Windows_NT # This will be changed to Linux later
+        - agent.os -equals Linux # This will be changed to Linux later
     jobs:
     - job: ensure_code_gen_up_to_date
       workspace:
