@@ -60,9 +60,7 @@ stages:
               if os.system('git add .') != 0:
                 print("Unable to add the files", file=sys.stderr)
                 sys.exit(-1)              
-              if os.system('git commit -m "test"') != 0:
-                print("Unable to do commit the changes in git", file=sys.stderr)
-                sys.exit(-1)
+              os.system('git commit -m "test"') # return code is 1 if there are files to commit
               commit_id_after_code_generator = os.system("git log -1 --format=%h")
               if commit_id_before_code_generator != commit_id_after_code_generator:
                 print("Run codegen and include the generated files in the PR", file=sys.stderr)
