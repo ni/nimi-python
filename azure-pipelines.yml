@@ -67,7 +67,7 @@ stages:
                 sys.exit(-1)
               print("codgen is up to date")
 
-  - stage: nimi_bot_windows
+  - stage: nimi_bot_win64
     dependsOn: ensure_code_gen_up_to_date
     pool:
       name: nimi-bot
@@ -86,7 +86,7 @@ stages:
             mkdir generated\junit
             mkdir generated\kibana
             tools\system_tests.bat nidigital
-          displayName: nidigital system tests windows
+          displayName: nidigital system tests win64
 
     - job: nitclk_system_tests_win64
       workspace:
@@ -99,7 +99,7 @@ stages:
             mkdir generated\junit
             mkdir generated\kibana
             tools\system_tests.bat nitclk
-          displayName: nitclk system tests windows    
+          displayName: nitclk system tests win64    
 
     - job: nifgen_system_tests_win64
       workspace:
@@ -112,7 +112,7 @@ stages:
             mkdir generated\junit
             mkdir generated\kibana
             tools\system_tests.bat nifgen
-          displayName: nifgen system tests windows
+          displayName: nifgen system tests win64
 
     - job: nidcpower_system_tests_win64
       workspace:
@@ -125,7 +125,7 @@ stages:
             mkdir generated\junit
             mkdir generated\kibana
             tools\system_tests.bat nidcpower
-          displayName: nidcpower system tests windows
+          displayName: nidcpower system tests win64
 
     - job: nidmm_system_tests_win64
       workspace:
@@ -138,7 +138,7 @@ stages:
             mkdir generated\junit
             mkdir generated\kibana
             tools\system_tests.bat nidmm
-          displayName: nidmm system tests windows
+          displayName: nidmm system tests win64
 
     - job: niscope_system_tests_win64
       workspace:
@@ -151,7 +151,7 @@ stages:
             mkdir generated\junit
             mkdir generated\kibana
             tools\system_tests.bat niscope
-          displayName: niscope system tests windows
+          displayName: niscope system tests win64
 
     - job: nimodinst_system_tests_win64
       workspace:
@@ -164,7 +164,7 @@ stages:
             mkdir generated\junit
             mkdir generated\kibana
             tools\system_tests.bat nimodinst
-          displayName: nimodinst system tests windows
+          displayName: nimodinst system tests win64
 
     - job: nise_system_tests_win64
       workspace:
@@ -177,7 +177,7 @@ stages:
             mkdir generated\junit
             mkdir generated\kibana
             tools\system_tests.bat nise
-          displayName: nise system tests windows
+          displayName: nise system tests win64
 
     - job: niswitch_system_tests_win64
       workspace:
@@ -190,4 +190,4 @@ stages:
             mkdir generated\junit
             mkdir generated\kibana
             tools\system_tests.bat niswitch
-          displayName: niswitch system tests windows
+          displayName: niswitch system tests win64
