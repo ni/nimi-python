@@ -1,17 +1,16 @@
-variables:
-- name: clone_depth
-  value: 10 
+parameters:
 - name: module_names
-  value:
-    - nidigital
-    - nitclk  
-    - nifgen
-    - nidcpower
-    - nidmm
-    - nimodinst
-    - nise
-    - niswitch
-    - nifake
+  type: object
+  default:
+  - nidigital
+  - nitclk  
+  - nifgen
+  - nidcpower
+  - nidmm
+  - nimodinst
+  - nise
+  - niswitch
+  - nifake
 
 # A pipeline with no CI trigger
 trigger: none
@@ -85,7 +84,7 @@ stages:
         - nimi-bot -equals True
         - agent.os -equals Windows_NT
     jobs:
-    - ${{each module_name in variables.module_names}}:
+    - ${{each module_name in parameters.module_names}}:
       - template: .template_system_tests.yml
         parameters:
           module_name: {{module_name}}
