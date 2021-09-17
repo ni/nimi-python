@@ -15,7 +15,7 @@ jobs:
       fetchDepth: ${{ parameters.clone_depth }}
     - script: |
         cd generated
-        mkdir unit
+        mkdir junit
         mkdir kibana
         cd ${{ parameters.module_name }}
         python -m tox -c tox-system_tests.ini --parallel ${{ parameters.tox_parallel_threads }} --parallel-live
