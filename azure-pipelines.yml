@@ -76,16 +76,16 @@ stages:
                 sys.exit(-1)
               print("codgen is up to date")
 
-  # - stage: nimi_bot_win64
-  #   dependsOn: ensure_code_gen_up_to_date
-  #   pool:
-  #     name: nimi-bot
-  #     demands:
-  #       - nimi-bot -equals True
-  #       - agent.os -equals Windows_NT
-  #   jobs:
-  #   - ${{each module_name in parameters.module_names}}:
-  #     - template: .template_system_tests.yml
-  #       parameters:
-  #         module_name: {{module_name}}
-  #         os_name: win64
+  - stage: nimi_bot_win64
+    dependsOn: ensure_code_gen_up_to_date
+    pool:
+      name: nimi-bot
+      demands:
+        - nimi-bot -equals True
+        - agent.os -equals Windows_NT
+    jobs:
+    - ${{each module_name in parameters.module_names}}:
+      - template: .template_system_tests.yml
+        parameters:
+          module_name: ${{module_name}}
+          os_name: win64
