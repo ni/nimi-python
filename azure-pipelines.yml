@@ -1,7 +1,17 @@
 variables:
 - name: clone_depth
   value: 10 
-  
+- name: module_names
+  value:
+  - nidigital
+  - nitclk  
+  - nifgen
+  - nidcpower
+  - nidmm
+  - nimodinst
+  - nise
+  - niswitch
+  - nifake
 
 # A pipeline with no CI trigger
 trigger: none
@@ -75,47 +85,8 @@ stages:
         - nimi-bot -equals True
         - agent.os -equals Windows_NT
     jobs:
-    - template: .template_system_tests.yml
-      parameters:
-        module_name: nidigital
-        os_name: win64
-
-    - template: .template_system_tests.yml
-      parameters:
-        module_name: nitclk
-        os_name: win64
-
-    - template: .template_system_tests.yml
-      parameters:
-        module_name: nifgen
-        os_name: win64
-
-    - template: .template_system_tests.yml
-      parameters:
-        module_name: nidcpower
-        os_name: win64
-
-    - template: .template_system_tests.yml
-      parameters:
-        module_name: nidmm
-        os_name: win64
-
-    - template: .template_system_tests.yml
-      parameters:
-        module_name: niscope
-        os_name: win64
-
-    - template: .template_system_tests.yml
-      parameters:
-        module_name: nimodinst
-        os_name: win64
-
-    - template: .template_system_tests.yml
-      parameters:
-        module_name: nise
-        os_name: win64
-
-    - template: .template_system_tests.yml
-      parameters:
-        module_name: niswitch
-        os_name: win64
+    - ${{each module_name in variables.module_names}}:
+      - template: .template_system_tests.yml
+        parameters:
+          module_name: {{module_name}}
+          os_name: win64
