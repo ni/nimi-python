@@ -79,126 +79,43 @@ stages:
       parameters:
         module_name: nidigital
         os_name: win64
-    # - job: nidigital_system_tests_win64
-    #   workspace:
-    #     clean: all
-    #   steps:
-    #   - template: .template_system_tests.yml
-    #     parameters:
-    #       module_name: nidigital
-    #       os_name: win64
-        # - checkout: self  
-        #   clean: true
-        #   fetchDepth: $(clone_depth)
-        # - script: | 
-        #     mkdir generated\junit
-        #     mkdir generated\kibana
-        #     tools\system_tests.bat nidigital
-        #   displayName: nidigital system tests win64
 
-    - job: nitclk_system_tests_win64
-      workspace:
-        clean: all
-      steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - script: | 
-            mkdir generated\junit
-            mkdir generated\kibana
-            cd generated\nitclk
-            python -m tox -c tox-system_tests.ini --parallel 4 --parallel-live
-          displayName: nitclk system tests win64
-          env:
-            TOX_PARALLEL_NO_SPINNER: 1
+    - template: .template_system_tests.yml
+      parameters:
+        module_name: nitclk
+        os_name: win64
 
-    - job: nifgen_system_tests_win64
-      workspace:
-        clean: all
-      steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - script: | 
-            mkdir generated\junit
-            mkdir generated\kibana
-            tools\system_tests.bat nifgen
-          displayName: nifgen system tests win64
+    - template: .template_system_tests.yml
+      parameters:
+        module_name: nifgen
+        os_name: win64
 
-    - job: nidcpower_system_tests_win64
-      workspace:
-        clean: all
-      steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - script: | 
-            mkdir generated\junit
-            mkdir generated\kibana
-            tools\system_tests.bat nidcpower
-          displayName: nidcpower system tests win64
+    - template: .template_system_tests.yml
+      parameters:
+        module_name: nidcpower
+        os_name: win64
 
-    - job: nidmm_system_tests_win64
-      workspace:
-        clean: all
-      steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - script: | 
-            mkdir generated\junit
-            mkdir generated\kibana
-            tools\system_tests.bat nidmm
-          displayName: nidmm system tests win64
+    - template: .template_system_tests.yml
+      parameters:
+        module_name: nidmm
+        os_name: win64
 
-    - job: niscope_system_tests_win64
-      workspace:
-        clean: all
-      steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - script: |
-            mkdir generated\junit
-            mkdir generated\kibana
-            tools\system_tests.bat niscope
-          displayName: niscope system tests win64
+    - template: .template_system_tests.yml
+      parameters:
+        module_name: niscope
+        os_name: win64
 
-    - job: nimodinst_system_tests_win64
-      workspace:
-        clean: all
-      steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - script: |
-            mkdir generated\junit
-            mkdir generated\kibana
-            tools\system_tests.bat nimodinst
-          displayName: nimodinst system tests win64
+    - template: .template_system_tests.yml
+      parameters:
+        module_name: nimodinst
+        os_name: win64
 
-    - job: nise_system_tests_win64
-      workspace:
-        clean: all
-      steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - script: | 
-            mkdir generated\junit
-            mkdir generated\kibana
-            tools\system_tests.bat nise
-          displayName: nise system tests win64
+    - template: .template_system_tests.yml
+      parameters:
+        module_name: nise
+        os_name: win64
 
-    - job: niswitch_system_tests_win64
-      workspace:
-        clean: all
-      steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - script: | 
-            mkdir generated\junit
-            mkdir generated\kibana
-            tools\system_tests.bat niswitch
-          displayName: niswitch system tests win64
+    - template: .template_system_tests.yml
+      parameters:
+        module_name: niswitch
+        os_name: win64
