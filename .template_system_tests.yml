@@ -1,6 +1,8 @@
 variables:
-  clone_depth: 10
-  tox_parallel_threads: 2
+- name: clone_depth
+  value: 10 
+- name: tox_parallel_threads
+  value: 2
 
 parameters:
   module_name: ""
