@@ -1,12 +1,9 @@
-variables:
-- name: clone_depth
-  value: 10 
-- name: tox_parallel_threads
-  value: 2
-
 parameters:
   module_name: ""
   os_name: ""
+  clone_depth: 10
+  tox_parallel_threads: 2
+
 
 jobs:
 - job: ${{ parameters.module_name }}_system_tests_${{ parameters.os_name }}
@@ -15,13 +12,13 @@ jobs:
   steps:
     - checkout: self  
       clean: true
-      fetchDepth: ${{ variables.clone_depth }}
+      fetchDepth: ${{ parameters.clone_depth }}
     - script: |
         cd generated
         mkdir unit
         mkdir kibana
         cd ${{ parameters.module_name }}
-        python -m tox -c tox-system_tests.ini --parallel ${{ variables.tox_parallel_threads }} --parallel-live
+        python -m tox -c tox-system_tests.ini --parallel ${{ parameters.tox_parallel_threads }} --parallel-live
       displayName: ${{ parameters.module_name }} system tests ${{ parameters.os_name }} 
       env:
         TOX_PARALLEL_NO_SPINNER: 1
