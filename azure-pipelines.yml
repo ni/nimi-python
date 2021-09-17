@@ -3,15 +3,15 @@ variables:
   value: 10 
 - name: module_names
   value:
-  - nidigital
-  - nitclk  
-  - nifgen
-  - nidcpower
-  - nidmm
-  - nimodinst
-  - nise
-  - niswitch
-  - nifake
+    - nidigital
+    - nitclk  
+    - nifgen
+    - nidcpower
+    - nidmm
+    - nimodinst
+    - nise
+    - niswitch
+    - nifake
 
 # A pipeline with no CI trigger
 trigger: none
