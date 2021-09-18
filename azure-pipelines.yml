@@ -10,6 +10,7 @@ parameters:
   - nimodinst
   - nise
   - niswitch
+  - niscope
 
 # A pipeline with no CI trigger
 trigger: none
