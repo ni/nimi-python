@@ -2,7 +2,7 @@ parameters:
   module_name: ""
   os_name: ""
   clone_depth: 10
-  tox_parallel_threads: 2
+  tox_parallel_threads: 4
 
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
         mkdir junit
         mkdir kibana
         cd ${{ parameters.module_name }}
+        set TOX_PARALLEL_NO_SPINNER=1
         python -m tox -c tox-system_tests.ini --parallel ${{ parameters.tox_parallel_threads }} --parallel-live
       displayName: ${{ parameters.module_name }} system tests ${{ parameters.os_name }} 
-      env:
-        TOX_PARALLEL_NO_SPINNER: 1
+
