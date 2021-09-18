@@ -35,6 +35,7 @@ following installed:
     - If you're using Windows Subsystem for Linux
         - Install and enable [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
         - Install make: ``sudo apt-get install make``
+        - Install zip: ``sudo apt-get install zip``
 
     - If you're on Windows 10 (not using WSL):
         - [Install mingw (msys-base)](https://osdn.net/projects/mingw/).
