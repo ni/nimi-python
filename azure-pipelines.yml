@@ -7,10 +7,10 @@ parameters:
   - nifgen
   - nidcpower
   - nidmm
+  - niscope
   - nimodinst
   - nise
   - niswitch
-  - niscope
 
 # A pipeline with no CI trigger
 trigger: none
@@ -25,7 +25,6 @@ pr:
     exclude:
     - CHANGELOG.md
     - CONTRIBUTING.md
-    - .gitattributes
     - .gitattributes
     - LICENSE
     - VERSION
