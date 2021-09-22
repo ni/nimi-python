@@ -1,7 +1,7 @@
 parameters:
 - name: module_names
   type: object
-  default:
+  default: # Order of the modules is based on test execution time, longest firt.
   - nidigital
   - nitclk  
   - nifgen
@@ -32,14 +32,14 @@ pr:
 
 stages:
 
-  - stage: ensure_code_gen_up_to_date
+  - stage: ensure_codegen_up_to_date
     pool:
       name: nimi-bot
       demands:
         - nimi-bot -equals True
         - agent.os -equals Linux
     jobs:
-    - job: ensure_code_gen_up_to_date
+    - job: ensure_codegen_up_to_date
       workspace:
         clean: all
       steps:
@@ -49,34 +49,11 @@ stages:
         - task: PythonScript@0
           displayName: Ensure codegen up to date
           inputs:
-            scriptSource: inline
-            script: |
-              import os
-              import sys
-              import subprocess
-
-              # To verify code is generated
-              if os.system('git config user.email "dummy@ni.com"') != 0:
-                sys.exit(-1)
-              if os.system('git config user.name "dummy"') != 0:
-                sys.exit(-1)
-              commit_id_before_code_generator = os.system("git log -1 --format=%h")
-              if os.system("tox -e clean") != 0:
-                sys.exit(-1)
-              if os.system("tox -e codegen") != 0:
-                sys.exit(-1)
-              if os.system('git add .') != 0:
-                print("Unable to add the files", file=sys.stderr)
-                sys.exit(-1)              
-              os.system('git commit -m "test"') # return code is 1 if there are files to commit
-              commit_id_after_code_generator = os.system("git log -1 --format=%h")
-              if commit_id_before_code_generator != commit_id_after_code_generator:
-                print("Run codegen and include the generated files in the PR", file=sys.stderr)
-                sys.exit(-1)
-              print("codgen is up to date")
-
-  - stage: nimi_bot_win64
-    dependsOn: ensure_code_gen_up_to_date
+            scriptSource: filePath
+            scriptPath: tools/ensure_codegen_up_to_date.py
+            
+  - stage: system_tests_win64
+    dependsOn: ensure_codegen_up_to_date
     pool:
       name: nimi-bot
       demands:
