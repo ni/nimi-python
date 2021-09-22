@@ -56,7 +56,7 @@ def add_codgen_files_to_git_staging_area():
     """
     if os.system('git add .') != 0:
         print("Unable to add files to git", file=sys.stderr)
-    sys.exit(-1)    
+        sys.exit(-1)    
 
 def commit_git_staging_area_files():
     """
