@@ -47,7 +47,7 @@ stages:
           clean: true
           fetchDepth: $(clone_depth)
         - task: PythonScript@0
-          displayName: Ensure codegen up to date
+          displayName: Ensure changes to code generation are committed to repository
           inputs:
             scriptSource: filePath
             scriptPath: tools/ensure_codegen_up_to_date.py
