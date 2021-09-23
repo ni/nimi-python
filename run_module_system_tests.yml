@@ -2,7 +2,7 @@
 
 parameters:
   module_name: ""
-  os_name: ""
+  platform: ""
   clone_depth: 1
 
 
