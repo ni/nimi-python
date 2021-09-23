@@ -3,7 +3,7 @@
 parameters:
 - name: module_names
   type: object
-  default: # Order of the modules is based on test execution time, longest firt.
+  default: # Order of the modules is based on test execution time, longest first.
   - nidigital
   - nitclk  
   - nifgen
@@ -66,4 +66,4 @@ stages:
       - template: run_module_system_tests.yml
         parameters:
           module_name: ${{module_name}}
-          os_name: win64
+          platform: win64

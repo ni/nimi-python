@@ -86,4 +86,4 @@ if __name__ == "__main__":
         print("Run codegen and include the generated files in the PR", file=sys.stderr)
         sys.exit(-1)
     
-    print("codgen is up to date")
+    print("All changes to code generation are committed to repository")
