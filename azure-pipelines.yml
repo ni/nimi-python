@@ -1,3 +1,5 @@
+# nimi-bot pipeline for running all system tests as part of Continuous Integration.
+
 parameters:
 - name: module_names
   type: object
