@@ -32,29 +32,8 @@ pr:
   drafts: false
 
 stages:
-
-  - stage: ensure_codegen_up_to_date
-    pool:
-      name: nimi-bot
-      demands:
-        - nimi-bot -equals True
-        - agent.os -equals Linux
-    jobs:
-    - job: ensure_codegen_up_to_date
-      workspace:
-        clean: all
-      steps:
-        - checkout: self  
-          clean: true
-          fetchDepth: $(clone_depth)
-        - task: PythonScript@0
-          displayName: Ensure changes to code generation are committed to repository
-          inputs:
-            scriptSource: filePath
-            scriptPath: tools/ensure_codegen_up_to_date.py
-            
+           
   - stage: system_tests_win64
-    dependsOn: ensure_codegen_up_to_date
     pool:
       name: nimi-bot
       demands:
