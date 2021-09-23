@@ -17,7 +17,6 @@ parameters:
 # A pipeline with no CI trigger
 trigger: none
 
-# specific path
 pr:
   branches:
     include:
