@@ -63,7 +63,7 @@ stages:
         - agent.os -equals Windows_NT
     jobs:
     - ${{each module_name in parameters.module_names}}:
-      - template: .template_system_tests.yml
+      - template: run_module_system_tests.yml
         parameters:
           module_name: ${{module_name}}
           os_name: win64
