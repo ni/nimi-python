@@ -23,6 +23,8 @@ pr:
     - master
     - releases/*
   paths:
+    include:
+    - '*'
     exclude:
     - CHANGELOG.md
     - CONTRIBUTING.md
