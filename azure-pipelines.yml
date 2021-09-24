@@ -14,7 +14,7 @@ parameters:
   - nise
   - niswitch
 
-# A pipeline with no CI trigger
+# A pipeline with no CI trigger.
 trigger: none
 
 pr:
@@ -34,14 +34,27 @@ pr:
 stages:
            
   - stage: system_tests_win64
+    dependsOn: []
     pool:
       name: nimi-bot
       demands:
         - nimi-bot -equals True
-        - agent.os -equals Windows_NT
+        - platform -equals win64 # Run system tests using 64-bit Python interpreter on a 64-bit Windows 10 system.
     jobs:
     - ${{each module_name in parameters.module_names}}:
       - template: run_module_system_tests.yml
         parameters:
           module_name: ${{module_name}}
-          platform: win64
+
+  - stage: system_tests_win32
+    dependsOn: []
+    pool:
+      name: nimi-bot
+      demands:
+        - nimi-bot -equals True
+        - platform -equals win32 # Run system tests using 32-bit Python interpreter on a 64-bit Windows 10 system.
+    jobs:
+    - ${{each module_name in parameters.module_names}}:
+      - template: run_module_system_tests.yml
+        parameters:
+          module_name: ${{module_name}}
