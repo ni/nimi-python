@@ -2,6 +2,7 @@ import nise
 import pytest
 
 
+
 @pytest.fixture(scope='function')
 def session():
     with nise.Session('SwitchExecutiveExample') as simulated_session:
