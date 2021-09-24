@@ -14,7 +14,7 @@ parameters:
   - nise
   - niswitch
 
-# A pipeline with no CI trigger
+# A pipeline with no CI trigger.
 trigger: none
 
 pr:
