@@ -34,6 +34,7 @@ pr:
 stages:
            
   - stage: system_tests_win64
+    dependsOn: []
     pool:
       name: nimi-bot
       demands:
@@ -47,6 +48,7 @@ stages:
           platform: win64
 
   - stage: system_tests_win32
+    dependsOn: []
     pool:
       name: nimi-bot
       demands:
