@@ -1,0 +1,47 @@
+# nimi-bot pipeline for running all system tests as part of Continuous Integration.
+
+parameters:
+- name: module_names
+  type: object
+  default: # Order of the modules is based on test execution time, longest first.
+  - nidigital
+  - nitclk  
+  - nifgen
+  - nidcpower
+  - nidmm
+  - niscope
+  - nimodinst
+  - nise
+  - niswitch
+
+# A pipeline with no CI trigger
+trigger: none
+
+pr:
+  branches:
+    include:
+    - master
+    - releases/*
+  paths:
+    exclude:
+    - CHANGELOG.md
+    - CONTRIBUTING.md
+    - .gitattributes
+    - LICENSE
+    - VERSION
+  drafts: false
+
+stages:
+           
+  - stage: system_tests_win64
+    pool:
+      name: nimi-bot
+      demands:
+        - nimi-bot -equals True
+        - agent.os -equals Windows_NT
+    jobs:
+    - ${{each module_name in parameters.module_names}}:
+      - template: run_module_system_tests.yml
+        parameters:
+          module_name: ${{module_name}}
+          platform: win64

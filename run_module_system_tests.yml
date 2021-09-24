@@ -1,0 +1,26 @@
+# Run system tests for the specified module
+
+parameters:
+  module_name: ""
+  platform: ""
+  clone_depth: 1
+
+
+jobs:
+- job: ${{ parameters.module_name }}
+  workspace:
+    clean: all
+  steps:
+    - checkout: self  
+      clean: true
+      fetchDepth: ${{ parameters.clone_depth }}
+    - script: |
+        cd generated
+        mkdir junit
+        mkdir kibana
+        cd ${{ parameters.module_name }}
+        py -3.6 -m tox -c tox-system_tests.ini
+      displayName: Run system tests
+      env:
+        TOX_PARALLEL_NO_SPINNER: 1
+
