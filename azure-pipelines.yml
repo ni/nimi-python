@@ -38,7 +38,20 @@ stages:
       name: nimi-bot
       demands:
         - nimi-bot -equals True
-        - agent.os -equals Windows_NT
+        - platform -equals win64 # Run system tests using python 64 bit installed on windows 64 bit
+    jobs:
+    - ${{each module_name in parameters.module_names}}:
+      - template: run_module_system_tests.yml
+        parameters:
+          module_name: ${{module_name}}
+          platform: win64
+
+  - stage: system_tests_win32
+    pool:
+      name: nimi-bot
+      demands:
+        - nimi-bot -equals True
+        - platform -equals win32 # Run system tests using python 32 bit installed on windows 64 bit
     jobs:
     - ${{each module_name in parameters.module_names}}:
       - template: run_module_system_tests.yml
