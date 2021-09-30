@@ -72,7 +72,7 @@ stages:
         - nimi-bot -equals True
         - platform -equals rhel
     jobs:
-    - ${{each module_name in parameters.rhel}}:
+    - ${{each module_name in parameters.rhel_module_names}}:
       - template: run_module_system_tests.yml
         parameters:
           module_name: ${{module_name}}
