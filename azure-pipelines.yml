@@ -1,7 +1,7 @@
 # nimi-bot pipeline for running all system tests as part of Continuous Integration.
 
 parameters:
-- name: module_names
+- name: win_module_names
   type: object
   default: # Order of the modules is based on test execution time, longest first.
   - nidigital
@@ -46,7 +46,7 @@ stages:
         - nimi-bot -equals True
         - platform -equals win64 # Run system tests using 64-bit Python interpreter on a 64-bit Windows 10 system.
     jobs:
-    - ${{each module_name in parameters.module_names}}:
+    - ${{each module_name in parameters.win_module_names}}:
       - template: run_module_system_tests.yml
         parameters:
           module_name: ${{module_name}}
@@ -59,7 +59,20 @@ stages:
         - nimi-bot -equals True
         - platform -equals win32 # Run system tests using 32-bit Python interpreter on a 64-bit Windows 10 system.
     jobs:
-    - ${{each module_name in parameters.rhel_module_names}}:
+    - ${{each module_name in parameters.win_module_names}}:
+      - template: run_module_system_tests.yml
+        parameters:
+          module_name: ${{module_name}}
+
+  - stage: system_tests_rhel
+    dependsOn: []
+    pool:
+      name: nimi-bot
+      demands:
+        - nimi-bot -equals True
+        - platform -equals rhel
+    jobs:
+    - ${{each module_name in parameters.rhel}}:
       - template: run_module_system_tests.yml
         parameters:
           module_name: ${{module_name}}
