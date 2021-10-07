@@ -69,7 +69,7 @@ stages:
     pool:
       name: nimi-bot
       demands:
-        - nimi-bot -equals True
+        - nimi_bot -equals True
         - platform -equals rhel
     jobs:
     - ${{each module_name in parameters.rhel_module_names}}:
