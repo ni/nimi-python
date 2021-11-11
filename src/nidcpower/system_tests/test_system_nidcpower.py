@@ -333,7 +333,7 @@ def test_create_and_delete_advanced_sequence(session):
         session.active_advanced_sequence = sequence_name
 
 
-@pytest.mark.skip(reason="Please refer the Bug:")
+@pytest.mark.skip(reason="Please refer the Bug:1667")
 @pytest.mark.channels('0')
 def test_create_advanced_sequence_commit_step(session):
     properties_used = ['output_function', 'voltage_level']
@@ -346,7 +346,7 @@ def test_create_advanced_sequence_commit_step(session):
     assert e.value.description.find('This device does not support the requested operation.  Refer to the device documentation to determine which operations it supports.') != -1
 
 
-@pytest.mark.skip(reason="Please refer the Bug:")
+@pytest.mark.skip(reason="Please refer the Bug:1667")
 @pytest.mark.channels('0')
 def test_create_and_delete_advanced_sequence_bad_name(session):
     properties_used = ['output_function_bad', 'voltage_level']
@@ -654,7 +654,7 @@ def test_create_and_delete_advanced_sequence_repeated_capabilities(session, chan
         channels_session.active_advanced_sequence = sequence_name
 
 
-@pytest.mark.skip(reason="Please refer the Bug:")
+@pytest.mark.skip(reason="Please refer the Bug:1667")
 @pytest.mark.resource_name('Dev1/0, Dev2/0')
 @pytest.mark.parametrize('channels', ('Dev1/0', 'Dev2/0', 'Dev1/0,Dev2/0'))
 def test_create_advanced_sequence_commit_step_repeated_capabilities(session, channels):
