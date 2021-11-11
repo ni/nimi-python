@@ -22,7 +22,7 @@ jobs:
         mkdir kibana
         echo "cd ${{ parameters.module_name }}"
         cd ${{ parameters.module_name }}
-        python3 -m tox -c tox-system_tests.ini
+        python -m tox -c tox-system_tests.ini
       displayName: Run system tests
       env:
         TOX_PARALLEL_NO_SPINNER: 1
