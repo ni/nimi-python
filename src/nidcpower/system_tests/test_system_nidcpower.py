@@ -346,7 +346,7 @@ def test_create_advanced_sequence_commit_step(session):
     assert e.value.description.find('This device does not support the requested operation.  Refer to the device documentation to determine which operations it supports.') != -1
 
 
-@pytest.mark.skip(reason="Please refer the Bug:1667")
+@pytest.mark.skip(reason="Workaround for issue #1667")
 @pytest.mark.channels('0')
 def test_create_and_delete_advanced_sequence_bad_name(session):
     properties_used = ['output_function_bad', 'voltage_level']
