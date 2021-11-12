@@ -15,13 +15,13 @@ def test_no_device_family():
 
 
 def test_device_family_string_with_dashes():
-    with nimodinst.Session('NI-DMM') as session:
-        assert len(session) > 0, 'Must have NI-DMM hardware for this tests to be valid.'
+    with nimodinst.Session('NI-SCOPE') as session:
+        assert len(session) > 0, 'Must have NI-SCOPE hardware for this tests to be valid.'
 
 
 def test_device_family_string_without_dashes():
-    with nimodinst.Session('nidmm') as session:
-        assert len(session) > 0, 'Must have NI-DMM hardware for ModInst tests to be valid.'
+    with nimodinst.Session('niscope') as session:
+        assert len(session) > 0, 'Must have NI-SCOPE hardware for ModInst tests to be valid.'
 
 
 def test_int_attribute_error_on_non_existant_device():
