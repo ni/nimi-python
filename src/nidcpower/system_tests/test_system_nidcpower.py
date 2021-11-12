@@ -333,7 +333,7 @@ def test_create_and_delete_advanced_sequence(session):
         session.active_advanced_sequence = sequence_name
 
 
-@pytest.mark.skip(reason="Please refer the Bug:1667")
+@pytest.mark.skip(reason="Workaround for issue #1667")
 @pytest.mark.channels('0')
 def test_create_advanced_sequence_commit_step(session):
     properties_used = ['output_function', 'voltage_level']
