@@ -23,7 +23,7 @@
 # test suite on all supported python versions. To use it, "pip install tox"
 # and then run "tox -c tox-system_tests.ini" from the driver directory. (generated/${module_name})
 [tox]
-envlist = ${wheel_env}py{36,37,38,39}-${module_name}-system_tests, py39-${module_name}-coverage
+envlist = ${wheel_env}py{36,37,38,39}-${module_name}-system_tests, py3-${module_name}-coverage
 skip_missing_interpreters=True
 ignore_basepython_conflict=True
 # We put the .tox directory outside of the Jenkins workspace so that it isn't wiped with the rest of the repo
