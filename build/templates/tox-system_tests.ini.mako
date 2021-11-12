@@ -6,7 +6,7 @@
     driver_name = config['driver_name']
     if config['uses_nitclk'] or module_name == 'nitclk':
         wheel_env_no_py = '{}-wheel_dep'.format(module_name)
-        wheel_env = 'py39-' + wheel_env_no_py + ','
+        wheel_env = 'py3-' + wheel_env_no_py + ','
         uses_other_wheel = True
         if module_name == 'nitclk':
             # nitclk system tests use niscope
