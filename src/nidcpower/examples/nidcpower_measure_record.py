@@ -4,6 +4,7 @@ import argparse
 import nidcpower
 import sys
 
+# Dummy comment to test the azure pipelines
 
 def example(resource_name, options, voltage, length):
     with nidcpower.Session(resource_name=resource_name, options=options) as session:
