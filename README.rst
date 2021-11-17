@@ -2,7 +2,7 @@ Overall Status
 --------------
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| master branch status | |BuildStatusTravesCI| |BuildStatusAzureCI| |Docs| |MITLicense| |CoverageStatus|                                                    |
+| master branch status | |BuildStatus| |Docs| |MITLicense| |CoverageStatus|                                                                                 |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | GitHub status        | |OpenIssues| |OpenPullRequests|                                                                                                    |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
@@ -12,13 +12,9 @@ Info         Python bindings for NI Modular Instrument drivers. See `GitHub <htt
 Author       National Instruments
 ===========  ============================================================================================================================
 
-.. |BuildStatusTravesCI| image:: https://img.shields.io/travis/ni/nimi-python.svg
+.. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
     :alt: green - master branch
     :target: https://travis-ci.org/ni/nimi-python
-
-.. |BuildStatusAzureCI| image:: https://ni.visualstudio.com/DevCentral/_apis/build/status/nimi-bot/nimibot?branchName=master
-    :alt: Build Status - master branch
-    :target: https://ni.visualstudio.com/DevCentral/_build?definitionId=7575
 
 .. |Docs| image:: https://readthedocs.org/projects/nimi-python/badge/?version=latest
     :alt: Documentation Status - master branch
