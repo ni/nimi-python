@@ -13,7 +13,7 @@ Author       National Instruments
 ===========  ============================================================================================================================
 
 .. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
-    :alt: green - master branch
+    :alt: Build Status - master branch
     :target: https://travis-ci.org/ni/nimi-python
 
 .. |Docs| image:: https://readthedocs.org/projects/nimi-python/badge/?version=latest
