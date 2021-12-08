@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 20.7.0d242
+# This file is generated from NI-FGEN API metadata version 21.5.0d106
 attributes = {
     1050005: {
         'access': 'read-write',
@@ -183,6 +183,9 @@ attributes = {
         'enum': 'TriggerMode',
         'lv_property': 'Triggers:Trigger Mode',
         'name': 'TRIGGER_MODE',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViInt32'
     },
     1150110: {
@@ -529,7 +532,9 @@ attributes = {
         'enum': 'ScriptTriggerType',
         'lv_property': 'Triggers:Script:Trigger Type',
         'name': 'SCRIPT_TRIGGER_TYPE',
-        'repeated_capability_type': 'script_triggers',
+        'supported_rep_caps': [
+            'script_triggers'
+        ],
         'type': 'ViInt32'
     },
     1150291: {
@@ -539,7 +544,9 @@ attributes = {
         },
         'lv_property': 'Triggers:Script:Digital Edge:Source',
         'name': 'DIGITAL_EDGE_SCRIPT_TRIGGER_SOURCE',
-        'repeated_capability_type': 'script_triggers',
+        'supported_rep_caps': [
+            'script_triggers'
+        ],
         'type': 'ViString'
     },
     1150292: {
@@ -550,7 +557,9 @@ attributes = {
         'enum': 'ScriptTriggerDigitalEdgeEdge',
         'lv_property': 'Triggers:Script:Digital Edge:Edge',
         'name': 'DIGITAL_EDGE_SCRIPT_TRIGGER_EDGE',
-        'repeated_capability_type': 'script_triggers',
+        'supported_rep_caps': [
+            'script_triggers'
+        ],
         'type': 'ViInt32'
     },
     1150295: {
@@ -560,7 +569,9 @@ attributes = {
         },
         'lv_property': 'Triggers:Script:Output Terminal',
         'name': 'EXPORTED_SCRIPT_TRIGGER_OUTPUT_TERMINAL',
-        'repeated_capability_type': 'script_triggers',
+        'supported_rep_caps': [
+            'script_triggers'
+        ],
         'type': 'ViString'
     },
     1150310: {
@@ -579,7 +590,9 @@ attributes = {
         },
         'lv_property': 'Events:Marker:Output Terminal',
         'name': 'MARKER_EVENT_OUTPUT_TERMINAL',
-        'repeated_capability_type': 'markers',
+        'supported_rep_caps': [
+            'markers'
+        ],
         'type': 'ViString'
     },
     1150314: {
@@ -670,7 +683,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Marker Position',
         'name': 'ARB_MARKER_POSITION',
-        'repeated_capability_type': 'markers',
         'type': 'ViInt32'
     },
     1150328: {
@@ -699,7 +711,9 @@ attributes = {
         },
         'lv_property': 'Events:Data Marker:Data Bit Number',
         'name': 'DATA_MARKER_EVENT_DATA_BIT_NUMBER',
-        'repeated_capability_type': 'markers',
+        'supported_rep_caps': [
+            'data_markers'
+        ],
         'type': 'ViInt32'
     },
     1150338: {
@@ -710,7 +724,9 @@ attributes = {
         'enum': 'DataMarkerEventLevelPolarity',
         'lv_property': 'Events:Data Marker:Level:Active Level',
         'name': 'DATA_MARKER_EVENT_LEVEL_POLARITY',
-        'repeated_capability_type': 'markers',
+        'supported_rep_caps': [
+            'data_markers'
+        ],
         'type': 'ViInt32'
     },
     1150339: {
@@ -720,7 +736,9 @@ attributes = {
         },
         'lv_property': 'Events:Data Marker:Output Terminal',
         'name': 'DATA_MARKER_EVENT_OUTPUT_TERMINAL',
-        'repeated_capability_type': 'markers',
+        'supported_rep_caps': [
+            'data_markers'
+        ],
         'type': 'ViString'
     },
     1150344: {
@@ -749,6 +767,9 @@ attributes = {
         'enum': 'TerminalConfiguration',
         'lv_property': 'Output:Terminal Configuration',
         'name': 'TERMINAL_CONFIGURATION',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViInt32'
     },
     1150366: {
@@ -758,6 +779,9 @@ attributes = {
         },
         'lv_property': 'Output:Common Mode Offset',
         'name': 'COMMON_MODE_OFFSET',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViReal64'
     },
     1150367: {
@@ -788,6 +812,9 @@ attributes = {
         },
         'lv_property': 'Output:Channel Delay',
         'name': 'CHANNEL_DELAY',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViReal64'
     },
     1150373: {
@@ -931,6 +958,9 @@ attributes = {
         },
         'lv_property': 'Output:Output Enabled',
         'name': 'OUTPUT_ENABLED',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViBoolean'
     },
     1250004: {
@@ -940,6 +970,9 @@ attributes = {
         },
         'lv_property': 'Output:Output Impedance',
         'name': 'OUTPUT_IMPEDANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViReal64'
     },
     1250101: {
@@ -950,6 +983,9 @@ attributes = {
         'enum': 'Waveform',
         'lv_property': 'Standard Function:Waveform',
         'name': 'FUNC_WAVEFORM',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViInt32'
     },
     1250102: {
@@ -960,6 +996,9 @@ attributes = {
         },
         'lv_property': 'Standard Function:Amplitude',
         'name': 'FUNC_AMPLITUDE',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViReal64'
     },
     1250103: {
@@ -969,6 +1008,9 @@ attributes = {
         },
         'lv_property': 'Standard Function:DC Offset',
         'name': 'FUNC_DC_OFFSET',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViReal64'
     },
     1250104: {
@@ -979,6 +1021,9 @@ attributes = {
         },
         'lv_property': 'Standard Function:Standard Function Mode:Frequency',
         'name': 'FUNC_FREQUENCY',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViReal64'
     },
     1250105: {
@@ -989,6 +1034,9 @@ attributes = {
         },
         'lv_property': 'Standard Function:Start Phase',
         'name': 'FUNC_START_PHASE',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViReal64'
     },
     1250106: {
@@ -999,15 +1047,21 @@ attributes = {
         },
         'lv_property': 'Standard Function:Duty Cycle High',
         'name': 'FUNC_DUTY_CYCLE_HIGH',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViReal64'
     },
     1250201: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSelects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform functions:\nniFgen_CreateWaveformF64\nniFgen_CreateWaveformI16\nniFgen_CreateWaveformFromFileI16\nniFgen_CreateWaveformFromFileF64\nniFgen_CreateWaveformFromFileHWS\nThese functions return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this attribute to the waveform handle.\nUse this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.\n'
+            'description': '\nSelects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform functions:\nniFgen_CreateWaveformF64\nniFgen_CreateWaveformI16\nniFgen_CreateWaveformFromFileI16\nniFgen_CreateWaveformFromFileF64\nThese functions return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this attribute to the waveform handle.\nUse this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.\n'
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Arbitrary Waveform Handle',
         'name': 'ARB_WAVEFORM_HANDLE',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViInt32'
     },
     1250202: {
@@ -1017,6 +1071,9 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Gain',
         'name': 'ARB_GAIN',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViReal64'
     },
     1250203: {
@@ -1026,6 +1083,9 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Offset',
         'name': 'ARB_OFFSET',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViReal64'
     },
     1250204: {
@@ -1080,6 +1140,9 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Arbitrary Sequence Handle',
         'name': 'ARB_SEQUENCE_HANDLE',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViInt32'
     },
     1250212: {
