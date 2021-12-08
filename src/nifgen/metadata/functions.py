@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 20.0.0d5
+# This file is generated from NI-FGEN API metadata version 21.5.0d106
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -160,7 +160,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the handle of the arbitrary waveform that you want the signal\ngenerator to remove.\n\nYou can create multiple arbitrary waveforms using one of the following\nniFgen Create Waveform functions:\n\n-  niFgen_CreateWaveformF64\n-  niFgen_CreateWaveformI16\n-  niFgen_CreateWaveformFromFileI16\n-  niFgen_CreateWaveformFromFileF64\n-  niFgen_CreateWaveformFromFileHWS\n\n**Defined Value**:\n\nNIFGEN_VAL_ALL_WAVEFORMS—Remove all waveforms from the signal\ngenerator.\n\n**Default Value**: None\n'
+                    'description': '\nSpecifies the handle of the arbitrary waveform that you want the signal\ngenerator to remove.\n\nYou can create multiple arbitrary waveforms using one of the following\nniFgen Create Waveform functions:\n\n-  niFgen_CreateWaveformF64\n-  niFgen_CreateWaveformI16\n-  niFgen_CreateWaveformFromFileI16\n-  niFgen_CreateWaveformFromFileF64\n\n**Defined Value**:\n\nNIFGEN_VAL_ALL_WAVEFORMS—Remove all waveforms from the signal\ngenerator.\n\n**Default Value**: None\n'
                 },
                 'name': 'waveformHandle',
                 'type': 'ViInt32'
@@ -309,7 +309,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the handle of the arbitrary waveform you want the signal\ngenerator to produce. NI-FGEN sets the\nNIFGEN_ATTR_ARB_WAVEFORM_HANDLE attribute to this value. You can\ncreate an arbitrary waveform using one of the following niFgen Create\nWaveform functions:\n\n-  niFgen_CreateWaveformF64\n-  niFgen_CreateWaveformI16\n-  niFgen_CreateWaveformFromFileI16\n-  niFgen_CreateWaveformFromFileF64\n-  niFgen_CreateWaveformFromFileHWS\n\nThese functions return a handle that you use to identify the waveform.\n\n**Default Value**: None\n'
+                    'description': '\nSpecifies the handle of the arbitrary waveform you want the signal\ngenerator to produce. NI-FGEN sets the\nNIFGEN_ATTR_ARB_WAVEFORM_HANDLE attribute to this value. You can\ncreate an arbitrary waveform using one of the following niFgen Create\nWaveform functions:\n\n-  niFgen_CreateWaveformF64\n-  niFgen_CreateWaveformI16\n-  niFgen_CreateWaveformFromFileI16\n-  niFgen_CreateWaveformFromFileF64\n\nThese functions return a handle that you use to identify the waveform.\n\n**Default Value**: None\n'
                 },
                 'name': 'waveformHandle',
                 'type': 'ViInt32'
@@ -526,7 +526,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the array of waveform handles from which you want to create a\nnew arbitrary sequence. The array must have at least as many elements as\nthe value that you specify in **sequenceLength**. Each\n**waveformHandlesArray** element has a corresponding **loopCountsArray**\nelement that indicates how many times that waveform is repeated. You\nobtain waveform handles when you create arbitrary waveforms with the\nnifgen_AllocateWaveform function or one of the following niFgen\nCreateWaveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n-  nifgen_CreateWaveformFromFileHWS\n\n**Default Value**: None\n'
+                    'description': '\nSpecifies the array of waveform handles from which you want to create a\nnew arbitrary sequence. The array must have at least as many elements as\nthe value that you specify in **sequenceLength**. Each\n**waveformHandlesArray** element has a corresponding **loopCountsArray**\nelement that indicates how many times that waveform is repeated. You\nobtain waveform handles when you create arbitrary waveforms with the\nnifgen_AllocateWaveform function or one of the following niFgen\nCreateWaveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n\n**Default Value**: None\n'
                 },
                 'name': 'waveformHandlesArray',
                 'size': {
@@ -621,7 +621,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the array of waveform handles from which you want to create a\nnew arbitrary sequence. The array must have at least as many elements as\nthe value that you specify in **sequenceLength**. Each\n**waveformHandlesArray** element has a corresponding **loopCountsArray**\nelement that indicates how many times that waveform is repeated. You\nobtain waveform handles when you create arbitrary waveforms with the\nnifgen_AllocateWaveform function or one of the following niFgen\nCreateWaveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n-  nifgen_CreateWaveformFromFileHWS\n\n**Default Value**: None\n'
+                    'description': '\nSpecifies the array of waveform handles from which you want to create a\nnew arbitrary sequence. The array must have at least as many elements as\nthe value that you specify in **sequenceLength**. Each\n**waveformHandlesArray** element has a corresponding **loopCountsArray**\nelement that indicates how many times that waveform is repeated. You\nobtain waveform handles when you create arbitrary waveforms with the\nnifgen_AllocateWaveform function or one of the following niFgen\nCreateWaveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n\n**Default Value**: None\n'
                 },
                 'name': 'waveformHandlesArray',
                 'size': {
@@ -2635,7 +2635,7 @@ functions = {
     'SetNamedWaveformNextWritePosition': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nSets the position in the waveform to which data is written at the next\nwrite. This function allows you to write to arbitrary locations within\nthe waveform. These settings apply only to the next write to the\nwaveform specified by the **waveformHandle** parameter. Subsequent\nwrites to that waveform begin where the last write left off, unless this\nfunction is called again. The **waveformHandle** passed in must have\nbeen created with a call to one of the following functions:\n\n-  nifgen_AllocateWaveform\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n-  nifgen_CreateWaveformFromFileHWS\n'
+            'description': '\nSets the position in the waveform to which data is written at the next\nwrite. This function allows you to write to arbitrary locations within\nthe waveform. These settings apply only to the next write to the\nwaveform specified by the **waveformHandle** parameter. Subsequent\nwrites to that waveform begin where the last write left off, unless this\nfunction is called again. The **waveformHandle** passed in must have\nbeen created with a call to one of the following functions:\n\n-  nifgen_AllocateWaveform\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n'
         },
         'method_name_for_documentation': 'set_next_write_position',
         'parameters': [
@@ -2765,7 +2765,7 @@ functions = {
     'SetWaveformNextWritePosition': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nSets the position in the waveform at which the next waveform data is\nwritten. This function allows you to write to arbitrary locations within\nthe waveform. These settings apply only to the next write to the\nwaveform specified by the waveformHandle parameter. Subsequent writes to\nthat waveform begin where the last write left off, unless this function\nis called again. The waveformHandle passed in must have been created by\na call to the nifgen_AllocateWaveform function or one of the following\nniFgen CreateWaveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n-  nifgen_CreateWaveformFromFileHWS\n'
+            'description': '\nSets the position in the waveform at which the next waveform data is\nwritten. This function allows you to write to arbitrary locations within\nthe waveform. These settings apply only to the next write to the\nwaveform specified by the waveformHandle parameter. Subsequent writes to\nthat waveform begin where the last write left off, unless this function\nis called again. The waveformHandle passed in must have been created by\na call to the nifgen_AllocateWaveform function or one of the following\nniFgen CreateWaveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n'
         },
         'method_name_for_documentation': 'set_next_write_position',
         'parameters': [
@@ -2949,7 +2949,7 @@ functions = {
     'WriteNamedWaveformF64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nWrites floating-point data to the waveform in onboard memory. The\nwaveform handle passed in must have been created by a call to the\nnifgen_AllocateWaveform function or to one of the following niFgen\nCreate Waveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n-  nifgen_CreateWaveformFromFileHWS\n\nBy default, the subsequent call to the niFgen_WriteNamedWaveformF64\nfunction continues writing data from the position of the last sample\nwritten. You can set the write position and offset by calling the\nnifgen_SetNamedWaveformNextWritePosition function. If streaming is\nenabled, you can write more data than the allocated waveform size in\nonboard memory. Refer to the\n`Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more\ninformation about streaming data.\n'
+            'description': '\nWrites floating-point data to the waveform in onboard memory. The\nwaveform handle passed in must have been created by a call to the\nnifgen_AllocateWaveform function or to one of the following niFgen\nCreate Waveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n\nBy default, the subsequent call to the niFgen_WriteNamedWaveformF64\nfunction continues writing data from the position of the last sample\nwritten. You can set the write position and offset by calling the\nnifgen_SetNamedWaveformNextWritePosition function. If streaming is\nenabled, you can write more data than the allocated waveform size in\nonboard memory. Refer to the\n`Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more\ninformation about streaming data.\n'
         },
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
@@ -3109,7 +3109,7 @@ functions = {
     'WriteWaveform': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nWrites floating-point data to the waveform in onboard memory. The\nwaveform handle passed in must have been created by a call to the\nnifgen_AllocateWaveform function or one of the following niFgen\nCreateWaveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n-  nifgen_CreateWaveformFromFileHWS\n\nBy default, the subsequent call to the niFgen_WriteWaveform function\ncontinues writing data from the position of the last sample written. You\ncan set the write position and offset by calling the\nnifgen_SetWaveformNextWritePosition function. If streaming is enabled,\nyou can write more data than the allocated waveform size in onboard\nmemory. Refer to the\n`Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more\ninformation about streaming data.\n'
+            'description': '\nWrites floating-point data to the waveform in onboard memory. The\nwaveform handle passed in must have been created by a call to the\nnifgen_AllocateWaveform function or one of the following niFgen\nCreateWaveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n\nBy default, the subsequent call to the niFgen_WriteWaveform function\ncontinues writing data from the position of the last sample written. You\ncan set the write position and offset by calling the\nnifgen_SetWaveformNextWritePosition function. If streaming is enabled,\nyou can write more data than the allocated waveform size in onboard\nmemory. Refer to the\n`Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more\ninformation about streaming data.\n'
         },
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
