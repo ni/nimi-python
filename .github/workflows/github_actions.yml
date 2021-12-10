@@ -17,8 +17,8 @@ jobs:
     name: First job
     strategy:
       matrix:
-        module_name: [ "nidigital", "nitclk", "nifgen", "nidcpower", "nidmm", "niscope", "nimodinst", "nise", "niswitch"]
-        # module_name: [ "nidigital" ]
+        # module_name: [ "nidigital", "nitclk", "nifgen", "nidcpower", "nidmm", "niscope", "nimodinst", "nise", "niswitch"]
+        module_name: [ "nidigital" ]
         os: ["self-hosted"]
     runs-on: ${{ matrix.os }}
 
