@@ -8,7 +8,7 @@ on:
       - .gitattributes
       - LICENSE
       - VERSION
-      
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -34,17 +34,18 @@ jobs:
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           ec2-base-os: win-x64
           ec2-launch-template: rdss-nimibot-windows-python32
-          
+
   do-the-job:
     name: system_tests_win32
     needs: start-runner # required to start the main job when the runner is ready
     runs-on: ${{ needs.start-runner.outputs.label }} # run the job on the newly created runner
+    timeout-minutes: 40
     steps:
       - name: nidigital
         uses: SukruthGrandhiNI/githubactions@master
         with:
           module_name: "nidigital"
- 
+
   stop-runner:
     name: Stop self-hosted EC2 runner
     needs:
@@ -66,4 +67,3 @@ jobs:
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           label: ${{ needs.start-runner.outputs.label }}
           ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
-
