@@ -21,6 +21,7 @@ jobs:
         module_name: ["nidigital"]
         os: ["self-hosted"]
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
 
     steps:
       - name: system_tests_win32
