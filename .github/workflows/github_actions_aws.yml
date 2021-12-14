@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  start-win-python32-runner:
+ start-runner:
     name: Start self-hosted EC2 runner
     runs-on: ubuntu-latest
     outputs:
@@ -28,17 +28,18 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: ni/ec2-github-runner@users/krlydm/1210_once
+        uses: ni/ec2-github-runner@users/krlydm/1214_number_of_runners
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           ec2-base-os: win-x64
           ec2-launch-template: rdss-nimibot-windows-python32
+          number-of-runners: 2
 
   do-the-job:
     name: system_tests_win32
-    needs: start-win-python32-runner # required to start the main job when the runner is ready
-    runs-on: ${{ 'needs.start-${{ matrix.os }}-runner.outputs.label' }} # run the job on the newly created runner
+    needs: start-runner # required to start the main job when the runner is ready
+    runs-on: ${{ needs.start-runner.outputs.label }} # run the job on the newly created runner
     timeout-minutes: 40
     strategy:
       matrix:
@@ -53,7 +54,7 @@ jobs:
   stop-runner:
     name: Stop self-hosted EC2 runner
     needs:
-      - start-win-python32-runner # required to get output from the start-win-python32-runner job
+      - start-runner # required to get output from the start-runner job
       - do-the-job # required to wait when the main job is done
     runs-on: ubuntu-latest
     if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
@@ -65,9 +66,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Stop EC2 runner
-        uses: ni/ec2-github-runner@users/krlydm/1210_once
+        uses: ni/ec2-github-runner@users/krlydm/1214_number_of_runners
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          label: ${{ needs.start-win-python32-runner.outputs.label }}
-          ec2-instance-id: ${{ needs.start-win-python32-runner.outputs.ec2-instance-id }}
+          label: ${{ needs.start-runner.outputs.label }}
+          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
