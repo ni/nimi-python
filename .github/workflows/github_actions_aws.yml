@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  start-runner:
+  start-win-python32-runner:
     name: Start self-hosted EC2 runner
     runs-on: ubuntu-latest
     outputs:
@@ -37,19 +37,23 @@ jobs:
 
   do-the-job:
     name: system_tests_win32
-    needs: start-runner # required to start the main job when the runner is ready
-    runs-on: ${{ needs.start-runner.outputs.label }} # run the job on the newly created runner
+    needs: start-${{ matrix.os }}-runner # required to start the main job when the runner is ready
+    runs-on: ${{ needs.start-${{ matrix.os }}.outputs.label }} # run the job on the newly created runner
     timeout-minutes: 40
+    strategy:
+      matrix:
+        os: [win-python32]
+        module_name: ["niswitch", "nidmm"]
     steps:
-      - name: nidigital
+      - name: ${{ matrix.os }}
         uses: SukruthGrandhiNI/githubactions@master
         with:
-          module_name: "nidigital"
+          module_name: ${{ matrix.module_name }}
 
   stop-runner:
     name: Stop self-hosted EC2 runner
     needs:
-      - start-runner # required to get output from the start-runner job
+      - start-win-python32-runner # required to get output from the start-win-python32-runner job
       - do-the-job # required to wait when the main job is done
     runs-on: ubuntu-latest
     if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
@@ -65,5 +69,5 @@ jobs:
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          label: ${{ needs.start-runner.outputs.label }}
-          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+          label: ${{ needs.start-win-python32-runner.outputs.label }}
+          ec2-instance-id: ${{ needs.start-win-python32-runner.outputs.ec2-instance-id }}
