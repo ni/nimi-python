@@ -52,7 +52,6 @@ jobs:
             "nidmm",
             "niscope",
             "nimodinst",
-            "nise",
             "niswitch",
           ]
     steps:
