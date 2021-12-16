@@ -35,7 +35,7 @@ jobs:
           github-registration-timeout: 10
           ec2-base-os: win-x64
           ec2-launch-template: rdss-nimibot-windows-python32
-          number-of-runners: 1
+          number-of-runners: 2
 
   do-the-job:
     name: system_tests_win32
