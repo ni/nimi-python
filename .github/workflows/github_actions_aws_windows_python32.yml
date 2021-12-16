@@ -43,20 +43,10 @@ jobs:
     timeout-minutes: 40
     strategy:
       matrix:
-        module_name:
-          [
-            "nidigital",
-            "nitclk",
-            "nifgen",
-            "nidcpower",
-            "nidmm",
-            "niscope",
-            "nimodinst",
-            "nise",
-            "niswitch",
-          ]
+        os: [win-python32]
+        module_name: ["niswitch", "nidmm"]
     steps:
-      - name: system_tests_win32
+      - name: ${{ matrix.os }}
         uses: SukruthGrandhiNI/githubactions@master
         with:
           module_name: ${{ matrix.module_name }}
