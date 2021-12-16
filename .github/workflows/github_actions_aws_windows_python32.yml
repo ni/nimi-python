@@ -1,4 +1,4 @@
-name: nimibot
+name: nimibot_win_32
 
 on:
   push: #TBD
@@ -34,7 +34,7 @@ jobs:
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           ec2-base-os: win-x64
           ec2-launch-template: rdss-nimibot-windows-python32
-          number-of-runners: 2
+          number-of-runners: 6
 
   do-the-job:
     name: system_tests_win32
@@ -43,10 +43,20 @@ jobs:
     timeout-minutes: 40
     strategy:
       matrix:
-        os: [win-python32]
-        module_name: ["niswitch", "nidmm"]
+        module_name:
+          [
+            "nidigital",
+            "nitclk",
+            "nifgen",
+            "nidcpower",
+            "nidmm",
+            "niscope",
+            "nimodinst",
+            "nise",
+            "niswitch",
+          ]
     steps:
-      - name: ${{ matrix.os }}
+      - name: system_tests_win32
         uses: SukruthGrandhiNI/githubactions@master
         with:
           module_name: ${{ matrix.module_name }}
