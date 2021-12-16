@@ -28,7 +28,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: ni/ec2-github-runner@main
+        uses: ni/ec2-github-runner@users/krlydm/1210_once
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -40,11 +40,15 @@ jobs:
     needs: start-runner # required to start the main job when the runner is ready
     runs-on: ${{ needs.start-runner.outputs.label }} # run the job on the newly created runner
     timeout-minutes: 40
+    strategy:
+      matrix:
+        os: [win-python32]
+        module_name: ["niswitch", "nidmm"]
     steps:
-      - name: nidigital
+      - name: ${{ matrix.os }}
         uses: SukruthGrandhiNI/githubactions@master
         with:
-          module_name: "nidigital"
+          module_name: ${{ matrix.module_name }}
 
   stop-runner:
     name: Stop self-hosted EC2 runner
@@ -61,7 +65,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Stop EC2 runner
-        uses: ni/ec2-github-runner@main
+        uses: ni/ec2-github-runner@users/krlydm/1210_once
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
