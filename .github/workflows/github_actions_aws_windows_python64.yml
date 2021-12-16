@@ -32,9 +32,8 @@ jobs:
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          github-registration-timeout: 10
           ec2-base-os: win-x64
-          ec2-launch-template: rdss-nimibot-windows-python32
+          ec2-launch-template: rdss-nimibot-windows-python64
           number-of-runners: 2
 
   do-the-job:
@@ -44,20 +43,10 @@ jobs:
     timeout-minutes: 40
     strategy:
       matrix:
-        module_name:
-          [
-            "nidigital",
-            "nitclk",
-            "nifgen",
-            "nidcpower",
-            "nidmm",
-            "niscope",
-            "nimodinst",
-            "nise",
-            "niswitch",
-          ]
+        os: [win-python32]
+        module_name: ["niswitch", "nidmm"]
     steps:
-      - name: system_tests_win32
+      - name: ${{ matrix.os }}
         uses: SukruthGrandhiNI/githubactions@master
         with:
           module_name: ${{ matrix.module_name }}
