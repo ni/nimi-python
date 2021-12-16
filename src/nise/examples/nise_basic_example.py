@@ -5,9 +5,10 @@ import sys
 
 
 def example(virtual_device_name, connection):
-    with nise.Session(virtual_device_name=virtual_device_name) as session:
-        session.connect(connection)
-        print(connection, ' is now connected.')
+    pass
+    # with nise.Session(virtual_device_name=virtual_device_name) as session:
+    #     session.connect(connection)
+    #     print(connection, ' is now connected.')
 
 
 def _main(argsv):
