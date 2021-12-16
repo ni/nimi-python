@@ -32,6 +32,7 @@ jobs:
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          github-registration-timeout: 10
           ec2-base-os: win-x64
           ec2-launch-template: rdss-nimibot-windows-python32
           number-of-runners: 2
