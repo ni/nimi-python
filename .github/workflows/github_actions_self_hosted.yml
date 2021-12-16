@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         # module_name: [ "nidigital", "nitclk", "nifgen", "nidcpower", "nidmm", "niscope", "nimodinst", "nise", "niswitch"]
-        module_name: ["nidigital"]
+        module_name: ["niswitch", "nidmm"]
         os: ["self-hosted"]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 40
