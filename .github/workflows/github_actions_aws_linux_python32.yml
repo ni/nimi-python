@@ -32,7 +32,7 @@ jobs:
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          ec2-base-os: win-x64
+          ec2-base-os: linux-x64
           ec2-launch-template: rdss-nimibot-rhel-python64
           number-of-runners: 2
 
