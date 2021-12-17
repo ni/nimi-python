@@ -34,7 +34,7 @@ jobs:
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           ec2-base-os: win-x64
           ec2-launch-template: rdss-nimibot-windows-python64
-          number-of-runners: 4
+          number-of-runners: 6
 
   do-the-job:
     name: system_tests_win64
@@ -52,7 +52,6 @@ jobs:
             "nidmm",
             "niscope",
             "nimodinst",
-            "nise",
             "niswitch",
           ]
     steps:
