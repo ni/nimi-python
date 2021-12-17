@@ -12,7 +12,7 @@ runs:
     - name: checkout repository
       uses: actions/checkout@v2
     - run: echo "Hello ${{ inputs.module_name }}"
-      shell: powershell
+      shell: bash
     - run: |
         cd generated
         mkdir junit
