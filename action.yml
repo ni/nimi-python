@@ -11,7 +11,9 @@ runs:
   steps:
     - name: checkout repository
       uses: actions/checkout@v2
-    - run: echo "Hello ${{ inputs.module_name }}"
+    - run: |
+        echo "Hello ${{ inputs.module_name }}"
+        whoami
       shell: bash
     - run: |
         cd generated
