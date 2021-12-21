@@ -45,14 +45,7 @@ jobs:
       matrix:
         module_name:
           [
-            "nidigital",
-            "nitclk",
-            "nifgen",
-            "nidcpower",
-            "nidmm",
-            "niscope",
-            "nimodinst",
-            "niswitch",
+            "nise",
           ]
     steps:
       - name: system_tests_win32
