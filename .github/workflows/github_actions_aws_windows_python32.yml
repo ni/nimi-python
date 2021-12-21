@@ -24,6 +24,11 @@ jobs:
             "nise",
           ]
     steps:
+      - run: |
+          whoami
+        shell: powershell
+      
+
       - name: system_tests_win32
         uses: SukruthGrandhiNI/githubactions@master
         with:
