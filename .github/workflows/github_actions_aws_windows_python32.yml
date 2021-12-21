@@ -15,7 +15,6 @@ on:
 jobs:
   do-the-job:
     name: system_tests_win32
-    needs: start-runner # required to start the main job when the runner is ready
     runs-on: cxdyq # run the job on the newly created runner
     timeout-minutes: 40
     strategy:
