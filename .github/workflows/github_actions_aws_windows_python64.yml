@@ -53,6 +53,7 @@ jobs:
             "niscope",
             "nimodinst",
             "niswitch",
+            "nise",
           ]
     steps:
       - name: system_tests_win64
