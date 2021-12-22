@@ -1,4 +1,4 @@
-name: nimibot_win_32
+name: nimibot_win_32_test
 
 on:
   push: #TBD
