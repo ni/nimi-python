@@ -15,7 +15,7 @@ on:
 jobs:
   do-the-job:
     name: system_tests_win32
-    runs-on: test # run the job on the newly created runner
+    runs-on: self-hosted # run the job on the newly created runner
     timeout-minutes: 40
     strategy:
       matrix:
