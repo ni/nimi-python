@@ -17,9 +17,6 @@ runs:
         echo "$PATH"
         type -a python
         which python
-        ls -l /usr/bin/python
-        ls -l /usr/bin/python*
-        ls -l /usr/local/bin/python*
       shell: bash
     - run: |
         cd generated
