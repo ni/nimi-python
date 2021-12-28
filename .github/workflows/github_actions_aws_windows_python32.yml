@@ -43,15 +43,24 @@ jobs:
     timeout-minutes: 40
     strategy:
       matrix:
-        module_name: ["nise"]
+        module_name:
+          [
+            "nidigital",
+            "nitclk",
+            "nifgen",
+            "nidcpower",
+            "nidmm",
+            "niscope",
+            "nimodinst",
+            "nise",
+            "niswitch",
+          ]
     steps:
-      - run: |
-          whoami
-        shell: powershell
       - name: system_tests_win32
         uses: SukruthGrandhiNI/githubactions@master
         with:
           module_name: ${{ matrix.module_name }}
+
 
   stop-runner:
     name: Stop self-hosted EC2 runner
