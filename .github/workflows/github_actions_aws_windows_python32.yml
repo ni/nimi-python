@@ -34,7 +34,7 @@ jobs:
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           ec2-base-os: win-x64
           ec2-launch-template: rdss-nimibot-windows-python32
-          number-of-runners: 2
+          number-of-runners: 5
 
   do-the-job:
     name: system_tests_win32
