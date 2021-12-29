@@ -13,12 +13,9 @@ runs:
       uses: actions/checkout@v2
     - run: |
         echo "Hello ${{ inputs.module_name }}"
-        whoami
-        echo "$PATH"
-        type -a python
-        which python
       shell: bash
     - run: |
+        source /etc/bashrc
         cd generated
         mkdir junit
         mkdir kibana
