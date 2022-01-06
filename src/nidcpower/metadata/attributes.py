@@ -11,7 +11,7 @@ attributes = {
         'type': 'ViBoolean'
     },
     1050005: {
-        'access': 'read-write',
+        'access': 'read only',
         'documentation': {
             'description': '\nSpecifies whether to simulate NI-DCPower I/O operations. VI_TRUE specifies that operation is simulated.\nDefault Value: VI_FALSE\n'
         },
