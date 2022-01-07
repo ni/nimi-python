@@ -2,7 +2,7 @@
 # This file is generated from NI-FAKE API metadata version 21.0.0d11
 attributes = {
     1000000: {
-        'access': 'read-write',
+        'access': 'read only',
         'documentation': {
             'description': 'An attribute of type bool with read/write access.'
         },
