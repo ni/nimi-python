@@ -560,15 +560,12 @@ configure_arb_waveform
                 -  :py:meth:`nifgen.Session.create_waveform`
                 -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
                 -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
-                -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
 
                 These methods return a handle that you use to identify the waveform.
 
                 **Default Value**: None
 
                 
-
-                .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
             :type waveform_handle: int
@@ -920,7 +917,6 @@ create_advanced_arb_sequence
                 -  :py:meth:`nifgen.Session.create_waveform`
                 -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
                 -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
-                -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
 
                 **Default Value**: None
 
@@ -1062,7 +1058,6 @@ create_arb_sequence
                 -  :py:meth:`nifgen.Session.create_waveform`
                 -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
                 -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
-                -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
 
                 **Default Value**: None
 
@@ -2775,6 +2770,18 @@ arb_gain
         For example, when you set this property to 2.0, the output signal ranges from -2.0 V to +2.0 V.
         Use this property when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ`.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].arb_gain`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.arb_gain`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -2784,7 +2791,7 @@ arb_gain
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -2833,6 +2840,18 @@ arb_offset
         Use this property when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ`.
         Units: Volts
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].arb_offset`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.arb_offset`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -2842,7 +2861,7 @@ arb_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -2911,6 +2930,18 @@ arb_sequence_handle
         This channel-based property identifies which sequence the signal generator produces. You can create multiple sequences using :py:meth:`nifgen.Session.create_arb_sequence`. :py:meth:`nifgen.Session.create_arb_sequence` returns a handle that you can use to identify the particular sequence. To configure the signal generator to produce a particular sequence, set this property to the sequence handle.
         Use this property only when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.SEQ`.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].arb_sequence_handle`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.arb_sequence_handle`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -2920,7 +2951,7 @@ arb_sequence_handle
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -2939,13 +2970,20 @@ arb_waveform_handle
         :py:meth:`nifgen.Session.create_waveform`
         :py:meth:`nifgen.Session.create_waveform_from_file_i16`
         :py:meth:`nifgen.Session.create_waveform_from_file_f64`
-        :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
         These methods return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this property to the waveform handle.
         Use this property only when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB`.
 
 
 
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].arb_waveform_handle`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.arb_waveform_handle`
 
         The following table lists the characteristics of this property.
 
@@ -2956,7 +2994,7 @@ arb_waveform_handle
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -3022,6 +3060,18 @@ channel_delay
 
         Specifies, in seconds, the delay to apply to the analog output of the channel specified by the channel string. You can use the channel delay to configure the timing relationship between channels on a multichannel device. Values for this property can be zero or positive. A value of zero indicates that the channels are aligned. A positive value delays the analog output by the specified number of seconds.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].channel_delay`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.channel_delay`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3031,7 +3081,7 @@ channel_delay
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -3073,6 +3123,18 @@ common_mode_offset
 
         Specifies, in volts, the value the signal generator adds to or subtracts from the arbitrary waveform data. This property applies only when you set the :py:attr:`nifgen.Session.terminal_configuration` property to :py:data:`~nifgen.TerminalConfiguration.DIFFERENTIAL`. Common mode offset is applied to the signals generated at each differential output terminal.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].common_mode_offset`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.common_mode_offset`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3082,7 +3144,7 @@ common_mode_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -3123,17 +3185,29 @@ data_marker_event_data_bit_number
 
         Specifies the bit number to assign to the Data Marker Event.
 
+
+
+
+        .. tip:: This property can be set/get on specific data_markers within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container data_markers to specify a subset.
+
+            Example: :py:attr:`my_session.data_markers[ ... ].data_marker_event_data_bit_number`
+
+            To set/get on all data_markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.data_marker_event_data_bit_number`
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+--------------+
+            | Characteristic        | Value        |
+            +=======================+==============+
+            | Datatype              | int          |
+            +-----------------------+--------------+
+            | Permissions           | read-write   |
+            +-----------------------+--------------+
+            | Repeated Capabilities | data_markers |
+            +-----------------------+--------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3148,6 +3222,18 @@ data_marker_event_level_polarity
 
         Specifies the output polarity of the Data marker event.
 
+
+
+
+        .. tip:: This property can be set/get on specific data_markers within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container data_markers to specify a subset.
+
+            Example: :py:attr:`my_session.data_markers[ ... ].data_marker_event_level_polarity`
+
+            To set/get on all data_markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.data_marker_event_level_polarity`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------------------------------+
@@ -3157,7 +3243,7 @@ data_marker_event_level_polarity
             +-----------------------+------------------------------------+
             | Permissions           | read-write                         |
             +-----------------------+------------------------------------+
-            | Repeated Capabilities | None                               |
+            | Repeated Capabilities | data_markers                       |
             +-----------------------+------------------------------------+
 
         .. tip::
@@ -3173,17 +3259,29 @@ data_marker_event_output_terminal
 
         Specifies the destination terminal for the Data Marker Event.
 
+
+
+
+        .. tip:: This property can be set/get on specific data_markers within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container data_markers to specify a subset.
+
+            Example: :py:attr:`my_session.data_markers[ ... ].data_marker_event_output_terminal`
+
+            To set/get on all data_markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.data_marker_event_output_terminal`
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+--------------+
+            | Characteristic        | Value        |
+            +=======================+==============+
+            | Datatype              | str          |
+            +-----------------------+--------------+
+            | Permissions           | read-write   |
+            +-----------------------+--------------+
+            | Repeated Capabilities | data_markers |
+            +-----------------------+--------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3332,6 +3430,18 @@ digital_edge_script_trigger_edge
 
         Specifies the active edge for the Script trigger. This property is used when :py:attr:`nifgen.Session.script_trigger_type` is set to Digital Edge.
 
+
+
+
+        .. tip:: This property can be set/get on specific script_triggers within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container script_triggers to specify a subset.
+
+            Example: :py:attr:`my_session.script_triggers[ ... ].digital_edge_script_trigger_edge`
+
+            To set/get on all script_triggers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_script_trigger_edge`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------------------------------+
@@ -3341,7 +3451,7 @@ digital_edge_script_trigger_edge
             +-----------------------+------------------------------------+
             | Permissions           | read-write                         |
             +-----------------------+------------------------------------+
-            | Repeated Capabilities | None                               |
+            | Repeated Capabilities | script_triggers                    |
             +-----------------------+------------------------------------+
 
         .. tip::
@@ -3357,17 +3467,29 @@ digital_edge_script_trigger_source
 
         Specifies the source terminal for the Script trigger. This property is used when :py:attr:`nifgen.Session.script_trigger_type` is set to Digital Edge.
 
+
+
+
+        .. tip:: This property can be set/get on specific script_triggers within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container script_triggers to specify a subset.
+
+            Example: :py:attr:`my_session.script_triggers[ ... ].digital_edge_script_trigger_source`
+
+            To set/get on all script_triggers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.digital_edge_script_trigger_source`
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-----------------+
+            | Characteristic        | Value           |
+            +=======================+=================+
+            | Datatype              | str             |
+            +-----------------------+-----------------+
+            | Permissions           | read-write      |
+            +-----------------------+-----------------+
+            | Repeated Capabilities | script_triggers |
+            +-----------------------+-----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3775,17 +3897,29 @@ exported_script_trigger_output_terminal
         Specifies the output terminal for the exported Script trigger.
         Setting this property to an empty string means that when you commit the session, the signal is removed from that terminal and, if possible, the terminal is tristated.
 
+
+
+
+        .. tip:: This property can be set/get on specific script_triggers within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container script_triggers to specify a subset.
+
+            Example: :py:attr:`my_session.script_triggers[ ... ].exported_script_trigger_output_terminal`
+
+            To set/get on all script_triggers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.exported_script_trigger_output_terminal`
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-----------------+
+            | Characteristic        | Value           |
+            +=======================+=================+
+            | Datatype              | str             |
+            +-----------------------+-----------------+
+            | Permissions           | read-write      |
+            +-----------------------+-----------------+
+            | Repeated Capabilities | script_triggers |
+            +-----------------------+-----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4033,6 +4167,16 @@ func_amplitude
 
         .. note:: This parameter does not affect signal generator behavior when you
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].func_amplitude`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.func_amplitude`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4042,7 +4186,7 @@ func_amplitude
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4090,6 +4234,18 @@ func_dc_offset
         For example, to configure a waveform with an amplitude of 10.00 V to  range from 0.00 V to +10.00 V, set DC Offset to 5.00 V.
         Units: volts
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].func_dc_offset`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.func_dc_offset`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4099,7 +4255,7 @@ func_dc_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4121,6 +4277,16 @@ func_duty_cycle_high
 
         .. note:: This parameter only affects signal generator behavior when you
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].func_duty_cycle_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.func_duty_cycle_high`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4130,7 +4296,7 @@ func_duty_cycle_high
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4153,6 +4319,16 @@ func_frequency
 
         .. note:: :
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].func_frequency`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.func_frequency`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4162,7 +4338,7 @@ func_frequency
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4215,6 +4391,16 @@ func_start_phase
 
         .. note:: This parameter does not affect signal generator behavior when you
 
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].func_start_phase`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.func_start_phase`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4224,7 +4410,7 @@ func_start_phase
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4250,6 +4436,18 @@ func_waveform
         :py:data:`~nifgen.Waveform.USER`      - User-defined waveform as defined with
         :py:meth:`nifgen.Session.define_user_standard_waveform`
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].func_waveform`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.func_waveform`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+----------------+
@@ -4259,7 +4457,7 @@ func_waveform
             +-----------------------+----------------+
             | Permissions           | read-write     |
             +-----------------------+----------------+
-            | Repeated Capabilities | None           |
+            | Repeated Capabilities | channels       |
             +-----------------------+----------------+
 
         .. tip::
@@ -4511,6 +4709,18 @@ marker_event_output_terminal
 
         Specifies the destination terminal for the Marker Event.
 
+
+
+
+        .. tip:: This property can be set/get on specific markers within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+            Example: :py:attr:`my_session.markers[ ... ].marker_event_output_terminal`
+
+            To set/get on all markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.marker_event_output_terminal`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4520,7 +4730,7 @@ marker_event_output_terminal
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | markers    |
             +-----------------------+------------+
 
         .. tip::
@@ -4912,6 +5122,18 @@ output_enabled
 
         This channel-based property specifies whether the signal that the signal generator produces appears at the output connector.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.output_enabled`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4921,7 +5143,7 @@ output_enabled
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -4937,6 +5159,18 @@ output_impedance
 
         This channel-based property specifies the signal generator output impedance at the output connector. NI signal sources modules have an output impedance of 50 ohms and an optional 75 ohms on select modules. If the load impedance matches the output impedance, then the voltage at the signal output connector is at the needed level. The voltage at the signal output connector varies with load output impedance, up to doubling the voltage for a high-impedance load.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_impedance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.output_impedance`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -4946,7 +5180,7 @@ output_impedance
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -5216,6 +5450,18 @@ script_trigger_type
 
         Specifies the Script trigger type. Depending upon the value of this property, additional properties may need to be configured to fully configure the trigger.
 
+
+
+
+        .. tip:: This property can be set/get on specific script_triggers within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container script_triggers to specify a subset.
+
+            Example: :py:attr:`my_session.script_triggers[ ... ].script_trigger_type`
+
+            To set/get on all script_triggers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.script_trigger_type`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-------------------------+
@@ -5225,7 +5471,7 @@ script_trigger_type
             +-----------------------+-------------------------+
             | Permissions           | read-write              |
             +-----------------------+-------------------------+
-            | Repeated Capabilities | None                    |
+            | Repeated Capabilities | script_triggers         |
             +-----------------------+-------------------------+
 
         .. tip::
@@ -5601,6 +5847,18 @@ terminal_configuration
 
         Specifies whether gain and offset values will be analyzed based on single-ended or differential operation.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].terminal_configuration`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.terminal_configuration`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------------------------+
@@ -5610,7 +5868,7 @@ terminal_configuration
             +-----------------------+-----------------------------+
             | Permissions           | read-write                  |
             +-----------------------+-----------------------------+
-            | Repeated Capabilities | None                        |
+            | Repeated Capabilities | channels                    |
             +-----------------------+-----------------------------+
 
         .. tip::
@@ -5626,6 +5884,18 @@ trigger_mode
 
         Controls the trigger mode.
 
+
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].trigger_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.trigger_mode`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-------------------+
@@ -5635,7 +5905,7 @@ trigger_mode
             +-----------------------+-------------------+
             | Permissions           | read-write        |
             +-----------------------+-------------------+
-            | Repeated Capabilities | None              |
+            | Repeated Capabilities | channels          |
             +-----------------------+-------------------+
 
         .. tip::
