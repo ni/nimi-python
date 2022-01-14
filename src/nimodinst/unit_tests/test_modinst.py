@@ -8,7 +8,7 @@ from mock import patch
 
 SESSION_NUM_FOR_TEST = 42
 
-
+# Dummy comments to test the PR trigger
 class TestSession(object):
     def setup_method(self, method):
         self.patched_library_patcher = patch('nimodinst._library.Library', autospec=True)
