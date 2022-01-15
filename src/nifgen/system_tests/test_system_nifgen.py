@@ -91,7 +91,7 @@ def test_self_cal(session):
 def test_channels_rep_cap():
     with nifgen.Session('', '', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as session:
         session.func_amplitude = 0.5
-        assert session.channels['0-1'].func_amplitude == 0.5
+        assert session.channels[0:1].func_amplitude == 0.5
 
         session.channels[0].func_amplitude = 1
         assert session.channels[0].func_amplitude == 1
