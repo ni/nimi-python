@@ -99,7 +99,7 @@ def test_channels_rep_cap():
 
 
 def test_markers_rep_cap(session):
-    assert '' == session.markers['Marker0'].marker_event_output_terminal
+    assert '' == session.markers[0].marker_event_output_terminal
 
     requested_terminal_name = '/Dev1/PXI_Trig0'
     session.markers[0].marker_event_output_terminal = requested_terminal_name
