@@ -106,12 +106,12 @@ def test_markers_rep_cap(session):
     assert requested_terminal_name == session.markers[0].marker_event_output_terminal
 
 
-def test_data_markers_rep_cap(session):
-    assert nifgen.DataMarkerEventLevelPolarity.HIGH == session.data_markers[0].data_marker_event_level_polarity
+def test_data_markers_rep_cap(session_5421):
+    assert nifgen.DataMarkerEventLevelPolarity.HIGH == session_5421.data_markers[0].data_marker_event_level_polarity
 
     requested_polarity = nifgen.DataMarkerEventLevelPolarity.LOW
-    session.data_markers[0].data_marker_event_level_polarity = requested_polarity
-    assert requested_polarity == session.data_markers[0].data_marker_event_level_polarity
+    session_5421.data_markers[0].data_marker_event_level_polarity = requested_polarity
+    assert requested_polarity == session_5421.data_markers[0].data_marker_event_level_polarity
 
 
 def test_script_triggers_rep_cap(session):
