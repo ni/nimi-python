@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
+# edit the file for demo purpose
 
 from setuptools.command.test import test as test_command
 from setuptools import setup
