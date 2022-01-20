@@ -46,8 +46,16 @@ All notable changes to this project will be documented in this file.
     * #### Changed
     * #### Removed
 * ### `nifgen` (NI-FGEN)
-    * #### Added
+    * #### Added 
+        * `data_markers` repeated capability support - [#1668](https://github.com/ni/nimi-python/issues/1668)
     * #### Changed
+        * Addressed [#1627](https://github.com/ni/nimi-python/issues/1627) for attributes supporting the following repeated capabilities
+           * `channels`
+           * `markers`
+           * `data_markers`
+           * `script_triggers`
+        * Corrected multiple mistakes in repeated capability info of attribute metadata
+            * alters API behavior (repeated capability access of attributes) and documentation
     * #### Removed
 * ### `nimodinst` (NI-ModInst)
     * #### Added
