@@ -18,10 +18,15 @@ Repeated Capabilities
 
     Repeated capabilities attributes use the indexing operator :python:`[]` to indicate the repeated capabilities.
     The parameter can be a string, list, tuple, or slice (range). Each element of those can be a string or
-    an integer. If it is a string, you can indicate a range using the same format as the driver: :python:`'0-2'` or
-    :python:`'0:2'`
+    an integer.
 
-    Some repeated capabilities use a prefix before the number and this is optional
+    ..
+        If it is a string, you can indicate a range using the same format as the driver: :python:`'0-2'` or
+        :python:`'0:2'`
+
+        Some repeated capabilities use a prefix before the number and this is optional.
+
+    The recommended way of accessing repeated capabilities is with an integer :python:`[0]` or range :python:`[0:2]`.
 
 channels
 --------
@@ -30,10 +35,19 @@ channels
 
         .. code:: python
 
-            session.channels['0-2'].channel_enabled = True
+            session.channels[0].channel_enabled = True
 
-        passes a string of :python:`'0, 1, 2'` to the set attribute function.
+        sets :py:attr:`channel_enabled` to :python:`True` for channels 0.
 
+        .. code:: python
+
+            session.channels[0:2].channel_enabled = True
+        
+        sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 1, 2.
+
+        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
+        supports this repeated capability. See documentation for individual properties and methods to
+        learn what repeated capabilites they support, if any.
 
 instruments
 -----------
@@ -42,9 +56,18 @@ instruments
 
         .. code:: python
 
-            session.instruments['0-2'].channel_enabled = True
+            session.instruments[0].channel_enabled = True
 
-        passes a string of :python:`'0, 1, 2'` to the set attribute function.
+        sets :py:attr:`channel_enabled` to :python:`True` for instruments 0.
 
+        .. code:: python
+
+            session.instruments[0:2].channel_enabled = True
+        
+        sets :py:attr:`channel_enabled` to :python:`True` for instruments 0, 1, 2.
+
+        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
+        supports this repeated capability. See documentation for individual properties and methods to
+        learn what repeated capabilites they support, if any.
 
 
