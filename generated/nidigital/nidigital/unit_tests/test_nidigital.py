@@ -2,8 +2,8 @@ import _mock_helper
 
 import nidigital
 
-from mock import patch
 import pytest
+from unittest.mock import patch
 
 session_id_for_test = 42
 
