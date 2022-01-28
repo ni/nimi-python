@@ -27,12 +27,6 @@ ${helper.get_rst_header_snippet('Repeated Capabilities', '=')}
     The parameter can be a string, list, tuple, or slice (range). Each element of those can be a string or
     an integer.
 
-    ..
-        If it is a string, you can indicate a range using the same format as the driver: :python:`'0-2'` or
-        :python:`'0:2'`
-
-        Some repeated capabilities use a prefix before the number and this is optional.
-
     The recommended way of accessing repeated capabilities is with an integer :python:`[0]` or range :python:`[0:2]`.
 
 % for rep_cap in config['repeated_capabilities']:
