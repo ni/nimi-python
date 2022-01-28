@@ -19,13 +19,18 @@
 
 ${helper.get_rst_header_snippet('Repeated Capabilities', '=')}
 
-    Repeated capabilities attributes are used to set the `channel_string` parameter to the
-    underlying driver function call. This can be the actual function based on the :py:class:`Session`
-    method being called, or it can be the appropriate Get/Set Attribute function, such as :c:`${config['c_function_prefix']}SetAttributeViInt32()`.
+    :py:class:`${module_name}.Session` supports "Repeated Capabilities", which are multiple instances of the same type of
+    functionality. The repeated capabilities supported by :py:class:`${module_name}.Session` are:
 
-    Repeated capabilities attributes use the indexing operator :python:`[]` to indicate the repeated capabilities.
-    The parameter can be a string, list, tuple, or slice (range). Each element of those can be a string or
-    an integer.
+% for rep_cap in config['repeated_capabilities']:
+<%
+name = rep_cap['python_name']
+%>\
+    #. ${name}_
+% endfor
+
+    Use the indexing operator :python:`[]` to indicate which repeated capability you are trying to access.
+    The parameter can be an integer, a string, a list, a tuple, or slice (range).
 
     The recommended way of accessing repeated capabilities is with an integer :python:`[0]` or range :python:`[0:2]`.
 
