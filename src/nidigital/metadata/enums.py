@@ -591,7 +591,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Specifies to route a pattern opcode event signal.'
+                    'description': 'Specifies to route a conditional jump trigger.'
                 },
                 'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER',
                 'value': 2001
