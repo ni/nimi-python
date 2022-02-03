@@ -45,8 +45,10 @@ jobs:
       matrix:
         module_name: ["nidmm", "niswitch"]
     steps:
-      - name: system_tests_win32
-        uses: SukruthGrandhiNI/nimi-python@master
+      - name: checkout repository
+        uses: actions/checkout@v2
+      - name: Execute system tests
+        uses: ./.github/actions/linux
         with:
           module_name: ${{ matrix.module_name }}
 

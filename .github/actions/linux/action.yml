@@ -9,11 +9,8 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: checkout repository
-      uses: actions/checkout@v2
-    - run: echo "Hello ${{ inputs.module_name }}"
-      shell: powershell
     - run: |
+        source /etc/bashrc
         cd generated
         mkdir junit
         mkdir kibana
