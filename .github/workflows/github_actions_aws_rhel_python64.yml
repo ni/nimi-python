@@ -45,8 +45,10 @@ jobs:
       matrix:
         module_name: ["nidmm", "niswitch"]
     steps:
-      - name: system_tests_win32
-        uses: SukruthGrandhiNI/nimi-python@master
+      - name: checkout repository
+        uses: actions/checkout@v2
+      - name: Execute system tests
+        uses: ./.github/actions/linux
         with:
           module_name: ${{ matrix.module_name }}
 
@@ -58,10 +60,8 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
     steps:
-      - name: checkout repository
-        uses: actions/checkout@v2
-      - name: Execute system tests
-        uses: ./.github/action1/test
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
