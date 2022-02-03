@@ -33,8 +33,10 @@ jobs:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           ec2-base-os: win-x64
-          ec2-launch-template: rdss-nimibot-windows-python64
-          number-of-runners: 6
+          ec2-launch-template: rdss-nimibot-windows-python32
+          number-of-runners: 1
+          number-of-instances: 4
+          ec2-instance-type: t3.medium
 
   do-the-job:
     name: system_tests_win64
@@ -56,8 +58,10 @@ jobs:
             "nise",
           ]
     steps:
-      - name: system_tests_win64
-        uses: SukruthGrandhiNI/githubactions@master
+      - name: checkout repository
+        uses: actions/checkout@v2
+      - name: Execute system tests
+        uses: ./.github/actions/windows
         with:
           module_name: ${{ matrix.module_name }}
 
