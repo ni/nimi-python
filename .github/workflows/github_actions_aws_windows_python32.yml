@@ -1,13 +1,17 @@
 name: nimibot_win_32
 
 on:
-  push: #TBD
+  pull_request:
+    branches:
+      - master
+      - releases/*
     paths-ignore:
       - CHANGELOG.md
       - CONTRIBUTING.md
       - .gitattributes
       - LICENSE
       - VERSION
+    types: [review_requested, ready_for_review, synchronize]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
