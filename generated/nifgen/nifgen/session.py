@@ -181,6 +181,16 @@ class _SessionBase(object):
     Specifies the factor by which the signal generator scales the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this property to scale the arbitrary waveform to other ranges.
     For example, when you set this property to 2.0, the output signal ranges from -2.0 V to +2.0 V.
     Use this property when output_mode is set to OutputMode.ARB or OutputMode.SEQ.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].arb_gain`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.arb_gain`
     '''
     arb_marker_position = _attributes.AttributeViInt32(1150327)
     '''Type: int
@@ -198,6 +208,16 @@ class _SessionBase(object):
     For example, when you set this property to 1.0, the output signal ranges from 2.0 V to 0.0 V.
     Use this property when output_mode is set to OutputMode.ARB or OutputMode.SEQ.
     Units: Volts
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].arb_offset`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.arb_offset`
     '''
     arb_repeat_count = _attributes.AttributeViInt32(1150328)
     '''Type: int
@@ -216,6 +236,16 @@ class _SessionBase(object):
 
     This channel-based property identifies which sequence the signal generator produces. You can create multiple sequences using create_arb_sequence. create_arb_sequence returns a handle that you can use to identify the particular sequence. To configure the signal generator to produce a particular sequence, set this property to the sequence handle.
     Use this property only when output_mode is set to OutputMode.SEQ.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].arb_sequence_handle`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.arb_sequence_handle`
     '''
     arb_waveform_handle = _attributes.AttributeViInt32(1250201)
     '''Type: int
@@ -225,12 +255,18 @@ class _SessionBase(object):
     create_waveform
     create_waveform_from_file_i16
     create_waveform_from_file_f64
-    CreateWaveformFromFileHWS
     These methods return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this property to the waveform handle.
     Use this property only when output_mode is set to OutputMode.ARB.
 
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].arb_waveform_handle`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.arb_waveform_handle`
     '''
     aux_power_enabled = _attributes.AttributeViBoolean(1150411)
     '''Type: bool
@@ -246,6 +282,16 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies, in seconds, the delay to apply to the analog output of the channel specified by the channel string. You can use the channel delay to configure the timing relationship between channels on a multichannel device. Values for this property can be zero or positive. A value of zero indicates that the channels are aligned. A positive value delays the analog output by the specified number of seconds.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].channel_delay`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.channel_delay`
     '''
     clock_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ClockMode, 1150110)
     '''Type: enums.ClockMode
@@ -257,6 +303,16 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies, in volts, the value the signal generator adds to or subtracts from the arbitrary waveform data. This property applies only when you set the terminal_configuration property to TerminalConfiguration.DIFFERENTIAL. Common mode offset is applied to the signals generated at each differential output terminal.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].common_mode_offset`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.common_mode_offset`
     '''
     data_marker_events_count = _attributes.AttributeViInt32(1150273)
     '''Type: int
@@ -267,16 +323,46 @@ class _SessionBase(object):
     '''Type: int
 
     Specifies the bit number to assign to the Data Marker Event.
+
+    Tip:
+    This property can be set/get on specific data_markers within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container data_markers to specify a subset.
+
+    Example: :py:attr:`my_session.data_markers[ ... ].data_marker_event_data_bit_number`
+
+    To set/get on all data_markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.data_marker_event_data_bit_number`
     '''
     data_marker_event_level_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DataMarkerEventLevelPolarity, 1150338)
     '''Type: enums.DataMarkerEventLevelPolarity
 
     Specifies the output polarity of the Data marker event.
+
+    Tip:
+    This property can be set/get on specific data_markers within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container data_markers to specify a subset.
+
+    Example: :py:attr:`my_session.data_markers[ ... ].data_marker_event_level_polarity`
+
+    To set/get on all data_markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.data_marker_event_level_polarity`
     '''
     data_marker_event_output_terminal = _attributes.AttributeViString(1150339)
     '''Type: str
 
     Specifies the destination terminal for the Data Marker Event.
+
+    Tip:
+    This property can be set/get on specific data_markers within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container data_markers to specify a subset.
+
+    Example: :py:attr:`my_session.data_markers[ ... ].data_marker_event_output_terminal`
+
+    To set/get on all data_markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.data_marker_event_output_terminal`
     '''
     data_transfer_block_size = _attributes.AttributeViInt32(1150241)
     '''Type: int
@@ -315,11 +401,31 @@ class _SessionBase(object):
     '''Type: enums.ScriptTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
+
+    Tip:
+    This property can be set/get on specific script_triggers within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container script_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.script_triggers[ ... ].digital_edge_script_trigger_edge`
+
+    To set/get on all script_triggers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.digital_edge_script_trigger_edge`
     '''
     digital_edge_script_trigger_source = _attributes.AttributeViString(1150291)
     '''Type: str
 
     Specifies the source terminal for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
+
+    Tip:
+    This property can be set/get on specific script_triggers within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container script_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.script_triggers[ ... ].digital_edge_script_trigger_source`
+
+    To set/get on all script_triggers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.digital_edge_script_trigger_source`
     '''
     digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerDigitalEdgeEdge, 1150282)
     '''Type: enums.StartTriggerDigitalEdgeEdge
@@ -414,6 +520,16 @@ class _SessionBase(object):
 
     Specifies the output terminal for the exported Script trigger.
     Setting this property to an empty string means that when you commit the session, the signal is removed from that terminal and, if possible, the terminal is tristated.
+
+    Tip:
+    This property can be set/get on specific script_triggers within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container script_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.script_triggers[ ... ].exported_script_trigger_output_terminal`
+
+    To set/get on all script_triggers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.exported_script_trigger_output_terminal`
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150283)
     '''Type: str
@@ -470,6 +586,16 @@ class _SessionBase(object):
     Units: Vpk-pk
 
     Note: This parameter does not affect signal generator behavior when you
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].func_amplitude`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.func_amplitude`
     '''
     func_buffer_size = _attributes.AttributeViInt32(1150238)
     '''Type: int
@@ -485,6 +611,16 @@ class _SessionBase(object):
     Controls the DC offset of the standard waveform that the  signal generator produces.  This value is the offset at the output  terminal. The value is the offset from ground to the center of the  waveform that you specify with the Waveform parameter.
     For example, to configure a waveform with an amplitude of 10.00 V to  range from 0.00 V to +10.00 V, set DC Offset to 5.00 V.
     Units: volts
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].func_dc_offset`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.func_dc_offset`
     '''
     func_duty_cycle_high = _attributes.AttributeViReal64(1250106)
     '''Type: float
@@ -494,6 +630,16 @@ class _SessionBase(object):
     Units: Percentage of time the waveform is high
 
     Note: This parameter only affects signal generator behavior when you
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].func_duty_cycle_high`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.func_duty_cycle_high`
     '''
     func_frequency = _attributes.AttributeViReal64(1250104)
     '''Type: float
@@ -505,6 +651,16 @@ class _SessionBase(object):
 
     Note:
     :
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].func_frequency`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.func_frequency`
     '''
     func_max_buffer_size = _attributes.AttributeViInt32(1150239)
     '''Type: int
@@ -523,6 +679,16 @@ class _SessionBase(object):
     Units: Degrees of one cycle
 
     Note: This parameter does not affect signal generator behavior when you
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].func_start_phase`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.func_start_phase`
     '''
     func_waveform = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Waveform, 1250101)
     '''Type: enums.Waveform
@@ -538,6 +704,16 @@ class _SessionBase(object):
     Waveform.NOISE     - White noise
     Waveform.USER      - User-defined waveform as defined with
     define_user_standard_waveform
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].func_waveform`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.func_waveform`
     '''
     idle_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IdleBehavior, 1150377)
     '''Type: enums.IdleBehavior
@@ -597,6 +773,16 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the destination terminal for the Marker Event.
+
+    Tip:
+    This property can be set/get on specific markers within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+    Example: :py:attr:`my_session.markers[ ... ].marker_event_output_terminal`
+
+    To set/get on all markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.marker_event_output_terminal`
     '''
     max_freq_list_duration = _attributes.AttributeViReal64(1150213)
     '''Type: float
@@ -678,11 +864,31 @@ class _SessionBase(object):
     '''Type: bool
 
     This channel-based property specifies whether the signal that the signal generator produces appears at the output connector.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].output_enabled`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.output_enabled`
     '''
     output_impedance = _attributes.AttributeViReal64(1250004)
     '''Type: float
 
     This channel-based property specifies the signal generator output impedance at the output connector. NI signal sources modules have an output impedance of 50 ohms and an optional 75 ohms on select modules. If the load impedance matches the output impedance, then the voltage at the signal output connector is at the needed level. The voltage at the signal output connector varies with load output impedance, up to doubling the voltage for a high-impedance load.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].output_impedance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.output_impedance`
     '''
     output_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputMode, 1250001)
     '''Type: enums.OutputMode
@@ -750,6 +956,16 @@ class _SessionBase(object):
     '''Type: enums.ScriptTriggerType
 
     Specifies the Script trigger type. Depending upon the value of this property, additional properties may need to be configured to fully configure the trigger.
+
+    Tip:
+    This property can be set/get on specific script_triggers within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container script_triggers to specify a subset.
+
+    Example: :py:attr:`my_session.script_triggers[ ... ].script_trigger_type`
+
+    To set/get on all script_triggers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.script_trigger_type`
     '''
     serial_number = _attributes.AttributeViString(1150243)
     '''Type: str
@@ -834,11 +1050,31 @@ class _SessionBase(object):
     '''Type: enums.TerminalConfiguration
 
     Specifies whether gain and offset values will be analyzed based on single-ended or differential operation.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].terminal_configuration`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.terminal_configuration`
     '''
     trigger_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerMode, 1150108)
     '''Type: enums.TriggerMode
 
     Controls the trigger mode.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].trigger_mode`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.trigger_mode`
     '''
     wait_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WaitBehavior, 1150379)
     '''Type: enums.WaitBehavior
@@ -876,6 +1112,7 @@ class _SessionBase(object):
         self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
         self.script_triggers = _RepeatedCapabilities(self, 'ScriptTrigger', repeated_capability_list)
         self.markers = _RepeatedCapabilities(self, 'Marker', repeated_capability_list)
+        self.data_markers = _RepeatedCapabilities(self, 'DataMarker', repeated_capability_list)
 
         self._is_frozen = freeze_it
 
@@ -1114,14 +1351,10 @@ class _SessionBase(object):
                 -  create_waveform
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
-                -  CreateWaveformFromFileHWS
 
                 These methods return a handle that you use to identify the waveform.
 
                 **Default Value**: None
-
-                Note:
-                One or more of the referenced methods are not in the Python API for this driver.
 
             gain (float): Specifies the factor by which the signal generator scales the arbitrary
                 waveforms in the sequence. When you create an arbitrary waveform, you
@@ -2472,7 +2705,6 @@ class _SessionBase(object):
         -  create_waveform
         -  create_waveform_from_file_i16
         -  create_waveform_from_file_f64
-        -  CreateWaveformFromFileHWS
 
         Tip:
         This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
@@ -2580,7 +2812,6 @@ class _SessionBase(object):
         -  create_waveform
         -  create_waveform_from_file_i16
         -  create_waveform_from_file_f64
-        -  CreateWaveformFromFileHWS
 
         Tip:
         This method can be called on specific channels within your :py:class:`nifgen.Session` instance.
@@ -2703,7 +2934,6 @@ class _SessionBase(object):
         -  create_waveform
         -  create_waveform_from_file_i16
         -  create_waveform_from_file_f64
-        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
@@ -2755,7 +2985,6 @@ class _SessionBase(object):
         -  create_waveform
         -  create_waveform_from_file_i16
         -  create_waveform_from_file_f64
-        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
@@ -2896,7 +3125,6 @@ class _SessionBase(object):
         -  create_waveform
         -  create_waveform_from_file_i16
         -  create_waveform_from_file_f64
-        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
@@ -2949,7 +3177,6 @@ class _SessionBase(object):
         -  create_waveform
         -  create_waveform_from_file_i16
         -  create_waveform_from_file_f64
-        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
@@ -3346,7 +3573,6 @@ class Session(_SessionBase):
                 -  create_waveform
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
-                -  CreateWaveformFromFileHWS
 
                 **Defined Value**:
 
@@ -3354,9 +3580,6 @@ class Session(_SessionBase):
                 generator.
 
                 **Default Value**: None
-
-                Note:
-                One or more of the referenced methods are not in the Python API for this driver.
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3473,7 +3696,6 @@ class Session(_SessionBase):
                 -  create_waveform
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
-                -  CreateWaveformFromFileHWS
 
                 **Default Value**: None
 
@@ -3587,7 +3809,6 @@ class Session(_SessionBase):
                 -  create_waveform
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
-                -  CreateWaveformFromFileHWS
 
                 **Default Value**: None
 

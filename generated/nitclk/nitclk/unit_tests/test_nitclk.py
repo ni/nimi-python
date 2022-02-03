@@ -4,7 +4,7 @@ import _mock_helper
 import hightime
 import nitclk
 
-from mock import patch
+from unittest.mock import patch
 
 SESSION_NUM_FOR_TEST = 42
 single_session = [SESSION_NUM_FOR_TEST]
@@ -227,7 +227,7 @@ class TestNitclkApi(object):
         attr_string = session.sync_pulse_sender_sync_pulse_source
         assert(attr_string == test_string)
 
-        from mock import call
+        from unittest.mock import call
         calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32Matcher(0), None), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32Matcher(len(test_string)), _matchers.ViCharBufferMatcher(len(test_string)))]
         self.patched_library.niTClk_GetAttributeViString.assert_has_calls(calls)
         assert self.patched_library.niTClk_GetAttributeViString.call_count == 2

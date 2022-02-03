@@ -549,7 +549,7 @@ SoftwareTrigger
 
 
 
-        Specifies to route a pattern opcode event signal.
+        Specifies to route a conditional jump trigger.
 
         
 

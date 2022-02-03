@@ -4,7 +4,7 @@ import _mock_helper
 import nimodinst
 import warnings
 
-from mock import patch
+from unittest.mock import patch
 
 SESSION_NUM_FOR_TEST = 42
 

@@ -9,12 +9,12 @@ import numpy
 import platform
 import warnings
 
-from mock import patch
+from unittest.mock import patch
 
 import _matchers
 import _mock_helper
 
-# from mock import ANY
+# from unittest.mock import ANY
 # Tests
 
 
@@ -348,7 +348,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             session.enum_input_function_with_defaults()
             session.enum_input_function_with_defaults(test_turtle)
-            from mock import call
+            from unittest.mock import call
             calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt16Matcher(0)), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt16Matcher(1))]  # 0 is the value of the default of nifake.Turtle.LEONARDO, 1 is the value of nifake.Turtle.DONATELLO
             self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
 
@@ -358,7 +358,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             session.string_valued_enum_input_function_with_defaults()
             session.string_valued_enum_input_function_with_defaults(test_mobile_os_name)
-            from mock import call
+            from unittest.mock import call
             calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher('Android')), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher('iOS'))]  # 'ANDROID' is the value of the default of nifake.MobileOSNames.Android, 'iOS' is the value of nifake.MobileOSNames.IOS
             self.patched_library.niFake_StringValuedEnumInputFunctionWithDefaults.assert_has_calls(calls)
 
@@ -777,7 +777,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             result_string = session.get_an_ivi_dance_string()
             assert result_string == string_val
-            from mock import call
+            from unittest.mock import call
             calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(0), None), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(string_val)), _matchers.ViCharBufferMatcher(len(string_val)))]
             self.patched_library.niFake_GetAnIviDanceString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAnIviDanceString.call_count == 2
@@ -807,7 +807,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             result_string = session.get_an_ivi_dance_with_a_twist_string()
             assert result_string == string_val
-            from mock import call
+            from unittest.mock import call
             calls = [
                 call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(0), None, _matchers.ViInt32PointerMatcher()),
                 call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(string_val)), _matchers.ViCharBufferMatcher(len(string_val)), _matchers.ViInt32PointerMatcher())
@@ -953,7 +953,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             attr_string = session.read_write_string
             assert attr_string == string
-            from mock import call
+            from unittest.mock import call
             calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(1000002), _matchers.ViInt32Matcher(0), None), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(1000002), _matchers.ViInt32Matcher(15), _matchers.ViCharBufferMatcher(len(string)))]
             self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViString.call_count == 2
@@ -973,7 +973,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             attr_string = session.read_write_string_repeated_capability
             assert attr_string == string
-            from mock import call
+            from unittest.mock import call
             calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(1000010), _matchers.ViInt32Matcher(0), None), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(1000010), _matchers.ViInt32Matcher(20), _matchers.ViCharBufferMatcher(len(string)))]
             self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViString.call_count == 2
