@@ -1,17 +1,13 @@
 name: nimibot_rhel_64
 
 on:
-  pull_request:
-    branches:
-      - master
-      - releases/*
+  push: #TBD
     paths-ignore:
       - CHANGELOG.md
       - CONTRIBUTING.md
       - .gitattributes
       - LICENSE
       - VERSION
-    draft: false
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
