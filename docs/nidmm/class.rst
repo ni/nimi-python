@@ -1209,6 +1209,52 @@ get_dev_temp
 
 
 
+get_ext_cal_last_date_and_time
+------------------------------
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: get_ext_cal_last_date_and_time()
+
+            Returns the date and time of the last external calibration performed.
+
+            
+
+
+
+            :rtype: hightime.datetime
+            :return:
+
+
+                    Indicates date and time of the last external calibration.
+
+                    
+
+
+
+get_ext_cal_last_temp
+---------------------
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: get_ext_cal_last_temp()
+
+            Returns the **Temperature** during the last external calibration procedure.
+
+            
+
+
+
+            :rtype: float
+            :return:
+
+
+                    Returns the **temperature** during the last external calibration.
+
+                    
+
+
+
 get_ext_cal_recommended_interval
 --------------------------------
 
@@ -1236,45 +1282,47 @@ get_ext_cal_recommended_interval
 
 
 
-get_last_cal_temp
------------------
+get_self_cal_last_date_and_time
+-------------------------------
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:method:: get_last_cal_temp(cal_type)
+    .. py:method:: get_self_cal_last_date_and_time()
 
-            Returns the **Temperature** during the last calibration procedure.
+            Returns the date and time of the last self calibration performed.
 
             
 
-            .. note:: The NI 4050 and NI 4060 are not supported.
+
+
+            :rtype: hightime.datetime
+            :return:
+
+
+                    Indicates date and time of the last self calibration.
+
+                    
 
 
 
-            :param cal_type:
+get_self_cal_last_temp
+----------------------
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: get_self_cal_last_temp()
+
+            Returns the **Temperature** during the last self calibration procedure.
+
+            
 
 
-                Specifies the type of calibration performed (external or
-                self-calibration).
-
-                +-----------------------------------------------------+---+----------------------+
-                | :py:data:`~nidmm.NIDMM_VAL_INTERNAL_AREA` (default) | 0 | Self-Calibration     |
-                +-----------------------------------------------------+---+----------------------+
-                | :py:data:`~nidmm.NIDMM_VAL_EXTERNAL_AREA`           | 1 | External Calibration |
-                +-----------------------------------------------------+---+----------------------+
-
-                .. note:: The NI 4065 does not support self-calibration.
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-            :type cal_type: int
 
             :rtype: float
             :return:
 
 
-                    Returns the **temperature** during the last calibration.
+                    Returns the **temperature** during the last self calibration.
 
                     
 

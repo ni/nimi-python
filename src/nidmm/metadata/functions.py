@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 19.6.0d7
+# This file is generated from NI-DMM API metadata version 20.5.0d5
 functions = {
     'Abort': {
         'documentation': {
@@ -1209,6 +1209,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetLastCalTemp': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Returns the **Temperature** during the last calibration procedure.',
             'note': 'The NI 4050 and NI 4060 are not supported.'
