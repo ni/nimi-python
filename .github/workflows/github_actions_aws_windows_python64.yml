@@ -1,0 +1,92 @@
+name: nimibot_win_64
+
+on:
+  pull_request:
+    branches:
+      - master
+      - releases/*
+    paths-ignore:
+      - CHANGELOG.md
+      - CONTRIBUTING.md
+      - .gitattributes
+      - LICENSE
+      - VERSION
+    types: [review_requested, ready_for_review, synchronize]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  start-runner:
+    name: Start self-hosted EC2 runner
+    runs-on: ubuntu-latest
+    outputs:
+      label: ${{ steps.start-ec2-runner.outputs.label }}
+      ec2-instance-ids: ${{ steps.start-ec2-runner.outputs.ec2-instance-ids }}
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Start EC2 runner
+        id: start-ec2-runner
+        uses: ni/ec2-github-runner@main
+        with:
+          mode: start
+          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          ec2-base-os: win-x64
+          ec2-launch-template: rdss-nimibot-windows-python32
+          number-of-runners: 1
+          number-of-instances: 4
+          ec2-instance-type: t3.medium
+
+  do-the-job:
+    name: system_tests_win64
+    needs: start-runner # required to start the main job when the runner is ready
+    runs-on: ${{ needs.start-runner.outputs.label }} # run the job on the newly created runner
+    timeout-minutes: 40
+    strategy:
+      matrix:
+        module_name:
+          [
+            "nidigital",
+            "nitclk",
+            "nifgen",
+            "nidcpower",
+            "nidmm",
+            "niscope",
+            "nimodinst",
+            "niswitch",
+            "nise",
+          ]
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+      - name: Execute system tests
+        uses: ./.github/actions/windows
+        with:
+          module_name: ${{ matrix.module_name }}
+
+  stop-runner:
+    name: Stop self-hosted EC2 runner
+    needs:
+      - start-runner # required to get output from the start-runner job
+      - do-the-job # required to wait when the main job is done
+    runs-on: ubuntu-latest
+    if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Stop EC2 runner
+        uses: ni/ec2-github-runner@main
+        with:
+          mode: stop
+          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          label: ${{ needs.start-runner.outputs.label }}
+          ec2-instance-ids: ${{ needs.start-runner.outputs.ec2-instance-ids }}
