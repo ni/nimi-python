@@ -1,0 +1,22 @@
+name: hello_world
+
+on: 
+   # Allows you to run this workflow manually from the Actions tab
+   workflow_dispatch:
+
+jobs:
+  do-the-job1:
+    name: hello_world
+    runs-on: 
+    - self-hosted
+    - linux
+    - x64
+    - rdss-nimibot-rhel-83-py64
+    timeout-minutes: 30
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2   
+      - name: Hello, world!
+        run: |
+         echo 'Hello, world!'
+        shell: bash
