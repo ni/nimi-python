@@ -15,33 +15,34 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
+  
   jobs:
-  do-the-job1:
-    name: system_tests_rhel64
-    runs-on: 
-    - self-hosted
-    - windows
-    - x64
-    - rdss-nimibot-win-10-py32
-    timeout-minutes: 40
-    strategy:
-      matrix:
-        module_name:
-          [
-            "nidigital",
-            "nitclk",
-            "nifgen",
-            "nidcpower",
-            "nidmm",
-            "niscope",
-            "nimodinst",
-            "nise",
-            "niswitch",
-          ]
-    steps:
-      - name: checkout repository
-        uses: actions/checkout@v2
-      - name: Execute system tests
-        uses: ./.github/actions/windows
-        with:
-          module_name: ${{ matrix.module_name }}
+    do-the-job1:
+      name: system_tests_rhel64
+      runs-on: 
+      - self-hosted
+      - windows
+      - x64
+      - rdss-nimibot-win-10-py32
+      timeout-minutes: 40
+      strategy:
+        matrix:
+          module_name:
+            [
+              "nidigital",
+              "nitclk",
+              "nifgen",
+              "nidcpower",
+              "nidmm",
+              "niscope",
+              "nimodinst",
+              "nise",
+              "niswitch",
+            ]
+      steps:
+        - name: checkout repository
+          uses: actions/checkout@v2
+        - name: Execute system tests
+          uses: ./.github/actions/windows
+          with:
+            module_name: ${{ matrix.module_name }}
