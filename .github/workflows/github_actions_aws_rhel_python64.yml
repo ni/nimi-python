@@ -23,11 +23,14 @@ jobs:
     - linux
     - x64
     - rdss-nimibot-rhel-83-py64
-    timeout-minutes: 30
+    timeout-minutes: 40
+    strategy:
+      matrix:
+        module_name: ["nidmm", "niswitch"]
     steps:
       - name: checkout repository
-        uses: actions/checkout@v2   
-      - name: Hello, world!
-        run: |
-         echo 'Hello, world!'
-        shell: bash
+        uses: actions/checkout@v2
+      - name: Execute system tests
+        uses: ./.github/actions/linux
+        with:
+          module_name: ${{ matrix.module_name }}
