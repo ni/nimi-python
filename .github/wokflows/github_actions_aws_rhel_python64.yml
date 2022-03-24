@@ -1,9 +1,20 @@
-name: hello_world
+name: nimibot_rhel_64
 
-on: 
-   # Allows you to run this workflow manually from the Actions tab
-   workflow_dispatch:
+on:
+  pull_request:
+    branches:
+      - master
+      - releases/*
+    paths-ignore:
+      - CHANGELOG.md
+      - CONTRIBUTING.md
+      - .gitattributes
+      - LICENSE
+      - VERSION
+    types: [review_requested, ready_for_review, synchronize]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 jobs:
   do-the-job1:
     name: hello_world
