@@ -16,9 +16,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
   
-  jobs:
-    do-the-job1:
-      name: system_tests_rhel64
+jobs:
+  do-the-job1:
+      name: system_tests_win32
       runs-on: 
       - self-hosted
       - windows
