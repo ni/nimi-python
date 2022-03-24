@@ -1,0 +1,48 @@
+name: nimibot_win_64
+
+on:
+  pull_request:
+    branches:
+      - master
+      - releases/*
+    paths-ignore:
+      - CHANGELOG.md
+      - CONTRIBUTING.md
+      - .gitattributes
+      - LICENSE
+      - VERSION
+    types: [review_requested, ready_for_review, synchronize]
+
+  # Allows you to run this workflow manually from the Actions tab.
+  workflow_dispatch:
+  
+jobs:
+  do-the-job1:
+      name: system_tests_win64
+      runs-on: 
+      - self-hosted
+      - windows
+      - x64
+      - rdss-nimibot-win-10-py64
+      timeout-minutes: 40
+      strategy:
+        matrix:
+          module_name:
+            [
+              "nidigital",
+              "nitclk",
+              "nifgen",
+              "nidcpower",
+              "nidmm",
+              "niscope",
+              "nimodinst",
+              "nise",
+              "niswitch",
+            ]
+      steps:
+        - name: checkout repository
+          uses: actions/checkout@v2
+        - name: Execute system tests
+          uses: ./.github/actions/windows
+          with:
+            module_name: ${{ matrix.module_name }}
