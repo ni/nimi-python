@@ -24,7 +24,7 @@ jobs:
       - windows
       - x64
       - rdss-nimibot-win-10-py64
-      timeout-minutes: 40
+      timeout-minutes: 60
       strategy:
         matrix:
           module_name:
