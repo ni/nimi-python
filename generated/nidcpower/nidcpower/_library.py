@@ -7,6 +7,10 @@ import threading
 
 from nidcpower._visatype import *  # noqa: F403,H303
 
+import nidcpower.lcr_load_compensation_spot as lcr_load_compensation_spot  # noqa: F401
+
+import nidcpower.lcr_measurement as lcr_measurement  # noqa: F401
+
 
 class Library(object):
     '''Library

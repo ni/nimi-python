@@ -74,6 +74,7 @@ All notable changes to this project will be documented in this file.
                 * `LCRDCBiasSource`
                 * `LCRMeasurementTime`
                 * `LCROpenShortLoadCompensationDataSource`
+                * `LCRReferenceValueType`
                 * `LCRSourceDelayMode`
                 * `LCRStimulusFunction`
             * Methods added:
@@ -84,6 +85,9 @@ All notable changes to this project will be documented in this file.
                 * `perform_lcr_open_custom_cable_compensation`
                 * `perform_lcr_short_compensation`
                 * `perform_lcr_short_custom_cable_compensation`
+            * Custom types added:
+                * `LCRLoadCompensationSpot`
+                * `LCRMeasurement`
     * #### Changed
         * Updated supported devices information in documentation for methods and properties
     * #### Removed
