@@ -7,6 +7,10 @@ import threading
 
 from nidcpower._visatype import *  # noqa: F403,H303
 
+import nidcpower.ni_lcr_load_compensation_spot as ni_lcr_load_compensation_spot  # noqa: F401
+
+import nidcpower.ni_lcr_measurement as ni_lcr_measurement  # noqa: F401
+
 
 class Library(object):
     '''Library
@@ -24,6 +28,7 @@ class Library(object):
         self.niDCPower_ClearLatchedOutputCutoffState_cfunc = None
         self.niDCPower_CommitWithChannels_cfunc = None
         self.niDCPower_ConfigureApertureTime_cfunc = None
+        self.niDCPower_ConfigureLCRCustomCableCompensation_cfunc = None
         self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc = None
         self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc = None
         self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc = None
@@ -33,6 +38,7 @@ class Library(object):
         self.niDCPower_ExportAttributeConfigurationFile_cfunc = None
         self.niDCPower_FancyInitialize_cfunc = None
         self.niDCPower_FetchMultiple_cfunc = None
+        self.niDCPower_FetchMultipleLCR_cfunc = None
         self.niDCPower_GetAttributeViBoolean_cfunc = None
         self.niDCPower_GetAttributeViInt32_cfunc = None
         self.niDCPower_GetAttributeViInt64_cfunc = None
@@ -44,6 +50,8 @@ class Library(object):
         self.niDCPower_GetExtCalLastDateAndTime_cfunc = None
         self.niDCPower_GetExtCalLastTemp_cfunc = None
         self.niDCPower_GetExtCalRecommendedInterval_cfunc = None
+        self.niDCPower_GetLCRCompensationLastDateAndTime_cfunc = None
+        self.niDCPower_GetLCRCustomCableCompensationData_cfunc = None
         self.niDCPower_GetSelfCalLastDateAndTime_cfunc = None
         self.niDCPower_GetSelfCalLastTemp_cfunc = None
         self.niDCPower_ImportAttributeConfigurationBuffer_cfunc = None
@@ -54,7 +62,13 @@ class Library(object):
         self.niDCPower_LockSession_cfunc = None
         self.niDCPower_Measure_cfunc = None
         self.niDCPower_MeasureMultiple_cfunc = None
+        self.niDCPower_MeasureMultipleLCR_cfunc = None
         self.niDCPower_ParseChannelCount_cfunc = None
+        self.niDCPower_PerformLCRLoadCompensation_cfunc = None
+        self.niDCPower_PerformLCROpenCompensation_cfunc = None
+        self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc = None
+        self.niDCPower_PerformLCRShortCompensation_cfunc = None
+        self.niDCPower_PerformLCRShortCustomCableCompensation_cfunc = None
         self.niDCPower_QueryInCompliance_cfunc = None
         self.niDCPower_QueryLatchedOutputCutoffState_cfunc = None
         self.niDCPower_QueryMaxCurrentLimit_cfunc = None
@@ -124,6 +138,14 @@ class Library(object):
                 self.niDCPower_ConfigureApertureTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32]  # noqa: F405
                 self.niDCPower_ConfigureApertureTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureApertureTime_cfunc(vi, channel_name, aperture_time, units)
+
+    def niDCPower_ConfigureLCRCustomCableCompensation(self, vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ConfigureLCRCustomCableCompensation_cfunc is None:
+                self.niDCPower_ConfigureLCRCustomCableCompensation_cfunc = self._get_library_function('niDCPower_ConfigureLCRCustomCableCompensation')
+                self.niDCPower_ConfigureLCRCustomCableCompensation_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niDCPower_ConfigureLCRCustomCableCompensation_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ConfigureLCRCustomCableCompensation_cfunc(vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data)
 
     def niDCPower_CreateAdvancedSequenceCommitStepWithChannels(self, vi, channel_name, set_as_active_step):  # noqa: N802
         with self._func_lock:
@@ -196,6 +218,14 @@ class Library(object):
                 self.niDCPower_FetchMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViBoolean), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_FetchMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_FetchMultiple_cfunc(vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count)
+
+    def niDCPower_FetchMultipleLCR(self, vi, channel_name, timeout, count, measurements, actual_count):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_FetchMultipleLCR_cfunc is None:
+                self.niDCPower_FetchMultipleLCR_cfunc = self._get_library_function('niDCPower_FetchMultipleLCR')
+                self.niDCPower_FetchMultipleLCR_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ni_lcr_measurement.struct_NILCRMeasurement), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDCPower_FetchMultipleLCR_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_FetchMultipleLCR_cfunc(vi, channel_name, timeout, count, measurements, actual_count)
 
     def niDCPower_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
@@ -285,6 +315,22 @@ class Library(object):
                 self.niDCPower_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetExtCalRecommendedInterval_cfunc(vi, months)
 
+    def niDCPower_GetLCRCompensationLastDateAndTime(self, vi, channel_name, compensation_type, year, month, day, hour, minute):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetLCRCompensationLastDateAndTime_cfunc is None:
+                self.niDCPower_GetLCRCompensationLastDateAndTime_cfunc = self._get_library_function('niDCPower_GetLCRCompensationLastDateAndTime')
+                self.niDCPower_GetLCRCompensationLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDCPower_GetLCRCompensationLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetLCRCompensationLastDateAndTime_cfunc(vi, channel_name, compensation_type, year, month, day, hour, minute)
+
+    def niDCPower_GetLCRCustomCableCompensationData(self, vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetLCRCustomCableCompensationData_cfunc is None:
+                self.niDCPower_GetLCRCustomCableCompensationData_cfunc = self._get_library_function('niDCPower_GetLCRCustomCableCompensationData')
+                self.niDCPower_GetLCRCustomCableCompensationData_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niDCPower_GetLCRCustomCableCompensationData_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetLCRCustomCableCompensationData_cfunc(vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data)
+
     def niDCPower_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetSelfCalLastDateAndTime_cfunc is None:
@@ -365,6 +411,14 @@ class Library(object):
                 self.niDCPower_MeasureMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_MeasureMultiple_cfunc(vi, channel_name, voltage_measurements, current_measurements)
 
+    def niDCPower_MeasureMultipleLCR(self, vi, channel_name, measurements):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_MeasureMultipleLCR_cfunc is None:
+                self.niDCPower_MeasureMultipleLCR_cfunc = self._get_library_function('niDCPower_MeasureMultipleLCR')
+                self.niDCPower_MeasureMultipleLCR_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ni_lcr_measurement.struct_NILCRMeasurement)]  # noqa: F405
+                self.niDCPower_MeasureMultipleLCR_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_MeasureMultipleLCR_cfunc(vi, channel_name, measurements)
+
     def niDCPower_ParseChannelCount(self, vi, channels_string, number_of_channels):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ParseChannelCount_cfunc is None:
@@ -372,6 +426,46 @@ class Library(object):
                 self.niDCPower_ParseChannelCount_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViUInt32)]  # noqa: F405
                 self.niDCPower_ParseChannelCount_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ParseChannelCount_cfunc(vi, channels_string, number_of_channels)
+
+    def niDCPower_PerformLCRLoadCompensation(self, vi, channel_name, num_compensation_spots, compensation_spots):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_PerformLCRLoadCompensation_cfunc is None:
+                self.niDCPower_PerformLCRLoadCompensation_cfunc = self._get_library_function('niDCPower_PerformLCRLoadCompensation')
+                self.niDCPower_PerformLCRLoadCompensation_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ni_lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot)]  # noqa: F405
+                self.niDCPower_PerformLCRLoadCompensation_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_PerformLCRLoadCompensation_cfunc(vi, channel_name, num_compensation_spots, compensation_spots)
+
+    def niDCPower_PerformLCROpenCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_PerformLCROpenCompensation_cfunc is None:
+                self.niDCPower_PerformLCROpenCompensation_cfunc = self._get_library_function('niDCPower_PerformLCROpenCompensation')
+                self.niDCPower_PerformLCROpenCompensation_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_PerformLCROpenCompensation_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_PerformLCROpenCompensation_cfunc(vi, channel_name, num_frequencies, additional_frequencies)
+
+    def niDCPower_PerformLCROpenCustomCableCompensation(self, vi, channel_name):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc is None:
+                self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc = self._get_library_function('niDCPower_PerformLCROpenCustomCableCompensation')
+                self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc(vi, channel_name)
+
+    def niDCPower_PerformLCRShortCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_PerformLCRShortCompensation_cfunc is None:
+                self.niDCPower_PerformLCRShortCompensation_cfunc = self._get_library_function('niDCPower_PerformLCRShortCompensation')
+                self.niDCPower_PerformLCRShortCompensation_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_PerformLCRShortCompensation_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_PerformLCRShortCompensation_cfunc(vi, channel_name, num_frequencies, additional_frequencies)
+
+    def niDCPower_PerformLCRShortCustomCableCompensation(self, vi, channel_name):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_PerformLCRShortCustomCableCompensation_cfunc is None:
+                self.niDCPower_PerformLCRShortCustomCableCompensation_cfunc = self._get_library_function('niDCPower_PerformLCRShortCustomCableCompensation')
+                self.niDCPower_PerformLCRShortCustomCableCompensation_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_PerformLCRShortCustomCableCompensation_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_PerformLCRShortCustomCableCompensation_cfunc(vi, channel_name)
 
     def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
         with self._func_lock:

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0f353
+# This file is generated from NI-DCPower API metadata version 21.8.0d9999
 config = {
-    'api_version': '21.0.0f353',
+    'api_version': '21.8.0d9999',
     'c_function_prefix': 'niDCPower_',
     'close_function': 'close',
     'context_manager_name': {
@@ -10,6 +10,16 @@ config = {
         'task': 'acquisition'
     },
     'custom_types': [
+        {
+            'ctypes_type': 'struct_NILCRLoadCompensationSpot',
+            'file_name': 'ni_lcr_load_compensation_spot',
+            'python_name': 'NILCRLoadCompensationSpot'
+        },
+        {
+            'ctypes_type': 'struct_NILCRMeasurement',
+            'file_name': 'ni_lcr_measurement',
+            'python_name': 'NILCRMeasurement'
+        }
     ],
     'driver_name': 'NI-DCPower',
     'extra_errors_used': [

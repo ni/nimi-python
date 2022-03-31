@@ -724,3 +724,263 @@ def test_wait_for_event_repeated_capabilities(session, channels):
     channels_session = session.channels[channels]
     with channels_session.initiate():
         channels_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE)
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_fetch_multiple_lcr(session):
+    session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+    session.instrument_mode = nidcpower.InstrumentMode.LCR
+    session.lcr_stimulus_function = nidcpower.LCRStimulusFunction.VOLTAGE
+    session.lcr_voltage_amplitude = 0.7
+    session.lcr_frequency = 10_000.0
+    session.lcr_impedance_range = 100.0
+    session.lcr_measurement_time = nidcpower.LCRMeasurementTime.MEDIUM
+    session.cable_length = nidcpower.CableLength.NI_STANDARD_2M
+    session.lcr_dc_bias_source = nidcpower.LCRDCBiasSource.VOLTAGE
+    session.lcr_dc_bias_voltage_level = 1.0
+    count = 3
+    with session.initiate():
+        measurements = session.fetch_multiple_lcr(count)
+        assert len(measurements) == count
+        assert measurements[1].vdc == pytest.approx(session.lcr_dc_bias_voltage_level, 1e-9)
+        assert measurements[1].stimulus_frequency == pytest.approx(session.lcr_frequency, 1e-9)
+        assert measurements[1].ac_voltage.real == pytest.approx(session.lcr_voltage_amplitude, 1e-9)
+        assert measurements[1].ac_voltage.imag == pytest.approx(0.0, 1e-9)
+        assert (
+            nidcpower.InstrumentMode(measurements[1].measurement_mode) == nidcpower.InstrumentMode.LCR
+        )
+        assert not measurements[1].dc_in_compliance
+        assert not measurements[1].ac_in_compliance
+        assert not measurements[1].unbalanced
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_measure_multiple_lcr(session):
+    session.instrument_mode = nidcpower.InstrumentMode.LCR
+    session.lcr_stimulus_function = nidcpower.LCRStimulusFunction.CURRENT
+    session.lcr_current_amplitude = 700.0e-6
+    session.lcr_frequency = 10_000.0
+    session.lcr_impedance_range_source = nidcpower.LCRImpedanceRangeSource.LOAD_CONFIGURATION
+    session.lcr_load_capacitance = 10.0e-6
+    session.lcr_load_inductance = 0.0
+    session.lcr_load_resistance = 10.0
+    session.lcr_measurement_time = nidcpower.LCRMeasurementTime.CUSTOM
+    session.lcr_custom_measurement_time = 0.0
+    session.cable_length = nidcpower.CableLength.NI_STANDARD_1M
+    session.lcr_dc_bias_source = nidcpower.LCRDCBiasSource.CURRENT
+    session.lcr_dc_bias_current_level = 1.0e-6
+    with session.initiate():
+        measurements = session.measure_multiple_lcr()
+        assert measurements[0].idc == pytest.approx(session.lcr_dc_bias_current_level, 1e-9)
+        assert measurements[0].stimulus_frequency == pytest.approx(session.lcr_frequency, 1e-9)
+        assert measurements[0].ac_current.real == pytest.approx(session.lcr_current_amplitude, 1e-9)
+        assert measurements[0].ac_current.imag == pytest.approx(0.0, 1e-9)
+        assert (
+            nidcpower.InstrumentMode(measurements[0].measurement_mode) == nidcpower.InstrumentMode.LCR
+        )
+        assert not measurements[0].dc_in_compliance
+        assert not measurements[0].ac_in_compliance
+        assert not measurements[0].unbalanced
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+@pytest.mark.parametrize(
+    "compensation_function",
+    [
+        nidcpower.Session.perform_lcr_open_custom_cable_compensation,
+        nidcpower.Session.perform_lcr_short_custom_cable_compensation,
+    ],
+)
+def test_perform_lcr_open_short_custom_cable_compensation(session, compensation_function):
+    compensation_function(session)
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+@pytest.mark.parametrize(
+    "compensation_function",
+    [
+        nidcpower.Session.perform_lcr_open_compensation,
+        nidcpower.Session.perform_lcr_short_compensation,
+    ],
+)
+@pytest.mark.parametrize("additional_frequencies", [None, [], [9_000.0, 12_345.0, 12_346.0]])
+def test_perform_lcr_open_short_compensation(
+    session, compensation_function, additional_frequencies
+):
+    if additional_frequencies is None:
+        compensation_function(session)
+    else:
+        compensation_function(session, additional_frequencies)
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_perform_lcr_load_compensation(session):
+    session.perform_lcr_load_compensation(
+        [
+            nidcpower.NILCRLoadCompensationSpot(
+                frequency=100_000.0,
+                reference_value_type=nidcpower.LCRReferenceValueType.IMPEDANCE,
+                reference_value_a=100.0,
+                reference_value_b=1000.0,
+            ),
+            nidcpower.NILCRLoadCompensationSpot(
+                frequency=200_000.0,
+                reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_RESISTANCE,
+                reference_value_a=200,
+                reference_value_b=0.0,
+            ),
+            nidcpower.NILCRLoadCompensationSpot(
+                frequency=300_000.0,
+                reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_CAPACITANCE,
+                reference_value_a=300.0e-9,
+                reference_value_b=0.0,
+            ),
+            nidcpower.NILCRLoadCompensationSpot(
+                frequency=400_000.0,
+                reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_INDUCTANCE,
+                reference_value_a=400.0e-6,
+                reference_value_b=0.0,
+            ),
+        ]
+    )
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_lcr_custom_cable_compensation_data(session):
+    compensation_data = session.get_lcr_custom_cable_compensation_data()
+    session.configure_lcr_custom_cable_compensation(compensation_data)
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+@pytest.mark.parametrize(
+    "compensation_type",
+    [
+        nidcpower.LCRCompensationType.OPEN_CUSTOM_CABLE,
+        nidcpower.LCRCompensationType.SHORT_CUSTOM_CABLE,
+        nidcpower.LCRCompensationType.OPEN,
+        nidcpower.LCRCompensationType.SHORT,
+        nidcpower.LCRCompensationType.LOAD,
+    ],
+)
+def test_get_lcr_compensation_last_date_and_time(session, compensation_type):
+    last_compensation_datetime = session.get_lcr_compensation_last_date_and_time(compensation_type)
+    assert last_compensation_datetime.year == 1940
+    assert last_compensation_datetime.month == 3
+    assert last_compensation_datetime.day == 1
+    assert last_compensation_datetime.hour == 0
+    assert last_compensation_datetime.minute == 0
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_lcr_attributes(session):
+    session.lcr_open_conductance = 1.0
+    session.lcr_open_susceptance = 1.0
+    session.lcr_short_resistance = 1.0
+    session.lcr_short_reactance = 1.0
+    session.lcr_measured_load_resistance = 10.0
+    session.lcr_measured_load_reactance = 10.0
+    session.lcr_actual_load_resistance = 10.0
+    session.lcr_actual_load_reactance = 10.0
+    session.lcr_open_short_load_compensation_data_source = (
+        nidcpower.LCROpenShortLoadCompensationDataSource.AS_DEFINED
+    )
+    session.lcr_open_compensation_enabled = True
+    session.lcr_short_compensation_enabled = True
+    session.lcr_load_compensation_enabled = True
+    session.lcr_short_custom_cable_compensation_enabled = True
+    session.isolation_state = nidcpower.IsolationState.ISOLATED
+    session.lcr_automatic_level_control = True
+    session.lcr_dc_bias_automatic_level_control = True
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_create_and_delete_advanced_sequence_with_lcr_attributes(session):
+    attr_vals = {
+        "instrument_mode": [nidcpower.InstrumentMode.SMU_PS, nidcpower.InstrumentMode.LCR],
+        "lcr_stimulus_function": [
+            nidcpower.LCRStimulusFunction.VOLTAGE,
+            nidcpower.LCRStimulusFunction.CURRENT,
+        ],
+        "lcr_frequency": [1_000.0, 10_000.0],
+        "lcr_impedance_range": [100.0, 200.0],
+        "lcr_voltage_amplitude": [0.7, 7.0],
+        "lcr_current_amplitude": [70.0e-3, 7.0e-3],
+        "lcr_dc_bias_source": [
+            nidcpower.LCRDCBiasSource.VOLTAGE,
+            nidcpower.LCRDCBiasSource.CURRENT,
+        ],
+        "lcr_dc_bias_voltage_level": [0.1, 0.01],
+        "lcr_dc_bias_current_level": [0.01, 0.001],
+        "lcr_measurement_time": [
+            nidcpower.LCRMeasurementTime.SHORT,
+            nidcpower.LCRMeasurementTime.LONG,
+        ],
+        "lcr_custom_measurement_time": [0.1, 0.2],
+        "lcr_open_conductance": [1, 2],
+        "lcr_open_susceptance": [3, 4],
+        "lcr_short_resistance": [5, 6],
+        "lcr_short_reactance": [7, 8],
+        "lcr_measured_load_resistance": [9, 10],
+        "lcr_measured_load_reactance": [11, 12],
+        "lcr_actual_load_resistance": [13, 14],
+        "lcr_actual_load_reactance": [15, 16],
+        "lcr_open_compensation_enabled": [True, False],
+        "lcr_short_compensation_enabled": [True, False],
+        "lcr_load_compensation_enabled": [True, False],
+    }
+    dependent_attributes = [
+        "lcr_voltage_amplitude",
+        "lcr_current_amplitude",
+        "lcr_dc_bias_voltage_level",
+        "lcr_dc_bias_current_level",
+        "lcr_custom_measurement_time",
+    ]
+    sequence_name = "my_sequence"
+    session.source_mode = nidcpower.SourceMode.SEQUENCE
+    session.lcr_open_short_load_compensation_data_source = (
+        nidcpower.LCROpenShortLoadCompensationDataSource.AS_DEFINED
+    )
+    session.create_advanced_sequence(
+        sequence_name=sequence_name,
+        property_names=list(attr_vals.keys()),
+        set_as_active_sequence=True,
+    )
+    for step_index in range(2):
+        session.create_advanced_sequence_step(set_as_active_step=True)
+        assert session.active_advanced_sequence == sequence_name
+        for lcr_attribute in attr_vals:
+            setattr(session, lcr_attribute, attr_vals[lcr_attribute][step_index])
+    for step_index in range(2):
+        session.active_advanced_sequence_step = step_index
+        for lcr_attribute in attr_vals.keys() - dependent_attributes:
+            assert getattr(session, lcr_attribute) == attr_vals[lcr_attribute][step_index]
+        # Test dependent attributes
+        if attr_vals["lcr_stimulus_function"][step_index] == nidcpower.LCRStimulusFunction.VOLTAGE:
+            assert session.lcr_voltage_amplitude == attr_vals["lcr_voltage_amplitude"][step_index]
+        else:
+            assert session.lcr_stimulus_function == nidcpower.LCRStimulusFunction.CURRENT
+            assert session.lcr_current_amplitude == attr_vals["lcr_current_amplitude"][step_index]
+        if attr_vals["lcr_dc_bias_source"][step_index] == nidcpower.LCRStimulusFunction.VOLTAGE:
+            assert (
+                session.lcr_dc_bias_voltage_level == attr_vals["lcr_dc_bias_voltage_level"][step_index]
+            )
+        elif attr_vals["lcr_dc_bias_source"][step_index] == nidcpower.LCRStimulusFunction.CURRENT:
+            assert (
+                session.lcr_dc_bias_current_level == attr_vals["lcr_dc_bias_current_level"][step_index]
+            )
+        if attr_vals["lcr_measurement_time"][step_index] == nidcpower.LCRMeasurementTime.CUSTOM:
+            assert (
+                session.lcr_custom_measurement_time == attr_vals["lcr_custom_measurement_time"][step_index]
+            )
+    session.delete_advanced_sequence(sequence_name=sequence_name)
+    with pytest.raises(nidcpower.errors.DriverError):
+        session.active_advanced_sequence = sequence_name

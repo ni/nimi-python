@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0f353
+# This file is generated from NI-DCPower API metadata version 21.8.0d9999
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -26,7 +26,7 @@ functions = {
     'CalSelfCalibrate': {
         'documentation': {
             'description': '\nPerforms a self-calibration upon the specified channel(s).\n\nThis function disables the output, performs several internal\ncalculations, and updates calibration values. The updated calibration\nvalues are written to the device hardware if the\nNIDCPOWER_ATTR_SELF_CALIBRATION_PERSISTENCE attribute is set to\nNIDCPOWER_VAL_WRITE_TO_EEPROM. Refer to the\nNIDCPOWER_ATTR_SELF_CALIBRATION_PERSISTENCE attribute topic for more\ninformation about the settings for this attribute.\n\nWhen calling niDCPower_CalSelfCalibrate with the PXIe-4162/4163,\nspecify all channels of your PXIe-4162/4163 with the channelName input.\nYou cannot self-calibrate a subset of PXIe-4162/4163 channels.\n\nRefer to the\n`Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__ topic for\nmore information about this function.\n\n**Related Topics:**\n\n`Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
             {
@@ -145,7 +145,7 @@ functions = {
     'ConfigureApertureTime': {
         'documentation': {
             'description': '\nConfigures the aperture time on the specified channel(s).\n\nThe supported values depend on the **units**. Refer to the *Aperture\nTime* topic for your device in the *NI DC Power Supplies and SMUs Help*\nfor more information. In general, devices support discrete\n**apertureTime** values, and if you configure **apertureTime** to some\nunsupported value, NI-DCPower coerces it up to the next supported value.\n\nRefer to the *Measurement Configuration and Timing* or *DC Noise\nRejection* topic for your device in the *NI DC Power Supplies and SMUs\nHelp* for more information about how to configure your measurements.\n\n**Related Topics:**\n\n`Aperture Time <REPLACE_DRIVER_SPECIFIC_URL_1(aperture)>`__\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
             {
@@ -191,6 +191,51 @@ functions = {
                 'enum': 'ApertureTimeUnits',
                 'name': 'units',
                 'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'ConfigureLCRCustomCableCompensation': {
+        'documentation': {
+            'description': '\nApplies previously generated open and short custom cable compensation data to LCR measurements.\n\nThis function applies custom cable compensation data when you have set NIDCPOWER_ATTR_CABLE_LENGTH property to NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED.\n\nCall this function after you have obtained custom cable compensation data.\n\nIf NIDCPOWER_ATTR_LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED property is set to **TRUE**, you must generate data with both niDCPower_PerformLCROpenCustomCableCompensation and niDCPower_PerformLCRShortCustomCableCompensation;\nif **FALSE**, you must only use niDCPower_PerformLCROpenCustomCableCompensation, and NI-DCPower uses default short data.\n\nCall niDCPower_GetLCRCustomCableCompensationData and pass the **custom cable compensation data** to this function.\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {'\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'},
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe size of the **custom cable compensation data**\n'
+                },
+                'name': 'customCableCompensationDataSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe open and short custom cable compensation data to apply.\n'
+                },
+                'name': 'customCableCompensationData',
+                'python_api_converter_name': 'convert_to_bytes',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'customCableCompensationDataSize'
+                },
+                'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes'
             }
         ],
         'returns': 'ViStatus'
@@ -1210,7 +1255,7 @@ functions = {
         'codegen_method': 'private',
         'documentation': {
             'description': '\nReturns an array of voltage measurements, an array of current\nmeasurements, and an array of compliance measurements that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nRefer to the `Acquiring\nMeasurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__\nand `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nconfiguring this function.\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_name_for_documentation': 'fetch_multiple',
         'parameters': [
@@ -1291,6 +1336,166 @@ functions = {
                 'direction': 'out',
                 'documentation': {
                     'description': '\nIndicates the number of measured values actually retrieved from the\ndevice.\n'
+                },
+                'name': 'actualCount',
+                'type': 'ViInt32',
+                'use_in_python_api': False
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'FetchMultipleLCR': {
+        'documentation': {
+            'description': '\nReturns a list of previously measured LCR data on the specified channel that have been taken and stored in a buffer.\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER\n-  Put the channel in the Running state (call niDCPower_InitiateWithChannels)\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'default_value': 'hightime.timedelta(seconds=1.0)',
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the maximum time allowed for this function to complete, in seconds.\nIf the function does not complete within this time interval, NI-DCPower returns an error.\n',
+                    'note': '\nWhen setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.\n'
+                },
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the number of measurements to fetch.\n'
+                },
+                'name': 'count',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nReturns an array of LCR measurement data.\n',
+                    'table_body': [
+                        [
+                            'vdc',
+                            'The measured DC voltage, in volts.'
+                        ],
+                        [
+                            'idc',
+                            'The measured DC current, in amps'
+                        ],
+                        [
+                            'stimulus_frequency',
+                            'The frequency of the LCR test signal, in Hz.'
+                        ],
+                        [
+                            'ac_voltage',
+                            'The measured AC voltage, in volts RMS.'
+                        ],
+                        [
+                            'ac_current',
+                            'The measured AC current, in amps RMS.'
+                        ],
+                        [
+                            'z',
+                            'The complex impedance.'
+                        ],
+                        [
+                            'z_magnitude',
+                            'The magnitude of the complex impedance, in ohms.'
+                        ],
+                        [
+                            'z_phase',
+                            'The impedance phase angle, in degrees.'
+                        ],
+                        [
+                            'y',
+                            'The complex admittance.'
+                        ],
+                        [
+                            'y_magnitude',
+                            'The magnitude of the complex admittance, in siemens.'
+                        ],
+                        [
+                            'y_phase',
+                            'The admittance phase angle, in degrees.'
+                        ],
+                        [
+                            'ls',
+                            'The inductance, in henrys, as measured using a series circuit model.'
+                        ],
+                        [
+                            'cs',
+                            'The capacitance, in farads, as measured using a series circuit model.'
+                        ],
+                        [
+                            'rs',
+                            'The resistance, in ohms, as measured using a series circuit model.'
+                        ],
+                        [
+                            'lp',
+                            'The inductance, in henrys, as measured using a parallel circuit model.'
+                        ],
+                        [
+                            'cp',
+                            'The capacitance, in farads, as measured using a parallel circuit model.'
+                        ],
+                        [
+                            'rp',
+                            'The resistance, in ohms, as measured using a parallel circuit model.'
+                        ],
+                        [
+                            'd',
+                            'The dissipation factor of the circuit.'
+                        ],
+                        [
+                            'q',
+                            'The quality factor of the circuit.'
+                        ],
+                        [
+                            'measurement_mode',
+                            'Returns the measurement mode: **SMU** is the channel(s) are operating as a power supply/SMU. **LCR** is the channel(s) are operating as an LCR meter.'
+                        ],
+                        [
+                            'dc_in_compliance',
+                            'Indicates whether the output was in DC compliance at the time the measurement was taken.'
+                        ],
+                        [
+                            'ac_in_compliance',
+                            'Indicates whether the output was in AC compliance at the time the measurement was taken.'
+                        ],
+                        [
+                            'unbalanced',
+                            'Indicates whether the output was unbalanced at the time the measurement was taken.'
+                        ]
+                    ]
+                },
+                'name': 'measurements',
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'count'
+                },
+                'type': 'NILCRMeasurement[]'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nIndicates the number of measured values actually retrieved from the device.\n'
                 },
                 'name': 'actualCount',
                 'type': 'ViInt32',
@@ -1768,6 +1973,127 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'GetLCRCompensationLastDateAndTime': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nReturns the date and time the specified type of compensation data for LCR measurements was most recently generated.\nThe time returned is 24-hour (military) local time; for example, if the selected type of compensation data was generated at 2:30 PM, this function returns 14 for **hours** and 30 for **minutes**.\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'method_name_for_documentation': 'get_lcr_compensation_last_date_and_time',
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the type of compensation for LCR measurements.\n'
+                },
+                'enum': 'LCRCompensationType',
+                'name': 'compensationType',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nReturns the year of the relevant operation.\n'
+                },
+                'name': 'year',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nReturns the month of the relevant operation.\n'
+                },
+                'name': 'month',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nReturns the day of the relevant operation.\n'
+                },
+                'name': 'day',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nReturns the hour (in 24-hour time) of the relevant operation.\n'
+                },
+                'name': 'hour',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nReturns the minute of the relevant operation.\n'
+                },
+                'name': 'minute',
+                'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'GetLCRCustomCableCompensationData': {
+        'documentation': {
+            'description': '\nCollects previously generated open and short custom cable compensation data so you can then apply it to LCR measurements with niDCPower_ConfigureLCRCustomCableCompensation.\n\nCall this function after you have obtained open and short custom cable compensation data. Pass the **custom cable compensation data** to niDCPower_ConfigureLCRCustomCableCompensation\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'customCableCompensationDataSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nThe open and short custom cable compensation data to retrieve.\n'
+                },
+                'name': 'customCableCompensationData',
+                'python_api_converter_name': 'convert_to_bytes',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'customCableCompensationDataSize'
+                },
+                'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes',
+                'use_array': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'GetLastExtCalLastDateAndTime': {
         'codegen_method': 'python-only',
         'documentation': {
@@ -1794,12 +2120,64 @@ functions = {
                 'documentation': {
                     'description': 'Indicates date and time of the last calibration.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],
         'python_name': 'get_ext_cal_last_date_and_time',
         'real_datetime_call': 'GetExtCalLastDateAndTime',
+        'returns': 'ViStatus'
+    },
+    'GetLastLCRCompensationLastDateAndTime': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nReturns the date and time the specified type of compensation data for LCR measurements was most recently generated.\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'datetime_wrappers'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the type of compensation for LCR measurements.\n'
+                },
+                'enum': 'LCRCompensationType',
+                'name': 'compensationType',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nReturns the date and time the specified type of compensation data for LCR measurements was most recently generated.\n'
+                },
+                'name': 'lastCompDatetime',
+                'type': 'hightime.datetime'
+            }
+        ],
+        'python_name': 'get_lcr_compensation_last_date_and_time',
+        'real_datetime_call': 'GetLCRCompensationLastDateAndTime',
         'returns': 'ViStatus'
     },
     'GetLastSelfCalLastDateAndTime': {
@@ -1829,7 +2207,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the date and time the device was last calibrated.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],
@@ -1841,7 +2219,7 @@ functions = {
         'codegen_method': 'private',
         'documentation': {
             'description': '\nReturns the date and time of the oldest successful self-calibration from\namong the channels in the session.\n\nThe time returned is 24-hour (military) local time; for example, if you\nhave a session using channels 1 and 2, and a self-calibration was\nperformed on channel 1 at 2:30 PM, and a self-calibration was performed\non channel 2 at 3:00 PM on the same day, this function returns 14 for\n**hours** and 30 for **minutes**.\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_name_for_documentation': 'get_self_cal_last_date_and_time',
         'parameters': [
@@ -1899,7 +2277,7 @@ functions = {
     'GetSelfCalLastTemp': {
         'documentation': {
             'description': '\nReturns the onboard temperature of the device, in degrees Celsius,\nduring the oldest successful self-calibration from among the channels in\nthe session.\n\nFor example, if you have a session using channels 1 and 2, and you\nperform a self-calibration on channel 1 with a device temperature of 25\ndegrees Celsius at 2:00, and a self-calibration was performed on channel\n2 at 27 degrees Celsius at 3:00 on the same day, this function returns\n25 for the **temperature** parameter.\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
             {
@@ -2240,6 +2618,137 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'MeasureMultipleLCR': {
+        'documentation': {
+            'description': '\nMeasures and returns a list of LCR data on the specified output channel(s).\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_INSTRUMENT_MODE property to NIDCPOWER_VAL_LCR\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_ON_DEMAND\n-  Put the channel(s) in the Running state (call niDCPower_InitiateWithChannels)\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nReturns an array of LCR measurement data.\n',
+                    'table_body': [
+                        [
+                            'vdc',
+                            'The measured DC voltage, in volts.'
+                        ],
+                        [
+                            'idc',
+                            'The measured DC current, in amps'
+                        ],
+                        [
+                            'stimulus_frequency',
+                            'The frequency of the LCR test signal, in Hz.'
+                        ],
+                        [
+                            'ac_voltage',
+                            'The measured AC voltage, in volts RMS.'
+                        ],
+                        [
+                            'ac_current',
+                            'The measured AC current, in amps RMS.'
+                        ],
+                        [
+                            'z',
+                            'The complex impedance.'
+                        ],
+                        [
+                            'z_magnitude',
+                            'The magnitude of the complex impedance, in ohms.'
+                        ],
+                        [
+                            'z_phase',
+                            'The impedance phase angle, in degrees.'
+                        ],
+                        [
+                            'y',
+                            'The complex admittance.'
+                        ],
+                        [
+                            'y_magnitude',
+                            'The magnitude of the complex admittance, in siemens.'
+                        ],
+                        [
+                            'y_phase',
+                            'The admittance phase angle, in degrees.'
+                        ],
+                        [
+                            'ls',
+                            'The inductance, in henrys, as measured using a series circuit model.'
+                        ],
+                        [
+                            'cs',
+                            'The capacitance, in farads, as measured using a series circuit model.'
+                        ],
+                        [
+                            'rs',
+                            'The resistance, in ohms, as measured using a series circuit model.'
+                        ],
+                        [
+                            'lp',
+                            'The inductance, in henrys, as measured using a parallel circuit model.'
+                        ],
+                        [
+                            'cp',
+                            'The capacitance, in farads, as measured using a parallel circuit model.'
+                        ],
+                        [
+                            'rp',
+                            'The resistance, in ohms, as measured using a parallel circuit model.'
+                        ],
+                        [
+                            'd',
+                            'The dissipation factor of the circuit.'
+                        ],
+                        [
+                            'q',
+                            'The quality factor of the circuit.'
+                        ],
+                        [
+                            'measurement_mode',
+                            'Returns the measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.'
+                        ],
+                        [
+                            'dc_in_compliance',
+                            'Indicates whether the output was in DC compliance at the time the measurement was taken.'
+                        ],
+                        [
+                            'ac_in_compliance',
+                            'Indicates whether the output was in AC compliance at the time the measurement was taken.'
+                        ],
+                        [
+                            'unbalanced',
+                            'Indicates whether the output was unbalanced at the time the measurement was taken.'
+                        ]
+                    ]
+                },
+                'name': 'measurements',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': 'self._parse_channel_count()'
+                },
+                'type': 'NILCRMeasurement[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'ParseChannelCount': {
         'codegen_method': 'private',
         'documentation': {
@@ -2260,6 +2769,213 @@ functions = {
                 'direction': 'out',
                 'name': 'numberOfChannels',
                 'type': 'ViUInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'PerformLCRLoadCompensation': {
+        'documentation': {
+            'description': '\nGenerates load compensation data for LCR measurements for the test spots you specify.\n\nYou must physically configure your LCR circuit with an appropriate reference load to use this function to generate valid load compensation data.\n\nWhen you call this function:\n\n-  The load compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n\nTo apply the load compensation data you generate with this function to your LCR measurements, set the NIDCPOWER_ATTR_LCR_LOAD_COMPENSATION_ENABLED property to **TRUE**.\n\nLoad compensation data are generated only for those specific frequencies you define with this function; load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sfequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe number of compensation spots defined in **load compensation spots**\n'
+                },
+                'name': 'numCompensationSpots',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nDefines the frequencies and DUT specifications to use for LCR load compensation.\n\nYou can specify <=1000 spot frequencies.\n',
+                    'table_body': [
+                        [
+                            'frequency',
+                            'The spot frequency.'
+                        ],
+                        [
+                            'reference_value_type',
+                            'A known specification value of your DUT to use as the basis for load compensation. Refer to the enums.LCRReferenceValueType for the supported values.'
+                        ],
+                        [
+                            'reference_value_A',
+                            'A value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose.'
+                        ],
+                        [
+                            'reference_value_B',
+                            'If applicable, a value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose.'
+                        ]
+                    ]
+                },
+                'name': 'compensationSpots',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numCompensationSpots'
+                },
+                'type': 'NILCRLoadCompensationSpot[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'PerformLCROpenCompensation': {
+        'documentation': {
+            'description': '\nGenerates open compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.\n\nYou must physically configure an open LCR circuit to use this function to generate valid open compensation data.\n\nWhen you call this function:\n\n-  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n\nTo apply the open compensation data you generate with this method to your LCR measurements, set the NIDCPOWER_ATTR_LCR_OPEN_COMPENSATION_ENABLED property to **TRUE**.\n\nCorrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe number of frequencies defined in **addtional frequencies**.\n'
+                },
+                'name': 'numFrequencies',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': None,
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nDefines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.\n'
+                },
+                'name': 'additionalFrequencies',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numFrequencies'
+                },
+                'type': 'ViReal64[]',
+                'use_array': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'PerformLCROpenCustomCableCompensation': {
+        'documentation': {
+            'description': '\nGenerates open custom cable compensation data for LCR measurements.\n\nTo use this function, you must physically configure an open LCR circuit to generate valid open custom cable compensation data.\n\nWhen you call this function:\n\n-  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'PerformLCRShortCompensation': {
+        'documentation': {
+            'description': '\nGenerates short compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.\n\nYou must physically configure your LCR circuit with a short to use this function to generate valid short compensation data.\n\nWhen you call this function:\n\n-  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n- Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n\nTo apply the short compensation data you generate with this method to your LCR measurements, set the NIDCPOWER_ATTR_LCR_SHORT_COMPENSATION_ENABLED property to **TRUE**.\n\nCorrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe number of frequencies defined in **addtional frequencies**.\n'
+                },
+                'name': 'numFrequencies',
+                'type': 'ViInt32'
+            },
+            {
+                'default_value': None,
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nDefines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.\n'
+                },
+                'name': 'additionalFrequencies',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numFrequencies'
+                },
+                'type': 'ViReal64[]',
+                'use_array': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'PerformLCRShortCustomCableCompensation': {
+        'documentation': {
+            'description': '\nGenerates short custom cable compensation data for LCR measurements.\n\nTo use this function:\n\n-  You must physically configure your LCR circuit with a short to generate valid short custom cable compensation data.\n-  Set NIDCPOWER_ATTR_LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED property to **TRUE** \n\nWhen you call this function:\n\n-  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString'
             }
         ],
         'returns': 'ViStatus'
@@ -2905,7 +3621,7 @@ functions = {
     'SetSequence': {
         'documentation': {
             'description': '\nConfigures a series of voltage or current outputs and corresponding\nsource delays. The source mode must be set to\n`Sequence <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for this\nfunction to take effect.\n\nRefer to the `Configuring the Source\nUnit <REPLACE_DRIVER_SPECIFIC_URL_1(configuringthesourceunit)>`__ topic\nin the *NI DC Power Supplies and SMUs Help* for more information about\nhow to configure your device.\n\nUse this function in the Uncommitted or Committed programming states.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nNI-DCPower programming states.\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
             {

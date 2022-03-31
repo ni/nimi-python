@@ -12,6 +12,10 @@ import nidcpower._visatype as _visatype
 import nidcpower.enums as enums
 import nidcpower.errors as errors
 
+import nidcpower.ni_lcr_load_compensation_spot as ni_lcr_load_compensation_spot  # noqa: F401
+
+import nidcpower.ni_lcr_measurement as ni_lcr_measurement  # noqa: F401
+
 import hightime
 
 # Used for __repr__
@@ -129,7 +133,8 @@ class _SessionBase(object):
 
     Specifies the advanced sequence to configure or generate.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -146,7 +151,8 @@ class _SessionBase(object):
 
     Specifies the advanced sequence step to configure.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -189,7 +195,8 @@ class _SessionBase(object):
     Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements and for information about valid values.
     Default Value: 0.01666666 seconds
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -201,6 +208,19 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.aperture_time`
     '''
+    aperture_time_auto_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeAutoMode, 1150314)
+    '''Type: enums.ApertureTimeAutoMode
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].aperture_time_auto_mode`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.aperture_time_auto_mode`
+    '''
     aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150059)
     '''Type: enums.ApertureTimeUnits
 
@@ -209,7 +229,8 @@ class _SessionBase(object):
     Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements and for information about valid values.
     Default Value: ApertureTimeUnits.SECONDS
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -243,7 +264,8 @@ class _SessionBase(object):
 
     Specifies whether the aperture time used for the measurement autorange algorithm is determined automatically or customized using the autorange_minimum_aperture_time property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -260,7 +282,8 @@ class _SessionBase(object):
 
     Specifies the algorithm the hardware uses for measurement autoranging.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -271,6 +294,24 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.autorange_behavior`
+    '''
+    autorange_maximum_delay_after_range_change = _attributes.AttributeViReal64(1150322)
+    '''Type: float
+
+    Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].autorange_maximum_delay_after_range_change`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.autorange_maximum_delay_after_range_change`
     '''
     autorange_minimum_aperture_time = _attributes.AttributeViReal64(1150247)
     '''Type: float
@@ -294,7 +335,8 @@ class _SessionBase(object):
 
     Specifies the units of the autorange_minimum_aperture_time property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -345,7 +387,8 @@ class _SessionBase(object):
 
     Specifies thresholds used during autoranging to determine when range changing occurs.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -382,6 +425,31 @@ class _SessionBase(object):
     power source to generate power. Use the power_source_in_use property to retrieve this information.
 
     Note: This property does not necessarily indicate if the device is using the auxiliary
+    '''
+    cable_length = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.CableLength, 1150278)
+    '''Type: enums.CableLength
+
+    Specifies how to apply cable compensation data for instruments that support LCR functionality.
+    Supported instruments use cable compensation for the following operations:
+
+    SMU mode: to stabilize DC current sourcing in the two smallest current ranges.
+    LCR mode: to compensate for the effects of cabling on LCR measurements.
+
+    For NI standard options, select the length of your NI cable to apply compensation data for a typical cable of that type.
+    For custom options, choose the source of the custom cable compensation data. You must then generate the custom cable compensation data.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].cable_length`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.cable_length`
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
@@ -431,7 +499,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -450,7 +519,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -690,7 +760,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -709,7 +780,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TransientResponse.NORMAL
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -729,7 +801,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -748,7 +821,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -768,7 +842,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -787,7 +862,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -807,7 +883,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -827,7 +904,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -854,7 +932,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -873,7 +952,8 @@ class _SessionBase(object):
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -893,7 +973,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -913,7 +994,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -933,7 +1015,8 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0.
     for information about supported devices.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -990,6 +1073,24 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.instrument_manufacturer`
     '''
+    instrument_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.InstrumentMode, 1150208)
+    '''Type: enums.InstrumentMode
+
+    Specifies the mode of operation for an instrument channel for instruments that support multiple modes.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].instrument_mode`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.instrument_mode`
+    '''
     instrument_model = _attributes.AttributeViString(1050512)
     '''Type: str
 
@@ -1012,7 +1113,8 @@ class _SessionBase(object):
     Refer to the Safety Interlock topic in the NI DC Power Supplies and SMUs Help for more information about the safety interlock circuit.
     about supported devices.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
@@ -1031,6 +1133,595 @@ class _SessionBase(object):
     If you initialize NI-DCPower with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.
     If you initialize NI-DCPower with the resource descriptor, this property contains that value.
     '''
+    isolation_state = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IsolationState, 1150302)
+    '''Type: enums.IsolationState
+
+    Defines whether the channel is isolated.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].isolation_state`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.isolation_state`
+    '''
+    lcr_actual_load_reactance = _attributes.AttributeViReal64(1150271)
+    '''Type: float
+
+    Specifies the actual reactance, in ohms, of the load used for load LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_actual_load_reactance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_actual_load_reactance`
+    '''
+    lcr_actual_load_resistance = _attributes.AttributeViReal64(1150270)
+    '''Type: float
+
+    Specifies the actual resistance, in ohms, of the load used for load LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_actual_load_resistance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_actual_load_resistance`
+    '''
+    lcr_automatic_level_control = _attributes.AttributeViInt32(1150290)
+    '''Type: bool
+
+    Specifies whether the channel actively attempts to maintain a constant test voltage or current across the DUT for LCR measurements.
+    The use of voltage or current depends on the test signal you configure with the lcr_stimulus_function property.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_automatic_level_control`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_automatic_level_control`
+    '''
+    lcr_current_amplitude = _attributes.AttributeViReal64(1150212)
+    '''Type: float
+
+    Specifies the amplitude, in amps RMS, of the AC current test signal applied to the DUT for LCR measurements.
+    This property applies when the lcr_stimulus_function property is set to LCRStimulusFunction.CURRENT.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_current_amplitude`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_current_amplitude`
+    '''
+    lcr_custom_measurement_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150258)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+
+    Specifies the LCR measurement aperture time for a channel, in seconds,
+    when the lcr_measurement_time property is set to LCRMeasurementTime.CUSTOM.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_custom_measurement_time`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_custom_measurement_time`
+    '''
+    lcr_dc_bias_automatic_level_control = _attributes.AttributeViInt32(1150291)
+    '''Type: bool
+
+    Specifies whether the channel actively maintains a constant DC bias voltage or current across the DUT for LCR measurements.
+    To use this property, you must configure a DC bias with the lcr_dc_bias_source property.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_automatic_level_control`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_dc_bias_automatic_level_control`
+    '''
+    lcr_dc_bias_current_level = _attributes.AttributeViReal64(1150215)
+    '''Type: float
+
+    Specifies the DC bias current level, in amps, when the lcr_dc_bias_source property is set to LCRDCBiasSource.CURRENT.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_current_level`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_dc_bias_current_level`
+    '''
+    lcr_dc_bias_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRDCBiasSource, 1150213)
+    '''Type: enums.LCRDCBiasSource
+
+    Specifies how to apply DC bias for LCR measurements.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_source`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_dc_bias_source`
+    '''
+    lcr_dc_bias_voltage_level = _attributes.AttributeViReal64(1150214)
+    '''Type: float
+
+    Specifies the DC bias voltage level, in volts, when the lcr_dc_bias_source property is set to LCRDCBiasSource.VOLTAGE.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_voltage_level`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_dc_bias_voltage_level`
+    '''
+    lcr_frequency = _attributes.AttributeViReal64(1150210)
+    '''Type: float
+
+    Specifies the frequency of the AC test signal applied to the DUT for LCR measurements.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_frequency`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_frequency`
+    '''
+    lcr_impedance_range = _attributes.AttributeViReal64(1150217)
+    '''Type: float
+
+    Specifies the impedance range the channel uses for LCR measurements.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_impedance_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_impedance_range`
+    '''
+    lcr_impedance_range_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRImpedanceRangeSource, 1150321)
+    '''Type: enums.LCRImpedanceRangeSource
+
+    Specifies how the impedance range for LCR measurements is determined.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_impedance_range_source`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_impedance_range_source`
+    '''
+    lcr_load_capacitance = _attributes.AttributeViReal64(1150320)
+    '''Type: float
+
+    Specifies the load capacitance, in farads and assuming a series model, of the DUT in order to compute the impedance range when the lcr_impedance_range_source property is set to LCRImpedanceRangeSource.LOAD_CONFIGURATION.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_load_capacitance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_load_capacitance`
+    '''
+    lcr_load_compensation_enabled = _attributes.AttributeViBoolean(1150222)
+    '''Type: bool
+
+    Specifies whether to apply load LCR compensation data to LCR measurements.
+    Both the lcr_open_compensation_enabled and lcr_short_compensation_enabled properties must be set to **TRUE** in order to set this property to **TRUE**.
+
+    Use the lcr_open_short_load_compensation_data_source property to define where the load compensation data that is applied to LCR measurements comes from.
+
+    Load compensation data are applied only for those specific frequencies you define with perform_lcr_load_compensation;
+    load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_load_compensation_enabled`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_load_compensation_enabled`
+    '''
+    lcr_load_inductance = _attributes.AttributeViReal64(1150319)
+    '''Type: float
+
+    Specifies the load inductance, in henrys and assuming a series model, of the DUT in order to compute the impedance range when the lcr_impedance_range_source property is set to LCRImpedanceRangeSource.LOAD_CONFIGURATION.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_load_inductance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_load_inductance`
+    '''
+    lcr_load_resistance = _attributes.AttributeViReal64(1150318)
+    '''Type: float
+
+    Specifies the load resistance, in ohms and assuming a series model, of the DUT in order to compute the impedance range when the lcr_impedance_range_source property is set to LCRImpedanceRangeSource.LOAD_CONFIGURATION.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_load_resistance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_load_resistance`
+    '''
+    lcr_measured_load_reactance = _attributes.AttributeViReal64(1150269)
+    '''Type: float
+
+    Specifies the reactance, in ohms, of the load used for load LCR compensation as measured by the instrument.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_measured_load_reactance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_measured_load_reactance`
+    '''
+    lcr_measured_load_resistance = _attributes.AttributeViReal64(1150268)
+    '''Type: float
+
+    Specifies the resistance, in ohms, of the load used for load LCR compensation as measured by the instrument.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_measured_load_resistance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_measured_load_resistance`
+    '''
+    lcr_measurement_time = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRMeasurementTime, 1150218)
+    '''Type: enums.LCRMeasurementTime
+
+    Selects a general aperture time profile for LCR measurements. The actual duration of each profile depends on the frequency of the LCR test signal.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_measurement_time`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_measurement_time`
+    '''
+    lcr_open_compensation_enabled = _attributes.AttributeViBoolean(1150220)
+    '''Type: bool
+
+    Specifies whether to apply open LCR compensation data to LCR measurements.
+    Use the lcr_open_short_load_compensation_data_source property to define where the open compensation data that is applied to LCR measurements comes from.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_open_compensation_enabled`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_open_compensation_enabled`
+    '''
+    lcr_open_conductance = _attributes.AttributeViReal64(1150261)
+    '''Type: float
+
+    Specifies the conductance, in siemens, of the circuit used for open LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_open_conductance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_open_conductance`
+    '''
+    lcr_open_short_load_compensation_data_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCROpenShortLoadCompensationDataSource, 1150223)
+    '''Type: enums.LCROpenShortLoadCompensationDataSource
+
+    Specifies the source of the LCR compensation data NI-DCPower applies to LCR measurements.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_open_short_load_compensation_data_source`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_open_short_load_compensation_data_source`
+    '''
+    lcr_open_susceptance = _attributes.AttributeViReal64(1150262)
+    '''Type: float
+
+    Specifies the susceptance, in siemens, of the circuit used for open LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_open_susceptance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_open_susceptance`
+    '''
+    lcr_short_compensation_enabled = _attributes.AttributeViBoolean(1150221)
+    '''Type: bool
+
+    Specifies whether to apply short LCR compensation data to LCR measurements.
+    Use the lcr_open_short_load_compensation_data_source property to define where the short compensation data that is applied to LCR measurements comes from.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_short_compensation_enabled`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_short_compensation_enabled`
+    '''
+    lcr_short_custom_cable_compensation_enabled = _attributes.AttributeViBoolean(1150299)
+    '''Type: bool
+
+    Defines how to apply short custom cable compensation in LCR mode when cable_length property is set to CableLength.CUSTOM_ONBOARD_STORAGE or CableLength.CUSTOM_AS_CONFIGURED.
+
+    LCR custom cable compensation uses compensation data for both an open and short configuration.
+    For open custom cable compensation, you must supply your own data from a call to perform_lcr_open_custom_cable_compensation.
+    For short custom cable compensation, you can supply your own data from a call to perform_lcr_short_custom_cable_compensation or NI-DCPower can apply a default set of short compensation data.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_short_custom_cable_compensation_enabled`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_short_custom_cable_compensation_enabled`
+    '''
+    lcr_short_reactance = _attributes.AttributeViReal64(1150264)
+    '''Type: float
+
+    Specifies the reactance, in ohms, of the circuit used for short LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_short_reactance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_short_reactance`
+    '''
+    lcr_short_resistance = _attributes.AttributeViReal64(1150263)
+    '''Type: float
+
+    Specifies the resistance, in ohms, of the circuit used for short LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_short_resistance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_short_resistance`
+    '''
+    lcr_source_delay_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRSourceDelayMode, 1150315)
+    '''Type: enums.LCRSourceDelayMode
+
+    For instruments in LCR mode, determines whether NI-DCPower automatically calculates and applies the source delay or applies a source delay you set manually.
+
+    You can return the source delay duration for either option by reading source_delay.
+
+    When you use this property to manually set the source delay, it is possible to set source delays short enough to unbalance the bridge and affect measurement accuracy. LCR measurement methods report whether the bridge is unbalanced.
+
+    Default Value: LCRSourceDelayMode.AUTOMATIC
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_source_delay_mode`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_source_delay_mode`
+    '''
+    lcr_stimulus_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRStimulusFunction, 1150209)
+    '''Type: enums.LCRStimulusFunction
+
+    Specifies the type of test signal to apply to the DUT for LCR measurements.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_stimulus_function`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_stimulus_function`
+    '''
+    lcr_voltage_amplitude = _attributes.AttributeViReal64(1150211)
+    '''Type: float
+
+    Specifies the amplitude, in V RMS, of the AC voltage test signal applied to the DUT for LCR measurements.
+    This property applies when the lcr_stimulus_function property is set to LCRStimulusFunction.VOLTAGE.
+
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_voltage_amplitude`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_voltage_amplitude`
+    '''
     logical_name = _attributes.AttributeViString(1050305)
     '''Type: str
 
@@ -1046,7 +1737,8 @@ class _SessionBase(object):
     Valid Values: 1000 to 2147483647
     Default Value: Varies by device. Refer to Supported Properties by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1066,7 +1758,8 @@ class _SessionBase(object):
     Valid Values: 0 to 167 seconds
     Default Value: The NI PXI-4132 and NI PXIe-4140/4141/4142/4143/4144/4145/4154 supports values from  0 seconds to 167 seconds.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1085,7 +1778,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1104,7 +1798,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1126,7 +1821,8 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1205,7 +1901,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TriggerType.DIGITAL_EDGE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1262,7 +1959,8 @@ class _SessionBase(object):
     for information about supported devices.
     Refer to the NI PXI-4130 Output Capacitance Selection topic in the NI DC Power Supplies and SMUs Help for more information about capacitance.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1604,7 +2302,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: False
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1624,7 +2323,8 @@ class _SessionBase(object):
     Valid Values: 2 V to 210 V
     Default Value: 210 V
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1702,7 +2402,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_level_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1721,7 +2422,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_limit_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1834,7 +2536,8 @@ class _SessionBase(object):
     Valid Values: 0 to 167 seconds
     Default Value: 16.67 milliseconds
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1853,7 +2556,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_voltage_level_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1872,7 +2576,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_voltage_limit_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1985,7 +2690,8 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
     Default Value:The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2003,7 +2709,8 @@ class _SessionBase(object):
     Specifies the behavior of the Pulse Complete event.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2023,7 +2730,8 @@ class _SessionBase(object):
     The maximum event pulse width value for PXI Express devices is 1.6 microseconds.
     Default Value: The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2042,7 +2750,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_level_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2062,7 +2771,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2081,7 +2791,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_limit_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2195,7 +2906,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2214,7 +2926,8 @@ class _SessionBase(object):
     Valid Values: 10 microseconds to 167 seconds
     Default Value: 34 milliseconds
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2233,7 +2946,8 @@ class _SessionBase(object):
     Valid Values: 10 microseconds to 167 seconds
     Default Value: 34 milliseconds
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2251,7 +2965,8 @@ class _SessionBase(object):
     Specifies the behavior of the Pulse trigger.
     Default Value: TriggerType.NONE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2270,7 +2985,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_limit_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2290,7 +3006,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2309,7 +3026,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_voltage_limit_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2450,7 +3168,8 @@ class _SessionBase(object):
     Specifies the output terminal for exporting the Ready For Pulse Trigger event.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2468,7 +3187,8 @@ class _SessionBase(object):
     Specifies the behavior of the Ready For Pulse Trigger event.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2488,7 +3208,8 @@ class _SessionBase(object):
     The maximum event pulse width value for all devices is 1.6 microseconds.
     Default Value: The default value for PXI Express devices is 250 ns
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2533,7 +3254,8 @@ class _SessionBase(object):
     When you set the samples_to_average property in the Running state, the output channel measurements might move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a session, you can force a synchronization in the running state before you run the measure_multiple method. To force a synchronization in the running state, set this property to True, and then run the measure_multiple method, specifying all channels in the channel name parameter. You can set the reset_average_before_measurement property to False after the measure_multiple method completes.
     Default Value: True
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2578,7 +3300,8 @@ class _SessionBase(object):
     about supported devices.
     Default Value: SelfCalibrationPersistence.KEEP_IN_MEMORY
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
@@ -2614,7 +3337,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TriggerType.NONE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2633,7 +3357,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2652,7 +3377,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2674,7 +3400,8 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6 seconds
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2693,7 +3420,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2712,7 +3440,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2734,7 +3463,8 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6 seconds
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2755,7 +3485,8 @@ class _SessionBase(object):
     Valid Range: 1 to 134217727
     Default Value: 1
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2834,7 +3565,8 @@ class _SessionBase(object):
     Specifies the behavior of the Shutdown trigger.
     Default Value: TriggerType.NONE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2859,7 +3591,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2878,7 +3611,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2900,7 +3634,8 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6 seconds
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2956,7 +3691,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TriggerType.NONE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2995,7 +3731,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TriggerType.NONE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3019,7 +3756,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TransientResponse.NORMAL
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3038,7 +3776,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3057,7 +3796,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3284,7 +4024,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3454,10 +4195,7 @@ class _SessionBase(object):
         `Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Tip:
         This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3584,10 +4322,7 @@ class _SessionBase(object):
         `Aperture Time <REPLACE_DRIVER_SPECIFIC_URL_1(aperture)>`__
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Tip:
         This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3621,6 +4356,48 @@ class _SessionBase(object):
         aperture_time_ctype = _visatype.ViReal64(aperture_time)  # case S150
         units_ctype = _visatype.ViInt32(units.value)  # case S130
         error_code = self._library.niDCPower_ConfigureApertureTime(vi_ctype, channel_name_ctype, aperture_time_ctype, units_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_lcr_custom_cable_compensation(self, custom_cable_compensation_data):
+        r'''configure_lcr_custom_cable_compensation
+
+        Applies previously generated open and short custom cable compensation data to LCR measurements.
+
+        This method applies custom cable compensation data when you have set cable_length property to CableLength.CUSTOM_AS_CONFIGURED.
+
+        Call this method after you have obtained custom cable compensation data.
+
+        If lcr_short_custom_cable_compensation_enabled property is set to **TRUE**, you must generate data with both perform_lcr_open_custom_cable_compensation and perform_lcr_short_custom_cable_compensation;
+        if **FALSE**, you must only use perform_lcr_open_custom_cable_compensation, and NI-DCPower uses default short data.
+
+        Call get_lcr_custom_cable_compensation_data and pass the **custom cable compensation data** to this method.
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].configure_lcr_custom_cable_compensation`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.configure_lcr_custom_cable_compensation`
+
+        Args:
+            custom_cable_compensation_data (bytes): The open and short custom cable compensation data to apply.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        custom_cable_compensation_data_size_ctype = _visatype.ViInt32(0 if custom_cable_compensation_data is None else len(custom_cable_compensation_data))  # case S160
+        custom_cable_compensation_data_converted = _converters.convert_to_bytes(custom_cable_compensation_data)  # case B520
+        custom_cable_compensation_data_ctype = get_ctypes_pointer_for_buffer(value=custom_cable_compensation_data_converted, library_type=_visatype.ViInt8)  # case B520
+        error_code = self._library.niDCPower_ConfigureLCRCustomCableCompensation(vi_ctype, channel_name_ctype, custom_cable_compensation_data_size_ctype, custom_cable_compensation_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4260,10 +5037,7 @@ class _SessionBase(object):
         configuring this method.
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Tip:
         This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4320,6 +5094,106 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
+
+    @ivi_synchronized
+    def fetch_multiple_lcr(self, count, timeout=hightime.timedelta(seconds=1.0)):
+        r'''fetch_multiple_lcr
+
+        Returns a list of previously measured LCR data on the specified channel that have been taken and stored in a buffer.
+
+        To use this method:
+
+        -  Set measure_when property to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or MeasureWhen.ON_MEASURE_TRIGGER
+        -  Put the channel in the Running state (call initiate)
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].fetch_multiple_lcr`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.fetch_multiple_lcr`
+
+        Args:
+            count (int): Specifies the number of measurements to fetch.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete, in seconds.
+                If the method does not complete within this time interval, NI-DCPower returns an error.
+
+                Note:
+                When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
+
+
+        Returns:
+            measurements (list of NILCRMeasurement): Returns an array of LCR measurement data.
+
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | vdc                | The measured DC voltage, in volts.                                                                                                                    |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | idc                | The measured DC current, in amps                                                                                                                      |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | stimulus_frequency | The frequency of the LCR test signal, in Hz.                                                                                                          |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_voltage         | The measured AC voltage, in volts RMS.                                                                                                                |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_current         | The measured AC current, in amps RMS.                                                                                                                 |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z                  | The complex impedance.                                                                                                                                |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_magnitude        | The magnitude of the complex impedance, in ohms.                                                                                                      |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_phase            | The impedance phase angle, in degrees.                                                                                                                |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y                  | The complex admittance.                                                                                                                               |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_magnitude        | The magnitude of the complex admittance, in siemens.                                                                                                  |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_phase            | The admittance phase angle, in degrees.                                                                                                               |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ls                 | The inductance, in henrys, as measured using a series circuit model.                                                                                  |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | cs                 | The capacitance, in farads, as measured using a series circuit model.                                                                                 |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | rs                 | The resistance, in ohms, as measured using a series circuit model.                                                                                    |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | lp                 | The inductance, in henrys, as measured using a parallel circuit model.                                                                                |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | cp                 | The capacitance, in farads, as measured using a parallel circuit model.                                                                               |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | rp                 | The resistance, in ohms, as measured using a parallel circuit model.                                                                                  |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | d                  | The dissipation factor of the circuit.                                                                                                                |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | q                  | The quality factor of the circuit.                                                                                                                    |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | measurement_mode   | Returns the measurement mode: **SMU** is the channel(s) are operating as a power supply/SMU. **LCR** is the channel(s) are operating as an LCR meter. |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | dc_in_compliance   | Indicates whether the output was in DC compliance at the time the measurement was taken.                                                              |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_in_compliance   | Indicates whether the output was in AC compliance at the time the measurement was taken.                                                              |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | unbalanced         | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                    |
+                +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+            actual_count (int): Indicates the number of measured values actually retrieved from the device.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
+        count_ctype = _visatype.ViInt32(count)  # case S210
+        measurements_size = count  # case B600
+        measurements_ctype = get_ctypes_pointer_for_buffer(library_type=ni_lcr_measurement.struct_NILCRMeasurement, size=measurements_size)  # case B600
+        actual_count_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDCPower_FetchMultipleLCR(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, measurements_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [ni_lcr_measurement.NILCRMeasurement(measurements_ctype[i]) for i in range(count_ctype.value)]
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -4677,6 +5551,128 @@ class _SessionBase(object):
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
+    def _get_lcr_compensation_last_date_and_time(self, compensation_type):
+        r'''_get_lcr_compensation_last_date_and_time
+
+        Returns the date and time the specified type of compensation data for LCR measurements was most recently generated.
+        The time returned is 24-hour (military) local time; for example, if the selected type of compensation data was generated at 2:30 PM, this method returns 14 for **hours** and 30 for **minutes**.
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._get_lcr_compensation_last_date_and_time`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session._get_lcr_compensation_last_date_and_time`
+
+        Args:
+            compensation_type (enums.LCRCompensationType): Specifies the type of compensation for LCR measurements.
+
+
+        Returns:
+            year (int): Returns the year of the relevant operation.
+
+            month (int): Returns the month of the relevant operation.
+
+            day (int): Returns the day of the relevant operation.
+
+            hour (int): Returns the hour (in 24-hour time) of the relevant operation.
+
+            minute (int): Returns the minute of the relevant operation.
+
+        '''
+        if type(compensation_type) is not enums.LCRCompensationType:
+            raise TypeError('Parameter compensation_type must be of type ' + str(enums.LCRCompensationType))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        compensation_type_ctype = _visatype.ViInt32(compensation_type.value)  # case S130
+        year_ctype = _visatype.ViInt32()  # case S220
+        month_ctype = _visatype.ViInt32()  # case S220
+        day_ctype = _visatype.ViInt32()  # case S220
+        hour_ctype = _visatype.ViInt32()  # case S220
+        minute_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDCPower_GetLCRCompensationLastDateAndTime(vi_ctype, channel_name_ctype, compensation_type_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+
+    @ivi_synchronized
+    def get_lcr_custom_cable_compensation_data(self):
+        r'''get_lcr_custom_cable_compensation_data
+
+        Collects previously generated open and short custom cable compensation data so you can then apply it to LCR measurements with configure_lcr_custom_cable_compensation.
+
+        Call this method after you have obtained open and short custom cable compensation data. Pass the **custom cable compensation data** to configure_lcr_custom_cable_compensation
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].get_lcr_custom_cable_compensation_data`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.get_lcr_custom_cable_compensation_data`
+
+        Returns:
+            custom_cable_compensation_data (bytes): The open and short custom cable compensation data to retrieve.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        custom_cable_compensation_data_size_ctype = _visatype.ViInt32()  # case S170
+        custom_cable_compensation_data_ctype = None  # case B580
+        error_code = self._library.niDCPower_GetLCRCustomCableCompensationData(vi_ctype, channel_name_ctype, custom_cable_compensation_data_size_ctype, custom_cable_compensation_data_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        custom_cable_compensation_data_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        custom_cable_compensation_data_size = custom_cable_compensation_data_size_ctype.value  # case B590
+        custom_cable_compensation_data_array = array.array("b", [0] * custom_cable_compensation_data_size)  # case B590
+        custom_cable_compensation_data_ctype = get_ctypes_pointer_for_buffer(value=custom_cable_compensation_data_array, library_type=_visatype.ViInt8)  # case B590
+        error_code = self._library.niDCPower_GetLCRCustomCableCompensationData(vi_ctype, channel_name_ctype, custom_cable_compensation_data_size_ctype, custom_cable_compensation_data_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_to_bytes(custom_cable_compensation_data_array)
+
+    @ivi_synchronized
+    def get_lcr_compensation_last_date_and_time(self, compensation_type):
+        '''get_lcr_compensation_last_date_and_time
+
+        Returns the date and time the specified type of compensation data for LCR measurements was most recently generated.
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].get_lcr_compensation_last_date_and_time`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.get_lcr_compensation_last_date_and_time`
+
+        Args:
+            compensation_type (enums.LCRCompensationType): Specifies the type of compensation for LCR measurements.
+
+
+        Returns:
+            last_comp_datetime (hightime.datetime): Returns the date and time the specified type of compensation data for LCR measurements was most recently generated.
+
+        '''
+        year, month, day, hour, minute = self._get_lcr_compensation_last_date_and_time(compensation_type)
+        return hightime.datetime(year, month, day, hour, minute)
+
+    @ivi_synchronized
     def _initiate_with_channels(self):
         r'''_initiate_with_channels
 
@@ -4852,6 +5848,92 @@ class _SessionBase(object):
         return voltage_measurements_array, current_measurements_array
 
     @ivi_synchronized
+    def measure_multiple_lcr(self):
+        r'''measure_multiple_lcr
+
+        Measures and returns a list of LCR data on the specified output channel(s).
+
+        To use this method:
+
+        -  Set instrument_mode property to InstrumentMode.LCR
+        -  Set measure_when property to MeasureWhen.ON_DEMAND
+        -  Put the channel(s) in the Running state (call initiate)
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].measure_multiple_lcr`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.measure_multiple_lcr`
+
+        Returns:
+            measurements (list of NILCRMeasurement): Returns an array of LCR measurement data.
+
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | vdc                | The measured DC voltage, in volts.                                                                                                                  |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | idc                | The measured DC current, in amps                                                                                                                    |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | stimulus_frequency | The frequency of the LCR test signal, in Hz.                                                                                                        |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_voltage         | The measured AC voltage, in volts RMS.                                                                                                              |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_current         | The measured AC current, in amps RMS.                                                                                                               |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z                  | The complex impedance.                                                                                                                              |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_magnitude        | The magnitude of the complex impedance, in ohms.                                                                                                    |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_phase            | The impedance phase angle, in degrees.                                                                                                              |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y                  | The complex admittance.                                                                                                                             |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_magnitude        | The magnitude of the complex admittance, in siemens.                                                                                                |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_phase            | The admittance phase angle, in degrees.                                                                                                             |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ls                 | The inductance, in henrys, as measured using a series circuit model.                                                                                |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | cs                 | The capacitance, in farads, as measured using a series circuit model.                                                                               |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | rs                 | The resistance, in ohms, as measured using a series circuit model.                                                                                  |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | lp                 | The inductance, in henrys, as measured using a parallel circuit model.                                                                              |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | cp                 | The capacitance, in farads, as measured using a parallel circuit model.                                                                             |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | rp                 | The resistance, in ohms, as measured using a parallel circuit model.                                                                                |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | d                  | The dissipation factor of the circuit.                                                                                                              |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | q                  | The quality factor of the circuit.                                                                                                                  |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | measurement_mode   | Returns the measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter. |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | dc_in_compliance   | Indicates whether the output was in DC compliance at the time the measurement was taken.                                                            |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_in_compliance   | Indicates whether the output was in AC compliance at the time the measurement was taken.                                                            |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+                | unbalanced         | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                  |
+                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        measurements_size = self._parse_channel_count()  # case B560
+        measurements_ctype = get_ctypes_pointer_for_buffer(library_type=ni_lcr_measurement.struct_NILCRMeasurement, size=measurements_size)  # case B560
+        error_code = self._library.niDCPower_MeasureMultipleLCR(vi_ctype, channel_name_ctype, measurements_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [ni_lcr_measurement.NILCRMeasurement(measurements_ctype[i]) for i in range(self._parse_channel_count())]
+
+    @ivi_synchronized
     def _parse_channel_count(self):
         r'''_parse_channel_count
 
@@ -4878,6 +5960,218 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_ParseChannelCount(vi_ctype, channels_string_ctype, None if number_of_channels_ctype is None else (ctypes.pointer(number_of_channels_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(number_of_channels_ctype.value)
+
+    @ivi_synchronized
+    def perform_lcr_load_compensation(self, compensation_spots):
+        r'''perform_lcr_load_compensation
+
+        Generates load compensation data for LCR measurements for the test spots you specify.
+
+        You must physically configure your LCR circuit with an appropriate reference load to use this method to generate valid load compensation data.
+
+        When you call this method:
+
+        -  The load compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+        -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+        To apply the load compensation data you generate with this method to your LCR measurements, set the lcr_load_compensation_enabled property to **TRUE**.
+
+        Load compensation data are generated only for those specific frequencies you define with this method; load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].perform_lcr_load_compensation`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.perform_lcr_load_compensation`
+
+        Args:
+            compensation_spots (list of NILCRLoadCompensationSpot): Defines the frequencies and DUT specifications to use for LCR load compensation.
+
+                You can specify <=1000 spot frequencies.
+
+                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | frequency            | The spot frequency.                                                                                                                                   |
+                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | reference_value_type | A known specification value of your DUT to use as the basis for load compensation. Refer to the enums.LCRReferenceValueType for the supported values. |
+                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | reference_value_A    | A value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose.                |
+                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | reference_value_B    | If applicable, a value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose. |
+                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        num_compensation_spots_ctype = _visatype.ViInt32(0 if compensation_spots is None else len(compensation_spots))  # case S160
+        compensation_spots_ctype = get_ctypes_pointer_for_buffer([ni_lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot(c) for c in compensation_spots], library_type=ni_lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot)  # case B540
+        error_code = self._library.niDCPower_PerformLCRLoadCompensation(vi_ctype, channel_name_ctype, num_compensation_spots_ctype, compensation_spots_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def perform_lcr_open_compensation(self, additional_frequencies=None):
+        r'''perform_lcr_open_compensation
+
+        Generates open compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.
+
+        You must physically configure an open LCR circuit to use this method to generate valid open compensation data.
+
+        When you call this method:
+
+        -  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+        -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+        To apply the open compensation data you generate with this method to your LCR measurements, set the lcr_open_compensation_enabled property to **TRUE**.
+
+        Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].perform_lcr_open_compensation`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.perform_lcr_open_compensation`
+
+        Args:
+            additional_frequencies (array.array("d")): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
+        additional_frequencies_array = get_ctypes_and_array(value=additional_frequencies, array_type="d")  # case B550
+        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies_array, library_type=_visatype.ViReal64)  # case B550
+        error_code = self._library.niDCPower_PerformLCROpenCompensation(vi_ctype, channel_name_ctype, num_frequencies_ctype, additional_frequencies_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def perform_lcr_open_custom_cable_compensation(self):
+        r'''perform_lcr_open_custom_cable_compensation
+
+        Generates open custom cable compensation data for LCR measurements.
+
+        To use this method, you must physically configure an open LCR circuit to generate valid open custom cable compensation data.
+
+        When you call this method:
+
+        -  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+        -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].perform_lcr_open_custom_cable_compensation`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.perform_lcr_open_custom_cable_compensation`
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDCPower_PerformLCROpenCustomCableCompensation(vi_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def perform_lcr_short_compensation(self, additional_frequencies=None):
+        r'''perform_lcr_short_compensation
+
+        Generates short compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.
+
+        You must physically configure your LCR circuit with a short to use this method to generate valid short compensation data.
+
+        When you call this method:
+
+        -  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+        - Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+        To apply the short compensation data you generate with this method to your LCR measurements, set the lcr_short_compensation_enabled property to **TRUE**.
+
+        Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].perform_lcr_short_compensation`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.perform_lcr_short_compensation`
+
+        Args:
+            additional_frequencies (array.array("d")): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
+        additional_frequencies_array = get_ctypes_and_array(value=additional_frequencies, array_type="d")  # case B550
+        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies_array, library_type=_visatype.ViReal64)  # case B550
+        error_code = self._library.niDCPower_PerformLCRShortCompensation(vi_ctype, channel_name_ctype, num_frequencies_ctype, additional_frequencies_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def perform_lcr_short_custom_cable_compensation(self):
+        r'''perform_lcr_short_custom_cable_compensation
+
+        Generates short custom cable compensation data for LCR measurements.
+
+        To use this method:
+
+        -  You must physically configure your LCR circuit with a short to generate valid short custom cable compensation data.
+        -  Set lcr_short_custom_cable_compensation_enabled property to **TRUE**
+
+        When you call this method:
+
+        -  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+        -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].perform_lcr_short_custom_cable_compensation`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.perform_lcr_short_custom_cable_compensation`
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDCPower_PerformLCRShortCustomCableCompensation(vi_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     @ivi_synchronized
     def query_in_compliance(self):
@@ -5562,10 +6856,7 @@ class _SessionBase(object):
         NI-DCPower programming states.
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Tip:
         This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6286,7 +7577,7 @@ class Session(_SessionBase):
         Returns the date and time of the last successful calibration.
 
         Returns:
-            month (hightime.datetime): Indicates date and time of the last calibration.
+            last_cal_datetime (hightime.datetime): Indicates date and time of the last calibration.
 
         '''
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
@@ -6301,7 +7592,7 @@ class Session(_SessionBase):
         Note: This method is not supported on all devices.
 
         Returns:
-            month (hightime.datetime): Returns the date and time the device was last calibrated.
+            last_cal_datetime (hightime.datetime): Returns the date and time the device was last calibrated.
 
         '''
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
@@ -6321,10 +7612,7 @@ class Session(_SessionBase):
         **hours** and 30 for **minutes**.
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Returns:
             year (int): Returns the **year** the device was last calibrated.
@@ -6364,10 +7652,7 @@ class Session(_SessionBase):
         25 for the **temperature** parameter.
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Returns:
             temperature (float): Returns the onboard **temperature** of the device, in degrees Celsius,
