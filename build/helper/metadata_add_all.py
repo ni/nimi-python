@@ -297,6 +297,15 @@ def _fix_type(parameter):
     parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' []', '[]').replace(' ', '_')
 
 
+def _fix_custom_type(parameter, config):
+    '''Add "struct_" prefix to custom type if necessary to match its ctypes_type.'''
+    parameter_type_with_struct_prefix = 'struct_' + parameter['type']
+    for custom_type in config['custom_types']:
+        if parameter_type_with_struct_prefix == custom_type['ctypes_type']:
+            parameter['type'] = custom_type['ctypes_type']
+            break
+
+
 def _add_use_in_python_api(p, parameters):
     '''Add 'use_in_python_api' if not there with value of True'''
     if 'use_in_python_api' not in p:
@@ -368,6 +377,7 @@ def add_all_function_metadata(functions, config):
             _add_enum(p)
             _fix_type(p)
             _add_buffer_info(p, config)
+            _fix_custom_type(p, config)
             _add_use_in_python_api(p, functions[f]['parameters'])
             _add_python_parameter_name(p)
             _add_python_type(p, config)
