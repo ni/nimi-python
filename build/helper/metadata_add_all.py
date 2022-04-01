@@ -1096,7 +1096,7 @@ functions_expected = {
             },
             {
                 'ctypes_type': 'struct_CustomStruct',
-                'ctypes_variable_name': 'custom_type_output_without_struct_prefix_ctype',
+                'ctypes_variable_name': 'custom_type_without_struct_prefix_output_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(custom_struct.struct_CustomStruct)',
                 'direction': 'out',
                 'documentation': {
@@ -1122,7 +1122,7 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'struct_CustomStruct',
-                'library_method_call_snippet': 'None if custom_type_output_without_struct_prefix_ctype is None else (ctypes.pointer(custom_type_output_without_struct_prefix_ctype))',
+                'library_method_call_snippet': 'None if custom_type_without_struct_prefix_output_ctype is None else (ctypes.pointer(custom_type_without_struct_prefix_output_ctype))',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_output',
             },
