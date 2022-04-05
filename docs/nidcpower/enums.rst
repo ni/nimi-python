@@ -6,6 +6,51 @@ Enums used in NI-DCPower
 .. py:currentmodule:: nidcpower
 
 
+ApertureTimeAutoMode
+--------------------
+
+.. py:class:: ApertureTimeAutoMode
+
+    .. py:attribute:: ApertureTimeAutoMode.OFF
+
+
+
+        Disables automatic aperture time scaling. The :py:attr:`nidcpower.Session.aperture_time` property specifies the aperture time for all ranges.
+
+        
+
+
+
+    .. py:attribute:: ApertureTimeAutoMode.SHORT
+
+
+
+        Prioritizes measurement speed over measurement accuracy by quickly scaling down aperture time in larger current ranges. The :py:attr:`nidcpower.Session.aperture_time` property specifies the aperture time for the minimum range.
+
+        
+
+
+
+    .. py:attribute:: ApertureTimeAutoMode.NORMAL
+
+
+
+        Balances measurement accuracy and speed by scaling down aperture time in larger current ranges. The :py:attr:`nidcpower.Session.aperture_time` property specifies the aperture time for the minimum range.
+
+        
+
+
+
+    .. py:attribute:: ApertureTimeAutoMode.LONG
+
+
+
+        Prioritizes accuracy while still decreasing measurement time by slowly scaling down aperture time in larger current ranges. The :py:attr:`nidcpower.Session.aperture_time` property specifies the aperture time for the minimum range.
+
+        
+
+
+
 ApertureTimeUnits
 -----------------
 

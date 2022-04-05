@@ -37,6 +37,8 @@ All notable changes to this project will be documented in this file.
     * #### Added
         * Partial API parity with NI-DCPower 21.8.0.
             * Properties added:
+                * `aperture_time_auto_mode`
+                * `autorange_maximum_delay_after_range_change`
                 * `instrument_mode`
                 * `lcr_actual_load_reactance`
                 * `lcr_actual_load_resistance`
@@ -61,6 +63,7 @@ All notable changes to this project will be documented in this file.
                 * `lcr_stimulus_function`
                 * `lcr_voltage_amplitude`
             * Enums added:
+                * `ApertureTimeAutoMode`
                 * `InstrumentMode`
                 * `LCRDCBiasSource`
                 * `LCRMeasurementTime`

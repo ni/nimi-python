@@ -4,6 +4,25 @@
 from enum import Enum
 
 
+class ApertureTimeAutoMode(Enum):
+    OFF = 1135
+    r'''
+    Disables automatic aperture time scaling. The aperture_time property specifies the aperture time for all ranges.
+    '''
+    SHORT = 1136
+    r'''
+    Prioritizes measurement speed over measurement accuracy by quickly scaling down aperture time in larger current ranges. The aperture_time property specifies the aperture time for the minimum range.
+    '''
+    NORMAL = 1137
+    r'''
+    Balances measurement accuracy and speed by scaling down aperture time in larger current ranges. The aperture_time property specifies the aperture time for the minimum range.
+    '''
+    LONG = 1138
+    r'''
+    Prioritizes accuracy while still decreasing measurement time by slowly scaling down aperture time in larger current ranges. The aperture_time property specifies the aperture time for the minimum range.
+    '''
+
+
 class ApertureTimeUnits(Enum):
     SECONDS = 1028
     r'''
