@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
 * ### `nidcpower` (NI-DCPower)
     * #### Added
     * #### Changed
+        * Updated docs on supported devices
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
@@ -46,7 +47,7 @@ All notable changes to this project will be documented in this file.
     * #### Changed
     * #### Removed
 * ### `nifgen` (NI-FGEN)
-    * #### Added 
+    * #### Added
         * `data_markers` repeated capability support - [#1668](https://github.com/ni/nimi-python/issues/1668)
     * #### Changed
         * Addressed [#1627](https://github.com/ni/nimi-python/issues/1627) for attributes supporting the following repeated capabilities
