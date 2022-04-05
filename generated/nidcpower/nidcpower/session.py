@@ -129,7 +129,8 @@ class _SessionBase(object):
 
     Specifies the advanced sequence to configure or generate.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -146,7 +147,8 @@ class _SessionBase(object):
 
     Specifies the advanced sequence step to configure.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -189,7 +191,8 @@ class _SessionBase(object):
     Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements and for information about valid values.
     Default Value: 0.01666666 seconds
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -209,7 +212,8 @@ class _SessionBase(object):
     Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements and for information about valid values.
     Default Value: ApertureTimeUnits.SECONDS
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -243,7 +247,8 @@ class _SessionBase(object):
 
     Specifies whether the aperture time used for the measurement autorange algorithm is determined automatically or customized using the autorange_minimum_aperture_time property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -260,7 +265,8 @@ class _SessionBase(object):
 
     Specifies the algorithm the hardware uses for measurement autoranging.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -294,7 +300,8 @@ class _SessionBase(object):
 
     Specifies the units of the autorange_minimum_aperture_time property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -345,7 +352,8 @@ class _SessionBase(object):
 
     Specifies thresholds used during autoranging to determine when range changing occurs.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -431,7 +439,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -450,7 +459,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -690,7 +700,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -709,7 +720,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TransientResponse.NORMAL
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -729,7 +741,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -748,7 +761,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -768,7 +782,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -787,7 +802,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -807,7 +823,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -827,7 +844,8 @@ class _SessionBase(object):
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -854,7 +872,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -873,7 +892,8 @@ class _SessionBase(object):
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -893,7 +913,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -913,7 +934,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -933,7 +955,8 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0.
     for information about supported devices.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1012,7 +1035,8 @@ class _SessionBase(object):
     Refer to the Safety Interlock topic in the NI DC Power Supplies and SMUs Help for more information about the safety interlock circuit.
     about supported devices.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
@@ -1046,7 +1070,8 @@ class _SessionBase(object):
     Valid Values: 1000 to 2147483647
     Default Value: Varies by device. Refer to Supported Properties by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1066,7 +1091,8 @@ class _SessionBase(object):
     Valid Values: 0 to 167 seconds
     Default Value: The NI PXI-4132 and NI PXIe-4140/4141/4142/4143/4144/4145/4154 supports values from  0 seconds to 167 seconds.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1085,7 +1111,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1104,7 +1131,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1126,7 +1154,8 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1205,7 +1234,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TriggerType.DIGITAL_EDGE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1262,7 +1292,8 @@ class _SessionBase(object):
     for information about supported devices.
     Refer to the NI PXI-4130 Output Capacitance Selection topic in the NI DC Power Supplies and SMUs Help for more information about capacitance.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1604,7 +1635,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: False
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1624,7 +1656,8 @@ class _SessionBase(object):
     Valid Values: 2 V to 210 V
     Default Value: 210 V
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1702,7 +1735,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_level_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1721,7 +1755,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_limit_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1834,7 +1869,8 @@ class _SessionBase(object):
     Valid Values: 0 to 167 seconds
     Default Value: 16.67 milliseconds
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1853,7 +1889,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_voltage_level_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1872,7 +1909,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_voltage_limit_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1985,7 +2023,8 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
     Default Value:The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2003,7 +2042,8 @@ class _SessionBase(object):
     Specifies the behavior of the Pulse Complete event.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2023,7 +2063,8 @@ class _SessionBase(object):
     The maximum event pulse width value for PXI Express devices is 1.6 microseconds.
     Default Value: The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2042,7 +2083,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_level_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2062,7 +2104,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2081,7 +2124,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_limit_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2195,7 +2239,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2214,7 +2259,8 @@ class _SessionBase(object):
     Valid Values: 10 microseconds to 167 seconds
     Default Value: 34 milliseconds
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2233,7 +2279,8 @@ class _SessionBase(object):
     Valid Values: 10 microseconds to 167 seconds
     Default Value: 34 milliseconds
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2251,7 +2298,8 @@ class _SessionBase(object):
     Specifies the behavior of the Pulse trigger.
     Default Value: TriggerType.NONE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2270,7 +2318,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_limit_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2290,7 +2339,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2309,7 +2359,8 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_voltage_limit_range property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2450,7 +2501,8 @@ class _SessionBase(object):
     Specifies the output terminal for exporting the Ready For Pulse Trigger event.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2468,7 +2520,8 @@ class _SessionBase(object):
     Specifies the behavior of the Ready For Pulse Trigger event.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2488,7 +2541,8 @@ class _SessionBase(object):
     The maximum event pulse width value for all devices is 1.6 microseconds.
     Default Value: The default value for PXI Express devices is 250 ns
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2533,7 +2587,8 @@ class _SessionBase(object):
     When you set the samples_to_average property in the Running state, the output channel measurements might move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a session, you can force a synchronization in the running state before you run the measure_multiple method. To force a synchronization in the running state, set this property to True, and then run the measure_multiple method, specifying all channels in the channel name parameter. You can set the reset_average_before_measurement property to False after the measure_multiple method completes.
     Default Value: True
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2578,7 +2633,8 @@ class _SessionBase(object):
     about supported devices.
     Default Value: SelfCalibrationPersistence.KEEP_IN_MEMORY
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
@@ -2614,7 +2670,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TriggerType.NONE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2633,7 +2690,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2652,7 +2710,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2674,7 +2733,8 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6 seconds
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2693,7 +2753,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2712,7 +2773,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2734,7 +2796,8 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6 seconds
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2755,7 +2818,8 @@ class _SessionBase(object):
     Valid Range: 1 to 134217727
     Default Value: 1
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2834,7 +2898,8 @@ class _SessionBase(object):
     Specifies the behavior of the Shutdown trigger.
     Default Value: TriggerType.NONE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2859,7 +2924,8 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2878,7 +2944,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Polarity.HIGH
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2900,7 +2967,8 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6 seconds
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2956,7 +3024,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TriggerType.NONE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2995,7 +3064,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TriggerType.NONE
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3019,7 +3089,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: TransientResponse.NORMAL
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3038,7 +3109,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3057,7 +3129,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3284,7 +3357,8 @@ class _SessionBase(object):
     for information about supported devices.
     Default value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+    Note:
+    This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3454,10 +3528,7 @@ class _SessionBase(object):
         `Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Tip:
         This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3584,10 +3655,7 @@ class _SessionBase(object):
         `Aperture Time <REPLACE_DRIVER_SPECIFIC_URL_1(aperture)>`__
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Tip:
         This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4260,10 +4328,7 @@ class _SessionBase(object):
         configuring this method.
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Tip:
         This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5562,10 +5627,7 @@ class _SessionBase(object):
         NI-DCPower programming states.
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Tip:
         This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6286,7 +6348,7 @@ class Session(_SessionBase):
         Returns the date and time of the last successful calibration.
 
         Returns:
-            month (hightime.datetime): Indicates date and time of the last calibration.
+            last_cal_datetime (hightime.datetime): Indicates date and time of the last calibration.
 
         '''
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
@@ -6301,7 +6363,7 @@ class Session(_SessionBase):
         Note: This method is not supported on all devices.
 
         Returns:
-            month (hightime.datetime): Returns the date and time the device was last calibrated.
+            last_cal_datetime (hightime.datetime): Returns the date and time the device was last calibrated.
 
         '''
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
@@ -6321,10 +6383,7 @@ class Session(_SessionBase):
         **hours** and 30 for **minutes**.
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Returns:
             year (int): Returns the **year** the device was last calibrated.
@@ -6364,10 +6423,7 @@ class Session(_SessionBase):
         25 for the **temperature** parameter.
 
         Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Returns:
             temperature (float): Returns the onboard **temperature** of the device, in degrees Celsius,

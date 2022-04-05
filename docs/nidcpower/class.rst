@@ -337,10 +337,7 @@ configure_aperture_time
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1152,10 +1149,7 @@ get_self_cal_last_temp
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
 
@@ -1926,10 +1920,7 @@ self_cal
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2056,10 +2047,7 @@ set_sequence
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2199,7 +2187,7 @@ active_advanced_sequence
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2238,7 +2226,7 @@ active_advanced_sequence_step
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2325,7 +2313,7 @@ aperture_time
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2367,7 +2355,7 @@ aperture_time_units
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2445,7 +2433,7 @@ autorange_aperture_time_mode
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2484,7 +2472,7 @@ autorange_behavior
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2562,7 +2550,7 @@ autorange_minimum_aperture_time_units
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2679,7 +2667,7 @@ autorange_threshold_mode
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2872,7 +2860,7 @@ current_compensation_frequency
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2913,7 +2901,7 @@ current_gain_bandwidth
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3365,7 +3353,7 @@ current_pole_zero_ratio
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3406,7 +3394,7 @@ dc_noise_rejection
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3448,7 +3436,7 @@ digital_edge_measure_trigger_input_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3489,7 +3477,7 @@ digital_edge_pulse_trigger_input_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3531,7 +3519,7 @@ digital_edge_sequence_advance_trigger_input_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic in
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3572,7 +3560,7 @@ digital_edge_shutdown_trigger_input_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3614,7 +3602,7 @@ digital_edge_source_trigger_input_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3656,7 +3644,7 @@ digital_edge_start_trigger_input_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3725,7 +3713,7 @@ exported_measure_trigger_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3766,7 +3754,7 @@ exported_pulse_trigger_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3808,7 +3796,7 @@ exported_sequence_advance_trigger_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3850,7 +3838,7 @@ exported_source_trigger_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3892,7 +3880,7 @@ exported_start_trigger_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4081,7 +4069,7 @@ interlock_input_open
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
@@ -4177,7 +4165,7 @@ measure_buffer_size
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4219,7 +4207,7 @@ measure_complete_event_delay
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4260,7 +4248,7 @@ measure_complete_event_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4301,7 +4289,7 @@ measure_complete_event_pulse_polarity
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4345,7 +4333,7 @@ measure_complete_event_pulse_width
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4510,7 +4498,7 @@ measure_trigger_type
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4633,7 +4621,7 @@ output_capacitance
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5349,7 +5337,7 @@ ovp_enabled
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5391,7 +5379,7 @@ ovp_limit
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5576,7 +5564,7 @@ pulse_bias_current_level
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5617,7 +5605,7 @@ pulse_bias_current_limit
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5792,7 +5780,7 @@ pulse_bias_delay
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5833,7 +5821,7 @@ pulse_bias_voltage_level
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5874,7 +5862,7 @@ pulse_bias_voltage_limit
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6049,7 +6037,7 @@ pulse_complete_event_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6089,7 +6077,7 @@ pulse_complete_event_pulse_polarity
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6131,7 +6119,7 @@ pulse_complete_event_pulse_width
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6172,7 +6160,7 @@ pulse_current_level
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6214,7 +6202,7 @@ pulse_current_level_range
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6255,7 +6243,7 @@ pulse_current_limit
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6431,7 +6419,7 @@ pulse_current_limit_range
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6472,7 +6460,7 @@ pulse_off_time
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6513,7 +6501,7 @@ pulse_on_time
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6553,7 +6541,7 @@ pulse_trigger_type
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6594,7 +6582,7 @@ pulse_voltage_level
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6636,7 +6624,7 @@ pulse_voltage_level_range
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6677,7 +6665,7 @@ pulse_voltage_limit
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6922,7 +6910,7 @@ ready_for_pulse_trigger_event_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6962,7 +6950,7 @@ ready_for_pulse_trigger_event_pulse_polarity
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7004,7 +6992,7 @@ ready_for_pulse_trigger_event_pulse_width
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7093,7 +7081,7 @@ reset_average_before_measurement
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7182,7 +7170,7 @@ self_calibration_persistence
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
@@ -7262,7 +7250,7 @@ sequence_advance_trigger_type
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7303,7 +7291,7 @@ sequence_engine_done_event_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7344,7 +7332,7 @@ sequence_engine_done_event_pulse_polarity
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7388,7 +7376,7 @@ sequence_engine_done_event_pulse_width
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7429,7 +7417,7 @@ sequence_iteration_complete_event_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7470,7 +7458,7 @@ sequence_iteration_complete_event_pulse_polarity
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7514,7 +7502,7 @@ sequence_iteration_complete_event_pulse_width
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic in
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7557,7 +7545,7 @@ sequence_loop_count
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7738,7 +7726,7 @@ shutdown_trigger_type
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7805,7 +7793,7 @@ source_complete_event_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7846,7 +7834,7 @@ source_complete_event_pulse_polarity
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7890,7 +7878,7 @@ source_complete_event_pulse_width
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8011,7 +7999,7 @@ source_trigger_type
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8152,7 +8140,7 @@ start_trigger_type
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8218,7 +8206,7 @@ transient_response
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8259,7 +8247,7 @@ voltage_compensation_frequency
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8300,7 +8288,7 @@ voltage_gain_bandwidth
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8721,7 +8709,7 @@ voltage_pole_zero_ratio
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported by all devices. For more information about supported properties, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
