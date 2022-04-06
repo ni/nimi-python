@@ -88,6 +88,40 @@ def test_self_cal(session):
     session.self_cal()
 
 
+def test_channels_rep_cap():
+    with nifgen.Session('', '', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as session:
+        session.func_amplitude = 0.5
+        assert session.channels[0:1].func_amplitude == 0.5
+
+        session.channels[0].func_amplitude = 1
+        assert session.channels[0].func_amplitude == 1
+        assert session.channels[1].func_amplitude == 0.5
+
+
+def test_markers_rep_cap(session):
+    assert '' == session.markers[0].marker_event_output_terminal
+
+    requested_terminal_name = '/Dev1/PXI_Trig0'
+    session.markers[0].marker_event_output_terminal = requested_terminal_name
+    assert requested_terminal_name == session.markers[0].marker_event_output_terminal
+
+
+def test_data_markers_rep_cap(session):
+    assert nifgen.DataMarkerEventLevelPolarity.HIGH == session.data_markers[0].data_marker_event_level_polarity
+
+    requested_polarity = nifgen.DataMarkerEventLevelPolarity.LOW
+    session.data_markers[0].data_marker_event_level_polarity = requested_polarity
+    assert requested_polarity == session.data_markers[0].data_marker_event_level_polarity
+
+
+def test_script_triggers_rep_cap(session):
+    assert '' == session.script_triggers[0].exported_script_trigger_output_terminal
+
+    requested_terminal_name = '/Dev1/PXI_Trig0'
+    session.script_triggers[0].exported_script_trigger_output_terminal = requested_terminal_name
+    assert requested_terminal_name == session.script_triggers[0].exported_script_trigger_output_terminal
+
+
 def test_standard_waveform(session):
     session.output_mode = nifgen.OutputMode.FUNC
     session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 2000000, 1.0, 0.0)

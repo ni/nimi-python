@@ -15,13 +15,13 @@ def test_no_device_family():
 
 
 def test_device_family_string_with_dashes():
-    with nimodinst.Session('NI-DMM') as session:
-        assert len(session) > 0, 'This test expects a DMM in the system (real or simulated).'
+    with nimodinst.Session('NI-SCOPE') as session:
+        assert len(session) > 0, 'This test expects a device supported by NI-SCOPE in the system (real or simulated).'
 
 
 def test_device_family_string_without_dashes():
-    with nimodinst.Session('nidmm') as session:
-        assert len(session) > 0, 'This test expects a DMM in the system (real or simulated).'
+    with nimodinst.Session('niscope') as session:
+        assert len(session) > 0, 'This test expects a device supported by NI-SCOPE in the system (real or simulated).'
 
 
 def test_int_attribute_error_on_non_existant_device():

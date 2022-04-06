@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 20.0.0d5
+# This file is generated from NI-FGEN API metadata version 21.5.0d106
 enums = {
     'AnalogPath': {
         'values': [
