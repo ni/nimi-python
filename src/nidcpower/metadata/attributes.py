@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0f353
+# This file is generated from NI-DCPower API metadata version 21.8.0f382
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -1637,6 +1637,193 @@ attributes = {
         ],
         'type': 'ViInt32'
     },
+    1150208: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the mode of operation for an instrument channel for instruments that support multiple modes.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'InstrumentMode',
+        'lv_property': 'LCR:Instrument Mode',
+        'name': 'INSTRUMENT_MODE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150209: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the type of test signal to apply to the DUT for LCR measurements.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'LCRStimulusFunction',
+        'lv_property': 'LCR:AC Stimulus:Function',
+        'name': 'LCR_STIMULUS_FUNCTION',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150210: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the frequency of the AC test signal applied to the DUT for LCR measurements.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:AC Stimulus:Frequency',
+        'name': 'LCR_FREQUENCY',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150211: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the amplitude, in V RMS, of the AC voltage test signal applied to the DUT for LCR measurements.\nThis property applies when the NIDCPOWER_ATTR_LCR_STIMULUS_FUNCTION property is set to NIDCPOWER_VAL_AC_VOLTAGE.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:AC Stimulus:Voltage Amplitude',
+        'name': 'LCR_VOLTAGE_AMPLITUDE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150212: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the amplitude, in amps RMS, of the AC current test signal applied to the DUT for LCR measurements.\nThis property applies when the NIDCPOWER_ATTR_LCR_STIMULUS_FUNCTION property is set to NIDCPOWER_VAL_AC_CURRENT.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:AC Stimulus:Current Amplitude',
+        'name': 'LCR_CURRENT_AMPLITUDE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150213: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies how to apply DC bias for LCR measurements.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'LCRDCBiasSource',
+        'lv_property': 'LCR:DC Bias:Source',
+        'name': 'LCR_DC_BIAS_SOURCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150214: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the DC bias voltage level, in volts, when the NIDCPOWER_ATTR_LCR_DC_BIAS_SOURCE property is set to NIDCPOWER_VAL_DC_BIAS_VOLTAGE.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:DC Bias:Voltage Level',
+        'name': 'LCR_DC_BIAS_VOLTAGE_LEVEL',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150215: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the DC bias current level, in amps, when the NIDCPOWER_ATTR_LCR_DC_BIAS_SOURCE property is set to NIDCPOWER_VAL_DC_BIAS_CURRENT.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:DC Bias:Current Level',
+        'name': 'LCR_DC_BIAS_CURRENT_LEVEL',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150217: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the impedance range the channel uses for LCR measurements.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Impedance Range:Impedance Range',
+        'name': 'LCR_IMPEDANCE_RANGE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150218: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSelects a general aperture time profile for LCR measurements. The actual duration of each profile depends on the frequency of the LCR test signal.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'LCRMeasurementTime',
+        'lv_property': 'LCR:Measurement Time',
+        'name': 'LCR_MEASUREMENT_TIME',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150220: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies whether to apply open LCR compensation data to LCR measurements.\nUse the NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE property to define where the open compensation data that is applied to LCR measurements comes from.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:Open:Enabled',
+        'name': 'LCR_OPEN_COMPENSATION_ENABLED',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViBoolean'
+    },
+    1150221: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies whether to apply short LCR compensation data to LCR measurements.\nUse the NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE property to define where the short compensation data that is applied to LCR measurements comes from.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:Short:Enabled',
+        'name': 'LCR_SHORT_COMPENSATION_ENABLED',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViBoolean'
+    },
+    1150222: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies whether to apply load LCR compensation data to LCR measurements.\nBoth the NIDCPOWER_ATTR_LCR_OPEN_COMPENSATION_ENABLED and NIDCPOWER_ATTR_LCR_SHORT_COMPENSATION_ENABLED properties must be set to **TRUE** in order to set this property to **TRUE**.\n\nUse the NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE property to define where the load compensation data that is applied to LCR measurements comes from.\n\nLoad compensation data are applied only for those specific frequencies you define with niDCPower_PerformLCRLoadCompensation;\nload compensation is not interpolated from the specific frequencies you define and applied to other frequencies.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:Load:Enabled',
+        'name': 'LCR_LOAD_COMPENSATION_ENABLED',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViBoolean'
+    },
+    1150223: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the source of the LCR compensation data NI-DCPower applies to LCR measurements.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'LCROpenShortLoadCompensationDataSource',
+        'lv_property': 'LCR:Compensation:LCR Open/Short/Load Compensation Data Source',
+        'name': 'LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
     1150235: {
         'access': 'read-write',
         'documentation': {
@@ -1838,6 +2025,125 @@ attributes = {
         ],
         'type': 'ViInt32'
     },
+    1150258: {
+        'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
+        'documentation': {
+            'description': '\nSpecifies the LCR measurement aperture time for a channel, in seconds, \nwhen the NIDCPOWER_ATTR_LCR_MEASUREMENT_TIME property is set to NIDCPOWER_VAL_MEASUREMENT_TIME_CUSTOM.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Custom Measurement Time',
+        'name': 'LCR_CUSTOM_MEASUREMENT_TIME',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+    },
+    1150261: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the conductance, in siemens, of the circuit used for open LCR compensation.\nThis property applies when NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE is set to NIDCPOWER_VAL_AS_DEFINED.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:Open:Conductance',
+        'name': 'LCR_OPEN_CONDUCTANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150262: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the susceptance, in siemens, of the circuit used for open LCR compensation.\nThis property applies when NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE is set to NIDCPOWER_VAL_AS_DEFINED.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:Open:Susceptance',
+        'name': 'LCR_OPEN_SUSCEPTANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150263: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the resistance, in ohms, of the circuit used for short LCR compensation.\nThis property applies when NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE is set to NIDCPOWER_VAL_AS_DEFINED.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:Short:Resistance',
+        'name': 'LCR_SHORT_RESISTANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150264: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the reactance, in ohms, of the circuit used for short LCR compensation.\nThis property applies when NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE is set to NIDCPOWER_VAL_AS_DEFINED.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:Short:Reactance',
+        'name': 'LCR_SHORT_REACTANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150268: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the resistance, in ohms, of the load used for load LCR compensation as measured by the instrument.\nThis property applies when NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE is set to NIDCPOWER_VAL_AS_DEFINED.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:Load:Measured Resistance',
+        'name': 'LCR_MEASURED_LOAD_RESISTANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150269: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the reactance, in ohms, of the load used for load LCR compensation as measured by the instrument.\nThis property applies when NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE is set to NIDCPOWER_VAL_AS_DEFINED.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:Load:Measured Reactance',
+        'name': 'LCR_MEASURED_LOAD_REACTANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150270: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the actual resistance, in ohms, of the load used for load LCR compensation.\nThis property applies when NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE is set to NIDCPOWER_VAL_AS_DEFINED.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:LCR Actual Load Resistance',
+        'name': 'LCR_ACTUAL_LOAD_RESISTANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150271: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the actual reactance, in ohms, of the load used for load LCR compensation.\nThis property applies when NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE is set to NIDCPOWER_VAL_AS_DEFINED.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:LCR Actual Load Reactance',
+        'name': 'LCR_ACTUAL_LOAD_REACTANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
     1150275: {
         'access': 'read-write',
         'documentation': {
@@ -1864,6 +2170,48 @@ attributes = {
             'channels'
         ],
         'type': 'ViString'
+    },
+    1150278: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies how to apply cable compensation data for instruments that support LCR functionality.\nSupported instruments use cable compensation for the following operations:\n\nSMU mode: to stabilize DC current sourcing in the two smallest current ranges.\nLCR mode: to compensate for the effects of cabling on LCR measurements.\n\nFor NI standard options, select the length of your NI cable to apply compensation data for a typical cable of that type.\nFor custom options, choose the source of the custom cable compensation data. You must then generate the custom cable compensation data.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'CableLength',
+        'lv_property': 'Device Specific:LCR:Cable Length',
+        'name': 'CABLE_LENGTH',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150290: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies whether the channel actively attempts to maintain a constant test voltage or current across the DUT for LCR measurements.\nThe use of voltage or current depends on the test signal you configure with the NIDCPOWER_ATTR_LCR_STIMULUS_FUNCTION property.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:AC Stimulus:Automatic Level Control',
+        'name': 'LCR_AUTOMATIC_LEVEL_CONTROL',
+        'python_type': 'bool',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150291: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies whether the channel actively maintains a constant DC bias voltage or current across the DUT for LCR measurements.\nTo use this property, you must configure a DC bias with the NIDCPOWER_ATTR_LCR_DC_BIAS_SOURCE property.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:DC Bias:Automatic Level Control',
+        'name': 'LCR_DC_BIAS_AUTOMATIC_LEVEL_CONTROL',
+        'python_type': 'bool',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
     },
     1150292: {
         'access': 'read-write',
@@ -1917,6 +2265,19 @@ attributes = {
         ],
         'type': 'ViReal64'
     },
+    1150299: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nDefines how to apply short custom cable compensation in LCR mode when NIDCPOWER_ATTR_CABLE_LENGTH property is set to NIDCPOWER_VAL_CUSTOM_ONBOARD_STORAGE or NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED.\n\nLCR custom cable compensation uses compensation data for both an open and short configuration.\nFor open custom cable compensation, you must supply your own data from a call to niDCPower_PerformLCROpenCustomCableCompensation.\nFor short custom cable compensation, you can supply your own data from a call to niDCPower_PerformLCRShortCustomCableCompensation or NI-DCPower can apply a default set of short compensation data.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:LCR Short Custom Cable Compensation Enabled',
+        'name': 'LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViBoolean'
+    },
     1150300: {
         'access': 'read-write',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
@@ -1931,6 +2292,110 @@ attributes = {
         ],
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+    },
+    1150302: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nDefines whether the channel is isolated.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'IsolationState',
+        'lv_property': 'Advanced:Isolation State',
+        'name': 'ISOLATION_STATE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150314: {
+        'access': 'read-write',
+        'enum': 'ApertureTimeAutoMode',
+        'lv_property': 'Measurement:Aperture Time Auto Mode',
+        'name': 'APERTURE_TIME_AUTO_MODE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150315: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nFor instruments in LCR mode, determines whether NI-DCPower automatically calculates and applies the source delay or applies a source delay you set manually.\n\nYou can return the source delay duration for either option by reading NIDCPOWER_ATTR_SOURCE_DELAY.\n\nWhen you use this property to manually set the source delay, it is possible to set source delays short enough to unbalance the bridge and affect measurement accuracy. LCR measurement functions report whether the bridge is unbalanced.\n\nDefault Value: NIDCPOWER_VAL_LCR_SOURCE_DELAY_MODE_AUTOMATIC\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'LCRSourceDelayMode',
+        'lv_property': 'LCR:Source Delay Mode',
+        'name': 'LCR_SOURCE_DELAY_MODE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150318: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the load resistance, in ohms and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Impedance Range:Advanced:Load Resistance',
+        'name': 'LCR_LOAD_RESISTANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150319: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the load inductance, in henrys and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Impedance Range:Advanced:Load Inductance',
+        'name': 'LCR_LOAD_INDUCTANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150320: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the load capacitance, in farads and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Impedance Range:Advanced:Load Capacitance',
+        'name': 'LCR_LOAD_CAPACITANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150321: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies how the impedance range for LCR measurements is determined.',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'LCRImpedanceRangeSource',
+        'lv_property': 'LCR:Impedance Range:Advanced:Impedance Range Source',
+        'name': 'LCR_IMPEDANCE_RANGE_SOURCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150322: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nBalances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.\n',
+            'note': '\nThis attribute is not supported by all devices. For more information about supported attributes, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'Measurement:Advanced:Autorange Maximum Delay After Range Change',
+        'name': 'AUTORANGE_MAXIMUM_DELAY_AFTER_RANGE_CHANGE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
     },
     1250001: {
         'access': 'read-write',

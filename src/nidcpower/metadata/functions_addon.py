@@ -2,6 +2,17 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
+    "ConfigureLCRCustomCableCompensation": {"codegen_method": "no"},
+    "FetchMultipleLCR": {"codegen_method": "no"},
+    "GetLCRCompensationLastDateAndTime": {"codegen_method": "no"},
+    "GetLCRCustomCableCompensationData": {"codegen_method": "no"},
+    "GetLastLCRCompensationLastDateAndTime": {"codegen_method": "no"},
+    "MeasureMultipleLCR": {"codegen_method": "no"},
+    "PerformLCRLoadCompensation": {"codegen_method": "no"},
+    "PerformLCROpenCompensation": {"codegen_method": "no"},
+    "PerformLCROpenCustomCableCompensation": {"codegen_method": "no"},
+    "PerformLCRShortCompensation": {"codegen_method": "no"},
+    "PerformLCRShortCustomCableCompensation": {"codegen_method": "no"}
 }
 
 functions_additional_create_advanced_sequence = {
