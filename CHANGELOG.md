@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
 * ### `nidcpower` (NI-DCPower)
     * #### Added
     * #### Changed
+        * Addressed [#1596](https://github.com/ni/nimi-python/issues/1596) by removing RLock replacements for session.py::_SessionBase::lock/unlock
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
