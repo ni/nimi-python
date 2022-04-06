@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
-      - name: Execute system tests
+      - name: execute system tests
         uses: ./.github/actions/linux
         with:
           module_name: ${{ matrix.module_name }}
