@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Allow functions with `codegen_method` set to "no" to have `method_name_for_documentation` defined
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
@@ -46,7 +47,7 @@ All notable changes to this project will be documented in this file.
     * #### Changed
     * #### Removed
 * ### `nifgen` (NI-FGEN)
-    * #### Added 
+    * #### Added
         * `data_markers` repeated capability support - [#1668](https://github.com/ni/nimi-python/issues/1668)
     * #### Changed
         * Addressed [#1627](https://github.com/ni/nimi-python/issues/1627) for attributes supporting the following repeated capabilities
