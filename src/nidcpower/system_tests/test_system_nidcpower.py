@@ -725,6 +725,7 @@ def test_wait_for_event_repeated_capabilities(session, channels):
     with channels_session.initiate():
         channels_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE)
 
+
 def test_no_underlying_rlock(session):
     session.lock()
     assert not hasattr(session, '_pylock')
