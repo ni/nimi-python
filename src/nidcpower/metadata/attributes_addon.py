@@ -2,6 +2,8 @@
 # Any changes to the API should be made here. attributes.py is code generated
 
 attributes_override_metadata = {
+    # TODO(olsl21): Temporarily disable the new attributes (#1715), they will be re-enabled in
+    #  subsequent smaller PRs
     1150208: {"codegen_method": "no"},
     1150209: {"codegen_method": "no"},
     1150210: {"codegen_method": "no"},

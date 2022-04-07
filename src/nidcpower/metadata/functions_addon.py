@@ -2,6 +2,8 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
+    # TODO(olsl21): Temporarily disable the new functions (#1715), they will be re-enabled in
+    #  subsequent smaller PRs
     "ConfigureLCRCustomCableCompensation": {"codegen_method": "no"},
     "FetchMultipleLCR": {"codegen_method": "no"},
     "GetLCRCompensationLastDateAndTime": {"codegen_method": "no"},
