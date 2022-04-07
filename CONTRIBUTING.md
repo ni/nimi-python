@@ -81,7 +81,7 @@ System tests exercise the Python bindings. After you have successfully built
 **[nimi-python](https://github.com/ni/nimi-python)**, install the locally built PyPI
 packages using PyPI. For example:
 
-    python3 -m pip install -U generated/nidmm/dist/nidmm-0.1.0.dev4-py2.py3-none-any.whl
+    python3 -m pip install -U generated/nidmm/dist/nidmm-0.1.0.dev4-py3-none-any.whl
 
 You can install all locally built packages in one fell swoop using the following command.
 This will work on Unix-based systems including Windows Subsystem for Linux.
