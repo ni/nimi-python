@@ -63,7 +63,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'NI Modular Instruments Python API'
-copyright = '2017-${current_year}, Nationalz Instruments Corporation'
+copyright = '2017-${current_year}, National Instruments Corporation'
 author = 'NI'
 
 # The version info for the project you're documenting, acts as replacement for
