@@ -112,9 +112,10 @@ begin contributing to to the project.
       [system tests](src/nidmm/system_tests).
 1. Make your change.
 1. Verify all tests, including the new ones, pass.
-1. Update CHANGELOG.md if applicable.
+1. Update CHANGELOG.md for customer-visible changes.
     * If the change applies to all generated driver bindings, put the change into the **ALL** section
     * If it only applies to a single driver binding, put the change in the section associated with that driver
+    * DO NOT MENTION: Internal-only changes like refactors or test improvements.
 1. On GitHub, send a New pull request to the main repository's master branch. GitHub
    pull requests are the expected method of code collaboration on this project.
 
