@@ -2,7 +2,7 @@
 # This file is generated from NI-Digital Pattern Driver API metadata version 21.3.0d40
 attributes = {
     1050002: {
-        'access': 'read-write',
+        'access': 'read only',
         'documentation': {
             'description': 'Checks the range and validates parameter and attribute values you pass to NI-Digital Pattern Driver functions. Ranges are always checked, regardless of the attribute setting.\n'
         },
