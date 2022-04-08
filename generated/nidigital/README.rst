@@ -168,7 +168,7 @@ source current, and measure both voltage and current using the PPMU on selected 
         # Disconnect all channels using programmable onboard switching
         session.channels[channels].selected_function = nidigital.SelectedFunction.DISCONNECT
 
-Additional examples for NI-Digital Pattern Driver are located in src/nidigital/examples/ directory `on GitHub <https://github.com/ni/nimi-python/tree/master/src/nidigital/examples>`_.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nidigital/examples>`_
 
 .. _support-section:
 

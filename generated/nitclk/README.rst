@@ -134,7 +134,7 @@ The following is a basic example of using the **nitclk** module
 
     import nitclk
 
-Additional examples for NI-TClk are located in src/nitclk/examples/ directory `on GitHub <https://github.com/ni/nimi-python/tree/master/src/nitclk/examples>`_.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nitclk/examples>`_
 
 .. _support-section:
 
