@@ -31,5 +31,5 @@ The following is a basic example of using the **nidcpower** module to open a ses
                     for i in range(len(measurements)):
                         print(row_format.format(channel_name, i, measurements[i].voltage, measurements[i].current, measurements[i].in_compliance))
 
-Additional examples for NI-DCPower are located in src/nidcpower/examples/ directory.
+Additional examples for NI-DCPower are located in src/nidcpower/examples/ directory `on GitHub <https://github.com/ni/nimi-python/tree/master/src/nidcpower/examples>`_.
 
