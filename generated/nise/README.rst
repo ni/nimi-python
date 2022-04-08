@@ -136,7 +136,7 @@ The following is a basic example of using the **nise** module to open a session 
     with nise.Session('SwitchExecutiveExample') as session:
         session.connect('DIOToUUT')
 
-Additional examples for NI Switch Executive are located in src/nise/examples/ directory.
+Additional examples for NI Switch Executive are located in src/nise/examples/ directory `on GitHub <https://github.com/ni/nimi-python/tree/master/src/nise/examples>`_.
 
 .. _support-section:
 
