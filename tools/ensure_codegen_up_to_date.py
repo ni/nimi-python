@@ -32,7 +32,7 @@ def create_codegen_files():
     if os.system("tox -e codegen") != 0:
         sys.exit("Error: Unable to generate code using \"tox -e codegen\"")
 
-def check_file_status():
+def check_no_dirty_files():
     '''
     Checks if there are any modified files
     '''
@@ -49,4 +49,4 @@ if __name__ == "__main__":
     clean_codegen_files()
     create_codegen_files()
 
-    check_file_status()
+    check_no_dirty_files()
