@@ -10,5 +10,5 @@ The following is a basic example of using the **nidmm** module to open a session
         session.configureMeasurementDigits(nidmm.Function.DC_VOLTS, 10, 5.5)
         print("Measurement: " + str(session.read()))
 
-Additional examples for NI-DMM are located in src/nidmm/examples/ directory `on GitHub <https://github.com/ni/nimi-python/tree/master/src/nidmm/examples>`_.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nidmm/examples>`_
 

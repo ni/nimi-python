@@ -13,5 +13,5 @@ The following is a basic example of using the **nifgen** module to open a sessio
         with session.initiate():
             time.sleep(5)
 
-Additional examples for NI-FGEN are located in src/nifgen/examples/ directory `on GitHub <https://github.com/ni/nimi-python/tree/master/src/nifgen/examples>`_.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nifgen/examples>`_
 
