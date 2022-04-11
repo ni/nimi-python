@@ -50,7 +50,7 @@ if __name__ == "__main__":
     Main
     """
     configure_git_credentials()
-    configure_git_line_endings
+    configure_git_line_endings()
 
     clean_codegen_files()
     create_codegen_files()
