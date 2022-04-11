@@ -37,7 +37,8 @@ def check_no_dirty_files():
     Checks if there are any modified files
     '''
     if int(subprocess.check_output("git status -s -uno | wc -l", shell=True).decode().strip("b'\\n'")) != 0:
-        sys.exit("Run codegen and include the generated files in the PR")
+        list_of_changed_files = subprocess.check_output("git status -s -uno", shell=True).decode()
+        sys.exit(f"The following code generated files do not match what is commited to Git. Run codegen and include the generated files in the PR.\n{list_of_changed_files} ")
     print("All changes to code generation are committed to repository")
 
 if __name__ == "__main__":
