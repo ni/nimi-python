@@ -18,6 +18,10 @@ def configure_git_credentials():
     if os.system('git config user.name "dummy"') != 0:
         sys.exit("Error: Unable to configure \"user name\" using git")
 
+def configure_git_line_endings():
+    if os.system('git config --global core.autocrlf false') != 0:
+        sys.exit("Error: Unable to turn off line ending conversion")
+
 def clean_codegen_files():
     """
     Before code generation clean the existing codegen files
@@ -46,6 +50,7 @@ if __name__ == "__main__":
     Main
     """
     configure_git_credentials()
+    configure_git_line_endings
 
     clean_codegen_files()
     create_codegen_files()
