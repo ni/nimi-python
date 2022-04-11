@@ -297,6 +297,9 @@ def _fix_type(parameter):
     parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' []', '[]').replace(' ', '_')
 
 
+# TODO(olsl21): Metadata is inconsistent with regards to how structs are treated.
+#  This is a hack to workaround that inconsistency. The real root cause is tracked
+#  by internal NI bug 1918101. Once that is addressed, this method can be removed.
 def _fix_custom_type(parameter, config):
     '''Add "struct_" prefix to custom type if necessary to match its ctypes_type.'''
     parameter_type_with_struct_prefix = 'struct_' + parameter['type']
