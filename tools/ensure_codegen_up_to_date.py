@@ -42,6 +42,7 @@ def check_no_dirty_files():
     '''
     if int(subprocess.check_output("git status -s -uno | wc -l", shell=True).decode().strip("b'\\n'")) != 0:
         list_of_changed_files = subprocess.check_output("git status -s -uno", shell=True).decode()
+        print(subprocess.check_output("git diff").decode())
         sys.exit(f"The following code generated files do not match what is commited to Git. Run codegen and include the generated files in the PR.\n{list_of_changed_files} ")
     print("All changes to code generation are committed to repository")
 
