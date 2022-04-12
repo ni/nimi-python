@@ -41,13 +41,9 @@ def convert_all_files_to_unix_line_endings():
 
     """Changes the line endings of all the files in the repo to LF"""
 
-    current_dir = os.getcwd()
-    files = os.path.join(current_dir, '**')
-    nimi_python_files = glob.glob(files, recursive=True)
-    print(nimi_python_files)
+    nimi_python_files = glob.glob(os.path.join(os.getcwd(), '**'), recursive=True)
     for file_name in nimi_python_files:
-        if subprocess.run(['dos2unix', file_name], shell=False) != 0:
-            sys.exit("Error: The file {file_name} could not be converted to Unix endings.")
+        subprocess.run(['dos2unix', file_name], shell=False) != 0
 
 
 def check_no_dirty_files():
