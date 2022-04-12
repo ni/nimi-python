@@ -48,12 +48,15 @@ def convert_all_files_to_unix_line_endings():
 
 def check_no_dirty_files():
 
-    '''Checks if there are any modified files'''
+    '''Checks if there are any modified files, outputting a warning if only line endings are different'''
 
     if int(subprocess.check_output("git status -s -uno | wc -l", shell=True).decode().strip("b'\\n'")) != 0:
         list_of_changed_files = subprocess.check_output("git status -s -uno", shell=True).decode()
         file_diffs = subprocess.check_output("git diff", shell=True).decode()
-        sys.exit(f"The following code generated files do not match what is commited to Git. Run codegen and include the generated files in the PR.\n{list_of_changed_files}\n File diffs: \n{file_diffs} ")
+        if not file_diffs:
+            print(f"Warning: The following files may have modified line endings.\n{list_of_changed_files}")
+        else:
+            sys.exit(f"The following code generated files do not match what is commited to Git. Run codegen and include the generated files in the PR.\n{list_of_changed_files}\n File diffs: \n{file_diffs} ")
     print("All changes to code generation are committed to repository")
 
 
