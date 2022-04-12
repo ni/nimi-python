@@ -43,7 +43,7 @@ def convert_all_files_to_unix_line_endings():
 
     nimi_python_files = glob.glob(os.path.join(os.getcwd(), '**'), recursive=True)
     for file_name in nimi_python_files:
-        subprocess.call(['dos2unix', file_name], shell=False)
+        subprocess.call(["dos2unix", file_name], shell=True)
 
 
 def check_no_dirty_files():
