@@ -26,7 +26,7 @@ following installed:
 * [Python](https://www.python.org/downloads/)
     - If you're on Windows 10 (not [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about))
         - Install the 64-bit Python version that is needed by `build_test` environment in [tox.ini](https://github.com/ni/nimi-python/blob/e13087eb67e2399de2dfa83fd504f8ebd0e0e263/tox.ini#L10)
-        - [Ensure](https://packaging.python.org/en/latest/tutorials/installing-packages/#ensure-you-can-run-pip-from-the-command-line) pip support is installed 
+        - [Ensure](https://packaging.python.org/en/latest/tutorials/installing-packages/#ensure-you-can-run-pip-from-the-command-line) pip support is installed. 
     - Add ``Python install path`` and ``python install path``\Scripts to Windows path
     - Copy ``Python install path``\python.exe to ``python install path``\python3.exe
 
