@@ -37,15 +37,6 @@ def create_codegen_files():
         sys.exit("Error: Unable to generate code using \"tox -e codegen\"")
 
 
-def convert_all_files_to_unix_line_endings():
-
-    """Changes the line endings of all the files in the repo to LF"""
-
-    nimi_python_files = glob.glob(os.path.join(os.getcwd(), '**'), recursive=True)
-    for file_name in nimi_python_files:
-        subprocess.call(["dos2unix", file_name], shell=True)
-
-
 def check_no_dirty_files():
 
     '''Checks if there are any modified files, outputting a warning if only line endings are different'''
@@ -69,5 +60,4 @@ if __name__ == "__main__":
     clean_codegen_files()
     create_codegen_files()
 
-    convert_all_files_to_unix_line_endings()
     check_no_dirty_files()
