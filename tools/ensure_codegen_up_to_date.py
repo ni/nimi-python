@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 
-def configure_git_credentials():
+def _configure_git_credentials():
 
     """Configures git user name and email with dummy name and email"""
 
@@ -21,7 +21,7 @@ def configure_git_credentials():
         sys.exit("Error: Unable to configure \"user name\" using git")
 
 
-def clean_codegen_files():
+def _clean_codegen_files():
 
     """Before code generation clean the existing codegen files"""
 
@@ -29,7 +29,7 @@ def clean_codegen_files():
         sys.exit("Error: Unable to clean the repo using \"tox -e clean\"")
 
 
-def create_codegen_files():
+def _create_codegen_files():
 
     """create codegen files"""
 
@@ -37,7 +37,7 @@ def create_codegen_files():
         sys.exit("Error: Unable to generate code using \"tox -e codegen\"")
 
 
-def check_no_dirty_files():
+def _check_no_dirty_files():
 
     '''Checks if there are any modified files, outputting a warning if only line endings are different'''
 
@@ -55,9 +55,9 @@ if __name__ == "__main__":
     """
     Main
     """
-    configure_git_credentials()
+    _configure_git_credentials()
 
-    clean_codegen_files()
-    create_codegen_files()
+    _clean_codegen_files()
+    _create_codegen_files()
 
-    check_no_dirty_files()
+    _check_no_dirty_files()
