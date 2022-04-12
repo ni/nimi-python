@@ -11,7 +11,7 @@ on:
       - .gitattributes
       - LICENSE
       - VERSION
-    types: [review_requested, ready_for_review, synchronize]
+    types: [review_requested, synchronize]
 
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
