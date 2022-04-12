@@ -13,6 +13,8 @@ multiple_sessions = [SESSION_NUM_FOR_TEST, SESSION_NUM_FOR_TEST * 10, SESSION_NU
 multiple_session_references = [nitclk.SessionReference(x) for x in multiple_sessions]
 
 
+
+
 class NitclkSupportingDriverSession(object):
     '''Session objects for drivers that support NI-TClk are expected to have a property of type nitclk.SessionReference called tclk
 
