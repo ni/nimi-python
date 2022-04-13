@@ -24,7 +24,7 @@ In order to have the ability to build and run the tests you will need a few thin
 -  Install and enable [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
 - Install GNU Make: ``sudo apt-get install make``
 - Install zip: ``sudo apt-get install zip``
-- Install [Python 3.9](https://www.python.org/downloads/)
+- Install 64-bit [Python 3.9](https://www.python.org/downloads/)
     - Add ``Python install path`` and ``python install path``\Scripts to Windows path
     - Copy ``Python install path``\python.exe to ``python install path``\python3.exe
 
@@ -77,7 +77,11 @@ But it is recommended that during development you run the system tests locally, 
 
 In order to run the **[nimi-python](https://github.com/ni/nimi-python)** system tests locally:
 
+<<<<<<< HEAD
 ### Install the corresponding driver runtimes.
+=======
+    python3 -m pip install -U generated/nidmm/dist/nidmm-0.1.0.dev4-py3-none-any.whl
+>>>>>>> master
 
 Download and install the latest versions for the supported driver runtimes from [ni.com](http://www.ni.com/downloads/ni-drivers/):
 * NI-DCPower
