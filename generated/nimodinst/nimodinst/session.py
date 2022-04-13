@@ -13,27 +13,25 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 class AttributeViInt32(object):
+
     def __init__(self, owner, attribute_id, index):
         self._owner = owner
         self._index = index
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        return self._owner._get_installed_device_attribute_vi_int32(
-            self._index, self._attribute_id
-        )
+        return self._owner._get_installed_device_attribute_vi_int32(self._index, self._attribute_id)
 
 
 class AttributeViString(object):
+
     def __init__(self, owner, attribute_id, index):
         self._owner = owner
         self._index = index
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        return self._owner._get_installed_device_attribute_vi_string(
-            self._index, self._attribute_id
-        )
+        return self._owner._get_installed_device_attribute_vi_string(self._index, self._attribute_id)
 
 
 class _Device(object):
@@ -44,81 +42,62 @@ class _Device(object):
     def __init__(self, owner, index):
         self._index = index
         self.bus_number = AttributeViInt32(owner, 12, index=index)
-        """
+        '''
         The bus on which the device has been enumerated.
-        """
+        '''
         self.chassis_number = AttributeViInt32(owner, 11, index=index)
-        """
+        '''
         The number of the chassis in which the device is installed. This property can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
-        """
+        '''
         self.device_model = AttributeViString(owner, 1, index=index)
-        """
+        '''
         The model of the device (for example, NI PXI-5122)
-        """
+        '''
         self.device_name = AttributeViString(owner, 0, index=index)
-        """
+        '''
         The name of the device, which can be used to open an instrument driver session for that device
-        """
+        '''
         self.max_pciexpress_link_width = AttributeViInt32(owner, 18, index=index)
-        """
+        '''
         **MAX_PCIEXPRESS_LINK_WIDTH**
-        """
+        '''
         self.pciexpress_link_width = AttributeViInt32(owner, 17, index=index)
-        """
+        '''
         **PCIEXPRESS_LINK_WIDTH**
-        """
+        '''
         self.serial_number = AttributeViString(owner, 2, index=index)
-        """
+        '''
         The serial number of the device
-        """
+        '''
         self.slot_number = AttributeViInt32(owner, 10, index=index)
-        """
+        '''
         The slot (for example, in a PXI chassis) in which the device is installed. This property can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
-        """
+        '''
         self.socket_number = AttributeViInt32(owner, 13, index=index)
-        """
+        '''
         The socket number on which the device has been enumerated
-        """
-        self._param_list = "owner=" + pp.pformat(owner) + ", index=" + pp.pformat(index)
+        '''
+        self._param_list = 'owner=' + pp.pformat(owner) + ', index=' + pp.pformat(index)
         self._is_frozen = True
 
     def __repr__(self):
-        return "{0}.{1}({2})".format(
-            "nimodinst", self.__class__.__name__, self._param_list
-        )
+        return '{0}.{1}({2})'.format('nimodinst', self.__class__.__name__, self._param_list)
 
     def __str__(self):
-        ret_str = self.__repr__() + ":\n"
-        ret_str += "    bus_number = " + pp.pformat(self.bus_number) + "\n"
-        ret_str += "    chassis_number = " + pp.pformat(self.chassis_number) + "\n"
-        ret_str += "    device_model = " + pp.pformat(self.device_model) + "\n"
-        ret_str += "    device_name = " + pp.pformat(self.device_name) + "\n"
-        ret_str += (
-            "    max_pciexpress_link_width = "
-            + pp.pformat(self.max_pciexpress_link_width)
-            + "\n"
-        )
-        ret_str += (
-            "    pciexpress_link_width = "
-            + pp.pformat(self.pciexpress_link_width)
-            + "\n"
-        )
-        ret_str += "    serial_number = " + pp.pformat(self.serial_number) + "\n"
-        ret_str += "    slot_number = " + pp.pformat(self.slot_number) + "\n"
-        ret_str += "    socket_number = " + pp.pformat(self.socket_number) + "\n"
+        ret_str = self.__repr__() + ':\n'
+        ret_str += '    bus_number = ' + pp.pformat(self.bus_number) + '\n'
+        ret_str += '    chassis_number = ' + pp.pformat(self.chassis_number) + '\n'
+        ret_str += '    device_model = ' + pp.pformat(self.device_model) + '\n'
+        ret_str += '    device_name = ' + pp.pformat(self.device_name) + '\n'
+        ret_str += '    max_pciexpress_link_width = ' + pp.pformat(self.max_pciexpress_link_width) + '\n'
+        ret_str += '    pciexpress_link_width = ' + pp.pformat(self.pciexpress_link_width) + '\n'
+        ret_str += '    serial_number = ' + pp.pformat(self.serial_number) + '\n'
+        ret_str += '    slot_number = ' + pp.pformat(self.slot_number) + '\n'
+        ret_str += '    socket_number = ' + pp.pformat(self.socket_number) + '\n'
         return ret_str
 
     def __getattribute__(self, name):
-        if name in [
-            "_is_frozen",
-            "index",
-            "_param_list",
-            "__class__",
-            "__name__",
-            "__repr__",
-            "__str__",
-            "__setattr__",
-        ]:
+        if name in ['_is_frozen', 'index', '_param_list', '__class__', '__name__', '__repr__', '__str__', '__setattr__', ]:
             return object.__getattribute__(self, name)
         else:
             return object.__getattribute__(self, name).__getitem__(None)
@@ -134,7 +113,7 @@ class _DeviceIterable(object):
         self._current_index = 0
         self._owner = owner
         self._count = count
-        self._param_list = "owner=" + pp.pformat(owner) + ", count=" + pp.pformat(count)
+        self._param_list = 'owner=' + pp.pformat(owner) + ', count=' + pp.pformat(count)
         self._is_frozen = True
 
     def _get_next(self):
@@ -152,18 +131,16 @@ class _DeviceIterable(object):
         return self._get_next()
 
     def __repr__(self):
-        return "{0}.{1}({2})".format(
-            "nimodinst", self.__class__.__name__, self._param_list
-        )
+        return '{0}.{1}({2})'.format('nimodinst', self.__class__.__name__, self._param_list)
 
     def __str__(self):
-        ret_str = self.__repr__() + ":\n"
-        ret_str += "    current index = {0}".format(self._current_index)
+        ret_str = self.__repr__() + ':\n'
+        ret_str += '    current index = {0}'.format(self._current_index)
         return ret_str
 
 
 class Session(object):
-    """A NI-ModInst session to get device information"""
+    '''A NI-ModInst session to get device information'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -172,7 +149,7 @@ class Session(object):
         self._handle = 0
         self._item_count = 0
         self._current_item = 0
-        self._encoding = "windows-1251"
+        self._encoding = 'windows-1251'
         self._library = _library_singleton.get()
         self._handle, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
@@ -184,14 +161,12 @@ class Session(object):
         self._is_frozen = True
 
     def __repr__(self):
-        return "{0}.{1}({2})".format(
-            "nimodinst", self.__class__.__name__, self._param_list
-        )
+        return '{0}.{1}({2})'.format('nimodinst', self.__class__.__name__, self._param_list)
 
     def __str__(self):
-        ret_str = self.__repr__() + ":\n"
+        ret_str = self.__repr__() + ':\n'
         for i in range(self._item_count):
-            ret_str += str(_Device(self, i)) + "\n"
+            ret_str += str(_Device(self, i)) + '\n'
         return ret_str
 
     def __setattr__(self, key, value):
@@ -206,29 +181,23 @@ class Session(object):
         self.close()
 
     def _get_error_description(self, error_code):
-        """_get_error_description
+        '''_get_error_description
 
         Returns the error description.
-        """
+        '''
         # We hand-maintain the code that calls into self._library rather than leverage code-generation
         # because niModInst_GetExtendedErrorInfo() does not properly do the IVI-dance.
         # See https://github.com/ni/nimi-python/issues/166
         error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
         error_info_ctype = None  # case C050
-        error_code = self._library.niModInst_GetExtendedErrorInfo(
-            error_info_buffer_size_ctype, error_info_ctype
-        )
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         if error_code <= 0:
             return "Failed to retrieve error description."
         error_info_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        error_info_ctype = (
-            _visatype.ViChar * error_info_buffer_size_ctype.value
-        )()  # case C060
+        error_info_ctype = (_visatype.ViChar * error_info_buffer_size_ctype.value)()  # case C060
         # Note we don't look at the return value. This is intentional as niModInst returns the
         # original error code rather than 0 (VI_SUCCESS).
-        self._library.niModInst_GetExtendedErrorInfo(
-            error_info_buffer_size_ctype, error_info_ctype
-        )
+        self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         return error_info_ctype.value.decode("ascii")
 
     # Iterator functions
@@ -246,24 +215,21 @@ class Session(object):
             raise
         self._handle = 0
 
-    """ These are code-generated """
-
+    ''' These are code-generated '''
     def _close_installed_devices_session(self):
-        r"""_close_installed_devices_session
+        r'''_close_installed_devices_session
 
         Cleans up the NI-ModInst session created by a call to
         _open_installed_devices_session. Call this method when you are
         finished using the session handle and do not use this handle again.
-        """
+        '''
         handle_ctype = _visatype.ViSession(self._handle)  # case S110
         error_code = self._library.niModInst_CloseInstalledDevicesSession(handle_ctype)
-        errors.handle_error(
-            self, error_code, ignore_warnings=False, is_error_handling=False
-        )
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _get_extended_error_info(self):
-        r"""_get_extended_error_info
+        r'''_get_extended_error_info
 
         Returns detailed information about the last error that occurred in the
         current thread during a call to one of the NI-ModInst methods. When
@@ -283,29 +249,19 @@ class Session(object):
         Returns:
             error_info (str): The character buffer into which the error information string is copied.
 
-        """
+        '''
         error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
         error_info_ctype = None  # case C050
-        error_code = self._library.niModInst_GetExtendedErrorInfo(
-            error_info_buffer_size_ctype, error_info_ctype
-        )
-        errors.handle_error(
-            self, error_code, ignore_warnings=True, is_error_handling=True
-        )
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         error_info_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        error_info_ctype = (
-            _visatype.ViChar * error_info_buffer_size_ctype.value
-        )()  # case C060
-        error_code = self._library.niModInst_GetExtendedErrorInfo(
-            error_info_buffer_size_ctype, error_info_ctype
-        )
-        errors.handle_error(
-            self, error_code, ignore_warnings=False, is_error_handling=True
-        )
+        error_info_ctype = (_visatype.ViChar * error_info_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode(self._encoding)
 
     def _get_installed_device_attribute_vi_int32(self, index, attribute_id):
-        r"""_get_installed_device_attribute_vi_int32
+        r'''_get_installed_device_attribute_vi_int32
 
         Returns an integer property specified by the attributeID parameter for
         a device specified by the handle and index parameters. The handle
@@ -338,26 +294,17 @@ class Session(object):
             attribute_value (int): A pointer to a signed 32-bit integer variable that receives the value of
                 the requested property.
 
-        """
+        '''
         handle_ctype = _visatype.ViSession(self._handle)  # case S110
         index_ctype = _visatype.ViInt32(index)  # case S150
         attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(
-            handle_ctype,
-            index_ctype,
-            attribute_id_ctype,
-            None
-            if attribute_value_ctype is None
-            else (ctypes.pointer(attribute_value_ctype)),
-        )
-        errors.handle_error(
-            self, error_code, ignore_warnings=False, is_error_handling=False
-        )
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(handle_ctype, index_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
     def _get_installed_device_attribute_vi_string(self, index, attribute_id):
-        r"""_get_installed_device_attribute_vi_string
+        r'''_get_installed_device_attribute_vi_string
 
         Returns a string property specified by the attributeID parameter for a
         device specified by the handle and index parameters. The handle
@@ -389,40 +336,22 @@ class Session(object):
         Returns:
             attribute_value (str): The character buffer into which the property value string is copied.
 
-        """
+        '''
         handle_ctype = _visatype.ViSession(self._handle)  # case S110
         index_ctype = _visatype.ViInt32(index)  # case S150
         attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
         attribute_value_buffer_size_ctype = _visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case C050
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(
-            handle_ctype,
-            index_ctype,
-            attribute_id_ctype,
-            attribute_value_buffer_size_ctype,
-            attribute_value_ctype,
-        )
-        errors.handle_error(
-            self, error_code, ignore_warnings=True, is_error_handling=False
-        )
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         attribute_value_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        attribute_value_ctype = (
-            _visatype.ViChar * attribute_value_buffer_size_ctype.value
-        )()  # case C060
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(
-            handle_ctype,
-            index_ctype,
-            attribute_id_ctype,
-            attribute_value_buffer_size_ctype,
-            attribute_value_ctype,
-        )
-        errors.handle_error(
-            self, error_code, ignore_warnings=False, is_error_handling=False
-        )
+        attribute_value_ctype = (_visatype.ViChar * attribute_value_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
     def _open_installed_devices_session(self, driver):
-        r"""_open_installed_devices_session
+        r'''_open_installed_devices_session
 
         Creates a handle to a list of installed devices supported by the
         specified driver. Call this method and pass in the name of a National
@@ -456,20 +385,12 @@ class Session(object):
                 found in the system that are supported by the driver specified in the
                 driver parameter.
 
-        """
-        driver_ctype = ctypes.create_string_buffer(
-            driver.encode(self._encoding)
-        )  # case C020
+        '''
+        driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case C020
         handle_ctype = _visatype.ViSession()  # case S220
         device_count_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niModInst_OpenInstalledDevicesSession(
-            driver_ctype,
-            None if handle_ctype is None else (ctypes.pointer(handle_ctype)),
-            None
-            if device_count_ctype is None
-            else (ctypes.pointer(device_count_ctype)),
-        )
-        errors.handle_error(
-            self, error_code, ignore_warnings=False, is_error_handling=False
-        )
+        error_code = self._library.niModInst_OpenInstalledDevicesSession(driver_ctype, None if handle_ctype is None else (ctypes.pointer(handle_ctype)), None if device_count_ctype is None else (ctypes.pointer(device_count_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(handle_ctype.value), int(device_count_ctype.value)
+
+

@@ -2,9 +2,9 @@
 import ctypes
 
 
-"""Definitions of the VISA types used by the C API of the driver runtime.
+'''Definitions of the VISA types used by the C API of the driver runtime.
 These are aliased directly to ctypes types so can be used directly to call into the library.
-"""
+'''
 
 
 ViChar = ctypes.c_char
@@ -26,3 +26,4 @@ ViSession = ViUInt32
 ViAttr = ViUInt32
 ViConstString = ViString
 ViRsrc = ViString
+

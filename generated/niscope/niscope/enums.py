@@ -12,139 +12,139 @@ class AcquisitionStatus(Enum):
 
 class AcquisitionType(Enum):
     NORMAL = 0
-    r"""
+    r'''
     Sets the digitizer to normal resolution mode. The digitizer can use real-time sampling or equivalent-time sampling.
-    """
+    '''
     FLEXRES = 1001
-    r"""
+    r'''
     Sets the digitizer to flexible resolution mode if supported.  The digitizer uses different hardware configurations to change the resolution depending on the sampling rate used.
-    """
+    '''
     DDC = 1002
-    r"""
+    r'''
     Sets the digitizer to DDC mode on the NI 5620/5621.
-    """
+    '''
 
 
 class ArrayMeasurement(Enum):
     NO_MEASUREMENT = 4000
-    r"""
+    r'''
     None
-    """
+    '''
     LAST_ACQ_HISTOGRAM = 4001
-    r"""
+    r'''
     Last Acquisition Histogram
-    """
+    '''
     FFT_PHASE_SPECTRUM = 4002
-    r"""
+    r'''
     FFT Phase Spectrum
-    """
+    '''
     FFT_AMP_SPECTRUM_VOLTS_RMS = 4003
-    r"""
+    r'''
     FFT Amp. Spectrum (Volts RMS)
-    """
+    '''
     MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004
-    r"""
+    r'''
     Multi Acquisition Voltage Histogram
-    """
+    '''
     MULTI_ACQ_TIME_HISTOGRAM = 4005
-    r"""
+    r'''
     Multi Acquisition Time Histogram
-    """
+    '''
     ARRAY_INTEGRAL = 4006
-    r"""
+    r'''
     Array Integral
-    """
+    '''
     DERIVATIVE = 4007
-    r"""
+    r'''
     Derivative
-    """
+    '''
     INVERSE = 4008
-    r"""
+    r'''
     Inverse
-    """
+    '''
     HANNING_WINDOW = 4009
-    r"""
+    r'''
     Hanning Window
-    """
+    '''
     FLAT_TOP_WINDOW = 4010
-    r"""
+    r'''
     Flat Top Window
-    """
+    '''
     POLYNOMIAL_INTERPOLATION = 4011
-    r"""
+    r'''
     Polynomial Interpolation
-    """
+    '''
     MULTIPLY_CHANNELS = 4012
-    r"""
+    r'''
     Multiply Channels
-    """
+    '''
     ADD_CHANNELS = 4013
-    r"""
+    r'''
     Add Channels
-    """
+    '''
     SUBTRACT_CHANNELS = 4014
-    r"""
+    r'''
     Subtract Channels
-    """
+    '''
     DIVIDE_CHANNELS = 4015
-    r"""
+    r'''
     Divide Channels
-    """
+    '''
     MULTI_ACQ_AVERAGE = 4016
-    r"""
+    r'''
     Multi Acquisition Average
-    """
+    '''
     BUTTERWORTH_FILTER = 4017
-    r"""
+    r'''
     Butterworth IIR Filter
-    """
+    '''
     CHEBYSHEV_FILTER = 4018
-    r"""
+    r'''
     Chebyshev IIR Filter
-    """
+    '''
     FFT_AMP_SPECTRUM_DB = 4019
-    r"""
+    r'''
     FFT Amp. Spectrum (dB)
-    """
+    '''
     HAMMING_WINDOW = 4020
-    r"""
+    r'''
     Hamming Window
-    """
+    '''
     WINDOWED_FIR_FILTER = 4021
-    r"""
+    r'''
     FIR Windowed Filter
-    """
+    '''
     BESSEL_FILTER = 4022
-    r"""
+    r'''
     Bessel IIR Filter
-    """
+    '''
     TRIANGLE_WINDOW = 4023
-    r"""
+    r'''
     Triangle Window
-    """
+    '''
     BLACKMAN_WINDOW = 4024
-    r"""
+    r'''
     Blackman Window
-    """
+    '''
     ARRAY_OFFSET = 4025
-    r"""
+    r'''
     Array Offset
-    """
+    '''
     ARRAY_GAIN = 4026
-    r"""
+    r'''
     Array Gain
-    """
+    '''
 
 
 class CableSenseMode(Enum):
     DISABLED = 0
-    r"""
+    r'''
     The oscilloscope is not configured to emit a CableSense signal.
-    """
+    '''
     ON_DEMAND = 1
-    r"""
+    r'''
     The oscilloscope is configured to emit a single CableSense pulse.
-    """
+    '''
 
 
 class _CalibrationTypes(Enum):
@@ -225,223 +225,223 @@ class ClearableMeasurement(Enum):
 
 class FIRFilterWindow(Enum):
     NONE = 0
-    r"""
+    r'''
     No window.
-    """
+    '''
     HANNING = 409
-    r"""
+    r'''
     Specifies a Hanning window.
-    """
+    '''
     FLAT_TOP = 410
-    r"""
+    r'''
     Specifies a Flat Top window.
-    """
+    '''
     HAMMING = 420
-    r"""
+    r'''
     Specifies a Hamming window.
-    """
+    '''
     TRIANGLE = 423
-    r"""
+    r'''
     Specifies a Triangle window.
-    """
+    '''
     BLACKMAN = 424
-    r"""
+    r'''
     Specifies a Blackman window.
-    """
+    '''
 
 
 class FetchRelativeTo(Enum):
     READ_POINTER = 388
-    r"""
+    r'''
     The read pointer is set to zero when a new acquisition is initiated. After every fetch the read pointer is incremeted to be the sample after the last sample retrieved.  Therefore, you can repeatedly fetch relative to the read pointer for a continuous acquisition program.
-    """
+    '''
     PRETRIGGER = 477
-    r"""
+    r'''
     Fetches relative to the first pretrigger point requested with configure_horizontal_timing.
-    """
+    '''
     NOW = 481
-    r"""
+    r'''
     Fetch data at the last sample acquired.
-    """
+    '''
     START = 482
-    r"""
+    r'''
     Fetch data starting at the first point sampled by the digitizer.
-    """
+    '''
     TRIGGER = 483
-    r"""
+    r'''
     Fetch at the first posttrigger sample.
-    """
+    '''
 
 
 class FilterType(Enum):
     LOWPASS = 0
-    r"""
+    r'''
     Specifies lowpass as the filter type.
-    """
+    '''
     HIGHPASS = 1
-    r"""
+    r'''
     Specifies highpass as the filter type.
-    """
+    '''
     BANDPASS = 2
-    r"""
+    r'''
     Specifies bandpass as the filter type.
-    """
+    '''
     BANDSTOP = 3
-    r"""
+    r'''
     Specifies bandstop as the filter type.
-    """
+    '''
 
 
 class FlexFIRAntialiasFilterType(Enum):
     FOURTYEIGHT_TAP_STANDARD = 0
-    r"""
+    r'''
     This filter is optimized for alias protection and frequency-domain flatness
-    """
+    '''
     FOURTYEIGHT_TAP_HANNING = 1
-    r"""
+    r'''
     This filter is optimized for the lowest possible bandwidth for a 48 tap filter and maximizes the SNR
-    """
+    '''
     SIXTEEN_TAP_HANNING = 2
-    r"""
+    r'''
     This filter is optimized for the lowest possible bandwidth for a 16 tap filter and maximizes the SNR
-    """
+    '''
     EIGHT_TAP_HANNING = 3
-    r"""
+    r'''
     This filter is optimized for the lowest possible bandwidth for a 8 tap filter and maximizes the SNR
-    """
+    '''
 
 
 class GlitchCondition(Enum):
     GREATER = 2
-    r"""
+    r'''
     Trigger on pulses with a duration greater than the specified glitch width.
-    """
+    '''
     LESS = 1
-    r"""
+    r'''
     Trigger on pulses with a duration shorter than the specified glitch width.
-    """
+    '''
 
 
 class GlitchPolarity(Enum):
     POSITIVE = 1
-    r"""
+    r'''
     Trigger on pulses of positive polarity relative to the trigger threshold.
-    """
+    '''
     NEGATIVE = 2
-    r"""
+    r'''
     Trigger on pulses of negative polarity relative to the trigger threshold.
-    """
+    '''
     EITHER = 3
-    r"""
+    r'''
     Trigger on pulses of either positive or negative polarity.
-    """
+    '''
 
 
 class Option(Enum):
     SELF_CALIBRATE_ALL_CHANNELS = 0
-    r"""
+    r'''
     Self Calibrating all Channels
-    """
+    '''
     RESTORE_EXTERNAL_CALIBRATION = 1
-    r"""
+    r'''
     Restore External Calibration.
-    """
+    '''
 
 
 class PercentageMethod(Enum):
     LOWHIGH = 0
-    r"""
+    r'''
     Specifies that the reference level percentages should be computed using
     the low/high method,
-    """
+    '''
     MINMAX = 1
-    r"""
+    r'''
     Reference level percentages are computed using the min/max method.
-    """
+    '''
     BASETOP = 2
-    r"""
+    r'''
     Reference level percentages are computed using the base/top method.
-    """
+    '''
 
 
 class RISMethod(Enum):
     EXACT_NUM_AVERAGES = 1
-    r"""
+    r'''
     Acquires exactly the specified number of records for each bin in the RIS acquisition.  An error is returned from the fetch method if the RIS acquisition does not successfully acquire the specified number of waveforms within the timeout period.  You may call the fetch method again to allow more time for the acquisition to finish.
-    """
+    '''
     MIN_NUM_AVERAGES = 2
-    r"""
+    r'''
     Each RIS sample is the average of a least a minimum number of randomly
     distributed points.
-    """
+    '''
     INCOMPLETE = 3
-    r"""
+    r'''
     Returns the RIS waveform after the specified timeout even if it is incomplete.  If no waveforms have been acquired in certain bins, these bins will have a NaN (when fetching scaled data) or a zero (when fetching binary data). A warning (positive error code) is returned from the fetch method if the RIS acquisition did not finish.  The acquisition aborts when data is returned.
-    """
+    '''
     LIMITED_BIN_WIDTH = 5
-    r"""
+    r'''
     Limits the waveforms in the various bins to be within 200 ps of the center of the bin.
-    """
+    '''
 
 
 class RefLevelUnits(Enum):
     VOLTS = 0
-    r"""
+    r'''
     Specifies that the reference levels are given in units of volts.
-    """
+    '''
     PERCENTAGE = 1
-    r"""
+    r'''
     (Default) Specifies that the reference levels are given in percentage
     units.
-    """
+    '''
 
 
 class RefTriggerDetectorLocation(Enum):
     ANALOG_DETECTION_CIRCUIT = 0
-    r"""
+    r'''
     use the hardware analog circuitry to implement the reference trigger.  This option will trigger before any onboard signal processing.
-    """
+    '''
     DDC_OUTPUT = 1
-    r"""
+    r'''
     use the onboard signal processing logic to implement the reference trigger.  This option will trigger based on the onboard signal processed data.
-    """
+    '''
 
 
 class RuntPolarity(Enum):
     POSITIVE = 1
-    r"""
+    r'''
     Trigger on pulses of positive polarity relative to runt_low_threshold that do not cross runt_high_threshold.
-    """
+    '''
     NEGATIVE = 2
-    r"""
+    r'''
     Trigger on pulses of negative polarity relative to runt_high_threshold that do not cross runt_low_threshold.
-    """
+    '''
     EITHER = 3
-    r"""
+    r'''
     Trigger on pulses of either positive or negative polarity.
-    """
+    '''
 
 
 class RuntTimeCondition(Enum):
     NONE = 0
-    r"""
+    r'''
     Time qualification is disabled. Trigger on runt pulses based solely on the voltage level of the pulses.
-    """
+    '''
     WITHIN = 1
-    r"""
+    r'''
     Trigger on pulses that, in addition to meeting runt voltage criteria, have a duration within the range bounded by runt_time_low_limit and runt_time_high_limit.
-    """
+    '''
     OUTSIDE = 2
-    r"""
+    r'''
     Trigger on pulses that, in addition to meeting runt voltage criteria, have a duration not within the range bounded by runt_time_low_limit and runt_time_high_limit.
-    """
+    '''
 
 
 class ScalarMeasurement(Enum):
     NO_MEASUREMENT = 4000
-    r"""
+    r'''
     None
-    """
+    '''
     RISE_TIME = 0
     FALL_TIME = 1
     FREQUENCY = 2
@@ -485,234 +485,234 @@ class ScalarMeasurement(Enum):
 
 class TerminalConfiguration(Enum):
     SINGLE_ENDED = 0
-    r"""
+    r'''
     Channel is single ended
-    """
+    '''
     UNBALANCED_DIFFERENTIAL = 1
-    r"""
+    r'''
     Channel is unbalanced differential
-    """
+    '''
     DIFFERENTIAL = 2
-    r"""
+    r'''
     Channel is differential
-    """
+    '''
 
 
 class TriggerCoupling(Enum):
     AC = 0
-    r"""
+    r'''
     AC coupling
-    """
+    '''
     DC = 1
-    r"""
+    r'''
     DC coupling
-    """
+    '''
     HF_REJECT = 3
-    r"""
+    r'''
     Highpass filter coupling
-    """
+    '''
     LF_REJECT = 4
-    r"""
+    r'''
     Lowpass filter coupling
-    """
+    '''
     AC_PLUS_HF_REJECT = 1001
-    r"""
+    r'''
     Highpass and lowpass filter coupling
-    """
+    '''
 
 
 class TriggerModifier(Enum):
     NO_TRIGGER_MOD = 1
-    r"""
+    r'''
     Normal triggering.
-    """
+    '''
     AUTO = 2
-    r"""
+    r'''
     Software will trigger an acquisition automatically if no trigger arrives
     after a certain amount of time.
-    """
+    '''
     AUTO_LEVEL = 3
 
 
 class TriggerSlope(Enum):
     NEGATIVE = 0
-    r"""
+    r'''
     Falling edge
-    """
+    '''
     POSITIVE = 1
-    r"""
+    r'''
     Rising edge
-    """
+    '''
     SLOPE_EITHER = 3
-    r"""
+    r'''
     Either edge
-    """
+    '''
 
 
 class TriggerType(Enum):
     EDGE = 1
-    r"""
+    r'''
     Configures the digitizer for edge triggering.  An edge trigger occurs when the trigger signal crosses the trigger level specified with the set trigger slope.  You configure the trigger level and slope with configure_trigger_edge.
-    """
+    '''
     HYSTERESIS = 1001
-    r"""
+    r'''
     Configures the digitizer for hysteresis triggering.  A hysteresis trigger occurs when the trigger signal crosses the trigger level with the specified slope and passes through the hysteresis window you specify. You configure the trigger level, slope, and hysteresis with configure_trigger_hysteresis.
-    """
+    '''
     DIGITAL = 1002
-    r"""
+    r'''
     Configures the digitizer for digital triggering. A digital trigger occurs when the trigger signal has the specified slope. You configure the trigger slope with configure_trigger_digital.
-    """
+    '''
     WINDOW = 1003
-    r"""
+    r'''
     Configures the digitizer for window triggering.  A window trigger occurs when the trigger signal enters or leaves the window defined by the values you specify with the Low Window Level, High Window Level, and Window Mode Parameters.  You configure the low window level high window level, and window mode with configure_trigger_window.
-    """
+    '''
     SOFTWARE = 1004
-    r"""
+    r'''
     Configures the digitizer for software triggering.  A software trigger occurs when SendSoftwareTrigger is called.
-    """
+    '''
     TV = 5
-    r"""
+    r'''
     Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with configure_trigger_video.
-    """
+    '''
     GLITCH = 4
     WIDTH = 2
     RUNT = 3
     IMMEDIATE = 6
-    r"""
+    r'''
     Configures the digitizer for immediate triggering.   An immediate trigger occurs as soon as the pretrigger samples are acquired.
-    """
+    '''
 
 
 class TriggerWindowMode(Enum):
     ENTERING = 0
-    r"""
+    r'''
     Trigger upon entering the window
-    """
+    '''
     LEAVING = 1
-    r"""
+    r'''
     Trigger upon leaving the window
-    """
+    '''
     ENTERING_OR_LEAVING = 2
 
 
 class VerticalCoupling(Enum):
     AC = 0
-    r"""
+    r'''
     AC coupling
-    """
+    '''
     DC = 1
-    r"""
+    r'''
     DC coupling
-    """
+    '''
     GND = 2
-    r"""
+    r'''
     GND coupling
-    """
+    '''
 
 
 class VideoPolarity(Enum):
     POSITIVE = 1
-    r"""
+    r'''
     Specifies that the video signal has positive polarity.
-    """
+    '''
     NEGATIVE = 2
-    r"""
+    r'''
     Specifies that the video signal has negative polarity.
-    """
+    '''
 
 
 class VideoSignalFormat(Enum):
     NTSC = 1
-    r"""
+    r'''
     NTSC signal format supports line numbers from 1 to 525
-    """
+    '''
     PAL = 2
-    r"""
+    r'''
     PAL signal format supports line numbers from 1 to 625
-    """
+    '''
     SECAM = 3
-    r"""
+    r'''
     SECAM signal format supports line numbers from 1 to 625
-    """
+    '''
     M_PAL = 1001
-    r"""
+    r'''
     M-PAL signal format supports line numbers from 1 to 525
-    """
+    '''
     VIDEO_480I_59_94_FIELDS_PER_SECOND = 1010
-    r"""
+    r'''
     480 lines, interlaced, 59.94 fields per second
-    """
+    '''
     VIDEO_480I_60_FIELDS_PER_SECOND = 1011
-    r"""
+    r'''
     480 lines, interlaced, 60 fields per second
-    """
+    '''
     VIDEO_480P_59_94_FRAMES_PER_SECOND = 1015
-    r"""
+    r'''
     480 lines, progressive, 59.94 frames per second
-    """
+    '''
     VIDEO_480P_60_FRAMES_PER_SECOND = 1016
-    r"""
+    r'''
     480 lines, progressive,60 frames per second
-    """
+    '''
     VIDEO_576I_50_FIELDS_PER_SECOND = 1020
-    r"""
+    r'''
     576 lines, interlaced, 50 fields per second
-    """
+    '''
     VIDEO_576P_50_FRAMES_PER_SECOND = 1025
-    r"""
+    r'''
     576 lines, progressive, 50 frames per second
-    """
+    '''
     VIDEO_720P_50_FRAMES_PER_SECOND = 1031
-    r"""
+    r'''
     720 lines, progressive, 50 frames per second
-    """
+    '''
     VIDEO_720P_59_94_FRAMES_PER_SECOND = 1032
-    r"""
+    r'''
     720 lines, progressive, 59.94 frames per second
-    """
+    '''
     VIDEO_720P_60_FRAMES_PER_SECOND = 1033
-    r"""
+    r'''
     720 lines, progressive, 60 frames per second
-    """
+    '''
     VIDEO_1080I_50_FIELDS_PER_SECOND = 1040
-    r"""
+    r'''
     1,080 lines, interlaced, 50 fields per second
-    """
+    '''
     VIDEO_1080I_59_94_FIELDS_PER_SECOND = 1041
-    r"""
+    r'''
     1,080 lines, interlaced, 59.94 fields per second
-    """
+    '''
     VIDEO_1080I_60_FIELDS_PER_SECOND = 1042
-    r"""
+    r'''
     1,080 lines, interlaced, 60 fields per second
-    """
+    '''
     VIDEO_1080P_24_FRAMES_PER_SECOND = 1045
-    r"""
+    r'''
     1,080 lines, progressive, 24 frames per second
-    """
+    '''
 
 
 class VideoTriggerEvent(Enum):
     FIELD1 = 1
-    r"""
+    r'''
     Trigger on field 1 of the signal
-    """
+    '''
     FIELD2 = 2
-    r"""
+    r'''
     Trigger on field 2 of the signal
-    """
+    '''
     ANY_FIELD = 3
-    r"""
+    r'''
     Trigger on the first field acquired
-    """
+    '''
     ANY_LINE = 4
-    r"""
+    r'''
     Trigger on the first line acquired
-    """
+    '''
     LINE_NUMBER = 5
-    r"""
+    r'''
     Trigger on a specific line of a video signal.  Valid values vary depending on the signal format configured.
-    """
+    '''
 
 
 class WhichTrigger(Enum):
@@ -724,25 +724,25 @@ class WhichTrigger(Enum):
 
 class WidthCondition(Enum):
     WITHIN = 1
-    r"""
+    r'''
     Trigger on pulses with a duration within the range bounded by width_low_threshold and width_high_threshold.
-    """
+    '''
     OUTSIDE = 2
-    r"""
+    r'''
     Trigger on pulses with a duration not within the range bounded by width_low_threshold and width_high_threshold.
-    """
+    '''
 
 
 class WidthPolarity(Enum):
     POSITIVE = 1
-    r"""
+    r'''
     Trigger on pulses of positive polarity relative to the trigger threshold.
-    """
+    '''
     NEGATIVE = 2
-    r"""
+    r'''
     Trigger on pulses of negative polarity relative to the trigger threshold.
-    """
+    '''
     EITHER = 3
-    r"""
+    r'''
     Trigger on pulses of either positive or negative polarity.
-    """
+    '''

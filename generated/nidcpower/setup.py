@@ -15,44 +15,41 @@ class PyTest(test_command):
 
     def run_tests(self):
         import pytest
-
         pytest.main(self.test_args)
 
 
-pypi_name = "nidcpower"
+pypi_name = 'nidcpower'
 
 
 def read_contents(file_to_read):
-    with open(file_to_read, "r") as f:
+    with open(file_to_read, 'r') as f:
         return f.read()
 
 
 setup(
     name=pypi_name,
     zip_safe=True,
-    version="1.4.2.dev0",
-    description="NI-DCPower Python API",
-    long_description=read_contents("README.rst"),
-    long_description_content_type="text/x-rst",
-    author="NI",
+    version='1.4.2.dev0',
+    description='NI-DCPower Python API',
+    long_description=read_contents('README.rst'),
+    long_description_content_type='text/x-rst',
+    author='NI',
     author_email="opensource@ni.com",
     url="https://github.com/ni/nimi-python",
     maintainer="NI",
     maintainer_email="opensource@ni.com",
-    keywords=["nidcpower"],
-    license="MIT",
+    keywords=['nidcpower'],
+    license='MIT',
     include_package_data=True,
-    packages=["nidcpower"],
+    packages=['nidcpower'],
     install_requires=[
         'enum34;python_version<"3.4"',
         'singledispatch;python_version<"3.4"',
-        "hightime>=0.2.0",
+        'hightime>=0.2.0',
     ],
-    setup_requires=[
-        "pytest-runner",
-    ],
-    tests_require=["pytest"],
-    test_suite="tests",
+    setup_requires=['pytest-runner', ],
+    tests_require=['pytest'],
+    test_suite='tests',
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
@@ -67,8 +64,8 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: Implementation :: CPython",
-        "Topic :: System :: Hardware :: Hardware Drivers",
+        "Topic :: System :: Hardware :: Hardware Drivers"
     ],
-    cmdclass={"test": PyTest},
-    package_data={pypi_name: ["VERSION"]},
+    cmdclass={'test': PyTest},
+    package_data={pypi_name: ['VERSION']},
 )

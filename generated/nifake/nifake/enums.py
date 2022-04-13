@@ -6,75 +6,75 @@ from enum import Enum
 
 class Color(Enum):
     RED = 1
-    r"""
+    r'''
     Like blood.
-    """
+    '''
     BLUE = 2
-    r"""
+    r'''
     Like the sky.
-    """
+    '''
     YELLOW = 5
-    r"""
+    r'''
     Like a banana.
-    """
+    '''
     BLACK = 42
-    r"""
+    r'''
     Like this developer's conscience.
-    """
+    '''
 
 
 class FloatEnum(Enum):
     THREE_POINT_FIVE = 3.5
-    r"""
+    r'''
     Specifies 3.5 digits resolution.
-    """
+    '''
     FOUR_POINT_FIVE = 4.5
-    r"""
+    r'''
     Specifies 4.5 digits resolution.
-    """
+    '''
     FIVE_POINT_FIVE = 5.5
-    r"""
+    r'''
     Specifies 5.5 digits resolution.
-    """
+    '''
     SIX_POINT_FIVE = 6.5
-    r"""
+    r'''
     Specifies 6.5 digits resolution.
-    """
+    '''
     SEVEN_POINT_FIVE = 7.5
-    r"""
+    r'''
     Specifies 7.5 digits resolution.
-    """
+    '''
 
 
 class MobileOSNames(Enum):
-    ANDROID = "Android"
-    r"""
+    ANDROID = 'Android'
+    r'''
     Most popular OS.
-    """
-    IOS = "iOS"
-    r"""
+    '''
+    IOS = 'iOS'
+    r'''
     Most secure OS.
-    """
-    NONE = "None"
-    r"""
+    '''
+    NONE = 'None'
+    r'''
     Remember Symbian?.
-    """
+    '''
 
 
 class Turtle(Enum):
     LEONARDO = 0
-    r"""
+    r'''
     Wields two katanas.
-    """
+    '''
     DONATELLO = 1
-    r"""
+    r'''
     Uses a bo staff.
-    """
+    '''
     RAPHAEL = 2
-    r"""
+    r'''
     Has a pair of sai.
-    """
+    '''
     MICHELANGELO = 3
-    r"""
+    r'''
     Owns nunchucks.
-    """
+    '''
