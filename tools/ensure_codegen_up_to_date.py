@@ -4,7 +4,6 @@ ensure_codegen_up_to_date
 Ensure changes to code generation are committed to repository
 """
 
-import glob
 import os
 import subprocess
 import sys
@@ -43,11 +42,7 @@ def _check_no_dirty_files():
 
     if int(subprocess.check_output("git status -s -uno | wc -l", shell=True).decode().strip("b'\\n'")) != 0:
         list_of_changed_files = subprocess.check_output("git status -s -uno", shell=True).decode()
-        file_diffs = subprocess.check_output("git diff", shell=True).decode()
-        if not file_diffs:
-            print(f"Warning: The following files may have modified line endings.\n{list_of_changed_files}")
-        else:
-            sys.exit(f"The following code generated files do not match what is commited to Git. Run codegen and include the generated files in the PR.\n{list_of_changed_files}\n File diffs: \n{file_diffs} ")
+        sys.exit(f"The following code generated files do not match what is commited to Git. Run codegen and include the generated files in the PR.\n{list_of_changed_files}\n")
     print("All changes to code generation are committed to repository")
 
 
