@@ -21,7 +21,7 @@ In order to have the ability to build and run the tests you will need a few thin
 
 ### Windows:
 
--  Install and enable [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
+- Install and enable [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
 - Install GNU Make: ``sudo apt-get install make``
 - Install zip: ``sudo apt-get install zip``
 - Install 64-bit [Python 3.9](https://www.python.org/downloads/)
