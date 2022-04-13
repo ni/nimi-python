@@ -239,7 +239,7 @@ The waveform_infos returned from `fetch_into <niscope/class.html#fetch-into>`_ i
     - Where *x* = the record length
 
 
-Additional examples for NI-SCOPE are located in src/niscope/examples/ directory.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/niscope/examples>`_
 
 
 .. _support-section:
