@@ -2,6 +2,7 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
+
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -16,22 +17,24 @@ import hightime
 
 # Used for __repr__
 import pprint
+
 pp = pprint.PrettyPrinter(indent=4)
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
 def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     if isinstance(value, array.array):
-        assert library_type is not None, 'library_type is required for array.array'
+        assert library_type is not None, "library_type is required for array.array"
         addr, _ = value.buffer_info()
         return ctypes.cast(addr, ctypes.POINTER(library_type))
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
+
         return numpy.ctypeslib.as_ctypes(value)
     elif isinstance(value, bytes):
         return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
-        assert library_type is not None, 'library_type is required for list'
+        assert library_type is not None, "library_type is required for list"
         return (library_type * len(value))(*value)
     else:
         if library_type is not None and size is not None:
@@ -71,6 +74,7 @@ def ivi_synchronized(f):
         session = xs[0]  # parameter 0 is 'self' which is the session object
         with session.lock():
             return f(*xs, **kws)
+
     return aux
 
 
@@ -91,16 +95,34 @@ class _RepeatedCapabilities(object):
         self._session = session
         self._prefix = prefix
         # We need at least one element. If we get an empty list, make the one element an empty string
-        self._current_repeated_capability_list = current_repeated_capability_list if len(current_repeated_capability_list) > 0 else ['']
+        self._current_repeated_capability_list = (
+            current_repeated_capability_list
+            if len(current_repeated_capability_list) > 0
+            else [""]
+        )
         # Now we know there is at lease one entry, so we look if it is an empty string or not
-        self._separator = '/' if len(self._current_repeated_capability_list[0]) > 0 else ''
+        self._separator = (
+            "/" if len(self._current_repeated_capability_list[0]) > 0 else ""
+        )
 
     def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
-        complete_rep_cap_list = [current_rep_cap + self._separator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
+        """Set/get properties or call methods with a repeated capability (i.e. channels)"""
+        rep_caps_list = _converters.convert_repeated_capabilities(
+            repeated_capability, self._prefix
+        )
+        complete_rep_cap_list = [
+            current_rep_cap + self._separator + rep_cap
+            for current_rep_cap in self._current_repeated_capability_list
+            for rep_cap in rep_caps_list
+        ]
 
-        return _SessionBase(vi=self._session._vi, repeated_capability_list=complete_rep_cap_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
+        return _SessionBase(
+            vi=self._session._vi,
+            repeated_capability_list=complete_rep_cap_list,
+            library=self._session._library,
+            encoding=self._session._encoding,
+            freeze_it=True,
+        )
 
 
 # This is a very simple context manager we can use when we need to set/get attributes
@@ -112,20 +134,20 @@ class _NoChannel(object):
 
     def __enter__(self):
         self._repeated_capability_cache = self._session._repeated_capability
-        self._session._repeated_capability = ''
+        self._session._repeated_capability = ""
 
     def __exit__(self, exc_type, exc_value, traceback):
         self._session._repeated_capability = self._repeated_capability_cache
 
 
 class _SessionBase(object):
-    '''Base class for all NI-DCPower sessions.'''
+    """Base class for all NI-DCPower sessions."""
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
     active_advanced_sequence = _attributes.AttributeViString(1150074)
-    '''Type: str
+    """Type: str
 
     Specifies the advanced sequence to configure or generate.
 
@@ -140,9 +162,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.active_advanced_sequence`
-    '''
+    """
     active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
-    '''Type: int
+    """Type: int
 
     Specifies the advanced sequence step to configure.
 
@@ -157,9 +179,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.active_advanced_sequence_step`
-    '''
+    """
     actual_power_allocation = _attributes.AttributeViReal64(1150205)
-    '''Type: float
+    """Type: float
 
     Returns the power, in watts, the device is sourcing on each active channel if the power_allocation_mode property is set to PowerAllocationMode.AUTOMATIC or PowerAllocationMode.MANUAL.
 
@@ -180,9 +202,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.actual_power_allocation`
-    '''
+    """
     aperture_time = _attributes.AttributeViReal64(1150058)
-    '''Type: float
+    """Type: float
 
     Specifies the measurement aperture time for the channel configuration. Aperture time is specified in the units set by the aperture_time_units property.
     for information about supported devices.
@@ -200,9 +222,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.aperture_time`
-    '''
-    aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150059)
-    '''Type: enums.ApertureTimeUnits
+    """
+    aperture_time_units = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150059
+    )
+    """Type: enums.ApertureTimeUnits
 
     Specifies the units of the aperture_time property for the channel configuration.
     for information about supported devices.
@@ -220,9 +244,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.aperture_time_units`
-    '''
+    """
     autorange = _attributes.AttributeViInt32(1150244)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether the hardware automatically selects the best range to measure the signal. Note the highest range the algorithm uses is dependent on the corresponding limit range property. The algorithm the hardware uses can be controlled using the autorange_aperture_time_mode property.
 
@@ -237,9 +261,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.autorange`
-    '''
-    autorange_aperture_time_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutorangeApertureTimeMode, 1150246)
-    '''Type: enums.AutorangeApertureTimeMode
+    """
+    autorange_aperture_time_mode = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.AutorangeApertureTimeMode, 1150246
+    )
+    """Type: enums.AutorangeApertureTimeMode
 
     Specifies whether the aperture time used for the measurement autorange algorithm is determined automatically or customized using the autorange_minimum_aperture_time property.
 
@@ -254,9 +280,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.autorange_aperture_time_mode`
-    '''
-    autorange_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutorangeBehavior, 1150245)
-    '''Type: enums.AutorangeBehavior
+    """
+    autorange_behavior = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.AutorangeBehavior, 1150245
+    )
+    """Type: enums.AutorangeBehavior
 
     Specifies the algorithm the hardware uses for measurement autoranging.
 
@@ -271,9 +299,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.autorange_behavior`
-    '''
+    """
     autorange_minimum_aperture_time = _attributes.AttributeViReal64(1150247)
-    '''Type: float
+    """Type: float
 
     Specifies the measurement autorange aperture time used for the measurement autorange algorithm. The aperture time is specified in the units set by the autorange_minimum_aperture_time_units property. This value will typically be smaller than the aperture time used for measurements.
 
@@ -288,9 +316,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.autorange_minimum_aperture_time`
-    '''
-    autorange_minimum_aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150248)
-    '''Type: enums.ApertureTimeUnits
+    """
+    autorange_minimum_aperture_time_units = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150248
+    )
+    """Type: enums.ApertureTimeUnits
 
     Specifies the units of the autorange_minimum_aperture_time property.
 
@@ -305,9 +335,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.autorange_minimum_aperture_time_units`
-    '''
+    """
     autorange_minimum_current_range = _attributes.AttributeViReal64(1150255)
-    '''Type: float
+    """Type: float
 
     Specifies the lowest range used during measurement autoranging. Limiting the lowest range used during autoranging can improve the speed of the autoranging algorithm and minimize frequent and unpredictable range changes for noisy signals.
 
@@ -322,9 +352,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.autorange_minimum_current_range`
-    '''
+    """
     autorange_minimum_voltage_range = _attributes.AttributeViReal64(1150256)
-    '''Type: float
+    """Type: float
 
     Specifies the lowest range used during measurement autoranging. The maximum range used is range that includes the value specified in the compliance limit property. Limiting the lowest range used during autoranging can improve the speed of the autoranging algorithm and/or minimize thrashing between ranges for noisy signals.
 
@@ -339,9 +369,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.autorange_minimum_voltage_range`
-    '''
-    autorange_threshold_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutorangeThresholdMode, 1150257)
-    '''Type: enums.AutorangeThresholdMode
+    """
+    autorange_threshold_mode = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.AutorangeThresholdMode, 1150257
+    )
+    """Type: enums.AutorangeThresholdMode
 
     Specifies thresholds used during autoranging to determine when range changing occurs.
 
@@ -356,9 +388,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.autorange_threshold_mode`
-    '''
-    auto_zero = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutoZero, 1150055)
-    '''Type: enums.AutoZero
+    """
+    auto_zero = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.AutoZero, 1150055
+    )
+    """Type: enums.AutoZero
 
     Specifies the auto-zero method to use on the device.
     Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information about how to configure your measurements.
@@ -373,23 +407,25 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.auto_zero`
-    '''
+    """
     auxiliary_power_source_available = _attributes.AttributeViBoolean(1150002)
-    '''Type: bool
+    """Type: bool
 
     Indicates whether an auxiliary power source is connected to the device.
     A value of False may indicate that the auxiliary input fuse has blown. Refer to the Detecting Internal/Auxiliary Power topic in the NI DC Power Supplies and SMUs Help for more information about internal and auxiliary power.
     power source to generate power. Use the power_source_in_use property to retrieve this information.
 
     Note: This property does not necessarily indicate if the device is using the auxiliary
-    '''
+    """
     channel_count = _attributes.AttributeViInt32(1050203)
-    '''Type: int
+    """Type: int
 
     Indicates the number of channels that NI-DCPower supports for the instrument that was chosen when the current session was opened. For channel-based properties, the IVI engine maintains a separate cache value for each channel.
-    '''
-    compliance_limit_symmetry = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ComplianceLimitSymmetry, 1150184)
-    '''Type: enums.ComplianceLimitSymmetry
+    """
+    compliance_limit_symmetry = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.ComplianceLimitSymmetry, 1150184
+    )
+    """Type: enums.ComplianceLimitSymmetry
 
     Specifies whether compliance limits for current generation and voltage
     generation for the device are applied symmetrically about 0 V and 0 A or
@@ -423,9 +459,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.compliance_limit_symmetry`
-    '''
+    """
     current_compensation_frequency = _attributes.AttributeViReal64(1150071)
-    '''Type: float
+    """Type: float
 
     The frequency at which a pole-zero pair is added to the system when the channel is in Constant Current mode.
     for information about supported devices.
@@ -442,9 +478,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_compensation_frequency`
-    '''
+    """
     current_gain_bandwidth = _attributes.AttributeViReal64(1150070)
-    '''Type: float
+    """Type: float
 
     The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This property takes effect when the channel is in Constant Current mode.
     for information about supported devices.
@@ -461,9 +497,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_gain_bandwidth`
-    '''
+    """
     current_level = _attributes.AttributeViReal64(1150009)
-    '''Type: float
+    """Type: float
 
     Specifies the current level, in amps, that the device attempts to generate on the specified channel(s).
     This property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT.
@@ -481,9 +517,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_level`
-    '''
+    """
     current_level_autorange = _attributes.AttributeViInt32(1150017)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for the specified channels.
     If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the current_level_range property. If you change the current_level_autorange property from AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the current_level_range property was set to (or the default value if the property was never set) and uses that value as the current level range.
@@ -500,9 +536,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_level_autorange`
-    '''
+    """
     current_level_range = _attributes.AttributeViReal64(1150011)
-    '''Type: float
+    """Type: float
 
     Specifies the current level range, in amps, for the specified channel(s).
     The range defines the valid value to which the current level can be set. Use the current_level_autorange property to enable automatic selection of the current level range.
@@ -521,9 +557,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_level_range`
-    '''
+    """
     current_limit = _attributes.AttributeViReal64(1250005)
-    '''Type: float
+    """Type: float
 
     Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level on the specified channel(s).
     This property is applicable only if the output_function property is set to OutputFunction.DC_VOLTAGE and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
@@ -541,9 +577,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_limit`
-    '''
+    """
     current_limit_autorange = _attributes.AttributeViInt32(1150016)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the specified channel(s).
     If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the current_limit_range property. If you change this property from AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the current_limit_range property was set to (or the default value if the property was never set) and uses that value as the current limit range.
@@ -560,9 +596,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_limit_autorange`
-    '''
+    """
     current_limit_behavior = _attributes.AttributeViInt32(1250004)
-    '''Type: int
+    """Type: int
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -573,9 +609,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_limit_behavior`
-    '''
+    """
     current_limit_high = _attributes.AttributeViReal64(1150187)
-    '''Type: float
+    """Type: float
 
     Specifies the maximum current, in amps, that the output can produce when
     generating the desired voltage on the specified channel(s).
@@ -617,9 +653,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_limit_high`
-    '''
+    """
     current_limit_low = _attributes.AttributeViReal64(1150188)
-    '''Type: float
+    """Type: float
 
     Specifies the minimum current, in amps, that the output can produce when
     generating the desired voltage on the specified channel(s).
@@ -661,9 +697,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_limit_low`
-    '''
+    """
     current_limit_range = _attributes.AttributeViReal64(1150004)
-    '''Type: float
+    """Type: float
 
     Specifies the current limit range, in amps, for the specified channel(s).
     The range defines the valid value to which the current limit can be set. Use the current_limit_autorange property to enable automatic selection of the current limit range.
@@ -682,9 +718,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_limit_range`
-    '''
+    """
     current_pole_zero_ratio = _attributes.AttributeViReal64(1150072)
-    '''Type: float
+    """Type: float
 
     The ratio of the pole frequency to the zero frequency when the channel is in Constant Current mode.
     for information about supported devices.
@@ -701,9 +737,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.current_pole_zero_ratio`
-    '''
-    dc_noise_rejection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DCNoiseRejection, 1150066)
-    '''Type: enums.DCNoiseRejection
+    """
+    dc_noise_rejection = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.DCNoiseRejection, 1150066
+    )
+    """Type: enums.DCNoiseRejection
 
     Determines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection, NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies and SMUs Help for more information about noise rejection.
     for information about supported devices.
@@ -720,9 +758,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.dc_noise_rejection`
-    '''
+    """
     digital_edge_measure_trigger_input_terminal = _attributes.AttributeViString(1150036)
-    '''Type: str
+    """Type: str
 
     Specifies the input terminal for the Measure trigger. This property is used only when the measure_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     for this property.
@@ -740,9 +778,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.digital_edge_measure_trigger_input_terminal`
-    '''
+    """
     digital_edge_pulse_trigger_input_terminal = _attributes.AttributeViString(1150097)
-    '''Type: str
+    """Type: str
 
     Specifies the input terminal for the Pulse trigger. This property is used only when the pulse_trigger_type property is set to digital edge.
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
@@ -759,9 +797,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.digital_edge_pulse_trigger_input_terminal`
-    '''
-    digital_edge_sequence_advance_trigger_input_terminal = _attributes.AttributeViString(1150028)
-    '''Type: str
+    """
+    digital_edge_sequence_advance_trigger_input_terminal = (
+        _attributes.AttributeViString(1150028)
+    )
+    """Type: str
 
     Specifies the input terminal for the Sequence Advance trigger. Use this property only when the sequence_advance_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     the NI DC Power Supplies and SMUs Help for information about supported devices.
@@ -779,9 +819,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.digital_edge_sequence_advance_trigger_input_terminal`
-    '''
-    digital_edge_shutdown_trigger_input_terminal = _attributes.AttributeViString(1150277)
-    '''Type: str
+    """
+    digital_edge_shutdown_trigger_input_terminal = _attributes.AttributeViString(
+        1150277
+    )
+    """Type: str
 
     Specifies the input terminal for the Shutdown trigger. This property is used only when the shutdown_trigger_type property is set to digital edge.
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
@@ -798,9 +840,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.digital_edge_shutdown_trigger_input_terminal`
-    '''
+    """
     digital_edge_source_trigger_input_terminal = _attributes.AttributeViString(1150032)
-    '''Type: str
+    """Type: str
 
     Specifies the input terminal for the Source trigger. Use this property only when the source_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     for information about supported devices.
@@ -818,9 +860,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.digital_edge_source_trigger_input_terminal`
-    '''
+    """
     digital_edge_start_trigger_input_terminal = _attributes.AttributeViString(1150023)
-    '''Type: str
+    """Type: str
 
     Specifies the input terminal for the Start trigger. Use this property only when the start_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     for information about supported devices.
@@ -838,16 +880,16 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.digital_edge_start_trigger_input_terminal`
-    '''
+    """
     driver_setup = _attributes.AttributeViString(1050007)
-    '''Type: str
+    """Type: str
 
     Indicates the Driver Setup string that you specified when initializing the driver.
     Some cases exist where you must specify the instrument driver options at initialization time. An example of this case is specifying a particular device model from among a family of devices that the driver supports. This property is useful when simulating a device. You can specify the driver-specific options through the DriverSetup keyword in the optionsString parameter in the __init__ method or through the IVI Configuration Utility.
     You can specify driver-specific options through the DriverSetup keyword in the optionsString parameter in the __init__ method. If you do not specify a Driver Setup string, this property returns an empty string.
-    '''
+    """
     exported_measure_trigger_output_terminal = _attributes.AttributeViString(1150037)
-    '''Type: str
+    """Type: str
 
     Specifies the output terminal for exporting the Measure trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
@@ -865,9 +907,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.exported_measure_trigger_output_terminal`
-    '''
+    """
     exported_pulse_trigger_output_terminal = _attributes.AttributeViString(1150098)
-    '''Type: str
+    """Type: str
 
     Specifies the output terminal for exporting the Pulse trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
@@ -884,9 +926,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.exported_pulse_trigger_output_terminal`
-    '''
-    exported_sequence_advance_trigger_output_terminal = _attributes.AttributeViString(1150029)
-    '''Type: str
+    """
+    exported_sequence_advance_trigger_output_terminal = _attributes.AttributeViString(
+        1150029
+    )
+    """Type: str
 
     Specifies the output terminal for exporting the Sequence Advance trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
@@ -904,9 +948,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.exported_sequence_advance_trigger_output_terminal`
-    '''
+    """
     exported_source_trigger_output_terminal = _attributes.AttributeViString(1150033)
-    '''Type: str
+    """Type: str
 
     Specifies the output terminal for exporting the Source trigger.
     Refer to the Device Routes tab in MAX for a list of the terminals available on your device.
@@ -924,9 +968,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.exported_source_trigger_output_terminal`
-    '''
+    """
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150024)
-    '''Type: str
+    """Type: str
 
     Specifies the output terminal for exporting the Start trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer (MAX) for a list of the terminals available on your device.
@@ -944,9 +988,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.exported_start_trigger_output_terminal`
-    '''
+    """
     fetch_backlog = _attributes.AttributeViInt32(1150056)
-    '''Type: int
+    """Type: int
 
     Returns the number of measurements acquired that have not been fetched yet.
 
@@ -959,9 +1003,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.fetch_backlog`
-    '''
+    """
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
-    '''Type: str
+    """Type: str
 
     Contains the firmware revision information for the device you are currently using.
 
@@ -974,9 +1018,9 @@ class _SessionBase(object):
     To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.instrument_firmware_revision`
-    '''
+    """
     instrument_manufacturer = _attributes.AttributeViString(1050511)
-    '''Type: str
+    """Type: str
 
     Contains the name of the manufacturer for the device you are currently using.
 
@@ -989,9 +1033,9 @@ class _SessionBase(object):
     To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.instrument_manufacturer`
-    '''
+    """
     instrument_model = _attributes.AttributeViString(1050512)
-    '''Type: str
+    """Type: str
 
     Contains the model number or name of the device that you are currently using.
 
@@ -1004,9 +1048,9 @@ class _SessionBase(object):
     To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.instrument_model`
-    '''
+    """
     interlock_input_open = _attributes.AttributeViBoolean(1150105)
-    '''Type: bool
+    """Type: bool
 
     Indicates whether the safety interlock circuit is open.
     Refer to the Safety Interlock topic in the NI DC Power Supplies and SMUs Help for more information about the safety interlock circuit.
@@ -1023,22 +1067,22 @@ class _SessionBase(object):
     To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.interlock_input_open`
-    '''
+    """
     io_resource_descriptor = _attributes.AttributeViString(1050304)
-    '''Type: str
+    """Type: str
 
     Indicates the resource descriptor NI-DCPower uses to identify the physical device.
     If you initialize NI-DCPower with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.
     If you initialize NI-DCPower with the resource descriptor, this property contains that value.
-    '''
+    """
     logical_name = _attributes.AttributeViString(1050305)
-    '''Type: str
+    """Type: str
 
     Contains the logical name you specified when opening the current IVI session.
     You can pass a logical name to the __init__ method. The IVI Configuration utility must contain an entry for the logical name. The logical name entry refers to a method section in the IVI Configuration file. The method section specifies a physical device and initial user options.
-    '''
+    """
     measure_buffer_size = _attributes.AttributeViInt32(1150077)
-    '''Type: int
+    """Type: int
 
     Specifies the number of samples that the active channel measurement buffer can hold.
     The default value is the maximum number of samples that a device is capable of recording in one second.
@@ -1057,9 +1101,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.measure_buffer_size`
-    '''
-    measure_complete_event_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150046)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+    """
+    measure_complete_event_delay = _attributes.AttributeViReal64TimeDeltaSeconds(
+        1150046
+    )
+    """Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the amount of time to delay the generation of the Measure Complete event, in seconds.
     for information about supported devices.
@@ -1077,9 +1123,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.measure_complete_event_delay`
-    '''
+    """
     measure_complete_event_output_terminal = _attributes.AttributeViString(1150047)
-    '''Type: str
+    """Type: str
 
     Specifies the output terminal for exporting the Measure Complete event.
     for information about supported devices.
@@ -1096,9 +1142,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.measure_complete_event_output_terminal`
-    '''
-    measure_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150044)
-    '''Type: enums.Polarity
+    """
+    measure_complete_event_pulse_polarity = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.Polarity, 1150044
+    )
+    """Type: enums.Polarity
 
     Specifies the behavior of the Measure Complete event.
     for information about supported devices.
@@ -1115,9 +1163,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.measure_complete_event_pulse_polarity`
-    '''
+    """
     measure_complete_event_pulse_width = _attributes.AttributeViReal64(1150045)
-    '''Type: float
+    """Type: float
 
     Specifies the width of the Measure Complete event, in seconds.
     The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value for PXI Express devices is 250 ns.
@@ -1137,9 +1185,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.measure_complete_event_pulse_width`
-    '''
+    """
     measure_record_delta_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150065)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+    """Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record. Only query this property after the desired measurement settings are committed.
     for information about supported devices.
@@ -1156,9 +1204,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.measure_record_delta_time`
-    '''
+    """
     measure_record_length = _attributes.AttributeViInt32(1150063)
-    '''Type: int
+    """Type: int
 
     Specifies how many measurements compose a measure record. When this property is set to a value greater than 1, the measure_when property must be set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or MeasureWhen.ON_MEASURE_TRIGGER.
     for information about supported devices.
@@ -1177,9 +1225,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.measure_record_length`
-    '''
+    """
     measure_record_length_is_finite = _attributes.AttributeViBoolean(1150064)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether to take continuous measurements. Call the abort method to stop continuous measurements. When this property is set to False and the source_mode property is set to SourceMode.SINGLE_POINT, the measure_when property must be set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or MeasureWhen.ON_MEASURE_TRIGGER. When this property is set to False and the source_mode property is set to SourceMode.SEQUENCE, the measure_when property must be set to MeasureWhen.ON_MEASURE_TRIGGER.
     for information about supported devices.
@@ -1197,9 +1245,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.measure_record_length_is_finite`
-    '''
-    measure_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150034)
-    '''Type: enums.TriggerType
+    """
+    measure_trigger_type = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.TriggerType, 1150034
+    )
+    """Type: enums.TriggerType
 
     Specifies the behavior of the Measure trigger.
     for information about supported devices.
@@ -1216,9 +1266,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.measure_trigger_type`
-    '''
-    measure_when = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MeasureWhen, 1150057)
-    '''Type: enums.MeasureWhen
+    """
+    measure_when = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.MeasureWhen, 1150057
+    )
+    """Type: enums.MeasureWhen
 
     Specifies when the measure unit should acquire measurements. Unless this property is configured to MeasureWhen.ON_MEASURE_TRIGGER, the measure_trigger_type property is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements.
@@ -1233,9 +1285,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.measure_when`
-    '''
+    """
     merged_channels = _attributes.AttributeViStringRepeatedCapability(1150249)
-    '''Type: str
+    """Type: str
 
     Specifies the channel(s) to merge with a designated primary channel of an SMU in order to increase the maximum current you can source from the SMU.
     This property designates the merge channels to combine with a primary channel. To designate the primary channel, initialize the session to the primary channel only.
@@ -1254,9 +1306,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.merged_channels`
-    '''
-    output_capacitance = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputCapacitance, 1150014)
-    '''Type: enums.OutputCapacitance
+    """
+    output_capacitance = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.OutputCapacitance, 1150014
+    )
+    """Type: enums.OutputCapacitance
 
     Specifies whether to use a low or high capacitance on the output for the specified channel(s).
     for information about supported devices.
@@ -1273,9 +1327,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_capacitance`
-    '''
+    """
     output_connected = _attributes.AttributeViBoolean(1150060)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether the output relay is connected (closed) or disconnected (open). The output_enabled property does not change based on this property; they are independent of each other.
     about supported devices.
@@ -1294,9 +1348,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_connected`
-    '''
+    """
     output_cutoff_current_change_limit_high = _attributes.AttributeViReal64(1150295)
-    '''Type: float
+    """Type: float
 
     Specifies a limit for positive current slew rate, in amps per microsecond, for output cutoff.
     If the current increases at a rate that exceeds this limit, the output is disconnected.
@@ -1314,9 +1368,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_cutoff_current_change_limit_high`
-    '''
+    """
     output_cutoff_current_change_limit_low = _attributes.AttributeViReal64(1150239)
-    '''Type: float
+    """Type: float
 
     Specifies a limit for negative current slew rate, in amps per microsecond, for output cutoff.
     If the current decreases at a rate that exceeds this limit, the output is disconnected.
@@ -1334,9 +1388,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_cutoff_current_change_limit_low`
-    '''
+    """
     output_cutoff_current_measure_limit_high = _attributes.AttributeViReal64(1150237)
-    '''Type: float
+    """Type: float
 
     Specifies a high limit current value, in amps, for output cutoff.
     If the measured current exceeds this limit, the output is disconnected.
@@ -1354,9 +1408,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_cutoff_current_measure_limit_high`
-    '''
+    """
     output_cutoff_current_measure_limit_low = _attributes.AttributeViReal64(1150293)
-    '''Type: float
+    """Type: float
 
     Specifies a low limit current value, in amps, for output cutoff.
     If the measured current falls below this limit, the output is disconnected.
@@ -1374,9 +1428,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_cutoff_current_measure_limit_low`
-    '''
+    """
     output_cutoff_current_overrange_enabled = _attributes.AttributeViBoolean(1150240)
-    '''Type: bool
+    """Type: bool
 
     Enables or disables current overrange functionality for output cutoff. If enabled, the output is disconnected when the measured current saturates the current range.
 
@@ -1393,9 +1447,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_cutoff_current_overrange_enabled`
-    '''
+    """
     output_cutoff_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150300)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+    """Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Delays disconnecting the output by the time you specify, in seconds, when a limit is exceeded.
 
@@ -1410,9 +1464,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_cutoff_delay`
-    '''
+    """
     output_cutoff_enabled = _attributes.AttributeViBoolean(1150235)
-    '''Type: bool
+    """Type: bool
 
     Enables or disables output cutoff functionality. If enabled, you can define output cutoffs that, if exceeded, cause the output of the specified channel(s) to be disconnected.
     When this property is disabled, all other output cutoff properties are ignored.
@@ -1428,9 +1482,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_cutoff_enabled`
-    '''
+    """
     output_cutoff_voltage_change_limit_high = _attributes.AttributeViReal64(1150294)
-    '''Type: float
+    """Type: float
 
     Specifies a limit for positive voltage slew rate, in volts per microsecond, for output cutoff.
     If the voltage increases at a rate that exceeds this limit, the output is disconnected.
@@ -1448,9 +1502,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_cutoff_voltage_change_limit_high`
-    '''
+    """
     output_cutoff_voltage_change_limit_low = _attributes.AttributeViReal64(1150238)
-    '''Type: float
+    """Type: float
 
     Specifies a limit for negative voltage slew rate, in volts per microsecond, for output cutoff.
     If the voltage decreases at a rate that exceeds this limit, the output is disconnected.
@@ -1468,9 +1522,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_cutoff_voltage_change_limit_low`
-    '''
+    """
     output_cutoff_voltage_output_limit_high = _attributes.AttributeViReal64(1150236)
-    '''Type: float
+    """Type: float
 
     Specifies a high limit voltage value, in volts, for output cutoff.
     If the voltage output exceeds this limit, the output is disconnected.
@@ -1488,9 +1542,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_cutoff_voltage_output_limit_high`
-    '''
+    """
     output_cutoff_voltage_output_limit_low = _attributes.AttributeViReal64(1150292)
-    '''Type: float
+    """Type: float
 
     Specifies a low limit voltage value, in volts, for output cutoff.
     If the voltage output falls below this limit, the output is disconnected.
@@ -1508,9 +1562,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_cutoff_voltage_output_limit_low`
-    '''
+    """
     output_enabled = _attributes.AttributeViBoolean(1250006)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether the output is enabled (True) or disabled (False).
     Depending on the value you specify for the output_function property, you also must set the voltage level or current level in addition to enabling the output
@@ -1528,9 +1582,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_enabled`
-    '''
-    output_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputFunction, 1150008)
-    '''Type: enums.OutputFunction
+    """
+    output_function = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.OutputFunction, 1150008
+    )
+    """Type: enums.OutputFunction
 
     Configures the method to generate on the specified channel(s).
     When OutputFunction.DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the output current is below the current limit. You can use the following properties to configure the channel when OutputFunction.DC_VOLTAGE is selected:
@@ -1559,9 +1615,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_function`
-    '''
+    """
     output_resistance = _attributes.AttributeViReal64(1150061)
-    '''Type: float
+    """Type: float
 
     Specifies the output resistance that the device attempts to generate for the specified channel(s). This property is available only when you set the output_function property on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.
     about supported devices.
@@ -1578,9 +1634,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_resistance`
-    '''
+    """
     overranging_enabled = _attributes.AttributeViBoolean(1150007)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether NI-DCPower allows setting the voltage level, current level, voltage limit and current limit outside the device specification limits. True means that overranging is enabled.
     Refer to the Ranges topic in the NI DC Power Supplies and SMUs Help for more information about overranging.
@@ -1595,9 +1651,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.overranging_enabled`
-    '''
+    """
     ovp_enabled = _attributes.AttributeViBoolean(1250002)
-    '''Type: bool
+    """Type: bool
 
     Enables (True) or disables (False) overvoltage protection (OVP).
     Refer to the Output Overvoltage Protection topic in the NI DC Power Supplies and SMUs Help for more information about overvoltage protection.
@@ -1615,9 +1671,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.ovp_enabled`
-    '''
+    """
     ovp_limit = _attributes.AttributeViReal64(1250003)
-    '''Type: float
+    """Type: float
 
     Determines the voltage limit, in volts, beyond which overvoltage protection (OVP) engages.
     for information about supported devices.
@@ -1635,9 +1691,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.ovp_limit`
-    '''
-    power_allocation_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PowerAllocationMode, 1150207)
-    '''Type: enums.PowerAllocationMode
+    """
+    power_allocation_mode = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.PowerAllocationMode, 1150207
+    )
+    """Type: enums.PowerAllocationMode
 
     Determines whether the device sources the power its source configuration requires or a specific wattage you request; determines whether NI-DCPower proactively checks that this sourcing power is within the maximum per-channel and overall sourcing power of the device.
 
@@ -1658,9 +1716,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.power_allocation_mode`
-    '''
+    """
     power_line_frequency = _attributes.AttributeViReal64(1150020)
-    '''Type: float
+    """Type: float
 
     Specifies the power line frequency for specified channel(s). NI-DCPower uses this value to select a timebase for setting the aperture_time property in power line cycles (PLCs).
     in the NI DC Power Supplies and SMUs Help for information about supported devices.
@@ -1680,23 +1738,27 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.power_line_frequency`
-    '''
-    power_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PowerSource, 1150000)
-    '''Type: enums.PowerSource
+    """
+    power_source = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.PowerSource, 1150000
+    )
+    """Type: enums.PowerSource
 
     Specifies the power source to use. NI-DCPower switches the power source used by the device to the specified value.
     Default Value: PowerSource.AUTOMATIC
     is set to PowerSource.AUTOMATIC. However, if the session is in the Committed or Uncommitted state when you set this property, the power source selection only occurs after you call the initiate method.
 
     Note: Automatic selection is not persistent and occurs only at the time this property
-    '''
-    power_source_in_use = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PowerSourceInUse, 1150001)
-    '''Type: enums.PowerSourceInUse
+    """
+    power_source_in_use = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.PowerSourceInUse, 1150001
+    )
+    """Type: enums.PowerSourceInUse
 
     Indicates whether the device is using the internal or auxiliary power source to generate power.
-    '''
+    """
     pulse_bias_current_level = _attributes.AttributeViReal64(1150088)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse bias current level, in amps, that the device attempts to generate on the specified channel(s) during the off phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
@@ -1713,9 +1775,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_bias_current_level`
-    '''
+    """
     pulse_bias_current_limit = _attributes.AttributeViReal64(1150083)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse bias current limit, in amps, that the output cannot exceed when generating the desired pulse bias voltage on the specified channel(s) during the off phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
@@ -1732,9 +1794,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_bias_current_limit`
-    '''
+    """
     pulse_bias_current_limit_high = _attributes.AttributeViReal64(1150195)
-    '''Type: float
+    """Type: float
 
     Specifies the maximum current, in amps, that the output can produce when
     generating the desired pulse voltage on the specified channel(s) during
@@ -1779,9 +1841,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_bias_current_limit_high`
-    '''
+    """
     pulse_bias_current_limit_low = _attributes.AttributeViReal64(1150196)
-    '''Type: float
+    """Type: float
 
     Specifies the minimum current, in amps, that the output can produce when
     generating the desired pulse voltage on the specified channel(s) during
@@ -1826,9 +1888,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_bias_current_limit_low`
-    '''
+    """
     pulse_bias_delay = _attributes.AttributeViReal64(1150092)
-    '''Type: float
+    """Type: float
 
     Determines when, in seconds, the device generates the Pulse Complete event after generating the off level of a pulse.
     Valid Values: 0 to 167 seconds
@@ -1845,9 +1907,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_bias_delay`
-    '''
+    """
     pulse_bias_voltage_level = _attributes.AttributeViReal64(1150082)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse bias voltage level, in volts, that the device attempts to generate on the specified channel(s) during the off phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
@@ -1864,9 +1926,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_bias_voltage_level`
-    '''
+    """
     pulse_bias_voltage_limit = _attributes.AttributeViReal64(1150089)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired current on the specified channel(s) during the off phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
@@ -1883,9 +1945,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_bias_voltage_limit`
-    '''
+    """
     pulse_bias_voltage_limit_high = _attributes.AttributeViReal64(1150191)
-    '''Type: float
+    """Type: float
 
     Specifies the maximum voltage, in volts, that the output can produce
     when generating the desired pulse current on the specified channel(s)
@@ -1930,9 +1992,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_bias_voltage_limit_high`
-    '''
+    """
     pulse_bias_voltage_limit_low = _attributes.AttributeViReal64(1150192)
-    '''Type: float
+    """Type: float
 
     Specifies the minimum voltage, in volts, that the output can produce
     when generating the desired pulse current on the specified channel(s)
@@ -1977,9 +2039,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_bias_voltage_limit_low`
-    '''
+    """
     pulse_complete_event_output_terminal = _attributes.AttributeViString(1150099)
-    '''Type: str
+    """Type: str
 
     Specifies the output terminal for exporting the Pulse Complete event.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
@@ -1996,9 +2058,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_complete_event_output_terminal`
-    '''
-    pulse_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150100)
-    '''Type: enums.Polarity
+    """
+    pulse_complete_event_pulse_polarity = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.Polarity, 1150100
+    )
+    """Type: enums.Polarity
 
     Specifies the behavior of the Pulse Complete event.
     Default Value: Polarity.HIGH
@@ -2014,9 +2078,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_complete_event_pulse_polarity`
-    '''
+    """
     pulse_complete_event_pulse_width = _attributes.AttributeViReal64(1150101)
-    '''Type: float
+    """Type: float
 
     Specifies the width of the Pulse Complete event, in seconds.
     The minimum event pulse width value for PXI Express devices is 250 ns.
@@ -2034,9 +2098,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_complete_event_pulse_width`
-    '''
+    """
     pulse_current_level = _attributes.AttributeViReal64(1150086)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse current level, in amps, that the device attempts to generate on the specified channel(s) during the on phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
@@ -2053,9 +2117,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_current_level`
-    '''
+    """
     pulse_current_level_range = _attributes.AttributeViReal64(1150090)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse current level range, in amps, for the specified channel(s).
     The range defines the valid values to which you can set the pulse current level and pulse bias current level.
@@ -2073,9 +2137,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_current_level_range`
-    '''
+    """
     pulse_current_limit = _attributes.AttributeViReal64(1150081)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
@@ -2092,9 +2156,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_current_limit`
-    '''
+    """
     pulse_current_limit_high = _attributes.AttributeViReal64(1150193)
-    '''Type: float
+    """Type: float
 
     Specifies the maximum current, in amps, that the output can produce when
     generating the desired pulse voltage on the specified channel(s) during
@@ -2139,9 +2203,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_current_limit_high`
-    '''
+    """
     pulse_current_limit_low = _attributes.AttributeViReal64(1150194)
-    '''Type: float
+    """Type: float
 
     Specifies the minimum current, in amps, that the output can produce when
     generating the desired pulse voltage on the specified channel(s) during
@@ -2186,9 +2250,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_current_limit_low`
-    '''
+    """
     pulse_current_limit_range = _attributes.AttributeViReal64(1150085)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse current limit range, in amps, for the specified channel(s).
     The range defines the valid values to which you can set the pulse current limit and pulse bias current limit.
@@ -2206,9 +2270,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_current_limit_range`
-    '''
+    """
     pulse_off_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150094)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+    """Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Determines the length, in seconds, of the off phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -2225,9 +2289,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_off_time`
-    '''
+    """
     pulse_on_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150093)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+    """Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Determines the length, in seconds, of the on phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -2244,9 +2308,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_on_time`
-    '''
-    pulse_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150095)
-    '''Type: enums.TriggerType
+    """
+    pulse_trigger_type = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.TriggerType, 1150095
+    )
+    """Type: enums.TriggerType
 
     Specifies the behavior of the Pulse trigger.
     Default Value: TriggerType.NONE
@@ -2262,9 +2328,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_trigger_type`
-    '''
+    """
     pulse_voltage_level = _attributes.AttributeViReal64(1150080)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
@@ -2281,9 +2347,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_voltage_level`
-    '''
+    """
     pulse_voltage_level_range = _attributes.AttributeViReal64(1150084)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse voltage level range, in volts, for the specified channel(s).
     The range defines the valid values at which you can set the pulse voltage level and pulse bias voltage level.
@@ -2301,9 +2367,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_voltage_level_range`
-    '''
+    """
     pulse_voltage_limit = _attributes.AttributeViReal64(1150087)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
@@ -2320,9 +2386,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_voltage_limit`
-    '''
+    """
     pulse_voltage_limit_high = _attributes.AttributeViReal64(1150189)
-    '''Type: float
+    """Type: float
 
     Specifies the maximum voltage, in volts, that the output can produce
     when generating the desired pulse current on the specified channel(s)
@@ -2367,9 +2433,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_voltage_limit_high`
-    '''
+    """
     pulse_voltage_limit_low = _attributes.AttributeViReal64(1150190)
-    '''Type: float
+    """Type: float
 
     Specifies the minimum voltage, in volts, that the output can produce
     when generating the desired pulse current on the specified channel(s)
@@ -2414,9 +2480,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_voltage_limit_low`
-    '''
+    """
     pulse_voltage_limit_range = _attributes.AttributeViReal64(1150091)
-    '''Type: float
+    """Type: float
 
     Specifies the pulse voltage limit range, in volts, for the specified channel(s).
     The range defines the valid values to which you can set the pulse voltage limit and pulse bias voltage limit.
@@ -2434,18 +2500,20 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.pulse_voltage_limit_range`
-    '''
+    """
     query_instrument_status = _attributes.AttributeViBoolean(1050003)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether NI-DCPower queries the device status after each operation.
     Querying the device status is useful for debugging. After you validate your program, you can set this property to False to disable status checking and maximize performance.
     NI-DCPower ignores status checking for particular properties regardless of the setting of this property.
     Use the __init__ method to override this value.
     Default Value: True
-    '''
-    ready_for_pulse_trigger_event_output_terminal = _attributes.AttributeViString(1150102)
-    '''Type: str
+    """
+    ready_for_pulse_trigger_event_output_terminal = _attributes.AttributeViString(
+        1150102
+    )
+    """Type: str
 
     Specifies the output terminal for exporting the Ready For Pulse Trigger event.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
@@ -2461,9 +2529,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.ready_for_pulse_trigger_event_output_terminal`
-    '''
-    ready_for_pulse_trigger_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150103)
-    '''Type: enums.Polarity
+    """
+    ready_for_pulse_trigger_event_pulse_polarity = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.Polarity, 1150103
+    )
+    """Type: enums.Polarity
 
     Specifies the behavior of the Ready For Pulse Trigger event.
     Default Value: Polarity.HIGH
@@ -2479,9 +2549,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.ready_for_pulse_trigger_event_pulse_polarity`
-    '''
+    """
     ready_for_pulse_trigger_event_pulse_width = _attributes.AttributeViReal64(1150104)
-    '''Type: float
+    """Type: float
 
     Specifies the width of the Ready For Pulse Trigger event, in seconds.
     The minimum event pulse width value for PXI Express devices is 250 ns.
@@ -2499,9 +2569,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.ready_for_pulse_trigger_event_pulse_width`
-    '''
+    """
     requested_power_allocation = _attributes.AttributeViReal64(1150206)
-    '''Type: float
+    """Type: float
 
     Specifies the power, in watts, to request the device to source from each active channel.
      This property defines the power to source from the device only if the power_allocation_mode property is set to PowerAllocationMode.MANUAL.
@@ -2524,9 +2594,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.requested_power_allocation`
-    '''
+    """
     reset_average_before_measurement = _attributes.AttributeViBoolean(1150006)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether the measurement returned from any measurement call starts with a new measurement call (True) or returns a measurement that has already begun or completed(False).
     for information about supported devices.
@@ -2544,9 +2614,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.reset_average_before_measurement`
-    '''
+    """
     samples_to_average = _attributes.AttributeViInt32(1150003)
-    '''Type: int
+    """Type: int
 
     Specifies the number of samples to average when you take a measurement.
     Increasing the number of samples to average decreases measurement noise but increases the time required to take a measurement. Refer to the NI PXI-4110, NI PXI-4130, NI PXI-4132, or NI PXIe-4154 Averaging topic for optional property settings to improve immunity to certain noise types, or refer to the NI PXIe-4140/4141  DC Noise Rejection, NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic for information about improving noise immunity for those devices.
@@ -2569,9 +2639,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.samples_to_average`
-    '''
-    self_calibration_persistence = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SelfCalibrationPersistence, 1150073)
-    '''Type: enums.SelfCalibrationPersistence
+    """
+    self_calibration_persistence = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.SelfCalibrationPersistence, 1150073
+    )
+    """Type: enums.SelfCalibrationPersistence
 
     Specifies whether the values calculated during self-calibration should be written to hardware to be used until the next self-calibration or only used until the reset_device method is called or the machine is powered down.
     This property affects the behavior of the self_cal method. When set to SelfCalibrationPersistence.KEEP_IN_MEMORY, the values calculated by the self_cal method are used in the existing session, as well as in all further sessions until you call the reset_device method or restart the machine. When you set this property to SelfCalibrationPersistence.WRITE_TO_EEPROM, the values calculated by the self_cal method are written to hardware and used in the existing session and in all subsequent sessions until another call to the self_cal method is made.
@@ -2589,9 +2661,11 @@ class _SessionBase(object):
     To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.self_calibration_persistence`
-    '''
-    sense = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Sense, 1150013)
-    '''Type: enums.Sense
+    """
+    sense = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.Sense, 1150013
+    )
+    """Type: enums.Sense
 
     Selects either local or remote sensing of the output voltage for the specified channel(s).
     Refer to the Local and Remote Sense topic in the NI DC Power Supplies and SMUs Help for more information about sensing voltage on supported channels and about devices that support local and/or remote sensing.
@@ -2606,9 +2680,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sense`
-    '''
-    sequence_advance_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150026)
-    '''Type: enums.TriggerType
+    """
+    sequence_advance_trigger_type = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.TriggerType, 1150026
+    )
+    """Type: enums.TriggerType
 
     Specifies the behavior of the Sequence Advance trigger.
     for information about supported devices.
@@ -2625,9 +2701,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_advance_trigger_type`
-    '''
+    """
     sequence_engine_done_event_output_terminal = _attributes.AttributeViString(1150050)
-    '''Type: str
+    """Type: str
 
     Specifies the output terminal for exporting the Sequence Engine Done Complete event.
     for information about supported devices.
@@ -2644,9 +2720,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_engine_done_event_output_terminal`
-    '''
-    sequence_engine_done_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150048)
-    '''Type: enums.Polarity
+    """
+    sequence_engine_done_event_pulse_polarity = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.Polarity, 1150048
+    )
+    """Type: enums.Polarity
 
     Specifies the behavior of the Sequence Engine Done event.
     for information about supported devices.
@@ -2663,9 +2741,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_engine_done_event_pulse_polarity`
-    '''
+    """
     sequence_engine_done_event_pulse_width = _attributes.AttributeViReal64(1150049)
-    '''Type: float
+    """Type: float
 
     Specifies the width of the Sequence Engine Done event, in seconds.
     The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value for PXI Express devices is 250 ns.
@@ -2685,9 +2763,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_engine_done_event_pulse_width`
-    '''
-    sequence_iteration_complete_event_output_terminal = _attributes.AttributeViString(1150040)
-    '''Type: str
+    """
+    sequence_iteration_complete_event_output_terminal = _attributes.AttributeViString(
+        1150040
+    )
+    """Type: str
 
     Specifies the output terminal for exporting the Sequence Iteration Complete event.
     for information about supported devices.
@@ -2704,9 +2784,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_iteration_complete_event_output_terminal`
-    '''
-    sequence_iteration_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150038)
-    '''Type: enums.Polarity
+    """
+    sequence_iteration_complete_event_pulse_polarity = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.Polarity, 1150038
+    )
+    """Type: enums.Polarity
 
     Specifies the behavior of the Sequence Iteration Complete event.
     for information about supported devices.
@@ -2723,9 +2805,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_iteration_complete_event_pulse_polarity`
-    '''
-    sequence_iteration_complete_event_pulse_width = _attributes.AttributeViReal64(1150039)
-    '''Type: float
+    """
+    sequence_iteration_complete_event_pulse_width = _attributes.AttributeViReal64(
+        1150039
+    )
+    """Type: float
 
     Specifies the width of the Sequence Iteration Complete event, in seconds.
     The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value for PXI Express devices is 250 ns.
@@ -2745,9 +2829,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_iteration_complete_event_pulse_width`
-    '''
+    """
     sequence_loop_count = _attributes.AttributeViInt32(1150025)
-    '''Type: int
+    """Type: int
 
     Specifies the number of times a sequence is run after initiation.
     Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence loop count.
@@ -2766,9 +2850,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_loop_count`
-    '''
+    """
     sequence_loop_count_is_finite = _attributes.AttributeViBoolean(1150078)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether a sequence should repeat indefinitely.
     Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about infinite sequencing.
@@ -2786,9 +2870,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_loop_count_is_finite`
-    '''
+    """
     sequence_step_delta_time = _attributes.AttributeViReal64(1150198)
-    '''Type: float
+    """Type: float
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2799,9 +2883,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_step_delta_time`
-    '''
+    """
     sequence_step_delta_time_enabled = _attributes.AttributeViBoolean(1150199)
-    '''Type: bool
+    """Type: bool
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2812,9 +2896,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_step_delta_time_enabled`
-    '''
+    """
     serial_number = _attributes.AttributeViString(1150152)
-    '''Type: str
+    """Type: str
 
     Contains the serial number for the device you are currently using.
 
@@ -2827,9 +2911,11 @@ class _SessionBase(object):
     To set/get on all instruments, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.serial_number`
-    '''
-    shutdown_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150275)
-    '''Type: enums.TriggerType
+    """
+    shutdown_trigger_type = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.TriggerType, 1150275
+    )
+    """Type: enums.TriggerType
 
     Specifies the behavior of the Shutdown trigger.
     Default Value: TriggerType.NONE
@@ -2845,15 +2931,15 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.shutdown_trigger_type`
-    '''
+    """
     simulate = _attributes.AttributeViBoolean(1050005)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether to simulate NI-DCPower I/O operations. True specifies that operation is simulated.
     Default Value: False
-    '''
+    """
     source_complete_event_output_terminal = _attributes.AttributeViString(1150043)
-    '''Type: str
+    """Type: str
 
     Specifies the output terminal for exporting the Source Complete event.
     for information about supported devices.
@@ -2870,9 +2956,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.source_complete_event_output_terminal`
-    '''
-    source_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150041)
-    '''Type: enums.Polarity
+    """
+    source_complete_event_pulse_polarity = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.Polarity, 1150041
+    )
+    """Type: enums.Polarity
 
     Specifies the behavior of the Source Complete event.
     for information about supported devices.
@@ -2889,9 +2977,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.source_complete_event_pulse_polarity`
-    '''
+    """
     source_complete_event_pulse_width = _attributes.AttributeViReal64(1150042)
-    '''Type: float
+    """Type: float
 
     Specifies the width of the Source Complete event, in seconds.
     for information about supported devices.
@@ -2911,9 +2999,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.source_complete_event_pulse_width`
-    '''
+    """
     source_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+    """Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the measure_when property is set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
     Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.
@@ -2932,9 +3020,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.source_delay`
-    '''
-    source_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SourceMode, 1150054)
-    '''Type: enums.SourceMode
+    """
+    source_mode = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.SourceMode, 1150054
+    )
+    """Type: enums.SourceMode
 
     Specifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.
     Default value: SourceMode.SINGLE_POINT
@@ -2948,9 +3038,11 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.source_mode`
-    '''
-    source_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150030)
-    '''Type: enums.TriggerType
+    """
+    source_trigger_type = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.TriggerType, 1150030
+    )
+    """Type: enums.TriggerType
 
     Specifies the behavior of the Source trigger.
     for information about supported devices.
@@ -2967,29 +3059,31 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.source_trigger_type`
-    '''
+    """
     specific_driver_description = _attributes.AttributeViString(1050514)
-    '''Type: str
+    """Type: str
 
     Contains a brief description of the specific driver.
-    '''
+    """
     specific_driver_prefix = _attributes.AttributeViString(1050302)
-    '''Type: str
+    """Type: str
 
     Contains the prefix for NI-DCPower. The name of each user-callable method in NI-DCPower begins with this prefix.
-    '''
+    """
     specific_driver_revision = _attributes.AttributeViString(1050551)
-    '''Type: str
+    """Type: str
 
     Contains additional version information about NI-DCPower.
-    '''
+    """
     specific_driver_vendor = _attributes.AttributeViString(1050513)
-    '''Type: str
+    """Type: str
 
     Contains the name of the vendor that supplies NI-DCPower.
-    '''
-    start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150021)
-    '''Type: enums.TriggerType
+    """
+    start_trigger_type = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.TriggerType, 1150021
+    )
+    """Type: enums.TriggerType
 
     Specifies the behavior of the Start trigger.
     for information about supported devices.
@@ -3006,14 +3100,16 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.start_trigger_type`
-    '''
+    """
     supported_instrument_models = _attributes.AttributeViString(1050327)
-    '''Type: str
+    """Type: str
 
     Contains a comma-separated (,) list of supported NI-DCPower device models.
-    '''
-    transient_response = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TransientResponse, 1150062)
-    '''Type: enums.TransientResponse
+    """
+    transient_response = _attributes.AttributeEnum(
+        _attributes.AttributeViInt32, enums.TransientResponse, 1150062
+    )
+    """Type: enums.TransientResponse
 
     Specifies the transient response. Refer to the Transient Response topic in the NI DC Power Supplies and SMUs Help for more information about transient response.
     for information about supported devices.
@@ -3030,9 +3126,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.transient_response`
-    '''
+    """
     voltage_compensation_frequency = _attributes.AttributeViReal64(1150068)
-    '''Type: float
+    """Type: float
 
     The frequency at which a pole-zero pair is added to the system when the channel is in Constant Voltage mode.
     for information about supported devices.
@@ -3049,9 +3145,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.voltage_compensation_frequency`
-    '''
+    """
     voltage_gain_bandwidth = _attributes.AttributeViReal64(1150067)
-    '''Type: float
+    """Type: float
 
     The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This property takes effect when the channel is in Constant Voltage mode.
     for information about supported devices.
@@ -3068,9 +3164,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.voltage_gain_bandwidth`
-    '''
+    """
     voltage_level = _attributes.AttributeViReal64(1250001)
-    '''Type: float
+    """Type: float
 
     Specifies the voltage level, in volts, that the device attempts to generate on the specified channel(s).
     This property is applicable only if the output_function property is set to OutputFunction.DC_VOLTAGE.
@@ -3088,9 +3184,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.voltage_level`
-    '''
+    """
     voltage_level_autorange = _attributes.AttributeViInt32(1150015)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level for the specified channel(s).
     If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the voltage_level_range property. If you change the voltage_level_autorange property from AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_level_range property was set to (or the default value if the property was never set) and uses that value as the voltage level range.
@@ -3107,9 +3203,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.voltage_level_autorange`
-    '''
+    """
     voltage_level_range = _attributes.AttributeViReal64(1150005)
-    '''Type: float
+    """Type: float
 
     Specifies the voltage level range, in volts, for the specified channel(s).
     The range defines the valid values to which the voltage level can be set. Use the voltage_level_autorange property to enable automatic selection of the voltage level range.
@@ -3128,9 +3224,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.voltage_level_range`
-    '''
+    """
     voltage_limit = _attributes.AttributeViReal64(1150010)
-    '''Type: float
+    """Type: float
 
     Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level on the specified channels.
     This property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
@@ -3148,9 +3244,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.voltage_limit`
-    '''
+    """
     voltage_limit_autorange = _attributes.AttributeViInt32(1150018)
-    '''Type: bool
+    """Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for the specified channel(s).
     If this property is set to AutoZero.ON, NI-DCPower ignores any changes you make to the voltage_limit_range property. If you change the voltage_limit_autorange property from AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_limit_range property was set to (or the default value if the property was never set) and uses that value as the voltage limit range.
@@ -3167,9 +3263,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.voltage_limit_autorange`
-    '''
+    """
     voltage_limit_high = _attributes.AttributeViReal64(1150185)
-    '''Type: float
+    """Type: float
 
     Specifies the maximum voltage, in volts, that the output can produce
     when generating the desired current on the specified channel(s).
@@ -3211,9 +3307,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.voltage_limit_high`
-    '''
+    """
     voltage_limit_low = _attributes.AttributeViReal64(1150186)
-    '''Type: float
+    """Type: float
 
     Specifies the minimum voltage, in volts, that the output can produce
     when generating the desired current on the specified channel(s).
@@ -3255,9 +3351,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.voltage_limit_low`
-    '''
+    """
     voltage_limit_range = _attributes.AttributeViReal64(1150012)
-    '''Type: float
+    """Type: float
 
     Specifies the voltage limit range, in volts, for the specified channel(s).
     The range defines the valid values to which the voltage limit can be set. Use the voltage_limit_autorange property to enable automatic selection of the voltage limit range.
@@ -3276,9 +3372,9 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.voltage_limit_range`
-    '''
+    """
     voltage_pole_zero_ratio = _attributes.AttributeViReal64(1150069)
-    '''Type: float
+    """Type: float
 
     The ratio of the pole frequency to the zero frequency when the channel is in Constant Voltage mode.
     for information about supported devices.
@@ -3295,42 +3391,50 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.voltage_pole_zero_ratio`
-    '''
+    """
 
-    def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
+    def __init__(
+        self, repeated_capability_list, vi, library, encoding, freeze_it=False
+    ):
         self._repeated_capability_list = repeated_capability_list
-        self._repeated_capability = ','.join(repeated_capability_list)
+        self._repeated_capability = ",".join(repeated_capability_list)
         self._vi = vi
         self._library = library
         self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
+        param_list.append(
+            "repeated_capability_list=" + pp.pformat(repeated_capability_list)
+        )
         param_list.append("vi=" + pp.pformat(vi))
         param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
-        self._param_list = ', '.join(param_list)
+        self._param_list = ", ".join(param_list)
 
         # Instantiate any repeated capability objects
-        self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
-        self.instruments = _RepeatedCapabilities(self, '', repeated_capability_list)
+        self.channels = _RepeatedCapabilities(self, "", repeated_capability_list)
+        self.instruments = _RepeatedCapabilities(self, "", repeated_capability_list)
 
         self._is_frozen = freeze_it
 
     def __repr__(self):
-        return '{0}.{1}({2})'.format('nidcpower', self.__class__.__name__, self._param_list)
+        return "{0}.{1}({2})".format(
+            "nidcpower", self.__class__.__name__, self._param_list
+        )
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
-            raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
+            raise AttributeError(
+                "'{0}' object has no attribute '{1}'".format(type(self).__name__, key)
+            )
         object.__setattr__(self, key, value)
 
     def _get_error_description(self, error_code):
-        '''_get_error_description
+        """_get_error_description
 
         Returns the error description.
-        '''
+        """
         try:
             _, error_string = self._get_error()
             return error_string
@@ -3338,18 +3442,18 @@ class _SessionBase(object):
             pass
 
         try:
-            '''
+            """
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
             Use _error_message instead. It doesn't require a session.
-            '''
+            """
             error_string = self._error_message(error_code)
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
 
     def initiate(self):
-        '''initiate
+        """initiate
 
         Starts generation or acquisition, causing the specified channel(s) to
         leave the Uncommitted state or Committed state and enter the Running
@@ -3377,14 +3481,14 @@ class _SessionBase(object):
         To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.initiate`
-        '''
+        """
         return _Acquisition(self)
 
-    ''' These are code-generated '''
+    """ These are code-generated """
 
     @ivi_synchronized
     def abort(self):
-        r'''abort
+        r"""abort
 
         Transitions the specified channel(s) from the Running state to the
         Uncommitted state. If a sequence is running, it is stopped. Any
@@ -3420,16 +3524,22 @@ class _SessionBase(object):
         To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.abort`
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_AbortWithChannels(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
+        error_code = self._library.niDCPower_AbortWithChannels(
+            vi_ctype, channel_name_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def self_cal(self):
-        r'''self_cal
+        r"""self_cal
 
         Performs a self-calibration upon the specified channel(s).
 
@@ -3469,16 +3579,22 @@ class _SessionBase(object):
         To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.self_cal`
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_CalSelfCalibrate(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
+        error_code = self._library.niDCPower_CalSelfCalibrate(
+            vi_ctype, channel_name_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def clear_latched_output_cutoff_state(self, output_cutoff_reason):
-        r'''clear_latched_output_cutoff_state
+        r"""clear_latched_output_cutoff_state
 
         Clears the state of an output cutoff that was engaged.
         To clear the state for all output cutoff reasons, use OutputCutoffReason.ALL.
@@ -3517,19 +3633,30 @@ class _SessionBase(object):
                 | OutputCutoffReason.CURRENT_CHANGE_LOW   | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output |
                 +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
 
-        '''
+        """
         if type(output_cutoff_reason) is not enums.OutputCutoffReason:
-            raise TypeError('Parameter output_cutoff_reason must be of type ' + str(enums.OutputCutoffReason))
+            raise TypeError(
+                "Parameter output_cutoff_reason must be of type "
+                + str(enums.OutputCutoffReason)
+            )
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        output_cutoff_reason_ctype = _visatype.ViInt32(output_cutoff_reason.value)  # case S130
-        error_code = self._library.niDCPower_ClearLatchedOutputCutoffState(vi_ctype, channel_name_ctype, output_cutoff_reason_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
+        output_cutoff_reason_ctype = _visatype.ViInt32(
+            output_cutoff_reason.value
+        )  # case S130
+        error_code = self._library.niDCPower_ClearLatchedOutputCutoffState(
+            vi_ctype, channel_name_ctype, output_cutoff_reason_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def commit(self):
-        r'''commit
+        r"""commit
 
         Applies previously configured settings to the specified channel(s). Calling this
         method moves the NI-DCPower session from the Uncommitted state into
@@ -3556,16 +3683,24 @@ class _SessionBase(object):
         To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.commit`
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_CommitWithChannels(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
+        error_code = self._library.niDCPower_CommitWithChannels(
+            vi_ctype, channel_name_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
-    def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
-        r'''configure_aperture_time
+    def configure_aperture_time(
+        self, aperture_time, units=enums.ApertureTimeUnits.SECONDS
+    ):
+        r"""configure_aperture_time
 
         Configures the aperture time on the specified channel(s).
 
@@ -3613,20 +3748,28 @@ class _SessionBase(object):
                 | ApertureTimeUnits.POWER_LINE_CYCLES | Specifies Power Line Cycles. |
                 +-------------------------------------+------------------------------+
 
-        '''
+        """
         if type(units) is not enums.ApertureTimeUnits:
-            raise TypeError('Parameter units must be of type ' + str(enums.ApertureTimeUnits))
+            raise TypeError(
+                "Parameter units must be of type " + str(enums.ApertureTimeUnits)
+            )
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         aperture_time_ctype = _visatype.ViReal64(aperture_time)  # case S150
         units_ctype = _visatype.ViInt32(units.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureApertureTime(vi_ctype, channel_name_ctype, aperture_time_ctype, units_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_ConfigureApertureTime(
+            vi_ctype, channel_name_ctype, aperture_time_ctype, units_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def create_advanced_sequence_commit_step(self, set_as_active_step=True):
-        r'''create_advanced_sequence_commit_step
+        r"""create_advanced_sequence_commit_step
 
         Creates a Commit step in the Active advanced sequence. A Commit step
         configures channels to a user-defined known state before starting the advanced sequence.
@@ -3673,17 +3816,25 @@ class _SessionBase(object):
         Args:
             set_as_active_step (bool): Specifies whether the step created with this method is active in the Active advanced sequence.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
-        error_code = self._library.niDCPower_CreateAdvancedSequenceCommitStepWithChannels(vi_ctype, channel_name_ctype, set_as_active_step_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = (
+            self._library.niDCPower_CreateAdvancedSequenceCommitStepWithChannels(
+                vi_ctype, channel_name_ctype, set_as_active_step_ctype
+            )
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def create_advanced_sequence_step(self, set_as_active_step=True):
-        r'''create_advanced_sequence_step
+        r"""create_advanced_sequence_step
 
         Creates a new advanced sequence step in the advanced sequence specified
         by the Active advanced sequence. When you create an advanced sequence
@@ -3728,17 +3879,25 @@ class _SessionBase(object):
         Args:
             set_as_active_step (bool): Specifies whether the step created with this method is active in the Active advanced sequence.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
-        error_code = self._library.niDCPower_CreateAdvancedSequenceStepWithChannels(vi_ctype, channel_name_ctype, set_as_active_step_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_CreateAdvancedSequenceStepWithChannels(
+            vi_ctype, channel_name_ctype, set_as_active_step_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
-    def _create_advanced_sequence_with_channels(self, sequence_name, attribute_ids, set_as_active_sequence):
-        r'''_create_advanced_sequence_with_channels
+    def _create_advanced_sequence_with_channels(
+        self, sequence_name, attribute_ids, set_as_active_sequence
+    ):
+        r"""_create_advanced_sequence_with_channels
 
         Creates an empty advanced sequence. Call the
         create_advanced_sequence_step method to add steps to the
@@ -3906,20 +4065,39 @@ class _SessionBase(object):
 
             set_as_active_sequence (bool): Specifies that this current sequence is active.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
-        attribute_id_count_ctype = _visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case S160
-        attribute_ids_ctype = get_ctypes_pointer_for_buffer(value=attribute_ids, library_type=_visatype.ViInt32)  # case B550
-        set_as_active_sequence_ctype = _visatype.ViBoolean(set_as_active_sequence)  # case S150
-        error_code = self._library.niDCPower_CreateAdvancedSequenceWithChannels(vi_ctype, channel_name_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
+        sequence_name_ctype = ctypes.create_string_buffer(
+            sequence_name.encode(self._encoding)
+        )  # case C020
+        attribute_id_count_ctype = _visatype.ViInt32(
+            0 if attribute_ids is None else len(attribute_ids)
+        )  # case S160
+        attribute_ids_ctype = get_ctypes_pointer_for_buffer(
+            value=attribute_ids, library_type=_visatype.ViInt32
+        )  # case B550
+        set_as_active_sequence_ctype = _visatype.ViBoolean(
+            set_as_active_sequence
+        )  # case S150
+        error_code = self._library.niDCPower_CreateAdvancedSequenceWithChannels(
+            vi_ctype,
+            channel_name_ctype,
+            sequence_name_ctype,
+            attribute_id_count_ctype,
+            attribute_ids_ctype,
+            set_as_active_sequence_ctype,
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def delete_advanced_sequence(self, sequence_name):
-        r'''delete_advanced_sequence
+        r"""delete_advanced_sequence
 
         Deletes a previously created advanced sequence and all the advanced
         sequence steps in the advanced sequence.
@@ -3959,17 +4137,27 @@ class _SessionBase(object):
         Args:
             sequence_name (str): specifies the name of the sequence to delete.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_DeleteAdvancedSequenceWithChannels(vi_ctype, channel_name_ctype, sequence_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
+        sequence_name_ctype = ctypes.create_string_buffer(
+            sequence_name.encode(self._encoding)
+        )  # case C020
+        error_code = self._library.niDCPower_DeleteAdvancedSequenceWithChannels(
+            vi_ctype, channel_name_ctype, sequence_name_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
-    def create_advanced_sequence(self, sequence_name, property_names, set_as_active_sequence=True):
-        '''create_advanced_sequence
+    def create_advanced_sequence(
+        self, sequence_name, property_names, set_as_active_sequence=True
+    ):
+        """create_advanced_sequence
 
         Creates an empty advanced sequence. Call the
         create_advanced_sequence_step method to add steps to the
@@ -4132,23 +4320,35 @@ class _SessionBase(object):
 
             set_as_active_sequence (bool): Specifies that this current sequence is active.
 
-        '''
+        """
         # The way the NI-DCPower C API is designed, we need to know all the attribute ID's upfront in order to call
         # `niDCPower_CreateAdvancedSequence`. In order to find the attribute ID of each property, we look at the
         # member Attribute objects of Session. We use a set since we don't have to worry about is it already there.
         attribute_ids_used = set()
         for prop in property_names:
             if prop not in Session.__base__.__dict__:
-                raise KeyError('{0} is not an property on the nidcpower.Session'.format(prop))
-            if not isinstance(Session.__base__.__dict__[prop], _attributes.Attribute) and not isinstance(Session.__base__.__dict__[prop], _attributes.AttributeEnum):
-                raise TypeError('{0} is not a valid property: {1}'.format(prop, type(Session.__base__.__dict__[prop])))
+                raise KeyError(
+                    "{0} is not an property on the nidcpower.Session".format(prop)
+                )
+            if not isinstance(
+                Session.__base__.__dict__[prop], _attributes.Attribute
+            ) and not isinstance(
+                Session.__base__.__dict__[prop], _attributes.AttributeEnum
+            ):
+                raise TypeError(
+                    "{0} is not a valid property: {1}".format(
+                        prop, type(Session.__base__.__dict__[prop])
+                    )
+                )
             attribute_ids_used.add(Session.__base__.__dict__[prop]._attribute_id)
 
-        self._create_advanced_sequence_with_channels(sequence_name, list(attribute_ids_used), set_as_active_sequence)
+        self._create_advanced_sequence_with_channels(
+            sequence_name, list(attribute_ids_used), set_as_active_sequence
+        )
 
     @ivi_synchronized
     def fetch_multiple(self, count, timeout=hightime.timedelta(seconds=1.0)):
-        '''fetch_multiple
+        """fetch_multiple
 
         Returns a list of named tuples (Measurement) that were
         previously taken and are stored in the NI-DCPower buffer. This method
@@ -4190,17 +4390,31 @@ class _SessionBase(object):
                 - **current** (float)
                 - **in_compliance** (bool)
 
-        '''
+        """
         import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
 
-        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(timeout, count)
+        Measurement = collections.namedtuple(
+            "Measurement", ["voltage", "current", "in_compliance"]
+        )
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
+        (
+            voltage_measurements,
+            current_measurements,
+            in_compliance,
+        ) = self._fetch_multiple(timeout, count)
+
+        return [
+            Measurement(
+                voltage=voltage_measurements[i],
+                current=current_measurements[i],
+                in_compliance=in_compliance[i],
+            )
+            for i in range(count)
+        ]
 
     @ivi_synchronized
     def measure_multiple(self):
-        '''measure_multiple
+        """measure_multiple
 
         Returns a list of named tuples (Measurement) containing the measured voltage
         and current values on the specified output channel(s). Each call to this method
@@ -4234,17 +4448,27 @@ class _SessionBase(object):
                 - **current** (float)
                 - **in_compliance** (bool) - Always None
 
-        '''
+        """
         import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+
+        Measurement = collections.namedtuple(
+            "Measurement", ["voltage", "current", "in_compliance"]
+        )
 
         voltage_measurements, current_measurements = self._measure_multiple()
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
+        return [
+            Measurement(
+                voltage=voltage_measurements[i],
+                current=current_measurements[i],
+                in_compliance=None,
+            )
+            for i in range(self._parse_channel_count())
+        ]
 
     @ivi_synchronized
     def _fetch_multiple(self, timeout, count):
-        r'''_fetch_multiple
+        r"""_fetch_multiple
 
         Returns an array of voltage measurements, an array of current
         measurements, and an array of compliance measurements that were
@@ -4303,27 +4527,58 @@ class _SessionBase(object):
             actual_count (int): Indicates the number of measured values actually retrieved from the
                 device.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(
+            timeout
+        )  # case S140
         count_ctype = _visatype.ViInt32(count)  # case S210
         voltage_measurements_size = count  # case B600
-        voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B600
-        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B600
+        voltage_measurements_array = array.array(
+            "d", [0] * voltage_measurements_size
+        )  # case B600
+        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(
+            value=voltage_measurements_array, library_type=_visatype.ViReal64
+        )  # case B600
         current_measurements_size = count  # case B600
-        current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B600
-        current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B600
+        current_measurements_array = array.array(
+            "d", [0] * current_measurements_size
+        )  # case B600
+        current_measurements_ctype = get_ctypes_pointer_for_buffer(
+            value=current_measurements_array, library_type=_visatype.ViReal64
+        )  # case B600
         in_compliance_size = count  # case B600
-        in_compliance_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=in_compliance_size)  # case B600
+        in_compliance_ctype = get_ctypes_pointer_for_buffer(
+            library_type=_visatype.ViBoolean, size=in_compliance_size
+        )  # case B600
         actual_count_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
+        error_code = self._library.niDCPower_FetchMultiple(
+            vi_ctype,
+            channel_name_ctype,
+            timeout_ctype,
+            count_ctype,
+            voltage_measurements_ctype,
+            current_measurements_ctype,
+            in_compliance_ctype,
+            None
+            if actual_count_ctype is None
+            else (ctypes.pointer(actual_count_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
+        return (
+            voltage_measurements_array,
+            current_measurements_array,
+            [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)],
+        )
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
-        r'''_get_attribute_vi_boolean
+        r"""_get_attribute_vi_boolean
 
         | Queries the value of a ViBoolean property.
         | You can use this method to get the values of device-specific
@@ -4370,18 +4625,29 @@ class _SessionBase(object):
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niDCPower_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_GetAttributeViBoolean(
+            vi_ctype,
+            channel_name_ctype,
+            attribute_id_ctype,
+            None
+            if attribute_value_ctype is None
+            else (ctypes.pointer(attribute_value_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return bool(attribute_value_ctype.value)
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
-        r'''_get_attribute_vi_int32
+        r"""_get_attribute_vi_int32
 
         | Queries the value of a ViInt32 property.
         | You can use this method to get the values of device-specific
@@ -4428,18 +4694,29 @@ class _SessionBase(object):
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_GetAttributeViInt32(
+            vi_ctype,
+            channel_name_ctype,
+            attribute_id_ctype,
+            None
+            if attribute_value_ctype is None
+            else (ctypes.pointer(attribute_value_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return int(attribute_value_ctype.value)
 
     @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute_id):
-        r'''_get_attribute_vi_int64
+        r"""_get_attribute_vi_int64
 
         | Queries the value of a ViInt64 property.
         | You can use this method to get the values of device-specific
@@ -4486,18 +4763,29 @@ class _SessionBase(object):
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt64()  # case S220
-        error_code = self._library.niDCPower_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_GetAttributeViInt64(
+            vi_ctype,
+            channel_name_ctype,
+            attribute_id_ctype,
+            None
+            if attribute_value_ctype is None
+            else (ctypes.pointer(attribute_value_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return int(attribute_value_ctype.value)
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
-        r'''_get_attribute_vi_real64
+        r"""_get_attribute_vi_real64
 
         | Queries the value of a ViReal64 property.
         | You can use this method to get the values of device-specific
@@ -4544,18 +4832,29 @@ class _SessionBase(object):
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_GetAttributeViReal64(
+            vi_ctype,
+            channel_name_ctype,
+            attribute_id_ctype,
+            None
+            if attribute_value_ctype is None
+            else (ctypes.pointer(attribute_value_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return float(attribute_value_ctype.value)
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
-        r'''_get_attribute_vi_string
+        r"""_get_attribute_vi_string
 
         | Queries the value of a ViString property.
         | You can use this method to get the values of device-specific
@@ -4612,22 +4911,42 @@ class _SessionBase(object):
                 pressing on this control. Select a value by double-clicking on it or by
                 selecting it and then pressing .
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        error_code = self._library.niDCPower_GetAttributeViString(
+            vi_ctype,
+            channel_name_ctype,
+            attribute_id_ctype,
+            buffer_size_ctype,
+            attribute_value_ctype,
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=True, is_error_handling=False
+        )
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        attribute_value_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        attribute_value_ctype = (
+            _visatype.ViChar * buffer_size_ctype.value
+        )()  # case C060
+        error_code = self._library.niDCPower_GetAttributeViString(
+            vi_ctype,
+            channel_name_ctype,
+            attribute_id_ctype,
+            buffer_size_ctype,
+            attribute_value_ctype,
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return attribute_value_ctype.value.decode(self._encoding)
 
     def _get_error(self):
-        r'''_get_error
+        r"""_get_error
 
         | Retrieves and then clears the IVI error information for the session or
           the current execution thread unless **bufferSize** is 0, in which case
@@ -4663,22 +4982,36 @@ class _SessionBase(object):
                 If you pass 0 for **bufferSize**, you can pass VI_NULL for this
                 property.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         code_ctype = _visatype.ViStatus()  # case S220
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        error_code = self._library.niDCPower_GetError(
+            vi_ctype,
+            None if code_ctype is None else (ctypes.pointer(code_ctype)),
+            buffer_size_ctype,
+            description_ctype,
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=True, is_error_handling=True
+        )
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        error_code = self._library.niDCPower_GetError(
+            vi_ctype,
+            None if code_ctype is None else (ctypes.pointer(code_ctype)),
+            buffer_size_ctype,
+            description_ctype,
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=True
+        )
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
     def _initiate_with_channels(self):
-        r'''_initiate_with_channels
+        r"""_initiate_with_channels
 
         Starts generation or acquisition, causing the specified channel(s) to
         leave the Uncommitted state or Committed state and enter the Running
@@ -4703,15 +5036,21 @@ class _SessionBase(object):
         To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session._initiate_with_channels`
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_InitiateWithChannels(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
+        error_code = self._library.niDCPower_InitiateWithChannels(
+            vi_ctype, channel_name_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     def lock(self):
-        '''lock
+        """lock
 
         Obtains a multithread lock on the device session. Before doing so, the
         software waits until all other execution threads release their locks
@@ -4739,25 +5078,27 @@ class _SessionBase(object):
         Returns:
             lock (context manager): When used in a with statement, nidcpower.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
-        '''
+        """
         self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
 
     def _lock_session(self):
-        '''_lock_session
+        """_lock_session
 
         Actual call to driver
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_LockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=True
+        )
         return
 
     @ivi_synchronized
     def measure(self, measurement_type):
-        r'''measure
+        r"""measure
 
         Returns the measured value of either the voltage or current on the
         specified output channel. Each call to this method blocks other
@@ -4791,20 +5132,32 @@ class _SessionBase(object):
             measurement (float): Returns the value of the measurement, either in volts for voltage or
                 amps for current.
 
-        '''
+        """
         if type(measurement_type) is not enums.MeasurementTypes:
-            raise TypeError('Parameter measurement_type must be of type ' + str(enums.MeasurementTypes))
+            raise TypeError(
+                "Parameter measurement_type must be of type "
+                + str(enums.MeasurementTypes)
+            )
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         measurement_type_ctype = _visatype.ViInt32(measurement_type.value)  # case S130
         measurement_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_Measure(vi_ctype, channel_name_ctype, measurement_type_ctype, None if measurement_ctype is None else (ctypes.pointer(measurement_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_Measure(
+            vi_ctype,
+            channel_name_ctype,
+            measurement_type_ctype,
+            None if measurement_ctype is None else (ctypes.pointer(measurement_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return float(measurement_ctype.value)
 
     @ivi_synchronized
     def _measure_multiple(self):
-        r'''_measure_multiple
+        r"""_measure_multiple
 
         Returns arrays of the measured voltage and current values on the
         specified output channel(s). Each call to this method blocks other
@@ -4834,22 +5187,39 @@ class _SessionBase(object):
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         voltage_measurements_size = self._parse_channel_count()  # case B560
-        voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B560
-        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B560
+        voltage_measurements_array = array.array(
+            "d", [0] * voltage_measurements_size
+        )  # case B560
+        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(
+            value=voltage_measurements_array, library_type=_visatype.ViReal64
+        )  # case B560
         current_measurements_size = self._parse_channel_count()  # case B560
-        current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B560
-        current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B560
-        error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        current_measurements_array = array.array(
+            "d", [0] * current_measurements_size
+        )  # case B560
+        current_measurements_ctype = get_ctypes_pointer_for_buffer(
+            value=current_measurements_array, library_type=_visatype.ViReal64
+        )  # case B560
+        error_code = self._library.niDCPower_MeasureMultiple(
+            vi_ctype,
+            channel_name_ctype,
+            voltage_measurements_ctype,
+            current_measurements_ctype,
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return voltage_measurements_array, current_measurements_array
 
     @ivi_synchronized
     def _parse_channel_count(self):
-        r'''_parse_channel_count
+        r"""_parse_channel_count
 
         Returns the number of channels.
 
@@ -4867,17 +5237,27 @@ class _SessionBase(object):
         Returns:
             number_of_channels (int):
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channels_string_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channels_string_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         number_of_channels_ctype = _visatype.ViUInt32()  # case S220
-        error_code = self._library.niDCPower_ParseChannelCount(vi_ctype, channels_string_ctype, None if number_of_channels_ctype is None else (ctypes.pointer(number_of_channels_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_ParseChannelCount(
+            vi_ctype,
+            channels_string_ctype,
+            None
+            if number_of_channels_ctype is None
+            else (ctypes.pointer(number_of_channels_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return int(number_of_channels_ctype.value)
 
     @ivi_synchronized
     def query_in_compliance(self):
-        r'''query_in_compliance
+        r"""query_in_compliance
 
         Queries the specified output device to determine if it is operating at
         the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
@@ -4917,17 +5297,27 @@ class _SessionBase(object):
         Returns:
             in_compliance (bool): Returns whether the device output channel is in compliance.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         in_compliance_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niDCPower_QueryInCompliance(vi_ctype, channel_name_ctype, None if in_compliance_ctype is None else (ctypes.pointer(in_compliance_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_QueryInCompliance(
+            vi_ctype,
+            channel_name_ctype,
+            None
+            if in_compliance_ctype is None
+            else (ctypes.pointer(in_compliance_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return bool(in_compliance_ctype.value)
 
     @ivi_synchronized
     def query_latched_output_cutoff_state(self, output_cutoff_reason):
-        r'''query_latched_output_cutoff_state
+        r"""query_latched_output_cutoff_state
 
         Discovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.
         If a limit was exceeded, the state is latched until you clear it with the clear_latched_output_cutoff_state method or the reset method.
@@ -4978,20 +5368,36 @@ class _SessionBase(object):
                 | False | No output cutoff has engaged.                                                |
                 +-------+------------------------------------------------------------------------------+
 
-        '''
+        """
         if type(output_cutoff_reason) is not enums.OutputCutoffReason:
-            raise TypeError('Parameter output_cutoff_reason must be of type ' + str(enums.OutputCutoffReason))
+            raise TypeError(
+                "Parameter output_cutoff_reason must be of type "
+                + str(enums.OutputCutoffReason)
+            )
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        output_cutoff_reason_ctype = _visatype.ViInt32(output_cutoff_reason.value)  # case S130
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
+        output_cutoff_reason_ctype = _visatype.ViInt32(
+            output_cutoff_reason.value
+        )  # case S130
         output_cutoff_state_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niDCPower_QueryLatchedOutputCutoffState(vi_ctype, channel_name_ctype, output_cutoff_reason_ctype, None if output_cutoff_state_ctype is None else (ctypes.pointer(output_cutoff_state_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_QueryLatchedOutputCutoffState(
+            vi_ctype,
+            channel_name_ctype,
+            output_cutoff_reason_ctype,
+            None
+            if output_cutoff_state_ctype is None
+            else (ctypes.pointer(output_cutoff_state_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return bool(output_cutoff_state_ctype.value)
 
     @ivi_synchronized
     def query_max_current_limit(self, voltage_level):
-        r'''query_max_current_limit
+        r"""query_max_current_limit
 
         Queries the maximum current limit on an output channel if the output
         channel is set to the specified **voltageLevel**.
@@ -5016,18 +5422,29 @@ class _SessionBase(object):
             max_current_limit (float): Returns the maximum current limit that can be set with the specified
                 **voltageLevel**.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
         max_current_limit_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_QueryMaxCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if max_current_limit_ctype is None else (ctypes.pointer(max_current_limit_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_QueryMaxCurrentLimit(
+            vi_ctype,
+            channel_name_ctype,
+            voltage_level_ctype,
+            None
+            if max_current_limit_ctype is None
+            else (ctypes.pointer(max_current_limit_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return float(max_current_limit_ctype.value)
 
     @ivi_synchronized
     def query_max_voltage_level(self, current_limit):
-        r'''query_max_voltage_level
+        r"""query_max_voltage_level
 
         Queries the maximum voltage level on an output channel if the output
         channel is set to the specified **currentLimit**.
@@ -5052,18 +5469,29 @@ class _SessionBase(object):
             max_voltage_level (float): Returns the maximum voltage level that can be set on an output channel
                 with the specified **currentLimit**.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         current_limit_ctype = _visatype.ViReal64(current_limit)  # case S150
         max_voltage_level_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_QueryMaxVoltageLevel(vi_ctype, channel_name_ctype, current_limit_ctype, None if max_voltage_level_ctype is None else (ctypes.pointer(max_voltage_level_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_QueryMaxVoltageLevel(
+            vi_ctype,
+            channel_name_ctype,
+            current_limit_ctype,
+            None
+            if max_voltage_level_ctype is None
+            else (ctypes.pointer(max_voltage_level_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return float(max_voltage_level_ctype.value)
 
     @ivi_synchronized
     def query_min_current_limit(self, voltage_level):
-        r'''query_min_current_limit
+        r"""query_min_current_limit
 
         Queries the minimum current limit on an output channel if the output
         channel is set to the specified **voltageLevel**.
@@ -5088,18 +5516,29 @@ class _SessionBase(object):
             min_current_limit (float): Returns the minimum current limit that can be set on an output channel
                 with the specified **voltageLevel**.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
         min_current_limit_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_QueryMinCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if min_current_limit_ctype is None else (ctypes.pointer(min_current_limit_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_QueryMinCurrentLimit(
+            vi_ctype,
+            channel_name_ctype,
+            voltage_level_ctype,
+            None
+            if min_current_limit_ctype is None
+            else (ctypes.pointer(min_current_limit_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return float(min_current_limit_ctype.value)
 
     @ivi_synchronized
     def query_output_state(self, output_state):
-        r'''query_output_state
+        r"""query_output_state
 
         Queries the specified output channel to determine if the output channel
         is currently in the state specified by **outputState**.
@@ -5134,20 +5573,31 @@ class _SessionBase(object):
             in_state (bool): Returns whether the device output channel is in the specified output
                 state.
 
-        '''
+        """
         if type(output_state) is not enums.OutputStates:
-            raise TypeError('Parameter output_state must be of type ' + str(enums.OutputStates))
+            raise TypeError(
+                "Parameter output_state must be of type " + str(enums.OutputStates)
+            )
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         output_state_ctype = _visatype.ViInt32(output_state.value)  # case S130
         in_state_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niDCPower_QueryOutputState(vi_ctype, channel_name_ctype, output_state_ctype, None if in_state_ctype is None else (ctypes.pointer(in_state_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_QueryOutputState(
+            vi_ctype,
+            channel_name_ctype,
+            output_state_ctype,
+            None if in_state_ctype is None else (ctypes.pointer(in_state_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return bool(in_state_ctype.value)
 
     @ivi_synchronized
     def reset(self):
-        r'''reset
+        r"""reset
 
         Resets the specified channel(s) to a known state. This method disables power
         generation, resets session properties to their default values, commits
@@ -5166,16 +5616,22 @@ class _SessionBase(object):
         To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
 
         Example: :py:meth:`my_session.reset`
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_ResetWithChannels(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
+        error_code = self._library.niDCPower_ResetWithChannels(
+            vi_ctype, channel_name_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def send_software_edge_trigger(self, trigger):
-        r'''send_software_edge_trigger
+        r"""send_software_edge_trigger
 
         Asserts the specified trigger. This method can override an external
         edge trigger.
@@ -5222,19 +5678,28 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-        '''
+        """
         if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
-            raise TypeError('Parameter trigger must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
+            raise TypeError(
+                "Parameter trigger must be of type "
+                + str(enums.SendSoftwareEdgeTriggerType)
+            )
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        error_code = self._library.niDCPower_SendSoftwareEdgeTriggerWithChannels(vi_ctype, channel_name_ctype, trigger_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_SendSoftwareEdgeTriggerWithChannels(
+            vi_ctype, channel_name_ctype, trigger_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
-        r'''_set_attribute_vi_boolean
+        r"""_set_attribute_vi_boolean
 
         | Sets the value of a ViBoolean property.
         | This is a low-level method that you can use to set the values of
@@ -5284,18 +5749,24 @@ class _SessionBase(object):
                 Some of the values might not be valid depending upon the current
                 settings of the device session.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViBoolean(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_SetAttributeViBoolean(
+            vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
-        r'''_set_attribute_vi_int32
+        r"""_set_attribute_vi_int32
 
         | Sets the value of a ViInt32 property.
         | This is a low-level method that you can use to set the values of
@@ -5345,18 +5816,24 @@ class _SessionBase(object):
                 Some of the values might not be valid depending upon the current
                 settings of the device session.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_SetAttributeViInt32(
+            vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
-        r'''_set_attribute_vi_int64
+        r"""_set_attribute_vi_int64
 
         | Sets the value of a ViInt64 property.
         | This is a low-level method that you can use to set the values of
@@ -5406,18 +5883,24 @@ class _SessionBase(object):
                 Some of the values might not be valid depending upon the current
                 settings of the device session.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt64(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_SetAttributeViInt64(
+            vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
-        r'''_set_attribute_vi_real64
+        r"""_set_attribute_vi_real64
 
         | Sets the value of a ViReal64 property.
         | This is a low-level method that you can use to set the values of
@@ -5467,18 +5950,24 @@ class _SessionBase(object):
                 Some of the values might not be valid depending upon the current
                 settings of the device session.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViReal64(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_SetAttributeViReal64(
+            vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
-        r'''_set_attribute_vi_string
+        r"""_set_attribute_vi_string
 
         | Sets the value of a ViString property.
         | This is a low-level method that you can use to set the values of
@@ -5528,18 +6017,26 @@ class _SessionBase(object):
                 Some of the values might not be valid depending upon the current
                 settings of the device session.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        attribute_value_ctype = ctypes.create_string_buffer(
+            attribute_value.encode(self._encoding)
+        )  # case C020
+        error_code = self._library.niDCPower_SetAttributeViString(
+            vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def set_sequence(self, values, source_delays):
-        r'''set_sequence
+        r"""set_sequence
 
         Configures a series of voltage or current outputs and corresponding
         source delays. The source mode must be set to
@@ -5587,33 +6084,49 @@ class _SessionBase(object):
                 **Valid Values**:
                 The valid values are between 0 and 167 seconds.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        values_ctype = get_ctypes_pointer_for_buffer(value=values, library_type=_visatype.ViReal64)  # case B550
-        source_delays_ctype = get_ctypes_pointer_for_buffer(value=source_delays, library_type=_visatype.ViReal64)  # case B550
-        size_ctype = _visatype.ViUInt32(0 if values is None else len(values))  # case S160
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
+        values_ctype = get_ctypes_pointer_for_buffer(
+            value=values, library_type=_visatype.ViReal64
+        )  # case B550
+        source_delays_ctype = get_ctypes_pointer_for_buffer(
+            value=source_delays, library_type=_visatype.ViReal64
+        )  # case B550
+        size_ctype = _visatype.ViUInt32(
+            0 if values is None else len(values)
+        )  # case S160
         if source_delays is not None and len(source_delays) != len(values):  # case S160
-            raise ValueError("Length of source_delays and values parameters do not match.")  # case S160
-        error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            raise ValueError(
+                "Length of source_delays and values parameters do not match."
+            )  # case S160
+        error_code = self._library.niDCPower_SetSequence(
+            vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     def unlock(self):
-        '''unlock
+        """unlock
 
         Releases a lock that you acquired on an device session using
         lock. Refer to lock for additional
         information on session locks.
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_UnlockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=True
+        )
         return
 
     @ivi_synchronized
     def wait_for_event(self, event_id, timeout=hightime.timedelta(seconds=10.0)):
-        r'''wait_for_event
+        r"""wait_for_event
 
         Waits until the specified channel(s) have generated the specified event.
 
@@ -5669,19 +6182,27 @@ class _SessionBase(object):
                 triggers so that the timeout interval is long enough for your
                 application.
 
-        '''
+        """
         if type(event_id) is not enums.Event:
-            raise TypeError('Parameter event_id must be of type ' + str(enums.Event))
+            raise TypeError("Parameter event_id must be of type " + str(enums.Event))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        error_code = self._library.niDCPower_WaitForEventWithChannels(vi_ctype, channel_name_ctype, event_id_ctype, timeout_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(
+            timeout
+        )  # case S140
+        error_code = self._library.niDCPower_WaitForEventWithChannels(
+            vi_ctype, channel_name_ctype, event_id_ctype, timeout_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     def _error_message(self, error_code):
-        r'''_error_message
+        r"""_error_message
 
         Converts a status code returned by an instrument driver method into a
         user-readable string.
@@ -5696,20 +6217,31 @@ class _SessionBase(object):
                 code you specify.
                 You must pass a ViChar array with at least 256 bytes.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code_ctype = _visatype.ViStatus(error_code)  # case S150
         error_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niDCPower_error_message(vi_ctype, error_code_ctype, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        error_code = self._library.niDCPower_error_message(
+            vi_ctype, error_code_ctype, error_message_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=True
+        )
         return error_message_ctype.value.decode(self._encoding)
 
 
 class Session(_SessionBase):
-    '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
+    """An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit."""
 
-    def __init__(self, resource_name, channels=None, reset=False, options={}, independent_channels=True):
-        r'''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
+    def __init__(
+        self,
+        resource_name,
+        channels=None,
+        reset=False,
+        options={},
+        independent_channels=True,
+    ):
+        r"""An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
 
         Creates and returns a new NI-DCPower session to the instrument(s) and channel(s) specified
         in **resource name** to be used in all subsequent NI-DCPower method calls. With this method,
@@ -5816,17 +6348,27 @@ class Session(_SessionBase):
         Returns:
             session (nidcpower.Session): A session object representing the device.
 
-        '''
-        super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        resource_name = _converters.convert_repeated_capabilities_without_prefix(resource_name)
+        """
+        super(Session, self).__init__(
+            repeated_capability_list=[],
+            vi=None,
+            library=None,
+            encoding=None,
+            freeze_it=False,
+        )
+        resource_name = _converters.convert_repeated_capabilities_without_prefix(
+            resource_name
+        )
         channels = _converters.convert_repeated_capabilities_without_prefix(channels)
         options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
+        self._encoding = "windows-1251"
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _fancy_initialize().
-        self._vi = self._fancy_initialize(resource_name, channels, reset, options, independent_channels)
+        self._vi = self._fancy_initialize(
+            resource_name, channels, reset, options, independent_channels
+        )
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -5835,7 +6377,7 @@ class Session(_SessionBase):
         param_list.append("reset=" + pp.pformat(reset))
         param_list.append("options=" + pp.pformat(options))
         param_list.append("independent_channels=" + pp.pformat(independent_channels))
-        self._param_list = ', '.join(param_list)
+        self._param_list = ", ".join(param_list)
 
         self._is_frozen = True
 
@@ -5846,7 +6388,7 @@ class Session(_SessionBase):
         self.close()
 
     def close(self):
-        '''close
+        """close
 
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
@@ -5865,7 +6407,7 @@ class Session(_SessionBase):
 
         Note:
         This method is not needed when using the session context manager
-        '''
+        """
         try:
             self._close()
         except errors.DriverError:
@@ -5873,11 +6415,11 @@ class Session(_SessionBase):
             raise
         self._vi = 0
 
-    ''' These are code-generated '''
+    """ These are code-generated """
 
     @ivi_synchronized
     def disable(self):
-        r'''disable
+        r"""disable
 
         This method performs the same actions as the reset
         method, except that this method also immediately sets the
@@ -5885,15 +6427,17 @@ class Session(_SessionBase):
 
         This method opens the output relay on devices that have an output
         relay.
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Disable(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def export_attribute_configuration_buffer(self):
-        r'''export_attribute_configuration_buffer
+        r"""export_attribute_configuration_buffer
 
         Exports the property configuration of the session to the specified
         configuration buffer.
@@ -5942,23 +6486,33 @@ class Session(_SessionBase):
             configuration (bytes): Specifies the byte array buffer to be populated with the exported
                 property configuration.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_ctype = _visatype.ViInt32()  # case S170
         configuration_ctype = None  # case B580
-        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(
+            vi_ctype, size_ctype, configuration_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=True, is_error_handling=False
+        )
         size_ctype = _visatype.ViInt32(error_code)  # case S180
         configuration_size = size_ctype.value  # case B590
         configuration_array = array.array("b", [0] * configuration_size)  # case B590
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
-        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        configuration_ctype = get_ctypes_pointer_for_buffer(
+            value=configuration_array, library_type=_visatype.ViInt8
+        )  # case B590
+        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(
+            vi_ctype, size_ctype, configuration_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return _converters.convert_to_bytes(configuration_array)
 
     @ivi_synchronized
     def export_attribute_configuration_file(self, file_path):
-        r'''export_attribute_configuration_file
+        r"""export_attribute_configuration_file
 
         Exports the property configuration of the session to the specified
         file.
@@ -6009,15 +6563,28 @@ class Session(_SessionBase):
                 method returns an error.
                 **Default file extension:** .nidcpowerconfig
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        file_path_ctype = ctypes.create_string_buffer(
+            file_path.encode(self._encoding)
+        )  # case C020
+        error_code = self._library.niDCPower_ExportAttributeConfigurationFile(
+            vi_ctype, file_path_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
-    def _fancy_initialize(self, resource_name, channels=None, reset=False, option_string="", independent_channels=True):
-        '''_fancy_initialize
+    def _fancy_initialize(
+        self,
+        resource_name,
+        channels=None,
+        reset=False,
+        option_string="",
+        independent_channels=True,
+    ):
+        """_fancy_initialize
 
         Creates and returns a new NI-DCPower session to the instrument(s) and channel(s) specified
         in **resource name** to be used in all subsequent NI-DCPower method calls. With this method,
@@ -6113,43 +6680,62 @@ class Session(_SessionBase):
             vi (int): Returns a session handle that you use to identify the device in all
                 subsequent NI-DCPower method calls.
 
-        '''
+        """
         if independent_channels:
             resource_string = resource_name  # store potential modifications to resource_name in a separate variable
 
             if channels:
                 # if we have a channels arg, we need to try and combine it with the resource name
                 # before calling into initialize with independent channels
-                channel_list = (resource_name + "/" + channel for channel in channels.split(","))
+                channel_list = (
+                    resource_name + "/" + channel for channel in channels.split(",")
+                )
                 resource_string = ",".join(channel_list)
 
                 import warnings
+
                 warnings.warn(
                     "Attempting to initialize an independent channels session with a channels argument. The resource "
-                    "name '" + resource_name + "' will be combined with the channels '" + channels + "' to form the "
-                    "fully-qualified channel list '" + resource_string + "'. To avoid this warning, use a "
+                    "name '"
+                    + resource_name
+                    + "' will be combined with the channels '"
+                    + channels
+                    + "' to form the "
+                    "fully-qualified channel list '"
+                    + resource_string
+                    + "'. To avoid this warning, use a "
                     "fully-qualified channel list as the resource name instead of providing a channels argument.",
-                    DeprecationWarning
+                    DeprecationWarning,
                 )
 
                 if "," in resource_name:
                     raise ValueError(
-                        "Channels cannot be combined with multiple instruments in the resource name '" + resource_name + "'. "
+                        "Channels cannot be combined with multiple instruments in the resource name '"
+                        + resource_name
+                        + "'. "
                         "Specify a list of fully-qualified channels as the resource name instead of supplying a "
                         "channels argument."
                     )
 
-            return self._initialize_with_independent_channels(resource_string, reset, option_string)
+            return self._initialize_with_independent_channels(
+                resource_string, reset, option_string
+            )
 
         else:
             import warnings
-            warnings.warn("Initializing session without independent channels enabled.", DeprecationWarning)
 
-            return self._initialize_with_channels(resource_name, channels, reset, option_string)
+            warnings.warn(
+                "Initializing session without independent channels enabled.",
+                DeprecationWarning,
+            )
+
+            return self._initialize_with_channels(
+                resource_name, channels, reset, option_string
+            )
 
     @ivi_synchronized
     def get_channel_name(self, index):
-        r'''get_channel_name
+        r"""get_channel_name
 
         Retrieves the output **channelName** that corresponds to the requested
         **index**. Use the channel_count property to
@@ -6163,22 +6749,30 @@ class Session(_SessionBase):
         Returns:
             channel_name (str): Returns the output channel name that corresponds to **index**.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         index_ctype = _visatype.ViInt32(index)  # case S150
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         channel_name_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        error_code = self._library.niDCPower_GetChannelName(
+            vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=True, is_error_handling=False
+        )
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_GetChannelName(
+            vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return channel_name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
     def get_channel_names(self, indices):
-        r'''get_channel_names
+        r"""get_channel_names
 
         Returns a list of channel names for the given channel indices.
 
@@ -6195,22 +6789,36 @@ class Session(_SessionBase):
         Returns:
             names (list of str): The channel name(s) at the specified indices.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
+        indices_ctype = ctypes.create_string_buffer(
+            _converters.convert_repeated_capabilities_without_prefix(indices).encode(
+                self._encoding
+            )
+        )  # case C040
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         names_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        error_code = self._library.niDCPower_GetChannelNameFromString(
+            vi_ctype, indices_ctype, buffer_size_ctype, names_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=True, is_error_handling=False
+        )
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
+        error_code = self._library.niDCPower_GetChannelNameFromString(
+            vi_ctype, indices_ctype, buffer_size_ctype, names_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
+        return _converters.convert_comma_separated_string_to_list(
+            names_ctype.value.decode(self._encoding)
+        )
 
     @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
-        r'''_get_ext_cal_last_date_and_time
+        r"""_get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful calibration. The time
         returned is 24-hour (military) local time; for example, if the device
@@ -6229,20 +6837,35 @@ class Session(_SessionBase):
 
             minute (int): Returns the **minute** in which the device was last calibrated.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         year_ctype = _visatype.ViInt32()  # case S220
         month_ctype = _visatype.ViInt32()  # case S220
         day_ctype = _visatype.ViInt32()  # case S220
         hour_ctype = _visatype.ViInt32()  # case S220
         minute_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_GetExtCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+        error_code = self._library.niDCPower_GetExtCalLastDateAndTime(
+            vi_ctype,
+            None if year_ctype is None else (ctypes.pointer(year_ctype)),
+            None if month_ctype is None else (ctypes.pointer(month_ctype)),
+            None if day_ctype is None else (ctypes.pointer(day_ctype)),
+            None if hour_ctype is None else (ctypes.pointer(hour_ctype)),
+            None if minute_ctype is None else (ctypes.pointer(minute_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
+        return (
+            int(year_ctype.value),
+            int(month_ctype.value),
+            int(day_ctype.value),
+            int(hour_ctype.value),
+            int(minute_ctype.value),
+        )
 
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
-        r'''get_ext_cal_last_temp
+        r"""get_ext_cal_last_temp
 
         Returns the onboard **temperature** of the device, in degrees Celsius,
         during the last successful external calibration.
@@ -6251,16 +6874,21 @@ class Session(_SessionBase):
             temperature (float): Returns the onboard **temperature** of the device, in degrees Celsius,
                 during the last successful external calibration.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_GetExtCalLastTemp(
+            vi_ctype,
+            None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return float(temperature_ctype.value)
 
     @ivi_synchronized
     def get_ext_cal_recommended_interval(self):
-        r'''get_ext_cal_recommended_interval
+        r"""get_ext_cal_recommended_interval
 
         Returns the recommended maximum interval, in **months**, between
         external calibrations.
@@ -6269,29 +6897,33 @@ class Session(_SessionBase):
             months (hightime.timedelta): Specifies the recommended maximum interval, in **months**, between
                 external calibrations.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         months_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_GetExtCalRecommendedInterval(
+            vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype))
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     @ivi_synchronized
     def get_ext_cal_last_date_and_time(self):
-        '''get_ext_cal_last_date_and_time
+        """get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful calibration.
 
         Returns:
             month (hightime.datetime): Indicates date and time of the last calibration.
 
-        '''
+        """
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
-        '''get_self_cal_last_date_and_time
+        """get_self_cal_last_date_and_time
 
         Returns the date and time of the oldest successful self-calibration from among the channels in the session.
 
@@ -6300,13 +6932,13 @@ class Session(_SessionBase):
         Returns:
             month (hightime.datetime): Returns the date and time the device was last calibrated.
 
-        '''
+        """
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def _get_self_cal_last_date_and_time(self):
-        r'''_get_self_cal_last_date_and_time
+        r"""_get_self_cal_last_date_and_time
 
         Returns the date and time of the oldest successful self-calibration from
         among the channels in the session.
@@ -6335,20 +6967,35 @@ class Session(_SessionBase):
 
             minute (int): Returns the **minute** in which the device was last calibrated.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         year_ctype = _visatype.ViInt32()  # case S220
         month_ctype = _visatype.ViInt32()  # case S220
         day_ctype = _visatype.ViInt32()  # case S220
         hour_ctype = _visatype.ViInt32()  # case S220
         minute_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_GetSelfCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+        error_code = self._library.niDCPower_GetSelfCalLastDateAndTime(
+            vi_ctype,
+            None if year_ctype is None else (ctypes.pointer(year_ctype)),
+            None if month_ctype is None else (ctypes.pointer(month_ctype)),
+            None if day_ctype is None else (ctypes.pointer(day_ctype)),
+            None if hour_ctype is None else (ctypes.pointer(hour_ctype)),
+            None if minute_ctype is None else (ctypes.pointer(minute_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
+        return (
+            int(year_ctype.value),
+            int(month_ctype.value),
+            int(day_ctype.value),
+            int(hour_ctype.value),
+            int(minute_ctype.value),
+        )
 
     @ivi_synchronized
     def get_self_cal_last_temp(self):
-        r'''get_self_cal_last_temp
+        r"""get_self_cal_last_temp
 
         Returns the onboard temperature of the device, in degrees Celsius,
         during the oldest successful self-calibration from among the channels in
@@ -6370,16 +7017,21 @@ class Session(_SessionBase):
             temperature (float): Returns the onboard **temperature** of the device, in degrees Celsius,
                 during the oldest successful calibration.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_GetSelfCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_GetSelfCalLastTemp(
+            vi_ctype,
+            None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return float(temperature_ctype.value)
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
-        r'''import_attribute_configuration_buffer
+        r"""import_attribute_configuration_buffer
 
         Imports a property configuration to the session from the specified
         configuration buffer.
@@ -6427,18 +7079,28 @@ class Session(_SessionBase):
             configuration (bytes): Specifies the byte array buffer that contains the property
                 configuration to import.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_converted = _converters.convert_to_bytes(configuration)  # case B520
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
-        error_code = self._library.niDCPower_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        size_ctype = _visatype.ViInt32(
+            0 if configuration is None else len(configuration)
+        )  # case S160
+        configuration_converted = _converters.convert_to_bytes(
+            configuration
+        )  # case B520
+        configuration_ctype = get_ctypes_pointer_for_buffer(
+            value=configuration_converted, library_type=_visatype.ViInt8
+        )  # case B520
+        error_code = self._library.niDCPower_ImportAttributeConfigurationBuffer(
+            vi_ctype, size_ctype, configuration_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def import_attribute_configuration_file(self, file_path):
-        r'''import_attribute_configuration_file
+        r"""import_attribute_configuration_file
 
         Imports a property configuration to the session from the specified
         file.
@@ -6488,15 +7150,21 @@ class Session(_SessionBase):
                 method returns an error.
                 **Default File Extension:** .nidcpowerconfig
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_ImportAttributeConfigurationFile(vi_ctype, file_path_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        file_path_ctype = ctypes.create_string_buffer(
+            file_path.encode(self._encoding)
+        )  # case C020
+        error_code = self._library.niDCPower_ImportAttributeConfigurationFile(
+            vi_ctype, file_path_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     def _initialize_with_channels(self, resource_name, channels, reset, option_string):
-        r'''_initialize_with_channels
+        r"""_initialize_with_channels
 
         Creates and returns a new NI-DCPower session to the power supply or SMU
         specified in **resource name** to be used in all subsequent NI-DCPower
@@ -6563,18 +7231,34 @@ class Session(_SessionBase):
             vi (int): Returns a session handle that you use to identify the device in all
                 subsequent NI-DCPower method calls.
 
-        '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        channels_ctype = ctypes.create_string_buffer(channels.encode(self._encoding))  # case C020
+        """
+        resource_name_ctype = ctypes.create_string_buffer(
+            resource_name.encode(self._encoding)
+        )  # case C020
+        channels_ctype = ctypes.create_string_buffer(
+            channels.encode(self._encoding)
+        )  # case C020
         reset_ctype = _visatype.ViBoolean(reset)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
+        option_string_ctype = ctypes.create_string_buffer(
+            option_string.encode(self._encoding)
+        )  # case C020
         vi_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library.niDCPower_InitializeWithChannels(resource_name_ctype, channels_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_InitializeWithChannels(
+            resource_name_ctype,
+            channels_ctype,
+            reset_ctype,
+            option_string_ctype,
+            None if vi_ctype is None else (ctypes.pointer(vi_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return int(vi_ctype.value)
 
-    def _initialize_with_independent_channels(self, resource_name, reset, option_string):
-        r'''_initialize_with_independent_channels
+    def _initialize_with_independent_channels(
+        self, resource_name, reset, option_string
+    ):
+        r"""_initialize_with_independent_channels
 
         Creates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a
         session handle to be used in all subsequent NI-DCPower method calls.
@@ -6649,18 +7333,29 @@ class Session(_SessionBase):
             vi (int): Returns a session handle that you use to identify the session in all
                 subsequent NI-DCPower method calls.
 
-        '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
+        """
+        resource_name_ctype = ctypes.create_string_buffer(
+            resource_name.encode(self._encoding)
+        )  # case C020
         reset_ctype = _visatype.ViBoolean(reset)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
+        option_string_ctype = ctypes.create_string_buffer(
+            option_string.encode(self._encoding)
+        )  # case C020
         vi_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library.niDCPower_InitializeWithIndependentChannels(resource_name_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_InitializeWithIndependentChannels(
+            resource_name_ctype,
+            reset_ctype,
+            option_string_ctype,
+            None if vi_ctype is None else (ctypes.pointer(vi_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return int(vi_ctype.value)
 
     @ivi_synchronized
     def read_current_temperature(self):
-        r'''read_current_temperature
+        r"""read_current_temperature
 
         Returns the current onboard **temperature**, in degrees Celsius, of the
         device.
@@ -6668,16 +7363,21 @@ class Session(_SessionBase):
         Returns:
             temperature (float): Returns the onboard **temperature**, in degrees Celsius, of the device.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_ReadCurrentTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niDCPower_ReadCurrentTemperature(
+            vi_ctype,
+            None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return float(temperature_ctype.value)
 
     @ivi_synchronized
     def reset_device(self):
-        r'''reset_device
+        r"""reset_device
 
         Resets the device to a known state. The method disables power
         generation, resets session properties to their default values, clears
@@ -6692,15 +7392,17 @@ class Session(_SessionBase):
 
         This will also open the output relay on devices that have an output
         relay.
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_ResetDevice(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def reset_with_defaults(self):
-        r'''reset_with_defaults
+        r"""reset_with_defaults
 
         Resets the device to a known state. This method disables power
         generation, resets session properties to their default values, commits
@@ -6709,14 +7411,16 @@ class Session(_SessionBase):
         state. In addition to exhibiting the behavior of the reset
         method, this method can assign user-defined default values for
         configurable properties from the IVI configuration.
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_ResetWithDefaults(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     def _close(self):
-        r'''_close
+        r"""_close
 
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
@@ -6732,15 +7436,17 @@ class Session(_SessionBase):
 
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_close(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     @ivi_synchronized
     def self_test(self):
-        '''self_test
+        """self_test
 
         Performs the device self-test routine and returns the test result(s).
         Calling this method implicitly calls the reset method.
@@ -6762,7 +7468,7 @@ class Session(_SessionBase):
         +----------------+-------------------+
         | 1              | Self test failed. |
         +----------------+-------------------+
-        '''
+        """
         code, msg = self._self_test()
         if code:
             raise errors.SelfTestError(code, msg)
@@ -6770,7 +7476,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _self_test(self):
-        r'''_self_test
+        r"""_self_test
 
         Performs the device self-test routine and returns the test result(s).
         Calling this method implicitly calls the reset method.
@@ -6794,13 +7500,20 @@ class Session(_SessionBase):
             self_test_message (str): Returns the self-test result message. The size of this array must be at
                 least 256 bytes.
 
-        '''
+        """
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         self_test_result_ctype = _visatype.ViInt16()  # case S220
         self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niDCPower_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
-
-
-
+        error_code = self._library.niDCPower_self_test(
+            vi_ctype,
+            None
+            if self_test_result_ctype is None
+            else (ctypes.pointer(self_test_result_ctype)),
+            self_test_message_ctype,
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
+        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(
+            self._encoding
+        )

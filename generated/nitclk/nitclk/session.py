@@ -13,6 +13,7 @@ import nitclk.errors as errors
 
 # Used for __repr__ and __str__
 import pprint
+
 pp = pprint.PrettyPrinter(indent=4)
 
 _session_instance = None
@@ -22,14 +23,15 @@ _session_instance_lock = threading.Lock()
 # Helper functions for creating ctypes needed for calling into the driver DLL
 def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     if isinstance(value, array.array):
-        assert library_type is not None, 'library_type is required for array.array'
+        assert library_type is not None, "library_type is required for array.array"
         addr, _ = value.buffer_info()
         return ctypes.cast(addr, ctypes.POINTER(library_type))
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
+
         return numpy.ctypeslib.as_ctypes(value)
     elif isinstance(value, list):
-        assert library_type is not None, 'library_type is required for list'
+        assert library_type is not None, "library_type is required for list"
         return (library_type * len(value))(*value)
     else:
         if library_type is not None and size is not None:
@@ -39,16 +41,16 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
 
 
 class SessionReference(object):
-    '''Properties container for NI-TClk attributes.
+    """Properties container for NI-TClk attributes.
 
     Note: Constructing this class is an advanced use case and should not be needed in most circumstances.
-    '''
+    """
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
     exported_sync_pulse_output_terminal = _attributes.AttributeViString(2)
-    '''Type: str
+    """Type: str
 
     Specifies the destination of the Sync Pulse. This property is most often  used when synchronizing a multichassis system.
     Values
@@ -60,9 +62,9 @@ class SessionReference(object):
     - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI4', and  'PFI5'
     - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
     Default Value is empty string
-    '''
+    """
     exported_tclk_output_terminal = _attributes.AttributeViString(9)
-    '''Type: str
+    """Type: str
 
     Specifies the destination of the device's TClk signal.
     Values
@@ -74,21 +76,21 @@ class SessionReference(object):
     - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI4', and  'PFI5'
     - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
     Default Value is empty string
-    '''
+    """
     pause_trigger_master_session = _attributes.AttributeSessionReference(6)
-    '''Type: instrument-specific session or an instance of nitclk.SessionReference
+    """Type: instrument-specific session or an instance of nitclk.SessionReference
 
     Specifies the pause trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
-    '''
+    """
     ref_trigger_master_session = _attributes.AttributeSessionReference(4)
-    '''Type: instrument-specific session or an instance of nitclk.SessionReference
+    """Type: instrument-specific session or an instance of nitclk.SessionReference
 
     Specifies the reference trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
-    '''
+    """
     sample_clock_delay = _attributes.AttributeViReal64TimeDeltaSeconds(11)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+    """Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the sample clock delay.
     Specifies the delay, in seconds, to apply to the session sample clock  relative to the other synchronized sessions. During synchronization,  NI-TClk aligns the sample clocks on the synchronized devices. If you want  to delay the sample clocks, set this property before calling  synchronize.
@@ -98,32 +100,32 @@ class SessionReference(object):
     Default Value is 0
 
     Note: Sample clock delay is supported for generation sessions only; it is
-    '''
+    """
     sequencer_flag_master_session = _attributes.AttributeSessionReference(16)
-    '''Type: instrument-specific session or an instance of nitclk.SessionReference
+    """Type: instrument-specific session or an instance of nitclk.SessionReference
 
     Specifies the sequencer flag master session.
     For external triggers, the session that originally receives the trigger.
     For None (no trigger configured) or software triggers, the session that
     originally generates the trigger.
-    '''
+    """
     start_trigger_master_session = _attributes.AttributeSessionReference(3)
-    '''Type: instrument-specific session or an instance of nitclk.SessionReference
+    """Type: instrument-specific session or an instance of nitclk.SessionReference
 
     Specifies the start trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
-    '''
+    """
     sync_pulse_clock_source = _attributes.AttributeViString(10)
-    '''Type: str
+    """Type: str
 
     Specifies the Sync Pulse Clock source. This property is typically used to  synchronize PCI devices when you want to control RTSI 7 yourself. Make  sure that a 10 MHz clock is driven onto RTSI 7.
     Values
     PCI Devices -  'RTSI_7' and  'None'
     PXI Devices -  'PXI_CLK10' and  'None'
     Default Value -  'None' directs synchronize to create the necessary routes. For  PCI, one of the synchronized devices drives a 10 MHz clock on RTSI 7  unless that line is already being driven.
-    '''
+    """
     sync_pulse_sender_sync_pulse_source = _attributes.AttributeViString(13)
-    '''Type: str
+    """Type: str
 
     Specifies the external sync pulse source for the Sync Pulse Sender.  You can use this source to synchronize  the Sync Pulse Sender with an external non-TClk source.
     Values
@@ -135,9 +137,9 @@ class SessionReference(object):
     - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI4', and  'PFI5'
     - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
     Default Value is empty string
-    '''
+    """
     sync_pulse_source = _attributes.AttributeViString(1)
-    '''Type: str
+    """Type: str
 
     Specifies the Sync Pulse source. This property is most often used when  synchronizing a multichassis system.
     Values
@@ -149,47 +151,51 @@ class SessionReference(object):
     - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
     - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
     Default Value - Empty string. This default value directs  synchronize to set this property when all the synchronized devices  are in one PXI chassis. To synchronize a multichassis system, you must set  this property before calling synchronize.
-    '''
+    """
     tclk_actual_period = _attributes.AttributeViReal64(8)
-    '''Type: float
+    """Type: float
 
     Indicates the computed TClk period that will be used during the acquisition.
-    '''
+    """
 
-    def __init__(self, session_number, encoding='windows-1251'):
+    def __init__(self, session_number, encoding="windows-1251"):
         self._session_number = session_number
         self._library = _library_singleton.get()
         self._encoding = encoding
         # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
-        self._repeated_capability = ''
+        self._repeated_capability = ""
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("session_number=" + pp.pformat(session_number))
         param_list.append("encoding=" + pp.pformat(encoding))
-        self._param_list = ', '.join(param_list)
+        self._param_list = ", ".join(param_list)
 
         self._is_frozen = True
 
     def __repr__(self):
-        return '{0}.{1}({2})'.format('nitclk', self.__class__.__name__, self._param_list)
+        return "{0}.{1}({2})".format(
+            "nitclk", self.__class__.__name__, self._param_list
+        )
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
-            raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
+            raise AttributeError(
+                "'{0}' object has no attribute '{1}'".format(type(self).__name__, key)
+            )
         object.__setattr__(self, key, value)
 
     def _get_error_description(self, error_code):
-        '''_get_error_description
+        """_get_error_description
 
         Returns the error description.
-        '''
+        """
         try:
-            '''
+            """
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
             Use _error_message instead. It doesn't require a session.
-            '''
+            """
             error_string = self._get_extended_error_info()
             return error_string
         except errors.Error:
@@ -199,7 +205,7 @@ class SessionReference(object):
         return self._session_number
 
     def _get_attribute_vi_real64(self, attribute_id):
-        r'''_get_attribute_vi_real64
+        r"""_get_attribute_vi_real64
 
         Gets the value of an NI-TClk ViReal64 property.
 
@@ -222,17 +228,26 @@ class SessionReference(object):
         Returns:
             value (float): The value that you are getting
 
-        '''
+        """
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niTClk_GetAttributeViReal64(session_ctype, channel_name_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niTClk_GetAttributeViReal64(
+            session_ctype,
+            channel_name_ctype,
+            attribute_id_ctype,
+            None if value_ctype is None else (ctypes.pointer(value_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return float(value_ctype.value)
 
     def _get_attribute_vi_session(self, attribute_id):
-        r'''_get_attribute_vi_session
+        r"""_get_attribute_vi_session
 
         Gets the value of an NI-TClk ViSession property.
 
@@ -257,17 +272,26 @@ class SessionReference(object):
         Returns:
             value (int): The value that you are getting
 
-        '''
+        """
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library.niTClk_GetAttributeViSession(session_ctype, channel_name_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niTClk_GetAttributeViSession(
+            session_ctype,
+            channel_name_ctype,
+            attribute_id_ctype,
+            None if value_ctype is None else (ctypes.pointer(value_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return int(value_ctype.value)
 
     def _get_attribute_vi_string(self, attribute_id):
-        r'''_get_attribute_vi_string
+        r"""_get_attribute_vi_string
 
         This method queries the value of an NI-TClk ViString property. You
         must provide a ViChar array to serve as a buffer for the value. You pass
@@ -302,22 +326,40 @@ class SessionReference(object):
         Returns:
             value (str): The value that you are getting
 
-        '''
+        """
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         buf_size_ctype = _visatype.ViInt32()  # case S170
         value_ctype = None  # case C050
-        error_code = self._library.niTClk_GetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        error_code = self._library.niTClk_GetAttributeViString(
+            session_ctype,
+            channel_name_ctype,
+            attribute_id_ctype,
+            buf_size_ctype,
+            value_ctype,
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=True, is_error_handling=False
+        )
         buf_size_ctype = _visatype.ViInt32(error_code)  # case S180
         value_ctype = (_visatype.ViChar * buf_size_ctype.value)()  # case C060
-        error_code = self._library.niTClk_GetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niTClk_GetAttributeViString(
+            session_ctype,
+            channel_name_ctype,
+            attribute_id_ctype,
+            buf_size_ctype,
+            value_ctype,
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return value_ctype.value.decode(self._encoding)
 
     def _get_extended_error_info(self):
-        r'''_get_extended_error_info
+        r"""_get_extended_error_info
 
         Reports extended error information for the most recent NI-TClk method
         that returned an error. To establish the method that returned an
@@ -331,19 +373,29 @@ class SessionReference(object):
                 value of _get_extended_error_info is the size that you should use
                 for _get_extended_error_info to return the full error string.
 
-        '''
+        """
         error_string_ctype = None  # case C050
         error_string_size_ctype = _visatype.ViUInt32()  # case S170
-        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        error_code = self._library.niTClk_GetExtendedErrorInfo(
+            error_string_ctype, error_string_size_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=True, is_error_handling=True
+        )
         error_string_size_ctype = _visatype.ViUInt32(error_code)  # case S180
-        error_string_ctype = (_visatype.ViChar * error_string_size_ctype.value)()  # case C060
-        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        error_string_ctype = (
+            _visatype.ViChar * error_string_size_ctype.value
+        )()  # case C060
+        error_code = self._library.niTClk_GetExtendedErrorInfo(
+            error_string_ctype, error_string_size_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=True
+        )
         return error_string_ctype.value.decode(self._encoding)
 
     def _set_attribute_vi_real64(self, attribute_id, value):
-        r'''_set_attribute_vi_real64
+        r"""_set_attribute_vi_real64
 
         Sets the value of an NI-TClk VIReal64 property.
         _set_attribute_vi_real64 is a low-level method that you can use to
@@ -368,17 +420,23 @@ class SessionReference(object):
 
             value (float): The value for the property
 
-        '''
+        """
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViReal64(value)  # case S150
-        error_code = self._library.niTClk_SetAttributeViReal64(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niTClk_SetAttributeViReal64(
+            session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     def _set_attribute_vi_session(self, attribute_id, value):
-        r'''_set_attribute_vi_session
+        r"""_set_attribute_vi_session
 
         Sets the value of an NI-TClk ViSession property.
         _set_attribute_vi_session is a low-level method that you can use
@@ -405,17 +463,23 @@ class SessionReference(object):
 
             value (int): The value for the property
 
-        '''
+        """
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViSession(value)  # case S150
-        error_code = self._library.niTClk_SetAttributeViSession(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niTClk_SetAttributeViSession(
+            session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     def _set_attribute_vi_string(self, attribute_id, value):
-        r'''_set_attribute_vi_string
+        r"""_set_attribute_vi_string
 
         Sets the value of an NI-TClk VIString property.
         _set_attribute_vi_string is a low-level method that you can use to
@@ -442,55 +506,64 @@ class SessionReference(object):
 
             value (str): Pass the value for the property
 
-        '''
+        """
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(
+            self._repeated_capability.encode(self._encoding)
+        )  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case C020
-        error_code = self._library.niTClk_SetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        value_ctype = ctypes.create_string_buffer(
+            value.encode(self._encoding)
+        )  # case C020
+        error_code = self._library.niTClk_SetAttributeViString(
+            session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
 
 class _Session(object):
-    '''Private class
+    """Private class
 
     This class allows reusing function templates that are used in all other drivers. If
     we don't do this, we would need new template(s) that the only difference is in the
     indentation.
-    '''
+    """
 
     def __init__(self):
         self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
+        self._encoding = "windows-1251"
 
         # Instantiate any repeated capability objects
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        self._param_list = ', '.join(param_list)
+        self._param_list = ", ".join(param_list)
 
         self._is_frozen = True
 
     def _get_error_description(self, error_code):
-        '''_get_error_description
+        """_get_error_description
 
         Returns the error description.
-        '''
+        """
         try:
-            '''
+            """
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
             Use _error_message instead. It doesn't require a session.
-            '''
+            """
             error_string = self._get_extended_error_info()
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
 
-    ''' These are code-generated '''
+    """ These are code-generated """
+
     def configure_for_homogeneous_triggers(self, sessions):
-        r'''configure_for_homogeneous_triggers
+        r"""configure_for_homogeneous_triggers
 
         Configures the properties commonly required for the TClk synchronization
         of device sessions with homogeneous triggers in a single PXI chassis or
@@ -598,16 +671,28 @@ class _Session(object):
         Args:
             sessions (list of instrument-specific sessions or nitclk.SessionReference instances): sessions is an array of sessions that are being synchronized.
 
-        '''
-        session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        error_code = self._library.niTClk_ConfigureForHomogeneousTriggers(session_count_ctype, sessions_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        """
+        session_count_ctype = _visatype.ViUInt32(
+            0 if sessions is None else len(sessions)
+        )  # case S160
+        sessions_converted = _converters.convert_to_nitclk_session_number_list(
+            sessions
+        )  # case B520
+        sessions_ctype = get_ctypes_pointer_for_buffer(
+            value=sessions_converted, library_type=_visatype.ViSession
+        )  # case B520
+        error_code = self._library.niTClk_ConfigureForHomogeneousTriggers(
+            session_count_ctype, sessions_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
-    def finish_sync_pulse_sender_synchronize(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
-        r'''finish_sync_pulse_sender_synchronize
+    def finish_sync_pulse_sender_synchronize(
+        self, sessions, min_time=hightime.timedelta(seconds=0.0)
+    ):
+        r"""finish_sync_pulse_sender_synchronize
 
         Finishes synchronizing the Sync Pulse Sender.
 
@@ -621,17 +706,29 @@ class _Session(object):
                 synchronization, adjust this value to account for propagation delays
                 through the various devices and cables.
 
-        '''
-        session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        min_time_ctype = _converters.convert_timedelta_to_seconds_real64(min_time)  # case S140
-        error_code = self._library.niTClk_FinishSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        """
+        session_count_ctype = _visatype.ViUInt32(
+            0 if sessions is None else len(sessions)
+        )  # case S160
+        sessions_converted = _converters.convert_to_nitclk_session_number_list(
+            sessions
+        )  # case B520
+        sessions_ctype = get_ctypes_pointer_for_buffer(
+            value=sessions_converted, library_type=_visatype.ViSession
+        )  # case B520
+        min_time_ctype = _converters.convert_timedelta_to_seconds_real64(
+            min_time
+        )  # case S140
+        error_code = self._library.niTClk_FinishSyncPulseSenderSynchronize(
+            session_count_ctype, sessions_ctype, min_time_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     def _get_extended_error_info(self):
-        r'''_get_extended_error_info
+        r"""_get_extended_error_info
 
         Reports extended error information for the most recent NI-TClk method
         that returned an error. To establish the method that returned an
@@ -645,19 +742,29 @@ class _Session(object):
                 value of _get_extended_error_info is the size that you should use
                 for _get_extended_error_info to return the full error string.
 
-        '''
+        """
         error_string_ctype = None  # case C050
         error_string_size_ctype = _visatype.ViUInt32()  # case S170
-        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        error_code = self._library.niTClk_GetExtendedErrorInfo(
+            error_string_ctype, error_string_size_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=True, is_error_handling=True
+        )
         error_string_size_ctype = _visatype.ViUInt32(error_code)  # case S180
-        error_string_ctype = (_visatype.ViChar * error_string_size_ctype.value)()  # case C060
-        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        error_string_ctype = (
+            _visatype.ViChar * error_string_size_ctype.value
+        )()  # case C060
+        error_code = self._library.niTClk_GetExtendedErrorInfo(
+            error_string_ctype, error_string_size_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=True
+        )
         return error_string_ctype.value.decode(self._encoding)
 
     def initiate(self, sessions):
-        r'''initiate
+        r"""initiate
 
         Initiates the acquisition or generation sessions specified, taking into
         consideration any special requirements needed for synchronization. For
@@ -668,16 +775,24 @@ class _Session(object):
         Args:
             sessions (list of instrument-specific sessions or nitclk.SessionReference instances): sessions is an array of sessions that are being synchronized.
 
-        '''
-        session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
+        """
+        session_count_ctype = _visatype.ViUInt32(
+            0 if sessions is None else len(sessions)
+        )  # case S160
+        sessions_converted = _converters.convert_to_nitclk_session_number_list(
+            sessions
+        )  # case B520
+        sessions_ctype = get_ctypes_pointer_for_buffer(
+            value=sessions_converted, library_type=_visatype.ViSession
+        )  # case B520
         error_code = self._library.niTClk_Initiate(session_count_ctype, sessions_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     def is_done(self, sessions):
-        r'''is_done
+        r"""is_done
 
         Monitors the progress of the acquisitions and/or generations
         corresponding to sessions.
@@ -691,17 +806,31 @@ class _Session(object):
                 session has completed without any errors or when any one of the sessions
                 reports an error.
 
-        '''
-        session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
+        """
+        session_count_ctype = _visatype.ViUInt32(
+            0 if sessions is None else len(sessions)
+        )  # case S160
+        sessions_converted = _converters.convert_to_nitclk_session_number_list(
+            sessions
+        )  # case B520
+        sessions_ctype = get_ctypes_pointer_for_buffer(
+            value=sessions_converted, library_type=_visatype.ViSession
+        )  # case B520
         done_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niTClk_IsDone(session_count_ctype, sessions_ctype, None if done_ctype is None else (ctypes.pointer(done_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niTClk_IsDone(
+            session_count_ctype,
+            sessions_ctype,
+            None if done_ctype is None else (ctypes.pointer(done_ctype)),
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return bool(done_ctype.value)
 
-    def setup_for_sync_pulse_sender_synchronize(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
-        r'''setup_for_sync_pulse_sender_synchronize
+    def setup_for_sync_pulse_sender_synchronize(
+        self, sessions, min_time=hightime.timedelta(seconds=0.0)
+    ):
+        r"""setup_for_sync_pulse_sender_synchronize
 
         Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
 
@@ -715,17 +844,29 @@ class _Session(object):
                 synchronization, adjust this value to account for propagation delays
                 through the various devices and cables.
 
-        '''
-        session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        min_time_ctype = _converters.convert_timedelta_to_seconds_real64(min_time)  # case S140
-        error_code = self._library.niTClk_SetupForSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        """
+        session_count_ctype = _visatype.ViUInt32(
+            0 if sessions is None else len(sessions)
+        )  # case S160
+        sessions_converted = _converters.convert_to_nitclk_session_number_list(
+            sessions
+        )  # case B520
+        sessions_ctype = get_ctypes_pointer_for_buffer(
+            value=sessions_converted, library_type=_visatype.ViSession
+        )  # case B520
+        min_time_ctype = _converters.convert_timedelta_to_seconds_real64(
+            min_time
+        )  # case S140
+        error_code = self._library.niTClk_SetupForSyncPulseSenderSynchronize(
+            session_count_ctype, sessions_ctype, min_time_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     def synchronize(self, sessions, min_tclk_period=hightime.timedelta(seconds=0.0)):
-        r'''synchronize
+        r"""synchronize
 
         Synchronizes the TClk signals on the given sessions. After
         synchronize executes, TClk signals from all sessions are
@@ -744,17 +885,31 @@ class _Session(object):
                 synchronization, adjust this value to account for propagation delays
                 through the various devices and cables.
 
-        '''
-        session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        min_tclk_period_ctype = _converters.convert_timedelta_to_seconds_real64(min_tclk_period)  # case S140
-        error_code = self._library.niTClk_Synchronize(session_count_ctype, sessions_ctype, min_tclk_period_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        """
+        session_count_ctype = _visatype.ViUInt32(
+            0 if sessions is None else len(sessions)
+        )  # case S160
+        sessions_converted = _converters.convert_to_nitclk_session_number_list(
+            sessions
+        )  # case B520
+        sessions_ctype = get_ctypes_pointer_for_buffer(
+            value=sessions_converted, library_type=_visatype.ViSession
+        )  # case B520
+        min_tclk_period_ctype = _converters.convert_timedelta_to_seconds_real64(
+            min_tclk_period
+        )  # case S140
+        error_code = self._library.niTClk_Synchronize(
+            session_count_ctype, sessions_ctype, min_tclk_period_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
-    def synchronize_to_sync_pulse_sender(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
-        r'''synchronize_to_sync_pulse_sender
+    def synchronize_to_sync_pulse_sender(
+        self, sessions, min_time=hightime.timedelta(seconds=0.0)
+    ):
+        r"""synchronize_to_sync_pulse_sender
 
         Synchronizes the other devices to the Sync Pulse Sender.
 
@@ -768,17 +923,29 @@ class _Session(object):
                 synchronization, adjust this value to account for propagation delays
                 through the various devices and cables.
 
-        '''
-        session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        min_time_ctype = _converters.convert_timedelta_to_seconds_real64(min_time)  # case S140
-        error_code = self._library.niTClk_SynchronizeToSyncPulseSender(session_count_ctype, sessions_ctype, min_time_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        """
+        session_count_ctype = _visatype.ViUInt32(
+            0 if sessions is None else len(sessions)
+        )  # case S160
+        sessions_converted = _converters.convert_to_nitclk_session_number_list(
+            sessions
+        )  # case B520
+        sessions_ctype = get_ctypes_pointer_for_buffer(
+            value=sessions_converted, library_type=_visatype.ViSession
+        )  # case B520
+        min_time_ctype = _converters.convert_timedelta_to_seconds_real64(
+            min_time
+        )  # case S140
+        error_code = self._library.niTClk_SynchronizeToSyncPulseSender(
+            session_count_ctype, sessions_ctype, min_time_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
     def wait_until_done(self, sessions, timeout=hightime.timedelta(seconds=0.0)):
-        r'''wait_until_done
+        r"""wait_until_done
 
         Call this method to pause execution of your program until the
         acquisitions and/or generations corresponding to sessions are done or
@@ -796,18 +963,30 @@ class _Session(object):
                 sessions to complete. If timeout is exceeded, wait_until_done
                 returns an error.
 
-        '''
-        session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        error_code = self._library.niTClk_WaitUntilDone(session_count_ctype, sessions_ctype, timeout_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        """
+        session_count_ctype = _visatype.ViUInt32(
+            0 if sessions is None else len(sessions)
+        )  # case S160
+        sessions_converted = _converters.convert_to_nitclk_session_number_list(
+            sessions
+        )  # case B520
+        sessions_ctype = get_ctypes_pointer_for_buffer(
+            value=sessions_converted, library_type=_visatype.ViSession
+        )  # case B520
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(
+            timeout
+        )  # case S140
+        error_code = self._library.niTClk_WaitUntilDone(
+            session_count_ctype, sessions_ctype, timeout_ctype
+        )
+        errors.handle_error(
+            self, error_code, ignore_warnings=False, is_error_handling=False
+        )
         return
 
 
 def configure_for_homogeneous_triggers(sessions):
-    '''configure_for_homogeneous_triggers
+    """configure_for_homogeneous_triggers
 
     Configures the properties commonly required for the TClk synchronization
     of device sessions with homogeneous triggers in a single PXI chassis or
@@ -915,12 +1094,12 @@ def configure_for_homogeneous_triggers(sessions):
     Args:
         sessions (list of instrument-specific sessions or nitclk.SessionReference instances): sessions is an array of sessions that are being synchronized.
 
-    '''
+    """
     return _Session().configure_for_homogeneous_triggers(sessions)
 
 
 def finish_sync_pulse_sender_synchronize(sessions, min_time):
-    '''finish_sync_pulse_sender_synchronize
+    """finish_sync_pulse_sender_synchronize
 
     Finishes synchronizing the Sync Pulse Sender.
 
@@ -934,12 +1113,12 @@ def finish_sync_pulse_sender_synchronize(sessions, min_time):
             synchronization, adjust this value to account for propagation delays
             through the various devices and cables.
 
-    '''
+    """
     return _Session().finish_sync_pulse_sender_synchronize(sessions, min_time)
 
 
 def initiate(sessions):
-    '''initiate
+    """initiate
 
     Initiates the acquisition or generation sessions specified, taking into
     consideration any special requirements needed for synchronization. For
@@ -950,12 +1129,12 @@ def initiate(sessions):
     Args:
         sessions (list of instrument-specific sessions or nitclk.SessionReference instances): sessions is an array of sessions that are being synchronized.
 
-    '''
+    """
     return _Session().initiate(sessions)
 
 
 def is_done(sessions):
-    '''is_done
+    """is_done
 
     Monitors the progress of the acquisitions and/or generations
     corresponding to sessions.
@@ -969,12 +1148,12 @@ def is_done(sessions):
             session has completed without any errors or when any one of the sessions
             reports an error.
 
-    '''
+    """
     return _Session().is_done(sessions)
 
 
 def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
-    '''setup_for_sync_pulse_sender_synchronize
+    """setup_for_sync_pulse_sender_synchronize
 
     Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
 
@@ -988,12 +1167,12 @@ def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
             synchronization, adjust this value to account for propagation delays
             through the various devices and cables.
 
-    '''
+    """
     return _Session().setup_for_sync_pulse_sender_synchronize(sessions, min_time)
 
 
 def synchronize(sessions, min_tclk_period):
-    '''synchronize
+    """synchronize
 
     Synchronizes the TClk signals on the given sessions. After
     synchronize executes, TClk signals from all sessions are
@@ -1012,12 +1191,12 @@ def synchronize(sessions, min_tclk_period):
             synchronization, adjust this value to account for propagation delays
             through the various devices and cables.
 
-    '''
+    """
     return _Session().synchronize(sessions, min_tclk_period)
 
 
 def synchronize_to_sync_pulse_sender(sessions, min_time):
-    '''synchronize_to_sync_pulse_sender
+    """synchronize_to_sync_pulse_sender
 
     Synchronizes the other devices to the Sync Pulse Sender.
 
@@ -1031,12 +1210,12 @@ def synchronize_to_sync_pulse_sender(sessions, min_time):
             synchronization, adjust this value to account for propagation delays
             through the various devices and cables.
 
-    '''
+    """
     return _Session().synchronize_to_sync_pulse_sender(sessions, min_time)
 
 
 def wait_until_done(sessions, timeout):
-    '''wait_until_done
+    """wait_until_done
 
     Call this method to pause execution of your program until the
     acquisitions and/or generations corresponding to sessions are done or
@@ -1054,8 +1233,5 @@ def wait_until_done(sessions, timeout):
             sessions to complete. If timeout is exceeded, wait_until_done
             returns an error.
 
-    '''
+    """
     return _Session().wait_until_done(sessions, timeout)
-
-
-
