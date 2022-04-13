@@ -46,7 +46,7 @@ changedir =
 
 commands =
 % if uses_other_wheel:
-    ${wheel_env_no_py}: python setup.py bdist_wheel --universal
+    ${wheel_env_no_py}: python setup.py bdist_wheel
 
 % endif
     # --disable-pip-version-check prevents pip from telling us we need to upgrade pip, since we are doing that now
