@@ -24,19 +24,20 @@ In order to have the ability to build and run the tests you will need a few thin
 - Install and enable [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
 - Install GNU Make: ``sudo apt-get install make``
 - Install zip: ``sudo apt-get install zip``
-- Install 64-bit [Python 3.9](https://www.python.org/downloads/)
-    - Add ``Python install path`` and ``python install path``\Scripts to Windows path
-    - Copy ``Python install path``\python.exe to ``python install path``\python3.exe
+- Install 64-bit [Python](https://www.python.org/downloads/)
+    - Use the version that `build_test` uses. See [tox.ini](https://github.com/ni/nimi-python/blob/e13087eb67e2399de2dfa83fd504f8ebd0e0e263/tox.ini#L10)
 
 ### macOS:
 
 - Install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
 - Install command line developer tools
-- Install [Python 3.9](https://www.python.org/downloads/)
+- Install [Python](https://www.python.org/downloads/)
+    - Use the version that `build_test` uses. See [tox.ini](https://github.com/ni/nimi-python/blob/e13087eb67e2399de2dfa83fd504f8ebd0e0e263/tox.ini#L10)
 
 ### Linux:
 
-- Install Python 3.9 and [PyPI](https://pypi.python.org/pypi): ``sudo apt-get install python3-pip (Linux)``
+- Install Python: ``sudo apt-get install python3-pip``
+    - Use the version that `build_test` uses. See [tox.ini](https://github.com/ni/nimi-python/blob/e13087eb67e2399de2dfa83fd504f8ebd0e0e263/tox.ini#L10)
 
 ### All:
 
@@ -56,12 +57,13 @@ Building **[`nimi-python`](https://github.com/ni/nimi-python)**
 
    It will do the following, for each driver:
 
-      * Generate Python bindings
-      * Generate [RST documentation](http://www.sphinx-doc.org/)
-      * Create installer packages
-      * Run [flake8](http://flake8.pycqa.org/)
-      * Generate [HTML documentation](http://www.sphinx-doc.org/)
-      * Iterate over all python versions and run the NI-FAKE unit tests for each installed version of Python
+    * Validate the code generator and build scripts
+    * Generate Python bindings
+    * Generate [RST documentation](http://www.sphinx-doc.org/)
+     * Create installer packages
+     * Run [flake8](http://flake8.pycqa.org/)
+     * Generate [HTML documentation](http://www.sphinx-doc.org/)
+     * Iterate over all installed and supported Python versions and run unit tests
 
 1. To clean everything and start fresh
 
