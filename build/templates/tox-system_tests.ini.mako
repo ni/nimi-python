@@ -97,6 +97,9 @@ passenv =
     BUILD_NUMBER
 
 [pytest]
+addopts = --verbose
+norecursedirs = .* build dist CVS _darcs {arch} *.egg venv
+junit_suite_name = nimi-python
 junit_family = xunit1
 % if module_name == 'nidcpower':
 markers = # Defines custom markers used by nidcpower system tests. Prevents PytestUnknownMarkWarning.
