@@ -39,7 +39,7 @@ description =
 
 changedir =
 % if uses_other_wheel:
-    ${wheel_env_no_py}: ../../generated/${other_wheel}
+    ${wheel_env_no_py}: ../${other_wheel}
 % endif
     ${module_name}-system_tests: .
     ${module_name}-coverage: .
@@ -55,8 +55,8 @@ commands =
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver ${other_wheel} --start-path ../..
 % endif
     ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../../generated/kibana/${module_name}_system_test_result.json {posargs}
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests -c ../../generated/${module_name}/tox-system_tests.ini --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../../generated/kibana/${module_name}_system_test_result.json --durations=5 {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../kibana/${module_name}_system_test_result.json {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests -c tox-system_tests.ini --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../kibana/${module_name}_system_test_result.json --durations=5 {posargs}
 
     ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
     # Create the report to upload
@@ -64,7 +64,7 @@ commands =
     # Display the coverage results
     ${module_name}-coverage: coverage report --rcfile=../../tools/coverage_system_tests.rc
     # token is from codecov
-    ${module_name}-coverage: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}systemtests --name ${module_name} --root ../.. --file ../../generated/${module_name}/coverage.xml
+    ${module_name}-coverage: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}systemtests --name ${module_name} --root ../.. --file coverage.xml
 
 deps =
 % if uses_other_wheel:
