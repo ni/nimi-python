@@ -94,7 +94,7 @@ Once the Python bindings are installed, you can run the system tests for the des
 
 You can also use ``tox`` to run the system tests for the desired driver, *using all installed Python versions*. For example:
 
-    tox -c generated\nidmm\tox-system_tests.ini
+    tox -c generated/nidmm/tox-system_tests.ini
 
 
 Contributing
