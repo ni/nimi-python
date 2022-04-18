@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 21.5.0d106
+# This file is generated from NI-FGEN API metadata version 22.0.0d9999
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -1734,7 +1734,7 @@ functions = {
                 'documentation': {
                     'description': 'Indicates date and time of the last calibration.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],
@@ -1768,7 +1768,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the date and time the device was last calibrated.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],
