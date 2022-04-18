@@ -137,7 +137,7 @@ The following is a basic example of using the **nimodinst** module to retrieve i
         for device in session:
             print("{: >20} {: >15} {: >10}".format(device.device_name, device.device_model, device.serial_number))
 
-Additional examples for NI-ModInst are located in src/nimodinst/examples/ directory.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nimodinst/examples>`_
 
 .. _support-section:
 
