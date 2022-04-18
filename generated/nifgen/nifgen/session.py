@@ -4144,7 +4144,7 @@ class Session(_SessionBase):
         Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this method returns 14 for the **hour** parameter and 30 for the **minute** parameter.
 
         Returns:
-            month (hightime.datetime): Indicates date and time of the last calibration.
+            last_cal_datetime (hightime.datetime): Indicates date and time of the last calibration.
 
         '''
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
@@ -4157,7 +4157,7 @@ class Session(_SessionBase):
         Returns the date and time of the last successful self-calibration.
 
         Returns:
-            month (hightime.datetime): Returns the date and time the device was last calibrated.
+            last_cal_datetime (hightime.datetime): Returns the date and time the device was last calibrated.
 
         '''
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()

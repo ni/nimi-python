@@ -387,21 +387,21 @@ class Library(object):
                 self.niFgen_GetHardwareState_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetHardwareState_cfunc(vi, state)
 
-    def niFgen_GetLastExtCalLastDateAndTime(self, vi, month):  # noqa: N802
+    def niFgen_GetLastExtCalLastDateAndTime(self, vi, last_cal_datetime):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetLastExtCalLastDateAndTime_cfunc is None:
                 self.niFgen_GetLastExtCalLastDateAndTime_cfunc = self._get_library_function('niFgen_GetLastExtCalLastDateAndTime')
                 self.niFgen_GetLastExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(hightime.datetime)]  # noqa: F405
                 self.niFgen_GetLastExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_GetLastExtCalLastDateAndTime_cfunc(vi, month)
+        return self.niFgen_GetLastExtCalLastDateAndTime_cfunc(vi, last_cal_datetime)
 
-    def niFgen_GetLastSelfCalLastDateAndTime(self, vi, month):  # noqa: N802
+    def niFgen_GetLastSelfCalLastDateAndTime(self, vi, last_cal_datetime):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetLastSelfCalLastDateAndTime_cfunc is None:
                 self.niFgen_GetLastSelfCalLastDateAndTime_cfunc = self._get_library_function('niFgen_GetLastSelfCalLastDateAndTime')
                 self.niFgen_GetLastSelfCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(hightime.datetime)]  # noqa: F405
                 self.niFgen_GetLastSelfCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_GetLastSelfCalLastDateAndTime_cfunc(vi, month)
+        return self.niFgen_GetLastSelfCalLastDateAndTime_cfunc(vi, last_cal_datetime)
 
     def niFgen_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:

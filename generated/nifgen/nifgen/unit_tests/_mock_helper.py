@@ -115,10 +115,10 @@ class SideEffectsHelper(object):
         self._defaults['GetHardwareState']['state'] = None
         self._defaults['GetLastExtCalLastDateAndTime'] = {}
         self._defaults['GetLastExtCalLastDateAndTime']['return'] = 0
-        self._defaults['GetLastExtCalLastDateAndTime']['month'] = None
+        self._defaults['GetLastExtCalLastDateAndTime']['lastCalDatetime'] = None
         self._defaults['GetLastSelfCalLastDateAndTime'] = {}
         self._defaults['GetLastSelfCalLastDateAndTime']['return'] = 0
-        self._defaults['GetLastSelfCalLastDateAndTime']['month'] = None
+        self._defaults['GetLastSelfCalLastDateAndTime']['lastCalDatetime'] = None
         self._defaults['GetSelfCalLastDateAndTime'] = {}
         self._defaults['GetSelfCalLastDateAndTime']['return'] = 0
         self._defaults['GetSelfCalLastDateAndTime']['year'] = None
@@ -539,24 +539,24 @@ class SideEffectsHelper(object):
             state.contents.value = self._defaults['GetHardwareState']['state']
         return self._defaults['GetHardwareState']['return']
 
-    def niFgen_GetLastExtCalLastDateAndTime(self, vi, month):  # noqa: N802
+    def niFgen_GetLastExtCalLastDateAndTime(self, vi, last_cal_datetime):  # noqa: N802
         if self._defaults['GetLastExtCalLastDateAndTime']['return'] != 0:
             return self._defaults['GetLastExtCalLastDateAndTime']['return']
-        # month
-        if self._defaults['GetLastExtCalLastDateAndTime']['month'] is None:
-            raise MockFunctionCallError("niFgen_GetLastExtCalLastDateAndTime", param='month')
-        if month is not None:
-            month.contents.value = self._defaults['GetLastExtCalLastDateAndTime']['month']
+        # last_cal_datetime
+        if self._defaults['GetLastExtCalLastDateAndTime']['lastCalDatetime'] is None:
+            raise MockFunctionCallError("niFgen_GetLastExtCalLastDateAndTime", param='lastCalDatetime')
+        if last_cal_datetime is not None:
+            last_cal_datetime.contents.value = self._defaults['GetLastExtCalLastDateAndTime']['lastCalDatetime']
         return self._defaults['GetLastExtCalLastDateAndTime']['return']
 
-    def niFgen_GetLastSelfCalLastDateAndTime(self, vi, month):  # noqa: N802
+    def niFgen_GetLastSelfCalLastDateAndTime(self, vi, last_cal_datetime):  # noqa: N802
         if self._defaults['GetLastSelfCalLastDateAndTime']['return'] != 0:
             return self._defaults['GetLastSelfCalLastDateAndTime']['return']
-        # month
-        if self._defaults['GetLastSelfCalLastDateAndTime']['month'] is None:
-            raise MockFunctionCallError("niFgen_GetLastSelfCalLastDateAndTime", param='month')
-        if month is not None:
-            month.contents.value = self._defaults['GetLastSelfCalLastDateAndTime']['month']
+        # last_cal_datetime
+        if self._defaults['GetLastSelfCalLastDateAndTime']['lastCalDatetime'] is None:
+            raise MockFunctionCallError("niFgen_GetLastSelfCalLastDateAndTime", param='lastCalDatetime')
+        if last_cal_datetime is not None:
+            last_cal_datetime.contents.value = self._defaults['GetLastSelfCalLastDateAndTime']['lastCalDatetime']
         return self._defaults['GetLastSelfCalLastDateAndTime']['return']
 
     def niFgen_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
