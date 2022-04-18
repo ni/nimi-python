@@ -4710,7 +4710,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    # TODO(smooresni): Replace with session lock per GitHub issue [1596](https://github.com/ni/nimi-python/issues/1596)
     def lock(self):
         '''lock
 
@@ -4746,17 +4745,14 @@ class _SessionBase(object):
         # that will handle the unlock for them
         return _Lock(self)
 
-    # create python lock class variable; it is important the variable has class scope since
-    # new instances of _SessionBase are constructed in __getitem__ of _RepeatedCapabilities
-    import threading
-    _pylock = threading.RLock()
-
     def _lock_session(self):
         '''_lock_session
 
         Actual call to driver
         '''
-        self._pylock.acquire()
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niDCPower_LockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
     @ivi_synchronized
@@ -5603,7 +5599,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    # TODO(smooresni): Replace with session lock per GitHub issue [1596](https://github.com/ni/nimi-python/issues/1596)
     def unlock(self):
         '''unlock
 
@@ -5611,7 +5606,9 @@ class _SessionBase(object):
         lock. Refer to lock for additional
         information on session locks.
         '''
-        self._pylock.release()
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niDCPower_UnlockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
     @ivi_synchronized
