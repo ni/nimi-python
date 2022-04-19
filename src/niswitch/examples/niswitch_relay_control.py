@@ -16,7 +16,7 @@ def example(resource_name, topology, simulate, relay, action):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Performs relay control with NI-SWITCH relays.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of an NI-Switch module.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of an NI-SWITCH module.')
     parser.add_argument('-r', '--relay', default='k0', help='Relay Name.')
     parser.add_argument('-a', '--action', default='OPEN', choices=niswitch.RelayAction.__members__.keys(), type=str.upper, help='Relay Action.')
     parser.add_argument('-t', '--topology', default='Configured Topology', help='Topology.')
