@@ -100,11 +100,11 @@ After you have successfully built **[nimi-python](https://github.com/ni/nimi-pyt
 
 Once the Python bindings are installed, run the system tests for the desired driver. For example:
 
-    pytest src/nidmm/system_tests
+    pytest src/nidmm/system_tests -c generated/nidmm/tox-system_tests.ini
 
 You can also use ``tox`` to run the system tests for the desired driver, *using all installed Python versions*. For example:
 
-    tox -c generated\nidmm\tox-system-tests.ini
+    tox -c generated/nidmm/tox-system_tests.ini
 
 
 Contributing
