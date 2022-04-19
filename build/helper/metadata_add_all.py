@@ -297,6 +297,18 @@ def _fix_type(parameter):
     parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' []', '[]').replace(' ', '_')
 
 
+# TODO(olsl21): Metadata is inconsistent with regards to how structs are treated.
+#  This is a hack to workaround that inconsistency. The real root cause is tracked
+#  by internal NI bug 1918101. Once that is addressed, this method can be removed.
+def _fix_custom_type(parameter, config):
+    '''Add "struct_" prefix to custom type if necessary to match its ctypes_type.'''
+    parameter_type_with_struct_prefix = 'struct_' + parameter['type']
+    for custom_type in config['custom_types']:
+        if parameter_type_with_struct_prefix == custom_type['ctypes_type']:
+            parameter['type'] = custom_type['ctypes_type']
+            break
+
+
 def _add_use_in_python_api(p, parameters):
     '''Add 'use_in_python_api' if not there with value of True'''
     if 'use_in_python_api' not in p:
@@ -368,6 +380,7 @@ def add_all_function_metadata(functions, config):
             _add_enum(p)
             _fix_type(p)
             _add_buffer_info(p, config)
+            _fix_custom_type(p, config)
             _add_use_in_python_api(p, functions[f]['parameters'])
             _add_python_parameter_name(p)
             _add_python_type(p, config)
@@ -723,6 +736,42 @@ functions_input = {
                 },
                 'type': 'ViUInt8[]'
             },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'custom type input',
+                },
+                'enum': None,
+                'name': 'customTypeInput',
+                'type': 'struct CustomStruct'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'custom type output',
+                },
+                'enum': None,
+                'name': 'customTypeOutput',
+                'type': 'struct CustomStruct'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'custom type without struct prefix input',
+                },
+                'enum': None,
+                'name': 'customTypeWithoutStructPrefixInput',
+                'type': 'CustomStruct'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'custom type without struct prefix output',
+                },
+                'enum': None,
+                'name': 'customTypeWithoutStructPrefixOutput',
+                'type': 'CustomStruct'
+            },
         ],
         'documentation': {
             'description': 'Performs a foo, and performs it well.',
@@ -951,6 +1000,134 @@ functions_expected = {
                 'library_method_call_snippet': 'expected_pin_states_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'expected_pin_states',
+            },
+            {
+                'ctypes_type': 'struct_CustomStruct',
+                'ctypes_variable_name': 'custom_type_input_ctype',
+                'ctypes_type_library_call': 'custom_struct.struct_CustomStruct',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'custom type input',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'CustomStruct',
+                'type_in_documentation': 'CustomStruct',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'customTypeInput',
+                'python_name': 'custom_type_input',
+                'python_name_with_default': 'custom_type_input',
+                'python_name_with_doc_default': 'custom_type_input',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'struct_CustomStruct',
+                'library_method_call_snippet': 'custom_type_input_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'custom_type_input',
+            },
+            {
+                'ctypes_type': 'struct_CustomStruct',
+                'ctypes_variable_name': 'custom_type_output_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(custom_struct.struct_CustomStruct)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'custom type output',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'CustomStruct',
+                'type_in_documentation': 'CustomStruct',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'customTypeOutput',
+                'python_name': 'custom_type_output',
+                'python_name_with_default': 'custom_type_output',
+                'python_name_with_doc_default': 'custom_type_output',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'struct_CustomStruct',
+                'library_method_call_snippet': 'None if custom_type_output_ctype is None else (ctypes.pointer(custom_type_output_ctype))',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'custom_type_output',
+            },
+            {
+                'ctypes_type': 'struct_CustomStruct',
+                'ctypes_variable_name': 'custom_type_without_struct_prefix_input_ctype',
+                'ctypes_type_library_call': 'custom_struct.struct_CustomStruct',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'custom type without struct prefix input',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'CustomStruct',
+                'type_in_documentation': 'CustomStruct',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'customTypeWithoutStructPrefixInput',
+                'python_name': 'custom_type_without_struct_prefix_input',
+                'python_name_with_default': 'custom_type_without_struct_prefix_input',
+                'python_name_with_doc_default': 'custom_type_without_struct_prefix_input',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'struct_CustomStruct',
+                'library_method_call_snippet': 'custom_type_without_struct_prefix_input_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'custom_type_without_struct_prefix_input',
+            },
+            {
+                'ctypes_type': 'struct_CustomStruct',
+                'ctypes_variable_name': 'custom_type_without_struct_prefix_output_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(custom_struct.struct_CustomStruct)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'custom type without struct prefix output',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'CustomStruct',
+                'type_in_documentation': 'CustomStruct',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'customTypeWithoutStructPrefixOutput',
+                'python_name': 'custom_type_without_struct_prefix_output',
+                'python_name_with_default': 'custom_type_without_struct_prefix_output',
+                'python_name_with_doc_default': 'custom_type_without_struct_prefix_output',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'struct_CustomStruct',
+                'library_method_call_snippet': 'None if custom_type_without_struct_prefix_output_ctype is None else (ctypes.pointer(custom_type_without_struct_prefix_output_ctype))',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'custom_type_without_struct_prefix_output',
             },
         ],
         'python_name': 'make_a_foo',
@@ -1212,7 +1389,7 @@ config_input = {
     'init_function': 'InitWithOptions',
     'close_function': 'close',
     'custom_types': [
-        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
+        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'struct_CustomStruct', },
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
     'repeated_capabilities': [
@@ -1253,7 +1430,7 @@ config_expected = {
     'init_function': 'InitWithOptions',
     'close_function': 'close',
     'custom_types': [
-        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
+        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'struct_CustomStruct', },
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
     'repeated_capabilities': [
