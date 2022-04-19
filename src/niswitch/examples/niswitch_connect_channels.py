@@ -18,7 +18,7 @@ def example(resource_name, channel1, channel2, topology, simulate):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Performs a connection with NI-SWITCH Channels.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments Switch.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a NI-Switch module.')
     parser.add_argument('-ch1', '--channel1', default='c0', help='Channel One.')
     parser.add_argument('-ch2', '--channel2', default='r0', help='Channel Two.')
     parser.add_argument('-t', '--topology', default='Configured Topology', help='Topology.')
