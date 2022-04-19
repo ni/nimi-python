@@ -44,7 +44,7 @@ def example(resource_name, options, total_acquisition_time_in_seconds, voltage, 
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Fetch more samples than will fit in memory.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of an NI-Digitizer module.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of an NI Digitizer module.')
     parser.add_argument('-t', '--time', default=10, type=int, help='Time to sample (s)')
     parser.add_argument('-v', '--voltage', default=1.0, type=float, help='Voltage range (V)')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
