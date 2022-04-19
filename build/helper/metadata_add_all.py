@@ -54,7 +54,7 @@ def _add_python_method_name(function, name):
             function['python_name'] = '_' + camelcase_to_snakecase(name)
         else:
             function['python_name'] = camelcase_to_snakecase(name)
-            assert 'method_name_for_documentation' not in function, "'method_name_for_documentation' not allowed to be set: function['method_name_for_documentation'] = '{0}', function['python_name'] = '{1}'".format(function['method_name_for_documentation'], function['python_name'])
+            assert function['codegen_method'] == 'no' or 'method_name_for_documentation' not in function, "'method_name_for_documentation' not allowed to be set: function['method_name_for_documentation'] = '{0}', function['python_name'] = '{1}'".format(function['method_name_for_documentation'], function['python_name'])
     return function
 
 
@@ -826,6 +826,22 @@ functions_input = {
             'description': 'Perform actions as method defined',
         },
     },
+    'MakeANoCodegenMethod': {
+        'codegen_method': 'no',
+        'documentation': {
+            'description': 'This is a method with codegen_method set to no',
+        },
+        'method_name_for_documentation': 'MakeAPublicMethod',
+        'method_templates': [
+            {
+                'session_filename': '/cool_template',
+                'documentation_filename': '/cool_template',
+                'method_python_name_suffix': '',
+            },
+        ],
+        'parameters': [],
+        'returns': 'ViStatus',
+    },
 }
 
 
@@ -1277,6 +1293,28 @@ functions_expected = {
         'is_error_handling': False,
         'render_in_session_base': False,
         'has_repeated_capability': False
+    },
+    'MakeANoCodegenMethod': {
+        'name': 'MakeANoCodegenMethod',
+        'codegen_method': 'no',
+        'method_name_for_documentation': 'MakeAPublicMethod',
+        'use_session_lock': True,
+        'documentation': {
+            'description': 'This is a method with codegen_method set to no'
+        },
+        'has_repeated_capability': False,
+        'is_error_handling': False,
+        'render_in_session_base': False,
+        'method_templates': [
+            {
+                'session_filename': '/cool_template',
+                'documentation_filename': '/cool_template',
+                'method_python_name_suffix': ''
+            }
+        ],
+        'parameters': [],
+        'python_name': 'make_a_no_codegen_method',
+        'returns': 'ViStatus',
     }
 }
 
