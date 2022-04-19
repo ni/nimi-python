@@ -58,7 +58,7 @@ def example(resource_name, channels, options, steps, voltage_start, voltage_fina
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Performs voltage sweep then a current sweep.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments SMU')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of an NI SMU.')
     parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
     parser.add_argument('-s', '--steps', default='10', type=int, help='Number of steps per sweep')
     parser.add_argument('-v0', '--voltage-start', default=1.0, type=float, help='Voltage level at which sweep starts (V)')
