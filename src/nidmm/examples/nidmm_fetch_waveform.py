@@ -21,7 +21,7 @@ def example(resource_name, options, function, range, points, rate):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Performs a waveform acquisition using the NI-DMM API.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of an NI-Digital Multimeter module.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of an NI Digital Multimeter module.')
     parser.add_argument('-f', '--function', default='WAVEFORM_VOLTAGE', choices=nidmm.Function.__members__.keys(), type=str.upper, help='Measurement function.')
     parser.add_argument('-r', '--range', default=10, type=float, help='Measurement range.')
     parser.add_argument('-p', '--points', default=10, type=int, help='Specifies the number of points to acquire before the waveform acquisition completes.')
