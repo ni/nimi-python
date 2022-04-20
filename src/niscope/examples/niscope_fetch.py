@@ -21,7 +21,7 @@ def example(resource_name, channels, options, length, voltage):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Acquires one record from the given channels.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of an NI Digitizer module.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of an NI Digitizer.')
     parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
     parser.add_argument('-l', '--length', default=1000, type=int, help='Measure record length')
     parser.add_argument('-v', '--voltage', default=1.0, type=float, help='Voltage range (V)')
