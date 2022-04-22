@@ -2,7 +2,7 @@
 # This file is generated from NI-DCPower API metadata version 21.0.0f353
 attributes = {
     1050003: {
-        'access': 'read-write',
+        'access': 'read only',
         'documentation': {
             'description': '\nSpecifies whether NI-DCPower queries the device status after each operation.\nQuerying the device status is useful for debugging. After you validate your program, you can set this attribute to VI_FALSE to disable status checking and maximize performance.\nNI-DCPower ignores status checking for particular attributes regardless of the setting of this attribute.\nUse the niDCPower_InitializeWithChannels function to override this value.\nDefault Value: VI_TRUE\n'
         },
