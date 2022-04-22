@@ -50,7 +50,7 @@ def example(resource_name, options, voltage_max, current_max, points_per_output_
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Output ramping voltage to voltage max, then ramping current to current max.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2/0, PXI1Slot3/0-1', help='Resource name of National Instruments SMUs')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2/0, PXI1Slot3/0-1', help='Resource names of NI SMUs.')
     parser.add_argument('-s', '--number-steps', default=256, help='Number of steps per output function')
     parser.add_argument('-v', '--voltage-max', default=1.0, type=float, help='Maximum voltage (V)')
     parser.add_argument('-i', '--current-max', default=0.001, type=float, help='Maximum Current (I)')

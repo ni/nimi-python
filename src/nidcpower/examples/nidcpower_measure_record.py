@@ -33,7 +33,7 @@ def example(resource_name, options, voltage, length):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Outputs the specified voltage, then takes the specified number of voltage and current readings.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2/0, PXI1Slot3/0-1', help='Resource names of National Instruments SMUs')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2/0, PXI1Slot3/0-1', help='Resource names of NI SMUs.')
     parser.add_argument('-l', '--length', default='20', type=int, help='Measure record length per channel')
     parser.add_argument('-v', '--voltage', default=5.0, type=float, help='Voltage level (V)')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
