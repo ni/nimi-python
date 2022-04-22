@@ -8,8 +8,8 @@ Session
     
 
     Creates a handle to a list of installed devices supported by the
-    specified driver. Call this method and pass in the name of a National
-    Instruments instrument driver, such as "NI-SCOPE". This method
+    specified driver. Call this method and pass in the name of an NI
+    instrument driver, such as "NI-SCOPE". This method
     searches the system and constructs a list of all the installed devices
     that are supported by that driver, and then returns both a handle to
     this list and the number of devices found. The handle is used with other
