@@ -70,7 +70,7 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | NI-DCPower (nidcpower)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 21.3.0                   |
+| Driver Version Tested Against | 21.8.0                   |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
@@ -187,7 +187,7 @@ NI-FGEN Python API Status
 +-------------------------------+-----------------------+
 | NI-FGEN (nifgen)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 21.3.0                |
+| Driver Version Tested Against | 21.8.0                |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nifgenLatestVersion| |
 +-------------------------------+-----------------------+
@@ -226,7 +226,7 @@ NI-ModInst Python API Status
 +-------------------------------+--------------------------+
 | NI-ModInst (nimodinst)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 21.3.0                   |
+| Driver Version Tested Against | 21.8.0                   |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nimodinstLatestVersion| |
 +-------------------------------+--------------------------+
@@ -382,7 +382,7 @@ NI-TClk Python API Status
 +-------------------------------+-----------------------+
 | NI-TClk (nitclk)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 21.3.0                |
+| Driver Version Tested Against | 21.8.0                |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nitclkLatestVersion| |
 +-------------------------------+-----------------------+

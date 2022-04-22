@@ -5,7 +5,7 @@ NI-ModInst Python API Status
 +-------------------------------+--------------------------+
 | NI-ModInst (nimodinst)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 21.3.0                   |
+| Driver Version Tested Against | 21.8.0                   |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nimodinstLatestVersion| |
 +-------------------------------+--------------------------+
