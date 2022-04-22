@@ -47,7 +47,7 @@ config = {
             'python_name': 'instruments'
         }
     ],
-    'session_class_description': 'An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.',
+    'session_class_description': 'An NI-DCPower session to an NI programmable power supply or source measure unit.',
     'session_handle_parameter_name': 'vi',
     'uses_nitclk': False
 }

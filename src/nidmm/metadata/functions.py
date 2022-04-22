@@ -804,7 +804,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -845,7 +845,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -886,7 +886,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -927,7 +927,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1863,7 +1863,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1904,7 +1904,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1945,7 +1945,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1986,7 +1986,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'

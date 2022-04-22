@@ -2467,7 +2467,7 @@ functions = {
     'GetError': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nReads an error code and message from the error queue. National\nInstruments digitizers do not contain an error queue. Errors are\nreported as they occur. Therefore, this function does not detect errors.\n',
+            'description': '\nReads an error code and message from the error queue. NI\ndigitizers do not contain an error queue. Errors are\nreported as they occur. Therefore, this function does not detect errors.\n',
             'note': '\nThis function is included for compliance with the IviScope Class\nSpecification.\n'
         },
         'is_error_handling': True,
