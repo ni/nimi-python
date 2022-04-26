@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.8.0f382
+# This file is generated from NI-DCPower API metadata version 22.0.0d131
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -243,7 +243,7 @@ functions = {
     'CreateAdvancedSequenceCommitStepWithChannels': {
         'documentation': {
             'description': '\nCreates a Commit step in the Active advanced sequence. A Commit step\nconfigures channels to a user-defined known state before starting the advanced sequence.\nWhen a Commit step exists in the Active advanced sequence, you cannot\nset the output function to Pulse Voltage or Pulse Current in either\nthe Commit step (-1) or step 0. When you create an advanced sequence\nstep, each attribute you passed to the niDCPower_CreateAdvancedSequenceWithChannels\nfunction is reset to its default value for that step unless otherwise specified.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceWithChannels\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
             {
@@ -275,7 +275,7 @@ functions = {
     'CreateAdvancedSequenceStepWithChannels': {
         'documentation': {
             'description': '\nCreates a new advanced sequence step in the advanced sequence specified\nby the Active advanced sequence. When you create an advanced sequence\nstep, each attribute you passed to the niDCPower_CreateAdvancedSequenceWithChannels\nfunction is reset to its default value for that step unless otherwise\nspecified.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceWithChannels\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
             {
@@ -308,7 +308,7 @@ functions = {
         'codegen_method': 'private',
         'documentation': {
             'description': '\nCreates an empty advanced sequence. Call the\nniDCPower_CreateAdvancedSequenceStepWithChannels function to add steps to the\nactive advanced sequence.\n\nYou can create multiple advanced sequences for a channel.\n\n**Support for this function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\nUse this function in the Uncommitted or Committed programming states.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nNI-DCPower programming states.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceStepWithChannels\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_name_for_documentation': 'create_advanced_sequence',
         'parameters': [
@@ -952,7 +952,7 @@ functions = {
     'DeleteAdvancedSequenceWithChannels': {
         'documentation': {
             'description': '\nDeletes a previously created advanced sequence and all the advanced\nsequence steps in the advanced sequence.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
             {
@@ -1065,7 +1065,7 @@ functions = {
         'codegen_method': 'python-only',
         'documentation': {
             'description': '\nReturns a list of named tuples (Measurement) that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n\n',
-            'note': 'This function is not supported on all devices. Refer to `Supported Functions by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.'
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_templates': [
             {
@@ -1208,7 +1208,7 @@ functions = {
         'codegen_method': 'python-only',
         'documentation': {
             'description': '\nReturns a list of named tuples (Measurement) containing the measured voltage\nand current values on the specified output channel(s). Each call to this function\nblocks other function calls until the measurements are returned from the device.\nThe order of the measurements returned in the array corresponds to the order\non the specified output channel(s).\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n\n',
-            'note': 'This function is not supported on all devices. Refer to `Supported Functions by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.'
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_templates': [
             {
@@ -2184,7 +2184,7 @@ functions = {
         'codegen_method': 'python-only',
         'documentation': {
             'description': 'Returns the date and time of the oldest successful self-calibration from among the channels in the session.',
-            'note': 'This function is not supported on all devices.'
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_templates': [
             {
@@ -2489,7 +2489,7 @@ functions = {
             {
                 'documentation_filename': 'lock',
                 'method_python_name_suffix': '',
-                'session_filename': 'fancy_lock'
+                'session_filename': 'lock'
             }
         ],
         'parameters': [
@@ -3353,7 +3353,7 @@ functions = {
     'SendSoftwareEdgeTriggerWithChannels': {
         'documentation': {
             'description': '\nAsserts the specified trigger. This function can override an external\nedge trigger.\n\n**Related Topics:**\n\n`Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__\n',
-            'note': "\nThis function is not supported on all devices. Refer to `Supported\nFunctions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
             {
@@ -3683,7 +3683,7 @@ functions = {
             {
                 'documentation_filename': 'unlock',
                 'method_python_name_suffix': '',
-                'session_filename': 'fancy_unlock'
+                'session_filename': 'unlock'
             }
         ],
         'parameters': [
@@ -3712,7 +3712,7 @@ functions = {
     'WaitForEventWithChannels': {
         'documentation': {
             'description': '\nWaits until the specified channel(s) have generated the specified event.\n\nThe session monitors whether each type of event has occurred at least\nonce since the last time this function or the niDCPower_InitiateWithChannels\nfunction were called. If an event has only been generated once and you\ncall this function successively, the function times out. Individual\nevents must be generated between separate calls of this function.\n',
-            'note': "\nRefer to `Supported Functions by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__\nfor more information about supported devices.\n"
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
             {

@@ -36,7 +36,7 @@ All notable changes to this project will be documented in this file.
 * ### `nidcpower` (NI-DCPower)
     * #### Added
     * #### Changed
-        * Updated docs on supported devices
+        * Updated supported devices information in documentation for methods and properties
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
