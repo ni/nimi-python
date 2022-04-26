@@ -9,7 +9,7 @@ Overall Status
 
 ===========  ============================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
-Author       National Instruments
+Author       NI
 ===========  ============================================================================================================================
 
 .. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
@@ -137,7 +137,7 @@ The following is a basic example of using the **nidmm** module to open a session
         session.configureMeasurementDigits(nidmm.Function.DC_VOLTS, 10, 5.5)
         print("Measurement: " + str(session.read()))
 
-Additional examples for NI-DMM are located in src/nidmm/examples/ directory.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nidmm/examples>`_
 
 .. _support-section:
 

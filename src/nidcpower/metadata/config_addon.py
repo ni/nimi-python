@@ -4,5 +4,5 @@ config_additional_config = {
     #  subsequent smaller PRs
     'custom_types': [],
     'module_version': '1.4.2.dev0',
-    'latest_runtime_version_tested_against': '21.3.0',
+    'latest_runtime_version_tested_against': '21.8.0',
 }

@@ -9,7 +9,7 @@ Overall Status
 
 ===========  ============================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
-Author       National Instruments
+Author       NI
 ===========  ============================================================================================================================
 
 .. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
@@ -168,7 +168,7 @@ source current, and measure both voltage and current using the PPMU on selected 
         # Disconnect all channels using programmable onboard switching
         session.channels[channels].selected_function = nidigital.SelectedFunction.DISCONNECT
 
-Additional examples for NI-Digital Pattern Driver are located in src/nidigital/examples/ directory.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nidigital/examples>`_
 
 .. _support-section:
 
