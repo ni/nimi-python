@@ -2489,7 +2489,7 @@ functions = {
             {
                 'documentation_filename': 'lock',
                 'method_python_name_suffix': '',
-                'session_filename': 'fancy_lock'
+                'session_filename': 'lock'
             }
         ],
         'parameters': [
@@ -3683,7 +3683,7 @@ functions = {
             {
                 'documentation_filename': 'unlock',
                 'method_python_name_suffix': '',
-                'session_filename': 'fancy_unlock'
+                'session_filename': 'unlock'
             }
         ],
         'parameters': [

@@ -9,7 +9,7 @@ Overall Status
 
 ===========  ============================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
-Author       National Instruments
+Author       NI
 ===========  ============================================================================================================================
 
 .. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
@@ -239,7 +239,7 @@ The waveform_infos returned from `fetch_into <niscope/class.html#fetch-into>`_ i
     - Where *x* = the record length
 
 
-Additional examples for NI-SCOPE are located in src/niscope/examples/ directory.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/niscope/examples>`_
 
 
 .. _support-section:

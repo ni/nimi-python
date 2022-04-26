@@ -9,7 +9,7 @@ Overall Status
 
 ===========  ============================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
-Author       National Instruments
+Author       NI
 ===========  ============================================================================================================================
 
 .. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
@@ -136,7 +136,7 @@ The following is a basic example of using the **niswitch** module to open a sess
     with niswitch.Session("Dev1") as session:
         session.connect(channel1='r0', channel2='c0')
 
-Additional examples for NI-SWITCH are located in src/niswitch/examples/ directory.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/niswitch/examples>`_
 
 .. _support-section:
 
