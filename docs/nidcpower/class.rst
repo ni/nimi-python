@@ -337,10 +337,7 @@ configure_aperture_time
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -602,10 +599,7 @@ create_advanced_sequence_commit_step
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -661,10 +655,7 @@ create_advanced_sequence_step
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -715,10 +706,7 @@ delete_advanced_sequence
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -911,7 +899,7 @@ fetch_multiple
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1119,7 +1107,7 @@ get_self_cal_last_date_and_time
 
             
 
-            .. note:: This method is not supported on all devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
 
@@ -1152,10 +1140,7 @@ get_self_cal_last_temp
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
 
@@ -1457,7 +1442,7 @@ measure_multiple
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1926,10 +1911,7 @@ self_cal
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1989,10 +1971,7 @@ send_software_edge_trigger
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2056,10 +2035,7 @@ set_sequence
 
             
 
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2130,9 +2106,7 @@ wait_for_event
 
             
 
-            .. note:: Refer to `Supported Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2199,7 +2173,7 @@ active_advanced_sequence
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2238,7 +2212,7 @@ active_advanced_sequence_step
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2281,7 +2255,7 @@ actual_power_allocation
 
 
 
-        .. note:: This property is not supported by all devices. Refer to the Supported Properties by Device topic for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
              This property returns -1 when the :py:attr:`nidcpower.Session.power_allocation_mode` property is set to :py:data:`~nidcpower.PowerAllocationMode.DISABLED`.
 
@@ -2319,13 +2293,12 @@ aperture_time
     .. py:attribute:: aperture_time
 
         Specifies the measurement aperture time for the channel configuration. Aperture time is specified in the units set by the :py:attr:`nidcpower.Session.aperture_time_units` property.
-        for information about supported devices.
         Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements and for information about valid values.
         Default Value: 0.01666666 seconds
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2361,13 +2334,12 @@ aperture_time_units
     .. py:attribute:: aperture_time_units
 
         Specifies the units of the :py:attr:`nidcpower.Session.aperture_time` property for the channel configuration.
-        for information about supported devices.
         Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements and for information about valid values.
         Default Value: :py:data:`~nidcpower.ApertureTimeUnits.SECONDS`
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2406,7 +2378,7 @@ autorange
 
 
 
-        .. note:: Autoranging begins at module startup and remains active until the module is reconfigured or reset. This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: Autoranging begins at module startup and remains active until the module is reconfigured or reset. This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2445,7 +2417,7 @@ autorange_aperture_time_mode
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2484,7 +2456,7 @@ autorange_behavior
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2523,7 +2495,7 @@ autorange_minimum_aperture_time
 
 
 
-        .. note:: For smaller ranges, the value is scaled up to account for noise. The factor used to scale the value is derived from the module capabilities. This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: For smaller ranges, the value is scaled up to account for noise. The factor used to scale the value is derived from the module capabilities. This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2562,7 +2534,7 @@ autorange_minimum_aperture_time_units
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2601,7 +2573,7 @@ autorange_minimum_current_range
 
 
 
-        .. note:: The maximum range used is the range that includes the value specified in the compliance limit property, :py:attr:`nidcpower.Session.voltage_limit_range` property or :py:attr:`nidcpower.Session.current_limit_range` property, depending on the selected :py:attr:`nidcpower.Session.output_function`. This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: The maximum range used is the range that includes the value specified in the compliance limit property, :py:attr:`nidcpower.Session.voltage_limit_range` property or :py:attr:`nidcpower.Session.current_limit_range` property, depending on the selected :py:attr:`nidcpower.Session.output_function`. This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2640,7 +2612,7 @@ autorange_minimum_voltage_range
 
 
 
-        .. note:: The maximum range used is the range that includes the value specified in the compliance limit property, :py:attr:`nidcpower.Session.voltage_limit_range` property or :py:attr:`nidcpower.Session.current_limit_range` property, depending on the selected :py:attr:`nidcpower.Session.output_function`. This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: The maximum range used is the range that includes the value specified in the compliance limit property, :py:attr:`nidcpower.Session.voltage_limit_range` property or :py:attr:`nidcpower.Session.current_limit_range` property, depending on the selected :py:attr:`nidcpower.Session.output_function`. This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2679,7 +2651,7 @@ autorange_threshold_mode
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2812,26 +2784,23 @@ compliance_limit_symmetry
         Specifies whether compliance limits for current generation and voltage
         generation for the device are applied symmetrically about 0 V and 0 A or
         asymmetrically with respect to 0 V and 0 A.
-        When set to **Symmetric**, voltage limits and current limits are set
+        When set to :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`, voltage limits and current limits are set
         using a single property with a positive value. The resulting range is
         bounded by this positive value and its opposite.
-        When set to **Asymmetric**, you must separately set a limit high and a
+        When set to :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC`, you must separately set a limit high and a
         limit low using distinct properties.
         For asymmetric limits, the range bounded by the limit high and limit low
         must include zero.
         **Default Value:** Symmetric
         **Related Topics:**
-        `Compliance <NI_DC_Power_Supplies_Help.chm::/compliance.html>`__
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Compliance;
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
-        .. note:: Refer to `Supported Properties by
-            Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-            information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2867,12 +2836,11 @@ current_compensation_frequency
     .. py:attribute:: current_compensation_frequency
 
         The frequency at which a pole-zero pair is added to the system when the channel is in Constant Current mode.
-        for information about supported devices.
         Default Value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of the :py:attr:`nidcpower.Session.transient_response` property.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2908,12 +2876,11 @@ current_gain_bandwidth
     .. py:attribute:: current_gain_bandwidth
 
         The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This property takes effect when the channel is in Constant Current mode.
-        for information about supported devices.
         Default Value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of the :py:attr:`nidcpower.Session.transient_response` property.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2955,7 +2922,7 @@ current_level
 
 
 
-        .. note:: The channel must be enabled for the specified current level to take effect. Refer to the
+        .. note:: The channel must be enabled for the specified current level to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3039,7 +3006,7 @@ current_level_range
 
 
 
-        .. note:: The channel must be enabled for the specified current level range to take effect. Refer to the
+        .. note:: The channel must be enabled for the specified current level range to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3081,7 +3048,7 @@ current_limit
 
 
 
-        .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the
+        .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3190,34 +3157,23 @@ current_limit_high
 
         Specifies the maximum current, in amps, that the output can produce when
         generating the desired voltage on the specified channel(s).
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **DC
-        Voltage**.
-        You must also specify a `Current Limit
-        Low <p:py:meth:`nidcpower.Session.CurrentLimitLow`.html>`__ to complete the asymmetric
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
+        You must also specify a :py:attr:`nidcpower.Session.current_limit_low` to complete the asymmetric
         range.
-        **Valid Values:** [1% of `Current Limit
-        Range <p:py:meth:`nidcpower.Session.CurrentLimitRange`.html>`__, `Current Limit
-        Range <p:py:meth:`nidcpower.Session.CurrentLimitRange`.html>`__]
+        **Valid Values:** [1% of :py:attr:`nidcpower.Session.current_limit_range`, :py:attr:`nidcpower.Session.current_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3254,34 +3210,23 @@ current_limit_low
 
         Specifies the minimum current, in amps, that the output can produce when
         generating the desired voltage on the specified channel(s).
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **DC
-        Voltage**.
-        You must also specify a `Current Limit
-        High <p:py:meth:`nidcpower.Session.CurrentLimitHigh`.html>`__ to complete the asymmetric
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
+        You must also specify a :py:attr:`nidcpower.Session.current_limit_high` to complete the asymmetric
         range.
-        **Valid Values:** [-`Current Limit
-        Range <p:py:meth:`nidcpower.Session.CurrentLimitRange`.html>`__, -1% of `Current Limit
-        Range <p:py:meth:`nidcpower.Session.CurrentLimitRange`.html>`__]
+        **Valid Values:** [-:py:attr:`nidcpower.Session.current_limit_range`, -1% of :py:attr:`nidcpower.Session.current_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3324,7 +3269,7 @@ current_limit_range
 
 
 
-        .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the
+        .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3360,12 +3305,11 @@ current_pole_zero_ratio
     .. py:attribute:: current_pole_zero_ratio
 
         The ratio of the pole frequency to the zero frequency when the channel is in Constant Current mode.
-        for information about supported devices.
         Default Value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of the :py:attr:`nidcpower.Session.transient_response` property.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3401,12 +3345,11 @@ dc_noise_rejection
     .. py:attribute:: dc_noise_rejection
 
         Determines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection, NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies and SMUs Help for more information about noise rejection.
-        for information about supported devices.
         Default Value: :py:data:`~nidcpower.TransientResponse.NORMAL`
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3448,7 +3391,7 @@ digital_edge_measure_trigger_input_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3489,7 +3432,7 @@ digital_edge_pulse_trigger_input_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3531,7 +3474,7 @@ digital_edge_sequence_advance_trigger_input_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic in
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3572,7 +3515,7 @@ digital_edge_shutdown_trigger_input_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3608,13 +3551,12 @@ digital_edge_source_trigger_input_terminal
     .. py:attribute:: digital_edge_source_trigger_input_terminal
 
         Specifies the input terminal for the Source trigger. Use this property only when the :py:attr:`nidcpower.Session.source_trigger_type` property is set to :py:data:`~nidcpower.TriggerType.DIGITAL_EDGE`.
-        for information about supported devices.
         You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
         Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3650,13 +3592,12 @@ digital_edge_start_trigger_input_terminal
     .. py:attribute:: digital_edge_start_trigger_input_terminal
 
         Specifies the input terminal for the Start trigger. Use this property only when the :py:attr:`nidcpower.Session.start_trigger_type` property is set to :py:data:`~nidcpower.TriggerType.DIGITAL_EDGE`.
-        for information about supported devices.
         You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
         Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3720,12 +3661,11 @@ exported_measure_trigger_output_terminal
 
         Specifies the output terminal for exporting the Measure trigger.
         Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
-        for information about supported devices.
         Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3766,7 +3706,7 @@ exported_pulse_trigger_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3803,12 +3743,11 @@ exported_sequence_advance_trigger_output_terminal
 
         Specifies the output terminal for exporting the Sequence Advance trigger.
         Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
-        for information about supported devices.
         Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3845,12 +3784,11 @@ exported_source_trigger_output_terminal
 
         Specifies the output terminal for exporting the Source trigger.
         Refer to the Device Routes tab in MAX for a list of the terminals available on your device.
-        for information about supported devices.
         Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3888,11 +3826,10 @@ exported_start_trigger_output_terminal
         Specifies the output terminal for exporting the Start trigger.
         Refer to the Device Routes tab in Measurement & Automation Explorer (MAX) for a list of the terminals available on your device.
         Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0.
-        for information about supported devices.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4081,7 +4018,7 @@ interlock_input_open
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
@@ -4171,13 +4108,12 @@ measure_buffer_size
 
         Specifies the number of samples that the active channel measurement buffer can hold.
         The default value is the maximum number of samples that a device is capable of recording in one second.
-        for information about supported devices.
         Valid Values: 1000 to 2147483647
         Default Value: Varies by device. Refer to Supported Properties by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4213,13 +4149,12 @@ measure_complete_event_delay
     .. py:attribute:: measure_complete_event_delay
 
         Specifies the amount of time to delay the generation of the Measure Complete event, in seconds.
-        for information about supported devices.
         Valid Values: 0 to 167 seconds
         Default Value: The NI PXI-4132 and NI PXIe-4140/4141/4142/4143/4144/4145/4154 supports values from  0 seconds to 167 seconds.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4255,12 +4190,11 @@ measure_complete_event_output_terminal
     .. py:attribute:: measure_complete_event_output_terminal
 
         Specifies the output terminal for exporting the Measure Complete event.
-        for information about supported devices.
         Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4296,12 +4230,11 @@ measure_complete_event_pulse_polarity
     .. py:attribute:: measure_complete_event_pulse_polarity
 
         Specifies the behavior of the Measure Complete event.
-        for information about supported devices.
         Default Value: :py:data:`~nidcpower.Polarity.HIGH`
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4339,13 +4272,12 @@ measure_complete_event_pulse_width
         Specifies the width of the Measure Complete event, in seconds.
         The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value for PXI Express devices is 250 ns.
         The maximum event pulse width value for all devices is 1.6 microseconds.
-        for information about supported devices.
         Valid Values: 1.5e-7 to 1.6e-6
         Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4381,7 +4313,6 @@ measure_record_delta_time
     .. py:attribute:: measure_record_delta_time
 
         Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record. Only query this property after the desired measurement settings are committed.
-        for information about supported devices.
         two measurements and the rest would differ.
 
 
@@ -4422,7 +4353,6 @@ measure_record_length
     .. py:attribute:: measure_record_length
 
         Specifies how many measurements compose a measure record. When this property is set to a value greater than 1, the :py:attr:`nidcpower.Session.measure_when` property must be set to :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE` or :py:data:`~nidcpower.MeasureWhen.ON_MEASURE_TRIGGER`.
-        for information about supported devices.
         Valid Values: 1 to 16,777,216
         Default Value: 1
 
@@ -4464,12 +4394,11 @@ measure_record_length_is_finite
     .. py:attribute:: measure_record_length_is_finite
 
         Specifies whether to take continuous measurements. Call the :py:meth:`nidcpower.Session.abort` method to stop continuous measurements. When this property is set to False and the :py:attr:`nidcpower.Session.source_mode` property is set to :py:data:`~nidcpower.SourceMode.SINGLE_POINT`, the :py:attr:`nidcpower.Session.measure_when` property must be set to :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE` or :py:data:`~nidcpower.MeasureWhen.ON_MEASURE_TRIGGER`. When this property is set to False and the :py:attr:`nidcpower.Session.source_mode` property is set to :py:data:`~nidcpower.SourceMode.SEQUENCE`, the :py:attr:`nidcpower.Session.measure_when` property must be set to :py:data:`~nidcpower.MeasureWhen.ON_MEASURE_TRIGGER`.
-        for information about supported devices.
         Default Value: True
 
 
 
-        .. note:: This property is not available in a session involving multiple channels.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device. This property is not available in a session involving multiple channels.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4505,12 +4434,11 @@ measure_trigger_type
     .. py:attribute:: measure_trigger_type
 
         Specifies the behavior of the Measure trigger.
-        for information about supported devices.
         Default Value: :py:data:`~nidcpower.TriggerType.DIGITAL_EDGE`
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4591,7 +4519,7 @@ merged_channels
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices. Devices that do not support this property behave as if no channels were merged.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device. Devices that do not support this property behave as if no channels were merged.
             Default Value: Refer to the Supported Properties by Device topic for the default value by device.
 
 
@@ -4628,12 +4556,11 @@ output_capacitance
     .. py:attribute:: output_capacitance
 
         Specifies whether to use a low or high capacitance on the output for the specified channel(s).
-        for information about supported devices.
         Refer to the NI PXI-4130 Output Capacitance Selection topic in the NI DC Power Supplies and SMUs Help for more information about capacitance.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4718,7 +4645,7 @@ output_cutoff_current_change_limit_high
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4760,7 +4687,7 @@ output_cutoff_current_change_limit_low
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4802,7 +4729,7 @@ output_cutoff_current_measure_limit_high
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4844,7 +4771,7 @@ output_cutoff_current_measure_limit_low
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4885,7 +4812,7 @@ output_cutoff_current_overrange_enabled
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4924,7 +4851,7 @@ output_cutoff_delay
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4964,7 +4891,8 @@ output_cutoff_enabled
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices. Instruments that do not support this property behave as if this property were set to False.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+             Instruments that do not support this property behave as if this property were set to False.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5006,7 +4934,7 @@ output_cutoff_voltage_change_limit_high
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5048,7 +4976,7 @@ output_cutoff_voltage_change_limit_low
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5090,7 +5018,7 @@ output_cutoff_voltage_output_limit_high
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5132,7 +5060,7 @@ output_cutoff_voltage_output_limit_low
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5268,7 +5196,7 @@ output_resistance
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic for information
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5344,12 +5272,11 @@ ovp_enabled
 
         Enables (True) or disables (False) overvoltage protection (OVP).
         Refer to the Output Overvoltage Protection topic in the NI DC Power Supplies and SMUs Help for more information about overvoltage protection.
-        for information about supported devices.
         Default Value: False
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5385,13 +5312,12 @@ ovp_limit
     .. py:attribute:: ovp_limit
 
         Determines the voltage limit, in volts, beyond which overvoltage protection (OVP) engages.
-        for information about supported devices.
         Valid Values: 2 V to 210 V
         Default Value: 210 V
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5436,7 +5362,7 @@ power_allocation_mode
 
 
 
-        .. note:: This property is not supported by all devices. Refer to the Supported Properties by Device topic for information about supported devices. Devices that do not support this property behave as if this property were set to :py:data:`~nidcpower.PowerAllocationMode.DISABLED`.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device. Devices that do not support this property behave as if this property were set to :py:data:`~nidcpower.PowerAllocationMode.DISABLED`.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5477,7 +5403,7 @@ power_line_frequency
 
 
 
-        .. note:: This property is not supported by all devices. Refer to the Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -5576,7 +5502,7 @@ pulse_bias_current_level
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5617,7 +5543,7 @@ pulse_bias_current_limit
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5655,36 +5581,24 @@ pulse_bias_current_limit_high
         Specifies the maximum current, in amps, that the output can produce when
         generating the desired pulse voltage on the specified channel(s) during
         the *off* phase of a pulse.
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
-        Voltage**.
-        You must also specify a `Pulse Bias Current Limit
-        Low <p:py:meth:`nidcpower.Session.PulseBiasCurrentLimitLow`.html>`__ to complete the
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
+        You must also specify a :py:attr:`nidcpower.Session.pulse_bias_current_limit_low` to complete the
         asymmetric range.
-        **Valid Values:** [1% of `Pulse Current Limit
-        Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, `Pulse Current Limit
-        Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__]
+        **Valid Values:** [1% of :py:attr:`nidcpower.Session.pulse_current_limit_range`, :py:attr:`nidcpower.Session.pulse_current_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE or if the `Output
-            Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5722,36 +5636,24 @@ pulse_bias_current_limit_low
         Specifies the minimum current, in amps, that the output can produce when
         generating the desired pulse voltage on the specified channel(s) during
         the *off* phase of a pulse.
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
-        Voltage**.
-        You must also specify a `Pulse Bias Current Limit
-        High <p:py:meth:`nidcpower.Session.PulseBiasCurrentLimitHigh`.html>`__ to complete the
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
+        You must also specify a :py:attr:`nidcpower.Session.pulse_bias_current_limit_high` to complete the
         asymmetric range.
-        **Valid Values:** [-`Pulse Current Limit
-        Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, -1% of `Pulse Current
-        Limit Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__]
+        **Valid Values:** [-:py:attr:`nidcpower.Session.pulse_current_limit_range`, -1% of :py:attr:`nidcpower.Session.pulse_current_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE or if the `Output
-            Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5792,7 +5694,7 @@ pulse_bias_delay
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5833,7 +5735,7 @@ pulse_bias_voltage_level
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5874,7 +5776,7 @@ pulse_bias_voltage_limit
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5912,36 +5814,24 @@ pulse_bias_voltage_limit_high
         Specifies the maximum voltage, in volts, that the output can produce
         when generating the desired pulse current on the specified channel(s)
         during the *off* phase of a pulse.
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
-        Current**.
-        You must also specify a `Pulse Bias Voltage Limit
-        Low <p:py:meth:`nidcpower.Session.PulseBiasVoltageLimitLow`.html>`__ to complete the
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
+        You must also specify a :py:attr:`nidcpower.Session.pulse_bias_voltage_limit_low` to complete the
         asymmetric range.
-        **Valid Values:** [1% of `Pulse Voltage Limit
-        Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, `Pulse Voltage Limit
-        Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__]
+        **Valid Values:** [1% of :py:attr:`nidcpower.Session.pulse_voltage_limit_range`, :py:attr:`nidcpower.Session.pulse_voltage_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE or if the `Output
-            Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5979,36 +5869,24 @@ pulse_bias_voltage_limit_low
         Specifies the minimum voltage, in volts, that the output can produce
         when generating the desired pulse current on the specified channel(s)
         during the *off* phase of a pulse.
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
-        Current**.
-        You must also specify a `Pulse Bias Voltage Limit
-        High <p:py:meth:`nidcpower.Session.PulseBiasVoltageLimitHigh`.html>`__ to complete the
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
+        You must also specify a :py:attr:`nidcpower.Session.pulse_bias_voltage_limit_high` to complete the
         asymmetric range.
-        **Valid Values:** [-`Pulse Voltage Limit
-        Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, -1% of `Pulse Voltage
-        Limit Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__]
+        **Valid Values:** [-:py:attr:`nidcpower.Session.pulse_voltage_limit_range`, -1% of :py:attr:`nidcpower.Session.pulse_voltage_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE or if the `Output
-            Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6049,7 +5927,7 @@ pulse_complete_event_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6089,7 +5967,7 @@ pulse_complete_event_pulse_polarity
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6131,7 +6009,7 @@ pulse_complete_event_pulse_width
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6172,7 +6050,7 @@ pulse_current_level
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6214,7 +6092,7 @@ pulse_current_level_range
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6255,7 +6133,7 @@ pulse_current_limit
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6293,36 +6171,24 @@ pulse_current_limit_high
         Specifies the maximum current, in amps, that the output can produce when
         generating the desired pulse voltage on the specified channel(s) during
         the *on* phase of a pulse.
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
-        Voltage**.
-        You must also specify a `Pulse Current Limit
-        Low <p:py:meth:`nidcpower.Session.PulseCurrentLimitLow`.html>`__ to complete the asymmetric
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
+        You must also specify a :py:attr:`nidcpower.Session.pulse_current_limit_low` to complete the asymmetric
         range.
-        **Valid Values:** [1% of `Pulse Current Limit
-        Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, `Pulse Current Limit
-        Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__]
+        **Valid Values:** [1% of :py:attr:`nidcpower.Session.pulse_current_limit_range`, :py:attr:`nidcpower.Session.pulse_current_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE or if the `Output
-            Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6360,36 +6226,24 @@ pulse_current_limit_low
         Specifies the minimum current, in amps, that the output can produce when
         generating the desired pulse voltage on the specified channel(s) during
         the *on* phase of a pulse.
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
-        Voltage**.
-        You must also specify a `Pulse Current Limit
-        High <p:py:meth:`nidcpower.Session.PulseCurrentLimitHigh`.html>`__ to complete the
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
+        You must also specify a :py:attr:`nidcpower.Session.pulse_current_limit_high` to complete the
         asymmetric range.
-        **Valid Values:** [-`Pulse Current Limit
-        Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, -1% of `Pulse Current
-        Limit Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__]
+        **Valid Values:** [-:py:attr:`nidcpower.Session.pulse_current_limit_range`, -1% of :py:attr:`nidcpower.Session.pulse_current_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE or if the `Output
-            Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6431,7 +6285,7 @@ pulse_current_limit_range
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6472,7 +6326,7 @@ pulse_off_time
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6513,7 +6367,7 @@ pulse_on_time
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6553,7 +6407,7 @@ pulse_trigger_type
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6594,7 +6448,7 @@ pulse_voltage_level
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6636,7 +6490,7 @@ pulse_voltage_level_range
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6677,7 +6531,7 @@ pulse_voltage_limit
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6715,36 +6569,24 @@ pulse_voltage_limit_high
         Specifies the maximum voltage, in volts, that the output can produce
         when generating the desired pulse current on the specified channel(s)
         during the *on* phase of a pulse.
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
-        Current**.
-        You must also specify a `Pulse Voltage Limit
-        Low <p:py:meth:`nidcpower.Session.PulseVoltageLimitLow`.html>`__ to complete the asymmetric
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
+        You must also specify a :py:attr:`nidcpower.Session.pulse_voltage_limit_low` to complete the asymmetric
         range.
-        **Valid Values:** [1% of `Pulse Voltage Limit
-        Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, `Pulse Voltage Limit
-        Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__]
+        **Valid Values:** [1% of :py:attr:`nidcpower.Session.pulse_voltage_limit_range`, :py:attr:`nidcpower.Session.pulse_voltage_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE or if the `Output
-            Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6782,36 +6624,24 @@ pulse_voltage_limit_low
         Specifies the minimum voltage, in volts, that the output can produce
         when generating the desired pulse current on the specified channel(s)
         during the *on* phase of a pulse.
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
-        Current**.
-        You must also specify a `Pulse Voltage Limit
-        High <p:py:meth:`nidcpower.Session.PulseVoltageLimitHigh`.html>`__ to complete the
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
+        You must also specify a :py:attr:`nidcpower.Session.pulse_voltage_limit_high` to complete the
         asymmetric range.
-        **Valid Values:** [-`Pulse Voltage Limit
-        Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, -1% of `Pulse Voltage
-        Limit Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__]
+        **Valid Values:** [-:py:attr:`nidcpower.Session.pulse_voltage_limit_range`, -1% of :py:attr:`nidcpower.Session.pulse_voltage_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE or if the `Output
-            Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6922,7 +6752,7 @@ ready_for_pulse_trigger_event_output_terminal
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6962,7 +6792,7 @@ ready_for_pulse_trigger_event_pulse_polarity
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7004,7 +6834,7 @@ ready_for_pulse_trigger_event_pulse_width
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7051,7 +6881,7 @@ requested_power_allocation
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7087,13 +6917,12 @@ reset_average_before_measurement
     .. py:attribute:: reset_average_before_measurement
 
         Specifies whether the measurement returned from any measurement call starts with a new measurement call (True) or returns a measurement that has already begun or completed(False).
-        for information about supported devices.
         When you set the :py:attr:`nidcpower.Session.samples_to_average` property in the Running state, the output channel measurements might move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a session, you can force a synchronization in the running state before you run the :py:meth:`nidcpower.Session.measure_multiple` method. To force a synchronization in the running state, set this property to True, and then run the :py:meth:`nidcpower.Session.measure_multiple` method, specifying all channels in the channel name parameter. You can set the :py:attr:`nidcpower.Session.reset_average_before_measurement` property to False after the :py:meth:`nidcpower.Session.measure_multiple` method completes.
         Default Value: True
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7182,7 +7011,7 @@ self_calibration_persistence
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific instruments within your :py:class:`nidcpower.Session` instance.
@@ -7257,12 +7086,11 @@ sequence_advance_trigger_type
     .. py:attribute:: sequence_advance_trigger_type
 
         Specifies the behavior of the Sequence Advance trigger.
-        for information about supported devices.
         Default Value: :py:data:`~nidcpower.TriggerType.NONE`
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7298,12 +7126,11 @@ sequence_engine_done_event_output_terminal
     .. py:attribute:: sequence_engine_done_event_output_terminal
 
         Specifies the output terminal for exporting the Sequence Engine Done Complete event.
-        for information about supported devices.
         Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7339,12 +7166,11 @@ sequence_engine_done_event_pulse_polarity
     .. py:attribute:: sequence_engine_done_event_pulse_polarity
 
         Specifies the behavior of the Sequence Engine Done event.
-        for information about supported devices.
         Default Value: :py:data:`~nidcpower.Polarity.HIGH`
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7382,13 +7208,12 @@ sequence_engine_done_event_pulse_width
         Specifies the width of the Sequence Engine Done event, in seconds.
         The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value for PXI Express devices is 250 ns.
         The maximum event pulse width value for all devices is 1.6 microseconds.
-        for information about supported devices.
         Valid Values: 1.5e-7 to 1.6e-6 seconds
         Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7424,12 +7249,11 @@ sequence_iteration_complete_event_output_terminal
     .. py:attribute:: sequence_iteration_complete_event_output_terminal
 
         Specifies the output terminal for exporting the Sequence Iteration Complete event.
-        for information about supported devices.
         Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7465,12 +7289,11 @@ sequence_iteration_complete_event_pulse_polarity
     .. py:attribute:: sequence_iteration_complete_event_pulse_polarity
 
         Specifies the behavior of the Sequence Iteration Complete event.
-        for information about supported devices.
         Default Value: :py:data:`~nidcpower.Polarity.HIGH`
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7514,7 +7337,7 @@ sequence_iteration_complete_event_pulse_width
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic in
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7551,13 +7374,13 @@ sequence_loop_count
 
         Specifies the number of times a sequence is run after initiation.
         Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence loop count.
-        for information about supported devices. When the :py:attr:`nidcpower.Session.sequence_loop_count_is_finite` property is set to False, the :py:attr:`nidcpower.Session.sequence_loop_count` property is ignored.
+        When the :py:attr:`nidcpower.Session.sequence_loop_count_is_finite` property is set to False, the :py:attr:`nidcpower.Session.sequence_loop_count` property is ignored.
         Valid Range: 1 to 134217727
         Default Value: 1
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7594,12 +7417,12 @@ sequence_loop_count_is_finite
 
         Specifies whether a sequence should repeat indefinitely.
         Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about infinite sequencing.
-        :py:attr:`nidcpower.Session.sequence_loop_count_is_finite` property is set to False,  the :py:attr:`nidcpower.Session.sequence_loop_count` property is ignored.
+        When the :py:attr:`nidcpower.Session.sequence_loop_count_is_finite` property is set to False, the :py:attr:`nidcpower.Session.sequence_loop_count` property is ignored.
         Default Value: True
 
 
 
-        .. note:: This property is not supported by all devices. When the
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7738,7 +7561,7 @@ shutdown_trigger_type
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7800,12 +7623,11 @@ source_complete_event_output_terminal
     .. py:attribute:: source_complete_event_output_terminal
 
         Specifies the output terminal for exporting the Source Complete event.
-        for information about supported devices.
         Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7841,12 +7663,11 @@ source_complete_event_pulse_polarity
     .. py:attribute:: source_complete_event_pulse_polarity
 
         Specifies the behavior of the Source Complete event.
-        for information about supported devices.
         Default Value: :py:data:`~nidcpower.Polarity.HIGH`
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7882,7 +7703,6 @@ source_complete_event_pulse_width
     .. py:attribute:: source_complete_event_pulse_width
 
         Specifies the width of the Source Complete event, in seconds.
-        for information about supported devices.
         The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value for PXI Express devices is 250 ns.
         The maximum event pulse width value for all devices is 1.6 microseconds
         Valid Values: 1.5e-7 to 1.6e-6 seconds
@@ -7890,7 +7710,7 @@ source_complete_event_pulse_width
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7932,7 +7752,7 @@ source_delay
 
 
 
-        .. note:: Refer to Supported Properties by Device for information about supported devices.
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8006,12 +7826,11 @@ source_trigger_type
     .. py:attribute:: source_trigger_type
 
         Specifies the behavior of the Source trigger.
-        for information about supported devices.
         Default Value: :py:data:`~nidcpower.TriggerType.NONE`
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8147,12 +7966,11 @@ start_trigger_type
     .. py:attribute:: start_trigger_type
 
         Specifies the behavior of the Start trigger.
-        for information about supported devices.
         Default Value: :py:data:`~nidcpower.TriggerType.NONE`
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8213,12 +8031,11 @@ transient_response
     .. py:attribute:: transient_response
 
         Specifies the transient response. Refer to the Transient Response topic in the NI DC Power Supplies and SMUs Help for more information about transient response.
-        for information about supported devices.
         Default Value: :py:data:`~nidcpower.TransientResponse.NORMAL`
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8254,12 +8071,11 @@ voltage_compensation_frequency
     .. py:attribute:: voltage_compensation_frequency
 
         The frequency at which a pole-zero pair is added to the system when the channel is in Constant Voltage mode.
-        for information about supported devices.
         Default value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of the :py:attr:`nidcpower.Session.transient_response` property.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8295,12 +8111,11 @@ voltage_gain_bandwidth
     .. py:attribute:: voltage_gain_bandwidth
 
         The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This property takes effect when the channel is in Constant Voltage mode.
-        for information about supported devices.
         Default Value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of the :py:attr:`nidcpower.Session.transient_response` property.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8342,7 +8157,7 @@ voltage_level
 
 
 
-        .. note:: The channel must be enabled for the specified voltage level to take effect. Refer to the
+        .. note:: The channel must be enabled for the specified voltage level to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8426,7 +8241,7 @@ voltage_level_range
 
 
 
-        .. note:: The channel must be enabled for the specified voltage level range to take effect. Refer to the
+        .. note:: The channel must be enabled for the specified voltage level range to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8468,7 +8283,7 @@ voltage_limit
 
 
 
-        .. note:: The channel must be enabled for the specified current level to take effect. Refer to the
+        .. note:: The channel must be enabled for the specified current level to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8546,34 +8361,23 @@ voltage_limit_high
 
         Specifies the maximum voltage, in volts, that the output can produce
         when generating the desired current on the specified channel(s).
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **DC
-        Current**.
-        You must also specify a `Voltage Limit
-        Low <p:py:meth:`nidcpower.Session.VoltageLimitLow`.html>`__ to complete the asymmetric
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+        You must also specify a :py:attr:`nidcpower.Session.voltage_limit_low` to complete the asymmetric
         range.
-        **Valid Values:** [1% of `Voltage Limit
-        Range <p:py:meth:`nidcpower.Session.VoltageLimitRange`.html>`__, `Voltage Limit
-        Range <p:py:meth:`nidcpower.Session.VoltageLimitRange`.html>`__]
+        **Valid Values:** [1% of :py:attr:`nidcpower.Session.voltage_limit_range`, :py:attr:`nidcpower.Session.voltage_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8610,34 +8414,23 @@ voltage_limit_low
 
         Specifies the minimum voltage, in volts, that the output can produce
         when generating the desired current on the specified channel(s).
-        This property is applicable only if the `Compliance Limit
-        Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
-        **Asymmetric** and the `Output
-        Method <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **DC
-        Current**.
-        You must also specify a `Voltage Limit
-        High <p:py:meth:`nidcpower.Session.VoltageLimitHigh`.html>`__ to complete the asymmetric
+        This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+        You must also specify a :py:attr:`nidcpower.Session.voltage_limit_high` to complete the asymmetric
         range.
-        **Valid Values:** [-`Voltage Limit
-        Range <p:py:meth:`nidcpower.Session.VoltageLimitRange`.html>`__, -1% of `Voltage Limit
-        Range <p:py:meth:`nidcpower.Session.VoltageLimitRange`.html>`__]
+        **Valid Values:** [-:py:attr:`nidcpower.Session.voltage_limit_range`, -1% of :py:attr:`nidcpower.Session.voltage_limit_range`]
         The range bounded by the limit high and limit low must include zero.
-        **Default Value:** Refer to `Supported Properties by
-        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
-        the default value by device.
+        **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
         **Related Topics:**
-        `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-        `Changing
-        Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
-        `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+        Ranges;
+        Changing Ranges;
+        Overranging
 
 
 
         .. note:: The limit may be extended beyond the selected limit range if the
-            `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
-            set to TRUE.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+            :py:attr:`nidcpower.Session.overranging_enabled` property is
+            set to True.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8680,7 +8473,7 @@ voltage_limit_range
 
 
 
-        .. note:: The channel must be enabled for the specified voltage limit range to take effect. Refer to the
+        .. note:: The channel must be enabled for the specified voltage limit range to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8716,12 +8509,11 @@ voltage_pole_zero_ratio
     .. py:attribute:: voltage_pole_zero_ratio
 
         The ratio of the pole frequency to the zero frequency when the channel is in Constant Voltage mode.
-        for information about supported devices.
         Default value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of the :py:attr:`nidcpower.Session.transient_response` property.
 
 
 
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.

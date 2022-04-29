@@ -1,6 +1,26 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0f353
+# This file is generated from NI-DCPower API metadata version 22.0.0d131
 enums = {
+    'ApertureTimeAutoMode': {
+        'values': [
+            {
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_OFF',
+                'value': 1135
+            },
+            {
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_SHORT',
+                'value': 1136
+            },
+            {
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_NORMAL',
+                'value': 1137
+            },
+            {
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_LONG',
+                'value': 1138
+            }
+        ]
+    },
     'ApertureTimeUnits': {
         'values': [
             {
@@ -123,6 +143,73 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_THRESHOLD_MODE_HOLD',
                 'value': 1116
+            }
+        ]
+    },
+    'CableLength': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for a 0m cable (direct connection).'
+                },
+                'name': 'NIDCPOWER_VAL_ZERO_M',
+                'value': 1121
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 1m coaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_1M',
+                'value': 1122
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 2m coaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_2M',
+                'value': 1123
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 4m coaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_4M',
+                'value': 1124
+            },
+            {
+                'documentation': {
+                    'description': 'Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.'
+                },
+                'name': 'NIDCPOWER_VAL_CUSTOM_ONBOARD_STORAGE',
+                'value': 1125
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the custom cable compensation data supplied to niDCPower_ConfigureLCRCustomCableCompensation. Use this option to manage multiple sets of custom cable compensation data.'
+                },
+                'name': 'NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED',
+                'value': 1126
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 1m triaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_TRIAXIAL_1M',
+                'value': 1139
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 2m triaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_TRIAXIAL_2M',
+                'value': 1140
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 4m triaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_TRIAXIAL_4M',
+                'value': 1141
             }
         ]
     },
@@ -311,6 +398,243 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_SHUTDOWN_TRIGGER',
                 'value': 1118
+            }
+        ]
+    },
+    'InstrumentMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The channel operates as an SMU/power supply.'
+                },
+                'name': 'NIDCPOWER_VAL_SMU_PS',
+                'value': 1061
+            },
+            {
+                'documentation': {
+                    'description': 'The channel operates as an LCR meter.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR',
+                'value': 1062
+            }
+        ]
+    },
+    'IsolationState': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The channel is disconnected from chassis ground.'
+                },
+                'name': 'NIDCPOWER_VAL_ISOLATED',
+                'value': 1128
+            },
+            {
+                'documentation': {
+                    'description': 'The channel is connected to chassis ground.'
+                },
+                'name': 'NIDCPOWER_VAL_NON_ISOLATED',
+                'value': 1129
+            }
+        ]
+    },
+    'LCRCompensationType': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Returns the date and time that open LCR compensation data was most recently generated.'
+                },
+                'name': 'NIDCPOWER_VAL_OPEN_COMPENSATION',
+                'value': 1130
+            },
+            {
+                'documentation': {
+                    'description': 'Returns the date and time that short LCR compensation data was most recently generated.'
+                },
+                'name': 'NIDCPOWER_VAL_SHORT_COMPENSATION',
+                'value': 1131
+            },
+            {
+                'documentation': {
+                    'description': 'Returns the date and time that load LCR compensation data was most recently generated.'
+                },
+                'name': 'NIDCPOWER_VAL_LOAD_COMPENSATION',
+                'value': 1132
+            },
+            {
+                'documentation': {
+                    'description': 'Returns the date and time that open custom cable compensation data was most recently generated.'
+                },
+                'name': 'NIDCPOWER_VAL_OPEN_CUSTOM_CABLE_COMPENSATION',
+                'value': 1133
+            },
+            {
+                'documentation': {
+                    'description': 'Returns the date and time that short custom cable compensation data was most recently generated.'
+                },
+                'name': 'NIDCPOWER_VAL_SHORT_CUSTOM_CABLE_COMPENSATION',
+                'value': 1134
+            }
+        ]
+    },
+    'LCRDCBiasSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables DC bias in LCR mode.'
+                },
+                'name': 'NIDCPOWER_VAL_DC_BIAS_OFF',
+                'value': 1065
+            },
+            {
+                'documentation': {
+                    'description': 'Applies a constant voltage bias, as defined by the NIDCPOWER_ATTR_LCR_DC_BIAS_VOLTAGE_LEVEL property.'
+                },
+                'name': 'NIDCPOWER_VAL_DC_BIAS_VOLTAGE',
+                'value': 1066
+            },
+            {
+                'documentation': {
+                    'description': 'Applies a constant current bias, as defined by the NIDCPOWER_ATTR_LCR_DC_BIAS_CURRENT_LEVEL property.'
+                },
+                'name': 'NIDCPOWER_VAL_DC_BIAS_CURRENT',
+                'value': 1067
+            }
+        ]
+    },
+    'LCRImpedanceRangeSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses the impedance range you specify with the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE property.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_IMPEDANCE_RANGE',
+                'value': 1142
+            },
+            {
+                'documentation': {
+                    'description': 'Computes the impedance range to select based on the values you supply to the NIDCPOWER_ATTR_LCR_LOAD_RESISTANCE, NIDCPOWER_ATTR_LCR_LOAD_INDUCTANCE, and NIDCPOWER_ATTR_LCR_LOAD_CAPACITANCE properties. NI-DCPower uses a series model of load resistance, load inductance, and load capacitance to compute the impedance range.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION',
+                'value': 1143
+            }
+        ]
+    },
+    'LCRMeasurementTime': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses a short aperture time for LCR measurements.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASUREMENT_TIME_SHORT',
+                'value': 1071
+            },
+            {
+                'documentation': {
+                    'description': 'Uses a medium aperture time for LCR measurements.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASUREMENT_TIME_MEDIUM',
+                'value': 1072
+            },
+            {
+                'documentation': {
+                    'description': 'Uses a long aperture time for LCR measurements.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASUREMENT_TIME_LONG',
+                'value': 1073
+            },
+            {
+                'documentation': {
+                    'description': 'Uses a custom aperture time for LCR measurements as specified by the NIDCPOWER_ATTR_LCR_CUSTOM_MEASUREMENT_TIME property.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASUREMENT_TIME_CUSTOM',
+                'value': 1117
+            }
+        ]
+    },
+    'LCROpenShortLoadCompensationDataSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses previously generated LCR compensation data. Only the most recently performed compensation data for each LCR compensation type (open, short, and load) is stored.'
+                },
+                'name': 'NIDCPOWER_VAL_ONBOARD_STORAGE',
+                'value': 1074
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the LCR compensation data represented by the relevant LCR compensation attributes as generated by niDCPower_PerformLCROpenCompensation, niDCPower_PerformLCRShortCompensation, and niDCPower_PerformLCRLoadCompensation. Use this option to manage multiple sets of LCR compensation data. This option applies compensation data from the following attributes: NIDCPOWER_ATTR_LCR_OPEN_CONDUCTANCE, NIDCPOWER_ATTR_LCR_OPEN_SUSCEPTANCE, NIDCPOWER_ATTR_LCR_SHORT_RESISTANCE, NIDCPOWER_ATTR_LCR_SHORT_REACTANCE, NIDCPOWER_ATTR_LCR_MEASURED_LOAD_RESISTANCE, NIDCPOWER_ATTR_LCR_MEASURED_LOAD_REACTANCE, NIDCPOWER_ATTR_LCR_ACTUAL_LOAD_RESISTANCE, NIDCPOWER_ATTR_LCR_ACTUAL_LOAD_REACTANCE.'
+                },
+                'name': 'NIDCPOWER_VAL_AS_DEFINED',
+                'value': 1075
+            }
+        ]
+    },
+    'LCRReferenceValueType': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The actual impedance, comprising real resistance and imaginary reactance, of your DUT. Supply resistance, in ohms, to reference value A; supply reactance, in ohms, to reference value B.'
+                },
+                'name': 'NIDCPOWER_VAL_IMPEDANCE',
+                'value': 1076
+            },
+            {
+                'documentation': {
+                    'description': 'The ideal capacitance of your DUT. Supply capacitance, in farads, to reference value A.'
+                },
+                'name': 'NIDCPOWER_VAL_IDEAL_CAPACITANCE',
+                'value': 1077
+            },
+            {
+                'documentation': {
+                    'description': 'The ideal inductance of your DUT. Supply inductance, in henrys, to reference value A.'
+                },
+                'name': 'NIDCPOWER_VAL_IDEAL_INDUCTANCE',
+                'value': 1078
+            },
+            {
+                'documentation': {
+                    'description': 'The ideal resistance of your DUT. Supply resistance, in ohms, to reference value A.'
+                },
+                'name': 'NIDCPOWER_VAL_IDEAL_RESISTANCE',
+                'value': 1079
+            }
+        ]
+    },
+    'LCRSourceDelayMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'NI-DCPower automatically applies source delay of sufficient duration to account for settling time.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_SOURCE_DELAY_MODE_AUTOMATIC',
+                'value': 1144
+            },
+            {
+                'documentation': {
+                    'description': 'NI-DCPower applies the source delay that you set manually with NIDCPOWER_ATTR_SOURCE_DELAY. You can use this option to set a shorter delay to reduce measurement time at the possible expense of measurement accuracy.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_SOURCE_DELAY_MODE_MANUAL',
+                'value': 1145
+            }
+        ]
+    },
+    'LCRStimulusFunction': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Applies an AC voltage for LCR stimulus.'
+                },
+                'name': 'NIDCPOWER_VAL_AC_VOLTAGE',
+                'value': 1063
+            },
+            {
+                'documentation': {
+                    'description': 'Applies an AC current for LCR stimulus.'
+                },
+                'name': 'NIDCPOWER_VAL_AC_CURRENT',
+                'value': 1064
             }
         ]
     },
