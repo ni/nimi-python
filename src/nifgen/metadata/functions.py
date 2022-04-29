@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 21.5.0d106
+# This file is generated from NI-FGEN API metadata version 22.0.0d76
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -1709,7 +1709,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetLastExtCalLastDateAndTime': {
-        'codegen_method': 'public',
+        'codegen_method': 'python-only',
         'documentation': {
             'description': 'Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for the **hour** parameter and 30 for the **minute** parameter.'
         },
@@ -1734,7 +1734,7 @@ functions = {
                 'documentation': {
                     'description': 'Indicates date and time of the last calibration.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],
@@ -1743,7 +1743,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetLastSelfCalLastDateAndTime': {
-        'codegen_method': 'public',
+        'codegen_method': 'python-only',
         'documentation': {
             'description': 'Returns the date and time of the last successful self-calibration.'
         },
@@ -1768,7 +1768,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the date and time the device was last calibrated.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],
