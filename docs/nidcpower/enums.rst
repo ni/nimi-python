@@ -260,6 +260,56 @@ Event
 
 
 
+InstrumentMode
+--------------
+
+.. py:class:: InstrumentMode
+
+    .. py:attribute:: InstrumentMode.SMU_PS
+
+
+
+        The channel operates as an SMU/power supply.
+
+        
+
+
+
+    .. py:attribute:: InstrumentMode.LCR
+
+
+
+        The channel operates as an LCR meter.
+
+        
+
+
+
+LCRStimulusFunction
+-------------------
+
+.. py:class:: LCRStimulusFunction
+
+    .. py:attribute:: LCRStimulusFunction.VOLTAGE
+
+
+
+        Applies an AC voltage for LCR stimulus.
+
+        
+
+
+
+    .. py:attribute:: LCRStimulusFunction.CURRENT
+
+
+
+        Applies an AC current for LCR stimulus.
+
+        
+
+
+
 MeasureWhen
 -----------
 

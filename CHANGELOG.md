@@ -35,6 +35,16 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * API parity with NI-DCPower 21.8.0.
+            * Properties added:
+                * `instrument_mode`
+                * `lcr_current_amplitude`
+                * `lcr_frequency`
+                * `lcr_stimulus_function`
+                * `lcr_voltage_amplitude`
+            * Enums added:
+                * `InstrumentMode`
+                * `LCRStimulusFunction`
     * #### Changed
         * Updated supported devices information in documentation for methods and properties
     * #### Removed
