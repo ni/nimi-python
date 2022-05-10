@@ -5,6 +5,7 @@ import nifgen
 import sys
 import time
 
+# Add a comment
 
 def example(resource_name, options, waveform, frequency, amplitude, offset, phase, gen_time):
     with nifgen.Session(resource_name=resource_name, options=options) as session:
