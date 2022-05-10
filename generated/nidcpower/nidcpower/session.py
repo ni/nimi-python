@@ -1055,6 +1055,25 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.lcr_current_amplitude`
     '''
+    lcr_custom_measurement_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150258)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+
+    Specifies the LCR measurement aperture time for a channel, in seconds,
+    when the lcr_measurement_time property is set to LCRMeasurementTime.CUSTOM.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_custom_measurement_time`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_custom_measurement_time`
+    '''
     lcr_dc_bias_current_level = _attributes.AttributeViReal64(1150215)
     '''Type: float
 
@@ -1126,6 +1145,48 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.lcr_frequency`
+    '''
+    lcr_measurement_time = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRMeasurementTime, 1150218)
+    '''Type: enums.LCRMeasurementTime
+
+    Selects a general aperture time profile for LCR measurements. The actual duration of each profile depends on the frequency of the LCR test signal.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_measurement_time`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_measurement_time`
+    '''
+    lcr_source_delay_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRSourceDelayMode, 1150315)
+    '''Type: enums.LCRSourceDelayMode
+
+    For instruments in LCR mode, determines whether NI-DCPower automatically calculates and applies the source delay or applies a source delay you set manually.
+
+    You can return the source delay duration for either option by reading source_delay.
+
+    When you use this property to manually set the source delay, it is possible to set source delays short enough to unbalance the bridge and affect measurement accuracy. LCR measurement methods report whether the bridge is unbalanced.
+
+    Default Value: LCRSourceDelayMode.AUTOMATIC
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_source_delay_mode`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_source_delay_mode`
     '''
     lcr_stimulus_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRStimulusFunction, 1150209)
     '''Type: enums.LCRStimulusFunction

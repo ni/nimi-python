@@ -320,6 +320,76 @@ LCRDCBiasSource
 
 
 
+LCRMeasurementTime
+------------------
+
+.. py:class:: LCRMeasurementTime
+
+    .. py:attribute:: LCRMeasurementTime.SHORT
+
+
+
+        Uses a short aperture time for LCR measurements.
+
+        
+
+
+
+    .. py:attribute:: LCRMeasurementTime.MEDIUM
+
+
+
+        Uses a medium aperture time for LCR measurements.
+
+        
+
+
+
+    .. py:attribute:: LCRMeasurementTime.LONG
+
+
+
+        Uses a long aperture time for LCR measurements.
+
+        
+
+
+
+    .. py:attribute:: LCRMeasurementTime.CUSTOM
+
+
+
+        Uses a custom aperture time for LCR measurements as specified by the :py:attr:`nidcpower.Session.lcr_custom_measurement_time` property.
+
+        
+
+
+
+LCRSourceDelayMode
+------------------
+
+.. py:class:: LCRSourceDelayMode
+
+    .. py:attribute:: LCRSourceDelayMode.AUTOMATIC
+
+
+
+        NI-DCPower automatically applies source delay of sufficient duration to account for settling time.
+
+        
+
+
+
+    .. py:attribute:: LCRSourceDelayMode.MANUAL
+
+
+
+        NI-DCPower applies the source delay that you set manually with :py:attr:`nidcpower.Session.source_delay`. You can use this option to set a shorter delay to reduce measurement time at the possible expense of measurement accuracy.
+
+        
+
+
+
 LCRStimulusFunction
 -------------------
 

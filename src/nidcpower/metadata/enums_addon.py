@@ -9,9 +9,7 @@ enums_override_metadata = {
     "IsolationState": {"codegen_method": "no"},
     "LCRCompensationType": {"codegen_method": "no"},
     "LCRImpedanceRangeSource": {"codegen_method": "no"},
-    "LCRMeasurementTime": {"codegen_method": "no"},
     "LCROpenShortLoadCompensationDataSource": {"codegen_method": "no"},
-    "LCRReferenceValueType": {"codegen_method": "no"},
-    "LCRSourceDelayMode": {"codegen_method": "no"}
+    "LCRReferenceValueType": {"codegen_method": "no"}
 }
 
