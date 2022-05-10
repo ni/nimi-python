@@ -1,6 +1,6 @@
 import pytest
 
-
+# adding a comment
 def pytest_collection_modifyitems(items):
     '''Ignores initializer deprecation warnings for all nidcpower system tests.'''
     for item in items:
