@@ -35,7 +35,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
-        * API parity with NI-DCPower 21.8.0.
+        * Partial API parity with NI-DCPower 21.8.0.
             * Properties added:
                 * `instrument_mode`
                 * `lcr_current_amplitude`
