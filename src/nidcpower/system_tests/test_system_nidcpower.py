@@ -724,3 +724,18 @@ def test_wait_for_event_repeated_capabilities(session, channels):
     channels_session = session.channels[channels]
     with channels_session.initiate():
         channels_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE)
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_lcr_attributes(session):
+    session.lcr_dc_bias_source = nidcpower.LCRDCBiasSource.OFF
+    assert session.lcr_dc_bias_source == nidcpower.LCRDCBiasSource.OFF
+
+    session.lcr_dc_bias_source = nidcpower.LCRDCBiasSource.VOLTAGE
+    session.lcr_dc_bias_voltage_level = 0.5
+    assert session.lcr_dc_bias_voltage_level == 0.5
+
+    session.lcr_dc_bias_source = nidcpower.LCRDCBiasSource.CURRENT
+    session.lcr_dc_bias_current_level = 0.005
+    assert session.lcr_dc_bias_current_level == 0.005
