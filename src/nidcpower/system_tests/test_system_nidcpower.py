@@ -724,3 +724,23 @@ def test_wait_for_event_repeated_capabilities(session, channels):
     channels_session = session.channels[channels]
     with channels_session.initiate():
         channels_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE)
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+@pytest.mark.parametrize("additional_frequencies", [None, [], [9_000.0, 12_345.0, 12_346.0]])
+def test_perform_lcr_open_compensation(session, additional_frequencies):
+    if additional_frequencies is None:
+        nidcpower.Session.perform_lcr_open_compensation(session)
+    else:
+        nidcpower.Session.perform_lcr_open_compensation(session, additional_frequencies)
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+@pytest.mark.parametrize("additional_frequencies", [None, [], [9_000.0, 12_345.0, 12_346.0]])
+def test_perform_lcr_short_compensation(session, additional_frequencies):
+    if additional_frequencies is None:
+        nidcpower.Session.perform_lcr_short_compensation(session)
+    else:
+        nidcpower.Session.perform_lcr_short_compensation(session, additional_frequencies)

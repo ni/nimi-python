@@ -1470,6 +1470,98 @@ measure_multiple
 
 
 
+perform_lcr_open_compensation
+-----------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: perform_lcr_open_compensation(additional_frequencies=None)
+
+            Generates open compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.
+
+            You must physically configure an open LCR circuit to use this method to generate valid open compensation data.
+
+            When you call this method:
+
+            -  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+            -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+            To apply the open compensation data you generate with this method to your LCR measurements, set the :py:attr:`nidcpower.Session.lcr_open_compensation_enabled` property to **TRUE**.
+
+            Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].perform_lcr_open_compensation`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.perform_lcr_open_compensation`
+
+
+            :param additional_frequencies:
+
+
+                Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
+
+                
+
+
+            :type additional_frequencies: array.array("d")
+
+perform_lcr_short_compensation
+------------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: perform_lcr_short_compensation(additional_frequencies=None)
+
+            Generates short compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.
+
+            You must physically configure your LCR circuit with a short to use this method to generate valid short compensation data.
+
+            When you call this method:
+
+            -  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+            - Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+            To apply the short compensation data you generate with this method to your LCR measurements, set the :py:attr:`nidcpower.Session.lcr_short_compensation_enabled` property to **TRUE**.
+
+            Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].perform_lcr_short_compensation`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.perform_lcr_short_compensation`
+
+
+            :param additional_frequencies:
+
+
+                Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
+
+                
+
+
+            :type additional_frequencies: array.array("d")
+
 query_in_compliance
 -------------------
 
@@ -4114,6 +4206,86 @@ io_resource_descriptor
                 - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Resource Descriptor**
                 - C Attribute: **NIDCPOWER_ATTR_IO_RESOURCE_DESCRIPTOR**
 
+lcr_actual_load_reactance
+-------------------------
+
+    .. py:attribute:: lcr_actual_load_reactance
+
+        Specifies the actual reactance, in ohms, of the load used for load LCR compensation.
+        This property applies when :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` is set to :py:data:`~nidcpower.LCROpenShortLoadCompensationDataSource.AS_DEFINED`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_actual_load_reactance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_actual_load_reactance`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:LCR Actual Load Reactance**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_ACTUAL_LOAD_REACTANCE**
+
+lcr_actual_load_resistance
+--------------------------
+
+    .. py:attribute:: lcr_actual_load_resistance
+
+        Specifies the actual resistance, in ohms, of the load used for load LCR compensation.
+        This property applies when :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` is set to :py:data:`~nidcpower.LCROpenShortLoadCompensationDataSource.AS_DEFINED`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_actual_load_resistance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_actual_load_resistance`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:LCR Actual Load Resistance**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_ACTUAL_LOAD_RESISTANCE**
+
 lcr_current_amplitude
 ---------------------
 
@@ -4354,6 +4526,131 @@ lcr_frequency
                 - LabVIEW Property: **LCR:AC Stimulus:Frequency**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_FREQUENCY**
 
+lcr_load_compensation_enabled
+-----------------------------
+
+    .. py:attribute:: lcr_load_compensation_enabled
+
+        Specifies whether to apply load LCR compensation data to LCR measurements.
+        Both the :py:attr:`nidcpower.Session.lcr_open_compensation_enabled` and :py:attr:`nidcpower.Session.lcr_short_compensation_enabled` properties must be set to True in order to set this property to True.
+
+        Use the :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` property to define where the load compensation data that is applied to LCR measurements comes from.
+
+        Load compensation data are applied only for those specific frequencies you define with :py:meth:`nidcpower.Session.perform_lcr_load_compensation`;
+        load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_load_compensation_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_load_compensation_enabled`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | bool       |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:Load:Enabled**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_LOAD_COMPENSATION_ENABLED**
+
+lcr_measured_load_reactance
+---------------------------
+
+    .. py:attribute:: lcr_measured_load_reactance
+
+        Specifies the reactance, in ohms, of the load used for load LCR compensation as measured by the instrument.
+        This property applies when :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` is set to :py:data:`~nidcpower.LCROpenShortLoadCompensationDataSource.AS_DEFINED`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_measured_load_reactance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_measured_load_reactance`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:Load:Measured Reactance**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_MEASURED_LOAD_REACTANCE**
+
+lcr_measured_load_resistance
+----------------------------
+
+    .. py:attribute:: lcr_measured_load_resistance
+
+        Specifies the resistance, in ohms, of the load used for load LCR compensation as measured by the instrument.
+        This property applies when :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` is set to :py:data:`~nidcpower.LCROpenShortLoadCompensationDataSource.AS_DEFINED`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_measured_load_resistance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_measured_load_resistance`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:Load:Measured Resistance**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_MEASURED_LOAD_RESISTANCE**
+
 lcr_measurement_time
 --------------------
 
@@ -4392,6 +4689,285 @@ lcr_measurement_time
 
                 - LabVIEW Property: **LCR:Measurement Time**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_MEASUREMENT_TIME**
+
+lcr_open_compensation_enabled
+-----------------------------
+
+    .. py:attribute:: lcr_open_compensation_enabled
+
+        Specifies whether to apply open LCR compensation data to LCR measurements.
+        Use the :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` property to define where the open compensation data that is applied to LCR measurements comes from.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_open_compensation_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_open_compensation_enabled`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | bool       |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:Open:Enabled**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_OPEN_COMPENSATION_ENABLED**
+
+lcr_open_conductance
+--------------------
+
+    .. py:attribute:: lcr_open_conductance
+
+        Specifies the conductance, in siemens, of the circuit used for open LCR compensation.
+        This property applies when :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` is set to :py:data:`~nidcpower.LCROpenShortLoadCompensationDataSource.AS_DEFINED`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_open_conductance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_open_conductance`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:Open:Conductance**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_OPEN_CONDUCTANCE**
+
+lcr_open_short_load_compensation_data_source
+--------------------------------------------
+
+    .. py:attribute:: lcr_open_short_load_compensation_data_source
+
+        Specifies the source of the LCR compensation data NI-DCPower applies to LCR measurements.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_open_short_load_compensation_data_source`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_open_short_load_compensation_data_source`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+----------------------------------------------+
+            | Characteristic        | Value                                        |
+            +=======================+==============================================+
+            | Datatype              | enums.LCROpenShortLoadCompensationDataSource |
+            +-----------------------+----------------------------------------------+
+            | Permissions           | read-write                                   |
+            +-----------------------+----------------------------------------------+
+            | Repeated Capabilities | channels                                     |
+            +-----------------------+----------------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:LCR Open/Short/Load Compensation Data Source**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE**
+
+lcr_open_susceptance
+--------------------
+
+    .. py:attribute:: lcr_open_susceptance
+
+        Specifies the susceptance, in siemens, of the circuit used for open LCR compensation.
+        This property applies when :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` is set to :py:data:`~nidcpower.LCROpenShortLoadCompensationDataSource.AS_DEFINED`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_open_susceptance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_open_susceptance`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:Open:Susceptance**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_OPEN_SUSCEPTANCE**
+
+lcr_short_compensation_enabled
+------------------------------
+
+    .. py:attribute:: lcr_short_compensation_enabled
+
+        Specifies whether to apply short LCR compensation data to LCR measurements.
+        Use the :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` property to define where the short compensation data that is applied to LCR measurements comes from.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_short_compensation_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_short_compensation_enabled`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | bool       |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:Short:Enabled**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_SHORT_COMPENSATION_ENABLED**
+
+lcr_short_reactance
+-------------------
+
+    .. py:attribute:: lcr_short_reactance
+
+        Specifies the reactance, in ohms, of the circuit used for short LCR compensation.
+        This property applies when :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` is set to :py:data:`~nidcpower.LCROpenShortLoadCompensationDataSource.AS_DEFINED`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_short_reactance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_short_reactance`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:Short:Reactance**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_SHORT_REACTANCE**
+
+lcr_short_resistance
+--------------------
+
+    .. py:attribute:: lcr_short_resistance
+
+        Specifies the resistance, in ohms, of the circuit used for short LCR compensation.
+        This property applies when :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` is set to :py:data:`~nidcpower.LCROpenShortLoadCompensationDataSource.AS_DEFINED`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_short_resistance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_short_resistance`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:Short:Resistance**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_SHORT_RESISTANCE**
 
 lcr_source_delay_mode
 ---------------------

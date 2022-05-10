@@ -123,6 +123,10 @@ class SideEffectsHelper(object):
         self._defaults['ParseChannelCount'] = {}
         self._defaults['ParseChannelCount']['return'] = 0
         self._defaults['ParseChannelCount']['numberOfChannels'] = None
+        self._defaults['PerformLCROpenCompensation'] = {}
+        self._defaults['PerformLCROpenCompensation']['return'] = 0
+        self._defaults['PerformLCRShortCompensation'] = {}
+        self._defaults['PerformLCRShortCompensation']['return'] = 0
         self._defaults['QueryInCompliance'] = {}
         self._defaults['QueryInCompliance']['return'] = 0
         self._defaults['QueryInCompliance']['inCompliance'] = None
@@ -575,6 +579,16 @@ class SideEffectsHelper(object):
             number_of_channels.contents.value = self._defaults['ParseChannelCount']['numberOfChannels']
         return self._defaults['ParseChannelCount']['return']
 
+    def niDCPower_PerformLCROpenCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
+        if self._defaults['PerformLCROpenCompensation']['return'] != 0:
+            return self._defaults['PerformLCROpenCompensation']['return']
+        return self._defaults['PerformLCROpenCompensation']['return']
+
+    def niDCPower_PerformLCRShortCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
+        if self._defaults['PerformLCRShortCompensation']['return'] != 0:
+            return self._defaults['PerformLCRShortCompensation']['return']
+        return self._defaults['PerformLCRShortCompensation']['return']
+
     def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
         if self._defaults['QueryInCompliance']['return'] != 0:
             return self._defaults['QueryInCompliance']['return']
@@ -822,6 +836,10 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_MeasureMultiple.return_value = 0
         mock_library.niDCPower_ParseChannelCount.side_effect = MockFunctionCallError("niDCPower_ParseChannelCount")
         mock_library.niDCPower_ParseChannelCount.return_value = 0
+        mock_library.niDCPower_PerformLCROpenCompensation.side_effect = MockFunctionCallError("niDCPower_PerformLCROpenCompensation")
+        mock_library.niDCPower_PerformLCROpenCompensation.return_value = 0
+        mock_library.niDCPower_PerformLCRShortCompensation.side_effect = MockFunctionCallError("niDCPower_PerformLCRShortCompensation")
+        mock_library.niDCPower_PerformLCRShortCompensation.return_value = 0
         mock_library.niDCPower_QueryInCompliance.side_effect = MockFunctionCallError("niDCPower_QueryInCompliance")
         mock_library.niDCPower_QueryInCompliance.return_value = 0
         mock_library.niDCPower_QueryLatchedOutputCutoffState.side_effect = MockFunctionCallError("niDCPower_QueryLatchedOutputCutoffState")
