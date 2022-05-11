@@ -4,15 +4,9 @@
 functions_override_metadata = {
     # TODO(olsl21): Temporarily disable the new functions (#1715), they will be re-enabled in
     #  subsequent smaller PRs
-    "ConfigureLCRCustomCableCompensation": {"codegen_method": "no"},
     "FetchMultipleLCR": {"codegen_method": "no"},
-    "GetLCRCompensationLastDateAndTime": {"codegen_method": "no"},
-    "GetLCRCustomCableCompensationData": {"codegen_method": "no"},
-    "GetLastLCRCompensationLastDateAndTime": {"codegen_method": "no"},
     "MeasureMultipleLCR": {"codegen_method": "no"},
-    "PerformLCRLoadCompensation": {"codegen_method": "no"},
-    "PerformLCROpenCustomCableCompensation": {"codegen_method": "no"},
-    "PerformLCRShortCustomCableCompensation": {"codegen_method": "no"}
+    "PerformLCRLoadCompensation": {"codegen_method": "no"}
 }
 
 functions_additional_create_advanced_sequence = {

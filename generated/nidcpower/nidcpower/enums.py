@@ -98,6 +98,45 @@ class AutorangeThresholdMode(Enum):
     '''
 
 
+class CableLength(Enum):
+    ZERO_M = 1121
+    r'''
+    Uses predefined cable compensation data for a 0m cable (direct connection).
+    '''
+    NI_STANDARD_1M = 1122
+    r'''
+    Uses predefined cable compensation data for an NI standard 1m coaxial cable.
+    '''
+    NI_STANDARD_2M = 1123
+    r'''
+    Uses predefined cable compensation data for an NI standard 2m coaxial cable.
+    '''
+    NI_STANDARD_4M = 1124
+    r'''
+    Uses predefined cable compensation data for an NI standard 4m coaxial cable.
+    '''
+    CUSTOM_ONBOARD_STORAGE = 1125
+    r'''
+    Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.
+    '''
+    CUSTOM_AS_CONFIGURED = 1126
+    r'''
+    Uses the custom cable compensation data supplied to configure_lcr_custom_cable_compensation. Use this option to manage multiple sets of custom cable compensation data.
+    '''
+    NI_STANDARD_TRIAXIAL_1M = 1139
+    r'''
+    Uses predefined cable compensation data for an NI standard 1m triaxial cable.
+    '''
+    NI_STANDARD_TRIAXIAL_2M = 1140
+    r'''
+    Uses predefined cable compensation data for an NI standard 2m triaxial cable.
+    '''
+    NI_STANDARD_TRIAXIAL_4M = 1141
+    r'''
+    Uses predefined cable compensation data for an NI standard 4m triaxial cable.
+    '''
+
+
 class ComplianceLimitSymmetry(Enum):
     SYMMETRIC = 0
     r'''
@@ -137,6 +176,29 @@ class InstrumentMode(Enum):
     LCR = 1062
     r'''
     The channel operates as an LCR meter.
+    '''
+
+
+class LCRCompensationType(Enum):
+    OPEN = 1130
+    r'''
+    Open LCR compensation.
+    '''
+    SHORT = 1131
+    r'''
+    Short LCR compensation.
+    '''
+    LOAD = 1132
+    r'''
+    Load LCR compensation.
+    '''
+    OPEN_CUSTOM_CABLE = 1133
+    r'''
+    Open custom cable compensation.
+    '''
+    SHORT_CUSTOM_CABLE = 1134
+    r'''
+    Short custom cable compensation.
     '''
 
 
