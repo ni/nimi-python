@@ -724,22 +724,3 @@ def test_wait_for_event_repeated_capabilities(session, channels):
     channels_session = session.channels[channels]
     with channels_session.initiate():
         channels_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE)
-
-
-@pytest.mark.resource_name("4190/0")
-@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
-def test_lcr_attributes(session):
-    session.instrument_mode = nidcpower.InstrumentMode.LCR
-    session.lcr_frequency = 10_000.0
-    assert session.instrument_mode == nidcpower.InstrumentMode.LCR
-    assert session.lcr_frequency == 10_000.0
-
-    session.lcr_stimulus_function = nidcpower.LCRStimulusFunction.VOLTAGE
-    session.lcr_voltage_amplitude = 0.7
-    assert session.lcr_stimulus_function == nidcpower.LCRStimulusFunction.VOLTAGE
-    assert session.lcr_voltage_amplitude == 0.7
-
-    session.lcr_stimulus_function = nidcpower.LCRStimulusFunction.CURRENT
-    session.lcr_current_amplitude = 700.0e-6
-    assert session.lcr_stimulus_function == nidcpower.LCRStimulusFunction.CURRENT
-    assert session.lcr_current_amplitude == 700.0e-6
