@@ -3970,6 +3970,45 @@ instrument_manufacturer
                 - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Manufacturer**
                 - C Attribute: **NIDCPOWER_ATTR_INSTRUMENT_MANUFACTURER**
 
+instrument_mode
+---------------
+
+    .. py:attribute:: instrument_mode
+
+        Specifies the mode of operation for an instrument channel for instruments that support multiple modes.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].instrument_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.instrument_mode`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+----------------------+
+            | Characteristic        | Value                |
+            +=======================+======================+
+            | Datatype              | enums.InstrumentMode |
+            +-----------------------+----------------------+
+            | Permissions           | read-write           |
+            +-----------------------+----------------------+
+            | Repeated Capabilities | channels             |
+            +-----------------------+----------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Instrument Mode**
+                - C Attribute: **NIDCPOWER_ATTR_INSTRUMENT_MODE**
+
 instrument_model
 ----------------
 
@@ -4074,6 +4113,164 @@ io_resource_descriptor
 
                 - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Resource Descriptor**
                 - C Attribute: **NIDCPOWER_ATTR_IO_RESOURCE_DESCRIPTOR**
+
+lcr_current_amplitude
+---------------------
+
+    .. py:attribute:: lcr_current_amplitude
+
+        Specifies the amplitude, in amps RMS, of the AC current test signal applied to the DUT for LCR measurements.
+        This property applies when the :py:attr:`nidcpower.Session.lcr_stimulus_function` property is set to :py:data:`~nidcpower.LCRStimulusFunction.CURRENT`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_current_amplitude`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_current_amplitude`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:AC Stimulus:Current Amplitude**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_CURRENT_AMPLITUDE**
+
+lcr_frequency
+-------------
+
+    .. py:attribute:: lcr_frequency
+
+        Specifies the frequency of the AC test signal applied to the DUT for LCR measurements.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_frequency`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_frequency`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:AC Stimulus:Frequency**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_FREQUENCY**
+
+lcr_stimulus_function
+---------------------
+
+    .. py:attribute:: lcr_stimulus_function
+
+        Specifies the type of test signal to apply to the DUT for LCR measurements.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_stimulus_function`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_stimulus_function`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+---------------------------+
+            | Characteristic        | Value                     |
+            +=======================+===========================+
+            | Datatype              | enums.LCRStimulusFunction |
+            +-----------------------+---------------------------+
+            | Permissions           | read-write                |
+            +-----------------------+---------------------------+
+            | Repeated Capabilities | channels                  |
+            +-----------------------+---------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:AC Stimulus:Function**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_STIMULUS_FUNCTION**
+
+lcr_voltage_amplitude
+---------------------
+
+    .. py:attribute:: lcr_voltage_amplitude
+
+        Specifies the amplitude, in V RMS, of the AC voltage test signal applied to the DUT for LCR measurements.
+        This property applies when the :py:attr:`nidcpower.Session.lcr_stimulus_function` property is set to :py:data:`~nidcpower.LCRStimulusFunction.VOLTAGE`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_voltage_amplitude`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_voltage_amplitude`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:AC Stimulus:Voltage Amplitude**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_VOLTAGE_AMPLITUDE**
 
 logical_name
 ------------

@@ -110,6 +110,28 @@ class Event(Enum):
     READY_FOR_PULSE_TRIGGER = 1052
 
 
+class InstrumentMode(Enum):
+    SMU_PS = 1061
+    r'''
+    The channel operates as an SMU/power supply.
+    '''
+    LCR = 1062
+    r'''
+    The channel operates as an LCR meter.
+    '''
+
+
+class LCRStimulusFunction(Enum):
+    VOLTAGE = 1063
+    r'''
+    Applies an AC voltage for LCR stimulus.
+    '''
+    CURRENT = 1064
+    r'''
+    Applies an AC current for LCR stimulus.
+    '''
+
+
 class MeasureWhen(Enum):
     AUTOMATICALLY_AFTER_SOURCE_COMPLETE = 1025
     r'''

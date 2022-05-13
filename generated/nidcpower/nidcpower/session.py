@@ -976,6 +976,24 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.instrument_manufacturer`
     '''
+    instrument_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.InstrumentMode, 1150208)
+    '''Type: enums.InstrumentMode
+
+    Specifies the mode of operation for an instrument channel for instruments that support multiple modes.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].instrument_mode`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.instrument_mode`
+    '''
     instrument_model = _attributes.AttributeViString(1050512)
     '''Type: str
 
@@ -1017,6 +1035,80 @@ class _SessionBase(object):
     Indicates the resource descriptor NI-DCPower uses to identify the physical device.
     If you initialize NI-DCPower with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.
     If you initialize NI-DCPower with the resource descriptor, this property contains that value.
+    '''
+    lcr_current_amplitude = _attributes.AttributeViReal64(1150212)
+    '''Type: float
+
+    Specifies the amplitude, in amps RMS, of the AC current test signal applied to the DUT for LCR measurements.
+    This property applies when the lcr_stimulus_function property is set to LCRStimulusFunction.CURRENT.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_current_amplitude`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_current_amplitude`
+    '''
+    lcr_frequency = _attributes.AttributeViReal64(1150210)
+    '''Type: float
+
+    Specifies the frequency of the AC test signal applied to the DUT for LCR measurements.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_frequency`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_frequency`
+    '''
+    lcr_stimulus_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRStimulusFunction, 1150209)
+    '''Type: enums.LCRStimulusFunction
+
+    Specifies the type of test signal to apply to the DUT for LCR measurements.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_stimulus_function`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_stimulus_function`
+    '''
+    lcr_voltage_amplitude = _attributes.AttributeViReal64(1150211)
+    '''Type: float
+
+    Specifies the amplitude, in V RMS, of the AC voltage test signal applied to the DUT for LCR measurements.
+    This property applies when the lcr_stimulus_function property is set to LCRStimulusFunction.VOLTAGE.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_voltage_amplitude`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_voltage_amplitude`
     '''
     logical_name = _attributes.AttributeViString(1050305)
     '''Type: str
