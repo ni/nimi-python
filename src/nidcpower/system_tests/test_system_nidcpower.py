@@ -724,15 +724,3 @@ def test_wait_for_event_repeated_capabilities(session, channels):
     channels_session = session.channels[channels]
     with channels_session.initiate():
         channels_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE)
-
-
-@pytest.mark.resource_name("4190/0")
-@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
-def test_lcr_attributes(session):
-    session.lcr_measurement_time = nidcpower.LCRMeasurementTime.CUSTOM
-    session.lcr_custom_measurement_time = 0.003
-    assert session.lcr_measurement_time == nidcpower.LCRMeasurementTime.CUSTOM
-    assert session.lcr_custom_measurement_time == hightime.timedelta(seconds=0.003)
-
-    session.lcr_source_delay_mode = nidcpower.LCRSourceDelayMode.MANUAL
-    assert session.lcr_source_delay_mode == nidcpower.LCRSourceDelayMode.MANUAL
