@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 21.3.0d40
+# This file is generated from NI-Digital Pattern Driver API metadata version 22.0.0d53
 attributes = {
     1050002: {
         'access': 'read-write',
@@ -832,7 +832,6 @@ attributes = {
     },
     1150043: {
         'access': 'read-write',
-        'enum': 'HistoryRAMTriggerType',
         'documentation': {
             'description': 'Specifies the type of trigger condition on which History RAM starts acquiring pattern information.\n',
             'table_body': [
@@ -853,6 +852,7 @@ attributes = {
                 'Defined Values:'
             ]
         },
+        'enum': 'HistoryRAMTriggerType',
         'name': 'HISTORY_RAM_TRIGGER_TYPE',
         'type': 'ViInt32'
     },
@@ -882,7 +882,6 @@ attributes = {
     },
     1150047: {
         'access': 'read-write',
-        'enum': 'HistoryRAMCyclesToAcquire',
         'documentation': {
             'description': 'Configures which cycles History RAM acquires after the trigger conditions are met. If you configure History RAM to only acquire failed cycles, you must set the pretrigger samples for History RAM to 0.\n',
             'table_body': [
@@ -899,6 +898,7 @@ attributes = {
                 'Defined Values:'
             ]
         },
+        'enum': 'HistoryRAMCyclesToAcquire',
         'name': 'HISTORY_RAM_CYCLES_TO_ACQUIRE',
         'type': 'ViInt32'
     },

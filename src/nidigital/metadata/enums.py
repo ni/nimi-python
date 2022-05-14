@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 21.3.0d40
+# This file is generated from NI-Digital Pattern Driver API metadata version 22.0.0d53
 enums = {
     'BitOrder': {
         'values': [
@@ -129,6 +129,24 @@ enums = {
             }
         ]
     },
+    'FrequencyMeasurementMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Frequency measurements are made serially for groups of channels associated with a single frequency counter for each group.\n\nMaximum frequency measured: 200 MHz.'
+                },
+                'name': 'NIDIGITAL_VAL_BANKED',
+                'value': 3700
+            },
+            {
+                'documentation': {
+                    'description': 'Frequency measurements are made by multiple frequency counters in parallel.\n\nMaximum frequency measured: 100 MHz.'
+                },
+                'name': 'NIDIGITAL_VAL_PARALLEL',
+                'value': 3701
+            }
+        ]
+    },
     'HistoryRAMCyclesToAcquire': {
         'values': [
             {
@@ -169,24 +187,6 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_PATTERN_LABEL',
                 'value': 2202
-            }
-        ]
-    },
-    'FrequencyMeasurementMode': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Frequency measurements are made serially for groups of channels associated with a single frequency counter for each group.\n\nMaximum frequency measured: 200 MHz.'
-                },
-                'name': 'NIDIGITAL_VAL_BANKED',
-                'value': 3700
-            },
-            {
-                'documentation': {
-                    'description': 'Frequency measurements are made by multiple frequency counters in parallel.\n\nMaximum frequency measured: 100 MHz.'
-                },
-                'name': 'NIDIGITAL_VAL_PARALLEL',
-                'value': 3701
             }
         ]
     },
