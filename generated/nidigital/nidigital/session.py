@@ -2978,7 +2978,10 @@ class _SessionBase(object):
             site_numbers (list of int): The returned site numbers that correspond to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.
 
             channel_indexes (list of int): The returned index of channels corresponding to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.
-                Call get_channel_name to get the name of the channel associated with an index. Channel indexes are one-based.
+                Call GetChannelName to get the name of the channel associated with an index. Channel indexes are one-based.
+
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
