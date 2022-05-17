@@ -5,12 +5,10 @@ attributes_override_metadata = {
     # TODO(olsl21): Temporarily disable the new attributes (#1715), they will be re-enabled in
     #  subsequent smaller PRs
     1150217: {"codegen_method": "no"},
-    1150218: {"codegen_method": "no"},
     1150220: {"codegen_method": "no"},
     1150221: {"codegen_method": "no"},
     1150222: {"codegen_method": "no"},
     1150223: {"codegen_method": "no"},
-    1150258: {"codegen_method": "no"},
     1150261: {"codegen_method": "no"},
     1150262: {"codegen_method": "no"},
     1150263: {"codegen_method": "no"},
@@ -25,7 +23,6 @@ attributes_override_metadata = {
     1150299: {"codegen_method": "no"},
     1150302: {"codegen_method": "no"},
     1150314: {"codegen_method": "no"},
-    1150315: {"codegen_method": "no"},
     1150318: {"codegen_method": "no"},
     1150319: {"codegen_method": "no"},
     1150320: {"codegen_method": "no"},

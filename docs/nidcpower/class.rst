@@ -4154,6 +4154,46 @@ lcr_current_amplitude
                 - LabVIEW Property: **LCR:AC Stimulus:Current Amplitude**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_CURRENT_AMPLITUDE**
 
+lcr_custom_measurement_time
+---------------------------
+
+    .. py:attribute:: lcr_custom_measurement_time
+
+        Specifies the LCR measurement aperture time for a channel, in seconds,
+        when the :py:attr:`nidcpower.Session.lcr_measurement_time` property is set to :py:data:`~nidcpower.LCRMeasurementTime.CUSTOM`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_custom_measurement_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_custom_measurement_time`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | channels                                                    |
+            +-----------------------+-------------------------------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Custom Measurement Time**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_CUSTOM_MEASUREMENT_TIME**
+
 lcr_dc_bias_current_level
 -------------------------
 
@@ -4309,6 +4349,90 @@ lcr_frequency
 
                 - LabVIEW Property: **LCR:AC Stimulus:Frequency**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_FREQUENCY**
+
+lcr_measurement_time
+--------------------
+
+    .. py:attribute:: lcr_measurement_time
+
+        Selects a general aperture time profile for LCR measurements. The actual duration of each profile depends on the frequency of the LCR test signal.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_measurement_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_measurement_time`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+--------------------------+
+            | Characteristic        | Value                    |
+            +=======================+==========================+
+            | Datatype              | enums.LCRMeasurementTime |
+            +-----------------------+--------------------------+
+            | Permissions           | read-write               |
+            +-----------------------+--------------------------+
+            | Repeated Capabilities | channels                 |
+            +-----------------------+--------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Measurement Time**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_MEASUREMENT_TIME**
+
+lcr_source_delay_mode
+---------------------
+
+    .. py:attribute:: lcr_source_delay_mode
+
+        For instruments in LCR mode, determines whether NI-DCPower automatically calculates and applies the source delay or applies a source delay you set manually.
+
+        You can return the source delay duration for either option by reading :py:attr:`nidcpower.Session.source_delay`.
+
+        When you use this property to manually set the source delay, it is possible to set source delays short enough to unbalance the bridge and affect measurement accuracy. LCR measurement methods report whether the bridge is unbalanced.
+
+        Default Value: :py:data:`~nidcpower.LCRSourceDelayMode.AUTOMATIC`
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_source_delay_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_source_delay_mode`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+--------------------------+
+            | Characteristic        | Value                    |
+            +=======================+==========================+
+            | Datatype              | enums.LCRSourceDelayMode |
+            +-----------------------+--------------------------+
+            | Permissions           | read-write               |
+            +-----------------------+--------------------------+
+            | Repeated Capabilities | channels                 |
+            +-----------------------+--------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Source Delay Mode**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_SOURCE_DELAY_MODE**
 
 lcr_stimulus_function
 ---------------------

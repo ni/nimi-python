@@ -39,15 +39,20 @@ All notable changes to this project will be documented in this file.
             * Properties added:
                 * `instrument_mode`
                 * `lcr_current_amplitude`
+                * `lcr_custom_measurement_time`
                 * `lcr_dc_bias_current_level`
                 * `lcr_dc_bias_source`
                 * `lcr_dc_bias_voltage_level`
                 * `lcr_frequency`
+                * `lcr_measurement_time`
+                * `lcr_source_delay_mode`
                 * `lcr_stimulus_function`
                 * `lcr_voltage_amplitude`
             * Enums added:
                 * `InstrumentMode`
                 * `LCRDCBiasSource`
+                * `LCRMeasurementTime`
+                * `LCRSourceDelayMode`
                 * `LCRStimulusFunction`
     * #### Changed
         * Updated supported devices information in documentation for methods and properties

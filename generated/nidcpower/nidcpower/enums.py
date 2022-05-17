@@ -136,6 +136,36 @@ class LCRDCBiasSource(Enum):
     '''
 
 
+class LCRMeasurementTime(Enum):
+    SHORT = 1071
+    r'''
+    Uses a short aperture time for LCR measurements.
+    '''
+    MEDIUM = 1072
+    r'''
+    Uses a medium aperture time for LCR measurements.
+    '''
+    LONG = 1073
+    r'''
+    Uses a long aperture time for LCR measurements.
+    '''
+    CUSTOM = 1117
+    r'''
+    Uses a custom aperture time for LCR measurements as specified by the lcr_custom_measurement_time property.
+    '''
+
+
+class LCRSourceDelayMode(Enum):
+    AUTOMATIC = 1144
+    r'''
+    NI-DCPower automatically applies source delay of sufficient duration to account for settling time.
+    '''
+    MANUAL = 1145
+    r'''
+    NI-DCPower applies the source delay that you set manually with source_delay. You can use this option to set a shorter delay to reduce measurement time at the possible expense of measurement accuracy.
+    '''
+
+
 class LCRStimulusFunction(Enum):
     VOLTAGE = 1063
     r'''
