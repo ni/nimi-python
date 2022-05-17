@@ -285,6 +285,41 @@ InstrumentMode
 
 
 
+LCRDCBiasSource
+---------------
+
+.. py:class:: LCRDCBiasSource
+
+    .. py:attribute:: LCRDCBiasSource.OFF
+
+
+
+        Disables DC bias in LCR mode.
+
+        
+
+
+
+    .. py:attribute:: LCRDCBiasSource.VOLTAGE
+
+
+
+        Applies a constant voltage bias, as defined by the :py:attr:`nidcpower.Session.lcr_dc_bias_voltage_level` property.
+
+        
+
+
+
+    .. py:attribute:: LCRDCBiasSource.CURRENT
+
+
+
+        Applies a constant current bias, as defined by the :py:attr:`nidcpower.Session.lcr_dc_bias_current_level` property.
+
+        
+
+
+
 LCRStimulusFunction
 -------------------
 

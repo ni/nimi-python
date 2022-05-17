@@ -8,7 +8,6 @@ enums_override_metadata = {
     "CableLength": {"codegen_method": "no"},
     "IsolationState": {"codegen_method": "no"},
     "LCRCompensationType": {"codegen_method": "no"},
-    "LCRDCBiasSource": {"codegen_method": "no"},
     "LCRImpedanceRangeSource": {"codegen_method": "no"},
     "LCRMeasurementTime": {"codegen_method": "no"},
     "LCROpenShortLoadCompensationDataSource": {"codegen_method": "no"},

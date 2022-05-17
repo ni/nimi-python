@@ -121,6 +121,21 @@ class InstrumentMode(Enum):
     '''
 
 
+class LCRDCBiasSource(Enum):
+    OFF = 1065
+    r'''
+    Disables DC bias in LCR mode.
+    '''
+    VOLTAGE = 1066
+    r'''
+    Applies a constant voltage bias, as defined by the lcr_dc_bias_voltage_level property.
+    '''
+    CURRENT = 1067
+    r'''
+    Applies a constant current bias, as defined by the lcr_dc_bias_current_level property.
+    '''
+
+
 class LCRStimulusFunction(Enum):
     VOLTAGE = 1063
     r'''

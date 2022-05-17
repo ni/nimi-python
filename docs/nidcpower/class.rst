@@ -4154,6 +4154,123 @@ lcr_current_amplitude
                 - LabVIEW Property: **LCR:AC Stimulus:Current Amplitude**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_CURRENT_AMPLITUDE**
 
+lcr_dc_bias_current_level
+-------------------------
+
+    .. py:attribute:: lcr_dc_bias_current_level
+
+        Specifies the DC bias current level, in amps, when the :py:attr:`nidcpower.Session.lcr_dc_bias_source` property is set to :py:data:`~nidcpower.LCRDCBiasSource.CURRENT`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_current_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_dc_bias_current_level`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:DC Bias:Current Level**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_DC_BIAS_CURRENT_LEVEL**
+
+lcr_dc_bias_source
+------------------
+
+    .. py:attribute:: lcr_dc_bias_source
+
+        Specifies how to apply DC bias for LCR measurements.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_source`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_dc_bias_source`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-----------------------+
+            | Characteristic        | Value                 |
+            +=======================+=======================+
+            | Datatype              | enums.LCRDCBiasSource |
+            +-----------------------+-----------------------+
+            | Permissions           | read-write            |
+            +-----------------------+-----------------------+
+            | Repeated Capabilities | channels              |
+            +-----------------------+-----------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:DC Bias:Source**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_DC_BIAS_SOURCE**
+
+lcr_dc_bias_voltage_level
+-------------------------
+
+    .. py:attribute:: lcr_dc_bias_voltage_level
+
+        Specifies the DC bias voltage level, in volts, when the :py:attr:`nidcpower.Session.lcr_dc_bias_source` property is set to :py:data:`~nidcpower.LCRDCBiasSource.VOLTAGE`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_voltage_level`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_dc_bias_voltage_level`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:DC Bias:Voltage Level**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_DC_BIAS_VOLTAGE_LEVEL**
+
 lcr_frequency
 -------------
 
