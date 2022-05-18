@@ -217,6 +217,17 @@ class LCRDCBiasSource(Enum):
     '''
 
 
+class LCRImpedanceRangeSource(Enum):
+    IMPEDANCE_RANGE = 1142
+    r'''
+    Uses the impedance range you specify with the lcr_impedance_range property.
+    '''
+    LOAD_CONFIGURATION = 1143
+    r'''
+    Computes the impedance range to select based on the values you supply to the lcr_load_resistance, lcr_load_inductance, and lcr_load_capacitance properties. NI-DCPower uses a series model of load resistance, load inductance, and load capacitance to compute the impedance range.
+    '''
+
+
 class LCRMeasurementTime(Enum):
     SHORT = 1071
     r'''
