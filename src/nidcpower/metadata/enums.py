@@ -1,21 +1,33 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.0.0d131
+# This file is generated from NI-DCPower API metadata version 22.0.0d200
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Disables automatic aperture time scaling. The NIDCPOWER_ATTR_APERTURE_TIME attribute specifies the aperture time for all ranges.'
+                },
                 'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_OFF',
                 'value': 1135
             },
             {
+                'documentation': {
+                    'description': 'Prioritizes measurement speed over measurement accuracy by quickly scaling down aperture time in larger current ranges. The NIDCPOWER_ATTR_APERTURE_TIME attribute specifies the aperture time for the minimum range.'
+                },
                 'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_SHORT',
                 'value': 1136
             },
             {
+                'documentation': {
+                    'description': 'Balances measurement accuracy and speed by scaling down aperture time in larger current ranges. The NIDCPOWER_ATTR_APERTURE_TIME attribute specifies the aperture time for the minimum range.'
+                },
                 'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_NORMAL',
                 'value': 1137
             },
             {
+                'documentation': {
+                    'description': 'Prioritizes accuracy while still decreasing measurement time by slowly scaling down aperture time in larger current ranges. The NIDCPOWER_ATTR_APERTURE_TIME attribute specifies the aperture time for the minimum range.'
+                },
                 'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_LONG',
                 'value': 1138
             }
@@ -416,24 +428,6 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_LCR',
                 'value': 1062
-            }
-        ]
-    },
-    'IsolationState': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The channel is disconnected from chassis ground.'
-                },
-                'name': 'NIDCPOWER_VAL_ISOLATED',
-                'value': 1128
-            },
-            {
-                'documentation': {
-                    'description': 'The channel is connected to chassis ground.'
-                },
-                'name': 'NIDCPOWER_VAL_NON_ISOLATED',
-                'value': 1129
             }
         ]
     },

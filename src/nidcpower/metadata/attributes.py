@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.0.0d131
+# This file is generated from NI-DCPower API metadata version 22.0.0d200
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -2295,20 +2295,25 @@ attributes = {
     },
     1150302: {
         'access': 'read-write',
+        'attribute_class': 'AttributeIsolationState',
         'documentation': {
             'description': '\nDefines whether the channel is isolated.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
-        'enum': 'IsolationState',
         'lv_property': 'Advanced:Isolation State',
         'name': 'ISOLATION_STATE',
         'supported_rep_caps': [
             'channels'
         ],
-        'type': 'ViInt32'
+        'type': 'ViInt32',
+        'type_in_documentation': 'bool'
     },
     1150314: {
         'access': 'read-write',
+        'documentation': {
+            'description': '\nAutomatically optimizes the measurement aperture time according to the actual current range when measurement autorange is enabled.\nOptimization accounts for power line frequency when the NIDCPOWER_ATTR_APERTURE_TIME_UNITS attribute is set to NIDCPOWER_VAL_POWER_LINE_CYCLES.\n\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE and the NIDCPOWER_ATTR_AUTORANGE attribute is enabled.',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
         'enum': 'ApertureTimeAutoMode',
         'lv_property': 'Measurement:Aperture Time Auto Mode',
         'name': 'APERTURE_TIME_AUTO_MODE',
