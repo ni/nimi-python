@@ -4122,6 +4122,10 @@ lcr_current_amplitude
         Specifies the amplitude, in amps RMS, of the AC current test signal applied to the DUT for LCR measurements.
         This property applies when the :py:attr:`nidcpower.Session.lcr_stimulus_function` property is set to :py:data:`~nidcpower.LCRStimulusFunction.CURRENT`.
 
+        Valid Values: 7.08e-9 A RMS to 0.707 A RMS
+
+        Instrument specifications affect the valid values you can program. Refer to the specifications for your instrument for more information.
+
 
 
         .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
@@ -4480,6 +4484,10 @@ lcr_voltage_amplitude
 
         Specifies the amplitude, in V RMS, of the AC voltage test signal applied to the DUT for LCR measurements.
         This property applies when the :py:attr:`nidcpower.Session.lcr_stimulus_function` property is set to :py:data:`~nidcpower.LCRStimulusFunction.VOLTAGE`.
+
+        Valid Values: 7.08e-4 V RMS to 7.07 V RMS
+
+        Instrument specifications affect the valid values you can program. Refer to the specifications for your instrument for more information.
 
 
 

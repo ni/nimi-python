@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.0.0d200
+# This file is generated from NI-DCPower API metadata version 22.0.0d216
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -197,7 +197,7 @@ functions = {
     },
     'ConfigureLCRCustomCableCompensation': {
         'documentation': {
-            'description': '\nApplies previously generated open and short custom cable compensation data to LCR measurements.\n\nThis function applies custom cable compensation data when you have set NIDCPOWER_ATTR_CABLE_LENGTH property to NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED.\n\nCall this function after you have obtained custom cable compensation data.\n\nIf NIDCPOWER_ATTR_LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED property is set to **TRUE**, you must generate data with both niDCPower_PerformLCROpenCustomCableCompensation and niDCPower_PerformLCRShortCustomCableCompensation;\nif **FALSE**, you must only use niDCPower_PerformLCROpenCustomCableCompensation, and NI-DCPower uses default short data.\n\nCall niDCPower_GetLCRCustomCableCompensationData and pass the **custom cable compensation data** to this function.\n',
+            'description': '\nApplies previously generated open and short custom cable compensation data to LCR measurements.\n\nThis function applies custom cable compensation data when you have set NIDCPOWER_ATTR_CABLE_LENGTH property to NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED.\n\nCall this function after you have obtained custom cable compensation data.\n\nIf NIDCPOWER_ATTR_LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED property is set to VI_TRUE, you must generate data with both niDCPower_PerformLCROpenCustomCableCompensation and niDCPower_PerformLCRShortCustomCableCompensation;\nif VI_FALSE, you must only use niDCPower_PerformLCROpenCustomCableCompensation, and NI-DCPower uses default short data.\n\nCall niDCPower_GetLCRCustomCableCompensationData and pass the **custom cable compensation data** to this function.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
@@ -2775,7 +2775,7 @@ functions = {
     },
     'PerformLCRLoadCompensation': {
         'documentation': {
-            'description': '\nGenerates load compensation data for LCR measurements for the test spots you specify.\n\nYou must physically configure your LCR circuit with an appropriate reference load to use this function to generate valid load compensation data.\n\nWhen you call this function:\n\n-  The load compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n\nTo apply the load compensation data you generate with this function to your LCR measurements, set the NIDCPOWER_ATTR_LCR_LOAD_COMPENSATION_ENABLED property to **TRUE**.\n\nLoad compensation data are generated only for those specific frequencies you define with this function; load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.\n',
+            'description': '\nGenerates load compensation data for LCR measurements for the test spots you specify.\n\nYou must physically configure your LCR circuit with an appropriate reference load to use this function to generate valid load compensation data.\n\nWhen you call this function:\n\n-  The load compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n\nTo apply the load compensation data you generate with this function to your LCR measurements, set the NIDCPOWER_ATTR_LCR_LOAD_COMPENSATION_ENABLED property to VI_TRUE.\n\nLoad compensation data are generated only for those specific frequencies you define with this function; load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
@@ -2838,8 +2838,11 @@ functions = {
     },
     'PerformLCROpenCompensation': {
         'documentation': {
-            'description': '\nGenerates open compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.\n\nYou must physically configure an open LCR circuit to use this function to generate valid open compensation data.\n\nWhen you call this function:\n\n-  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n\nTo apply the open compensation data you generate with this method to your LCR measurements, set the NIDCPOWER_ATTR_LCR_OPEN_COMPENSATION_ENABLED property to **TRUE**.\n\nCorrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.\n',
-            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+            'description': '\nGenerates open compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.\n\nYou must physically configure an open LCR circuit to use this function to generate valid open compensation data.\n\nWhen you call this function:\n\n-  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n\nTo apply the open compensation data you generate with this method to your LCR measurements, set the NIDCPOWER_ATTR_LCR_OPEN_COMPENSATION_ENABLED property to VI_TRUE.\n\nCorrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.\n',
+            'note': [
+                '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n',
+                '\nDefault Open Compensation Frequencies:\nBy default, NI-DCPower uses the following frequencies for LCR open compensation:\n\n-  10 logarithmic steps at 1 kHz frequency decade\n-  10 logarithmic steps at 10 kHz frequency decade\n-  100 logarithmic steps at 100 kHz frequency decade\n-  100 logarithmic steps at 1 MHz frequency decade\n\nThe actual frequencies used depend on the bandwidth of your instrument.\n'
+            ]
         },
         'parameters': [
             {
@@ -2877,8 +2880,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'numFrequencies'
                 },
-                'type': 'ViReal64[]',
-                'use_array': True
+                'type': 'ViReal64[]'
             }
         ],
         'returns': 'ViStatus'
@@ -2910,8 +2912,11 @@ functions = {
     },
     'PerformLCRShortCompensation': {
         'documentation': {
-            'description': '\nGenerates short compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.\n\nYou must physically configure your LCR circuit with a short to use this function to generate valid short compensation data.\n\nWhen you call this function:\n\n-  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n- Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n\nTo apply the short compensation data you generate with this method to your LCR measurements, set the NIDCPOWER_ATTR_LCR_SHORT_COMPENSATION_ENABLED property to **TRUE**.\n\nCorrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.\n',
-            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+            'description': '\nGenerates short compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.\n\nYou must physically configure your LCR circuit with a short to use this function to generate valid short compensation data.\n\nWhen you call this function:\n\n-  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n- Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n\nTo apply the short compensation data you generate with this method to your LCR measurements, set the NIDCPOWER_ATTR_LCR_SHORT_COMPENSATION_ENABLED property to VI_TRUE.\n\nCorrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.\n',
+            'note': [
+                '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n',
+                '\nDefault Short Compensation Frequencies:\nBy default, NI-DCPower uses the following frequencies for LCR short compensation:\n\n-  10 logarithmic steps at 1 kHz frequency decade\n-  10 logarithmic steps at 10 kHz frequency decade\n-  100 logarithmic steps at 100 kHz frequency decade\n-  100 logarithmic steps at 1 MHz frequency decade\n\nThe actual frequencies used depend on the bandwidth of your instrument.'
+            ]
         },
         'parameters': [
             {
@@ -2949,15 +2954,14 @@ functions = {
                     'mechanism': 'len',
                     'value': 'numFrequencies'
                 },
-                'type': 'ViReal64[]',
-                'use_array': True
+                'type': 'ViReal64[]'
             }
         ],
         'returns': 'ViStatus'
     },
     'PerformLCRShortCustomCableCompensation': {
         'documentation': {
-            'description': '\nGenerates short custom cable compensation data for LCR measurements.\n\nTo use this function:\n\n-  You must physically configure your LCR circuit with a short to generate valid short custom cable compensation data.\n-  Set NIDCPOWER_ATTR_LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED property to **TRUE** \n\nWhen you call this function:\n\n-  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.\n',
+            'description': '\nGenerates short custom cable compensation data for LCR measurements.\n\nTo use this function:\n\n-  You must physically configure your LCR circuit with a short to generate valid short custom cable compensation data.\n-  Set NIDCPOWER_ATTR_LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED property to VI_TRUE \n\nWhen you call this function:\n\n-  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [

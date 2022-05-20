@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.0.0d200
+# This file is generated from NI-DCPower API metadata version 22.0.0d216
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -1681,7 +1681,7 @@ attributes = {
     1150211: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the amplitude, in V RMS, of the AC voltage test signal applied to the DUT for LCR measurements.\nThis property applies when the NIDCPOWER_ATTR_LCR_STIMULUS_FUNCTION property is set to NIDCPOWER_VAL_AC_VOLTAGE.\n',
+            'description': '\nSpecifies the amplitude, in V RMS, of the AC voltage test signal applied to the DUT for LCR measurements.\nThis property applies when the NIDCPOWER_ATTR_LCR_STIMULUS_FUNCTION property is set to NIDCPOWER_VAL_AC_VOLTAGE.\n\nValid Values: 7.08e-4 V RMS to 7.07 V RMS\n\nInstrument specifications affect the valid values you can program. Refer to the specifications for your instrument for more information.',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:AC Stimulus:Voltage Amplitude',
@@ -1694,7 +1694,7 @@ attributes = {
     1150212: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the amplitude, in amps RMS, of the AC current test signal applied to the DUT for LCR measurements.\nThis property applies when the NIDCPOWER_ATTR_LCR_STIMULUS_FUNCTION property is set to NIDCPOWER_VAL_AC_CURRENT.\n',
+            'description': '\nSpecifies the amplitude, in amps RMS, of the AC current test signal applied to the DUT for LCR measurements.\nThis property applies when the NIDCPOWER_ATTR_LCR_STIMULUS_FUNCTION property is set to NIDCPOWER_VAL_AC_CURRENT.\n\nValid Values: 7.08e-9 A RMS to 0.707 A RMS\n\nInstrument specifications affect the valid values you can program. Refer to the specifications for your instrument for more information.',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:AC Stimulus:Current Amplitude',
@@ -1800,8 +1800,8 @@ attributes = {
     1150222: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies whether to apply load LCR compensation data to LCR measurements.\nBoth the NIDCPOWER_ATTR_LCR_OPEN_COMPENSATION_ENABLED and NIDCPOWER_ATTR_LCR_SHORT_COMPENSATION_ENABLED properties must be set to VI_TRUE in order to set this property to VI_TRUE.\n\nUse the NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE property to define where the load compensation data that is applied to LCR measurements comes from.\n\nLoad compensation data are applied only for those specific frequencies you define with niDCPower_PerformLCRLoadCompensation;\nload compensation is not interpolated from the specific frequencies you define and applied to other frequencies.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'description': '\nSpecifies whether to apply load LCR compensation data to LCR measurements.\nBoth the NIDCPOWER_ATTR_LCR_OPEN_COMPENSATION_ENABLED and NIDCPOWER_ATTR_LCR_SHORT_COMPENSATION_ENABLED properties must be set to VI_TRUE in order to set this property to VI_TRUE.\n\nUse the NIDCPOWER_ATTR_LCR_OPEN_SHORT_LOAD_COMPENSATION_DATA_SOURCE property to define where the load compensation data that is applied to LCR measurements comes from.\n',
+            'note': '\nLoad compensation data are applied only for those specific frequencies you define with niDCPower_PerformLCRLoadCompensation;\nload compensation is not interpolated from the specific frequencies you define and applied to other frequencies.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:Compensation:Load:Enabled',
         'name': 'LCR_LOAD_COMPENSATION_ENABLED',
@@ -2269,7 +2269,17 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nDefines how to apply short custom cable compensation in LCR mode when NIDCPOWER_ATTR_CABLE_LENGTH property is set to NIDCPOWER_VAL_CUSTOM_ONBOARD_STORAGE or NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED.\n\nLCR custom cable compensation uses compensation data for both an open and short configuration.\nFor open custom cable compensation, you must supply your own data from a call to niDCPower_PerformLCROpenCustomCableCompensation.\nFor short custom cable compensation, you can supply your own data from a call to niDCPower_PerformLCRShortCustomCableCompensation or NI-DCPower can apply a default set of short compensation data.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n',
+            'table_body': [
+                [
+                    'VI_FALSE',
+                    'Uses default short compensation data.'
+                ],
+                [
+                    'VI_TRUE',
+                    'Uses short custom cable compensation data generated by niDCPower_PerformLCRShortCustomCableCompensation.'
+                ]
+            ]
         },
         'lv_property': 'LCR:Compensation:LCR Short Custom Cable Compensation Enabled',
         'name': 'LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED',

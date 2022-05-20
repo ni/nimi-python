@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.0.0d200
+# This file is generated from NI-DCPower API metadata version 22.0.0d216
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -435,35 +435,35 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': 'Returns the date and time that open LCR compensation data was most recently generated.'
+                    'description': 'Open LCR compensation.'
                 },
                 'name': 'NIDCPOWER_VAL_OPEN_COMPENSATION',
                 'value': 1130
             },
             {
                 'documentation': {
-                    'description': 'Returns the date and time that short LCR compensation data was most recently generated.'
+                    'description': 'Short LCR compensation.'
                 },
                 'name': 'NIDCPOWER_VAL_SHORT_COMPENSATION',
                 'value': 1131
             },
             {
                 'documentation': {
-                    'description': 'Returns the date and time that load LCR compensation data was most recently generated.'
+                    'description': 'Load LCR compensation.'
                 },
                 'name': 'NIDCPOWER_VAL_LOAD_COMPENSATION',
                 'value': 1132
             },
             {
                 'documentation': {
-                    'description': 'Returns the date and time that open custom cable compensation data was most recently generated.'
+                    'description': 'Open custom cable compensation.'
                 },
                 'name': 'NIDCPOWER_VAL_OPEN_CUSTOM_CABLE_COMPENSATION',
                 'value': 1133
             },
             {
                 'documentation': {
-                    'description': 'Returns the date and time that short custom cable compensation data was most recently generated.'
+                    'description': 'Short custom cable compensation.'
                 },
                 'name': 'NIDCPOWER_VAL_SHORT_CUSTOM_CABLE_COMPENSATION',
                 'value': 1134
