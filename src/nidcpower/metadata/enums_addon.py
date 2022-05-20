@@ -6,7 +6,6 @@ enums_override_metadata = {
     #  subsequent smaller PRs
     "ApertureTimeAutoMode": {"codegen_method": "no"},
     "CableLength": {"codegen_method": "no"},
-    "IsolationState": {"codegen_method": "no"},
     "LCRCompensationType": {"codegen_method": "no"},
     "LCRImpedanceRangeSource": {"codegen_method": "no"},
     "LCROpenShortLoadCompensationDataSource": {"codegen_method": "no"},
