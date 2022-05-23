@@ -1486,13 +1486,23 @@ perform_lcr_open_compensation
             -  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
             -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
 
-            To apply the open compensation data you generate with this method to your LCR measurements, set the :py:attr:`nidcpower.Session.lcr_open_compensation_enabled` property to **TRUE**.
+            To apply the open compensation data you generate with this method to your LCR measurements, set the :py:attr:`nidcpower.Session.lcr_open_compensation_enabled` property to True.
 
             Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
 
             
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+            .. note:: Default Open Compensation Frequencies:
+                By default, NI-DCPower uses the following frequencies for LCR open compensation:
+
+                -  10 logarithmic steps at 1 kHz frequency decade
+                -  10 logarithmic steps at 10 kHz frequency decade
+                -  100 logarithmic steps at 100 kHz frequency decade
+                -  100 logarithmic steps at 1 MHz frequency decade
+
+                The actual frequencies used depend on the bandwidth of your instrument.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1514,7 +1524,7 @@ perform_lcr_open_compensation
                 
 
 
-            :type additional_frequencies: array.array("d")
+            :type additional_frequencies: list of float
 
 perform_lcr_short_compensation
 ------------------------------
@@ -1532,13 +1542,23 @@ perform_lcr_short_compensation
             -  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
             - Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
 
-            To apply the short compensation data you generate with this method to your LCR measurements, set the :py:attr:`nidcpower.Session.lcr_short_compensation_enabled` property to **TRUE**.
+            To apply the short compensation data you generate with this method to your LCR measurements, set the :py:attr:`nidcpower.Session.lcr_short_compensation_enabled` property to True.
 
             Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
 
             
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+            .. note:: Default Short Compensation Frequencies:
+                By default, NI-DCPower uses the following frequencies for LCR short compensation:
+
+                -  10 logarithmic steps at 1 kHz frequency decade
+                -  10 logarithmic steps at 10 kHz frequency decade
+                -  100 logarithmic steps at 100 kHz frequency decade
+                -  100 logarithmic steps at 1 MHz frequency decade
+
+                The actual frequencies used depend on the bandwidth of your instrument.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1560,7 +1580,7 @@ perform_lcr_short_compensation
                 
 
 
-            :type additional_frequencies: array.array("d")
+            :type additional_frequencies: list of float
 
 query_in_compliance
 -------------------
@@ -4536,12 +4556,12 @@ lcr_load_compensation_enabled
 
         Use the :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` property to define where the load compensation data that is applied to LCR measurements comes from.
 
-        Load compensation data are applied only for those specific frequencies you define with :py:meth:`nidcpower.Session.perform_lcr_load_compensation`;
-        load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.
 
 
+        .. note:: Load compensation data are applied only for those specific frequencies you define with :py:meth:`nidcpower.Session.perform_lcr_load_compensation`;
+            load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.

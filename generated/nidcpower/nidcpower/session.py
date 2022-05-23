@@ -1196,10 +1196,10 @@ class _SessionBase(object):
 
     Use the lcr_open_short_load_compensation_data_source property to define where the load compensation data that is applied to LCR measurements comes from.
 
+    Note:
     Load compensation data are applied only for those specific frequencies you define with perform_lcr_load_compensation;
     load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.
 
-    Note:
     This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
     Tip:
@@ -5216,12 +5216,23 @@ class _SessionBase(object):
         -  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
         -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
 
-        To apply the open compensation data you generate with this method to your LCR measurements, set the lcr_open_compensation_enabled property to **TRUE**.
+        To apply the open compensation data you generate with this method to your LCR measurements, set the lcr_open_compensation_enabled property to True.
 
         Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
 
         Note:
         This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Note:
+        Default Open Compensation Frequencies:
+        By default, NI-DCPower uses the following frequencies for LCR open compensation:
+
+        -  10 logarithmic steps at 1 kHz frequency decade
+        -  10 logarithmic steps at 10 kHz frequency decade
+        -  100 logarithmic steps at 100 kHz frequency decade
+        -  100 logarithmic steps at 1 MHz frequency decade
+
+        The actual frequencies used depend on the bandwidth of your instrument.
 
         Tip:
         This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5235,14 +5246,13 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.perform_lcr_open_compensation`
 
         Args:
-            additional_frequencies (array.array("d")): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
+            additional_frequencies (list of float): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
-        additional_frequencies_array = get_ctypes_and_array(value=additional_frequencies, array_type="d")  # case B550
-        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies_array, library_type=_visatype.ViReal64)  # case B550
+        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niDCPower_PerformLCROpenCompensation(vi_ctype, channel_name_ctype, num_frequencies_ctype, additional_frequencies_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -5260,12 +5270,23 @@ class _SessionBase(object):
         -  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
         - Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
 
-        To apply the short compensation data you generate with this method to your LCR measurements, set the lcr_short_compensation_enabled property to **TRUE**.
+        To apply the short compensation data you generate with this method to your LCR measurements, set the lcr_short_compensation_enabled property to True.
 
         Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
 
         Note:
         This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Note:
+        Default Short Compensation Frequencies:
+        By default, NI-DCPower uses the following frequencies for LCR short compensation:
+
+        -  10 logarithmic steps at 1 kHz frequency decade
+        -  10 logarithmic steps at 10 kHz frequency decade
+        -  100 logarithmic steps at 100 kHz frequency decade
+        -  100 logarithmic steps at 1 MHz frequency decade
+
+        The actual frequencies used depend on the bandwidth of your instrument.
 
         Tip:
         This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -5279,14 +5300,13 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.perform_lcr_short_compensation`
 
         Args:
-            additional_frequencies (array.array("d")): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
+            additional_frequencies (list of float): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
-        additional_frequencies_array = get_ctypes_and_array(value=additional_frequencies, array_type="d")  # case B550
-        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies_array, library_type=_visatype.ViReal64)  # case B550
+        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niDCPower_PerformLCRShortCompensation(vi_ctype, channel_name_ctype, num_frequencies_ctype, additional_frequencies_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
