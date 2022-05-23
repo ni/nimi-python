@@ -38,13 +38,25 @@ All notable changes to this project will be documented in this file.
         * Partial API parity with NI-DCPower 21.8.0.
             * Properties added:
                 * `instrument_mode`
+                * `lcr_actual_load_reactance`
+                * `lcr_actual_load_resistance`
                 * `lcr_current_amplitude`
                 * `lcr_custom_measurement_time`
                 * `lcr_dc_bias_current_level`
                 * `lcr_dc_bias_source`
                 * `lcr_dc_bias_voltage_level`
                 * `lcr_frequency`
+                * `lcr_load_compensation_enabled`
+                * `lcr_measured_load_reactance`
+                * `lcr_measured_load_resistance`
                 * `lcr_measurement_time`
+                * `lcr_open_compensation_enabled`
+                * `lcr_open_conductance`
+                * `lcr_open_short_load_compensation_data_source`
+                * `lcr_open_susceptance`
+                * `lcr_short_compensation_enabled`
+                * `lcr_short_reactance`
+                * `lcr_short_resistance`
                 * `lcr_source_delay_mode`
                 * `lcr_stimulus_function`
                 * `lcr_voltage_amplitude`
@@ -52,8 +64,12 @@ All notable changes to this project will be documented in this file.
                 * `InstrumentMode`
                 * `LCRDCBiasSource`
                 * `LCRMeasurementTime`
+                * `LCROpenShortLoadCompensationDataSource`
                 * `LCRSourceDelayMode`
                 * `LCRStimulusFunction`
+            * Methods added:
+                * `perform_lcr_open_compensation`
+                * `perform_lcr_short_compensation`
     * #### Changed
         * Updated supported devices information in documentation for methods and properties
     * #### Removed

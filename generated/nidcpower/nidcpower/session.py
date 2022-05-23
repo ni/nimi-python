@@ -1036,6 +1036,44 @@ class _SessionBase(object):
     If you initialize NI-DCPower with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.
     If you initialize NI-DCPower with the resource descriptor, this property contains that value.
     '''
+    lcr_actual_load_reactance = _attributes.AttributeViReal64(1150271)
+    '''Type: float
+
+    Specifies the actual reactance, in ohms, of the load used for load LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_actual_load_reactance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_actual_load_reactance`
+    '''
+    lcr_actual_load_resistance = _attributes.AttributeViReal64(1150270)
+    '''Type: float
+
+    Specifies the actual resistance, in ohms, of the load used for load LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_actual_load_resistance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_actual_load_resistance`
+    '''
     lcr_current_amplitude = _attributes.AttributeViReal64(1150212)
     '''Type: float
 
@@ -1150,6 +1188,68 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.lcr_frequency`
     '''
+    lcr_load_compensation_enabled = _attributes.AttributeViBoolean(1150222)
+    '''Type: bool
+
+    Specifies whether to apply load LCR compensation data to LCR measurements.
+    Both the lcr_open_compensation_enabled and lcr_short_compensation_enabled properties must be set to True in order to set this property to True.
+
+    Use the lcr_open_short_load_compensation_data_source property to define where the load compensation data that is applied to LCR measurements comes from.
+
+    Note:
+    Load compensation data are applied only for those specific frequencies you define with perform_lcr_load_compensation;
+    load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.
+
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_load_compensation_enabled`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_load_compensation_enabled`
+    '''
+    lcr_measured_load_reactance = _attributes.AttributeViReal64(1150269)
+    '''Type: float
+
+    Specifies the reactance, in ohms, of the load used for load LCR compensation as measured by the instrument.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_measured_load_reactance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_measured_load_reactance`
+    '''
+    lcr_measured_load_resistance = _attributes.AttributeViReal64(1150268)
+    '''Type: float
+
+    Specifies the resistance, in ohms, of the load used for load LCR compensation as measured by the instrument.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_measured_load_resistance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_measured_load_resistance`
+    '''
     lcr_measurement_time = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRMeasurementTime, 1150218)
     '''Type: enums.LCRMeasurementTime
 
@@ -1167,6 +1267,138 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.lcr_measurement_time`
+    '''
+    lcr_open_compensation_enabled = _attributes.AttributeViBoolean(1150220)
+    '''Type: bool
+
+    Specifies whether to apply open LCR compensation data to LCR measurements.
+    Use the lcr_open_short_load_compensation_data_source property to define where the open compensation data that is applied to LCR measurements comes from.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_open_compensation_enabled`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_open_compensation_enabled`
+    '''
+    lcr_open_conductance = _attributes.AttributeViReal64(1150261)
+    '''Type: float
+
+    Specifies the conductance, in siemens, of the circuit used for open LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_open_conductance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_open_conductance`
+    '''
+    lcr_open_short_load_compensation_data_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCROpenShortLoadCompensationDataSource, 1150223)
+    '''Type: enums.LCROpenShortLoadCompensationDataSource
+
+    Specifies the source of the LCR compensation data NI-DCPower applies to LCR measurements.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_open_short_load_compensation_data_source`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_open_short_load_compensation_data_source`
+    '''
+    lcr_open_susceptance = _attributes.AttributeViReal64(1150262)
+    '''Type: float
+
+    Specifies the susceptance, in siemens, of the circuit used for open LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_open_susceptance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_open_susceptance`
+    '''
+    lcr_short_compensation_enabled = _attributes.AttributeViBoolean(1150221)
+    '''Type: bool
+
+    Specifies whether to apply short LCR compensation data to LCR measurements.
+    Use the lcr_open_short_load_compensation_data_source property to define where the short compensation data that is applied to LCR measurements comes from.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_short_compensation_enabled`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_short_compensation_enabled`
+    '''
+    lcr_short_reactance = _attributes.AttributeViReal64(1150264)
+    '''Type: float
+
+    Specifies the reactance, in ohms, of the circuit used for short LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_short_reactance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_short_reactance`
+    '''
+    lcr_short_resistance = _attributes.AttributeViReal64(1150263)
+    '''Type: float
+
+    Specifies the resistance, in ohms, of the circuit used for short LCR compensation.
+    This property applies when lcr_open_short_load_compensation_data_source is set to LCROpenShortLoadCompensationDataSource.AS_DEFINED.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_short_resistance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_short_resistance`
     '''
     lcr_source_delay_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRSourceDelayMode, 1150315)
     '''Type: enums.LCRSourceDelayMode
@@ -4970,6 +5202,114 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_ParseChannelCount(vi_ctype, channels_string_ctype, None if number_of_channels_ctype is None else (ctypes.pointer(number_of_channels_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(number_of_channels_ctype.value)
+
+    @ivi_synchronized
+    def perform_lcr_open_compensation(self, additional_frequencies=None):
+        r'''perform_lcr_open_compensation
+
+        Generates open compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.
+
+        You must physically configure an open LCR circuit to use this method to generate valid open compensation data.
+
+        When you call this method:
+
+        -  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+        -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+        To apply the open compensation data you generate with this method to your LCR measurements, set the lcr_open_compensation_enabled property to True.
+
+        Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Note:
+        Default Open Compensation Frequencies:
+        By default, NI-DCPower uses the following frequencies for LCR open compensation:
+
+        -  10 logarithmic steps at 1 kHz frequency decade
+        -  10 logarithmic steps at 10 kHz frequency decade
+        -  100 logarithmic steps at 100 kHz frequency decade
+        -  100 logarithmic steps at 1 MHz frequency decade
+
+        The actual frequencies used depend on the bandwidth of your instrument.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].perform_lcr_open_compensation`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.perform_lcr_open_compensation`
+
+        Args:
+            additional_frequencies (list of float): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
+        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies, library_type=_visatype.ViReal64)  # case B550
+        error_code = self._library.niDCPower_PerformLCROpenCompensation(vi_ctype, channel_name_ctype, num_frequencies_ctype, additional_frequencies_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def perform_lcr_short_compensation(self, additional_frequencies=None):
+        r'''perform_lcr_short_compensation
+
+        Generates short compensation data for LCR measurements based on a default set of test frequencies and, optionally, additional frequencies you can specify.
+
+        You must physically configure your LCR circuit with a short to use this method to generate valid short compensation data.
+
+        When you call this method:
+
+        -  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+        - Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+        To apply the short compensation data you generate with this method to your LCR measurements, set the lcr_short_compensation_enabled property to True.
+
+        Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Note:
+        Default Short Compensation Frequencies:
+        By default, NI-DCPower uses the following frequencies for LCR short compensation:
+
+        -  10 logarithmic steps at 1 kHz frequency decade
+        -  10 logarithmic steps at 10 kHz frequency decade
+        -  100 logarithmic steps at 100 kHz frequency decade
+        -  100 logarithmic steps at 1 MHz frequency decade
+
+        The actual frequencies used depend on the bandwidth of your instrument.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].perform_lcr_short_compensation`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.perform_lcr_short_compensation`
+
+        Args:
+            additional_frequencies (list of float): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
+        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies, library_type=_visatype.ViReal64)  # case B550
+        error_code = self._library.niDCPower_PerformLCRShortCompensation(vi_ctype, channel_name_ctype, num_frequencies_ctype, additional_frequencies_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     @ivi_synchronized
     def query_in_compliance(self):

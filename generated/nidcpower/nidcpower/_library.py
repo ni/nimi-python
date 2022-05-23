@@ -55,6 +55,8 @@ class Library(object):
         self.niDCPower_Measure_cfunc = None
         self.niDCPower_MeasureMultiple_cfunc = None
         self.niDCPower_ParseChannelCount_cfunc = None
+        self.niDCPower_PerformLCROpenCompensation_cfunc = None
+        self.niDCPower_PerformLCRShortCompensation_cfunc = None
         self.niDCPower_QueryInCompliance_cfunc = None
         self.niDCPower_QueryLatchedOutputCutoffState_cfunc = None
         self.niDCPower_QueryMaxCurrentLimit_cfunc = None
@@ -372,6 +374,22 @@ class Library(object):
                 self.niDCPower_ParseChannelCount_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViUInt32)]  # noqa: F405
                 self.niDCPower_ParseChannelCount_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ParseChannelCount_cfunc(vi, channels_string, number_of_channels)
+
+    def niDCPower_PerformLCROpenCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_PerformLCROpenCompensation_cfunc is None:
+                self.niDCPower_PerformLCROpenCompensation_cfunc = self._get_library_function('niDCPower_PerformLCROpenCompensation')
+                self.niDCPower_PerformLCROpenCompensation_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_PerformLCROpenCompensation_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_PerformLCROpenCompensation_cfunc(vi, channel_name, num_frequencies, additional_frequencies)
+
+    def niDCPower_PerformLCRShortCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_PerformLCRShortCompensation_cfunc is None:
+                self.niDCPower_PerformLCRShortCompensation_cfunc = self._get_library_function('niDCPower_PerformLCRShortCompensation')
+                self.niDCPower_PerformLCRShortCompensation_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_PerformLCRShortCompensation_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_PerformLCRShortCompensation_cfunc(vi, channel_name, num_frequencies, additional_frequencies)
 
     def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
         with self._func_lock:

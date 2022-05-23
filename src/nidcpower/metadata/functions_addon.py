@@ -11,9 +11,7 @@ functions_override_metadata = {
     "GetLastLCRCompensationLastDateAndTime": {"codegen_method": "no"},
     "MeasureMultipleLCR": {"codegen_method": "no"},
     "PerformLCRLoadCompensation": {"codegen_method": "no"},
-    "PerformLCROpenCompensation": {"codegen_method": "no"},
     "PerformLCROpenCustomCableCompensation": {"codegen_method": "no"},
-    "PerformLCRShortCompensation": {"codegen_method": "no"},
     "PerformLCRShortCustomCableCompensation": {"codegen_method": "no"}
 }
 
