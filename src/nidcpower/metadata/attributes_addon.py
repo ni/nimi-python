@@ -6,8 +6,6 @@ attributes_override_metadata = {
     #  subsequent smaller PRs
     1150217: {"codegen_method": "no"},
     1150278: {"codegen_method": "no"},
-    1150290: {"codegen_method": "no"},
-    1150291: {"codegen_method": "no"},
     1150299: {"codegen_method": "no"},
     1150302: {"codegen_method": "no"},
     1150314: {"codegen_method": "no"},

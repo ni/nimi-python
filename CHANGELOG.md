@@ -40,8 +40,10 @@ All notable changes to this project will be documented in this file.
                 * `instrument_mode`
                 * `lcr_actual_load_reactance`
                 * `lcr_actual_load_resistance`
+                * `lcr_automatic_level_control`
                 * `lcr_current_amplitude`
                 * `lcr_custom_measurement_time`
+                * `lcr_dc_bias_automatic_level_control`
                 * `lcr_dc_bias_current_level`
                 * `lcr_dc_bias_source`
                 * `lcr_dc_bias_voltage_level`

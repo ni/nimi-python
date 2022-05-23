@@ -1074,6 +1074,25 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.lcr_actual_load_resistance`
     '''
+    lcr_automatic_level_control = _attributes.AttributeViInt32(1150290)
+    '''Type: bool
+
+    Specifies whether the channel actively attempts to maintain a constant test voltage or current across the DUT for LCR measurements.
+    The use of voltage or current depends on the test signal you configure with the lcr_stimulus_function property.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_automatic_level_control`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_automatic_level_control`
+    '''
     lcr_current_amplitude = _attributes.AttributeViReal64(1150212)
     '''Type: float
 
@@ -1115,6 +1134,25 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.lcr_custom_measurement_time`
+    '''
+    lcr_dc_bias_automatic_level_control = _attributes.AttributeViInt32(1150291)
+    '''Type: bool
+
+    Specifies whether the channel actively maintains a constant DC bias voltage or current across the DUT for LCR measurements.
+    To use this property, you must configure a DC bias with the lcr_dc_bias_source property.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_automatic_level_control`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_dc_bias_automatic_level_control`
     '''
     lcr_dc_bias_current_level = _attributes.AttributeViReal64(1150215)
     '''Type: float
