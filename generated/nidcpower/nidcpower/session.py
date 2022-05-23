@@ -1100,6 +1100,24 @@ class _SessionBase(object):
     If you initialize NI-DCPower with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.
     If you initialize NI-DCPower with the resource descriptor, this property contains that value.
     '''
+    isolation_state = _attributes.AttributeBooleanEnum(_attributes.AttributeViInt32, 1150302, {1128: True, 1129: False})
+    '''Type: bool
+
+    Defines whether the channel is isolated.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].isolation_state`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.isolation_state`
+    '''
     lcr_actual_load_reactance = _attributes.AttributeViReal64(1150271)
     '''Type: float
 

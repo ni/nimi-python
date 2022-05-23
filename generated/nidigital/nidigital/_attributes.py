@@ -100,18 +100,27 @@ class AttributeEnum(object):
         return self._underlying_attribute.__set__(session, value.value)
 
 
-# nidcpower specific attribute type
-class AttributeIsolationState(AttributeViInt32):
-    enum_value_to_bool_map = {1128: True, 1129: False}
-    bool_to_enum_value_map = dict((value, key) for key, value in enum_value_to_bool_map.items())
+class AttributeBooleanEnum(object):
+    def __init__(
+        self,
+        underlying_attribute_meta_class,
+        attribute_id,
+        enum_value_to_bool_map
+    ):
+        self._underlying_attribute = underlying_attribute_meta_class(attribute_id)
+        self._attribute_id = attribute_id
+        self._enum_value_to_bool_map = enum_value_to_bool_map
+        self._bool_to_enum_value_map = dict(
+            (value, key) for key, value in enum_value_to_bool_map.items()
+        )
 
     def __get__(self, session, session_type):
-        return AttributeIsolationState.enum_value_to_bool_map[
-            super().__get__(session, session_type)
+        return self._enum_value_to_bool_map[
+            self._underlying_attribute.__get__(session, session_type)
         ]
 
-    def __set__(self, session, is_isolated):
-        return super().__set__(session, AttributeIsolationState.bool_to_enum_value_map[is_isolated])
+    def __set__(self, session, value):
+        return self._underlying_attribute.__set__(session, self._bool_to_enum_value_map[value])
 
 
 # nitclk specific attribute type

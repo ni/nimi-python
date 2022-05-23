@@ -168,6 +168,8 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 %>\
     %if attributes[attribute]['enum']:
     ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute})
+    %elif 'enum_value_to_bool_map' in attributes[attribute]:
+    ${attributes[attribute]['python_name']} = _attributes.AttributeBooleanEnum(_attributes.Attribute${attributes[attribute]['type']}, ${attribute}, ${attributes[attribute]['enum_value_to_bool_map']})
     %else:
     ${attributes[attribute]['python_name']} = _attributes.${attributes[attribute]['attribute_class']}(${attribute})
     %endif
