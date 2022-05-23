@@ -4387,6 +4387,46 @@ lcr_actual_load_resistance
                 - LabVIEW Property: **LCR:Compensation:LCR Actual Load Resistance**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_ACTUAL_LOAD_RESISTANCE**
 
+lcr_automatic_level_control
+---------------------------
+
+    .. py:attribute:: lcr_automatic_level_control
+
+        Specifies whether the channel actively attempts to maintain a constant test voltage or current across the DUT for LCR measurements.
+        The use of voltage or current depends on the test signal you configure with the :py:attr:`nidcpower.Session.lcr_stimulus_function` property.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_automatic_level_control`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_automatic_level_control`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | bool       |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:AC Stimulus:Automatic Level Control**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_AUTOMATIC_LEVEL_CONTROL**
+
 lcr_current_amplitude
 ---------------------
 
@@ -4470,6 +4510,46 @@ lcr_custom_measurement_time
 
                 - LabVIEW Property: **LCR:Custom Measurement Time**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_CUSTOM_MEASUREMENT_TIME**
+
+lcr_dc_bias_automatic_level_control
+-----------------------------------
+
+    .. py:attribute:: lcr_dc_bias_automatic_level_control
+
+        Specifies whether the channel actively maintains a constant DC bias voltage or current across the DUT for LCR measurements.
+        To use this property, you must configure a DC bias with the :py:attr:`nidcpower.Session.lcr_dc_bias_source` property.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_automatic_level_control`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_dc_bias_automatic_level_control`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | bool       |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:DC Bias:Automatic Level Control**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_DC_BIAS_AUTOMATIC_LEVEL_CONTROL**
 
 lcr_dc_bias_current_level
 -------------------------
