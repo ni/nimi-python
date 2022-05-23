@@ -2440,6 +2440,48 @@ aperture_time
                 - LabVIEW Property: **Measurement:Aperture Time**
                 - C Attribute: **NIDCPOWER_ATTR_APERTURE_TIME**
 
+aperture_time_auto_mode
+-----------------------
+
+    .. py:attribute:: aperture_time_auto_mode
+
+        Automatically optimizes the measurement aperture time according to the actual current range when measurement autorange is enabled.
+        Optimization accounts for power line frequency when the :py:attr:`nidcpower.Session.aperture_time_units` property is set to :py:data:`~nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES`.
+
+        This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE` and the :py:attr:`nidcpower.Session.autorange` property is enabled.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].aperture_time_auto_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.aperture_time_auto_mode`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ApertureTimeAutoMode |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | channels                   |
+            +-----------------------+----------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Measurement:Aperture Time Auto Mode**
+                - C Attribute: **NIDCPOWER_ATTR_APERTURE_TIME_AUTO_MODE**
+
 aperture_time_units
 -------------------
 
@@ -2597,6 +2639,45 @@ autorange_behavior
 
                 - LabVIEW Property: **Measurement:Advanced:Autorange Behavior**
                 - C Attribute: **NIDCPOWER_ATTR_AUTORANGE_BEHAVIOR**
+
+autorange_maximum_delay_after_range_change
+------------------------------------------
+
+    .. py:attribute:: autorange_maximum_delay_after_range_change
+
+        Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].autorange_maximum_delay_after_range_change`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.autorange_maximum_delay_after_range_change`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | channels                                                    |
+            +-----------------------+-------------------------------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Measurement:Advanced:Autorange Maximum Delay After Range Change**
+                - C Attribute: **NIDCPOWER_ATTR_AUTORANGE_MAXIMUM_DELAY_AFTER_RANGE_CHANGE**
 
 autorange_minimum_aperture_time
 -------------------------------

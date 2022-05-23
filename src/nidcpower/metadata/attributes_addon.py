@@ -10,10 +10,8 @@ attributes_override_metadata = {
     1150291: {"codegen_method": "no"},
     1150299: {"codegen_method": "no"},
     1150302: {"codegen_method": "no"},
-    1150314: {"codegen_method": "no"},
     1150318: {"codegen_method": "no"},
     1150319: {"codegen_method": "no"},
     1150320: {"codegen_method": "no"},
-    1150321: {"codegen_method": "no"},
-    1150322: {"codegen_method": "no"}
+    1150321: {"codegen_method": "no"}
 }

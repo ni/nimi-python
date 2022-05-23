@@ -204,6 +204,27 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.aperture_time`
     '''
+    aperture_time_auto_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeAutoMode, 1150314)
+    '''Type: enums.ApertureTimeAutoMode
+
+    Automatically optimizes the measurement aperture time according to the actual current range when measurement autorange is enabled.
+    Optimization accounts for power line frequency when the aperture_time_units property is set to ApertureTimeUnits.POWER_LINE_CYCLES.
+
+    This property is applicable only if the output_function property is set to OutputFunction.DC_VOLTAGE and the autorange property is enabled.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].aperture_time_auto_mode`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.aperture_time_auto_mode`
+    '''
     aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150059)
     '''Type: enums.ApertureTimeUnits
 
@@ -277,6 +298,24 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.autorange_behavior`
+    '''
+    autorange_maximum_delay_after_range_change = _attributes.AttributeViReal64TimeDeltaSeconds(1150322)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
+
+    Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].autorange_maximum_delay_after_range_change`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.autorange_maximum_delay_after_range_change`
     '''
     autorange_minimum_aperture_time = _attributes.AttributeViReal64(1150247)
     '''Type: float
