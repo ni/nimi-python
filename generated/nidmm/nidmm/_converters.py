@@ -13,7 +13,7 @@ from functools import singledispatch
 
 @singledispatch
 def _convert_repeated_capabilities(arg, prefix):  # noqa: F811
-    '''Base version that should not be called
+    """Base version that should not be called
 
     Overall purpose is to convert the repeated capabilities to a list of strings with prefix from what ever form
 
@@ -40,36 +40,38 @@ def _convert_repeated_capabilities(arg, prefix):  # noqa: F811
     - ('0-1', 4) --> ['0', '1', '4']
     - (slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17') -->
         ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
-    '''
-    raise errors.InvalidRepeatedCapabilityError('Invalid type', type(arg))
+    """
+    raise errors.InvalidRepeatedCapabilityError("Invalid type", type(arg))
 
 
 @_convert_repeated_capabilities.register(numbers.Integral)  # noqa: F811
 def _(repeated_capability, prefix):
-    '''Integer version'''
+    """Integer version"""
     return [str(repeated_capability)]
 
 
 # This parsing function duplicate the parsing in the driver, so if changes to the allowed format are made there, they will need to be replicated here.
 @_convert_repeated_capabilities.register(str)  # noqa: F811
 def _(repeated_capability, prefix):
-    '''String version (this is the most complex)
+    """String version (this is the most complex)
 
     We need to deal with a range ('0-3' or '0:3'), a list ('0,1,2,3') and a single item
-    '''
+    """
     # First we deal with a list
-    rep_cap_list = repeated_capability.split(',')
+    rep_cap_list = repeated_capability.split(",")
     if len(rep_cap_list) > 1:
         # We have a list so call ourselves again to let the iterable instance handle it
         return _convert_repeated_capabilities(rep_cap_list, prefix)
 
     # Now we deal with ranges
     # We remove any prefix and change ':' to '-'
-    r = repeated_capability.strip().replace(prefix, '').replace(':', '-')
-    rc = r.split('-')
+    r = repeated_capability.strip().replace(prefix, "").replace(":", "-")
+    rc = r.split("-")
     if len(rc) > 1:
         if len(rc) > 2:
-            raise errors.InvalidRepeatedCapabilityError("Multiple '-' or ':'", repeated_capability)
+            raise errors.InvalidRepeatedCapabilityError(
+                "Multiple '-' or ':'", repeated_capability
+            )
         try:
             start = int(rc[0])
             end = int(rc[1])
@@ -85,7 +87,7 @@ def _(repeated_capability, prefix):
             return _convert_repeated_capabilities(rng, prefix)
 
     # If we made it here, it must be a simple item so we remove any prefix and return
-    return [repeated_capability.replace(prefix, '').strip()]
+    return [repeated_capability.replace(prefix, "").strip()]
 
 
 # We cannot use collections.abc.Iterable here because strings are also iterable and then this
@@ -94,7 +96,7 @@ def _(repeated_capability, prefix):
 @_convert_repeated_capabilities.register(range)  # noqa: F811
 @_convert_repeated_capabilities.register(tuple)  # noqa: F811
 def _(repeated_capability, prefix):
-    '''Iterable version - can handle lists, ranges, and tuples'''
+    """Iterable version - can handle lists, ranges, and tuples"""
     rep_cap_list = []
     for r in repeated_capability:
         rep_cap_list += _convert_repeated_capabilities(r, prefix)
@@ -103,16 +105,22 @@ def _(repeated_capability, prefix):
 
 @_convert_repeated_capabilities.register(slice)  # noqa: F811
 def _(repeated_capability, prefix):
-    '''slice version'''
+    """slice version"""
+
     def ifnone(a, b):
         return b if a is None else a
+
     # Turn the slice into a list and call ourselves again to let the iterable instance handle it
-    rng = range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1))
+    rng = range(
+        ifnone(repeated_capability.start, 0),
+        repeated_capability.stop,
+        ifnone(repeated_capability.step, 1),
+    )
     return _convert_repeated_capabilities(rng, prefix)
 
 
-def convert_repeated_capabilities(repeated_capability, prefix=''):
-    '''Convert a repeated capabilities object to a comma delimited list
+def convert_repeated_capabilities(repeated_capability, prefix=""):
+    """Convert a repeated capabilities object to a comma delimited list
 
     Args:
         repeated_capability (str, list, tuple, slice, None) -
@@ -120,15 +128,17 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
 
     Returns:
         rep_cap_list (list of str) - list of each repeated capability item with ranges expanded and prefix added
-    '''
+    """
     # We need to explicitly handle None here. Everything else we can pass on to the singledispatch functions
     if repeated_capability is None:
         return []
-    return [prefix + r for r in _convert_repeated_capabilities(repeated_capability, prefix)]
+    return [
+        prefix + r for r in _convert_repeated_capabilities(repeated_capability, prefix)
+    ]
 
 
 def convert_repeated_capabilities_without_prefix(repeated_capability):
-    '''Convert a repeated capabilities object, without any prefix, to a comma delimited list
+    """Convert a repeated capabilities object, without any prefix, to a comma delimited list
 
     Args:
         repeated_capability - Supported types:
@@ -144,8 +154,8 @@ def convert_repeated_capabilities_without_prefix(repeated_capability):
 
     Returns:
         rep_cap (str) - comma delimited string of each repeated capability item with ranges expanded
-    '''
-    return ','.join(convert_repeated_capabilities(repeated_capability, ''))
+    """
+    return ",".join(convert_repeated_capabilities(repeated_capability, ""))
 
 
 def _convert_timedelta(value, library_type, scaling):
@@ -158,7 +168,14 @@ def _convert_timedelta(value, library_type, scaling):
         scaled_value = float(value) * scaling
 
     # ctype integer types don't convert to int from float so we need to
-    if library_type in [_visatype.ViInt64, _visatype.ViInt32, _visatype.ViUInt32, _visatype.ViInt16, _visatype.ViUInt16, _visatype.ViInt8]:
+    if library_type in [
+        _visatype.ViInt64,
+        _visatype.ViInt32,
+        _visatype.ViUInt32,
+        _visatype.ViInt16,
+        _visatype.ViUInt16,
+        _visatype.ViInt8,
+    ]:
         scaled_value = int(scaled_value)
 
     return library_type(scaled_value)
@@ -195,34 +212,36 @@ def convert_init_with_options_dictionary(values):
         init_with_options_string = values
     else:
         good_keys = {
-            'rangecheck': 'RangeCheck',
-            'queryinstrstatus': 'QueryInstrStatus',
-            'cache': 'Cache',
-            'simulate': 'Simulate',
-            'recordcoercions': 'RecordCoercions',
-            'interchangecheck': 'InterchangeCheck',
-            'driversetup': 'DriverSetup',
-            'range_check': 'RangeCheck',
-            'query_instr_status': 'QueryInstrStatus',
-            'record_coercions': 'RecordCoercions',
-            'interchange_check': 'InterchangeCheck',
-            'driver_setup': 'DriverSetup',
+            "rangecheck": "RangeCheck",
+            "queryinstrstatus": "QueryInstrStatus",
+            "cache": "Cache",
+            "simulate": "Simulate",
+            "recordcoercions": "RecordCoercions",
+            "interchangecheck": "InterchangeCheck",
+            "driversetup": "DriverSetup",
+            "range_check": "RangeCheck",
+            "query_instr_status": "QueryInstrStatus",
+            "record_coercions": "RecordCoercions",
+            "interchange_check": "InterchangeCheck",
+            "driver_setup": "DriverSetup",
         }
         init_with_options = []
         for k in sorted(values.keys()):
             value = None
-            if k.lower() in good_keys and not good_keys[k.lower()] == 'DriverSetup':
-                value = good_keys[k.lower()] + ('=1' if values[k] is True else '=0')
-            elif k.lower() in good_keys and good_keys[k.lower()] == 'DriverSetup':
+            if k.lower() in good_keys and not good_keys[k.lower()] == "DriverSetup":
+                value = good_keys[k.lower()] + ("=1" if values[k] is True else "=0")
+            elif k.lower() in good_keys and good_keys[k.lower()] == "DriverSetup":
                 if not isinstance(values[k], dict):
-                    raise TypeError('DriverSetup must be a dictionary')
-                value = 'DriverSetup=' + (';'.join([key + ':' + values[k][key] for key in sorted(values[k])]))
+                    raise TypeError("DriverSetup must be a dictionary")
+                value = "DriverSetup=" + (
+                    ";".join([key + ":" + values[k][key] for key in sorted(values[k])])
+                )
             else:
-                value = k + ('=1' if values[k] is True else '=0')
+                value = k + ("=1" if values[k] is True else "=0")
 
             init_with_options.append(value)
 
-        init_with_options_string = ','.join(init_with_options)
+        init_with_options_string = ",".join(init_with_options)
 
     return init_with_options_string
 
@@ -251,11 +270,11 @@ def convert_to_bytes(value):  # noqa: F811
 
 
 def convert_comma_separated_string_to_list(comma_separated_string):
-    return [x.strip() for x in comma_separated_string.split(',')]
+    return [x.strip() for x in comma_separated_string.split(",")]
 
 
 def convert_chained_repeated_capability_to_parts(chained_repeated_capability):
-    '''Convert a chained repeated capabilities string to a list of comma-delimited repeated capabilities string.
+    """Convert a chained repeated capabilities string to a list of comma-delimited repeated capabilities string.
 
     Converter assumes that the input contains the full cartesian product of its parts.
     e.g. If chained_repeated_capability is 'site0/PinA,site0/PinB,site1/PinA,site1/PinB',
@@ -267,11 +286,17 @@ def convert_chained_repeated_capability_to_parts(chained_repeated_capability):
 
     Returns:
         rep_cap_list (list of str) - list of comma-delimited repeated capabilities string
-    '''
-    chained_repeated_capability_items = convert_comma_separated_string_to_list(chained_repeated_capability)
-    repeated_capability_lists = [[] for _ in range(chained_repeated_capability_items[0].count('/') + 1)]
+    """
+    chained_repeated_capability_items = convert_comma_separated_string_to_list(
+        chained_repeated_capability
+    )
+    repeated_capability_lists = [
+        [] for _ in range(chained_repeated_capability_items[0].count("/") + 1)
+    ]
     for item in chained_repeated_capability_items:
-        repeated_capability_lists = [x + [y] for x, y in zip(repeated_capability_lists, item.split('/'))]
-    return [','.join(collections.OrderedDict.fromkeys(x)) for x in repeated_capability_lists]
-
-
+        repeated_capability_lists = [
+            x + [y] for x, y in zip(repeated_capability_lists, item.split("/"))
+        ]
+    return [
+        ",".join(collections.OrderedDict.fromkeys(x)) for x in repeated_capability_lists
+    ]
