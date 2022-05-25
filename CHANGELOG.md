@@ -67,11 +67,8 @@ All notable changes to this project will be documented in this file.
                 * `lcr_stimulus_function`
                 * `lcr_voltage_amplitude`
             * Enums added:
-<<<<<<< HEAD
                 * `ApertureTimeAutoMode`
-=======
                 * `CableLength`
->>>>>>> dd8c8244 (NI-DCPower: Enable LCR custom compensation metadata)
                 * `InstrumentMode`
                 * `LCRCompensationType`
                 * `LCRDCBiasSource`
