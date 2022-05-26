@@ -744,3 +744,54 @@ def test_perform_lcr_short_compensation(session, additional_frequencies):
         nidcpower.Session.perform_lcr_short_compensation(session)
     else:
         nidcpower.Session.perform_lcr_short_compensation(session, additional_frequencies)
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+@pytest.mark.parametrize(
+    "compensation_function",
+    [
+        nidcpower.Session.perform_lcr_open_custom_cable_compensation,
+        nidcpower.Session.perform_lcr_short_custom_cable_compensation,
+    ],
+)
+def test_perform_lcr_open_short_custom_cable_compensation(session, compensation_function):
+    compensation_function(session)
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_lcr_custom_cable_compensation_data(session):
+    compensation_data = session.get_lcr_custom_cable_compensation_data()
+    session.configure_lcr_custom_cable_compensation(compensation_data)
+
+    session.configure_lcr_custom_cable_compensation(list(compensation_data))
+
+    session.configure_lcr_custom_cable_compensation(bytes(compensation_data))
+
+    with tempfile.NamedTemporaryFile(suffix='.bin', delete=False) as temp_file:
+        temp_file.write(compensation_data)
+    with open(temp_file.name, 'rb') as reopened_temp_file:
+        compensation_data_bytes_from_file = reopened_temp_file.read()
+    session.configure_lcr_custom_cable_compensation(compensation_data_bytes_from_file)
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+@pytest.mark.parametrize(
+    "compensation_type",
+    [
+        nidcpower.LCRCompensationType.OPEN_CUSTOM_CABLE,
+        nidcpower.LCRCompensationType.SHORT_CUSTOM_CABLE,
+        nidcpower.LCRCompensationType.OPEN,
+        nidcpower.LCRCompensationType.SHORT,
+        nidcpower.LCRCompensationType.LOAD,
+    ],
+)
+def test_get_lcr_compensation_last_date_and_time(session, compensation_type):
+    last_compensation_datetime = session.get_lcr_compensation_last_date_and_time(compensation_type)
+    assert last_compensation_datetime.year == 1940
+    assert last_compensation_datetime.month == 3
+    assert last_compensation_datetime.day == 1
+    assert last_compensation_datetime.hour == 0
+    assert last_compensation_datetime.minute == 0

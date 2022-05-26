@@ -39,6 +39,7 @@ All notable changes to this project will be documented in this file.
             * Properties added:
                 * `aperture_time_auto_mode`
                 * `autorange_maximum_delay_after_range_change`
+                * `cable_length`
                 * `instrument_mode`
                 * `lcr_actual_load_reactance`
                 * `lcr_actual_load_resistance`
@@ -59,6 +60,7 @@ All notable changes to this project will be documented in this file.
                 * `lcr_open_short_load_compensation_data_source`
                 * `lcr_open_susceptance`
                 * `lcr_short_compensation_enabled`
+                * `lcr_short_custom_cable_compensation_enabled`
                 * `lcr_short_reactance`
                 * `lcr_short_resistance`
                 * `lcr_source_delay_mode`
@@ -66,15 +68,22 @@ All notable changes to this project will be documented in this file.
                 * `lcr_voltage_amplitude`
             * Enums added:
                 * `ApertureTimeAutoMode`
+                * `CableLength`
                 * `InstrumentMode`
+                * `LCRCompensationType`
                 * `LCRDCBiasSource`
                 * `LCRMeasurementTime`
                 * `LCROpenShortLoadCompensationDataSource`
                 * `LCRSourceDelayMode`
                 * `LCRStimulusFunction`
             * Methods added:
+                * `configure_lcr_custom_cable_compensation`
+                * `get_lcr_compensation_last_date_and_time`
+                * `get_lcr_custom_cable_compensation_data`
                 * `perform_lcr_open_compensation`
+                * `perform_lcr_open_custom_cable_compensation`
                 * `perform_lcr_short_compensation`
+                * `perform_lcr_short_custom_cable_compensation`
     * #### Changed
         * Updated supported devices information in documentation for methods and properties
     * #### Removed

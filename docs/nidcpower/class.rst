@@ -376,6 +376,50 @@ configure_aperture_time
 
             :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
+configure_lcr_custom_cable_compensation
+---------------------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: configure_lcr_custom_cable_compensation(custom_cable_compensation_data)
+
+            Applies previously generated open and short custom cable compensation data to LCR measurements.
+
+            This method applies custom cable compensation data when you have set :py:attr:`nidcpower.Session.cable_length` property to :py:data:`~nidcpower.CableLength.CUSTOM_AS_CONFIGURED`.
+
+            Call this method after you have obtained custom cable compensation data.
+
+            If :py:attr:`nidcpower.Session.lcr_short_custom_cable_compensation_enabled` property is set to True, you must generate data with both :py:meth:`nidcpower.Session.perform_lcr_open_custom_cable_compensation` and :py:meth:`nidcpower.Session.perform_lcr_short_custom_cable_compensation`;
+            if False, you must only use :py:meth:`nidcpower.Session.perform_lcr_open_custom_cable_compensation`, and NI-DCPower uses default short data.
+
+            Call :py:meth:`nidcpower.Session.get_lcr_custom_cable_compensation_data` and pass the **custom cable compensation data** to this method.
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].configure_lcr_custom_cable_compensation`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.configure_lcr_custom_cable_compensation`
+
+
+            :param custom_cable_compensation_data:
+
+
+                The open and short custom cable compensation data to apply.
+
+                
+
+
+            :type custom_cable_compensation_data: bytes
+
 create_advanced_sequence
 ------------------------
 
@@ -1096,6 +1140,88 @@ get_ext_cal_recommended_interval
 
 
 
+get_lcr_compensation_last_date_and_time
+---------------------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: get_lcr_compensation_last_date_and_time(compensation_type)
+
+            Returns the date and time the specified type of compensation data for LCR measurements was most recently generated.
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_lcr_compensation_last_date_and_time`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.get_lcr_compensation_last_date_and_time`
+
+
+            :param compensation_type:
+
+
+                Specifies the type of compensation for LCR measurements.
+
+                
+
+
+            :type compensation_type: :py:data:`nidcpower.LCRCompensationType`
+
+            :rtype: hightime.datetime
+            :return:
+
+
+                    Returns the date and time the specified type of compensation data for LCR measurements was most recently generated.
+
+                    
+
+
+
+get_lcr_custom_cable_compensation_data
+--------------------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: get_lcr_custom_cable_compensation_data()
+
+            Collects previously generated open and short custom cable compensation data so you can then apply it to LCR measurements with :py:meth:`nidcpower.Session.configure_lcr_custom_cable_compensation`.
+
+            Call this method after you have obtained open and short custom cable compensation data. Pass the **custom cable compensation data** to :py:meth:`nidcpower.Session.configure_lcr_custom_cable_compensation`
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_lcr_custom_cable_compensation_data`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.get_lcr_custom_cable_compensation_data`
+
+
+            :rtype: bytes
+            :return:
+
+
+                    The open and short custom cable compensation data to retrieve.
+
+                    
+
+
+
 get_self_cal_last_date_and_time
 -------------------------------
 
@@ -1526,6 +1652,38 @@ perform_lcr_open_compensation
 
             :type additional_frequencies: list of float
 
+perform_lcr_open_custom_cable_compensation
+------------------------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: perform_lcr_open_custom_cable_compensation()
+
+            Generates open custom cable compensation data for LCR measurements.
+
+            To use this method, you must physically configure an open LCR circuit to generate valid open custom cable compensation data.
+
+            When you call this method:
+
+            -  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+            -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].perform_lcr_open_custom_cable_compensation`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.perform_lcr_open_custom_cable_compensation`
+
+
 perform_lcr_short_compensation
 ------------------------------
 
@@ -1581,6 +1739,41 @@ perform_lcr_short_compensation
 
 
             :type additional_frequencies: list of float
+
+perform_lcr_short_custom_cable_compensation
+-------------------------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: perform_lcr_short_custom_cable_compensation()
+
+            Generates short custom cable compensation data for LCR measurements.
+
+            To use this method:
+
+            -  You must physically configure your LCR circuit with a short to generate valid short custom cable compensation data.
+            -  Set :py:attr:`nidcpower.Session.lcr_short_custom_cable_compensation_enabled` property to True
+
+            When you call this method:
+
+            -  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+            -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].perform_lcr_short_custom_cable_compensation`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.perform_lcr_short_custom_cable_compensation`
+
 
 query_in_compliance
 -------------------
@@ -2943,6 +3136,52 @@ auxiliary_power_source_available
 
                 - LabVIEW Property: **Advanced:Auxiliary Power Source Available**
                 - C Attribute: **NIDCPOWER_ATTR_AUXILIARY_POWER_SOURCE_AVAILABLE**
+
+cable_length
+------------
+
+    .. py:attribute:: cable_length
+
+        Specifies how to apply cable compensation data for instruments that support LCR functionality.
+        Supported instruments use cable compensation for the following operations:
+
+        SMU mode: to stabilize DC current sourcing in the two smallest current ranges.
+        LCR mode: to compensate for the effects of cabling on LCR measurements.
+
+        For NI standard options, select the length of your NI cable to apply compensation data for a typical cable of that type.
+        For custom options, choose the source of the custom cable compensation data. You must then generate the custom cable compensation data.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].cable_length`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.cable_length`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------+
+            | Characteristic        | Value             |
+            +=======================+===================+
+            | Datatype              | enums.CableLength |
+            +-----------------------+-------------------+
+            | Permissions           | read-write        |
+            +-----------------------+-------------------+
+            | Repeated Capabilities | channels          |
+            +-----------------------+-------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Device Specific:LCR:Cable Length**
+                - C Attribute: **NIDCPOWER_ATTR_CABLE_LENGTH**
 
 channel_count
 -------------
@@ -5069,6 +5308,53 @@ lcr_short_compensation_enabled
 
                 - LabVIEW Property: **LCR:Compensation:Short:Enabled**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_SHORT_COMPENSATION_ENABLED**
+
+lcr_short_custom_cable_compensation_enabled
+-------------------------------------------
+
+    .. py:attribute:: lcr_short_custom_cable_compensation_enabled
+
+        Defines how to apply short custom cable compensation in LCR mode when :py:attr:`nidcpower.Session.cable_length` property is set to :py:data:`~nidcpower.CableLength.CUSTOM_ONBOARD_STORAGE` or :py:data:`~nidcpower.CableLength.CUSTOM_AS_CONFIGURED`.
+
+        LCR custom cable compensation uses compensation data for both an open and short configuration.
+        For open custom cable compensation, you must supply your own data from a call to :py:meth:`nidcpower.Session.perform_lcr_open_custom_cable_compensation`.
+        For short custom cable compensation, you can supply your own data from a call to :py:meth:`nidcpower.Session.perform_lcr_short_custom_cable_compensation` or NI-DCPower can apply a default set of short compensation data.
+
+        +-------+----------------------------------------------------------------------------------------------------------------------------------+
+        | False | Uses default short compensation data.                                                                                            |
+        +-------+----------------------------------------------------------------------------------------------------------------------------------+
+        | True  | Uses short custom cable compensation data generated by :py:meth:`nidcpower.Session.perform_lcr_short_custom_cable_compensation`. |
+        +-------+----------------------------------------------------------------------------------------------------------------------------------+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_short_custom_cable_compensation_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_short_custom_cable_compensation_enabled`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | bool       |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:LCR Short Custom Cable Compensation Enabled**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED**
 
 lcr_short_reactance
 -------------------

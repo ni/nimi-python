@@ -226,6 +226,101 @@ AutorangeThresholdMode
 
 
 
+CableLength
+-----------
+
+.. py:class:: CableLength
+
+    .. py:attribute:: CableLength.ZERO_M
+
+
+
+        Uses predefined cable compensation data for a 0m cable (direct connection).
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_1M
+
+
+
+        Uses predefined cable compensation data for an NI standard 1m coaxial cable.
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_2M
+
+
+
+        Uses predefined cable compensation data for an NI standard 2m coaxial cable.
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_4M
+
+
+
+        Uses predefined cable compensation data for an NI standard 4m coaxial cable.
+
+        
+
+
+
+    .. py:attribute:: CableLength.CUSTOM_ONBOARD_STORAGE
+
+
+
+        Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.
+
+        
+
+
+
+    .. py:attribute:: CableLength.CUSTOM_AS_CONFIGURED
+
+
+
+        Uses the custom cable compensation data supplied to :py:meth:`nidcpower.Session.configure_lcr_custom_cable_compensation`. Use this option to manage multiple sets of custom cable compensation data.
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_TRIAXIAL_1M
+
+
+
+        Uses predefined cable compensation data for an NI standard 1m triaxial cable.
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_TRIAXIAL_2M
+
+
+
+        Uses predefined cable compensation data for an NI standard 2m triaxial cable.
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_TRIAXIAL_4M
+
+
+
+        Uses predefined cable compensation data for an NI standard 4m triaxial cable.
+
+        
+
+
+
 ComplianceLimitSymmetry
 -----------------------
 
@@ -325,6 +420,61 @@ InstrumentMode
 
 
         The channel operates as an LCR meter.
+
+        
+
+
+
+LCRCompensationType
+-------------------
+
+.. py:class:: LCRCompensationType
+
+    .. py:attribute:: LCRCompensationType.OPEN
+
+
+
+        Open LCR compensation.
+
+        
+
+
+
+    .. py:attribute:: LCRCompensationType.SHORT
+
+
+
+        Short LCR compensation.
+
+        
+
+
+
+    .. py:attribute:: LCRCompensationType.LOAD
+
+
+
+        Load LCR compensation.
+
+        
+
+
+
+    .. py:attribute:: LCRCompensationType.OPEN_CUSTOM_CABLE
+
+
+
+        Open custom cable compensation.
+
+        
+
+
+
+    .. py:attribute:: LCRCompensationType.SHORT_CUSTOM_CABLE
+
+
+
+        Short custom cable compensation.
 
         
 
