@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.0.0d216
+# This file is generated from NI-DCPower API metadata version 22.0.0d245
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -1747,7 +1747,7 @@ attributes = {
     1150217: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the impedance range the channel uses for LCR measurements.\n',
+            'description': '\nSpecifies the impedance range the channel uses for LCR measurements.\n\nValid Values: 0 ohms to +inf ohms\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:Impedance Range:Impedance Range',
@@ -2349,7 +2349,7 @@ attributes = {
     1150318: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the load resistance, in ohms and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.',
+            'description': '\nSpecifies the load resistance, in ohms and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.\n\nValid Values: 0 ohms to +inf ohms\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:Impedance Range:Advanced:Load Resistance',
@@ -2362,7 +2362,7 @@ attributes = {
     1150319: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the load inductance, in henrys and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.',
+            'description': '\nSpecifies the load inductance, in henrys and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.\n\nValid Values: 0 henrys to +inf henrys\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:Impedance Range:Advanced:Load Inductance',
@@ -2375,7 +2375,7 @@ attributes = {
     1150320: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the load capacitance, in farads and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.',
+            'description': '\nSpecifies the load capacitance, in farads and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.\n\nValid Values: (0 farads, +inf farads).\n0 is a special value that signifies +inf farads.\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:Impedance Range:Advanced:Load Capacitance',
