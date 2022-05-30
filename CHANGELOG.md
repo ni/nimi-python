@@ -41,6 +41,7 @@ All notable changes to this project will be documented in this file.
                 * `autorange_maximum_delay_after_range_change`
                 * `cable_length`
                 * `instrument_mode`
+                * `isolation_state`
                 * `lcr_actual_load_reactance`
                 * `lcr_actual_load_resistance`
                 * `lcr_automatic_level_control`
@@ -76,6 +77,7 @@ All notable changes to this project will be documented in this file.
                 * `LCROpenShortLoadCompensationDataSource`
                 * `LCRSourceDelayMode`
                 * `LCRStimulusFunction`
+                * `_IsolationState`
             * Methods added:
                 * `configure_lcr_custom_cable_compensation`
                 * `get_lcr_compensation_last_date_and_time`
