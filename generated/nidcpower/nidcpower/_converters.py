@@ -275,3 +275,25 @@ def convert_chained_repeated_capability_to_parts(chained_repeated_capability):
     return [','.join(collections.OrderedDict.fromkeys(x)) for x in repeated_capability_lists]
 
 
+# Getter converter for _IsolationState
+___isolation_state_enum_value_to_converted_value_dict = {
+    1128: True,
+    1129: False,
+}
+
+
+def convert_from___isolation_state_enum_value(enum_value):
+    return ___isolation_state_enum_value_to_converted_value_dict[enum_value]
+
+
+# Setter converter for _IsolationState
+___isolation_state_converted_value_to_enum_value_dict = {
+    True: 1128,
+    False: 1129,
+}
+
+
+def convert_to___isolation_state_enum_value(value):
+    return ___isolation_state_converted_value_to_enum_value_dict[value]
+
+

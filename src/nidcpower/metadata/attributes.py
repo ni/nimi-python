@@ -2309,10 +2309,7 @@ attributes = {
             'description': '\nDefines whether the channel is isolated.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
-        'enum_value_to_bool_map': {
-            1128: True,
-            1129: False
-        },
+        'enum': 'IsolationState',
         'lv_property': 'Advanced:Isolation State',
         'name': 'ISOLATION_STATE',
         'supported_rep_caps': [

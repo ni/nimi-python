@@ -100,27 +100,24 @@ class AttributeEnum(object):
         return self._underlying_attribute.__set__(session, value.value)
 
 
-class AttributeBooleanEnum(object):
+class AttributeEnumWithConverters(AttributeEnum):
     def __init__(
         self,
         underlying_attribute_meta_class,
+        enum_meta_class,
         attribute_id,
-        enum_value_to_bool_map
+        getter_converter,
+        setter_converter
     ):
-        self._underlying_attribute = underlying_attribute_meta_class(attribute_id)
-        self._attribute_id = attribute_id
-        self._enum_value_to_bool_map = enum_value_to_bool_map
-        self._bool_to_enum_value_map = dict(
-            (value, key) for key, value in enum_value_to_bool_map.items()
-        )
+        super().__init__(underlying_attribute_meta_class, enum_meta_class, attribute_id)
+        self._getter_converter = getter_converter
+        self._setter_converter = setter_converter
 
     def __get__(self, session, session_type):
-        return self._enum_value_to_bool_map[
-            self._underlying_attribute.__get__(session, session_type)
-        ]
+        return self._getter_converter(super().__get__(session, session_type).value)
 
     def __set__(self, session, value):
-        return self._underlying_attribute.__set__(session, self._bool_to_enum_value_map[value])
+        return super().__set__(session, super()._attribute_type(self._setter_converter(value)))
 
 
 # nitclk specific attribute type

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.0.0d216
+# This file is generated from NI-DCPower API metadata version 22.0.0d9999
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -428,6 +428,29 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_LCR',
                 'value': 1062
+            }
+        ]
+    },
+    'IsolationState': {
+        'codegen_method': 'private',
+        'has_converters': True,
+        'python_name': '_IsolationState',
+        'values': [
+            {
+                'converted_value': True,
+                'documentation': {
+                    'description': 'The channel is disconnected from chassis ground.'
+                },
+                'name': 'NIDCPOWER_VAL_ISOLATED',
+                'value': 1128
+            },
+            {
+                'converted_value': False,
+                'documentation': {
+                    'description': 'The channel is connected to chassis ground.'
+                },
+                'name': 'NIDCPOWER_VAL_NON_ISOLATED',
+                'value': 1129
             }
         ]
     },

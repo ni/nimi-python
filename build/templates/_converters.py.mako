@@ -1,9 +1,11 @@
 ${template_parameters['encoding_tag']}
 # This file was generated
 <%
+    import build.helper as helper
     config = template_parameters['metadata'].config
     module_name = config['module_name']
     extra_errors_used = config['extra_errors_used']
+    enums = config['enums']
 %>\
 import ${module_name}._visatype as _visatype
 import ${module_name}.errors as errors
@@ -324,3 +326,50 @@ def convert_double_each_element(numbers):
 
 
 % endif
+% for enum_name in sorted(helper.filter_codegen_enums(enums)):
+    % if enums[enum_name].get('has_converters', False):
+<%
+    enum_name_in_snakecase = helper.camelcase_to_snakecase(enums[enum_name]['python_name'])
+%>\
+# Getter converter for ${enums[enum_name]['python_name']}
+_${enum_name_in_snakecase}_enum_value_to_converted_value_dict = {
+        % for enum_value in enums[enum_name]['values']:
+<%
+    dict_key = (
+        "'{}'" if type(enum_value['value']) is str else "{}"
+    ).format(enum_value['value'])
+    dict_value = (
+        "'{}'" if type(enum_value['converted_value']) is str else "{}"
+    ).format(enum_value['converted_value'])
+%>\
+    ${dict_key}: ${dict_value},
+        % endfor
+}
+
+
+def convert_from_${enum_name_in_snakecase}_enum_value(enum_value):
+    return _${enum_name_in_snakecase}_enum_value_to_converted_value_dict[enum_value]
+
+
+# Setter converter for ${enums[enum_name]['python_name']}
+_${enum_name_in_snakecase}_converted_value_to_enum_value_dict = {
+        % for enum_value in enums[enum_name]['values']:
+<%
+    dict_key = (
+        "'{}'" if type(enum_value['converted_value']) is str else "{}"
+    ).format(enum_value['converted_value'])
+    dict_value = (
+        "'{}'" if type(enum_value['value']) is str else "{}"
+    ).format(enum_value['value'])
+%>\
+    ${dict_key}: ${dict_value},
+        % endfor
+}
+
+
+def convert_to_${enum_name_in_snakecase}_enum_value(value):
+    return _${enum_name_in_snakecase}_converted_value_to_enum_value_dict[value]
+
+
+    % endif
+% endfor

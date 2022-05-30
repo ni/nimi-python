@@ -425,6 +425,31 @@ InstrumentMode
 
 
 
+_IsolationState
+---------------
+
+.. py:class:: _IsolationState
+
+    .. py:attribute:: IsolationState.ISOLATED
+
+
+
+        The channel is disconnected from chassis ground.
+
+        
+
+
+
+    .. py:attribute:: IsolationState.NON_ISOLATED
+
+
+
+        The channel is connected to chassis ground.
+
+        
+
+
+
 LCRCompensationType
 -------------------
 
