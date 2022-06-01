@@ -100,7 +100,7 @@ class AttributeEnum(object):
         return self._underlying_attribute.__set__(session, value.value)
 
 
-class AttributeEnumWithConverters(AttributeEnum):
+class AttributeEnumWithConverter(AttributeEnum):
     def __init__(
         self,
         underlying_attribute_meta_class,
@@ -117,7 +117,7 @@ class AttributeEnumWithConverters(AttributeEnum):
         return self._getter_converter(super().__get__(session, session_type).value)
 
     def __set__(self, session, value):
-        return super().__set__(session, super()._attribute_type(self._setter_converter(value)))
+        return super().__set__(session, self._attribute_type(self._setter_converter(value)))
 
 
 # nitclk specific attribute type

@@ -167,8 +167,8 @@ class _SessionBase(object):
 helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 %>\
     %if attributes[attribute]['enum']:
-        %if enums[attributes[attribute]['enum']].get('has_converters', False):
-    ${attributes[attribute]['python_name']} = _attributes.AttributeEnumWithConverters(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute}, _converters.convert_from_${helper.camelcase_to_snakecase(enums[attributes[attribute]['enum']]['python_name'])}_enum_value, _converters.convert_to_${helper.camelcase_to_snakecase(enums[attributes[attribute]['enum']]['python_name'])}_enum_value)
+        %if enums[attributes[attribute]['enum']].get('use_converter', False):
+    ${attributes[attribute]['python_name']} = _attributes.AttributeEnumWithConverter(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute}, _converters.convert_from_${helper.camelcase_to_snakecase(enums[attributes[attribute]['enum']]['python_name'])}_enum_value, _converters.convert_to_${helper.camelcase_to_snakecase(enums[attributes[attribute]['enum']]['python_name'])}_enum_value)
         %else:
     ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute})
         %endif

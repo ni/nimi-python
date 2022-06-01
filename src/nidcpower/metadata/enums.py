@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.0.0d9999
+# This file is generated from NI-DCPower API metadata version 22.5.0d9999
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -433,11 +433,10 @@ enums = {
     },
     'IsolationState': {
         'codegen_method': 'private',
-        'has_converters': True,
-        'python_name': '_IsolationState',
+        'use_converter': True,
         'values': [
             {
-                'converted_value': True,
+                'converts_to_value': True,
                 'documentation': {
                     'description': 'The channel is disconnected from chassis ground.'
                 },
@@ -445,7 +444,7 @@ enums = {
                 'value': 1128
             },
             {
-                'converted_value': False,
+                'converts_to_value': False,
                 'documentation': {
                     'description': 'The channel is connected to chassis ground.'
                 },

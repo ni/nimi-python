@@ -100,7 +100,7 @@ class AttributeEnum(object):
         return self._underlying_attribute.__set__(session, value.value)
 
 
-class AttributeEnumWithConverters(AttributeEnum):
+class AttributeEnumWithConverter(AttributeEnum):
     def __init__(
         self,
         underlying_attribute_meta_class,

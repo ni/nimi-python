@@ -441,11 +441,17 @@ def add_all_attribute_metadata(attributes, config):
 def _add_enum_codegen_method(enums, config):
     '''Adds 'codegen_method' that will determine whether and how the enum is code genned. Default is public
 
-    Set all to 'no', then go through all functions and attributes and set to least restrictive use
+    Set all to 'no', then go through all functions and attributes and set to least restrictive use.
+    If the 'codegen_method' of an enum has been explicitly set to a value other than 'public' and it
+    is used by a 'public'/'python-only' function or 'public' attribute, a ValueError would be thrown
     '''
+    enum_to_has_explicit_codegen_method = {}
     for e in enums:
         if 'codegen_method' not in enums[e]:
             enums[e]['codegen_method'] = 'no'
+            enum_to_has_explicit_codegen_method[e] = False
+        else:
+            enum_to_has_explicit_codegen_method[e] = True
 
     # Iterate through all codegen functions and set any enum parameters to the same level
     for f in filter_codegen_functions(config['functions']):
@@ -458,8 +464,16 @@ def _add_enum_codegen_method(enums, config):
                 elif e is not None:
                     if f_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
                         enums[e]['codegen_method'] = f_codegen_method
-                    elif f_codegen_method == 'public' or f_codegen_method == 'python-only':
-                        enums[e]['codegen_method'] = 'public'
+                    elif f_codegen_method in ('public', 'python-only') and enums[e]['codegen_method'] != 'public':
+                        if enum_to_has_explicit_codegen_method[e]:
+                            if not enums[e].get('use_converter', False):
+                                raise ValueError(
+                                    "Public / python-only function {} cannot use non-public enum {} (without converter)".format(
+                                        f, e
+                                    )
+                                )
+                        else:
+                            enums[e]['codegen_method'] = 'public'
 
     # Iterate through all codegen attributes and set any enum parameters to the same level
     for a in filter_codegen_attributes(config['attributes']):
@@ -471,8 +485,16 @@ def _add_enum_codegen_method(enums, config):
             elif e is not None:
                 if a_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
                     enums[e]['codegen_method'] = a_codegen_method
-                elif a_codegen_method == 'public':
-                    enums[e]['codegen_method'] = a_codegen_method
+                elif a_codegen_method == 'public' and enums[e]['codegen_method'] != 'public':
+                    if enum_to_has_explicit_codegen_method[e]:
+                        if not enums[e].get('use_converter', False):
+                            raise ValueError(
+                                "Public attribute {} cannot use non-public enum {} (without converter)".format(
+                                    config['attributes'][a]['name'], e
+                                )
+                            )
+                    else:
+                        enums[e]['codegen_method'] = a_codegen_method
 
 
 def _add_enum_value_python_name(enum_info, config):
