@@ -4946,6 +4946,132 @@ lcr_frequency
                 - LabVIEW Property: **LCR:AC Stimulus:Frequency**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_FREQUENCY**
 
+lcr_impedance_range
+-------------------
+
+    .. py:attribute:: lcr_impedance_range
+
+        Specifies the impedance range the channel uses for LCR measurements.
+
+        Valid Values: 0 ohms to +inf ohms
+
+        Default Value: Search ni.com for Supported Properties by Device for the default value by instrument.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_impedance_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_impedance_range`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Impedance Range:Impedance Range**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE**
+
+lcr_impedance_range_source
+--------------------------
+
+    .. py:attribute:: lcr_impedance_range_source
+
+        Specifies how the impedance range for LCR measurements is determined.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_impedance_range_source`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_impedance_range_source`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------------------+
+            | Characteristic        | Value                         |
+            +=======================+===============================+
+            | Datatype              | enums.LCRImpedanceRangeSource |
+            +-----------------------+-------------------------------+
+            | Permissions           | read-write                    |
+            +-----------------------+-------------------------------+
+            | Repeated Capabilities | channels                      |
+            +-----------------------+-------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Impedance Range:Advanced:Impedance Range Source**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE**
+
+lcr_load_capacitance
+--------------------
+
+    .. py:attribute:: lcr_load_capacitance
+
+        Specifies the load capacitance, in farads and assuming a series model, of the DUT in order to compute the impedance range when the :py:attr:`nidcpower.Session.lcr_impedance_range_source` property is set to :py:data:`~nidcpower.LCRImpedanceRangeSource.LOAD_CONFIGURATION`.
+
+        Valid Values: (0 farads, +inf farads).
+        0 is a special value that signifies +inf farads.
+
+        Default Value: Search ni.com for Supported Properties by Device for the default value by instrument
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_load_capacitance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_load_capacitance`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Impedance Range:Advanced:Load Capacitance**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_LOAD_CAPACITANCE**
+
 lcr_load_compensation_enabled
 -----------------------------
 
@@ -4990,6 +5116,92 @@ lcr_load_compensation_enabled
 
                 - LabVIEW Property: **LCR:Compensation:Load:Enabled**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_LOAD_COMPENSATION_ENABLED**
+
+lcr_load_inductance
+-------------------
+
+    .. py:attribute:: lcr_load_inductance
+
+        Specifies the load inductance, in henrys and assuming a series model, of the DUT in order to compute the impedance range when the :py:attr:`nidcpower.Session.lcr_impedance_range_source` property is set to :py:data:`~nidcpower.LCRImpedanceRangeSource.LOAD_CONFIGURATION`.
+
+        Valid Values: 0 henrys to +inf henrys
+
+        Default Value: Search ni.com for Supported Properties by Device for the default value by instrument
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_load_inductance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_load_inductance`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Impedance Range:Advanced:Load Inductance**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_LOAD_INDUCTANCE**
+
+lcr_load_resistance
+-------------------
+
+    .. py:attribute:: lcr_load_resistance
+
+        Specifies the load resistance, in ohms and assuming a series model, of the DUT in order to compute the impedance range when the :py:attr:`nidcpower.Session.lcr_impedance_range_source` property is set to :py:data:`~nidcpower.LCRImpedanceRangeSource.LOAD_CONFIGURATION`.
+
+        Valid Values: 0 ohms to +inf ohms
+
+        Default Value: Search ni.com for Supported Properties by Device for the default value by instrument
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_load_resistance`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_load_resistance`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Impedance Range:Advanced:Load Resistance**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_LOAD_RESISTANCE**
 
 lcr_measured_load_reactance
 ---------------------------
