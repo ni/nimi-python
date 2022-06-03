@@ -515,6 +515,31 @@ LCRDCBiasSource
 
 
 
+LCRImpedanceRangeSource
+-----------------------
+
+.. py:class:: LCRImpedanceRangeSource
+
+    .. py:attribute:: LCRImpedanceRangeSource.IMPEDANCE_RANGE
+
+
+
+        Uses the impedance range you specify with the :py:attr:`nidcpower.Session.lcr_impedance_range` property.
+
+        
+
+
+
+    .. py:attribute:: LCRImpedanceRangeSource.LOAD_CONFIGURATION
+
+
+
+        Computes the impedance range to select based on the values you supply to the :py:attr:`nidcpower.Session.lcr_load_resistance`, :py:attr:`nidcpower.Session.lcr_load_inductance`, and :py:attr:`nidcpower.Session.lcr_load_capacitance` properties. NI-DCPower uses a series model of load resistance, load inductance, and load capacitance to compute the impedance range.
+
+        
+
+
+
 LCRMeasurementTime
 ------------------
 
