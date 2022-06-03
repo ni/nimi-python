@@ -433,7 +433,8 @@ enums = {
     },
     'IsolationState': {
         'codegen_method': 'private',
-        'use_converter': True,
+        'converted_value_to_enum_function_name': 'convert_to_isolation_state_enum',
+        'enum_to_converted_value_function_name': 'convert_from_isolation_state_enum',
         'values': [
             {
                 'converts_to_value': True,

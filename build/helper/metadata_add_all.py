@@ -7,6 +7,7 @@ from .documentation_snippets import options_table_header
 from .documentation_snippets import options_text
 from .documentation_snippets import session_return_text
 from .helper import camelcase_to_snakecase
+from .helper import enum_uses_converter
 from .helper import get_numpy_type_for_api_type
 from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
@@ -466,7 +467,7 @@ def _add_enum_codegen_method(enums, config):
                         enums[e]['codegen_method'] = f_codegen_method
                     elif f_codegen_method in ('public', 'python-only') and enums[e]['codegen_method'] != 'public':
                         if enum_to_has_explicit_codegen_method[e]:
-                            if not enums[e].get('use_converter', False):
+                            if not enum_uses_converter(enums[e]):
                                 raise ValueError(
                                     "Public / python-only function {} cannot use non-public enum {} (without converter)".format(
                                         f, e
@@ -487,7 +488,7 @@ def _add_enum_codegen_method(enums, config):
                     enums[e]['codegen_method'] = a_codegen_method
                 elif a_codegen_method == 'public' and enums[e]['codegen_method'] != 'public':
                     if enum_to_has_explicit_codegen_method[e]:
-                        if not enums[e].get('use_converter', False):
+                        if not enum_uses_converter(enums[e]):
                             raise ValueError(
                                 "Public attribute {} cannot use non-public enum {} (without converter)".format(
                                     config['attributes'][a]['name'], e

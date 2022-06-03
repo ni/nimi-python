@@ -8,6 +8,9 @@ ${template_parameters['encoding_tag']}
     enums = config['enums']
 %>\
 import ${module_name}._visatype as _visatype
+% if any(helper.enum_uses_converter(enums[enum_name]) for enum_name in helper.filter_codegen_enums(enums)):
+import ${module_name}.enums as enums
+% endif
 import ${module_name}.errors as errors
 
 import array
@@ -327,48 +330,29 @@ def convert_double_each_element(numbers):
 
 % endif
 % for enum_name in sorted(helper.filter_codegen_enums(enums)):
-    % if enums[enum_name].get('use_converter', False):
-<%
-    enum_name_in_snakecase = helper.camelcase_to_snakecase(enums[enum_name]['python_name'])
-%>\
-# Getter converter for ${enums[enum_name]['python_name']}
-_${enum_name_in_snakecase}_enum_value_to_converted_value_dict = {
+    % if helper.enum_uses_converter(enums[enum_name]):
+_${enums[enum_name]['enum_to_converted_value_function_name']}_dict = {
         % for enum_value in enums[enum_name]['values']:
-<%
-    dict_key = (
-        "'{}'" if type(enum_value['value']) is str else "{}"
-    ).format(enum_value['value'])
-    dict_value = (
-        "'{}'" if type(enum_value['converts_to_value']) is str else "{}"
-    ).format(enum_value['converts_to_value'])
-%>\
-    ${dict_key}: ${dict_value},
+    enums.${enums[enum_name]['python_name']}.${enum_value['python_name']}: ${helper.get_enum_value_snippet(enum_value['converts_to_value'])},
         % endfor
 }
 
 
-def convert_from_${enum_name_in_snakecase}_enum_value(enum_value):
-    return _${enum_name_in_snakecase}_enum_value_to_converted_value_dict[enum_value]
+def ${enums[enum_name]['enum_to_converted_value_function_name']}(enum):
+    if type(enum) is not enums.${enums[enum_name]['python_name']}:
+        raise TypeError('must be ${enums[enum_name]['python_name']} not {}'.format(type(enum).__name__))
+    return _${enums[enum_name]['enum_to_converted_value_function_name']}_dict[enum]
 
 
-# Setter converter for ${enums[enum_name]['python_name']}
-_${enum_name_in_snakecase}_converted_value_to_enum_value_dict = {
+_${enums[enum_name]['converted_value_to_enum_function_name']}_dict = {
         % for enum_value in enums[enum_name]['values']:
-<%
-    dict_key = (
-        "'{}'" if type(enum_value['converts_to_value']) is str else "{}"
-    ).format(enum_value['converts_to_value'])
-    dict_value = (
-        "'{}'" if type(enum_value['value']) is str else "{}"
-    ).format(enum_value['value'])
-%>\
-    ${dict_key}: ${dict_value},
+    ${helper.get_enum_value_snippet(enum_value['converts_to_value'])}: enums.${enums[enum_name]['python_name']}.${enum_value['python_name']},
         % endfor
 }
 
 
-def convert_to_${enum_name_in_snakecase}_enum_value(value):
-    return _${enum_name_in_snakecase}_converted_value_to_enum_value_dict[value]
+def ${enums[enum_name]['converted_value_to_enum_function_name']}(value):
+    return _${enums[enum_name]['converted_value_to_enum_function_name']}_dict[value]
 
 
     % endif

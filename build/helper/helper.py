@@ -133,6 +133,15 @@ def get_development_status(config):
     return dev_status
 
 
+def enum_uses_converter(enum):
+    '''Returns True if enum uses converter, False otherwise.
+
+    An enum uses converter if it has both 'enum_to_converted_value_function_name' and
+    'converted_value_to_enum_function_name' defined which are not None.
+    '''
+    return enum.get('enum_to_converted_value_function_name', None) is not None and enum.get('converted_value_to_enum_function_name', None) is not None
+
+
 # Tests
 def test_get_development_status():
     config = {}
@@ -233,3 +242,21 @@ def test_get_development_status():
     config['module_version'] = '19.9.9'
     assert get_development_status(config) == '5 - Production/Stable'
 
+
+def test_enum_uses_converter():
+    assert not enum_uses_converter({})
+    assert not enum_uses_converter({
+        'enum_to_converted_value_function_name': lambda x: x
+    })
+    assert not enum_uses_converter({
+        'converted_value_to_enum_function_name': lambda x: x
+    })
+    assert not enum_uses_converter({
+        'enum_to_converted_value_function_name': None,
+        'converted_value_to_enum_function_name': None
+    })
+
+    assert enum_uses_converter({
+        'enum_to_converted_value_function_name': lambda x: x,
+        'converted_value_to_enum_function_name': lambda x: x
+    })

@@ -83,7 +83,6 @@ All notable changes to this project will be documented in this file.
                 * `LCROpenShortLoadCompensationDataSource`
                 * `LCRSourceDelayMode`
                 * `LCRStimulusFunction`
-                * `_IsolationState`
             * Methods added:
                 * `configure_lcr_custom_cable_compensation`
                 * `get_lcr_compensation_last_date_and_time`

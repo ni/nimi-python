@@ -105,6 +105,8 @@ class AttributeEnum(object):
 
 
 class AttributeEnumWithConverter(AttributeEnum):
+    '''Attribute metaclass for enums that use converters.'''
+
     def __init__(
         self,
         underlying_attribute_meta_class,
@@ -113,6 +115,22 @@ class AttributeEnumWithConverter(AttributeEnum):
         getter_converter,
         setter_converter
     ):
+        '''Creates and returns an AttributeEnumWithConverter attribute meta class.
+
+        Args:
+            underlying_attribute_meta_class (object): The attribute meta class for the enum values
+                (to be used with the driver)
+
+            enum_meta_class (Enum): The enum class for the associated enum
+
+            attribute_id (int): The id of the attribute (to be used with the driver)
+
+            getter_converter (function): The function that converts the enum value to its converted
+                value
+
+            setter_converter (function): The function that converts the converted value back to the
+                enum value
+        '''
         super().__init__(underlying_attribute_meta_class, enum_meta_class, attribute_id)
         self._getter_converter = getter_converter
         self._setter_converter = setter_converter

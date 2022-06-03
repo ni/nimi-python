@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import nidcpower._visatype as _visatype
+import nidcpower.enums as enums
 import nidcpower.errors as errors
 
 import array
@@ -275,25 +276,25 @@ def convert_chained_repeated_capability_to_parts(chained_repeated_capability):
     return [','.join(collections.OrderedDict.fromkeys(x)) for x in repeated_capability_lists]
 
 
-# Getter converter for _IsolationState
-___isolation_state_enum_value_to_converted_value_dict = {
-    1128: True,
-    1129: False,
+_convert_from_isolation_state_enum_dict = {
+    enums._IsolationState.ISOLATED: True,
+    enums._IsolationState.NON_ISOLATED: False,
 }
 
 
-def convert_from___isolation_state_enum_value(enum_value):
-    return ___isolation_state_enum_value_to_converted_value_dict[enum_value]
+def convert_from_isolation_state_enum(enum):
+    if type(enum) is not enums._IsolationState:
+        raise TypeError('must be _IsolationState not {}'.format(type(enum).__name__))
+    return _convert_from_isolation_state_enum_dict[enum]
 
 
-# Setter converter for _IsolationState
-___isolation_state_converted_value_to_enum_value_dict = {
-    True: 1128,
-    False: 1129,
+_convert_to_isolation_state_enum_dict = {
+    True: enums._IsolationState.ISOLATED,
+    False: enums._IsolationState.NON_ISOLATED,
 }
 
 
-def convert_to___isolation_state_enum_value(value):
-    return ___isolation_state_converted_value_to_enum_value_dict[value]
+def convert_to_isolation_state_enum(value):
+    return _convert_to_isolation_state_enum_dict[value]
 
 

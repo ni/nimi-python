@@ -485,6 +485,11 @@ def get_dictionary_snippet(d, indent=4):
     return ('\n' + (' ' * indent)).join(d_lines)
 
 
+def get_enum_value_snippet(value):
+    '''Returns value formatted into string, surrounding it with single quotes if it is of str type'''
+    return ("'{}'" if type(value) is str else "{}").format(value)
+
+
 #
 # Let's do some unit testing!
 #
@@ -1675,3 +1680,9 @@ def test_get_ctype_variable_declaration_snippet_bad_ivi_dance_step():
 # TODO(marcoskirsch): unit tests for reamining cases of get_ctype_variable_declaration_snippet(): parameter is a buffer.
 
 
+def test_get_enum_value_snippet():
+    assert get_enum_value_snippet(None) == 'None'
+    assert get_enum_value_snippet(True) == 'True'
+    assert get_enum_value_snippet(0) == '0'
+    assert get_enum_value_snippet('True') == "'True'"
+    assert get_enum_value_snippet('0') == "'0'"
