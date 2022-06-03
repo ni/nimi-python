@@ -1308,6 +1308,69 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.lcr_frequency`
     '''
+    lcr_impedance_range = _attributes.AttributeViReal64(1150217)
+    '''Type: float
+
+    Specifies the impedance range the channel uses for LCR measurements.
+
+    Valid Values: 0 ohms to +inf ohms
+
+    Default Value: Search ni.com for Supported Properties by Device for the default value by instrument.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_impedance_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_impedance_range`
+    '''
+    lcr_impedance_range_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRImpedanceRangeSource, 1150321)
+    '''Type: enums.LCRImpedanceRangeSource
+
+    Specifies how the impedance range for LCR measurements is determined.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_impedance_range_source`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_impedance_range_source`
+    '''
+    lcr_load_capacitance = _attributes.AttributeViReal64(1150320)
+    '''Type: float
+
+    Specifies the load capacitance, in farads and assuming a series model, of the DUT in order to compute the impedance range when the lcr_impedance_range_source property is set to LCRImpedanceRangeSource.LOAD_CONFIGURATION.
+
+    Valid Values: (0 farads, +inf farads).
+    0 is a special value that signifies +inf farads.
+
+    Default Value: Search ni.com for Supported Properties by Device for the default value by instrument
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_load_capacitance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_load_capacitance`
+    '''
     lcr_load_compensation_enabled = _attributes.AttributeViBoolean(1150222)
     '''Type: bool
 
@@ -1331,6 +1394,50 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.lcr_load_compensation_enabled`
+    '''
+    lcr_load_inductance = _attributes.AttributeViReal64(1150319)
+    '''Type: float
+
+    Specifies the load inductance, in henrys and assuming a series model, of the DUT in order to compute the impedance range when the lcr_impedance_range_source property is set to LCRImpedanceRangeSource.LOAD_CONFIGURATION.
+
+    Valid Values: 0 henrys to +inf henrys
+
+    Default Value: Search ni.com for Supported Properties by Device for the default value by instrument
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_load_inductance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_load_inductance`
+    '''
+    lcr_load_resistance = _attributes.AttributeViReal64(1150318)
+    '''Type: float
+
+    Specifies the load resistance, in ohms and assuming a series model, of the DUT in order to compute the impedance range when the lcr_impedance_range_source property is set to LCRImpedanceRangeSource.LOAD_CONFIGURATION.
+
+    Valid Values: 0 ohms to +inf ohms
+
+    Default Value: Search ni.com for Supported Properties by Device for the default value by instrument
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_load_resistance`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_load_resistance`
     '''
     lcr_measured_load_reactance = _attributes.AttributeViReal64(1150269)
     '''Type: float

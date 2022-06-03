@@ -52,7 +52,12 @@ All notable changes to this project will be documented in this file.
                 * `lcr_dc_bias_source`
                 * `lcr_dc_bias_voltage_level`
                 * `lcr_frequency`
+                * `lcr_impedance_range`
+                * `lcr_impedance_range_source`
+                * `lcr_load_capacitance`
                 * `lcr_load_compensation_enabled`
+                * `lcr_load_inductance`
+                * `lcr_load_resistance`
                 * `lcr_measured_load_reactance`
                 * `lcr_measured_load_resistance`
                 * `lcr_measurement_time`
@@ -73,6 +78,7 @@ All notable changes to this project will be documented in this file.
                 * `InstrumentMode`
                 * `LCRCompensationType`
                 * `LCRDCBiasSource`
+                * `LCRImpedanceRangeSource`
                 * `LCRMeasurementTime`
                 * `LCROpenShortLoadCompensationDataSource`
                 * `LCRSourceDelayMode`
