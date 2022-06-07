@@ -132,7 +132,7 @@ class AttributeEnumWithConverter(AttributeEnum):
         self._setter_converter = setter_converter
 
     def __get__(self, session, session_type):
-        return self._getter_converter(super().__get__(session, session_type).value)
+        return self._getter_converter(super().__get__(session, session_type))
 
     def __set__(self, session, value):
         return super().__set__(session, self._attribute_type(self._setter_converter(value)))

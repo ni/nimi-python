@@ -276,25 +276,19 @@ def convert_chained_repeated_capability_to_parts(chained_repeated_capability):
     return [','.join(collections.OrderedDict.fromkeys(x)) for x in repeated_capability_lists]
 
 
-_convert_from_isolation_state_enum_dict = {
-    enums._IsolationState.ISOLATED: True,
-    enums._IsolationState.NON_ISOLATED: False,
-}
-
-
 def convert_from_isolation_state_enum(enum):
     if type(enum) is not enums._IsolationState:
         raise TypeError('must be _IsolationState not {}'.format(type(enum).__name__))
-    return _convert_from_isolation_state_enum_dict[enum]
-
-
-_convert_to_isolation_state_enum_dict = {
-    True: enums._IsolationState.ISOLATED,
-    False: enums._IsolationState.NON_ISOLATED,
-}
+    return {
+        enums._IsolationState.ISOLATED: True,
+        enums._IsolationState.NON_ISOLATED: False,
+    }[enum]
 
 
 def convert_to_isolation_state_enum(value):
-    return _convert_to_isolation_state_enum_dict[value]
+    return {
+        True: enums._IsolationState.ISOLATED,
+        False: enums._IsolationState.NON_ISOLATED,
+    }[value]
 
 
