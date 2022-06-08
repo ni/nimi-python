@@ -101,7 +101,7 @@ class AttributeEnum(object):
 
 
 class AttributeEnumWithConverter(AttributeEnum):
-    '''Attribute metaclass for enums that use converters.'''
+    '''Class for attributes that use enums internally but are exposed in nimi-python API as something else, thus need conversion.'''
 
     def __init__(
         self,
@@ -111,7 +111,7 @@ class AttributeEnumWithConverter(AttributeEnum):
         getter_converter,
         setter_converter
     ):
-        '''Creates and returns an AttributeEnumWithConverter attribute meta class.
+        '''Creates and returns an instance of AttributeEnumWithConverter attribute meta class.
 
         Args:
             underlying_attribute_meta_class (object): The attribute meta class for the enum values

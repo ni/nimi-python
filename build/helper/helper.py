@@ -137,9 +137,19 @@ def enum_uses_converter(enum):
     '''Returns True if enum uses converter, False otherwise.
 
     An enum uses converter if it has both 'enum_to_converted_value_function_name' and
-    'converted_value_to_enum_function_name' defined which are not None.
+    'converted_value_to_enum_function_name' defined which are not None. If one of them is defined
+    and not None but not the other, an AssertionError would be thrown.
     '''
-    return enum.get('enum_to_converted_value_function_name', None) is not None and enum.get('converted_value_to_enum_function_name', None) is not None
+    has_enum_to_converted_value_function_name = enum.get(
+        'enum_to_converted_value_function_name', None
+    ) is not None
+    has_converted_value_to_enum_function_name = enum.get(
+        'converted_value_to_enum_function_name', None
+    ) is not None
+    assert has_enum_to_converted_value_function_name == has_converted_value_to_enum_function_name, (
+        "An enum must either define both 'converted_value_to_enum_function_name' and 'converted_value_to_enum_function_name', or define none of them"
+    )
+    return has_enum_to_converted_value_function_name and has_converted_value_to_enum_function_name
 
 
 # Tests
@@ -244,13 +254,9 @@ def test_get_development_status():
 
 
 def test_enum_uses_converter():
+    import pytest
+
     assert not enum_uses_converter({})
-    assert not enum_uses_converter({
-        'enum_to_converted_value_function_name': lambda x: x
-    })
-    assert not enum_uses_converter({
-        'converted_value_to_enum_function_name': lambda x: x
-    })
     assert not enum_uses_converter({
         'enum_to_converted_value_function_name': None,
         'converted_value_to_enum_function_name': None
@@ -260,3 +266,22 @@ def test_enum_uses_converter():
         'enum_to_converted_value_function_name': lambda x: x,
         'converted_value_to_enum_function_name': lambda x: x
     })
+
+    with pytest.raises(AssertionError):
+        enum_uses_converter({
+            'enum_to_converted_value_function_name': lambda x: x
+        })
+    with pytest.raises(AssertionError):
+        enum_uses_converter({
+            'converted_value_to_enum_function_name': lambda x: x
+        })
+    with pytest.raises(AssertionError):
+        enum_uses_converter({
+            'enum_to_converted_value_function_name': None,
+            'converted_value_to_enum_function_name': lambda x: x
+        })
+    with pytest.raises(AssertionError):
+        enum_uses_converter({
+            'enum_to_converted_value_function_name': lambda x: x,
+            'converted_value_to_enum_function_name': None
+        })

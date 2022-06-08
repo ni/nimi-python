@@ -331,22 +331,26 @@ def convert_double_each_element(numbers):
 % endif
 % for enum_name in sorted(helper.filter_codegen_enums(enums)):
     % if helper.enum_uses_converter(enums[enum_name]):
-def ${enums[enum_name]['enum_to_converted_value_function_name']}(enum):
-    if type(enum) is not enums.${enums[enum_name]['python_name']}:
-        raise TypeError('must be ${enums[enum_name]['python_name']} not {}'.format(type(enum).__name__))
-    return {
+def ${enums[enum_name]['enum_to_converted_value_function_name']}(value):
+    try:
+        return {
         % for enum_value in enums[enum_name]['values']:
-        enums.${enums[enum_name]['python_name']}.${enum_value['python_name']}: ${helper.get_enum_value_snippet(enum_value['converts_to_value'])},
+            enums.${enums[enum_name]['python_name']}.${enum_value['python_name']}: ${helper.get_enum_value_snippet(enum_value['converts_to_value'])},
         % endfor
-    }[enum]
+        }[value]
+    except Exception:
+        raise ValueError(f"${enums[enum_name]['python_name']} enum value '{value}' cannot be converted")
 
 
 def ${enums[enum_name]['converted_value_to_enum_function_name']}(value):
-    return {
+    try:
+        return {
         % for enum_value in enums[enum_name]['values']:
-        ${helper.get_enum_value_snippet(enum_value['converts_to_value'])}: enums.${enums[enum_name]['python_name']}.${enum_value['python_name']},
+            ${helper.get_enum_value_snippet(enum_value['converts_to_value'])}: enums.${enums[enum_name]['python_name']}.${enum_value['python_name']},
         % endfor
-    }[value]
+        }[value]
+    except Exception:
+        raise ValueError(f"'{value}' cannot be converted to an ${enums[enum_name]['python_name']} enum value")
 
 
     % endif
