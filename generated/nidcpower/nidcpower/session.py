@@ -1100,7 +1100,7 @@ class _SessionBase(object):
     If you initialize NI-DCPower with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.
     If you initialize NI-DCPower with the resource descriptor, this property contains that value.
     '''
-    isolation_state = _attributes.AttributeEnumWithConverter(_attributes.AttributeViInt32, enums._IsolationState, 1150302, _converters.convert_from_isolation_state_enum, _converters.convert_to_isolation_state_enum)
+    isolation_state = _attributes.AttributeEnumWithConverter(_attributes.AttributeEnum(_attributes.AttributeViInt32, enums._IsolationState, 1150302), _converters.convert_from_isolation_state_enum, _converters.convert_to_isolation_state_enum)
     '''Type: bool
 
     Defines whether the channel is isolated.
