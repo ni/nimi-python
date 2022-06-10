@@ -5,26 +5,6 @@ import nidcpower
 import sys
 
 
-def print_measurements(measurements):
-    print('V DC: {0}'.format(measurements[0].vdc))
-    print('I DC: {0}'.format(measurements[0].idc))
-    print('Stimulus frequency: {0}'.format(measurements[0].stimulus_frequency))
-    print('AC voltage: {0}'.format(measurements[0].ac_voltage))
-    print('AC current: {0}'.format(measurements[0].ac_current))
-    print('Z: {0}'.format(measurements[0].z))
-    print('Ls: {0}'.format(measurements[0].series_lcr.inductance))
-    print('Cs: {0}'.format(measurements[0].series_lcr.capacitance))
-    print('Rs: {0}'.format(measurements[0].series_lcr.resistance))
-    print('Lp: {0}'.format(measurements[0].parallel_lcr.inductance))
-    print('Cp: {0}'.format(measurements[0].parallel_lcr.capacitance))
-    print('Rp: {0}'.format(measurements[0].parallel_lcr.resistance))
-    print('D: {0}'.format(measurements[0].d))
-    print('Measurement mode: {0}'.format(measurements[0].measurement_mode))
-    print('DC in compliance: {0}'.format(measurements[0].dc_in_compliance))
-    print('AC in compliance: {0}'.format(measurements[0].ac_in_compliance))
-    print('Unbalanced: {0}'.format(measurements[0].unbalanced))
-
-
 def example(
         resource_name,
         frequency,
@@ -59,7 +39,7 @@ def example(
         with session.initiate():
             session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 21.0)
             measurements = session.measure_multiple_lcr()
-            print_measurements(measurements)
+            print(measurements)
 
         session.reset()
 
