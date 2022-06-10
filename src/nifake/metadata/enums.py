@@ -1,6 +1,26 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 1.2.0d9
+# This file is generated from NI-FAKE API metadata version 22.5.0d9
 enums = {
+    'AltColor': {
+        'values': [
+            {
+                'name': 'NIFAKE_VAL_RED',
+                'value': 1
+            },
+            {
+                'name': 'NIFAKE_VAL_BLUE',
+                'value': 2
+            },
+            {
+                'name': 'NIFAKE_VAL_YELLOW',
+                'value': 5
+            },
+            {
+                'name': 'NIFAKE_VAL_BLACK',
+                'value': 42
+            }
+        ]
+    },
     'BeautifulColor': {
         'values': [
             {
