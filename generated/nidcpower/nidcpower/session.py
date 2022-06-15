@@ -4801,11 +4801,39 @@ class _SessionBase(object):
 
         '''
         import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance', 'channel'])
 
         voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(timeout, count)
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
+        if self._repeated_capability == '':
+            channel_names = self._get_channel_names(range(self.channel_count))
+        else:
+            # Check if the session was opened with independent_channels set to True by checking if
+            #  _get_channel_name() returns channel names with prefix
+            first_channel_name = self._get_channel_name(1)
+            if '/' in first_channel_name:
+                # If there is any repeated capabilities without prefix, the session must have only
+                # one instrument, so just get the prefix from the first channel and add to all of
+                # the repeated capabilities that are without prefix
+                default_prefix = first_channel_name[:first_channel_name.find('/') + 1]
+                channel_names = _converters.convert_independent_channels_repeated_capabilities(
+                    self._repeated_capability,
+                    default_prefix
+                )
+            else:
+                channel_names = _converters.convert_repeated_capabilities(
+                    self._repeated_capability,
+                    ''
+                )
+
+        return [
+            Measurement(
+                voltage=voltage_measurements[i],
+                current=current_measurements[i],
+                in_compliance=in_compliance[i],
+                channel=channel_names[0],
+            ) for i in range(count)
+        ]
 
     @ivi_synchronized
     def measure_multiple(self):
@@ -4846,11 +4874,39 @@ class _SessionBase(object):
 
         '''
         import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance', 'channel'])
 
         voltage_measurements, current_measurements = self._measure_multiple()
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
+        if self._repeated_capability == '':
+            channel_names = self._get_channel_names(range(self.channel_count))
+        else:
+            # Check if the session was opened with independent_channels set to True by checking if
+            #  _get_channel_name() returns channel names with prefix
+            first_channel_name = self._get_channel_name(1)
+            if '/' in first_channel_name:
+                # If there is any repeated capabilities without prefix, the session must have only
+                # one instrument, so just get the prefix from the first channel and add to all of
+                # the repeated capabilities that are without prefix
+                default_prefix = first_channel_name[:first_channel_name.find('/') + 1]
+                channel_names = _converters.convert_independent_channels_repeated_capabilities(
+                    self._repeated_capability,
+                    default_prefix
+                )
+            else:
+                channel_names = _converters.convert_repeated_capabilities(
+                    self._repeated_capability,
+                    ''
+                )
+
+        return [
+            Measurement(
+                voltage=voltage_measurements[i],
+                current=current_measurements[i],
+                in_compliance=None,
+                channel=channel_names[i],
+            ) for i in range(self._parse_channel_count())
+        ]
 
     @ivi_synchronized
     def _fetch_multiple(self, timeout, count):
@@ -5232,6 +5288,67 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def _get_channel_name(self, index):
+        r'''_get_channel_name
+
+        Retrieves the output **channelName** that corresponds to the requested
+        **index**. Use the channel_count property to
+        determine the upper bound of valid values for **index**.
+
+        Args:
+            index (int): Specifies which output channel name to return. The index values begin at
+                1.
+
+
+        Returns:
+            channel_name (str): Returns the output channel name that corresponds to **index**.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        channel_name_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return channel_name_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def _get_channel_names(self, indices):
+        r'''_get_channel_names
+
+        Returns a list of channel names for the given channel indices.
+
+        Args:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            names (list of str): The channel name(s) at the specified indices.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        names_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
 
     def _get_error(self):
         r'''_get_error
@@ -7046,67 +7163,6 @@ class Session(_SessionBase):
             return self._initialize_with_channels(resource_name, channels, reset, option_string)
 
     @ivi_synchronized
-    def get_channel_name(self, index):
-        r'''get_channel_name
-
-        Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the channel_count property to
-        determine the upper bound of valid values for **index**.
-
-        Args:
-            index (int): Specifies which output channel name to return. The index values begin at
-                1.
-
-
-        Returns:
-            channel_name (str): Returns the output channel name that corresponds to **index**.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        channel_name_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return channel_name_ctype.value.decode(self._encoding)
-
-    @ivi_synchronized
-    def get_channel_names(self, indices):
-        r'''get_channel_names
-
-        Returns a list of channel names for the given channel indices.
-
-        Args:
-            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
-
-                -   A comma-separated list—for example, "0,2,3,1"
-                -   A range using a hyphen—for example, "0-3"
-                -   A range using a colon—for example, "0:3 "
-
-                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
-
-
-        Returns:
-            names (list of str): The channel name(s) at the specified indices.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        names_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
-
-    @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
         r'''_get_ext_cal_last_date_and_time
 
@@ -7550,6 +7606,47 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_InitializeWithIndependentChannels(resource_name_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
+
+    @ivi_synchronized
+    def get_channel_name(self, index):
+        '''get_channel_name
+
+        Retrieves the output **channelName** that corresponds to the requested
+        **index**. Use the channel_count property to
+        determine the upper bound of valid values for **index**.
+
+        Args:
+            index (int): Specifies which output channel name to return. The index values begin at
+                1.
+
+
+        Returns:
+            channel_name (str): Returns the output channel name that corresponds to **index**.
+
+        '''
+        return self._get_channel_name(index)
+
+    @ivi_synchronized
+    def get_channel_names(self, indices):
+        '''get_channel_names
+
+        Returns a list of channel names for the given channel indices.
+
+        Args:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            names (list of str): The channel name(s) at the specified indices.
+
+        '''
+        return self._get_channel_names(indices)
 
     @ivi_synchronized
     def read_current_temperature(self):

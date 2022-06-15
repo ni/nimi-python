@@ -233,6 +233,88 @@ def test_measure_multiple(session):
         assert measurements[1].current == 0.00001
 
 
+@pytest.mark.parametrize(
+    'resource_name,channels,independent_channels,measurement_channels,expected_measured_channel',
+    [
+        ('Dev1', '1', False, None, '1'),
+        ('Dev1', '2', False, '', '2'),
+        ('Dev1', '3', False, ' ', '3'),
+        ('Dev1', '4', False, '4', '4'),
+        ('Dev1', '1', True, None, 'Dev1/1'),
+        ('Dev1', '2', True, '', 'Dev1/2'),
+        ('Dev1', '3', True, ' ', 'Dev1/3'),
+        ('Dev1', '4', True, '4', 'Dev1/4'),
+        ('Dev1', 'Dev1/5', True, 'Dev1/5', 'Dev1/5'),
+        ('Dev1/6', '', True, None, 'Dev1/6'),
+        ('Dev1/7', ' ', True, ' ', 'Dev1/7'),
+    ]
+)
+def test_fetch_multiple_channels(
+    resource_name,
+    channels,
+    independent_channels,
+    measurement_channels,
+    expected_measured_channel
+):
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
+    with nidcpower.Session(
+        resource_name,
+        channels,
+        options=options,
+        independent_channels=independent_channels
+    ) as session:
+        session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+        count = 10
+        with session.initiate():
+            if measurement_channels is None:
+                measurements = session.fetch_multiple(count)
+            else:
+                measurements = session.channels[measurement_channels].fetch_multiple(count)
+            assert len(measurements) == count
+            for measurement in measurements:
+                assert measurement.channel == expected_measured_channel
+
+
+@pytest.mark.parametrize(
+    'resource_name,channels,independent_channels,measurement_channels,expected_measured_channels',
+    [
+        ('Dev1', None, False, None, [str(x) for x in range(12)]),
+        ('Dev1', '', False, '', [str(x) for x in range(12)]),
+        ('Dev1', ' ', False, ' ', [str(x) for x in range(12)]),
+        ('Dev1', '0,2-3,6', False, '2-3,0', ['2', '3', '0']),
+        ('Dev1', None, True, None, [f'Dev1/{x}' for x in range(12)]),
+        ('Dev1', '', True, '', [f'Dev1/{x}' for x in range(12)]),
+        ('Dev1', ' ', True, ' ', [f'Dev1/{x}' for x in range(12)]),
+        ('Dev1', '0:2,Dev1/4', True, 'Dev1/1:2,0', ['Dev1/1', 'Dev1/2', 'Dev1/0']),
+        ('Dev1', 'Dev1/0:2,Dev1/4', True, 'Dev1/1:2,Dev1/0', ['Dev1/1', 'Dev1/2', 'Dev1/0']),
+        ('Dev1/1', '', True, None, ['Dev1/1']),
+        ('Dev1/1:4', ' ', True, '2:3', ['Dev1/2', 'Dev1/3']),
+        ('Dev1/0-1,Dev2/0:2', ' ', True, 'Dev2/0-1,Dev1/0', ['Dev2/0', 'Dev2/1', 'Dev1/0']),
+        ('Dev1/1:4,Dev1/6', ' ', True, '6,2-3', ['Dev1/6', 'Dev1/2', 'Dev1/3']),
+    ]
+)
+def test_measure_multiple_channels(
+    resource_name,
+    channels,
+    independent_channels,
+    measurement_channels,
+    expected_measured_channels
+):
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4162', 'BoardType': 'PXIe'}}
+    with nidcpower.Session(
+        resource_name,
+        channels,
+        options=options,
+        independent_channels=independent_channels
+    ) as session:
+        with session.initiate():
+            if measurement_channels is None:
+                measurements = session.measure_multiple()
+            else:
+                measurements = session.channels[measurement_channels].measure_multiple()
+            assert [measurement.channel for measurement in measurements] == expected_measured_channels
+
+
 @pytest.mark.channels('0')
 def test_query_max_current_limit(session):
     max_current_limit = session.query_max_current_limit(6)

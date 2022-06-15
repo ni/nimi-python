@@ -153,6 +153,46 @@ def convert_repeated_capabilities_without_prefix(repeated_capability):
     return ','.join(convert_repeated_capabilities(repeated_capability, ''))
 
 
+def convert_single_group_repeated_capabilities(repeated_capability):
+    '''Convert a repeated capabilities string, with at most one prefix (that ends with '/') and without any comma, to a list
+
+    Args:
+        repeated_capability (str) - Supported types (with an optional prefix):
+            - range (using '-' or ':')
+            - single item
+
+    Returns:
+        rep_cap (str) - comma delimited list of strings of the expanded repeated capability items
+    '''
+    if '/' in repeated_capability:
+        split_index = repeated_capability.find('/') + 1
+        prefix = repeated_capability[:split_index]
+        return convert_repeated_capabilities(repeated_capability[split_index:], prefix)
+    return convert_repeated_capabilities(repeated_capability)
+
+
+def convert_independent_channels_repeated_capabilities(repeated_capability, default_prefix):
+    '''Convert an independent channels repeated capabilities string, possibly with no or multiple prefixes, to a list
+
+    Args:
+        repeated_capability (str) - refer to _convert_repeated_capabilities() for the supported formats
+        default_prefix (str) - default prefix (that ends with '/') to add to any of the expanded items if it does not already have one
+
+    Returns:
+        rep_cap (str) - comma delimited list of strings of the expanded repeated capability items with prefix
+    '''
+    # Split the comma-delimited repeated capabilities (if any) into groups with at most one prefix
+    # each and expand their ranges (if any) accordingly
+    repeated_capabilities = []
+    for rep_cap in repeated_capability.split(','):
+        repeated_capabilities.extend(convert_single_group_repeated_capabilities(rep_cap))
+    # If there is any group without prefix, add the default prefix to it
+    return [
+        rep_cap if '/' in rep_cap else default_prefix + rep_cap
+        for rep_cap in repeated_capabilities
+    ]
+
+
 def _convert_timedelta(value, library_type, scaling):
     try:
         # We first assume it is a timedelta object

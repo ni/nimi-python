@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.5.0d65
+# This file is generated from NI-DCPower API metadata version 22.5.0d9999
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -1722,9 +1722,11 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetChannelName': {
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nRetrieves the output **channelName** that corresponds to the requested\n**index**. Use the NIDCPOWER_ATTR_CHANNEL_COUNT attribute to\ndetermine the upper bound of valid values for **index**.\n'
         },
+        'method_name_for_documentation': 'get_channel_name',
         'parameters': [
             {
                 'direction': 'in',
@@ -1764,12 +1766,15 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
+        'render_in_session_base': True,
         'returns': 'ViStatus'
     },
     'GetChannelNameFromString': {
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nReturns a list of channel names for the given channel indices.'
         },
+        'method_name_for_documentation': 'get_channel_name_from_string',
         'parameters': [
             {
                 'direction': 'in',
@@ -1815,7 +1820,8 @@ functions = {
                 'type_in_documentation': 'list of str'
             }
         ],
-        'python_name': 'get_channel_names',
+        'python_name': '_get_channel_names',
+        'render_in_session_base': True,
         'returns': 'ViStatus'
     },
     'GetError': {
@@ -2982,6 +2988,120 @@ functions = {
                 'type': 'ViConstString'
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'PublicGetChannelName': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nRetrieves the output **channelName** that corresponds to the requested\n**index**. Use the NIDCPOWER_ATTR_CHANNEL_COUNT attribute to\ndetermine the upper bound of valid values for **index**.\n'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'delegate_to_private_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies which output channel name to return. The index values begin at\n1.\n'
+                },
+                'name': 'index',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the number of bytes in the ViChar array you specify for\n**channelName**. If the **channelName**, including the terminating NUL\nbyte, contains more bytes than you indicate in this attribute, the\nfunction copies (buffer size - 1) bytes into the buffer, places an ASCII\nNUL byte at the end of the buffer, and returns the buffer size you must\npass to get the entire value. For example, if the value is 123456 and\nthe buffer size is 4, the function places 123 into the buffer and\nreturns 7.\nIf you pass 0, you can pass VI_NULL for **channelName**.\n'
+                },
+                'name': 'bufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the output channel name that corresponds to **index**.'
+                },
+                'is_repeated_capability': False,
+                'name': 'channelName',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufferSize'
+                },
+                'type': 'ViString'
+            }
+        ],
+        'python_name': 'get_channel_name',
+        'returns': 'ViStatus'
+    },
+    'PublicGetChannelNameFromString': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nReturns a list of channel names for the given channel indices.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'delegate_to_private_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIndex list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
+                },
+                'name': 'index',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'python_name': 'indices',
+                'type': 'ViString',
+                'type_in_documentation': 'basic sequence types or str or int'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe number of elements in the ViChar array you specify for name.\n'
+                },
+                'name': 'bufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'The channel name(s) at the specified indices.'
+                },
+                'is_repeated_capability': False,
+                'name': 'channelName',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'python_name': 'names',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufferSize'
+                },
+                'type': 'ViString',
+                'type_in_documentation': 'list of str'
+            }
+        ],
+        'python_name': 'get_channel_names',
         'returns': 'ViStatus'
     },
     'QueryInCompliance': {
