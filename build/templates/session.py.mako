@@ -195,12 +195,12 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
-        param_list = []
-        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("${config['session_handle_parameter_name']}=" + pp.pformat(${config['session_handle_parameter_name']}))
-        param_list.append("library=" + pp.pformat(library))
-        param_list.append("encoding=" + pp.pformat(encoding))
-        self._param_list = ', '.join(param_list)
+        self._params = {
+            'repeated_capability_list': repeated_capability_list,
+            '${config['session_handle_parameter_name']}': ${config['session_handle_parameter_name']},
+            'library': library,
+            'encoding': encoding,
+        }
 
 % if len(config['repeated_capabilities']) > 0:
         # Instantiate any repeated capability objects
@@ -212,7 +212,10 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         self._is_frozen = freeze_it
 
     def __repr__(self):
-        return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, self._param_list)
+        params_string = ', '.join(
+            [param + '=' + pp.pformat(self._params[param]) for param in self._params]
+        )
+        return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, params_string)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -287,11 +290,11 @@ class Session(_SessionBase):
 
 % endif
         # Store the parameter list for later printing in __repr__
-        param_list = []
+        self._params = {
 %       for param in constructor_params:
-        param_list.append("${param['python_name']}=" + pp.pformat(${param['python_name']}))
+            '${param['python_name']}': ${param['python_name']},
 %       endfor
-        self._param_list = ', '.join(param_list)
+        }
 
         self._is_frozen = True
 

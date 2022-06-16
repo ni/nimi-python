@@ -3889,12 +3889,12 @@ class _SessionBase(object):
         self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
-        param_list = []
-        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("vi=" + pp.pformat(vi))
-        param_list.append("library=" + pp.pformat(library))
-        param_list.append("encoding=" + pp.pformat(encoding))
-        self._param_list = ', '.join(param_list)
+        self._params = {
+            'repeated_capability_list': repeated_capability_list,
+            'vi': vi,
+            'library': library,
+            'encoding': encoding,
+        }
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
@@ -3903,7 +3903,10 @@ class _SessionBase(object):
         self._is_frozen = freeze_it
 
     def __repr__(self):
-        return '{0}.{1}({2})'.format('nidcpower', self.__class__.__name__, self._param_list)
+        params_string = ', '.join(
+            [param + '=' + pp.pformat(self._params[param]) for param in self._params]
+        )
+        return '{0}.{1}({2})'.format('nidcpower', self.__class__.__name__, params_string)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -6727,13 +6730,13 @@ class Session(_SessionBase):
         self._vi = self._fancy_initialize(resource_name, channels, reset, options, independent_channels)
 
         # Store the parameter list for later printing in __repr__
-        param_list = []
-        param_list.append("resource_name=" + pp.pformat(resource_name))
-        param_list.append("channels=" + pp.pformat(channels))
-        param_list.append("reset=" + pp.pformat(reset))
-        param_list.append("options=" + pp.pformat(options))
-        param_list.append("independent_channels=" + pp.pformat(independent_channels))
-        self._param_list = ', '.join(param_list)
+        self._params = {
+            'resource_name': resource_name,
+            'channels': channels,
+            'reset': reset,
+            'options': options,
+            'independent_channels': independent_channels,
+        }
 
         self._is_frozen = True
 
