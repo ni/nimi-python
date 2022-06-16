@@ -34,23 +34,12 @@
         if self._repeated_capability == '':
             channel_names = self._get_channel_names(range(self.channel_count))
         else:
-            # Check if the session was opened with independent_channels set to True by checking if
-            #  _get_channel_name() returns channel names with prefix
             first_channel_name = self._get_channel_name(1)
-            if '/' in first_channel_name:
-                # If there is any repeated capabilities without prefix, the session must have only
-                # one instrument, so just get the prefix from the first channel and add to all of
-                # the repeated capabilities that are without prefix
-                default_prefix = first_channel_name[:first_channel_name.find('/') + 1]
-                channel_names = _converters.convert_independent_channels_repeated_capabilities(
-                    self._repeated_capability,
-                    default_prefix
-                )
-            else:
-                channel_names = _converters.convert_repeated_capabilities(
-                    self._repeated_capability,
-                    ''
-                )
+            channel_names = _converters.convert_channels_repeated_capabilities(
+                self._repeated_capability,
+                self._params['independent_channels'],
+                first_channel_name
+            )
 
         return [
             Measurement(
