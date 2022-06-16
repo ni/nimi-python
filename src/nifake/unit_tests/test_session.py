@@ -873,6 +873,15 @@ class TestSession(object):
         self.patched_library.niFake_ReadFromChannel.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher('site0/2,site0/3,site1/2,site1/3'), _matchers.ViInt32Matcher(test_maximum_time_ms), _matchers.ViReal64PointerMatcher())
         assert value == test_reading
 
+    def test_function_with_repeated_capability_type(self):
+        self.patched_library.niFake_FunctionWithRepeatedCapabilityType.side_effect = self.side_effects_helper.niFake_FunctionWithRepeatedCapabilityType
+        with nifake.Session('dev1') as session:
+            session.channels['0-3'].function_with_repeated_capability_type()
+            self.patched_library.niFake_FunctionWithRepeatedCapabilityType.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViStringMatcher('0,1,2,3')
+            )
+
     # Attributes
 
     def test_get_attribute_int32(self):
