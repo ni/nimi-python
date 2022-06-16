@@ -1225,6 +1225,26 @@ class TestSession(object):
                 assert actual.struct_int == expected.struct_int
                 assert actual.struct_double == expected.struct_double
 
+    def test_get_custom_type_typedef(self):
+        self.patched_library.niFake_GetCustomTypeTypedef.side_effect = self.side_effects_helper.niFake_GetCustomTypeTypedef
+        cst = nifake.CustomStructTypedef(struct_int=42, struct_double=4.2)
+        cst_ctype = nifake.struct_CustomStructTypedef(cst)
+        csnt = nifake.CustomStructNestedTypedef(
+            struct_custom_struct=nifake.CustomStruct(struct_int=43, struct_double=4.3),
+            struct_custom_struct_typedef=nifake.CustomStructTypedef(struct_int=44, struct_double=4.4)
+        )
+        csnt_ctype = nifake.struct_CustomStructNestedTypedef(csnt)
+        self.side_effects_helper['GetCustomTypeTypedef']['cst'] = cst_ctype
+        self.side_effects_helper['GetCustomTypeTypedef']['csnt'] = csnt_ctype
+        with nifake.Session('dev1') as session:
+            cst_test, csnt_test = session.get_custom_type_typedef()
+            assert cst_test.struct_int == cst.struct_int
+            assert cst_test.struct_double == cst.struct_double
+            assert csnt_test.struct_custom_struct.struct_int == csnt.struct_custom_struct.struct_int
+            assert csnt_test.struct_custom_struct.struct_double == csnt.struct_custom_struct.struct_double
+            assert csnt_test.struct_custom_struct_typedef.struct_int == csnt.struct_custom_struct_typedef.struct_int
+            assert csnt_test.struct_custom_struct_typedef.struct_double == csnt.struct_custom_struct_typedef.struct_double
+
     # python-code size mechanism
 
     def test_get_array_using_python_code_double(self):
