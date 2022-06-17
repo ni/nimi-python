@@ -173,7 +173,6 @@ def convert_single_group_repeated_capabilities(repeated_capability):
 
 def convert_channels_repeated_capabilities(
     channels_repeated_capability,
-    is_independent_channels_session,
     first_channel_name
 ):
     '''Convert a channels repeated capabilities string, possibly with no or multiple prefixes (each ends with '/'), to a list
@@ -182,18 +181,15 @@ def convert_channels_repeated_capabilities(
         channels_repeated_capability (str) - refer to _convert_repeated_capabilities() for the
             supported formats (this string is expected to be used as the index of session.channels)
 
-        is_independent_channels_session (bool) - whether the session is initialized with
-            independent_channels set to True
-
         first_channel_name (str) - name of the first channel returned by get_channel_name() of the
-            session (its prefix, which ends with '/', would be added to any of the expanded
-            items if it does not already have one and is_independent_channels is set to True)
+            session (if it has a prefix, which ends with '/', it would be added to any of the
+            expanded items if it does not already have one)
 
     Returns:
         channel_names (list of str) - comma delimited list of strings of the expanded channels
             repeated capability items (essentially the channel names)
     '''
-    if is_independent_channels_session:
+    if '/' in first_channel_name:
         # Split the comma-delimited channels repeated capabilities (if any) into groups with at most
         # one prefix each and expand their ranges (if any) accordingly
         repeated_capabilities = []

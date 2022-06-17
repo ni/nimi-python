@@ -37,7 +37,6 @@
             first_channel_name = self._get_channel_name(1)
             channel_names = _converters.convert_channels_repeated_capabilities(
                 self._repeated_capability,
-                self._params['independent_channels'],
                 first_channel_name
             )
 
