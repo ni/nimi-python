@@ -34,7 +34,7 @@
         if self._repeated_capability == '':
             channel_names = self._get_channel_names(range(self.channel_count))
         else:
-            first_channel_name = self._get_channel_name(1)
+            first_channel_name = self._get_channel_names([0])[0]
             channel_names = _converters.convert_channels_repeated_capabilities(
                 self._repeated_capability,
                 first_channel_name
