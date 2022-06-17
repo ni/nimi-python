@@ -5234,35 +5234,6 @@ class _SessionBase(object):
         return attribute_value_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def _get_channel_name(self, index):
-        r'''_get_channel_name
-
-        Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the channel_count property to
-        determine the upper bound of valid values for **index**.
-
-        Args:
-            index (int): Specifies which output channel name to return. The index values begin at
-                1.
-
-
-        Returns:
-            channel_name (str): Returns the output channel name that corresponds to **index**.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        channel_name_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return channel_name_ctype.value.decode(self._encoding)
-
-    @ivi_synchronized
     def _get_channel_names(self, indices):
         r'''_get_channel_names
 
@@ -7107,6 +7078,35 @@ class Session(_SessionBase):
             return self._initialize_with_channels(resource_name, channels, reset, option_string)
 
     @ivi_synchronized
+    def get_channel_name(self, index):
+        r'''get_channel_name
+
+        Retrieves the output **channelName** that corresponds to the requested
+        **index**. Use the channel_count property to
+        determine the upper bound of valid values for **index**.
+
+        Args:
+            index (int): Specifies which output channel name to return. The index values begin at
+                1.
+
+
+        Returns:
+            channel_name (str): Returns the output channel name that corresponds to **index**.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        channel_name_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return channel_name_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
         r'''_get_ext_cal_last_date_and_time
 
@@ -7550,25 +7550,6 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_InitializeWithIndependentChannels(resource_name_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
-
-    @ivi_synchronized
-    def get_channel_name(self, index):
-        '''get_channel_name
-
-        Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the channel_count property to
-        determine the upper bound of valid values for **index**.
-
-        Args:
-            index (int): Specifies which output channel name to return. The index values begin at
-                1.
-
-
-        Returns:
-            channel_name (str): Returns the output channel name that corresponds to **index**.
-
-        '''
-        return self._get_channel_name(index)
 
     @ivi_synchronized
     def get_channel_names(self, indices):
