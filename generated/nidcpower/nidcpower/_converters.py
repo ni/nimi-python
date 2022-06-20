@@ -186,6 +186,7 @@ def convert_channels_repeated_capabilities(
         - convert_channels_repeated_capabilities('0:2', '0') --> ['0', '1', '2']
         - convert_channels_repeated_capabilities('0:2,4', '0') --> ['0', '1', '2', '4']
         - convert_channels_repeated_capabilities('4,1:2', '1') --> ['4', '1', '2']
+        - convert_channels_repeated_capabilities('2:3,0', 'Dev1/0') --> ['Dev1/2', 'Dev1/3', 'Dev1/0']
         - convert_channels_repeated_capabilities('Dev1/1', 'Dev1/0') --> ['Dev1/1']
         - convert_channels_repeated_capabilities('Dev1/0-2', 'Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2']
         - convert_channels_repeated_capabilities('Dev1/0:2', 'Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2']
@@ -197,7 +198,7 @@ def convert_channels_repeated_capabilities(
         channels_repeated_capability (str) - refer to _convert_repeated_capabilities() for the
             supported formats (this string is expected to be used as the index of session.channels)
 
-        first_channel_name (str) - name of the first channel returned by get_channel_name() of the
+        first_channel_name (str) - name of the first channel returned by get_channel_names() of the
             session (if it has a prefix, which ends with '/', it would be added to any of the
             expanded items if it does not already have one)
 
