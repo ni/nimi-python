@@ -4,7 +4,6 @@ import nifake.custom_struct as custom_struct
 import nifake.custom_struct_typedef as custom_struct_typedef
 
 
-# These custom type classes are created as placeholders
 class struct_CustomStructNestedTypedef(ctypes.Structure):  # noqa N801
     _fields_ = [
         ('struct_custom_struct', custom_struct.struct_CustomStruct),
