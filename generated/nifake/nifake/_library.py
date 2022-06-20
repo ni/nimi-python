@@ -9,6 +9,10 @@ from nifake._visatype import *  # noqa: F403,H303
 
 import nifake.custom_struct as custom_struct  # noqa: F401
 
+import nifake.custom_struct_nested_typedef as custom_struct_nested_typedef  # noqa: F401
+
+import nifake.custom_struct_typedef as custom_struct_typedef  # noqa: F401
+
 
 class Library(object):
     '''Library
@@ -29,6 +33,7 @@ class Library(object):
         self.niFake_EnumInputFunctionWithDefaults_cfunc = None
         self.niFake_ExportAttributeConfigurationBuffer_cfunc = None
         self.niFake_FetchWaveform_cfunc = None
+        self.niFake_FunctionWithRepeatedCapabilityType_cfunc = None
         self.niFake_GetABoolean_cfunc = None
         self.niFake_GetANumber_cfunc = None
         self.niFake_GetAStringOfFixedMaximumSize_cfunc = None
@@ -48,6 +53,7 @@ class Library(object):
         self.niFake_GetCalInterval_cfunc = None
         self.niFake_GetCustomType_cfunc = None
         self.niFake_GetCustomTypeArray_cfunc = None
+        self.niFake_GetCustomTypeTypedef_cfunc = None
         self.niFake_GetEnumValue_cfunc = None
         self.niFake_GetError_cfunc = None
         self.niFake_ImportAttributeConfigurationBuffer_cfunc = None
@@ -151,6 +157,14 @@ class Library(object):
                 self.niFake_FetchWaveform_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFake_FetchWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_FetchWaveform_cfunc(vi, number_of_samples, waveform_data, actual_number_of_samples)
+
+    def niFake_FunctionWithRepeatedCapabilityType(self, vi, site_list):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_FunctionWithRepeatedCapabilityType_cfunc is None:
+                self.niFake_FunctionWithRepeatedCapabilityType_cfunc = self._get_library_function('niFake_FunctionWithRepeatedCapabilityType')
+                self.niFake_FunctionWithRepeatedCapabilityType_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_FunctionWithRepeatedCapabilityType_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_FunctionWithRepeatedCapabilityType_cfunc(vi, site_list)
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         with self._func_lock:
@@ -303,6 +317,14 @@ class Library(object):
                 self.niFake_GetCustomTypeArray_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(custom_struct.struct_CustomStruct)]  # noqa: F405
                 self.niFake_GetCustomTypeArray_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetCustomTypeArray_cfunc(vi, number_of_elements, cs)
+
+    def niFake_GetCustomTypeTypedef(self, vi, cst, csnt):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetCustomTypeTypedef_cfunc is None:
+                self.niFake_GetCustomTypeTypedef_cfunc = self._get_library_function('niFake_GetCustomTypeTypedef')
+                self.niFake_GetCustomTypeTypedef_cfunc.argtypes = [ViSession, ctypes.POINTER(custom_struct_typedef.struct_CustomStructTypedef), ctypes.POINTER(custom_struct_nested_typedef.struct_CustomStructNestedTypedef)]  # noqa: F405
+                self.niFake_GetCustomTypeTypedef_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetCustomTypeTypedef_cfunc(vi, cst, csnt)
 
     def niFake_GetEnumValue(self, vi, a_quantity, a_turtle):  # noqa: N802
         with self._func_lock:
