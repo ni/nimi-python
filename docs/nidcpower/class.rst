@@ -937,6 +937,7 @@ fetch_multiple
 
             Fields in Measurement:
 
+            - **channel** (str)
             - **voltage** (float)
             - **current** (float)
             - **in_compliance** (bool)
@@ -984,6 +985,7 @@ fetch_multiple
 
                     List of named tuples with fields:
 
+                    - **channel** (str)
                     - **voltage** (float)
                     - **current** (float)
                     - **in_compliance** (bool)
@@ -1562,6 +1564,7 @@ measure_multiple
 
             Fields in Measurement:
 
+            - **channel** (str)
             - **voltage** (float)
             - **current** (float)
             - **in_compliance** (bool) - Always None
@@ -1588,6 +1591,7 @@ measure_multiple
 
                     List of named tuples with fields:
 
+                    - **channel** (str)
                     - **voltage** (float)
                     - **current** (float)
                     - **in_compliance** (bool) - Always None

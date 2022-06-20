@@ -4766,6 +4766,7 @@ class _SessionBase(object):
 
         Fields in Measurement:
 
+        - **channel** (str)
         - **voltage** (float)
         - **current** (float)
         - **in_compliance** (bool)
@@ -4795,20 +4796,21 @@ class _SessionBase(object):
         Returns:
             measurements (list of Measurement): List of named tuples with fields:
 
+                - **channel** (str)
                 - **voltage** (float)
                 - **current** (float)
                 - **in_compliance** (bool)
 
         '''
         import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance', 'channel'])
+        Measurement = collections.namedtuple('Measurement', ['channel', 'voltage', 'current', 'in_compliance'])
 
-        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(timeout, count)
+        voltage_measurements, current_measurements, in_compliances = self._fetch_multiple(timeout, count)
 
         if self._repeated_capability == '':
             channel_names = self._get_channel_names(range(self.channel_count))
         else:
-            first_channel_name = self._get_channel_name(1)
+            first_channel_name = self._get_channel_names([0])[0]
             channel_names = _converters.convert_channels_repeated_capabilities(
                 self._repeated_capability,
                 first_channel_name
@@ -4816,11 +4818,13 @@ class _SessionBase(object):
 
         return [
             Measurement(
-                voltage=voltage_measurements[i],
-                current=current_measurements[i],
-                in_compliance=in_compliance[i],
                 channel=channel_names[0],
-            ) for i in range(count)
+                voltage=voltage,
+                current=current,
+                in_compliance=in_compliance
+            ) for voltage, current, in_compliance in zip(
+                voltage_measurements, current_measurements, in_compliances
+            )
         ]
 
     @ivi_synchronized
@@ -4835,6 +4839,7 @@ class _SessionBase(object):
 
         Fields in Measurement:
 
+        - **channel** (str)
         - **voltage** (float)
         - **current** (float)
         - **in_compliance** (bool) - Always None
@@ -4856,20 +4861,21 @@ class _SessionBase(object):
         Returns:
             measurements (list of Measurement): List of named tuples with fields:
 
+                - **channel** (str)
                 - **voltage** (float)
                 - **current** (float)
                 - **in_compliance** (bool) - Always None
 
         '''
         import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance', 'channel'])
+        Measurement = collections.namedtuple('Measurement', ['channel', 'voltage', 'current', 'in_compliance'])
 
         voltage_measurements, current_measurements = self._measure_multiple()
 
         if self._repeated_capability == '':
             channel_names = self._get_channel_names(range(self.channel_count))
         else:
-            first_channel_name = self._get_channel_name(1)
+            first_channel_name = self._get_channel_names([0])[0]
             channel_names = _converters.convert_channels_repeated_capabilities(
                 self._repeated_capability,
                 first_channel_name
@@ -4877,11 +4883,13 @@ class _SessionBase(object):
 
         return [
             Measurement(
-                voltage=voltage_measurements[i],
-                current=current_measurements[i],
-                in_compliance=None,
-                channel=channel_names[i],
-            ) for i in range(self._parse_channel_count())
+                channel=channel_name,
+                voltage=voltage,
+                current=current,
+                in_compliance=None
+            ) for voltage, current, channel_name in zip(
+                voltage_measurements, current_measurements, channel_names
+            )
         ]
 
     @ivi_synchronized
@@ -5264,35 +5272,6 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
-
-    @ivi_synchronized
-    def _get_channel_name(self, index):
-        r'''_get_channel_name
-
-        Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the channel_count property to
-        determine the upper bound of valid values for **index**.
-
-        Args:
-            index (int): Specifies which output channel name to return. The index values begin at
-                1.
-
-
-        Returns:
-            channel_name (str): Returns the output channel name that corresponds to **index**.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        channel_name_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return channel_name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
     def _get_channel_names(self, indices):
@@ -7139,6 +7118,35 @@ class Session(_SessionBase):
             return self._initialize_with_channels(resource_name, channels, reset, option_string)
 
     @ivi_synchronized
+    def get_channel_name(self, index):
+        r'''get_channel_name
+
+        Retrieves the output **channelName** that corresponds to the requested
+        **index**. Use the channel_count property to
+        determine the upper bound of valid values for **index**.
+
+        Args:
+            index (int): Specifies which output channel name to return. The index values begin at
+                1.
+
+
+        Returns:
+            channel_name (str): Returns the output channel name that corresponds to **index**.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        channel_name_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return channel_name_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
         r'''_get_ext_cal_last_date_and_time
 
@@ -7582,25 +7590,6 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_InitializeWithIndependentChannels(resource_name_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
-
-    @ivi_synchronized
-    def get_channel_name(self, index):
-        '''get_channel_name
-
-        Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the channel_count property to
-        determine the upper bound of valid values for **index**.
-
-        Args:
-            index (int): Specifies which output channel name to return. The index values begin at
-                1.
-
-
-        Returns:
-            channel_name (str): Returns the output channel name that corresponds to **index**.
-
-        '''
-        return self._get_channel_name(index)
 
     @ivi_synchronized
     def get_channel_names(self, indices):

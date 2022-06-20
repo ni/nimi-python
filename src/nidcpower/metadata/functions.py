@@ -1064,7 +1064,7 @@ functions = {
     'FancyFetchMultiple': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nReturns a list of named tuples (Measurement) that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n\n',
+            'description': '\nReturns a list of named tuples (Measurement) that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nFields in Measurement:\n\n- **channel** (str)\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_templates': [
@@ -1114,7 +1114,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nList of named tuples with fields:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n'
+                    'description': '\nList of named tuples with fields:\n\n- **channel** (str)\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n'
                 },
                 'name': 'measurements',
                 'python_type': 'Measurement',
@@ -1207,7 +1207,7 @@ functions = {
     'FancyMeasureMultiple': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nReturns a list of named tuples (Measurement) containing the measured voltage\nand current values on the specified output channel(s). Each call to this function\nblocks other function calls until the measurements are returned from the device.\nThe order of the measurements returned in the array corresponds to the order\non the specified output channel(s).\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n\n',
+            'description': '\nReturns a list of named tuples (Measurement) containing the measured voltage\nand current values on the specified output channel(s). Each call to this function\nblocks other function calls until the measurements are returned from the device.\nThe order of the measurements returned in the array corresponds to the order\non the specified output channel(s).\n\nFields in Measurement:\n\n- **channel** (str)\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_templates': [
@@ -1237,7 +1237,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nList of named tuples with fields:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n'
+                    'description': '\nList of named tuples with fields:\n\n- **channel** (str)\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n'
                 },
                 'name': 'measurements',
                 'python_type': 'Measurement',
@@ -1722,11 +1722,9 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetChannelName': {
-        'codegen_method': 'private',
         'documentation': {
             'description': '\nRetrieves the output **channelName** that corresponds to the requested\n**index**. Use the NIDCPOWER_ATTR_CHANNEL_COUNT attribute to\ndetermine the upper bound of valid values for **index**.\n'
         },
-        'method_name_for_documentation': 'get_channel_name',
         'parameters': [
             {
                 'direction': 'in',
@@ -1766,7 +1764,6 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
-        'render_in_session_base': True,
         'returns': 'ViStatus'
     },
     'GetChannelNameFromString': {
@@ -2988,60 +2985,6 @@ functions = {
                 'type': 'ViConstString'
             }
         ],
-        'returns': 'ViStatus'
-    },
-    'PublicGetChannelName': {
-        'codegen_method': 'python-only',
-        'documentation': {
-            'description': '\nRetrieves the output **channelName** that corresponds to the requested\n**index**. Use the NIDCPOWER_ATTR_CHANNEL_COUNT attribute to\ndetermine the upper bound of valid values for **index**.\n'
-        },
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'delegate_to_private_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nSpecifies which output channel name to return. The index values begin at\n1.\n'
-                },
-                'name': 'index',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nSpecifies the number of bytes in the ViChar array you specify for\n**channelName**. If the **channelName**, including the terminating NUL\nbyte, contains more bytes than you indicate in this attribute, the\nfunction copies (buffer size - 1) bytes into the buffer, places an ASCII\nNUL byte at the end of the buffer, and returns the buffer size you must\npass to get the entire value. For example, if the value is 123456 and\nthe buffer size is 4, the function places 123 into the buffer and\nreturns 7.\nIf you pass 0, you can pass VI_NULL for **channelName**.\n'
-                },
-                'name': 'bufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the output channel name that corresponds to **index**.'
-                },
-                'is_repeated_capability': False,
-                'name': 'channelName',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
-                },
-                'type': 'ViString'
-            }
-        ],
-        'python_name': 'get_channel_name',
         'returns': 'ViStatus'
     },
     'PublicGetChannelNameFromString': {
