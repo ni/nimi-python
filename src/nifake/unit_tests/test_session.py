@@ -1042,6 +1042,25 @@ class TestSession(object):
             attribute_id = 1000005
             self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViReal64Matcher(enum_value.value))
 
+    def test_get_attribute_enum_with_converter(self):
+        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
+        enum_value = nifake.EnumWithConverter.RED
+        converted_value = True
+        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = enum_value.value
+        with nifake.Session('dev1') as session:
+            assert session.read_write_enum_with_converter == converted_value
+            attribute_id = 1000011
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32PointerMatcher())
+
+    def test_set_attribute_enum_with_converter(self):
+        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
+        enum_value = nifake.EnumWithConverter.RED
+        converted_value = True
+        with nifake.Session('dev1') as session:
+            session.read_write_enum_with_converter = converted_value
+            attribute_id = 1000011
+            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32Matcher(enum_value.value))
+
     def test_get_attribute_channel(self):
         self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
         test_number = 100

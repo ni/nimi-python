@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import nifake._visatype as _visatype
+import nifake.enums as enums
 import nifake.errors as errors
 
 import array
@@ -278,5 +279,29 @@ def convert_chained_repeated_capability_to_parts(chained_repeated_capability):
 # nifake specific converter(s) - used only for testing
 def convert_double_each_element(numbers):
     return [x * 2 for x in numbers]
+
+
+def convert_from_enum_with_converter_enum(value):
+    try:
+        return {
+            enums.EnumWithConverter.RED: True,
+            enums.EnumWithConverter.BLUE: False,
+            enums.EnumWithConverter.YELLOW: 'yellow',
+            enums.EnumWithConverter.BLACK: 42,
+        }[value]
+    except Exception:
+        raise ValueError(f"EnumWithConverter enum value '{value}' cannot be converted")
+
+
+def convert_to_enum_with_converter_enum(value):
+    try:
+        return {
+            True: enums.EnumWithConverter.RED,
+            False: enums.EnumWithConverter.BLUE,
+            'yellow': enums.EnumWithConverter.YELLOW,
+            42: enums.EnumWithConverter.BLACK,
+        }[value]
+    except Exception:
+        raise ValueError(f"'{value}' cannot be converted to an EnumWithConverter enum value")
 
 
