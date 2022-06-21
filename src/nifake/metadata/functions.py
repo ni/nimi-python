@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 1.2.0d9
+# This file is generated from NI-FAKE API metadata version 22.5.0d9
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -302,6 +302,34 @@ functions = {
                 'use_in_python_api': False
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'FunctionWithRepeatedCapabilityType': {
+        'documentation': {
+            'description': 'A function with a parameter that specifies repeated_capability_type.'
+        },
+        'has_repeated_capability': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'A list of sites.'
+                },
+                'is_repeated_capability': True,
+                'name': 'siteList',
+                'repeated_capability_type': 'sites',
+                'type': 'ViConstString'
+            }
+        ],
+        'repeated_capability_type': 'sites',
         'returns': 'ViStatus'
     },
     'GetABoolean': {
@@ -1009,6 +1037,39 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'GetCustomTypeTypedef': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'This function returns a custom type with typedef and a custom type with nested typedef.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'An object of a custom type with typedef'
+                },
+                'name': 'cst',
+                'type': 'CustomStructTypedef'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'An object of a custom type with nested typedef'
+                },
+                'name': 'csnt',
+                'type': 'CustomStructNestedTypedef'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'GetEnumValue': {
         'codegen_method': 'public',
         'documentation': {
@@ -1144,7 +1205,7 @@ functions = {
                 'documentation': {
                     'description': 'Indicates date and time of the last calibration.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],

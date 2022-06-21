@@ -37,6 +37,8 @@ class SideEffectsHelper(object):
         self._defaults['FetchWaveform']['return'] = 0
         self._defaults['FetchWaveform']['waveformData'] = None
         self._defaults['FetchWaveform']['actualNumberOfSamples'] = None
+        self._defaults['FunctionWithRepeatedCapabilityType'] = {}
+        self._defaults['FunctionWithRepeatedCapabilityType']['return'] = 0
         self._defaults['GetABoolean'] = {}
         self._defaults['GetABoolean']['return'] = 0
         self._defaults['GetABoolean']['aBoolean'] = None
@@ -99,6 +101,10 @@ class SideEffectsHelper(object):
         self._defaults['GetCustomTypeArray'] = {}
         self._defaults['GetCustomTypeArray']['return'] = 0
         self._defaults['GetCustomTypeArray']['cs'] = None
+        self._defaults['GetCustomTypeTypedef'] = {}
+        self._defaults['GetCustomTypeTypedef']['return'] = 0
+        self._defaults['GetCustomTypeTypedef']['cst'] = None
+        self._defaults['GetCustomTypeTypedef']['csnt'] = None
         self._defaults['GetEnumValue'] = {}
         self._defaults['GetEnumValue']['return'] = 0
         self._defaults['GetEnumValue']['aQuantity'] = None
@@ -284,6 +290,11 @@ class SideEffectsHelper(object):
         if actual_number_of_samples is not None:
             actual_number_of_samples.contents.value = self._defaults['FetchWaveform']['actualNumberOfSamples']
         return self._defaults['FetchWaveform']['return']
+
+    def niFake_FunctionWithRepeatedCapabilityType(self, vi, site_list):  # noqa: N802
+        if self._defaults['FunctionWithRepeatedCapabilityType']['return'] != 0:
+            return self._defaults['FunctionWithRepeatedCapabilityType']['return']
+        return self._defaults['FunctionWithRepeatedCapabilityType']['return']
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         if self._defaults['GetABoolean']['return'] != 0:
@@ -531,6 +542,23 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             cs_ref[i] = test_value[i]
         return self._defaults['GetCustomTypeArray']['return']
+
+    def niFake_GetCustomTypeTypedef(self, vi, cst, csnt):  # noqa: N802
+        if self._defaults['GetCustomTypeTypedef']['return'] != 0:
+            return self._defaults['GetCustomTypeTypedef']['return']
+        # cst
+        if self._defaults['GetCustomTypeTypedef']['cst'] is None:
+            raise MockFunctionCallError("niFake_GetCustomTypeTypedef", param='cst')
+        for field in self._defaults['GetCustomTypeTypedef']['cst']._fields_:
+            field_name = field[0]
+            setattr(cst.contents, field_name, getattr(self._defaults['GetCustomTypeTypedef']['cst'], field_name))
+        # csnt
+        if self._defaults['GetCustomTypeTypedef']['csnt'] is None:
+            raise MockFunctionCallError("niFake_GetCustomTypeTypedef", param='csnt')
+        for field in self._defaults['GetCustomTypeTypedef']['csnt']._fields_:
+            field_name = field[0]
+            setattr(csnt.contents, field_name, getattr(self._defaults['GetCustomTypeTypedef']['csnt'], field_name))
+        return self._defaults['GetCustomTypeTypedef']['return']
 
     def niFake_GetEnumValue(self, vi, a_quantity, a_turtle):  # noqa: N802
         if self._defaults['GetEnumValue']['return'] != 0:
@@ -881,6 +909,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_ExportAttributeConfigurationBuffer.return_value = 0
         mock_library.niFake_FetchWaveform.side_effect = MockFunctionCallError("niFake_FetchWaveform")
         mock_library.niFake_FetchWaveform.return_value = 0
+        mock_library.niFake_FunctionWithRepeatedCapabilityType.side_effect = MockFunctionCallError("niFake_FunctionWithRepeatedCapabilityType")
+        mock_library.niFake_FunctionWithRepeatedCapabilityType.return_value = 0
         mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")
         mock_library.niFake_GetABoolean.return_value = 0
         mock_library.niFake_GetANumber.side_effect = MockFunctionCallError("niFake_GetANumber")
@@ -919,6 +949,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetCustomType.return_value = 0
         mock_library.niFake_GetCustomTypeArray.side_effect = MockFunctionCallError("niFake_GetCustomTypeArray")
         mock_library.niFake_GetCustomTypeArray.return_value = 0
+        mock_library.niFake_GetCustomTypeTypedef.side_effect = MockFunctionCallError("niFake_GetCustomTypeTypedef")
+        mock_library.niFake_GetCustomTypeTypedef.return_value = 0
         mock_library.niFake_GetEnumValue.side_effect = MockFunctionCallError("niFake_GetEnumValue")
         mock_library.niFake_GetEnumValue.return_value = 0
         mock_library.niFake_GetError.side_effect = MockFunctionCallError("niFake_GetError")
