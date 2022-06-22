@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 22.5.0d9999
+# This file is generated from NI-FAKE API metadata version 22.5.0d24
 functions = {
     'Abort': {
         'codegen_method': 'public',
