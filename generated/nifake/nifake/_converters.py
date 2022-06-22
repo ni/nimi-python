@@ -289,8 +289,8 @@ def convert_from_enum_with_converter_enum(value):
             enums.EnumWithConverter.YELLOW: 'yellow',
             enums.EnumWithConverter.BLACK: 42,
         }[value]
-    except Exception:
-        raise ValueError(f"EnumWithConverter enum value '{value}' cannot be converted")
+    except KeyError:
+        raise ValueError(f'{value} is not a valid EnumWithConverter enum value to be converted')
 
 
 def convert_to_enum_with_converter_enum(value):
@@ -301,7 +301,7 @@ def convert_to_enum_with_converter_enum(value):
             'yellow': enums.EnumWithConverter.YELLOW,
             42: enums.EnumWithConverter.BLACK,
         }[value]
-    except Exception:
-        raise ValueError(f"'{value}' cannot be converted to an EnumWithConverter enum value")
+    except KeyError:
+        raise ValueError(f"{value} cannot be converted to an EnumWithConverter enum value, valid values: True, False, 'yellow', 42")
 
 

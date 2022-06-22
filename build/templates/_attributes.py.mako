@@ -5,6 +5,7 @@ ${template_parameters['encoding_tag']}
     config = template_parameters['metadata'].config
 %>\
 import ${module_name}._converters as _converters
+import ${module_name}.errors as errors
 
 import hightime
 
@@ -125,9 +126,12 @@ class AttributeEnumWithConverter(AttributeEnum):
         self._setter_converter = setter_converter
 
     def __get__(self, session, session_type):
-        return self._getter_converter(
-            self._underlying_enum_attribute.__get__(session, session_type)
-        )
+        try:
+            return self._getter_converter(
+                self._underlying_enum_attribute.__get__(session, session_type)
+            )
+        except ValueError:
+            raise errors.DriverTooNewError('The driver runtime returned an unexpected value. ')
 
     def __set__(self, session, value):
         return self._underlying_enum_attribute.__set__(session, self._setter_converter(value))
