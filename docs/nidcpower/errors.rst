@@ -59,6 +59,16 @@ SelfTestError
         An error due to a failed self-test
 
 
+DriverTooNewError
+-----------------
+
+    .. py:currentmodule:: nidcpower.errors
+
+    .. exception:: DriverTooNewError
+
+        An error due to the driver runtime being too new compared to the Python module
+
+
 DriverWarning
 -------------
 
