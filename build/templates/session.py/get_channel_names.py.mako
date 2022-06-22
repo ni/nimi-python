@@ -1,5 +1,10 @@
 <%page args="f, config, method_template"/>\
 <%
+    '''Some "fancy" methods in _SessionBase need to get channel names, but get_channel_names()
+    doesn't make sense there for customers as it only applies with no repeated capabilities.
+    For that reason, some modules code-generate _get_channel_names() as private in _SessionBase and
+    then put this public wrapper in Session.
+    '''
     import build.helper as helper
 
     suffix = method_template['method_python_name_suffix']
