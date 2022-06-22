@@ -96,6 +96,15 @@ class SelfTestError(Error):
 
 
 % endif
+% if 'DriverTooNewError' in extra_errors_used:
+class DriverTooNewError(Error):
+    '''An error due to the driver runtime being too new compared to the Python module'''
+
+    def __init__(self, prefix_message):
+        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the ${module_name} Python module is too old. Upgrade the ${module_name} Python module.')
+
+
+% endif
 def handle_error(session, code, ignore_warnings, is_error_handling):
     '''handle_error
 

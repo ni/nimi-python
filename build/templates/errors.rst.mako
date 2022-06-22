@@ -65,6 +65,17 @@ ${helper.get_rst_header_snippet('SelfTestError', '-')}
 
 
 % endif
+% if 'DriverTooNewError' in extra_errors_used:
+${helper.get_rst_header_snippet('DriverTooNewError', '-')}
+
+    .. py:currentmodule:: ${module_name}.errors
+
+    .. exception:: DriverTooNewError
+
+        An error due to the driver runtime being too new compared to the Python module
+
+
+% endif
 ${helper.get_rst_header_snippet('DriverWarning', '-')}
 
     .. py:currentmodule:: ${module_name}.errors

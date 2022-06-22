@@ -80,6 +80,13 @@ class SelfTestError(Error):
         super(SelfTestError, self).__init__('Self-test failed with code {0}: {1}'.format(code, msg))
 
 
+class DriverTooNewError(Error):
+    '''An error due to the driver runtime being too new compared to the Python module'''
+
+    def __init__(self, prefix_message):
+        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the nidcpower Python module is too old. Upgrade the nidcpower Python module.')
+
+
 def handle_error(session, code, ignore_warnings, is_error_handling):
     '''handle_error
 
