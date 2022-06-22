@@ -51,6 +51,7 @@ class Library(object):
         self.niFake_GetAttributeViString_cfunc = None
         self.niFake_GetCalDateAndTime_cfunc = None
         self.niFake_GetCalInterval_cfunc = None
+        self.niFake_GetChannelNames_cfunc = None
         self.niFake_GetCustomType_cfunc = None
         self.niFake_GetCustomTypeArray_cfunc = None
         self.niFake_GetCustomTypeTypedef_cfunc = None
@@ -301,6 +302,14 @@ class Library(object):
                 self.niFake_GetCalInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFake_GetCalInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetCalInterval_cfunc(vi, months)
+
+    def niFake_GetChannelNames(self, vi, indices, name_size, names):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetChannelNames_cfunc is None:
+                self.niFake_GetChannelNames_cfunc = self._get_library_function('niFake_GetChannelNames')
+                self.niFake_GetChannelNames_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_GetChannelNames_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetChannelNames_cfunc(vi, indices, name_size, names)
 
     def niFake_GetCustomType(self, vi, cs):  # noqa: N802
         with self._func_lock:
