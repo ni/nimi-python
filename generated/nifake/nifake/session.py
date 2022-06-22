@@ -169,6 +169,7 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.read_write_double_with_repeated_capability`
     '''
+    read_write_enum_with_converter = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnumWithConverter, 1000011)
     read_write_int64 = _attributes.AttributeViInt64(1000006)
     '''Type: int
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 22.5.0d9
+# This file is generated from NI-FAKE API metadata version 22.5.0d21
 enums = {
     'AltColor': {
         'values': [
@@ -108,6 +108,32 @@ enums = {
                 'value': 5
             },
             {
+                'name': 'NIFAKE_VAL_BLACK',
+                'value': 42
+            }
+        ]
+    },
+    'EnumWithConverter': {
+        'converted_value_to_enum_function_name': 'convert_to_enum_with_converter_enum',
+        'enum_to_converted_value_function_name': 'convert_from_enum_with_converter_enum',
+        'values': [
+            {
+                'converts_to_value': True,
+                'name': 'NIFAKE_VAL_RED',
+                'value': 1
+            },
+            {
+                'converts_to_value': False,
+                'name': 'NIFAKE_VAL_BLUE',
+                'value': 2
+            },
+            {
+                'converts_to_value': 'yellow',
+                'name': 'NIFAKE_VAL_YELLOW',
+                'value': 5
+            },
+            {
+                'converts_to_value': 42,
                 'name': 'NIFAKE_VAL_BLACK',
                 'value': 42
             }
