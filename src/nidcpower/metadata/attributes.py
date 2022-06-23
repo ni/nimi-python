@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.5.0d65
+# This file is generated from NI-DCPower API metadata version 22.5.0d71
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -2357,11 +2357,11 @@ attributes = {
     },
     1150302: {
         'access': 'read-write',
-        'attribute_class': 'AttributeIsolationState',
         'documentation': {
             'description': '\nDefines whether the channel is isolated.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
+        'enum': 'IsolationState',
         'lv_property': 'Advanced:Isolation State',
         'name': 'ISOLATION_STATE',
         'supported_rep_caps': [
