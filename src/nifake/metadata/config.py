@@ -14,6 +14,16 @@ config = {
             'ctypes_type': 'struct_CustomStruct',
             'file_name': 'custom_struct',
             'python_name': 'CustomStruct'
+        },
+        {
+            'ctypes_type': 'struct_CustomStructNestedTypedef',
+            'file_name': 'custom_struct_nested_typedef',
+            'python_name': 'CustomStructNestedTypedef'
+        },
+        {
+            'ctypes_type': 'struct_CustomStructTypedef',
+            'file_name': 'custom_struct_typedef',
+            'python_name': 'CustomStructTypedef'
         }
     ],
     'driver_name': 'NI-FAKE',

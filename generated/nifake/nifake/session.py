@@ -14,6 +14,10 @@ import nifake.errors as errors
 
 import nifake.custom_struct as custom_struct  # noqa: F401
 
+import nifake.custom_struct_nested_typedef as custom_struct_nested_typedef  # noqa: F401
+
+import nifake.custom_struct_typedef as custom_struct_typedef  # noqa: F401
+
 import hightime
 import nitclk
 
@@ -165,6 +169,7 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.read_write_double_with_repeated_capability`
     '''
+    read_write_enum_with_converter = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnumWithConverter, 1000011)
     read_write_int64 = _attributes.AttributeViInt64(1000006)
     '''Type: int
 
@@ -259,6 +264,29 @@ class _SessionBase(object):
             return "Failed to retrieve error description."
 
     ''' These are code-generated '''
+
+    @ivi_synchronized
+    def function_with_repeated_capability_type(self):
+        r'''function_with_repeated_capability_type
+
+        A method with a parameter that specifies repeated_capability_type.
+
+        Tip:
+        This method can be called on specific sites within your :py:class:`nifake.Session` instance.
+        Use Python index notation on the repeated capabilities container sites to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.sites[ ... ].function_with_repeated_capability_type`
+
+        To call the method on all sites, you can call it directly on the :py:class:`nifake.Session`.
+
+        Example: :py:meth:`my_session.function_with_repeated_capability_type`
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niFake_FunctionWithRepeatedCapabilityType(vi_ctype, site_list_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -430,6 +458,38 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
+    def _get_channel_names(self, indices):
+        r'''_get_channel_names
+
+        Returns a list of channel names for the given channel indices.
+
+        Args:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            names (list of str): The channel name(s) at the specified indices.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
+        name_size_ctype = _visatype.ViInt32()  # case S170
+        names_ctype = None  # case C050
+        error_code = self._library.niFake_GetChannelNames(vi_ctype, indices_ctype, name_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        name_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        names_ctype = (_visatype.ViChar * name_size_ctype.value)()  # case C060
+        error_code = self._library.niFake_GetChannelNames(vi_ctype, indices_ctype, name_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
+
     def _get_error(self):
         r'''_get_error
 
@@ -497,6 +557,28 @@ class _SessionBase(object):
         error_code = self._library.niFake_LockSession(vi_ctype, None)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
+
+    @ivi_synchronized
+    def get_channel_names(self, indices):
+        '''get_channel_names
+
+        Returns a list of channel names for the given channel indices.
+
+        Args:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            names (list of str): The channel name(s) at the specified indices.
+
+        '''
+        return self._get_channel_names(indices)
 
     @ivi_synchronized
     def read_from_channel(self, maximum_time):
@@ -1316,6 +1398,25 @@ class Session(_SessionBase):
         return [custom_struct.CustomStruct(cs_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
     @ivi_synchronized
+    def get_custom_type_typedef(self):
+        r'''get_custom_type_typedef
+
+        This method returns a custom type with typedef and a custom type with nested typedef.
+
+        Returns:
+            cst (CustomStructTypedef): An object of a custom type with typedef
+
+            csnt (CustomStructNestedTypedef): An object of a custom type with nested typedef
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        cst_ctype = custom_struct_typedef.struct_CustomStructTypedef()  # case S220
+        csnt_ctype = custom_struct_nested_typedef.struct_CustomStructNestedTypedef()  # case S220
+        error_code = self._library.niFake_GetCustomTypeTypedef(vi_ctype, None if cst_ctype is None else (ctypes.pointer(cst_ctype)), None if csnt_ctype is None else (ctypes.pointer(csnt_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return custom_struct_typedef.CustomStructTypedef(cst_ctype), custom_struct_nested_typedef.CustomStructNestedTypedef(csnt_ctype)
+
+    @ivi_synchronized
     def get_enum_value(self):
         r'''get_enum_value
 
@@ -1359,7 +1460,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            month (hightime.datetime): Indicates date and time of the last calibration.
+            last_cal_datetime (hightime.datetime): Indicates date and time of the last calibration.
 
         '''
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)

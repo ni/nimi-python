@@ -735,6 +735,34 @@ class TestSession(object):
                 assert issubclass(w[0].category, nifake.DriverWarning)
                 assert test_error_desc in str(w[0].message)
 
+    def test_get_channel_names(self):
+        channel_indices = [0, 3, 2]
+        expected_channel_names_string = '0,3,2'
+        expected_channel_names_string_size = len(expected_channel_names_string)
+        expected_channel_names = ['0', '3', '2']
+        self.patched_library.niFake_GetChannelNames.side_effect = self.side_effects_helper.niFake_GetChannelNames
+        self.side_effects_helper['GetChannelNames']['names'] = expected_channel_names_string
+        with nifake.Session('dev1') as session:
+            channel_names_from_session = session.get_channel_names(channel_indices)
+            assert channel_names_from_session == expected_channel_names
+            from unittest.mock import call
+            expected_calls = [
+                call(
+                    _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                    _matchers.ViStringMatcher(expected_channel_names_string),
+                    _matchers.ViInt32Matcher(0),
+                    None
+                ),
+                call(
+                    _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                    _matchers.ViStringMatcher(expected_channel_names_string),
+                    _matchers.ViInt32Matcher(expected_channel_names_string_size),
+                    _matchers.ViCharBufferMatcher(expected_channel_names_string_size)
+                )
+            ]
+            self.patched_library.niFake_GetChannelNames.assert_has_calls(expected_calls)
+            assert self.patched_library.niFake_GetChannelNames.call_count == len(expected_calls)
+
     # Retrieving buffers and strings
 
     def test_get_a_string_of_fixed_maximum_size(self):
@@ -872,6 +900,15 @@ class TestSession(object):
             value = session.sites[0, 1].channels[2, 3].read_from_channel(test_maximum_time)
         self.patched_library.niFake_ReadFromChannel.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher('site0/2,site0/3,site1/2,site1/3'), _matchers.ViInt32Matcher(test_maximum_time_ms), _matchers.ViReal64PointerMatcher())
         assert value == test_reading
+
+    def test_function_with_repeated_capability_type(self):
+        self.patched_library.niFake_FunctionWithRepeatedCapabilityType.side_effect = self.side_effects_helper.niFake_FunctionWithRepeatedCapabilityType
+        with nifake.Session('dev1') as session:
+            session.channels['0-3'].function_with_repeated_capability_type()
+            self.patched_library.niFake_FunctionWithRepeatedCapabilityType.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViStringMatcher('0,1,2,3')
+            )
 
     # Attributes
 
@@ -1224,6 +1261,26 @@ class TestSession(object):
             for actual, expected in zip(cs_test, cs):
                 assert actual.struct_int == expected.struct_int
                 assert actual.struct_double == expected.struct_double
+
+    def test_get_custom_type_typedef(self):
+        self.patched_library.niFake_GetCustomTypeTypedef.side_effect = self.side_effects_helper.niFake_GetCustomTypeTypedef
+        cst = nifake.CustomStructTypedef(struct_int=42, struct_double=4.2)
+        cst_ctype = nifake.struct_CustomStructTypedef(cst)
+        csnt = nifake.CustomStructNestedTypedef(
+            struct_custom_struct=nifake.CustomStruct(struct_int=43, struct_double=4.3),
+            struct_custom_struct_typedef=nifake.CustomStructTypedef(struct_int=44, struct_double=4.4)
+        )
+        csnt_ctype = nifake.struct_CustomStructNestedTypedef(csnt)
+        self.side_effects_helper['GetCustomTypeTypedef']['cst'] = cst_ctype
+        self.side_effects_helper['GetCustomTypeTypedef']['csnt'] = csnt_ctype
+        with nifake.Session('dev1') as session:
+            cst_test, csnt_test = session.get_custom_type_typedef()
+            assert cst_test.struct_int == cst.struct_int
+            assert cst_test.struct_double == cst.struct_double
+            assert csnt_test.struct_custom_struct.struct_int == csnt.struct_custom_struct.struct_int
+            assert csnt_test.struct_custom_struct.struct_double == csnt.struct_custom_struct.struct_double
+            assert csnt_test.struct_custom_struct_typedef.struct_int == csnt.struct_custom_struct_typedef.struct_int
+            assert csnt_test.struct_custom_struct_typedef.struct_double == csnt.struct_custom_struct_typedef.struct_double
 
     # python-code size mechanism
 
