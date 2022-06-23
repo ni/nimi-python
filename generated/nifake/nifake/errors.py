@@ -64,6 +64,13 @@ class DriverTooOldError(Error):
         super(DriverTooOldError, self).__init__('A function was not found in the NI-FAKE runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.')
 
 
+class DriverTooNewError(Error):
+    '''An error due to the driver runtime being too new for the Python module.'''
+
+    def __init__(self, prefix_message):
+        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the NI-FAKE runtime is newer than the nifake Python module. Upgrade the nifake Python module.')
+
+
 class InvalidRepeatedCapabilityError(Error):
     '''An error due to an invalid character in a repeated capability'''
 
@@ -78,13 +85,6 @@ class SelfTestError(Error):
         self.code = code
         self.message = msg
         super(SelfTestError, self).__init__('Self-test failed with code {0}: {1}'.format(code, msg))
-
-
-class DriverTooNewError(Error):
-    '''An error due to the driver runtime being too new compared to the Python module'''
-
-    def __init__(self, prefix_message):
-        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the nifake Python module is too old. Upgrade the nifake Python module.')
 
 
 def handle_error(session, code, ignore_warnings, is_error_handling):

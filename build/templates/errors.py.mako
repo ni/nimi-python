@@ -76,6 +76,13 @@ class DriverTooOldError(Error):
         super(DriverTooOldError, self).__init__('A function was not found in the ${driver_name} runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.')
 
 
+class DriverTooNewError(Error):
+    '''An error due to the driver runtime being too new for the Python module.'''
+
+    def __init__(self, prefix_message):
+        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the ${driver_name} runtime is newer than the ${module_name} Python module. Upgrade the ${module_name} Python module.')
+
+
 % if 'InvalidRepeatedCapabilityError' in extra_errors_used:
 class InvalidRepeatedCapabilityError(Error):
     '''An error due to an invalid character in a repeated capability'''
@@ -93,15 +100,6 @@ class SelfTestError(Error):
         self.code = code
         self.message = msg
         super(SelfTestError, self).__init__('Self-test failed with code {0}: {1}'.format(code, msg))
-
-
-% endif
-% if 'DriverTooNewError' in extra_errors_used:
-class DriverTooNewError(Error):
-    '''An error due to the driver runtime being too new compared to the Python module'''
-
-    def __init__(self, prefix_message):
-        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the ${module_name} Python module is too old. Upgrade the ${module_name} Python module.')
 
 
 % endif
