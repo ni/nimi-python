@@ -442,8 +442,8 @@ def add_all_attribute_metadata(attributes, config):
 def _add_enum_codegen_method(enums, config):
     '''Adds 'codegen_method' that will determine whether and how the enum is code-generated.
 
-    Set the 'codegen_method' of all enums without any explicit 'codegen_method' to 'no', then go
-    through all functions and attributes and set to the least restrictive use.
+    Set the 'codegen_method' of all enums that do not explicitly specify it in metadata to 'no',
+    then go through all functions and attributes and set to the least restrictive use.
     If an enum without converter has an explicit non-public 'codegen_method' but it is used by a
     'public'/'python-only' function or 'public' attribute, a ValueError would be thrown.
     '''

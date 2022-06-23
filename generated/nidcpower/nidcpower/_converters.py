@@ -277,22 +277,16 @@ def convert_chained_repeated_capability_to_parts(chained_repeated_capability):
 
 
 def convert_from_isolation_state_enum(value):
-    try:
-        return {
-            enums._IsolationState.ISOLATED: True,
-            enums._IsolationState.NON_ISOLATED: False,
-        }[value]
-    except KeyError:
-        raise ValueError(f'{value} is not a valid _IsolationState enum value to be converted')
+    return {
+        enums._IsolationState.ISOLATED: True,
+        enums._IsolationState.NON_ISOLATED: False,
+    }[value]
 
 
 def convert_to_isolation_state_enum(value):
-    try:
-        return {
-            True: enums._IsolationState.ISOLATED,
-            False: enums._IsolationState.NON_ISOLATED,
-        }[value]
-    except KeyError:
-        raise ValueError(f"{value} cannot be converted to an _IsolationState enum value, valid values: True, False")
+    return {
+        True: enums._IsolationState.ISOLATED,
+        False: enums._IsolationState.NON_ISOLATED,
+    }[value]
 
 

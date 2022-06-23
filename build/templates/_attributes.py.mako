@@ -106,13 +106,13 @@ class AttributeEnum(object):
 
 
 class AttributeEnumWithConverter(AttributeEnum):
-    '''Class for attributes that use enums internally but are exposed in nimi-python API as something else, thus need conversion.'''
+    '''Class for attributes that use enums internally but are exposed in the ${module_name} Python module as something else, thus need conversion.'''
 
-    def __init__(self, underlying_enum_attribute, getter_converter, setter_converter):
+    def __init__(self, underlying_attribute_enum, getter_converter, setter_converter):
         '''Creates and returns an instance of AttributeEnumWithConverter attribute meta class.
 
         Args:
-            underlying_enum_attribute (AttributeEnum): The AttributeEnum instance for the underlying
+            underlying_attribute_enum (AttributeEnum): The AttributeEnum instance for the underlying
                 enum
 
             getter_converter (function): The function that converts the enum value to its converted
@@ -121,20 +121,20 @@ class AttributeEnumWithConverter(AttributeEnum):
             setter_converter (function): The function that converts the converted value back to the
                 enum value
         '''
-        self._underlying_enum_attribute = underlying_enum_attribute
+        self._underlying_attribute_enum = underlying_attribute_enum
         self._getter_converter = getter_converter
         self._setter_converter = setter_converter
 
     def __get__(self, session, session_type):
         try:
             return self._getter_converter(
-                self._underlying_enum_attribute.__get__(session, session_type)
+                self._underlying_attribute_enum.__get__(session, session_type)
             )
-        except ValueError:
+        except (KeyError, ValueError):
             raise errors.DriverTooNewError('The driver runtime returned an unexpected value. ')
 
     def __set__(self, session, value):
-        return self._underlying_enum_attribute.__set__(session, self._setter_converter(value))
+        return self._underlying_attribute_enum.__set__(session, self._setter_converter(value))
 
 
 # nitclk specific attribute type
