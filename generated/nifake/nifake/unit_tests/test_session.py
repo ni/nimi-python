@@ -735,6 +735,34 @@ class TestSession(object):
                 assert issubclass(w[0].category, nifake.DriverWarning)
                 assert test_error_desc in str(w[0].message)
 
+    def test_get_channel_names(self):
+        channel_indices = [0, 3, 2]
+        expected_channel_names_string = '0,3,2'
+        expected_channel_names_string_size = len(expected_channel_names_string)
+        expected_channel_names = ['0', '3', '2']
+        self.patched_library.niFake_GetChannelNames.side_effect = self.side_effects_helper.niFake_GetChannelNames
+        self.side_effects_helper['GetChannelNames']['names'] = expected_channel_names_string
+        with nifake.Session('dev1') as session:
+            channel_names_from_session = session.get_channel_names(channel_indices)
+            assert channel_names_from_session == expected_channel_names
+            from unittest.mock import call
+            expected_calls = [
+                call(
+                    _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                    _matchers.ViStringMatcher(expected_channel_names_string),
+                    _matchers.ViInt32Matcher(0),
+                    None
+                ),
+                call(
+                    _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                    _matchers.ViStringMatcher(expected_channel_names_string),
+                    _matchers.ViInt32Matcher(expected_channel_names_string_size),
+                    _matchers.ViCharBufferMatcher(expected_channel_names_string_size)
+                )
+            ]
+            self.patched_library.niFake_GetChannelNames.assert_has_calls(expected_calls)
+            assert self.patched_library.niFake_GetChannelNames.call_count == len(expected_calls)
+
     # Retrieving buffers and strings
 
     def test_get_a_string_of_fixed_maximum_size(self):
