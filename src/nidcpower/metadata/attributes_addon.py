@@ -3,6 +3,7 @@
 
 attributes_override_metadata = {
     # Disable the new attributes
+    1150216: {"codegen_method": "no"},
     1150265: {"codegen_method": "no"},
     1150266: {"codegen_method": "no"},
     1150267: {"codegen_method": "no"},
