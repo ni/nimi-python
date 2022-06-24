@@ -2996,7 +2996,7 @@ functions = {
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'delegate_to_private_method'
+                'session_filename': 'get_channel_names'
             }
         ],
         'parameters': [
