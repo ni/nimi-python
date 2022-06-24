@@ -82,7 +82,7 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_params, params)
 %           if helper.find_custom_type(p, config) is not None:
         for field in self._defaults['${func_name}']['${p["python_name"]}']._fields_:
             field_name = field[0]
-            setattr(cs.contents, field_name, getattr(self._defaults['${func_name}']['${p["python_name"]}'], field_name))
+            setattr(${p["python_name"]}.contents, field_name, getattr(self._defaults['${func_name}']['${p["python_name"]}'], field_name))
 %           elif p['is_string']:
         test_value = self._defaults['${func_name}']['${p['name']}']
         if type(test_value) is str:

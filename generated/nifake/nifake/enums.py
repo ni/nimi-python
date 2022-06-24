@@ -23,6 +23,13 @@ class Color(Enum):
     '''
 
 
+class EnumWithConverter(Enum):
+    RED = 1
+    BLUE = 2
+    YELLOW = 5
+    BLACK = 42
+
+
 class FloatEnum(Enum):
     THREE_POINT_FIVE = 3.5
     r'''

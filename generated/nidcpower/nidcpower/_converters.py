@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import nidcpower._visatype as _visatype
+import nidcpower.enums as enums
 import nidcpower.errors as errors
 
 import array
@@ -348,5 +349,19 @@ def convert_chained_repeated_capability_to_parts(chained_repeated_capability):
     for item in chained_repeated_capability_items:
         repeated_capability_lists = [x + [y] for x, y in zip(repeated_capability_lists, item.split('/'))]
     return [','.join(collections.OrderedDict.fromkeys(x)) for x in repeated_capability_lists]
+
+
+def convert_from_isolation_state_enum(value):
+    return {
+        enums._IsolationState.ISOLATED: True,
+        enums._IsolationState.NON_ISOLATED: False,
+    }[value]
+
+
+def convert_to_isolation_state_enum(value):
+    return {
+        True: enums._IsolationState.ISOLATED,
+        False: enums._IsolationState.NON_ISOLATED,
+    }[value]
 
 
