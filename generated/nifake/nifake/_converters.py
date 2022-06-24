@@ -291,11 +291,14 @@ def convert_from_enum_with_converter_enum(value):
 
 
 def convert_to_enum_with_converter_enum(value):
-    return {
-        True: enums.EnumWithConverter.RED,
-        False: enums.EnumWithConverter.BLUE,
-        'yellow': enums.EnumWithConverter.YELLOW,
-        42: enums.EnumWithConverter.BLACK,
-    }[value]
+    try:
+        return {
+            True: enums.EnumWithConverter.RED,
+            False: enums.EnumWithConverter.BLUE,
+            'yellow': enums.EnumWithConverter.YELLOW,
+            42: enums.EnumWithConverter.BLACK,
+        }[value]
+    except KeyError:
+        raise ValueError(f"{value} cannot be converted to an EnumWithConverter enum value, valid values: True, False, 'yellow', 42")
 
 
