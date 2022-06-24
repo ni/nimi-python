@@ -4784,10 +4784,10 @@ class _SessionBase(object):
 
         Fields in Measurement:
 
-        - **channel** (str)
         - **voltage** (float)
         - **current** (float)
         - **in_compliance** (bool)
+        - **channel** (str)
 
         Note:
         This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
@@ -4814,14 +4814,14 @@ class _SessionBase(object):
         Returns:
             measurements (list of Measurement): List of named tuples with fields:
 
-                - **channel** (str)
                 - **voltage** (float)
                 - **current** (float)
                 - **in_compliance** (bool)
+                - **channel** (str)
 
         '''
         import collections
-        Measurement = collections.namedtuple('Measurement', ['channel', 'voltage', 'current', 'in_compliance'])
+        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance', 'channel'])
 
         voltage_measurements, current_measurements, in_compliances = self._fetch_multiple(timeout, count)
 
@@ -4841,10 +4841,10 @@ class _SessionBase(object):
 
         return [
             Measurement(
-                channel=channel_names[0],
                 voltage=voltage,
                 current=current,
-                in_compliance=in_compliance
+                in_compliance=in_compliance,
+                channel=channel_names[0]
             ) for voltage, current, in_compliance in zip(
                 voltage_measurements, current_measurements, in_compliances
             )
@@ -4862,10 +4862,10 @@ class _SessionBase(object):
 
         Fields in Measurement:
 
-        - **channel** (str)
         - **voltage** (float)
         - **current** (float)
         - **in_compliance** (bool) - Always None
+        - **channel** (str)
 
         Note:
         This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
@@ -4884,14 +4884,14 @@ class _SessionBase(object):
         Returns:
             measurements (list of Measurement): List of named tuples with fields:
 
-                - **channel** (str)
                 - **voltage** (float)
                 - **current** (float)
                 - **in_compliance** (bool) - Always None
+                - **channel** (str)
 
         '''
         import collections
-        Measurement = collections.namedtuple('Measurement', ['channel', 'voltage', 'current', 'in_compliance'])
+        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance', 'channel'])
 
         voltage_measurements, current_measurements = self._measure_multiple()
 
@@ -4911,10 +4911,10 @@ class _SessionBase(object):
 
         return [
             Measurement(
-                channel=channel_name,
                 voltage=voltage,
                 current=current,
-                in_compliance=None
+                in_compliance=None,
+                channel=channel_name
             ) for voltage, current, channel_name in zip(
                 voltage_measurements, current_measurements, channel_names
             )

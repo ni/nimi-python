@@ -1064,7 +1064,7 @@ functions = {
     'FancyFetchMultiple': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nReturns a list of named tuples (Measurement) that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nFields in Measurement:\n\n- **channel** (str)\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n\n',
+            'description': '\nReturns a list of named tuples (Measurement) that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n- **channel** (str)\n\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_templates': [
@@ -1114,7 +1114,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nList of named tuples with fields:\n\n- **channel** (str)\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n'
+                    'description': '\nList of named tuples with fields:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n- **channel** (str)\n'
                 },
                 'name': 'measurements',
                 'python_type': 'Measurement',
@@ -1207,7 +1207,7 @@ functions = {
     'FancyMeasureMultiple': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nReturns a list of named tuples (Measurement) containing the measured voltage\nand current values on the specified output channel(s). Each call to this function\nblocks other function calls until the measurements are returned from the device.\nThe order of the measurements returned in the array corresponds to the order\non the specified output channel(s).\n\nFields in Measurement:\n\n- **channel** (str)\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n\n',
+            'description': '\nReturns a list of named tuples (Measurement) containing the measured voltage\nand current values on the specified output channel(s). Each call to this function\nblocks other function calls until the measurements are returned from the device.\nThe order of the measurements returned in the array corresponds to the order\non the specified output channel(s).\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n- **channel** (str)\n\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_templates': [
@@ -1237,7 +1237,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nList of named tuples with fields:\n\n- **channel** (str)\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n'
+                    'description': '\nList of named tuples with fields:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n- **channel** (str)\n'
                 },
                 'name': 'measurements',
                 'python_type': 'Measurement',

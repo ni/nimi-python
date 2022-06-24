@@ -31,7 +31,7 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         import collections
-        Measurement = collections.namedtuple('Measurement', ['channel', 'voltage', 'current', 'in_compliance'])
+        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance', 'channel'])
 
         voltage_measurements, current_measurements${in_compliances_return} = self._${f['python_name']}(${param_list})
 
@@ -51,10 +51,10 @@
 
         return [
             Measurement(
-                channel=${channel_name_value},
                 voltage=voltage,
                 current=current,
-                in_compliance=${in_compliance_value}
+                in_compliance=${in_compliance_value},
+                channel=${channel_name_value}
             ) for voltage, current${in_compliance_unpack}${channel_name_unpack} in zip(
                 voltage_measurements, current_measurements${in_compliances_return}${channel_names_zipped}
             )
