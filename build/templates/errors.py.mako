@@ -76,6 +76,13 @@ class DriverTooOldError(Error):
         super(DriverTooOldError, self).__init__('A function was not found in the ${driver_name} runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.')
 
 
+class DriverTooNewError(Error):
+    '''An error due to the driver runtime being too new for the Python module.'''
+
+    def __init__(self, prefix_message):
+        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the ${driver_name} runtime is newer than the ${module_name} Python module. Upgrade the ${module_name} Python module.')
+
+
 % if 'InvalidRepeatedCapabilityError' in extra_errors_used:
 class InvalidRepeatedCapabilityError(Error):
     '''An error due to an invalid character in a repeated capability'''

@@ -1070,6 +1070,68 @@ class TestSession(object):
             attribute_id = 1000005
             self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViReal64Matcher(enum_value.value))
 
+    def test_get_attribute_enum_with_converter(self):
+        enum_value = nifake.EnumWithConverter.RED
+        converted_value = True
+        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
+        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = enum_value.value
+        with nifake.Session('dev1') as session:
+            assert session.read_write_enum_with_converter == converted_value
+            attribute_id = 1000011
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViStringMatcher(''),
+                _matchers.ViAttrMatcher(attribute_id),
+                _matchers.ViInt32PointerMatcher()
+            )
+
+    def test_get_attribute_enum_with_converter_invalid_value_from_driver(self):
+        invalid_value_from_driver = 0
+        expected_error_message = 'The driver runtime returned an unexpected value. This can occur if the nifake Python module is too old. Upgrade the nifake Python module.'
+        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
+        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = invalid_value_from_driver
+        with nifake.Session('dev1') as session:
+            try:
+                session.read_write_enum_with_converter
+                assert False
+            except nifake.errors.DriverTooNewError as actual_error:
+                actual_error_message = actual_error.args[0]
+                assert actual_error_message == expected_error_message
+            attribute_id = 1000011
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViStringMatcher(''),
+                _matchers.ViAttrMatcher(attribute_id),
+                _matchers.ViInt32PointerMatcher()
+            )
+
+    def test_set_attribute_enum_with_converter(self):
+        enum_value = nifake.EnumWithConverter.RED
+        converted_value = True
+        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
+        with nifake.Session('dev1') as session:
+            session.read_write_enum_with_converter = converted_value
+            attribute_id = 1000011
+            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViStringMatcher(''),
+                _matchers.ViAttrMatcher(attribute_id),
+                _matchers.ViInt32Matcher(enum_value.value)
+            )
+
+    def test_set_attribute_enum_with_converter_invalid_input(self):
+        invalid_input_value = 'invalid'
+        expected_error_description = "invalid cannot be converted to an EnumWithConverter enum value, valid values: True, False, 'yellow', 42"
+        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
+        with nifake.Session('dev1') as session:
+            try:
+                session.read_write_enum_with_converter = invalid_input_value
+                assert False
+            except ValueError as actual_error:
+                actual_error_message = actual_error.args[0]
+                assert actual_error_message == expected_error_description
+            assert not self.patched_library.niFake_SetAttributeViInt32.called
+
     def test_get_attribute_channel(self):
         self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
         test_number = 100
