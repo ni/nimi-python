@@ -359,9 +359,12 @@ def convert_from_isolation_state_enum(value):
 
 
 def convert_to_isolation_state_enum(value):
-    return {
-        True: enums._IsolationState.ISOLATED,
-        False: enums._IsolationState.NON_ISOLATED,
-    }[value]
+    try:
+        return {
+            True: enums._IsolationState.ISOLATED,
+            False: enums._IsolationState.NON_ISOLATED,
+        }[value]
+    except KeyError:
+        raise ValueError(f"{value} cannot be converted to an _IsolationState enum value, valid values: True, False")
 
 
