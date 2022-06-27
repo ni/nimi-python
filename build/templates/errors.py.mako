@@ -79,8 +79,8 @@ class DriverTooOldError(Error):
 class DriverTooNewError(Error):
     '''An error due to the ${driver_name} driver runtime being too new for this module.'''
 
-    def __init__(self, prefix_message):
-        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the ${driver_name} runtime is newer than the ${module_name} Python module. Upgrade the ${module_name} Python module.')
+    def __init__(self):
+        super(DriverTooNewError, self).__init__('The ${driver_name} runtime returned an unexpected value. This can occur if it is too new for the ${module_name} Python module. Upgrade the ${module_name} Python module.')
 
 
 % if 'InvalidRepeatedCapabilityError' in extra_errors_used:

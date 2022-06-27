@@ -67,8 +67,8 @@ class DriverTooOldError(Error):
 class DriverTooNewError(Error):
     '''An error due to the NI-DCPower driver runtime being too new for this module.'''
 
-    def __init__(self, prefix_message):
-        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the NI-DCPower runtime is newer than the nidcpower Python module. Upgrade the nidcpower Python module.')
+    def __init__(self):
+        super(DriverTooNewError, self).__init__('The NI-DCPower runtime returned an unexpected value. This can occur if it is too new for the nidcpower Python module. Upgrade the nidcpower Python module.')
 
 
 class InvalidRepeatedCapabilityError(Error):

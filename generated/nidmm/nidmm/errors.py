@@ -67,8 +67,8 @@ class DriverTooOldError(Error):
 class DriverTooNewError(Error):
     '''An error due to the NI-DMM driver runtime being too new for this module.'''
 
-    def __init__(self, prefix_message):
-        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the NI-DMM runtime is newer than the nidmm Python module. Upgrade the nidmm Python module.')
+    def __init__(self):
+        super(DriverTooNewError, self).__init__('The NI-DMM runtime returned an unexpected value. This can occur if it is too new for the nidmm Python module. Upgrade the nidmm Python module.')
 
 
 class InvalidRepeatedCapabilityError(Error):

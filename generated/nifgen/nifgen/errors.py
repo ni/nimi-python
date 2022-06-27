@@ -67,8 +67,8 @@ class DriverTooOldError(Error):
 class DriverTooNewError(Error):
     '''An error due to the NI-FGEN driver runtime being too new for this module.'''
 
-    def __init__(self, prefix_message):
-        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the NI-FGEN runtime is newer than the nifgen Python module. Upgrade the nifgen Python module.')
+    def __init__(self):
+        super(DriverTooNewError, self).__init__('The NI-FGEN runtime returned an unexpected value. This can occur if it is too new for the nifgen Python module. Upgrade the nifgen Python module.')
 
 
 class InvalidRepeatedCapabilityError(Error):

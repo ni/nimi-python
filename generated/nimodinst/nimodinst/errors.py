@@ -67,8 +67,8 @@ class DriverTooOldError(Error):
 class DriverTooNewError(Error):
     '''An error due to the NI-ModInst driver runtime being too new for this module.'''
 
-    def __init__(self, prefix_message):
-        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the NI-ModInst runtime is newer than the nimodinst Python module. Upgrade the nimodinst Python module.')
+    def __init__(self):
+        super(DriverTooNewError, self).__init__('The NI-ModInst runtime returned an unexpected value. This can occur if it is too new for the nimodinst Python module. Upgrade the nimodinst Python module.')
 
 
 def handle_error(session, code, ignore_warnings, is_error_handling):

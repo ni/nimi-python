@@ -67,8 +67,8 @@ class DriverTooOldError(Error):
 class DriverTooNewError(Error):
     '''An error due to the NI-SCOPE driver runtime being too new for this module.'''
 
-    def __init__(self, prefix_message):
-        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the NI-SCOPE runtime is newer than the niscope Python module. Upgrade the niscope Python module.')
+    def __init__(self):
+        super(DriverTooNewError, self).__init__('The NI-SCOPE runtime returned an unexpected value. This can occur if it is too new for the niscope Python module. Upgrade the niscope Python module.')
 
 
 class InvalidRepeatedCapabilityError(Error):

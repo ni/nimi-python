@@ -67,8 +67,8 @@ class DriverTooOldError(Error):
 class DriverTooNewError(Error):
     '''An error due to the NI-FAKE driver runtime being too new for this module.'''
 
-    def __init__(self, prefix_message):
-        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the NI-FAKE runtime is newer than the nifake Python module. Upgrade the nifake Python module.')
+    def __init__(self):
+        super(DriverTooNewError, self).__init__('The NI-FAKE runtime returned an unexpected value. This can occur if it is too new for the nifake Python module. Upgrade the nifake Python module.')
 
 
 class InvalidRepeatedCapabilityError(Error):

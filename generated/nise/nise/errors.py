@@ -67,8 +67,8 @@ class DriverTooOldError(Error):
 class DriverTooNewError(Error):
     '''An error due to the NI Switch Executive driver runtime being too new for this module.'''
 
-    def __init__(self, prefix_message):
-        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the NI Switch Executive runtime is newer than the nise Python module. Upgrade the nise Python module.')
+    def __init__(self):
+        super(DriverTooNewError, self).__init__('The NI Switch Executive runtime returned an unexpected value. This can occur if it is too new for the nise Python module. Upgrade the nise Python module.')
 
 
 class InvalidRepeatedCapabilityError(Error):

@@ -1087,7 +1087,7 @@ class TestSession(object):
 
     def test_get_attribute_enum_with_converter_invalid_value_from_driver(self):
         invalid_value_from_driver = 0
-        expected_error_message = 'The driver runtime returned an unexpected value. This can occur if the NI-FAKE runtime is newer than the nifake Python module. Upgrade the nifake Python module.'
+        expected_error_message = 'The NI-FAKE runtime returned an unexpected value. This can occur if it is too new for the nifake Python module. Upgrade the nifake Python module.'
         self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
         self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = invalid_value_from_driver
         with nifake.Session('dev1') as session:
