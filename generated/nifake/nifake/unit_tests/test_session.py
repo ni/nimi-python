@@ -1121,7 +1121,7 @@ class TestSession(object):
 
     def test_set_attribute_enum_with_converter_invalid_input(self):
         invalid_input_value = 'invalid'
-        expected_error_description = "invalid cannot be converted to an EnumWithConverter enum value, valid values: True, False, 'yellow', 42"
+        expected_error_description = "invalid cannot be converted to an EnumWithConverter enum value"
         self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
         with nifake.Session('dev1') as session:
             try:
