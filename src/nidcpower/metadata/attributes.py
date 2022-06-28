@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.0.0d245
+# This file is generated from NI-DCPower API metadata version 22.5.0d71
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -182,7 +182,7 @@ attributes = {
     1150004: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the current limit range, in amps, for the specified channel(s).\nThe range defines the valid value to which the current limit can be set. Use the NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE attribute to enable automatic selection of the current limit range.\nThe NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.\n',
+            'description': '\nSpecifies the current limit range, in amps, for the specified channel(s).\nThe range defines the valid values to which you can set the current limit. Use the NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE attribute to enable automatic selection of the current limit range.\nThe NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the specifications for your instrument.\n',
             'note': 'The channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
         },
         'lv_property': 'Source:DC Voltage:Current Limit Range',
@@ -195,7 +195,7 @@ attributes = {
     1150005: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the voltage level range, in volts, for the specified channel(s).\nThe range defines the valid values to which the voltage level can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute to enable automatic selection of the voltage level range.\nThe NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.\n',
+            'description': '\nSpecifies the voltage level range, in volts, for the specified channel(s).\nThe range defines the valid values to which the voltage level can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute to enable automatic selection of the voltage level range.\nThe NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the specifications for your instrument.\n',
             'note': 'The channel must be enabled for the specified voltage level range to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
         },
         'lv_property': 'Source:DC Voltage:Voltage Level Range',
@@ -272,7 +272,7 @@ attributes = {
     1150011: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the current level range, in amps, for the specified channel(s).\nThe range defines the valid value to which the current level can be set. Use the NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute to enable automatic selection of the current level range.\nThe NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.\n',
+            'description': '\nSpecifies the current level range, in amps, for the specified channel(s).\nThe range defines the valid values to which you can set the current level. Use the NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute to enable automatic selection of the current level range.\nThe NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the specifications for your instrument.\n',
             'note': 'The channel must be enabled for the specified current level range to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
         },
         'lv_property': 'Source:DC Current:Current Level Range',
@@ -285,7 +285,7 @@ attributes = {
     1150012: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the voltage limit range, in volts, for the specified channel(s).\nThe range defines the valid values to which the voltage limit can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute to enable automatic selection of the voltage limit range.\nThe NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.\n',
+            'description': '\nSpecifies the voltage limit range, in volts, for the specified channel(s).\nThe range defines the valid values to which the voltage limit can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute to enable automatic selection of the voltage limit range.\nThe NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the specifications for your instrument.\n',
             'note': 'The channel must be enabled for the specified voltage limit range to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
         },
         'lv_property': 'Source:DC Current:Voltage Limit Range',
@@ -1122,7 +1122,7 @@ attributes = {
     1150084: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the pulse voltage level range, in volts, for the specified channel(s).\nThe range defines the valid values at which you can set the pulse voltage level and pulse bias voltage level.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.\nFor valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.\n',
+            'description': '\nSpecifies the pulse voltage level range, in volts, for the specified channel(s).\nThe range defines the valid values at which you can set the pulse voltage level and pulse bias voltage level.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.\nFor valid ranges, refer to the specifications for your instrument.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Voltage Level Range',
@@ -1135,7 +1135,7 @@ attributes = {
     1150085: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the pulse current limit range, in amps, for the specified channel(s).\nThe range defines the valid values to which you can set the pulse current limit and pulse bias current limit.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.\nFor valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.\n',
+            'description': '\nSpecifies the pulse current limit range, in amps, for the specified channel(s).\nThe range defines the valid values to which you can set the pulse current limit and pulse bias current limit.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.\nFor valid ranges, refer to the specifications for your instrument.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Current Limit Range',
@@ -1200,7 +1200,7 @@ attributes = {
     1150090: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the pulse current level range, in amps, for the specified channel(s).\nThe range defines the valid values to which you can set the pulse current level and pulse bias current level.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.\nFor valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.\n',
+            'description': '\nSpecifies the pulse current level range, in amps, for the specified channel(s).\nThe range defines the valid values to which you can set the pulse current level and pulse bias current level.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.\nFor valid ranges, refer to the specifications for your instrument.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Pulse Current:Pulse Current Level Range',
@@ -1213,7 +1213,7 @@ attributes = {
     1150091: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the pulse voltage limit range, in volts, for the specified channel(s).\nThe range defines the valid values to which you can set the pulse voltage limit and pulse bias voltage limit.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.\nFor valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.\n',
+            'description': '\nSpecifies the pulse voltage limit range, in volts, for the specified channel(s).\nThe range defines the valid values to which you can set the pulse voltage limit and pulse bias voltage limit.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.\nFor valid ranges, refer to the specifications for your instrument.\n',
             'note': 'The channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
         },
         'lv_property': 'Source:Pulse Current:Pulse Voltage Limit Range',
@@ -1681,7 +1681,7 @@ attributes = {
     1150211: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the amplitude, in V RMS, of the AC voltage test signal applied to the DUT for LCR measurements.\nThis property applies when the NIDCPOWER_ATTR_LCR_STIMULUS_FUNCTION property is set to NIDCPOWER_VAL_AC_VOLTAGE.\n\nValid Values: 7.08e-4 V RMS to 7.07 V RMS\n\nInstrument specifications affect the valid values you can program. Refer to the specifications for your instrument for more information.',
+            'description': '\nSpecifies the amplitude, in volts RMS, of the AC voltage test signal applied to the DUT for LCR measurements.\nThis property applies when the NIDCPOWER_ATTR_LCR_STIMULUS_FUNCTION property is set to NIDCPOWER_VAL_AC_VOLTAGE.\n\nValid Values: 7.08e-4 V RMS to 7.07 V RMS\n\nInstrument specifications affect the valid values you can program. Refer to the specifications for your instrument for more information.',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:AC Stimulus:Voltage Amplitude',
@@ -2092,6 +2092,45 @@ attributes = {
         ],
         'type': 'ViReal64'
     },
+    1150265: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the voltage range, in volts RMS, for the specified channel(s).\nThe range defines the valid values to which you can set the NIDCPOWER_ATTR_LCR_VOLTAGE_AMPLITUDE.\nFor valid ranges, refer to the specifications for your instrument.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:AC Stimulus:Advanced:Voltage Range',
+        'name': 'LCR_VOLTAGE_RANGE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150266: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the DC Bias voltage range, in volts, for the specified channel(s).\nThe range defines the valid values to which you can set the NIDCPOWER_ATTR_LCR_DC_BIAS_VOLTAGE_LEVEL.\nFor valid ranges, refer to the specifications for your instrument.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:DC Bias:Advanced:Voltage Range',
+        'name': 'LCR_DC_BIAS_VOLTAGE_RANGE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150267: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the current range, in amps RMS, for the specified channel(s).\nThe range defines the valid values to which you can set the NIDCPOWER_ATTR_LCR_CURRENT_AMPLITUDE.\nFor valid ranges, refer to the specifications for your instrument.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:AC Stimulus:Advanced:Current Range',
+        'name': 'LCR_CURRENT_RANGE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
     1150268: {
         'access': 'read-write',
         'documentation': {
@@ -2139,6 +2178,19 @@ attributes = {
         },
         'lv_property': 'LCR:Compensation:LCR Actual Load Reactance',
         'name': 'LCR_ACTUAL_LOAD_REACTANCE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150274: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the DC Bias current range, in amps, for the specified channel(s).\nThe range defines the valid values to which you can set the NIDCPOWER_ATTR_LCR_DC_BIAS_CURRENT_LEVEL.\nFor valid ranges, refer to the specifications for your instrument.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:DC Bias:Advanced:Current Range',
+        'name': 'LCR_DC_BIAS_CURRENT_RANGE',
         'supported_rep_caps': [
             'channels'
         ],
@@ -2202,7 +2254,7 @@ attributes = {
     1150291: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies whether the channel actively maintains a constant DC bias voltage or current across the DUT for LCR measurements.\nTo use this property, you must configure a DC bias with the NIDCPOWER_ATTR_LCR_DC_BIAS_SOURCE property.\n',
+            'description': '\nSpecifies whether the channel actively maintains a constant DC bias voltage or current across the DUT for LCR measurements.\nTo use this property, you must configure a DC bias with the NIDCPOWER_ATTR_LCR_DC_BIAS_SOURCE property and, depending on the DC bias source you choose, either NIDCPOWER_ATTR_LCR_DC_BIAS_VOLTAGE_LEVEL or NIDCPOWER_ATTR_LCR_DC_BIAS_CURRENT_LEVEL.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:DC Bias:Automatic Level Control',
@@ -2305,11 +2357,11 @@ attributes = {
     },
     1150302: {
         'access': 'read-write',
-        'attribute_class': 'AttributeIsolationState',
         'documentation': {
             'description': '\nDefines whether the channel is isolated.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
+        'enum': 'IsolationState',
         'lv_property': 'Advanced:Isolation State',
         'name': 'ISOLATION_STATE',
         'supported_rep_caps': [
@@ -2349,7 +2401,7 @@ attributes = {
     1150318: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the load resistance, in ohms and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.\n\nValid Values: 0 ohms to +inf ohms\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument',
+            'description': '\nSpecifies the load resistance, in ohms and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.\n\nValid values: [0 ohms, +inf ohms)\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:Impedance Range:Advanced:Load Resistance',
@@ -2362,7 +2414,7 @@ attributes = {
     1150319: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the load inductance, in henrys and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.\n\nValid Values: 0 henrys to +inf henrys\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument',
+            'description': '\nSpecifies the load inductance, in henrys and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.\n\nValid values: [0 henrys, +inf henrys)\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:Impedance Range:Advanced:Load Inductance',
@@ -2375,7 +2427,7 @@ attributes = {
     1150320: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the load capacitance, in farads and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.\n\nValid Values: (0 farads, +inf farads).\n0 is a special value that signifies +inf farads.\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument',
+            'description': '\nSpecifies the load capacitance, in farads and assuming a series model, of the DUT in order to compute the impedance range when the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE property is set to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.\n\nValid values: (0 farads, +inf farads)\n0 is a special value that signifies +inf farads.\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:Impedance Range:Advanced:Load Capacitance',

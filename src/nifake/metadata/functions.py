@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 1.2.0d9
+# This file is generated from NI-FAKE API metadata version 22.5.0d24
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -302,6 +302,34 @@ functions = {
                 'use_in_python_api': False
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'FunctionWithRepeatedCapabilityType': {
+        'documentation': {
+            'description': 'A function with a parameter that specifies repeated_capability_type.'
+        },
+        'has_repeated_capability': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'A list of sites.'
+                },
+                'is_repeated_capability': True,
+                'name': 'siteList',
+                'repeated_capability_type': 'sites',
+                'type': 'ViConstString'
+            }
+        ],
+        'repeated_capability_type': 'sites',
         'returns': 'ViStatus'
     },
     'GetABoolean': {
@@ -947,6 +975,56 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'GetChannelNames': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Returns a list of channel names for the given channel indices.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.'
+                },
+                'name': 'indices',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'type': 'ViConstString',
+                'type_in_documentation': 'basic sequence types or str or int'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The number of elements in the ViChar array you specify for names.'
+                },
+                'name': 'nameSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'The channel name(s) at the specified indices.'
+                },
+                'name': 'names',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'nameSize'
+                },
+                'type': 'ViChar[]',
+                'type_in_documentation': 'list of str'
+            }
+        ],
+        'render_in_session_base': True,
+        'returns': 'ViStatus'
+    },
     'GetCustomType': {
         'codegen_method': 'public',
         'documentation': {
@@ -1005,6 +1083,39 @@ functions = {
                     'value': 'numberOfElements'
                 },
                 'type': 'struct CustomStruct[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'GetCustomTypeTypedef': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'This function returns a custom type with typedef and a custom type with nested typedef.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'An object of a custom type with typedef'
+                },
+                'name': 'cst',
+                'type': 'CustomStructTypedef'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'An object of a custom type with nested typedef'
+                },
+                'name': 'csnt',
+                'type': 'CustomStructNestedTypedef'
             }
         ],
         'returns': 'ViStatus'
@@ -1144,7 +1255,7 @@ functions = {
                 'documentation': {
                     'description': 'Indicates date and time of the last calibration.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],
@@ -1614,6 +1725,64 @@ functions = {
         ],
         'python_name': 'simple_function',
         'returns': 'ViStatus'
+    },
+    'PublicGetChannelNames': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Returns a list of channel names for the given channel indices.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'get_channel_names'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.'
+                },
+                'name': 'indices',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'type': 'ViString',
+                'type_in_documentation': 'basic sequence types or str or int'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The number of elements in the ViChar array you specify for names.'
+                },
+                'name': 'nameSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'The channel name(s) at the specified indices.'
+                },
+                'name': 'names',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'nameSize'
+                },
+                'type': 'ViString',
+                'type_in_documentation': 'list of str'
+            }
+        ],
+        'python_name': 'get_channel_names',
+        'render_in_session_base': True,
+        'returns': None
     },
     'Read': {
         'codegen_method': 'public',

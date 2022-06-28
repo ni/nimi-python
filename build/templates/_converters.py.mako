@@ -1,11 +1,16 @@
 ${template_parameters['encoding_tag']}
 # This file was generated
 <%
+    import build.helper as helper
     config = template_parameters['metadata'].config
     module_name = config['module_name']
     extra_errors_used = config['extra_errors_used']
+    enums = config['enums']
 %>\
 import ${module_name}._visatype as _visatype
+% if any(helper.enum_uses_converter(enums[enum_name]) for enum_name in helper.filter_codegen_enums(enums)):
+import ${module_name}.enums as enums
+% endif
 import ${module_name}.errors as errors
 
 import array
@@ -324,3 +329,23 @@ def convert_double_each_element(numbers):
 
 
 % endif
+% for enum_name in sorted(helper.filter_codegen_enums(enums)):
+    % if helper.enum_uses_converter(enums[enum_name]):
+def ${enums[enum_name]['enum_to_converted_value_function_name']}(value):
+    return {
+        % for enum_value in enums[enum_name]['values']:
+        enums.${enums[enum_name]['python_name']}.${enum_value['python_name']}: ${helper.get_enum_value_snippet(enum_value['converts_to_value'])},
+        % endfor
+    }[value]
+
+
+def ${enums[enum_name]['converted_value_to_enum_function_name']}(value):
+    return {
+    % for enum_value in enums[enum_name]['values']:
+        ${helper.get_enum_value_snippet(enum_value['converts_to_value'])}: enums.${enums[enum_name]['python_name']}.${enum_value['python_name']},
+    % endfor
+    }[value]
+
+
+    % endif
+% endfor

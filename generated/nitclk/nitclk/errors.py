@@ -64,6 +64,13 @@ class DriverTooOldError(Error):
         super(DriverTooOldError, self).__init__('A function was not found in the NI-TClk runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.')
 
 
+class DriverTooNewError(Error):
+    '''An error due to the driver runtime being too new for the Python module.'''
+
+    def __init__(self, prefix_message):
+        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the NI-TClk runtime is newer than the nitclk Python module. Upgrade the nitclk Python module.')
+
+
 def handle_error(session, code, ignore_warnings, is_error_handling):
     '''handle_error
 

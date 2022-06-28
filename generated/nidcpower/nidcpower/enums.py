@@ -179,6 +179,17 @@ class InstrumentMode(Enum):
     '''
 
 
+class _IsolationState(Enum):
+    ISOLATED = 1128
+    r'''
+    The channel is disconnected from chassis ground.
+    '''
+    NON_ISOLATED = 1129
+    r'''
+    The channel is connected to chassis ground.
+    '''
+
+
 class LCRCompensationType(Enum):
     OPEN = 1130
     r'''

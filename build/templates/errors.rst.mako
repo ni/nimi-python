@@ -43,6 +43,22 @@ ${helper.get_rst_header_snippet('DriverNotInstalledError', '-')}
 
         An error due to using this module without the driver runtime installed.
 
+${helper.get_rst_header_snippet('DriverTooOldError', '-')}
+
+    .. py:currentmodule:: ${module_name}.errors
+
+    .. exception:: DriverTooOldError
+
+        An error due to using this module with an older version of the driver runtime.
+
+${helper.get_rst_header_snippet('DriverTooNewError', '-')}
+
+    .. py:currentmodule:: ${module_name}.errors
+
+    .. exception:: DriverTooNewError
+
+        An error due to the driver runtime being too new for the Python module.
+
 % if 'InvalidRepeatedCapabilityError' in extra_errors_used:
 ${helper.get_rst_header_snippet('InvalidRepeatedCapabilityError', '-')}
 

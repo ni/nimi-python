@@ -3431,10 +3431,10 @@ current_level_range
     .. py:attribute:: current_level_range
 
         Specifies the current level range, in amps, for the specified channel(s).
-        The range defines the valid value to which the current level can be set. Use the :py:attr:`nidcpower.Session.current_level_autorange` property to enable automatic selection of the current level range.
+        The range defines the valid values to which you can set the current level. Use the :py:attr:`nidcpower.Session.current_level_autorange` property to enable automatic selection of the current level range.
         The :py:attr:`nidcpower.Session.current_level_range` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
         :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
-        For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
+        For valid ranges, refer to the specifications for your instrument.
 
 
 
@@ -3694,10 +3694,10 @@ current_limit_range
     .. py:attribute:: current_limit_range
 
         Specifies the current limit range, in amps, for the specified channel(s).
-        The range defines the valid value to which the current limit can be set. Use the :py:attr:`nidcpower.Session.current_limit_autorange` property to enable automatic selection of the current limit range.
+        The range defines the valid values to which you can set the current limit. Use the :py:attr:`nidcpower.Session.current_limit_autorange` property to enable automatic selection of the current limit range.
         The :py:attr:`nidcpower.Session.current_limit_range` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
         :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
-        For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
+        For valid ranges, refer to the specifications for your instrument.
 
 
 
@@ -4546,6 +4546,45 @@ io_resource_descriptor
                 - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Resource Descriptor**
                 - C Attribute: **NIDCPOWER_ATTR_IO_RESOURCE_DESCRIPTOR**
 
+isolation_state
+---------------
+
+    .. py:attribute:: isolation_state
+
+        Defines whether the channel is isolated.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].isolation_state`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.isolation_state`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | bool       |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Advanced:Isolation State**
+                - C Attribute: **NIDCPOWER_ATTR_ISOLATION_STATE**
+
 lcr_actual_load_reactance
 -------------------------
 
@@ -4756,7 +4795,7 @@ lcr_dc_bias_automatic_level_control
     .. py:attribute:: lcr_dc_bias_automatic_level_control
 
         Specifies whether the channel actively maintains a constant DC bias voltage or current across the DUT for LCR measurements.
-        To use this property, you must configure a DC bias with the :py:attr:`nidcpower.Session.lcr_dc_bias_source` property.
+        To use this property, you must configure a DC bias with the :py:attr:`nidcpower.Session.lcr_dc_bias_source` property and, depending on the DC bias source you choose, either :py:attr:`nidcpower.Session.lcr_dc_bias_voltage_level` or :py:attr:`nidcpower.Session.lcr_dc_bias_current_level`.
 
 
 
@@ -5035,7 +5074,7 @@ lcr_load_capacitance
 
         Specifies the load capacitance, in farads and assuming a series model, of the DUT in order to compute the impedance range when the :py:attr:`nidcpower.Session.lcr_impedance_range_source` property is set to :py:data:`~nidcpower.LCRImpedanceRangeSource.LOAD_CONFIGURATION`.
 
-        Valid Values: (0 farads, +inf farads).
+        Valid values: (0 farads, +inf farads)
         0 is a special value that signifies +inf farads.
 
         Default Value: Search ni.com for Supported Properties by Device for the default value by instrument
@@ -5124,7 +5163,7 @@ lcr_load_inductance
 
         Specifies the load inductance, in henrys and assuming a series model, of the DUT in order to compute the impedance range when the :py:attr:`nidcpower.Session.lcr_impedance_range_source` property is set to :py:data:`~nidcpower.LCRImpedanceRangeSource.LOAD_CONFIGURATION`.
 
-        Valid Values: 0 henrys to +inf henrys
+        Valid values: [0 henrys, +inf henrys)
 
         Default Value: Search ni.com for Supported Properties by Device for the default value by instrument
 
@@ -5167,7 +5206,7 @@ lcr_load_resistance
 
         Specifies the load resistance, in ohms and assuming a series model, of the DUT in order to compute the impedance range when the :py:attr:`nidcpower.Session.lcr_impedance_range_source` property is set to :py:data:`~nidcpower.LCRImpedanceRangeSource.LOAD_CONFIGURATION`.
 
-        Valid Values: 0 ohms to +inf ohms
+        Valid values: [0 ohms, +inf ohms)
 
         Default Value: Search ni.com for Supported Properties by Device for the default value by instrument
 
@@ -5737,7 +5776,7 @@ lcr_voltage_amplitude
 
     .. py:attribute:: lcr_voltage_amplitude
 
-        Specifies the amplitude, in V RMS, of the AC voltage test signal applied to the DUT for LCR measurements.
+        Specifies the amplitude, in volts RMS, of the AC voltage test signal applied to the DUT for LCR measurements.
         This property applies when the :py:attr:`nidcpower.Session.lcr_stimulus_function` property is set to :py:data:`~nidcpower.LCRStimulusFunction.VOLTAGE`.
 
         Valid Values: 7.08e-4 V RMS to 7.07 V RMS
@@ -7789,7 +7828,7 @@ pulse_current_level_range
         Specifies the pulse current level range, in amps, for the specified channel(s).
         The range defines the valid values to which you can set the pulse current level and pulse bias current level.
         This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
-        For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
+        For valid ranges, refer to the specifications for your instrument.
 
 
 
@@ -7982,7 +8021,7 @@ pulse_current_limit_range
         Specifies the pulse current limit range, in amps, for the specified channel(s).
         The range defines the valid values to which you can set the pulse current limit and pulse bias current limit.
         This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
-        For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
+        For valid ranges, refer to the specifications for your instrument.
 
 
 
@@ -8187,7 +8226,7 @@ pulse_voltage_level_range
         Specifies the pulse voltage level range, in volts, for the specified channel(s).
         The range defines the valid values at which you can set the pulse voltage level and pulse bias voltage level.
         This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
-        For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
+        For valid ranges, refer to the specifications for your instrument.
 
 
 
@@ -8380,7 +8419,7 @@ pulse_voltage_limit_range
         Specifies the pulse voltage limit range, in volts, for the specified channel(s).
         The range defines the valid values to which you can set the pulse voltage limit and pulse bias voltage limit.
         This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
-        For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
+        For valid ranges, refer to the specifications for your instrument.
 
 
 
@@ -9938,7 +9977,7 @@ voltage_level_range
         The range defines the valid values to which the voltage level can be set. Use the :py:attr:`nidcpower.Session.voltage_level_autorange` property to enable automatic selection of the voltage level range.
         The :py:attr:`nidcpower.Session.voltage_level_range` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
         :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
-        For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
+        For valid ranges, refer to the specifications for your instrument.
 
 
 
@@ -10170,7 +10209,7 @@ voltage_limit_range
         The range defines the valid values to which the voltage limit can be set. Use the :py:attr:`nidcpower.Session.voltage_limit_autorange` property to enable automatic selection of the voltage limit range.
         The :py:attr:`nidcpower.Session.voltage_limit_range` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
         :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
-        For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
+        For valid ranges, refer to the specifications for your instrument.
 
 
 
