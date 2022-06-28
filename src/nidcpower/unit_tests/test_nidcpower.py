@@ -71,6 +71,7 @@ import nidcpower
             {},
             # expected_python_members
             {
+                "channel": "",
                 "vdc": 0.0,
                 "idc": 0.0,
                 "stimulus_frequency": 0.0,
@@ -121,6 +122,7 @@ import nidcpower
             # expected_repr
             (
                 "LCRMeasurement(data=None, "
+                'channel="", '
                 "vdc=0.0, "
                 "idc=0.0, "
                 "stimulus_frequency=0.0, "
@@ -136,6 +138,7 @@ import nidcpower
             ),
             # expected_str
             (
+                "Channel           : \n"
                 "V DC              : 0\n"
                 "I DC              : 0\n"
                 "Stimulus frequency: 0\n"
@@ -160,6 +163,7 @@ import nidcpower
             nidcpower.struct_NILCRMeasurement,  # ctype_class
             # init_params
             {
+                "channel": "",  # Non-default channel will be tested separately in test_lcr_measurement_channel()
                 "vdc": 0.1,
                 "idc": 0.001,
                 "stimulus_frequency": 10_000.0,
@@ -179,6 +183,7 @@ import nidcpower
             },
             # expected_python_members
             {
+                "channel": "",
                 "vdc": 0.1,
                 "idc": 0.001,
                 "stimulus_frequency": 10_000.0,
@@ -229,6 +234,7 @@ import nidcpower
             # expected_repr
             (
                 "LCRMeasurement(data=None, "
+                'channel="", '
                 "vdc=0.1, "
                 "idc=0.001, "
                 "stimulus_frequency=10000.0, "
@@ -244,6 +250,7 @@ import nidcpower
             ),
             # expected_str
             (
+                "Channel           : \n"
                 "V DC              : 0.1\n"
                 "I DC              : 0.001\n"
                 "Stimulus frequency: 10,000\n"
@@ -362,3 +369,16 @@ def test_custom_type_ctype_default_values(ctype_class, expected_ctype_members):
 def test_lcr_load_compensation_spot_input_error(init_params, expected_error_type):
     with pytest.raises(expected_error_type):
         nidcpower.LCRLoadCompensationSpot(**init_params)
+
+
+# "channel" field of LCRMeasurement class need to be tested separately as it will not be preserved
+#  after converting an LCRMeasurement object to struct_NILCRMeasurement
+def test_lcr_measurement_channel():
+    expected_channel = "dev0/0"
+    initial_python_object = nidcpower.LCRMeasurement(channel=expected_channel)
+    copied_python_object = nidcpower.LCRMeasurement(initial_python_object)
+
+    for python_object in (initial_python_object, copied_python_object):
+        assert python_object.channel == expected_channel
+        assert f'channel="{expected_channel}",' in repr(python_object)
+        assert str(python_object).startswith(f"Channel           : {expected_channel}\n")

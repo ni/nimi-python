@@ -90,6 +90,7 @@ class LCRMeasurement(object):
 
     _lcr_measurement_field_metadata = [
         # field_name           label(s)
+        ("channel"           , "Channel"                               ),  # noqa: E202,E203
         ("vdc"               , "V DC"                                  ),  # noqa: E202,E203
         ("idc"               , "I DC"                                  ),  # noqa: E202,E203
         ("stimulus_frequency", "Stimulus frequency"                    ),  # noqa: E202,E203
@@ -107,6 +108,7 @@ class LCRMeasurement(object):
     def __init__(
         self,
         data=None,
+        channel="",
         vdc=0.0,
         idc=0.0,
         stimulus_frequency=0.0,
@@ -125,6 +127,8 @@ class LCRMeasurement(object):
         Creates and returns an LCRMeasurement object.
 
         Args:
+            channel (str): The channel name associated with this LCRMeasurement.
+
             data (LCRMeasurement, struct_NILCRMeasurement): Specifies an LCR measurement object to
                 copy from. If it is None, the values from the other parameters are used instead.
 
@@ -165,6 +169,7 @@ class LCRMeasurement(object):
         """
         if data is not None:
             if isinstance(data, struct_NILCRMeasurement):
+                self.channel = ""
                 self.vdc = data.vdc
                 self.idc = data.idc
                 self.stimulus_frequency = data.stimulus_frequency
@@ -260,11 +265,12 @@ class LCRMeasurement(object):
         field_value_strings = []
         for field_name, _ in LCRMeasurement._lcr_measurement_field_metadata:
             field_value = getattr(self, field_name)
-            value_string = (
-                "{0}.{1}".format(self.__class__.__name__, field_value)
-                if isinstance(field_value, tuple)
-                else str(field_value)
-            )
+            if isinstance(field_value, tuple):
+                value_string = "{0}.{1}".format(self.__class__.__name__, field_value)
+            elif isinstance(field_value, str):
+                value_string = '"{0}"'.format(field_value)
+            else:
+                value_string = str(field_value)
             field_value_strings.append("{0}={1}".format(field_name, value_string))
         return "{0}(data=None, {1})".format(self.__class__.__name__, ", ".join(field_value_strings))
 
@@ -276,7 +282,7 @@ class LCRMeasurement(object):
         field_value_strings = []
         for field_name, field_label in LCRMeasurement._lcr_measurement_field_metadata:
             # Determines row_format
-            if field_name in ("measurement_mode", "in_compliances", "unbalanced"):
+            if field_name in ("channel", "measurement_mode", "in_compliances", "unbalanced"):
                 row_format = "{{:<{}}}: {{:}}\n".format(max_field_label_len)
             else:
                 row_format = "{{:<{}}}: {{:,.6g}}\n".format(max_field_label_len)
