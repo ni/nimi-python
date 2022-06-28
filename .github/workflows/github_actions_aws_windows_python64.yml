@@ -18,7 +18,7 @@ on:
   
 jobs:
   do-the-job1:
-      name: 
+      name: test
       runs-on: 
       - self-hosted
       - windows

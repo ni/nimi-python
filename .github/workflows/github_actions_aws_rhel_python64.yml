@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
 jobs:
   do-the-job1:
-    name: 
+    name: test
     runs-on: 
     - self-hosted
     - linux
