@@ -303,7 +303,7 @@ class _SessionBase(object):
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
-    **Valid Values:** PXIe-4147: 0 to 9 seconds; PXIe-4162, PXIe-4163: 0 to 23 seconds
+    **Valid Values:**The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.
 
     Note:
     This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
