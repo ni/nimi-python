@@ -440,57 +440,103 @@ def add_all_attribute_metadata(attributes, config):
 
 
 def _add_enum_codegen_method(enums, config):
-    '''Adds 'codegen_method' that will determine whether and how the enum is code-generated.
+    '''Adds 'codegen_method' if not explicitly specified that will determine whether and how the enum is code-generated.
 
-    Set the 'codegen_method' of all enums that do not explicitly specify it in metadata to 'no',
-    then go through all functions and attributes and set to the least restrictive use.
-    If an enum without converter has an explicit non-public 'codegen_method' but it is used by a
-    'public'/'python-only' function or 'public' attribute, a ValueError would be thrown.
+    If an enum does not explicitly specify its 'codegen_method' in metadata, it will be assigned the
+    least restrictive codegen_method based on the codegen_method of all the functions and attributes
+    that use it. The default codegen_method is 'no' (if no function nor attribute uses it).
+
+    If an enum explicitly specifies its 'codegen_method' in metadata, it will be checked against the
+    least restrictive codegen_method based on the codegen_method of all the functions and attributes
+    that use it (if its explicit 'codegen_method' is more restrictive than the calculated least
+    restrictive codegen_method and it does not use converter, a ValueError would be thrown).
+
+    The restrictiveness of the codegen_method is as follows (most restrictive -> least restrictive):
+    'no' -> 'private' -> 'public' / 'python-only' (will be converted to 'public' if not explicitly specified)
     '''
-    enum_has_explicit_codegen_method = {}
+    enum_to_client_functions = _get_functions_that_use_enums(enums, config)
+    enum_to_client_attributes = _get_attributes_that_use_enums(enums, config)
     for e in enums:
+        least_restrictive_codegen_method = _get_least_restrictive_codegen_method([
+            config['functions'][f]['codegen_method'] for f in enum_to_client_functions[e]
+        ] + [
+            config['attributes'][a]['codegen_method'] for a in enum_to_client_attributes[e]
+        ])
         if 'codegen_method' not in enums[e]:
-            enums[e]['codegen_method'] = 'no'
-            enum_has_explicit_codegen_method[e] = False
+            enums[e]['codegen_method'] = least_restrictive_codegen_method
         else:
-            enum_has_explicit_codegen_method[e] = True
+            explicit_codegen_method = enums[e]['codegen_method']
+            # Check if explicit_codegen_method is more restrictive than
+            #  least_restrictive_codegen_method and the enum does not use converter
+            # _get_least_restrictive_codegen_method() might change 'python-only' to 'public',
+            #  so avoid comparing explicit_codegen_method with the output of
+            #  _get_least_restrictive_codegen_method() directly
+            if _get_least_restrictive_codegen_method([
+                explicit_codegen_method,
+                least_restrictive_codegen_method
+            ]) != _get_least_restrictive_codegen_method([
+                explicit_codegen_method
+            ]) and not enum_uses_converter(enums[e]):
+                client_function_names = enum_to_client_functions[e]
+                client_attribute_names = [
+                    config['attributes'][a]['name'] for a in enum_to_client_attributes[e]
+                ]
+                raise ValueError(
+                    f'Codegen_method of enum {e} used by functions {client_function_names} and attributes {client_attribute_names} must be {least_restrictive_codegen_method}, is {explicit_codegen_method}'
+                )
 
-    # Iterate through all codegen functions and set any enum parameters to the same level of codegen_method
+
+def _get_functions_that_use_enums(enums, config):
+    '''Generate a dict that maps each enum to a list of functions that use it in their parameters'''
+    enum_to_client_functions = {e: [] for e in enums}
     for f in filter_codegen_functions(config['functions']):
-        f_codegen_method = config['functions'][f]['codegen_method']
         for p in config['functions'][f]['parameters']:
             e = p['enum']
-            if e is not None and e not in enums:
-                print('Missing enum {0} referenced by function {1}'.format(e, f))
-            elif e is not None:
-                if f_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
-                    enums[e]['codegen_method'] = f_codegen_method
-                elif f_codegen_method in ('public', 'python-only') and enums[e]['codegen_method'] != 'public':
-                    if enum_has_explicit_codegen_method[e]:
-                        if not enum_uses_converter(enums[e]):
-                            raise ValueError(
-                                f"Enum {e} used by public function {f} must be public, is private"
-                            )
-                    else:
-                        enums[e]['codegen_method'] = 'public'
-
-    # Iterate through all codegen attributes and set any enum parameters to the same level of codegen_method
-    for a in filter_codegen_attributes(config['attributes']):
-        a_codegen_method = config['attributes'][a]['codegen_method']
-        e = config['attributes'][a]['enum']
-        if e is not None and e not in enums:
-            print('Missing enum {0} referenced by attribute {1}'.format(e, a))
-        elif e is not None:
-            if a_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
-                enums[e]['codegen_method'] = a_codegen_method
-            elif a_codegen_method == 'public' and enums[e]['codegen_method'] != 'public':
-                if enum_has_explicit_codegen_method[e]:
-                    if not enum_uses_converter(enums[e]):
-                        raise ValueError(
-                            f"Enum {e} used by public attribute {config['attributes'][a]['name']} must be public, is private"
-                        )
+            if e is not None:
+                if e not in enum_to_client_functions:
+                    print('Missing enum {0} referenced by function {1}'.format(e, f))
                 else:
-                    enums[e]['codegen_method'] = a_codegen_method
+                    enum_to_client_functions[e].append(f)
+    return enum_to_client_functions
+
+
+def _get_attributes_that_use_enums(enums, config):
+    '''Generate a dict that maps each enum to a list of attributes that use it'''
+    enum_to_client_attributes = {e: [] for e in enums}
+    for a in filter_codegen_attributes(config['attributes']):
+        e = config['attributes'][a]['enum']
+        if e is not None:
+            if e not in enum_to_client_attributes:
+                print('Missing enum {0} referenced by attribute {1}'.format(e, a))
+            else:
+                enum_to_client_attributes[e].append(a)
+    return enum_to_client_attributes
+
+
+def _get_least_restrictive_codegen_method(codegen_methods):
+    '''Get the least restrictive codegen_method among the input codegen_methods list.
+
+    If the input codegen_methods list, return 'no'.
+    The restrictiveness of the codegen_method is as follows (most restrictive -> least restrictive):
+    'no' -> 'private' -> 'public' / 'python-only' (will be converted to 'public')
+    '''
+    if len(codegen_methods) == 0:
+        return 'no'
+
+    codegen_method_to_permissiveness = {
+        'no': 0,
+        'private': 1,
+        'python-only': 2,
+        'public': 2
+    }
+    permissiveness_to_codegen_method = {
+        0: 'no',
+        1: 'private',
+        2: 'public'
+    }
+    return permissiveness_to_codegen_method[
+        max(codegen_method_to_permissiveness[codegen_method] for codegen_method in codegen_methods)
+    ]
 
 
 def _add_enum_value_python_name(enum_info, config):
@@ -1402,6 +1448,33 @@ enums_input = {
             },
         ],
     },
+    'EnumWithConverter': {
+        'codegen_method': 'private',
+        'converted_value_to_enum_function_name': 'convert_to_enum_with_converter_enum',
+        'enum_to_converted_value_function_name': 'convert_from_enum_with_converter_enum',
+        'values': [
+            {
+                'converts_to_value': True,
+                'name': 'RED',
+                'value': 1
+            },
+            {
+                'converts_to_value': False,
+                'name': 'BLUE',
+                'value': 2
+            },
+            {
+                'converts_to_value': 'yellow',
+                'name': 'YELLOW',
+                'value': 5
+            },
+            {
+                'converts_to_value': 42,
+                'name': 'BLACK',
+                'value': 42
+            }
+        ]
+    },
 }
 
 
@@ -1414,6 +1487,18 @@ enums_expected = {
             {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE'},
             {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2, 'python_name': 'YELLOW'},
             {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2, 'python_name': 'BLACK'}
+        ]
+    },
+    'EnumWithConverter': {
+        'codegen_method': 'private',
+        'python_name': '_EnumWithConverter',
+        'converted_value_to_enum_function_name': 'convert_to_enum_with_converter_enum',
+        'enum_to_converted_value_function_name': 'convert_from_enum_with_converter_enum',
+        'values': [
+            {'name': 'RED', 'value': 1, 'converts_to_value': True, 'python_name': 'RED'},
+            {'name': 'BLUE', 'value': 2, 'converts_to_value': False, 'python_name': 'BLUE'},
+            {'name': 'YELLOW', 'value': 5, 'converts_to_value': 'yellow', 'python_name': 'YELLOW'},
+            {'name': 'BLACK', 'value': 42, 'converts_to_value': 42, 'python_name': 'BLACK'}
         ]
     },
 }
@@ -1567,4 +1652,87 @@ def test_add_all_metadata():
         expected=expected)
 
 
+def _setup_inputs_for_enum_codegen_method_tests():
+    actual_enums = copy.deepcopy(enums_input)
+    actual_config = copy.deepcopy(config_input)
+    # Set up minimal input functions metadata
+    actual_config['functions'] = {
+        'PublicMethod': {
+            'codegen_method': 'public',
+            'parameters': [{'enum': None}, {'enum': 'EnumWithConverter'}],
+        },
+        'PythonOnlyMethod': {
+            'codegen_method': 'python-only',
+            'parameters': [{'enum': 'Color'}, {'enum': None}],
+        },
+        'PrivateMethod': {
+            'codegen_method': 'private',
+            'parameters': [{'enum': 'EnumWithConverter'}],
+        },
+        'NoCodegenMethod': {
+            'codegen_method': 'no',
+            'parameters': [{'enum': 'Color'}],
+        },
+    }
+    # Set up minimal input attributes metadata
+    actual_config['attributes'] = {
+        '1000000': {'codegen_method': 'public', 'name': 'PUBLIC_ATTR', 'enum': None},
+        '1000001': {'codegen_method': 'public', 'name': 'PUBLIC_ATTR_2', 'enum': 'EnumWithConverter'},
+        '1000002': {'codegen_method': 'private', 'name': 'PRIVATE_ATTR', 'enum': 'Color'},
+        '1000003': {'codegen_method': 'private', 'name': 'PRIVATE_ATTR_2', 'enum': 'EnumWithConverter'},
+        '1000004': {'codegen_method': 'no', 'name': 'NO_CODEGEN_ATTR', 'enum': 'Color'},
+    }
+    return actual_enums, actual_config
 
+
+def test_add_enum_codegen_method():
+    actual_enums, actual_config = _setup_inputs_for_enum_codegen_method_tests()
+    _add_enum_codegen_method(actual_enums, actual_config)
+    assert actual_enums['Color']['codegen_method'] == 'public'
+    assert actual_enums['EnumWithConverter']['codegen_method'] == 'private'
+
+
+def test_add_enum_codegen_method_error():
+    actual_enums, actual_config = _setup_inputs_for_enum_codegen_method_tests()
+    actual_enums['Color']['codegen_method'] = 'private'
+    expected_error_description = "Codegen_method of enum Color used by functions ['PythonOnlyMethod'] and attributes ['PRIVATE_ATTR'] must be public, is private"
+    try:
+        _add_enum_codegen_method(actual_enums, actual_config)
+    except ValueError as actual_error:
+        actual_error_message = actual_error.args[0]
+        assert actual_error_message == expected_error_description
+
+
+def test_get_functions_that_use_enums():
+    actual_enums, actual_config = _setup_inputs_for_enum_codegen_method_tests()
+    expected_output = {
+        'Color': ['PythonOnlyMethod'],
+        'EnumWithConverter': ['PublicMethod', 'PrivateMethod'],
+    }
+    actual_output = _get_functions_that_use_enums(actual_enums, actual_config)
+    _compare_dicts(actual_output, expected_output)
+
+
+def test_get_attributes_that_use_enums():
+    actual_enums, actual_config = _setup_inputs_for_enum_codegen_method_tests()
+    expected_output = {
+        'Color': ['1000002'],
+        'EnumWithConverter': ['1000001', '1000003'],
+    }
+    actual_output = _get_attributes_that_use_enums(actual_enums, actual_config)
+    _compare_dicts(actual_output, expected_output)
+
+
+def test_get_least_restrictive_codegen_method():
+    for codegen_methods, expected_least_restrictive_codegen_method in (
+        ([], 'no'),
+        (['no'], 'no'),
+        (['private', 'private'], 'private'),
+        (['no', 'private'], 'private'),
+        (['public', 'private'], 'public'),
+        (['private', 'python-only', 'private', 'no'], 'public'),
+        (['public', 'python-only', 'public'], 'public')
+    ):
+        assert _get_least_restrictive_codegen_method(
+            codegen_methods
+        ) == expected_least_restrictive_codegen_method
