@@ -518,6 +518,23 @@ enums = {
             }
         ]
     },
+    'LCRImpedanceAutoRange': {
+        'codegen_method': 'private',
+        'converted_value_to_enum_function_name': 'convert_to_lcr_impedance_auto_range_enum',
+        'enum_to_converted_value_function_name': 'convert_from_lcr_impedance_auto_range_enum',
+        'values': [
+            {
+                'converts_to_value': False,
+                'name': 'NIDCPOWER_VAL_AUTO_RANGE_OFF',
+                'value': 1068
+            },
+            {
+                'converts_to_value': True,
+                'name': 'NIDCPOWER_VAL_AUTO_RANGE_ON',
+                'value': 1070
+            }
+        ]
+    },
     'LCRImpedanceRangeSource': {
         'values': [
             {
