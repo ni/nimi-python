@@ -303,6 +303,7 @@ class _SessionBase(object):
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
+    **Valid Values:** PXIe-4147: 0 to 9 seconds; PXIe-4162, PXIe-4163: 0 to 23 seconds
 
     Note:
     This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
@@ -1221,7 +1222,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether the channel actively maintains a constant DC bias voltage or current across the DUT for LCR measurements.
-    To use this property, you must configure a DC bias with the lcr_dc_bias_source property and, depending on the DC bias source you choose, either lcr_dc_bias_voltage_level or lcr_dc_bias_current_level.
+    To use this property, you must configure a DC bias by 1) selecting an lcr_dc_bias_source and 2) depending on the DC bias source you choose, setting either the lcr_dc_bias_voltage_level or lcr_dc_bias_current_level.
 
     Note:
     This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
