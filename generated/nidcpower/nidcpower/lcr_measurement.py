@@ -194,7 +194,6 @@ class LCRMeasurement(object):
                     )
         else:
             for field_name, _ in LCRMeasurement._lcr_measurement_field_metadata:
-                setattr(self, field_name, locals()[field_name])
                 setattr(
                     self,
                     field_name,
