@@ -1,4 +1,4 @@
-name: system_tests
+name: system_tests_rhel_64
 
 on:
   pull_request:
@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
 jobs:
   do-the-job1:
-    name: rhel64
+    name: 
     runs-on: 
     - self-hosted
     - linux
