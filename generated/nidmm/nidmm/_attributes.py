@@ -127,13 +127,13 @@ class AttributeEnumWithConverter(AttributeEnum):
                 self._underlying_attribute_enum.__get__(session, session_type)
             )
         except (KeyError, ValueError):
-            raise errors.DriverTooNewError('The driver runtime returned an unexpected value. ')
+            raise errors.DriverTooNewError()
 
     def __set__(self, session, value):
         try:
             return self._underlying_attribute_enum.__set__(session, self._setter_converter(value))
         except KeyError:
-            raise ValueError(f'{value} cannot be converted to an {str(self._underlying_attribute_enum._attribute_type.__name__)} enum value')
+            raise ValueError(f'Invalid value: {value}')
 
 
 # nitclk specific attribute type

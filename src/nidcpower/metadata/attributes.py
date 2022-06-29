@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.5.0d71
+# This file is generated from NI-DCPower API metadata version 22.5.0d135
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -1744,6 +1744,21 @@ attributes = {
         ],
         'type': 'ViReal64'
     },
+    1150216: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nDefines whether an instrument in LCR mode automatically selects the best impedance range for each given LCR measurement.\n\nImpedance autoranging may be enabled only when both:\n\n- The NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SINGLE_POINT\n- NIDCPOWER_ATTR_MEASURE_WHEN is set to a value other than NIDCPOWER_VAL_ON_MEASURE_TRIGGER\n\nYou can read NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE back after a measurement to determine the actual range used.\n\nWhen enabled, impedance autoranging overrides impedance range settings you configure manually with any other attributes.\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'LCRImpedanceAutoRange',
+        'lv_property': 'LCR:Impedance Range:Impedance Autorange',
+        'name': 'LCR_IMPEDANCE_AUTO_RANGE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32',
+        'type_in_documentation': 'bool'
+    },
     1150217: {
         'access': 'read-write',
         'documentation': {
@@ -2254,7 +2269,7 @@ attributes = {
     1150291: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies whether the channel actively maintains a constant DC bias voltage or current across the DUT for LCR measurements.\nTo use this property, you must configure a DC bias with the NIDCPOWER_ATTR_LCR_DC_BIAS_SOURCE property and, depending on the DC bias source you choose, either NIDCPOWER_ATTR_LCR_DC_BIAS_VOLTAGE_LEVEL or NIDCPOWER_ATTR_LCR_DC_BIAS_CURRENT_LEVEL.\n',
+            'description': '\nSpecifies whether the channel actively maintains a constant DC bias voltage or current across the DUT for LCR measurements.\nTo use this property, you must configure a DC bias by 1) selecting an NIDCPOWER_ATTR_LCR_DC_BIAS_SOURCE and 2) depending on the DC bias source you choose, setting either the NIDCPOWER_ATTR_LCR_DC_BIAS_VOLTAGE_LEVEL or NIDCPOWER_ATTR_LCR_DC_BIAS_CURRENT_LEVEL.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'LCR:DC Bias:Automatic Level Control',
@@ -2455,7 +2470,7 @@ attributes = {
         'access': 'read-write',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'documentation': {
-            'description': '\nBalances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.\n',
+            'description': '\nBalances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.\n**Valid Values:**The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Measurement:Advanced:Autorange Maximum Delay After Range Change',
