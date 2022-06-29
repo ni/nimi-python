@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.5.0d93
+# This file is generated from NI-DCPower API metadata version 22.5.0d135
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -1064,7 +1064,7 @@ functions = {
     'FancyFetchMultiple': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nReturns a list of named tuples (Measurement) that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n\n',
+            'description': '\nReturns a list of named tuples (Measurement) that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n- **channel** (str)\n\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_templates': [
@@ -1114,7 +1114,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nList of named tuples with fields:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n'
+                    'description': '\nList of named tuples with fields:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n- **channel** (str)\n'
                 },
                 'name': 'measurements',
                 'python_type': 'Measurement',
@@ -1207,7 +1207,7 @@ functions = {
     'FancyMeasureMultiple': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nReturns a list of named tuples (Measurement) containing the measured voltage\nand current values on the specified output channel(s). Each call to this function\nblocks other function calls until the measurements are returned from the device.\nThe order of the measurements returned in the array corresponds to the order\non the specified output channel(s).\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n\n',
+            'description': '\nReturns a list of named tuples (Measurement) containing the measured voltage\nand current values on the specified output channel(s). Each call to this function\nblocks other function calls until the measurements are returned from the device.\nThe order of the measurements returned in the array corresponds to the order\non the specified output channel(s).\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n- **channel** (str)\n\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'method_templates': [
@@ -1237,7 +1237,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nList of named tuples with fields:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n'
+                    'description': '\nList of named tuples with fields:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n- **channel** (str)\n'
                 },
                 'name': 'measurements',
                 'python_type': 'Measurement',
@@ -1767,9 +1767,11 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetChannelNameFromString': {
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nReturns a list of channel names for the given channel indices.'
         },
+        'method_name_for_documentation': 'get_channel_name_from_string',
         'parameters': [
             {
                 'direction': 'in',
@@ -1815,7 +1817,8 @@ functions = {
                 'type_in_documentation': 'list of str'
             }
         ],
-        'python_name': 'get_channel_names',
+        'python_name': '_get_channel_names',
+        'render_in_session_base': True,
         'returns': 'ViStatus'
     },
     'GetError': {
@@ -2982,6 +2985,66 @@ functions = {
                 'type': 'ViConstString'
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'PublicGetChannelNameFromString': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nReturns a list of channel names for the given channel indices.'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'get_channel_names'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session. **vi** is obtained from the\nniDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIndex list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
+                },
+                'name': 'index',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'python_name': 'indices',
+                'type': 'ViString',
+                'type_in_documentation': 'basic sequence types or str or int'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe number of elements in the ViChar array you specify for name.\n'
+                },
+                'name': 'bufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'The channel name(s) at the specified indices.'
+                },
+                'is_repeated_capability': False,
+                'name': 'channelName',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'python_name': 'names',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufferSize'
+                },
+                'type': 'ViString',
+                'type_in_documentation': 'list of str'
+            }
+        ],
+        'python_name': 'get_channel_names',
         'returns': 'ViStatus'
     },
     'QueryInCompliance': {
