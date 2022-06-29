@@ -70,17 +70,17 @@ class DriverNotInstalledError(Error):
 
 
 class DriverTooOldError(Error):
-    '''An error due to using this module with an older version of the driver runtime.'''
+    '''An error due to using this module with an older version of the ${driver_name} driver runtime.'''
 
     def __init__(self):
         super(DriverTooOldError, self).__init__('A function was not found in the ${driver_name} runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.')
 
 
 class DriverTooNewError(Error):
-    '''An error due to the driver runtime being too new for the Python module.'''
+    '''An error due to the ${driver_name} driver runtime being too new for this module.'''
 
-    def __init__(self, prefix_message):
-        super(DriverTooNewError, self).__init__(f'{prefix_message}This can occur if the ${driver_name} runtime is newer than the ${module_name} Python module. Upgrade the ${module_name} Python module.')
+    def __init__(self):
+        super(DriverTooNewError, self).__init__('The ${driver_name} runtime returned an unexpected value. This can occur if it is too new for the ${module_name} Python module. Upgrade the ${module_name} Python module.')
 
 
 % if 'InvalidRepeatedCapabilityError' in extra_errors_used:

@@ -46,7 +46,7 @@ DriverTooOldError
 
     .. exception:: DriverTooOldError
 
-        An error due to using this module with an older version of the driver runtime.
+        An error due to using this module with an older version of the NI Switch Executive driver runtime.
 
 DriverTooNewError
 -----------------
@@ -55,7 +55,7 @@ DriverTooNewError
 
     .. exception:: DriverTooNewError
 
-        An error due to the driver runtime being too new for the Python module.
+        An error due to the NI Switch Executive driver runtime being too new for this module.
 
 InvalidRepeatedCapabilityError
 ------------------------------
