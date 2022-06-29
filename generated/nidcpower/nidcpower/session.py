@@ -307,6 +307,7 @@ class _SessionBase(object):
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
+    **Valid Values:**The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.
 
     Note:
     This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
@@ -1225,7 +1226,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether the channel actively maintains a constant DC bias voltage or current across the DUT for LCR measurements.
-    To use this property, you must configure a DC bias with the lcr_dc_bias_source property and, depending on the DC bias source you choose, either lcr_dc_bias_voltage_level or lcr_dc_bias_current_level.
+    To use this property, you must configure a DC bias by 1) selecting an lcr_dc_bias_source and 2) depending on the DC bias source you choose, setting either the lcr_dc_bias_voltage_level or lcr_dc_bias_current_level.
 
     Note:
     This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
@@ -4791,6 +4792,7 @@ class _SessionBase(object):
         - **voltage** (float)
         - **current** (float)
         - **in_compliance** (bool)
+        - **channel** (str)
 
         Note:
         This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
@@ -4820,6 +4822,7 @@ class _SessionBase(object):
                 - **voltage** (float)
                 - **current** (float)
                 - **in_compliance** (bool)
+                - **channel** (str)
 
         '''
         import collections
@@ -4844,6 +4847,7 @@ class _SessionBase(object):
         - **voltage** (float)
         - **current** (float)
         - **in_compliance** (bool) - Always None
+        - **channel** (str)
 
         Note:
         This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
@@ -4865,6 +4869,7 @@ class _SessionBase(object):
                 - **voltage** (float)
                 - **current** (float)
                 - **in_compliance** (bool) - Always None
+                - **channel** (str)
 
         '''
         import collections
@@ -5254,6 +5259,38 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def _get_channel_names(self, indices):
+        r'''_get_channel_names
+
+        Returns a list of channel names for the given channel indices.
+
+        Args:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            names (list of str): The channel name(s) at the specified indices.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        names_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
 
     def _get_error(self):
         r'''_get_error
@@ -7097,38 +7134,6 @@ class Session(_SessionBase):
         return channel_name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_channel_names(self, indices):
-        r'''get_channel_names
-
-        Returns a list of channel names for the given channel indices.
-
-        Args:
-            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
-
-                -   A comma-separated list—for example, "0,2,3,1"
-                -   A range using a hyphen—for example, "0-3"
-                -   A range using a colon—for example, "0:3 "
-
-                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
-
-
-        Returns:
-            names (list of str): The channel name(s) at the specified indices.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        names_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
-
-    @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
         r'''_get_ext_cal_last_date_and_time
 
@@ -7572,6 +7577,28 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_InitializeWithIndependentChannels(resource_name_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
+
+    @ivi_synchronized
+    def get_channel_names(self, indices):
+        '''get_channel_names
+
+        Returns a list of channel names for the given channel indices.
+
+        Args:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            names (list of str): The channel name(s) at the specified indices.
+
+        '''
+        return self._get_channel_names(indices)
 
     @ivi_synchronized
     def read_current_temperature(self):
