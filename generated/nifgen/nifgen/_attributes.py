@@ -127,7 +127,7 @@ class AttributeEnumWithConverter(AttributeEnum):
                 self._underlying_attribute_enum.__get__(session, session_type)
             )
         except (KeyError, ValueError):
-            raise errors.DriverTooNewError('The driver runtime returned an unexpected value. ')
+            raise errors.DriverTooNewError()
 
     def __set__(self, session, value):
         try:
