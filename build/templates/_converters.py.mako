@@ -191,18 +191,18 @@ def convert_channels_repeated_capabilities(
     '''Convert a channels repeated capabilities string, possibly with no or multiple prefixes (each ends with '/'), to a list
 
     Examples:
-        - convert_channels_repeated_capabilities('1', '0') --> ['1']
-        - convert_channels_repeated_capabilities('0-2', '0') --> ['0', '1', '2']
-        - convert_channels_repeated_capabilities('0:2', '0') --> ['0', '1', '2']
-        - convert_channels_repeated_capabilities('0:2,4', '0') --> ['0', '1', '2', '4']
-        - convert_channels_repeated_capabilities('4,1:2', '1') --> ['4', '1', '2']
-        - convert_channels_repeated_capabilities('2:3,0', 'Dev1/0') --> ['Dev1/2', 'Dev1/3', 'Dev1/0']
-        - convert_channels_repeated_capabilities('Dev1/1', 'Dev1/0') --> ['Dev1/1']
-        - convert_channels_repeated_capabilities('Dev1/0-2', 'Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2']
-        - convert_channels_repeated_capabilities('Dev1/0:2', 'Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2']
-        - convert_channels_repeated_capabilities('Dev1/0:2,4', 'Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/4']
-        - convert_channels_repeated_capabilities('4,Dev1/1:2', 'Dev1/1') --> ['Dev1/4', 'Dev1/1', 'Dev1/2']
-        - convert_channels_repeated_capabilities('Dev1/4,Dev1/2,Dev1/3', 'Dev1/2') --> ['Dev1/4', 'Dev1/2', 'Dev1/3']
+        - convert_channels_repeated_capabilities('1', first_channel_name='0') --> ['1']
+        - convert_channels_repeated_capabilities('0-2', first_channel_name='0') --> ['0', '1', '2']
+        - convert_channels_repeated_capabilities('0:2', first_channel_name='0') --> ['0', '1', '2']
+        - convert_channels_repeated_capabilities('0:2,4', first_channel_name='0') --> ['0', '1', '2', '4']
+        - convert_channels_repeated_capabilities('4,1:2', first_channel_name='1') --> ['4', '1', '2']
+        - convert_channels_repeated_capabilities('2:3,0', first_channel_name='Dev1/0') --> ['Dev1/2', 'Dev1/3', 'Dev1/0']
+        - convert_channels_repeated_capabilities('Dev1/1', first_channel_name='Dev1/0') --> ['Dev1/1']
+        - convert_channels_repeated_capabilities('Dev1/0-2', first_channel_name='Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2']
+        - convert_channels_repeated_capabilities('Dev1/0:2', first_channel_name='Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2']
+        - convert_channels_repeated_capabilities('Dev1/0:2,4', first_channel_name='Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/4']
+        - convert_channels_repeated_capabilities('4,Dev1/1:2', first_channel_name='Dev1/1') --> ['Dev1/4', 'Dev1/1', 'Dev1/2']
+        - convert_channels_repeated_capabilities('Dev1/4,Dev1/2,Dev1/3', first_channel_name='Dev1/2') --> ['Dev1/4', 'Dev1/2', 'Dev1/3']
 
     Args:
         channels_repeated_capability (str) - refer to _convert_repeated_capabilities() for the

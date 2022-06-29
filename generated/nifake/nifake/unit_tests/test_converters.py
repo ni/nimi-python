@@ -294,6 +294,51 @@ def test_repeated_capabilities_invalid_resource_names():
     assert test_result_list == '0/1:2,'
 
 
+def test_convert_single_group_repeated_capabilities():
+    test_result_list = _converters.convert_single_group_repeated_capabilities('0')
+    assert test_result_list == ['0']
+    test_result_list = _converters.convert_single_group_repeated_capabilities('0-2')
+    assert test_result_list == ['0', '1', '2']
+    test_result_list = _converters.convert_single_group_repeated_capabilities('0:2')
+    assert test_result_list == ['0', '1', '2']
+    test_result_list = _converters.convert_single_group_repeated_capabilities('Dev1/0')
+    assert test_result_list == ['Dev1/0']
+    test_result_list = _converters.convert_single_group_repeated_capabilities('Dev1/0-2')
+    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev1/2']
+    test_result_list = _converters.convert_single_group_repeated_capabilities('Dev1/0:2')
+    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev1/2']
+
+
+def test_convert_channels_repeated_capabilities_without_prefix():
+    test_result_list = _converters.convert_channels_repeated_capabilities('1', first_channel_name='0')
+    assert test_result_list == ['1']
+    test_result_list = _converters.convert_channels_repeated_capabilities('0-2', first_channel_name='0')
+    assert test_result_list == ['0', '1', '2']
+    test_result_list = _converters.convert_channels_repeated_capabilities('0:2', first_channel_name='0')
+    assert test_result_list == ['0', '1', '2']
+    test_result_list = _converters.convert_channels_repeated_capabilities('0:2,4', first_channel_name='0')
+    assert test_result_list == ['0', '1', '2', '4']
+    test_result_list = _converters.convert_channels_repeated_capabilities('4,1:2', first_channel_name='1')
+    assert test_result_list == ['4', '1', '2']
+
+
+def test_convert_channels_repeated_capabilities_with_prefix():
+    test_result_list = _converters.convert_channels_repeated_capabilities('2:3,0', first_channel_name='Dev1/0')
+    assert test_result_list == ['Dev1/2', 'Dev1/3', 'Dev1/0']
+    test_result_list = _converters.convert_channels_repeated_capabilities('Dev1/1', first_channel_name='Dev1/0')
+    assert test_result_list == ['Dev1/1']
+    test_result_list = _converters.convert_channels_repeated_capabilities('Dev1/0-2', first_channel_name='Dev1/0')
+    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev1/2']
+    test_result_list = _converters.convert_channels_repeated_capabilities('Dev1/0:2', first_channel_name='Dev1/0')
+    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev1/2']
+    test_result_list = _converters.convert_channels_repeated_capabilities('Dev1/0:2,4', first_channel_name='Dev1/0')
+    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/4']
+    test_result_list = _converters.convert_channels_repeated_capabilities('4,Dev1/1:2', first_channel_name='Dev1/1')
+    assert test_result_list == ['Dev1/4', 'Dev1/1', 'Dev1/2']
+    test_result_list = _converters.convert_channels_repeated_capabilities('Dev1/4,Dev1/2,Dev1/3', first_channel_name='Dev1/2')
+    assert test_result_list == ['Dev1/4', 'Dev1/2', 'Dev1/3']
+
+
 def test_convert_chained_repeated_capability_to_parts_three_parts():
     chained_rep_cap = ('site0/test/PinA,site0/test/PinB,site0/test/PinC,'
                        'site1/test/PinA,site1/test/PinB,site1/test/PinC')
