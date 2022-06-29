@@ -38,6 +38,7 @@ class Library(object):
         self.niDCPower_ExportAttributeConfigurationFile_cfunc = None
         self.niDCPower_FancyInitialize_cfunc = None
         self.niDCPower_FetchMultiple_cfunc = None
+        self.niDCPower_FetchMultipleLCR_cfunc = None
         self.niDCPower_GetAttributeViBoolean_cfunc = None
         self.niDCPower_GetAttributeViInt32_cfunc = None
         self.niDCPower_GetAttributeViInt64_cfunc = None
@@ -61,6 +62,7 @@ class Library(object):
         self.niDCPower_LockSession_cfunc = None
         self.niDCPower_Measure_cfunc = None
         self.niDCPower_MeasureMultiple_cfunc = None
+        self.niDCPower_MeasureMultipleLCR_cfunc = None
         self.niDCPower_ParseChannelCount_cfunc = None
         self.niDCPower_PerformLCROpenCompensation_cfunc = None
         self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc = None
@@ -215,6 +217,14 @@ class Library(object):
                 self.niDCPower_FetchMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViBoolean), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_FetchMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_FetchMultiple_cfunc(vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count)
+
+    def niDCPower_FetchMultipleLCR(self, vi, channel_name, timeout, count, measurements, actual_count):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_FetchMultipleLCR_cfunc is None:
+                self.niDCPower_FetchMultipleLCR_cfunc = self._get_library_function('niDCPower_FetchMultipleLCR')
+                self.niDCPower_FetchMultipleLCR_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(lcr_measurement.struct_NILCRMeasurement), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDCPower_FetchMultipleLCR_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_FetchMultipleLCR_cfunc(vi, channel_name, timeout, count, measurements, actual_count)
 
     def niDCPower_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
@@ -399,6 +409,14 @@ class Library(object):
                 self.niDCPower_MeasureMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_MeasureMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_MeasureMultiple_cfunc(vi, channel_name, voltage_measurements, current_measurements)
+
+    def niDCPower_MeasureMultipleLCR(self, vi, channel_name, measurements):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_MeasureMultipleLCR_cfunc is None:
+                self.niDCPower_MeasureMultipleLCR_cfunc = self._get_library_function('niDCPower_MeasureMultipleLCR')
+                self.niDCPower_MeasureMultipleLCR_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(lcr_measurement.struct_NILCRMeasurement)]  # noqa: F405
+                self.niDCPower_MeasureMultipleLCR_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_MeasureMultipleLCR_cfunc(vi, channel_name, measurements)
 
     def niDCPower_ParseChannelCount(self, vi, channels_string, number_of_channels):  # noqa: N802
         with self._func_lock:

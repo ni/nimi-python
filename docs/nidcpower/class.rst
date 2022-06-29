@@ -994,6 +994,94 @@ fetch_multiple
 
 
 
+fetch_multiple_lcr
+------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: fetch_multiple_lcr(count, timeout=hightime.timedelta(seconds=1.0))
+
+            Returns a list of previously measured LCR data on the specified channel that have been taken and stored in a buffer.
+
+            To use this method:
+
+            -  Set :py:attr:`nidcpower.Session.measure_when` property to :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE` or :py:data:`~nidcpower.MeasureWhen.ON_MEASURE_TRIGGER`
+            -  Put the channel in the Running state (call :py:meth:`nidcpower.Session.initiate`)
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].fetch_multiple_lcr`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.fetch_multiple_lcr`
+
+
+            :param count:
+
+
+                Specifies the number of measurements to fetch.
+
+                
+
+
+            :type count: int
+            :param timeout:
+
+
+                Specifies the maximum time allowed for this method to complete, in seconds.
+                If the method does not complete within this time interval, NI-DCPower returns an error.
+
+                
+
+                .. note:: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
+
+
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
+
+            :rtype: list of LCRMeasurement
+            :return:
+
+
+                    Returns an array of LCR measurement data.
+
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | channel            | The channel name associated with this LCRMeasurement.                                                                                       |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | vdc                | The measured DC voltage, in volts.                                                                                                          |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | idc                | The measured DC current, in amps                                                                                                            |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | stimulus_frequency | The frequency of the LCR test signal, in Hz.                                                                                                |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | ac_voltage         | The measured AC voltage, in volts RMS.                                                                                                      |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | ac_current         | The measured AC current, in amps RMS.                                                                                                       |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | z                  | The complex impedance.                                                                                                                      |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | series_lcr         | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.               |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | parallel_lcr       | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.             |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | d                  | The dissipation factor of the circuit.                                                                                                      |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | measurement_mode   | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter. |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | in_compliances     | Indicates whether the output was in DC compliance and/or AC compliance at the time the measurement was taken                                |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | unbalanced         | Indicates whether the output was unbalanced at the time the measurement was taken.                                                          |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 get_channel_name
 ----------------
 
@@ -1597,6 +1685,73 @@ measure_multiple
                     - **channel** (str)
 
                     
+
+
+
+measure_multiple_lcr
+--------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: measure_multiple_lcr()
+
+            Measures and returns a list of LCR data on the specified output channel(s).
+
+            To use this method:
+
+            -  Set :py:attr:`nidcpower.Session.instrument_mode` property to :py:data:`~nidcpower.InstrumentMode.LCR`
+            -  Set :py:attr:`nidcpower.Session.measure_when` property to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`
+            -  Put the channel(s) in the Running state (call :py:meth:`nidcpower.Session.initiate`)
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].measure_multiple_lcr`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.measure_multiple_lcr`
+
+
+            :rtype: list of LCRMeasurement
+            :return:
+
+
+                    Returns an array of LCR measurement data.
+
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | channel            | The channel name associated with this LCRMeasurement.                                                                                       |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | vdc                | The measured DC voltage, in volts.                                                                                                          |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | idc                | The measured DC current, in amps                                                                                                            |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | stimulus_frequency | The frequency of the LCR test signal, in Hz.                                                                                                |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | ac_voltage         | The measured AC voltage, in volts RMS.                                                                                                      |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | ac_current         | The measured AC current, in amps RMS.                                                                                                       |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | z                  | The complex impedance.                                                                                                                      |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | series_lcr         | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.               |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | parallel_lcr       | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.             |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | d                  | The dissipation factor of the circuit.                                                                                                      |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | measurement_mode   | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter. |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | in_compliances     | Indicates whether the output was in DC compliance and/or AC compliance at the time the measurement was taken                                |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                    | unbalanced         | Indicates whether the output was unbalanced at the time the measurement was taken.                                                          |
+                    +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -2843,7 +2998,7 @@ autorange_maximum_delay_after_range_change
     .. py:attribute:: autorange_maximum_delay_after_range_change
 
         Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
-        **Valid Values:**The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.
+        **Valid Values:** The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.
 
 
 

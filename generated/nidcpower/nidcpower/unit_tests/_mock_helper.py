@@ -52,6 +52,10 @@ class SideEffectsHelper(object):
         self._defaults['FetchMultiple']['currentMeasurements'] = None
         self._defaults['FetchMultiple']['inCompliance'] = None
         self._defaults['FetchMultiple']['actualCount'] = None
+        self._defaults['FetchMultipleLCR'] = {}
+        self._defaults['FetchMultipleLCR']['return'] = 0
+        self._defaults['FetchMultipleLCR']['measurements'] = None
+        self._defaults['FetchMultipleLCR']['actualCount'] = None
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
         self._defaults['GetAttributeViBoolean']['attributeValue'] = None
@@ -132,6 +136,9 @@ class SideEffectsHelper(object):
         self._defaults['MeasureMultiple']['return'] = 0
         self._defaults['MeasureMultiple']['voltageMeasurements'] = None
         self._defaults['MeasureMultiple']['currentMeasurements'] = None
+        self._defaults['MeasureMultipleLCR'] = {}
+        self._defaults['MeasureMultipleLCR']['return'] = 0
+        self._defaults['MeasureMultipleLCR']['measurements'] = None
         self._defaults['ParseChannelCount'] = {}
         self._defaults['ParseChannelCount']['return'] = 0
         self._defaults['ParseChannelCount']['numberOfChannels'] = None
@@ -332,6 +339,27 @@ class SideEffectsHelper(object):
         if actual_count is not None:
             actual_count.contents.value = self._defaults['FetchMultiple']['actualCount']
         return self._defaults['FetchMultiple']['return']
+
+    def niDCPower_FetchMultipleLCR(self, vi, channel_name, timeout, count, measurements, actual_count):  # noqa: N802
+        if self._defaults['FetchMultipleLCR']['return'] != 0:
+            return self._defaults['FetchMultipleLCR']['return']
+        # measurements
+        if self._defaults['FetchMultipleLCR']['measurements'] is None:
+            raise MockFunctionCallError("niDCPower_FetchMultipleLCR", param='measurements')
+        test_value = self._defaults['FetchMultipleLCR']['measurements']
+        try:
+            measurements_ref = measurements.contents
+        except AttributeError:
+            measurements_ref = measurements
+        assert len(measurements_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            measurements_ref[i] = test_value[i]
+        # actual_count
+        if self._defaults['FetchMultipleLCR']['actualCount'] is None:
+            raise MockFunctionCallError("niDCPower_FetchMultipleLCR", param='actualCount')
+        if actual_count is not None:
+            actual_count.contents.value = self._defaults['FetchMultipleLCR']['actualCount']
+        return self._defaults['FetchMultipleLCR']['return']
 
     def niDCPower_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
@@ -635,6 +663,22 @@ class SideEffectsHelper(object):
             current_measurements_ref[i] = test_value[i]
         return self._defaults['MeasureMultiple']['return']
 
+    def niDCPower_MeasureMultipleLCR(self, vi, channel_name, measurements):  # noqa: N802
+        if self._defaults['MeasureMultipleLCR']['return'] != 0:
+            return self._defaults['MeasureMultipleLCR']['return']
+        # measurements
+        if self._defaults['MeasureMultipleLCR']['measurements'] is None:
+            raise MockFunctionCallError("niDCPower_MeasureMultipleLCR", param='measurements')
+        test_value = self._defaults['MeasureMultipleLCR']['measurements']
+        try:
+            measurements_ref = measurements.contents
+        except AttributeError:
+            measurements_ref = measurements
+        assert len(measurements_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            measurements_ref[i] = test_value[i]
+        return self._defaults['MeasureMultipleLCR']['return']
+
     def niDCPower_ParseChannelCount(self, vi, channels_string, number_of_channels):  # noqa: N802
         if self._defaults['ParseChannelCount']['return'] != 0:
             return self._defaults['ParseChannelCount']['return']
@@ -870,6 +914,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_FancyInitialize.return_value = 0
         mock_library.niDCPower_FetchMultiple.side_effect = MockFunctionCallError("niDCPower_FetchMultiple")
         mock_library.niDCPower_FetchMultiple.return_value = 0
+        mock_library.niDCPower_FetchMultipleLCR.side_effect = MockFunctionCallError("niDCPower_FetchMultipleLCR")
+        mock_library.niDCPower_FetchMultipleLCR.return_value = 0
         mock_library.niDCPower_GetAttributeViBoolean.side_effect = MockFunctionCallError("niDCPower_GetAttributeViBoolean")
         mock_library.niDCPower_GetAttributeViBoolean.return_value = 0
         mock_library.niDCPower_GetAttributeViInt32.side_effect = MockFunctionCallError("niDCPower_GetAttributeViInt32")
@@ -916,6 +962,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_Measure.return_value = 0
         mock_library.niDCPower_MeasureMultiple.side_effect = MockFunctionCallError("niDCPower_MeasureMultiple")
         mock_library.niDCPower_MeasureMultiple.return_value = 0
+        mock_library.niDCPower_MeasureMultipleLCR.side_effect = MockFunctionCallError("niDCPower_MeasureMultipleLCR")
+        mock_library.niDCPower_MeasureMultipleLCR.return_value = 0
         mock_library.niDCPower_ParseChannelCount.side_effect = MockFunctionCallError("niDCPower_ParseChannelCount")
         mock_library.niDCPower_ParseChannelCount.return_value = 0
         mock_library.niDCPower_PerformLCROpenCompensation.side_effect = MockFunctionCallError("niDCPower_PerformLCROpenCompensation")
