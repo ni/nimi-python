@@ -457,11 +457,12 @@ def _add_enum_codegen_method(enums, config):
     enum_to_client_functions = _get_functions_that_use_enums(enums, config)
     enum_to_client_attributes = _get_attributes_that_use_enums(enums, config)
     for e in enums:
-        least_restrictive_codegen_method = _get_least_restrictive_codegen_method([
-            config['functions'][f]['codegen_method'] for f in enum_to_client_functions[e]
-        ] + [
-            config['attributes'][a]['codegen_method'] for a in enum_to_client_attributes[e]
-        ])
+        least_restrictive_codegen_method = _get_least_restrictive_codegen_method(
+            set.union(
+                set(config['functions'][f]['codegen_method'] for f in enum_to_client_functions[e]),
+                set(config['attributes'][a]['codegen_method'] for a in enum_to_client_attributes[e])
+            )
+        )
         if 'codegen_method' not in enums[e]:
             enums[e]['codegen_method'] = least_restrictive_codegen_method
         else:
@@ -514,9 +515,9 @@ def _get_attributes_that_use_enums(enums, config):
 
 
 def _get_least_restrictive_codegen_method(codegen_methods):
-    '''Get the least restrictive codegen_method among the input codegen_methods list.
+    '''Get the least restrictive codegen_method among the input codegen_methods.
 
-    If the input codegen_methods list, return 'no'.
+    If the codegen_methods parameter is empty, return 'no'.
     The restrictiveness of the codegen_method is as follows (most restrictive -> least restrictive):
     'no' -> 'private' -> 'public' / 'python-only' (will be converted to 'public')
     '''
