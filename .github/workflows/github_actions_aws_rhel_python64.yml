@@ -26,7 +26,7 @@ jobs:
     timeout-minutes: 40
     strategy:
       matrix:
-        module_name: ["nidmm", "niswitch"]
+        module_name: ["nidcpower", "nidmm", "nifgen", "niscope", "niswitch", "nitclk"]
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
