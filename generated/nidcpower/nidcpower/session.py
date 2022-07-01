@@ -1199,6 +1199,26 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.lcr_current_amplitude`
     '''
+    lcr_current_range = _attributes.AttributeViReal64(1150267)
+    '''Type: float
+
+    Specifies the current range, in amps RMS, for the specified channel(s).
+    The range defines the valid values to which you can set the lcr_current_amplitude.
+    For valid ranges, refer to the specifications for your instrument.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_current_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_current_range`
+    '''
     lcr_custom_measurement_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150258)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
@@ -1255,6 +1275,26 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.lcr_dc_bias_current_level`
     '''
+    lcr_dc_bias_current_range = _attributes.AttributeViReal64(1150274)
+    '''Type: float
+
+    Specifies the DC Bias current range, in amps, for the specified channel(s).
+    The range defines the valid values to which you can set the lcr_dc_bias_current_level.
+    For valid ranges, refer to the specifications for your instrument.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_current_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_dc_bias_current_range`
+    '''
     lcr_dc_bias_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRDCBiasSource, 1150213)
     '''Type: enums.LCRDCBiasSource
 
@@ -1291,6 +1331,26 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.lcr_dc_bias_voltage_level`
     '''
+    lcr_dc_bias_voltage_range = _attributes.AttributeViReal64(1150266)
+    '''Type: float
+
+    Specifies the DC Bias voltage range, in volts, for the specified channel(s).
+    The range defines the valid values to which you can set the lcr_dc_bias_voltage_level.
+    For valid ranges, refer to the specifications for your instrument.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_voltage_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_dc_bias_voltage_range`
+    '''
     lcr_frequency = _attributes.AttributeViReal64(1150210)
     '''Type: float
 
@@ -1308,6 +1368,35 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.lcr_frequency`
+    '''
+    lcr_impedance_auto_range = _attributes.AttributeEnumWithConverter(_attributes.AttributeEnum(_attributes.AttributeViInt32, enums._LCRImpedanceAutoRange, 1150216), _converters.convert_from_lcr_impedance_auto_range_enum, _converters.convert_to_lcr_impedance_auto_range_enum)
+    '''Type: bool
+
+    Defines whether an instrument in LCR mode automatically selects the best impedance range for each given LCR measurement.
+
+    Impedance autoranging may be enabled only when both:
+
+    - The source_mode property is set to SourceMode.SINGLE_POINT
+    - measure_when is set to a value other than MeasureWhen.ON_MEASURE_TRIGGER
+
+    You can read lcr_impedance_range back after a measurement to determine the actual range used.
+
+    When enabled, impedance autoranging overrides impedance range settings you configure manually with any other properties.
+
+    Default Value: Search ni.com for Supported Properties by Device for the default value by instrument.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_impedance_auto_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_impedance_auto_range`
     '''
     lcr_impedance_range = _attributes.AttributeViReal64(1150217)
     '''Type: float
@@ -1720,6 +1809,26 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.lcr_voltage_amplitude`
+    '''
+    lcr_voltage_range = _attributes.AttributeViReal64(1150265)
+    '''Type: float
+
+    Specifies the voltage range, in volts RMS, for the specified channel(s).
+    The range defines the valid values to which you can set the lcr_voltage_amplitude.
+    For valid ranges, refer to the specifications for your instrument.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_voltage_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_voltage_range`
     '''
     logical_name = _attributes.AttributeViString(1050305)
     '''Type: str
