@@ -5,8 +5,7 @@ functions_override_metadata = {
     # TODO(olsl21): Temporarily disable the new functions (#1715), they will be re-enabled in
     #  subsequent smaller PRs
     "FetchMultipleLCR": {"codegen_method": "no"},
-    "MeasureMultipleLCR": {"codegen_method": "no"},
-    "PerformLCRLoadCompensation": {"codegen_method": "no"}
+    "MeasureMultipleLCR": {"codegen_method": "no"}
 }
 
 functions_additional_create_advanced_sequence = {

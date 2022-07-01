@@ -88,6 +88,7 @@ All notable changes to this project will be documented in this file.
                 * `configure_lcr_custom_cable_compensation`
                 * `get_lcr_compensation_last_date_and_time`
                 * `get_lcr_custom_cable_compensation_data`
+                * `perform_lcr_load_compensation`
                 * `perform_lcr_open_compensation`
                 * `perform_lcr_open_custom_cable_compensation`
                 * `perform_lcr_short_compensation`

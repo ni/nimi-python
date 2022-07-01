@@ -62,6 +62,7 @@ class Library(object):
         self.niDCPower_Measure_cfunc = None
         self.niDCPower_MeasureMultiple_cfunc = None
         self.niDCPower_ParseChannelCount_cfunc = None
+        self.niDCPower_PerformLCRLoadCompensation_cfunc = None
         self.niDCPower_PerformLCROpenCompensation_cfunc = None
         self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc = None
         self.niDCPower_PerformLCRShortCompensation_cfunc = None
@@ -407,6 +408,14 @@ class Library(object):
                 self.niDCPower_ParseChannelCount_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViUInt32)]  # noqa: F405
                 self.niDCPower_ParseChannelCount_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ParseChannelCount_cfunc(vi, channels_string, number_of_channels)
+
+    def niDCPower_PerformLCRLoadCompensation(self, vi, channel_name, num_compensation_spots, compensation_spots):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_PerformLCRLoadCompensation_cfunc is None:
+                self.niDCPower_PerformLCRLoadCompensation_cfunc = self._get_library_function('niDCPower_PerformLCRLoadCompensation')
+                self.niDCPower_PerformLCRLoadCompensation_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot)]  # noqa: F405
+                self.niDCPower_PerformLCRLoadCompensation_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_PerformLCRLoadCompensation_cfunc(vi, channel_name, num_compensation_spots, compensation_spots)
 
     def niDCPower_PerformLCROpenCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
         with self._func_lock:
