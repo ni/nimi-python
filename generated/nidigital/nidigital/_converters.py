@@ -165,7 +165,7 @@ def convert_single_group_repeated_capabilities(repeated_capability):
             - single item
 
     Returns:
-        rep_cap (str) - comma delimited list of strings of the expanded repeated capability items
+        rep_cap_list (list of str) - list of each expanded repeated capability item
     '''
     if '/' in repeated_capability:
         split_index = repeated_capability.find('/') + 1
@@ -193,6 +193,7 @@ def convert_channels_repeated_capabilities(
         - convert_channels_repeated_capabilities('Dev1/0:2,4', first_channel_name='Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/4']
         - convert_channels_repeated_capabilities('4,Dev1/1:2', first_channel_name='Dev1/1') --> ['Dev1/4', 'Dev1/1', 'Dev1/2']
         - convert_channels_repeated_capabilities('Dev1/4,Dev1/2,Dev1/3', first_channel_name='Dev1/2') --> ['Dev1/4', 'Dev1/2', 'Dev1/3']
+        - convert_channels_repeated_capabilities('Dev1/1,Dev2/2', first_channel_name='Dev1/0') --> ['Dev1/1', 'Dev2/2']
 
     Args:
         channels_repeated_capability (str) - refer to _convert_repeated_capabilities() for the

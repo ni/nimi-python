@@ -337,6 +337,8 @@ def test_convert_channels_repeated_capabilities_with_prefix():
     assert test_result_list == ['Dev1/4', 'Dev1/1', 'Dev1/2']
     test_result_list = _converters.convert_channels_repeated_capabilities('Dev1/4,Dev1/2,Dev1/3', first_channel_name='Dev1/2')
     assert test_result_list == ['Dev1/4', 'Dev1/2', 'Dev1/3']
+    test_result_list = _converters.convert_channels_repeated_capabilities('Dev1/1,Dev2/2', first_channel_name='Dev1/0')
+    assert test_result_list == ['Dev1/1', 'Dev2/2']
 
 
 def test_convert_chained_repeated_capability_to_parts_three_parts():
