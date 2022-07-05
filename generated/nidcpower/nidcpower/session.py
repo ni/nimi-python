@@ -4826,20 +4826,10 @@ class _SessionBase(object):
 
         voltage_measurements, current_measurements, in_compliances = self._fetch_multiple(timeout, count)
 
-        if self._repeated_capability == '':
-            channel_names = self._get_channel_names(range(self.channel_count))
-        else:
-            # first_channel_name is used to deduce if the session was opened with independent_channels
-            #  set to True (in that case, the channel name would be fully-qualified) or False (in
-            #  that case, the channel name would not have any instrument prefix). It is also used
-            #  to extract the instrument prefix and populate the expanded channels repeated
-            #  capabilities with it if needed
-            first_channel_name = self._get_channel_names([0])[0]
-            channel_names = _converters.convert_channels_repeated_capabilities(
-                self._repeated_capability,
-                first_channel_name
-            )
-
+        channel_names = _converters.convert_channels_repeated_capabilities(
+            self._repeated_capability,
+            session_channel_names=self._get_channel_names(range(self.channel_count))
+        )
         return [
             Measurement(
                 voltage=voltage,
@@ -4896,20 +4886,10 @@ class _SessionBase(object):
 
         voltage_measurements, current_measurements = self._measure_multiple()
 
-        if self._repeated_capability == '':
-            channel_names = self._get_channel_names(range(self.channel_count))
-        else:
-            # first_channel_name is used to deduce if the session was opened with independent_channels
-            #  set to True (in that case, the channel name would be fully-qualified) or False (in
-            #  that case, the channel name would not have any instrument prefix). It is also used
-            #  to extract the instrument prefix and populate the expanded channels repeated
-            #  capabilities with it if needed
-            first_channel_name = self._get_channel_names([0])[0]
-            channel_names = _converters.convert_channels_repeated_capabilities(
-                self._repeated_capability,
-                first_channel_name
-            )
-
+        channel_names = _converters.convert_channels_repeated_capabilities(
+            self._repeated_capability,
+            session_channel_names=self._get_channel_names(range(self.channel_count))
+        )
         return [
             Measurement(
                 voltage=voltage,

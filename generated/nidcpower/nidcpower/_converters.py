@@ -177,47 +177,63 @@ def convert_single_group_repeated_capabilities(repeated_capability):
 
 def convert_channels_repeated_capabilities(
     channels_repeated_capability,
-    first_channel_name
+    session_channel_names
 ):
     '''Convert a channels repeated capabilities string, possibly with no or multiple prefixes (each ends with '/'), to a list
 
     Examples:
-        - convert_channels_repeated_capabilities('1', first_channel_name='0') --> ['1']
-        - convert_channels_repeated_capabilities('0-2', first_channel_name='0') --> ['0', '1', '2']
-        - convert_channels_repeated_capabilities('0:2', first_channel_name='0') --> ['0', '1', '2']
-        - convert_channels_repeated_capabilities('0:2,4', first_channel_name='0') --> ['0', '1', '2', '4']
-        - convert_channels_repeated_capabilities('4,1:2', first_channel_name='1') --> ['4', '1', '2']
-        - convert_channels_repeated_capabilities('2:3,0', first_channel_name='Dev1/0') --> ['Dev1/2', 'Dev1/3', 'Dev1/0']
-        - convert_channels_repeated_capabilities('Dev1/1', first_channel_name='Dev1/0') --> ['Dev1/1']
-        - convert_channels_repeated_capabilities('Dev1/0-2', first_channel_name='Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2']
-        - convert_channels_repeated_capabilities('Dev1/0:2', first_channel_name='Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2']
-        - convert_channels_repeated_capabilities('Dev1/0:2,4', first_channel_name='Dev1/0') --> ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/4']
-        - convert_channels_repeated_capabilities('4,Dev1/1:2', first_channel_name='Dev1/1') --> ['Dev1/4', 'Dev1/1', 'Dev1/2']
-        - convert_channels_repeated_capabilities('Dev1/4,Dev1/2,Dev1/3', first_channel_name='Dev1/2') --> ['Dev1/4', 'Dev1/2', 'Dev1/3']
-        - convert_channels_repeated_capabilities('Dev1/1,Dev2/2', first_channel_name='Dev1/0') --> ['Dev1/1', 'Dev2/2']
+        - convert_channels_repeated_capabilities('1', ['0', '1', '2', '3']) --> ['1']
+        - convert_channels_repeated_capabilities('0-2', ['0', '1', '2', '3']) --> ['0', '1', '2']
+        - convert_channels_repeated_capabilities('0:2', ['0', '1', '2', '3']) --> ['0', '1', '2']
+        - convert_channels_repeated_capabilities('0:2,4', ['0', '1', '2', '3', '4', '5']) --> ['0', '1', '2', '4']
+        - convert_channels_repeated_capabilities('4,1:2', ['1', '2', '4']) --> ['4', '1', '2']
+        - convert_channels_repeated_capabilities('2:3,0', ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3'])
+            --> ['Dev1/2', 'Dev1/3', 'Dev1/0']
+        - convert_channels_repeated_capabilities('Dev1/1', ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3'])
+            --> ['Dev1/1']
+        - convert_channels_repeated_capabilities('Dev1/0-2', ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3'])
+            --> ['Dev1/0', 'Dev1/1', 'Dev1/2']
+        - convert_channels_repeated_capabilities('Dev1/0:2', ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3'])
+            --> ['Dev1/0', 'Dev1/1', 'Dev1/2']
+        - convert_channels_repeated_capabilities('Dev1/0:2,4', ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3', 'Dev1/4', 'Dev1/5'])
+            --> ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/4']
+        - convert_channels_repeated_capabilities('4,Dev1/1:2', ['Dev1/1', 'Dev1/2', 'Dev1/4'])
+            --> ['Dev1/4', 'Dev1/1', 'Dev1/2']
+        - convert_channels_repeated_capabilities('Dev1/4,Dev1/2,Dev1/3', ['Dev1/2', 'Dev1/3', 'Dev1/4'])
+            --> ['Dev1/4', 'Dev1/2', 'Dev1/3']
+        - convert_channels_repeated_capabilities('Dev1/1,Dev2/2', ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3', 'Dev2/0', 'Dev2/1', 'Dev2/2', 'Dev2/3'])
+            --> ['Dev1/1', 'Dev2/2']
 
     Args:
         channels_repeated_capability (str) - refer to _convert_repeated_capabilities() for the
             supported formats (this string is expected to be used as the index of session.channels)
 
-        first_channel_name (str) - name of the first channel returned by get_channel_names() of the
-            session (if it has a prefix, which ends with '/', it would be added to any of the
-            expanded items if it does not already have one)
+        session_channel_names (list of str) - names of all the channels in the session, as returned
+            by get_channel_names() (if they have a prefix, which ends with '/', it would be added to
+            any of the expanded items if it does not already have one)
 
     Returns:
-        channel_names (list of str) - comma delimited list of strings of the expanded channels
-            repeated capability items (essentially the channel names)
+        channel_names (list of str) - list of strings of the expanded channels repeated capability
+            items (essentially the channel names)
     '''
-    if '/' in first_channel_name:
+    channels_repeated_capability = channels_repeated_capability.strip()
+    if channels_repeated_capability == '':
+        return session_channel_names
+
+    # Use one of the session_channel_names to deduce if the session was opened with
+    # independent_channels set to True (in that case, the channel name would be fully-qualified) or
+    # False (in that case, the channel name would not have any instrument prefix).
+    session_channel_name = session_channel_names[0]
+    if '/' in session_channel_name:
         # Split the comma-delimited channels repeated capabilities (if any) into groups with at most
         # one prefix each and expand their ranges (if any) accordingly
         repeated_capabilities = []
         for rep_cap in channels_repeated_capability.split(','):
             repeated_capabilities.extend(convert_single_group_repeated_capabilities(rep_cap))
         # If there is any channels repeated capabilities without prefix, the session must have only
-        # one instrument, so just get the prefix from the first channel and add to all of the
+        # one instrument, so just get the prefix from session_channel_name and add to all of the
         # repeated capabilities that are without prefix
-        default_prefix = first_channel_name[:first_channel_name.find('/') + 1]
+        default_prefix = session_channel_name[:session_channel_name.find('/') + 1]
         return [
             rep_cap if '/' in rep_cap else default_prefix + rep_cap
             for rep_cap in repeated_capabilities
