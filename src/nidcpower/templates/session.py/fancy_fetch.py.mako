@@ -37,7 +37,7 @@
 
         channel_names = _converters.convert_channels_repeated_capabilities(
             self._repeated_capability,
-            session_channel_names=self._get_channel_names(range(self.channel_count))
+            session_channel_names=self._get_channel_names(range(self._parse_channel_count()))
         )
         return [
             Measurement(
