@@ -294,90 +294,72 @@ def test_repeated_capabilities_invalid_resource_names():
     assert test_result_list == '0/1:2,'
 
 
-def test_convert_single_group_repeated_capabilities():
-    test_result_list = _converters.convert_single_group_repeated_capabilities('0')
-    assert test_result_list == ['0']
-    test_result_list = _converters.convert_single_group_repeated_capabilities('0-2')
-    assert test_result_list == ['0', '1', '2']
-    test_result_list = _converters.convert_single_group_repeated_capabilities('0:2')
-    assert test_result_list == ['0', '1', '2']
-    test_result_list = _converters.convert_single_group_repeated_capabilities('Dev1/0')
-    assert test_result_list == ['Dev1/0']
-    test_result_list = _converters.convert_single_group_repeated_capabilities('Dev1/0-2')
-    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev1/2']
-    test_result_list = _converters.convert_single_group_repeated_capabilities('Dev1/0:2')
-    assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev1/2']
-
-
-def test_convert_channels_repeated_capabilities_without_prefix():
-    test_result_list = _converters.convert_channels_repeated_capabilities(
-        '1',
-        ['0', '1', '2', '3']
-    )
+def test_expand_channel_string_non_fully_qualified_channel_names():
+    test_result_list = _converters.expand_channel_string('1', ['0', '1', '2', '3'])
     assert test_result_list == ['1']
-    test_result_list = _converters.convert_channels_repeated_capabilities(
-        '0-2',
-        ['0', '1', '2', '3']
-    )
+    test_result_list = _converters.expand_channel_string('0-2', ['0', '1', '2', '3'])
     assert test_result_list == ['0', '1', '2']
-    test_result_list = _converters.convert_channels_repeated_capabilities(
-        '0:2',
-        ['0', '1', '2', '3']
-    )
+    test_result_list = _converters.expand_channel_string('0:2', ['0', '1', '2', '3'])
     assert test_result_list == ['0', '1', '2']
-    test_result_list = _converters.convert_channels_repeated_capabilities(
-        '0:2,4',
-        ['0', '1', '2', '3', '4', '5']
-    )
+    test_result_list = _converters.expand_channel_string('0:2,4', ['0', '1', '2', '3', '4', '5'])
     assert test_result_list == ['0', '1', '2', '4']
-    test_result_list = _converters.convert_channels_repeated_capabilities(
-        '4,1:2',
-        ['1', '2', '4']
-    )
+    test_result_list = _converters.expand_channel_string('4,1:2', ['1', '2', '4'])
     assert test_result_list == ['4', '1', '2']
+    test_result_list = _converters.expand_channel_string(' 1 : 2 , 4 ', ['1', '2', '4'])
+    assert test_result_list == ['1', '2', '4']
 
 
-def test_convert_channels_repeated_capabilities_with_prefix():
-    test_result_list = _converters.convert_channels_repeated_capabilities(
+def test_expand_channel_string_fully_qualified_channel_names():
+    test_result_list = _converters.expand_channel_string(
         '2:3,0',
         ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3']
     )
     assert test_result_list == ['Dev1/2', 'Dev1/3', 'Dev1/0']
-    test_result_list = _converters.convert_channels_repeated_capabilities(
+    test_result_list = _converters.expand_channel_string(
         'Dev1/1',
         ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3']
     )
     assert test_result_list == ['Dev1/1']
-    test_result_list = _converters.convert_channels_repeated_capabilities(
+    test_result_list = _converters.expand_channel_string(
         'Dev1/0-2',
         ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3']
     )
     assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev1/2']
-    test_result_list = _converters.convert_channels_repeated_capabilities(
+    test_result_list = _converters.expand_channel_string(
         'Dev1/0:2',
         ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3']
     )
     assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev1/2']
-    test_result_list = _converters.convert_channels_repeated_capabilities(
+    test_result_list = _converters.expand_channel_string(
         'Dev1/0:2,4',
-        ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3']
+        ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/4']
     )
     assert test_result_list == ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/4']
-    test_result_list = _converters.convert_channels_repeated_capabilities(
+    test_result_list = _converters.expand_channel_string(
         '4,Dev1/1:2',
         ['Dev1/1', 'Dev1/2', 'Dev1/4']
     )
     assert test_result_list == ['Dev1/4', 'Dev1/1', 'Dev1/2']
-    test_result_list = _converters.convert_channels_repeated_capabilities(
+    test_result_list = _converters.expand_channel_string(
         'Dev1/4,Dev1/2,Dev1/3',
         ['Dev1/2', 'Dev1/3', 'Dev1/4']
     )
     assert test_result_list == ['Dev1/4', 'Dev1/2', 'Dev1/3']
-    test_result_list = _converters.convert_channels_repeated_capabilities(
+    test_result_list = _converters.expand_channel_string(
         'Dev1/1,Dev2/2',
         ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3', 'Dev2/0', 'Dev2/1', 'Dev2/2', 'Dev2/3']
     )
     assert test_result_list == ['Dev1/1', 'Dev2/2']
+    test_result_list = _converters.expand_channel_string(
+        ' Dev1 / 1 : 2 , 4 ',
+        ['Dev1/1', 'Dev1/2', 'Dev1/4']
+    )
+    assert test_result_list == ['Dev1/1', 'Dev1/2', 'Dev1/4']
+    test_result_list = _converters.expand_channel_string(
+        'DEV1/0-1    , Dev1/3',
+        ['dev1/0', 'dev1/1', 'dev1/2', 'dev1/3']
+    )
+    assert test_result_list == ['dev1/0', 'dev1/1', 'dev1/3']
 
 
 def test_convert_chained_repeated_capability_to_parts_three_parts():

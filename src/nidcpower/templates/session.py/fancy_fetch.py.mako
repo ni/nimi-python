@@ -35,10 +35,16 @@
 
         voltage_measurements, current_measurements${in_compliances_return} = self._${f['python_name']}(${param_list})
 
-        channel_names = _converters.convert_channels_repeated_capabilities(
+        with _NoChannel(session=self):
+            all_channels_in_session = self._get_channel_names(range(self.channel_count))
+
+        channel_names = _converters.expand_channel_string(
             self._repeated_capability,
-            session_channel_names=self._get_channel_names(range(self._parse_channel_count()))
+            all_channels_in_session
         )
+%if f['python_name'] == 'fetch_multiple':
+        assert len(channel_names) == 1
+%endif
         return [
             Measurement(
                 voltage=voltage,
