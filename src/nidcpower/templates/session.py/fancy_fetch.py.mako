@@ -7,15 +7,21 @@
 
     # We explicitly only support fetch_multiple and measure_multiple
     if f['python_name'] == 'fetch_multiple':
-        in_compliance_value = 'in_compliance[i]'
-        in_compliance_return = ', in_compliance'
         param_list = 'timeout, count'
-        array_size = 'count'  # This is what is used for the array sizes
+        in_compliances_return = ', in_compliances'
+        in_compliance_unpack = ', in_compliance'
+        in_compliance_value = 'in_compliance'
+        channel_names_zipped = ''
+        channel_name_unpack = ''
+        channel_name_value = 'channel_names[0]'
     elif f['python_name'] == 'measure_multiple':
-        in_compliance_value = 'None'
-        in_compliance_return = ''
         param_list = ''
-        array_size = 'self._parse_channel_count()'  # This is what is used for the array sizes
+        in_compliances_return = ''
+        in_compliance_unpack = ''
+        in_compliance_value = 'None'
+        channel_names_zipped = ', channel_names'
+        channel_name_unpack = ', channel_name'
+        channel_name_value = 'channel_name'
     else:
         raise ValueError('Only fetch_multiple and measure_multiple are supported. Got {0}'.format(f['python_name']))
 %>\
@@ -25,9 +31,34 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance', 'channel'])
 
-        voltage_measurements, current_measurements${in_compliance_return} = self._${f['python_name']}(${param_list})
+        voltage_measurements, current_measurements${in_compliances_return} = self._${f['python_name']}(${param_list})
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=${in_compliance_value}) for i in range(${array_size})]
+        with _NoChannel(session=self):
+            # TODO(olsl21): Retrieving the list of channels in the session on every function call is
+            #  silly because they never change #1776
+            all_channels_in_session = self._get_channel_names(range(self.channel_count))
+
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            all_channels_in_session
+        )
+%if f['python_name'] == 'fetch_multiple':
+        assert len(channel_names) == 1, "fetch_multiple only supports one channel at a time"
+%elif f['python_name'] == 'measure_multiple':
+        assert (
+            len(channel_names) == len(voltage_measurements) and len(channel_names) == len(current_measurements)
+        ), "measure_multiple should return as many voltage and current measurements as the number of channels specified through the channel string"
+%endif
+        return [
+            Measurement(
+                voltage=voltage,
+                current=current,
+                in_compliance=${in_compliance_value},
+                channel=${channel_name_value}
+            ) for voltage, current${in_compliance_unpack}${channel_name_unpack} in zip(
+                voltage_measurements, current_measurements${in_compliances_return}${channel_names_zipped}
+            )
+        ]
 
