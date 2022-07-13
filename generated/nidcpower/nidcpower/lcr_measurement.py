@@ -85,6 +85,7 @@ class struct_NILCRMeasurement(ctypes.Structure):  # noqa N801
 
 
 class LCRMeasurement(object):
+    """Specifies a LCR measurement."""
     LCR = namedtuple(typename="LCR", field_names=("inductance", "capacitance", "resistance"))
     InCompliances = namedtuple(typename="InCompliances", field_names=("dc", "ac"))
 
