@@ -4827,13 +4827,15 @@ class _SessionBase(object):
         voltage_measurements, current_measurements, in_compliances = self._fetch_multiple(timeout, count)
 
         with _NoChannel(session=self):
+            # TODO(olsl21): Retrieving the list of channels in the session on every function call is
+            #  silly because they never change #1776
             all_channels_in_session = self._get_channel_names(range(self.channel_count))
 
         channel_names = _converters.expand_channel_string(
             self._repeated_capability,
             all_channels_in_session
         )
-        assert len(channel_names) == 1
+        assert len(channel_names) == 1, "fetch_multiple only supports one channel at a time"
         return [
             Measurement(
                 voltage=voltage,
@@ -4891,12 +4893,17 @@ class _SessionBase(object):
         voltage_measurements, current_measurements = self._measure_multiple()
 
         with _NoChannel(session=self):
+            # TODO(olsl21): Retrieving the list of channels in the session on every function call is
+            #  silly because they never change #1776
             all_channels_in_session = self._get_channel_names(range(self.channel_count))
 
         channel_names = _converters.expand_channel_string(
             self._repeated_capability,
             all_channels_in_session
         )
+        assert (
+            len(channel_names) == len(voltage_measurements) and len(channel_names) == len(current_measurements)
+        ), "measure_multiple should return as many voltage and current measurements as the number of channels specified through the channel string"
         return [
             Measurement(
                 voltage=voltage,

@@ -325,6 +325,7 @@ def test_measure_multiple_channels(
     [
         ('Dev1/0:1,Dev2/2:3', 'Dev1/0,2'),
         ('Dev1/0:1,Dev2/0:1', '2,3'),
+        ('Dev1/0, Dev1/1, Dev2/2', '0, Dev1/1')
     ]
 )
 def test_measure_multiple_error_invalid_channels(resource_name, measurement_channels):

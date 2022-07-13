@@ -182,11 +182,10 @@ def expand_channel_string(channel_string, all_channels_in_session):
             by get_channel_names()
 
     Returns:
-        channel_names (list of str) - list of strings of the expanded channels repeated capability
-            items (essentially the channel names)
+        channel_names (list of str) - A list in which each element is the name of a single channel,
+            with the exact capitalization used by the driver runtime.
     '''
-    channel_string = channel_string.strip()
-    if channel_string == '':
+    if channel_string.strip() == '':
         return all_channels_in_session
 
     # Rule 1: If all_channels_in_session is fully-qualified then returned channel names should be
