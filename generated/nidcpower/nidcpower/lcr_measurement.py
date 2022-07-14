@@ -56,9 +56,6 @@ class LCRMeasurement(object):
     Fields:
         channel (str): The channel name associated with this LCRMeasurement.
 
-        data (LCRMeasurement, struct_NILCRMeasurement): Specifies an LCR measurement object to
-            copy from. If it is None, the values from the other parameters are used instead.
-
         vdc (float): Specifies the measured DC voltage, in volts.
 
         idc (float): Specifies the measured DC current, in amps.
