@@ -4826,11 +4826,30 @@ class _SessionBase(object):
 
         '''
         import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance', 'channel'])
 
-        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(timeout, count)
+        voltage_measurements, current_measurements, in_compliances = self._fetch_multiple(timeout, count)
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
+        with _NoChannel(session=self):
+            # TODO(olsl21): Retrieving the list of channels in the session on every function call is
+            #  silly because they never change #1776
+            all_channels_in_session = self._get_channel_names(range(self.channel_count))
+
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            all_channels_in_session
+        )
+        assert len(channel_names) == 1, "fetch_multiple only supports one channel at a time"
+        return [
+            Measurement(
+                voltage=voltage,
+                current=current,
+                in_compliance=in_compliance,
+                channel=channel_names[0]
+            ) for voltage, current, in_compliance in zip(
+                voltage_measurements, current_measurements, in_compliances
+            )
+        ]
 
     @ivi_synchronized
     def measure_multiple(self):
@@ -4873,11 +4892,32 @@ class _SessionBase(object):
 
         '''
         import collections
-        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance', 'channel'])
 
         voltage_measurements, current_measurements = self._measure_multiple()
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
+        with _NoChannel(session=self):
+            # TODO(olsl21): Retrieving the list of channels in the session on every function call is
+            #  silly because they never change #1776
+            all_channels_in_session = self._get_channel_names(range(self.channel_count))
+
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            all_channels_in_session
+        )
+        assert (
+            len(channel_names) == len(voltage_measurements) and len(channel_names) == len(current_measurements)
+        ), "measure_multiple should return as many voltage and current measurements as the number of channels specified through the channel string"
+        return [
+            Measurement(
+                voltage=voltage,
+                current=current,
+                in_compliance=None,
+                channel=channel_name
+            ) for voltage, current, channel_name in zip(
+                voltage_measurements, current_measurements, channel_names
+            )
+        ]
 
     @ivi_synchronized
     def _fetch_multiple(self, timeout, count):

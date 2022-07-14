@@ -97,6 +97,7 @@ All notable changes to this project will be documented in this file.
                 * `LCRMeasurement`
     * #### Changed
         * Updated supported devices information in documentation for methods and properties
+        * Added `channel` field to the `Measurement` namedtuple instances returned by `fetch_multiple` and `measure_multiple`
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
