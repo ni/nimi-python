@@ -6,7 +6,8 @@ import nidcpower._visatype
 import nidcpower.enums as enums
 
 
-# This class is an internal ctypes implementation detail
+# This class is an internal ctypes implementation detail that corresponds to
+# NILCRLoadCompensationSpot in the C API
 class struct_NILCRLoadCompensationSpot(ctypes.Structure):  # noqa N801
     if platform.system() == "Windows" and platform.architecture()[0] == "64bit":
         _pack_ = 8
@@ -61,10 +62,10 @@ class LCRLoadCompensationSpot(object):
             ideal_capacitance (float): Specifies the ideal capacitance of your DUT to be used as the
                 basis for load compensation, or None to use another type of DUT specification value.
 
-            ideal_inductance (complex): Specifies the ideal inductance of your DUT to be used as the
+            ideal_inductance (float): Specifies the ideal inductance of your DUT to be used as the
                 basis for load compensation, or None to use another type of DUT specification value.
 
-            ideal_resistance (complex): Specifies the ideal inductance of your DUT to be used as the
+            ideal_resistance (float): Specifies the ideal resistance of your DUT to be used as the
                 basis for load compensation, or None to use another type of DUT specification value.
         """
         self.frequency = frequency
@@ -99,8 +100,9 @@ class LCRLoadCompensationSpot(object):
             )
 
     def __repr__(self):
-        return "{0}(frequency={1}, {2}={3})".format(
-            self.__class__.__name__,
+        return "{0}.{1}(frequency={2}, {3}={4})".format(
+            self.__class__.__module__,
+            self.__class__.__qualname__,
             self.frequency,
             self.reference_value_type.name.lower(),
             self.reference_value,

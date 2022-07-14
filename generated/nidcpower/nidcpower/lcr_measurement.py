@@ -7,9 +7,8 @@ import nidcpower._visatype
 import nidcpower.enums as enums
 
 
-# This class is an internal implementation detail
-# ctypes definition
-# Name must match exactly what the name of the structure type is named in the C API.
+# This class is an internal ctypes implementation detail that corresponds to
+# NILCRMeasurement in the C API
 class struct_NILCRMeasurement(ctypes.Structure):  # noqa N801
     _pack_ = 8
     _fields_ = [
@@ -50,42 +49,51 @@ class struct_NILCRMeasurement(ctypes.Structure):  # noqa N801
         ("reserved7"           , nidcpower._visatype.ViReal64 ),  # noqa: E202,E203
     ]
 
-    def __init__(self, data=None):
-        super(ctypes.Structure, self).__init__()
-        if data is not None:
-            if isinstance(data, LCRMeasurement):
-                self.vdc = data.vdc
-                self.idc = data.idc
-                self.stimulus_frequency = data.stimulus_frequency
-                self.ac_voltage_real = data.ac_voltage.real
-                self.ac_voltage_imaginary = data.ac_voltage.imag
-                self.ac_current_real = data.ac_current.real
-                self.ac_current_imaginary = data.ac_current.imag
-                self.z_real = data.z.real
-                self.z_imaginary = data.z.imag
-                self.z_magnitude, self.z_phase = data.get_z_magnitude_and_phase()
-                y = data.get_y()
-                self.y_real = y.real
-                self.y_imaginary = y.imag
-                self.y_magnitude, self.y_phase = data.get_y_magnitude_and_phase()
-                self.ls, self.cs, self.rs = data.series_lcr
-                self.lp, self.cp, self.rp = data.parallel_lcr
-                self.d = data.d
-                self.q = data.get_q()
-                self.measurement_mode = enums.InstrumentMode(data.measurement_mode).value
-                self.dc_in_compliance, self.ac_in_compliance = data.in_compliances
-                self.unbalanced = data.unbalanced
-            else:
-                for field_name, _ in struct_NILCRMeasurement._fields_:
-                    setattr(self, field_name, getattr(data, field_name))
-        else:
-            # Assign default value for all fields
-            for field_name, _ in struct_NILCRMeasurement._fields_:
-                setattr(self, field_name, 0)
-
 
 class LCRMeasurement(object):
-    """Specifies a LCR measurement."""
+    """Specifies an LCR measurement.
+
+    Fields:
+        channel (str): The channel name associated with this LCRMeasurement.
+
+        data (LCRMeasurement, struct_NILCRMeasurement): Specifies an LCR measurement object to
+            copy from. If it is None, the values from the other parameters are used instead.
+
+        vdc (float): Specifies the measured DC voltage, in volts.
+
+        idc (float): Specifies the measured DC current, in amps.
+
+        stimulus_frequency (float): Specifies the frequency of the LCR test signal, in Hz.
+
+        ac_voltage (complex): Specifies the measured AC voltage, in volts RMS.
+
+        ac_current (complex): Specifies the measured AC current, in amps RMS.
+
+        z (complex): Specifies the complex impedance.
+
+        series_lcr (LCR): Specifies the inductance, in henrys, the capacitance, in farads, and
+            the resistance, in ohms, as measured using a series circuit model.
+
+        parallel_lcr (LCR): Specifies the inductance, in henrys, the capacitance, in farads, and
+            the resistance, in ohms, as measured using a parallel circuit model.
+
+        d (float): The dissipation factor of the circuit.
+
+        measurement_mode (enums.InstrumentMode): Specifies the measurement mode.
+            **Defined Values**:
+
+            +-----------------------+-----------------------------------------------------+
+            | InstrumentMode.SMU_PS | The channel(s) are operating as a power supply/SMU. |
+            +-----------------------+-----------------------------------------------------+
+            | InstrumentMode.LCR    | The channel(s) are operating as an LCR meter.       |
+            +-----------------------+-----------------------------------------------------+
+
+        in_compliances (InCompliances): Indicates whether the output was in DC compliance and/or
+            AC compliance at the time the measurement was taken.
+
+        unbalanced (bool): Indicates whether the output was unbalanced at the time the
+            measurement was taken.
+    """
     LCR = namedtuple(typename="LCR", field_names=("inductance", "capacitance", "resistance"))
     InCompliances = namedtuple(typename="InCompliances", field_names=("dc", "ac"))
 
@@ -106,110 +114,37 @@ class LCRMeasurement(object):
         ("unbalanced"        , "Unbalanced"                            ),  # noqa: E202,E203
     ]
 
-    def __init__(
-        self,
-        data=None,
-        channel="",
-        vdc=0.0,
-        idc=0.0,
-        stimulus_frequency=0.0,
-        ac_voltage=complex(),
-        ac_current=complex(),
-        z=complex(),
-        series_lcr=LCR(inductance=0.0, capacitance=0.0, resistance=0.0),
-        parallel_lcr=LCR(inductance=0.0, capacitance=0.0, resistance=0.0),
-        d=0.0,
-        measurement_mode=enums.InstrumentMode.LCR,
-        in_compliances=InCompliances(dc=False, ac=False),
-        unbalanced=False,
-    ):
+    def __init__(self, data):
         """LCRMeasurement
 
         Creates and returns an LCRMeasurement object.
 
         Args:
-            channel (str): The channel name associated with this LCRMeasurement.
-
-            data (LCRMeasurement, struct_NILCRMeasurement): Specifies an LCR measurement object to
-                copy from. If it is None, the values from the other parameters are used instead.
-
-            vdc (float): Specifies the measured DC voltage, in volts.
-
-            idc (float): Specifies the measured DC current, in amps.
-
-            stimulus_frequency (float): Specifies the frequency of the LCR test signal, in Hz.
-
-            ac_voltage (complex): Specifies the measured AC voltage, in volts RMS.
-
-            ac_current (complex): Specifies the measured AC current, in amps RMS.
-
-            z (complex): Specifies the complex impedance.
-
-            series_lcr (LCR): Specifies the inductance, in henrys, the capacitance, in farads, and
-                the resistance, in ohms, as measured using a series circuit model.
-
-            parallel_lcr (LCR): Specifies the inductance, in henrys, the capacitance, in farads, and
-                the resistance, in ohms, as measured using a parallel circuit model.
-
-            d (float): The dissipation factor of the circuit.
-
-            measurement_mode (enums.InstrumentMode): Specifies the measurement mode.
-                **Defined Values**:
-
-                +-----------------------+-----------------------------------------------------+
-                | InstrumentMode.SMU_PS | The channel(s) are operating as a power supply/SMU. |
-                +-----------------------+-----------------------------------------------------+
-                | InstrumentMode.LCR    | The channel(s) are operating as an LCR meter.       |
-                +-----------------------+-----------------------------------------------------+
-
-            in_compliances (InCompliances): Indicates whether the output was in DC compliance and/or
-                AC compliance at the time the measurement was taken.
-
-            unbalanced (bool): Indicates whether the output was unbalanced at the time the
-                measurement was taken.
+            data (struct_NILCRMeasurement): The LCR measurement ctypes object returned by the driver.
         """
-        if data is not None:
-            if isinstance(data, struct_NILCRMeasurement):
-                self.channel = ""
-                self.vdc = data.vdc
-                self.idc = data.idc
-                self.stimulus_frequency = data.stimulus_frequency
-                self.ac_voltage = complex(data.ac_voltage_real, data.ac_voltage_imaginary)
-                self.ac_current = complex(data.ac_current_real, data.ac_current_imaginary)
-                self.z = complex(data.z_real, data.z_imaginary)
-                self.series_lcr = LCRMeasurement.LCR(
-                    inductance=data.ls, capacitance=data.cs, resistance=data.rs
-                )
-                self.parallel_lcr = LCRMeasurement.LCR(
-                    inductance=data.lp, capacitance=data.cp, resistance=data.rp
-                )
-                self.d = data.d
-                self.measurement_mode = enums.InstrumentMode(data.measurement_mode)
-                self.in_compliances = LCRMeasurement.InCompliances(
-                    dc=bool(data.dc_in_compliance), ac=bool(data.ac_in_compliance)
-                )
-                self.unbalanced = bool(data.unbalanced)
-            else:
-                for field_name, _ in LCRMeasurement._lcr_measurement_field_metadata:
-                    setattr(
-                        self,
-                        field_name,
-                        enums.InstrumentMode(data.measurement_mode)
-                        if field_name == "measurement_mode"
-                        else getattr(data, field_name),
-                    )
-        else:
-            for field_name, _ in LCRMeasurement._lcr_measurement_field_metadata:
-                setattr(
-                    self,
-                    field_name,
-                    enums.InstrumentMode(measurement_mode)
-                    if field_name == "measurement_mode"
-                    else locals()[field_name],
-                )
+        self.channel = ""
+        self.vdc = data.vdc
+        self.idc = data.idc
+        self.stimulus_frequency = data.stimulus_frequency
+        self.ac_voltage = complex(data.ac_voltage_real, data.ac_voltage_imaginary)
+        self.ac_current = complex(data.ac_current_real, data.ac_current_imaginary)
+        self.z = complex(data.z_real, data.z_imaginary)
+        self.series_lcr = LCRMeasurement.LCR(
+            inductance=data.ls, capacitance=data.cs, resistance=data.rs
+        )
+        self.parallel_lcr = LCRMeasurement.LCR(
+            inductance=data.lp, capacitance=data.cp, resistance=data.rp
+        )
+        self.d = data.d
+        self.measurement_mode = enums.InstrumentMode(data.measurement_mode)
+        self.in_compliances = LCRMeasurement.InCompliances(
+            dc=bool(data.dc_in_compliance), ac=bool(data.ac_in_compliance)
+        )
+        self.unbalanced = bool(data.unbalanced)
 
-    def get_z_magnitude_and_phase(self):
-        """get_z_magnitude_and_phase
+    @property
+    def z_magnitude_and_phase(self):
+        """z_magnitude_and_phase
 
         Returns a tuple of (z_magnitude, z_phase) of this LCRMeasurement object.
 
@@ -220,10 +155,12 @@ class LCRMeasurement(object):
                 - **z_phase** (float): The impedance phase angle, in degrees.
 
         """
-        return cmath.polar(self.z)
+        z_magnitude, z_phase_in_radians = cmath.polar(self.z)
+        return z_magnitude, math.degrees(z_phase_in_radians)
 
-    def get_y(self):
-        """get_y
+    @property
+    def y(self):
+        """y
 
         Returns the admittance of this LCRMeasurement object.
 
@@ -235,8 +172,9 @@ class LCRMeasurement(object):
             return complex(cmath.nan, cmath.nan)
         return 1.0 / self.z
 
-    def get_y_magnitude_and_phase(self):
-        """get_y_magnitude_and_phase
+    @property
+    def y_magnitude_and_phase(self):
+        """y_magnitude_and_phase
 
         Returns a tuple of (y_magnitude, y_phase) of this LCRMeasurement object.
 
@@ -247,10 +185,12 @@ class LCRMeasurement(object):
                 - **y_phase** (float): The admittance phase angle, in degrees.
 
         """
-        return cmath.polar(self.get_y())
+        y_magnitude, y_phase_in_radians = cmath.polar(self.y)
+        return y_magnitude, math.degrees(y_phase_in_radians)
 
-    def get_q(self):
-        """get_q
+    @property
+    def q(self):
+        """q
 
         Returns the quality factor of this LCRMeasurement object.
 
@@ -261,19 +201,6 @@ class LCRMeasurement(object):
         if self.d == 0:
             return math.nan
         return 1.0 / self.d
-
-    def __repr__(self):
-        field_value_strings = []
-        for field_name, _ in LCRMeasurement._lcr_measurement_field_metadata:
-            field_value = getattr(self, field_name)
-            if isinstance(field_value, tuple):
-                value_string = "{0}.{1}".format(self.__class__.__name__, field_value)
-            elif isinstance(field_value, str):
-                value_string = '"{0}"'.format(field_value)
-            else:
-                value_string = str(field_value)
-            field_value_strings.append("{0}={1}".format(field_name, value_string))
-        return "{0}(data=None, {1})".format(self.__class__.__name__, ", ".join(field_value_strings))
 
     def __str__(self):
         max_field_label_len = max(
