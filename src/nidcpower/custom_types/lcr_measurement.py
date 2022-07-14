@@ -96,19 +96,19 @@ class LCRMeasurement(object):
 
     _lcr_measurement_field_metadata = [
         # field_name           label(s)
-        ("channel"           , "Channel"                               ),  # noqa: E202,E203
-        ("vdc"               , "V DC"                                  ),  # noqa: E202,E203
-        ("idc"               , "I DC"                                  ),  # noqa: E202,E203
-        ("stimulus_frequency", "Stimulus frequency"                    ),  # noqa: E202,E203
-        ("ac_voltage"        , "AC voltage"                            ),  # noqa: E202,E203
-        ("ac_current"        , "AC current"                            ),  # noqa: E202,E203
-        ("z"                 , "Z"                                     ),  # noqa: E202,E203
-        ("series_lcr"        , ("Ls", "Cs", "Rs")                      ),  # noqa: E202,E203
-        ("parallel_lcr"      , ("Lp", "Cp", "Rp")                      ),  # noqa: E202,E203
-        ("d"                 , "D"                                     ),  # noqa: E202,E203
-        ("measurement_mode"  , "Measurement mode"                      ),  # noqa: E202,E203
-        ("in_compliances"    , ("DC in compliance", "AC in compliance")),  # noqa: E202,E203
-        ("unbalanced"        , "Unbalanced"                            ),  # noqa: E202,E203
+        ("channel"           , "Channel"                                                             ),  # noqa: E202,E203
+        ("vdc"               , "DC voltage"                                                          ),  # noqa: E202,E203
+        ("idc"               , "DC current"                                                          ),  # noqa: E202,E203
+        ("stimulus_frequency", "Stimulus frequency"                                                  ),  # noqa: E202,E203
+        ("ac_voltage"        , "AC voltage"                                                          ),  # noqa: E202,E203
+        ("ac_current"        , "AC current"                                                          ),  # noqa: E202,E203
+        ("z"                 , "Impedance"                                                           ),  # noqa: E202,E203
+        ("series_lcr"        , ("Series inductance", "Series capacitance", "Series resistance")      ),  # noqa: E202,E203
+        ("parallel_lcr"      , ("Parallel inductance", "Parallel capacitance", "Parallel resistance")),  # noqa: E202,E203
+        ("d"                 , "Dissipation factor"                                                  ),  # noqa: E202,E203
+        ("measurement_mode"  , "Measurement mode"                                                    ),  # noqa: E202,E203
+        ("in_compliances"    , ("DC in compliance", "AC in compliance")                              ),  # noqa: E202,E203
+        ("unbalanced"        , "Unbalanced"                                                          ),  # noqa: E202,E203
     ]
 
     def __init__(self, data):
