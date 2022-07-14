@@ -320,6 +320,26 @@ def test_measure_multiple_channels(
             assert [measurement.channel for measurement in measurements] == expected_measured_channels
 
 
+@pytest.mark.parametrize('independent_channels', [True, False])
+def test_measure_multiple_channel_ordering(independent_channels):
+    with nidcpower.Session(
+        resource_name="Dev1, Dev2",
+        channels="",
+        options="Simulate=1, DriverSetup=Model:4162; BoardType:PXIe",
+        independent_channels=independent_channels
+    ) as session:
+        for instrument in (1, 2):
+            for channel in range(12):
+                session.channels[f"Dev{instrument}/{channel}"].voltage_level = instrument + channel * 0.01
+        with session.initiate():
+            measurements = session.channels["Dev2/3-5, Dev1/0, Dev2/7"].measure_multiple()
+            assert measurements[0].voltage == pytest.approx(2.03)
+            assert measurements[1].voltage == pytest.approx(2.04)
+            assert measurements[2].voltage == pytest.approx(2.05)
+            assert measurements[3].voltage == pytest.approx(1.00)
+            assert measurements[4].voltage == pytest.approx(2.07)
+
+
 @pytest.mark.parametrize(
     'resource_name,measurement_channels',
     [
