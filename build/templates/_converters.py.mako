@@ -158,6 +158,74 @@ def convert_repeated_capabilities_without_prefix(repeated_capability):
     return ','.join(convert_repeated_capabilities(repeated_capability, ''))
 
 
+def expand_channel_string(channel_string, all_channels_in_session):
+    '''Expands a channel_string to a list of individual channel names.
+
+    The individual channel names may or may not be fully qualified channel names as applicable for
+    the session. In other words, the individual channel names will be a subset of
+    all_channels_in_session.
+
+    Examples:
+        - expand_channel_string('1', ['0', '1', '2', '3']) --> ['1']
+        - expand_channel_string('4,1:2', ['1', '2', '4']) --> ['4', '1', '2']
+        - expand_channel_string('2:3,0', ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3'])
+            --> ['Dev1/2', 'Dev1/3', 'Dev1/0']
+        - expand_channel_string('Dev1/1', ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3'])
+            --> ['Dev1/1']
+        - expand_channel_string('4,Dev1/1:2', ['Dev1/1', 'Dev1/2', 'Dev1/4'])
+            --> ['Dev1/4', 'Dev1/1', 'Dev1/2']
+        - expand_channel_string('Dev1/4,Dev1/2,Dev1/3', ['Dev1/2', 'Dev1/3', 'Dev1/4'])
+            --> ['Dev1/4', 'Dev1/2', 'Dev1/3']
+        - expand_channel_string('Dev1/1,Dev2/2', ['Dev1/0', 'Dev1/1', 'Dev1/2', 'Dev1/3', 'Dev2/0', 'Dev2/1', 'Dev2/2', 'Dev2/3'])
+            --> ['Dev1/1', 'Dev2/2']
+        - expand_channel_string(' Dev1 / 1 : 2 , 4 ', ['Dev1/1', 'Dev1/2', 'Dev1/4'])
+            --> ['Dev1/1', 'Dev1/2', 'Dev1/4']
+        - expand_channel_string('DEV1/0-1    , Dev1/3', ['dev1/0', 'dev1/1', 'dev1/2', 'dev1/3'])
+            --> ['dev1/0', 'dev1/1', 'dev1/3']
+
+    Args:
+        channel_string (str) - refer to _convert_repeated_capabilities() for the
+            supported formats (this string is expected to be used as the index of session.channels)
+
+        all_channels_in_session (list of str) - names of all the channels in the session as returned
+            by get_channel_names()
+
+    Returns:
+        channel_names (list of str) - A list in which each element is the name of a single channel,
+            with the exact capitalization used by the driver runtime.
+    '''
+    if channel_string.strip() == '':
+        return all_channels_in_session
+
+    # Rule 1: If all_channels_in_session is fully-qualified then returned channel names should be
+    #         fully-qualified, otherwise returned channel names should not be fully-qualified.
+    # Rule 2: If any channel in the input is not fully-qualified, but we need to return
+    #         fully-qualified channels because of Rule 1, then use the channel qualifier obtained
+    #         from all_channels_in_session. This can only happen on a single-instrument session,
+    #         so all the channel qualifiers are the same and we pick the first one.
+
+    instrument, separator, channel = all_channels_in_session[0].rpartition('/')
+    default_channel_qualifier = instrument + separator
+
+    expanded_channel_list = []
+    for token in channel_string.split(','):
+        instrument, separator, channel = token.rpartition('/')
+        instrument = instrument.strip()
+        channel_qualifier = instrument + separator if instrument else default_channel_qualifier
+        expanded_channel_list.extend(
+            convert_repeated_capabilities(channel.strip(), channel_qualifier)
+        )
+
+    # Convert the expanded channel names to their canonical form based on all_channels_in_session
+    lowercase_channel_name_to_session_channel_name_dict = {
+        channel_name.lower(): channel_name for channel_name in all_channels_in_session
+    }
+    return [
+        lowercase_channel_name_to_session_channel_name_dict[channel_name.lower()]
+        for channel_name in expanded_channel_list
+    ]
+
+
 def _convert_timedelta(value, library_type, scaling):
     try:
         # We first assume it is a timedelta object
