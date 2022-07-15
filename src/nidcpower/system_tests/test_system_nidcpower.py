@@ -320,6 +320,53 @@ def test_measure_multiple_channels(
             assert [measurement.channel for measurement in measurements] == expected_measured_channels
 
 
+@pytest.mark.resource_name('Dev1,Dev2')
+def test_measure_multiple_channel_ordering(session):
+    for instrument in (1, 2):
+        for channel in range(12):
+            session.channels[f"Dev{instrument}/{channel}"].voltage_level = instrument + channel * 0.01
+    with session.initiate():
+        measurements = session.channels["Dev2/3-5, Dev1/0, Dev2/7"].measure_multiple()
+        expected_measured_voltages_and_channels = (
+            (2.03, "Dev2/3"),
+            (2.04, "Dev2/4"),
+            (2.05, "Dev2/5"),
+            (1.00, "Dev1/0"),
+            (2.07, "Dev2/7")
+        )
+        assert len(measurements) == len(expected_measured_voltages_and_channels)
+        for measurement, expected_measured_voltage_and_channel in zip(
+            measurements,
+            expected_measured_voltages_and_channels
+        ):
+            expected_measured_voltage, expected_channel = expected_measured_voltage_and_channel
+            assert measurement.voltage == pytest.approx(expected_measured_voltage)
+            assert measurement.channel == expected_channel
+
+
+@pytest.mark.independent_channels(False)
+def test_measure_multiple_channel_ordering_non_independent_channels(session):
+    for channel in range(12):
+        session.channels[f"{channel}"].voltage_level = channel * 0.01
+    with session.initiate():
+        measurements = session.channels["3-4, 0, 7, 1"].measure_multiple()
+        expected_measured_voltages_and_channels = (
+            (0.03, "3"),
+            (0.04, "4"),
+            (0.00, "0"),
+            (0.07, "7"),
+            (0.01, "1")
+        )
+        assert len(measurements) == len(expected_measured_voltages_and_channels)
+        for measurement, expected_measured_voltage_and_channel in zip(
+            measurements,
+            expected_measured_voltages_and_channels
+        ):
+            expected_measured_voltage, expected_channel = expected_measured_voltage_and_channel
+            assert measurement.voltage == pytest.approx(expected_measured_voltage)
+            assert measurement.channel == expected_channel
+
+
 @pytest.mark.parametrize(
     'resource_name,measurement_channels',
     [
