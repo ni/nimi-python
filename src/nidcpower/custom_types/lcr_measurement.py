@@ -97,7 +97,6 @@ class LCRMeasurement(object):
             measurement was taken.
     """
     LCR = namedtuple(typename="LCR", field_names=("inductance", "capacitance", "resistance"))
-    InCompliances = namedtuple(typename="InCompliances", field_names=("dc", "ac"))
 
     _lcr_measurement_field_metadata = [
         # field_name           label(s)
