@@ -61,7 +61,8 @@ import nidcpower
                 ),
                 "d": 10.0,
                 "measurement_mode": nidcpower.InstrumentMode.SMU_PS,
-                "in_compliances": nidcpower.LCRMeasurement.InCompliances(dc=True, ac=True),
+                "dc_in_compliance": True,
+                "ac_in_compliance": True,
                 "unbalanced": True,
                 # Derived properties
                 "z_magnitude_and_phase": (100.49876, 5.7105931375),
@@ -145,7 +146,8 @@ import nidcpower
                 ),
                 "d": 0.0,
                 "measurement_mode": nidcpower.InstrumentMode.LCR,
-                "in_compliances": nidcpower.LCRMeasurement.InCompliances(dc=False, ac=False),
+                "dc_in_compliance": False,
+                "ac_in_compliance": False,
                 "unbalanced": False,
                 # Derived properties
                 "z_magnitude_and_phase": (0.0, 0.0),
@@ -308,16 +310,10 @@ def test_lcr_load_compensation_spot_repr_and_str():
     assert str(recreated_object) == str(python_object)
 
 
-@pytest.mark.parametrize(
-    "init_params, expected_error_type",
-    [
-        ({"impedance": "1.0"}, TypeError),
-        ({"ideal_capacitance": complex()}, TypeError),
-        ({"ideal_inductance": complex()}, TypeError),
-        ({"ideal_resistance": complex()}, TypeError),
-        ({"impedance": complex(), "ideal_capacitance": 1.0}, ValueError),
-    ],
-)
-def test_lcr_load_compensation_spot_input_error(init_params, expected_error_type):
-    with pytest.raises(expected_error_type):
-        nidcpower.LCRLoadCompensationSpot(**init_params)
+def test_lcr_load_compensation_spot_input_error():
+    with pytest.raises(ValueError):
+        nidcpower.LCRLoadCompensationSpot(
+            frequency=10.0e3,
+            impedance=complex(100.0, 0.0),
+            ideal_capacitance=1.0
+        )

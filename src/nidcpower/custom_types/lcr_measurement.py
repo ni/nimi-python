@@ -74,7 +74,9 @@ class LCRMeasurement(object):
         parallel_lcr (LCR): Specifies the inductance, in henrys, the capacitance, in farads, and
             the resistance, in ohms, as measured using a parallel circuit model.
 
-        d (float): The dissipation factor of the circuit.
+        d (float): The dissipation factor of the circuit. The dimensionless dissipation factor is
+            directly proportional to how quickly an oscillating system loses energy. D is the
+            reciprocal of Q, the quality factor.
 
         measurement_mode (enums.InstrumentMode): Specifies the measurement mode.
             **Defined Values**:
@@ -85,10 +87,13 @@ class LCRMeasurement(object):
             | InstrumentMode.LCR    | The channel(s) are operating as an LCR meter.       |
             +-----------------------+-----------------------------------------------------+
 
-        in_compliances (InCompliances): Indicates whether the output was in DC compliance and/or
-            AC compliance at the time the measurement was taken.
+        dc_in_compliance (bool): Indicates whether the output was in DC compliance at the time the
+            measurement was taken.
 
-        unbalanced (bool): Indicates whether the output was unbalanced at the time the
+        ac_in_compliance (bool): Indicates whether the output was in AC compliance at the time the
+            measurement was taken.
+
+        unbalanced (bool): Indicates whether the bridge was unbalanced at the time the
             measurement was taken.
     """
     LCR = namedtuple(typename="LCR", field_names=("inductance", "capacitance", "resistance"))
@@ -107,7 +112,8 @@ class LCRMeasurement(object):
         ("parallel_lcr"      , ("Parallel inductance", "Parallel capacitance", "Parallel resistance")),  # noqa: E202,E203
         ("d"                 , "Dissipation factor"                                                  ),  # noqa: E202,E203
         ("measurement_mode"  , "Measurement mode"                                                    ),  # noqa: E202,E203
-        ("in_compliances"    , ("DC in compliance", "AC in compliance")                              ),  # noqa: E202,E203
+        ("dc_in_compliance"  , "DC in compliance"                                                    ),  # noqa: E202,E203
+        ("ac_in_compliance"  , "AC in compliance"                                                    ),  # noqa: E202,E203
         ("unbalanced"        , "Unbalanced"                                                          ),  # noqa: E202,E203
     ]
 
@@ -134,9 +140,8 @@ class LCRMeasurement(object):
         )
         self.d = data.d
         self.measurement_mode = enums.InstrumentMode(data.measurement_mode)
-        self.in_compliances = LCRMeasurement.InCompliances(
-            dc=bool(data.dc_in_compliance), ac=bool(data.ac_in_compliance)
-        )
+        self.dc_in_compliance = bool(data.dc_in_compliance)
+        self.ac_in_compliance = bool(data.ac_in_compliance)
         self.unbalanced = bool(data.unbalanced)
 
     @property
@@ -189,7 +194,9 @@ class LCRMeasurement(object):
     def q(self):
         """q
 
-        Returns the quality factor of this LCRMeasurement object.
+        Returns the quality factor of this LCRMeasurement object. The dimensionless quality factor
+        is inversely proportional to the degree of damping in a system. Q is the reciprocal of D,
+        the dissipation factor.
 
         Returns:
             q (float): The quality factor of the circuit.
@@ -207,23 +214,25 @@ class LCRMeasurement(object):
         field_value_strings = []
         for field_name, field_label in LCRMeasurement._lcr_measurement_field_metadata:
             # Determines row_format
-            if field_name in ("channel", "measurement_mode", "in_compliances", "unbalanced"):
+            if field_name in (
+                "channel",
+                "measurement_mode",
+                "dc_in_compliance",
+                "ac_in_compliance",
+                "unbalanced"
+            ):
                 row_format = "{{:<{}}}: {{:}}\n".format(max_field_label_len)
             else:
                 row_format = "{{:<{}}}: {{:,.6g}}\n".format(max_field_label_len)
             # Process namedtuple fields
             if isinstance(field_label, tuple):
                 for label, value in zip(field_label, getattr(self, field_name)):
-                    field_value_strings.append(
-                        row_format.format(
-                            label, bool(value) if field_name == "in_compliances" else value
-                        )
-                    )
+                    field_value_strings.append(row_format.format(label, value))
             else:
                 field_value = getattr(self, field_name)
                 if field_name == "measurement_mode":
                     field_value = enums.InstrumentMode(field_value).name
-                elif field_name == "unbalanced":
+                elif field_name in ("dc_in_compliance", "ac_in_compliance", "unbalanced"):
                     field_value = bool(field_value)
                 field_value_strings.append(row_format.format(field_label, field_value))
         return "".join(field_value_strings)

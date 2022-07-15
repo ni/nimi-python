@@ -1,5 +1,4 @@
 import ctypes
-import numbers
 import platform
 
 import nidcpower._visatype
@@ -35,11 +34,11 @@ class struct_NILCRLoadCompensationSpot(ctypes.Structure):  # noqa N801
 
 
 class LCRLoadCompensationSpot(object):
-    """Constructs a DUT specification for a given frequency to use in LCR load compensation."""
+    """Specifies a DUT specification for a given frequency to use in LCR load compensation."""
 
     def __init__(
         self,
-        frequency=0.0,
+        frequency,
         impedance=None,
         ideal_capacitance=None,
         ideal_inductance=None,
@@ -47,51 +46,48 @@ class LCRLoadCompensationSpot(object):
     ):
         """LCRLoadCompensationSpot
 
-        Creates and returns an LCRLoadCompensationSpot object. At most one of impedance,
-            ideal_capacitance, ideal_inductance and ideal_resistance can be set, and the remaining
-            parameters (excluding frequency) must be None. The parameter that is not None specifies
-            the known specification value of the DUT to be used as the basis for load compensation.
-            If all of them are None, then the default value of `impedance=complex()` will be used.
+        Creates and returns an LCRLoadCompensationSpot object. One and only one of impedance,
+            ideal_capacitance, ideal_inductance and ideal_resistance can be anything other than
+            None. This parameter specifies the known specification value of the DUT to be used as
+            the basis for load compensation.
 
         Args:
             frequency (float): Specifies the spot frequency, in Hz.
 
-            impedance (complex): Specifies the actual impedance of your DUT to be used as the basis
-                for load compensation, or None to use another type of DUT specification value.
+            impedance (complex): Specifies the actual impedance, in ohms, of your DUT to be used as
+                the basis for load compensation, or None to use another type of DUT specification
+                value.
 
-            ideal_capacitance (float): Specifies the ideal capacitance of your DUT to be used as the
-                basis for load compensation, or None to use another type of DUT specification value.
+            ideal_capacitance (float): Specifies the ideal capacitance, in farads, of your DUT to be
+                used as the basis for load compensation, or None to use another type of DUT
+                specification value.
 
-            ideal_inductance (float): Specifies the ideal inductance of your DUT to be used as the
-                basis for load compensation, or None to use another type of DUT specification value.
+            ideal_inductance (float): Specifies the ideal inductance, in henrys, of your DUT to be
+                used as the basis for load compensation, or None to use another type of DUT
+                specification value.
 
-            ideal_resistance (float): Specifies the ideal resistance of your DUT to be used as the
-                basis for load compensation, or None to use another type of DUT specification value.
+            ideal_resistance (float): Specifies the ideal resistance, in ohms, of your DUT to be
+                used as the basis for load compensation, or None to use another type of DUT
+                specification value.
         """
         self.frequency = frequency
-        # Set default values
-        self.reference_value_type = enums.LCRReferenceValueType.IMPEDANCE
-        self.reference_value = complex()
-        # Input validations
+        # Input validation
         none_count = 0
         for uppercase_parameter_name in enums.LCRReferenceValueType.__members__:
             parameter_name = uppercase_parameter_name.lower()
             parameter = locals()[parameter_name]
             if parameter is None:
                 none_count += 1
-            elif parameter_name == "impedance" and not isinstance(parameter, numbers.Complex):
-                raise TypeError("Parameter impedance must be of type complex")
-            elif parameter_name != "impedance" and not isinstance(parameter, numbers.Real):
-                raise TypeError("Parameter {} must be a real number".format(parameter_name))
             else:
                 self.reference_value_type = getattr(
-                    enums.LCRReferenceValueType, uppercase_parameter_name
+                    enums.LCRReferenceValueType,
+                    uppercase_parameter_name
                 )
                 self.reference_value = parameter
 
-        if none_count < len(enums.LCRReferenceValueType) - 1:
+        if none_count != len(enums.LCRReferenceValueType) - 1:
             raise ValueError(
-                "At most one of {0} parameters can be set and the remaining parameters must be None".format(
+                "One and only one of {0} parameters can be anything other than None".format(
                     tuple(
                         uppercase_parameter_name.lower()
                         for uppercase_parameter_name in enums.LCRReferenceValueType.__members__
