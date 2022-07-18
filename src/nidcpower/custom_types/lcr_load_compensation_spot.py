@@ -36,79 +36,66 @@ class struct_NILCRLoadCompensationSpot(ctypes.Structure):  # noqa N801
 class LCRLoadCompensationSpot(object):
     """Specifies a DUT specification for a given frequency to use in LCR load compensation."""
 
-    def __init__(
-        self,
-        frequency,
-        impedance=None,
-        ideal_capacitance=None,
-        ideal_inductance=None,
-        ideal_resistance=None,
-    ):
+    _lcr_reference_value_type_to_label_and_units = {
+        enums.LCRReferenceValueType.IMPEDANCE: {
+            "label": "Impedance        ",
+            "unit": "ohms"
+        },
+        enums.LCRReferenceValueType.IDEAL_CAPACITANCE: {
+            "label": "Ideal Capacitance",
+            "unit": "farads"
+        },
+        enums.LCRReferenceValueType.IDEAL_INDUCTANCE: {
+            "label": "Ideal Inductance ",
+            "unit": "henrys"
+        },
+        enums.LCRReferenceValueType.IDEAL_RESISTANCE: {
+            "label": "Ideal Resistance ",
+            "unit": "ohms"
+        },
+    }
+
+    def __init__(self, frequency, reference_value_type, reference_value):
         """LCRLoadCompensationSpot
 
-        Creates and returns an LCRLoadCompensationSpot object. One and only one of impedance,
-            ideal_capacitance, ideal_inductance and ideal_resistance can be anything other than
-            None. This parameter specifies the known specification value of the DUT to be used as
-            the basis for load compensation.
+        Creates and returns an instance of LCRLoadCompensationSpot.
 
         Args:
-            frequency (float): Specifies the spot frequency, in Hz.
+            frequency (float): The spot frequency, in Hz.
 
-            impedance (complex): Specifies the actual impedance, in ohms, of your DUT to be used as
-                the basis for load compensation, or None to use another type of DUT specification
-                value.
+            reference_value_type (enums.LCRReferenceValueType): A known specification value of your
+                DUT to use as the basis for load compensation.
 
-            ideal_capacitance (float): Specifies the ideal capacitance, in farads, of your DUT to be
-                used as the basis for load compensation, or None to use another type of DUT
-                specification value.
-
-            ideal_inductance (float): Specifies the ideal inductance, in henrys, of your DUT to be
-                used as the basis for load compensation, or None to use another type of DUT
-                specification value.
-
-            ideal_resistance (float): Specifies the ideal resistance, in ohms, of your DUT to be
-                used as the basis for load compensation, or None to use another type of DUT
-                specification value.
+            reference_value (complex or float): A value that describes the referenceValueType
+                specification.
         """
         self.frequency = frequency
-        # Input validation
-        none_count = 0
-        for uppercase_parameter_name in enums.LCRReferenceValueType.__members__:
-            parameter_name = uppercase_parameter_name.lower()
-            parameter = locals()[parameter_name]
-            if parameter is None:
-                none_count += 1
-            else:
-                self.reference_value_type = getattr(
-                    enums.LCRReferenceValueType,
-                    uppercase_parameter_name
-                )
-                self.reference_value = parameter
-
-        if none_count != len(enums.LCRReferenceValueType) - 1:
-            raise ValueError(
-                "One and only one of {0} parameters can be anything other than None".format(
-                    tuple(
-                        uppercase_parameter_name.lower()
-                        for uppercase_parameter_name in enums.LCRReferenceValueType.__members__
-                    )
-                )
-            )
+        self.reference_value_type = enums.LCRReferenceValueType(reference_value_type)
+        self.reference_value = reference_value
 
     def __repr__(self):
-        return "{0}.{1}(frequency={2}, {3}={4})".format(
+        return "{0}.{1}(frequency={2}, reference_value_type={3}.{4}.{5}, reference_value={6})".format(
             self.__class__.__module__,
             self.__class__.__qualname__,
             self.frequency,
-            self.reference_value_type.name.lower(),
+            enums.LCRReferenceValueType.__module__,
+            enums.LCRReferenceValueType.__qualname__,
+            self.reference_value_type.name,
             self.reference_value,
         )
 
     def __str__(self):
         return "".join(
             [
-                "Frequency           : {:,.6g}\n".format(self.frequency),
-                "Reference Value Type: {:}\n".format(self.reference_value_type.name),
-                "Reference Value     : {:,.6g}\n".format(self.reference_value),
+                "Frequency        : {:,.6g}\n{}: {:,.6g} {}\n".format(
+                    self.frequency,
+                    LCRLoadCompensationSpot._lcr_reference_value_type_to_label_and_units[
+                        self.reference_value_type
+                    ]["label"],
+                    self.reference_value,
+                    LCRLoadCompensationSpot._lcr_reference_value_type_to_label_and_units[
+                        self.reference_value_type
+                    ]["unit"],
+                ),
             ]
         )
