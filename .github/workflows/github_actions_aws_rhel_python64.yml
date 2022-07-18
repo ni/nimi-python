@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
 jobs:
   do-the-job1:
-    name: system_tests_rhel64
+    name: system_test
     runs-on: 
     - self-hosted
     - linux
