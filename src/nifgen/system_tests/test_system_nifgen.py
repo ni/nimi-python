@@ -8,7 +8,7 @@ import tempfile
 import warnings
 
 
-# Set up some global information we need
+# Set up global information we need
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
 
 
