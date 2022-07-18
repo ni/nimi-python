@@ -97,21 +97,25 @@ class LCRMeasurement(object):
     LCR = namedtuple(typename="LCR", field_names=("inductance", "capacitance", "resistance"))
 
     _lcr_measurement_field_metadata = [
-        # field_name           label(s)
-        ("channel"           , "Channel"                                                             ),  # noqa: E202,E203
-        ("vdc"               , "DC voltage"                                                          ),  # noqa: E202,E203
-        ("idc"               , "DC current"                                                          ),  # noqa: E202,E203
-        ("stimulus_frequency", "Stimulus frequency"                                                  ),  # noqa: E202,E203
-        ("ac_voltage"        , "AC voltage"                                                          ),  # noqa: E202,E203
-        ("ac_current"        , "AC current"                                                          ),  # noqa: E202,E203
-        ("z"                 , "Impedance"                                                           ),  # noqa: E202,E203
-        ("series_lcr"        , ("Series inductance", "Series capacitance", "Series resistance")      ),  # noqa: E202,E203
-        ("parallel_lcr"      , ("Parallel inductance", "Parallel capacitance", "Parallel resistance")),  # noqa: E202,E203
-        ("d"                 , "Dissipation factor"                                                  ),  # noqa: E202,E203
-        ("measurement_mode"  , "Measurement mode"                                                    ),  # noqa: E202,E203
-        ("dc_in_compliance"  , "DC in compliance"                                                    ),  # noqa: E202,E203
-        ("ac_in_compliance"  , "AC in compliance"                                                    ),  # noqa: E202,E203
-        ("unbalanced"        , "Unbalanced"                                                          ),  # noqa: E202,E203
+        # field_name              label(s)
+        ("channel"              , "Channel"                                                             ),  # noqa: E202,E203
+        ("vdc"                  , "DC voltage"                                                          ),  # noqa: E202,E203
+        ("idc"                  , "DC current"                                                          ),  # noqa: E202,E203
+        ("stimulus_frequency"   , "Stimulus frequency"                                                  ),  # noqa: E202,E203
+        ("ac_voltage"           , "AC voltage"                                                          ),  # noqa: E202,E203
+        ("ac_current"           , "AC current"                                                          ),  # noqa: E202,E203
+        ("z"                    , "Impedance"                                                           ),  # noqa: E202,E203
+        ("z_magnitude_and_phase", ("Impedance magnitude", "Impedance phase")                            ),  # noqa: E202,E203
+        ("y"                    , "Admittance"                                                          ),  # noqa: E202,E203
+        ("y_magnitude_and_phase", ("Admittance magnitude", "Admittance phase")                          ),  # noqa: E202,E203
+        ("series_lcr"           , ("Series inductance", "Series capacitance", "Series resistance")      ),  # noqa: E202,E203
+        ("parallel_lcr"         , ("Parallel inductance", "Parallel capacitance", "Parallel resistance")),  # noqa: E202,E203
+        ("d"                    , "Dissipation factor"                                                  ),  # noqa: E202,E203
+        ("q"                    , "Quality factor"                                                      ),  # noqa: E202,E203
+        ("measurement_mode"     , "Measurement mode"                                                    ),  # noqa: E202,E203
+        ("dc_in_compliance"     , "DC in compliance"                                                    ),  # noqa: E202,E203
+        ("ac_in_compliance"     , "AC in compliance"                                                    ),  # noqa: E202,E203
+        ("unbalanced"           , "Unbalanced"                                                          ),  # noqa: E202,E203
     ]
 
     def __init__(self, data):
