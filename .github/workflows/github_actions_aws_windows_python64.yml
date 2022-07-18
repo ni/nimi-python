@@ -1,4 +1,4 @@
-name: system_tests_win64
+name: nimibot_win_64
 
 on:
   pull_request:
@@ -18,7 +18,7 @@ on:
   
 jobs:
   do-the-job1:
-      name: test
+      name: system_test
       runs-on: 
       - self-hosted
       - windows

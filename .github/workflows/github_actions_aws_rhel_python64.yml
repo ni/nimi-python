@@ -1,4 +1,4 @@
-name: system_tests_rhel_64
+name: nimibot_rhel_64
 
 on:
   pull_request:
@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
 jobs:
   do-the-job1:
-    name: test
+    name: system_test
     runs-on: 
     - self-hosted
     - linux
