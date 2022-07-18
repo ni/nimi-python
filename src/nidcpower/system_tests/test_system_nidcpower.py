@@ -104,14 +104,14 @@ def test_error_message():
         with nidcpower.Session('4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
             pass
     assert e.value.code == -1074134964
-    assert e.value.description.find('The option string parameter contains an entry with an unknown option value.') != -1
+    # The option string parameter contains an entry with an unknown option value.
 
 
 def test_get_error(session):
     with pytest.raises(nidcpower.Error) as e:
         session.instrument_model = ''
-    assert e.value.code == -1074135027  # Error : Attribute is read-only.
-    assert e.value.description.find('Attribute is read-only.') != -1
+    assert e.value.code == -1074135027
+    # Error Description: Attribute is read-only.
 
 
 def test_get_self_cal_last_date_and_time(session):
@@ -490,7 +490,6 @@ def test_create_and_delete_advanced_sequence(session):
         session.active_advanced_sequence = sequence_name
 
 
-@pytest.mark.skip(reason="Workaround for issue #1667")
 @pytest.mark.channels('0')
 def test_create_advanced_sequence_commit_step(session):
     properties_used = ['output_function', 'voltage_level']
@@ -499,11 +498,11 @@ def test_create_advanced_sequence_commit_step(session):
     session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
     with pytest.raises(nidcpower.Error) as e:
         session.create_advanced_sequence_commit_step(set_as_active_step=True)
-    assert e.value.code == -1074118619  # NIDCPOWER_ERROR_OPERATION_NOT_SUPPORTED
-    assert e.value.description.find('This device does not support the requested operation.  Refer to the device documentation to determine which operations it supports.') != -1
+    assert e.value.code == -1074118619
+    # Error Description: This device does not support the requested operation. Refer to the device
+    # documentation to determine which operations it supports.
 
 
-@pytest.mark.skip(reason="Workaround for issue #1667")
 @pytest.mark.channels('0')
 def test_create_and_delete_advanced_sequence_bad_name(session):
     properties_used = ['output_function_bad', 'voltage_level']
@@ -526,8 +525,8 @@ def test_create_and_delete_advanced_sequence_bad_type(session):
 def test_send_software_edge_trigger_error(session):
     with pytest.raises(nidcpower.Error) as e:
         session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
-    assert e.value.code == -1074118587  # Error : Function not available in multichannel session
-    assert e.value.description.find('The requested function is not available when multiple channels are present in the same session.') != -1
+    assert e.value.code == -1074118587
+    # Error Description: The requested function is not available when multiple channels are present in the same session.
 
 
 def test_get_ext_cal_last_date_and_time(session):
@@ -674,7 +673,7 @@ def test_init_raises_driver_errors_for_invalid_arguments(resource_name, channels
         with nidcpower.Session(resource_name, channels, options=options):
             pass
     assert e.value.code == -1074097793
-    assert e.value.description.find('The specified device cannot be found.') != -1
+    # Error Description: The specified device cannot be found.
 
 
 @pytest.mark.parametrize(
@@ -697,7 +696,7 @@ def test_init_raises_driver_errors_for_invalid_arguments_legacy_session(resource
         with nidcpower.Session(resource_name, channels, independent_channels=False):
             pass
     assert e.value.code == -1074118656
-    assert e.value.description.find('The device is not supported with this driver or version.') != -1
+    # Error Description: Device was not recognized. The device is not supported with this driver or version.
 
 
 @pytest.mark.include_legacy_session
@@ -713,16 +712,18 @@ def test_repeated_capabilities_on_method_when_all_channels_are_specified(session
 def test_error_channel_name_not_allowed_in_legacy_session(session):
     with pytest.raises(nidcpower.Error) as e:
         session.channels['0'].reset()
-    assert e.value.code == -1074118494  # NIDCPOWER_ERROR_CHANNEL_NAME_NOT_ALLOWED_IN_OBSOLETE_SESSION
-    assert e.value.description.find('The channel name string must represent all channels in the session because the session was not initialized with independent channels. To specify a subset of channels for this function, first initialize the session with independent channels.') != -1
+    assert e.value.code == -1074118494
+    # Error Description: The channel name string must represent all channels in the session because
+    # the session was not initialized with independent channels. To specify a subset of channels
+    # for this function, first initialize the session with independent channels.
 
 
 @pytest.mark.legacy_session_only
 def test_error_channel_name_not_allowed(session):
     with pytest.raises(nidcpower.Error) as e:
         session.channels['0'].instrument_model
-    assert e.value.code == -1074134971  # IVI_ERROR_CHANNEL_NAME_NOT_ALLOWED
-    assert e.value.description.find('The channel or repeated capability name is not allowed.') != -1
+    assert e.value.code == -1074134971
+    # Error Description: The channel or repeated capability name is not allowed.
 
 
 @pytest.mark.resource_name('Dev1,Dev2')
@@ -764,7 +765,7 @@ def test_invalid_channels_repeated_capabilities(session, channels):
     with pytest.raises(nidcpower.Error) as e:
         session.channels[channels].output_function = nidcpower.OutputFunction.DC_VOLTAGE
     assert e.value.code == -1074135008
-    assert e.value.description.find('Unknown channel or repeated capability name.') != -1
+    # Error Description: Unknown channel or repeated capability name.
 
 
 @pytest.mark.resource_name('Dev1,Dev2,Dev3')
@@ -811,7 +812,6 @@ def test_create_and_delete_advanced_sequence_repeated_capabilities(session, chan
         channels_session.active_advanced_sequence = sequence_name
 
 
-@pytest.mark.skip(reason="Please refer the Bug:1667")
 @pytest.mark.resource_name('Dev1/0, Dev2/0')
 @pytest.mark.parametrize('channels', ('Dev1/0', 'Dev2/0', 'Dev1/0,Dev2/0'))
 def test_create_advanced_sequence_commit_step_repeated_capabilities(session, channels):
@@ -822,8 +822,9 @@ def test_create_advanced_sequence_commit_step_repeated_capabilities(session, cha
     channels_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
     with pytest.raises(nidcpower.Error) as e:
         channels_session.create_advanced_sequence_commit_step(set_as_active_step=True)
-    assert e.value.code == -1074118619  # NIDCPOWER_ERROR_OPERATION_NOT_SUPPORTED
-    assert e.value.description.find('This device does not support the requested operation.  Refer to the device documentation to determine which operations it supports.') != -1
+    assert e.value.code == -1074118619
+    # Error Description: This device does not support the requested operation. Refer to the device
+    # documentation to determine which operations it supports.
 
 
 @pytest.mark.resource_name('Dev1/0:3, Dev2/0:3')
