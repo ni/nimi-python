@@ -269,6 +269,25 @@ class LCROpenShortLoadCompensationDataSource(Enum):
     '''
 
 
+class LCRReferenceValueType(Enum):
+    IMPEDANCE = 1076
+    r'''
+    The actual impedance, comprising real resistance and imaginary reactance, of your DUT. Supply resistance, in ohms, to reference value A; supply reactance, in ohms, to reference value B.
+    '''
+    IDEAL_CAPACITANCE = 1077
+    r'''
+    The ideal capacitance of your DUT. Supply capacitance, in farads, to reference value A.
+    '''
+    IDEAL_INDUCTANCE = 1078
+    r'''
+    The ideal inductance of your DUT. Supply inductance, in henrys, to reference value A.
+    '''
+    IDEAL_RESISTANCE = 1079
+    r'''
+    The ideal resistance of your DUT. Supply resistance, in ohms, to reference value A.
+    '''
+
+
 class LCRSourceDelayMode(Enum):
     AUTOMATIC = 1144
     r'''

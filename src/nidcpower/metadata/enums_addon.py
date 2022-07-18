@@ -4,7 +4,6 @@
 enums_override_metadata = {
     # TODO(olsl21): Temporarily disable the new enums (#1715), they will be re-enabled in
     #  subsequent smaller PRs
-    "LCRImpedanceAutoRange": {"codegen_method": "no"},
-    "LCRReferenceValueType": {"codegen_method": "no"}
+    "LCRImpedanceAutoRange": {"codegen_method": "no"}
 }
 

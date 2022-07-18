@@ -610,6 +610,51 @@ LCROpenShortLoadCompensationDataSource
 
 
 
+LCRReferenceValueType
+---------------------
+
+.. py:class:: LCRReferenceValueType
+
+    .. py:attribute:: LCRReferenceValueType.IMPEDANCE
+
+
+
+        The actual impedance, comprising real resistance and imaginary reactance, of your DUT. Supply resistance, in ohms, to reference value A; supply reactance, in ohms, to reference value B.
+
+        
+
+
+
+    .. py:attribute:: LCRReferenceValueType.IDEAL_CAPACITANCE
+
+
+
+        The ideal capacitance of your DUT. Supply capacitance, in farads, to reference value A.
+
+        
+
+
+
+    .. py:attribute:: LCRReferenceValueType.IDEAL_INDUCTANCE
+
+
+
+        The ideal inductance of your DUT. Supply inductance, in henrys, to reference value A.
+
+        
+
+
+
+    .. py:attribute:: LCRReferenceValueType.IDEAL_RESISTANCE
+
+
+
+        The ideal resistance of your DUT. Supply resistance, in ohms, to reference value A.
+
+        
+
+
+
 LCRSourceDelayMode
 ------------------
 
