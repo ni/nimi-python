@@ -73,23 +73,23 @@ import nidcpower
             # expected_python_str
             (
                 "Channel             : Dev1/0\n"
-                "DC voltage          : 0.1\n"
-                "DC current          : 0.001\n"
-                "Stimulus frequency  : 10,000\n"
-                "AC voltage          : 1+0.1j\n"
-                "AC current          : 0.01+0.001j\n"
-                "Impedance           : 100+10j\n"
-                "Impedance magnitude : 100.499\n"
-                "Impedance phase     : 5.71059\n"
-                "Admittance          : 0.00990099-0.000990099j\n"
-                "Admittance magnitude: 0.00995037\n"
-                "Admittance phase    : -5.71059\n"
-                "Series inductance   : 10\n"
-                "Series capacitance  : 20\n"
-                "Series resistance   : 90\n"
-                "Parallel inductance : 30\n"
-                "Parallel capacitance: 40\n"
-                "Parallel resistance : 110\n"
+                "DC voltage          : 0.1 V\n"
+                "DC current          : 0.001 A\n"
+                "Stimulus frequency  : 10,000 Hz\n"
+                "AC voltage          : 1+0.1j V RMS\n"
+                "AC current          : 0.01+0.001j A RMS\n"
+                "Impedance           : 100+10j Ω\n"
+                "Impedance magnitude : 100.499 Ω\n"
+                "Impedance phase     : 5.71059 °\n"
+                "Admittance          : 0.00990099-0.000990099j S\n"
+                "Admittance magnitude: 0.00995037 S\n"
+                "Admittance phase    : -5.71059 °\n"
+                "Series inductance   : 10 H\n"
+                "Series capacitance  : 20 F\n"
+                "Series resistance   : 90 Ω\n"
+                "Parallel inductance : 30 H\n"
+                "Parallel capacitance: 40 F\n"
+                "Parallel resistance : 110 Ω\n"
                 "Dissipation factor  : 10\n"
                 "Quality factor      : 0.1\n"
                 "Measurement mode    : SMU_PS\n"
@@ -164,23 +164,23 @@ import nidcpower
             # expected_python_str
             (
                 "Channel             : 1\n"
-                "DC voltage          : 0\n"
-                "DC current          : 0\n"
-                "Stimulus frequency  : 0\n"
-                "AC voltage          : 0+0j\n"
-                "AC current          : 0+0j\n"
-                "Impedance           : 0+0j\n"
-                "Impedance magnitude : 0\n"
-                "Impedance phase     : 0\n"
-                "Admittance          : nan+nanj\n"
-                "Admittance magnitude: nan\n"
-                "Admittance phase    : nan\n"
-                "Series inductance   : 0\n"
-                "Series capacitance  : 0\n"
-                "Series resistance   : 0\n"
-                "Parallel inductance : 0\n"
-                "Parallel capacitance: 0\n"
-                "Parallel resistance : 0\n"
+                "DC voltage          : 0 V\n"
+                "DC current          : 0 A\n"
+                "Stimulus frequency  : 0 Hz\n"
+                "AC voltage          : 0+0j V RMS\n"
+                "AC current          : 0+0j A RMS\n"
+                "Impedance           : 0+0j Ω\n"
+                "Impedance magnitude : 0 Ω\n"
+                "Impedance phase     : 0 °\n"
+                "Admittance          : nan+nanj S\n"
+                "Admittance magnitude: nan S\n"
+                "Admittance phase    : nan °\n"
+                "Series inductance   : 0 H\n"
+                "Series capacitance  : 0 F\n"
+                "Series resistance   : 0 Ω\n"
+                "Parallel inductance : 0 H\n"
+                "Parallel capacitance: 0 F\n"
+                "Parallel resistance : 0 Ω\n"
                 "Dissipation factor  : 0\n"
                 "Quality factor      : nan\n"
                 "Measurement mode    : LCR\n"
@@ -222,8 +222,8 @@ def test_lcr_measurement(ctype_members, channel, expected_python_members, expect
             ),
             # expected_str
             (
-                "Frequency        : 200\n"
-                "Impedance        : 3+4j ohms\n"
+                "Frequency        : 200 Hz\n"
+                "Impedance        : 3+4j Ω\n"
             ),
             # expected_ctype_members
             {
@@ -249,8 +249,8 @@ def test_lcr_measurement(ctype_members, channel, expected_python_members, expect
             ),
             # expected_str
             (
-                "Frequency        : 300\n"
-                "Ideal Capacitance: 5 farads\n"
+                "Frequency        : 300 Hz\n"
+                "Ideal Capacitance: 5 F\n"
             ),
             # expected_ctype_members
             {
@@ -276,8 +276,8 @@ def test_lcr_measurement(ctype_members, channel, expected_python_members, expect
             ),
             # expected_str
             (
-                "Frequency        : 400\n"
-                "Ideal Inductance : 6 henrys\n"
+                "Frequency        : 400 Hz\n"
+                "Ideal Inductance : 6 H\n"
             ),
             # expected_ctype_members
             {
@@ -303,8 +303,8 @@ def test_lcr_measurement(ctype_members, channel, expected_python_members, expect
             ),
             # expected_str
             (
-                "Frequency        : 500\n"
-                "Ideal Resistance : 7 ohms\n"
+                "Frequency        : 500 Hz\n"
+                "Ideal Resistance : 7 Ω\n"
             ),
             # expected_ctype_members
             {
