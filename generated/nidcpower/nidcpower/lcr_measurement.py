@@ -1,7 +1,5 @@
-import cmath
 from collections import namedtuple
 import ctypes
-import math
 
 import nidcpower._visatype
 import nidcpower.enums as enums
@@ -53,30 +51,32 @@ class struct_NILCRMeasurement(ctypes.Structure):  # noqa N801
 class LCRMeasurement(object):
     """Specifies an LCR measurement.
 
-    Fields:
+    Data attributes:
         channel (str): The channel name associated with this LCRMeasurement.
 
-        vdc (float): Specifies the measured DC voltage, in volts.
+        vdc (float): The measured DC voltage, in volts.
 
-        idc (float): Specifies the measured DC current, in amps.
+        idc (float): The measured DC current, in amps.
 
-        stimulus_frequency (float): Specifies the frequency of the LCR test signal, in Hz.
+        stimulus_frequency (float): The frequency of the LCR test signal, in Hz.
 
-        ac_voltage (complex): Specifies the measured AC voltage, in volts RMS.
+        ac_voltage (complex): The measured AC voltage, in volts RMS.
 
-        ac_current (complex): Specifies the measured AC current, in amps RMS.
+        ac_current (complex): The measured AC current, in amps RMS.
 
-        z (complex): Specifies the complex impedance.
+        z (complex): The complex impedance.
 
-        series_lcr (LCR): Specifies the inductance, in henrys, the capacitance, in farads, and
-            the resistance, in ohms, as measured using a series circuit model.
+        series_lcr (LCR): The inductance, in henrys, the capacitance, in farads, and the resistance,
+            in ohms, as measured using a series circuit model.
 
-        parallel_lcr (LCR): Specifies the inductance, in henrys, the capacitance, in farads, and
-            the resistance, in ohms, as measured using a parallel circuit model.
+        parallel_lcr (LCR): The inductance, in henrys, the capacitance, in farads, and the
+            resistance, in ohms, as measured using a parallel circuit model.
 
-        d (float): The dissipation factor of the circuit.
+        d (float): The dissipation factor of the circuit. The dimensionless dissipation factor is
+            directly proportional to how quickly an oscillating system loses energy. D is the
+            reciprocal of Q, the quality factor.
 
-        measurement_mode (enums.InstrumentMode): Specifies the measurement mode.
+        measurement_mode (enums.InstrumentMode): The measurement mode.
             **Defined Values**:
 
             +-----------------------+-----------------------------------------------------+
@@ -85,40 +85,48 @@ class LCRMeasurement(object):
             | InstrumentMode.LCR    | The channel(s) are operating as an LCR meter.       |
             +-----------------------+-----------------------------------------------------+
 
-        in_compliances (InCompliances): Indicates whether the output was in DC compliance and/or
-            AC compliance at the time the measurement was taken.
-
-        unbalanced (bool): Indicates whether the output was unbalanced at the time the
+        dc_in_compliance (bool): Indicates whether the output was in DC compliance at the time the
             measurement was taken.
+
+        ac_in_compliance (bool): Indicates whether the output was in AC compliance at the time the
+            measurement was taken.
+
+        unbalanced (bool): Indicates whether the bridge was unbalanced at the time the measurement
+            was taken.
     """
     LCR = namedtuple(typename="LCR", field_names=("inductance", "capacitance", "resistance"))
-    InCompliances = namedtuple(typename="InCompliances", field_names=("dc", "ac"))
 
     _lcr_measurement_field_metadata = [
-        # field_name           label(s)
-        ("channel"           , "Channel"                               ),  # noqa: E202,E203
-        ("vdc"               , "V DC"                                  ),  # noqa: E202,E203
-        ("idc"               , "I DC"                                  ),  # noqa: E202,E203
-        ("stimulus_frequency", "Stimulus frequency"                    ),  # noqa: E202,E203
-        ("ac_voltage"        , "AC voltage"                            ),  # noqa: E202,E203
-        ("ac_current"        , "AC current"                            ),  # noqa: E202,E203
-        ("z"                 , "Z"                                     ),  # noqa: E202,E203
-        ("series_lcr"        , ("Ls", "Cs", "Rs")                      ),  # noqa: E202,E203
-        ("parallel_lcr"      , ("Lp", "Cp", "Rp")                      ),  # noqa: E202,E203
-        ("d"                 , "D"                                     ),  # noqa: E202,E203
-        ("measurement_mode"  , "Measurement mode"                      ),  # noqa: E202,E203
-        ("in_compliances"    , ("DC in compliance", "AC in compliance")),  # noqa: E202,E203
-        ("unbalanced"        , "Unbalanced"                            ),  # noqa: E202,E203
+        # field_name              label(s)
+        ("channel"              , "Channel"                                                             ),  # noqa: E202,E203
+        ("vdc"                  , "DC voltage"                                                          ),  # noqa: E202,E203
+        ("idc"                  , "DC current"                                                          ),  # noqa: E202,E203
+        ("stimulus_frequency"   , "Stimulus frequency"                                                  ),  # noqa: E202,E203
+        ("ac_voltage"           , "AC voltage"                                                          ),  # noqa: E202,E203
+        ("ac_current"           , "AC current"                                                          ),  # noqa: E202,E203
+        ("z"                    , "Impedance"                                                           ),  # noqa: E202,E203
+        ("z_magnitude_and_phase", ("Impedance magnitude", "Impedance phase")                            ),  # noqa: E202,E203
+        ("y"                    , "Admittance"                                                          ),  # noqa: E202,E203
+        ("y_magnitude_and_phase", ("Admittance magnitude", "Admittance phase")                          ),  # noqa: E202,E203
+        ("series_lcr"           , ("Series inductance", "Series capacitance", "Series resistance")      ),  # noqa: E202,E203
+        ("parallel_lcr"         , ("Parallel inductance", "Parallel capacitance", "Parallel resistance")),  # noqa: E202,E203
+        ("d"                    , "Dissipation factor"                                                  ),  # noqa: E202,E203
+        ("q"                    , "Quality factor"                                                      ),  # noqa: E202,E203
+        ("measurement_mode"     , "Measurement mode"                                                    ),  # noqa: E202,E203
+        ("dc_in_compliance"     , "DC in compliance"                                                    ),  # noqa: E202,E203
+        ("ac_in_compliance"     , "AC in compliance"                                                    ),  # noqa: E202,E203
+        ("unbalanced"           , "Unbalanced"                                                          ),  # noqa: E202,E203
     ]
 
     def __init__(self, data):
         """LCRMeasurement
 
-        Creates and returns an LCRMeasurement object.
+        Creates and returns an instance of LCRMeasurement.
 
         Args:
-            data (struct_NILCRMeasurement): The LCR measurement ctypes object returned by the driver.
+            data (struct_NILCRMeasurement): The LCR measurement ctypes instance returned by the driver.
         """
+        self._data = data
         self.channel = ""
         self.vdc = data.vdc
         self.idc = data.idc
@@ -134,70 +142,45 @@ class LCRMeasurement(object):
         )
         self.d = data.d
         self.measurement_mode = enums.InstrumentMode(data.measurement_mode)
-        self.in_compliances = LCRMeasurement.InCompliances(
-            dc=bool(data.dc_in_compliance), ac=bool(data.ac_in_compliance)
-        )
+        self.dc_in_compliance = bool(data.dc_in_compliance)
+        self.ac_in_compliance = bool(data.ac_in_compliance)
         self.unbalanced = bool(data.unbalanced)
 
     @property
     def z_magnitude_and_phase(self):
         """z_magnitude_and_phase
 
-        Returns a tuple of (z_magnitude, z_phase) of this LCRMeasurement object.
-
-        Returns:
-            z_magnitude_and_phase (tuple of (float, float)):
-
-                - **z_magnitude** (float): The magnitude of the complex impedance, in ohms.
-                - **z_phase** (float): The impedance phase angle, in degrees.
-
+        Get the **magnitude** (float), in ohms and **phase angle** (float), in degrees of the
+        complex impedance.
         """
-        z_magnitude, z_phase_in_radians = cmath.polar(self.z)
-        return z_magnitude, math.degrees(z_phase_in_radians)
+        return self._data.z_magnitude, self._data.z_phase
 
     @property
     def y(self):
         """y
 
-        Returns the admittance of this LCRMeasurement object.
-
-        Returns:
-            y (complex): The complex admittance.
-
+        Get the complex admittance (complex).
         """
-        if self.z == 0:
-            return complex(cmath.nan, cmath.nan)
-        return 1.0 / self.z
+        return complex(self._data.y_real, self._data.y_imaginary)
 
     @property
     def y_magnitude_and_phase(self):
         """y_magnitude_and_phase
 
-        Returns a tuple of (y_magnitude, y_phase) of this LCRMeasurement object.
-
-        Returns:
-            y_magnitude_and_phase (tuple of (float, float)):
-
-                - **y_magnitude** (float): The magnitude of the complex admittance, in siemens.
-                - **y_phase** (float): The admittance phase angle, in degrees.
-
+        Get the **magnitude** (float), in siemens and **phase angle** (float), in degrees of the
+        complex admittance.
         """
-        y_magnitude, y_phase_in_radians = cmath.polar(self.y)
-        return y_magnitude, math.degrees(y_phase_in_radians)
+        return self._data.y_magnitude, self._data.y_phase
 
     @property
     def q(self):
         """q
 
-        Returns the quality factor of this LCRMeasurement object.
-
-        Returns:
-            q (float): The quality factor of the circuit.
-
+        Get the quality factor (float) of the circuit. The dimensionless quality factor is inversely
+        proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation
+        factor.
         """
-        if self.d == 0:
-            return math.nan
-        return 1.0 / self.d
+        return self._data.q
 
     def __str__(self):
         max_field_label_len = max(
@@ -207,23 +190,25 @@ class LCRMeasurement(object):
         field_value_strings = []
         for field_name, field_label in LCRMeasurement._lcr_measurement_field_metadata:
             # Determines row_format
-            if field_name in ("channel", "measurement_mode", "in_compliances", "unbalanced"):
+            if field_name in (
+                "channel",
+                "measurement_mode",
+                "dc_in_compliance",
+                "ac_in_compliance",
+                "unbalanced"
+            ):
                 row_format = "{{:<{}}}: {{:}}\n".format(max_field_label_len)
             else:
                 row_format = "{{:<{}}}: {{:,.6g}}\n".format(max_field_label_len)
             # Process namedtuple fields
             if isinstance(field_label, tuple):
                 for label, value in zip(field_label, getattr(self, field_name)):
-                    field_value_strings.append(
-                        row_format.format(
-                            label, bool(value) if field_name == "in_compliances" else value
-                        )
-                    )
+                    field_value_strings.append(row_format.format(label, value))
             else:
                 field_value = getattr(self, field_name)
                 if field_name == "measurement_mode":
                     field_value = enums.InstrumentMode(field_value).name
-                elif field_name == "unbalanced":
+                elif field_name in ("dc_in_compliance", "ac_in_compliance", "unbalanced"):
                     field_value = bool(field_value)
                 field_value_strings.append(row_format.format(field_label, field_value))
         return "".join(field_value_strings)
