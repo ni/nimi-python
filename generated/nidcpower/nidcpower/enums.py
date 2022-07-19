@@ -228,6 +228,11 @@ class LCRDCBiasSource(Enum):
     '''
 
 
+class _LCRImpedanceAutoRange(Enum):
+    OFF = 1068
+    ON = 1070
+
+
 class LCRImpedanceRangeSource(Enum):
     IMPEDANCE_RANGE = 1142
     r'''

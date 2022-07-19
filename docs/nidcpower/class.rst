@@ -4754,6 +4754,47 @@ lcr_current_amplitude
                 - LabVIEW Property: **LCR:AC Stimulus:Current Amplitude**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_CURRENT_AMPLITUDE**
 
+lcr_current_range
+-----------------
+
+    .. py:attribute:: lcr_current_range
+
+        Specifies the current range, in amps RMS, for the specified channel(s).
+        The range defines the valid values to which you can set the :py:attr:`nidcpower.Session.lcr_current_amplitude`.
+        For valid ranges, refer to the specifications for your instrument.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_current_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_current_range`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:AC Stimulus:Advanced:Current Range**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_CURRENT_RANGE**
+
 lcr_custom_measurement_time
 ---------------------------
 
@@ -4873,6 +4914,47 @@ lcr_dc_bias_current_level
                 - LabVIEW Property: **LCR:DC Bias:Current Level**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_DC_BIAS_CURRENT_LEVEL**
 
+lcr_dc_bias_current_range
+-------------------------
+
+    .. py:attribute:: lcr_dc_bias_current_range
+
+        Specifies the DC Bias current range, in amps, for the specified channel(s).
+        The range defines the valid values to which you can set the :py:attr:`nidcpower.Session.lcr_dc_bias_current_level`.
+        For valid ranges, refer to the specifications for your instrument.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_current_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_dc_bias_current_range`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:DC Bias:Advanced:Current Range**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_DC_BIAS_CURRENT_RANGE**
+
 lcr_dc_bias_source
 ------------------
 
@@ -4951,6 +5033,47 @@ lcr_dc_bias_voltage_level
                 - LabVIEW Property: **LCR:DC Bias:Voltage Level**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_DC_BIAS_VOLTAGE_LEVEL**
 
+lcr_dc_bias_voltage_range
+-------------------------
+
+    .. py:attribute:: lcr_dc_bias_voltage_range
+
+        Specifies the DC Bias voltage range, in volts, for the specified channel(s).
+        The range defines the valid values to which you can set the :py:attr:`nidcpower.Session.lcr_dc_bias_voltage_level`.
+        For valid ranges, refer to the specifications for your instrument.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_voltage_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_dc_bias_voltage_range`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:DC Bias:Advanced:Voltage Range**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_DC_BIAS_VOLTAGE_RANGE**
+
 lcr_frequency
 -------------
 
@@ -4989,6 +5112,56 @@ lcr_frequency
 
                 - LabVIEW Property: **LCR:AC Stimulus:Frequency**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_FREQUENCY**
+
+lcr_impedance_auto_range
+------------------------
+
+    .. py:attribute:: lcr_impedance_auto_range
+
+        Defines whether an instrument in LCR mode automatically selects the best impedance range for each given LCR measurement.
+
+        Impedance autoranging may be enabled only when both:
+
+        - The :py:attr:`nidcpower.Session.source_mode` property is set to :py:data:`~nidcpower.SourceMode.SINGLE_POINT`
+        - :py:attr:`nidcpower.Session.measure_when` is set to a value other than :py:data:`~nidcpower.MeasureWhen.ON_MEASURE_TRIGGER`
+
+        You can read :py:attr:`nidcpower.Session.lcr_impedance_range` back after a measurement to determine the actual range used.
+
+        When enabled, impedance autoranging overrides impedance range settings you configure manually with any other properties.
+
+        Default Value: Search ni.com for Supported Properties by Device for the default value by instrument.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_impedance_auto_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_impedance_auto_range`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | bool       |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Impedance Range:Impedance Autorange**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_IMPEDANCE_AUTO_RANGE**
 
 lcr_impedance_range
 -------------------
@@ -5819,6 +5992,47 @@ lcr_voltage_amplitude
 
                 - LabVIEW Property: **LCR:AC Stimulus:Voltage Amplitude**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_VOLTAGE_AMPLITUDE**
+
+lcr_voltage_range
+-----------------
+
+    .. py:attribute:: lcr_voltage_range
+
+        Specifies the voltage range, in volts RMS, for the specified channel(s).
+        The range defines the valid values to which you can set the :py:attr:`nidcpower.Session.lcr_voltage_amplitude`.
+        For valid ranges, refer to the specifications for your instrument.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_voltage_range`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_voltage_range`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:AC Stimulus:Advanced:Voltage Range**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_VOLTAGE_RANGE**
 
 logical_name
 ------------

@@ -358,3 +358,17 @@ def convert_to_isolation_state_enum(value):
     }[value]
 
 
+def convert_from_lcr_impedance_auto_range_enum(value):
+    return {
+        enums._LCRImpedanceAutoRange.OFF: False,
+        enums._LCRImpedanceAutoRange.ON: True,
+    }[value]
+
+
+def convert_to_lcr_impedance_auto_range_enum(value):
+    return {
+        False: enums._LCRImpedanceAutoRange.OFF,
+        True: enums._LCRImpedanceAutoRange.ON,
+    }[value]
+
+
