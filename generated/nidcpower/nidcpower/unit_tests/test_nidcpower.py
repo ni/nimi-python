@@ -79,6 +79,11 @@ import nidcpower
                 "AC voltage          : 1+0.1j\n"
                 "AC current          : 0.01+0.001j\n"
                 "Impedance           : 100+10j\n"
+                "Impedance magnitude : 100.499\n"
+                "Impedance phase     : 5.71059\n"
+                "Admittance          : 0.00990099-0.000990099j\n"
+                "Admittance magnitude: 0.00995037\n"
+                "Admittance phase    : -5.71059\n"
                 "Series inductance   : 10\n"
                 "Series capacitance  : 20\n"
                 "Series resistance   : 90\n"
@@ -86,6 +91,7 @@ import nidcpower
                 "Parallel capacitance: 40\n"
                 "Parallel resistance : 110\n"
                 "Dissipation factor  : 10\n"
+                "Quality factor      : 0.1\n"
                 "Measurement mode    : SMU_PS\n"
                 "DC in compliance    : True\n"
                 "AC in compliance    : True\n"
@@ -164,6 +170,11 @@ import nidcpower
                 "AC voltage          : 0+0j\n"
                 "AC current          : 0+0j\n"
                 "Impedance           : 0+0j\n"
+                "Impedance magnitude : 0\n"
+                "Impedance phase     : 0\n"
+                "Admittance          : nan+nanj\n"
+                "Admittance magnitude: nan\n"
+                "Admittance phase    : nan\n"
                 "Series inductance   : 0\n"
                 "Series capacitance  : 0\n"
                 "Series resistance   : 0\n"
@@ -171,6 +182,7 @@ import nidcpower
                 "Parallel capacitance: 0\n"
                 "Parallel resistance : 0\n"
                 "Dissipation factor  : 0\n"
+                "Quality factor      : nan\n"
                 "Measurement mode    : LCR\n"
                 "DC in compliance    : False\n"
                 "AC in compliance    : False\n"
@@ -180,32 +192,39 @@ import nidcpower
     ]
 )
 def test_lcr_measurement(ctype_members, channel, expected_python_members, expected_python_str):
-    ctype_object = nidcpower.struct_NILCRMeasurement(**ctype_members)
-    python_object = nidcpower.LCRMeasurement(ctype_object)
-    python_object.channel = channel
+    ctype_instance = nidcpower.struct_NILCRMeasurement(**ctype_members)
+    python_instance = nidcpower.LCRMeasurement(ctype_instance)
+    python_instance.channel = channel
     for member in expected_python_members:
-        assert getattr(python_object, member) == pytest.approx(
+        assert getattr(python_instance, member) == pytest.approx(
             expected_python_members[member],
             nan_ok=True
         )
-    assert str(python_object) == expected_python_str
+    assert str(python_instance) == expected_python_str
 
 
 @pytest.mark.parametrize(
-    "python_init_params, expected_python_members, expected_ctype_members",
+    "python_init_params, expected_repr, expected_str, expected_ctype_members",
     [
         (
             # python_init_params
             {
                 "frequency": 200.0,
-                "impedance": complex(3.0, 4.0)
-            },
-            # expected_python_members
-            {
-                "frequency": 200.0,
                 "reference_value_type": nidcpower.LCRReferenceValueType.IMPEDANCE,
                 "reference_value": complex(3.0, 4.0)
             },
+            # expected_repr
+            (
+                "nidcpower.lcr_load_compensation_spot.LCRLoadCompensationSpot("
+                "frequency=200.0, "
+                "reference_value_type=nidcpower.enums.LCRReferenceValueType.IMPEDANCE, "
+                "reference_value=(3+4j))"
+            ),
+            # expected_str
+            (
+                "Frequency        : 200\n"
+                "Impedance        : 3+4j ohms\n"
+            ),
             # expected_ctype_members
             {
                 "frequency": 200.0,
@@ -218,14 +237,21 @@ def test_lcr_measurement(ctype_members, channel, expected_python_members, expect
             # python_init_params
             {
                 "frequency": 300.0,
-                "ideal_capacitance": 5.0
-            },
-            # expected_python_members
-            {
-                "frequency": 300.0,
                 "reference_value_type": nidcpower.LCRReferenceValueType.IDEAL_CAPACITANCE,
                 "reference_value": 5.0
             },
+            # expected_repr
+            (
+                "nidcpower.lcr_load_compensation_spot.LCRLoadCompensationSpot("
+                "frequency=300.0, "
+                "reference_value_type=nidcpower.enums.LCRReferenceValueType.IDEAL_CAPACITANCE, "
+                "reference_value=5.0)"
+            ),
+            # expected_str
+            (
+                "Frequency        : 300\n"
+                "Ideal Capacitance: 5 farads\n"
+            ),
             # expected_ctype_members
             {
                 "frequency": 300.0,
@@ -238,14 +264,21 @@ def test_lcr_measurement(ctype_members, channel, expected_python_members, expect
             # python_init_params
             {
                 "frequency": 400.0,
-                "ideal_inductance": 6.0
-            },
-            # expected_python_members
-            {
-                "frequency": 400.0,
                 "reference_value_type": nidcpower.LCRReferenceValueType.IDEAL_INDUCTANCE,
                 "reference_value": 6.0
             },
+            # expected_repr
+            (
+                "nidcpower.lcr_load_compensation_spot.LCRLoadCompensationSpot("
+                "frequency=400.0, "
+                "reference_value_type=nidcpower.enums.LCRReferenceValueType.IDEAL_INDUCTANCE, "
+                "reference_value=6.0)"
+            ),
+            # expected_str
+            (
+                "Frequency        : 400\n"
+                "Ideal Inductance : 6 henrys\n"
+            ),
             # expected_ctype_members
             {
                 "frequency": 400.0,
@@ -258,14 +291,21 @@ def test_lcr_measurement(ctype_members, channel, expected_python_members, expect
             # python_init_params
             {
                 "frequency": 500.0,
-                "ideal_resistance": 7.0
-            },
-            # expected_python_members
-            {
-                "frequency": 500.0,
                 "reference_value_type": nidcpower.LCRReferenceValueType.IDEAL_RESISTANCE,
                 "reference_value": 7.0
             },
+            # expected_repr
+            (
+                "nidcpower.lcr_load_compensation_spot.LCRLoadCompensationSpot("
+                "frequency=500.0, "
+                "reference_value_type=nidcpower.enums.LCRReferenceValueType.IDEAL_RESISTANCE, "
+                "reference_value=7.0)"
+            ),
+            # expected_str
+            (
+                "Frequency        : 500\n"
+                "Ideal Resistance : 7 ohms\n"
+            ),
             # expected_ctype_members
             {
                 "frequency": 500.0,
@@ -278,42 +318,19 @@ def test_lcr_measurement(ctype_members, channel, expected_python_members, expect
 )
 def test_lcr_load_compensation_spot(
     python_init_params,
-    expected_python_members,
+    expected_repr,
+    expected_str,
     expected_ctype_members
 ):
-    python_object = nidcpower.LCRLoadCompensationSpot(**python_init_params)
-    for member in expected_python_members:
-        assert getattr(python_object, member) == pytest.approx(
-            expected_python_members[member]
-        )
+    python_instance = nidcpower.LCRLoadCompensationSpot(**python_init_params)
+    for member in python_init_params:
+        assert getattr(python_instance, member) == pytest.approx(python_init_params[member])
 
-    ctype_object = nidcpower.struct_NILCRLoadCompensationSpot(python_object)
+    assert repr(python_instance) == expected_repr
+    assert str(python_instance) == expected_str
+    recreated_instance = eval(repr(python_instance))
+    assert str(recreated_instance) == str(python_instance)
+
+    ctype_instance = nidcpower.struct_NILCRLoadCompensationSpot(python_instance)
     for member in expected_ctype_members:
-        assert getattr(ctype_object, member) == pytest.approx(
-            expected_ctype_members[member]
-        )
-
-
-def test_lcr_load_compensation_spot_repr_and_str():
-    python_object = nidcpower.LCRLoadCompensationSpot(frequency=100.0, impedance=complex(1.0, 2.0))
-    assert repr(python_object) == (
-        "nidcpower.lcr_load_compensation_spot.LCRLoadCompensationSpot("
-        "frequency=100.0, "
-        "impedance=(1+2j))"
-    )
-    assert str(python_object) == (
-        "Frequency           : 100\n"
-        "Reference Value Type: IMPEDANCE\n"
-        "Reference Value     : 1+2j\n"
-    )
-    recreated_object = eval(repr(python_object))
-    assert str(recreated_object) == str(python_object)
-
-
-def test_lcr_load_compensation_spot_input_error():
-    with pytest.raises(ValueError):
-        nidcpower.LCRLoadCompensationSpot(
-            frequency=10.0e3,
-            impedance=complex(100.0, 0.0),
-            ideal_capacitance=1.0
-        )
+        assert getattr(ctype_instance, member) == pytest.approx(expected_ctype_members[member])

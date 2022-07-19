@@ -18,7 +18,7 @@ on:
   
 jobs:
   do-the-job1:
-      name: system_tests_win32
+      name: system_test
       runs-on: 
       - self-hosted
       - windows
