@@ -43,7 +43,7 @@
         assert len(channel_names) == 1, "fetch_multiple_lcr only supports one channel at a time"
 %elif f['python_name'] == 'measure_multiple_lcr':
         assert len(channel_names) == len(lcr_measurements), (
-            "measure_multiple should return as many LCR measurements as the number of channels specified through the channel string"
+            "measure_multiple_lcr should return as many LCR measurements as the number of channels specified through the channel string"
         )
 %endif
         for lcr_measurement_object,${channel_name_unpack} in zip(lcr_measurements${channel_names_zipped}):

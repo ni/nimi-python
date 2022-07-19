@@ -4812,6 +4812,7 @@ class _SessionBase(object):
             count (int): Specifies the number of measurements to fetch.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
+                Default value: 1.0 second
 
                 Note: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
@@ -4855,7 +4856,7 @@ class _SessionBase(object):
     def fetch_multiple_lcr(self, count, timeout=hightime.timedelta(seconds=1.0)):
         '''fetch_multiple_lcr
 
-        Returns a list of previously measured LCR data on the specified channel that have been taken and stored in a buffer.
+        Returns a list of previously measured LCRMeasurement instances on the specified channel that have been taken and stored in a buffer.
 
         To use this method:
 
@@ -4881,41 +4882,52 @@ class _SessionBase(object):
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete, in seconds.
                 If the method does not complete within this time interval, NI-DCPower returns an error.
+                Default value: 1.0 second
 
                 Note:
                 When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
 
         Returns:
-            measurements (list of LCRMeasurement): Returns an array of LCR measurement data.
+            measurements (list of LCRMeasurement): \A list of LCRMeasurement instances.
 
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | channel            | The channel name associated with this LCRMeasurement.                                                                                       |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | vdc                | The measured DC voltage, in volts.                                                                                                          |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | idc                | The measured DC current, in amps                                                                                                            |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | stimulus_frequency | The frequency of the LCR test signal, in Hz.                                                                                                |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | ac_voltage         | The measured AC voltage, in volts RMS.                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | ac_current         | The measured AC current, in amps RMS.                                                                                                       |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | z                  | The complex impedance.                                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | series_lcr         | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.               |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | parallel_lcr       | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.             |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | d                  | The dissipation factor of the circuit.                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | measurement_mode   | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter. |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | in_compliances     | Indicates whether the output was in DC compliance and/or AC compliance at the time the measurement was taken                                |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | unbalanced         | Indicates whether the output was unbalanced at the time the measurement was taken.                                                          |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | channel               | The channel name associated with this LCR measurement.                                                                                                                                                |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | vdc                   | The measured DC voltage, in volts.                                                                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | idc                   | The measured DC current, in amps.                                                                                                                                                                     |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | stimulus_frequency    | The frequency of the LCR test signal, in Hz.                                                                                                                                                          |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_voltage            | The measured AC voltage, in volts RMS.                                                                                                                                                                |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_current            | The measured AC current, in amps RMS.                                                                                                                                                                 |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z                     | The complex impedance.                                                                                                                                                                                |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_magnitude_and_phase | The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.                                                                                                                        |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y                     | The complex admittance.                                                                                                                                                                               |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_magnitude_and_phase | The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | series_lcr            | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.                                                                         |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | parallel_lcr          | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.                                                                       |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | d                     | The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor. |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | q                     | The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.                 |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | measurement_mode      | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.                                                           |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | dc_in_compliance      | Indicates whether the output was in DC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_in_compliance      | Indicates whether the output was in AC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | unbalanced            | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         '''
         lcr_measurements = self._fetch_multiple_lcr(count, timeout)
@@ -5006,7 +5018,7 @@ class _SessionBase(object):
     def measure_multiple_lcr(self):
         '''measure_multiple_lcr
 
-        Measures and returns a list of LCR data on the specified output channel(s).
+        Measures and returns a list of LCRMeasurement instances on the specified output channel(s).
 
         To use this method:
 
@@ -5029,35 +5041,45 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.measure_multiple_lcr`
 
         Returns:
-            measurements (list of LCRMeasurement): Returns an array of LCR measurement data.
+            measurements (list of LCRMeasurement): A list of LCRMeasurement instances.
 
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | channel            | The channel name associated with this LCRMeasurement.                                                                                       |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | vdc                | The measured DC voltage, in volts.                                                                                                          |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | idc                | The measured DC current, in amps                                                                                                            |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | stimulus_frequency | The frequency of the LCR test signal, in Hz.                                                                                                |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | ac_voltage         | The measured AC voltage, in volts RMS.                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | ac_current         | The measured AC current, in amps RMS.                                                                                                       |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | z                  | The complex impedance.                                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | series_lcr         | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.               |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | parallel_lcr       | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.             |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | d                  | The dissipation factor of the circuit.                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | measurement_mode   | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter. |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | in_compliances     | Indicates whether the output was in DC compliance and/or AC compliance at the time the measurement was taken                                |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | unbalanced         | Indicates whether the output was unbalanced at the time the measurement was taken.                                                          |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | channel               | The channel name associated with this LCR measurement.                                                                                                                                                |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | vdc                   | The measured DC voltage, in volts.                                                                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | idc                   | The measured DC current, in amps.                                                                                                                                                                     |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | stimulus_frequency    | The frequency of the LCR test signal, in Hz.                                                                                                                                                          |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_voltage            | The measured AC voltage, in volts RMS.                                                                                                                                                                |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_current            | The measured AC current, in amps RMS.                                                                                                                                                                 |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z                     | The complex impedance.                                                                                                                                                                                |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_magnitude_and_phase | The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.                                                                                                                        |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y                     | The complex admittance.                                                                                                                                                                               |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_magnitude_and_phase | The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | series_lcr            | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.                                                                         |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | parallel_lcr          | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.                                                                       |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | d                     | The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor. |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | q                     | The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.                 |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | measurement_mode      | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.                                                           |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | dc_in_compliance      | Indicates whether the output was in DC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_in_compliance      | Indicates whether the output was in AC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | unbalanced            | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         '''
         lcr_measurements = self._measure_multiple_lcr()
@@ -5072,7 +5094,7 @@ class _SessionBase(object):
             all_channels_in_session
         )
         assert len(channel_names) == len(lcr_measurements), (
-            "measure_multiple should return as many LCR measurements as the number of channels specified through the channel string"
+            "measure_multiple_lcr should return as many LCR measurements as the number of channels specified through the channel string"
         )
         for lcr_measurement_object, channel_name in zip(lcr_measurements, channel_names):
             lcr_measurement_object.channel = channel_name
@@ -5158,7 +5180,7 @@ class _SessionBase(object):
     def _fetch_multiple_lcr(self, count, timeout=hightime.timedelta(seconds=1.0)):
         r'''_fetch_multiple_lcr
 
-        Returns a list of previously measured LCR data on the specified channel that have been taken and stored in a buffer.
+        Returns a list of previously measured LCRMeasurement instances on the specified channel that have been taken and stored in a buffer.
 
         To use this method:
 
@@ -5190,33 +5212,43 @@ class _SessionBase(object):
 
 
         Returns:
-            measurements (list of LCRMeasurement): Returns an array of LCR measurement data.
+            measurements (list of LCRMeasurement): A list of LCRMeasurement instances.
 
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | vdc                | The measured DC voltage, in volts.                                                                                                          |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | idc                | The measured DC current, in amps                                                                                                            |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | stimulus_frequency | The frequency of the LCR test signal, in Hz.                                                                                                |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | ac_voltage         | The measured AC voltage, in volts RMS.                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | ac_current         | The measured AC current, in amps RMS.                                                                                                       |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | z                  | The complex impedance.                                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | series_lcr         | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.               |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | parallel_lcr       | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.             |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | d                  | The dissipation factor of the circuit.                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | measurement_mode   | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter. |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | in_compliances     | Indicates whether the output was in DC compliance and/or AC compliance at the time the measurement was taken                                |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | unbalanced         | Indicates whether the output was unbalanced at the time the measurement was taken.                                                          |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | vdc                   | The measured DC voltage, in volts.                                                                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | idc                   | The measured DC current, in amps.                                                                                                                                                                     |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | stimulus_frequency    | The frequency of the LCR test signal, in Hz.                                                                                                                                                          |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_voltage            | The measured AC voltage, in volts RMS.                                                                                                                                                                |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_current            | The measured AC current, in amps RMS.                                                                                                                                                                 |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z                     | The complex impedance.                                                                                                                                                                                |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_magnitude_and_phase | The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.                                                                                                                        |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y                     | The complex admittance.                                                                                                                                                                               |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_magnitude_and_phase | The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | series_lcr            | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.                                                                         |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | parallel_lcr          | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.                                                                       |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | d                     | The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor. |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | q                     | The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.                 |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | measurement_mode      | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.                                                           |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | dc_in_compliance      | Indicates whether the output was in DC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_in_compliance      | Indicates whether the output was in AC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | unbalanced            | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
             actual_count (int):
 
@@ -5916,7 +5948,7 @@ class _SessionBase(object):
     def _measure_multiple_lcr(self):
         r'''_measure_multiple_lcr
 
-        Measures and returns a list of LCR data on the specified output channel(s).
+        Measures and returns a list of LCRMeasurement instances on the specified output channel(s).
 
         To use this method:
 
@@ -5939,33 +5971,43 @@ class _SessionBase(object):
         Example: :py:meth:`my_session._measure_multiple_lcr`
 
         Returns:
-            measurements (list of LCRMeasurement): Returns an array of LCR measurement data.
+            measurements (list of LCRMeasurement): A list of LCRMeasurement instances.
 
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | vdc                | The measured DC voltage, in volts.                                                                                                          |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | idc                | The measured DC current, in amps                                                                                                            |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | stimulus_frequency | The frequency of the LCR test signal, in Hz.                                                                                                |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | ac_voltage         | The measured AC voltage, in volts RMS.                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | ac_current         | The measured AC current, in amps RMS.                                                                                                       |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | z                  | The complex impedance.                                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | series_lcr         | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.               |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | parallel_lcr       | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.             |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | d                  | The dissipation factor of the circuit.                                                                                                      |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | measurement_mode   | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter. |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | in_compliances     | Indicates whether the output was in DC compliance and/or AC compliance at the time the measurement was taken                                |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-                | unbalanced         | Indicates whether the output was unbalanced at the time the measurement was taken.                                                          |
-                +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | vdc                   | The measured DC voltage, in volts.                                                                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | idc                   | The measured DC current, in amps.                                                                                                                                                                     |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | stimulus_frequency    | The frequency of the LCR test signal, in Hz.                                                                                                                                                          |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_voltage            | The measured AC voltage, in volts RMS.                                                                                                                                                                |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_current            | The measured AC current, in amps RMS.                                                                                                                                                                 |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z                     | The complex impedance.                                                                                                                                                                                |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_magnitude_and_phase | The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.                                                                                                                        |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y                     | The complex admittance.                                                                                                                                                                               |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_magnitude_and_phase | The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | series_lcr            | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.                                                                         |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | parallel_lcr          | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.                                                                       |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | d                     | The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor. |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | q                     | The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.                 |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | measurement_mode      | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.                                                           |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | dc_in_compliance      | Indicates whether the output was in DC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_in_compliance      | Indicates whether the output was in AC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | unbalanced            | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                                                                    |
+                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

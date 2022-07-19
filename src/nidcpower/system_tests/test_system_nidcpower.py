@@ -904,8 +904,8 @@ def test_fetch_multiple_lcr(session):
             assert measurement.ac_voltage.real == pytest.approx(session.lcr_voltage_amplitude, 1e-9)
             assert measurement.ac_voltage.imag == pytest.approx(0.0, 1e-9)
             assert measurement.measurement_mode == nidcpower.InstrumentMode.LCR
-            assert not measurement.in_compliances.dc
-            assert not measurement.in_compliances.ac
+            assert not measurement.dc_in_compliance
+            assert not measurement.ac_in_compliance
             assert not measurement.unbalanced
 
 
@@ -925,8 +925,8 @@ def test_measure_multiple_lcr(session):
         assert measurements[0].ac_current.real == pytest.approx(session.lcr_current_amplitude, 1e-9)
         assert measurements[0].ac_current.imag == pytest.approx(0.0, 1e-9)
         assert measurements[0].measurement_mode == nidcpower.InstrumentMode.LCR
-        assert not measurements[0].in_compliances.dc
-        assert not measurements[0].in_compliances.ac
+        assert not measurements[0].dc_in_compliance
+        assert not measurements[0].ac_in_compliance
         assert not measurements[0].unbalanced
 
 
