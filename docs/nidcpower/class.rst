@@ -1052,7 +1052,7 @@ fetch_multiple_lcr
             :return:
 
 
-                    \A list of LCRMeasurement instances.
+                    A list of LCRMeasurement instances.
 
                     +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
                     | channel               | The channel name associated with this LCR measurement.                                                                                                                                                |

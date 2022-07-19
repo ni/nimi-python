@@ -1181,7 +1181,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\\A list of LCRMeasurement instances.\n',
+                    'description': '\nA list of LCRMeasurement instances.\n',
                     'table_body': [
                         [
                             'channel',
@@ -3012,7 +3012,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThe number of compensation spots defined in **load compensation spots**\n'
+                    'description': '\nThe number of elements defined in **compensation spots**.\n'
                 },
                 'name': 'numCompensationSpots',
                 'type': 'ViInt32'
@@ -3024,19 +3024,15 @@ functions = {
                     'table_body': [
                         [
                             'frequency',
-                            'The spot frequency.'
+                            'The spot frequency, in Hz.'
                         ],
                         [
                             'reference_value_type',
-                            'A known specification value of your DUT to use as the basis for load compensation. Refer to the enums.LCRReferenceValueType for the supported values.'
+                            'A known specification value of your DUT to use as the basis for load compensation.'
                         ],
                         [
-                            'reference_value_A',
+                            'reference_value',
                             'A value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose.'
-                        ],
-                        [
-                            'reference_value_B',
-                            'If applicable, a value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose.'
                         ]
                     ]
                 },

@@ -4889,7 +4889,7 @@ class _SessionBase(object):
 
 
         Returns:
-            measurements (list of LCRMeasurement): \A list of LCRMeasurement instances.
+            measurements (list of LCRMeasurement): A list of LCRMeasurement instances.
 
                 +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
                 | channel               | The channel name associated with this LCR measurement.                                                                                                                                                |
