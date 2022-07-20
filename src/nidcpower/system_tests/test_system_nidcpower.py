@@ -953,3 +953,88 @@ def test_get_lcr_compensation_last_date_and_time(session, compensation_type):
     assert last_compensation_datetime.day == 1
     assert last_compensation_datetime.hour == 0
     assert last_compensation_datetime.minute == 0
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_create_and_delete_advanced_sequence_with_lcr_attributes(session):
+    attr_vals = {
+        "instrument_mode": (nidcpower.InstrumentMode.SMU_PS, nidcpower.InstrumentMode.LCR),
+        "lcr_stimulus_function": (
+            nidcpower.LCRStimulusFunction.VOLTAGE,
+            nidcpower.LCRStimulusFunction.CURRENT,
+        ),
+        "lcr_frequency": (1_000.0, 10_000.0),
+        "lcr_impedance_range": (100.0, 200.0),
+        "lcr_voltage_amplitude": (0.7, 7.0),
+        "lcr_current_amplitude": (70.0e-3, 7.0e-3),
+        "lcr_dc_bias_source": (
+            nidcpower.LCRDCBiasSource.VOLTAGE,
+            nidcpower.LCRDCBiasSource.CURRENT,
+        ),
+        "lcr_dc_bias_voltage_level": (0.1, 0.01),
+        "lcr_dc_bias_current_level": (0.01, 0.001),
+        "lcr_measurement_time": (
+            nidcpower.LCRMeasurementTime.SHORT,
+            nidcpower.LCRMeasurementTime.LONG,
+        ),
+        "lcr_custom_measurement_time": (0.1, 0.2),
+        "lcr_open_conductance": (1, 2),
+        "lcr_open_susceptance": (3, 4),
+        "lcr_short_resistance": (5, 6),
+        "lcr_short_reactance": (7, 8),
+        "lcr_measured_load_resistance": (9, 10),
+        "lcr_measured_load_reactance": (11, 12),
+        "lcr_actual_load_resistance": (13, 14),
+        "lcr_actual_load_reactance": (15, 16),
+        "lcr_open_compensation_enabled": (True, False),
+        "lcr_short_compensation_enabled": (True, False),
+        "lcr_load_compensation_enabled": (True, False),
+    }
+    dependent_attributes = [
+        "lcr_voltage_amplitude",
+        "lcr_current_amplitude",
+        "lcr_dc_bias_voltage_level",
+        "lcr_dc_bias_current_level",
+        "lcr_custom_measurement_time",
+    ]
+    sequence_name = "my_sequence"
+    session.source_mode = nidcpower.SourceMode.SEQUENCE
+    session.lcr_open_short_load_compensation_data_source = (
+        nidcpower.LCROpenShortLoadCompensationDataSource.AS_DEFINED
+    )
+    session.create_advanced_sequence(
+        sequence_name=sequence_name,
+        property_names=list(attr_vals.keys()),
+        set_as_active_sequence=True,
+    )
+    for step_index in range(2):
+        session.create_advanced_sequence_step(set_as_active_step=True)
+        assert session.active_advanced_sequence == sequence_name
+        for lcr_attribute in attr_vals:
+            setattr(session, lcr_attribute, attr_vals[lcr_attribute][step_index])
+    for step_index in range(2):
+        session.active_advanced_sequence_step = step_index
+        for lcr_attribute in attr_vals.keys() - dependent_attributes:
+            assert getattr(session, lcr_attribute) == attr_vals[lcr_attribute][step_index]
+        # Test dependent attributes
+        if attr_vals["lcr_stimulus_function"][step_index] == nidcpower.LCRStimulusFunction.VOLTAGE:
+            assert session.lcr_voltage_amplitude == attr_vals["lcr_voltage_amplitude"][step_index]
+        else:
+            assert session.lcr_stimulus_function == nidcpower.LCRStimulusFunction.CURRENT
+            assert session.lcr_current_amplitude == attr_vals["lcr_current_amplitude"][step_index]
+        if attr_vals["lcr_dc_bias_source"][step_index] == nidcpower.LCRStimulusFunction.VOLTAGE:
+            assert (
+                session.lcr_dc_bias_voltage_level == attr_vals["lcr_dc_bias_voltage_level"][step_index]
+            )
+        elif attr_vals["lcr_dc_bias_source"][step_index] == nidcpower.LCRStimulusFunction.CURRENT:
+            assert (
+                session.lcr_dc_bias_current_level == attr_vals["lcr_dc_bias_current_level"][step_index]
+            )
+        if attr_vals["lcr_measurement_time"][step_index] == nidcpower.LCRMeasurementTime.CUSTOM:
+            assert (
+                session.lcr_custom_measurement_time == attr_vals["lcr_custom_measurement_time"][step_index]
+            )
+    session.delete_advanced_sequence(sequence_name=sequence_name)
+    with pytest.raises(nidcpower.errors.DriverError):
+        session.active_advanced_sequence = sequence_name
