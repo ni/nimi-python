@@ -50,7 +50,7 @@ def _main(argsv):
     )
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2/0', help='Resource names of NI SMUs')
     parser.add_argument('-f', '--lcr-frequency', default=10.0e3, type=float, help='LCR frequency (Hz)')
-    parser.add_argument('-i', '--lcr-impedance-range', default=100.0, type=float, help='LCR impedance range (Ohm)')
+    parser.add_argument('-i', '--lcr-impedance-range', default=100.0, type=float, help='LCR impedance range (Ω)')
     parser.add_argument('-c', '--cable-length', default='NI_STANDARD_2M', type=str, choices=tuple(nidcpower.CableLength.__members__.keys()), help='Cable length')
     parser.add_argument('-v', '--lcr-voltage-rms', default=700.0e-3, type=float, help='LCR voltage RMS (V RMS)')
     parser.add_argument('-d', '--lcr-dc-bias-source', default='OFF', type=str, choices=tuple(nidcpower.LCRDCBiasSource.__members__.keys()), help='LCR DC bias source')
