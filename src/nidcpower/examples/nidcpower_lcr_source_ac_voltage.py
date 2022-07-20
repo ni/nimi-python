@@ -35,7 +35,7 @@ def example(
         session.source_delay = source_delay
 
         with session.initiate():
-            session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 21.0)
+            session.wait_for_event(event_id=nidcpower.Event.SOURCE_COMPLETE, timeout=21.0)
             measurements = session.measure_multiple_lcr()
             for measurement in measurements:
                 print(measurement)
@@ -62,18 +62,18 @@ def _main(argsv):
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
     args = parser.parse_args(argsv)
     example(
-        args.resource_name,
-        args.option_string,
-        args.lcr_frequency,
-        args.lcr_impedance_range,
-        getattr(nidcpower.CableLength, args.cable_length),
-        args.lcr_voltage_rms,
-        getattr(nidcpower.LCRDCBiasSource, args.lcr_dc_bias_source),
-        args.lcr_dc_bias_voltage_level,
-        getattr(nidcpower.LCRMeasurementTime, args.lcr_measurement_time),
-        args.lcr_custom_measurement_time,
-        getattr(nidcpower.LCRSourceDelayMode, args.lcr_source_delay_mode),
-        args.source_delay,
+        resource_name=args.resource_name,
+        options=args.option_string,
+        lcr_frequency=args.lcr_frequency,
+        lcr_impedance_range=args.lcr_impedance_range,
+        cable_length=getattr(nidcpower.CableLength, args.cable_length),
+        lcr_voltage_rms=args.lcr_voltage_rms,
+        lcr_dc_bias_source=getattr(nidcpower.LCRDCBiasSource, args.lcr_dc_bias_source),
+        lcr_dc_bias_voltage_level=args.lcr_dc_bias_voltage_level,
+        lcr_measurement_time=getattr(nidcpower.LCRMeasurementTime, args.lcr_measurement_time),
+        lcr_custom_measurement_time=args.lcr_custom_measurement_time,
+        lcr_source_delay_mode=getattr(nidcpower.LCRSourceDelayMode, args.lcr_source_delay_mode),
+        source_delay=args.source_delay,
     )
 
 
@@ -82,20 +82,19 @@ def main():
 
 
 def test_example():
-    options = {'simulate': True, 'driver_setup': {'Model': '4190', 'BoardType': 'PXIe', }, }
     example(
-        'PXI1Slot2/0',
-        options,
-        10.0e3,
-        100.0,
-        nidcpower.CableLength.NI_STANDARD_2M,
-        700.0e-3,
-        nidcpower.LCRDCBiasSource.OFF,
-        0.0,
-        nidcpower.LCRMeasurementTime.MEDIUM,
-        10.0e-3,
-        nidcpower.LCRSourceDelayMode.AUTOMATIC,
-        16.66e-3,
+        resource_name='PXI1Slot2/0',
+        options={'simulate': True, 'driver_setup': {'Model': '4190', 'BoardType': 'PXIe', }, },
+        lcr_frequency=10.0e3,
+        lcr_impedance_range=100.0,
+        cable_length=nidcpower.CableLength.NI_STANDARD_2M,
+        lcr_voltage_rms=700.0e-3,
+        lcr_dc_bias_source=nidcpower.LCRDCBiasSource.OFF,
+        lcr_dc_bias_voltage_level=0.0,
+        lcr_measurement_time=nidcpower.LCRMeasurementTime.MEDIUM,
+        lcr_custom_measurement_time=10.0e-3,
+        lcr_source_delay_mode=nidcpower.LCRSourceDelayMode.AUTOMATIC,
+        source_delay=16.66e-3,
     )
 
 
