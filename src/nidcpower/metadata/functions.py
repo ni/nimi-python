@@ -1071,7 +1071,7 @@ functions = {
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'fancy_fetch'
+                'session_filename': 'fancy_fetch_measure'
             }
         ],
         'parameters': [
@@ -1138,7 +1138,7 @@ functions = {
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'fancy_fetch_lcr'
+                'session_filename': 'fancy_fetch_measure_lcr'
             }
         ],
         'parameters': [
@@ -1185,74 +1185,92 @@ functions = {
                     'table_body': [
                         [
                             'channel',
+                            '',
                             'The channel name associated with this LCR measurement.'
                         ],
                         [
                             'vdc',
+                            'float',
                             'The measured DC voltage, in volts.'
                         ],
                         [
                             'idc',
+                            'float',
                             'The measured DC current, in amps.'
                         ],
                         [
                             'stimulus_frequency',
+                            'float',
                             'The frequency of the LCR test signal, in Hz.'
                         ],
                         [
                             'ac_voltage',
+                            'complex',
                             'The measured AC voltage, in volts RMS.'
                         ],
                         [
                             'ac_current',
+                            'complex',
                             'The measured AC current, in amps RMS.'
                         ],
                         [
                             'z',
+                            'complex',
                             'The complex impedance.'
                         ],
                         [
                             'z_magnitude_and_phase',
+                            'tuple of float',
                             'The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.'
                         ],
                         [
                             'y',
+                            'complex',
                             'The complex admittance.'
                         ],
                         [
                             'y_magnitude_and_phase',
+                            'tuple of float',
                             'The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.'
                         ],
                         [
                             'series_lcr',
+                            'LCR',
                             'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.'
                         ],
                         [
                             'parallel_lcr',
+                            'LCR',
                             'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.'
                         ],
                         [
                             'd',
+                            'float',
                             'The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor.'
                         ],
                         [
                             'q',
+                            'float',
                             'The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.'
                         ],
                         [
                             'measurement_mode',
+                            'enums.InstrumentMode',
                             'The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.'
                         ],
                         [
                             'dc_in_compliance',
+                            'bool',
                             'Indicates whether the output was in DC compliance at the time the measurement was taken.'
                         ],
                         [
                             'ac_in_compliance',
+                            'bool',
                             'Indicates whether the output was in AC compliance at the time the measurement was taken.'
                         ],
                         [
                             'unbalanced',
+                            'bool',
                             'Indicates whether the output was unbalanced at the time the measurement was taken.'
                         ]
                     ]
@@ -1354,7 +1372,7 @@ functions = {
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'fancy_fetch'
+                'session_filename': 'fancy_fetch_measure'
             }
         ],
         'parameters': [
@@ -1401,7 +1419,7 @@ functions = {
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'fancy_fetch_lcr'
+                'session_filename': 'fancy_fetch_measure_lcr'
             }
         ],
         'parameters': [
@@ -1428,74 +1446,92 @@ functions = {
                     'table_body': [
                         [
                             'channel',
+                            '',
                             'The channel name associated with this LCR measurement.'
                         ],
                         [
                             'vdc',
+                            'float',
                             'The measured DC voltage, in volts.'
                         ],
                         [
                             'idc',
+                            'float',
                             'The measured DC current, in amps.'
                         ],
                         [
                             'stimulus_frequency',
+                            'float',
                             'The frequency of the LCR test signal, in Hz.'
                         ],
                         [
                             'ac_voltage',
+                            'complex',
                             'The measured AC voltage, in volts RMS.'
                         ],
                         [
                             'ac_current',
+                            'complex',
                             'The measured AC current, in amps RMS.'
                         ],
                         [
                             'z',
+                            'complex',
                             'The complex impedance.'
                         ],
                         [
                             'z_magnitude_and_phase',
+                            'tuple of float',
                             'The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.'
                         ],
                         [
                             'y',
+                            'complex',
                             'The complex admittance.'
                         ],
                         [
                             'y_magnitude_and_phase',
+                            'tuple of float',
                             'The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.'
                         ],
                         [
                             'series_lcr',
+                            'LCR',
                             'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.'
                         ],
                         [
                             'parallel_lcr',
+                            'LCR',
                             'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.'
                         ],
                         [
                             'd',
+                            'float',
                             'The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor.'
                         ],
                         [
                             'q',
+                            'float',
                             'The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.'
                         ],
                         [
                             'measurement_mode',
+                            'enums.InstrumentMode',
                             'The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.'
                         ],
                         [
                             'dc_in_compliance',
+                            'bool',
                             'Indicates whether the output was in DC compliance at the time the measurement was taken.'
                         ],
                         [
                             'ac_in_compliance',
+                            'bool',
                             'Indicates whether the output was in AC compliance at the time the measurement was taken.'
                         ],
                         [
                             'unbalanced',
+                            'bool',
                             'Indicates whether the output was unbalanced at the time the measurement was taken.'
                         ]
                     ]
@@ -1654,70 +1690,87 @@ functions = {
                     'table_body': [
                         [
                             'vdc',
+                            'float',
                             'The measured DC voltage, in volts.'
                         ],
                         [
                             'idc',
+                            'float',
                             'The measured DC current, in amps.'
                         ],
                         [
                             'stimulus_frequency',
+                            'float',
                             'The frequency of the LCR test signal, in Hz.'
                         ],
                         [
                             'ac_voltage',
+                            'complex',
                             'The measured AC voltage, in volts RMS.'
                         ],
                         [
                             'ac_current',
+                            'complex',
                             'The measured AC current, in amps RMS.'
                         ],
                         [
                             'z',
+                            'complex',
                             'The complex impedance.'
                         ],
                         [
                             'z_magnitude_and_phase',
+                            'tuple of float',
                             'The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.'
                         ],
                         [
                             'y',
+                            'complex',
                             'The complex admittance.'
                         ],
                         [
                             'y_magnitude_and_phase',
+                            'tuple of float',
                             'The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.'
                         ],
                         [
                             'series_lcr',
+                            'LCR',
                             'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.'
                         ],
                         [
                             'parallel_lcr',
+                            'LCR',
                             'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.'
                         ],
                         [
                             'd',
+                            'float',
                             'The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor.'
                         ],
                         [
                             'q',
+                            'float',
                             'The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.'
                         ],
                         [
                             'measurement_mode',
+                            'enums.InstrumentMode',
                             'The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.'
                         ],
                         [
                             'dc_in_compliance',
+                            'bool',
                             'Indicates whether the output was in DC compliance at the time the measurement was taken.'
                         ],
                         [
                             'ac_in_compliance',
+                            'bool',
                             'Indicates whether the output was in AC compliance at the time the measurement was taken.'
                         ],
                         [
                             'unbalanced',
+                            'bool',
                             'Indicates whether the output was unbalanced at the time the measurement was taken.'
                         ]
                     ]
@@ -2885,70 +2938,87 @@ functions = {
                     'table_body': [
                         [
                             'vdc',
+                            'float',
                             'The measured DC voltage, in volts.'
                         ],
                         [
                             'idc',
+                            'float',
                             'The measured DC current, in amps.'
                         ],
                         [
                             'stimulus_frequency',
+                            'float',
                             'The frequency of the LCR test signal, in Hz.'
                         ],
                         [
                             'ac_voltage',
+                            'complex',
                             'The measured AC voltage, in volts RMS.'
                         ],
                         [
                             'ac_current',
+                            'complex',
                             'The measured AC current, in amps RMS.'
                         ],
                         [
                             'z',
+                            'complex',
                             'The complex impedance.'
                         ],
                         [
                             'z_magnitude_and_phase',
+                            'tuple of float',
                             'The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.'
                         ],
                         [
                             'y',
+                            'complex',
                             'The complex admittance.'
                         ],
                         [
                             'y_magnitude_and_phase',
+                            'tuple of float',
                             'The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.'
                         ],
                         [
                             'series_lcr',
+                            'LCR',
                             'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.'
                         ],
                         [
                             'parallel_lcr',
+                            'LCR',
                             'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.'
                         ],
                         [
                             'd',
+                            'float',
                             'The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor.'
                         ],
                         [
                             'q',
+                            'float',
                             'The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.'
                         ],
                         [
                             'measurement_mode',
+                            'enums.InstrumentMode',
                             'The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.'
                         ],
                         [
                             'dc_in_compliance',
+                            'bool',
                             'Indicates whether the output was in DC compliance at the time the measurement was taken.'
                         ],
                         [
                             'ac_in_compliance',
+                            'bool',
                             'Indicates whether the output was in AC compliance at the time the measurement was taken.'
                         ],
                         [
                             'unbalanced',
+                            'bool',
                             'Indicates whether the output was unbalanced at the time the measurement was taken.'
                         ]
                     ]
