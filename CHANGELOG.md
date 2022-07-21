@@ -103,6 +103,7 @@ All notable changes to this project will be documented in this file.
             * Custom types added:
                 * `LCRLoadCompensationSpot`
                 * `LCRMeasurement`
+        * `nidcpower_lcr_source_ac_voltage.py` example
     * #### Changed
         * Updated supported devices information in documentation for methods and properties
         * Added `channel` field to the `Measurement` namedtuple instances returned by `fetch_multiple` and `measure_multiple`

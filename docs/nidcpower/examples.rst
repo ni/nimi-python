@@ -12,6 +12,15 @@ nidcpower_advanced_sequence.py
    :encoding: utf8
    :caption: `(nidcpower_advanced_sequence.py) <https://github.com/ni/nimi-python/blob/master/src/nidcpower/examples/nidcpower_advanced_sequence.py>`_
 
+nidcpower_lcr_source_ac_voltage.py
+----------------------------------
+
+.. literalinclude:: ../../src/nidcpower/examples/nidcpower_lcr_source_ac_voltage.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidcpower_lcr_source_ac_voltage.py) <https://github.com/ni/nimi-python/blob/master/src/nidcpower/examples/nidcpower_lcr_source_ac_voltage.py>`_
+
 nidcpower_measure_record.py
 ---------------------------
 
