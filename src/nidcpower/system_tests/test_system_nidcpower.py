@@ -886,6 +886,139 @@ def test_wait_for_event_repeated_capabilities(session, channels):
 
 @pytest.mark.resource_name("4190/0")
 @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_fetch_multiple_lcr(session):
+    session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+    session.instrument_mode = nidcpower.InstrumentMode.LCR
+    session.lcr_stimulus_function = nidcpower.LCRStimulusFunction.VOLTAGE
+    session.lcr_voltage_amplitude = 0.7
+    session.lcr_frequency = 10_000.0
+    session.lcr_dc_bias_source = nidcpower.LCRDCBiasSource.VOLTAGE
+    session.lcr_dc_bias_voltage_level = 1.0
+    count = 3
+    with session.initiate():
+        measurements = session.fetch_multiple_lcr(count)
+        assert len(measurements) == count
+        for measurement in measurements:
+            assert measurement.vdc == pytest.approx(session.lcr_dc_bias_voltage_level, 1e-9)
+            assert measurement.stimulus_frequency == pytest.approx(session.lcr_frequency, 1e-9)
+            assert measurement.ac_voltage.real == pytest.approx(session.lcr_voltage_amplitude, 1e-9)
+            assert measurement.ac_voltage.imag == pytest.approx(0.0, 1e-9)
+            assert measurement.measurement_mode == nidcpower.InstrumentMode.LCR
+            assert not measurement.dc_in_compliance
+            assert not measurement.ac_in_compliance
+            assert not measurement.unbalanced
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_measure_multiple_lcr(session):
+    session.instrument_mode = nidcpower.InstrumentMode.LCR
+    session.lcr_stimulus_function = nidcpower.LCRStimulusFunction.CURRENT
+    session.lcr_current_amplitude = 700.0e-6
+    session.lcr_frequency = 10_000.0
+    session.lcr_dc_bias_source = nidcpower.LCRDCBiasSource.CURRENT
+    session.lcr_dc_bias_current_level = 1.0e-6
+    with session.initiate():
+        measurements = session.measure_multiple_lcr()
+        assert measurements[0].idc == pytest.approx(session.lcr_dc_bias_current_level, 1e-9)
+        assert measurements[0].stimulus_frequency == pytest.approx(session.lcr_frequency, 1e-9)
+        assert measurements[0].ac_current.real == pytest.approx(session.lcr_current_amplitude, 1e-9)
+        assert measurements[0].ac_current.imag == pytest.approx(0.0, 1e-9)
+        assert measurements[0].measurement_mode == nidcpower.InstrumentMode.LCR
+        assert not measurements[0].dc_in_compliance
+        assert not measurements[0].ac_in_compliance
+        assert not measurements[0].unbalanced
+
+
+@pytest.mark.parametrize(
+    'resource_name,channels,independent_channels,measurement_channels,expected_measured_channel',
+    [
+        ('Dev1', None, False, None, '0'),
+        ('Dev1', '', False, '', '0'),
+        ('Dev1', ' ', False, ' ', '0'),
+        (' Dev1 ', ' 0 ', False, ' 0 ', '0'),
+        ('Dev1', None, True, None, 'Dev1/0'),
+        ('Dev1', '', True, '', 'Dev1/0'),
+        ('Dev1', ' ', True, ' ', 'Dev1/0'),
+        ('Dev1', '0', True, '0', 'Dev1/0'),
+        ('Dev1', 'Dev1/0', True, 'Dev1/0', 'Dev1/0'),
+        ('Dev1/0', '', True, None, 'Dev1/0'),
+        ('Dev1/0', ' ', True, ' ', 'Dev1/0'),
+        ('  DEV1 / 0  ', ' ', True, ' dev1  /  0 ', 'DEV1/0'),
+    ]
+)
+def test_fetch_multiple_lcr_channels(
+    resource_name,
+    channels,
+    independent_channels,
+    measurement_channels,
+    expected_measured_channel
+):
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4190', 'BoardType': 'PXIe'}}
+    with nidcpower.Session(
+        resource_name,
+        channels,
+        options=options,
+        independent_channels=independent_channels
+    ) as session:
+        session.instrument_mode = nidcpower.InstrumentMode.LCR
+        session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+        count = 10
+        with session.initiate():
+            if measurement_channels is None:
+                lcr_measurements = session.fetch_multiple_lcr(count)
+            else:
+                lcr_measurements = session.channels[measurement_channels].fetch_multiple_lcr(count)
+            assert len(lcr_measurements) == count
+            for lcr_measurement_object in lcr_measurements:
+                assert lcr_measurement_object.channel == expected_measured_channel
+
+
+@pytest.mark.parametrize(
+    'resource_name,channels,independent_channels,measurement_channels,expected_measured_channels',
+    [
+        ('Dev1', None, False, None, ['0']),
+        ('Dev1', '', False, '', ['0']),
+        ('Dev1', ' ', False, ' ', ['0']),
+        (' DEV1 ', ' 0 ', False, ' 0 ', ['0']),
+        ('Dev1', None, True, None, ['Dev1/0']),
+        ('Dev1', '', True, '', ['Dev1/0']),
+        ('Dev1', ' ', True, ' ', ['Dev1/0']),
+        ('Dev1', '0', True, 'Dev1/0', ['Dev1/0']),
+        ('Dev1', 'Dev1/0', True, '0', ['Dev1/0']),
+        ('Dev1/0', '', True, None, ['Dev1/0']),
+        ('Dev1/0', ' ', True, ' ', ['Dev1/0']),
+        ('Dev1,Dev2', ' ', True, 'Dev2/0,Dev1/0', ['Dev2/0', 'Dev1/0']),
+        (' DEV1 / 0 , dev2 / 0 ', ' ', True, 'dev1  /0,DEV2/  0', ['DEV1/0', 'dev2/0']),
+    ]
+)
+def test_measure_multiple_lcr_channels(
+    resource_name,
+    channels,
+    independent_channels,
+    measurement_channels,
+    expected_measured_channels
+):
+    options = {'Simulate': True, 'DriverSetup': {'Model': '4190', 'BoardType': 'PXIe'}}
+    with nidcpower.Session(
+        resource_name,
+        channels,
+        options=options,
+        independent_channels=independent_channels
+    ) as session:
+        session.instrument_mode = nidcpower.InstrumentMode.LCR
+        with session.initiate():
+            if measurement_channels is None:
+                lcr_measurements = session.measure_multiple_lcr()
+            else:
+                lcr_measurements = session.channels[measurement_channels].measure_multiple_lcr()
+            assert [
+                lcr_measurement_object.channel for lcr_measurement_object in lcr_measurements
+            ] == expected_measured_channels
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
 @pytest.mark.parametrize("additional_frequencies", [None, [], [9_000.0, 12_345.0, 12_346.0]])
 def test_perform_lcr_open_compensation(session, additional_frequencies):
     if additional_frequencies is None:

@@ -39,19 +39,19 @@ class LCRLoadCompensationSpot(object):
     _lcr_reference_value_type_to_label_and_units = {
         enums.LCRReferenceValueType.IMPEDANCE: {
             "label": "Impedance        ",
-            "unit": "ohms"
+            "unit": "Ω"
         },
         enums.LCRReferenceValueType.IDEAL_CAPACITANCE: {
             "label": "Ideal Capacitance",
-            "unit": "farads"
+            "unit": "F"
         },
         enums.LCRReferenceValueType.IDEAL_INDUCTANCE: {
             "label": "Ideal Inductance ",
-            "unit": "henrys"
+            "unit": "H"
         },
         enums.LCRReferenceValueType.IDEAL_RESISTANCE: {
             "label": "Ideal Resistance ",
-            "unit": "ohms"
+            "unit": "Ω"
         },
     }
 
@@ -66,8 +66,8 @@ class LCRLoadCompensationSpot(object):
             reference_value_type (enums.LCRReferenceValueType): A known specification value of your
                 DUT to use as the basis for load compensation.
 
-            reference_value (complex or float): A value that describes the referenceValueType
-                specification.
+            reference_value (complex or float): A value that describes the reference_value_type
+                specification. Use as indicated by the reference_value_type option you choose.
         """
         self.frequency = frequency
         self.reference_value_type = enums.LCRReferenceValueType(reference_value_type)
@@ -87,7 +87,7 @@ class LCRLoadCompensationSpot(object):
     def __str__(self):
         return "".join(
             [
-                "Frequency        : {:,.6g}\n{}: {:,.6g} {}\n".format(
+                "Frequency        : {:,.6g} Hz\n{}: {:,.6g} {}\n".format(
                     self.frequency,
                     LCRLoadCompensationSpot._lcr_reference_value_type_to_label_and_units[
                         self.reference_value_type

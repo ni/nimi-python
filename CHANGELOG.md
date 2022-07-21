@@ -35,7 +35,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
-        * Partial API parity with NI-DCPower 21.8.0.
+        * Partial API parity with NI-DCPower 2022 Q3.
             * Properties added:
                 * `aperture_time_auto_mode`
                 * `autorange_maximum_delay_after_range_change`
@@ -46,12 +46,16 @@ All notable changes to this project will be documented in this file.
                 * `lcr_actual_load_resistance`
                 * `lcr_automatic_level_control`
                 * `lcr_current_amplitude`
+                * `lcr_current_range`
                 * `lcr_custom_measurement_time`
                 * `lcr_dc_bias_automatic_level_control`
                 * `lcr_dc_bias_current_level`
+                * `lcr_dc_bias_current_range`
                 * `lcr_dc_bias_source`
                 * `lcr_dc_bias_voltage_level`
+                * `lcr_dc_bias_voltage_range`
                 * `lcr_frequency`
+                * `lcr_impedance_auto_range`
                 * `lcr_impedance_range`
                 * `lcr_impedance_range_source`
                 * `lcr_load_capacitance`
@@ -72,6 +76,7 @@ All notable changes to this project will be documented in this file.
                 * `lcr_source_delay_mode`
                 * `lcr_stimulus_function`
                 * `lcr_voltage_amplitude`
+                * `lcr_voltage_range`
             * Enums added:
                 * `ApertureTimeAutoMode`
                 * `CableLength`
@@ -86,8 +91,10 @@ All notable changes to this project will be documented in this file.
                 * `LCRStimulusFunction`
             * Methods added:
                 * `configure_lcr_custom_cable_compensation`
+                * `fetch_multiple_lcr`
                 * `get_lcr_compensation_last_date_and_time`
                 * `get_lcr_custom_cable_compensation_data`
+                * `measure_multiple_lcr`
                 * `perform_lcr_load_compensation`
                 * `perform_lcr_open_compensation`
                 * `perform_lcr_open_custom_cable_compensation`
