@@ -2,9 +2,6 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
-    # TODO(olsl21): Temporarily disable the new functions (#1715), they will be re-enabled in
-    #  subsequent smaller PRs
-    "PerformLCRLoadCompensation": {"codegen_method": "no"}
 }
 
 functions_additional_create_advanced_sequence = {

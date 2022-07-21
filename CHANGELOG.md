@@ -95,6 +95,7 @@ All notable changes to this project will be documented in this file.
                 * `get_lcr_compensation_last_date_and_time`
                 * `get_lcr_custom_cable_compensation_data`
                 * `measure_multiple_lcr`
+                * `perform_lcr_load_compensation`
                 * `perform_lcr_open_compensation`
                 * `perform_lcr_open_custom_cable_compensation`
                 * `perform_lcr_short_compensation`

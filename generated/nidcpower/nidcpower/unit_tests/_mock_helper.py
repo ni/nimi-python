@@ -142,6 +142,8 @@ class SideEffectsHelper(object):
         self._defaults['ParseChannelCount'] = {}
         self._defaults['ParseChannelCount']['return'] = 0
         self._defaults['ParseChannelCount']['numberOfChannels'] = None
+        self._defaults['PerformLCRLoadCompensation'] = {}
+        self._defaults['PerformLCRLoadCompensation']['return'] = 0
         self._defaults['PerformLCROpenCompensation'] = {}
         self._defaults['PerformLCROpenCompensation']['return'] = 0
         self._defaults['PerformLCROpenCustomCableCompensation'] = {}
@@ -689,6 +691,11 @@ class SideEffectsHelper(object):
             number_of_channels.contents.value = self._defaults['ParseChannelCount']['numberOfChannels']
         return self._defaults['ParseChannelCount']['return']
 
+    def niDCPower_PerformLCRLoadCompensation(self, vi, channel_name, num_compensation_spots, compensation_spots):  # noqa: N802
+        if self._defaults['PerformLCRLoadCompensation']['return'] != 0:
+            return self._defaults['PerformLCRLoadCompensation']['return']
+        return self._defaults['PerformLCRLoadCompensation']['return']
+
     def niDCPower_PerformLCROpenCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
         if self._defaults['PerformLCROpenCompensation']['return'] != 0:
             return self._defaults['PerformLCROpenCompensation']['return']
@@ -966,6 +973,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_MeasureMultipleLCR.return_value = 0
         mock_library.niDCPower_ParseChannelCount.side_effect = MockFunctionCallError("niDCPower_ParseChannelCount")
         mock_library.niDCPower_ParseChannelCount.return_value = 0
+        mock_library.niDCPower_PerformLCRLoadCompensation.side_effect = MockFunctionCallError("niDCPower_PerformLCRLoadCompensation")
+        mock_library.niDCPower_PerformLCRLoadCompensation.return_value = 0
         mock_library.niDCPower_PerformLCROpenCompensation.side_effect = MockFunctionCallError("niDCPower_PerformLCROpenCompensation")
         mock_library.niDCPower_PerformLCROpenCompensation.return_value = 0
         mock_library.niDCPower_PerformLCROpenCustomCableCompensation.side_effect = MockFunctionCallError("niDCPower_PerformLCROpenCustomCableCompensation")

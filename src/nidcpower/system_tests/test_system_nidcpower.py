@@ -1039,6 +1039,35 @@ def test_perform_lcr_short_compensation(session, additional_frequencies):
 
 @pytest.mark.resource_name("4190/0")
 @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_perform_lcr_load_compensation(session):
+    session.perform_lcr_load_compensation(
+        [
+            nidcpower.LCRLoadCompensationSpot(
+                frequency=100_000.0,
+                reference_value_type=nidcpower.LCRReferenceValueType.IMPEDANCE,
+                reference_value=complex(100.0, 1000.0)
+            ),
+            nidcpower.LCRLoadCompensationSpot(
+                frequency=200_000.0,
+                reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_CAPACITANCE,
+                reference_value=300.0e-9
+            ),
+            nidcpower.LCRLoadCompensationSpot(
+                frequency=300_000.0,
+                reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_INDUCTANCE,
+                reference_value=400.0e-6
+            ),
+            nidcpower.LCRLoadCompensationSpot(
+                frequency=400_000.0,
+                reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_RESISTANCE,
+                reference_value=200.0
+            )
+        ]
+    )
+
+
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
 @pytest.mark.parametrize(
     "compensation_function",
     [

@@ -6156,6 +6156,59 @@ class _SessionBase(object):
         return int(number_of_channels_ctype.value)
 
     @ivi_synchronized
+    def perform_lcr_load_compensation(self, compensation_spots):
+        r'''perform_lcr_load_compensation
+
+        Generates load compensation data for LCR measurements for the test spots you specify.
+
+        You must physically configure your LCR circuit with an appropriate reference load to use this method to generate valid load compensation data.
+
+        When you call this method:
+
+        -  The load compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
+        -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
+
+        To apply the load compensation data you generate with this method to your LCR measurements, set the lcr_load_compensation_enabled property to True.
+
+        Load compensation data are generated only for those specific frequencies you define with this method; load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].perform_lcr_load_compensation`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.perform_lcr_load_compensation`
+
+        Args:
+            compensation_spots (list of LCRLoadCompensationSpot): Defines the frequencies and DUT specifications to use for LCR load compensation.
+
+                You can specify <=1000 spot frequencies.
+
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+                | frequency            | The spot frequency, in Hz.                                                                                                             |
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+                | reference_value_type | A known specification value of your DUT to use as the basis for load compensation.                                                     |
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+                | reference_value      | A value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose. |
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        num_compensation_spots_ctype = _visatype.ViInt32(0 if compensation_spots is None else len(compensation_spots))  # case S160
+        compensation_spots_ctype = get_ctypes_pointer_for_buffer([lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot(c) for c in compensation_spots], library_type=lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot)  # case B540
+        error_code = self._library.niDCPower_PerformLCRLoadCompensation(vi_ctype, channel_name_ctype, num_compensation_spots_ctype, compensation_spots_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def perform_lcr_open_compensation(self, additional_frequencies=None):
         r'''perform_lcr_open_compensation
 
