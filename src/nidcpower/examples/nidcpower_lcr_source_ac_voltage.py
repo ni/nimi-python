@@ -35,7 +35,9 @@ def example(
         session.source_delay = source_delay
 
         with session.initiate():
-            session.wait_for_event(event_id=nidcpower.Event.SOURCE_COMPLETE, timeout=21.0)
+            # Low frequencies require longer settling times than the default timeout for
+            # wait_for_event(), hence 5.0s is set here as a reasonable timeout value
+            session.wait_for_event(event_id=nidcpower.Event.SOURCE_COMPLETE, timeout=5.0)
             measurements = session.measure_multiple_lcr()
             for measurement in measurements:
                 print(measurement)
