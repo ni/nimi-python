@@ -5,7 +5,7 @@ Session
 
 .. py:class:: Session(self, resource_name, channels=None, reset=False, options={}, independent_channels=True)
 
-
+    
 
     Creates and returns a new NI-DCPower session to the instrument(s) and channel(s) specified
     in **resource name** to be used in all subsequent NI-DCPower method calls. With this method,
@@ -42,12 +42,12 @@ Session
     the session may perform the operation on multiple channels in parallel, though this is not
     guaranteed, and some operations may execute sequentially.
 
-
+    
 
 
 
     :param resource_name:
-
+        
 
         Specifies the **resource name** as seen in Measurement
         & Automation Explorer (MAX) or lsni, for example "PXI1Slot3" where "PXI1Slot3" is an
@@ -62,13 +62,13 @@ Session
         after an instrument resource name, all channels of the instrument(s) are included in
         the session.
 
-
+        
 
 
     :type resource_name: str, list, tuple
 
     :param channels:
-
+        
 
         For new applications, use the default value of None
         and specify the channels in **resource name**.
@@ -88,23 +88,23 @@ Session
         specify which channels to include in an independent channels session. Initializing
         an independent channels session with a channels argument is deprecated.
 
-
+        
 
 
     :type channels: str, list, range, tuple
 
     :param reset:
-
+        
 
         Specifies whether to reset channel(s) during the initialization procedure.
 
-
+        
 
 
     :type reset: bool
 
     :param options:
-
+        
 
         Specifies the initial value of certain properties for the session. The
         syntax for **options** is a dictionary of properties with an assigned
@@ -138,13 +138,13 @@ Session
     :type options: dict
 
     :param independent_channels:
-
+        
 
         Specifies whether to initialize the session with
         independent channels. Set this argument to False on legacy applications or if you
         are unable to upgrade your NI-DCPower driver runtime to 20.6 or higher.
 
-
+        
 
 
     :type independent_channels: bool
@@ -181,7 +181,7 @@ abort
             `Programming
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-
+            
 
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
@@ -207,7 +207,7 @@ clear_latched_output_cutoff_state
             Clears the state of an output cutoff that was engaged.
             To clear the state for all output cutoff reasons, use :py:data:`~nidcpower.OutputCutoffReason.ALL`.
 
-
+            
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -268,7 +268,7 @@ close
             `Programming
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-
+            
 
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
@@ -298,7 +298,7 @@ commit
             `Programming
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-
+            
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -335,7 +335,7 @@ configure_aperture_time
 
             `Aperture Time <REPLACE_DRIVER_SPECIFIC_URL_1(aperture)>`__
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -357,7 +357,7 @@ configure_aperture_time
                 Specifies the aperture time. Refer to the *Aperture Time* topic for your
                 device in the *NI DC Power Supplies and SMUs Help* for more information.
 
-
+                
 
 
             :type aperture_time: float
@@ -394,7 +394,7 @@ configure_lcr_custom_cable_compensation
 
             Call :py:meth:`nidcpower.Session.get_lcr_custom_cable_compensation_data` and pass the **custom cable compensation data** to this method.
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -415,7 +415,7 @@ configure_lcr_custom_cable_compensation
 
                 The open and short custom cable compensation data to apply.
 
-
+                
 
 
             :type custom_cable_compensation_data: bytes
@@ -456,7 +456,7 @@ create_advanced_sequence
 
             :py:meth:`nidcpower.Session.create_advanced_sequence_step`
 
-
+            
 
             .. note:: This method is not supported on all devices. Refer to `Supported
                 Methods by
@@ -480,7 +480,7 @@ create_advanced_sequence
 
                 Specifies the name of the sequence to create.
 
-
+                
 
 
             :type sequence_name: str
@@ -604,7 +604,7 @@ create_advanced_sequence
 
                 Specifies that this current sequence is active.
 
-
+                
 
 
             :type set_as_active_sequence: bool
@@ -641,7 +641,7 @@ create_advanced_sequence_commit_step
 
             :py:meth:`nidcpower.Session.create_advanced_sequence`
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -662,7 +662,7 @@ create_advanced_sequence_commit_step
 
                 Specifies whether the step created with this method is active in the Active advanced sequence.
 
-
+                
 
 
             :type set_as_active_step: bool
@@ -697,7 +697,7 @@ create_advanced_sequence_step
 
             :py:meth:`nidcpower.Session.create_advanced_sequence`
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -718,7 +718,7 @@ create_advanced_sequence_step
 
                 Specifies whether the step created with this method is active in the Active advanced sequence.
 
-
+                
 
 
             :type set_as_active_step: bool
@@ -748,7 +748,7 @@ delete_advanced_sequence
             `Programming
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -769,7 +769,7 @@ delete_advanced_sequence
 
                 specifies the name of the sequence to delete.
 
-
+                
 
 
             :type sequence_name: str
@@ -788,7 +788,7 @@ disable
             This method opens the output relay on devices that have an output
             relay.
 
-
+            
 
 
 
@@ -837,7 +837,7 @@ export_attribute_configuration_buffer
             `Setting Properties and Properties Before Reading
             Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
-
+            
 
             .. note:: This method will return an error if the total number of channels
                 initialized for the exporting session is not equal to the total number
@@ -852,7 +852,7 @@ export_attribute_configuration_buffer
                     Specifies the byte array buffer to be populated with the exported
                     property configuration.
 
-
+                    
 
 
 
@@ -901,7 +901,7 @@ export_attribute_configuration_file
             `Setting Properties and Properties Before Reading
             Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
-
+            
 
             .. note:: This method will return an error if the total number of channels
                 initialized for the exporting session is not equal to the total number
@@ -917,7 +917,7 @@ export_attribute_configuration_file
                 method returns an error.
                 **Default file extension:** .nidcpowerconfig
 
-
+                
 
 
             :type file_path: str
@@ -942,7 +942,7 @@ fetch_multiple
             - **in_compliance** (bool)
             - **channel** (str)
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -963,7 +963,7 @@ fetch_multiple
 
                 Specifies the number of measurements to fetch.
 
-
+                
 
 
             :type count: int
@@ -973,7 +973,7 @@ fetch_multiple
                 Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
                 Default value: 1.0 second
 
-
+                
 
                 .. note:: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
@@ -991,7 +991,7 @@ fetch_multiple
                     - **in_compliance** (bool)
                     - **channel** (str)
 
-
+                    
 
 
 
@@ -1009,7 +1009,7 @@ fetch_multiple_lcr
             -  Set :py:attr:`nidcpower.Session.measure_when` property to :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE` or :py:data:`~nidcpower.MeasureWhen.ON_MEASURE_TRIGGER`
             -  Put the channel in the Running state (call :py:meth:`nidcpower.Session.initiate`)
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -1030,7 +1030,7 @@ fetch_multiple_lcr
 
                 Specifies the number of measurements to fetch.
 
-
+                
 
 
             :type count: int
@@ -1041,7 +1041,7 @@ fetch_multiple_lcr
                 If the method does not complete within this time interval, NI-DCPower returns an error.
                 Default value: 1.0 second
 
-
+                
 
                 .. note:: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
@@ -1105,7 +1105,7 @@ get_channel_name
             **index**. Use the :py:attr:`nidcpower.Session.channel_count` property to
             determine the upper bound of valid values for **index**.
 
-
+            
 
 
 
@@ -1115,7 +1115,7 @@ get_channel_name
                 Specifies which output channel name to return. The index values begin at
                 1.
 
-
+                
 
 
             :type index: int
@@ -1126,7 +1126,7 @@ get_channel_name
 
                     Returns the output channel name that corresponds to **index**.
 
-
+                    
 
 
 
@@ -1139,7 +1139,7 @@ get_channel_names
 
             Returns a list of channel names for the given channel indices.
 
-
+            
 
 
 
@@ -1154,7 +1154,7 @@ get_channel_names
 
                 You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
 
-
+                
 
 
             :type indices: basic sequence types or str or int
@@ -1165,7 +1165,7 @@ get_channel_names
 
                     The channel name(s) at the specified indices.
 
-
+                    
 
 
 
@@ -1178,7 +1178,7 @@ get_ext_cal_last_date_and_time
 
             Returns the date and time of the last successful calibration.
 
-
+            
 
 
 
@@ -1188,7 +1188,7 @@ get_ext_cal_last_date_and_time
 
                     Indicates date and time of the last calibration.
 
-
+                    
 
 
 
@@ -1202,7 +1202,7 @@ get_ext_cal_last_temp
             Returns the onboard **temperature** of the device, in degrees Celsius,
             during the last successful external calibration.
 
-
+            
 
 
 
@@ -1213,7 +1213,7 @@ get_ext_cal_last_temp
                     Returns the onboard **temperature** of the device, in degrees Celsius,
                     during the last successful external calibration.
 
-
+                    
 
 
 
@@ -1227,7 +1227,7 @@ get_ext_cal_recommended_interval
             Returns the recommended maximum interval, in **months**, between
             external calibrations.
 
-
+            
 
 
 
@@ -1238,7 +1238,7 @@ get_ext_cal_recommended_interval
                     Specifies the recommended maximum interval, in **months**, between
                     external calibrations.
 
-
+                    
 
 
 
@@ -1251,7 +1251,7 @@ get_lcr_compensation_last_date_and_time
 
             Returns the date and time the specified type of compensation data for LCR measurements was most recently generated.
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -1272,7 +1272,7 @@ get_lcr_compensation_last_date_and_time
 
                 Specifies the type of compensation for LCR measurements.
 
-
+                
 
 
             :type compensation_type: :py:data:`nidcpower.LCRCompensationType`
@@ -1283,7 +1283,7 @@ get_lcr_compensation_last_date_and_time
 
                     Returns the date and time the specified type of compensation data for LCR measurements was most recently generated.
 
-
+                    
 
 
 
@@ -1298,7 +1298,7 @@ get_lcr_custom_cable_compensation_data
 
             Call this method after you have obtained open and short custom cable compensation data. Pass the **custom cable compensation data** to :py:meth:`nidcpower.Session.configure_lcr_custom_cable_compensation`
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -1320,7 +1320,7 @@ get_lcr_custom_cable_compensation_data
 
                     The open and short custom cable compensation data to retrieve.
 
-
+                    
 
 
 
@@ -1333,7 +1333,7 @@ get_self_cal_last_date_and_time
 
             Returns the date and time of the oldest successful self-calibration from among the channels in the session.
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -1345,7 +1345,7 @@ get_self_cal_last_date_and_time
 
                     Returns the date and time the device was last calibrated.
 
-
+                    
 
 
 
@@ -1366,7 +1366,7 @@ get_self_cal_last_temp
             2 at 27 degrees Celsius at 3:00 on the same day, this method returns
             25 for the **temperature** parameter.
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -1379,7 +1379,7 @@ get_self_cal_last_temp
                     Returns the onboard **temperature** of the device, in degrees Celsius,
                     during the oldest successful calibration.
 
-
+                    
 
 
 
@@ -1427,7 +1427,7 @@ import_attribute_configuration_buffer
             `Setting Properties and Properties Before Reading
             Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
-
+            
 
             .. note:: This method will return an error if the total number of channels
                 initialized for the exporting session is not equal to the total number
@@ -1441,7 +1441,7 @@ import_attribute_configuration_buffer
                 Specifies the byte array buffer that contains the property
                 configuration to import.
 
-
+                
 
 
             :type configuration: bytes
@@ -1490,7 +1490,7 @@ import_attribute_configuration_file
             `Setting Properties and Properties Before Reading
             Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
-
+            
 
             .. note:: This method will return an error if the total number of channels
                 initialized for the exporting session is not equal to the total number
@@ -1506,7 +1506,7 @@ import_attribute_configuration_file
                 method returns an error.
                 **Default File Extension:** .nidcpowerconfig
 
-
+                
 
 
             :type file_path: str
@@ -1531,7 +1531,7 @@ initiate
             `Programming
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-
+            
 
             .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
 
@@ -1609,7 +1609,7 @@ measure
             measure multiple output channels, use the :py:meth:`nidcpower.Session.measure_multiple`
             method.
 
-
+            
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -1645,7 +1645,7 @@ measure
                     Returns the value of the measurement, either in volts for voltage or
                     amps for current.
 
-
+                    
 
 
 
@@ -1669,7 +1669,7 @@ measure_multiple
             - **in_compliance** (bool) - Always None
             - **channel** (str)
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -1696,7 +1696,84 @@ measure_multiple
                     - **in_compliance** (bool) - Always None
                     - **channel** (str)
 
+                    
 
+
+
+measure_multiple_lcr
+--------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: measure_multiple_lcr()
+
+            Measures and returns a list of LCRMeasurement instances on the specified output channel(s).
+
+            To use this method:
+
+            -  Set :py:attr:`nidcpower.Session.instrument_mode` property to :py:data:`~nidcpower.InstrumentMode.LCR`
+            -  Set :py:attr:`nidcpower.Session.measure_when` property to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`
+            -  Put the channel(s) in the Running state (call :py:meth:`nidcpower.Session.initiate`)
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].measure_multiple_lcr`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.measure_multiple_lcr`
+
+
+            :rtype: list of LCRMeasurement
+            :return:
+
+
+                    A list of LCRMeasurement instances.
+
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | channel               |                      | The channel name associated with this LCR measurement.                                                                                                                                                |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | vdc                   | float                | The measured DC voltage, in volts.                                                                                                                                                                    |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | idc                   | float                | The measured DC current, in amps.                                                                                                                                                                     |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | stimulus_frequency    | float                | The frequency of the LCR test signal, in Hz.                                                                                                                                                          |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | ac_voltage            | complex              | The measured AC voltage, in volts RMS.                                                                                                                                                                |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | ac_current            | complex              | The measured AC current, in amps RMS.                                                                                                                                                                 |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | z                     | complex              | The complex impedance.                                                                                                                                                                                |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | z_magnitude_and_phase | tuple of float       | The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.                                                                                                                        |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | y                     | complex              | The complex admittance.                                                                                                                                                                               |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | y_magnitude_and_phase | tuple of float       | The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.                                                                                                                    |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | series_lcr            | LCR                  | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.                                                                         |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | parallel_lcr          | LCR                  | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.                                                                       |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | d                     | float                | The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor. |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | q                     | float                | The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.                 |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | measurement_mode      | enums.InstrumentMode | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.                                                           |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | dc_in_compliance      | bool                 | Indicates whether the output was in DC compliance at the time the measurement was taken.                                                                                                              |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | ac_in_compliance      | bool                 | Indicates whether the output was in AC compliance at the time the measurement was taken.                                                                                                              |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                    | unbalanced            | bool                 | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                                                                    |
+                    +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -1720,7 +1797,7 @@ perform_lcr_load_compensation
 
             Load compensation data are generated only for those specific frequencies you define with this method; load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -1743,15 +1820,13 @@ perform_lcr_load_compensation
 
                 You can specify <=1000 spot frequencies.
 
-                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | frequency            | The spot frequency.                                                                                                                                   |
-                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | reference_value_type | A known specification value of your DUT to use as the basis for load compensation. Refer to the enums.LCRReferenceValueType for the supported values. |
-                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | reference_value_A    | A value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose.                |
-                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | reference_value_B    | If applicable, a value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose. |
-                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+                | frequency            | The spot frequency, in Hz.                                                                                                             |
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+                | reference_value_type | A known specification value of your DUT to use as the basis for load compensation.                                                     |
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+                | reference_value      | A value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose. |
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
 
 
             :type compensation_spots: list of LCRLoadCompensationSpot
@@ -1776,7 +1851,7 @@ perform_lcr_open_compensation
 
             Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -1807,7 +1882,7 @@ perform_lcr_open_compensation
 
                 Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
 
-
+                
 
 
             :type additional_frequencies: list of float
@@ -1828,7 +1903,7 @@ perform_lcr_open_custom_cable_compensation
             -  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
             -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -1864,7 +1939,7 @@ perform_lcr_short_compensation
 
             Corrections for frequencies other than the default frequencies or any additional frequencies you specify are interpolated.
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -1895,7 +1970,7 @@ perform_lcr_short_compensation
 
                 Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
 
-
+                
 
 
             :type additional_frequencies: list of float
@@ -1919,7 +1994,7 @@ perform_lcr_short_custom_cable_compensation
             -  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.
             -  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -1963,7 +2038,7 @@ query_in_compliance
 
             `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
-
+            
 
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
@@ -1985,7 +2060,7 @@ query_in_compliance
 
                     Returns whether the device output channel is in compliance.
 
-
+                    
 
 
 
@@ -2001,7 +2076,7 @@ query_latched_output_cutoff_state
 
             outputCutoffReason specifies the conditions for which an output is disconnected.
 
-
+            
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2067,7 +2142,7 @@ query_max_current_limit
             Queries the maximum current limit on an output channel if the output
             channel is set to the specified **voltageLevel**.
 
-
+            
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2087,7 +2162,7 @@ query_max_current_limit
                 Specifies the voltage level to use when calculating the
                 **maxCurrentLimit**.
 
-
+                
 
 
             :type voltage_level: float
@@ -2099,7 +2174,7 @@ query_max_current_limit
                     Returns the maximum current limit that can be set with the specified
                     **voltageLevel**.
 
-
+                    
 
 
 
@@ -2113,7 +2188,7 @@ query_max_voltage_level
             Queries the maximum voltage level on an output channel if the output
             channel is set to the specified **currentLimit**.
 
-
+            
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2133,7 +2208,7 @@ query_max_voltage_level
                 Specifies the current limit to use when calculating the
                 **maxVoltageLevel**.
 
-
+                
 
 
             :type current_limit: float
@@ -2145,7 +2220,7 @@ query_max_voltage_level
                     Returns the maximum voltage level that can be set on an output channel
                     with the specified **currentLimit**.
 
-
+                    
 
 
 
@@ -2159,7 +2234,7 @@ query_min_current_limit
             Queries the minimum current limit on an output channel if the output
             channel is set to the specified **voltageLevel**.
 
-
+            
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2179,7 +2254,7 @@ query_min_current_limit
                 Specifies the voltage level to use when calculating the
                 **minCurrentLimit**.
 
-
+                
 
 
             :type voltage_level: float
@@ -2191,7 +2266,7 @@ query_min_current_limit
                     Returns the minimum current limit that can be set on an output channel
                     with the specified **voltageLevel**.
 
-
+                    
 
 
 
@@ -2209,7 +2284,7 @@ query_output_state
 
             `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
-
+            
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2245,7 +2320,7 @@ query_output_state
                     Returns whether the device output channel is in the specified output
                     state.
 
-
+                    
 
 
 
@@ -2259,7 +2334,7 @@ read_current_temperature
             Returns the current onboard **temperature**, in degrees Celsius, of the
             device.
 
-
+            
 
 
 
@@ -2269,7 +2344,7 @@ read_current_temperature
 
                     Returns the onboard **temperature**, in degrees Celsius, of the device.
 
-
+                    
 
 
 
@@ -2287,7 +2362,7 @@ reset
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
             more information about NI-DCPower software states.
 
-
+            
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2322,7 +2397,7 @@ reset_device
             This will also open the output relay on devices that have an output
             relay.
 
-
+            
 
 
 
@@ -2341,7 +2416,7 @@ reset_with_defaults
             method, this method can assign user-defined default values for
             configurable properties from the IVI configuration.
 
-
+            
 
 
 
@@ -2374,7 +2449,7 @@ self_cal
 
             `Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -2434,7 +2509,7 @@ send_software_edge_trigger
 
             `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -2498,7 +2573,7 @@ set_sequence
             the *NI DC Power Supplies and SMUs Help* for more information about
             NI-DCPower programming states.
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -2524,7 +2599,7 @@ set_sequence
                 The valid values for this parameter are defined by the voltage level
                 range or current level range.
 
-
+                
 
 
             :type values: list of float
@@ -2536,7 +2611,7 @@ set_sequence
                 **Valid Values**:
                 The valid values are between 0 and 167 seconds.
 
-
+                
 
 
             :type source_delays: list of float
@@ -2569,7 +2644,7 @@ wait_for_event
             call this method successively, the method times out. Individual
             events must be generated between separate calls of this method.
 
-
+            
 
             .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
@@ -2616,7 +2691,7 @@ wait_for_event
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
 
-
+                
 
                 .. note:: When setting the timeout interval, ensure you take into account any
                     triggers so that the timeout interval is long enough for your

@@ -6191,15 +6191,13 @@ class _SessionBase(object):
 
                 You can specify <=1000 spot frequencies.
 
-                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | frequency            | The spot frequency.                                                                                                                                   |
-                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | reference_value_type | A known specification value of your DUT to use as the basis for load compensation. Refer to the enums.LCRReferenceValueType for the supported values. |
-                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | reference_value_A    | A value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose.                |
-                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | reference_value_B    | If applicable, a value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose. |
-                +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+                | frequency            | The spot frequency, in Hz.                                                                                                             |
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+                | reference_value_type | A known specification value of your DUT to use as the basis for load compensation.                                                     |
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+                | reference_value      | A value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose. |
+                +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
