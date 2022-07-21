@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.5.0d135
+# This file is generated from NI-DCPower API metadata version 22.8.0d88
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -1071,7 +1071,7 @@ functions = {
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'fancy_fetch'
+                'session_filename': 'fancy_fetch_measure'
             }
         ],
         'parameters': [
@@ -1103,7 +1103,7 @@ functions = {
                 'default_value': 'hightime.timedelta(seconds=1.0)',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the maximum time allowed for this function to complete. If the function does not complete within this time interval, NI-DCPower returns an error.',
+                    'description': 'Specifies the maximum time allowed for this function to complete. If the function does not complete within this time interval, NI-DCPower returns an error.\nDefault value: 1.0 second\n',
                     'note': 'When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.'
                 },
                 'name': 'timeout',
@@ -1126,6 +1126,164 @@ functions = {
             }
         ],
         'python_name': 'fetch_multiple',
+        'returns': 'ViStatus'
+    },
+    'FancyFetchMultipleLCR': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nReturns a list of previously measured LCRMeasurement instances on the specified channel that have been taken and stored in a buffer.\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER\n-  Put the channel in the Running state (call niDCPower_InitiateWithChannels)\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_fetch_measure_lcr'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViString'
+            },
+            {
+                'default_value': 'hightime.timedelta(seconds=1.0)',
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the maximum time allowed for this function to complete, in seconds.\nIf the function does not complete within this time interval, NI-DCPower returns an error.\nDefault value: 1.0 second\n',
+                    'note': '\nWhen setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.\n'
+                },
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the number of measurements to fetch.\n'
+                },
+                'name': 'count',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nA list of LCRMeasurement instances.\n',
+                    'table_body': [
+                        [
+                            'channel',
+                            '',
+                            'The channel name associated with this LCR measurement.'
+                        ],
+                        [
+                            'vdc',
+                            'float',
+                            'The measured DC voltage, in volts.'
+                        ],
+                        [
+                            'idc',
+                            'float',
+                            'The measured DC current, in amps.'
+                        ],
+                        [
+                            'stimulus_frequency',
+                            'float',
+                            'The frequency of the LCR test signal, in Hz.'
+                        ],
+                        [
+                            'ac_voltage',
+                            'complex',
+                            'The measured AC voltage, in volts RMS.'
+                        ],
+                        [
+                            'ac_current',
+                            'complex',
+                            'The measured AC current, in amps RMS.'
+                        ],
+                        [
+                            'z',
+                            'complex',
+                            'The complex impedance.'
+                        ],
+                        [
+                            'z_magnitude_and_phase',
+                            'tuple of float',
+                            'The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.'
+                        ],
+                        [
+                            'y',
+                            'complex',
+                            'The complex admittance.'
+                        ],
+                        [
+                            'y_magnitude_and_phase',
+                            'tuple of float',
+                            'The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.'
+                        ],
+                        [
+                            'series_lcr',
+                            'LCR',
+                            'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.'
+                        ],
+                        [
+                            'parallel_lcr',
+                            'LCR',
+                            'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.'
+                        ],
+                        [
+                            'd',
+                            'float',
+                            'The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor.'
+                        ],
+                        [
+                            'q',
+                            'float',
+                            'The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.'
+                        ],
+                        [
+                            'measurement_mode',
+                            'enums.InstrumentMode',
+                            'The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.'
+                        ],
+                        [
+                            'dc_in_compliance',
+                            'bool',
+                            'Indicates whether the output was in DC compliance at the time the measurement was taken.'
+                        ],
+                        [
+                            'ac_in_compliance',
+                            'bool',
+                            'Indicates whether the output was in AC compliance at the time the measurement was taken.'
+                        ],
+                        [
+                            'unbalanced',
+                            'bool',
+                            'Indicates whether the output was unbalanced at the time the measurement was taken.'
+                        ]
+                    ]
+                },
+                'name': 'measurements',
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'count'
+                },
+                'type': 'NILCRMeasurement[]'
+            }
+        ],
+        'python_name': 'fetch_multiple_lcr',
         'returns': 'ViStatus'
     },
     'FancyInitialize': {
@@ -1214,7 +1372,7 @@ functions = {
             {
                 'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'fancy_fetch'
+                'session_filename': 'fancy_fetch_measure'
             }
         ],
         'parameters': [
@@ -1249,6 +1407,144 @@ functions = {
             }
         ],
         'python_name': 'measure_multiple',
+        'returns': 'ViStatus'
+    },
+    'FancyMeasureMultipleLCR': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nMeasures and returns a list of LCRMeasurement instances on the specified output channel(s).\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_INSTRUMENT_MODE property to NIDCPOWER_VAL_LCR\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_ON_DEMAND\n-  Put the channel(s) in the Running state (call niDCPower_InitiateWithChannels)\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_fetch_measure_lcr'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nIdentifies a particular instrument session.\n**vi** is obtained from the niDCPower_InitializeWithChannels function.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                },
+                'name': 'channelName',
+                'type': 'ViString'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nA list of LCRMeasurement instances.\n',
+                    'table_body': [
+                        [
+                            'channel',
+                            '',
+                            'The channel name associated with this LCR measurement.'
+                        ],
+                        [
+                            'vdc',
+                            'float',
+                            'The measured DC voltage, in volts.'
+                        ],
+                        [
+                            'idc',
+                            'float',
+                            'The measured DC current, in amps.'
+                        ],
+                        [
+                            'stimulus_frequency',
+                            'float',
+                            'The frequency of the LCR test signal, in Hz.'
+                        ],
+                        [
+                            'ac_voltage',
+                            'complex',
+                            'The measured AC voltage, in volts RMS.'
+                        ],
+                        [
+                            'ac_current',
+                            'complex',
+                            'The measured AC current, in amps RMS.'
+                        ],
+                        [
+                            'z',
+                            'complex',
+                            'The complex impedance.'
+                        ],
+                        [
+                            'z_magnitude_and_phase',
+                            'tuple of float',
+                            'The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.'
+                        ],
+                        [
+                            'y',
+                            'complex',
+                            'The complex admittance.'
+                        ],
+                        [
+                            'y_magnitude_and_phase',
+                            'tuple of float',
+                            'The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.'
+                        ],
+                        [
+                            'series_lcr',
+                            'LCR',
+                            'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.'
+                        ],
+                        [
+                            'parallel_lcr',
+                            'LCR',
+                            'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.'
+                        ],
+                        [
+                            'd',
+                            'float',
+                            'The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor.'
+                        ],
+                        [
+                            'q',
+                            'float',
+                            'The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.'
+                        ],
+                        [
+                            'measurement_mode',
+                            'enums.InstrumentMode',
+                            'The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.'
+                        ],
+                        [
+                            'dc_in_compliance',
+                            'bool',
+                            'Indicates whether the output was in DC compliance at the time the measurement was taken.'
+                        ],
+                        [
+                            'ac_in_compliance',
+                            'bool',
+                            'Indicates whether the output was in AC compliance at the time the measurement was taken.'
+                        ],
+                        [
+                            'unbalanced',
+                            'bool',
+                            'Indicates whether the output was unbalanced at the time the measurement was taken.'
+                        ]
+                    ]
+                },
+                'name': 'measurements',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': 'self._parse_channel_count()'
+                },
+                'type': 'NILCRMeasurement[]'
+            }
+        ],
+        'python_name': 'measure_multiple_lcr',
         'returns': 'ViStatus'
     },
     'FetchMultiple': {
@@ -1345,8 +1641,9 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchMultipleLCR': {
+        'codegen_method': 'private',
         'documentation': {
-            'description': '\nReturns a list of previously measured LCR data on the specified channel that have been taken and stored in a buffer.\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER\n-  Put the channel in the Running state (call niDCPower_InitiateWithChannels)\n',
+            'description': '\nReturns a list of previously measured LCRMeasurement instances on the specified channel that have been taken and stored in a buffer.\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER\n-  Put the channel in the Running state (call niDCPower_InitiateWithChannels)\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
@@ -1389,98 +1686,91 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nReturns an array of LCR measurement data.\n',
+                    'description': '\nA list of LCRMeasurement instances.\n',
                     'table_body': [
                         [
                             'vdc',
+                            'float',
                             'The measured DC voltage, in volts.'
                         ],
                         [
                             'idc',
-                            'The measured DC current, in amps'
+                            'float',
+                            'The measured DC current, in amps.'
                         ],
                         [
                             'stimulus_frequency',
+                            'float',
                             'The frequency of the LCR test signal, in Hz.'
                         ],
                         [
                             'ac_voltage',
+                            'complex',
                             'The measured AC voltage, in volts RMS.'
                         ],
                         [
                             'ac_current',
+                            'complex',
                             'The measured AC current, in amps RMS.'
                         ],
                         [
                             'z',
+                            'complex',
                             'The complex impedance.'
                         ],
                         [
-                            'z_magnitude',
-                            'The magnitude of the complex impedance, in ohms.'
-                        ],
-                        [
-                            'z_phase',
-                            'The impedance phase angle, in degrees.'
+                            'z_magnitude_and_phase',
+                            'tuple of float',
+                            'The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.'
                         ],
                         [
                             'y',
+                            'complex',
                             'The complex admittance.'
                         ],
                         [
-                            'y_magnitude',
-                            'The magnitude of the complex admittance, in siemens.'
+                            'y_magnitude_and_phase',
+                            'tuple of float',
+                            'The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.'
                         ],
                         [
-                            'y_phase',
-                            'The admittance phase angle, in degrees.'
+                            'series_lcr',
+                            'LCR',
+                            'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.'
                         ],
                         [
-                            'ls',
-                            'The inductance, in henrys, as measured using a series circuit model.'
-                        ],
-                        [
-                            'cs',
-                            'The capacitance, in farads, as measured using a series circuit model.'
-                        ],
-                        [
-                            'rs',
-                            'The resistance, in ohms, as measured using a series circuit model.'
-                        ],
-                        [
-                            'lp',
-                            'The inductance, in henrys, as measured using a parallel circuit model.'
-                        ],
-                        [
-                            'cp',
-                            'The capacitance, in farads, as measured using a parallel circuit model.'
-                        ],
-                        [
-                            'rp',
-                            'The resistance, in ohms, as measured using a parallel circuit model.'
+                            'parallel_lcr',
+                            'LCR',
+                            'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.'
                         ],
                         [
                             'd',
-                            'The dissipation factor of the circuit.'
+                            'float',
+                            'The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor.'
                         ],
                         [
                             'q',
-                            'The quality factor of the circuit.'
+                            'float',
+                            'The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.'
                         ],
                         [
                             'measurement_mode',
-                            'Returns the measurement mode: **SMU** is the channel(s) are operating as a power supply/SMU. **LCR** is the channel(s) are operating as an LCR meter.'
+                            'enums.InstrumentMode',
+                            'The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.'
                         ],
                         [
                             'dc_in_compliance',
+                            'bool',
                             'Indicates whether the output was in DC compliance at the time the measurement was taken.'
                         ],
                         [
                             'ac_in_compliance',
+                            'bool',
                             'Indicates whether the output was in AC compliance at the time the measurement was taken.'
                         ],
                         [
                             'unbalanced',
+                            'bool',
                             'Indicates whether the output was unbalanced at the time the measurement was taken.'
                         ]
                     ]
@@ -1494,9 +1784,6 @@ functions = {
             },
             {
                 'direction': 'out',
-                'documentation': {
-                    'description': '\nIndicates the number of measured values actually retrieved from the device.\n'
-                },
                 'name': 'actualCount',
                 'type': 'ViInt32',
                 'use_in_python_api': False
@@ -2622,8 +2909,9 @@ functions = {
         'returns': 'ViStatus'
     },
     'MeasureMultipleLCR': {
+        'codegen_method': 'private',
         'documentation': {
-            'description': '\nMeasures and returns a list of LCR data on the specified output channel(s).\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_INSTRUMENT_MODE property to NIDCPOWER_VAL_LCR\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_ON_DEMAND\n-  Put the channel(s) in the Running state (call niDCPower_InitiateWithChannels)\n',
+            'description': '\nMeasures and returns a list of LCRMeasurement instances on the specified output channel(s).\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_INSTRUMENT_MODE property to NIDCPOWER_VAL_LCR\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_ON_DEMAND\n-  Put the channel(s) in the Running state (call niDCPower_InitiateWithChannels)\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'parameters': [
@@ -2646,98 +2934,91 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nReturns an array of LCR measurement data.\n',
+                    'description': '\nA list of LCRMeasurement instances.\n',
                     'table_body': [
                         [
                             'vdc',
+                            'float',
                             'The measured DC voltage, in volts.'
                         ],
                         [
                             'idc',
-                            'The measured DC current, in amps'
+                            'float',
+                            'The measured DC current, in amps.'
                         ],
                         [
                             'stimulus_frequency',
+                            'float',
                             'The frequency of the LCR test signal, in Hz.'
                         ],
                         [
                             'ac_voltage',
+                            'complex',
                             'The measured AC voltage, in volts RMS.'
                         ],
                         [
                             'ac_current',
+                            'complex',
                             'The measured AC current, in amps RMS.'
                         ],
                         [
                             'z',
+                            'complex',
                             'The complex impedance.'
                         ],
                         [
-                            'z_magnitude',
-                            'The magnitude of the complex impedance, in ohms.'
-                        ],
-                        [
-                            'z_phase',
-                            'The impedance phase angle, in degrees.'
+                            'z_magnitude_and_phase',
+                            'tuple of float',
+                            'The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.'
                         ],
                         [
                             'y',
+                            'complex',
                             'The complex admittance.'
                         ],
                         [
-                            'y_magnitude',
-                            'The magnitude of the complex admittance, in siemens.'
+                            'y_magnitude_and_phase',
+                            'tuple of float',
+                            'The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.'
                         ],
                         [
-                            'y_phase',
-                            'The admittance phase angle, in degrees.'
+                            'series_lcr',
+                            'LCR',
+                            'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.'
                         ],
                         [
-                            'ls',
-                            'The inductance, in henrys, as measured using a series circuit model.'
-                        ],
-                        [
-                            'cs',
-                            'The capacitance, in farads, as measured using a series circuit model.'
-                        ],
-                        [
-                            'rs',
-                            'The resistance, in ohms, as measured using a series circuit model.'
-                        ],
-                        [
-                            'lp',
-                            'The inductance, in henrys, as measured using a parallel circuit model.'
-                        ],
-                        [
-                            'cp',
-                            'The capacitance, in farads, as measured using a parallel circuit model.'
-                        ],
-                        [
-                            'rp',
-                            'The resistance, in ohms, as measured using a parallel circuit model.'
+                            'parallel_lcr',
+                            'LCR',
+                            'The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.'
                         ],
                         [
                             'd',
-                            'The dissipation factor of the circuit.'
+                            'float',
+                            'The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor.'
                         ],
                         [
                             'q',
-                            'The quality factor of the circuit.'
+                            'float',
+                            'The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.'
                         ],
                         [
                             'measurement_mode',
-                            'Returns the measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.'
+                            'enums.InstrumentMode',
+                            'The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.'
                         ],
                         [
                             'dc_in_compliance',
+                            'bool',
                             'Indicates whether the output was in DC compliance at the time the measurement was taken.'
                         ],
                         [
                             'ac_in_compliance',
+                            'bool',
                             'Indicates whether the output was in AC compliance at the time the measurement was taken.'
                         ],
                         [
                             'unbalanced',
+                            'bool',
                             'Indicates whether the output was unbalanced at the time the measurement was taken.'
                         ]
                     ]
@@ -2801,7 +3082,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThe number of compensation spots defined in **load compensation spots**\n'
+                    'description': '\nThe number of elements defined in **compensation spots**.\n'
                 },
                 'name': 'numCompensationSpots',
                 'type': 'ViInt32'
@@ -2813,19 +3094,15 @@ functions = {
                     'table_body': [
                         [
                             'frequency',
-                            'The spot frequency.'
+                            'The spot frequency, in Hz.'
                         ],
                         [
                             'reference_value_type',
-                            'A known specification value of your DUT to use as the basis for load compensation. Refer to the enums.LCRReferenceValueType for the supported values.'
+                            'A known specification value of your DUT to use as the basis for load compensation.'
                         ],
                         [
-                            'reference_value_A',
+                            'reference_value',
                             'A value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose.'
-                        ],
-                        [
-                            'reference_value_B',
-                            'If applicable, a value that describes the **reference_value_type** specification. Use as indicated by the **reference_value_type** option you choose.'
                         ]
                     ]
                 },

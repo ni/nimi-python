@@ -307,7 +307,7 @@ class _SessionBase(object):
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
-    **Valid Values:**The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.
+    **Valid Values:** The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.
 
     Note:
     This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
@@ -4921,6 +4921,7 @@ class _SessionBase(object):
             count (int): Specifies the number of measurements to fetch.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
+                Default value: 1.0 second
 
                 Note: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
@@ -4959,6 +4960,100 @@ class _SessionBase(object):
                 voltage_measurements, current_measurements, in_compliances
             )
         ]
+
+    @ivi_synchronized
+    def fetch_multiple_lcr(self, count, timeout=hightime.timedelta(seconds=1.0)):
+        '''fetch_multiple_lcr
+
+        Returns a list of previously measured LCRMeasurement instances on the specified channel that have been taken and stored in a buffer.
+
+        To use this method:
+
+        -  Set measure_when property to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or MeasureWhen.ON_MEASURE_TRIGGER
+        -  Put the channel in the Running state (call initiate)
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].fetch_multiple_lcr`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.fetch_multiple_lcr`
+
+        Args:
+            count (int): Specifies the number of measurements to fetch.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete, in seconds.
+                If the method does not complete within this time interval, NI-DCPower returns an error.
+                Default value: 1.0 second
+
+                Note:
+                When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
+
+
+        Returns:
+            measurements (list of LCRMeasurement): A list of LCRMeasurement instances.
+
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | channel               |                      | The channel name associated with this LCR measurement.                                                                                                                                                |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | vdc                   | float                | The measured DC voltage, in volts.                                                                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | idc                   | float                | The measured DC current, in amps.                                                                                                                                                                     |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | stimulus_frequency    | float                | The frequency of the LCR test signal, in Hz.                                                                                                                                                          |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_voltage            | complex              | The measured AC voltage, in volts RMS.                                                                                                                                                                |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_current            | complex              | The measured AC current, in amps RMS.                                                                                                                                                                 |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z                     | complex              | The complex impedance.                                                                                                                                                                                |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_magnitude_and_phase | tuple of float       | The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.                                                                                                                        |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y                     | complex              | The complex admittance.                                                                                                                                                                               |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_magnitude_and_phase | tuple of float       | The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | series_lcr            | LCR                  | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.                                                                         |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | parallel_lcr          | LCR                  | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.                                                                       |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | d                     | float                | The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor. |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | q                     | float                | The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.                 |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | measurement_mode      | enums.InstrumentMode | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.                                                           |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | dc_in_compliance      | bool                 | Indicates whether the output was in DC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_in_compliance      | bool                 | Indicates whether the output was in AC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | unbalanced            | bool                 | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        '''
+        lcr_measurements = self._fetch_multiple_lcr(count, timeout)
+
+        with _NoChannel(session=self):
+            # TODO(olsl21): Retrieving the list of channels in the session on every function call is
+            #  silly because they never change #1776
+            all_channels_in_session = self._get_channel_names(range(self.channel_count))
+
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            all_channels_in_session
+        )
+        assert len(channel_names) == 1, "fetch_multiple_lcr only supports one channel at a time"
+        for lcr_measurement_object, in zip(lcr_measurements):
+            lcr_measurement_object.channel = channel_names[0]
+        return lcr_measurements
 
     @ivi_synchronized
     def measure_multiple(self):
@@ -5027,6 +5122,92 @@ class _SessionBase(object):
                 voltage_measurements, current_measurements, channel_names
             )
         ]
+
+    @ivi_synchronized
+    def measure_multiple_lcr(self):
+        '''measure_multiple_lcr
+
+        Measures and returns a list of LCRMeasurement instances on the specified output channel(s).
+
+        To use this method:
+
+        -  Set instrument_mode property to InstrumentMode.LCR
+        -  Set measure_when property to MeasureWhen.ON_DEMAND
+        -  Put the channel(s) in the Running state (call initiate)
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].measure_multiple_lcr`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.measure_multiple_lcr`
+
+        Returns:
+            measurements (list of LCRMeasurement): A list of LCRMeasurement instances.
+
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | channel               |                      | The channel name associated with this LCR measurement.                                                                                                                                                |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | vdc                   | float                | The measured DC voltage, in volts.                                                                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | idc                   | float                | The measured DC current, in amps.                                                                                                                                                                     |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | stimulus_frequency    | float                | The frequency of the LCR test signal, in Hz.                                                                                                                                                          |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_voltage            | complex              | The measured AC voltage, in volts RMS.                                                                                                                                                                |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_current            | complex              | The measured AC current, in amps RMS.                                                                                                                                                                 |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z                     | complex              | The complex impedance.                                                                                                                                                                                |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_magnitude_and_phase | tuple of float       | The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.                                                                                                                        |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y                     | complex              | The complex admittance.                                                                                                                                                                               |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_magnitude_and_phase | tuple of float       | The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | series_lcr            | LCR                  | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.                                                                         |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | parallel_lcr          | LCR                  | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.                                                                       |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | d                     | float                | The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor. |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | q                     | float                | The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.                 |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | measurement_mode      | enums.InstrumentMode | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.                                                           |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | dc_in_compliance      | bool                 | Indicates whether the output was in DC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_in_compliance      | bool                 | Indicates whether the output was in AC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | unbalanced            | bool                 | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        '''
+        lcr_measurements = self._measure_multiple_lcr()
+
+        with _NoChannel(session=self):
+            # TODO(olsl21): Retrieving the list of channels in the session on every function call is
+            #  silly because they never change #1776
+            all_channels_in_session = self._get_channel_names(range(self.channel_count))
+
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            all_channels_in_session
+        )
+        assert len(channel_names) == len(lcr_measurements), (
+            "measure_multiple_lcr should return as many LCR measurements as the number of channels specified through the channel string"
+        )
+        for lcr_measurement_object, channel_name in zip(lcr_measurements, channel_names):
+            lcr_measurement_object.channel = channel_name
+        return lcr_measurements
 
     @ivi_synchronized
     def _fetch_multiple(self, timeout, count):
@@ -5103,6 +5284,94 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
+
+    @ivi_synchronized
+    def _fetch_multiple_lcr(self, count, timeout=hightime.timedelta(seconds=1.0)):
+        r'''_fetch_multiple_lcr
+
+        Returns a list of previously measured LCRMeasurement instances on the specified channel that have been taken and stored in a buffer.
+
+        To use this method:
+
+        -  Set measure_when property to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or MeasureWhen.ON_MEASURE_TRIGGER
+        -  Put the channel in the Running state (call initiate)
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_multiple_lcr`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session._fetch_multiple_lcr`
+
+        Args:
+            count (int): Specifies the number of measurements to fetch.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete, in seconds.
+                If the method does not complete within this time interval, NI-DCPower returns an error.
+
+                Note:
+                When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
+
+
+        Returns:
+            measurements (list of LCRMeasurement): A list of LCRMeasurement instances.
+
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | vdc                   | float                | The measured DC voltage, in volts.                                                                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | idc                   | float                | The measured DC current, in amps.                                                                                                                                                                     |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | stimulus_frequency    | float                | The frequency of the LCR test signal, in Hz.                                                                                                                                                          |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_voltage            | complex              | The measured AC voltage, in volts RMS.                                                                                                                                                                |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_current            | complex              | The measured AC current, in amps RMS.                                                                                                                                                                 |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z                     | complex              | The complex impedance.                                                                                                                                                                                |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_magnitude_and_phase | tuple of float       | The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.                                                                                                                        |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y                     | complex              | The complex admittance.                                                                                                                                                                               |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_magnitude_and_phase | tuple of float       | The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | series_lcr            | LCR                  | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.                                                                         |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | parallel_lcr          | LCR                  | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.                                                                       |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | d                     | float                | The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor. |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | q                     | float                | The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.                 |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | measurement_mode      | enums.InstrumentMode | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.                                                           |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | dc_in_compliance      | bool                 | Indicates whether the output was in DC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_in_compliance      | bool                 | Indicates whether the output was in AC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | unbalanced            | bool                 | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+            actual_count (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
+        count_ctype = _visatype.ViInt32(count)  # case S210
+        measurements_size = count  # case B600
+        measurements_ctype = get_ctypes_pointer_for_buffer(library_type=lcr_measurement.struct_NILCRMeasurement, size=measurements_size)  # case B600
+        actual_count_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDCPower_FetchMultipleLCR(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, measurements_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [lcr_measurement.LCRMeasurement(measurements_ctype[i]) for i in range(count_ctype.value)]
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -5783,6 +6052,80 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array
+
+    @ivi_synchronized
+    def _measure_multiple_lcr(self):
+        r'''_measure_multiple_lcr
+
+        Measures and returns a list of LCRMeasurement instances on the specified output channel(s).
+
+        To use this method:
+
+        -  Set instrument_mode property to InstrumentMode.LCR
+        -  Set measure_when property to MeasureWhen.ON_DEMAND
+        -  Put the channel(s) in the Running state (call initiate)
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._measure_multiple_lcr`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session._measure_multiple_lcr`
+
+        Returns:
+            measurements (list of LCRMeasurement): A list of LCRMeasurement instances.
+
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | vdc                   | float                | The measured DC voltage, in volts.                                                                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | idc                   | float                | The measured DC current, in amps.                                                                                                                                                                     |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | stimulus_frequency    | float                | The frequency of the LCR test signal, in Hz.                                                                                                                                                          |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_voltage            | complex              | The measured AC voltage, in volts RMS.                                                                                                                                                                |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_current            | complex              | The measured AC current, in amps RMS.                                                                                                                                                                 |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z                     | complex              | The complex impedance.                                                                                                                                                                                |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | z_magnitude_and_phase | tuple of float       | The magnitude, in ohms, and phase angle, in degrees, of the complex impedance.                                                                                                                        |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y                     | complex              | The complex admittance.                                                                                                                                                                               |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | y_magnitude_and_phase | tuple of float       | The magnitude, in siemens, and phase angle, in degrees, of the complex admittance.                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | series_lcr            | LCR                  | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a series circuit model.                                                                         |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | parallel_lcr          | LCR                  | The inductance, in henrys, the capacitance, in farads, and the resistance, in ohms, as measured using a parallel circuit model.                                                                       |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | d                     | float                | The dissipation factor of the circuit. The dimensionless dissipation factor is directly proportional to how quickly an oscillating system loses energy. D is the reciprocal of Q, the quality factor. |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | q                     | float                | The quality factor of the circuit. The dimensionless quality factor is inversely proportional to the degree of damping in a system. Q is the reciprocal of D, the dissipation factor.                 |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | measurement_mode      | enums.InstrumentMode | The measurement mode: **SMU** - The channel(s) are operating as a power supply/SMU. **LCR** - The channel(s) are operating as an LCR meter.                                                           |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | dc_in_compliance      | bool                 | Indicates whether the output was in DC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ac_in_compliance      | bool                 | Indicates whether the output was in AC compliance at the time the measurement was taken.                                                                                                              |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | unbalanced            | bool                 | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                                                                    |
+                +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        measurements_size = self._parse_channel_count()  # case B560
+        measurements_ctype = get_ctypes_pointer_for_buffer(library_type=lcr_measurement.struct_NILCRMeasurement, size=measurements_size)  # case B560
+        error_code = self._library.niDCPower_MeasureMultipleLCR(vi_ctype, channel_name_ctype, measurements_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [lcr_measurement.LCRMeasurement(measurements_ctype[i]) for i in range(self._parse_channel_count())]
 
     @ivi_synchronized
     def _parse_channel_count(self):
