@@ -100,7 +100,14 @@ class _RepeatedCapabilities(object):
         rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
         complete_rep_cap_list = [current_rep_cap + self._separator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
 
-        return _SessionBase(vi=self._session._vi, repeated_capability_list=complete_rep_cap_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
+        return _SessionBase(
+            vi=self._session._vi,
+            repeated_capability_list=complete_rep_cap_list,
+            library=self._session._library,
+            encoding=self._session._encoding,
+            freeze_it=True,
+            all_channels_in_session=self._session._all_channels_in_session
+        )
 
 
 # This is a very simple context manager we can use when we need to set/get attributes
@@ -584,7 +591,7 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.wire_mode`
     '''
 
-    def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False, all_channels_in_session=None):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._vi = vi
@@ -602,6 +609,9 @@ class _SessionBase(object):
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
 
+        self._all_channels_in_session = all_channels_in_session
+        # _is_frozen must be set last to prevent __setattr__ from raising an exception while
+        # setting other member states
         self._is_frozen = freeze_it
 
     def __repr__(self):
@@ -1553,7 +1563,15 @@ class Session(_SessionBase):
             session (niswitch.Session): A session object representing the device.
 
         '''
-        super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
+        # Initialize the superclass with default values first, populate them later
+        super(Session, self).__init__(
+            repeated_capability_list=[],
+            vi=None,
+            library=None,
+            encoding=None,
+            freeze_it=False,
+            all_channels_in_session=None
+        )
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -1569,6 +1587,15 @@ class Session(_SessionBase):
         param_list.append("reset_device=" + pp.pformat(reset_device))
         self._param_list = ', '.join(param_list)
 
+        # self.get_channel_names() and self.channel_count can only be called after the session
+        # handle `self._vi` is set
+        try:
+            self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
+        except AttributeError:
+            self._all_channels_in_session = None
+
+        # _is_frozen must be set last to prevent __setattr__ from raising an exception while
+        # setting other member states
         self._is_frozen = True
 
     def __enter__(self):
