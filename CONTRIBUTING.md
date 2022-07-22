@@ -22,10 +22,11 @@ In order to have the ability to build and run the tests you will need a few thin
 ### Windows:
 
 - Install and enable [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
-- Install GNU Make: ``sudo apt-get install make``
-- Install zip: ``sudo apt-get install zip``
-- Install 64-bit [Python](https://www.python.org/downloads/)
-    - Use the version that `build_test` uses. See [tox.ini](https://github.com/ni/nimi-python/blob/e13087eb67e2399de2dfa83fd504f8ebd0e0e263/tox.ini#L10)
+- Install the following in **Windows Subsystem for Linux**:
+  - GNU Make: ``sudo apt-get install make``
+  - zip: ``sudo apt-get install zip``
+  - 64-bit [Python](https://www.python.org/downloads/)
+    -- Use the version that `build_test` uses. See [tox.ini](https://github.com/ni/nimi-python/blob/e13087eb67e2399de2dfa83fd504f8ebd0e0e263/tox.ini#L10)
 
 ### macOS:
 
