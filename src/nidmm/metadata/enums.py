@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 19.6.0d7
+# This file is generated from NI-DMM API metadata version 22.8.0d38
 enums = {
     'ADCCalibration': {
         'values': [
@@ -32,36 +32,35 @@ enums = {
                 'documentation': {
                     'description': 'Running'
                 },
-                'name': 'NIDMM_VAL_RUNNING_ANTICOLLISION',
-                'python_name': 'RUNNING',
+                'name': 'NIDMM_VAL_ACQUISITION_STATUS_RUNNING',
                 'value': 0
             },
             {
                 'documentation': {
                     'description': 'Finished with **Backlog**'
                 },
-                'name': 'NIDMM_VAL_FINISHED_WITH_BACKLOG',
+                'name': 'NIDMM_VAL_ACQUISITION_STATUS_FINISHED_WITH_BACKLOG',
                 'value': 1
             },
             {
                 'documentation': {
                     'description': 'Finished with no **Backlog**'
                 },
-                'name': 'NIDMM_VAL_FINISHED_WITH_NO_BACKLOG',
+                'name': 'NIDMM_VAL_ACQUISITION_STATUS_FINISHED_WITH_NO_BACKLOG',
                 'value': 2
             },
             {
                 'documentation': {
                     'description': 'Paused'
                 },
-                'name': 'NIDMM_VAL_PAUSED',
+                'name': 'NIDMM_VAL_ACQUISITION_STATUS_PAUSED',
                 'value': 3
             },
             {
                 'documentation': {
                     'description': 'No acquisition in progress'
                 },
-                'name': 'NIDMM_VAL_NO_ACQUISITION_IN_PROGRESS',
+                'name': 'NIDMM_VAL_ACQUISITION_STATUS_NO_ACQUISITION_IN_PROGRESS',
                 'value': 4
             }
         ]
