@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-TClk API metadata version 255.0.0d0
+# This file is generated from NI-TClk API metadata version 22.8.0d22
 config = {
-    'api_version': '255.0.0d0',
+    'api_version': '22.8.0d22',
     'c_function_prefix': 'niTClk_',
     'close_function': None,
     'context_manager_name': {

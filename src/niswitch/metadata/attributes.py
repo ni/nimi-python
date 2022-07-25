@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 21.0.0d1
+# This file is generated from NI-SWITCH API metadata version 22.8.0d32
 attributes = {
     1050005: {
         'access': 'read-write',

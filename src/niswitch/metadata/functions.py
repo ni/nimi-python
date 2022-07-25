@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 19.6.0d7
+# This file is generated from NI-SWITCH API metadata version 22.8.0d32
 functions = {
     'AbortScan': {
         'documentation': {

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.5.0d7
+# This file is generated from NI-SCOPE API metadata version 22.8.0d53
 functions = {
     'Abort': {
         'documentation': {
