@@ -4880,7 +4880,7 @@ class _SessionBase(object):
         for prop in property_names:
             if prop not in Session.__base__.__dict__:
                 raise KeyError('{0} is not an property on the nidcpower.Session'.format(prop))
-            if not isinstance(Session.__base__.__dict__[prop], _attributes.Attribute) and not isinstance(Session.__base__.__dict__[prop], _attributes.AttributeEnum):
+            if not isinstance(Session.__base__.__dict__[prop], _attributes.Attribute) and not isinstance(Session.__base__.__dict__[prop], _attributes.AttributeEnum) and not isinstance(Session.__base__.__dict__[prop], _attributes.AttributeEnumWithConverter):
                 raise TypeError('{0} is not a valid property: {1}'.format(prop, type(Session.__base__.__dict__[prop])))
             attribute_ids_used.add(Session.__base__.__dict__[prop]._attribute_id)
 

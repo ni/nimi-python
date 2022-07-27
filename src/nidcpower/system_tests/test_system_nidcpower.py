@@ -521,6 +521,25 @@ def test_create_and_delete_advanced_sequence_bad_type(session):
         session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
 
 
+@pytest.mark.resource_name("4190/0")
+@pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+def test_create_and_delete_advanced_sequence_attribute_enum_with_converter(session):
+    properties_used = ['lcr_impedance_auto_range']
+    sequence_name = 'my_sequence'
+    session.source_mode = nidcpower.SourceMode.SEQUENCE
+    session.create_advanced_sequence(
+        sequence_name=sequence_name,
+        property_names=properties_used,
+        set_as_active_sequence=True
+    )
+    session.create_advanced_sequence_step(set_as_active_step=True)
+    assert session.active_advanced_sequence == sequence_name
+    session.lcr_impedance_auto_range = True
+    session.delete_advanced_sequence(sequence_name=sequence_name)
+    with pytest.raises(nidcpower.errors.DriverError):
+        session.active_advanced_sequence = sequence_name
+
+
 @pytest.mark.legacy_session_only
 def test_send_software_edge_trigger_error(session):
     with pytest.raises(nidcpower.Error) as e:

@@ -101,7 +101,7 @@ class AttributeEnum(object):
         return self._underlying_attribute.__set__(session, value.value)
 
 
-class AttributeEnumWithConverter(AttributeEnum):
+class AttributeEnumWithConverter(object):
     '''Class for attributes that use enums internally but are exposed in the nidmm Python module as something else, thus need conversion.'''
 
     def __init__(self, underlying_attribute_enum, getter_converter, setter_converter):
@@ -118,6 +118,7 @@ class AttributeEnumWithConverter(AttributeEnum):
                 enum value
         '''
         self._underlying_attribute_enum = underlying_attribute_enum
+        self._attribute_id = underlying_attribute_enum._attribute_id
         self._getter_converter = getter_converter
         self._setter_converter = setter_converter
 
