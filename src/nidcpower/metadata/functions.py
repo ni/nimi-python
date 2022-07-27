@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.8.0d88
+# This file is generated from NI-DCPower API metadata version 22.8.0d9999
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -347,17 +347,6 @@ functions = {
                     'description': '\nSpecifies the attributes you reconfigure per step in the advanced\nsequence. The following table lists which attributes can be configured\nin an advanced sequence for each NI-DCPower device that supports\nadvanced sequencing. A Yes indicates that the attribute can be configured\nin advanced sequencing. An No indicates that the attribute cannot be\nconfigured in advanced sequencing.\n',
                     'table_body': [
                         [
-                            'NIDCPOWER_ATTR_DC_NOISE_REJECTION',
-                            'Yes',
-                            'No',
-                            'Yes',
-                            'No',
-                            'Yes',
-                            'No',
-                            'No',
-                            'Yes'
-                        ],
-                        [
                             'NIDCPOWER_ATTR_APERTURE_TIME',
                             'Yes',
                             'Yes',
@@ -366,10 +355,391 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'Yes',
+                            'Yes',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_DC_NOISE_REJECTION',
+                            'Yes',
+                            'No',
+                            'Yes',
+                            'No',
+                            'Yes',
+                            'No',
+                            'No',
+                            'Yes',
+                            'Yes',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_INSTRUMENT_MODE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_ACTUAL_LOAD_REACTANCE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_ACTUAL_LOAD_RESISTANCE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_CURRENT_AMPLITUDE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_CURRENT_RANGE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_CUSTOM_MEASUREMENT_TIME',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_DC_BIAS_CURRENT_LEVEL',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_DC_BIAS_CURRENT_RANGE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_DC_BIAS_SOURCE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_DC_BIAS_VOLTAGE_LEVEL',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_DC_BIAS_VOLTAGE_RANGE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_FREQUENCY',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_IMPEDANCE_AUTO_RANGE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_LOAD_COMPENSATION_ENABLED',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_MEASURED_LOAD_REACTANCE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_MEASURED_LOAD_RESISTANCE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_MEASUREMENT_TIME',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_OPEN_COMPENSATION_ENABLED',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_OPEN_CONDUCTANCE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_OPEN_SUSCEPTANCE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_SHORT_COMPENSATION_ENABLED',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_SHORT_REACTANCE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_SHORT_RESISTANCE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_SOURCE_DELAY_MODE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_STIMULUS_FUNCTION',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_VOLTAGE_AMPLITUDE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'Yes'
+                        ],
+                        [
+                            'NIDCPOWER_ATTR_LCR_VOLTAGE_RANGE',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
+                            'No',
                             'Yes'
                         ],
                         [
                             'NIDCPOWER_ATTR_MEASURE_RECORD_LENGTH',
+                            'Yes',
+                            'Yes',
                             'Yes',
                             'Yes',
                             'Yes',
@@ -388,6 +758,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'Yes',
+                            'Yes',
                             'Yes'
                         ],
                         [
@@ -395,6 +767,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No',
@@ -410,6 +784,8 @@ functions = {
                             'No',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
@@ -419,6 +795,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No'
@@ -432,6 +810,8 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
@@ -443,10 +823,14 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
                             'NIDCPOWER_ATTR_SOURCE_DELAY',
+                            'Yes',
+                            'Yes',
                             'Yes',
                             'Yes',
                             'Yes',
@@ -465,6 +849,8 @@ functions = {
                             'Yes',
                             'No',
                             'Yes',
+                            'Yes',
+                            'Yes',
                             'Yes'
                         ],
                         [
@@ -475,6 +861,8 @@ functions = {
                             'No',
                             'Yes',
                             'No',
+                            'Yes',
+                            'Yes',
                             'Yes',
                             'Yes'
                         ],
@@ -487,6 +875,8 @@ functions = {
                             'Yes',
                             'No',
                             'Yes',
+                            'Yes',
+                            'Yes',
                             'Yes'
                         ],
                         [
@@ -497,6 +887,8 @@ functions = {
                             'No',
                             'Yes',
                             'No',
+                            'Yes',
+                            'Yes',
                             'Yes',
                             'Yes'
                         ],
@@ -509,6 +901,8 @@ functions = {
                             'Yes',
                             'No',
                             'Yes',
+                            'Yes',
+                            'Yes',
                             'Yes'
                         ],
                         [
@@ -520,10 +914,14 @@ functions = {
                             'Yes',
                             'No',
                             'Yes',
+                            'Yes',
+                            'Yes',
                             'Yes'
                         ],
                         [
                             'NIDCPOWER_ATTR_CURRENT_LEVEL',
+                            'Yes',
+                            'Yes',
                             'Yes',
                             'Yes',
                             'Yes',
@@ -542,10 +940,14 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'Yes',
+                            'Yes',
                             'Yes'
                         ],
                         [
                             'NIDCPOWER_ATTR_VOLTAGE_LIMIT',
+                            'Yes',
+                            'Yes',
                             'Yes',
                             'Yes',
                             'Yes',
@@ -564,7 +966,9 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
-                            'No'
+                            'Yes',
+                            'No',
+                            'Yes'
                         ],
                         [
                             'NIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW',
@@ -575,10 +979,14 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
-                            'No'
+                            'Yes',
+                            'No',
+                            'Yes'
                         ],
                         [
                             'NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE',
+                            'Yes',
+                            'Yes',
                             'Yes',
                             'Yes',
                             'Yes',
@@ -597,6 +1005,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'Yes',
+                            'Yes',
                             'Yes'
                         ],
                         [
@@ -608,7 +1018,9 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
-                            'No'
+                            'Yes',
+                            'No',
+                            'Yes'
                         ],
                         [
                             'NIDCPOWER_ATTR_CURRENT_LIMIT_LOW',
@@ -619,10 +1031,14 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
-                            'No'
+                            'Yes',
+                            'No',
+                            'Yes'
                         ],
                         [
                             'NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE',
+                            'Yes',
+                            'Yes',
                             'Yes',
                             'Yes',
                             'Yes',
@@ -641,10 +1057,14 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'Yes',
+                            'Yes',
                             'Yes'
                         ],
                         [
                             'NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE',
+                            'Yes',
+                            'Yes',
                             'Yes',
                             'Yes',
                             'Yes',
@@ -663,10 +1083,14 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'Yes',
+                            'Yes',
                             'Yes'
                         ],
                         [
                             'NIDCPOWER_ATTR_OUTPUT_FUNCTION',
+                            'Yes',
+                            'Yes',
                             'Yes',
                             'Yes',
                             'Yes',
@@ -685,6 +1109,8 @@ functions = {
                             'Yes',
                             'No',
                             'Yes',
+                            'Yes',
+                            'No',
                             'No'
                         ],
                         [
@@ -694,6 +1120,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No'
@@ -707,6 +1135,8 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
@@ -716,6 +1146,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No'
@@ -729,6 +1161,8 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
@@ -738,6 +1172,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No'
@@ -751,6 +1187,8 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
@@ -760,6 +1198,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No'
@@ -773,6 +1213,8 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
@@ -782,6 +1224,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No'
@@ -795,6 +1239,8 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
@@ -804,6 +1250,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No'
@@ -817,6 +1265,8 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
@@ -826,6 +1276,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No'
@@ -839,6 +1291,8 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
@@ -848,6 +1302,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No'
@@ -861,6 +1317,8 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
@@ -870,6 +1328,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No'
@@ -883,6 +1343,8 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
@@ -892,6 +1354,8 @@ functions = {
                             'Yes',
                             'Yes',
                             'Yes',
+                            'No',
+                            'No',
                             'No',
                             'No',
                             'No'
@@ -905,10 +1369,14 @@ functions = {
                             'Yes',
                             'No',
                             'No',
+                            'No',
+                            'No',
                             'No'
                         ],
                         [
                             'NIDCPOWER_ATTR_TRANSIENT_RESPONSE',
+                            'Yes',
+                            'Yes',
                             'Yes',
                             'Yes',
                             'Yes',
@@ -928,7 +1396,9 @@ functions = {
                         'PXIe-4139',
                         'PXIe-4140/4142/4144',
                         'PXIe-4141/4143/4145',
-                        'PXIe-4162/4163'
+                        'PXIe-4147',
+                        'PXIe-4162/4163',
+                        'PXIe-4190'
                     ]
                 },
                 'name': 'attributeIds',
