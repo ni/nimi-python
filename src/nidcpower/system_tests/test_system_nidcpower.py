@@ -71,6 +71,8 @@ def test_self_test(session):
     session.self_test()
 
 
+# Workaround for driver runtime bug. See issue #1798 for details.
+@pytest.mark.legacy_session_only
 def test_self_cal(session):
     session.self_cal()
 
