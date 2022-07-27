@@ -29,7 +29,7 @@ class TestSession(object):
         self.patched_library.niDigital_UnlockSession.side_effect = self.side_effects_helper.niDigital_UnlockSession
         self.side_effects_helper['UnlockSession']['callerHasLock'] = True
 
-        # For _try_to_get_channel_names()
+        # For trying to set `_all_channels_in_session` in the Session constructor
         self.patched_library.niDigital_GetAttributeViInt32.side_effect = self.side_effects_helper.niDigital_GetAttributeViInt32
         self.side_effects_helper['GetAttributeViInt32']['value'] = 1  # channel_count
         self.patched_library.niDigital_GetChannelNameFromString.side_effect = self.side_effects_helper.niDigital_GetChannelNameFromString

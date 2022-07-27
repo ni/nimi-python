@@ -106,10 +106,10 @@ class _RepeatedCapabilities(object):
         return _SessionBase(
             vi=self._session._vi,
             repeated_capability_list=complete_rep_cap_list,
+            all_channels_in_session=self._session._all_channels_in_session,
             library=self._session._library,
             encoding=self._session._encoding,
-            freeze_it=True,
-            all_channels_in_session=self._session._all_channels_in_session
+            freeze_it=True
         )
 
 
@@ -1270,9 +1270,10 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.vterm`
     '''
 
-    def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False, all_channels_in_session=None):
+    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
+        self._all_channels_in_session = all_channels_in_session
         self._vi = vi
         self._library = library
         self._encoding = encoding
@@ -1295,9 +1296,8 @@ class _SessionBase(object):
         self.rio_events = _RepeatedCapabilities(self, 'RIOEvent', repeated_capability_list)
         self.rio_triggers = _RepeatedCapabilities(self, 'RIOTrigger', repeated_capability_list)
 
-        self._all_channels_in_session = all_channels_in_session
-        # _is_frozen must be set last to prevent __setattr__ from raising an exception while
-        # setting other member states
+        # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
+        # members when trying to set a property with a typo.
         self._is_frozen = freeze_it
 
     def __repr__(self):
@@ -3801,6 +3801,8 @@ class Session(_SessionBase):
         param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
+        # Store the list of channels in the Session which is needed by some nimi-python modules.
+        # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
         # handle `self._vi` is set
         try:
@@ -3808,8 +3810,8 @@ class Session(_SessionBase):
         except AttributeError:
             self._all_channels_in_session = None
 
-        # _is_frozen must be set last to prevent __setattr__ from raising an exception while
-        # setting other member states
+        # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
+        # members when trying to set a property with a typo.
         self._is_frozen = True
 
     def __enter__(self):
