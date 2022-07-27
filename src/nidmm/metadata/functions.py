@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 19.6.0d7
+# This file is generated from NI-DMM API metadata version 22.8.0d38
 functions = {
     'Abort': {
         'documentation': {
@@ -1200,7 +1200,7 @@ functions = {
                 'documentation': {
                     'description': 'Indicates date and time of the last calibration.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],

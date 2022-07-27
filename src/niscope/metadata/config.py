@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 20.5.0d7
+# This file is generated from NI-SCOPE API metadata version 22.8.0d53
 config = {
-    'api_version': '20.5.0d7',
+    'api_version': '22.8.0d53',
     'c_function_prefix': 'niScope_',
     'close_function': 'close',
     'context_manager_name': {

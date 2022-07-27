@@ -2154,7 +2154,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            month (hightime.datetime): Indicates date and time of the last calibration.
+            last_cal_datetime (hightime.datetime): Indicates date and time of the last calibration.
 
         '''
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
