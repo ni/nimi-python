@@ -30,14 +30,9 @@
         '''
         lcr_measurements = self._${f['python_name']}(${param_list})
 
-        with _NoChannel(session=self):
-            # TODO(olsl21): Retrieving the list of channels in the session on every function call is
-            #  silly because they never change #1776
-            all_channels_in_session = self._get_channel_names(range(self.channel_count))
-
         channel_names = _converters.expand_channel_string(
             self._repeated_capability,
-            all_channels_in_session
+            self._all_channels_in_session
         )
 %if f['python_name'] == 'fetch_multiple_lcr':
         assert len(channel_names) == 1, "fetch_multiple_lcr only supports one channel at a time"
