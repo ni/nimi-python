@@ -1,0 +1,78 @@
+# nimibot pipeline for running all system tests as part of Continuous Integration.
+
+parameters:
+- name: win_module_names
+  type: object
+  default: # Order of the modules is based on test execution time, longest first.
+  - nidigital
+  - nitclk  
+  - nifgen
+  - nidcpower
+  - nidmm
+  - niscope
+  - nimodinst
+  - nise
+  - niswitch
+- name: rhel_module_names
+  type: object
+  default: # Order of the modules is based on test execution time, longest first.
+  - nidmm
+  - niswitch
+
+# A pipeline with no CI trigger.
+trigger: none
+
+pr:
+  branches:
+    include:
+    - master
+    - releases/*
+  paths:
+    exclude:
+    - CHANGELOG.md
+    - CONTRIBUTING.md
+    - .gitattributes
+    - LICENSE
+    - VERSION
+  drafts: false
+
+stages:
+           
+  - stage: system_tests_win64
+    dependsOn: []
+    pool:
+      name: nimibot
+      demands:
+        - nimibot -equals True
+        - platform -equals win64 # Run system tests using 64-bit Python interpreter on a 64-bit Windows 10 system.
+    jobs:
+    - ${{each module_name in parameters.win_module_names}}:
+      - template: run_module_system_tests.yml
+        parameters:
+          module_name: ${{module_name}}
+
+  - stage: system_tests_win32
+    dependsOn: []
+    pool:
+      name: nimibot
+      demands:
+        - nimibot -equals True
+        - platform -equals win32 # Run system tests using 32-bit Python interpreter on a 64-bit Windows 10 system.
+    jobs:
+    - ${{each module_name in parameters.win_module_names}}:
+      - template: run_module_system_tests.yml
+        parameters:
+          module_name: ${{module_name}}
+
+  - stage: system_tests_rhel
+    dependsOn: []
+    pool:
+      name: nimibot
+      demands:
+        - nimibot -equals True
+        - platform -equals rhel
+    jobs:
+    - ${{each module_name in parameters.rhel_module_names}}:
+      - template: run_module_system_tests.yml
+        parameters:
+          module_name: ${{module_name}}
