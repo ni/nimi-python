@@ -85,12 +85,12 @@ class AttributeViBoolean(Attribute):
         session._set_attribute_vi_boolean(self._attribute_id, value)
 
 
-class AttributeEnum(object):
+class AttributeEnum(Attribute):
 
     def __init__(self, underlying_attribute_meta_class, enum_meta_class, attribute_id):
+        super(AttributeEnum, self).__init__(attribute_id)
         self._underlying_attribute = underlying_attribute_meta_class(attribute_id)
         self._attribute_type = enum_meta_class
-        self._attribute_id = attribute_id
 
     def __get__(self, session, session_type):
         return self._attribute_type(self._underlying_attribute.__get__(session, session_type))
@@ -101,7 +101,7 @@ class AttributeEnum(object):
         return self._underlying_attribute.__set__(session, value.value)
 
 
-class AttributeEnumWithConverter(AttributeEnum):
+class AttributeEnumWithConverter(Attribute):
     '''Class for attributes that use enums internally but are exposed in the nifake Python module as something else, thus need conversion.'''
 
     def __init__(self, underlying_attribute_enum, getter_converter, setter_converter):
@@ -117,6 +117,7 @@ class AttributeEnumWithConverter(AttributeEnum):
             setter_converter (function): The function that converts the converted value back to the
                 enum value
         '''
+        super(AttributeEnumWithConverter, self).__init__(underlying_attribute_enum._attribute_id)
         self._underlying_attribute_enum = underlying_attribute_enum
         self._getter_converter = getter_converter
         self._setter_converter = setter_converter
