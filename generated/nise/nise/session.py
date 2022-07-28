@@ -55,9 +55,10 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
+        self._all_channels_in_session = all_channels_in_session
         self._vi = vi
         self._library = library
         self._encoding = encoding
@@ -70,6 +71,8 @@ class _SessionBase(object):
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
+        # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
+        # members when trying to set a property with a typo.
         self._is_frozen = freeze_it
 
     def __repr__(self):
@@ -228,7 +231,15 @@ class Session(_SessionBase):
             session (nise.Session): A session object representing the device.
 
         '''
-        super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
+        # Initialize the superclass with default values first, populate them later
+        super(Session, self).__init__(
+            repeated_capability_list=[],
+            vi=None,
+            library=None,
+            encoding=None,
+            freeze_it=False,
+            all_channels_in_session=None
+        )
         options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
@@ -243,6 +254,17 @@ class Session(_SessionBase):
         param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
+        # Store the list of channels in the Session which is needed by some nimi-python modules.
+        # Use try/except because not all the modules support channels.
+        # self.get_channel_names() and self.channel_count can only be called after the session
+        # handle `self._vi` is set
+        try:
+            self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
+        except AttributeError:
+            self._all_channels_in_session = None
+
+        # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
+        # members when trying to set a property with a typo.
         self._is_frozen = True
 
     def __enter__(self):
