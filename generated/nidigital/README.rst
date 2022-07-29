@@ -70,7 +70,7 @@ NI-Digital Pattern Driver Python API Status
 +---------------------------------------+--------------------------+
 | NI-Digital Pattern Driver (nidigital) |                          |
 +=======================================+==========================+
-| Driver Version Tested Against         | 21.0.0                   |
+| Driver Version Tested Against         | 21.8.0                   |
 +---------------------------------------+--------------------------+
 | PyPI Version                          | |nidigitalLatestVersion| |
 +---------------------------------------+--------------------------+
