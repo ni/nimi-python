@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.4.2](#142---2022-08-03)
 * [1.4.1](#141---2021-08-23)
 * [1.4.0](#140---2021-07-09)
 * [1.3.3](#133---2021-02-26)
@@ -28,14 +28,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
-* ### ALL
-    * #### Added
-    * #### Changed
-    * #### Removed
+## 1.4.2 - 2022-08-03
 * ### `nidcpower` (NI-DCPower)
     * #### Added
-        * Partial API parity with NI-DCPower 2022 Q3.
+        * API parity with NI-DCPower 2022 Q3.
             * Properties added:
                 * `aperture_time_auto_mode`
                 * `autorange_maximum_delay_after_range_change`
@@ -107,15 +103,6 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * Updated supported devices information in documentation for methods and properties
         * Added `channel` field to the `Measurement` namedtuple instances returned by `fetch_multiple` and `measure_multiple`
-    * #### Removed
-* ### `nidigital` (NI-Digital Pattern Driver)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nidmm` (NI-DMM)
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
         * `data_markers` repeated capability support - [#1668](https://github.com/ni/nimi-python/issues/1668)
@@ -127,27 +114,6 @@ All notable changes to this project will be documented in this file.
            * `script_triggers`
         * Corrected multiple mistakes in repeated capability info of attribute metadata
             * alters API behavior (repeated capability access of attributes) and documentation
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niscope` (NI-SCOPE)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niswitch` (NI-SWITCH)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nitclk` (NI-TClk)
-    * #### Added
-    * #### Changed
-    * #### Removed
 
 
 ## 1.4.1 - 2021-08-23
