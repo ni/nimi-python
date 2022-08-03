@@ -112,7 +112,7 @@ As a prerequisite to using the nitclk module, you must install the NI-TClk runti
 
 The nimi-python modules (i.e. for **NI-TClk**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
-  $ python -m pip install nitclk~=1.4.2
+  $ python -m pip install nitclk
 
 Or **easy_install** from
 `setuptools <http://pypi.python.org/pypi/setuptools>`_::
