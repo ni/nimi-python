@@ -1,5 +1,6 @@
 group: travis_latest
 language: python
+dist: focal
 matrix:
     include:
       # We run tests on the latest supported version of Python first.
