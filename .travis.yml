@@ -2,7 +2,7 @@ group: travis_latest
 language: python
 matrix:
     include:
-      # We run tests on the latest  supported version of Python first.
+      # We run tests on the latest supported version of Python first.
       # This is where additional tests are run so we give it more time.
 ```
       - python: "3.10"
