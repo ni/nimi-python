@@ -4,10 +4,41 @@ import argparse
 import nifgen
 import numpy as np
 from scipy import signal
+
+import math
 import sys
 import time
 
 number_of_points = 256
+
+
+def equivalent_phase(phase):
+    if phase < 0:
+        phase += (abs(phase) // (2 * math.pi) + 1) * 2 * math.pi
+    elif phase > (2 * math.pi):
+        phase = phase % (2 * math.pi)
+    return phase  # phase in range [0, 2 * PI]
+
+
+def duty_cycle_is_on(phase, duty_cycle):
+    # duty_cycle is a decimal in the range [0, 1]
+    phase = equivalent_phase(phase)
+    if duty_cycle == 0:
+        return False
+    elif phase == 2 * math.pi:
+        return True
+    cycle_percentage = phase / (2 * math.pi)
+    return cycle_percentage <= duty_cycle
+
+
+def square_wave(t, duty_cycle):
+    wfm = []
+    for time in t:
+        if duty_cycle_is_on(time, duty_cycle):
+            wfm.append(1.0)
+        else:
+            wfm.append(-1.0)
+    return wfm
 
 
 def calculate_sinewave():
@@ -32,8 +63,7 @@ def calculate_rampdown():
 
 def calculate_square():
     time = np.linspace(start=0, stop=10, num=number_of_points)    # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    square_build = signal.square(t=time, duty=0.5)              # signal.square(t, duty=0.5)
-    square = square_build.tolist()                              # List of Float
+    square = square_wave(t=time, duty_cycle=0.5)
     return square
 
 
