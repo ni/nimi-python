@@ -33,6 +33,8 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Fix [#1811](https://github.com/ni/nimi-python/issues/1811): nimi-python uses scipy which keeps us from adding support to Python 3.10
+          * Replaced scipy usage in NI-FGEN examples with hand-crafted functions and dropped scipy installation system-test setup. 
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
