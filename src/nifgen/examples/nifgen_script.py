@@ -3,7 +3,6 @@
 import argparse
 import nifgen
 import numpy as np
-from scipy import signal
 
 import math
 import sys
@@ -41,6 +40,15 @@ def square_wave(t, duty_cycle):
     return wfm
 
 
+def sawtooth_wave(t):
+    wfm = []
+    for time in t:
+        phase = equivalent_phase(time)
+        cycle_percentage = phase / (2 * math.pi)
+        wfm.append(-1.0 + (2 * cycle_percentage))
+    return wfm
+
+
 def calculate_sinewave():
     time = np.linspace(start=0, stop=10, num=number_of_points)    # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
     amplitude = np.sin(time)
@@ -69,8 +77,7 @@ def calculate_square():
 
 def calculate_triangle():
     time = np.linspace(start=0, stop=1, num=number_of_points)     # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    triangle_build = signal.sawtooth(t=time)                    # signal.sawtooth(t, width=1)
-    triangle = triangle_build.tolist()                          # List of Float
+    triangle = sawtooth_wave(t=time)
     return triangle
 
 
