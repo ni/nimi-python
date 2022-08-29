@@ -13,32 +13,14 @@ import time
 number_of_samples = 256
 
 
-def calculate_sinewave():
-    # waveforms finish just short of 360 degrees, so that we don't repeat the first point
-    # if we repeat the waveform
-    return [math.sin(math.pi * 2 * x / (number_of_samples)) for x in range(number_of_samples)]
-
-
-def calculate_rampup():
-    return [x / (number_of_samples) for x in range(number_of_samples)]
-
-
-def calculate_rampdown():
-    return [-1.0 * x for x in calculate_rampup()]
-
-
-def calculate_square():
-    return [1.0 if x < (number_of_samples / 2) else -1.0 for x in range(number_of_samples)]
-
-
-def calculate_sawtooth():
-    part1 = calculate_rampup()
-    part2 = [(-1 + x) for x in part1]
-    return part1 + part2
-
-
-def calculate_gaussian_noise():
-    return [random.gauss(0, 0.2) for x in range(number_of_samples)]
+# waveforms finish just short of 360 degrees, so that we don't repeat the first point
+# if we repeat the waveform
+SINE_WAVE = [math.sin(math.pi * 2 * x / (number_of_samples)) for x in range(number_of_samples)]
+RAMP_UP = [x / (number_of_samples) for x in range(number_of_samples)]
+RAMP_DOWN = [-1.0 * x for x in RAMP_UP]
+SQUARE_WAVE = [1.0 if x < (number_of_samples / 2) else -1.0 for x in range(number_of_samples)]
+SAWTOOTH_WAVE = RAMP_UP + [(-1 + x) for x in RAMP_UP]
+GAUSSIAN_NOISE = [random.gauss(0, 0.2) for x in range(number_of_samples)]
 
 
 SCRIPT_ALL = '''
@@ -120,12 +102,12 @@ def example(resource_name, options, shape, channel):
         session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING  # RISING / FAILING
 
         # 3 - Calculate and write different waveform data to the device's onboard memory
-        session.channels[channel].write_waveform('sine', calculate_sinewave())        # (waveform_name, data)
-        session.channels[channel].write_waveform('rampup', calculate_rampup())
-        session.channels[channel].write_waveform('rampdown', calculate_rampdown())
-        session.channels[channel].write_waveform('square', calculate_square())
-        session.channels[channel].write_waveform('sawtooth', calculate_sawtooth())
-        session.channels[channel].write_waveform('noise', calculate_gaussian_noise())
+        session.channels[channel].write_waveform('sine', SINE_WAVE)        # (waveform_name, data)
+        session.channels[channel].write_waveform('rampup', RAMP_UP)
+        session.channels[channel].write_waveform('rampdown', RAMP_DOWN)
+        session.channels[channel].write_waveform('square', SQUARE_WAVE)
+        session.channels[channel].write_waveform('sawtooth', SAWTOOTH_WAVE)
+        session.channels[channel].write_waveform('noise', GAUSSIAN_NOISE)
 
         # 4 - Script to generate
         # supported shapes: SINE / SQUARE / SAWTOOTH / RAMPUP / RAMPDOWN / NOISE / MULTI
