@@ -15,7 +15,7 @@ number_of_points = 256
 def calculate_sinewave():
     # waveforms finish just short of 360 degrees, so that we don't repeat the first point
     # if we repeat the waveform
-    return [math.sin(math.pi * 2 * x / (number_of_points) for x in range(number_of_points)]
+    return [math.sin(math.pi * 2 * x / (number_of_points)) for x in range(number_of_points)]
 
 
 def calculate_rampup():
