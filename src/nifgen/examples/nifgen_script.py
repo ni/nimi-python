@@ -2,89 +2,42 @@
 
 import argparse
 import nifgen
-import numpy as np
 
 import math
 import sys
 import time
 
+# waveform size should be a multiple of the quantum, which is 4 or 8, for some devices
+# some older devices also have a 256 sample minimum waveform size
 number_of_points = 256
 
 
-def equivalent_phase(phase):
-    if phase < 0:
-        phase += (abs(phase) // (2 * math.pi) + 1) * 2 * math.pi
-    elif phase > (2 * math.pi):
-        phase = phase % (2 * math.pi)
-    return phase  # phase in range [0, 2 * PI]
-
-
-def duty_cycle_is_on(phase, duty_cycle):
-    # duty_cycle is a decimal in the range [0, 1]
-    phase = equivalent_phase(phase)
-    if duty_cycle == 0:
-        return False
-    elif phase == 2 * math.pi:
-        return True
-    cycle_percentage = phase / (2 * math.pi)
-    return cycle_percentage <= duty_cycle
-
-
-def square_wave(t, duty_cycle):
-    wfm = []
-    for phase in t:  # treat time as phase
-        if duty_cycle_is_on(phase, duty_cycle):
-            wfm.append(1.0)
-        else:
-            wfm.append(-1.0)
-    return wfm
-
-
-def sawtooth_wave(t):
-    wfm = []
-    for phase in t:  # treat time as phase
-        phase = equivalent_phase(phase)
-        cycle_percentage = phase / (2 * math.pi)
-        wfm.append(-1.0 + (2 * cycle_percentage))
-    return wfm
-
-
 def calculate_sinewave():
-    time = np.linspace(start=0, stop=10, num=number_of_points)    # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    amplitude = np.sin(time)
-    sinewave = amplitude.tolist()                               # List of Float
-    return sinewave
+    # waveforms finish just short of 360 degrees, so that we don't repeat the first point
+    # if we repeat the waveform
+    return [math.sin(math.pi * 2 * x / (number_of_points) for x in range(number_of_points)]
 
 
 def calculate_rampup():
-    ramp = np.linspace(start=0, stop=0.5, num=number_of_points)   # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    ramp_up = ramp.tolist()                                     # List of Float
-    return ramp_up
+    return [x / (number_of_points) for x in range(number_of_points)]
 
 
 def calculate_rampdown():
-    ramp = np.linspace(start=0, stop=0.5, num=number_of_points)   # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    ramp_down = ramp.tolist()                                   # List of Float
-    ramp_down.reverse()                                         # Reverse list to get a ramp down
-    return ramp_down
+    return [-1.0 * x for x in calculate_rampup()]
 
 
 def calculate_square():
-    time = np.linspace(start=0, stop=10, num=number_of_points)    # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    square = square_wave(t=time, duty_cycle=0.5)
-    return square
+    return [1.0 if x < (number_of_points / 2) else -1.0 for x in range(number_of_points)]
 
 
-def calculate_triangle():
-    time = np.linspace(start=0, stop=1, num=number_of_points)     # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    triangle = sawtooth_wave(t=time)
-    return triangle
+def calculate_sawtooth():
+    part1 = calculate_rampup()
+    part2 = [(-1 + x) for x in part1]
+    return part1 + part2
 
 
-def calculate_gaussian_noise():
-    random_noise = np.random.normal(loc=0, scale=0.1, size=number_of_points)  # random.normal(loc=0.0, scale=1.0, size=None)
-    noise = random_noise.tolist()                                           # List of Float
-    return noise
+def calculate_noise():
+    return [random.uniform(-1.0, 1.0) for x in range(number_of_points)]
 
 
 SCRIPT_ALL = '''
@@ -107,7 +60,7 @@ script scriptmulti
     generate sine
   end repeat
   repeat until scriptTrigger0
-    generate triangle
+    generate sawtooth
   end repeat
   repeat until scriptTrigger0
     generate rampdown
@@ -140,9 +93,9 @@ script scriptsquare
   end repeat
 end script
 
-script scripttriangle
+script scriptsawtooth
   repeat until scriptTrigger0
-    generate triangle
+    generate sawtooth
   end repeat
 end script
 
@@ -170,11 +123,11 @@ def example(resource_name, options, shape, channel):
         session.channels[channel].write_waveform('rampup', calculate_rampup())
         session.channels[channel].write_waveform('rampdown', calculate_rampdown())
         session.channels[channel].write_waveform('square', calculate_square())
-        session.channels[channel].write_waveform('triangle', calculate_triangle())
-        session.channels[channel].write_waveform('noise', calculate_gaussian_noise())
+        session.channels[channel].write_waveform('sawtooth', calculate_sawtooth())
+        session.channels[channel].write_waveform('noise', calculate_noise())
 
         # 4 - Script to generate
-        # supported shapes: SINE / SQUARE / TRIANGLE / RAMPUP / RAMPDOWN / NOISE / MULTI
+        # supported shapes: SINE / SQUARE / SAWTOOTH / RAMPUP / RAMPDOWN / NOISE / MULTI
         script_name = 'script{}'.format(shape.lower())
         num_triggers = 6 if shape.upper() == 'MULTI' else 1  # Only multi needs two triggers, all others need one
 
