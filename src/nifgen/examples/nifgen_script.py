@@ -32,8 +32,8 @@ def duty_cycle_is_on(phase, duty_cycle):
 
 def square_wave(t, duty_cycle):
     wfm = []
-    for time in t:
-        if duty_cycle_is_on(time, duty_cycle):
+    for phase in t:  # treat time as phase
+        if duty_cycle_is_on(phase, duty_cycle):
             wfm.append(1.0)
         else:
             wfm.append(-1.0)
@@ -42,8 +42,8 @@ def square_wave(t, duty_cycle):
 
 def sawtooth_wave(t):
     wfm = []
-    for time in t:
-        phase = equivalent_phase(time)
+    for phase in t:  # treat time as phase
+        phase = equivalent_phase(phase)
         cycle_percentage = phase / (2 * math.pi)
         wfm.append(-1.0 + (2 * cycle_percentage))
     return wfm
