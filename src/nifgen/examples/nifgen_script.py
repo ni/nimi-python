@@ -10,17 +10,17 @@ import time
 
 # waveform size should be a multiple of the quantum, which is 4 or 8, for some devices
 # some older devices also have a 256 sample minimum waveform size
-number_of_samples = 256
+NUMBER_OF_SAMPLES = 256
 
 
 # waveforms finish just short of 360 degrees, so that we don't repeat the first point
 # if we repeat the waveform
-SINE_WAVE = [math.sin(math.pi * 2 * x / (number_of_samples)) for x in range(number_of_samples)]
-RAMP_UP = [x / (number_of_samples) for x in range(number_of_samples)]
+SINE_WAVE = [math.sin(math.pi * 2 * x / (NUMBER_OF_SAMPLES)) for x in range(NUMBER_OF_SAMPLES)]
+RAMP_UP = [x / (NUMBER_OF_SAMPLES) for x in range(NUMBER_OF_SAMPLES)]
 RAMP_DOWN = [-1.0 * x for x in RAMP_UP]
-SQUARE_WAVE = [1.0 if x < (number_of_samples / 2) else -1.0 for x in range(number_of_samples)]
+SQUARE_WAVE = [1.0 if x < (NUMBER_OF_SAMPLES / 2) else -1.0 for x in range(NUMBER_OF_SAMPLES)]
 SAWTOOTH_WAVE = RAMP_UP + [(-1 + x) for x in RAMP_UP]
-GAUSSIAN_NOISE = [random.gauss(0, 0.2) for x in range(number_of_samples)]
+GAUSSIAN_NOISE = [random.gauss(0, 0.2) for x in range(NUMBER_OF_SAMPLES)]
 
 
 SCRIPT_ALL = '''
