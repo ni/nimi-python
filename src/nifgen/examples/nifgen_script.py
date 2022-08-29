@@ -4,6 +4,7 @@ import argparse
 import nifgen
 
 import math
+import random
 import sys
 import time
 
@@ -36,8 +37,8 @@ def calculate_sawtooth():
     return part1 + part2
 
 
-def calculate_noise():
-    return [random.uniform(-1.0, 1.0) for x in range(number_of_points)]
+def calculate_gaussian_noise():
+    return [random.gauss(0, 0.2) for x in range(number_of_points)]
 
 
 SCRIPT_ALL = '''
@@ -124,7 +125,7 @@ def example(resource_name, options, shape, channel):
         session.channels[channel].write_waveform('rampdown', calculate_rampdown())
         session.channels[channel].write_waveform('square', calculate_square())
         session.channels[channel].write_waveform('sawtooth', calculate_sawtooth())
-        session.channels[channel].write_waveform('noise', calculate_noise())
+        session.channels[channel].write_waveform('noise', calculate_gaussian_noise())
 
         # 4 - Script to generate
         # supported shapes: SINE / SQUARE / SAWTOOTH / RAMPUP / RAMPDOWN / NOISE / MULTI
