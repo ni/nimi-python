@@ -10,17 +10,17 @@ import time
 
 # waveform size should be a multiple of the quantum, which is 4 or 8, for some devices
 # some older devices also have a 256 sample minimum waveform size
-number_of_points = 256
+number_of_samples = 256
 
 
 def calculate_sinewave():
     # waveforms finish just short of 360 degrees, so that we don't repeat the first point
     # if we repeat the waveform
-    return [math.sin(math.pi * 2 * x / (number_of_points)) for x in range(number_of_points)]
+    return [math.sin(math.pi * 2 * x / (number_of_samples)) for x in range(number_of_samples)]
 
 
 def calculate_rampup():
-    return [x / (number_of_points) for x in range(number_of_points)]
+    return [x / (number_of_samples) for x in range(number_of_samples)]
 
 
 def calculate_rampdown():
@@ -28,7 +28,7 @@ def calculate_rampdown():
 
 
 def calculate_square():
-    return [1.0 if x < (number_of_points / 2) else -1.0 for x in range(number_of_points)]
+    return [1.0 if x < (number_of_samples / 2) else -1.0 for x in range(number_of_samples)]
 
 
 def calculate_sawtooth():
@@ -38,7 +38,7 @@ def calculate_sawtooth():
 
 
 def calculate_gaussian_noise():
-    return [random.gauss(0, 0.2) for x in range(number_of_points)]
+    return [random.gauss(0, 0.2) for x in range(number_of_samples)]
 
 
 SCRIPT_ALL = '''
