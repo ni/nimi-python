@@ -9,9 +9,9 @@ import sys
 import time
 
 # waveform size should be a multiple of the quantum, which is 4, 2 or 1, for all devices
-# minimum waveform size varies with sample rate and device.
-# 512 should be enough for any device and sample rate, except certain 5450, 5451 configurations.
-NUMBER_OF_SAMPLES = 512
+# minimum waveform size needed to prevent underflow varies with sample rate and device.
+# If underflow occurs, increase this value.
+NUMBER_OF_SAMPLES = 2096
 
 
 # waveforms finish just short of 360 degrees, so that we don't repeat the first point
