@@ -113,7 +113,7 @@ def example(resource_name, options, shape, channel):
         # 4 - Script to generate
         # supported shapes: SINE / SQUARE / SAWTOOTH / RAMPUP / RAMPDOWN / NOISE / MULTI
         script_name = 'script{}'.format(shape.lower())
-        num_triggers = 6 if shape.upper() == 'MULTI' else 1  # Only multi needs two triggers, all others need one
+        num_triggers = 6 if shape.upper() == 'MULTI' else 1  # Only multi needs multiple triggers, all others need one
 
         session.channels[channel].write_script(SCRIPT_ALL)
         session.script_to_generate = script_name
