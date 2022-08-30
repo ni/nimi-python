@@ -2,52 +2,26 @@
 
 import argparse
 import nifgen
-import numpy as np
-from scipy import signal
+
+import math
+import random
 import sys
 import time
 
-number_of_points = 256
+# waveform size should be a multiple of the quantum, which is 4, 2 or 1, for all devices
+# minimum waveform size needed to prevent underflow varies with sample rate and device.
+# If underflow occurs, increase this value.
+NUMBER_OF_SAMPLES = 2096
 
 
-def calculate_sinewave():
-    time = np.linspace(start=0, stop=10, num=number_of_points)    # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    amplitude = np.sin(time)
-    sinewave = amplitude.tolist()                               # List of Float
-    return sinewave
-
-
-def calculate_rampup():
-    ramp = np.linspace(start=0, stop=0.5, num=number_of_points)   # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    ramp_up = ramp.tolist()                                     # List of Float
-    return ramp_up
-
-
-def calculate_rampdown():
-    ramp = np.linspace(start=0, stop=0.5, num=number_of_points)   # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    ramp_down = ramp.tolist()                                   # List of Float
-    ramp_down.reverse()                                         # Reverse list to get a ramp down
-    return ramp_down
-
-
-def calculate_square():
-    time = np.linspace(start=0, stop=10, num=number_of_points)    # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    square_build = signal.square(t=time, duty=0.5)              # signal.square(t, duty=0.5)
-    square = square_build.tolist()                              # List of Float
-    return square
-
-
-def calculate_triangle():
-    time = np.linspace(start=0, stop=1, num=number_of_points)     # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    triangle_build = signal.sawtooth(t=time)                    # signal.sawtooth(t, width=1)
-    triangle = triangle_build.tolist()                          # List of Float
-    return triangle
-
-
-def calculate_gaussian_noise():
-    random_noise = np.random.normal(loc=0, scale=0.1, size=number_of_points)  # random.normal(loc=0.0, scale=1.0, size=None)
-    noise = random_noise.tolist()                                           # List of Float
-    return noise
+# waveforms finish just short of 360 degrees, so that we don't repeat the first point
+# if we repeat the waveform
+SINE_WAVE = [math.sin(math.pi * 2 * x / (NUMBER_OF_SAMPLES)) for x in range(NUMBER_OF_SAMPLES)]
+RAMP_UP = [x / (NUMBER_OF_SAMPLES) for x in range(NUMBER_OF_SAMPLES)]
+RAMP_DOWN = [-1.0 * x for x in RAMP_UP]
+SQUARE_WAVE = [1.0 if x < (NUMBER_OF_SAMPLES / 2) else -1.0 for x in range(NUMBER_OF_SAMPLES)]
+SAWTOOTH_WAVE = RAMP_UP[::2] + [(-1 + x) for x in RAMP_UP][::2]
+GAUSSIAN_NOISE = [random.gauss(0, 0.2) for x in range(NUMBER_OF_SAMPLES)]
 
 
 SCRIPT_ALL = '''
@@ -70,7 +44,7 @@ script scriptmulti
     generate sine
   end repeat
   repeat until scriptTrigger0
-    generate triangle
+    generate sawtooth
   end repeat
   repeat until scriptTrigger0
     generate rampdown
@@ -103,9 +77,9 @@ script scriptsquare
   end repeat
 end script
 
-script scripttriangle
+script scriptsawtooth
   repeat until scriptTrigger0
-    generate triangle
+    generate sawtooth
   end repeat
 end script
 
@@ -129,17 +103,17 @@ def example(resource_name, options, shape, channel):
         session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING  # RISING / FAILING
 
         # 3 - Calculate and write different waveform data to the device's onboard memory
-        session.channels[channel].write_waveform('sine', calculate_sinewave())        # (waveform_name, data)
-        session.channels[channel].write_waveform('rampup', calculate_rampup())
-        session.channels[channel].write_waveform('rampdown', calculate_rampdown())
-        session.channels[channel].write_waveform('square', calculate_square())
-        session.channels[channel].write_waveform('triangle', calculate_triangle())
-        session.channels[channel].write_waveform('noise', calculate_gaussian_noise())
+        session.channels[channel].write_waveform('sine', SINE_WAVE)        # (waveform_name, data)
+        session.channels[channel].write_waveform('rampup', RAMP_UP)
+        session.channels[channel].write_waveform('rampdown', RAMP_DOWN)
+        session.channels[channel].write_waveform('square', SQUARE_WAVE)
+        session.channels[channel].write_waveform('sawtooth', SAWTOOTH_WAVE)
+        session.channels[channel].write_waveform('noise', GAUSSIAN_NOISE)
 
         # 4 - Script to generate
-        # supported shapes: SINE / SQUARE / TRIANGLE / RAMPUP / RAMPDOWN / NOISE / MULTI
+        # supported shapes: SINE / SQUARE / SAWTOOTH / RAMPUP / RAMPDOWN / NOISE / MULTI
         script_name = 'script{}'.format(shape.lower())
-        num_triggers = 6 if shape.upper() == 'MULTI' else 1  # Only multi needs two triggers, all others need one
+        num_triggers = 6 if shape.upper() == 'MULTI' else 1  # Only multi needs multiple triggers, all others need one
 
         session.channels[channel].write_script(SCRIPT_ALL)
         session.script_to_generate = script_name
