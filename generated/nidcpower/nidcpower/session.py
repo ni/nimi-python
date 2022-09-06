@@ -5343,7 +5343,7 @@ class _SessionBase(object):
             actual_count (int):
 
         '''
-        return self._library._fetch_multiple_lcr(self, self._repeated_capability, timeout, count)
+        return self._library._fetch_multiple_lcr(self, self._repeated_capability, count, timeout)
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):

@@ -3,6 +3,7 @@
 
 import array  # noqa: F401
 import ctypes
+import hightime
 import niswitch._converters as _converters
 import niswitch._visatype as _visatype
 import niswitch.enums as enums
@@ -393,7 +394,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
 
-    def _init_with_topology(self, session, resource_name, topology, simulate, reset_device):  # noqa: N802
+    def _init_with_topology(self, session, resource_name, topology="Configured Topology", simulate=False, reset_device=False):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(session._encoding))  # case C020
         topology_ctype = ctypes.create_string_buffer(topology.encode(session._encoding))  # case C020
         simulate_ctype = _visatype.ViBoolean(simulate)  # case S150
@@ -455,7 +456,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def route_scan_advanced_output(self, session, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):  # noqa: N802
+    def route_scan_advanced_output(self, session, scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         scan_advanced_output_connector_ctype = _visatype.ViInt32(scan_advanced_output_connector.value)  # case S130
         scan_advanced_output_bus_line_ctype = _visatype.ViInt32(scan_advanced_output_bus_line.value)  # case S130
@@ -469,7 +470,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def route_trigger_input(self, session, trigger_input_connector, trigger_input_bus_line, invert):  # noqa: N802
+    def route_trigger_input(self, session, trigger_input_connector, trigger_input_bus_line, invert=False):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         trigger_input_connector_ctype = _visatype.ViInt32(trigger_input_connector.value)  # case S130
         trigger_input_bus_line_ctype = _visatype.ViInt32(trigger_input_bus_line.value)  # case S130
@@ -574,7 +575,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(caller_has_lock_ctype.value)
 
-    def wait_for_debounce(self, session, maximum_time_ms):  # noqa: N802
+    def wait_for_debounce(self, session, maximum_time_ms=hightime.timedelta(milliseconds=5000)):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
         with self._func_lock:
@@ -586,7 +587,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_scan_complete(self, session, maximum_time_ms):  # noqa: N802
+    def wait_for_scan_complete(self, session, maximum_time_ms=hightime.timedelta(milliseconds=5000)):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
         with self._func_lock:

@@ -3,6 +3,7 @@
 
 import array  # noqa: F401
 import ctypes
+import hightime
 import nifake._converters as _converters
 import nifake._visatype as _visatype
 import nifake.enums as enums
@@ -221,7 +222,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
-    def enum_input_function_with_defaults(self, session, a_turtle):  # noqa: N802
+    def enum_input_function_with_defaults(self, session, a_turtle=enums.Turtle.LEONARDO):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         a_turtle_ctype = _visatype.ViInt16(a_turtle.value)  # case S130
         with self._func_lock:
@@ -643,7 +644,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _init_with_options(self, session, resource_name, id_query, reset_device, option_string):  # noqa: N802
+    def _init_with_options(self, session, resource_name, option_string, id_query=False, reset_device=False):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(session._encoding))  # case C020
         id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
@@ -681,7 +682,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(caller_has_lock_ctype.value)
 
-    def multiple_array_types(self, session, output_array_size, input_array_of_floats, input_array_of_integers):  # noqa: N802
+    def multiple_array_types(self, session, output_array_size, input_array_of_floats, input_array_of_integers=None):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         output_array_size_ctype = _visatype.ViInt32(output_array_size)  # case S210
         output_array_size = output_array_size  # case B600
@@ -953,7 +954,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def string_valued_enum_input_function_with_defaults(self, session, a_mobile_os_name):  # noqa: N802
+    def string_valued_enum_input_function_with_defaults(self, session, a_mobile_os_name=enums.MobileOSNames.ANDROID):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         a_mobile_os_name_ctype = ctypes.create_string_buffer(a_mobile_os_name.value.encode(session._encoding))  # case C030
         with self._func_lock:

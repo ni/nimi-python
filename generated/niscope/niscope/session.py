@@ -2054,7 +2054,7 @@ class _SessionBase(object):
         '''
         if type(coupling) is not enums.VerticalCoupling:
             raise TypeError('Parameter coupling must be of type ' + str(enums.VerticalCoupling))
-        return self._library.configure_vertical(self, self._repeated_capability, range, offset, coupling, probe_attenuation, enabled)
+        return self._library.configure_vertical(self, self._repeated_capability, range, coupling, offset, probe_attenuation, enabled)
 
     @ivi_synchronized
     def fetch(self, num_samples=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0)):
@@ -2535,7 +2535,7 @@ class _SessionBase(object):
                 Call _actual_num_wfms to determine the size of this array.
 
         '''
-        return self._library._fetch(self, self._repeated_capability, timeout, num_samples)
+        return self._library._fetch(self, self._repeated_capability, num_samples, timeout)
 
     @ivi_synchronized
     def _fetch_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
@@ -2753,7 +2753,7 @@ class _SessionBase(object):
         '''
         if type(array_meas_function) is not enums.ArrayMeasurement:
             raise TypeError('Parameter array_meas_function must be of type ' + str(enums.ArrayMeasurement))
-        return self._library._fetch_array_measurement(self, self._repeated_capability, timeout, array_meas_function, measurement_waveform_size)
+        return self._library._fetch_array_measurement(self, self._repeated_capability, array_meas_function, measurement_waveform_size, timeout)
 
     @ivi_synchronized
     def _fetch_binary16_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
@@ -3299,7 +3299,7 @@ class _SessionBase(object):
         '''
         if type(scalar_meas_function) is not enums.ScalarMeasurement:
             raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums.ScalarMeasurement))
-        return self._library._fetch_measurement_stats(self, self._repeated_capability, timeout, scalar_meas_function)
+        return self._library._fetch_measurement_stats(self, self._repeated_capability, scalar_meas_function, timeout)
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -3693,7 +3693,7 @@ class _SessionBase(object):
                 Call _actual_num_wfms to determine the size of this array.
 
         '''
-        return self._library._read(self, self._repeated_capability, timeout, num_samples)
+        return self._library._read(self, self._repeated_capability, num_samples, timeout)
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, value):
@@ -4527,7 +4527,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter slope must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
             raise TypeError('Parameter trigger_coupling must be of type ' + str(enums.TriggerCoupling))
-        return self._library.configure_trigger_edge(self, trigger_source, level, slope, trigger_coupling, holdoff, delay)
+        return self._library.configure_trigger_edge(self, trigger_source, level, trigger_coupling, slope, holdoff, delay)
 
     @ivi_synchronized
     def configure_trigger_hysteresis(self, trigger_source, level, hysteresis, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):
@@ -4590,7 +4590,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter slope must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
             raise TypeError('Parameter trigger_coupling must be of type ' + str(enums.TriggerCoupling))
-        return self._library.configure_trigger_hysteresis(self, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay)
+        return self._library.configure_trigger_hysteresis(self, trigger_source, level, hysteresis, trigger_coupling, slope, holdoff, delay)
 
     @ivi_synchronized
     def configure_trigger_immediate(self):
@@ -4715,7 +4715,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter polarity must be of type ' + str(enums.VideoPolarity))
         if type(trigger_coupling) is not enums.TriggerCoupling:
             raise TypeError('Parameter trigger_coupling must be of type ' + str(enums.TriggerCoupling))
-        return self._library.configure_trigger_video(self, trigger_source, enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay)
+        return self._library.configure_trigger_video(self, trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore, line_number, holdoff, delay)
 
     @ivi_synchronized
     def configure_trigger_window(self, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):

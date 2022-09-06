@@ -3,6 +3,7 @@
 
 import array  # noqa: F401
 import ctypes
+import hightime
 import nimodinst._converters as _converters
 import nimodinst._visatype as _visatype
 import nimodinst.errors as errors

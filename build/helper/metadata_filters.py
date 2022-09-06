@@ -129,7 +129,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_output_parameters': True,
         'but_keep_output_numpy_array_parameters': False,
         'skip_size_parameter': True,
-        'reordered_for_default_values': False,
+        'reordered_for_default_values': True,
         'skip_repeated_capability_parameter': False,
         'skip_non_enum_parameter': False,
         'skip_all_except_numpy_parameters': False,

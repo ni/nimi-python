@@ -16,6 +16,7 @@ functions = helper.filter_library_functions(functions)
 
 import array  # noqa: F401
 import ctypes
+import hightime
 import ${module_name}._converters as _converters
 import ${module_name}._visatype as _visatype
 % if config['enums']:

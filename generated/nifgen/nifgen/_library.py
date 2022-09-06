@@ -3,6 +3,7 @@
 
 import array  # noqa: F401
 import ctypes
+import hightime
 import nifgen._converters as _converters
 import nifgen._visatype as _visatype
 import nifgen.enums as enums
@@ -295,7 +296,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_freq_list(self, session, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
+    def configure_freq_list(self, session, channel_name, frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(session._encoding))  # case C010
         frequency_list_handle_ctype = _visatype.ViInt32(frequency_list_handle)  # case S150
@@ -311,7 +312,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_standard_waveform(self, session, channel_name, waveform, amplitude, dc_offset, frequency, start_phase):  # noqa: N802
+    def configure_standard_waveform(self, session, channel_name, waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(session._encoding))  # case C010
         waveform_ctype = _visatype.ViInt32(waveform.value)  # case S130
@@ -328,7 +329,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_advanced_arb_sequence(self, session, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array):  # noqa: N802
+    def create_advanced_arb_sequence(self, session, waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         sequence_length_ctype = _visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case S160
         if loop_counts_array is not None and len(loop_counts_array) != len(waveform_handles_array):  # case S160
@@ -761,7 +762,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _initialize_with_channels(self, session, resource_name, channel_name, reset_device, option_string):  # noqa: N802
+    def _initialize_with_channels(self, session, resource_name, channel_name=None, reset_device=False, option_string=""):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(session._encoding))  # case C020
         channel_name_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(channel_name).encode(session._encoding))  # case C040
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
@@ -1014,7 +1015,7 @@ class Library(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(caller_has_lock_ctype.value)
 
-    def wait_until_done(self, session, max_time):  # noqa: N802
+    def wait_until_done(self, session, max_time=hightime.timedelta(seconds=10.0)):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         max_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(max_time)  # case S140
         with self._func_lock:

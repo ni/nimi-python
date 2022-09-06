@@ -77,7 +77,7 @@ _ParameterUsageOptionsSnippet = {
     ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
         'skip_self': False,
         'include_session_instance': True,
-        'name_to_use': 'python_name',
+        'name_to_use': 'python_name_with_default',
     },
 }
 # Only used for filtering
