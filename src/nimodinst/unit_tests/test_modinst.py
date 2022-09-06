@@ -4,23 +4,31 @@ import _mock_helper
 import nimodinst
 import warnings
 
+from unittest.mock import MagicMock
 from unittest.mock import patch
 
 SESSION_NUM_FOR_TEST = 42
 
 
 class TestSession(object):
+    class PatchedLibrary(nimodinst._library.Library):
+        def __init__(self, ctypes_library):
+            super().__init__(ctypes_library)
+
+            for f in dir(self):
+                if f.startswith("niModInst_") and f.endswith("_cfunc"):
+                    setattr(self, f, MagicMock())
+
     def setup_method(self, method):
-        self.patched_library_patcher = patch('nimodinst._library.Library', autospec=True)
-        self.patched_library = self.patched_library_patcher.start()
+        self.patched_library = self.PatchedLibrary(None)
         self.patched_library_singleton_get = patch('nimodinst.session._library_singleton.get', return_value=self.patched_library)
         self.patched_library_singleton_get.start()
 
         self.side_effects_helper = _mock_helper.SideEffectsHelper()
         self.side_effects_helper.set_side_effects_and_return_values(self.patched_library)
-        self.patched_library.niModInst_OpenInstalledDevicesSession.side_effect = self.side_effects_helper.niModInst_OpenInstalledDevicesSession
-        self.disallow_close = self.patched_library.niModInst_CloseInstalledDevicesSession.side_effect
-        self.patched_library.niModInst_CloseInstalledDevicesSession.side_effect = self.side_effects_helper.niModInst_CloseInstalledDevicesSession
+        self.patched_library.niModInst_OpenInstalledDevicesSession_cfunc.side_effect = self.side_effects_helper.niModInst_OpenInstalledDevicesSession
+        self.disallow_close = self.patched_library.niModInst_CloseInstalledDevicesSession_cfunc.side_effect
+        self.patched_library.niModInst_CloseInstalledDevicesSession_cfunc.side_effect = self.side_effects_helper.niModInst_CloseInstalledDevicesSession
 
         self.side_effects_helper['OpenInstalledDevicesSession']['handle'] = SESSION_NUM_FOR_TEST
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
@@ -33,7 +41,6 @@ class TestSession(object):
 
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
-        self.patched_library_patcher.stop()
 
     # Helper function for mocking multiple devices
     def niModInst_GetInstalledDeviceAttributeViString_looping(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
@@ -56,20 +63,20 @@ class TestSession(object):
 
     def test_open_and_close(self):
         session = nimodinst.Session('')
-        self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(_matchers.ViStringMatcher(''), _matchers.ViSessionPointerMatcher(), _matchers.ViInt32PointerMatcher())
+        self.patched_library.niModInst_OpenInstalledDevicesSession_cfunc.assert_called_once_with(_matchers.ViStringMatcher(''), _matchers.ViSessionPointerMatcher(), _matchers.ViInt32PointerMatcher())
         session.close()
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+        self.patched_library.niModInst_CloseInstalledDevicesSession_cfunc.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_close(self):
         session = nimodinst.Session('')
         session.close()
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+        self.patched_library.niModInst_CloseInstalledDevicesSession_cfunc.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_context_manager(self):
         with nimodinst.Session('') as session:
             assert type(session) == nimodinst.Session
-            self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(_matchers.ViStringMatcher(''), _matchers.ViSessionPointerMatcher(), _matchers.ViInt32PointerMatcher())
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+            self.patched_library.niModInst_OpenInstalledDevicesSession_cfunc.assert_called_once_with(_matchers.ViStringMatcher(''), _matchers.ViSessionPointerMatcher(), _matchers.ViInt32PointerMatcher())
+        self.patched_library.niModInst_CloseInstalledDevicesSession_cfunc.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_iterating_for(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
@@ -91,7 +98,7 @@ class TestSession(object):
 
     def test_get_extended_error_info(self):
         error_string = 'Error'
-        self.patched_library.niModInst_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
+        self.patched_library.niModInst_GetExtendedErrorInfo_cfunc.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
         self.side_effects_helper['GetExtendedErrorInfo']['errorInfo'] = error_string
         with nimodinst.Session('') as session:
             # Calling the private function directly, as _get_extended_error_info() functions differently than other IVI Dance functions.
@@ -100,9 +107,9 @@ class TestSession(object):
             assert result == error_string
 
     def test_get_error_description_fails(self):
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32_cfunc.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
         self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['return'] = -1
-        self.patched_library.niModInst_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
+        self.patched_library.niModInst_GetExtendedErrorInfo_cfunc.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
         self.side_effects_helper['GetExtendedErrorInfo']['return'] = -2
         with nimodinst.Session('') as session:
             try:
@@ -114,14 +121,14 @@ class TestSession(object):
     def test_get_attribute_session(self):
         val = 123
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32_cfunc.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
         self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = val
         with nimodinst.Session('') as session:
             attr_int = session.devices[0].chassis_number
             assert(attr_int == val)
 
     def test_get_attribute_vi_int32_for_loop_index(self):
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.niModInst_GetInstalledDeviceAttributeViInt32_looping
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32_cfunc.side_effect = self.niModInst_GetInstalledDeviceAttributeViInt32_looping
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_int_devices_looping
         index = 0
         with nimodinst.Session('') as session:
@@ -130,7 +137,7 @@ class TestSession(object):
             assert(attr_int == self.int_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
 
     def test_get_attribute_vi_string_for_loop_index(self):
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.niModInst_GetInstalledDeviceAttributeViString_looping
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViString_cfunc.side_effect = self.niModInst_GetInstalledDeviceAttributeViString_looping
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_string_devices_looping
         index = 0
         with nimodinst.Session('') as session:
@@ -141,7 +148,7 @@ class TestSession(object):
     def test_get_attribute_session_no_index(self):
         val = 123
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32_cfunc.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
         self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = val
         with nimodinst.Session('') as session:
             try:
@@ -151,7 +158,7 @@ class TestSession(object):
                 assert str(e) == "'Session' object has no attribute 'chassis_number'"
 
     def test_get_attribute_vi_int32_for_loop_multiple_devices(self):
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.niModInst_GetInstalledDeviceAttributeViInt32_looping
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32_cfunc.side_effect = self.niModInst_GetInstalledDeviceAttributeViInt32_looping
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_int_devices_looping
         with nimodinst.Session('') as session:
             for d in session:
@@ -159,7 +166,7 @@ class TestSession(object):
                 assert(attr_int == self.int_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
 
     def test_get_attribute_vi_string_for_loop_multiple_devices(self):
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.niModInst_GetInstalledDeviceAttributeViString_looping
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViString_cfunc.side_effect = self.niModInst_GetInstalledDeviceAttributeViString_looping
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_string_devices_looping
         with nimodinst.Session('') as session:
             for d in session:
@@ -220,10 +227,10 @@ class TestSession(object):
     def test_int_attribute_error(self):
         error_code = -1234
         error_string = 'Error'
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32_cfunc.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
         self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = -1
         self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['return'] = error_code
-        self.patched_library.niModInst_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
+        self.patched_library.niModInst_GetExtendedErrorInfo_cfunc.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
         self.side_effects_helper['GetExtendedErrorInfo']['errorInfo'] = error_string
         with nimodinst.Session('') as session:
             try:
@@ -236,10 +243,10 @@ class TestSession(object):
     def test_int_attribute_warning(self):
         warning_code = 1234
         error_string = 'Error'
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32_cfunc.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
         self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = -1
         self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['return'] = warning_code
-        self.patched_library.niModInst_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
+        self.patched_library.niModInst_GetExtendedErrorInfo_cfunc.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
         self.side_effects_helper['GetExtendedErrorInfo']['errorInfo'] = error_string
         with nimodinst.Session('') as session:
             with warnings.catch_warnings(record=True) as w:
@@ -249,8 +256,8 @@ class TestSession(object):
                 assert error_string in str(w[0].message)
 
     def test_repr_and_str(self):
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViString
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32_cfunc.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViString_cfunc.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViString
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
         self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = 42
         self.side_effects_helper['GetInstalledDeviceAttributeViString']['attributeValue'] = 'fourty two'

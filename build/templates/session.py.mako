@@ -21,8 +21,6 @@ ${template_parameters['encoding_tag']}
         session_context_manager_abort = functions[config['context_manager_name']['abort_function']]['python_name']
         render_initiate_in_session_base = functions[config['context_manager_name']['initiate_function']]['render_in_session_base']
 %>\
-import array  # noqa: F401
-import ctypes
 % if config['use_locking']:
 # Used by @ivi_synchronized
 from functools import wraps
@@ -33,7 +31,6 @@ import ${module_name}._attributes as _attributes
 % endif
 import ${module_name}._converters as _converters
 import ${module_name}._library_singleton as _library_singleton
-import ${module_name}._visatype as _visatype
 import ${module_name}.enums as enums
 import ${module_name}.errors as errors
 % for c in config['custom_types']:
@@ -49,39 +46,6 @@ import nitclk
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
-
-
-# Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
-    if isinstance(value, array.array):
-        assert library_type is not None, 'library_type is required for array.array'
-        addr, _ = value.buffer_info()
-        return ctypes.cast(addr, ctypes.POINTER(library_type))
-    elif str(type(value)).find("'numpy.ndarray'") != -1:
-        import numpy
-        return numpy.ctypeslib.as_ctypes(value)
-    elif isinstance(value, bytes):
-        return ctypes.cast(value, ctypes.POINTER(library_type))
-    elif isinstance(value, list):
-        assert library_type is not None, 'library_type is required for list'
-        return (library_type * len(value))(*value)
-    else:
-        if library_type is not None and size is not None:
-            return (library_type * size)()
-        else:
-            return None
-
-
-def get_ctypes_and_array(value, array_type):
-    if value is not None:
-        if isinstance(value, array.array):
-            value_array = value
-        else:
-            value_array = array.array(array_type, value)
-    else:
-        value_array = None
-
-    return value_array
 
 
 % if session_context_manager is not None:
@@ -233,28 +197,6 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
-
-        Returns the error description.
-        '''
-        try:
-            _, error_string = self._get_error()
-            return error_string
-        except errors.Error:
-            pass
-
-        try:
-            '''
-            It is expected for _get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use _error_message instead. It doesn't require a session.
-            '''
-            error_string = self._error_message(error_code)
-            return error_string
-        except errors.Error:
-            return "Failed to retrieve error description."
-
 % if session_context_manager is not None and render_initiate_in_session_base:
     def initiate(self):
         '''initiate
@@ -265,15 +207,16 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 
 % endif
     ''' These are code-generated '''
-
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+
 % if functions[func_name]['use_session_lock'] and config['use_locking']:
     @ivi_synchronized
 % endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
+
 
 class Session(_SessionBase):
     '''${config['session_class_description']}'''
@@ -356,14 +299,12 @@ class Session(_SessionBase):
         self._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
-
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+
 % if functions[func_name]['use_session_lock'] and config['use_locking']:
     @ivi_synchronized
 % endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
-
-

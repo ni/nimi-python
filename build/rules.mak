@@ -42,6 +42,7 @@ $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 # We set up some additional dependencies for specific files
 # examples.rst needs to use find since there may be folders of files and it needs to be recursive. wildcard is not recursive
 $(MODULE_DIR)/session.py: $(wildcard $(TEMPLATE_DIR)/session.py/*.mako) $(wildcard $(DRIVER_DIR)/templates/session.py/*.mako)
+$(MODULE_DIR)/_library.py: $(wildcard $(TEMPLATE_DIR)/_get_error_description.py.mako $(DRIVER_DIR)/templates/_get_error_description.py.mako)
 $(DRIVER_DOCS_DIR)/class.rst: $(wildcard $(TEMPLATE_DIR)/functions.rst/*.mako) $(wildcard $(DRIVER_DIR)/templates/functions.rst/*.mako)
 $(DRIVER_DOCS_DIR)/examples.rst: $(EXAMPLE_FILES) $(MODULE_DIR)/VERSION
 
@@ -131,5 +132,3 @@ endif
 
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
-
-

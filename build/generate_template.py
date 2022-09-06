@@ -15,7 +15,7 @@ def generate_template(template_name, template_params, dest_file, in_zip_file=Fal
     try:
         template_params['encoding_tag'] = '# -*- coding: utf-8 -*-'
         module_name = template_params['metadata'].config['module_name']
-        lookup = TemplateLookup(directories=['build/templates', 'src/{0}/templates'.format(module_name)])
+        lookup = TemplateLookup(directories=['src/{0}/templates'.format(module_name), 'build/templates'])
         template = Template(filename=template_name, lookup=lookup)
         rendered_template = template.render(template_parameters=template_params)
 

@@ -11,46 +11,72 @@ pp = pprint.PrettyPrinter(indent=4, width=200)
 _ParameterUsageOptionsSnippet = {
     ParameterUsageOptions.SESSION_METHOD_DECLARATION: {
         'skip_self': False,
+        'include_session_instance': False,
         'name_to_use': 'python_name_with_default',
     },
     ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL: {
         'skip_self': True,
+        'include_session_instance': False,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.SESSION_INIT_DECLARATION: {
         'skip_self': False,
+        'include_session_instance': False,
         'name_to_use': 'python_name_with_default',
     },
     ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION: {
         'skip_self': False,
+        'include_session_instance': False,
         'name_to_use': 'python_name_with_default',
+    },
+    ParameterUsageOptions.LIBRARY_NUMPY_INTO_METHOD_DECLARATION: {
+        'skip_self': False,
+        'include_session_instance': True,
+        'name_to_use': 'python_name',
+    },
+    ParameterUsageOptions.LIBRARY_NUMPY_INTO_METHOD_CALL: {
+        'skip_self': False,
+        'include_session_instance': False,
+        'name_to_use': 'library_method_call_snippet',
     },
     ParameterUsageOptions.SESSION_METHOD_CALL: {
         'skip_self': True,
+        'include_session_instance': False,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.SESSION_INIT_CALL: {
         'skip_self': True,
+        'include_session_instance': False,
         'name_to_use': 'python_name_or_default_for_init',
     },
     ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD: {
         'skip_self': True,
+        'include_session_instance': False,
         'name_to_use': 'python_name_with_doc_default',
+    },
+    ParameterUsageOptions.CTYPES_METHOD_DECLARATION: {
+        'skip_self': False,
+        'include_session_instance': False,
+        'name_to_use': 'python_name',
     },
     ParameterUsageOptions.CTYPES_CALL: {
         'skip_self': True,
-        'name_to_use': 'python_name',
+        'include_session_instance': False,
+        'name_to_use': 'ctypes_method_call_snippet',
     },
     ParameterUsageOptions.LIBRARY_METHOD_CALL: {
-        'skip_self': True,
+        'skip_self': False,
+        'include_session_instance': False,
         'name_to_use': 'library_method_call_snippet',
     },
     ParameterUsageOptions.CTYPES_ARGTYPES: {
         'skip_self': True,
+        'include_session_instance': False,
         'name_to_use': 'ctypes_type_library_call',
     },
     ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
         'skip_self': False,
+        'include_session_instance': True,
         'name_to_use': 'python_name',
     },
 }
@@ -78,6 +104,8 @@ def get_params_snippet(function, parameter_usage_options):
     snippets = []
     if not options_to_use['skip_self']:
         snippets.append('self')
+    if options_to_use['include_session_instance']:
+        snippets.append('session')
 
     # Render based on options
     for p in parameters_to_use:
@@ -117,8 +145,8 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
         snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
     else:
         if output_parameter['is_string']:
-            # 'self._encoding' is a variable on the session object
-            snippet = output_parameter['ctypes_variable_name'] + '.value.decode(self._encoding)'
+            # '_encoding' is a variable on the session object
+            snippet = output_parameter['ctypes_variable_name'] + '.value.decode(session._encoding)'
         else:
             snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + val_suffix + ')'
 
@@ -203,10 +231,10 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
 def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name):
     '''These are the different cases for initializing the ctype variables for strings
 
-    C010. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
-    C020. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(self._encoding))
-    C030. Input string enum:                                                   ctypes.create_string_buffer(parameter_name.value.encode(self._encoding))
-    C040. Input uses converter:                                                ctypes.create_string_buffer(_converters.convert_foo(parameter_name).encode(self._encoding))
+    C010. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(session._encoding))
+    C020. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(session._encoding))
+    C030. Input string enum:                                                   ctypes.create_string_buffer(parameter_name.value.encode(session._encoding))
+    C040. Input uses converter:                                                ctypes.create_string_buffer(_converters.convert_foo(parameter_name).encode(session._encoding))
     C050. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
     C060. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViChar * buffer_size_ctype.value)()
     C070. Output buffer with mechanism fixed-size:                             visatype.ViChar * 256
@@ -219,13 +247,13 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
 
     if parameter['direction'] == 'in':
         if parameter['is_repeated_capability'] is True:
-            definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010'
+            definition = 'ctypes.create_string_buffer({0}.encode(session._encoding))  # case C010'.format(parameter['python_name'])
         elif parameter['enum'] is not None:
-            definition = 'ctypes.create_string_buffer({0}.value.encode(self._encoding))  # case C030'.format(parameter['python_name'])
+            definition = 'ctypes.create_string_buffer({0}.value.encode(session._encoding))  # case C030'.format(parameter['python_name'])
         elif 'python_api_converter_name' in parameter:
-            definition = 'ctypes.create_string_buffer(_converters.{0}({1}).encode(self._encoding))  # case C040'.format(parameter['python_api_converter_name'], parameter['python_name'])
+            definition = 'ctypes.create_string_buffer(_converters.{0}({1}).encode(session._encoding))  # case C040'.format(parameter['python_api_converter_name'], parameter['python_name'])
         else:
-            definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case C020'.format(parameter['python_name'])
+            definition = 'ctypes.create_string_buffer({0}.encode(session._encoding))  # case C020'.format(parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
         if parameter['size']['mechanism'] == 'ivi-dance':
@@ -291,7 +319,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 
     if parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
-            definition = '{0}.{1}(self._{2})  # case S110'.format(module_name, parameter['ctypes_type'], config['session_handle_parameter_name'])
+            definition = '{0}.{1}(session._{2})  # case S110'.format(module_name, parameter['ctypes_type'], config['session_handle_parameter_name'])
         elif parameter['size']['mechanism'] == 'python-code':
             definition = '{0}.{1}({2})  # case S120'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['enum'] is not None:
@@ -513,6 +541,7 @@ config_for_testing = {
 # We also need some function parameters that cover all cases.
 parameters_for_testing = [
     {  # 0
+        'ctypes_method_call_snippet': 'vi_ctype',
         'ctypes_type': 'ViSession',
         'ctypes_type_library_call': 'ViSession',
         'ctypes_variable_name': 'vi_ctype',
@@ -523,7 +552,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': True,
-        'library_method_call_snippet': 'vi_ctype',
+        'library_method_call_snippet': 'self._vi',
         'name': 'vi',
         'python_name': 'vi',
         'python_name_with_default': 'vi',
@@ -535,6 +564,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 1
+        'ctypes_method_call_snippet': 'ctypes.pointer(output_ctype)',
         'ctypes_type': 'ViInt64',
         'ctypes_type_library_call': 'ctypes.POINTER(ViInt64)',
         'ctypes_variable_name': 'output_ctype',
@@ -548,7 +578,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'ctypes.pointer(output_ctype)',
+        'library_method_call_snippet': 'output',
         'name': 'output',
         'python_name': 'output',
         'python_name_with_default': 'output',
@@ -560,6 +590,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 2
+        'ctypes_method_call_snippet': 'error_message_ctype',
         'ctypes_type': 'ViString',
         'ctypes_type_library_call': 'ViString',
         'ctypes_variable_name': 'error_message_ctype',
@@ -572,7 +603,7 @@ parameters_for_testing = [
         'is_string': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'error_message_ctype',
+        'library_method_call_snippet': 'error_message',
         'name': 'errorMessage',
         'python_name': 'error_message',
         'python_name_with_default': 'error_message',
@@ -584,6 +615,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 3
+        'ctypes_method_call_snippet': 'array_out_ctype',
         'ctypes_type': 'custom_struct',
         'ctypes_type_library_call': 'ctypes.POINTER(custom_struct)',
         'ctypes_variable_name': 'array_out_ctype',
@@ -596,7 +628,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'array_out_ctype',
+        'library_method_call_snippet': 'array_out',
         'name': 'arrayOut',
         'original_type': 'custom_struct[]',
         'python_name': 'array_out',
@@ -609,6 +641,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 4
+        'ctypes_method_call_snippet': 'number_of_elements_ctype',
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ViInt32',
         'ctypes_variable_name': 'number_of_elements_ctype',
@@ -619,7 +652,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'number_of_elements_ctype',
+        'library_method_call_snippet': 'number_of_elements',
         'name': 'numberOfElements',
         'python_name': 'number_of_elements',
         'python_name_with_default': 'number_of_elements',
@@ -631,6 +664,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 5
+        'ctypes_method_call_snippet': 'an_array_ctype',
         'ctypes_type': 'ViInt16',
         'ctypes_type_library_call': 'ctypes.POINTER(ViInt16)',
         'ctypes_variable_name': 'an_array_ctype',
@@ -643,7 +677,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'an_array_ctype',
+        'library_method_call_snippet': 'an_array',
         'name': 'anArray',
         'python_name': 'an_array',
         'python_name_with_default': 'an_array',
@@ -655,6 +689,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 6
+        'ctypes_method_call_snippet': 'an_int_enum_ctype',
         'ctypes_type': 'ViInt16',
         'ctypes_type_library_call': 'ViInt16',
         'ctypes_variable_name': 'an_int_enum_ctype',
@@ -668,7 +703,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'an_int_enum_ctype',
+        'library_method_call_snippet': 'an_int_enum',
         'name': 'anIntEnum',
         'python_name': 'an_int_enum',
         'python_name_with_default': 'an_int_enum',
@@ -680,6 +715,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 7
+        'ctypes_method_call_snippet': 'ctypes.pointer(output_ctype)',
         'ctypes_type': 'ViInt64',
         'ctypes_type_library_call': 'ctypes.POINTER(ViInt64)',
         'ctypes_variable_name': 'output_ctype',
@@ -692,7 +728,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'ctypes.pointer(output_ctype)',
+        'library_method_call_snippet': 'output',
         'name': 'output',
         'python_name': 'output',
         'python_name_with_default': 'output',
@@ -706,6 +742,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 8
+        'ctypes_method_call_snippet': 'number_of_elements_python_code_ctype',
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ViInt32',
         'ctypes_variable_name': 'number_of_elements_python_code_ctype',
@@ -716,7 +753,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'number_of_elements_python_code_ctype',
+        'library_method_call_snippet': 'number_of_elements_python_code',
         'name': 'numberOfElementsPythonCode',
         'numpy': False,
         'python_name': 'number_of_elements_python_code',
@@ -728,6 +765,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 9
+        'ctypes_method_call_snippet': 'input_ctype',
         'ctypes_type': 'ViInt16',
         'ctypes_type_library_call': 'ViInt16',
         'ctypes_variable_name': 'input_ctype',
@@ -738,7 +776,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'input_ctype',
+        'library_method_call_snippet': 'input',
         'name': 'input',
         'numpy': False,
         'python_name': 'input',
@@ -750,6 +788,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 10
+        'ctypes_method_call_snippet': 'input_array_ctype',
         'ctypes_type': 'ViReal64',
         'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
         'ctypes_variable_name': 'input_array_ctype',
@@ -763,7 +802,7 @@ parameters_for_testing = [
         'use_list': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'input_array_ctype',
+        'library_method_call_snippet': 'input_array',
         'name': 'inputArray',
         'numpy': False,
         'python_name': 'input_array',
@@ -775,6 +814,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 11
+        'ctypes_method_call_snippet': 'input_array_size_ctype',
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ViInt32',
         'ctypes_variable_name': 'input_array_size_ctype',
@@ -785,7 +825,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'input_array_size_ctype',
+        'library_method_call_snippet': 'input_array_size',
         'name': 'inputArraySize',
         'numpy': False,
         'python_name': 'input_array_size',
@@ -797,6 +837,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 12
+        'ctypes_method_call_snippet': 'string_size_ctype',
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ViInt32',
         'ctypes_variable_name': 'string_size_ctype',
@@ -807,7 +848,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'string_size_ctype',
+        'library_method_call_snippet': 'string_size',
         'name': 'stringSize',
         'numpy': False,
         'python_name': 'string_size',
@@ -819,6 +860,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 13
+        'ctypes_method_call_snippet': 'a_string_ctype',
         'ctypes_type': 'ViString',
         'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
         'ctypes_variable_name': 'a_string_ctype',
@@ -829,7 +871,7 @@ parameters_for_testing = [
         'is_string': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'a_string_ctype',
+        'library_method_call_snippet': 'a_string',
         'name': 'aString',
         'numpy': False,
         'python_name': 'a_string',
@@ -841,6 +883,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 14
+        'ctypes_method_call_snippet': 'timeout_ctype',
         'ctypes_type': 'ViReal64',
         'ctypes_type_library_call': 'ViReal64',
         'ctypes_variable_name': 'timeout_ctype',
@@ -852,7 +895,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'timeout_ctype',
+        'library_method_call_snippet': 'timeout',
         'name': 'Timeout',
         'numpy': False,
         'python_name': 'timeout',
@@ -865,6 +908,7 @@ parameters_for_testing = [
         'python_api_converter_name': 'timedelta_converter_seconds_real64',
     },
     {  # 15
+        'ctypes_method_call_snippet': 'channel_list_ctype',
         'ctypes_type': 'ViString',
         'ctypes_type_library_call': 'ViString',
         'ctypes_variable_name': 'channel_list_ctype',
@@ -877,7 +921,7 @@ parameters_for_testing = [
         'is_string': True,
         'is_repeated_capability': True,
         'is_session_handle': False,
-        'library_method_call_snippet': 'channel_list_ctype',
+        'library_method_call_snippet': 'self._repeated_capability',
         'name': 'channelList',
         'numpy': False,
         'original_type': 'ViChar[]',
@@ -890,6 +934,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 16
+        'ctypes_method_call_snippet': 'a_string_ctype',
         'ctypes_type': 'ViString',
         'ctypes_type_library_call': 'ViString',
         'ctypes_variable_name': 'a_string_ctype',
@@ -900,7 +945,7 @@ parameters_for_testing = [
         'is_string': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'a_string_ctype',
+        'library_method_call_snippet': 'a_string',
         'name': 'aString',
         'numpy': False,
         'python_name': 'a_string',
@@ -912,6 +957,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 17
+        'ctypes_method_call_snippet': 'array_in_ctype',
         'ctypes_type': 'custom_struct',
         'ctypes_type_library_call': 'ctypes.POINTER(custom_struct)',
         'ctypes_variable_name': 'array_in_ctype',
@@ -922,7 +968,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'array_in_ctype',
+        'library_method_call_snippet': 'array_in',
         'name': 'arrayOut',
         'original_type': 'custom_struct[]',
         'python_name': 'array_in',
@@ -935,6 +981,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 18
+        'ctypes_method_call_snippet': 'an_int_ctype',
         'ctypes_type': 'ViInt16',
         'ctypes_type_library_call': 'ViInt16',
         'ctypes_variable_name': 'an_int_ctype',
@@ -949,7 +996,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'an_int_ctype',
+        'library_method_call_snippet': 'an_int',
         'name': 'anInt',
         'python_name': 'an_int',
         'python_name_with_default': 'an_int',
@@ -961,6 +1008,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 19
+        'ctypes_method_call_snippet': 'a_string_2_ctype',
         'ctypes_type': 'ViString',
         'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
         'ctypes_variable_name': 'a_string_2_ctype',
@@ -971,7 +1019,7 @@ parameters_for_testing = [
         'is_string': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'a_string_2_ctype',
+        'library_method_call_snippet': 'a_string_2',
         'name': 'aString2',
         'numpy': False,
         'python_name': 'a_string_2',
@@ -983,6 +1031,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 20
+        'ctypes_method_call_snippet': 'a_string_3_ctype',
         'ctypes_type': 'ViString',
         'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
         'ctypes_variable_name': 'a_string_3_ctype',
@@ -993,7 +1042,7 @@ parameters_for_testing = [
         'is_string': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'a_string_3_ctype',
+        'library_method_call_snippet': 'a_string_3',
         'name': 'aStrin3g',
         'numpy': False,
         'python_name': 'a_string_3',
@@ -1005,6 +1054,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 21
+        'ctypes_method_call_snippet': 'a_string_twist_ctype',
         'ctypes_type': 'ViString',
         'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
         'ctypes_variable_name': 'a_string_twist_ctype',
@@ -1015,7 +1065,7 @@ parameters_for_testing = [
         'is_string': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'a_string_twist_ctype',
+        'library_method_call_snippet': 'a_string_twist',
         'name': 'aStringTwist',
         'numpy': False,
         'python_name': 'a_string_twist',
@@ -1027,6 +1077,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 22
+        'ctypes_method_call_snippet': 'ctypes.pointer(output_twist_ctype)',
         'ctypes_type': 'ViInt64',
         'ctypes_type_library_call': 'ctypes.POINTER(ViInt64)',
         'ctypes_variable_name': 'output_twist_ctype',
@@ -1040,7 +1091,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'ctypes.pointer(output_twist_ctype)',
+        'library_method_call_snippet': 'output_twist',
         'name': 'output_twist',
         'python_name': 'output_twist',
         'python_name_with_default': 'output_twist',
@@ -1052,6 +1103,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 23
+        'ctypes_method_call_snippet': 'string_size_twist_ctype',
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ViInt32',
         'ctypes_variable_name': 'string_size_twist_ctype',
@@ -1062,7 +1114,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'string_size_twist_ctype',
+        'library_method_call_snippet': 'string_size_twist',
         'name': 'stringSizeTwist',
         'numpy': False,
         'python_name': 'string_size_twist',
@@ -1074,6 +1126,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 24
+        'ctypes_method_call_snippet': 'a_buffer_ctype',
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
         'ctypes_variable_name': 'a_buffer_array_ctype',
@@ -1084,7 +1137,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'a_buffer_ctype',
+        'library_method_call_snippet': 'a_buffer',
         'name': 'aBufferArray',
         'numpy': False,
         'python_name': 'a_buffer_array',
@@ -1098,6 +1151,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 25
+        'ctypes_method_call_snippet': 'a_buffer_ctype',
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
         'ctypes_variable_name': 'a_buffer_list_ctype',
@@ -1108,7 +1162,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'a_buffer_ctype',
+        'library_method_call_snippet': 'a_buffer',
         'name': 'aBufferList',
         'numpy': False,
         'python_name': 'a_buffer_list',
@@ -1122,6 +1176,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 26
+        'ctypes_method_call_snippet': 'a_buffer_ctype',
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
         'ctypes_variable_name': 'a_buffer_twist_array_ctype',
@@ -1132,7 +1187,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'a_buffer_ctype',
+        'library_method_call_snippet': 'a_buffer',
         'name': 'aBufferTwistArray',
         'numpy': False,
         'python_name': 'a_buffer_twist_array',
@@ -1146,6 +1201,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 27
+        'ctypes_method_call_snippet': 'a_buffer_ctype',
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
         'ctypes_variable_name': 'a_buffer_twist_list_ctype',
@@ -1156,7 +1212,7 @@ parameters_for_testing = [
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'a_buffer_ctype',
+        'library_method_call_snippet': 'a_buffer',
         'name': 'aBufferTwistList',
         'numpy': False,
         'python_name': 'a_buffer_twist_list',
@@ -1170,6 +1226,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 28
+        'ctypes_method_call_snippet': 'input_array_2_ctype',
         'ctypes_type': 'ViReal64',
         'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
         'ctypes_variable_name': 'input_array_2_ctype',
@@ -1183,7 +1240,7 @@ parameters_for_testing = [
         'use_list': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'input_array_2_ctype',
+        'library_method_call_snippet': 'input_array_2',
         'name': 'inputArray2',
         'numpy': False,
         'python_name': 'input_array_2',
@@ -1195,6 +1252,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 29
+        'ctypes_method_call_snippet': 'input_array_2_ctype',
         'ctypes_type': 'ViReal64',
         'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
         'ctypes_variable_name': 'input_array_2_ctype',
@@ -1208,7 +1266,7 @@ parameters_for_testing = [
         'use_list': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'input_array_2_ctype',
+        'library_method_call_snippet': 'input_array_2',
         'name': 'inputArray2',
         'numpy': False,
         'python_api_converter_name': 'convert_to_nitclk_session_num_list',
@@ -1221,6 +1279,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 30
+        'ctypes_method_call_snippet': 'input_array_3_ctype',
         'ctypes_type': 'ViReal64',
         'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
         'ctypes_variable_name': 'input_array_3_ctype',
@@ -1234,7 +1293,7 @@ parameters_for_testing = [
         'use_list': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'input_array_3_ctype',
+        'library_method_call_snippet': 'input_array_3',
         'name': 'inputArray3',
         'numpy': False,
         'python_api_converter_name': 'convert_to_nitclk_session_num_list',
@@ -1247,6 +1306,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 31
+        'ctypes_method_call_snippet': 'input_array_3_ctype',
         'ctypes_type': 'custom_struct',
         'ctypes_type_library_call': 'ctypes.POINTER(custom_struct)',
         'ctypes_variable_name': 'input_array_4_ctype',
@@ -1260,7 +1320,7 @@ parameters_for_testing = [
         'use_list': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'input_array_3_ctype',
+        'library_method_call_snippet': 'input_array_3',
         'name': 'inputArray4',
         'numpy': False,
         'python_api_converter_name': 'convert_to_nitclk_session_num_list',
@@ -1273,6 +1333,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 32
+        'ctypes_method_call_snippet': 'input_array_3_ctype',
         'ctypes_type': 'custom_struct',
         'ctypes_type_library_call': 'ctypes.POINTER(custom_struct)',
         'ctypes_variable_name': 'input_array_4_ctype',
@@ -1286,7 +1347,7 @@ parameters_for_testing = [
         'use_list': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'input_array_3_ctype',
+        'library_method_call_snippet': 'input_array_3',
         'name': 'inputArray4',
         'numpy': False,
         'python_api_converter_name': 'convert_to_nitclk_session_num_list',
@@ -1299,6 +1360,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 33
+        'ctypes_method_call_snippet': 'a_string_enum_ctype',
         'ctypes_type': 'ViString',
         'ctypes_type_library_call': 'ViString',
         'ctypes_variable_name': 'a_string_enum_ctype',
@@ -1309,7 +1371,7 @@ parameters_for_testing = [
         'is_string': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'a_string_enum_ctype',
+        'library_method_call_snippet': 'a_string_enum',
         'name': 'aStringEnum',
         'numpy': False,
         'python_name': 'a_string_enum',
@@ -1321,6 +1383,7 @@ parameters_for_testing = [
         'use_in_python_api': True,
     },
     {  # 34
+        'ctypes_method_call_snippet': 'indices_ctype',
         'ctypes_type': 'ViConstString',
         'ctypes_type_library_call': 'ViConstString',
         'ctypes_variable_name': 'indices_ctype',
@@ -1333,7 +1396,7 @@ parameters_for_testing = [
         'is_string': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
-        'library_method_call_snippet': 'indices_ctype',
+        'library_method_call_snippet': 'indices',
         'name': 'indices',
         'numpy': False,
         'original_type': 'ViChar[]',
@@ -1361,7 +1424,7 @@ def test_get_method_return_snippet_int():
 
 def test_get_method_return_snippet_string():
     param = [parameters_for_testing[2]]
-    assert get_method_return_snippet(param, config_for_testing) == 'return error_message_ctype.value.decode(self._encoding)'
+    assert get_method_return_snippet(param, config_for_testing) == 'return error_message_ctype.value.decode(session._encoding)'
 
 
 def test_get_method_return_snippet_custom_type():
@@ -1396,22 +1459,22 @@ def test_get_buffer_parameters_for_size_parameter():
 
 def test_get_ctype_variable_declaration_snippet_case_c010():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[15], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010"]
+    assert snippet == ["channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(session._encoding))  # case C010"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c020():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[16], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case C020"]
+    assert snippet == ["a_string_ctype = ctypes.create_string_buffer(a_string.encode(session._encoding))  # case C020"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c030():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[33], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["a_string_enum_ctype = ctypes.create_string_buffer(a_string_enum.value.encode(self._encoding))  # case C030"]
+    assert snippet == ["a_string_enum_ctype = ctypes.create_string_buffer(a_string_enum.value.encode(session._encoding))  # case C030"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c040():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[34], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040"]
+    assert snippet == ["indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(session._encoding))  # case C040"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c050():
@@ -1446,7 +1509,7 @@ def test_get_ctype_variable_declaration_snippet_case_c100():
 
 def test_get_ctype_variable_declaration_snippet_case_s110():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[0], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["vi_ctype = _visatype.ViSession(self._vi)  # case S110"]
+    assert snippet == ["vi_ctype = _visatype.ViSession(vi)  # case S110"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s120():

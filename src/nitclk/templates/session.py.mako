@@ -18,10 +18,7 @@ import hightime
 import threading
 
 import ${module_name}._attributes as _attributes
-import ${module_name}._converters as _converters
 import ${module_name}._library_singleton as _library_singleton
-import ${module_name}._visatype as _visatype
-import ${module_name}.errors as errors
 
 # Used for __repr__ and __str__
 import pprint
@@ -99,32 +96,11 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
-
-        Returns the error description.
-        '''
-        try:
-            '''
-            It is expected for _get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use _error_message instead. It doesn't require a session.
-            '''
-            error_string = self._get_extended_error_info()
-            return error_string
-        except errors.Error:
-            return "Failed to retrieve error description."
-
     def _get_tclk_session_reference(self):
         return self._${config['session_handle_parameter_name']}
-
-<%
-# We need _get_extended_error_info() to exist in both this class as well as the _Session class, so we will
-# Set then unset the 'render_in_session_base' flag to get it added to both
-functions['GetExtendedErrorInfo']['render_in_session_base'] = True
-%>\
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
@@ -155,41 +131,15 @@ class _Session(object):
 
         self._is_frozen = True
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
-
-        Returns the error description.
-        '''
-        try:
-            '''
-            It is expected for _get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use _error_message instead. It doesn't require a session.
-            '''
-            error_string = self._get_extended_error_info()
-            return error_string
-        except errors.Error:
-            return "Failed to retrieve error description."
-
     ''' These are code-generated '''
-<%
-# We need _get_extended_error_info() to exist in both this class as well as the SessionReference class, so we will
-# Set then unset the 'render_in_session_base' flag to get it added to both
-functions['GetExtendedErrorInfo']['render_in_session_base'] = False
-%>\
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
-
-<%
-# We need _get_extended_error_info() to exist in both this class as well as the _Session class, so we will
-# Set then unset the 'render_in_session_base' flag to get it added to both. We do not want it in the standalone
-# functions so we set it back to True here to remove it from this list
-functions['GetExtendedErrorInfo']['render_in_session_base'] = True
-%>\
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
+
 <%
 f = functions[func_name]
 name = f['python_name']
@@ -201,7 +151,4 @@ def ${name}(${parameter_list}):
     ${helper.get_function_docstring(f, False, config, indent=4)}
     '''
     return _Session().${name}(${parameter_list})
-
-
 % endfor
-

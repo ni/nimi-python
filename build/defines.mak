@@ -11,7 +11,7 @@ DRIVER_DIR := $(ROOT_DIR)/src/$(DRIVER)
 METADATA_DIR := $(DRIVER_DIR)/metadata
 METADATA_FILES := $(wildcard $(METADATA_DIR)/*.py)
 
-BUILD_HELPER_SCRIPTS := $(wildcard $(BUILD_HELPER_DIR)/helper/*)
+BUILD_HELPER_SCRIPTS := $(wildcard $(BUILD_HELPER_DIR)/* $(BUILD_HELPER_DIR)/helper/*)
 
 DRIVER_DOCS_DIR := $(DOCS_DIR)/$(DRIVER)
 
@@ -71,4 +71,3 @@ DEFAULT_RST_FILES_TO_GENERATE := \
 WHEEL_BUILD_DONE := $(LOG_DIR)/wheel_build_done
 SDIST_BUILD_DONE := $(LOG_DIR)/sdist_build_done
 GENERATED_FILES_COPY_DONE := $(LOG_DIR)/generated_files_copy_done
-

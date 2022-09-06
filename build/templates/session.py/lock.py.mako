@@ -1,9 +1,4 @@
 <%page args="f, config, method_template"/>\
-<%
-    import build.helper as helper
-
-    c_function_prefix = config['c_function_prefix']
-%>\
     def ${f['python_name']}(self):
         '''${f['python_name']}
 
@@ -44,8 +39,4 @@
 
         Actual call to driver
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.${c_function_prefix}LockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return
-
+        self._library.lock(self)

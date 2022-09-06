@@ -545,7 +545,7 @@ functions = {
                 'name': 'numberOfElements',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self.get_array_size_for_python_code()'
+                    'value': 'self.get_array_size_for_python_code(session)'
                 },
                 'type': 'ViInt32'
             },
@@ -557,7 +557,7 @@ functions = {
                 'name': 'arrayOut',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self.get_array_size_for_python_code()'
+                    'value': 'self.get_array_size_for_python_code(session)'
                 },
                 'type': 'struct CustomStruct[]'
             }
@@ -586,7 +586,7 @@ functions = {
                 'name': 'numberOfElements',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self.get_array_size_for_python_code()'
+                    'value': 'self.get_array_size_for_python_code(session)'
                 },
                 'type': 'ViInt32'
             },
@@ -598,7 +598,7 @@ functions = {
                 'name': 'arrayOut',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self.get_array_size_for_python_code()'
+                    'value': 'self.get_array_size_for_python_code(session)'
                 },
                 'type': 'ViReal64[]'
             }

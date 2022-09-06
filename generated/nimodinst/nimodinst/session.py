@@ -180,26 +180,6 @@ class Session(object):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
-
-        Returns the error description.
-        '''
-        # We hand-maintain the code that calls into self._library rather than leverage code-generation
-        # because niModInst_GetExtendedErrorInfo() does not properly do the IVI-dance.
-        # See https://github.com/ni/nimi-python/issues/166
-        error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        error_info_ctype = None  # case C050
-        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
-        if error_code <= 0:
-            return "Failed to retrieve error description."
-        error_info_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        error_info_ctype = (_visatype.ViChar * error_info_buffer_size_ctype.value)()  # case C060
-        # Note we don't look at the return value. This is intentional as niModInst returns the
-        # original error code rather than 0 (VI_SUCCESS).
-        self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
-        return error_info_ctype.value.decode("ascii")
-
     # Iterator functions
     def __len__(self):
         return self._item_count
@@ -216,6 +196,7 @@ class Session(object):
         self._handle = 0
 
     ''' These are code-generated '''
+
     def _close_installed_devices_session(self):
         r'''_close_installed_devices_session
 
@@ -223,10 +204,7 @@ class Session(object):
         _open_installed_devices_session. Call this method when you are
         finished using the session handle and do not use this handle again.
         '''
-        handle_ctype = _visatype.ViSession(self._handle)  # case S110
-        error_code = self._library.niModInst_CloseInstalledDevicesSession(handle_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        return self._library._close_installed_devices_session(self)
 
     def _get_extended_error_info(self):
         r'''_get_extended_error_info
@@ -250,15 +228,7 @@ class Session(object):
             error_info (str): The character buffer into which the error information string is copied.
 
         '''
-        error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        error_info_ctype = None  # case C050
-        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        error_info_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        error_info_ctype = (_visatype.ViChar * error_info_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_info_ctype.value.decode(self._encoding)
+        return self._library._get_extended_error_info(self)
 
     def _get_installed_device_attribute_vi_int32(self, index, attribute_id):
         r'''_get_installed_device_attribute_vi_int32
@@ -295,13 +265,7 @@ class Session(object):
                 the requested property.
 
         '''
-        handle_ctype = _visatype.ViSession(self._handle)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(handle_ctype, index_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(attribute_value_ctype.value)
+        return self._library._get_installed_device_attribute_vi_int32(self, index, attribute_id)
 
     def _get_installed_device_attribute_vi_string(self, index, attribute_id):
         r'''_get_installed_device_attribute_vi_string
@@ -337,18 +301,7 @@ class Session(object):
             attribute_value (str): The character buffer into which the property value string is copied.
 
         '''
-        handle_ctype = _visatype.ViSession(self._handle)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
-        attribute_value_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        attribute_value_ctype = None  # case C050
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        attribute_value_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        attribute_value_ctype = (_visatype.ViChar * attribute_value_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode(self._encoding)
+        return self._library._get_installed_device_attribute_vi_string(self, index, attribute_id)
 
     def _open_installed_devices_session(self, driver):
         r'''_open_installed_devices_session
@@ -386,11 +339,4 @@ class Session(object):
                 driver parameter.
 
         '''
-        driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case C020
-        handle_ctype = _visatype.ViSession()  # case S220
-        device_count_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niModInst_OpenInstalledDevicesSession(driver_ctype, None if handle_ctype is None else (ctypes.pointer(handle_ctype)), None if device_count_ctype is None else (ctypes.pointer(device_count_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(handle_ctype.value), int(device_count_ctype.value)
-
-
+        return self._library._open_installed_devices_session(self, driver)

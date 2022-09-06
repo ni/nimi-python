@@ -19,13 +19,19 @@ class ParameterUsageOptions(AutoNumber):
     SESSION_INIT_DECLARATION = ()
     '''For declaring an init method in Session'''
     SESSION_NUMPY_INTO_METHOD_DECLARATION = ()
-    '''For calling into a Session method that uses numpy arrays.'''
+    '''For declaring a Session method that uses numpy arrays.'''
+    LIBRARY_NUMPY_INTO_METHOD_DECLARATION = ()
+    '''For declaring a Library method that uses numpy arrays.'''
+    LIBRARY_NUMPY_INTO_METHOD_CALL = ()
+    '''For calling into a Library method that uses numpy arrays.'''
     SESSION_METHOD_CALL = ()
     '''For calling into a regular Session method.'''
     SESSION_INIT_CALL = ()
     '''For calling into an init Session method.'''
     DOCUMENTATION_SESSION_METHOD = ()
     '''For documentation (rst) of Session methods'''
+    CTYPES_METHOD_DECLARATION = ()
+    '''For declaring a ctypes library method (used in testing).'''
     CTYPES_CALL = ()
     '''For Library implementation calling into the DLL via ctypes'''
     LIBRARY_METHOD_CALL = ()
