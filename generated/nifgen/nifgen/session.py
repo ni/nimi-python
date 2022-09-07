@@ -2256,7 +2256,7 @@ class _SessionBase(object):
 
         if type(trigger) is not enums.Trigger:
             raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))
-        self._library.send_software_edge_trigger(session, trigger, trigger_id)
+        self._library.send_software_edge_trigger(self, trigger, trigger_id)
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):

@@ -21,6 +21,7 @@ ${template_parameters['encoding_tag']}
         session_context_manager_abort = functions[config['context_manager_name']['abort_function']]['python_name']
         render_initiate_in_session_base = functions[config['context_manager_name']['initiate_function']]['render_in_session_base']
 %>\
+import array  # noqa: F401
 % if config['use_locking']:
 # Used by @ivi_synchronized
 from functools import wraps
@@ -30,7 +31,7 @@ from functools import wraps
 import ${module_name}._attributes as _attributes
 % endif
 import ${module_name}._converters as _converters
-import ${module_name}._library_singleton as _library_singleton
+import ${module_name}._library_interpreter as _library_interpreter
 import ${module_name}.enums as enums
 import ${module_name}.errors as errors
 % for c in config['custom_types']:
@@ -106,7 +107,6 @@ class _RepeatedCapabilities(object):
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
             library=self._session._library,
-            encoding=self._session._encoding,
             freeze_it=True
         )
 
@@ -162,20 +162,18 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 % if attributes:
 
 % endif
-    def __init__(self, repeated_capability_list, all_channels_in_session, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, ${config['session_handle_parameter_name']}, library, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = library
-        self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("${config['session_handle_parameter_name']}=" + pp.pformat(${config['session_handle_parameter_name']}))
         param_list.append("library=" + pp.pformat(library))
-        param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
 % if len(config['repeated_capabilities']) > 0:
@@ -231,7 +229,6 @@ class Session(_SessionBase):
             repeated_capability_list=[],
             ${config['session_handle_parameter_name']}=None,
             library=None,
-            encoding=None,
             freeze_it=False,
             all_channels_in_session=None
         )
@@ -240,8 +237,7 @@ class Session(_SessionBase):
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']})
 %   endif
 % endfor
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
+        self._library = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().

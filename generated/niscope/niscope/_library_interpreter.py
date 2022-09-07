@@ -338,7 +338,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms(session, channel_list))]
 
-    def _fetch_into_numpy(self, session, num_samples, waveform, timeout):  # noqa: N802
+    def _fetch_into_numpy(self, session, channel_list, num_samples, waveform, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -364,7 +364,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(meas_wfm_ctype[i]) for i in range((measurement_waveform_size * self._actual_num_wfms(session, channel_list)))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms(session, channel_list))]
 
-    def _fetch_binary16_into_numpy(self, session, num_samples, waveform, timeout):  # noqa: N802
+    def _fetch_binary16_into_numpy(self, session, channel_list, num_samples, waveform, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -376,7 +376,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms(session, channel_list))]
 
-    def _fetch_binary32_into_numpy(self, session, num_samples, waveform, timeout):  # noqa: N802
+    def _fetch_binary32_into_numpy(self, session, channel_list, num_samples, waveform, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -388,7 +388,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms(session, channel_list))]
 
-    def _fetch_binary8_into_numpy(self, session, num_samples, waveform, timeout):  # noqa: N802
+    def _fetch_binary8_into_numpy(self, session, channel_list, num_samples, waveform, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(session._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140

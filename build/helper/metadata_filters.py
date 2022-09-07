@@ -52,7 +52,7 @@ _ParameterUsageOptionsFiltering = {
         'but_keep_output_numpy_array_parameters': True,
         'skip_size_parameter': False,
         'reordered_for_default_values': True,
-        'skip_repeated_capability_parameter': True,
+        'skip_repeated_capability_parameter': False,
         'skip_non_enum_parameter': False,
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in',

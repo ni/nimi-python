@@ -2656,7 +2656,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
-        return self._library._fetch_into_numpy(self, num_samples, waveform, timeout)
+        return self._library._fetch_into_numpy(self, self._repeated_capability, num_samples, waveform, timeout)
 
     @ivi_synchronized
     def _fetch_array_measurement(self, array_meas_function, measurement_waveform_size, timeout=hightime.timedelta(seconds=5.0)):
@@ -2872,7 +2872,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('int16'):
             raise TypeError('waveform must be numpy.ndarray of dtype=int16, is ' + str(waveform.dtype))
-        return self._library._fetch_binary16_into_numpy(self, num_samples, waveform, timeout)
+        return self._library._fetch_binary16_into_numpy(self, self._repeated_capability, num_samples, waveform, timeout)
 
     @ivi_synchronized
     def _fetch_binary32_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
@@ -2993,7 +2993,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('int32'):
             raise TypeError('waveform must be numpy.ndarray of dtype=int32, is ' + str(waveform.dtype))
-        return self._library._fetch_binary32_into_numpy(self, num_samples, waveform, timeout)
+        return self._library._fetch_binary32_into_numpy(self, self._repeated_capability, num_samples, waveform, timeout)
 
     @ivi_synchronized
     def _fetch_binary8_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
@@ -3114,7 +3114,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('int8'):
             raise TypeError('waveform must be numpy.ndarray of dtype=int8, is ' + str(waveform.dtype))
-        return self._library._fetch_binary8_into_numpy(self, num_samples, waveform, timeout)
+        return self._library._fetch_binary8_into_numpy(self, self._repeated_capability, num_samples, waveform, timeout)
 
     @ivi_synchronized
     def fetch_into(self, waveform, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0)):
