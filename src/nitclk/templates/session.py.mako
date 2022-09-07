@@ -18,7 +18,7 @@ import hightime
 import threading
 
 import ${module_name}._attributes as _attributes
-import ${module_name}._library_singleton as _library_singleton
+import ${module_name}._library_interpreter as _library_interpreter
 
 # Used for __repr__ and __str__
 import pprint
@@ -75,8 +75,7 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 
     def __init__(self, ${config['session_handle_parameter_name']}, encoding='windows-1251'):
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
-        self._library = _library_singleton.get()
-        self._encoding = encoding
+        self._library = _library_interpreter.LibraryInterpreter(encoding)
         # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
         self._repeated_capability = ''
 
@@ -117,8 +116,7 @@ class _Session(object):
     '''
 
     def __init__(self):
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
+        self._library = _library_interpreter.LibraryInterpreter('windows-1251')
 
         # Instantiate any repeated capability objects
 % for rep_cap in config['repeated_capabilities']:

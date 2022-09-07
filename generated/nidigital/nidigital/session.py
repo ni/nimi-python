@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # This file was generated
+import array  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
 import nidigital._attributes as _attributes
 import nidigital._converters as _converters
-import nidigital._library_singleton as _library_singleton
+import nidigital._library_interpreter as _library_interpreter
 import nidigital.enums as enums
 import nidigital.errors as errors
 
@@ -72,7 +73,6 @@ class _RepeatedCapabilities(object):
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
             library=self._session._library,
-            encoding=self._session._encoding,
             freeze_it=True
         )
 
@@ -1234,20 +1234,18 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.vterm`
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
         self._vi = vi
         self._library = library
-        self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("vi=" + pp.pformat(vi))
         param_list.append("library=" + pp.pformat(library))
-        param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
         # Instantiate any repeated capability objects
@@ -1944,7 +1942,7 @@ class _SessionBase(object):
             waveform ({ int: memoryview of array.array of unsigned int, int: memoryview of array.array of unsigned int, ... }): Dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
 
         '''
-        data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(waveform_name, samples_to_read, timeout)
+        data, actual_num_waveforms, actual_samples_per_waveform = self._library._fetch_capture_waveform(waveform_name, samples_to_read, timeout)
 
         # Get the site list
         site_list = self._get_site_results_site_numbers(enums._SiteResultType.CAPTURE_WAVEFORM)
@@ -1960,32 +1958,6 @@ class _SessionBase(object):
             waveforms[site_list[i]] = mv[start:end]
 
         return waveforms
-
-    def _fetch_capture_waveform(self, waveform_name, samples_to_read, timeout):
-        # This is slightly modified codegen from the function
-        # We cannot use codegen without major modifications to the code generator
-        # This function uses two 'ivi-dance' parameters and then multiplies them together - see
-        # the (modified) line below
-        # Also, we want to return the two sized that normally wouldn't be returned
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        samples_to_read_ctype = _visatype.ViInt32(samples_to_read)  # case S150
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        data_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        data_ctype = None  # case B610
-        actual_num_waveforms_ctype = _visatype.ViInt32()  # case S220
-        actual_samples_per_waveform_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_FetchCaptureWaveformU32(vi_ctype, site_list_ctype, waveform_name_ctype, samples_to_read_ctype, timeout_ctype, data_buffer_size_ctype, data_ctype, None if actual_num_waveforms_ctype is None else (ctypes.pointer(actual_num_waveforms_ctype)), None if actual_samples_per_waveform_ctype is None else (ctypes.pointer(actual_samples_per_waveform_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        data_buffer_size_ctype = _visatype.ViInt32(actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value)  # case S200 (modified)
-        data_size = actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value  # case B620 (modified)
-        data_array = array.array("L", [0] * data_size)  # case B620
-        data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViUInt32)  # case B620
-        error_code = self._library.niDigital_FetchCaptureWaveformU32(vi_ctype, site_list_ctype, waveform_name_ctype, samples_to_read_ctype, timeout_ctype, data_buffer_size_ctype, data_ctype, None if actual_num_waveforms_ctype is None else (ctypes.pointer(actual_num_waveforms_ctype)), None if actual_samples_per_waveform_ctype is None else (ctypes.pointer(actual_samples_per_waveform_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return data_array, actual_num_waveforms_ctype.value, actual_samples_per_waveform_ctype.value  # (modified)
-
 
     @ivi_synchronized
     def fetch_history_ram_cycle_information(self, position, samples_to_read):
@@ -3270,13 +3242,11 @@ class Session(_SessionBase):
             repeated_capability_list=[],
             vi=None,
             library=None,
-            encoding=None,
             freeze_it=False,
             all_channels_in_session=None
         )
         options = _converters.convert_init_with_options_dictionary(options)
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
+        self._library = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _init_with_options().

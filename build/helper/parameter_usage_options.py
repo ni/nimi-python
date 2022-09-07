@@ -32,8 +32,10 @@ class ParameterUsageOptions(AutoNumber):
     '''For documentation (rst) of Session methods'''
     CTYPES_METHOD_DECLARATION = ()
     '''For declaring a ctypes library method (used in testing).'''
+    CTYPES_PASSTHROUGH_CALL = ()
+    '''For Library implementation passing through to the DLL'''
     CTYPES_CALL = ()
-    '''For Library implementation calling into the DLL via ctypes'''
+    '''For LibraryInterpreter implementation calling into the Library via ctypes'''
     LIBRARY_METHOD_CALL = ()
     '''For calling into a method in Library.'''
     CTYPES_ARGTYPES = ()

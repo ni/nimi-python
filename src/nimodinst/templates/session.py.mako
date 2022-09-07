@@ -16,7 +16,7 @@
 
 import ctypes
 
-import ${module_name}._library_singleton as _library_singleton
+import ${module_name}._library_interpreter as _library_interpreter
 import ${module_name}._visatype as _visatype
 import ${module_name}.errors as errors
 
@@ -129,8 +129,7 @@ class Session(object):
         self._${config['session_handle_parameter_name']} = 0
         self._item_count = 0
         self._current_item = 0
-        self._encoding = 'windows-1251'
-        self._library = _library_singleton.get()
+        self._library = _library_interpreter.LibraryInterpreter('windows-1251')
         self._${config['session_handle_parameter_name']}, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
 

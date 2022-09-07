@@ -2,7 +2,7 @@
 
 import ctypes
 
-import nimodinst._library_singleton as _library_singleton
+import nimodinst._library_interpreter as _library_interpreter
 import nimodinst._visatype as _visatype
 import nimodinst.errors as errors
 
@@ -149,8 +149,7 @@ class Session(object):
         self._handle = 0
         self._item_count = 0
         self._current_item = 0
-        self._encoding = 'windows-1251'
-        self._library = _library_singleton.get()
+        self._library = _library_interpreter.LibraryInterpreter('windows-1251')
         self._handle, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
 

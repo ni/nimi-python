@@ -237,6 +237,7 @@ _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_CALL] = _Para
 
 _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION].copy()
 _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_NUMPY_INTO_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_NUMPY_INTO_METHOD_DECLARATION].copy()
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_PASSTHROUGH_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL].copy()
 
 
 def filter_parameters(function, parameter_usage_options):

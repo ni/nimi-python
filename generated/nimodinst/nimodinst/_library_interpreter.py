@@ -1,0 +1,122 @@
+# -*- coding: utf-8 -*-
+# This file was generated
+
+import array  # noqa: F401
+import ctypes
+import hightime
+import nimodinst._converters as _converters
+import nimodinst._library_singleton as _library_singleton
+import nimodinst._visatype as _visatype
+import nimodinst.errors as errors
+import threading
+
+from nimodinst._visatype import *  # noqa: F403,H303
+
+
+# Helper functions for creating ctypes needed for calling into the driver DLL
+def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
+    if isinstance(value, array.array):
+        assert library_type is not None, 'library_type is required for array.array'
+        addr, _ = value.buffer_info()
+        return ctypes.cast(addr, ctypes.POINTER(library_type))
+    elif str(type(value)).find("'numpy.ndarray'") != -1:
+        import numpy
+        return numpy.ctypeslib.as_ctypes(value)
+    elif isinstance(value, bytes):
+        return ctypes.cast(value, ctypes.POINTER(library_type))
+    elif isinstance(value, list):
+        assert library_type is not None, 'library_type is required for list'
+        return (library_type * len(value))(*value)
+    else:
+        if library_type is not None and size is not None:
+            return (library_type * size)()
+        else:
+            return None
+
+
+def get_ctypes_and_array(value, array_type):
+    if value is not None:
+        if isinstance(value, array.array):
+            value_array = value
+        else:
+            value_array = array.array(array_type, value)
+    else:
+        value_array = None
+
+    return value_array
+
+
+class LibraryInterpreter(object):
+    '''Library C<->Python interpreter.'''
+
+    def __init__(self, encoding):
+        self._encoding = encoding
+        self._library = _library_singleton.get()
+
+    def _get_error_description(self, session, error_code):
+        '''_get_error_description
+
+        Returns the error description.
+        '''
+        # We hand-maintain the code that calls into the cfunc rather than leverage code-generation
+        # because niModInst_GetExtendedErrorInfo() does not properly do the IVI-dance.
+        # See https://github.com/ni/nimi-python/issues/166
+        error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        error_info_ctype = None  # case C050
+        error_code = self._library._get_extended_error_info(error_info_buffer_size_ctype, error_info_ctype)
+        if error_code <= 0:
+            return 'Failed to retrieve error description.'
+        error_info_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        error_info_ctype = (_visatype.ViChar * error_info_buffer_size_ctype.value)()  # case C060
+        # Note we don't look at the return value. This is intentional as niModInst returns the
+        # original error code rather than 0 (VI_SUCCESS).
+        self._library._get_extended_error_info(error_info_buffer_size_ctype, error_info_ctype)
+        return error_info_ctype.value.decode("ascii")
+
+    def _close_installed_devices_session(self, session):  # noqa: N802
+        handle_ctype = _visatype.ViSession(session._handle)  # case S110
+        error_code = self._library._close_installed_devices_session(handle_ctype)
+        errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _get_extended_error_info(self, session):  # noqa: N802
+        error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        error_info_ctype = None  # case C050
+        error_code = self._library._get_extended_error_info(error_info_buffer_size_ctype, error_info_ctype)
+        errors.handle_error(self, session, error_code, ignore_warnings=True, is_error_handling=True)
+        error_info_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        error_info_ctype = (_visatype.ViChar * error_info_buffer_size_ctype.value)()  # case C060
+        error_code = self._library._get_extended_error_info(error_info_buffer_size_ctype, error_info_ctype)
+        errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_info_ctype.value.decode(self._encoding)
+
+    def _get_installed_device_attribute_vi_int32(self, session, index, attribute_id):  # noqa: N802
+        handle_ctype = _visatype.ViSession(session._handle)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library._get_installed_device_attribute_vi_int32(handle_ctype, index_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+        errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(attribute_value_ctype.value)
+
+    def _get_installed_device_attribute_vi_string(self, session, index, attribute_id):  # noqa: N802
+        handle_ctype = _visatype.ViSession(session._handle)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
+        attribute_value_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        attribute_value_ctype = None  # case C050
+        error_code = self._library._get_installed_device_attribute_vi_string(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
+        errors.handle_error(self, session, error_code, ignore_warnings=True, is_error_handling=False)
+        attribute_value_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        attribute_value_ctype = (_visatype.ViChar * attribute_value_buffer_size_ctype.value)()  # case C060
+        error_code = self._library._get_installed_device_attribute_vi_string(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
+        errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
+        return attribute_value_ctype.value.decode(self._encoding)
+
+    def _open_installed_devices_session(self, session, driver):  # noqa: N802
+        driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case C020
+        handle_ctype = _visatype.ViSession()  # case S220
+        device_count_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library._open_installed_devices_session(driver_ctype, None if handle_ctype is None else (ctypes.pointer(handle_ctype)), None if device_count_ctype is None else (ctypes.pointer(device_count_ctype)))
+        errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(handle_ctype.value), int(device_count_ctype.value)

@@ -64,6 +64,11 @@ _ParameterUsageOptionsSnippet = {
         'include_session_instance': False,
         'name_to_use': 'ctypes_method_call_snippet',
     },
+    ParameterUsageOptions.CTYPES_PASSTHROUGH_CALL: {
+        'skip_self': True,
+        'include_session_instance': False,
+        'name_to_use': 'python_name',
+    },
     ParameterUsageOptions.LIBRARY_METHOD_CALL: {
         'skip_self': False,
         'include_session_instance': False,
@@ -145,8 +150,8 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
         snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
     else:
         if output_parameter['is_string']:
-            # '_encoding' is a variable on the session object
-            snippet = output_parameter['ctypes_variable_name'] + '.value.decode(session._encoding)'
+            # '_encoding' is a variable on the LibraryInterpreter object
+            snippet = output_parameter['ctypes_variable_name'] + '.value.decode(self._encoding)'
         else:
             snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + val_suffix + ')'
 
@@ -231,10 +236,10 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
 def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name):
     '''These are the different cases for initializing the ctype variables for strings
 
-    C010. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(session._encoding))
-    C020. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(session._encoding))
-    C030. Input string enum:                                                   ctypes.create_string_buffer(parameter_name.value.encode(session._encoding))
-    C040. Input uses converter:                                                ctypes.create_string_buffer(_converters.convert_foo(parameter_name).encode(session._encoding))
+    C010. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
+    C020. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(self._encoding))
+    C030. Input string enum:                                                   ctypes.create_string_buffer(parameter_name.value.encode(self._encoding))
+    C040. Input uses converter:                                                ctypes.create_string_buffer(_converters.convert_foo(parameter_name).encode(self._encoding))
     C050. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
     C060. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViChar * buffer_size_ctype.value)()
     C070. Output buffer with mechanism fixed-size:                             visatype.ViChar * 256
@@ -247,13 +252,13 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
 
     if parameter['direction'] == 'in':
         if parameter['is_repeated_capability'] is True:
-            definition = 'ctypes.create_string_buffer({0}.encode(session._encoding))  # case C010'.format(parameter['python_name'])
+            definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case C010'.format(parameter['python_name'])
         elif parameter['enum'] is not None:
-            definition = 'ctypes.create_string_buffer({0}.value.encode(session._encoding))  # case C030'.format(parameter['python_name'])
+            definition = 'ctypes.create_string_buffer({0}.value.encode(self._encoding))  # case C030'.format(parameter['python_name'])
         elif 'python_api_converter_name' in parameter:
-            definition = 'ctypes.create_string_buffer(_converters.{0}({1}).encode(session._encoding))  # case C040'.format(parameter['python_api_converter_name'], parameter['python_name'])
+            definition = 'ctypes.create_string_buffer(_converters.{0}({1}).encode(self._encoding))  # case C040'.format(parameter['python_api_converter_name'], parameter['python_name'])
         else:
-            definition = 'ctypes.create_string_buffer({0}.encode(session._encoding))  # case C020'.format(parameter['python_name'])
+            definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case C020'.format(parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
         if parameter['size']['mechanism'] == 'ivi-dance':
@@ -1424,7 +1429,7 @@ def test_get_method_return_snippet_int():
 
 def test_get_method_return_snippet_string():
     param = [parameters_for_testing[2]]
-    assert get_method_return_snippet(param, config_for_testing) == 'return error_message_ctype.value.decode(session._encoding)'
+    assert get_method_return_snippet(param, config_for_testing) == 'return error_message_ctype.value.decode(self._encoding)'
 
 
 def test_get_method_return_snippet_custom_type():
@@ -1459,22 +1464,22 @@ def test_get_buffer_parameters_for_size_parameter():
 
 def test_get_ctype_variable_declaration_snippet_case_c010():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[15], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(session._encoding))  # case C010"]
+    assert snippet == ["channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c020():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[16], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["a_string_ctype = ctypes.create_string_buffer(a_string.encode(session._encoding))  # case C020"]
+    assert snippet == ["a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case C020"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c030():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[33], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["a_string_enum_ctype = ctypes.create_string_buffer(a_string_enum.value.encode(session._encoding))  # case C030"]
+    assert snippet == ["a_string_enum_ctype = ctypes.create_string_buffer(a_string_enum.value.encode(self._encoding))  # case C030"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c040():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[34], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(session._encoding))  # case C040"]
+    assert snippet == ["indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c050():

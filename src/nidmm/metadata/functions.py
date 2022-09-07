@@ -724,11 +724,13 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
                 'documentation_filename': 'numpy_method',
+                'interpreter_filename': 'numpy_read_method',
                 'method_python_name_suffix': '_into',
                 'session_filename': 'numpy_read_method'
             }
@@ -1161,6 +1163,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'datetime_wrappers'
             }
@@ -1498,6 +1501,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
+                'interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -2017,6 +2021,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
+                'interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -2114,6 +2119,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_self_test'
             }

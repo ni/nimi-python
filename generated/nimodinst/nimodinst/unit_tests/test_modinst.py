@@ -21,7 +21,7 @@ class TestSession(object):
 
     def setup_method(self, method):
         self.patched_library = self.PatchedLibrary(None)
-        self.patched_library_singleton_get = patch('nimodinst.session._library_singleton.get', return_value=self.patched_library)
+        self.patched_library_singleton_get = patch('nimodinst._library_interpreter._library_singleton.get', return_value=self.patched_library)
         self.patched_library_singleton_get.start()
 
         self.side_effects_helper = _mock_helper.SideEffectsHelper()

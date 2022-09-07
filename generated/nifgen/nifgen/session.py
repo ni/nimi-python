@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # This file was generated
+import array  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
 import nifgen._attributes as _attributes
 import nifgen._converters as _converters
-import nifgen._library_singleton as _library_singleton
+import nifgen._library_interpreter as _library_interpreter
 import nifgen.enums as enums
 import nifgen.errors as errors
 
@@ -70,7 +71,6 @@ class _RepeatedCapabilities(object):
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
             library=self._session._library,
-            encoding=self._session._encoding,
             freeze_it=True
         )
 
@@ -1064,20 +1064,18 @@ class _SessionBase(object):
     For example, when this property returns a value of 8, all waveform sizes must be a multiple of 8. Typically, this value is constant for the signal generator.
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
         self._vi = vi
         self._library = library
-        self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("vi=" + pp.pformat(vi))
         param_list.append("library=" + pp.pformat(library))
-        param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
         # Instantiate any repeated capability objects
@@ -2258,13 +2256,7 @@ class _SessionBase(object):
 
         if type(trigger) is not enums.Trigger:
             raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
-        error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
+        self._library.send_software_edge_trigger(session, trigger, trigger_id)
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -3135,14 +3127,12 @@ class Session(_SessionBase):
             repeated_capability_list=[],
             vi=None,
             library=None,
-            encoding=None,
             freeze_it=False,
             all_channels_in_session=None
         )
         channel_name = _converters.convert_repeated_capabilities_without_prefix(channel_name)
         options = _converters.convert_init_with_options_dictionary(options)
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
+        self._library = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _initialize_with_channels().

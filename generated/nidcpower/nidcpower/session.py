@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # This file was generated
+import array  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
 import nidcpower._attributes as _attributes
 import nidcpower._converters as _converters
-import nidcpower._library_singleton as _library_singleton
+import nidcpower._library_interpreter as _library_interpreter
 import nidcpower.enums as enums
 import nidcpower.errors as errors
 
@@ -73,7 +74,6 @@ class _RepeatedCapabilities(object):
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
             library=self._session._library,
-            encoding=self._session._encoding,
             freeze_it=True
         )
 
@@ -3984,20 +3984,18 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.voltage_pole_zero_ratio`
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
         self._vi = vi
         self._library = library
-        self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("vi=" + pp.pformat(vi))
         param_list.append("library=" + pp.pformat(library))
-        param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
         # Instantiate any repeated capability objects
@@ -7063,15 +7061,13 @@ class Session(_SessionBase):
             repeated_capability_list=[],
             vi=None,
             library=None,
-            encoding=None,
             freeze_it=False,
             all_channels_in_session=None
         )
         resource_name = _converters.convert_repeated_capabilities_without_prefix(resource_name)
         channels = _converters.convert_repeated_capabilities_without_prefix(channels)
         options = _converters.convert_init_with_options_dictionary(options)
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
+        self._library = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _fancy_initialize().

@@ -6,7 +6,7 @@ import hightime
 import threading
 
 import nitclk._attributes as _attributes
-import nitclk._library_singleton as _library_singleton
+import nitclk._library_interpreter as _library_interpreter
 
 # Used for __repr__ and __str__
 import pprint
@@ -155,8 +155,7 @@ class SessionReference(object):
 
     def __init__(self, session_number, encoding='windows-1251'):
         self._session_number = session_number
-        self._library = _library_singleton.get()
-        self._encoding = encoding
+        self._library = _library_interpreter.LibraryInterpreter(encoding)
         # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
         self._repeated_capability = ''
 
@@ -392,8 +391,7 @@ class _Session(object):
     '''
 
     def __init__(self):
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
+        self._library = _library_interpreter.LibraryInterpreter('windows-1251')
 
         # Instantiate any repeated capability objects
 
