@@ -339,13 +339,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _fetch_capture_waveform(self, waveform_name, samples_to_read, timeout):
+    def _fetch_capture_waveform(self, session, waveform_name, samples_to_read, timeout):
         # This is slightly modified codegen from the function
         # We cannot use codegen without major modifications to the code generator
         # This function uses two 'ivi-dance' parameters and then multiplies them together - see
         # the (modified) line below
         # Also, we want to return the two sized that normally wouldn't be returned
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(session._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         samples_to_read_ctype = _visatype.ViInt32(samples_to_read)  # case S150

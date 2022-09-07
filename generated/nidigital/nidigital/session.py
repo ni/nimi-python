@@ -1942,7 +1942,7 @@ class _SessionBase(object):
             waveform ({ int: memoryview of array.array of unsigned int, int: memoryview of array.array of unsigned int, ... }): Dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
 
         '''
-        data, actual_num_waveforms, actual_samples_per_waveform = self._library._fetch_capture_waveform(waveform_name, samples_to_read, timeout)
+        data, actual_num_waveforms, actual_samples_per_waveform = self._library._fetch_capture_waveform(self, waveform_name, samples_to_read, timeout)
 
         # Get the site list
         site_list = self._get_site_results_site_numbers(enums._SiteResultType.CAPTURE_WAVEFORM)
