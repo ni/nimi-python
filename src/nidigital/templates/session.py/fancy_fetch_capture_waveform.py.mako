@@ -8,7 +8,7 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        data, actual_num_waveforms, actual_samples_per_waveform = self._library._fetch_capture_waveform(waveform_name, samples_to_read, timeout)
+        data, actual_num_waveforms, actual_samples_per_waveform = self._library._fetch_capture_waveform(self, waveform_name, samples_to_read, timeout)
 
         # Get the site list
         site_list = self._get_site_results_site_numbers(enums._SiteResultType.CAPTURE_WAVEFORM)
