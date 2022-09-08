@@ -1514,7 +1514,7 @@ def test_get_ctype_variable_declaration_snippet_case_c100():
 
 def test_get_ctype_variable_declaration_snippet_case_s110():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[0], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["vi_ctype = _visatype.ViSession(vi)  # case S110"]
+    assert snippet == ["vi_ctype = _visatype.ViSession(session._vi)  # case S110"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s120():
