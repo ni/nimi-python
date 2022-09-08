@@ -20,7 +20,7 @@ ViReal32 = ctypes.c_float
 ViReal64 = ctypes.c_double
 
 # Types that are based on other visatypes
-ViBoolean = ViUInt16  # ctypes.wintypes.LP_c_ushort
+ViBoolean = ViUInt16
 ViStatus = ViInt32
 ViSession = ViUInt32
 ViAttr = ViUInt32
