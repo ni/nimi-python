@@ -4895,7 +4895,6 @@ class _SessionBase(object):
 
         self._create_advanced_sequence_with_channels(sequence_name, list(attribute_ids_used), set_as_active_sequence)
 
-
     @ivi_synchronized
     def fetch_multiple(self, count, timeout=hightime.timedelta(seconds=1.0)):
         '''fetch_multiple
@@ -4965,7 +4964,6 @@ class _SessionBase(object):
                 voltage_measurements, current_measurements, in_compliances
             )
         ]
-
 
     @ivi_synchronized
     def fetch_multiple_lcr(self, count, timeout=hightime.timedelta(seconds=1.0)):
@@ -5056,7 +5054,6 @@ class _SessionBase(object):
             lcr_measurement_object.channel = channel_names[0]
         return lcr_measurements
 
-
     @ivi_synchronized
     def measure_multiple(self):
         '''measure_multiple
@@ -5119,7 +5116,6 @@ class _SessionBase(object):
                 voltage_measurements, current_measurements, channel_names
             )
         ]
-
 
     @ivi_synchronized
     def measure_multiple_lcr(self):
@@ -5201,7 +5197,6 @@ class _SessionBase(object):
         for lcr_measurement_object, channel_name in zip(lcr_measurements, channel_names):
             lcr_measurement_object.channel = channel_name
         return lcr_measurements
-
 
     @ivi_synchronized
     def _fetch_multiple(self, timeout, count):
@@ -5774,7 +5769,6 @@ class _SessionBase(object):
         '''
         year, month, day, hour, minute = self._get_lcr_compensation_last_date_and_time(compensation_type)
         return hightime.datetime(year, month, day, hour, minute)
-
 
     @ivi_synchronized
     def _initiate_with_channels(self):
@@ -7385,7 +7379,6 @@ class Session(_SessionBase):
 
             return self._initialize_with_channels(resource_name, channels, reset, option_string)
 
-
     @ivi_synchronized
     def get_channel_name(self, index):
         r'''get_channel_name
@@ -7470,7 +7463,6 @@ class Session(_SessionBase):
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
         return hightime.datetime(year, month, day, hour, minute)
 
-
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
@@ -7486,7 +7478,6 @@ class Session(_SessionBase):
         '''
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
         return hightime.datetime(year, month, day, hour, minute)
-
 
     @ivi_synchronized
     def _get_self_cal_last_date_and_time(self):
@@ -7823,7 +7814,6 @@ class Session(_SessionBase):
         '''
         return self._get_channel_names(indices)
 
-
     @ivi_synchronized
     def read_current_temperature(self):
         r'''read_current_temperature
@@ -7920,7 +7910,6 @@ class Session(_SessionBase):
         if code:
             raise errors.SelfTestError(code, msg)
         return None
-
 
     @ivi_synchronized
     def _self_test(self):

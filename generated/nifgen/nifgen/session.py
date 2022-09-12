@@ -1560,7 +1560,6 @@ class _SessionBase(object):
 
         return self._create_waveform_f64(waveform_data_array)
 
-
     @ivi_synchronized
     def _create_waveform_f64(self, waveform_data_array):
         r'''_create_waveform_f64
@@ -1950,7 +1949,6 @@ class _SessionBase(object):
             return self._delete_named_waveform(waveform_name_or_handle)
         else:
             return self._clear_arb_waveform(waveform_name_or_handle)
-
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -2570,7 +2568,6 @@ class _SessionBase(object):
         else:
             return self._set_waveform_next_write_position(waveform_name_or_handle, relative_to, offset)
 
-
     @ivi_synchronized
     def _set_waveform_next_write_position(self, waveform_handle, relative_to, offset):
         r'''_set_waveform_next_write_position
@@ -2987,7 +2984,6 @@ class _SessionBase(object):
                 raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(data.typecode, 'd (double)', 'h (16 bit int)'))
 
         return self._write_named_waveform_f64(waveform_name_or_handle, data) if use_named else self._write_waveform(waveform_name_or_handle, data)
-
 
     def _error_message(self, error_code):
         r'''_error_message
@@ -3775,7 +3771,6 @@ class Session(_SessionBase):
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
         return hightime.datetime(year, month, day, hour, minute)
 
-
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
@@ -3788,7 +3783,6 @@ class Session(_SessionBase):
         '''
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
         return hightime.datetime(year, month, day, hour, minute)
-
 
     @ivi_synchronized
     def _get_self_cal_last_date_and_time(self):
@@ -4294,7 +4288,6 @@ class Session(_SessionBase):
         if code:
             raise errors.SelfTestError(code, msg)
         return None
-
 
     @ivi_synchronized
     def reset(self):

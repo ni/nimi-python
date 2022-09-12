@@ -2316,7 +2316,6 @@ class Session(_SessionBase):
             raise errors.SelfTestError(code, msg)
         return None
 
-
     @ivi_synchronized
     def reset(self):
         r'''reset

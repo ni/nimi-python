@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
-import array  # noqa: F401
+import array
 import ctypes
-import hightime
-import niscope._converters as _converters
+import hightime  # noqa: F401
+import niscope._converters as _converters  # noqa: F401
 import niscope._library_singleton as _library_singleton
 import niscope._visatype as _visatype
 import niscope.enums as enums
 import niscope.errors as errors
-import threading
-
-from niscope._visatype import *  # noqa: F403,H303
 
 import niscope.waveform_info as waveform_info  # noqa: F401
 

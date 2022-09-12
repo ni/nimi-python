@@ -14,19 +14,16 @@ functions = config['functions']
 functions = helper.filter_codegen_functions(functions)
 %>\
 
-import array  # noqa: F401
+import array
 import ctypes
-import hightime
-import ${module_name}._converters as _converters
+import hightime  # noqa: F401
+import ${module_name}._converters as _converters  # noqa: F401
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
 % if config['enums']:
 import ${module_name}.enums as enums
 % endif
 import ${module_name}.errors as errors
-import threading
-
-from ${module_name}._visatype import *  # noqa: F403,H303
 % for c in config['custom_types']:
 
 import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401

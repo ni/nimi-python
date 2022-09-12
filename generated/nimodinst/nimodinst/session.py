@@ -1,9 +1,6 @@
 # This file was generated
 
-import ctypes
-
 import nimodinst._library_interpreter as _library_interpreter
-import nimodinst._visatype as _visatype
 import nimodinst.errors as errors
 
 # Used for __repr__ and __str__

@@ -14,10 +14,7 @@
     close_function_name = helper.camelcase_to_snakecase(config['close_function'])
 %>\
 
-import ctypes
-
 import ${module_name}._library_interpreter as _library_interpreter
-import ${module_name}._visatype as _visatype
 import ${module_name}.errors as errors
 
 # Used for __repr__ and __str__

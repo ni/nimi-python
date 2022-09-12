@@ -42,4 +42,3 @@
             warnings.warn("Initializing session without independent channels enabled.", DeprecationWarning)
 
             return self._initialize_with_channels(resource_name, channels, reset, option_string)
-

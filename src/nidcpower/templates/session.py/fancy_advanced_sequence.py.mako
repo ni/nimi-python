@@ -25,4 +25,3 @@
             attribute_ids_used.add(Session.__base__.__dict__[prop]._attribute_id)
 
         self._create_advanced_sequence_with_channels(sequence_name, list(attribute_ids_used), set_as_active_sequence)
-

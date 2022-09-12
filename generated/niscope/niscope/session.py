@@ -2139,7 +2139,6 @@ class _SessionBase(object):
 
         return wfm_info
 
-
     @ivi_synchronized
     def fetch_array_measurement(self, array_meas_function, meas_wfm_size=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, meas_num_samples=None, timeout=hightime.timedelta(seconds=5.0)):
         r'''fetch_array_measurement
@@ -2236,7 +2235,6 @@ class _SessionBase(object):
 
         return wfm_info
 
-
     @ivi_synchronized
     def fetch_measurement_stats(self, scalar_meas_function, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0)):
         r'''fetch_measurement_stats
@@ -2331,7 +2329,6 @@ class _SessionBase(object):
 
         return output
 
-
     @ivi_synchronized
     def get_equalization_filter_coefficients(self):
         '''get_equalization_filter_coefficients
@@ -2350,7 +2347,6 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.get_equalization_filter_coefficients`
         '''
         return self._get_equalization_filter_coefficients(self.equalization_num_coefficients)
-
 
     @ivi_synchronized
     def read(self, num_samples=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0)):
@@ -2439,7 +2435,6 @@ class _SessionBase(object):
         waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
 
         return wfm_info
-
 
     @ivi_synchronized
     def _fetch(self, num_samples, timeout=hightime.timedelta(seconds=5.0)):
@@ -3224,7 +3219,6 @@ class _SessionBase(object):
         waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
 
         return wfm_info
-
 
     @ivi_synchronized
     def _fetch_measurement_stats(self, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):
@@ -4853,7 +4847,6 @@ class Session(_SessionBase):
         year, month, day = self._cal_fetch_date(enums._CalibrationTypes.EXTERNAL)
         return hightime.datetime(year, month, day)
 
-
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
         '''get_ext_cal_last_temp
@@ -4869,7 +4862,6 @@ class Session(_SessionBase):
 
         return self._cal_fetch_temperature(enums._CalibrationTypes.EXTERNAL.value)
 
-
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
@@ -4883,7 +4875,6 @@ class Session(_SessionBase):
 
         year, month, day = self._cal_fetch_date(enums._CalibrationTypes.SELF)
         return hightime.datetime(year, month, day)
-
 
     @ivi_synchronized
     def get_self_cal_last_temp(self):
@@ -4899,7 +4890,6 @@ class Session(_SessionBase):
         '''
 
         return self._cal_fetch_temperature(enums._CalibrationTypes.SELF.value)
-
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
@@ -5205,7 +5195,6 @@ class Session(_SessionBase):
         if code:
             raise errors.SelfTestError(code, msg)
         return None
-
 
     @ivi_synchronized
     def reset(self):

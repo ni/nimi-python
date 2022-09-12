@@ -1,9 +1,6 @@
 # This file was generated
 
-import array
-import ctypes
 import hightime
-import threading
 
 import nitclk._attributes as _attributes
 import nitclk._library_interpreter as _library_interpreter
@@ -11,28 +8,6 @@ import nitclk._library_interpreter as _library_interpreter
 # Used for __repr__ and __str__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
-
-_session_instance = None
-_session_instance_lock = threading.Lock()
-
-
-# Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
-    if isinstance(value, array.array):
-        assert library_type is not None, 'library_type is required for array.array'
-        addr, _ = value.buffer_info()
-        return ctypes.cast(addr, ctypes.POINTER(library_type))
-    elif str(type(value)).find("'numpy.ndarray'") != -1:
-        import numpy
-        return numpy.ctypeslib.as_ctypes(value)
-    elif isinstance(value, list):
-        assert library_type is not None, 'library_type is required for list'
-        return (library_type * len(value))(*value)
-    else:
-        if library_type is not None and size is not None:
-            return (library_type * size)()
-        else:
-            return None
 
 
 class SessionReference(object):
@@ -382,6 +357,7 @@ class SessionReference(object):
         '''
         return self._library._set_attribute_vi_string(self, self._repeated_capability, attribute_id, value)
 
+
 class _Session(object):
     '''Private class
 
@@ -647,6 +623,7 @@ class _Session(object):
         '''
         return self._library.wait_until_done(self, sessions, timeout)
 
+
 def configure_for_homogeneous_triggers(sessions):
     '''configure_for_homogeneous_triggers
 
@@ -759,6 +736,7 @@ def configure_for_homogeneous_triggers(sessions):
     '''
     return _Session().configure_for_homogeneous_triggers(sessions)
 
+
 def finish_sync_pulse_sender_synchronize(sessions, min_time):
     '''finish_sync_pulse_sender_synchronize
 
@@ -777,6 +755,7 @@ def finish_sync_pulse_sender_synchronize(sessions, min_time):
     '''
     return _Session().finish_sync_pulse_sender_synchronize(sessions, min_time)
 
+
 def initiate(sessions):
     '''initiate
 
@@ -791,6 +770,7 @@ def initiate(sessions):
 
     '''
     return _Session().initiate(sessions)
+
 
 def is_done(sessions):
     '''is_done
@@ -810,6 +790,7 @@ def is_done(sessions):
     '''
     return _Session().is_done(sessions)
 
+
 def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
     '''setup_for_sync_pulse_sender_synchronize
 
@@ -827,6 +808,7 @@ def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
 
     '''
     return _Session().setup_for_sync_pulse_sender_synchronize(sessions, min_time)
+
 
 def synchronize(sessions, min_tclk_period):
     '''synchronize
@@ -851,6 +833,7 @@ def synchronize(sessions, min_tclk_period):
     '''
     return _Session().synchronize(sessions, min_tclk_period)
 
+
 def synchronize_to_sync_pulse_sender(sessions, min_time):
     '''synchronize_to_sync_pulse_sender
 
@@ -868,6 +851,7 @@ def synchronize_to_sync_pulse_sender(sessions, min_time):
 
     '''
     return _Session().synchronize_to_sync_pulse_sender(sessions, min_time)
+
 
 def wait_until_done(sessions, timeout):
     '''wait_until_done

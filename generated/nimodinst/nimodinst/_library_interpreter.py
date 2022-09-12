@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
-import array  # noqa: F401
+import array
 import ctypes
-import hightime
-import nimodinst._converters as _converters
+import hightime  # noqa: F401
+import nimodinst._converters as _converters  # noqa: F401
 import nimodinst._library_singleton as _library_singleton
 import nimodinst._visatype as _visatype
 import nimodinst.errors as errors
-import threading
-
-from nimodinst._visatype import *  # noqa: F403,H303
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL

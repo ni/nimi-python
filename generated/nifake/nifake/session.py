@@ -468,7 +468,6 @@ class _SessionBase(object):
         '''
         return self._get_channel_names(indices)
 
-
     @ivi_synchronized
     def read_from_channel(self, maximum_time):
         r'''read_from_channel
@@ -1175,7 +1174,6 @@ class Session(_SessionBase):
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return hightime.datetime(year, month, day, hour, minute)
 
-
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
         r'''import_attribute_configuration_buffer
@@ -1560,7 +1558,6 @@ class Session(_SessionBase):
         if code:
             raise errors.SelfTestError(code, msg)
         return None
-
 
     @ivi_synchronized
     def _self_test(self):

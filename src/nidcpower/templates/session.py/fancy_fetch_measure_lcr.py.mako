@@ -44,4 +44,3 @@
         for lcr_measurement_object,${channel_name_unpack} in zip(lcr_measurements${channel_names_zipped}):
             lcr_measurement_object.channel = ${channel_name_value}
         return lcr_measurements
-

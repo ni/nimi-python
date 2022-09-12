@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
-import array  # noqa: F401
+import array
 import ctypes
-import hightime
-import niswitch._converters as _converters
+import hightime  # noqa: F401
+import niswitch._converters as _converters  # noqa: F401
 import niswitch._library_singleton as _library_singleton
 import niswitch._visatype as _visatype
 import niswitch.enums as enums
 import niswitch.errors as errors
-import threading
-
-from niswitch._visatype import *  # noqa: F403,H303
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL

@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
-import array  # noqa: F401
+import array
 import ctypes
-import hightime
-import nifake._converters as _converters
+import hightime  # noqa: F401
+import nifake._converters as _converters  # noqa: F401
 import nifake._library_singleton as _library_singleton
 import nifake._visatype as _visatype
 import nifake.enums as enums
 import nifake.errors as errors
-import threading
-
-from nifake._visatype import *  # noqa: F403,H303
 
 import nifake.custom_struct as custom_struct  # noqa: F401
 

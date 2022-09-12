@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
-import array  # noqa: F401
+import array
 import ctypes
-import hightime
-import nifgen._converters as _converters
+import hightime  # noqa: F401
+import nifgen._converters as _converters  # noqa: F401
 import nifgen._library_singleton as _library_singleton
 import nifgen._visatype as _visatype
 import nifgen.enums as enums
 import nifgen.errors as errors
-import threading
-
-from nifgen._visatype import *  # noqa: F403,H303
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL

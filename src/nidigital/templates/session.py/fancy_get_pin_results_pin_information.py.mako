@@ -23,4 +23,3 @@
             pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_names[0]))
 
         return pin_infos
-

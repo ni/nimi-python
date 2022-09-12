@@ -952,10 +952,10 @@ class _SessionBase(object):
 
 
 class Session(_SessionBase):
-    '''An NI-DMM session to an NI digital multimeter.'''
+    '''An NI-DMM session to an NI digital multimeter'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
-        r'''An NI-DMM session to an NI digital multimeter.
+        r'''An NI-DMM session to an NI digital multimeter
 
         This method completes the following tasks:
 
@@ -1903,7 +1903,6 @@ class Session(_SessionBase):
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return hightime.datetime(year, month, day, hour, minute)
 
-
     @ivi_synchronized
     def get_last_cal_temp(self, cal_type):
         r'''get_last_cal_temp
@@ -2445,7 +2444,6 @@ class Session(_SessionBase):
         if code:
             raise errors.SelfTestError(code, msg)
         return None
-
 
     @ivi_synchronized
     def reset(self):

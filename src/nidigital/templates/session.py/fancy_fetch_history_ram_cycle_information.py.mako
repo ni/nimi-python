@@ -86,4 +86,3 @@
             position += 1
 
         return cycle_infos
-

@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
-import array  # noqa: F401
+import array
 import ctypes
-import hightime
-import nitclk._converters as _converters
+import hightime  # noqa: F401
+import nitclk._converters as _converters  # noqa: F401
 import nitclk._library_singleton as _library_singleton
 import nitclk._visatype as _visatype
 import nitclk.errors as errors
-import threading
-
-from nitclk._visatype import *  # noqa: F403,H303
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL

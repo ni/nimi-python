@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
-import array  # noqa: F401
+import array
 import ctypes
-import hightime
-import nise._converters as _converters
+import hightime  # noqa: F401
+import nise._converters as _converters  # noqa: F401
 import nise._library_singleton as _library_singleton
 import nise._visatype as _visatype
 import nise.enums as enums
 import nise.errors as errors
-import threading
-
-from nise._visatype import *  # noqa: F403,H303
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL

@@ -20,4 +20,3 @@
             files = [files]
         for f in files:
             method(f)
-

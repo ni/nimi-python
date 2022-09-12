@@ -20,4 +20,3 @@
         '''
         ${output_params} = self.${called_function['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_CALL)})
         return hightime.datetime(year, month, day, hour, minute)
-

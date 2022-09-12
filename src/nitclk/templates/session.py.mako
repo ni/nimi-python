@@ -12,10 +12,7 @@
     functions = helper.filter_codegen_functions(functions)
 %>\
 
-import array
-import ctypes
 import hightime
-import threading
 
 import ${module_name}._attributes as _attributes
 import ${module_name}._library_interpreter as _library_interpreter
@@ -23,28 +20,6 @@ import ${module_name}._library_interpreter as _library_interpreter
 # Used for __repr__ and __str__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
-
-_session_instance = None
-_session_instance_lock = threading.Lock()
-
-
-# Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
-    if isinstance(value, array.array):
-        assert library_type is not None, 'library_type is required for array.array'
-        addr, _ = value.buffer_info()
-        return ctypes.cast(addr, ctypes.POINTER(library_type))
-    elif str(type(value)).find("'numpy.ndarray'") != -1:
-        import numpy
-        return numpy.ctypeslib.as_ctypes(value)
-    elif isinstance(value, list):
-        assert library_type is not None, 'library_type is required for list'
-        return (library_type * len(value))(*value)
-    else:
-        if library_type is not None and size is not None:
-            return (library_type * size)()
-        else:
-            return None
 
 
 class SessionReference(object):
@@ -104,9 +79,8 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 % endfor
 % endfor
 
-<%
-# The main reason for having this class is to allow reusing the default method template.
-%>\
+
+## The main reason for having this class is to allow reusing the default method template.
 class _Session(object):
     '''Private class
 
@@ -137,6 +111,7 @@ class _Session(object):
 % endfor
 % endfor
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
+
 
 <%
 f = functions[func_name]

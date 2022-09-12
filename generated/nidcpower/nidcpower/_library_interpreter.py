@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
-import array  # noqa: F401
+import array
 import ctypes
-import hightime
-import nidcpower._converters as _converters
+import hightime  # noqa: F401
+import nidcpower._converters as _converters  # noqa: F401
 import nidcpower._library_singleton as _library_singleton
 import nidcpower._visatype as _visatype
 import nidcpower.enums as enums
 import nidcpower.errors as errors
-import threading
-
-from nidcpower._visatype import *  # noqa: F403,H303
 
 import nidcpower.lcr_load_compensation_spot as lcr_load_compensation_spot  # noqa: F401
 

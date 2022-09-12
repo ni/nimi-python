@@ -1912,7 +1912,6 @@ class _SessionBase(object):
         else:
             return None
 
-
     @ivi_synchronized
     def fetch_capture_waveform(self, waveform_name, samples_to_read, timeout=hightime.timedelta(seconds=10.0)):
         '''fetch_capture_waveform
@@ -2130,7 +2129,6 @@ class _SessionBase(object):
 
         return cycle_infos
 
-
     @ivi_synchronized
     def get_pin_results_pin_information(self):
         '''get_pin_results_pin_information
@@ -2172,7 +2170,6 @@ class _SessionBase(object):
 
         return pin_infos
 
-
     @ivi_synchronized
     def get_site_pass_fail(self):
         '''get_site_pass_fail
@@ -2200,7 +2197,6 @@ class _SessionBase(object):
         assert len(site_list) == len(result_list)
 
         return dict(zip(site_list, result_list))
-
 
     @ivi_synchronized
     def _fetch_history_ram_cycle_information(self, sample_index):
@@ -3426,7 +3422,6 @@ class Session(_SessionBase):
         for f in files:
             method(f)
 
-
     @ivi_synchronized
     def self_test(self):
         '''self_test
@@ -3451,7 +3446,6 @@ class Session(_SessionBase):
             raise errors.SelfTestError(code, msg)
         return None
 
-
     @ivi_synchronized
     def unload_specifications(self, file_paths):
         '''unload_specifications
@@ -3468,7 +3462,6 @@ class Session(_SessionBase):
 
         '''
         self._call_method_with_iterable(self._unload_specifications, file_paths)
-
 
     @ivi_synchronized
     def write_source_waveform_site_unique(self, waveform_name, waveform_data):
@@ -3528,7 +3521,6 @@ class Session(_SessionBase):
             i += 1
 
         self.sites[site_list]._write_source_waveform_site_unique_u32(waveform_name, len(waveform_data), actual_samples_per_waveform, data)
-
 
     @ivi_synchronized
     def get_pattern_pin_names(self, start_label):

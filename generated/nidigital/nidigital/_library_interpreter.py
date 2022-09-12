@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
-import array  # noqa: F401
+import array
 import ctypes
-import hightime
-import nidigital._converters as _converters
+import hightime  # noqa: F401
+import nidigital._converters as _converters  # noqa: F401
 import nidigital._library_singleton as _library_singleton
 import nidigital._visatype as _visatype
 import nidigital.enums as enums
 import nidigital.errors as errors
-import threading
-
-from nidigital._visatype import *  # noqa: F403,H303
 
 import nidigital.history_ram_cycle_information as history_ram_cycle_information  # noqa: F401
 
