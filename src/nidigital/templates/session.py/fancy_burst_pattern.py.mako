@@ -4,8 +4,8 @@
     results and returns it to the caller.'''
     import build.helper as helper
 %>\
-    def ${f['session_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
-        '''${f['session_name']}
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+        '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''

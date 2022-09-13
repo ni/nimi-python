@@ -4,8 +4,8 @@
     import build.helper as helper
     suffix = method_template['method_python_name_suffix']
 %>\
-    def ${f['session_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
-        r'''${f['session_name']}
+    def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+        r'''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
@@ -20,7 +20,7 @@
         if meas_wfm_size is None:
             meas_wfm_size = self._actual_meas_wfm_size(array_meas_function)
 
-        meas_wfm, wfm_info = self._${f['session_name']}(array_meas_function, meas_wfm_size, timeout)
+        meas_wfm, wfm_info = self._${f['python_name']}(array_meas_function, meas_wfm_size, timeout)
 
         record_length = int(len(meas_wfm) / len(wfm_info))
         waveform_info._populate_samples_info(wfm_info, meas_wfm, record_length)

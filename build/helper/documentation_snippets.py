@@ -104,7 +104,7 @@ def close_function_def_for_doc(functions, config):
         if type(function_def['documentation']['note']) is not list:
             function_def['documentation']['note'] = [function_def['documentation']['note']]
         function_def['documentation']['note'].append(close_function_note)
-        function_def['session_name'] = 'close'
+        function_def['python_name'] = 'close'
     else:
         assert False, "No '{}' function defined".format(close_name)
 
@@ -136,7 +136,7 @@ def initiate_function_def_for_doc(functions, config):
         if type(function_def['documentation']['note']) is not list:
             function_def['documentation']['note'] = [function_def['documentation']['note']]
         function_def['documentation']['note'].append(initiate_function_note)
-        function_def['session_name'] = 'initiate'
+        function_def['python_name'] = 'initiate'
     else:
         assert False, "No '{}' function defined".format(session_context_manager_initiate)
 

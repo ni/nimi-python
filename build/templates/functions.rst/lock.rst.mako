@@ -2,7 +2,7 @@
 <%
     import build.helper as helper
 %>\
-.. py:method:: ${function['session_name']}()
+.. py:method:: ${function['python_name']}()
 
     Obtains a multithread lock on the device session. Before doing so, the
     software waits until all other execution threads release their locks

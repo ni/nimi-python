@@ -8,35 +8,35 @@
     suffix = method_template['method_python_name_suffix']
 
     # We explicitly only support fetch_multiple_lcr and measure_multiple_lcr
-    if f['session_name'] == 'fetch_multiple_lcr':
+    if f['python_name'] == 'fetch_multiple_lcr':
         param_list = 'count, timeout'
         channel_names_zipped = ''
         channel_name_unpack = ''
         channel_name_value = 'channel_names[0]'
-    elif f['session_name'] == 'measure_multiple_lcr':
+    elif f['python_name'] == 'measure_multiple_lcr':
         param_list = ''
         channel_names_zipped = ', channel_names'
         channel_name_unpack = ' channel_name'
         channel_name_value = 'channel_name'
     else:
         raise ValueError(
-            f"Only fetch_multiple_lcr and measure_multiple_lcr are supported. Got {f['session_name']}"
+            f"Only fetch_multiple_lcr and measure_multiple_lcr are supported. Got {f['python_name']}"
         )
 %>\
-    def ${f['session_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
-        '''${f['session_name']}
+    def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+        '''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        lcr_measurements = self._${f['session_name']}(${param_list})
+        lcr_measurements = self._${f['python_name']}(${param_list})
 
         channel_names = _converters.expand_channel_string(
             self._repeated_capability,
             self._all_channels_in_session
         )
-%if f['session_name'] == 'fetch_multiple_lcr':
+%if f['python_name'] == 'fetch_multiple_lcr':
         assert len(channel_names) == 1, "fetch_multiple_lcr only supports one channel at a time"
-%elif f['session_name'] == 'measure_multiple_lcr':
+%elif f['python_name'] == 'measure_multiple_lcr':
         assert len(channel_names) == len(lcr_measurements), (
             "measure_multiple_lcr should return as many LCR measurements as the number of channels specified through the channel string"
         )

@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
-    def ${f['session_name']}(self):
-        '''${f['session_name']}
+    def ${f['python_name']}(self):
+        '''${f['python_name']}
 
         Obtains a multithread lock on the device session. Before doing so, the
         software waits until all other execution threads release their locks
