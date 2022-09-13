@@ -6,4 +6,4 @@
         lock. Refer to lock for additional
         information on session locks.
         '''
-        self._library.unlock(self)
+        self._library.unlock()

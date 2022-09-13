@@ -1,4 +1,4 @@
-    def _get_error_description(self, session, error_code):
+    def _get_error_description(self, error_code):
         '''_get_error_description
 
         Returns the error description.

@@ -69,6 +69,7 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        self._${config['session_handle_parameter_name']} = 0
 
 <%include file="/_library_interpreter.py/_get_error_description.py.mako" />\
 % for func_name in sorted(functions):

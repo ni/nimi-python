@@ -131,6 +131,7 @@ class SessionReference(object):
     def __init__(self, session_number, encoding='windows-1251'):
         self._session_number = session_number
         self._library = _library_interpreter.LibraryInterpreter(encoding)
+        self._library._session_number = session_number
         # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
         self._repeated_capability = ''
 
@@ -178,7 +179,7 @@ class SessionReference(object):
             value (float): The value that you are getting
 
         '''
-        return self._library._get_attribute_vi_real64(self, self._repeated_capability, attribute_id)
+        return self._library._get_attribute_vi_real64(self._repeated_capability, attribute_id)
 
     def _get_attribute_vi_session(self, attribute_id):
         r'''_get_attribute_vi_session
@@ -207,7 +208,7 @@ class SessionReference(object):
             value (int): The value that you are getting
 
         '''
-        return self._library._get_attribute_vi_session(self, self._repeated_capability, attribute_id)
+        return self._library._get_attribute_vi_session(self._repeated_capability, attribute_id)
 
     def _get_attribute_vi_string(self, attribute_id):
         r'''_get_attribute_vi_string
@@ -246,7 +247,7 @@ class SessionReference(object):
             value (str): The value that you are getting
 
         '''
-        return self._library._get_attribute_vi_string(self, self._repeated_capability, attribute_id)
+        return self._library._get_attribute_vi_string(self._repeated_capability, attribute_id)
 
     def _get_extended_error_info(self):
         r'''_get_extended_error_info
@@ -264,7 +265,7 @@ class SessionReference(object):
                 for _get_extended_error_info to return the full error string.
 
         '''
-        return self._library._get_extended_error_info(self)
+        return self._library._get_extended_error_info()
 
     def _set_attribute_vi_real64(self, attribute_id, value):
         r'''_set_attribute_vi_real64
@@ -293,7 +294,7 @@ class SessionReference(object):
             value (float): The value for the property
 
         '''
-        return self._library._set_attribute_vi_real64(self, self._repeated_capability, attribute_id, value)
+        return self._library._set_attribute_vi_real64(self._repeated_capability, attribute_id, value)
 
     def _set_attribute_vi_session(self, attribute_id, value):
         r'''_set_attribute_vi_session
@@ -324,7 +325,7 @@ class SessionReference(object):
             value (int): The value for the property
 
         '''
-        return self._library._set_attribute_vi_session(self, self._repeated_capability, attribute_id, value)
+        return self._library._set_attribute_vi_session(self._repeated_capability, attribute_id, value)
 
     def _set_attribute_vi_string(self, attribute_id, value):
         r'''_set_attribute_vi_string
@@ -355,7 +356,7 @@ class SessionReference(object):
             value (str): Pass the value for the property
 
         '''
-        return self._library._set_attribute_vi_string(self, self._repeated_capability, attribute_id, value)
+        return self._library._set_attribute_vi_string(self._repeated_capability, attribute_id, value)
 
 
 class _Session(object):
@@ -489,7 +490,7 @@ class _Session(object):
             sessions (list of instrument-specific sessions or nitclk.SessionReference instances): sessions is an array of sessions that are being synchronized.
 
         '''
-        return self._library.configure_for_homogeneous_triggers(self, sessions)
+        return self._library.configure_for_homogeneous_triggers(sessions)
 
     def finish_sync_pulse_sender_synchronize(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
         r'''finish_sync_pulse_sender_synchronize
@@ -507,7 +508,7 @@ class _Session(object):
                 through the various devices and cables.
 
         '''
-        return self._library.finish_sync_pulse_sender_synchronize(self, sessions, min_time)
+        return self._library.finish_sync_pulse_sender_synchronize(sessions, min_time)
 
     def initiate(self, sessions):
         r'''initiate
@@ -522,7 +523,7 @@ class _Session(object):
             sessions (list of instrument-specific sessions or nitclk.SessionReference instances): sessions is an array of sessions that are being synchronized.
 
         '''
-        return self._library.initiate(self, sessions)
+        return self._library.initiate(sessions)
 
     def is_done(self, sessions):
         r'''is_done
@@ -540,7 +541,7 @@ class _Session(object):
                 reports an error.
 
         '''
-        return self._library.is_done(self, sessions)
+        return self._library.is_done(sessions)
 
     def setup_for_sync_pulse_sender_synchronize(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
         r'''setup_for_sync_pulse_sender_synchronize
@@ -558,7 +559,7 @@ class _Session(object):
                 through the various devices and cables.
 
         '''
-        return self._library.setup_for_sync_pulse_sender_synchronize(self, sessions, min_time)
+        return self._library.setup_for_sync_pulse_sender_synchronize(sessions, min_time)
 
     def synchronize(self, sessions, min_tclk_period=hightime.timedelta(seconds=0.0)):
         r'''synchronize
@@ -581,7 +582,7 @@ class _Session(object):
                 through the various devices and cables.
 
         '''
-        return self._library.synchronize(self, sessions, min_tclk_period)
+        return self._library.synchronize(sessions, min_tclk_period)
 
     def synchronize_to_sync_pulse_sender(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
         r'''synchronize_to_sync_pulse_sender
@@ -599,7 +600,7 @@ class _Session(object):
                 through the various devices and cables.
 
         '''
-        return self._library.synchronize_to_sync_pulse_sender(self, sessions, min_time)
+        return self._library.synchronize_to_sync_pulse_sender(sessions, min_time)
 
     def wait_until_done(self, sessions, timeout=hightime.timedelta(seconds=0.0)):
         r'''wait_until_done
@@ -621,7 +622,7 @@ class _Session(object):
                 returns an error.
 
         '''
-        return self._library.wait_until_done(self, sessions, timeout)
+        return self._library.wait_until_done(sessions, timeout)
 
 
 def configure_for_homogeneous_triggers(sessions):

@@ -1677,7 +1677,7 @@ fetch_into
 
                 .. code-block:: python
 
-                    waveform = numpy.ndarray(num_samples * session.actual_num_wfms(session, channel_list), dtype=numpy.float64)
+                    waveform = numpy.ndarray(num_samples * session.actual_num_wfms(channel_list), dtype=numpy.float64)
                     wfm_info = session['0,1'].fetch_into(waveform, timeout=5.0)
 
                 

@@ -1306,7 +1306,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms(session, channel_list))'
+                    'value': '(num_samples * self._actual_num_wfms(channel_list))'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1585,7 +1585,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms(session, channel_list))'
+                    'value': '(num_samples * self._actual_num_wfms(channel_list))'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1657,7 +1657,7 @@ functions = {
                 'numpy': True,
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms(session, channel_list))'
+                    'value': '(num_samples * self._actual_num_wfms(channel_list))'
                 },
                 'type': 'ViReal64[]',
                 'use_array': True
@@ -1670,7 +1670,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1738,7 +1738,7 @@ functions = {
                 'name': 'measWfm',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(measurement_waveform_size * self._actual_num_wfms(session, channel_list))'
+                    'value': '(measurement_waveform_size * self._actual_num_wfms(channel_list))'
                 },
                 'type': 'ViReal64[]'
             },
@@ -1750,7 +1750,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1816,7 +1816,7 @@ functions = {
                 'numpy': True,
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms(session, channel_list))'
+                    'value': '(num_samples * self._actual_num_wfms(channel_list))'
                 },
                 'type': 'ViInt16[]',
                 'use_array': True
@@ -1829,7 +1829,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1895,7 +1895,7 @@ functions = {
                 'numpy': True,
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms(session, channel_list))'
+                    'value': '(num_samples * self._actual_num_wfms(channel_list))'
                 },
                 'type': 'ViInt32[]',
                 'use_array': True
@@ -1908,7 +1908,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1974,7 +1974,7 @@ functions = {
                 'numpy': True,
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms(session, channel_list))'
+                    'value': '(num_samples * self._actual_num_wfms(channel_list))'
                 },
                 'type': 'ViInt8[]',
                 'use_array': True
@@ -1987,7 +1987,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -2028,7 +2028,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': "\nnumpy array of the appropriate type and size that should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.\n\nTypes supported are\n\n- `numpy.float64`\n- `numpy.int8`\n- `numpy.in16`\n- `numpy.int32`\n\nExample:\n\n.. code-block:: python\n\n    waveform = numpy.ndarray(num_samples * session.actual_num_wfms(session, channel_list), dtype=numpy.float64)\n    wfm_info = session['0,1'].fetch_into(waveform, timeout=5.0)"
+                    'description': "\nnumpy array of the appropriate type and size that should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.\n\nTypes supported are\n\n- `numpy.float64`\n- `numpy.int8`\n- `numpy.in16`\n- `numpy.int32`\n\nExample:\n\n.. code-block:: python\n\n    waveform = numpy.ndarray(num_samples * session.actual_num_wfms(channel_list), dtype=numpy.float64)\n    wfm_info = session['0,1'].fetch_into(waveform, timeout=5.0)"
                 },
                 'name': 'waveform',
                 'numpy': True,
@@ -2090,7 +2090,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -2148,7 +2148,7 @@ functions = {
                 'name': 'result',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'ViReal64[]'
             },
@@ -2160,7 +2160,7 @@ functions = {
                 'name': 'mean',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'ViReal64[]'
             },
@@ -2172,7 +2172,7 @@ functions = {
                 'name': 'stdev',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'ViReal64[]'
             },
@@ -2184,7 +2184,7 @@ functions = {
                 'name': 'min',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'ViReal64[]'
             },
@@ -2196,7 +2196,7 @@ functions = {
                 'name': 'max',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'ViReal64[]'
             },
@@ -2208,7 +2208,7 @@ functions = {
                 'name': 'numInStats',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'ViInt32[]'
             }
@@ -2816,7 +2816,7 @@ functions = {
                 'name': 'waveform',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms(session, channel_list))'
+                    'value': '(num_samples * self._actual_num_wfms(channel_list))'
                 },
                 'type': 'ViReal64[]',
                 'use_array': True
@@ -2829,7 +2829,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(session, channel_list)'
+                    'value': 'self._actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }

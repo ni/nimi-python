@@ -11,77 +11,62 @@ pp = pprint.PrettyPrinter(indent=4, width=200)
 _ParameterUsageOptionsSnippet = {
     ParameterUsageOptions.SESSION_METHOD_DECLARATION: {
         'skip_self': False,
-        'include_session_instance': False,
         'name_to_use': 'python_name_with_default',
     },
     ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL: {
         'skip_self': True,
-        'include_session_instance': False,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.SESSION_INIT_DECLARATION: {
         'skip_self': False,
-        'include_session_instance': False,
         'name_to_use': 'python_name_with_default',
     },
     ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION: {
         'skip_self': False,
-        'include_session_instance': False,
         'name_to_use': 'python_name_with_default',
     },
     ParameterUsageOptions.LIBRARY_NUMPY_INTO_METHOD_DECLARATION: {
         'skip_self': False,
-        'include_session_instance': True,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.LIBRARY_NUMPY_INTO_METHOD_CALL: {
-        'skip_self': False,
-        'include_session_instance': False,
+        'skip_self': True,
         'name_to_use': 'library_method_call_snippet',
     },
     ParameterUsageOptions.SESSION_METHOD_CALL: {
         'skip_self': True,
-        'include_session_instance': False,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.SESSION_INIT_CALL: {
         'skip_self': True,
-        'include_session_instance': False,
         'name_to_use': 'python_name_or_default_for_init',
     },
     ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD: {
         'skip_self': True,
-        'include_session_instance': False,
         'name_to_use': 'python_name_with_doc_default',
     },
     ParameterUsageOptions.CTYPES_METHOD_DECLARATION: {
         'skip_self': False,
-        'include_session_instance': False,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.CTYPES_CALL: {
         'skip_self': True,
-        'include_session_instance': False,
         'name_to_use': 'ctypes_method_call_snippet',
     },
     ParameterUsageOptions.CTYPES_PASSTHROUGH_CALL: {
         'skip_self': True,
-        'include_session_instance': False,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.LIBRARY_METHOD_CALL: {
-        'skip_self': False,
-        'include_session_instance': False,
+        'skip_self': True,
         'name_to_use': 'library_method_call_snippet',
     },
     ParameterUsageOptions.CTYPES_ARGTYPES: {
         'skip_self': True,
-        'include_session_instance': False,
         'name_to_use': 'ctypes_type_library_call',
     },
     ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
         'skip_self': False,
-        'include_session_instance': True,
         'name_to_use': 'python_name_with_default',
     },
 }
@@ -109,8 +94,6 @@ def get_params_snippet(function, parameter_usage_options):
     snippets = []
     if not options_to_use['skip_self']:
         snippets.append('self')
-    if options_to_use['include_session_instance']:
-        snippets.append('session')
 
     # Render based on options
     for p in parameters_to_use:
@@ -324,7 +307,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 
     if parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
-            definition = '{0}.{1}(session._{2})  # case S110'.format(module_name, parameter['ctypes_type'], config['session_handle_parameter_name'])
+            definition = '{0}.{1}(self._{2})  # case S110'.format(module_name, parameter['ctypes_type'], config['session_handle_parameter_name'])
         elif parameter['size']['mechanism'] == 'python-code':
             definition = '{0}.{1}({2})  # case S120'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['enum'] is not None:
@@ -1514,7 +1497,7 @@ def test_get_ctype_variable_declaration_snippet_case_c100():
 
 def test_get_ctype_variable_declaration_snippet_case_s110():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[0], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["vi_ctype = _visatype.ViSession(session._vi)  # case S110"]
+    assert snippet == ["vi_ctype = _visatype.ViSession(self._vi)  # case S110"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s120():

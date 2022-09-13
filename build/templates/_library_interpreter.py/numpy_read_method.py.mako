@@ -34,7 +34,7 @@
 % if len(ivi_dance_parameters) > 0:
 <% ivi_dance_step = helper.IviDanceStep.GET_DATA %>\
         error_code = self._library.${f['python_name']}(${param_names_library})
-        errors.handle_error(self, session, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
 %   for declaration in helper.get_ctype_variable_declaration_snippet(ivi_dance_size_parameter, parameters, ivi_dance_step, config):
         ${declaration}
 %   endfor
@@ -45,5 +45,5 @@
 %   endfor
 % endif
         error_code = self._library.${f['python_name']}(${param_names_library})
-        errors.handle_error(self, session, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(parameters, config, use_numpy_array=True)}

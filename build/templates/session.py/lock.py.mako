@@ -39,4 +39,4 @@
 
         Actual call to driver
         '''
-        self._library.lock(self)
+        self._library.lock()

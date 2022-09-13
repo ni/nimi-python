@@ -1301,7 +1301,7 @@ class _SessionBase(object):
             initial_state_tristate_pins (basic sequence types or str): Comma-delimited list of pins, pin groups, or channels to initialize to a non-drive state (X)
 
         '''
-        return self._library.apply_levels_and_timing(self, self._repeated_capability, levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins)
+        return self._library.apply_levels_and_timing(self._repeated_capability, levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins)
 
     @ivi_synchronized
     def apply_tdr_offsets(self, offsets):
@@ -1324,7 +1324,7 @@ class _SessionBase(object):
             offsets (basic sequence of hightime.timedelta, datetime.timedelta, or float in seconds): TDR offsets to apply, in seconds. Specify an offset for each pin or channel in the repeated capabilities. If the repeated capabilities contain pin names, you must specify offsets for each site in the channel map per pin.
 
         '''
-        return self._library.apply_tdr_offsets(self, self._repeated_capability, offsets)
+        return self._library.apply_tdr_offsets(self._repeated_capability, offsets)
 
     @ivi_synchronized
     def _burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.timedelta(seconds=10.0)):
@@ -1353,7 +1353,7 @@ class _SessionBase(object):
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Maximum time (in seconds) allowed for this method to complete. If this method does not complete within this time interval, this method returns an error.
 
         '''
-        return self._library._burst_pattern(self, self._repeated_capability, start_label, select_digital_function, wait_until_done, timeout)
+        return self._library._burst_pattern(self._repeated_capability, start_label, select_digital_function, wait_until_done, timeout)
 
     @ivi_synchronized
     def clock_generator_abort(self):
@@ -1372,7 +1372,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.clock_generator_abort`
         '''
-        return self._library.clock_generator_abort(self, self._repeated_capability)
+        return self._library.clock_generator_abort(self._repeated_capability)
 
     @ivi_synchronized
     def clock_generator_generate_clock(self, frequency, select_digital_function=True):
@@ -1397,7 +1397,7 @@ class _SessionBase(object):
             select_digital_function (bool): A Boolean that specifies whether to select the digital method for the pins specified prior to starting clock generation.
 
         '''
-        return self._library.clock_generator_generate_clock(self, self._repeated_capability, frequency, select_digital_function)
+        return self._library.clock_generator_generate_clock(self._repeated_capability, frequency, select_digital_function)
 
     @ivi_synchronized
     def configure_active_load_levels(self, iol, ioh, vcom):
@@ -1424,7 +1424,7 @@ class _SessionBase(object):
             vcom (float): Commutating voltage level at which the active load circuit switches between sourcing current and sinking current.
 
         '''
-        return self._library.configure_active_load_levels(self, self._repeated_capability, iol, ioh, vcom)
+        return self._library.configure_active_load_levels(self._repeated_capability, iol, ioh, vcom)
 
     @ivi_synchronized
     def configure_pattern_burst_sites(self):
@@ -1443,7 +1443,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.configure_pattern_burst_sites`
         '''
-        return self._library.configure_pattern_burst_sites(self, self._repeated_capability)
+        return self._library.configure_pattern_burst_sites(self._repeated_capability)
 
     @ivi_synchronized
     def configure_time_set_compare_edges_strobe(self, time_set_name, strobe_edge):
@@ -1468,7 +1468,7 @@ class _SessionBase(object):
             strobe_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Time when the comparison happens within a vector period.
 
         '''
-        return self._library.configure_time_set_compare_edges_strobe(self, self._repeated_capability, time_set_name, strobe_edge)
+        return self._library.configure_time_set_compare_edges_strobe(self._repeated_capability, time_set_name, strobe_edge)
 
     @ivi_synchronized
     def configure_time_set_compare_edges_strobe2x(self, time_set_name, strobe_edge, strobe2_edge):
@@ -1495,7 +1495,7 @@ class _SessionBase(object):
             strobe2_edge (hightime.timedelta, datetime.timedelta, or float in seconds): Time when the comparison happens for the second DUT cycle within a vector period.
 
         '''
-        return self._library.configure_time_set_compare_edges_strobe2x(self, self._repeated_capability, time_set_name, strobe_edge, strobe2_edge)
+        return self._library.configure_time_set_compare_edges_strobe2x(self._repeated_capability, time_set_name, strobe_edge, strobe2_edge)
 
     @ivi_synchronized
     def configure_time_set_drive_edges(self, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):
@@ -1535,7 +1535,7 @@ class _SessionBase(object):
         '''
         if type(format) is not enums.DriveFormat:
             raise TypeError('Parameter format must be of type ' + str(enums.DriveFormat))
-        return self._library.configure_time_set_drive_edges(self, self._repeated_capability, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
+        return self._library.configure_time_set_drive_edges(self._repeated_capability, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
 
     @ivi_synchronized
     def configure_time_set_drive_edges2x(self, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):
@@ -1579,7 +1579,7 @@ class _SessionBase(object):
         '''
         if type(format) is not enums.DriveFormat:
             raise TypeError('Parameter format must be of type ' + str(enums.DriveFormat))
-        return self._library.configure_time_set_drive_edges2x(self, self._repeated_capability, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
+        return self._library.configure_time_set_drive_edges2x(self._repeated_capability, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
 
     @ivi_synchronized
     def configure_time_set_drive_format(self, time_set_name, drive_format):
@@ -1611,7 +1611,7 @@ class _SessionBase(object):
         '''
         if type(drive_format) is not enums.DriveFormat:
             raise TypeError('Parameter drive_format must be of type ' + str(enums.DriveFormat))
-        return self._library.configure_time_set_drive_format(self, self._repeated_capability, time_set_name, drive_format)
+        return self._library.configure_time_set_drive_format(self._repeated_capability, time_set_name, drive_format)
 
     @ivi_synchronized
     def configure_time_set_edge(self, time_set_name, edge, time):
@@ -1649,7 +1649,7 @@ class _SessionBase(object):
         '''
         if type(edge) is not enums.TimeSetEdgeType:
             raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdgeType))
-        return self._library.configure_time_set_edge(self, self._repeated_capability, time_set_name, edge, time)
+        return self._library.configure_time_set_edge(self._repeated_capability, time_set_name, edge, time)
 
     @ivi_synchronized
     def configure_time_set_edge_multiplier(self, time_set_name, edge_multiplier):
@@ -1674,7 +1674,7 @@ class _SessionBase(object):
             edge_multiplier (int): The specified edge multiplier for the pins in the pin list.
 
         '''
-        return self._library.configure_time_set_edge_multiplier(self, self._repeated_capability, time_set_name, edge_multiplier)
+        return self._library.configure_time_set_edge_multiplier(self._repeated_capability, time_set_name, edge_multiplier)
 
     @ivi_synchronized
     def configure_voltage_levels(self, vil, vih, vol, voh, vterm):
@@ -1705,7 +1705,7 @@ class _SessionBase(object):
             vterm (float): Termination voltage the instrument applies during non-drive cycles when the termination mode is set to V\ :sub:`term`. The instrument applies the termination voltage through a 50 ohm parallel termination resistance.
 
         '''
-        return self._library.configure_voltage_levels(self, self._repeated_capability, vil, vih, vol, voh, vterm)
+        return self._library.configure_voltage_levels(self._repeated_capability, vil, vih, vol, voh, vterm)
 
     @ivi_synchronized
     def create_capture_waveform_parallel(self, waveform_name):
@@ -1728,7 +1728,7 @@ class _SessionBase(object):
             waveform_name (str): Waveform name you want to use. Use the waveform_name with the capture_start opcode in your pattern.
 
         '''
-        return self._library.create_capture_waveform_parallel(self, self._repeated_capability, waveform_name)
+        return self._library.create_capture_waveform_parallel(self._repeated_capability, waveform_name)
 
     @ivi_synchronized
     def create_capture_waveform_serial(self, waveform_name, sample_width, bit_order):
@@ -1760,7 +1760,7 @@ class _SessionBase(object):
         '''
         if type(bit_order) is not enums.BitOrder:
             raise TypeError('Parameter bit_order must be of type ' + str(enums.BitOrder))
-        return self._library.create_capture_waveform_serial(self, self._repeated_capability, waveform_name, sample_width, bit_order)
+        return self._library.create_capture_waveform_serial(self._repeated_capability, waveform_name, sample_width, bit_order)
 
     @ivi_synchronized
     def create_source_waveform_parallel(self, waveform_name, data_mapping):
@@ -1790,7 +1790,7 @@ class _SessionBase(object):
         '''
         if type(data_mapping) is not enums.SourceDataMapping:
             raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceDataMapping))
-        return self._library.create_source_waveform_parallel(self, self._repeated_capability, waveform_name, data_mapping)
+        return self._library.create_source_waveform_parallel(self._repeated_capability, waveform_name, data_mapping)
 
     @ivi_synchronized
     def create_source_waveform_serial(self, waveform_name, data_mapping, sample_width, bit_order):
@@ -1829,7 +1829,7 @@ class _SessionBase(object):
             raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceDataMapping))
         if type(bit_order) is not enums.BitOrder:
             raise TypeError('Parameter bit_order must be of type ' + str(enums.BitOrder))
-        return self._library.create_source_waveform_serial(self, self._repeated_capability, waveform_name, data_mapping, sample_width, bit_order)
+        return self._library.create_source_waveform_serial(self._repeated_capability, waveform_name, data_mapping, sample_width, bit_order)
 
     @ivi_synchronized
     def disable_sites(self):
@@ -1848,7 +1848,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.disable_sites`
         '''
-        return self._library.disable_sites(self, self._repeated_capability)
+        return self._library.disable_sites(self._repeated_capability)
 
     @ivi_synchronized
     def enable_sites(self):
@@ -1867,7 +1867,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.enable_sites`
         '''
-        return self._library.enable_sites(self, self._repeated_capability)
+        return self._library.enable_sites(self._repeated_capability)
 
     @ivi_synchronized
     def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.timedelta(seconds=10.0)):
@@ -1941,7 +1941,7 @@ class _SessionBase(object):
             waveform ({ int: memoryview of array.array of unsigned int, int: memoryview of array.array of unsigned int, ... }): Dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
 
         '''
-        data, actual_num_waveforms, actual_samples_per_waveform = self._library._fetch_capture_waveform(self, self._repeated_capability, waveform_name, samples_to_read, timeout)
+        data, actual_num_waveforms, actual_samples_per_waveform = self._library._fetch_capture_waveform(self._repeated_capability, waveform_name, samples_to_read, timeout)
 
         # Get the site list
         site_list = self._get_site_results_site_numbers(enums._SiteResultType.CAPTURE_WAVEFORM)
@@ -2231,7 +2231,7 @@ class _SessionBase(object):
             num_dut_cycles (int): The returned number of DUT cycles contained in the cycle acquired by this History RAM sample. This is only needed if the pattern uses the edge multiplier feature.
 
         '''
-        return self._library._fetch_history_ram_cycle_information(self, self._repeated_capability, sample_index)
+        return self._library._fetch_history_ram_cycle_information(self._repeated_capability, sample_index)
 
     @ivi_synchronized
     def _fetch_history_ram_cycle_pin_data(self, pin_list, sample_index, dut_cycle_index):
@@ -2269,7 +2269,7 @@ class _SessionBase(object):
             per_pin_pass_fail (list of bool): The returned pass fail information for pins in the order specified in **pinList**. Pins without defined edges in the specified DUT cycle will return pass (True).
 
         '''
-        return self._library._fetch_history_ram_cycle_pin_data(self, self._repeated_capability, pin_list, sample_index, dut_cycle_index)
+        return self._library._fetch_history_ram_cycle_pin_data(self._repeated_capability, pin_list, sample_index, dut_cycle_index)
 
     @ivi_synchronized
     def _fetch_history_ram_scan_cycle_number(self, sample_index):
@@ -2296,7 +2296,7 @@ class _SessionBase(object):
             scan_cycle_number (int): Returns the scan cycle number acquired by this History RAM sample. Scan cycle numbers start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not have a scan opcode.
 
         '''
-        return self._library._fetch_history_ram_scan_cycle_number(self, self._repeated_capability, sample_index)
+        return self._library._fetch_history_ram_scan_cycle_number(self._repeated_capability, sample_index)
 
     @ivi_synchronized
     def frequency_counter_measure_frequency(self):
@@ -2319,7 +2319,7 @@ class _SessionBase(object):
             frequencies (list of float): The returned frequency counter measurement, in Hz.This method returns -1 if the measurement is invalid for the channel.
 
         '''
-        return self._library.frequency_counter_measure_frequency(self, self._repeated_capability)
+        return self._library.frequency_counter_measure_frequency(self._repeated_capability)
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute):
@@ -2346,7 +2346,7 @@ class _SessionBase(object):
             value (bool): The returned current value of the property; pass the address of a ViBoolean variable.
 
         '''
-        return self._library._get_attribute_vi_boolean(self, self._repeated_capability, attribute)
+        return self._library._get_attribute_vi_boolean(self._repeated_capability, attribute)
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute):
@@ -2373,7 +2373,7 @@ class _SessionBase(object):
             value (int): The returned current value of the property; pass the address of a ViInt32 variable.
 
         '''
-        return self._library._get_attribute_vi_int32(self, self._repeated_capability, attribute)
+        return self._library._get_attribute_vi_int32(self._repeated_capability, attribute)
 
     @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute):
@@ -2400,7 +2400,7 @@ class _SessionBase(object):
             value (int): The returned current value of the property; pass the address of a ViInt64 variable.
 
         '''
-        return self._library._get_attribute_vi_int64(self, self._repeated_capability, attribute)
+        return self._library._get_attribute_vi_int64(self._repeated_capability, attribute)
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute):
@@ -2427,7 +2427,7 @@ class _SessionBase(object):
             value (float): The returned current value of the property; pass the address of a ViReal64 variable.
 
         '''
-        return self._library._get_attribute_vi_real64(self, self._repeated_capability, attribute)
+        return self._library._get_attribute_vi_real64(self._repeated_capability, attribute)
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute):
@@ -2454,7 +2454,7 @@ class _SessionBase(object):
             value (str): The buffer in which the method returns the current value of the property; the buffer must be of type ViChar and have at least as many bytes as indicated in the **bufferSize**.
 
         '''
-        return self._library._get_attribute_vi_string(self, self._repeated_capability, attribute)
+        return self._library._get_attribute_vi_string(self._repeated_capability, attribute)
 
     @ivi_synchronized
     def get_channel_names(self, indices):
@@ -2476,7 +2476,7 @@ class _SessionBase(object):
             names (list of str): The channel name(s) at the specified indices.
 
         '''
-        return self._library.get_channel_names(self, indices)
+        return self._library.get_channel_names(indices)
 
     def _get_error(self):
         r'''_get_error
@@ -2491,7 +2491,7 @@ class _SessionBase(object):
                 If you pass 0 for **errorDescriptionBufferSize**, you can pass VI_NULL for this parameter.
 
         '''
-        return self._library._get_error(self)
+        return self._library._get_error()
 
     @ivi_synchronized
     def get_fail_count(self):
@@ -2514,7 +2514,7 @@ class _SessionBase(object):
             failure_count (list of int): Number of failures in an array. If a site is disabled or not enabled for burst, the method does not return data for that site. You can also use the get_pin_results_pin_information method to obtain a sorted list of returned sites and channels.
 
         '''
-        return self._library.get_fail_count(self, self._repeated_capability)
+        return self._library.get_fail_count(self._repeated_capability)
 
     @ivi_synchronized
     def get_history_ram_sample_count(self):
@@ -2562,7 +2562,7 @@ class _SessionBase(object):
             sample_count (int): The returned number of samples that History RAM acquired.
 
         '''
-        return self._library.get_history_ram_sample_count(self, self._repeated_capability)
+        return self._library.get_history_ram_sample_count(self._repeated_capability)
 
     @ivi_synchronized
     def _get_pattern_name(self, pattern_index):
@@ -2578,7 +2578,7 @@ class _SessionBase(object):
             name (str):
 
         '''
-        return self._library._get_pattern_name(self, pattern_index)
+        return self._library._get_pattern_name(pattern_index)
 
     @ivi_synchronized
     def _get_pin_name(self, pin_index):
@@ -2594,7 +2594,7 @@ class _SessionBase(object):
             name (str): Returns the pin name at the specified **pinIndex**.
 
         '''
-        return self._library._get_pin_name(self, pin_index)
+        return self._library._get_pin_name(pin_index)
 
     @ivi_synchronized
     def _get_pin_results_pin_information(self):
@@ -2623,7 +2623,7 @@ class _SessionBase(object):
                 Call get_channel_name to get the name of the channel associated with an index. Channel indexes are one-based.
 
         '''
-        return self._library._get_pin_results_pin_information(self, self._repeated_capability)
+        return self._library._get_pin_results_pin_information(self._repeated_capability)
 
     @ivi_synchronized
     def _get_site_pass_fail(self):
@@ -2649,7 +2649,7 @@ class _SessionBase(object):
                 One or more of the referenced methods are not in the Python API for this driver.
 
         '''
-        return self._library._get_site_pass_fail(self, self._repeated_capability)
+        return self._library._get_site_pass_fail(self._repeated_capability)
 
     @ivi_synchronized
     def _get_site_results_site_numbers(self, site_result_type):
@@ -2681,7 +2681,7 @@ class _SessionBase(object):
         '''
         if type(site_result_type) is not enums._SiteResultType:
             raise TypeError('Parameter site_result_type must be of type ' + str(enums._SiteResultType))
-        return self._library._get_site_results_site_numbers(self, self._repeated_capability, site_result_type)
+        return self._library._get_site_results_site_numbers(self._repeated_capability, site_result_type)
 
     @ivi_synchronized
     def get_time_set_drive_format(self, time_set_name):
@@ -2708,7 +2708,7 @@ class _SessionBase(object):
             format (enums.DriveFormat): Returned drive format of the time set for the specified pin.
 
         '''
-        return self._library.get_time_set_drive_format(self, self._repeated_capability, time_set_name)
+        return self._library.get_time_set_drive_format(self._repeated_capability, time_set_name)
 
     @ivi_synchronized
     def get_time_set_edge(self, time_set_name, edge):
@@ -2748,7 +2748,7 @@ class _SessionBase(object):
         '''
         if type(edge) is not enums.TimeSetEdgeType:
             raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdgeType))
-        return self._library.get_time_set_edge(self, self._repeated_capability, time_set_name, edge)
+        return self._library.get_time_set_edge(self._repeated_capability, time_set_name, edge)
 
     @ivi_synchronized
     def get_time_set_edge_multiplier(self, time_set_name):
@@ -2775,7 +2775,7 @@ class _SessionBase(object):
             edge_multiplier (int): Returned edge multiplier of the time set for the specified pin.
 
         '''
-        return self._library.get_time_set_edge_multiplier(self, self._repeated_capability, time_set_name)
+        return self._library.get_time_set_edge_multiplier(self._repeated_capability, time_set_name)
 
     @ivi_synchronized
     def _get_time_set_name(self, time_set_index):
@@ -2791,7 +2791,7 @@ class _SessionBase(object):
             name (str):
 
         '''
-        return self._library._get_time_set_name(self, time_set_index)
+        return self._library._get_time_set_name(time_set_index)
 
     @ivi_synchronized
     def is_site_enabled(self):
@@ -2816,7 +2816,7 @@ class _SessionBase(object):
             enable (bool): Boolean value that returns whether the site is enabled or disabled.
 
         '''
-        return self._library.is_site_enabled(self, self._repeated_capability)
+        return self._library.is_site_enabled(self._repeated_capability)
 
     def lock(self):
         '''lock
@@ -2858,7 +2858,7 @@ class _SessionBase(object):
 
         Actual call to driver
         '''
-        self._library.lock(self)
+        self._library.lock()
 
     @ivi_synchronized
     def ppmu_measure(self, measurement_type):
@@ -2890,7 +2890,7 @@ class _SessionBase(object):
         '''
         if type(measurement_type) is not enums.PPMUMeasurementType:
             raise TypeError('Parameter measurement_type must be of type ' + str(enums.PPMUMeasurementType))
-        return self._library.ppmu_measure(self, self._repeated_capability, measurement_type)
+        return self._library.ppmu_measure(self._repeated_capability, measurement_type)
 
     @ivi_synchronized
     def ppmu_source(self):
@@ -2909,7 +2909,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.ppmu_source`
         '''
-        return self._library.ppmu_source(self, self._repeated_capability)
+        return self._library.ppmu_source(self._repeated_capability)
 
     @ivi_synchronized
     def read_static(self):
@@ -2937,7 +2937,7 @@ class _SessionBase(object):
                 -   PinState.V: The comparators read a value that is above VOH and below VOL, which can occur when you set VOL higher than VOH.
 
         '''
-        return self._library.read_static(self, self._repeated_capability)
+        return self._library.read_static(self._repeated_capability)
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute, value):
@@ -2962,7 +2962,7 @@ class _SessionBase(object):
             value (bool): The value to which you want to set the property; some of the values might not be valid depending on the current settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_boolean(self, self._repeated_capability, attribute, value)
+        return self._library._set_attribute_vi_boolean(self._repeated_capability, attribute, value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute, value):
@@ -2987,7 +2987,7 @@ class _SessionBase(object):
             value (int): The value to which you want to set the property; some of the values might not be valid depending on the current settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_int32(self, self._repeated_capability, attribute, value)
+        return self._library._set_attribute_vi_int32(self._repeated_capability, attribute, value)
 
     @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute, value):
@@ -3012,7 +3012,7 @@ class _SessionBase(object):
             value (int): The value to which you want to set the property; some of the values might not be valid depending on the current settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_int64(self, self._repeated_capability, attribute, value)
+        return self._library._set_attribute_vi_int64(self._repeated_capability, attribute, value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute, value):
@@ -3037,7 +3037,7 @@ class _SessionBase(object):
             value (float): The value to which you want to set the property; some of the values might not be valid depending on the current settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_real64(self, self._repeated_capability, attribute, value)
+        return self._library._set_attribute_vi_real64(self._repeated_capability, attribute, value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute, value):
@@ -3062,7 +3062,7 @@ class _SessionBase(object):
             value (str): The value to which you want to set the property; some of the values might not be valid depending on the current settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_string(self, self._repeated_capability, attribute, value)
+        return self._library._set_attribute_vi_string(self._repeated_capability, attribute, value)
 
     @ivi_synchronized
     def tdr(self, apply_offsets=True):
@@ -3089,7 +3089,7 @@ class _SessionBase(object):
             offsets (list of hightime.timedelta): Measured TDR offsets specified in seconds.
 
         '''
-        return self._library.tdr(self, self._repeated_capability, apply_offsets)
+        return self._library.tdr(self._repeated_capability, apply_offsets)
 
     def unlock(self):
         '''unlock
@@ -3098,7 +3098,7 @@ class _SessionBase(object):
         lock. Refer to lock for additional
         information on session locks.
         '''
-        self._library.unlock(self)
+        self._library.unlock()
 
     @ivi_synchronized
     def _write_source_waveform_site_unique_u32(self, waveform_name, num_waveforms, samples_per_waveform, waveform_data):
@@ -3127,7 +3127,7 @@ class _SessionBase(object):
             waveform_data (array.array("L")): An array of samples to use as source data. Data for each site must be appended sequentially in the array (non-interleaved).
 
         '''
-        return self._library._write_source_waveform_site_unique_u32(self, self._repeated_capability, waveform_name, num_waveforms, samples_per_waveform, waveform_data)
+        return self._library._write_source_waveform_site_unique_u32(self._repeated_capability, waveform_name, num_waveforms, samples_per_waveform, waveform_data)
 
     @ivi_synchronized
     def write_static(self, state):
@@ -3159,7 +3159,7 @@ class _SessionBase(object):
         '''
         if type(state) is not enums.WriteStaticPinState:
             raise TypeError('Parameter state must be of type ' + str(enums.WriteStaticPinState))
-        return self._library.write_static(self, self._repeated_capability, state)
+        return self._library.write_static(self._repeated_capability, state)
 
     def _error_message(self, error_code):
         r'''_error_message
@@ -3174,7 +3174,7 @@ class _SessionBase(object):
             error_message (str): The error information formatted as a string. The array must contain at least 256 characters.
 
         '''
-        return self._library._error_message(self, error_code)
+        return self._library._error_message(error_code)
 
 
 class Session(_SessionBase):
@@ -3247,6 +3247,7 @@ class Session(_SessionBase):
         # Call specified init function
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, options)
+        self._library._vi = self._vi
 
         self.tclk = nitclk.SessionReference(self._vi)
 
@@ -3309,7 +3310,7 @@ class Session(_SessionBase):
 
         Stops bursting the pattern.
         '''
-        return self._library.abort(self)
+        return self._library.abort()
 
     @ivi_synchronized
     def abort_keep_alive(self):
@@ -3317,7 +3318,7 @@ class Session(_SessionBase):
 
         Stops the keep alive pattern if it is currently running. If a pattern burst is in progress, the method aborts the pattern burst. If you start a new pattern burst while a keep alive pattern is running, the keep alive pattern runs to the last keep alive vector, and the new pattern burst starts on the next cycle.
         '''
-        return self._library.abort_keep_alive(self)
+        return self._library.abort_keep_alive()
 
     @ivi_synchronized
     def commit(self):
@@ -3325,7 +3326,7 @@ class Session(_SessionBase):
 
         Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the commit method, then the initiate method or the burst_pattern method will implicitly call this method for you. Calling this method moves the session from the Uncommitted state to the Committed state.
         '''
-        return self._library.commit(self)
+        return self._library.commit()
 
     @ivi_synchronized
     def configure_time_set_period(self, time_set_name, period):
@@ -3339,7 +3340,7 @@ class Session(_SessionBase):
             period (hightime.timedelta, datetime.timedelta, or float in seconds): Period for this time set, in seconds.
 
         '''
-        return self._library.configure_time_set_period(self, time_set_name, period)
+        return self._library.configure_time_set_period(time_set_name, period)
 
     @ivi_synchronized
     def create_capture_waveform_from_file_digicapture(self, waveform_name, waveform_file_path):
@@ -3353,7 +3354,7 @@ class Session(_SessionBase):
             waveform_file_path (str): Absolute file path to the capture waveform file (.digicapture) you want to load.
 
         '''
-        return self._library.create_capture_waveform_from_file_digicapture(self, waveform_name, waveform_file_path)
+        return self._library.create_capture_waveform_from_file_digicapture(waveform_name, waveform_file_path)
 
     @ivi_synchronized
     def create_source_waveform_from_file_tdms(self, waveform_name, waveform_file_path, write_waveform_data=True):
@@ -3369,7 +3370,7 @@ class Session(_SessionBase):
             write_waveform_data (bool): A Boolean that writes waveform data to source memory if True and the waveform data is in the file.
 
         '''
-        return self._library.create_source_waveform_from_file_tdms(self, waveform_name, waveform_file_path, write_waveform_data)
+        return self._library.create_source_waveform_from_file_tdms(waveform_name, waveform_file_path, write_waveform_data)
 
     @ivi_synchronized
     def create_time_set(self, name):
@@ -3381,7 +3382,7 @@ class Session(_SessionBase):
             name (str): The specified name of the new time set.
 
         '''
-        return self._library.create_time_set(self, name)
+        return self._library.create_time_set(name)
 
     @ivi_synchronized
     def delete_all_time_sets(self):
@@ -3389,7 +3390,7 @@ class Session(_SessionBase):
 
         Deletes all time sets from instrument memory.
         '''
-        return self._library.delete_all_time_sets(self)
+        return self._library.delete_all_time_sets()
 
     @ivi_synchronized
     def load_specifications_levels_and_timing(self, specifications_file_paths=None, levels_file_paths=None, timing_file_paths=None):
@@ -3536,7 +3537,7 @@ class Session(_SessionBase):
             pin_list (list of str): List of pins referenced by the pattern with the **startLabel**.
 
         '''
-        return self._library.get_pattern_pin_names(self, start_label)
+        return self._library.get_pattern_pin_names(start_label)
 
     @ivi_synchronized
     def get_time_set_period(self, time_set_name):
@@ -3552,7 +3553,7 @@ class Session(_SessionBase):
             period (hightime.timedelta): Returned period, in seconds, that the edge is configured to.
 
         '''
-        return self._library.get_time_set_period(self, time_set_name)
+        return self._library.get_time_set_period(time_set_name)
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         r'''_init_with_options
@@ -3581,7 +3582,7 @@ class Session(_SessionBase):
             new_vi (int): The returned instrument session.
 
         '''
-        return self._library._init_with_options(self, resource_name, id_query, reset_device, option_string)
+        return self._library._init_with_options(resource_name, id_query, reset_device, option_string)
 
     @ivi_synchronized
     def _initiate(self):
@@ -3589,7 +3590,7 @@ class Session(_SessionBase):
 
         Starts bursting the pattern configured by start_label, causing the NI-Digital session to be committed. To stop the pattern burst, call abort. If keep alive pattern is bursting when abort is called or upon exiting the context manager, keep alive pattern will not be stopped. To stop the keep alive pattern, call abort_keep_alive.
         '''
-        return self._library._initiate(self)
+        return self._library._initiate()
 
     @ivi_synchronized
     def is_done(self):
@@ -3601,7 +3602,7 @@ class Session(_SessionBase):
             done (bool): A Boolean that indicates whether the pattern burst completed.
 
         '''
-        return self._library.is_done(self)
+        return self._library.is_done()
 
     @ivi_synchronized
     def _load_levels(self, file_path):
@@ -3613,7 +3614,7 @@ class Session(_SessionBase):
             file_path (str): Absolute file path to the specified levels sheet file.
 
         '''
-        return self._library._load_levels(self, file_path)
+        return self._library._load_levels(file_path)
 
     @ivi_synchronized
     def load_pattern(self, file_path):
@@ -3625,7 +3626,7 @@ class Session(_SessionBase):
             file_path (str): Absolute file path of the binary .digipat pattern file to load. Specify the pattern to burst using start_label or the start_label parameter of the burst_pattern method.
 
         '''
-        return self._library.load_pattern(self, file_path)
+        return self._library.load_pattern(file_path)
 
     @ivi_synchronized
     def load_pin_map(self, file_path):
@@ -3637,7 +3638,7 @@ class Session(_SessionBase):
             file_path (str): Absolute file path to a pin map file created with the Digital Pattern Editor or the NI TestStand Semiconductor Module.
 
         '''
-        return self._library.load_pin_map(self, file_path)
+        return self._library.load_pin_map(file_path)
 
     @ivi_synchronized
     def _load_specifications(self, file_path):
@@ -3649,7 +3650,7 @@ class Session(_SessionBase):
             file_path (str): Absolute file path to a specifications file.
 
         '''
-        return self._library._load_specifications(self, file_path)
+        return self._library._load_specifications(file_path)
 
     @ivi_synchronized
     def _load_timing(self, file_path):
@@ -3661,7 +3662,7 @@ class Session(_SessionBase):
             file_path (str): Absolute file path to the specified timing sheet file.
 
         '''
-        return self._library._load_timing(self, file_path)
+        return self._library._load_timing(file_path)
 
     @ivi_synchronized
     def read_sequencer_flag(self, flag):
@@ -3684,7 +3685,7 @@ class Session(_SessionBase):
         '''
         if type(flag) is not enums.SequencerFlag:
             raise TypeError('Parameter flag must be of type ' + str(enums.SequencerFlag))
-        return self._library.read_sequencer_flag(self, flag)
+        return self._library.read_sequencer_flag(flag)
 
     @ivi_synchronized
     def read_sequencer_register(self, reg):
@@ -3719,7 +3720,7 @@ class Session(_SessionBase):
         '''
         if type(reg) is not enums.SequencerRegister:
             raise TypeError('Parameter reg must be of type ' + str(enums.SequencerRegister))
-        return self._library.read_sequencer_register(self, reg)
+        return self._library.read_sequencer_register(reg)
 
     @ivi_synchronized
     def reset_device(self):
@@ -3733,7 +3734,7 @@ class Session(_SessionBase):
         - Stops export of all external signals and events.
         - Clears over-temperature and over-power conditions.
         '''
-        return self._library.reset_device(self)
+        return self._library.reset_device()
 
     @ivi_synchronized
     def self_calibrate(self):
@@ -3741,7 +3742,7 @@ class Session(_SessionBase):
 
         Performs self-calibration on a digital pattern instrument.
         '''
-        return self._library.self_calibrate(self)
+        return self._library.self_calibrate()
 
     @ivi_synchronized
     def send_software_edge_trigger(self, trigger, trigger_identifier):
@@ -3774,7 +3775,7 @@ class Session(_SessionBase):
         '''
         if type(trigger) is not enums.SoftwareTrigger:
             raise TypeError('Parameter trigger must be of type ' + str(enums.SoftwareTrigger))
-        return self._library.send_software_edge_trigger(self, trigger, trigger_identifier)
+        return self._library.send_software_edge_trigger(trigger, trigger_identifier)
 
     @ivi_synchronized
     def unload_all_patterns(self, unload_keep_alive_pattern=False):
@@ -3786,7 +3787,7 @@ class Session(_SessionBase):
             unload_keep_alive_pattern (bool): A Boolean that specifies whether to keep or unload the keep alive pattern.
 
         '''
-        return self._library.unload_all_patterns(self, unload_keep_alive_pattern)
+        return self._library.unload_all_patterns(unload_keep_alive_pattern)
 
     @ivi_synchronized
     def _unload_specifications(self, file_path):
@@ -3798,7 +3799,7 @@ class Session(_SessionBase):
             file_path (str): Absolute file path to a loaded specifications file.
 
         '''
-        return self._library._unload_specifications(self, file_path)
+        return self._library._unload_specifications(file_path)
 
     @ivi_synchronized
     def wait_until_done(self, timeout=hightime.timedelta(seconds=10.0)):
@@ -3810,7 +3811,7 @@ class Session(_SessionBase):
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Maximum time (in seconds) allowed for this method to complete. If this method does not complete within this time interval, this method returns an error.
 
         '''
-        return self._library.wait_until_done(self, timeout)
+        return self._library.wait_until_done(timeout)
 
     @ivi_synchronized
     def write_sequencer_flag(self, flag, value):
@@ -3831,7 +3832,7 @@ class Session(_SessionBase):
         '''
         if type(flag) is not enums.SequencerFlag:
             raise TypeError('Parameter flag must be of type ' + str(enums.SequencerFlag))
-        return self._library.write_sequencer_flag(self, flag, value)
+        return self._library.write_sequencer_flag(flag, value)
 
     @ivi_synchronized
     def write_sequencer_register(self, reg, value):
@@ -3864,7 +3865,7 @@ class Session(_SessionBase):
         '''
         if type(reg) is not enums.SequencerRegister:
             raise TypeError('Parameter reg must be of type ' + str(enums.SequencerRegister))
-        return self._library.write_sequencer_register(self, reg, value)
+        return self._library.write_sequencer_register(reg, value)
 
     @ivi_synchronized
     def write_source_waveform_broadcast(self, waveform_name, waveform_data):
@@ -3878,7 +3879,7 @@ class Session(_SessionBase):
             waveform_data (list of int): 1D array of samples to use as source data to apply to all sites.
 
         '''
-        return self._library.write_source_waveform_broadcast(self, waveform_name, waveform_data)
+        return self._library.write_source_waveform_broadcast(waveform_name, waveform_data)
 
     @ivi_synchronized
     def write_source_waveform_data_from_file_tdms(self, waveform_name, waveform_file_path):
@@ -3892,14 +3893,14 @@ class Session(_SessionBase):
             waveform_file_path (str): Absolute file path to the load source waveform file (.tdms).
 
         '''
-        return self._library.write_source_waveform_data_from_file_tdms(self, waveform_name, waveform_file_path)
+        return self._library.write_source_waveform_data_from_file_tdms(waveform_name, waveform_file_path)
 
     def _close(self):
         r'''_close
 
         Closes the specified instrument session to a digital pattern instrument, aborts pattern execution, and unloads pattern memory. The channels on a digital pattern instrument remain in their current state.
         '''
-        return self._library._close(self)
+        return self._library._close()
 
     @ivi_synchronized
     def reset(self):
@@ -3912,7 +3913,7 @@ class Session(_SessionBase):
         - Resets all properties to default values, including the selected_function property that is set to SelectedFunction.DISCONNECT, causing the I/O switches to open.
         - Stops exporting all external signals and events.
         '''
-        return self._library.reset(self)
+        return self._library.reset()
 
     @ivi_synchronized
     def _self_test(self):
@@ -3926,4 +3927,4 @@ class Session(_SessionBase):
             test_message (str): The returned self test status message. The array must contain at least 256 characters.
 
         '''
-        return self._library._self_test(self)
+        return self._library._self_test()

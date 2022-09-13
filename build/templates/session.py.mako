@@ -242,6 +242,7 @@ class Session(_SessionBase):
         # Call specified init function
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
+        self._library._${config['session_handle_parameter_name']} = self._${config['session_handle_parameter_name']}
 
 % if config['uses_nitclk']:
         self.tclk = nitclk.SessionReference(self._${config['session_handle_parameter_name']})
