@@ -116,7 +116,7 @@ class _Session(object):
 
 <%
 f = functions[func_name]
-name = f['python_name']
+name = f['session_name']
 parameter_list = helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL)
 %>\
 def ${name}(${parameter_list}):

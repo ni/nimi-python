@@ -56,13 +56,13 @@ class LibraryInterpreter(object):
         self._library = _library_singleton.get()
         self._vi = 0
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
+    def get_error_description(self, error_code):
+        '''get_error_description
 
         Returns the error description.
         '''
         try:
-            _, error_string = self._get_error()
+            _, error_string = self.get_error()
             return error_string
         except errors.Error:
             pass
@@ -73,7 +73,7 @@ class LibraryInterpreter(object):
             (IVI spec requires GetError to fail).
             Use _error_message instead. It doesn't require a session.
             '''
-            error_string = self._error_message(error_code)
+            error_string = self.error_message(error_code)
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
@@ -142,7 +142,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _create_advanced_sequence_with_channels(self, channel_name, sequence_name, attribute_ids, set_as_active_sequence):  # noqa: N802
+    def create_advanced_sequence_with_channels(self, channel_name, sequence_name, attribute_ids, set_as_active_sequence):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
@@ -188,7 +188,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _fancy_initialize(self, resource_name, channels=None, reset=False, option_string="", independent_channels=True):  # noqa: N802
+    def fancy_initialize(self, resource_name, channels=None, reset=False, option_string="", independent_channels=True):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(resource_name).encode(self._encoding))  # case C040
         channels_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(channels).encode(self._encoding))  # case C040
         reset_ctype = _visatype.ViBoolean(reset)  # case S150
@@ -199,7 +199,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
-    def _fetch_multiple(self, channel_name, timeout, count):  # noqa: N802
+    def fetch_multiple(self, channel_name, timeout, count):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -217,7 +217,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
 
-    def _fetch_multiple_lcr(self, channel_name, count, timeout=hightime.timedelta(seconds=1.0)):  # noqa: N802
+    def fetch_multiple_lcr(self, channel_name, count, timeout=hightime.timedelta(seconds=1.0)):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -229,7 +229,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [lcr_measurement.LCRMeasurement(measurements_ctype[i]) for i in range(count_ctype.value)]
 
-    def _get_attribute_vi_boolean(self, channel_name, attribute_id):  # noqa: N802
+    def get_attribute_vi_boolean(self, channel_name, attribute_id):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -238,7 +238,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
-    def _get_attribute_vi_int32(self, channel_name, attribute_id):  # noqa: N802
+    def get_attribute_vi_int32(self, channel_name, attribute_id):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -247,7 +247,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
-    def _get_attribute_vi_int64(self, channel_name, attribute_id):  # noqa: N802
+    def get_attribute_vi_int64(self, channel_name, attribute_id):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -256,7 +256,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
-    def _get_attribute_vi_real64(self, channel_name, attribute_id):  # noqa: N802
+    def get_attribute_vi_real64(self, channel_name, attribute_id):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -265,7 +265,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
-    def _get_attribute_vi_string(self, channel_name, attribute_id):  # noqa: N802
+    def get_attribute_vi_string(self, channel_name, attribute_id):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -292,7 +292,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_ctype.value.decode(self._encoding)
 
-    def _get_channel_names(self, indices):  # noqa: N802
+    def get_channel_names(self, indices):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
         buffer_size_ctype = _visatype.ViInt32()  # case S170
@@ -305,7 +305,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
 
-    def _get_error(self):  # noqa: N802
+    def get_error(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         code_ctype = _visatype.ViStatus()  # case S220
         buffer_size_ctype = _visatype.ViInt32()  # case S170
@@ -318,7 +318,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def _get_ext_cal_last_date_and_time(self):  # noqa: N802
+    def get_ext_cal_last_date_and_time(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         year_ctype = _visatype.ViInt32()  # case S220
         month_ctype = _visatype.ViInt32()  # case S220
@@ -343,7 +343,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
-    def _get_lcr_compensation_last_date_and_time(self, channel_name, compensation_type):  # noqa: N802
+    def get_lcr_compensation_last_date_and_time(self, channel_name, compensation_type):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         compensation_type_ctype = _visatype.ViInt32(compensation_type.value)  # case S130
@@ -371,7 +371,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_to_bytes(custom_cable_compensation_data_array)
 
-    def _get_self_cal_last_date_and_time(self):  # noqa: N802
+    def get_self_cal_last_date_and_time(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         year_ctype = _visatype.ViInt32()  # case S220
         month_ctype = _visatype.ViInt32()  # case S220
@@ -405,7 +405,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _initialize_with_channels(self, resource_name, channels, reset, option_string):  # noqa: N802
+    def initialize_with_channels(self, resource_name, channels, reset, option_string):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         channels_ctype = ctypes.create_string_buffer(channels.encode(self._encoding))  # case C020
         reset_ctype = _visatype.ViBoolean(reset)  # case S150
@@ -415,7 +415,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
-    def _initialize_with_independent_channels(self, resource_name, reset, option_string):  # noqa: N802
+    def initialize_with_independent_channels(self, resource_name, reset, option_string):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         reset_ctype = _visatype.ViBoolean(reset)  # case S150
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
@@ -424,7 +424,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
-    def _initiate_with_channels(self, channel_name):  # noqa: N802
+    def initiate_with_channels(self, channel_name):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         error_code = self._library.niDCPower_InitiateWithChannels(vi_ctype, channel_name_ctype)
@@ -447,7 +447,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
 
-    def _measure_multiple(self, channel_name):  # noqa: N802
+    def measure_multiple(self, channel_name):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         voltage_measurements_size = self._parse_channel_count(channel_name)  # case B560
@@ -460,7 +460,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array
 
-    def _measure_multiple_lcr(self, channel_name):  # noqa: N802
+    def measure_multiple_lcr(self, channel_name):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         measurements_size = self._parse_channel_count(channel_name)  # case B560
@@ -469,7 +469,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [lcr_measurement.LCRMeasurement(measurements_ctype[i]) for i in range(self._parse_channel_count(channel_name))]
 
-    def _parse_channel_count(self, channels_string):  # noqa: N802
+    def parse_channel_count(self, channels_string):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channels_string_ctype = ctypes.create_string_buffer(channels_string.encode(self._encoding))  # case C010
         number_of_channels_ctype = _visatype.ViUInt32()  # case S220
@@ -605,7 +605,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -614,7 +614,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -623,7 +623,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_int64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def set_attribute_vi_int64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -632,7 +632,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -641,7 +641,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -678,13 +678,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _close(self):  # noqa: N802
+    def close(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _error_message(self, error_code):  # noqa: N802
+    def error_message(self, error_code):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code_ctype = _visatype.ViStatus(error_code)  # case S150
         error_message_ctype = (_visatype.ViChar * 256)()  # case C070
@@ -692,7 +692,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
 
-    def _self_test(self):  # noqa: N802
+    def self_test(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         self_test_result_ctype = _visatype.ViInt16()  # case S220
         self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070

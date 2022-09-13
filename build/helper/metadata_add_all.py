@@ -50,12 +50,16 @@ def _add_enum(n):
 
 def _add_python_method_name(function, name):
     '''Adds a python_name' key/value pair to the function metadata if not already specified'''
-    if 'python_name' not in function:
+    if 'python_name' in function:
+        function['session_name'] = function.pop('python_name')
+        function['interpreter_name'] = function['session_name'].lstrip('_')
+    else:
+        function['interpreter_name'] = camelcase_to_snakecase(name)
         if function['codegen_method'] == 'private':
-            function['python_name'] = '_' + camelcase_to_snakecase(name)
+            function['session_name'] = '_' + camelcase_to_snakecase(name)
         else:
-            function['python_name'] = camelcase_to_snakecase(name)
-            assert function['codegen_method'] == 'no' or 'method_name_for_documentation' not in function, "'method_name_for_documentation' not allowed to be set: function['method_name_for_documentation'] = '{0}', function['python_name'] = '{1}'".format(function['method_name_for_documentation'], function['python_name'])
+            function['session_name'] = camelcase_to_snakecase(name)
+            assert function['codegen_method'] == 'no' or 'method_name_for_documentation' not in function, "'method_name_for_documentation' not allowed to be set: function['method_name_for_documentation'] = '{0}', function['session_name'] = '{1}'".format(function['method_name_for_documentation'], function['session_name'])
     return function
 
 
@@ -1233,7 +1237,8 @@ functions_expected = {
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_output',
             },
         ],
-        'python_name': 'make_a_foo',
+        'session_name': 'make_a_foo',
+        'interpreter_name': 'make_a_foo',
         'returns': 'ViStatus',
     },
     'MakeAPrivateMethod': {
@@ -1380,7 +1385,8 @@ functions_expected = {
             'description': 'Perform actions as method defined'
         },
         'name': 'MakeAPrivateMethod',
-        'python_name': '_make_a_private_method',
+        'session_name': '_make_a_private_method',
+        'interpreter_name': 'make_a_private_method',
         'is_error_handling': False,
         'render_in_session_base': False,
         'has_repeated_capability': False
@@ -1405,7 +1411,8 @@ functions_expected = {
             }
         ],
         'parameters': [],
-        'python_name': 'make_a_no_codegen_method',
+        'session_name': 'make_a_no_codegen_method',
+        'interpreter_name': 'make_a_no_codegen_method',
         'returns': 'ViStatus',
     }
 }

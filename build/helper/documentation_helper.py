@@ -347,7 +347,7 @@ def _replace_func_python_name(f_match):
             if 'method_name_for_documentation' in config['functions'][fname]:
                 fname = config['functions'][fname]['method_name_for_documentation']
             else:
-                fname = config['functions'][fname]['python_name']
+                fname = config['functions'][fname]['session_name']
         except KeyError:
             print('Warning: "{0}" not found in function metadata. Typo? Generated code will be funky!'.format(fname))
     else:
@@ -492,9 +492,9 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['repeated_capability_type'], function['python_name'])
+        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['repeated_capability_type'], function['session_name'])
 
-    rst = '.. py:{0}:: {1}{2}('.format(method_or_function, function['python_name'], suffix)
+    rst = '.. py:{0}:: {1}{2}('.format(method_or_function, function['session_name'], suffix)
     rst += get_params_snippet(function, session_method) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
@@ -553,7 +553,7 @@ def get_function_docstring(function, numpy, config, indent=0):
 
     Args:
         function (dict): function dictionary
-        config (dict): configuration dictoionary (from metadata)
+        config (dict): configuration dictionary (from metadata)
         numpy (boolean): Is the entry we are processing a numpy based method
         indent (int): default 0 - initial indentation
 
@@ -567,7 +567,7 @@ def get_function_docstring(function, numpy, config, indent=0):
 
     docstring = ''
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['repeated_capability_type'], function['python_name'])
+        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['repeated_capability_type'], function['session_name'])
 
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
@@ -738,7 +738,7 @@ def _need_func_note(nd, config):
     for m in func_re.finditer(nd):
         fname = m.group(1).replace('.', '').replace(',', '').replace('\\', '')
         try:
-            config['functions'][fname]['python_name']
+            config['functions'][fname]['session_name']
         except KeyError:
             return True
 
@@ -1038,7 +1038,8 @@ wanted to choose.''',
                 ]
             },
             'name': 'GetTurtleID',
-            'python_name': 'get_turtle_id',
+            'session_name': 'get_turtle_id',
+            'interpreter_name': 'get_turtle_id',
             'is_error_handling': False,
             'has_repeated_capability': False
         },
@@ -1157,7 +1158,8 @@ wanted to choose.''',
                     'use_in_python_api': True,
                 }
             ],
-            'python_name': 'fetch_waveform',
+            'session_name': 'fetch_waveform',
+            'interpreter_name': 'fetch_waveform',
             'render_in_session_base': False,
             'returns': 'ViStatus'
         },
@@ -1569,7 +1571,8 @@ def test_add_notes_re_links():
             'documentation': {
                 'description': 'Performs a foo, and performs it well.',
             },
-            'python_name': 'make_a_foo',
+            'session_name': 'make_a_foo',
+            'interpreter_name': 'make_a_foo',
         },
     }
     attributes = {

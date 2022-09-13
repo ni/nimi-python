@@ -3,8 +3,8 @@
     '''Forwards to History RAM fetch functions'''
     import build.helper as helper
 %>\
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
-        '''${f['python_name']}
+    def ${f['session_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+        '''${f['session_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
@@ -49,7 +49,7 @@
         for _ in range(samples_to_read):
 
             # site is passed as repeated capability
-            pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles = self._${f['python_name']}(position)
+            pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles = self._${f['session_name']}(position)
 
             if pattern_index not in pattern_names:
                 # Repeated capability is not used

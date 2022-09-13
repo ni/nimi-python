@@ -52,13 +52,13 @@ class LibraryInterpreter(object):
         self._library = _library_singleton.get()
         self._vi = 0
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
+    def get_error_description(self, error_code):
+        '''get_error_description
 
         Returns the error description.
         '''
         try:
-            _, error_string = self._get_error()
+            _, error_string = self.get_error()
             return error_string
         except errors.Error:
             pass
@@ -69,12 +69,12 @@ class LibraryInterpreter(object):
             (IVI spec requires GetError to fail).
             Use _error_message instead. It doesn't require a session.
             '''
-            error_string = self._error_message(error_code)
+            error_string = self.error_message(error_code)
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
 
-    def _close_session(self):  # noqa: N802
+    def close_session(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSE_CloseSession(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -142,7 +142,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return route_spec_ctype.value.decode(self._encoding)
 
-    def _get_error(self, error_description_size=[1024]):  # noqa: N802
+    def get_error(self, error_description_size=[1024]):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_number_ctype = _visatype.ViInt32()  # case S220
         error_description_ctype = (_visatype.ViChar * error_description_size[0])()  # case C080
@@ -166,7 +166,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_debounced_ctype.value)
 
-    def _open_session(self, virtual_device_name, option_string=""):  # noqa: N802
+    def open_session(self, virtual_device_name, option_string=""):  # noqa: N802
         virtual_device_name_ctype = ctypes.create_string_buffer(virtual_device_name.encode(self._encoding))  # case C020
         option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
         vi_ctype = _visatype.ViSession()  # case S220

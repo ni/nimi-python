@@ -51,8 +51,8 @@ class LibraryInterpreter(object):
         self._library = _library_singleton.get()
         self._session_number = 0
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
+    def get_error_description(self, error_code):
+        '''get_error_description
 
         Returns the error description.
         '''
@@ -62,7 +62,7 @@ class LibraryInterpreter(object):
             (IVI spec requires GetError to fail).
             Use _error_message instead. It doesn't require a session.
             '''
-            error_string = self._get_extended_error_info()
+            error_string = self.get_extended_error_info()
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
@@ -84,7 +84,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _get_attribute_vi_real64(self, channel_name, attribute_id):  # noqa: N802
+    def get_attribute_vi_real64(self, channel_name, attribute_id):  # noqa: N802
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -93,7 +93,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(value_ctype.value)
 
-    def _get_attribute_vi_session(self, channel_name, attribute_id):  # noqa: N802
+    def get_attribute_vi_session(self, channel_name, attribute_id):  # noqa: N802
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -102,7 +102,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
-    def _get_attribute_vi_string(self, channel_name, attribute_id):  # noqa: N802
+    def get_attribute_vi_string(self, channel_name, attribute_id):  # noqa: N802
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -116,7 +116,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
 
-    def _get_extended_error_info(self):  # noqa: N802
+    def get_extended_error_info(self):  # noqa: N802
         error_string_ctype = None  # case C050
         error_string_size_ctype = _visatype.ViUInt32()  # case S170
         error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
@@ -144,7 +144,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
 
-    def _set_attribute_vi_real64(self, channel_name, attribute_id, value):  # noqa: N802
+    def set_attribute_vi_real64(self, channel_name, attribute_id, value):  # noqa: N802
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -153,7 +153,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_session(self, channel_name, attribute_id, value):  # noqa: N802
+    def set_attribute_vi_session(self, channel_name, attribute_id, value):  # noqa: N802
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
@@ -162,7 +162,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_string(self, channel_name, attribute_id, value):  # noqa: N802
+    def set_attribute_vi_string(self, channel_name, attribute_id, value):  # noqa: N802
         session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150

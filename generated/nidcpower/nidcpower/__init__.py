@@ -100,5 +100,3 @@ def print_diagnostic_information():
         print((' ' * 8) + p['name'] + '==' + p['version'])
 
     return info
-
-

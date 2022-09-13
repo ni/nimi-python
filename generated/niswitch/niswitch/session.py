@@ -637,7 +637,7 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        return self._library._get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -690,7 +690,7 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        return self._library._get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_int32(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -743,7 +743,7 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        return self._library._get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_real64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -817,7 +817,7 @@ class _SessionBase(object):
                 on it or by selecting it and then pressing .
 
         '''
-        return self._library._get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
     def _get_error(self):
         r'''_get_error
@@ -857,7 +857,7 @@ class _SessionBase(object):
                 Size, you can pass VI_NULL for this parameter.
 
         '''
-        return self._library._get_error()
+        return self._library.get_error()
 
     def lock(self):
         '''lock
@@ -964,7 +964,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        return self._library._set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -1029,7 +1029,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        return self._library._set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -1094,7 +1094,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        return self._library._set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -1159,7 +1159,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        return self._library._set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
 
     def unlock(self):
         '''unlock
@@ -1188,7 +1188,7 @@ class _SessionBase(object):
                 array with at least 256 bytes.
 
         '''
-        return self._library._error_message(error_code)
+        return self._library.error_message(error_code)
 
 
 class Session(_SessionBase):
@@ -2082,7 +2082,7 @@ class Session(_SessionBase):
                 One or more of the referenced methods are not in the Python API for this driver.
 
         '''
-        return self._library._init_with_topology(resource_name, topology, simulate, reset_device)
+        return self._library.init_with_topology(resource_name, topology, simulate, reset_device)
 
     @ivi_synchronized
     def _initiate_scan(self):
@@ -2097,7 +2097,7 @@ class Session(_SessionBase):
         scanning operation, To stop the scanning operation, call
         abort.
         '''
-        return self._library._initiate_scan()
+        return self._library.initiate_scan()
 
     @ivi_synchronized
     def relay_control(self, relay_name, relay_action):
@@ -2291,7 +2291,7 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        return self._library._close()
+        return self._library.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -2340,4 +2340,4 @@ class Session(_SessionBase):
                 array with at least 256 bytes.
 
         '''
-        return self._library._self_test()
+        return self._library.self_test()

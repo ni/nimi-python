@@ -4,7 +4,7 @@
     import build.helper as helper
 %>\
     def send_software_edge_trigger(self, trigger=None, trigger_id=None):
-        '''${f['python_name']}
+        '''${f['session_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''

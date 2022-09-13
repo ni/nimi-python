@@ -14,7 +14,7 @@
     len_size_parameter = helper.find_size_parameter(len_parameters, parameters)
     assert ivi_dance_size_parameter is None or len_size_parameter is None, str(f)
 
-    full_func_name = f['python_name'] + method_template['method_python_name_suffix']
+    full_func_name = f['interpreter_name'] + method_template['method_python_name_suffix']
     c_func_name = config['c_function_prefix'] + f['name']
 
     # If a method uses codegen_method=python-only, it should specify non-default method_templates

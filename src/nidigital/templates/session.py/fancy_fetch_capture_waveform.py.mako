@@ -3,12 +3,12 @@
     import build.helper as helper
     suffix = method_template['method_python_name_suffix']
 %>\
-    def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION)}):
-        '''${f['python_name']}
+    def ${f['session_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION)}):
+        '''${f['session_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        data, actual_num_waveforms, actual_samples_per_waveform = self._library._fetch_capture_waveform(self._repeated_capability, waveform_name, samples_to_read, timeout)
+        data, actual_num_waveforms, actual_samples_per_waveform = self._library.fetch_capture_waveform(self._repeated_capability, waveform_name, samples_to_read, timeout)
 
         # Get the site list
         site_list = self._get_site_results_site_numbers(enums._SiteResultType.CAPTURE_WAVEFORM)

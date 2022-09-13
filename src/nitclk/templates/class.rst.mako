@@ -18,7 +18,7 @@
     doc_list = {}
     for fname in sorted(functions):
         for method_template in functions[fname]['method_templates']:
-            name =  functions[fname]['python_name'] + method_template['method_python_name_suffix']
+            name =  functions[fname]['session_name'] + method_template['method_python_name_suffix']
             doc_list[name] = { 'filename': method_template['documentation_filename'], 'method_template': method_template, 'function': functions[fname], }
 
     attributes = helper.filter_codegen_attributes_public_only(config['attributes'])
@@ -91,7 +91,7 @@ table_contents = [
          ]
 if helper.module_supports_repeated_caps(config):
     table_contents.append(('Repeated Capabilities', helper.get_attribute_repeated_caps(a)))
-  
+
 table = helper.as_rest_table(table_contents)
 
 helper.add_attribute_rep_cap_tip(a, config)
@@ -115,5 +115,3 @@ desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 % endfor
 
 .. contents:: nitclk
-
-

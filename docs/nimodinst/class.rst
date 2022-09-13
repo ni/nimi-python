@@ -265,5 +265,3 @@ socket_number
 
 
 .. contents:: Session
-
-

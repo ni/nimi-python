@@ -36,7 +36,7 @@ from ${module_name}.session import SessionReference  # noqa: F401
 # The second type are the public functions that clients will call, so we need to import them explicitly into
 # the `nitclk` namespace. We are using the `render_in_session_base` metadata in order to distinguish them
 %>\
-%   for func_name in sorted([functions[k]['python_name'] for k in functions if not functions[k]['render_in_session_base']]):
+%   for func_name in sorted([functions[k]['session_name'] for k in functions if not functions[k]['render_in_session_base']]):
 from ${module_name}.session import ${func_name}  # noqa: F401
 %   endfor
 % else:
@@ -140,5 +140,3 @@ def print_diagnostic_information():
         print((' ' * 8) + p['name'] + '==' + p['version'])
 
     return info
-
-

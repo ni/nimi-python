@@ -1778,7 +1778,7 @@ class _SessionBase(object):
         '''
         if type(array_meas_function) is not enums.ArrayMeasurement:
             raise TypeError('Parameter array_meas_function must be of type ' + str(enums.ArrayMeasurement))
-        return self._library._actual_meas_wfm_size(array_meas_function)
+        return self._library.actual_meas_wfm_size(array_meas_function)
 
     @ivi_synchronized
     def _actual_num_wfms(self):
@@ -1804,7 +1804,7 @@ class _SessionBase(object):
                 two.
 
         '''
-        return self._library._actual_num_wfms(self._repeated_capability)
+        return self._library.actual_num_wfms(self._repeated_capability)
 
     @ivi_synchronized
     def add_waveform_processing(self, meas_function):
@@ -2528,7 +2528,7 @@ class _SessionBase(object):
                 Call _actual_num_wfms to determine the size of this array.
 
         '''
-        return self._library._fetch(self._repeated_capability, num_samples, timeout)
+        return self._library.fetch(self._repeated_capability, num_samples, timeout)
 
     @ivi_synchronized
     def _fetch_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
@@ -2651,7 +2651,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
-        return self._library._fetch_into_numpy(self._repeated_capability, num_samples, waveform, timeout)
+        return self._library.fetch_into_numpy(self._repeated_capability, num_samples, waveform, timeout)
 
     @ivi_synchronized
     def _fetch_array_measurement(self, array_meas_function, measurement_waveform_size, timeout=hightime.timedelta(seconds=5.0)):
@@ -2746,7 +2746,7 @@ class _SessionBase(object):
         '''
         if type(array_meas_function) is not enums.ArrayMeasurement:
             raise TypeError('Parameter array_meas_function must be of type ' + str(enums.ArrayMeasurement))
-        return self._library._fetch_array_measurement(self._repeated_capability, array_meas_function, measurement_waveform_size, timeout)
+        return self._library.fetch_array_measurement(self._repeated_capability, array_meas_function, measurement_waveform_size, timeout)
 
     @ivi_synchronized
     def _fetch_binary16_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
@@ -2867,7 +2867,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('int16'):
             raise TypeError('waveform must be numpy.ndarray of dtype=int16, is ' + str(waveform.dtype))
-        return self._library._fetch_binary16_into_numpy(self._repeated_capability, num_samples, waveform, timeout)
+        return self._library.fetch_binary16_into_numpy(self._repeated_capability, num_samples, waveform, timeout)
 
     @ivi_synchronized
     def _fetch_binary32_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
@@ -2988,7 +2988,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('int32'):
             raise TypeError('waveform must be numpy.ndarray of dtype=int32, is ' + str(waveform.dtype))
-        return self._library._fetch_binary32_into_numpy(self._repeated_capability, num_samples, waveform, timeout)
+        return self._library.fetch_binary32_into_numpy(self._repeated_capability, num_samples, waveform, timeout)
 
     @ivi_synchronized
     def _fetch_binary8_into_numpy(self, num_samples, waveform, timeout=hightime.timedelta(seconds=5.0)):
@@ -3109,7 +3109,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('int8'):
             raise TypeError('waveform must be numpy.ndarray of dtype=int8, is ' + str(waveform.dtype))
-        return self._library._fetch_binary8_into_numpy(self._repeated_capability, num_samples, waveform, timeout)
+        return self._library.fetch_binary8_into_numpy(self._repeated_capability, num_samples, waveform, timeout)
 
     @ivi_synchronized
     def fetch_into(self, waveform, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0)):
@@ -3291,7 +3291,7 @@ class _SessionBase(object):
         '''
         if type(scalar_meas_function) is not enums.ScalarMeasurement:
             raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums.ScalarMeasurement))
-        return self._library._fetch_measurement_stats(self._repeated_capability, scalar_meas_function, timeout)
+        return self._library.fetch_measurement_stats(self._repeated_capability, scalar_meas_function, timeout)
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -3326,7 +3326,7 @@ class _SessionBase(object):
                 ViBoolean variable.
 
         '''
-        return self._library._get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -3360,7 +3360,7 @@ class _SessionBase(object):
             value (int): Returns the current value of the property.
 
         '''
-        return self._library._get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_int32(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute_id):
@@ -3394,7 +3394,7 @@ class _SessionBase(object):
             value (int): Returns the current value of the property.
 
         '''
-        return self._library._get_attribute_vi_int64(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_int64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -3429,7 +3429,7 @@ class _SessionBase(object):
                 ViReal64 variable.
 
         '''
-        return self._library._get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_real64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -3476,7 +3476,7 @@ class _SessionBase(object):
                 bytes as indicated in the **bufSize**.
 
         '''
-        return self._library._get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_equalization_filter_coefficients(self, number_of_coefficients):
@@ -3511,7 +3511,7 @@ class _SessionBase(object):
                 property.
 
         '''
-        return self._library._get_equalization_filter_coefficients(self._repeated_capability, number_of_coefficients)
+        return self._library.get_equalization_filter_coefficients(self._repeated_capability, number_of_coefficients)
 
     def _get_error(self):
         r'''_get_error
@@ -3550,7 +3550,7 @@ class _SessionBase(object):
                 parameter.
 
         '''
-        return self._library._get_error()
+        return self._library.get_error()
 
     def lock(self):
         '''lock
@@ -3685,7 +3685,7 @@ class _SessionBase(object):
                 Call _actual_num_wfms to determine the size of this array.
 
         '''
-        return self._library._read(self._repeated_capability, num_samples, timeout)
+        return self._library.read(self._repeated_capability, num_samples, timeout)
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, value):
@@ -3732,7 +3732,7 @@ class _SessionBase(object):
                 be valid depending on the current settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_boolean(self._repeated_capability, attribute_id, value)
+        return self._library.set_attribute_vi_boolean(self._repeated_capability, attribute_id, value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, value):
@@ -3779,7 +3779,7 @@ class _SessionBase(object):
                 valid depending on the current settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_int32(self._repeated_capability, attribute_id, value)
+        return self._library.set_attribute_vi_int32(self._repeated_capability, attribute_id, value)
 
     @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute_id, value):
@@ -3826,7 +3826,7 @@ class _SessionBase(object):
                 valid depending on the current settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_int64(self._repeated_capability, attribute_id, value)
+        return self._library.set_attribute_vi_int64(self._repeated_capability, attribute_id, value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, value):
@@ -3873,7 +3873,7 @@ class _SessionBase(object):
                 be valid depending on the current settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_real64(self._repeated_capability, attribute_id, value)
+        return self._library.set_attribute_vi_real64(self._repeated_capability, attribute_id, value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, value):
@@ -3922,7 +3922,7 @@ class _SessionBase(object):
                 be valid depending on the current settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_string(self._repeated_capability, attribute_id, value)
+        return self._library.set_attribute_vi_string(self._repeated_capability, attribute_id, value)
 
     def unlock(self):
         '''unlock
@@ -3946,7 +3946,7 @@ class _SessionBase(object):
             error_message (str): The error information formatted into a string.
 
         '''
-        return self._library._error_message(error_code)
+        return self._library.error_message(error_code)
 
 
 class Session(_SessionBase):
@@ -4286,7 +4286,7 @@ class Session(_SessionBase):
         '''
         if type(which_one) is not enums._CalibrationTypes:
             raise TypeError('Parameter which_one must be of type ' + str(enums._CalibrationTypes))
-        return self._library._cal_fetch_date(which_one)
+        return self._library.cal_fetch_date(which_one)
 
     @ivi_synchronized
     def _cal_fetch_temperature(self, which_one):
@@ -4302,7 +4302,7 @@ class Session(_SessionBase):
             temperature (float):
 
         '''
-        return self._library._cal_fetch_temperature(which_one)
+        return self._library.cal_fetch_temperature(which_one)
 
     @ivi_synchronized
     def commit(self):
@@ -4410,7 +4410,7 @@ class Session(_SessionBase):
                 Default Value: 90.0
 
         '''
-        return self._library._configure_ref_levels(low, mid, high)
+        return self._library.configure_ref_levels(low, mid, high)
 
     @ivi_synchronized
     def configure_trigger_digital(self, trigger_source, slope=enums.TriggerSlope.POSITIVE, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):
@@ -5080,7 +5080,7 @@ class Session(_SessionBase):
                 subsequent NI-SCOPE method calls.
 
         '''
-        return self._library._init_with_options(resource_name, id_query, reset_device, option_string)
+        return self._library.init_with_options(resource_name, id_query, reset_device, option_string)
 
     @ivi_synchronized
     def _initiate_acquisition(self):
@@ -5092,7 +5092,7 @@ class Session(_SessionBase):
         waits for a trigger. The digitizer acquires a waveform for each channel
         you enable with configure_vertical.
         '''
-        return self._library._initiate_acquisition()
+        return self._library.initiate_acquisition()
 
     @ivi_synchronized
     def probe_compensation_signal_start(self):
@@ -5170,7 +5170,7 @@ class Session(_SessionBase):
         -  Destroys the IVI session and all of its properties.
         -  Deallocates any memory resources used by the IVI session.
         '''
-        return self._library._close()
+        return self._library.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -5228,4 +5228,4 @@ class Session(_SessionBase):
                 in length.
 
         '''
-        return self._library._self_test()
+        return self._library.self_test()

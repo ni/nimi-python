@@ -543,7 +543,7 @@ class _SessionBase(object):
                 ViBoolean variable.
 
         '''
-        return self._library._get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -580,7 +580,7 @@ class _SessionBase(object):
                 ViInt32 variable.
 
         '''
-        return self._library._get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_int32(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -617,7 +617,7 @@ class _SessionBase(object):
                 ViReal64 variable.
 
         '''
-        return self._library._get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_real64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -661,7 +661,7 @@ class _SessionBase(object):
                 VI_NULL for this parameter.
 
         '''
-        return self._library._get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
     def _get_error(self):
         r'''_get_error
@@ -684,7 +684,7 @@ class _SessionBase(object):
                 **Buffer_Size**, you can pass VI_NULL for this parameter.
 
         '''
-        return self._library._get_error()
+        return self._library.get_error()
 
     def lock(self):
         '''lock
@@ -775,7 +775,7 @@ class _SessionBase(object):
             attribute_value (bool): Pass the value that you want to set the property to.
 
         '''
-        return self._library._set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -824,7 +824,7 @@ class _SessionBase(object):
             attribute_value (int): Pass the value that you want to set the property to.
 
         '''
-        return self._library._set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -873,7 +873,7 @@ class _SessionBase(object):
             attribute_value (float): Pass the value that you want to set the property to.
 
         '''
-        return self._library._set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -922,7 +922,7 @@ class _SessionBase(object):
             attribute_value (str): Pass the value that you want to set the property to.
 
         '''
-        return self._library._set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
 
     def unlock(self):
         '''unlock
@@ -948,7 +948,7 @@ class _SessionBase(object):
             error_message (str): The error information formatted into a string.
 
         '''
-        return self._library._error_message(error_code)
+        return self._library.error_message(error_code)
 
 
 class Session(_SessionBase):
@@ -1838,7 +1838,7 @@ class Session(_SessionBase):
             minute (int): Indicates the **minute** of the last calibration.
 
         '''
-        return self._library._get_cal_date_and_time(cal_type)
+        return self._library.get_cal_date_and_time(cal_type)
 
     @ivi_synchronized
     def get_dev_temp(self, options=""):
@@ -2149,7 +2149,7 @@ class Session(_SessionBase):
                 all subsequent instrument driver method calls.
 
         '''
-        return self._library._init_with_options(resource_name, id_query, reset_device, option_string)
+        return self._library.init_with_options(resource_name, id_query, reset_device, option_string)
 
     @ivi_synchronized
     def _initiate(self):
@@ -2161,7 +2161,7 @@ class Session(_SessionBase):
         fetch, fetch_multi_point, or fetch_waveform to
         retrieve the measurement data.
         '''
-        return self._library._initiate()
+        return self._library.initiate()
 
     @ivi_synchronized
     def perform_open_cable_comp(self):
@@ -2419,7 +2419,7 @@ class Session(_SessionBase):
 
         Closes the specified session and deallocates resources that it reserved.
         '''
-        return self._library._close()
+        return self._library.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -2497,4 +2497,4 @@ class Session(_SessionBase):
                 This error code indicates that the DMM should be repaired.
 
         '''
-        return self._library._self_test()
+        return self._library.self_test()

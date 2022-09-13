@@ -179,7 +179,7 @@ class SessionReference(object):
             value (float): The value that you are getting
 
         '''
-        return self._library._get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_real64(self._repeated_capability, attribute_id)
 
     def _get_attribute_vi_session(self, attribute_id):
         r'''_get_attribute_vi_session
@@ -208,7 +208,7 @@ class SessionReference(object):
             value (int): The value that you are getting
 
         '''
-        return self._library._get_attribute_vi_session(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_session(self._repeated_capability, attribute_id)
 
     def _get_attribute_vi_string(self, attribute_id):
         r'''_get_attribute_vi_string
@@ -247,7 +247,7 @@ class SessionReference(object):
             value (str): The value that you are getting
 
         '''
-        return self._library._get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
     def _get_extended_error_info(self):
         r'''_get_extended_error_info
@@ -265,7 +265,7 @@ class SessionReference(object):
                 for _get_extended_error_info to return the full error string.
 
         '''
-        return self._library._get_extended_error_info()
+        return self._library.get_extended_error_info()
 
     def _set_attribute_vi_real64(self, attribute_id, value):
         r'''_set_attribute_vi_real64
@@ -294,7 +294,7 @@ class SessionReference(object):
             value (float): The value for the property
 
         '''
-        return self._library._set_attribute_vi_real64(self._repeated_capability, attribute_id, value)
+        return self._library.set_attribute_vi_real64(self._repeated_capability, attribute_id, value)
 
     def _set_attribute_vi_session(self, attribute_id, value):
         r'''_set_attribute_vi_session
@@ -325,7 +325,7 @@ class SessionReference(object):
             value (int): The value for the property
 
         '''
-        return self._library._set_attribute_vi_session(self._repeated_capability, attribute_id, value)
+        return self._library.set_attribute_vi_session(self._repeated_capability, attribute_id, value)
 
     def _set_attribute_vi_string(self, attribute_id, value):
         r'''_set_attribute_vi_string
@@ -356,7 +356,7 @@ class SessionReference(object):
             value (str): Pass the value for the property
 
         '''
-        return self._library._set_attribute_vi_string(self._repeated_capability, attribute_id, value)
+        return self._library.set_attribute_vi_string(self._repeated_capability, attribute_id, value)
 
 
 class _Session(object):

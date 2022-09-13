@@ -17,8 +17,8 @@ ${template_parameters['encoding_tag']}
     session_context_manager = None
     if 'task' in config['context_manager_name']:
         session_context_manager = '_' + config['context_manager_name']['task'].title()
-        session_context_manager_initiate = functions[config['context_manager_name']['initiate_function']]['python_name']
-        session_context_manager_abort = functions[config['context_manager_name']['abort_function']]['python_name']
+        session_context_manager_initiate = functions[config['context_manager_name']['initiate_function']]['session_name']
+        session_context_manager_abort = functions[config['context_manager_name']['abort_function']]['session_name']
         render_initiate_in_session_base = functions[config['context_manager_name']['initiate_function']]['render_in_session_base']
 %>\
 import array  # noqa: F401
@@ -240,8 +240,8 @@ class Session(_SessionBase):
         self._library = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
-        self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
-        self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
+        self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['session_name']}().
+        self._${config['session_handle_parameter_name']} = self.${init_function['session_name']}(${init_call_params})
         self._library._${config['session_handle_parameter_name']} = self._${config['session_handle_parameter_name']}
 
 % if config['uses_nitclk']:

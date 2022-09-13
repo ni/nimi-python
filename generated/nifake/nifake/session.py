@@ -259,7 +259,7 @@ class _SessionBase(object):
             attribute_value (bool): Returns the value of the property.
 
         '''
-        return self._library._get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -286,7 +286,7 @@ class _SessionBase(object):
             attribute_value (int): Returns the value of the property.
 
         '''
-        return self._library._get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_int32(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute_id):
@@ -313,7 +313,7 @@ class _SessionBase(object):
             attribute_value (int): Returns the value of the property.
 
         '''
-        return self._library._get_attribute_vi_int64(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_int64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -340,7 +340,7 @@ class _SessionBase(object):
             attribute_value (float): Returns the value of the property.
 
         '''
-        return self._library._get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_real64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -367,7 +367,7 @@ class _SessionBase(object):
             attribute_value (str): Returns the value of the property.
 
         '''
-        return self._library._get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_channel_names(self, indices):
@@ -389,7 +389,7 @@ class _SessionBase(object):
             names (list of str): The channel name(s) at the specified indices.
 
         '''
-        return self._library._get_channel_names(indices)
+        return self._library.get_channel_names(indices)
 
     def _get_error(self):
         r'''_get_error
@@ -402,7 +402,7 @@ class _SessionBase(object):
             description (str): At least bufferSize big, string comes out here.
 
         '''
-        return self._library._get_error()
+        return self._library.get_error()
 
     def lock(self):
         '''lock
@@ -518,7 +518,7 @@ class _SessionBase(object):
             attribute_value (bool): Pass the value that you want to set the property to.
 
         '''
-        return self._library._set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -543,7 +543,7 @@ class _SessionBase(object):
             attribute_value (int): Pass the value that you want to set the property to.
 
         '''
-        return self._library._set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
@@ -568,7 +568,7 @@ class _SessionBase(object):
             attribute_value (int): Pass the value that you want to set the property to.
 
         '''
-        return self._library._set_attribute_vi_int64(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_int64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -593,7 +593,7 @@ class _SessionBase(object):
             attribute_value (float): Pass the value that you want to set the property to.
 
         '''
-        return self._library._set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -618,7 +618,7 @@ class _SessionBase(object):
             attribute_value (str): Pass the value that you want to set the property to.
 
         '''
-        return self._library._set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
 
     def unlock(self):
         '''unlock
@@ -642,7 +642,7 @@ class _SessionBase(object):
             error_message (str): The error information formatted into a string.
 
         '''
-        return self._library._error_message(error_code)
+        return self._library.error_message(error_code)
 
 
 class Session(_SessionBase):
@@ -1074,7 +1074,7 @@ class Session(_SessionBase):
             minute (int): Indicates the **minute** of the last calibration.
 
         '''
-        return self._library._get_cal_date_and_time(cal_type)
+        return self._library.get_cal_date_and_time(cal_type)
 
     @ivi_synchronized
     def get_cal_interval(self):
@@ -1220,7 +1220,7 @@ class Session(_SessionBase):
             vi (int): Returns a ViSession handle that you use.
 
         '''
-        return self._library._init_with_options(resource_name, option_string, id_query, reset_device)
+        return self._library.init_with_options(resource_name, option_string, id_query, reset_device)
 
     @ivi_synchronized
     def _initiate(self):
@@ -1228,7 +1228,7 @@ class Session(_SessionBase):
 
         Initiates a thingie.
         '''
-        return self._library._initiate()
+        return self._library.initiate()
 
     @ivi_synchronized
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers=None):
@@ -1547,7 +1547,7 @@ class Session(_SessionBase):
 
         Closes the specified session and deallocates resources that it reserved.
         '''
-        return self._library._close()
+        return self._library.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -1572,4 +1572,4 @@ class Session(_SessionBase):
             self_test_message (str): This parameter contains the string returned from the instrument self-test. The array must contain at least 256 elements.
 
         '''
-        return self._library._self_test()
+        return self._library.self_test()

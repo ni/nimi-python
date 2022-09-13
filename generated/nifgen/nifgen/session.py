@@ -1602,7 +1602,7 @@ class _SessionBase(object):
                 when referring to this waveform.
 
         '''
-        return self._library._create_waveform_f64(self._repeated_capability, waveform_data_array)
+        return self._library.create_waveform_f64(self._repeated_capability, waveform_data_array)
 
     @ivi_synchronized
     def _create_waveform_f64_numpy(self, waveform_data_array):
@@ -1654,7 +1654,7 @@ class _SessionBase(object):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=float64, is ' + str(waveform_data_array.dtype))
-        return self._library._create_waveform_f64_numpy(self._repeated_capability, waveform_data_array)
+        return self._library.create_waveform_f64_numpy(self._repeated_capability, waveform_data_array)
 
     @ivi_synchronized
     def create_waveform_from_file_f64(self, file_name, byte_order):
@@ -1824,7 +1824,7 @@ class _SessionBase(object):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('int16'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
-        return self._library._create_waveform_i16_numpy(self._repeated_capability, waveform_data_array)
+        return self._library.create_waveform_i16_numpy(self._repeated_capability, waveform_data_array)
 
     @ivi_synchronized
     def define_user_standard_waveform(self, waveform_data_array):
@@ -1896,7 +1896,7 @@ class _SessionBase(object):
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
         '''
-        return self._library._delete_named_waveform(self._repeated_capability, waveform_name)
+        return self._library.delete_named_waveform(self._repeated_capability, waveform_name)
 
     @ivi_synchronized
     def delete_script(self, script_name):
@@ -1985,7 +1985,7 @@ class _SessionBase(object):
                 ViBoolean variable.
 
         '''
-        return self._library._get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -2020,7 +2020,7 @@ class _SessionBase(object):
                 ViInt32 variable.
 
         '''
-        return self._library._get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_int32(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -2057,7 +2057,7 @@ class _SessionBase(object):
                 ViReal64 variable.
 
         '''
-        return self._library._get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_real64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -2124,7 +2124,7 @@ class _SessionBase(object):
                 for this parameter.
 
         '''
-        return self._library._get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
     def _get_error(self):
         r'''_get_error
@@ -2162,7 +2162,7 @@ class _SessionBase(object):
                 **errorDescriptionBufferSize** parameter.
 
         '''
-        return self._library._get_error()
+        return self._library.get_error()
 
     def lock(self):
         '''lock
@@ -2307,7 +2307,7 @@ class _SessionBase(object):
                 settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -2360,7 +2360,7 @@ class _SessionBase(object):
                 settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -2413,7 +2413,7 @@ class _SessionBase(object):
                 settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -2466,7 +2466,7 @@ class _SessionBase(object):
                 settings of the instrument session.
 
         '''
-        return self._library._set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_named_waveform_next_write_position(self, waveform_name, relative_to, offset):
@@ -2518,7 +2518,7 @@ class _SessionBase(object):
         '''
         if type(relative_to) is not enums.RelativeTo:
             raise TypeError('Parameter relative_to must be of type ' + str(enums.RelativeTo))
-        return self._library._set_named_waveform_next_write_position(self._repeated_capability, waveform_name, relative_to, offset)
+        return self._library.set_named_waveform_next_write_position(self._repeated_capability, waveform_name, relative_to, offset)
 
     @ivi_synchronized
     def set_next_write_position(self, waveform_name_or_handle, relative_to, offset):
@@ -2619,7 +2619,7 @@ class _SessionBase(object):
         '''
         if type(relative_to) is not enums.RelativeTo:
             raise TypeError('Parameter relative_to must be of type ' + str(enums.RelativeTo))
-        return self._library._set_waveform_next_write_position(self._repeated_capability, waveform_handle, relative_to, offset)
+        return self._library.set_waveform_next_write_position(self._repeated_capability, waveform_handle, relative_to, offset)
 
     def unlock(self):
         '''unlock
@@ -2675,7 +2675,7 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('int16'):
             raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
-        return self._library._write_binary16_waveform_numpy(self._repeated_capability, waveform_handle, data)
+        return self._library.write_binary16_waveform_numpy(self._repeated_capability, waveform_handle, data)
 
     @ivi_synchronized
     def _write_named_waveform_f64(self, waveform_name, data):
@@ -2718,7 +2718,7 @@ class _SessionBase(object):
                 have at least as many elements as the value in **size**.
 
         '''
-        return self._library._write_named_waveform_f64(self._repeated_capability, waveform_name, data)
+        return self._library.write_named_waveform_f64(self._repeated_capability, waveform_name, data)
 
     @ivi_synchronized
     def _write_named_waveform_f64_numpy(self, waveform_name, data):
@@ -2769,7 +2769,7 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('float64'):
             raise TypeError('data must be numpy.ndarray of dtype=float64, is ' + str(data.dtype))
-        return self._library._write_named_waveform_f64_numpy(self._repeated_capability, waveform_name, data)
+        return self._library.write_named_waveform_f64_numpy(self._repeated_capability, waveform_name, data)
 
     @ivi_synchronized
     def _write_named_waveform_i16_numpy(self, waveform_name, data):
@@ -2812,7 +2812,7 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('int16'):
             raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
-        return self._library._write_named_waveform_i16_numpy(self._repeated_capability, waveform_name, data)
+        return self._library.write_named_waveform_i16_numpy(self._repeated_capability, waveform_name, data)
 
     @ivi_synchronized
     def write_script(self, script):
@@ -2883,7 +2883,7 @@ class _SessionBase(object):
                 have at least as many elements as the value in **size**.
 
         '''
-        return self._library._write_waveform(self._repeated_capability, waveform_handle, data)
+        return self._library.write_waveform(self._repeated_capability, waveform_handle, data)
 
     @ivi_synchronized
     def _write_waveform_numpy(self, waveform_handle, data):
@@ -2935,7 +2935,7 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('float64'):
             raise TypeError('data must be numpy.ndarray of dtype=float64, is ' + str(data.dtype))
-        return self._library._write_waveform_numpy(self._repeated_capability, waveform_handle, data)
+        return self._library.write_waveform_numpy(self._repeated_capability, waveform_handle, data)
 
     @ivi_synchronized
     def write_waveform(self, waveform_name_or_handle, data):
@@ -3005,7 +3005,7 @@ class _SessionBase(object):
                 You must pass a ViChar array with at least 256 bytes.
 
         '''
-        return self._library._error_message(error_code)
+        return self._library.error_message(error_code)
 
 
 class Session(_SessionBase):
@@ -3302,7 +3302,7 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        return self._library._clear_arb_waveform(waveform_handle)
+        return self._library.clear_arb_waveform(waveform_handle)
 
     @ivi_synchronized
     def clear_freq_list(self, frequency_list_handle):
@@ -3700,7 +3700,7 @@ class Session(_SessionBase):
             minute (int): Specifies the minute of the last successful calibration.
 
         '''
-        return self._library._get_ext_cal_last_date_and_time()
+        return self._library.get_ext_cal_last_date_and_time()
 
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
@@ -3813,7 +3813,7 @@ class Session(_SessionBase):
             minute (int): Specifies the minute of the last successful calibration.
 
         '''
-        return self._library._get_self_cal_last_date_and_time()
+        return self._library.get_self_cal_last_date_and_time()
 
     @ivi_synchronized
     def get_self_cal_last_temp(self):
@@ -4026,7 +4026,7 @@ class Session(_SessionBase):
                 subsequent NI-FGEN method calls.
 
         '''
-        return self._library._initialize_with_channels(resource_name, channel_name, reset_device, option_string)
+        return self._library.initialize_with_channels(resource_name, channel_name, reset_device, option_string)
 
     @ivi_synchronized
     def _initiate_generation(self):
@@ -4037,7 +4037,7 @@ class Session(_SessionBase):
         is aborted, you can call the initiate method to
         cause the signal generator to produce a signal again.
         '''
-        return self._library._initiate_generation()
+        return self._library.initiate_generation()
 
     @ivi_synchronized
     def is_done(self):
@@ -4258,7 +4258,7 @@ class Session(_SessionBase):
         After calling _close, you cannot use NI-FGEN again until you
         call the init or InitWithOptions methods.
         '''
-        return self._library._close()
+        return self._library.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -4334,4 +4334,4 @@ class Session(_SessionBase):
                 You must pass a ViChar array with at least 256 bytes.
 
         '''
-        return self._library._self_test()
+        return self._library.self_test()

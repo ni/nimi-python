@@ -4616,7 +4616,7 @@ class _SessionBase(object):
             set_as_active_sequence (bool): Specifies that this current sequence is active.
 
         '''
-        return self._library._create_advanced_sequence_with_channels(self._repeated_capability, sequence_name, attribute_ids, set_as_active_sequence)
+        return self._library.create_advanced_sequence_with_channels(self._repeated_capability, sequence_name, attribute_ids, set_as_active_sequence)
 
     @ivi_synchronized
     def delete_advanced_sequence(self, sequence_name):
@@ -5257,7 +5257,7 @@ class _SessionBase(object):
                 device.
 
         '''
-        return self._library._fetch_multiple(self._repeated_capability, timeout, count)
+        return self._library.fetch_multiple(self._repeated_capability, timeout, count)
 
     @ivi_synchronized
     def _fetch_multiple_lcr(self, count, timeout=hightime.timedelta(seconds=1.0)):
@@ -5336,7 +5336,7 @@ class _SessionBase(object):
             actual_count (int):
 
         '''
-        return self._library._fetch_multiple_lcr(self._repeated_capability, count, timeout)
+        return self._library.fetch_multiple_lcr(self._repeated_capability, count, timeout)
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -5388,7 +5388,7 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        return self._library._get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -5440,7 +5440,7 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        return self._library._get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_int32(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute_id):
@@ -5492,7 +5492,7 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        return self._library._get_attribute_vi_int64(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_int64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -5544,7 +5544,7 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        return self._library._get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_real64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -5606,7 +5606,7 @@ class _SessionBase(object):
                 selecting it and then pressing .
 
         '''
-        return self._library._get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return self._library.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_channel_names(self, indices):
@@ -5628,7 +5628,7 @@ class _SessionBase(object):
             names (list of str): The channel name(s) at the specified indices.
 
         '''
-        return self._library._get_channel_names(indices)
+        return self._library.get_channel_names(indices)
 
     def _get_error(self):
         r'''_get_error
@@ -5668,7 +5668,7 @@ class _SessionBase(object):
                 property.
 
         '''
-        return self._library._get_error()
+        return self._library.get_error()
 
     @ivi_synchronized
     def _get_lcr_compensation_last_date_and_time(self, compensation_type):
@@ -5709,7 +5709,7 @@ class _SessionBase(object):
         '''
         if type(compensation_type) is not enums.LCRCompensationType:
             raise TypeError('Parameter compensation_type must be of type ' + str(enums.LCRCompensationType))
-        return self._library._get_lcr_compensation_last_date_and_time(self._repeated_capability, compensation_type)
+        return self._library.get_lcr_compensation_last_date_and_time(self._repeated_capability, compensation_type)
 
     @ivi_synchronized
     def get_lcr_custom_cable_compensation_data(self):
@@ -5798,7 +5798,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session._initiate_with_channels`
         '''
-        return self._library._initiate_with_channels(self._repeated_capability)
+        return self._library.initiate_with_channels(self._repeated_capability)
 
     def lock(self):
         '''lock
@@ -5916,7 +5916,7 @@ class _SessionBase(object):
                 returned array.
 
         '''
-        return self._library._measure_multiple(self._repeated_capability)
+        return self._library.measure_multiple(self._repeated_capability)
 
     @ivi_synchronized
     def _measure_multiple_lcr(self):
@@ -5984,7 +5984,7 @@ class _SessionBase(object):
                 +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         '''
-        return self._library._measure_multiple_lcr(self._repeated_capability)
+        return self._library.measure_multiple_lcr(self._repeated_capability)
 
     @ivi_synchronized
     def _parse_channel_count(self):
@@ -6007,7 +6007,7 @@ class _SessionBase(object):
             number_of_channels (int):
 
         '''
-        return self._library._parse_channel_count(self._repeated_capability)
+        return self._library.parse_channel_count(self._repeated_capability)
 
     @ivi_synchronized
     def perform_lcr_load_compensation(self, compensation_spots):
@@ -6576,7 +6576,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        return self._library._set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -6631,7 +6631,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        return self._library._set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
@@ -6686,7 +6686,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        return self._library._set_attribute_vi_int64(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_int64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -6741,7 +6741,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        return self._library._set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -6796,7 +6796,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        return self._library._set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
+        return self._library.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def set_sequence(self, values, source_delays):
@@ -6935,7 +6935,7 @@ class _SessionBase(object):
                 You must pass a ViChar array with at least 256 bytes.
 
         '''
-        return self._library._error_message(error_code)
+        return self._library.error_message(error_code)
 
 
 class Session(_SessionBase):
@@ -7421,7 +7421,7 @@ class Session(_SessionBase):
             minute (int): Returns the **minute** in which the device was last calibrated.
 
         '''
-        return self._library._get_ext_cal_last_date_and_time()
+        return self._library.get_ext_cal_last_date_and_time()
 
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
@@ -7509,7 +7509,7 @@ class Session(_SessionBase):
             minute (int): Returns the **minute** in which the device was last calibrated.
 
         '''
-        return self._library._get_self_cal_last_date_and_time()
+        return self._library.get_self_cal_last_date_and_time()
 
     @ivi_synchronized
     def get_self_cal_last_temp(self):
@@ -7712,7 +7712,7 @@ class Session(_SessionBase):
                 subsequent NI-DCPower method calls.
 
         '''
-        return self._library._initialize_with_channels(resource_name, channels, reset, option_string)
+        return self._library.initialize_with_channels(resource_name, channels, reset, option_string)
 
     def _initialize_with_independent_channels(self, resource_name, reset, option_string):
         r'''_initialize_with_independent_channels
@@ -7791,7 +7791,7 @@ class Session(_SessionBase):
                 subsequent NI-DCPower method calls.
 
         '''
-        return self._library._initialize_with_independent_channels(resource_name, reset, option_string)
+        return self._library.initialize_with_independent_channels(resource_name, reset, option_string)
 
     @ivi_synchronized
     def get_channel_names(self, indices):
@@ -7880,7 +7880,7 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        return self._library._close()
+        return self._library.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -7939,4 +7939,4 @@ class Session(_SessionBase):
                 least 256 bytes.
 
         '''
-        return self._library._self_test()
+        return self._library.self_test()

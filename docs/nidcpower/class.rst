@@ -1651,7 +1651,6 @@ lock
         When used in a `with` statement, :py:meth:`nidcpower.Session.lock` acts as
         a context manager and unlock will be called when the `with` block is exited
 
-
 measure
 -------
 
@@ -2682,8 +2681,6 @@ unlock
     Releases a lock that you acquired on an device session using
     :py:meth:`nidcpower.Session.lock`. Refer to :py:meth:`nidcpower.Session.unlock` for additional
     information on session locks.
-
-
 
 wait_for_event
 --------------
@@ -10791,5 +10788,3 @@ voltage_pole_zero_ratio
 
 
 .. contents:: Session
-
-

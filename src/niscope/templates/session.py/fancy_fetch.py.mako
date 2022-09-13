@@ -5,8 +5,8 @@
 
     suffix = method_template['method_python_name_suffix']
 %>\
-    def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
-        '''${f['python_name']}
+    def ${f['session_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+        '''${f['session_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
@@ -19,7 +19,7 @@
             if num_samples is None:
                 num_samples = self.horz_record_length
 
-        wfm, wfm_info = self._${f['python_name']}(num_samples, timeout)
+        wfm, wfm_info = self._${f['session_name']}(num_samples, timeout)
 
         mv = memoryview(wfm)
 

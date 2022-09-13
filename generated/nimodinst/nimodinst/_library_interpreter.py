@@ -51,8 +51,8 @@ class LibraryInterpreter(object):
         self._library = _library_singleton.get()
         self._handle = 0
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
+    def get_error_description(self, error_code):
+        '''get_error_description
 
         Returns the error description.
         '''
@@ -71,13 +71,13 @@ class LibraryInterpreter(object):
         self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         return error_info_ctype.value.decode("ascii")
 
-    def _close_installed_devices_session(self):  # noqa: N802
+    def close_installed_devices_session(self):  # noqa: N802
         handle_ctype = _visatype.ViSession(self._handle)  # case S110
         error_code = self._library.niModInst_CloseInstalledDevicesSession(handle_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _get_extended_error_info(self):  # noqa: N802
+    def get_extended_error_info(self):  # noqa: N802
         error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
         error_info_ctype = None  # case C050
         error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
@@ -88,7 +88,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode(self._encoding)
 
-    def _get_installed_device_attribute_vi_int32(self, index, attribute_id):  # noqa: N802
+    def get_installed_device_attribute_vi_int32(self, index, attribute_id):  # noqa: N802
         handle_ctype = _visatype.ViSession(self._handle)  # case S110
         index_ctype = _visatype.ViInt32(index)  # case S150
         attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
@@ -97,7 +97,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
-    def _get_installed_device_attribute_vi_string(self, index, attribute_id):  # noqa: N802
+    def get_installed_device_attribute_vi_string(self, index, attribute_id):  # noqa: N802
         handle_ctype = _visatype.ViSession(self._handle)  # case S110
         index_ctype = _visatype.ViInt32(index)  # case S150
         attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
@@ -111,7 +111,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
-    def _open_installed_devices_session(self, driver):  # noqa: N802
+    def open_installed_devices_session(self, driver):  # noqa: N802
         driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case C020
         handle_ctype = _visatype.ViSession()  # case S220
         device_count_ctype = _visatype.ViInt32()  # case S220

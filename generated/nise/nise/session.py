@@ -106,7 +106,7 @@ class _SessionBase(object):
                 re-call the method to obtain the entire buffer.
 
         '''
-        return self._library._get_error(error_description_size)
+        return self._library.get_error(error_description_size)
 
 
 class Session(_SessionBase):
@@ -237,7 +237,7 @@ class Session(_SessionBase):
         close method, you should not use the NI Switch Executive
         virtual device again until you call __init__.
         '''
-        return self._library._close_session()
+        return self._library.close_session()
 
     def connect(self, connect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, wait_for_debounce=True):
         r'''connect
@@ -659,7 +659,7 @@ class Session(_SessionBase):
             vi (int): The session referencing this NI Switch Executive virtual device session.
 
         '''
-        return self._library._open_session(virtual_device_name, option_string)
+        return self._library.open_session(virtual_device_name, option_string)
 
     def wait_for_debounce(self, maximum_time_ms=hightime.timedelta(milliseconds=-1)):
         r'''wait_for_debounce

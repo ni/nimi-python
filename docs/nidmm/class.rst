@@ -1486,7 +1486,6 @@ lock
         When used in a `with` statement, :py:meth:`nidmm.Session.lock` acts as
         a context manager and unlock will be called when the `with` block is exited
 
-
 perform_open_cable_comp
 -----------------------
 
@@ -1936,8 +1935,6 @@ unlock
     Releases a lock that you acquired on an device session using
     :py:meth:`nidmm.Session.lock`. Refer to :py:meth:`nidmm.Session.unlock` for additional
     information on session locks.
-
-
 
 
 Properties
@@ -3615,5 +3612,3 @@ waveform_rate
 
 
 .. contents:: Session
-
-

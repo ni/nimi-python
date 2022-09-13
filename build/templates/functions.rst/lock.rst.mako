@@ -2,7 +2,7 @@
 <%
     import build.helper as helper
 %>\
-.. py:method:: ${function['python_name']}()
+.. py:method:: ${function['session_name']}()
 
     Obtains a multithread lock on the device session. Before doing so, the
     software waits until all other execution threads release their locks
@@ -44,4 +44,3 @@
     :return:
         When used in a `with` statement, :py:meth:`${config['module_name']}.Session.lock` acts as
         a context manager and unlock will be called when the `with` block is exited
-
