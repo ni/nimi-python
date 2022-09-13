@@ -10,11 +10,12 @@ def find_session_handle_parameter(parameters):
 
     Usually it's the one marked as is_session_handle. For Init functions, it's the output parameter.
     '''
-    matching = [p for p in parameters if p['type'] == 'ViSession']
-    assert len(matching) > 0, 'No ViSession parameter found:\n{0}'.format(parameters)
-    if len(matching) > 1:
-        matching = [p for p in matching if p['is_session_handle']]
-    assert len(matching) == 1, 'More than one ViSession parameter found:\n{0}'.format(parameters)
+    matching = [p for p in parameters if p['is_session_handle']]
+    assert len(matching) <= 1, 'More than one parameter found with is_session_handle=True:\n{0}'.format(parameters)
+    if len(matching) == 0:
+        matching = [p for p in parameters if p['type'] == 'ViSession']
+        assert len(matching) <= 1, 'More than one ViSession parameter found:\n{0}'.format(parameters)
+        assert len(matching) > 0, 'No ViSession parameter found:\n{0}'.format(parameters)
     return matching[0]
 
 
