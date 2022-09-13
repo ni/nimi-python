@@ -121,7 +121,7 @@ class Library(object):
             raise errors.DriverTooOldError() from e
         return function
 
-    def abort(self, vi):  # noqa: N802
+    def niDigital_Abort(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDigital_Abort_cfunc is None:
                 self.niDigital_Abort_cfunc = self._get_library_function('niDigital_Abort')
@@ -129,7 +129,7 @@ class Library(object):
                 self.niDigital_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_Abort_cfunc(vi)
 
-    def abort_keep_alive(self, vi):  # noqa: N802
+    def niDigital_AbortKeepAlive(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDigital_AbortKeepAlive_cfunc is None:
                 self.niDigital_AbortKeepAlive_cfunc = self._get_library_function('niDigital_AbortKeepAlive')
@@ -137,7 +137,7 @@ class Library(object):
                 self.niDigital_AbortKeepAlive_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_AbortKeepAlive_cfunc(vi)
 
-    def apply_levels_and_timing(self, vi, site_list, levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins):  # noqa: N802
+    def niDigital_ApplyLevelsAndTiming(self, vi, site_list, levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ApplyLevelsAndTiming_cfunc is None:
                 self.niDigital_ApplyLevelsAndTiming_cfunc = self._get_library_function('niDigital_ApplyLevelsAndTiming')
@@ -145,7 +145,7 @@ class Library(object):
                 self.niDigital_ApplyLevelsAndTiming_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ApplyLevelsAndTiming_cfunc(vi, site_list, levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins)
 
-    def apply_tdr_offsets(self, vi, channel_list, num_offsets, offsets):  # noqa: N802
+    def niDigital_ApplyTDROffsets(self, vi, channel_list, num_offsets, offsets):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ApplyTDROffsets_cfunc is None:
                 self.niDigital_ApplyTDROffsets_cfunc = self._get_library_function('niDigital_ApplyTDROffsets')
@@ -153,7 +153,7 @@ class Library(object):
                 self.niDigital_ApplyTDROffsets_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ApplyTDROffsets_cfunc(vi, channel_list, num_offsets, offsets)
 
-    def _burst_pattern(self, vi, site_list, start_label, select_digital_function, wait_until_done, timeout):  # noqa: N802
+    def niDigital_BurstPattern(self, vi, site_list, start_label, select_digital_function, wait_until_done, timeout):  # noqa: N802
         with self._func_lock:
             if self.niDigital_BurstPattern_cfunc is None:
                 self.niDigital_BurstPattern_cfunc = self._get_library_function('niDigital_BurstPattern')
@@ -161,7 +161,7 @@ class Library(object):
                 self.niDigital_BurstPattern_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_BurstPattern_cfunc(vi, site_list, start_label, select_digital_function, wait_until_done, timeout)
 
-    def clock_generator_abort(self, vi, channel_list):  # noqa: N802
+    def niDigital_ClockGenerator_Abort(self, vi, channel_list):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ClockGenerator_Abort_cfunc is None:
                 self.niDigital_ClockGenerator_Abort_cfunc = self._get_library_function('niDigital_ClockGenerator_Abort')
@@ -169,7 +169,7 @@ class Library(object):
                 self.niDigital_ClockGenerator_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ClockGenerator_Abort_cfunc(vi, channel_list)
 
-    def clock_generator_generate_clock(self, vi, channel_list, frequency, select_digital_function):  # noqa: N802
+    def niDigital_ClockGenerator_GenerateClock(self, vi, channel_list, frequency, select_digital_function):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ClockGenerator_GenerateClock_cfunc is None:
                 self.niDigital_ClockGenerator_GenerateClock_cfunc = self._get_library_function('niDigital_ClockGenerator_GenerateClock')
@@ -177,7 +177,7 @@ class Library(object):
                 self.niDigital_ClockGenerator_GenerateClock_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ClockGenerator_GenerateClock_cfunc(vi, channel_list, frequency, select_digital_function)
 
-    def commit(self, vi):  # noqa: N802
+    def niDigital_Commit(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDigital_Commit_cfunc is None:
                 self.niDigital_Commit_cfunc = self._get_library_function('niDigital_Commit')
@@ -185,7 +185,7 @@ class Library(object):
                 self.niDigital_Commit_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_Commit_cfunc(vi)
 
-    def configure_active_load_levels(self, vi, channel_list, iol, ioh, vcom):  # noqa: N802
+    def niDigital_ConfigureActiveLoadLevels(self, vi, channel_list, iol, ioh, vcom):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureActiveLoadLevels_cfunc is None:
                 self.niDigital_ConfigureActiveLoadLevels_cfunc = self._get_library_function('niDigital_ConfigureActiveLoadLevels')
@@ -193,7 +193,7 @@ class Library(object):
                 self.niDigital_ConfigureActiveLoadLevels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigureActiveLoadLevels_cfunc(vi, channel_list, iol, ioh, vcom)
 
-    def configure_pattern_burst_sites(self, vi, site_list):  # noqa: N802
+    def niDigital_ConfigurePatternBurstSites(self, vi, site_list):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigurePatternBurstSites_cfunc is None:
                 self.niDigital_ConfigurePatternBurstSites_cfunc = self._get_library_function('niDigital_ConfigurePatternBurstSites')
@@ -201,7 +201,7 @@ class Library(object):
                 self.niDigital_ConfigurePatternBurstSites_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigurePatternBurstSites_cfunc(vi, site_list)
 
-    def configure_time_set_compare_edges_strobe(self, vi, pin_list, time_set_name, strobe_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetCompareEdgesStrobe(self, vi, pin_list, time_set_name, strobe_edge):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetCompareEdgesStrobe_cfunc is None:
                 self.niDigital_ConfigureTimeSetCompareEdgesStrobe_cfunc = self._get_library_function('niDigital_ConfigureTimeSetCompareEdgesStrobe')
@@ -209,7 +209,7 @@ class Library(object):
                 self.niDigital_ConfigureTimeSetCompareEdgesStrobe_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigureTimeSetCompareEdgesStrobe_cfunc(vi, pin_list, time_set_name, strobe_edge)
 
-    def configure_time_set_compare_edges_strobe2x(self, vi, pin_list, time_set_name, strobe_edge, strobe2_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetCompareEdgesStrobe2x(self, vi, pin_list, time_set_name, strobe_edge, strobe2_edge):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetCompareEdgesStrobe2x_cfunc is None:
                 self.niDigital_ConfigureTimeSetCompareEdgesStrobe2x_cfunc = self._get_library_function('niDigital_ConfigureTimeSetCompareEdgesStrobe2x')
@@ -217,7 +217,7 @@ class Library(object):
                 self.niDigital_ConfigureTimeSetCompareEdgesStrobe2x_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigureTimeSetCompareEdgesStrobe2x_cfunc(vi, pin_list, time_set_name, strobe_edge, strobe2_edge)
 
-    def configure_time_set_drive_edges(self, vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveEdges(self, vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetDriveEdges_cfunc is None:
                 self.niDigital_ConfigureTimeSetDriveEdges_cfunc = self._get_library_function('niDigital_ConfigureTimeSetDriveEdges')
@@ -225,7 +225,7 @@ class Library(object):
                 self.niDigital_ConfigureTimeSetDriveEdges_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigureTimeSetDriveEdges_cfunc(vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
 
-    def configure_time_set_drive_edges2x(self, vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveEdges2x(self, vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetDriveEdges2x_cfunc is None:
                 self.niDigital_ConfigureTimeSetDriveEdges2x_cfunc = self._get_library_function('niDigital_ConfigureTimeSetDriveEdges2x')
@@ -233,7 +233,7 @@ class Library(object):
                 self.niDigital_ConfigureTimeSetDriveEdges2x_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigureTimeSetDriveEdges2x_cfunc(vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
 
-    def configure_time_set_drive_format(self, vi, pin_list, time_set_name, drive_format):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveFormat(self, vi, pin_list, time_set_name, drive_format):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetDriveFormat_cfunc is None:
                 self.niDigital_ConfigureTimeSetDriveFormat_cfunc = self._get_library_function('niDigital_ConfigureTimeSetDriveFormat')
@@ -241,7 +241,7 @@ class Library(object):
                 self.niDigital_ConfigureTimeSetDriveFormat_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigureTimeSetDriveFormat_cfunc(vi, pin_list, time_set_name, drive_format)
 
-    def configure_time_set_edge(self, vi, pin_list, time_set_name, edge, time):  # noqa: N802
+    def niDigital_ConfigureTimeSetEdge(self, vi, pin_list, time_set_name, edge, time):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetEdge_cfunc is None:
                 self.niDigital_ConfigureTimeSetEdge_cfunc = self._get_library_function('niDigital_ConfigureTimeSetEdge')
@@ -249,7 +249,7 @@ class Library(object):
                 self.niDigital_ConfigureTimeSetEdge_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigureTimeSetEdge_cfunc(vi, pin_list, time_set_name, edge, time)
 
-    def configure_time_set_edge_multiplier(self, vi, pin_list, time_set_name, edge_multiplier):  # noqa: N802
+    def niDigital_ConfigureTimeSetEdgeMultiplier(self, vi, pin_list, time_set_name, edge_multiplier):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetEdgeMultiplier_cfunc is None:
                 self.niDigital_ConfigureTimeSetEdgeMultiplier_cfunc = self._get_library_function('niDigital_ConfigureTimeSetEdgeMultiplier')
@@ -257,7 +257,7 @@ class Library(object):
                 self.niDigital_ConfigureTimeSetEdgeMultiplier_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigureTimeSetEdgeMultiplier_cfunc(vi, pin_list, time_set_name, edge_multiplier)
 
-    def configure_time_set_period(self, vi, time_set_name, period):  # noqa: N802
+    def niDigital_ConfigureTimeSetPeriod(self, vi, time_set_name, period):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetPeriod_cfunc is None:
                 self.niDigital_ConfigureTimeSetPeriod_cfunc = self._get_library_function('niDigital_ConfigureTimeSetPeriod')
@@ -265,7 +265,7 @@ class Library(object):
                 self.niDigital_ConfigureTimeSetPeriod_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigureTimeSetPeriod_cfunc(vi, time_set_name, period)
 
-    def configure_voltage_levels(self, vi, channel_list, vil, vih, vol, voh, vterm):  # noqa: N802
+    def niDigital_ConfigureVoltageLevels(self, vi, channel_list, vil, vih, vol, voh, vterm):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureVoltageLevels_cfunc is None:
                 self.niDigital_ConfigureVoltageLevels_cfunc = self._get_library_function('niDigital_ConfigureVoltageLevels')
@@ -273,7 +273,7 @@ class Library(object):
                 self.niDigital_ConfigureVoltageLevels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigureVoltageLevels_cfunc(vi, channel_list, vil, vih, vol, voh, vterm)
 
-    def create_capture_waveform_from_file_digicapture(self, vi, waveform_name, waveform_file_path):  # noqa: N802
+    def niDigital_CreateCaptureWaveformFromFileDigicapture(self, vi, waveform_name, waveform_file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_CreateCaptureWaveformFromFileDigicapture_cfunc is None:
                 self.niDigital_CreateCaptureWaveformFromFileDigicapture_cfunc = self._get_library_function('niDigital_CreateCaptureWaveformFromFileDigicapture')
@@ -281,7 +281,7 @@ class Library(object):
                 self.niDigital_CreateCaptureWaveformFromFileDigicapture_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_CreateCaptureWaveformFromFileDigicapture_cfunc(vi, waveform_name, waveform_file_path)
 
-    def create_capture_waveform_parallel(self, vi, pin_list, waveform_name):  # noqa: N802
+    def niDigital_CreateCaptureWaveformParallel(self, vi, pin_list, waveform_name):  # noqa: N802
         with self._func_lock:
             if self.niDigital_CreateCaptureWaveformParallel_cfunc is None:
                 self.niDigital_CreateCaptureWaveformParallel_cfunc = self._get_library_function('niDigital_CreateCaptureWaveformParallel')
@@ -289,7 +289,7 @@ class Library(object):
                 self.niDigital_CreateCaptureWaveformParallel_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_CreateCaptureWaveformParallel_cfunc(vi, pin_list, waveform_name)
 
-    def create_capture_waveform_serial(self, vi, pin_list, waveform_name, sample_width, bit_order):  # noqa: N802
+    def niDigital_CreateCaptureWaveformSerial(self, vi, pin_list, waveform_name, sample_width, bit_order):  # noqa: N802
         with self._func_lock:
             if self.niDigital_CreateCaptureWaveformSerial_cfunc is None:
                 self.niDigital_CreateCaptureWaveformSerial_cfunc = self._get_library_function('niDigital_CreateCaptureWaveformSerial')
@@ -297,7 +297,7 @@ class Library(object):
                 self.niDigital_CreateCaptureWaveformSerial_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_CreateCaptureWaveformSerial_cfunc(vi, pin_list, waveform_name, sample_width, bit_order)
 
-    def create_source_waveform_from_file_tdms(self, vi, waveform_name, waveform_file_path, write_waveform_data):  # noqa: N802
+    def niDigital_CreateSourceWaveformFromFileTDMS(self, vi, waveform_name, waveform_file_path, write_waveform_data):  # noqa: N802
         with self._func_lock:
             if self.niDigital_CreateSourceWaveformFromFileTDMS_cfunc is None:
                 self.niDigital_CreateSourceWaveformFromFileTDMS_cfunc = self._get_library_function('niDigital_CreateSourceWaveformFromFileTDMS')
@@ -305,7 +305,7 @@ class Library(object):
                 self.niDigital_CreateSourceWaveformFromFileTDMS_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_CreateSourceWaveformFromFileTDMS_cfunc(vi, waveform_name, waveform_file_path, write_waveform_data)
 
-    def create_source_waveform_parallel(self, vi, pin_list, waveform_name, data_mapping):  # noqa: N802
+    def niDigital_CreateSourceWaveformParallel(self, vi, pin_list, waveform_name, data_mapping):  # noqa: N802
         with self._func_lock:
             if self.niDigital_CreateSourceWaveformParallel_cfunc is None:
                 self.niDigital_CreateSourceWaveformParallel_cfunc = self._get_library_function('niDigital_CreateSourceWaveformParallel')
@@ -313,7 +313,7 @@ class Library(object):
                 self.niDigital_CreateSourceWaveformParallel_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_CreateSourceWaveformParallel_cfunc(vi, pin_list, waveform_name, data_mapping)
 
-    def create_source_waveform_serial(self, vi, pin_list, waveform_name, data_mapping, sample_width, bit_order):  # noqa: N802
+    def niDigital_CreateSourceWaveformSerial(self, vi, pin_list, waveform_name, data_mapping, sample_width, bit_order):  # noqa: N802
         with self._func_lock:
             if self.niDigital_CreateSourceWaveformSerial_cfunc is None:
                 self.niDigital_CreateSourceWaveformSerial_cfunc = self._get_library_function('niDigital_CreateSourceWaveformSerial')
@@ -321,7 +321,7 @@ class Library(object):
                 self.niDigital_CreateSourceWaveformSerial_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_CreateSourceWaveformSerial_cfunc(vi, pin_list, waveform_name, data_mapping, sample_width, bit_order)
 
-    def create_time_set(self, vi, name):  # noqa: N802
+    def niDigital_CreateTimeSet(self, vi, name):  # noqa: N802
         with self._func_lock:
             if self.niDigital_CreateTimeSet_cfunc is None:
                 self.niDigital_CreateTimeSet_cfunc = self._get_library_function('niDigital_CreateTimeSet')
@@ -329,7 +329,7 @@ class Library(object):
                 self.niDigital_CreateTimeSet_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_CreateTimeSet_cfunc(vi, name)
 
-    def delete_all_time_sets(self, vi):  # noqa: N802
+    def niDigital_DeleteAllTimeSets(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDigital_DeleteAllTimeSets_cfunc is None:
                 self.niDigital_DeleteAllTimeSets_cfunc = self._get_library_function('niDigital_DeleteAllTimeSets')
@@ -337,7 +337,7 @@ class Library(object):
                 self.niDigital_DeleteAllTimeSets_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_DeleteAllTimeSets_cfunc(vi)
 
-    def disable_sites(self, vi, site_list):  # noqa: N802
+    def niDigital_DisableSites(self, vi, site_list):  # noqa: N802
         with self._func_lock:
             if self.niDigital_DisableSites_cfunc is None:
                 self.niDigital_DisableSites_cfunc = self._get_library_function('niDigital_DisableSites')
@@ -345,7 +345,7 @@ class Library(object):
                 self.niDigital_DisableSites_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_DisableSites_cfunc(vi, site_list)
 
-    def enable_sites(self, vi, site_list):  # noqa: N802
+    def niDigital_EnableSites(self, vi, site_list):  # noqa: N802
         with self._func_lock:
             if self.niDigital_EnableSites_cfunc is None:
                 self.niDigital_EnableSites_cfunc = self._get_library_function('niDigital_EnableSites')
@@ -353,7 +353,7 @@ class Library(object):
                 self.niDigital_EnableSites_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_EnableSites_cfunc(vi, site_list)
 
-    def fetch_capture_waveform_u32(self, vi, site_list, waveform_name, samples_to_read, timeout, data_buffer_size, data, actual_num_waveforms, actual_samples_per_waveform):  # noqa: N802
+    def niDigital_FetchCaptureWaveformU32(self, vi, site_list, waveform_name, samples_to_read, timeout, data_buffer_size, data, actual_num_waveforms, actual_samples_per_waveform):  # noqa: N802
         with self._func_lock:
             if self.niDigital_FetchCaptureWaveformU32_cfunc is None:
                 self.niDigital_FetchCaptureWaveformU32_cfunc = self._get_library_function('niDigital_FetchCaptureWaveformU32')
@@ -361,7 +361,7 @@ class Library(object):
                 self.niDigital_FetchCaptureWaveformU32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_FetchCaptureWaveformU32_cfunc(vi, site_list, waveform_name, samples_to_read, timeout, data_buffer_size, data, actual_num_waveforms, actual_samples_per_waveform)
 
-    def _fetch_history_ram_cycle_information(self, vi, site, sample_index, pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles):  # noqa: N802
+    def niDigital_FetchHistoryRAMCycleInformation(self, vi, site, sample_index, pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles):  # noqa: N802
         with self._func_lock:
             if self.niDigital_FetchHistoryRAMCycleInformation_cfunc is None:
                 self.niDigital_FetchHistoryRAMCycleInformation_cfunc = self._get_library_function('niDigital_FetchHistoryRAMCycleInformation')
@@ -369,7 +369,7 @@ class Library(object):
                 self.niDigital_FetchHistoryRAMCycleInformation_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_FetchHistoryRAMCycleInformation_cfunc(vi, site, sample_index, pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles)
 
-    def _fetch_history_ram_cycle_pin_data(self, vi, site, pin_list, sample_index, dut_cycle_index, pin_data_buffer_size, expected_pin_states, actual_pin_states, per_pin_pass_fail, actual_num_pin_data):  # noqa: N802
+    def niDigital_FetchHistoryRAMCyclePinData(self, vi, site, pin_list, sample_index, dut_cycle_index, pin_data_buffer_size, expected_pin_states, actual_pin_states, per_pin_pass_fail, actual_num_pin_data):  # noqa: N802
         with self._func_lock:
             if self.niDigital_FetchHistoryRAMCyclePinData_cfunc is None:
                 self.niDigital_FetchHistoryRAMCyclePinData_cfunc = self._get_library_function('niDigital_FetchHistoryRAMCyclePinData')
@@ -377,7 +377,7 @@ class Library(object):
                 self.niDigital_FetchHistoryRAMCyclePinData_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_FetchHistoryRAMCyclePinData_cfunc(vi, site, pin_list, sample_index, dut_cycle_index, pin_data_buffer_size, expected_pin_states, actual_pin_states, per_pin_pass_fail, actual_num_pin_data)
 
-    def _fetch_history_ram_scan_cycle_number(self, vi, site, sample_index, scan_cycle_number):  # noqa: N802
+    def niDigital_FetchHistoryRAMScanCycleNumber(self, vi, site, sample_index, scan_cycle_number):  # noqa: N802
         with self._func_lock:
             if self.niDigital_FetchHistoryRAMScanCycleNumber_cfunc is None:
                 self.niDigital_FetchHistoryRAMScanCycleNumber_cfunc = self._get_library_function('niDigital_FetchHistoryRAMScanCycleNumber')
@@ -385,7 +385,7 @@ class Library(object):
                 self.niDigital_FetchHistoryRAMScanCycleNumber_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_FetchHistoryRAMScanCycleNumber_cfunc(vi, site, sample_index, scan_cycle_number)
 
-    def frequency_counter_measure_frequency(self, vi, channel_list, frequencies_buffer_size, frequencies, actual_num_frequencies):  # noqa: N802
+    def niDigital_FrequencyCounter_MeasureFrequency(self, vi, channel_list, frequencies_buffer_size, frequencies, actual_num_frequencies):  # noqa: N802
         with self._func_lock:
             if self.niDigital_FrequencyCounter_MeasureFrequency_cfunc is None:
                 self.niDigital_FrequencyCounter_MeasureFrequency_cfunc = self._get_library_function('niDigital_FrequencyCounter_MeasureFrequency')
@@ -393,7 +393,7 @@ class Library(object):
                 self.niDigital_FrequencyCounter_MeasureFrequency_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_FrequencyCounter_MeasureFrequency_cfunc(vi, channel_list, frequencies_buffer_size, frequencies, actual_num_frequencies)
 
-    def _get_attribute_vi_boolean(self, vi, channel_name, attribute, value):  # noqa: N802
+    def niDigital_GetAttributeViBoolean(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetAttributeViBoolean_cfunc is None:
                 self.niDigital_GetAttributeViBoolean_cfunc = self._get_library_function('niDigital_GetAttributeViBoolean')
@@ -401,7 +401,7 @@ class Library(object):
                 self.niDigital_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetAttributeViBoolean_cfunc(vi, channel_name, attribute, value)
 
-    def _get_attribute_vi_int32(self, vi, channel_name, attribute, value):  # noqa: N802
+    def niDigital_GetAttributeViInt32(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetAttributeViInt32_cfunc is None:
                 self.niDigital_GetAttributeViInt32_cfunc = self._get_library_function('niDigital_GetAttributeViInt32')
@@ -409,7 +409,7 @@ class Library(object):
                 self.niDigital_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetAttributeViInt32_cfunc(vi, channel_name, attribute, value)
 
-    def _get_attribute_vi_int64(self, vi, channel_name, attribute, value):  # noqa: N802
+    def niDigital_GetAttributeViInt64(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetAttributeViInt64_cfunc is None:
                 self.niDigital_GetAttributeViInt64_cfunc = self._get_library_function('niDigital_GetAttributeViInt64')
@@ -417,7 +417,7 @@ class Library(object):
                 self.niDigital_GetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetAttributeViInt64_cfunc(vi, channel_name, attribute, value)
 
-    def _get_attribute_vi_real64(self, vi, channel_name, attribute, value):  # noqa: N802
+    def niDigital_GetAttributeViReal64(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetAttributeViReal64_cfunc is None:
                 self.niDigital_GetAttributeViReal64_cfunc = self._get_library_function('niDigital_GetAttributeViReal64')
@@ -425,7 +425,7 @@ class Library(object):
                 self.niDigital_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetAttributeViReal64_cfunc(vi, channel_name, attribute, value)
 
-    def _get_attribute_vi_string(self, vi, channel_name, attribute, buffer_size, value):  # noqa: N802
+    def niDigital_GetAttributeViString(self, vi, channel_name, attribute, buffer_size, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetAttributeViString_cfunc is None:
                 self.niDigital_GetAttributeViString_cfunc = self._get_library_function('niDigital_GetAttributeViString')
@@ -433,7 +433,7 @@ class Library(object):
                 self.niDigital_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetAttributeViString_cfunc(vi, channel_name, attribute, buffer_size, value)
 
-    def get_channel_names(self, vi, indices, name_buffer_size, names):  # noqa: N802
+    def niDigital_GetChannelNameFromString(self, vi, indices, name_buffer_size, names):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetChannelNameFromString_cfunc is None:
                 self.niDigital_GetChannelNameFromString_cfunc = self._get_library_function('niDigital_GetChannelNameFromString')
@@ -441,7 +441,7 @@ class Library(object):
                 self.niDigital_GetChannelNameFromString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetChannelNameFromString_cfunc(vi, indices, name_buffer_size, names)
 
-    def _get_error(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
+    def niDigital_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetError_cfunc is None:
                 self.niDigital_GetError_cfunc = self._get_library_function('niDigital_GetError')
@@ -449,7 +449,7 @@ class Library(object):
                 self.niDigital_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetError_cfunc(vi, error_code, error_description_buffer_size, error_description)
 
-    def get_fail_count(self, vi, channel_list, buffer_size, failure_count, actual_num_read):  # noqa: N802
+    def niDigital_GetFailCount(self, vi, channel_list, buffer_size, failure_count, actual_num_read):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetFailCount_cfunc is None:
                 self.niDigital_GetFailCount_cfunc = self._get_library_function('niDigital_GetFailCount')
@@ -457,7 +457,7 @@ class Library(object):
                 self.niDigital_GetFailCount_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetFailCount_cfunc(vi, channel_list, buffer_size, failure_count, actual_num_read)
 
-    def get_history_ram_sample_count(self, vi, site, sample_count):  # noqa: N802
+    def niDigital_GetHistoryRAMSampleCount(self, vi, site, sample_count):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetHistoryRAMSampleCount_cfunc is None:
                 self.niDigital_GetHistoryRAMSampleCount_cfunc = self._get_library_function('niDigital_GetHistoryRAMSampleCount')
@@ -465,7 +465,7 @@ class Library(object):
                 self.niDigital_GetHistoryRAMSampleCount_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetHistoryRAMSampleCount_cfunc(vi, site, sample_count)
 
-    def _get_pattern_name(self, vi, pattern_index, name_buffer_size, name):  # noqa: N802
+    def niDigital_GetPatternName(self, vi, pattern_index, name_buffer_size, name):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetPatternName_cfunc is None:
                 self.niDigital_GetPatternName_cfunc = self._get_library_function('niDigital_GetPatternName')
@@ -473,7 +473,7 @@ class Library(object):
                 self.niDigital_GetPatternName_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetPatternName_cfunc(vi, pattern_index, name_buffer_size, name)
 
-    def get_pattern_pin_names(self, vi, start_label, pin_list_buffer_size, pin_list):  # noqa: N802
+    def niDigital_GetPatternPinList(self, vi, start_label, pin_list_buffer_size, pin_list):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetPatternPinList_cfunc is None:
                 self.niDigital_GetPatternPinList_cfunc = self._get_library_function('niDigital_GetPatternPinList')
@@ -481,7 +481,7 @@ class Library(object):
                 self.niDigital_GetPatternPinList_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetPatternPinList_cfunc(vi, start_label, pin_list_buffer_size, pin_list)
 
-    def _get_pin_name(self, vi, pin_index, name_buffer_size, name):  # noqa: N802
+    def niDigital_GetPinName(self, vi, pin_index, name_buffer_size, name):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetPinName_cfunc is None:
                 self.niDigital_GetPinName_cfunc = self._get_library_function('niDigital_GetPinName')
@@ -489,7 +489,7 @@ class Library(object):
                 self.niDigital_GetPinName_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetPinName_cfunc(vi, pin_index, name_buffer_size, name)
 
-    def _get_pin_results_pin_information(self, vi, channel_list, buffer_size, pin_indexes, site_numbers, channel_indexes, actual_num_values):  # noqa: N802
+    def niDigital_GetPinResultsPinInformation(self, vi, channel_list, buffer_size, pin_indexes, site_numbers, channel_indexes, actual_num_values):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetPinResultsPinInformation_cfunc is None:
                 self.niDigital_GetPinResultsPinInformation_cfunc = self._get_library_function('niDigital_GetPinResultsPinInformation')
@@ -497,7 +497,7 @@ class Library(object):
                 self.niDigital_GetPinResultsPinInformation_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetPinResultsPinInformation_cfunc(vi, channel_list, buffer_size, pin_indexes, site_numbers, channel_indexes, actual_num_values)
 
-    def _get_site_pass_fail(self, vi, site_list, pass_fail_buffer_size, pass_fail, actual_num_sites):  # noqa: N802
+    def niDigital_GetSitePassFail(self, vi, site_list, pass_fail_buffer_size, pass_fail, actual_num_sites):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetSitePassFail_cfunc is None:
                 self.niDigital_GetSitePassFail_cfunc = self._get_library_function('niDigital_GetSitePassFail')
@@ -505,7 +505,7 @@ class Library(object):
                 self.niDigital_GetSitePassFail_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetSitePassFail_cfunc(vi, site_list, pass_fail_buffer_size, pass_fail, actual_num_sites)
 
-    def _get_site_results_site_numbers(self, vi, site_list, site_result_type, site_numbers_buffer_size, site_numbers, actual_num_site_numbers):  # noqa: N802
+    def niDigital_GetSiteResultsSiteNumbers(self, vi, site_list, site_result_type, site_numbers_buffer_size, site_numbers, actual_num_site_numbers):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetSiteResultsSiteNumbers_cfunc is None:
                 self.niDigital_GetSiteResultsSiteNumbers_cfunc = self._get_library_function('niDigital_GetSiteResultsSiteNumbers')
@@ -513,7 +513,7 @@ class Library(object):
                 self.niDigital_GetSiteResultsSiteNumbers_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetSiteResultsSiteNumbers_cfunc(vi, site_list, site_result_type, site_numbers_buffer_size, site_numbers, actual_num_site_numbers)
 
-    def get_time_set_drive_format(self, vi, pin, time_set_name, format):  # noqa: N802
+    def niDigital_GetTimeSetDriveFormat(self, vi, pin, time_set_name, format):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetTimeSetDriveFormat_cfunc is None:
                 self.niDigital_GetTimeSetDriveFormat_cfunc = self._get_library_function('niDigital_GetTimeSetDriveFormat')
@@ -521,7 +521,7 @@ class Library(object):
                 self.niDigital_GetTimeSetDriveFormat_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetTimeSetDriveFormat_cfunc(vi, pin, time_set_name, format)
 
-    def get_time_set_edge(self, vi, pin, time_set_name, edge, time):  # noqa: N802
+    def niDigital_GetTimeSetEdge(self, vi, pin, time_set_name, edge, time):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetTimeSetEdge_cfunc is None:
                 self.niDigital_GetTimeSetEdge_cfunc = self._get_library_function('niDigital_GetTimeSetEdge')
@@ -529,7 +529,7 @@ class Library(object):
                 self.niDigital_GetTimeSetEdge_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetTimeSetEdge_cfunc(vi, pin, time_set_name, edge, time)
 
-    def get_time_set_edge_multiplier(self, vi, pin, time_set_name, edge_multiplier):  # noqa: N802
+    def niDigital_GetTimeSetEdgeMultiplier(self, vi, pin, time_set_name, edge_multiplier):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetTimeSetEdgeMultiplier_cfunc is None:
                 self.niDigital_GetTimeSetEdgeMultiplier_cfunc = self._get_library_function('niDigital_GetTimeSetEdgeMultiplier')
@@ -537,7 +537,7 @@ class Library(object):
                 self.niDigital_GetTimeSetEdgeMultiplier_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetTimeSetEdgeMultiplier_cfunc(vi, pin, time_set_name, edge_multiplier)
 
-    def _get_time_set_name(self, vi, time_set_index, name_buffer_size, name):  # noqa: N802
+    def niDigital_GetTimeSetName(self, vi, time_set_index, name_buffer_size, name):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetTimeSetName_cfunc is None:
                 self.niDigital_GetTimeSetName_cfunc = self._get_library_function('niDigital_GetTimeSetName')
@@ -545,7 +545,7 @@ class Library(object):
                 self.niDigital_GetTimeSetName_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetTimeSetName_cfunc(vi, time_set_index, name_buffer_size, name)
 
-    def get_time_set_period(self, vi, time_set_name, period):  # noqa: N802
+    def niDigital_GetTimeSetPeriod(self, vi, time_set_name, period):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetTimeSetPeriod_cfunc is None:
                 self.niDigital_GetTimeSetPeriod_cfunc = self._get_library_function('niDigital_GetTimeSetPeriod')
@@ -553,7 +553,7 @@ class Library(object):
                 self.niDigital_GetTimeSetPeriod_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetTimeSetPeriod_cfunc(vi, time_set_name, period)
 
-    def _init_with_options(self, resource_name, id_query, reset_device, option_string, new_vi):  # noqa: N802
+    def niDigital_InitWithOptions(self, resource_name, id_query, reset_device, option_string, new_vi):  # noqa: N802
         with self._func_lock:
             if self.niDigital_InitWithOptions_cfunc is None:
                 self.niDigital_InitWithOptions_cfunc = self._get_library_function('niDigital_InitWithOptions')
@@ -561,7 +561,7 @@ class Library(object):
                 self.niDigital_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, new_vi)
 
-    def _initiate(self, vi):  # noqa: N802
+    def niDigital_Initiate(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDigital_Initiate_cfunc is None:
                 self.niDigital_Initiate_cfunc = self._get_library_function('niDigital_Initiate')
@@ -569,7 +569,7 @@ class Library(object):
                 self.niDigital_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_Initiate_cfunc(vi)
 
-    def is_done(self, vi, done):  # noqa: N802
+    def niDigital_IsDone(self, vi, done):  # noqa: N802
         with self._func_lock:
             if self.niDigital_IsDone_cfunc is None:
                 self.niDigital_IsDone_cfunc = self._get_library_function('niDigital_IsDone')
@@ -577,7 +577,7 @@ class Library(object):
                 self.niDigital_IsDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_IsDone_cfunc(vi, done)
 
-    def is_site_enabled(self, vi, site, enable):  # noqa: N802
+    def niDigital_IsSiteEnabled(self, vi, site, enable):  # noqa: N802
         with self._func_lock:
             if self.niDigital_IsSiteEnabled_cfunc is None:
                 self.niDigital_IsSiteEnabled_cfunc = self._get_library_function('niDigital_IsSiteEnabled')
@@ -585,7 +585,7 @@ class Library(object):
                 self.niDigital_IsSiteEnabled_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_IsSiteEnabled_cfunc(vi, site, enable)
 
-    def _load_levels(self, vi, file_path):  # noqa: N802
+    def niDigital_LoadLevels(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_LoadLevels_cfunc is None:
                 self.niDigital_LoadLevels_cfunc = self._get_library_function('niDigital_LoadLevels')
@@ -593,7 +593,7 @@ class Library(object):
                 self.niDigital_LoadLevels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_LoadLevels_cfunc(vi, file_path)
 
-    def load_pattern(self, vi, file_path):  # noqa: N802
+    def niDigital_LoadPattern(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_LoadPattern_cfunc is None:
                 self.niDigital_LoadPattern_cfunc = self._get_library_function('niDigital_LoadPattern')
@@ -601,7 +601,7 @@ class Library(object):
                 self.niDigital_LoadPattern_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_LoadPattern_cfunc(vi, file_path)
 
-    def load_pin_map(self, vi, file_path):  # noqa: N802
+    def niDigital_LoadPinMap(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_LoadPinMap_cfunc is None:
                 self.niDigital_LoadPinMap_cfunc = self._get_library_function('niDigital_LoadPinMap')
@@ -609,7 +609,7 @@ class Library(object):
                 self.niDigital_LoadPinMap_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_LoadPinMap_cfunc(vi, file_path)
 
-    def _load_specifications(self, vi, file_path):  # noqa: N802
+    def niDigital_LoadSpecifications(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_LoadSpecifications_cfunc is None:
                 self.niDigital_LoadSpecifications_cfunc = self._get_library_function('niDigital_LoadSpecifications')
@@ -617,7 +617,7 @@ class Library(object):
                 self.niDigital_LoadSpecifications_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_LoadSpecifications_cfunc(vi, file_path)
 
-    def _load_timing(self, vi, file_path):  # noqa: N802
+    def niDigital_LoadTiming(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_LoadTiming_cfunc is None:
                 self.niDigital_LoadTiming_cfunc = self._get_library_function('niDigital_LoadTiming')
@@ -625,7 +625,7 @@ class Library(object):
                 self.niDigital_LoadTiming_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_LoadTiming_cfunc(vi, file_path)
 
-    def lock(self, vi, caller_has_lock):  # noqa: N802
+    def niDigital_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niDigital_LockSession_cfunc is None:
                 self.niDigital_LockSession_cfunc = self._get_library_function('niDigital_LockSession')
@@ -633,7 +633,7 @@ class Library(object):
                 self.niDigital_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_LockSession_cfunc(vi, caller_has_lock)
 
-    def ppmu_measure(self, vi, channel_list, measurement_type, buffer_size, measurements, actual_num_read):  # noqa: N802
+    def niDigital_PPMU_Measure(self, vi, channel_list, measurement_type, buffer_size, measurements, actual_num_read):  # noqa: N802
         with self._func_lock:
             if self.niDigital_PPMU_Measure_cfunc is None:
                 self.niDigital_PPMU_Measure_cfunc = self._get_library_function('niDigital_PPMU_Measure')
@@ -641,7 +641,7 @@ class Library(object):
                 self.niDigital_PPMU_Measure_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_PPMU_Measure_cfunc(vi, channel_list, measurement_type, buffer_size, measurements, actual_num_read)
 
-    def ppmu_source(self, vi, channel_list):  # noqa: N802
+    def niDigital_PPMU_Source(self, vi, channel_list):  # noqa: N802
         with self._func_lock:
             if self.niDigital_PPMU_Source_cfunc is None:
                 self.niDigital_PPMU_Source_cfunc = self._get_library_function('niDigital_PPMU_Source')
@@ -649,7 +649,7 @@ class Library(object):
                 self.niDigital_PPMU_Source_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_PPMU_Source_cfunc(vi, channel_list)
 
-    def read_sequencer_flag(self, vi, flag, value):  # noqa: N802
+    def niDigital_ReadSequencerFlag(self, vi, flag, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ReadSequencerFlag_cfunc is None:
                 self.niDigital_ReadSequencerFlag_cfunc = self._get_library_function('niDigital_ReadSequencerFlag')
@@ -657,7 +657,7 @@ class Library(object):
                 self.niDigital_ReadSequencerFlag_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ReadSequencerFlag_cfunc(vi, flag, value)
 
-    def read_sequencer_register(self, vi, reg, value):  # noqa: N802
+    def niDigital_ReadSequencerRegister(self, vi, reg, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ReadSequencerRegister_cfunc is None:
                 self.niDigital_ReadSequencerRegister_cfunc = self._get_library_function('niDigital_ReadSequencerRegister')
@@ -665,7 +665,7 @@ class Library(object):
                 self.niDigital_ReadSequencerRegister_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ReadSequencerRegister_cfunc(vi, reg, value)
 
-    def read_static(self, vi, channel_list, buffer_size, data, actual_num_read):  # noqa: N802
+    def niDigital_ReadStatic(self, vi, channel_list, buffer_size, data, actual_num_read):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ReadStatic_cfunc is None:
                 self.niDigital_ReadStatic_cfunc = self._get_library_function('niDigital_ReadStatic')
@@ -673,7 +673,7 @@ class Library(object):
                 self.niDigital_ReadStatic_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ReadStatic_cfunc(vi, channel_list, buffer_size, data, actual_num_read)
 
-    def reset_device(self, vi):  # noqa: N802
+    def niDigital_ResetDevice(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ResetDevice_cfunc is None:
                 self.niDigital_ResetDevice_cfunc = self._get_library_function('niDigital_ResetDevice')
@@ -681,7 +681,7 @@ class Library(object):
                 self.niDigital_ResetDevice_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ResetDevice_cfunc(vi)
 
-    def self_calibrate(self, vi):  # noqa: N802
+    def niDigital_SelfCalibrate(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDigital_SelfCalibrate_cfunc is None:
                 self.niDigital_SelfCalibrate_cfunc = self._get_library_function('niDigital_SelfCalibrate')
@@ -689,7 +689,7 @@ class Library(object):
                 self.niDigital_SelfCalibrate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_SelfCalibrate_cfunc(vi)
 
-    def send_software_edge_trigger(self, vi, trigger, trigger_identifier):  # noqa: N802
+    def niDigital_SendSoftwareEdgeTrigger(self, vi, trigger, trigger_identifier):  # noqa: N802
         with self._func_lock:
             if self.niDigital_SendSoftwareEdgeTrigger_cfunc is None:
                 self.niDigital_SendSoftwareEdgeTrigger_cfunc = self._get_library_function('niDigital_SendSoftwareEdgeTrigger')
@@ -697,7 +697,7 @@ class Library(object):
                 self.niDigital_SendSoftwareEdgeTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_SendSoftwareEdgeTrigger_cfunc(vi, trigger, trigger_identifier)
 
-    def _set_attribute_vi_boolean(self, vi, channel_name, attribute, value):  # noqa: N802
+    def niDigital_SetAttributeViBoolean(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_SetAttributeViBoolean_cfunc is None:
                 self.niDigital_SetAttributeViBoolean_cfunc = self._get_library_function('niDigital_SetAttributeViBoolean')
@@ -705,7 +705,7 @@ class Library(object):
                 self.niDigital_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_SetAttributeViBoolean_cfunc(vi, channel_name, attribute, value)
 
-    def _set_attribute_vi_int32(self, vi, channel_name, attribute, value):  # noqa: N802
+    def niDigital_SetAttributeViInt32(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_SetAttributeViInt32_cfunc is None:
                 self.niDigital_SetAttributeViInt32_cfunc = self._get_library_function('niDigital_SetAttributeViInt32')
@@ -713,7 +713,7 @@ class Library(object):
                 self.niDigital_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_SetAttributeViInt32_cfunc(vi, channel_name, attribute, value)
 
-    def _set_attribute_vi_int64(self, vi, channel_name, attribute, value):  # noqa: N802
+    def niDigital_SetAttributeViInt64(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_SetAttributeViInt64_cfunc is None:
                 self.niDigital_SetAttributeViInt64_cfunc = self._get_library_function('niDigital_SetAttributeViInt64')
@@ -721,7 +721,7 @@ class Library(object):
                 self.niDigital_SetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_SetAttributeViInt64_cfunc(vi, channel_name, attribute, value)
 
-    def _set_attribute_vi_real64(self, vi, channel_name, attribute, value):  # noqa: N802
+    def niDigital_SetAttributeViReal64(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_SetAttributeViReal64_cfunc is None:
                 self.niDigital_SetAttributeViReal64_cfunc = self._get_library_function('niDigital_SetAttributeViReal64')
@@ -729,7 +729,7 @@ class Library(object):
                 self.niDigital_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_SetAttributeViReal64_cfunc(vi, channel_name, attribute, value)
 
-    def _set_attribute_vi_string(self, vi, channel_name, attribute, value):  # noqa: N802
+    def niDigital_SetAttributeViString(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_SetAttributeViString_cfunc is None:
                 self.niDigital_SetAttributeViString_cfunc = self._get_library_function('niDigital_SetAttributeViString')
@@ -737,7 +737,7 @@ class Library(object):
                 self.niDigital_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_SetAttributeViString_cfunc(vi, channel_name, attribute, value)
 
-    def tdr(self, vi, channel_list, apply_offsets, offsets_buffer_size, offsets, actual_num_offsets):  # noqa: N802
+    def niDigital_TDR(self, vi, channel_list, apply_offsets, offsets_buffer_size, offsets, actual_num_offsets):  # noqa: N802
         with self._func_lock:
             if self.niDigital_TDR_cfunc is None:
                 self.niDigital_TDR_cfunc = self._get_library_function('niDigital_TDR')
@@ -745,7 +745,7 @@ class Library(object):
                 self.niDigital_TDR_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_TDR_cfunc(vi, channel_list, apply_offsets, offsets_buffer_size, offsets, actual_num_offsets)
 
-    def unload_all_patterns(self, vi, unload_keep_alive_pattern):  # noqa: N802
+    def niDigital_UnloadAllPatterns(self, vi, unload_keep_alive_pattern):  # noqa: N802
         with self._func_lock:
             if self.niDigital_UnloadAllPatterns_cfunc is None:
                 self.niDigital_UnloadAllPatterns_cfunc = self._get_library_function('niDigital_UnloadAllPatterns')
@@ -753,7 +753,7 @@ class Library(object):
                 self.niDigital_UnloadAllPatterns_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_UnloadAllPatterns_cfunc(vi, unload_keep_alive_pattern)
 
-    def _unload_specifications(self, vi, file_path):  # noqa: N802
+    def niDigital_UnloadSpecifications(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_UnloadSpecifications_cfunc is None:
                 self.niDigital_UnloadSpecifications_cfunc = self._get_library_function('niDigital_UnloadSpecifications')
@@ -761,7 +761,7 @@ class Library(object):
                 self.niDigital_UnloadSpecifications_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_UnloadSpecifications_cfunc(vi, file_path)
 
-    def unlock(self, vi, caller_has_lock):  # noqa: N802
+    def niDigital_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niDigital_UnlockSession_cfunc is None:
                 self.niDigital_UnlockSession_cfunc = self._get_library_function('niDigital_UnlockSession')
@@ -769,7 +769,7 @@ class Library(object):
                 self.niDigital_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_UnlockSession_cfunc(vi, caller_has_lock)
 
-    def wait_until_done(self, vi, timeout):  # noqa: N802
+    def niDigital_WaitUntilDone(self, vi, timeout):  # noqa: N802
         with self._func_lock:
             if self.niDigital_WaitUntilDone_cfunc is None:
                 self.niDigital_WaitUntilDone_cfunc = self._get_library_function('niDigital_WaitUntilDone')
@@ -777,7 +777,7 @@ class Library(object):
                 self.niDigital_WaitUntilDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_WaitUntilDone_cfunc(vi, timeout)
 
-    def write_sequencer_flag(self, vi, flag, value):  # noqa: N802
+    def niDigital_WriteSequencerFlag(self, vi, flag, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_WriteSequencerFlag_cfunc is None:
                 self.niDigital_WriteSequencerFlag_cfunc = self._get_library_function('niDigital_WriteSequencerFlag')
@@ -785,7 +785,7 @@ class Library(object):
                 self.niDigital_WriteSequencerFlag_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_WriteSequencerFlag_cfunc(vi, flag, value)
 
-    def write_sequencer_register(self, vi, reg, value):  # noqa: N802
+    def niDigital_WriteSequencerRegister(self, vi, reg, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_WriteSequencerRegister_cfunc is None:
                 self.niDigital_WriteSequencerRegister_cfunc = self._get_library_function('niDigital_WriteSequencerRegister')
@@ -793,7 +793,7 @@ class Library(object):
                 self.niDigital_WriteSequencerRegister_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_WriteSequencerRegister_cfunc(vi, reg, value)
 
-    def write_source_waveform_broadcast(self, vi, waveform_name, waveform_size, waveform_data):  # noqa: N802
+    def niDigital_WriteSourceWaveformBroadcastU32(self, vi, waveform_name, waveform_size, waveform_data):  # noqa: N802
         with self._func_lock:
             if self.niDigital_WriteSourceWaveformBroadcastU32_cfunc is None:
                 self.niDigital_WriteSourceWaveformBroadcastU32_cfunc = self._get_library_function('niDigital_WriteSourceWaveformBroadcastU32')
@@ -801,7 +801,7 @@ class Library(object):
                 self.niDigital_WriteSourceWaveformBroadcastU32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_WriteSourceWaveformBroadcastU32_cfunc(vi, waveform_name, waveform_size, waveform_data)
 
-    def write_source_waveform_data_from_file_tdms(self, vi, waveform_name, waveform_file_path):  # noqa: N802
+    def niDigital_WriteSourceWaveformDataFromFileTDMS(self, vi, waveform_name, waveform_file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc is None:
                 self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc = self._get_library_function('niDigital_WriteSourceWaveformDataFromFileTDMS')
@@ -809,7 +809,7 @@ class Library(object):
                 self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc(vi, waveform_name, waveform_file_path)
 
-    def _write_source_waveform_site_unique_u32(self, vi, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data):  # noqa: N802
+    def niDigital_WriteSourceWaveformSiteUniqueU32(self, vi, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data):  # noqa: N802
         with self._func_lock:
             if self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc is None:
                 self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc = self._get_library_function('niDigital_WriteSourceWaveformSiteUniqueU32')
@@ -817,7 +817,7 @@ class Library(object):
                 self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc(vi, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data)
 
-    def write_static(self, vi, channel_list, state):  # noqa: N802
+    def niDigital_WriteStatic(self, vi, channel_list, state):  # noqa: N802
         with self._func_lock:
             if self.niDigital_WriteStatic_cfunc is None:
                 self.niDigital_WriteStatic_cfunc = self._get_library_function('niDigital_WriteStatic')
@@ -825,7 +825,7 @@ class Library(object):
                 self.niDigital_WriteStatic_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_WriteStatic_cfunc(vi, channel_list, state)
 
-    def _close(self, vi):  # noqa: N802
+    def niDigital_close(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDigital_close_cfunc is None:
                 self.niDigital_close_cfunc = self._get_library_function('niDigital_close')
@@ -833,7 +833,7 @@ class Library(object):
                 self.niDigital_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_close_cfunc(vi)
 
-    def _error_message(self, vi, error_code, error_message):  # noqa: N802
+    def niDigital_error_message(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:
             if self.niDigital_error_message_cfunc is None:
                 self.niDigital_error_message_cfunc = self._get_library_function('niDigital_error_message')
@@ -841,7 +841,7 @@ class Library(object):
                 self.niDigital_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_error_message_cfunc(vi, error_code, error_message)
 
-    def reset(self, vi):  # noqa: N802
+    def niDigital_reset(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDigital_reset_cfunc is None:
                 self.niDigital_reset_cfunc = self._get_library_function('niDigital_reset')
@@ -849,7 +849,7 @@ class Library(object):
                 self.niDigital_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_reset_cfunc(vi)
 
-    def _self_test(self, vi, test_result, test_message):  # noqa: N802
+    def niDigital_self_test(self, vi, test_result, test_message):  # noqa: N802
         with self._func_lock:
             if self.niDigital_self_test_cfunc is None:
                 self.niDigital_self_test_cfunc = self._get_library_function('niDigital_self_test')

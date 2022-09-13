@@ -92,7 +92,7 @@ class Library(object):
             raise errors.DriverTooOldError() from e
         return function
 
-    def abort(self, vi):  # noqa: N802
+    def niScope_Abort(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_Abort_cfunc is None:
                 self.niScope_Abort_cfunc = self._get_library_function('niScope_Abort')
@@ -100,7 +100,7 @@ class Library(object):
                 self.niScope_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Abort_cfunc(vi)
 
-    def acquisition_status(self, vi, acquisition_status):  # noqa: N802
+    def niScope_AcquisitionStatus(self, vi, acquisition_status):  # noqa: N802
         with self._func_lock:
             if self.niScope_AcquisitionStatus_cfunc is None:
                 self.niScope_AcquisitionStatus_cfunc = self._get_library_function('niScope_AcquisitionStatus')
@@ -108,7 +108,7 @@ class Library(object):
                 self.niScope_AcquisitionStatus_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_AcquisitionStatus_cfunc(vi, acquisition_status)
 
-    def _actual_meas_wfm_size(self, vi, array_meas_function, meas_waveform_size):  # noqa: N802
+    def niScope_ActualMeasWfmSize(self, vi, array_meas_function, meas_waveform_size):  # noqa: N802
         with self._func_lock:
             if self.niScope_ActualMeasWfmSize_cfunc is None:
                 self.niScope_ActualMeasWfmSize_cfunc = self._get_library_function('niScope_ActualMeasWfmSize')
@@ -116,7 +116,7 @@ class Library(object):
                 self.niScope_ActualMeasWfmSize_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ActualMeasWfmSize_cfunc(vi, array_meas_function, meas_waveform_size)
 
-    def _actual_num_wfms(self, vi, channel_list, num_wfms):  # noqa: N802
+    def niScope_ActualNumWfms(self, vi, channel_list, num_wfms):  # noqa: N802
         with self._func_lock:
             if self.niScope_ActualNumWfms_cfunc is None:
                 self.niScope_ActualNumWfms_cfunc = self._get_library_function('niScope_ActualNumWfms')
@@ -124,7 +124,7 @@ class Library(object):
                 self.niScope_ActualNumWfms_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ActualNumWfms_cfunc(vi, channel_list, num_wfms)
 
-    def add_waveform_processing(self, vi, channel_list, meas_function):  # noqa: N802
+    def niScope_AddWaveformProcessing(self, vi, channel_list, meas_function):  # noqa: N802
         with self._func_lock:
             if self.niScope_AddWaveformProcessing_cfunc is None:
                 self.niScope_AddWaveformProcessing_cfunc = self._get_library_function('niScope_AddWaveformProcessing')
@@ -132,7 +132,7 @@ class Library(object):
                 self.niScope_AddWaveformProcessing_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_AddWaveformProcessing_cfunc(vi, channel_list, meas_function)
 
-    def auto_setup(self, vi):  # noqa: N802
+    def niScope_AutoSetup(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_AutoSetup_cfunc is None:
                 self.niScope_AutoSetup_cfunc = self._get_library_function('niScope_AutoSetup')
@@ -140,7 +140,7 @@ class Library(object):
                 self.niScope_AutoSetup_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_AutoSetup_cfunc(vi)
 
-    def _cal_fetch_date(self, vi, which_one, year, month, day):  # noqa: N802
+    def niScope_CalFetchDate(self, vi, which_one, year, month, day):  # noqa: N802
         with self._func_lock:
             if self.niScope_CalFetchDate_cfunc is None:
                 self.niScope_CalFetchDate_cfunc = self._get_library_function('niScope_CalFetchDate')
@@ -148,7 +148,7 @@ class Library(object):
                 self.niScope_CalFetchDate_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_CalFetchDate_cfunc(vi, which_one, year, month, day)
 
-    def _cal_fetch_temperature(self, vi, which_one, temperature):  # noqa: N802
+    def niScope_CalFetchTemperature(self, vi, which_one, temperature):  # noqa: N802
         with self._func_lock:
             if self.niScope_CalFetchTemperature_cfunc is None:
                 self.niScope_CalFetchTemperature_cfunc = self._get_library_function('niScope_CalFetchTemperature')
@@ -156,7 +156,7 @@ class Library(object):
                 self.niScope_CalFetchTemperature_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_CalFetchTemperature_cfunc(vi, which_one, temperature)
 
-    def self_cal(self, vi, channel_list, option):  # noqa: N802
+    def niScope_CalSelfCalibrate(self, vi, channel_list, option):  # noqa: N802
         with self._func_lock:
             if self.niScope_CalSelfCalibrate_cfunc is None:
                 self.niScope_CalSelfCalibrate_cfunc = self._get_library_function('niScope_CalSelfCalibrate')
@@ -164,7 +164,7 @@ class Library(object):
                 self.niScope_CalSelfCalibrate_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_CalSelfCalibrate_cfunc(vi, channel_list, option)
 
-    def clear_waveform_measurement_stats(self, vi, channel_list, clearable_measurement_function):  # noqa: N802
+    def niScope_ClearWaveformMeasurementStats(self, vi, channel_list, clearable_measurement_function):  # noqa: N802
         with self._func_lock:
             if self.niScope_ClearWaveformMeasurementStats_cfunc is None:
                 self.niScope_ClearWaveformMeasurementStats_cfunc = self._get_library_function('niScope_ClearWaveformMeasurementStats')
@@ -172,7 +172,7 @@ class Library(object):
                 self.niScope_ClearWaveformMeasurementStats_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ClearWaveformMeasurementStats_cfunc(vi, channel_list, clearable_measurement_function)
 
-    def clear_waveform_processing(self, vi, channel_list):  # noqa: N802
+    def niScope_ClearWaveformProcessing(self, vi, channel_list):  # noqa: N802
         with self._func_lock:
             if self.niScope_ClearWaveformProcessing_cfunc is None:
                 self.niScope_ClearWaveformProcessing_cfunc = self._get_library_function('niScope_ClearWaveformProcessing')
@@ -180,7 +180,7 @@ class Library(object):
                 self.niScope_ClearWaveformProcessing_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ClearWaveformProcessing_cfunc(vi, channel_list)
 
-    def commit(self, vi):  # noqa: N802
+    def niScope_Commit(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_Commit_cfunc is None:
                 self.niScope_Commit_cfunc = self._get_library_function('niScope_Commit')
@@ -188,7 +188,7 @@ class Library(object):
                 self.niScope_Commit_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Commit_cfunc(vi)
 
-    def configure_chan_characteristics(self, vi, channel_list, input_impedance, max_input_frequency):  # noqa: N802
+    def niScope_ConfigureChanCharacteristics(self, vi, channel_list, input_impedance, max_input_frequency):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureChanCharacteristics_cfunc is None:
                 self.niScope_ConfigureChanCharacteristics_cfunc = self._get_library_function('niScope_ConfigureChanCharacteristics')
@@ -196,7 +196,7 @@ class Library(object):
                 self.niScope_ConfigureChanCharacteristics_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureChanCharacteristics_cfunc(vi, channel_list, input_impedance, max_input_frequency)
 
-    def configure_equalization_filter_coefficients(self, vi, channel_list, number_of_coefficients, coefficients):  # noqa: N802
+    def niScope_ConfigureEqualizationFilterCoefficients(self, vi, channel_list, number_of_coefficients, coefficients):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureEqualizationFilterCoefficients_cfunc is None:
                 self.niScope_ConfigureEqualizationFilterCoefficients_cfunc = self._get_library_function('niScope_ConfigureEqualizationFilterCoefficients')
@@ -204,7 +204,7 @@ class Library(object):
                 self.niScope_ConfigureEqualizationFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureEqualizationFilterCoefficients_cfunc(vi, channel_list, number_of_coefficients, coefficients)
 
-    def configure_horizontal_timing(self, vi, min_sample_rate, min_num_pts, ref_position, num_records, enforce_realtime):  # noqa: N802
+    def niScope_ConfigureHorizontalTiming(self, vi, min_sample_rate, min_num_pts, ref_position, num_records, enforce_realtime):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureHorizontalTiming_cfunc is None:
                 self.niScope_ConfigureHorizontalTiming_cfunc = self._get_library_function('niScope_ConfigureHorizontalTiming')
@@ -212,7 +212,7 @@ class Library(object):
                 self.niScope_ConfigureHorizontalTiming_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureHorizontalTiming_cfunc(vi, min_sample_rate, min_num_pts, ref_position, num_records, enforce_realtime)
 
-    def _configure_ref_levels(self, vi, low, mid, high):  # noqa: N802
+    def niScope_ConfigureRefLevels(self, vi, low, mid, high):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureRefLevels_cfunc is None:
                 self.niScope_ConfigureRefLevels_cfunc = self._get_library_function('niScope_ConfigureRefLevels')
@@ -220,7 +220,7 @@ class Library(object):
                 self.niScope_ConfigureRefLevels_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureRefLevels_cfunc(vi, low, mid, high)
 
-    def configure_trigger_digital(self, vi, trigger_source, slope, holdoff, delay):  # noqa: N802
+    def niScope_ConfigureTriggerDigital(self, vi, trigger_source, slope, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerDigital_cfunc is None:
                 self.niScope_ConfigureTriggerDigital_cfunc = self._get_library_function('niScope_ConfigureTriggerDigital')
@@ -228,7 +228,7 @@ class Library(object):
                 self.niScope_ConfigureTriggerDigital_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerDigital_cfunc(vi, trigger_source, slope, holdoff, delay)
 
-    def configure_trigger_edge(self, vi, trigger_source, level, slope, trigger_coupling, holdoff, delay):  # noqa: N802
+    def niScope_ConfigureTriggerEdge(self, vi, trigger_source, level, slope, trigger_coupling, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerEdge_cfunc is None:
                 self.niScope_ConfigureTriggerEdge_cfunc = self._get_library_function('niScope_ConfigureTriggerEdge')
@@ -236,7 +236,7 @@ class Library(object):
                 self.niScope_ConfigureTriggerEdge_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerEdge_cfunc(vi, trigger_source, level, slope, trigger_coupling, holdoff, delay)
 
-    def configure_trigger_hysteresis(self, vi, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay):  # noqa: N802
+    def niScope_ConfigureTriggerHysteresis(self, vi, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerHysteresis_cfunc is None:
                 self.niScope_ConfigureTriggerHysteresis_cfunc = self._get_library_function('niScope_ConfigureTriggerHysteresis')
@@ -244,7 +244,7 @@ class Library(object):
                 self.niScope_ConfigureTriggerHysteresis_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerHysteresis_cfunc(vi, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay)
 
-    def configure_trigger_immediate(self, vi):  # noqa: N802
+    def niScope_ConfigureTriggerImmediate(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerImmediate_cfunc is None:
                 self.niScope_ConfigureTriggerImmediate_cfunc = self._get_library_function('niScope_ConfigureTriggerImmediate')
@@ -252,7 +252,7 @@ class Library(object):
                 self.niScope_ConfigureTriggerImmediate_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerImmediate_cfunc(vi)
 
-    def configure_trigger_software(self, vi, holdoff, delay):  # noqa: N802
+    def niScope_ConfigureTriggerSoftware(self, vi, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerSoftware_cfunc is None:
                 self.niScope_ConfigureTriggerSoftware_cfunc = self._get_library_function('niScope_ConfigureTriggerSoftware')
@@ -260,7 +260,7 @@ class Library(object):
                 self.niScope_ConfigureTriggerSoftware_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerSoftware_cfunc(vi, holdoff, delay)
 
-    def configure_trigger_video(self, vi, trigger_source, enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay):  # noqa: N802
+    def niScope_ConfigureTriggerVideo(self, vi, trigger_source, enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerVideo_cfunc is None:
                 self.niScope_ConfigureTriggerVideo_cfunc = self._get_library_function('niScope_ConfigureTriggerVideo')
@@ -268,7 +268,7 @@ class Library(object):
                 self.niScope_ConfigureTriggerVideo_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerVideo_cfunc(vi, trigger_source, enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay)
 
-    def configure_trigger_window(self, vi, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff, delay):  # noqa: N802
+    def niScope_ConfigureTriggerWindow(self, vi, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerWindow_cfunc is None:
                 self.niScope_ConfigureTriggerWindow_cfunc = self._get_library_function('niScope_ConfigureTriggerWindow')
@@ -276,7 +276,7 @@ class Library(object):
                 self.niScope_ConfigureTriggerWindow_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerWindow_cfunc(vi, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff, delay)
 
-    def configure_vertical(self, vi, channel_list, range, offset, coupling, probe_attenuation, enabled):  # noqa: N802
+    def niScope_ConfigureVertical(self, vi, channel_list, range, offset, coupling, probe_attenuation, enabled):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureVertical_cfunc is None:
                 self.niScope_ConfigureVertical_cfunc = self._get_library_function('niScope_ConfigureVertical')
@@ -284,7 +284,7 @@ class Library(object):
                 self.niScope_ConfigureVertical_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureVertical_cfunc(vi, channel_list, range, offset, coupling, probe_attenuation, enabled)
 
-    def disable(self, vi):  # noqa: N802
+    def niScope_Disable(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_Disable_cfunc is None:
                 self.niScope_Disable_cfunc = self._get_library_function('niScope_Disable')
@@ -292,7 +292,7 @@ class Library(object):
                 self.niScope_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Disable_cfunc(vi)
 
-    def export_attribute_configuration_buffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+    def niScope_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         with self._func_lock:
             if self.niScope_ExportAttributeConfigurationBuffer_cfunc is None:
                 self.niScope_ExportAttributeConfigurationBuffer_cfunc = self._get_library_function('niScope_ExportAttributeConfigurationBuffer')
@@ -300,7 +300,7 @@ class Library(object):
                 self.niScope_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ExportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
 
-    def export_attribute_configuration_file(self, vi, file_path):  # noqa: N802
+    def niScope_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niScope_ExportAttributeConfigurationFile_cfunc is None:
                 self.niScope_ExportAttributeConfigurationFile_cfunc = self._get_library_function('niScope_ExportAttributeConfigurationFile')
@@ -308,7 +308,7 @@ class Library(object):
                 self.niScope_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ExportAttributeConfigurationFile_cfunc(vi, file_path)
 
-    def _fetch(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
+    def niScope_Fetch(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_Fetch_cfunc is None:
                 self.niScope_Fetch_cfunc = self._get_library_function('niScope_Fetch')
@@ -316,7 +316,7 @@ class Library(object):
                 self.niScope_Fetch_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Fetch_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
 
-    def _fetch_array_measurement(self, vi, channel_list, timeout, array_meas_function, measurement_waveform_size, meas_wfm, wfm_info):  # noqa: N802
+    def niScope_FetchArrayMeasurement(self, vi, channel_list, timeout, array_meas_function, measurement_waveform_size, meas_wfm, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchArrayMeasurement_cfunc is None:
                 self.niScope_FetchArrayMeasurement_cfunc = self._get_library_function('niScope_FetchArrayMeasurement')
@@ -324,7 +324,7 @@ class Library(object):
                 self.niScope_FetchArrayMeasurement_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchArrayMeasurement_cfunc(vi, channel_list, timeout, array_meas_function, measurement_waveform_size, meas_wfm, wfm_info)
 
-    def _fetch_binary16(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
+    def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchBinary16_cfunc is None:
                 self.niScope_FetchBinary16_cfunc = self._get_library_function('niScope_FetchBinary16')
@@ -332,7 +332,7 @@ class Library(object):
                 self.niScope_FetchBinary16_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchBinary16_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
 
-    def _fetch_binary32(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
+    def niScope_FetchBinary32(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchBinary32_cfunc is None:
                 self.niScope_FetchBinary32_cfunc = self._get_library_function('niScope_FetchBinary32')
@@ -340,7 +340,7 @@ class Library(object):
                 self.niScope_FetchBinary32_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchBinary32_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
 
-    def _fetch_binary8(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
+    def niScope_FetchBinary8(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchBinary8_cfunc is None:
                 self.niScope_FetchBinary8_cfunc = self._get_library_function('niScope_FetchBinary8')
@@ -348,7 +348,7 @@ class Library(object):
                 self.niScope_FetchBinary8_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchBinary8_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
 
-    def _fetch_measurement_stats(self, vi, channel_list, timeout, scalar_meas_function, result, mean, stdev, min, max, num_in_stats):  # noqa: N802
+    def niScope_FetchMeasurementStats(self, vi, channel_list, timeout, scalar_meas_function, result, mean, stdev, min, max, num_in_stats):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchMeasurementStats_cfunc is None:
                 self.niScope_FetchMeasurementStats_cfunc = self._get_library_function('niScope_FetchMeasurementStats')
@@ -356,7 +356,7 @@ class Library(object):
                 self.niScope_FetchMeasurementStats_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchMeasurementStats_cfunc(vi, channel_list, timeout, scalar_meas_function, result, mean, stdev, min, max, num_in_stats)
 
-    def _get_attribute_vi_boolean(self, vi, channel_list, attribute_id, value):  # noqa: N802
+    def niScope_GetAttributeViBoolean(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViBoolean_cfunc is None:
                 self.niScope_GetAttributeViBoolean_cfunc = self._get_library_function('niScope_GetAttributeViBoolean')
@@ -364,7 +364,7 @@ class Library(object):
                 self.niScope_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViBoolean_cfunc(vi, channel_list, attribute_id, value)
 
-    def _get_attribute_vi_int32(self, vi, channel_list, attribute_id, value):  # noqa: N802
+    def niScope_GetAttributeViInt32(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViInt32_cfunc is None:
                 self.niScope_GetAttributeViInt32_cfunc = self._get_library_function('niScope_GetAttributeViInt32')
@@ -372,7 +372,7 @@ class Library(object):
                 self.niScope_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViInt32_cfunc(vi, channel_list, attribute_id, value)
 
-    def _get_attribute_vi_int64(self, vi, channel_list, attribute_id, value):  # noqa: N802
+    def niScope_GetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViInt64_cfunc is None:
                 self.niScope_GetAttributeViInt64_cfunc = self._get_library_function('niScope_GetAttributeViInt64')
@@ -380,7 +380,7 @@ class Library(object):
                 self.niScope_GetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViInt64_cfunc(vi, channel_list, attribute_id, value)
 
-    def _get_attribute_vi_real64(self, vi, channel_list, attribute_id, value):  # noqa: N802
+    def niScope_GetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViReal64_cfunc is None:
                 self.niScope_GetAttributeViReal64_cfunc = self._get_library_function('niScope_GetAttributeViReal64')
@@ -388,7 +388,7 @@ class Library(object):
                 self.niScope_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViReal64_cfunc(vi, channel_list, attribute_id, value)
 
-    def _get_attribute_vi_string(self, vi, channel_list, attribute_id, buf_size, value):  # noqa: N802
+    def niScope_GetAttributeViString(self, vi, channel_list, attribute_id, buf_size, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViString_cfunc is None:
                 self.niScope_GetAttributeViString_cfunc = self._get_library_function('niScope_GetAttributeViString')
@@ -396,7 +396,7 @@ class Library(object):
                 self.niScope_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViString_cfunc(vi, channel_list, attribute_id, buf_size, value)
 
-    def _get_equalization_filter_coefficients(self, vi, channel, number_of_coefficients, coefficients):  # noqa: N802
+    def niScope_GetEqualizationFilterCoefficients(self, vi, channel, number_of_coefficients, coefficients):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetEqualizationFilterCoefficients_cfunc is None:
                 self.niScope_GetEqualizationFilterCoefficients_cfunc = self._get_library_function('niScope_GetEqualizationFilterCoefficients')
@@ -404,7 +404,7 @@ class Library(object):
                 self.niScope_GetEqualizationFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetEqualizationFilterCoefficients_cfunc(vi, channel, number_of_coefficients, coefficients)
 
-    def _get_error(self, vi, error_code, buffer_size, description):  # noqa: N802
+    def niScope_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetError_cfunc is None:
                 self.niScope_GetError_cfunc = self._get_library_function('niScope_GetError')
@@ -412,7 +412,7 @@ class Library(object):
                 self.niScope_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetError_cfunc(vi, error_code, buffer_size, description)
 
-    def import_attribute_configuration_buffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+    def niScope_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         with self._func_lock:
             if self.niScope_ImportAttributeConfigurationBuffer_cfunc is None:
                 self.niScope_ImportAttributeConfigurationBuffer_cfunc = self._get_library_function('niScope_ImportAttributeConfigurationBuffer')
@@ -420,7 +420,7 @@ class Library(object):
                 self.niScope_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ImportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
 
-    def import_attribute_configuration_file(self, vi, file_path):  # noqa: N802
+    def niScope_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niScope_ImportAttributeConfigurationFile_cfunc is None:
                 self.niScope_ImportAttributeConfigurationFile_cfunc = self._get_library_function('niScope_ImportAttributeConfigurationFile')
@@ -428,7 +428,7 @@ class Library(object):
                 self.niScope_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ImportAttributeConfigurationFile_cfunc(vi, file_path)
 
-    def _init_with_options(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
+    def niScope_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_InitWithOptions_cfunc is None:
                 self.niScope_InitWithOptions_cfunc = self._get_library_function('niScope_InitWithOptions')
@@ -436,7 +436,7 @@ class Library(object):
                 self.niScope_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
 
-    def _initiate_acquisition(self, vi):  # noqa: N802
+    def niScope_InitiateAcquisition(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_InitiateAcquisition_cfunc is None:
                 self.niScope_InitiateAcquisition_cfunc = self._get_library_function('niScope_InitiateAcquisition')
@@ -444,7 +444,7 @@ class Library(object):
                 self.niScope_InitiateAcquisition_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_InitiateAcquisition_cfunc(vi)
 
-    def lock(self, vi, caller_has_lock):  # noqa: N802
+    def niScope_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niScope_LockSession_cfunc is None:
                 self.niScope_LockSession_cfunc = self._get_library_function('niScope_LockSession')
@@ -452,7 +452,7 @@ class Library(object):
                 self.niScope_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_LockSession_cfunc(vi, caller_has_lock)
 
-    def probe_compensation_signal_start(self, vi):  # noqa: N802
+    def niScope_ProbeCompensationSignalStart(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_ProbeCompensationSignalStart_cfunc is None:
                 self.niScope_ProbeCompensationSignalStart_cfunc = self._get_library_function('niScope_ProbeCompensationSignalStart')
@@ -460,7 +460,7 @@ class Library(object):
                 self.niScope_ProbeCompensationSignalStart_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ProbeCompensationSignalStart_cfunc(vi)
 
-    def probe_compensation_signal_stop(self, vi):  # noqa: N802
+    def niScope_ProbeCompensationSignalStop(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_ProbeCompensationSignalStop_cfunc is None:
                 self.niScope_ProbeCompensationSignalStop_cfunc = self._get_library_function('niScope_ProbeCompensationSignalStop')
@@ -468,7 +468,7 @@ class Library(object):
                 self.niScope_ProbeCompensationSignalStop_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ProbeCompensationSignalStop_cfunc(vi)
 
-    def _read(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
+    def niScope_Read(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_Read_cfunc is None:
                 self.niScope_Read_cfunc = self._get_library_function('niScope_Read')
@@ -476,7 +476,7 @@ class Library(object):
                 self.niScope_Read_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Read_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
 
-    def reset_device(self, vi):  # noqa: N802
+    def niScope_ResetDevice(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_ResetDevice_cfunc is None:
                 self.niScope_ResetDevice_cfunc = self._get_library_function('niScope_ResetDevice')
@@ -484,7 +484,7 @@ class Library(object):
                 self.niScope_ResetDevice_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ResetDevice_cfunc(vi)
 
-    def reset_with_defaults(self, vi):  # noqa: N802
+    def niScope_ResetWithDefaults(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_ResetWithDefaults_cfunc is None:
                 self.niScope_ResetWithDefaults_cfunc = self._get_library_function('niScope_ResetWithDefaults')
@@ -492,7 +492,7 @@ class Library(object):
                 self.niScope_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ResetWithDefaults_cfunc(vi)
 
-    def send_software_trigger_edge(self, vi, which_trigger):  # noqa: N802
+    def niScope_SendSoftwareTriggerEdge(self, vi, which_trigger):  # noqa: N802
         with self._func_lock:
             if self.niScope_SendSoftwareTriggerEdge_cfunc is None:
                 self.niScope_SendSoftwareTriggerEdge_cfunc = self._get_library_function('niScope_SendSoftwareTriggerEdge')
@@ -500,7 +500,7 @@ class Library(object):
                 self.niScope_SendSoftwareTriggerEdge_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SendSoftwareTriggerEdge_cfunc(vi, which_trigger)
 
-    def _set_attribute_vi_boolean(self, vi, channel_list, attribute_id, value):  # noqa: N802
+    def niScope_SetAttributeViBoolean(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_SetAttributeViBoolean_cfunc is None:
                 self.niScope_SetAttributeViBoolean_cfunc = self._get_library_function('niScope_SetAttributeViBoolean')
@@ -508,7 +508,7 @@ class Library(object):
                 self.niScope_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViBoolean_cfunc(vi, channel_list, attribute_id, value)
 
-    def _set_attribute_vi_int32(self, vi, channel_list, attribute_id, value):  # noqa: N802
+    def niScope_SetAttributeViInt32(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_SetAttributeViInt32_cfunc is None:
                 self.niScope_SetAttributeViInt32_cfunc = self._get_library_function('niScope_SetAttributeViInt32')
@@ -516,7 +516,7 @@ class Library(object):
                 self.niScope_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViInt32_cfunc(vi, channel_list, attribute_id, value)
 
-    def _set_attribute_vi_int64(self, vi, channel_list, attribute_id, value):  # noqa: N802
+    def niScope_SetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_SetAttributeViInt64_cfunc is None:
                 self.niScope_SetAttributeViInt64_cfunc = self._get_library_function('niScope_SetAttributeViInt64')
@@ -524,7 +524,7 @@ class Library(object):
                 self.niScope_SetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViInt64_cfunc(vi, channel_list, attribute_id, value)
 
-    def _set_attribute_vi_real64(self, vi, channel_list, attribute_id, value):  # noqa: N802
+    def niScope_SetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_SetAttributeViReal64_cfunc is None:
                 self.niScope_SetAttributeViReal64_cfunc = self._get_library_function('niScope_SetAttributeViReal64')
@@ -532,7 +532,7 @@ class Library(object):
                 self.niScope_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViReal64_cfunc(vi, channel_list, attribute_id, value)
 
-    def _set_attribute_vi_string(self, vi, channel_list, attribute_id, value):  # noqa: N802
+    def niScope_SetAttributeViString(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_SetAttributeViString_cfunc is None:
                 self.niScope_SetAttributeViString_cfunc = self._get_library_function('niScope_SetAttributeViString')
@@ -540,7 +540,7 @@ class Library(object):
                 self.niScope_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViString_cfunc(vi, channel_list, attribute_id, value)
 
-    def unlock(self, vi, caller_has_lock):  # noqa: N802
+    def niScope_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niScope_UnlockSession_cfunc is None:
                 self.niScope_UnlockSession_cfunc = self._get_library_function('niScope_UnlockSession')
@@ -548,7 +548,7 @@ class Library(object):
                 self.niScope_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_UnlockSession_cfunc(vi, caller_has_lock)
 
-    def _close(self, vi):  # noqa: N802
+    def niScope_close(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_close_cfunc is None:
                 self.niScope_close_cfunc = self._get_library_function('niScope_close')
@@ -556,7 +556,7 @@ class Library(object):
                 self.niScope_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_close_cfunc(vi)
 
-    def _error_message(self, vi, error_code, error_message):  # noqa: N802
+    def niScope_error_message(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:
             if self.niScope_error_message_cfunc is None:
                 self.niScope_error_message_cfunc = self._get_library_function('niScope_error_message')
@@ -564,7 +564,7 @@ class Library(object):
                 self.niScope_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_error_message_cfunc(vi, error_code, error_message)
 
-    def reset(self, vi):  # noqa: N802
+    def niScope_reset(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_reset_cfunc is None:
                 self.niScope_reset_cfunc = self._get_library_function('niScope_reset')
@@ -572,7 +572,7 @@ class Library(object):
                 self.niScope_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_reset_cfunc(vi)
 
-    def _self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
+    def niScope_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:
             if self.niScope_self_test_cfunc is None:
                 self.niScope_self_test_cfunc = self._get_library_function('niScope_self_test')

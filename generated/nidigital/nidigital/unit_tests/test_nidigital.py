@@ -16,7 +16,7 @@ class TestSession(object):
             super().__init__(ctypes_library)
 
             for f in dir(self):
-                if f.startswith("niDigital_") and f.endswith("_cfunc"):
+                if f.startswith("niDigital_") and not f.endswith("_cfunc"):
                     setattr(self, f, MagicMock())
 
     class PatchedTClkLibrary(nitclk._library.Library):
@@ -24,7 +24,7 @@ class TestSession(object):
             super().__init__(ctypes_library)
 
             for f in dir(self):
-                if f.startswith("niTClk_") and f.endswith("_cfunc"):
+                if f.startswith("niTClk_") and not f.endswith("_cfunc"):
                     setattr(self, f, MagicMock())
 
     def setup_method(self, method):
@@ -39,21 +39,21 @@ class TestSession(object):
         self.side_effects_helper = _mock_helper.SideEffectsHelper()
         self.side_effects_helper.set_side_effects_and_return_values(self.patched_library)
 
-        self.patched_library.niDigital_InitWithOptions_cfunc.side_effect = self.side_effects_helper.niDigital_InitWithOptions
+        self.patched_library.niDigital_InitWithOptions.side_effect = self.side_effects_helper.niDigital_InitWithOptions
         self.side_effects_helper['InitWithOptions']['newVi'] = session_id_for_test
 
-        self.patched_library.niDigital_close_cfunc.side_effect = self.side_effects_helper.niDigital_close
+        self.patched_library.niDigital_close.side_effect = self.side_effects_helper.niDigital_close
 
-        self.patched_library.niDigital_LockSession_cfunc.side_effect = self.side_effects_helper.niDigital_LockSession
+        self.patched_library.niDigital_LockSession.side_effect = self.side_effects_helper.niDigital_LockSession
         self.side_effects_helper['LockSession']['callerHasLock'] = True
 
-        self.patched_library.niDigital_UnlockSession_cfunc.side_effect = self.side_effects_helper.niDigital_UnlockSession
+        self.patched_library.niDigital_UnlockSession.side_effect = self.side_effects_helper.niDigital_UnlockSession
         self.side_effects_helper['UnlockSession']['callerHasLock'] = True
 
         # For trying to set `_all_channels_in_session` in the Session constructor
-        self.patched_library.niDigital_GetAttributeViInt32_cfunc.side_effect = self.side_effects_helper.niDigital_GetAttributeViInt32
+        self.patched_library.niDigital_GetAttributeViInt32.side_effect = self.side_effects_helper.niDigital_GetAttributeViInt32
         self.side_effects_helper['GetAttributeViInt32']['value'] = 1  # channel_count
-        self.patched_library.niDigital_GetChannelNameFromString_cfunc.side_effect = self.side_effects_helper.niDigital_GetChannelNameFromString
+        self.patched_library.niDigital_GetChannelNameFromString.side_effect = self.side_effects_helper.niDigital_GetChannelNameFromString
         self.side_effects_helper['GetChannelNameFromString']['names'] = '0'  # get_channel_names()
 
         # for niDigital_FetchHistoryRAMCycleInformation_looping
@@ -124,7 +124,7 @@ class TestSession(object):
     #  this test should be converted to a system test. (GitHub issue# 1353).
     def test_fetch_history_ram_cycle_information_position_out_of_bound(self):
 
-        self.patched_library.niDigital_GetHistoryRAMSampleCount_cfunc.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
+        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
         self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 7
         with nidigital.Session('') as session:
             with pytest.raises(ValueError, match='position: Specified value = 8, Maximum value = 6.'):
@@ -134,23 +134,23 @@ class TestSession(object):
     #  this test should be converted to a system test. (GitHub issue# 1353).
     def test_fetch_history_ram_cycle_information_position_last(self):
 
-        self.patched_library.niDigital_GetHistoryRAMSampleCount_cfunc.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
+        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
         self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 7
-        self.patched_library.niDigital_GetAttributeViBoolean_cfunc.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
+        self.patched_library.niDigital_GetAttributeViBoolean.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
         self.side_effects_helper['GetAttributeViBoolean']['value'] = True  # history_ram_number_of_samples_is_finite
-        self.patched_library.niDigital_FetchHistoryRAMCycleInformation_cfunc.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMCycleInformation
+        self.patched_library.niDigital_FetchHistoryRAMCycleInformation.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMCycleInformation
         self.side_effects_helper['FetchHistoryRAMCycleInformation']['patternIndex'] = 0
         self.side_effects_helper['FetchHistoryRAMCycleInformation']['timeSetIndex'] = 0
         self.side_effects_helper['FetchHistoryRAMCycleInformation']['vectorNumber'] = 9
         self.side_effects_helper['FetchHistoryRAMCycleInformation']['cycleNumber'] = 11
         self.side_effects_helper['FetchHistoryRAMCycleInformation']['numDutCycles'] = 1
-        self.patched_library.niDigital_GetPatternName_cfunc.side_effect = self.side_effects_helper.niDigital_GetPatternName
+        self.patched_library.niDigital_GetPatternName.side_effect = self.side_effects_helper.niDigital_GetPatternName
         self.side_effects_helper['GetPatternName']['name'] = 'new_pattern'
-        self.patched_library.niDigital_GetTimeSetName_cfunc.side_effect = self.side_effects_helper.niDigital_GetTimeSetName
+        self.patched_library.niDigital_GetTimeSetName.side_effect = self.side_effects_helper.niDigital_GetTimeSetName
         self.side_effects_helper['GetTimeSetName']['name'] = 't0'
-        self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber_cfunc.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMScanCycleNumber
+        self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMScanCycleNumber
         self.side_effects_helper['FetchHistoryRAMScanCycleNumber']['scanCycleNumber'] = -1
-        self.patched_library.niDigital_FetchHistoryRAMCyclePinData_cfunc.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMCyclePinData
+        self.patched_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMCyclePinData
         self.side_effects_helper['FetchHistoryRAMCyclePinData']['actualNumPinData'] = 8
         self.side_effects_helper['FetchHistoryRAMCyclePinData']['expectedPinStates'] = [nidigital.PinState.X.value] * 8
         self.side_effects_helper['FetchHistoryRAMCyclePinData']['actualPinStates'] = [nidigital.PinState.NOT_A_PIN_STATE.value] * 8
@@ -159,11 +159,11 @@ class TestSession(object):
             history_ram_cycle_info = session.sites[1].fetch_history_ram_cycle_information(
                 position=6,
                 samples_to_read=-1)
-            self.patched_library.niDigital_FetchHistoryRAMCycleInformation_cfunc.assert_called_once()
-            assert self.patched_library.niDigital_GetPatternName_cfunc.call_count == 2
-            assert self.patched_library.niDigital_GetTimeSetName_cfunc.call_count == 2
-            self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber_cfunc.assert_called_once()
-            assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData_cfunc.call_count == 2
+            self.patched_library.niDigital_FetchHistoryRAMCycleInformation.assert_called_once()
+            assert self.patched_library.niDigital_GetPatternName.call_count == 2
+            assert self.patched_library.niDigital_GetTimeSetName.call_count == 2
+            self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber.assert_called_once()
+            assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData.call_count == 2
 
         assert len(history_ram_cycle_info) == 1
         assert history_ram_cycle_info[0].vector_number == 9
@@ -173,9 +173,9 @@ class TestSession(object):
     #  this test should be converted to a system test. (GitHub issue# 1353).
     def test_fetch_history_ram_cycle_information_samples_to_read_too_much(self):
 
-        self.patched_library.niDigital_GetHistoryRAMSampleCount_cfunc.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
+        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
         self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 7
-        self.patched_library.niDigital_GetAttributeViBoolean_cfunc.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
+        self.patched_library.niDigital_GetAttributeViBoolean.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
         self.side_effects_helper['GetAttributeViBoolean']['value'] = True  # history_ram_number_of_samples_is_finite
 
         with nidigital.Session('') as session:
@@ -229,28 +229,28 @@ class TestSession(object):
     #  this test should be converted to a system test. (GitHub issue# 1353).
     def test_fetch_history_ram_cycle_information_samples_to_read_all(self):
 
-        self.patched_library.niDigital_GetHistoryRAMSampleCount_cfunc.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
+        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
         self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 7
-        self.patched_library.niDigital_GetAttributeViBoolean_cfunc.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
+        self.patched_library.niDigital_GetAttributeViBoolean.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
         self.side_effects_helper['GetAttributeViBoolean']['value'] = True  # history_ram_number_of_samples_is_finite
-        self.patched_library.niDigital_FetchHistoryRAMCycleInformation_cfunc.side_effect = self.niDigital_FetchHistoryRAMCycleInformation_looping
-        self.patched_library.niDigital_GetPatternName_cfunc.side_effect = self.side_effects_helper.niDigital_GetPatternName
+        self.patched_library.niDigital_FetchHistoryRAMCycleInformation.side_effect = self.niDigital_FetchHistoryRAMCycleInformation_looping
+        self.patched_library.niDigital_GetPatternName.side_effect = self.side_effects_helper.niDigital_GetPatternName
         self.side_effects_helper['GetPatternName']['name'] = 'new_pattern'
-        self.patched_library.niDigital_GetTimeSetName_cfunc.side_effect = self.niDigital_GetTimeSetName_looping
-        self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber_cfunc.side_effect = self.niDigital_FetchHistoryRAMScanCycleNumber_looping
-        self.patched_library.niDigital_FetchHistoryRAMCyclePinData_cfunc.side_effect = self.niDigital_FetchHistoryRAMCyclePinData_looping
-        self.patched_library.niDigital_GetPatternPinList_cfunc.side_effect = self.side_effects_helper.niDigital_GetPatternPinList
+        self.patched_library.niDigital_GetTimeSetName.side_effect = self.niDigital_GetTimeSetName_looping
+        self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber.side_effect = self.niDigital_FetchHistoryRAMScanCycleNumber_looping
+        self.patched_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = self.niDigital_FetchHistoryRAMCyclePinData_looping
+        self.patched_library.niDigital_GetPatternPinList.side_effect = self.side_effects_helper.niDigital_GetPatternPinList
         pin_list = ['LO' + str(i) for i in range(4)] + ['HI' + str(i) for i in range(4)]
         self.side_effects_helper['GetPatternPinList']['pinList'] = ','.join(pin_list)
         with nidigital.Session('') as session:
             history_ram_cycle_info = session.sites[1].fetch_history_ram_cycle_information(
                 position=0,
                 samples_to_read=-1)
-            assert self.patched_library.niDigital_FetchHistoryRAMCycleInformation_cfunc.call_count == 7
-            assert self.patched_library.niDigital_GetPatternName_cfunc.call_count == 2  # there's only one pattern, so this is a 2
-            assert self.patched_library.niDigital_GetTimeSetName_cfunc.call_count == 6  # 3 time sets, so this is a 6
-            assert self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber_cfunc.call_count == 7
-            assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData_cfunc.call_count == 20  # 10 DUT cycles
+            assert self.patched_library.niDigital_FetchHistoryRAMCycleInformation.call_count == 7
+            assert self.patched_library.niDigital_GetPatternName.call_count == 2  # there's only one pattern, so this is a 2
+            assert self.patched_library.niDigital_GetTimeSetName.call_count == 6  # 3 time sets, so this is a 6
+            assert self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber.call_count == 7
+            assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData.call_count == 20  # 10 DUT cycles
 
             assert len(history_ram_cycle_info) == 7
             assert all([i.pattern_name == 'new_pattern' for i in history_ram_cycle_info])
@@ -268,7 +268,7 @@ class TestSession(object):
             assert scan_cycle_numbers == [-1, 0, 1, -1, -1, -1, -1]
 
             pin_names = session.get_pattern_pin_names('new_pattern')
-            assert self.patched_library.niDigital_GetPatternPinList_cfunc.call_count == 2
+            assert self.patched_library.niDigital_GetPatternPinList.call_count == 2
             assert pin_names == pin_list
 
         expected_pin_states = [i.expected_pin_states for i in history_ram_cycle_info]
@@ -305,29 +305,29 @@ class TestSession(object):
 
     def test_fetch_history_ram_cycle_information_pin_list(self):
 
-        self.patched_library.niDigital_GetHistoryRAMSampleCount_cfunc.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
+        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
         self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 1
-        self.patched_library.niDigital_GetAttributeViBoolean_cfunc.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
+        self.patched_library.niDigital_GetAttributeViBoolean.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
         self.side_effects_helper['GetAttributeViBoolean']['value'] = True  # history_ram_number_of_samples_is_finite
-        self.patched_library.niDigital_FetchHistoryRAMCycleInformation_cfunc.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMCycleInformation
+        self.patched_library.niDigital_FetchHistoryRAMCycleInformation.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMCycleInformation
         self.side_effects_helper['FetchHistoryRAMCycleInformation']['patternIndex'] = 0
         self.side_effects_helper['FetchHistoryRAMCycleInformation']['timeSetIndex'] = 0
         self.side_effects_helper['FetchHistoryRAMCycleInformation']['vectorNumber'] = 0
         self.side_effects_helper['FetchHistoryRAMCycleInformation']['cycleNumber'] = 0
         self.side_effects_helper['FetchHistoryRAMCycleInformation']['numDutCycles'] = 1
-        self.patched_library.niDigital_GetPatternName_cfunc.side_effect = self.side_effects_helper.niDigital_GetPatternName
+        self.patched_library.niDigital_GetPatternName.side_effect = self.side_effects_helper.niDigital_GetPatternName
         self.side_effects_helper['GetPatternName']['name'] = 'new_pattern'
-        self.patched_library.niDigital_GetTimeSetName_cfunc.side_effect = self.side_effects_helper.niDigital_GetTimeSetName
+        self.patched_library.niDigital_GetTimeSetName.side_effect = self.side_effects_helper.niDigital_GetTimeSetName
         self.side_effects_helper['GetTimeSetName']['name'] = 't0'
-        self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber_cfunc.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMScanCycleNumber
+        self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMScanCycleNumber
         self.side_effects_helper['FetchHistoryRAMScanCycleNumber']['scanCycleNumber'] = -1
-        self.patched_library.niDigital_FetchHistoryRAMCyclePinData_cfunc.side_effect = self.niDigital_FetchHistoryRAMCyclePinData_check_pins_looping
+        self.patched_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = self.niDigital_FetchHistoryRAMCyclePinData_check_pins_looping
         with nidigital.Session('') as session:
             self.expected_pin_list_check_pins_looping = 'PinA,PinB'
             session.sites[0].pins['PinA', 'PinB'].fetch_history_ram_cycle_information(position=0, samples_to_read=-1)
             self.expected_pin_list_check_pins_looping = ''
             session.sites[0].fetch_history_ram_cycle_information(position=0, samples_to_read=-1)
-            assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData_cfunc.call_count == 4
+            assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData.call_count == 4
 
     # Helper function for validating site behavior in fetch_history_ram_cycle_information.
     def niDigital_GetHistoryRAMSampleCount_check_site_looping(self, vi, site, sample_count):  # noqa: N802
@@ -338,13 +338,13 @@ class TestSession(object):
 
     def test_fetch_history_ram_cycle_information_site_n(self):
 
-        self.patched_library.niDigital_GetHistoryRAMSampleCount_cfunc.side_effect = self.niDigital_GetHistoryRAMSampleCount_check_site_looping
+        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.niDigital_GetHistoryRAMSampleCount_check_site_looping
         self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 1
 
         with nidigital.Session('') as session:
             for s in self.site_numbers_looping:
                 session.sites[s].fetch_history_ram_cycle_information(position=0, samples_to_read=0)
-            assert self.patched_library.niDigital_GetHistoryRAMSampleCount_cfunc.call_count == len(self.site_numbers_looping)
+            assert self.patched_library.niDigital_GetHistoryRAMSampleCount.call_count == len(self.site_numbers_looping)
 
     def test_pin_state_enum_print(self):
 

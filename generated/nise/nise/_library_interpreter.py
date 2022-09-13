@@ -76,7 +76,7 @@ class LibraryInterpreter(object):
 
     def _close_session(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library._close_session(vi_ctype)
+        error_code = self._library.niSE_CloseSession(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -85,7 +85,7 @@ class LibraryInterpreter(object):
         connect_spec_ctype = ctypes.create_string_buffer(connect_spec.encode(self._encoding))  # case C020
         multiconnect_mode_ctype = _visatype.ViInt32(multiconnect_mode.value)  # case S130
         wait_for_debounce_ctype = _visatype.ViBoolean(wait_for_debounce)  # case S150
-        error_code = self._library.connect(vi_ctype, connect_spec_ctype, multiconnect_mode_ctype, wait_for_debounce_ctype)
+        error_code = self._library.niSE_Connect(vi_ctype, connect_spec_ctype, multiconnect_mode_ctype, wait_for_debounce_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -96,20 +96,20 @@ class LibraryInterpreter(object):
         multiconnect_mode_ctype = _visatype.ViInt32(multiconnect_mode.value)  # case S130
         operation_order_ctype = _visatype.ViInt32(operation_order.value)  # case S130
         wait_for_debounce_ctype = _visatype.ViBoolean(wait_for_debounce)  # case S150
-        error_code = self._library.connect_and_disconnect(vi_ctype, connect_spec_ctype, disconnect_spec_ctype, multiconnect_mode_ctype, operation_order_ctype, wait_for_debounce_ctype)
+        error_code = self._library.niSE_ConnectAndDisconnect(vi_ctype, connect_spec_ctype, disconnect_spec_ctype, multiconnect_mode_ctype, operation_order_ctype, wait_for_debounce_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def disconnect(self, disconnect_spec):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         disconnect_spec_ctype = ctypes.create_string_buffer(disconnect_spec.encode(self._encoding))  # case C020
-        error_code = self._library.disconnect(vi_ctype, disconnect_spec_ctype)
+        error_code = self._library.niSE_Disconnect(vi_ctype, disconnect_spec_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def disconnect_all(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.disconnect_all(vi_ctype)
+        error_code = self._library.niSE_DisconnectAll(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -119,7 +119,7 @@ class LibraryInterpreter(object):
         expand_action_ctype = _visatype.ViInt32(expand_action.value)  # case S130
         expanded_route_spec_ctype = (_visatype.ViChar * expanded_route_spec_size[0])()  # case C080
         expanded_route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=expanded_route_spec_size, library_type=_visatype.ViInt32)  # case B550
-        error_code = self._library.expand_route_spec(vi_ctype, route_spec_ctype, expand_action_ctype, expanded_route_spec_ctype, expanded_route_spec_size_ctype)
+        error_code = self._library.niSE_ExpandRouteSpec(vi_ctype, route_spec_ctype, expand_action_ctype, expanded_route_spec_ctype, expanded_route_spec_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return expanded_route_spec_ctype.value.decode(self._encoding)
 
@@ -130,7 +130,7 @@ class LibraryInterpreter(object):
         route_spec_ctype = (_visatype.ViChar * route_spec_size[0])()  # case C080
         route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=route_spec_size, library_type=_visatype.ViInt32)  # case B550
         path_capability_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.find_route(vi_ctype, channel1_ctype, channel2_ctype, route_spec_ctype, route_spec_size_ctype, None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
+        error_code = self._library.niSE_FindRoute(vi_ctype, channel1_ctype, channel2_ctype, route_spec_ctype, route_spec_size_ctype, None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return route_spec_ctype.value.decode(self._encoding), enums.PathCapability(path_capability_ctype.value)
 
@@ -138,7 +138,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         route_spec_ctype = (_visatype.ViChar * route_spec_size[0])()  # case C080
         route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=route_spec_size, library_type=_visatype.ViInt32)  # case B550
-        error_code = self._library.get_all_connections(vi_ctype, route_spec_ctype, route_spec_size_ctype)
+        error_code = self._library.niSE_GetAllConnections(vi_ctype, route_spec_ctype, route_spec_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return route_spec_ctype.value.decode(self._encoding)
 
@@ -147,7 +147,7 @@ class LibraryInterpreter(object):
         error_number_ctype = _visatype.ViInt32()  # case S220
         error_description_ctype = (_visatype.ViChar * error_description_size[0])()  # case C080
         error_description_size_ctype = get_ctypes_pointer_for_buffer(value=error_description_size, library_type=_visatype.ViInt32)  # case B550
-        error_code = self._library._get_error(vi_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), error_description_ctype, error_description_size_ctype)
+        error_code = self._library.niSE_GetError(vi_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), error_description_ctype, error_description_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_number_ctype.value), error_description_ctype.value.decode(self._encoding)
 
@@ -155,14 +155,14 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         route_spec_ctype = ctypes.create_string_buffer(route_spec.encode(self._encoding))  # case C020
         is_connected_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.is_connected(vi_ctype, route_spec_ctype, None if is_connected_ctype is None else (ctypes.pointer(is_connected_ctype)))
+        error_code = self._library.niSE_IsConnected(vi_ctype, route_spec_ctype, None if is_connected_ctype is None else (ctypes.pointer(is_connected_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_connected_ctype.value)
 
     def is_debounced(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         is_debounced_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.is_debounced(vi_ctype, None if is_debounced_ctype is None else (ctypes.pointer(is_debounced_ctype)))
+        error_code = self._library.niSE_IsDebounced(vi_ctype, None if is_debounced_ctype is None else (ctypes.pointer(is_debounced_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_debounced_ctype.value)
 
@@ -170,13 +170,13 @@ class LibraryInterpreter(object):
         virtual_device_name_ctype = ctypes.create_string_buffer(virtual_device_name.encode(self._encoding))  # case C020
         option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
         vi_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library._open_session(virtual_device_name_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
+        error_code = self._library.niSE_OpenSession(virtual_device_name_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
     def wait_for_debounce(self, maximum_time_ms=hightime.timedelta(milliseconds=-1)):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
-        error_code = self._library.wait_for_debounce(vi_ctype, maximum_time_ms_ctype)
+        error_code = self._library.niSE_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

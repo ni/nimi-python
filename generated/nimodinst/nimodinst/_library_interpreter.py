@@ -61,30 +61,30 @@ class LibraryInterpreter(object):
         # See https://github.com/ni/nimi-python/issues/166
         error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
         error_info_ctype = None  # case C050
-        error_code = self._library._get_extended_error_info(error_info_buffer_size_ctype, error_info_ctype)
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         if error_code <= 0:
             return 'Failed to retrieve error description.'
         error_info_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         error_info_ctype = (_visatype.ViChar * error_info_buffer_size_ctype.value)()  # case C060
         # Note we don't look at the return value. This is intentional as niModInst returns the
         # original error code rather than 0 (VI_SUCCESS).
-        self._library._get_extended_error_info(error_info_buffer_size_ctype, error_info_ctype)
+        self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         return error_info_ctype.value.decode("ascii")
 
     def _close_installed_devices_session(self):  # noqa: N802
         handle_ctype = _visatype.ViSession(self._handle)  # case S110
-        error_code = self._library._close_installed_devices_session(handle_ctype)
+        error_code = self._library.niModInst_CloseInstalledDevicesSession(handle_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _get_extended_error_info(self):  # noqa: N802
         error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
         error_info_ctype = None  # case C050
-        error_code = self._library._get_extended_error_info(error_info_buffer_size_ctype, error_info_ctype)
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         error_info_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         error_info_ctype = (_visatype.ViChar * error_info_buffer_size_ctype.value)()  # case C060
-        error_code = self._library._get_extended_error_info(error_info_buffer_size_ctype, error_info_ctype)
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode(self._encoding)
 
@@ -93,7 +93,7 @@ class LibraryInterpreter(object):
         index_ctype = _visatype.ViInt32(index)  # case S150
         attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library._get_installed_device_attribute_vi_int32(handle_ctype, index_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(handle_ctype, index_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -103,11 +103,11 @@ class LibraryInterpreter(object):
         attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
         attribute_value_buffer_size_ctype = _visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case C050
-        error_code = self._library._get_installed_device_attribute_vi_string(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         attribute_value_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         attribute_value_ctype = (_visatype.ViChar * attribute_value_buffer_size_ctype.value)()  # case C060
-        error_code = self._library._get_installed_device_attribute_vi_string(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
@@ -115,6 +115,6 @@ class LibraryInterpreter(object):
         driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case C020
         handle_ctype = _visatype.ViSession()  # case S220
         device_count_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library._open_installed_devices_session(driver_ctype, None if handle_ctype is None else (ctypes.pointer(handle_ctype)), None if device_count_ctype is None else (ctypes.pointer(device_count_ctype)))
+        error_code = self._library.niModInst_OpenInstalledDevicesSession(driver_ctype, None if handle_ctype is None else (ctypes.pointer(handle_ctype)), None if device_count_ctype is None else (ctypes.pointer(device_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(handle_ctype.value), int(device_count_ctype.value)

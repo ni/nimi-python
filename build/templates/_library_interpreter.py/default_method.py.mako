@@ -15,6 +15,7 @@
     assert ivi_dance_size_parameter is None or len_size_parameter is None, str(f)
 
     full_func_name = f['python_name'] + method_template['method_python_name_suffix']
+    c_func_name = config['c_function_prefix'] + f['name']
 
     # If a method uses codegen_method=python-only, it should specify non-default method_templates
     assert f['codegen_method'] != 'python-only', full_func_name + ' uses default_method method_template, but is python-only!'
@@ -29,7 +30,7 @@
 % endfor
 % if len(ivi_dance_parameters) > 0:
 <% ivi_dance_step = helper.IviDanceStep.GET_DATA %>\
-        error_code = self._library.${f['python_name']}(${param_names_library})
+        error_code = self._library.${c_func_name}(${param_names_library})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
 %   for declaration in helper.get_ctype_variable_declaration_snippet(ivi_dance_size_parameter, parameters, ivi_dance_step, config):
         ${declaration}
@@ -40,6 +41,6 @@
 %       endfor
 %   endfor
 % endif
-        error_code = self._library.${f['python_name']}(${param_names_library})
+        error_code = self._library.${c_func_name}(${param_names_library})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(parameters, config)}

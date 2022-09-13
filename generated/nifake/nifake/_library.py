@@ -95,7 +95,7 @@ class Library(object):
             raise errors.DriverTooOldError() from e
         return function
 
-    def abort(self, vi):  # noqa: N802
+    def niFake_Abort(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFake_Abort_cfunc is None:
                 self.niFake_Abort_cfunc = self._get_library_function('niFake_Abort')
@@ -103,7 +103,7 @@ class Library(object):
                 self.niFake_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Abort_cfunc(vi)
 
-    def accept_list_of_durations_in_seconds(self, vi, count, delays):  # noqa: N802
+    def niFake_AcceptListOfDurationsInSeconds(self, vi, count, delays):  # noqa: N802
         with self._func_lock:
             if self.niFake_AcceptListOfDurationsInSeconds_cfunc is None:
                 self.niFake_AcceptListOfDurationsInSeconds_cfunc = self._get_library_function('niFake_AcceptListOfDurationsInSeconds')
@@ -111,7 +111,7 @@ class Library(object):
                 self.niFake_AcceptListOfDurationsInSeconds_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_AcceptListOfDurationsInSeconds_cfunc(vi, count, delays)
 
-    def bool_array_output_function(self, vi, number_of_elements, an_array):  # noqa: N802
+    def niFake_BoolArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
         with self._func_lock:
             if self.niFake_BoolArrayOutputFunction_cfunc is None:
                 self.niFake_BoolArrayOutputFunction_cfunc = self._get_library_function('niFake_BoolArrayOutputFunction')
@@ -119,7 +119,7 @@ class Library(object):
                 self.niFake_BoolArrayOutputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_BoolArrayOutputFunction_cfunc(vi, number_of_elements, an_array)
 
-    def double_all_the_nums(self, vi, number_count, numbers):  # noqa: N802
+    def niFake_DoubleAllTheNums(self, vi, number_count, numbers):  # noqa: N802
         with self._func_lock:
             if self.niFake_DoubleAllTheNums_cfunc is None:
                 self.niFake_DoubleAllTheNums_cfunc = self._get_library_function('niFake_DoubleAllTheNums')
@@ -127,7 +127,7 @@ class Library(object):
                 self.niFake_DoubleAllTheNums_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_DoubleAllTheNums_cfunc(vi, number_count, numbers)
 
-    def enum_array_output_function(self, vi, number_of_elements, an_array):  # noqa: N802
+    def niFake_EnumArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
         with self._func_lock:
             if self.niFake_EnumArrayOutputFunction_cfunc is None:
                 self.niFake_EnumArrayOutputFunction_cfunc = self._get_library_function('niFake_EnumArrayOutputFunction')
@@ -135,7 +135,7 @@ class Library(object):
                 self.niFake_EnumArrayOutputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_EnumArrayOutputFunction_cfunc(vi, number_of_elements, an_array)
 
-    def enum_input_function_with_defaults(self, vi, a_turtle):  # noqa: N802
+    def niFake_EnumInputFunctionWithDefaults(self, vi, a_turtle):  # noqa: N802
         with self._func_lock:
             if self.niFake_EnumInputFunctionWithDefaults_cfunc is None:
                 self.niFake_EnumInputFunctionWithDefaults_cfunc = self._get_library_function('niFake_EnumInputFunctionWithDefaults')
@@ -143,7 +143,7 @@ class Library(object):
                 self.niFake_EnumInputFunctionWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_EnumInputFunctionWithDefaults_cfunc(vi, a_turtle)
 
-    def export_attribute_configuration_buffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+    def niFake_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         with self._func_lock:
             if self.niFake_ExportAttributeConfigurationBuffer_cfunc is None:
                 self.niFake_ExportAttributeConfigurationBuffer_cfunc = self._get_library_function('niFake_ExportAttributeConfigurationBuffer')
@@ -151,7 +151,7 @@ class Library(object):
                 self.niFake_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ExportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
 
-    def fetch_waveform(self, vi, number_of_samples, waveform_data, actual_number_of_samples):  # noqa: N802
+    def niFake_FetchWaveform(self, vi, number_of_samples, waveform_data, actual_number_of_samples):  # noqa: N802
         with self._func_lock:
             if self.niFake_FetchWaveform_cfunc is None:
                 self.niFake_FetchWaveform_cfunc = self._get_library_function('niFake_FetchWaveform')
@@ -159,7 +159,7 @@ class Library(object):
                 self.niFake_FetchWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_FetchWaveform_cfunc(vi, number_of_samples, waveform_data, actual_number_of_samples)
 
-    def function_with_repeated_capability_type(self, vi, site_list):  # noqa: N802
+    def niFake_FunctionWithRepeatedCapabilityType(self, vi, site_list):  # noqa: N802
         with self._func_lock:
             if self.niFake_FunctionWithRepeatedCapabilityType_cfunc is None:
                 self.niFake_FunctionWithRepeatedCapabilityType_cfunc = self._get_library_function('niFake_FunctionWithRepeatedCapabilityType')
@@ -167,7 +167,7 @@ class Library(object):
                 self.niFake_FunctionWithRepeatedCapabilityType_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_FunctionWithRepeatedCapabilityType_cfunc(vi, site_list)
 
-    def get_a_boolean(self, vi, a_boolean):  # noqa: N802
+    def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetABoolean_cfunc is None:
                 self.niFake_GetABoolean_cfunc = self._get_library_function('niFake_GetABoolean')
@@ -175,7 +175,7 @@ class Library(object):
                 self.niFake_GetABoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetABoolean_cfunc(vi, a_boolean)
 
-    def get_a_number(self, vi, a_number):  # noqa: N802
+    def niFake_GetANumber(self, vi, a_number):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetANumber_cfunc is None:
                 self.niFake_GetANumber_cfunc = self._get_library_function('niFake_GetANumber')
@@ -183,7 +183,7 @@ class Library(object):
                 self.niFake_GetANumber_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetANumber_cfunc(vi, a_number)
 
-    def get_a_string_of_fixed_maximum_size(self, vi, a_string):  # noqa: N802
+    def niFake_GetAStringOfFixedMaximumSize(self, vi, a_string):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetAStringOfFixedMaximumSize_cfunc is None:
                 self.niFake_GetAStringOfFixedMaximumSize_cfunc = self._get_library_function('niFake_GetAStringOfFixedMaximumSize')
@@ -191,7 +191,7 @@ class Library(object):
                 self.niFake_GetAStringOfFixedMaximumSize_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAStringOfFixedMaximumSize_cfunc(vi, a_string)
 
-    def get_a_string_using_python_code(self, vi, a_number, a_string):  # noqa: N802
+    def niFake_GetAStringUsingPythonCode(self, vi, a_number, a_string):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetAStringUsingPythonCode_cfunc is None:
                 self.niFake_GetAStringUsingPythonCode_cfunc = self._get_library_function('niFake_GetAStringUsingPythonCode')
@@ -199,7 +199,7 @@ class Library(object):
                 self.niFake_GetAStringUsingPythonCode_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAStringUsingPythonCode_cfunc(vi, a_number, a_string)
 
-    def get_an_ivi_dance_string(self, vi, buffer_size, a_string):  # noqa: N802
+    def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetAnIviDanceString_cfunc is None:
                 self.niFake_GetAnIviDanceString_cfunc = self._get_library_function('niFake_GetAnIviDanceString')
@@ -207,7 +207,7 @@ class Library(object):
                 self.niFake_GetAnIviDanceString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAnIviDanceString_cfunc(vi, buffer_size, a_string)
 
-    def get_an_ivi_dance_with_a_twist_string(self, vi, buffer_size, a_string, actual_size):  # noqa: N802
+    def niFake_GetAnIviDanceWithATwistString(self, vi, buffer_size, a_string, actual_size):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetAnIviDanceWithATwistString_cfunc is None:
                 self.niFake_GetAnIviDanceWithATwistString_cfunc = self._get_library_function('niFake_GetAnIviDanceWithATwistString')
@@ -215,7 +215,7 @@ class Library(object):
                 self.niFake_GetAnIviDanceWithATwistString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAnIviDanceWithATwistString_cfunc(vi, buffer_size, a_string, actual_size)
 
-    def get_array_for_python_code_custom_type(self, vi, number_of_elements, array_out):  # noqa: N802
+    def niFake_GetArrayForPythonCodeCustomType(self, vi, number_of_elements, array_out):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetArrayForPythonCodeCustomType_cfunc is None:
                 self.niFake_GetArrayForPythonCodeCustomType_cfunc = self._get_library_function('niFake_GetArrayForPythonCodeCustomType')
@@ -223,7 +223,7 @@ class Library(object):
                 self.niFake_GetArrayForPythonCodeCustomType_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetArrayForPythonCodeCustomType_cfunc(vi, number_of_elements, array_out)
 
-    def get_array_for_python_code_double(self, vi, number_of_elements, array_out):  # noqa: N802
+    def niFake_GetArrayForPythonCodeDouble(self, vi, number_of_elements, array_out):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetArrayForPythonCodeDouble_cfunc is None:
                 self.niFake_GetArrayForPythonCodeDouble_cfunc = self._get_library_function('niFake_GetArrayForPythonCodeDouble')
@@ -231,7 +231,7 @@ class Library(object):
                 self.niFake_GetArrayForPythonCodeDouble_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetArrayForPythonCodeDouble_cfunc(vi, number_of_elements, array_out)
 
-    def get_array_size_for_python_code(self, vi, size_out):  # noqa: N802
+    def niFake_GetArraySizeForPythonCode(self, vi, size_out):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetArraySizeForPythonCode_cfunc is None:
                 self.niFake_GetArraySizeForPythonCode_cfunc = self._get_library_function('niFake_GetArraySizeForPythonCode')
@@ -239,7 +239,7 @@ class Library(object):
                 self.niFake_GetArraySizeForPythonCode_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetArraySizeForPythonCode_cfunc(vi, size_out)
 
-    def get_array_using_ivi_dance(self, vi, array_size, array_out):  # noqa: N802
+    def niFake_GetArrayUsingIviDance(self, vi, array_size, array_out):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetArrayUsingIviDance_cfunc is None:
                 self.niFake_GetArrayUsingIviDance_cfunc = self._get_library_function('niFake_GetArrayUsingIviDance')
@@ -247,7 +247,7 @@ class Library(object):
                 self.niFake_GetArrayUsingIviDance_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetArrayUsingIviDance_cfunc(vi, array_size, array_out)
 
-    def _get_attribute_vi_boolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFake_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetAttributeViBoolean_cfunc is None:
                 self.niFake_GetAttributeViBoolean_cfunc = self._get_library_function('niFake_GetAttributeViBoolean')
@@ -255,7 +255,7 @@ class Library(object):
                 self.niFake_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_int32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFake_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetAttributeViInt32_cfunc is None:
                 self.niFake_GetAttributeViInt32_cfunc = self._get_library_function('niFake_GetAttributeViInt32')
@@ -263,7 +263,7 @@ class Library(object):
                 self.niFake_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_int64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFake_GetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetAttributeViInt64_cfunc is None:
                 self.niFake_GetAttributeViInt64_cfunc = self._get_library_function('niFake_GetAttributeViInt64')
@@ -271,7 +271,7 @@ class Library(object):
                 self.niFake_GetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_real64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFake_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetAttributeViReal64_cfunc is None:
                 self.niFake_GetAttributeViReal64_cfunc = self._get_library_function('niFake_GetAttributeViReal64')
@@ -279,7 +279,7 @@ class Library(object):
                 self.niFake_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_string(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
+    def niFake_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetAttributeViString_cfunc is None:
                 self.niFake_GetAttributeViString_cfunc = self._get_library_function('niFake_GetAttributeViString')
@@ -287,7 +287,7 @@ class Library(object):
                 self.niFake_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
 
-    def _get_cal_date_and_time(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
+    def niFake_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetCalDateAndTime_cfunc is None:
                 self.niFake_GetCalDateAndTime_cfunc = self._get_library_function('niFake_GetCalDateAndTime')
@@ -295,7 +295,7 @@ class Library(object):
                 self.niFake_GetCalDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetCalDateAndTime_cfunc(vi, cal_type, month, day, year, hour, minute)
 
-    def get_cal_interval(self, vi, months):  # noqa: N802
+    def niFake_GetCalInterval(self, vi, months):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetCalInterval_cfunc is None:
                 self.niFake_GetCalInterval_cfunc = self._get_library_function('niFake_GetCalInterval')
@@ -303,7 +303,7 @@ class Library(object):
                 self.niFake_GetCalInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetCalInterval_cfunc(vi, months)
 
-    def _get_channel_names(self, vi, indices, name_size, names):  # noqa: N802
+    def niFake_GetChannelNames(self, vi, indices, name_size, names):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetChannelNames_cfunc is None:
                 self.niFake_GetChannelNames_cfunc = self._get_library_function('niFake_GetChannelNames')
@@ -311,7 +311,7 @@ class Library(object):
                 self.niFake_GetChannelNames_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetChannelNames_cfunc(vi, indices, name_size, names)
 
-    def get_custom_type(self, vi, cs):  # noqa: N802
+    def niFake_GetCustomType(self, vi, cs):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetCustomType_cfunc is None:
                 self.niFake_GetCustomType_cfunc = self._get_library_function('niFake_GetCustomType')
@@ -319,7 +319,7 @@ class Library(object):
                 self.niFake_GetCustomType_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetCustomType_cfunc(vi, cs)
 
-    def get_custom_type_array(self, vi, number_of_elements, cs):  # noqa: N802
+    def niFake_GetCustomTypeArray(self, vi, number_of_elements, cs):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetCustomTypeArray_cfunc is None:
                 self.niFake_GetCustomTypeArray_cfunc = self._get_library_function('niFake_GetCustomTypeArray')
@@ -327,7 +327,7 @@ class Library(object):
                 self.niFake_GetCustomTypeArray_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetCustomTypeArray_cfunc(vi, number_of_elements, cs)
 
-    def get_custom_type_typedef(self, vi, cst, csnt):  # noqa: N802
+    def niFake_GetCustomTypeTypedef(self, vi, cst, csnt):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetCustomTypeTypedef_cfunc is None:
                 self.niFake_GetCustomTypeTypedef_cfunc = self._get_library_function('niFake_GetCustomTypeTypedef')
@@ -335,7 +335,7 @@ class Library(object):
                 self.niFake_GetCustomTypeTypedef_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetCustomTypeTypedef_cfunc(vi, cst, csnt)
 
-    def get_enum_value(self, vi, a_quantity, a_turtle):  # noqa: N802
+    def niFake_GetEnumValue(self, vi, a_quantity, a_turtle):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetEnumValue_cfunc is None:
                 self.niFake_GetEnumValue_cfunc = self._get_library_function('niFake_GetEnumValue')
@@ -343,7 +343,7 @@ class Library(object):
                 self.niFake_GetEnumValue_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetEnumValue_cfunc(vi, a_quantity, a_turtle)
 
-    def _get_error(self, vi, error_code, buffer_size, description):  # noqa: N802
+    def niFake_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetError_cfunc is None:
                 self.niFake_GetError_cfunc = self._get_library_function('niFake_GetError')
@@ -351,7 +351,7 @@ class Library(object):
                 self.niFake_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetError_cfunc(vi, error_code, buffer_size, description)
 
-    def import_attribute_configuration_buffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+    def niFake_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         with self._func_lock:
             if self.niFake_ImportAttributeConfigurationBuffer_cfunc is None:
                 self.niFake_ImportAttributeConfigurationBuffer_cfunc = self._get_library_function('niFake_ImportAttributeConfigurationBuffer')
@@ -359,7 +359,7 @@ class Library(object):
                 self.niFake_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ImportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
 
-    def _init_with_options(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
+    def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niFake_InitWithOptions_cfunc is None:
                 self.niFake_InitWithOptions_cfunc = self._get_library_function('niFake_InitWithOptions')
@@ -367,7 +367,7 @@ class Library(object):
                 self.niFake_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
 
-    def _initiate(self, vi):  # noqa: N802
+    def niFake_Initiate(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFake_Initiate_cfunc is None:
                 self.niFake_Initiate_cfunc = self._get_library_function('niFake_Initiate')
@@ -375,7 +375,7 @@ class Library(object):
                 self.niFake_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Initiate_cfunc(vi)
 
-    def lock(self, vi, caller_has_lock):  # noqa: N802
+    def niFake_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niFake_LockSession_cfunc is None:
                 self.niFake_LockSession_cfunc = self._get_library_function('niFake_LockSession')
@@ -383,7 +383,7 @@ class Library(object):
                 self.niFake_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_LockSession_cfunc(vi, caller_has_lock)
 
-    def multiple_array_types(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
+    def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         with self._func_lock:
             if self.niFake_MultipleArrayTypes_cfunc is None:
                 self.niFake_MultipleArrayTypes_cfunc = self._get_library_function('niFake_MultipleArrayTypes')
@@ -391,7 +391,7 @@ class Library(object):
                 self.niFake_MultipleArrayTypes_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_MultipleArrayTypes_cfunc(vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers)
 
-    def multiple_arrays_same_size(self, vi, values1, values2, values3, values4, size):  # noqa: N802
+    def niFake_MultipleArraysSameSize(self, vi, values1, values2, values3, values4, size):  # noqa: N802
         with self._func_lock:
             if self.niFake_MultipleArraysSameSize_cfunc is None:
                 self.niFake_MultipleArraysSameSize_cfunc = self._get_library_function('niFake_MultipleArraysSameSize')
@@ -399,7 +399,7 @@ class Library(object):
                 self.niFake_MultipleArraysSameSize_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_MultipleArraysSameSize_cfunc(vi, values1, values2, values3, values4, size)
 
-    def one_input_function(self, vi, a_number):  # noqa: N802
+    def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
         with self._func_lock:
             if self.niFake_OneInputFunction_cfunc is None:
                 self.niFake_OneInputFunction_cfunc = self._get_library_function('niFake_OneInputFunction')
@@ -407,7 +407,7 @@ class Library(object):
                 self.niFake_OneInputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_OneInputFunction_cfunc(vi, a_number)
 
-    def parameters_are_multiple_types(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):  # noqa: N802
+    def niFake_ParametersAreMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):  # noqa: N802
         with self._func_lock:
             if self.niFake_ParametersAreMultipleTypes_cfunc is None:
                 self.niFake_ParametersAreMultipleTypes_cfunc = self._get_library_function('niFake_ParametersAreMultipleTypes')
@@ -415,7 +415,7 @@ class Library(object):
                 self.niFake_ParametersAreMultipleTypes_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ParametersAreMultipleTypes_cfunc(vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string)
 
-    def simple_function(self, vi):  # noqa: N802
+    def niFake_PoorlyNamedSimpleFunction(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFake_PoorlyNamedSimpleFunction_cfunc is None:
                 self.niFake_PoorlyNamedSimpleFunction_cfunc = self._get_library_function('niFake_PoorlyNamedSimpleFunction')
@@ -423,7 +423,7 @@ class Library(object):
                 self.niFake_PoorlyNamedSimpleFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_PoorlyNamedSimpleFunction_cfunc(vi)
 
-    def read(self, vi, maximum_time, reading):  # noqa: N802
+    def niFake_Read(self, vi, maximum_time, reading):  # noqa: N802
         with self._func_lock:
             if self.niFake_Read_cfunc is None:
                 self.niFake_Read_cfunc = self._get_library_function('niFake_Read')
@@ -431,7 +431,7 @@ class Library(object):
                 self.niFake_Read_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Read_cfunc(vi, maximum_time, reading)
 
-    def read_from_channel(self, vi, channel_name, maximum_time, reading):  # noqa: N802
+    def niFake_ReadFromChannel(self, vi, channel_name, maximum_time, reading):  # noqa: N802
         with self._func_lock:
             if self.niFake_ReadFromChannel_cfunc is None:
                 self.niFake_ReadFromChannel_cfunc = self._get_library_function('niFake_ReadFromChannel')
@@ -439,7 +439,7 @@ class Library(object):
                 self.niFake_ReadFromChannel_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReadFromChannel_cfunc(vi, channel_name, maximum_time, reading)
 
-    def return_a_number_and_a_string(self, vi, a_number, a_string):  # noqa: N802
+    def niFake_ReturnANumberAndAString(self, vi, a_number, a_string):  # noqa: N802
         with self._func_lock:
             if self.niFake_ReturnANumberAndAString_cfunc is None:
                 self.niFake_ReturnANumberAndAString_cfunc = self._get_library_function('niFake_ReturnANumberAndAString')
@@ -447,7 +447,7 @@ class Library(object):
                 self.niFake_ReturnANumberAndAString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReturnANumberAndAString_cfunc(vi, a_number, a_string)
 
-    def return_duration_in_seconds(self, vi, timedelta):  # noqa: N802
+    def niFake_ReturnDurationInSeconds(self, vi, timedelta):  # noqa: N802
         with self._func_lock:
             if self.niFake_ReturnDurationInSeconds_cfunc is None:
                 self.niFake_ReturnDurationInSeconds_cfunc = self._get_library_function('niFake_ReturnDurationInSeconds')
@@ -455,7 +455,7 @@ class Library(object):
                 self.niFake_ReturnDurationInSeconds_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReturnDurationInSeconds_cfunc(vi, timedelta)
 
-    def return_list_of_durations_in_seconds(self, vi, number_of_elements, timedeltas):  # noqa: N802
+    def niFake_ReturnListOfDurationsInSeconds(self, vi, number_of_elements, timedeltas):  # noqa: N802
         with self._func_lock:
             if self.niFake_ReturnListOfDurationsInSeconds_cfunc is None:
                 self.niFake_ReturnListOfDurationsInSeconds_cfunc = self._get_library_function('niFake_ReturnListOfDurationsInSeconds')
@@ -463,7 +463,7 @@ class Library(object):
                 self.niFake_ReturnListOfDurationsInSeconds_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReturnListOfDurationsInSeconds_cfunc(vi, number_of_elements, timedeltas)
 
-    def return_multiple_types(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string):  # noqa: N802
+    def niFake_ReturnMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string):  # noqa: N802
         with self._func_lock:
             if self.niFake_ReturnMultipleTypes_cfunc is None:
                 self.niFake_ReturnMultipleTypes_cfunc = self._get_library_function('niFake_ReturnMultipleTypes')
@@ -471,7 +471,7 @@ class Library(object):
                 self.niFake_ReturnMultipleTypes_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReturnMultipleTypes_cfunc(vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string)
 
-    def _set_attribute_vi_boolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFake_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFake_SetAttributeViBoolean_cfunc is None:
                 self.niFake_SetAttributeViBoolean_cfunc = self._get_library_function('niFake_SetAttributeViBoolean')
@@ -479,7 +479,7 @@ class Library(object):
                 self.niFake_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_int32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFake_SetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFake_SetAttributeViInt32_cfunc is None:
                 self.niFake_SetAttributeViInt32_cfunc = self._get_library_function('niFake_SetAttributeViInt32')
@@ -487,7 +487,7 @@ class Library(object):
                 self.niFake_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_int64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFake_SetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFake_SetAttributeViInt64_cfunc is None:
                 self.niFake_SetAttributeViInt64_cfunc = self._get_library_function('niFake_SetAttributeViInt64')
@@ -495,7 +495,7 @@ class Library(object):
                 self.niFake_SetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_real64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFake_SetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFake_SetAttributeViReal64_cfunc is None:
                 self.niFake_SetAttributeViReal64_cfunc = self._get_library_function('niFake_SetAttributeViReal64')
@@ -503,7 +503,7 @@ class Library(object):
                 self.niFake_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_string(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFake_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFake_SetAttributeViString_cfunc is None:
                 self.niFake_SetAttributeViString_cfunc = self._get_library_function('niFake_SetAttributeViString')
@@ -511,7 +511,7 @@ class Library(object):
                 self.niFake_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def set_custom_type(self, vi, cs):  # noqa: N802
+    def niFake_SetCustomType(self, vi, cs):  # noqa: N802
         with self._func_lock:
             if self.niFake_SetCustomType_cfunc is None:
                 self.niFake_SetCustomType_cfunc = self._get_library_function('niFake_SetCustomType')
@@ -519,7 +519,7 @@ class Library(object):
                 self.niFake_SetCustomType_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetCustomType_cfunc(vi, cs)
 
-    def set_custom_type_array(self, vi, number_of_elements, cs):  # noqa: N802
+    def niFake_SetCustomTypeArray(self, vi, number_of_elements, cs):  # noqa: N802
         with self._func_lock:
             if self.niFake_SetCustomTypeArray_cfunc is None:
                 self.niFake_SetCustomTypeArray_cfunc = self._get_library_function('niFake_SetCustomTypeArray')
@@ -527,7 +527,7 @@ class Library(object):
                 self.niFake_SetCustomTypeArray_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetCustomTypeArray_cfunc(vi, number_of_elements, cs)
 
-    def string_valued_enum_input_function_with_defaults(self, vi, a_mobile_os_name):  # noqa: N802
+    def niFake_StringValuedEnumInputFunctionWithDefaults(self, vi, a_mobile_os_name):  # noqa: N802
         with self._func_lock:
             if self.niFake_StringValuedEnumInputFunctionWithDefaults_cfunc is None:
                 self.niFake_StringValuedEnumInputFunctionWithDefaults_cfunc = self._get_library_function('niFake_StringValuedEnumInputFunctionWithDefaults')
@@ -535,7 +535,7 @@ class Library(object):
                 self.niFake_StringValuedEnumInputFunctionWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_StringValuedEnumInputFunctionWithDefaults_cfunc(vi, a_mobile_os_name)
 
-    def two_input_function(self, vi, a_number, a_string):  # noqa: N802
+    def niFake_TwoInputFunction(self, vi, a_number, a_string):  # noqa: N802
         with self._func_lock:
             if self.niFake_TwoInputFunction_cfunc is None:
                 self.niFake_TwoInputFunction_cfunc = self._get_library_function('niFake_TwoInputFunction')
@@ -543,7 +543,7 @@ class Library(object):
                 self.niFake_TwoInputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_TwoInputFunction_cfunc(vi, a_number, a_string)
 
-    def unlock(self, vi, caller_has_lock):  # noqa: N802
+    def niFake_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niFake_UnlockSession_cfunc is None:
                 self.niFake_UnlockSession_cfunc = self._get_library_function('niFake_UnlockSession')
@@ -551,7 +551,7 @@ class Library(object):
                 self.niFake_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_UnlockSession_cfunc(vi, caller_has_lock)
 
-    def use64_bit_number(self, vi, input, output):  # noqa: N802
+    def niFake_Use64BitNumber(self, vi, input, output):  # noqa: N802
         with self._func_lock:
             if self.niFake_Use64BitNumber_cfunc is None:
                 self.niFake_Use64BitNumber_cfunc = self._get_library_function('niFake_Use64BitNumber')
@@ -559,7 +559,7 @@ class Library(object):
                 self.niFake_Use64BitNumber_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Use64BitNumber_cfunc(vi, input, output)
 
-    def write_waveform(self, vi, number_of_samples, waveform):  # noqa: N802
+    def niFake_WriteWaveform(self, vi, number_of_samples, waveform):  # noqa: N802
         with self._func_lock:
             if self.niFake_WriteWaveform_cfunc is None:
                 self.niFake_WriteWaveform_cfunc = self._get_library_function('niFake_WriteWaveform')
@@ -567,7 +567,7 @@ class Library(object):
                 self.niFake_WriteWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_WriteWaveform_cfunc(vi, number_of_samples, waveform)
 
-    def _close(self, vi):  # noqa: N802
+    def niFake_close(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFake_close_cfunc is None:
                 self.niFake_close_cfunc = self._get_library_function('niFake_close')
@@ -575,7 +575,7 @@ class Library(object):
                 self.niFake_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_close_cfunc(vi)
 
-    def _error_message(self, vi, error_code, error_message):  # noqa: N802
+    def niFake_error_message(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:
             if self.niFake_error_message_cfunc is None:
                 self.niFake_error_message_cfunc = self._get_library_function('niFake_error_message')
@@ -583,7 +583,7 @@ class Library(object):
                 self.niFake_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_error_message_cfunc(vi, error_code, error_message)
 
-    def _self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
+    def niFake_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:
             if self.niFake_self_test_cfunc is None:
                 self.niFake_self_test_cfunc = self._get_library_function('niFake_self_test')

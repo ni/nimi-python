@@ -4,8 +4,6 @@
 
     import build.helper as helper
 
-    parameters = f['parameters']
-    c_function_prefix = config['c_function_prefix']
     enum_input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
     suffix = method_template['method_python_name_suffix']
 %>\

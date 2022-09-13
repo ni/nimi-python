@@ -55,7 +55,7 @@ class Library(object):
     param_ctypes_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.CTYPES_ARGTYPES)
 %>\
 
-    def ${f['python_name']}(${param_names_method}):  # noqa: N802
+    def ${c_func_name}(${param_names_method}):  # noqa: N802
         with self._func_lock:
             if self.${c_func_name}_cfunc is None:
                 self.${c_func_name}_cfunc = self._get_library_function('${c_func_name}')

@@ -32,7 +32,7 @@ class Library(object):
             raise errors.DriverTooOldError() from e
         return function
 
-    def _close_installed_devices_session(self, handle):  # noqa: N802
+    def niModInst_CloseInstalledDevicesSession(self, handle):  # noqa: N802
         with self._func_lock:
             if self.niModInst_CloseInstalledDevicesSession_cfunc is None:
                 self.niModInst_CloseInstalledDevicesSession_cfunc = self._get_library_function('niModInst_CloseInstalledDevicesSession')
@@ -40,7 +40,7 @@ class Library(object):
                 self.niModInst_CloseInstalledDevicesSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niModInst_CloseInstalledDevicesSession_cfunc(handle)
 
-    def _get_extended_error_info(self, error_info_buffer_size, error_info):  # noqa: N802
+    def niModInst_GetExtendedErrorInfo(self, error_info_buffer_size, error_info):  # noqa: N802
         with self._func_lock:
             if self.niModInst_GetExtendedErrorInfo_cfunc is None:
                 self.niModInst_GetExtendedErrorInfo_cfunc = self._get_library_function('niModInst_GetExtendedErrorInfo')
@@ -48,7 +48,7 @@ class Library(object):
                 self.niModInst_GetExtendedErrorInfo_cfunc.restype = ViStatus  # noqa: F405
         return self.niModInst_GetExtendedErrorInfo_cfunc(error_info_buffer_size, error_info)
 
-    def _get_installed_device_attribute_vi_int32(self, handle, index, attribute_id, attribute_value):  # noqa: N802
+    def niModInst_GetInstalledDeviceAttributeViInt32(self, handle, index, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niModInst_GetInstalledDeviceAttributeViInt32_cfunc is None:
                 self.niModInst_GetInstalledDeviceAttributeViInt32_cfunc = self._get_library_function('niModInst_GetInstalledDeviceAttributeViInt32')
@@ -56,7 +56,7 @@ class Library(object):
                 self.niModInst_GetInstalledDeviceAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niModInst_GetInstalledDeviceAttributeViInt32_cfunc(handle, index, attribute_id, attribute_value)
 
-    def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
+    def niModInst_GetInstalledDeviceAttributeViString(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niModInst_GetInstalledDeviceAttributeViString_cfunc is None:
                 self.niModInst_GetInstalledDeviceAttributeViString_cfunc = self._get_library_function('niModInst_GetInstalledDeviceAttributeViString')
@@ -64,7 +64,7 @@ class Library(object):
                 self.niModInst_GetInstalledDeviceAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niModInst_GetInstalledDeviceAttributeViString_cfunc(handle, index, attribute_id, attribute_value_buffer_size, attribute_value)
 
-    def _open_installed_devices_session(self, driver, handle, device_count):  # noqa: N802
+    def niModInst_OpenInstalledDevicesSession(self, driver, handle, device_count):  # noqa: N802
         with self._func_lock:
             if self.niModInst_OpenInstalledDevicesSession_cfunc is None:
                 self.niModInst_OpenInstalledDevicesSession_cfunc = self._get_library_function('niModInst_OpenInstalledDevicesSession')

@@ -66,7 +66,7 @@ class Library(object):
             raise errors.DriverTooOldError() from e
         return function
 
-    def abort(self, vi):  # noqa: N802
+    def niSwitch_AbortScan(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_AbortScan_cfunc is None:
                 self.niSwitch_AbortScan_cfunc = self._get_library_function('niSwitch_AbortScan')
@@ -74,7 +74,7 @@ class Library(object):
                 self.niSwitch_AbortScan_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_AbortScan_cfunc(vi)
 
-    def can_connect(self, vi, channel1, channel2, path_capability):  # noqa: N802
+    def niSwitch_CanConnect(self, vi, channel1, channel2, path_capability):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_CanConnect_cfunc is None:
                 self.niSwitch_CanConnect_cfunc = self._get_library_function('niSwitch_CanConnect')
@@ -82,7 +82,7 @@ class Library(object):
                 self.niSwitch_CanConnect_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_CanConnect_cfunc(vi, channel1, channel2, path_capability)
 
-    def commit(self, vi):  # noqa: N802
+    def niSwitch_Commit(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_Commit_cfunc is None:
                 self.niSwitch_Commit_cfunc = self._get_library_function('niSwitch_Commit')
@@ -90,7 +90,7 @@ class Library(object):
                 self.niSwitch_Commit_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_Commit_cfunc(vi)
 
-    def connect(self, vi, channel1, channel2):  # noqa: N802
+    def niSwitch_Connect(self, vi, channel1, channel2):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_Connect_cfunc is None:
                 self.niSwitch_Connect_cfunc = self._get_library_function('niSwitch_Connect')
@@ -98,7 +98,7 @@ class Library(object):
                 self.niSwitch_Connect_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_Connect_cfunc(vi, channel1, channel2)
 
-    def connect_multiple(self, vi, connection_list):  # noqa: N802
+    def niSwitch_ConnectMultiple(self, vi, connection_list):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_ConnectMultiple_cfunc is None:
                 self.niSwitch_ConnectMultiple_cfunc = self._get_library_function('niSwitch_ConnectMultiple')
@@ -106,7 +106,7 @@ class Library(object):
                 self.niSwitch_ConnectMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_ConnectMultiple_cfunc(vi, connection_list)
 
-    def disable(self, vi):  # noqa: N802
+    def niSwitch_Disable(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_Disable_cfunc is None:
                 self.niSwitch_Disable_cfunc = self._get_library_function('niSwitch_Disable')
@@ -114,7 +114,7 @@ class Library(object):
                 self.niSwitch_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_Disable_cfunc(vi)
 
-    def disconnect(self, vi, channel1, channel2):  # noqa: N802
+    def niSwitch_Disconnect(self, vi, channel1, channel2):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_Disconnect_cfunc is None:
                 self.niSwitch_Disconnect_cfunc = self._get_library_function('niSwitch_Disconnect')
@@ -122,7 +122,7 @@ class Library(object):
                 self.niSwitch_Disconnect_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_Disconnect_cfunc(vi, channel1, channel2)
 
-    def disconnect_all(self, vi):  # noqa: N802
+    def niSwitch_DisconnectAll(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_DisconnectAll_cfunc is None:
                 self.niSwitch_DisconnectAll_cfunc = self._get_library_function('niSwitch_DisconnectAll')
@@ -130,7 +130,7 @@ class Library(object):
                 self.niSwitch_DisconnectAll_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_DisconnectAll_cfunc(vi)
 
-    def disconnect_multiple(self, vi, disconnection_list):  # noqa: N802
+    def niSwitch_DisconnectMultiple(self, vi, disconnection_list):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_DisconnectMultiple_cfunc is None:
                 self.niSwitch_DisconnectMultiple_cfunc = self._get_library_function('niSwitch_DisconnectMultiple')
@@ -138,7 +138,7 @@ class Library(object):
                 self.niSwitch_DisconnectMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_DisconnectMultiple_cfunc(vi, disconnection_list)
 
-    def _get_attribute_vi_boolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niSwitch_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetAttributeViBoolean_cfunc is None:
                 self.niSwitch_GetAttributeViBoolean_cfunc = self._get_library_function('niSwitch_GetAttributeViBoolean')
@@ -146,7 +146,7 @@ class Library(object):
                 self.niSwitch_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_int32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niSwitch_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetAttributeViInt32_cfunc is None:
                 self.niSwitch_GetAttributeViInt32_cfunc = self._get_library_function('niSwitch_GetAttributeViInt32')
@@ -154,7 +154,7 @@ class Library(object):
                 self.niSwitch_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_real64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niSwitch_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetAttributeViReal64_cfunc is None:
                 self.niSwitch_GetAttributeViReal64_cfunc = self._get_library_function('niSwitch_GetAttributeViReal64')
@@ -162,7 +162,7 @@ class Library(object):
                 self.niSwitch_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_string(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
+    def niSwitch_GetAttributeViString(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetAttributeViString_cfunc is None:
                 self.niSwitch_GetAttributeViString_cfunc = self._get_library_function('niSwitch_GetAttributeViString')
@@ -170,7 +170,7 @@ class Library(object):
                 self.niSwitch_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViString_cfunc(vi, channel_name, attribute_id, array_size, attribute_value)
 
-    def get_channel_name(self, vi, index, buffer_size, channel_name_buffer):  # noqa: N802
+    def niSwitch_GetChannelName(self, vi, index, buffer_size, channel_name_buffer):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetChannelName_cfunc is None:
                 self.niSwitch_GetChannelName_cfunc = self._get_library_function('niSwitch_GetChannelName')
@@ -178,7 +178,7 @@ class Library(object):
                 self.niSwitch_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetChannelName_cfunc(vi, index, buffer_size, channel_name_buffer)
 
-    def _get_error(self, vi, code, buffer_size, description):  # noqa: N802
+    def niSwitch_GetError(self, vi, code, buffer_size, description):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetError_cfunc is None:
                 self.niSwitch_GetError_cfunc = self._get_library_function('niSwitch_GetError')
@@ -186,7 +186,7 @@ class Library(object):
                 self.niSwitch_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetError_cfunc(vi, code, buffer_size, description)
 
-    def get_path(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
+    def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetPath_cfunc is None:
                 self.niSwitch_GetPath_cfunc = self._get_library_function('niSwitch_GetPath')
@@ -194,7 +194,7 @@ class Library(object):
                 self.niSwitch_GetPath_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetPath_cfunc(vi, channel1, channel2, buffer_size, path)
 
-    def get_relay_count(self, vi, relay_name, relay_count):  # noqa: N802
+    def niSwitch_GetRelayCount(self, vi, relay_name, relay_count):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetRelayCount_cfunc is None:
                 self.niSwitch_GetRelayCount_cfunc = self._get_library_function('niSwitch_GetRelayCount')
@@ -202,7 +202,7 @@ class Library(object):
                 self.niSwitch_GetRelayCount_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetRelayCount_cfunc(vi, relay_name, relay_count)
 
-    def get_relay_name(self, vi, index, relay_name_buffer_size, relay_name_buffer):  # noqa: N802
+    def niSwitch_GetRelayName(self, vi, index, relay_name_buffer_size, relay_name_buffer):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetRelayName_cfunc is None:
                 self.niSwitch_GetRelayName_cfunc = self._get_library_function('niSwitch_GetRelayName')
@@ -210,7 +210,7 @@ class Library(object):
                 self.niSwitch_GetRelayName_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetRelayName_cfunc(vi, index, relay_name_buffer_size, relay_name_buffer)
 
-    def get_relay_position(self, vi, relay_name, relay_position):  # noqa: N802
+    def niSwitch_GetRelayPosition(self, vi, relay_name, relay_position):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetRelayPosition_cfunc is None:
                 self.niSwitch_GetRelayPosition_cfunc = self._get_library_function('niSwitch_GetRelayPosition')
@@ -218,7 +218,7 @@ class Library(object):
                 self.niSwitch_GetRelayPosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetRelayPosition_cfunc(vi, relay_name, relay_position)
 
-    def _init_with_topology(self, resource_name, topology, simulate, reset_device, vi):  # noqa: N802
+    def niSwitch_InitWithTopology(self, resource_name, topology, simulate, reset_device, vi):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_InitWithTopology_cfunc is None:
                 self.niSwitch_InitWithTopology_cfunc = self._get_library_function('niSwitch_InitWithTopology')
@@ -226,7 +226,7 @@ class Library(object):
                 self.niSwitch_InitWithTopology_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_InitWithTopology_cfunc(resource_name, topology, simulate, reset_device, vi)
 
-    def _initiate_scan(self, vi):  # noqa: N802
+    def niSwitch_InitiateScan(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_InitiateScan_cfunc is None:
                 self.niSwitch_InitiateScan_cfunc = self._get_library_function('niSwitch_InitiateScan')
@@ -234,7 +234,7 @@ class Library(object):
                 self.niSwitch_InitiateScan_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_InitiateScan_cfunc(vi)
 
-    def lock(self, vi, caller_has_lock):  # noqa: N802
+    def niSwitch_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_LockSession_cfunc is None:
                 self.niSwitch_LockSession_cfunc = self._get_library_function('niSwitch_LockSession')
@@ -242,7 +242,7 @@ class Library(object):
                 self.niSwitch_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_LockSession_cfunc(vi, caller_has_lock)
 
-    def relay_control(self, vi, relay_name, relay_action):  # noqa: N802
+    def niSwitch_RelayControl(self, vi, relay_name, relay_action):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_RelayControl_cfunc is None:
                 self.niSwitch_RelayControl_cfunc = self._get_library_function('niSwitch_RelayControl')
@@ -250,7 +250,7 @@ class Library(object):
                 self.niSwitch_RelayControl_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_RelayControl_cfunc(vi, relay_name, relay_action)
 
-    def reset_with_defaults(self, vi):  # noqa: N802
+    def niSwitch_ResetWithDefaults(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_ResetWithDefaults_cfunc is None:
                 self.niSwitch_ResetWithDefaults_cfunc = self._get_library_function('niSwitch_ResetWithDefaults')
@@ -258,7 +258,7 @@ class Library(object):
                 self.niSwitch_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_ResetWithDefaults_cfunc(vi)
 
-    def route_scan_advanced_output(self, vi, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):  # noqa: N802
+    def niSwitch_RouteScanAdvancedOutput(self, vi, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_RouteScanAdvancedOutput_cfunc is None:
                 self.niSwitch_RouteScanAdvancedOutput_cfunc = self._get_library_function('niSwitch_RouteScanAdvancedOutput')
@@ -266,7 +266,7 @@ class Library(object):
                 self.niSwitch_RouteScanAdvancedOutput_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_RouteScanAdvancedOutput_cfunc(vi, scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
 
-    def route_trigger_input(self, vi, trigger_input_connector, trigger_input_bus_line, invert):  # noqa: N802
+    def niSwitch_RouteTriggerInput(self, vi, trigger_input_connector, trigger_input_bus_line, invert):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_RouteTriggerInput_cfunc is None:
                 self.niSwitch_RouteTriggerInput_cfunc = self._get_library_function('niSwitch_RouteTriggerInput')
@@ -274,7 +274,7 @@ class Library(object):
                 self.niSwitch_RouteTriggerInput_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_RouteTriggerInput_cfunc(vi, trigger_input_connector, trigger_input_bus_line, invert)
 
-    def send_software_trigger(self, vi):  # noqa: N802
+    def niSwitch_SendSoftwareTrigger(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_SendSoftwareTrigger_cfunc is None:
                 self.niSwitch_SendSoftwareTrigger_cfunc = self._get_library_function('niSwitch_SendSoftwareTrigger')
@@ -282,7 +282,7 @@ class Library(object):
                 self.niSwitch_SendSoftwareTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SendSoftwareTrigger_cfunc(vi)
 
-    def _set_attribute_vi_boolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niSwitch_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_SetAttributeViBoolean_cfunc is None:
                 self.niSwitch_SetAttributeViBoolean_cfunc = self._get_library_function('niSwitch_SetAttributeViBoolean')
@@ -290,7 +290,7 @@ class Library(object):
                 self.niSwitch_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_int32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niSwitch_SetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_SetAttributeViInt32_cfunc is None:
                 self.niSwitch_SetAttributeViInt32_cfunc = self._get_library_function('niSwitch_SetAttributeViInt32')
@@ -298,7 +298,7 @@ class Library(object):
                 self.niSwitch_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_real64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niSwitch_SetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_SetAttributeViReal64_cfunc is None:
                 self.niSwitch_SetAttributeViReal64_cfunc = self._get_library_function('niSwitch_SetAttributeViReal64')
@@ -306,7 +306,7 @@ class Library(object):
                 self.niSwitch_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_string(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niSwitch_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_SetAttributeViString_cfunc is None:
                 self.niSwitch_SetAttributeViString_cfunc = self._get_library_function('niSwitch_SetAttributeViString')
@@ -314,7 +314,7 @@ class Library(object):
                 self.niSwitch_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def set_path(self, vi, path_list):  # noqa: N802
+    def niSwitch_SetPath(self, vi, path_list):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_SetPath_cfunc is None:
                 self.niSwitch_SetPath_cfunc = self._get_library_function('niSwitch_SetPath')
@@ -322,7 +322,7 @@ class Library(object):
                 self.niSwitch_SetPath_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetPath_cfunc(vi, path_list)
 
-    def unlock(self, vi, caller_has_lock):  # noqa: N802
+    def niSwitch_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_UnlockSession_cfunc is None:
                 self.niSwitch_UnlockSession_cfunc = self._get_library_function('niSwitch_UnlockSession')
@@ -330,7 +330,7 @@ class Library(object):
                 self.niSwitch_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_UnlockSession_cfunc(vi, caller_has_lock)
 
-    def wait_for_debounce(self, vi, maximum_time_ms):  # noqa: N802
+    def niSwitch_WaitForDebounce(self, vi, maximum_time_ms):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_WaitForDebounce_cfunc is None:
                 self.niSwitch_WaitForDebounce_cfunc = self._get_library_function('niSwitch_WaitForDebounce')
@@ -338,7 +338,7 @@ class Library(object):
                 self.niSwitch_WaitForDebounce_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_WaitForDebounce_cfunc(vi, maximum_time_ms)
 
-    def wait_for_scan_complete(self, vi, maximum_time_ms):  # noqa: N802
+    def niSwitch_WaitForScanComplete(self, vi, maximum_time_ms):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_WaitForScanComplete_cfunc is None:
                 self.niSwitch_WaitForScanComplete_cfunc = self._get_library_function('niSwitch_WaitForScanComplete')
@@ -346,7 +346,7 @@ class Library(object):
                 self.niSwitch_WaitForScanComplete_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_WaitForScanComplete_cfunc(vi, maximum_time_ms)
 
-    def _close(self, vi):  # noqa: N802
+    def niSwitch_close(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_close_cfunc is None:
                 self.niSwitch_close_cfunc = self._get_library_function('niSwitch_close')
@@ -354,7 +354,7 @@ class Library(object):
                 self.niSwitch_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_close_cfunc(vi)
 
-    def _error_message(self, vi, error_code, error_message):  # noqa: N802
+    def niSwitch_error_message(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_error_message_cfunc is None:
                 self.niSwitch_error_message_cfunc = self._get_library_function('niSwitch_error_message')
@@ -362,7 +362,7 @@ class Library(object):
                 self.niSwitch_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_error_message_cfunc(vi, error_code, error_message)
 
-    def reset(self, vi):  # noqa: N802
+    def niSwitch_reset(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_reset_cfunc is None:
                 self.niSwitch_reset_cfunc = self._get_library_function('niSwitch_reset')
@@ -370,7 +370,7 @@ class Library(object):
                 self.niSwitch_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_reset_cfunc(vi)
 
-    def _self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
+    def niSwitch_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_self_test_cfunc is None:
                 self.niSwitch_self_test_cfunc = self._get_library_function('niSwitch_self_test')

@@ -127,6 +127,6 @@ if p['use_array']:
 <%
 f = functions[func_name]
 %>\
-        mock_library.${c_function_prefix}${func_name}_cfunc.side_effect = MockFunctionCallError("${c_function_prefix}${func_name}_cfunc")
-        mock_library.${c_function_prefix}${func_name}_cfunc.return_value = 0
+        mock_library.${c_function_prefix}${func_name}.side_effect = MockFunctionCallError("${c_function_prefix}${func_name}")
+        mock_library.${c_function_prefix}${func_name}.return_value = 0
 % endfor

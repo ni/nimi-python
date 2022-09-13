@@ -16,6 +16,7 @@
     assert ivi_dance_size_parameter is None or len_size_parameter is None, str(f)
 
     full_func_name = f['python_name'] + method_template['method_python_name_suffix']
+    c_func_name = config['c_function_prefix'] + f['name']
 %>\
 
     def ${full_func_name}(${param_names_method}):  # noqa: N802
@@ -33,7 +34,7 @@
 % endfor
 % if len(ivi_dance_parameters) > 0:
 <% ivi_dance_step = helper.IviDanceStep.GET_DATA %>\
-        error_code = self._library.${f['python_name']}(${param_names_library})
+        error_code = self._library.${c_func_name}(${param_names_library})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
 %   for declaration in helper.get_ctype_variable_declaration_snippet(ivi_dance_size_parameter, parameters, ivi_dance_step, config):
         ${declaration}
@@ -44,6 +45,6 @@
 %       endfor
 %   endfor
 % endif
-        error_code = self._library.${f['python_name']}(${param_names_library})
+        error_code = self._library.${c_func_name}(${param_names_library})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(parameters, config, use_numpy_array=True)}

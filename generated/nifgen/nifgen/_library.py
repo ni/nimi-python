@@ -97,7 +97,7 @@ class Library(object):
             raise errors.DriverTooOldError() from e
         return function
 
-    def abort(self, vi):  # noqa: N802
+    def niFgen_AbortGeneration(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_AbortGeneration_cfunc is None:
                 self.niFgen_AbortGeneration_cfunc = self._get_library_function('niFgen_AbortGeneration')
@@ -105,7 +105,7 @@ class Library(object):
                 self.niFgen_AbortGeneration_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_AbortGeneration_cfunc(vi)
 
-    def allocate_named_waveform(self, vi, channel_name, waveform_name, waveform_size):  # noqa: N802
+    def niFgen_AllocateNamedWaveform(self, vi, channel_name, waveform_name, waveform_size):  # noqa: N802
         with self._func_lock:
             if self.niFgen_AllocateNamedWaveform_cfunc is None:
                 self.niFgen_AllocateNamedWaveform_cfunc = self._get_library_function('niFgen_AllocateNamedWaveform')
@@ -113,7 +113,7 @@ class Library(object):
                 self.niFgen_AllocateNamedWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_AllocateNamedWaveform_cfunc(vi, channel_name, waveform_name, waveform_size)
 
-    def allocate_waveform(self, vi, channel_name, waveform_size, waveform_handle):  # noqa: N802
+    def niFgen_AllocateWaveform(self, vi, channel_name, waveform_size, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_AllocateWaveform_cfunc is None:
                 self.niFgen_AllocateWaveform_cfunc = self._get_library_function('niFgen_AllocateWaveform')
@@ -121,7 +121,7 @@ class Library(object):
                 self.niFgen_AllocateWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_AllocateWaveform_cfunc(vi, channel_name, waveform_size, waveform_handle)
 
-    def clear_arb_memory(self, vi):  # noqa: N802
+    def niFgen_ClearArbMemory(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ClearArbMemory_cfunc is None:
                 self.niFgen_ClearArbMemory_cfunc = self._get_library_function('niFgen_ClearArbMemory')
@@ -129,7 +129,7 @@ class Library(object):
                 self.niFgen_ClearArbMemory_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ClearArbMemory_cfunc(vi)
 
-    def clear_arb_sequence(self, vi, sequence_handle):  # noqa: N802
+    def niFgen_ClearArbSequence(self, vi, sequence_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ClearArbSequence_cfunc is None:
                 self.niFgen_ClearArbSequence_cfunc = self._get_library_function('niFgen_ClearArbSequence')
@@ -137,7 +137,7 @@ class Library(object):
                 self.niFgen_ClearArbSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ClearArbSequence_cfunc(vi, sequence_handle)
 
-    def _clear_arb_waveform(self, vi, waveform_handle):  # noqa: N802
+    def niFgen_ClearArbWaveform(self, vi, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ClearArbWaveform_cfunc is None:
                 self.niFgen_ClearArbWaveform_cfunc = self._get_library_function('niFgen_ClearArbWaveform')
@@ -145,7 +145,7 @@ class Library(object):
                 self.niFgen_ClearArbWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ClearArbWaveform_cfunc(vi, waveform_handle)
 
-    def clear_freq_list(self, vi, frequency_list_handle):  # noqa: N802
+    def niFgen_ClearFreqList(self, vi, frequency_list_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ClearFreqList_cfunc is None:
                 self.niFgen_ClearFreqList_cfunc = self._get_library_function('niFgen_ClearFreqList')
@@ -153,7 +153,7 @@ class Library(object):
                 self.niFgen_ClearFreqList_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ClearFreqList_cfunc(vi, frequency_list_handle)
 
-    def clear_user_standard_waveform(self, vi, channel_name):  # noqa: N802
+    def niFgen_ClearUserStandardWaveform(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ClearUserStandardWaveform_cfunc is None:
                 self.niFgen_ClearUserStandardWaveform_cfunc = self._get_library_function('niFgen_ClearUserStandardWaveform')
@@ -161,7 +161,7 @@ class Library(object):
                 self.niFgen_ClearUserStandardWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ClearUserStandardWaveform_cfunc(vi, channel_name)
 
-    def commit(self, vi):  # noqa: N802
+    def niFgen_Commit(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_Commit_cfunc is None:
                 self.niFgen_Commit_cfunc = self._get_library_function('niFgen_Commit')
@@ -169,7 +169,7 @@ class Library(object):
                 self.niFgen_Commit_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_Commit_cfunc(vi)
 
-    def configure_arb_sequence(self, vi, channel_name, sequence_handle, gain, offset):  # noqa: N802
+    def niFgen_ConfigureArbSequence(self, vi, channel_name, sequence_handle, gain, offset):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ConfigureArbSequence_cfunc is None:
                 self.niFgen_ConfigureArbSequence_cfunc = self._get_library_function('niFgen_ConfigureArbSequence')
@@ -177,7 +177,7 @@ class Library(object):
                 self.niFgen_ConfigureArbSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureArbSequence_cfunc(vi, channel_name, sequence_handle, gain, offset)
 
-    def configure_arb_waveform(self, vi, channel_name, waveform_handle, gain, offset):  # noqa: N802
+    def niFgen_ConfigureArbWaveform(self, vi, channel_name, waveform_handle, gain, offset):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ConfigureArbWaveform_cfunc is None:
                 self.niFgen_ConfigureArbWaveform_cfunc = self._get_library_function('niFgen_ConfigureArbWaveform')
@@ -185,7 +185,7 @@ class Library(object):
                 self.niFgen_ConfigureArbWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureArbWaveform_cfunc(vi, channel_name, waveform_handle, gain, offset)
 
-    def configure_freq_list(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
+    def niFgen_ConfigureFreqList(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ConfigureFreqList_cfunc is None:
                 self.niFgen_ConfigureFreqList_cfunc = self._get_library_function('niFgen_ConfigureFreqList')
@@ -193,7 +193,7 @@ class Library(object):
                 self.niFgen_ConfigureFreqList_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureFreqList_cfunc(vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase)
 
-    def configure_standard_waveform(self, vi, channel_name, waveform, amplitude, dc_offset, frequency, start_phase):  # noqa: N802
+    def niFgen_ConfigureStandardWaveform(self, vi, channel_name, waveform, amplitude, dc_offset, frequency, start_phase):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ConfigureStandardWaveform_cfunc is None:
                 self.niFgen_ConfigureStandardWaveform_cfunc = self._get_library_function('niFgen_ConfigureStandardWaveform')
@@ -201,7 +201,7 @@ class Library(object):
                 self.niFgen_ConfigureStandardWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureStandardWaveform_cfunc(vi, channel_name, waveform, amplitude, dc_offset, frequency, start_phase)
 
-    def create_advanced_arb_sequence(self, vi, sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array, coerced_markers_array, sequence_handle):  # noqa: N802
+    def niFgen_CreateAdvancedArbSequence(self, vi, sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array, coerced_markers_array, sequence_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateAdvancedArbSequence_cfunc is None:
                 self.niFgen_CreateAdvancedArbSequence_cfunc = self._get_library_function('niFgen_CreateAdvancedArbSequence')
@@ -209,7 +209,7 @@ class Library(object):
                 self.niFgen_CreateAdvancedArbSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateAdvancedArbSequence_cfunc(vi, sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array, coerced_markers_array, sequence_handle)
 
-    def create_arb_sequence(self, vi, sequence_length, waveform_handles_array, loop_counts_array, sequence_handle):  # noqa: N802
+    def niFgen_CreateArbSequence(self, vi, sequence_length, waveform_handles_array, loop_counts_array, sequence_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateArbSequence_cfunc is None:
                 self.niFgen_CreateArbSequence_cfunc = self._get_library_function('niFgen_CreateArbSequence')
@@ -217,7 +217,7 @@ class Library(object):
                 self.niFgen_CreateArbSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateArbSequence_cfunc(vi, sequence_length, waveform_handles_array, loop_counts_array, sequence_handle)
 
-    def create_freq_list(self, vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle):  # noqa: N802
+    def niFgen_CreateFreqList(self, vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateFreqList_cfunc is None:
                 self.niFgen_CreateFreqList_cfunc = self._get_library_function('niFgen_CreateFreqList')
@@ -225,7 +225,7 @@ class Library(object):
                 self.niFgen_CreateFreqList_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateFreqList_cfunc(vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle)
 
-    def _create_waveform_f64(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
+    def niFgen_CreateWaveformF64(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateWaveformF64_cfunc is None:
                 self.niFgen_CreateWaveformF64_cfunc = self._get_library_function('niFgen_CreateWaveformF64')
@@ -233,7 +233,7 @@ class Library(object):
                 self.niFgen_CreateWaveformF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformF64_cfunc(vi, channel_name, waveform_size, waveform_data_array, waveform_handle)
 
-    def create_waveform_from_file_f64(self, vi, channel_name, file_name, byte_order, waveform_handle):  # noqa: N802
+    def niFgen_CreateWaveformFromFileF64(self, vi, channel_name, file_name, byte_order, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateWaveformFromFileF64_cfunc is None:
                 self.niFgen_CreateWaveformFromFileF64_cfunc = self._get_library_function('niFgen_CreateWaveformFromFileF64')
@@ -241,7 +241,7 @@ class Library(object):
                 self.niFgen_CreateWaveformFromFileF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformFromFileF64_cfunc(vi, channel_name, file_name, byte_order, waveform_handle)
 
-    def create_waveform_from_file_i16(self, vi, channel_name, file_name, byte_order, waveform_handle):  # noqa: N802
+    def niFgen_CreateWaveformFromFileI16(self, vi, channel_name, file_name, byte_order, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateWaveformFromFileI16_cfunc is None:
                 self.niFgen_CreateWaveformFromFileI16_cfunc = self._get_library_function('niFgen_CreateWaveformFromFileI16')
@@ -249,7 +249,7 @@ class Library(object):
                 self.niFgen_CreateWaveformFromFileI16_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformFromFileI16_cfunc(vi, channel_name, file_name, byte_order, waveform_handle)
 
-    def _create_waveform_i16(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
+    def niFgen_CreateWaveformI16(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateWaveformI16_cfunc is None:
                 self.niFgen_CreateWaveformI16_cfunc = self._get_library_function('niFgen_CreateWaveformI16')
@@ -257,7 +257,7 @@ class Library(object):
                 self.niFgen_CreateWaveformI16_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformI16_cfunc(vi, channel_name, waveform_size, waveform_data_array, waveform_handle)
 
-    def define_user_standard_waveform(self, vi, channel_name, waveform_size, waveform_data_array):  # noqa: N802
+    def niFgen_DefineUserStandardWaveform(self, vi, channel_name, waveform_size, waveform_data_array):  # noqa: N802
         with self._func_lock:
             if self.niFgen_DefineUserStandardWaveform_cfunc is None:
                 self.niFgen_DefineUserStandardWaveform_cfunc = self._get_library_function('niFgen_DefineUserStandardWaveform')
@@ -265,7 +265,7 @@ class Library(object):
                 self.niFgen_DefineUserStandardWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_DefineUserStandardWaveform_cfunc(vi, channel_name, waveform_size, waveform_data_array)
 
-    def _delete_named_waveform(self, vi, channel_name, waveform_name):  # noqa: N802
+    def niFgen_DeleteNamedWaveform(self, vi, channel_name, waveform_name):  # noqa: N802
         with self._func_lock:
             if self.niFgen_DeleteNamedWaveform_cfunc is None:
                 self.niFgen_DeleteNamedWaveform_cfunc = self._get_library_function('niFgen_DeleteNamedWaveform')
@@ -273,7 +273,7 @@ class Library(object):
                 self.niFgen_DeleteNamedWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_DeleteNamedWaveform_cfunc(vi, channel_name, waveform_name)
 
-    def delete_script(self, vi, channel_name, script_name):  # noqa: N802
+    def niFgen_DeleteScript(self, vi, channel_name, script_name):  # noqa: N802
         with self._func_lock:
             if self.niFgen_DeleteScript_cfunc is None:
                 self.niFgen_DeleteScript_cfunc = self._get_library_function('niFgen_DeleteScript')
@@ -281,7 +281,7 @@ class Library(object):
                 self.niFgen_DeleteScript_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_DeleteScript_cfunc(vi, channel_name, script_name)
 
-    def disable(self, vi):  # noqa: N802
+    def niFgen_Disable(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_Disable_cfunc is None:
                 self.niFgen_Disable_cfunc = self._get_library_function('niFgen_Disable')
@@ -289,7 +289,7 @@ class Library(object):
                 self.niFgen_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_Disable_cfunc(vi)
 
-    def export_attribute_configuration_buffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+    def niFgen_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ExportAttributeConfigurationBuffer_cfunc is None:
                 self.niFgen_ExportAttributeConfigurationBuffer_cfunc = self._get_library_function('niFgen_ExportAttributeConfigurationBuffer')
@@ -297,7 +297,7 @@ class Library(object):
                 self.niFgen_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ExportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
 
-    def export_attribute_configuration_file(self, vi, file_path):  # noqa: N802
+    def niFgen_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ExportAttributeConfigurationFile_cfunc is None:
                 self.niFgen_ExportAttributeConfigurationFile_cfunc = self._get_library_function('niFgen_ExportAttributeConfigurationFile')
@@ -305,7 +305,7 @@ class Library(object):
                 self.niFgen_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ExportAttributeConfigurationFile_cfunc(vi, file_path)
 
-    def _get_attribute_vi_boolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFgen_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetAttributeViBoolean_cfunc is None:
                 self.niFgen_GetAttributeViBoolean_cfunc = self._get_library_function('niFgen_GetAttributeViBoolean')
@@ -313,7 +313,7 @@ class Library(object):
                 self.niFgen_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_int32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFgen_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetAttributeViInt32_cfunc is None:
                 self.niFgen_GetAttributeViInt32_cfunc = self._get_library_function('niFgen_GetAttributeViInt32')
@@ -321,7 +321,7 @@ class Library(object):
                 self.niFgen_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_real64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFgen_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetAttributeViReal64_cfunc is None:
                 self.niFgen_GetAttributeViReal64_cfunc = self._get_library_function('niFgen_GetAttributeViReal64')
@@ -329,7 +329,7 @@ class Library(object):
                 self.niFgen_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_string(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
+    def niFgen_GetAttributeViString(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetAttributeViString_cfunc is None:
                 self.niFgen_GetAttributeViString_cfunc = self._get_library_function('niFgen_GetAttributeViString')
@@ -337,7 +337,7 @@ class Library(object):
                 self.niFgen_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViString_cfunc(vi, channel_name, attribute_id, array_size, attribute_value)
 
-    def get_channel_name(self, vi, index, buffer_size, channel_string):  # noqa: N802
+    def niFgen_GetChannelName(self, vi, index, buffer_size, channel_string):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetChannelName_cfunc is None:
                 self.niFgen_GetChannelName_cfunc = self._get_library_function('niFgen_GetChannelName')
@@ -345,7 +345,7 @@ class Library(object):
                 self.niFgen_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetChannelName_cfunc(vi, index, buffer_size, channel_string)
 
-    def _get_error(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
+    def niFgen_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetError_cfunc is None:
                 self.niFgen_GetError_cfunc = self._get_library_function('niFgen_GetError')
@@ -353,7 +353,7 @@ class Library(object):
                 self.niFgen_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetError_cfunc(vi, error_code, error_description_buffer_size, error_description)
 
-    def _get_ext_cal_last_date_and_time(self, vi, year, month, day, hour, minute):  # noqa: N802
+    def niFgen_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetExtCalLastDateAndTime_cfunc is None:
                 self.niFgen_GetExtCalLastDateAndTime_cfunc = self._get_library_function('niFgen_GetExtCalLastDateAndTime')
@@ -361,7 +361,7 @@ class Library(object):
                 self.niFgen_GetExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetExtCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
 
-    def get_ext_cal_last_temp(self, vi, temperature):  # noqa: N802
+    def niFgen_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetExtCalLastTemp_cfunc is None:
                 self.niFgen_GetExtCalLastTemp_cfunc = self._get_library_function('niFgen_GetExtCalLastTemp')
@@ -369,7 +369,7 @@ class Library(object):
                 self.niFgen_GetExtCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetExtCalLastTemp_cfunc(vi, temperature)
 
-    def get_ext_cal_recommended_interval(self, vi, months):  # noqa: N802
+    def niFgen_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetExtCalRecommendedInterval_cfunc is None:
                 self.niFgen_GetExtCalRecommendedInterval_cfunc = self._get_library_function('niFgen_GetExtCalRecommendedInterval')
@@ -377,7 +377,7 @@ class Library(object):
                 self.niFgen_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetExtCalRecommendedInterval_cfunc(vi, months)
 
-    def get_hardware_state(self, vi, state):  # noqa: N802
+    def niFgen_GetHardwareState(self, vi, state):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetHardwareState_cfunc is None:
                 self.niFgen_GetHardwareState_cfunc = self._get_library_function('niFgen_GetHardwareState')
@@ -385,7 +385,7 @@ class Library(object):
                 self.niFgen_GetHardwareState_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetHardwareState_cfunc(vi, state)
 
-    def _get_self_cal_last_date_and_time(self, vi, year, month, day, hour, minute):  # noqa: N802
+    def niFgen_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetSelfCalLastDateAndTime_cfunc is None:
                 self.niFgen_GetSelfCalLastDateAndTime_cfunc = self._get_library_function('niFgen_GetSelfCalLastDateAndTime')
@@ -393,7 +393,7 @@ class Library(object):
                 self.niFgen_GetSelfCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetSelfCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
 
-    def get_self_cal_last_temp(self, vi, temperature):  # noqa: N802
+    def niFgen_GetSelfCalLastTemp(self, vi, temperature):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetSelfCalLastTemp_cfunc is None:
                 self.niFgen_GetSelfCalLastTemp_cfunc = self._get_library_function('niFgen_GetSelfCalLastTemp')
@@ -401,7 +401,7 @@ class Library(object):
                 self.niFgen_GetSelfCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetSelfCalLastTemp_cfunc(vi, temperature)
 
-    def get_self_cal_supported(self, vi, self_cal_supported):  # noqa: N802
+    def niFgen_GetSelfCalSupported(self, vi, self_cal_supported):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetSelfCalSupported_cfunc is None:
                 self.niFgen_GetSelfCalSupported_cfunc = self._get_library_function('niFgen_GetSelfCalSupported')
@@ -409,7 +409,7 @@ class Library(object):
                 self.niFgen_GetSelfCalSupported_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetSelfCalSupported_cfunc(vi, self_cal_supported)
 
-    def import_attribute_configuration_buffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+    def niFgen_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ImportAttributeConfigurationBuffer_cfunc is None:
                 self.niFgen_ImportAttributeConfigurationBuffer_cfunc = self._get_library_function('niFgen_ImportAttributeConfigurationBuffer')
@@ -417,7 +417,7 @@ class Library(object):
                 self.niFgen_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ImportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
 
-    def import_attribute_configuration_file(self, vi, file_path):  # noqa: N802
+    def niFgen_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ImportAttributeConfigurationFile_cfunc is None:
                 self.niFgen_ImportAttributeConfigurationFile_cfunc = self._get_library_function('niFgen_ImportAttributeConfigurationFile')
@@ -425,7 +425,7 @@ class Library(object):
                 self.niFgen_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ImportAttributeConfigurationFile_cfunc(vi, file_path)
 
-    def _initialize_with_channels(self, resource_name, channel_name, reset_device, option_string, vi):  # noqa: N802
+    def niFgen_InitializeWithChannels(self, resource_name, channel_name, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_InitializeWithChannels_cfunc is None:
                 self.niFgen_InitializeWithChannels_cfunc = self._get_library_function('niFgen_InitializeWithChannels')
@@ -433,7 +433,7 @@ class Library(object):
                 self.niFgen_InitializeWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_InitializeWithChannels_cfunc(resource_name, channel_name, reset_device, option_string, vi)
 
-    def _initiate_generation(self, vi):  # noqa: N802
+    def niFgen_InitiateGeneration(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_InitiateGeneration_cfunc is None:
                 self.niFgen_InitiateGeneration_cfunc = self._get_library_function('niFgen_InitiateGeneration')
@@ -441,7 +441,7 @@ class Library(object):
                 self.niFgen_InitiateGeneration_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_InitiateGeneration_cfunc(vi)
 
-    def is_done(self, vi, done):  # noqa: N802
+    def niFgen_IsDone(self, vi, done):  # noqa: N802
         with self._func_lock:
             if self.niFgen_IsDone_cfunc is None:
                 self.niFgen_IsDone_cfunc = self._get_library_function('niFgen_IsDone')
@@ -449,7 +449,7 @@ class Library(object):
                 self.niFgen_IsDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_IsDone_cfunc(vi, done)
 
-    def lock(self, vi, caller_has_lock):  # noqa: N802
+    def niFgen_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niFgen_LockSession_cfunc is None:
                 self.niFgen_LockSession_cfunc = self._get_library_function('niFgen_LockSession')
@@ -457,7 +457,7 @@ class Library(object):
                 self.niFgen_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_LockSession_cfunc(vi, caller_has_lock)
 
-    def query_arb_seq_capabilities(self, vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count):  # noqa: N802
+    def niFgen_QueryArbSeqCapabilities(self, vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count):  # noqa: N802
         with self._func_lock:
             if self.niFgen_QueryArbSeqCapabilities_cfunc is None:
                 self.niFgen_QueryArbSeqCapabilities_cfunc = self._get_library_function('niFgen_QueryArbSeqCapabilities')
@@ -465,7 +465,7 @@ class Library(object):
                 self.niFgen_QueryArbSeqCapabilities_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_QueryArbSeqCapabilities_cfunc(vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count)
 
-    def query_arb_wfm_capabilities(self, vi, maximum_number_of_waveforms, waveform_quantum, minimum_waveform_size, maximum_waveform_size):  # noqa: N802
+    def niFgen_QueryArbWfmCapabilities(self, vi, maximum_number_of_waveforms, waveform_quantum, minimum_waveform_size, maximum_waveform_size):  # noqa: N802
         with self._func_lock:
             if self.niFgen_QueryArbWfmCapabilities_cfunc is None:
                 self.niFgen_QueryArbWfmCapabilities_cfunc = self._get_library_function('niFgen_QueryArbWfmCapabilities')
@@ -473,7 +473,7 @@ class Library(object):
                 self.niFgen_QueryArbWfmCapabilities_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_QueryArbWfmCapabilities_cfunc(vi, maximum_number_of_waveforms, waveform_quantum, minimum_waveform_size, maximum_waveform_size)
 
-    def query_freq_list_capabilities(self, vi, maximum_number_of_freq_lists, minimum_frequency_list_length, maximum_frequency_list_length, minimum_frequency_list_duration, maximum_frequency_list_duration, frequency_list_duration_quantum):  # noqa: N802
+    def niFgen_QueryFreqListCapabilities(self, vi, maximum_number_of_freq_lists, minimum_frequency_list_length, maximum_frequency_list_length, minimum_frequency_list_duration, maximum_frequency_list_duration, frequency_list_duration_quantum):  # noqa: N802
         with self._func_lock:
             if self.niFgen_QueryFreqListCapabilities_cfunc is None:
                 self.niFgen_QueryFreqListCapabilities_cfunc = self._get_library_function('niFgen_QueryFreqListCapabilities')
@@ -481,7 +481,7 @@ class Library(object):
                 self.niFgen_QueryFreqListCapabilities_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_QueryFreqListCapabilities_cfunc(vi, maximum_number_of_freq_lists, minimum_frequency_list_length, maximum_frequency_list_length, minimum_frequency_list_duration, maximum_frequency_list_duration, frequency_list_duration_quantum)
 
-    def read_current_temperature(self, vi, temperature):  # noqa: N802
+    def niFgen_ReadCurrentTemperature(self, vi, temperature):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ReadCurrentTemperature_cfunc is None:
                 self.niFgen_ReadCurrentTemperature_cfunc = self._get_library_function('niFgen_ReadCurrentTemperature')
@@ -489,7 +489,7 @@ class Library(object):
                 self.niFgen_ReadCurrentTemperature_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ReadCurrentTemperature_cfunc(vi, temperature)
 
-    def reset_device(self, vi):  # noqa: N802
+    def niFgen_ResetDevice(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ResetDevice_cfunc is None:
                 self.niFgen_ResetDevice_cfunc = self._get_library_function('niFgen_ResetDevice')
@@ -497,7 +497,7 @@ class Library(object):
                 self.niFgen_ResetDevice_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ResetDevice_cfunc(vi)
 
-    def reset_with_defaults(self, vi):  # noqa: N802
+    def niFgen_ResetWithDefaults(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ResetWithDefaults_cfunc is None:
                 self.niFgen_ResetWithDefaults_cfunc = self._get_library_function('niFgen_ResetWithDefaults')
@@ -505,7 +505,7 @@ class Library(object):
                 self.niFgen_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ResetWithDefaults_cfunc(vi)
 
-    def self_cal(self, vi):  # noqa: N802
+    def niFgen_SelfCal(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SelfCal_cfunc is None:
                 self.niFgen_SelfCal_cfunc = self._get_library_function('niFgen_SelfCal')
@@ -513,7 +513,7 @@ class Library(object):
                 self.niFgen_SelfCal_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SelfCal_cfunc(vi)
 
-    def send_software_edge_trigger(self, vi, trigger, trigger_id):  # noqa: N802
+    def niFgen_SendSoftwareEdgeTrigger(self, vi, trigger, trigger_id):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SendSoftwareEdgeTrigger_cfunc is None:
                 self.niFgen_SendSoftwareEdgeTrigger_cfunc = self._get_library_function('niFgen_SendSoftwareEdgeTrigger')
@@ -521,7 +521,7 @@ class Library(object):
                 self.niFgen_SendSoftwareEdgeTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SendSoftwareEdgeTrigger_cfunc(vi, trigger, trigger_id)
 
-    def _set_attribute_vi_boolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFgen_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetAttributeViBoolean_cfunc is None:
                 self.niFgen_SetAttributeViBoolean_cfunc = self._get_library_function('niFgen_SetAttributeViBoolean')
@@ -529,7 +529,7 @@ class Library(object):
                 self.niFgen_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_int32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFgen_SetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetAttributeViInt32_cfunc is None:
                 self.niFgen_SetAttributeViInt32_cfunc = self._get_library_function('niFgen_SetAttributeViInt32')
@@ -537,7 +537,7 @@ class Library(object):
                 self.niFgen_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_real64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFgen_SetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetAttributeViReal64_cfunc is None:
                 self.niFgen_SetAttributeViReal64_cfunc = self._get_library_function('niFgen_SetAttributeViReal64')
@@ -545,7 +545,7 @@ class Library(object):
                 self.niFgen_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_string(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFgen_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetAttributeViString_cfunc is None:
                 self.niFgen_SetAttributeViString_cfunc = self._get_library_function('niFgen_SetAttributeViString')
@@ -553,7 +553,7 @@ class Library(object):
                 self.niFgen_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_named_waveform_next_write_position(self, vi, channel_name, waveform_name, relative_to, offset):  # noqa: N802
+    def niFgen_SetNamedWaveformNextWritePosition(self, vi, channel_name, waveform_name, relative_to, offset):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetNamedWaveformNextWritePosition_cfunc is None:
                 self.niFgen_SetNamedWaveformNextWritePosition_cfunc = self._get_library_function('niFgen_SetNamedWaveformNextWritePosition')
@@ -561,7 +561,7 @@ class Library(object):
                 self.niFgen_SetNamedWaveformNextWritePosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetNamedWaveformNextWritePosition_cfunc(vi, channel_name, waveform_name, relative_to, offset)
 
-    def _set_waveform_next_write_position(self, vi, channel_name, waveform_handle, relative_to, offset):  # noqa: N802
+    def niFgen_SetWaveformNextWritePosition(self, vi, channel_name, waveform_handle, relative_to, offset):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetWaveformNextWritePosition_cfunc is None:
                 self.niFgen_SetWaveformNextWritePosition_cfunc = self._get_library_function('niFgen_SetWaveformNextWritePosition')
@@ -569,7 +569,7 @@ class Library(object):
                 self.niFgen_SetWaveformNextWritePosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetWaveformNextWritePosition_cfunc(vi, channel_name, waveform_handle, relative_to, offset)
 
-    def unlock(self, vi, caller_has_lock):  # noqa: N802
+    def niFgen_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niFgen_UnlockSession_cfunc is None:
                 self.niFgen_UnlockSession_cfunc = self._get_library_function('niFgen_UnlockSession')
@@ -577,7 +577,7 @@ class Library(object):
                 self.niFgen_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_UnlockSession_cfunc(vi, caller_has_lock)
 
-    def wait_until_done(self, vi, max_time):  # noqa: N802
+    def niFgen_WaitUntilDone(self, vi, max_time):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WaitUntilDone_cfunc is None:
                 self.niFgen_WaitUntilDone_cfunc = self._get_library_function('niFgen_WaitUntilDone')
@@ -585,7 +585,7 @@ class Library(object):
                 self.niFgen_WaitUntilDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WaitUntilDone_cfunc(vi, max_time)
 
-    def _write_binary16_waveform(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
+    def niFgen_WriteBinary16Waveform(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WriteBinary16Waveform_cfunc is None:
                 self.niFgen_WriteBinary16Waveform_cfunc = self._get_library_function('niFgen_WriteBinary16Waveform')
@@ -593,7 +593,7 @@ class Library(object):
                 self.niFgen_WriteBinary16Waveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteBinary16Waveform_cfunc(vi, channel_name, waveform_handle, size, data)
 
-    def _write_named_waveform_f64(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
+    def niFgen_WriteNamedWaveformF64(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WriteNamedWaveformF64_cfunc is None:
                 self.niFgen_WriteNamedWaveformF64_cfunc = self._get_library_function('niFgen_WriteNamedWaveformF64')
@@ -601,7 +601,7 @@ class Library(object):
                 self.niFgen_WriteNamedWaveformF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteNamedWaveformF64_cfunc(vi, channel_name, waveform_name, size, data)
 
-    def _write_named_waveform_i16(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
+    def niFgen_WriteNamedWaveformI16(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WriteNamedWaveformI16_cfunc is None:
                 self.niFgen_WriteNamedWaveformI16_cfunc = self._get_library_function('niFgen_WriteNamedWaveformI16')
@@ -609,7 +609,7 @@ class Library(object):
                 self.niFgen_WriteNamedWaveformI16_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteNamedWaveformI16_cfunc(vi, channel_name, waveform_name, size, data)
 
-    def write_script(self, vi, channel_name, script):  # noqa: N802
+    def niFgen_WriteScript(self, vi, channel_name, script):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WriteScript_cfunc is None:
                 self.niFgen_WriteScript_cfunc = self._get_library_function('niFgen_WriteScript')
@@ -617,7 +617,7 @@ class Library(object):
                 self.niFgen_WriteScript_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteScript_cfunc(vi, channel_name, script)
 
-    def _write_waveform(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
+    def niFgen_WriteWaveform(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WriteWaveform_cfunc is None:
                 self.niFgen_WriteWaveform_cfunc = self._get_library_function('niFgen_WriteWaveform')
@@ -625,7 +625,7 @@ class Library(object):
                 self.niFgen_WriteWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteWaveform_cfunc(vi, channel_name, waveform_handle, size, data)
 
-    def _close(self, vi):  # noqa: N802
+    def niFgen_close(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_close_cfunc is None:
                 self.niFgen_close_cfunc = self._get_library_function('niFgen_close')
@@ -633,7 +633,7 @@ class Library(object):
                 self.niFgen_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_close_cfunc(vi)
 
-    def _error_message(self, vi, error_code, error_message):  # noqa: N802
+    def niFgen_error_message(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:
             if self.niFgen_error_message_cfunc is None:
                 self.niFgen_error_message_cfunc = self._get_library_function('niFgen_error_message')
@@ -641,7 +641,7 @@ class Library(object):
                 self.niFgen_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_error_message_cfunc(vi, error_code, error_message)
 
-    def reset(self, vi):  # noqa: N802
+    def niFgen_reset(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_reset_cfunc is None:
                 self.niFgen_reset_cfunc = self._get_library_function('niFgen_reset')
@@ -649,7 +649,7 @@ class Library(object):
                 self.niFgen_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_reset_cfunc(vi)
 
-    def _self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
+    def niFgen_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:
             if self.niFgen_self_test_cfunc is None:
                 self.niFgen_self_test_cfunc = self._get_library_function('niFgen_self_test')

@@ -71,7 +71,7 @@ class LibraryInterpreter(object):
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
         sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
         sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        error_code = self._library.configure_for_homogeneous_triggers(session_count_ctype, sessions_ctype)
+        error_code = self._library.niTClk_ConfigureForHomogeneousTriggers(session_count_ctype, sessions_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -80,7 +80,7 @@ class LibraryInterpreter(object):
         sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
         sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
         min_time_ctype = _converters.convert_timedelta_to_seconds_real64(min_time)  # case S140
-        error_code = self._library.finish_sync_pulse_sender_synchronize(session_count_ctype, sessions_ctype, min_time_ctype)
+        error_code = self._library.niTClk_FinishSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -89,7 +89,7 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library._get_attribute_vi_real64(session_ctype, channel_name_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
+        error_code = self._library.niTClk_GetAttributeViReal64(session_ctype, channel_name_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(value_ctype.value)
 
@@ -98,7 +98,7 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library._get_attribute_vi_session(session_ctype, channel_name_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
+        error_code = self._library.niTClk_GetAttributeViSession(session_ctype, channel_name_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
@@ -108,22 +108,22 @@ class LibraryInterpreter(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         buf_size_ctype = _visatype.ViInt32()  # case S170
         value_ctype = None  # case C050
-        error_code = self._library._get_attribute_vi_string(session_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
+        error_code = self._library.niTClk_GetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buf_size_ctype = _visatype.ViInt32(error_code)  # case S180
         value_ctype = (_visatype.ViChar * buf_size_ctype.value)()  # case C060
-        error_code = self._library._get_attribute_vi_string(session_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
+        error_code = self._library.niTClk_GetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
 
     def _get_extended_error_info(self):  # noqa: N802
         error_string_ctype = None  # case C050
         error_string_size_ctype = _visatype.ViUInt32()  # case S170
-        error_code = self._library._get_extended_error_info(error_string_ctype, error_string_size_ctype)
+        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         error_string_size_ctype = _visatype.ViUInt32(error_code)  # case S180
         error_string_ctype = (_visatype.ViChar * error_string_size_ctype.value)()  # case C060
-        error_code = self._library._get_extended_error_info(error_string_ctype, error_string_size_ctype)
+        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_string_ctype.value.decode(self._encoding)
 
@@ -131,7 +131,7 @@ class LibraryInterpreter(object):
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
         sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
         sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        error_code = self._library.initiate(session_count_ctype, sessions_ctype)
+        error_code = self._library.niTClk_Initiate(session_count_ctype, sessions_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -140,7 +140,7 @@ class LibraryInterpreter(object):
         sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
         sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
         done_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.is_done(session_count_ctype, sessions_ctype, None if done_ctype is None else (ctypes.pointer(done_ctype)))
+        error_code = self._library.niTClk_IsDone(session_count_ctype, sessions_ctype, None if done_ctype is None else (ctypes.pointer(done_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
 
@@ -149,7 +149,7 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViReal64(value)  # case S150
-        error_code = self._library._set_attribute_vi_real64(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
+        error_code = self._library.niTClk_SetAttributeViReal64(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -158,7 +158,7 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViSession(value)  # case S150
-        error_code = self._library._set_attribute_vi_session(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
+        error_code = self._library.niTClk_SetAttributeViSession(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -167,7 +167,7 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case C020
-        error_code = self._library._set_attribute_vi_string(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
+        error_code = self._library.niTClk_SetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -176,7 +176,7 @@ class LibraryInterpreter(object):
         sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
         sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
         min_time_ctype = _converters.convert_timedelta_to_seconds_real64(min_time)  # case S140
-        error_code = self._library.setup_for_sync_pulse_sender_synchronize(session_count_ctype, sessions_ctype, min_time_ctype)
+        error_code = self._library.niTClk_SetupForSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -185,7 +185,7 @@ class LibraryInterpreter(object):
         sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
         sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
         min_tclk_period_ctype = _converters.convert_timedelta_to_seconds_real64(min_tclk_period)  # case S140
-        error_code = self._library.synchronize(session_count_ctype, sessions_ctype, min_tclk_period_ctype)
+        error_code = self._library.niTClk_Synchronize(session_count_ctype, sessions_ctype, min_tclk_period_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -194,7 +194,7 @@ class LibraryInterpreter(object):
         sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
         sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
         min_time_ctype = _converters.convert_timedelta_to_seconds_real64(min_time)  # case S140
-        error_code = self._library.synchronize_to_sync_pulse_sender(session_count_ctype, sessions_ctype, min_time_ctype)
+        error_code = self._library.niTClk_SynchronizeToSyncPulseSender(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -203,6 +203,6 @@ class LibraryInterpreter(object):
         sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
         sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        error_code = self._library.wait_until_done(session_count_ctype, sessions_ctype, timeout_ctype)
+        error_code = self._library.niTClk_WaitUntilDone(session_count_ctype, sessions_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

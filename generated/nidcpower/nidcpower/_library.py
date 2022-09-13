@@ -99,7 +99,7 @@ class Library(object):
             raise errors.DriverTooOldError() from e
         return function
 
-    def abort(self, vi, channel_name):  # noqa: N802
+    def niDCPower_AbortWithChannels(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_AbortWithChannels_cfunc is None:
                 self.niDCPower_AbortWithChannels_cfunc = self._get_library_function('niDCPower_AbortWithChannels')
@@ -107,7 +107,7 @@ class Library(object):
                 self.niDCPower_AbortWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_AbortWithChannels_cfunc(vi, channel_name)
 
-    def self_cal(self, vi, channel_name):  # noqa: N802
+    def niDCPower_CalSelfCalibrate(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_CalSelfCalibrate_cfunc is None:
                 self.niDCPower_CalSelfCalibrate_cfunc = self._get_library_function('niDCPower_CalSelfCalibrate')
@@ -115,7 +115,7 @@ class Library(object):
                 self.niDCPower_CalSelfCalibrate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_CalSelfCalibrate_cfunc(vi, channel_name)
 
-    def clear_latched_output_cutoff_state(self, vi, channel_name, output_cutoff_reason):  # noqa: N802
+    def niDCPower_ClearLatchedOutputCutoffState(self, vi, channel_name, output_cutoff_reason):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ClearLatchedOutputCutoffState_cfunc is None:
                 self.niDCPower_ClearLatchedOutputCutoffState_cfunc = self._get_library_function('niDCPower_ClearLatchedOutputCutoffState')
@@ -123,7 +123,7 @@ class Library(object):
                 self.niDCPower_ClearLatchedOutputCutoffState_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ClearLatchedOutputCutoffState_cfunc(vi, channel_name, output_cutoff_reason)
 
-    def commit(self, vi, channel_name):  # noqa: N802
+    def niDCPower_CommitWithChannels(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_CommitWithChannels_cfunc is None:
                 self.niDCPower_CommitWithChannels_cfunc = self._get_library_function('niDCPower_CommitWithChannels')
@@ -131,7 +131,7 @@ class Library(object):
                 self.niDCPower_CommitWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_CommitWithChannels_cfunc(vi, channel_name)
 
-    def configure_aperture_time(self, vi, channel_name, aperture_time, units):  # noqa: N802
+    def niDCPower_ConfigureApertureTime(self, vi, channel_name, aperture_time, units):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ConfigureApertureTime_cfunc is None:
                 self.niDCPower_ConfigureApertureTime_cfunc = self._get_library_function('niDCPower_ConfigureApertureTime')
@@ -139,7 +139,7 @@ class Library(object):
                 self.niDCPower_ConfigureApertureTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureApertureTime_cfunc(vi, channel_name, aperture_time, units)
 
-    def configure_lcr_custom_cable_compensation(self, vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data):  # noqa: N802
+    def niDCPower_ConfigureLCRCustomCableCompensation(self, vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ConfigureLCRCustomCableCompensation_cfunc is None:
                 self.niDCPower_ConfigureLCRCustomCableCompensation_cfunc = self._get_library_function('niDCPower_ConfigureLCRCustomCableCompensation')
@@ -147,7 +147,7 @@ class Library(object):
                 self.niDCPower_ConfigureLCRCustomCableCompensation_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureLCRCustomCableCompensation_cfunc(vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data)
 
-    def create_advanced_sequence_commit_step(self, vi, channel_name, set_as_active_step):  # noqa: N802
+    def niDCPower_CreateAdvancedSequenceCommitStepWithChannels(self, vi, channel_name, set_as_active_step):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc is None:
                 self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc = self._get_library_function('niDCPower_CreateAdvancedSequenceCommitStepWithChannels')
@@ -155,7 +155,7 @@ class Library(object):
                 self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc(vi, channel_name, set_as_active_step)
 
-    def create_advanced_sequence_step(self, vi, channel_name, set_as_active_step):  # noqa: N802
+    def niDCPower_CreateAdvancedSequenceStepWithChannels(self, vi, channel_name, set_as_active_step):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc is None:
                 self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc = self._get_library_function('niDCPower_CreateAdvancedSequenceStepWithChannels')
@@ -163,7 +163,7 @@ class Library(object):
                 self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc(vi, channel_name, set_as_active_step)
 
-    def _create_advanced_sequence_with_channels(self, vi, channel_name, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):  # noqa: N802
+    def niDCPower_CreateAdvancedSequenceWithChannels(self, vi, channel_name, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc is None:
                 self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc = self._get_library_function('niDCPower_CreateAdvancedSequenceWithChannels')
@@ -171,7 +171,7 @@ class Library(object):
                 self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_CreateAdvancedSequenceWithChannels_cfunc(vi, channel_name, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence)
 
-    def delete_advanced_sequence(self, vi, channel_name, sequence_name):  # noqa: N802
+    def niDCPower_DeleteAdvancedSequenceWithChannels(self, vi, channel_name, sequence_name):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_DeleteAdvancedSequenceWithChannels_cfunc is None:
                 self.niDCPower_DeleteAdvancedSequenceWithChannels_cfunc = self._get_library_function('niDCPower_DeleteAdvancedSequenceWithChannels')
@@ -179,7 +179,7 @@ class Library(object):
                 self.niDCPower_DeleteAdvancedSequenceWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_DeleteAdvancedSequenceWithChannels_cfunc(vi, channel_name, sequence_name)
 
-    def disable(self, vi):  # noqa: N802
+    def niDCPower_Disable(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_Disable_cfunc is None:
                 self.niDCPower_Disable_cfunc = self._get_library_function('niDCPower_Disable')
@@ -187,7 +187,7 @@ class Library(object):
                 self.niDCPower_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Disable_cfunc(vi)
 
-    def export_attribute_configuration_buffer(self, vi, size, configuration):  # noqa: N802
+    def niDCPower_ExportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ExportAttributeConfigurationBuffer_cfunc is None:
                 self.niDCPower_ExportAttributeConfigurationBuffer_cfunc = self._get_library_function('niDCPower_ExportAttributeConfigurationBuffer')
@@ -195,7 +195,7 @@ class Library(object):
                 self.niDCPower_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ExportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
 
-    def export_attribute_configuration_file(self, vi, file_path):  # noqa: N802
+    def niDCPower_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ExportAttributeConfigurationFile_cfunc is None:
                 self.niDCPower_ExportAttributeConfigurationFile_cfunc = self._get_library_function('niDCPower_ExportAttributeConfigurationFile')
@@ -203,7 +203,7 @@ class Library(object):
                 self.niDCPower_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ExportAttributeConfigurationFile_cfunc(vi, file_path)
 
-    def _fancy_initialize(self, resource_name, channels, reset, option_string, vi, independent_channels):  # noqa: N802
+    def niDCPower_FancyInitialize(self, resource_name, channels, reset, option_string, vi, independent_channels):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_FancyInitialize_cfunc is None:
                 self.niDCPower_FancyInitialize_cfunc = self._get_library_function('niDCPower_FancyInitialize')
@@ -211,7 +211,7 @@ class Library(object):
                 self.niDCPower_FancyInitialize_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_FancyInitialize_cfunc(resource_name, channels, reset, option_string, vi, independent_channels)
 
-    def _fetch_multiple(self, vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count):  # noqa: N802
+    def niDCPower_FetchMultiple(self, vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_FetchMultiple_cfunc is None:
                 self.niDCPower_FetchMultiple_cfunc = self._get_library_function('niDCPower_FetchMultiple')
@@ -219,7 +219,7 @@ class Library(object):
                 self.niDCPower_FetchMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_FetchMultiple_cfunc(vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count)
 
-    def _fetch_multiple_lcr(self, vi, channel_name, timeout, count, measurements, actual_count):  # noqa: N802
+    def niDCPower_FetchMultipleLCR(self, vi, channel_name, timeout, count, measurements, actual_count):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_FetchMultipleLCR_cfunc is None:
                 self.niDCPower_FetchMultipleLCR_cfunc = self._get_library_function('niDCPower_FetchMultipleLCR')
@@ -227,7 +227,7 @@ class Library(object):
                 self.niDCPower_FetchMultipleLCR_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_FetchMultipleLCR_cfunc(vi, channel_name, timeout, count, measurements, actual_count)
 
-    def _get_attribute_vi_boolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niDCPower_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetAttributeViBoolean_cfunc is None:
                 self.niDCPower_GetAttributeViBoolean_cfunc = self._get_library_function('niDCPower_GetAttributeViBoolean')
@@ -235,7 +235,7 @@ class Library(object):
                 self.niDCPower_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_int32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niDCPower_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetAttributeViInt32_cfunc is None:
                 self.niDCPower_GetAttributeViInt32_cfunc = self._get_library_function('niDCPower_GetAttributeViInt32')
@@ -243,7 +243,7 @@ class Library(object):
                 self.niDCPower_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_int64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niDCPower_GetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetAttributeViInt64_cfunc is None:
                 self.niDCPower_GetAttributeViInt64_cfunc = self._get_library_function('niDCPower_GetAttributeViInt64')
@@ -251,7 +251,7 @@ class Library(object):
                 self.niDCPower_GetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_real64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niDCPower_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetAttributeViReal64_cfunc is None:
                 self.niDCPower_GetAttributeViReal64_cfunc = self._get_library_function('niDCPower_GetAttributeViReal64')
@@ -259,7 +259,7 @@ class Library(object):
                 self.niDCPower_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _get_attribute_vi_string(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
+    def niDCPower_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetAttributeViString_cfunc is None:
                 self.niDCPower_GetAttributeViString_cfunc = self._get_library_function('niDCPower_GetAttributeViString')
@@ -267,7 +267,7 @@ class Library(object):
                 self.niDCPower_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
 
-    def get_channel_name(self, vi, index, buffer_size, channel_name):  # noqa: N802
+    def niDCPower_GetChannelName(self, vi, index, buffer_size, channel_name):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetChannelName_cfunc is None:
                 self.niDCPower_GetChannelName_cfunc = self._get_library_function('niDCPower_GetChannelName')
@@ -275,7 +275,7 @@ class Library(object):
                 self.niDCPower_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetChannelName_cfunc(vi, index, buffer_size, channel_name)
 
-    def _get_channel_names(self, vi, indices, buffer_size, names):  # noqa: N802
+    def niDCPower_GetChannelNameFromString(self, vi, indices, buffer_size, names):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetChannelNameFromString_cfunc is None:
                 self.niDCPower_GetChannelNameFromString_cfunc = self._get_library_function('niDCPower_GetChannelNameFromString')
@@ -283,7 +283,7 @@ class Library(object):
                 self.niDCPower_GetChannelNameFromString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetChannelNameFromString_cfunc(vi, indices, buffer_size, names)
 
-    def _get_error(self, vi, code, buffer_size, description):  # noqa: N802
+    def niDCPower_GetError(self, vi, code, buffer_size, description):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetError_cfunc is None:
                 self.niDCPower_GetError_cfunc = self._get_library_function('niDCPower_GetError')
@@ -291,7 +291,7 @@ class Library(object):
                 self.niDCPower_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetError_cfunc(vi, code, buffer_size, description)
 
-    def _get_ext_cal_last_date_and_time(self, vi, year, month, day, hour, minute):  # noqa: N802
+    def niDCPower_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetExtCalLastDateAndTime_cfunc is None:
                 self.niDCPower_GetExtCalLastDateAndTime_cfunc = self._get_library_function('niDCPower_GetExtCalLastDateAndTime')
@@ -299,7 +299,7 @@ class Library(object):
                 self.niDCPower_GetExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetExtCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
 
-    def get_ext_cal_last_temp(self, vi, temperature):  # noqa: N802
+    def niDCPower_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetExtCalLastTemp_cfunc is None:
                 self.niDCPower_GetExtCalLastTemp_cfunc = self._get_library_function('niDCPower_GetExtCalLastTemp')
@@ -307,7 +307,7 @@ class Library(object):
                 self.niDCPower_GetExtCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetExtCalLastTemp_cfunc(vi, temperature)
 
-    def get_ext_cal_recommended_interval(self, vi, months):  # noqa: N802
+    def niDCPower_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetExtCalRecommendedInterval_cfunc is None:
                 self.niDCPower_GetExtCalRecommendedInterval_cfunc = self._get_library_function('niDCPower_GetExtCalRecommendedInterval')
@@ -315,7 +315,7 @@ class Library(object):
                 self.niDCPower_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetExtCalRecommendedInterval_cfunc(vi, months)
 
-    def _get_lcr_compensation_last_date_and_time(self, vi, channel_name, compensation_type, year, month, day, hour, minute):  # noqa: N802
+    def niDCPower_GetLCRCompensationLastDateAndTime(self, vi, channel_name, compensation_type, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetLCRCompensationLastDateAndTime_cfunc is None:
                 self.niDCPower_GetLCRCompensationLastDateAndTime_cfunc = self._get_library_function('niDCPower_GetLCRCompensationLastDateAndTime')
@@ -323,7 +323,7 @@ class Library(object):
                 self.niDCPower_GetLCRCompensationLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetLCRCompensationLastDateAndTime_cfunc(vi, channel_name, compensation_type, year, month, day, hour, minute)
 
-    def get_lcr_custom_cable_compensation_data(self, vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data):  # noqa: N802
+    def niDCPower_GetLCRCustomCableCompensationData(self, vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetLCRCustomCableCompensationData_cfunc is None:
                 self.niDCPower_GetLCRCustomCableCompensationData_cfunc = self._get_library_function('niDCPower_GetLCRCustomCableCompensationData')
@@ -331,7 +331,7 @@ class Library(object):
                 self.niDCPower_GetLCRCustomCableCompensationData_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetLCRCustomCableCompensationData_cfunc(vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data)
 
-    def _get_self_cal_last_date_and_time(self, vi, year, month, day, hour, minute):  # noqa: N802
+    def niDCPower_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetSelfCalLastDateAndTime_cfunc is None:
                 self.niDCPower_GetSelfCalLastDateAndTime_cfunc = self._get_library_function('niDCPower_GetSelfCalLastDateAndTime')
@@ -339,7 +339,7 @@ class Library(object):
                 self.niDCPower_GetSelfCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetSelfCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
 
-    def get_self_cal_last_temp(self, vi, temperature):  # noqa: N802
+    def niDCPower_GetSelfCalLastTemp(self, vi, temperature):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetSelfCalLastTemp_cfunc is None:
                 self.niDCPower_GetSelfCalLastTemp_cfunc = self._get_library_function('niDCPower_GetSelfCalLastTemp')
@@ -347,7 +347,7 @@ class Library(object):
                 self.niDCPower_GetSelfCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetSelfCalLastTemp_cfunc(vi, temperature)
 
-    def import_attribute_configuration_buffer(self, vi, size, configuration):  # noqa: N802
+    def niDCPower_ImportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ImportAttributeConfigurationBuffer_cfunc is None:
                 self.niDCPower_ImportAttributeConfigurationBuffer_cfunc = self._get_library_function('niDCPower_ImportAttributeConfigurationBuffer')
@@ -355,7 +355,7 @@ class Library(object):
                 self.niDCPower_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ImportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
 
-    def import_attribute_configuration_file(self, vi, file_path):  # noqa: N802
+    def niDCPower_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ImportAttributeConfigurationFile_cfunc is None:
                 self.niDCPower_ImportAttributeConfigurationFile_cfunc = self._get_library_function('niDCPower_ImportAttributeConfigurationFile')
@@ -363,7 +363,7 @@ class Library(object):
                 self.niDCPower_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ImportAttributeConfigurationFile_cfunc(vi, file_path)
 
-    def _initialize_with_channels(self, resource_name, channels, reset, option_string, vi):  # noqa: N802
+    def niDCPower_InitializeWithChannels(self, resource_name, channels, reset, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_InitializeWithChannels_cfunc is None:
                 self.niDCPower_InitializeWithChannels_cfunc = self._get_library_function('niDCPower_InitializeWithChannels')
@@ -371,7 +371,7 @@ class Library(object):
                 self.niDCPower_InitializeWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_InitializeWithChannels_cfunc(resource_name, channels, reset, option_string, vi)
 
-    def _initialize_with_independent_channels(self, resource_name, reset, option_string, vi):  # noqa: N802
+    def niDCPower_InitializeWithIndependentChannels(self, resource_name, reset, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_InitializeWithIndependentChannels_cfunc is None:
                 self.niDCPower_InitializeWithIndependentChannels_cfunc = self._get_library_function('niDCPower_InitializeWithIndependentChannels')
@@ -379,7 +379,7 @@ class Library(object):
                 self.niDCPower_InitializeWithIndependentChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_InitializeWithIndependentChannels_cfunc(resource_name, reset, option_string, vi)
 
-    def _initiate_with_channels(self, vi, channel_name):  # noqa: N802
+    def niDCPower_InitiateWithChannels(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_InitiateWithChannels_cfunc is None:
                 self.niDCPower_InitiateWithChannels_cfunc = self._get_library_function('niDCPower_InitiateWithChannels')
@@ -387,7 +387,7 @@ class Library(object):
                 self.niDCPower_InitiateWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_InitiateWithChannels_cfunc(vi, channel_name)
 
-    def lock(self, vi, caller_has_lock):  # noqa: N802
+    def niDCPower_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_LockSession_cfunc is None:
                 self.niDCPower_LockSession_cfunc = self._get_library_function('niDCPower_LockSession')
@@ -395,7 +395,7 @@ class Library(object):
                 self.niDCPower_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_LockSession_cfunc(vi, caller_has_lock)
 
-    def measure(self, vi, channel_name, measurement_type, measurement):  # noqa: N802
+    def niDCPower_Measure(self, vi, channel_name, measurement_type, measurement):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_Measure_cfunc is None:
                 self.niDCPower_Measure_cfunc = self._get_library_function('niDCPower_Measure')
@@ -403,7 +403,7 @@ class Library(object):
                 self.niDCPower_Measure_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Measure_cfunc(vi, channel_name, measurement_type, measurement)
 
-    def _measure_multiple(self, vi, channel_name, voltage_measurements, current_measurements):  # noqa: N802
+    def niDCPower_MeasureMultiple(self, vi, channel_name, voltage_measurements, current_measurements):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_MeasureMultiple_cfunc is None:
                 self.niDCPower_MeasureMultiple_cfunc = self._get_library_function('niDCPower_MeasureMultiple')
@@ -411,7 +411,7 @@ class Library(object):
                 self.niDCPower_MeasureMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_MeasureMultiple_cfunc(vi, channel_name, voltage_measurements, current_measurements)
 
-    def _measure_multiple_lcr(self, vi, channel_name, measurements):  # noqa: N802
+    def niDCPower_MeasureMultipleLCR(self, vi, channel_name, measurements):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_MeasureMultipleLCR_cfunc is None:
                 self.niDCPower_MeasureMultipleLCR_cfunc = self._get_library_function('niDCPower_MeasureMultipleLCR')
@@ -419,7 +419,7 @@ class Library(object):
                 self.niDCPower_MeasureMultipleLCR_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_MeasureMultipleLCR_cfunc(vi, channel_name, measurements)
 
-    def _parse_channel_count(self, vi, channels_string, number_of_channels):  # noqa: N802
+    def niDCPower_ParseChannelCount(self, vi, channels_string, number_of_channels):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ParseChannelCount_cfunc is None:
                 self.niDCPower_ParseChannelCount_cfunc = self._get_library_function('niDCPower_ParseChannelCount')
@@ -427,7 +427,7 @@ class Library(object):
                 self.niDCPower_ParseChannelCount_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ParseChannelCount_cfunc(vi, channels_string, number_of_channels)
 
-    def perform_lcr_load_compensation(self, vi, channel_name, num_compensation_spots, compensation_spots):  # noqa: N802
+    def niDCPower_PerformLCRLoadCompensation(self, vi, channel_name, num_compensation_spots, compensation_spots):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_PerformLCRLoadCompensation_cfunc is None:
                 self.niDCPower_PerformLCRLoadCompensation_cfunc = self._get_library_function('niDCPower_PerformLCRLoadCompensation')
@@ -435,7 +435,7 @@ class Library(object):
                 self.niDCPower_PerformLCRLoadCompensation_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_PerformLCRLoadCompensation_cfunc(vi, channel_name, num_compensation_spots, compensation_spots)
 
-    def perform_lcr_open_compensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
+    def niDCPower_PerformLCROpenCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_PerformLCROpenCompensation_cfunc is None:
                 self.niDCPower_PerformLCROpenCompensation_cfunc = self._get_library_function('niDCPower_PerformLCROpenCompensation')
@@ -443,7 +443,7 @@ class Library(object):
                 self.niDCPower_PerformLCROpenCompensation_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_PerformLCROpenCompensation_cfunc(vi, channel_name, num_frequencies, additional_frequencies)
 
-    def perform_lcr_open_custom_cable_compensation(self, vi, channel_name):  # noqa: N802
+    def niDCPower_PerformLCROpenCustomCableCompensation(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc is None:
                 self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc = self._get_library_function('niDCPower_PerformLCROpenCustomCableCompensation')
@@ -451,7 +451,7 @@ class Library(object):
                 self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_PerformLCROpenCustomCableCompensation_cfunc(vi, channel_name)
 
-    def perform_lcr_short_compensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
+    def niDCPower_PerformLCRShortCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_PerformLCRShortCompensation_cfunc is None:
                 self.niDCPower_PerformLCRShortCompensation_cfunc = self._get_library_function('niDCPower_PerformLCRShortCompensation')
@@ -459,7 +459,7 @@ class Library(object):
                 self.niDCPower_PerformLCRShortCompensation_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_PerformLCRShortCompensation_cfunc(vi, channel_name, num_frequencies, additional_frequencies)
 
-    def perform_lcr_short_custom_cable_compensation(self, vi, channel_name):  # noqa: N802
+    def niDCPower_PerformLCRShortCustomCableCompensation(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_PerformLCRShortCustomCableCompensation_cfunc is None:
                 self.niDCPower_PerformLCRShortCustomCableCompensation_cfunc = self._get_library_function('niDCPower_PerformLCRShortCustomCableCompensation')
@@ -467,7 +467,7 @@ class Library(object):
                 self.niDCPower_PerformLCRShortCustomCableCompensation_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_PerformLCRShortCustomCableCompensation_cfunc(vi, channel_name)
 
-    def query_in_compliance(self, vi, channel_name, in_compliance):  # noqa: N802
+    def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_QueryInCompliance_cfunc is None:
                 self.niDCPower_QueryInCompliance_cfunc = self._get_library_function('niDCPower_QueryInCompliance')
@@ -475,7 +475,7 @@ class Library(object):
                 self.niDCPower_QueryInCompliance_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryInCompliance_cfunc(vi, channel_name, in_compliance)
 
-    def query_latched_output_cutoff_state(self, vi, channel_name, output_cutoff_reason, output_cutoff_state):  # noqa: N802
+    def niDCPower_QueryLatchedOutputCutoffState(self, vi, channel_name, output_cutoff_reason, output_cutoff_state):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_QueryLatchedOutputCutoffState_cfunc is None:
                 self.niDCPower_QueryLatchedOutputCutoffState_cfunc = self._get_library_function('niDCPower_QueryLatchedOutputCutoffState')
@@ -483,7 +483,7 @@ class Library(object):
                 self.niDCPower_QueryLatchedOutputCutoffState_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryLatchedOutputCutoffState_cfunc(vi, channel_name, output_cutoff_reason, output_cutoff_state)
 
-    def query_max_current_limit(self, vi, channel_name, voltage_level, max_current_limit):  # noqa: N802
+    def niDCPower_QueryMaxCurrentLimit(self, vi, channel_name, voltage_level, max_current_limit):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_QueryMaxCurrentLimit_cfunc is None:
                 self.niDCPower_QueryMaxCurrentLimit_cfunc = self._get_library_function('niDCPower_QueryMaxCurrentLimit')
@@ -491,7 +491,7 @@ class Library(object):
                 self.niDCPower_QueryMaxCurrentLimit_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryMaxCurrentLimit_cfunc(vi, channel_name, voltage_level, max_current_limit)
 
-    def query_max_voltage_level(self, vi, channel_name, current_limit, max_voltage_level):  # noqa: N802
+    def niDCPower_QueryMaxVoltageLevel(self, vi, channel_name, current_limit, max_voltage_level):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_QueryMaxVoltageLevel_cfunc is None:
                 self.niDCPower_QueryMaxVoltageLevel_cfunc = self._get_library_function('niDCPower_QueryMaxVoltageLevel')
@@ -499,7 +499,7 @@ class Library(object):
                 self.niDCPower_QueryMaxVoltageLevel_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryMaxVoltageLevel_cfunc(vi, channel_name, current_limit, max_voltage_level)
 
-    def query_min_current_limit(self, vi, channel_name, voltage_level, min_current_limit):  # noqa: N802
+    def niDCPower_QueryMinCurrentLimit(self, vi, channel_name, voltage_level, min_current_limit):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_QueryMinCurrentLimit_cfunc is None:
                 self.niDCPower_QueryMinCurrentLimit_cfunc = self._get_library_function('niDCPower_QueryMinCurrentLimit')
@@ -507,7 +507,7 @@ class Library(object):
                 self.niDCPower_QueryMinCurrentLimit_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryMinCurrentLimit_cfunc(vi, channel_name, voltage_level, min_current_limit)
 
-    def query_output_state(self, vi, channel_name, output_state, in_state):  # noqa: N802
+    def niDCPower_QueryOutputState(self, vi, channel_name, output_state, in_state):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_QueryOutputState_cfunc is None:
                 self.niDCPower_QueryOutputState_cfunc = self._get_library_function('niDCPower_QueryOutputState')
@@ -515,7 +515,7 @@ class Library(object):
                 self.niDCPower_QueryOutputState_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryOutputState_cfunc(vi, channel_name, output_state, in_state)
 
-    def read_current_temperature(self, vi, temperature):  # noqa: N802
+    def niDCPower_ReadCurrentTemperature(self, vi, temperature):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ReadCurrentTemperature_cfunc is None:
                 self.niDCPower_ReadCurrentTemperature_cfunc = self._get_library_function('niDCPower_ReadCurrentTemperature')
@@ -523,7 +523,7 @@ class Library(object):
                 self.niDCPower_ReadCurrentTemperature_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ReadCurrentTemperature_cfunc(vi, temperature)
 
-    def reset_device(self, vi):  # noqa: N802
+    def niDCPower_ResetDevice(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ResetDevice_cfunc is None:
                 self.niDCPower_ResetDevice_cfunc = self._get_library_function('niDCPower_ResetDevice')
@@ -531,7 +531,7 @@ class Library(object):
                 self.niDCPower_ResetDevice_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ResetDevice_cfunc(vi)
 
-    def reset(self, vi, channel_name):  # noqa: N802
+    def niDCPower_ResetWithChannels(self, vi, channel_name):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ResetWithChannels_cfunc is None:
                 self.niDCPower_ResetWithChannels_cfunc = self._get_library_function('niDCPower_ResetWithChannels')
@@ -539,7 +539,7 @@ class Library(object):
                 self.niDCPower_ResetWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ResetWithChannels_cfunc(vi, channel_name)
 
-    def reset_with_defaults(self, vi):  # noqa: N802
+    def niDCPower_ResetWithDefaults(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_ResetWithDefaults_cfunc is None:
                 self.niDCPower_ResetWithDefaults_cfunc = self._get_library_function('niDCPower_ResetWithDefaults')
@@ -547,7 +547,7 @@ class Library(object):
                 self.niDCPower_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ResetWithDefaults_cfunc(vi)
 
-    def send_software_edge_trigger(self, vi, channel_name, trigger):  # noqa: N802
+    def niDCPower_SendSoftwareEdgeTriggerWithChannels(self, vi, channel_name, trigger):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_SendSoftwareEdgeTriggerWithChannels_cfunc is None:
                 self.niDCPower_SendSoftwareEdgeTriggerWithChannels_cfunc = self._get_library_function('niDCPower_SendSoftwareEdgeTriggerWithChannels')
@@ -555,7 +555,7 @@ class Library(object):
                 self.niDCPower_SendSoftwareEdgeTriggerWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SendSoftwareEdgeTriggerWithChannels_cfunc(vi, channel_name, trigger)
 
-    def _set_attribute_vi_boolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niDCPower_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_SetAttributeViBoolean_cfunc is None:
                 self.niDCPower_SetAttributeViBoolean_cfunc = self._get_library_function('niDCPower_SetAttributeViBoolean')
@@ -563,7 +563,7 @@ class Library(object):
                 self.niDCPower_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_int32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niDCPower_SetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_SetAttributeViInt32_cfunc is None:
                 self.niDCPower_SetAttributeViInt32_cfunc = self._get_library_function('niDCPower_SetAttributeViInt32')
@@ -571,7 +571,7 @@ class Library(object):
                 self.niDCPower_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_int64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niDCPower_SetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_SetAttributeViInt64_cfunc is None:
                 self.niDCPower_SetAttributeViInt64_cfunc = self._get_library_function('niDCPower_SetAttributeViInt64')
@@ -579,7 +579,7 @@ class Library(object):
                 self.niDCPower_SetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_real64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niDCPower_SetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_SetAttributeViReal64_cfunc is None:
                 self.niDCPower_SetAttributeViReal64_cfunc = self._get_library_function('niDCPower_SetAttributeViReal64')
@@ -587,7 +587,7 @@ class Library(object):
                 self.niDCPower_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def _set_attribute_vi_string(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niDCPower_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_SetAttributeViString_cfunc is None:
                 self.niDCPower_SetAttributeViString_cfunc = self._get_library_function('niDCPower_SetAttributeViString')
@@ -595,7 +595,7 @@ class Library(object):
                 self.niDCPower_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def set_sequence(self, vi, channel_name, values, source_delays, size):  # noqa: N802
+    def niDCPower_SetSequence(self, vi, channel_name, values, source_delays, size):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_SetSequence_cfunc is None:
                 self.niDCPower_SetSequence_cfunc = self._get_library_function('niDCPower_SetSequence')
@@ -603,7 +603,7 @@ class Library(object):
                 self.niDCPower_SetSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetSequence_cfunc(vi, channel_name, values, source_delays, size)
 
-    def unlock(self, vi, caller_has_lock):  # noqa: N802
+    def niDCPower_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_UnlockSession_cfunc is None:
                 self.niDCPower_UnlockSession_cfunc = self._get_library_function('niDCPower_UnlockSession')
@@ -611,7 +611,7 @@ class Library(object):
                 self.niDCPower_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_UnlockSession_cfunc(vi, caller_has_lock)
 
-    def wait_for_event(self, vi, channel_name, event_id, timeout):  # noqa: N802
+    def niDCPower_WaitForEventWithChannels(self, vi, channel_name, event_id, timeout):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_WaitForEventWithChannels_cfunc is None:
                 self.niDCPower_WaitForEventWithChannels_cfunc = self._get_library_function('niDCPower_WaitForEventWithChannels')
@@ -619,7 +619,7 @@ class Library(object):
                 self.niDCPower_WaitForEventWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_WaitForEventWithChannels_cfunc(vi, channel_name, event_id, timeout)
 
-    def _close(self, vi):  # noqa: N802
+    def niDCPower_close(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_close_cfunc is None:
                 self.niDCPower_close_cfunc = self._get_library_function('niDCPower_close')
@@ -627,7 +627,7 @@ class Library(object):
                 self.niDCPower_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_close_cfunc(vi)
 
-    def _error_message(self, vi, error_code, error_message):  # noqa: N802
+    def niDCPower_error_message(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_error_message_cfunc is None:
                 self.niDCPower_error_message_cfunc = self._get_library_function('niDCPower_error_message')
@@ -635,7 +635,7 @@ class Library(object):
                 self.niDCPower_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_error_message_cfunc(vi, error_code, error_message)
 
-    def _self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
+    def niDCPower_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_self_test_cfunc is None:
                 self.niDCPower_self_test_cfunc = self._get_library_function('niDCPower_self_test')
