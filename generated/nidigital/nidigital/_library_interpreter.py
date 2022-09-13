@@ -337,7 +337,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _fetch_capture_waveform(self, session, site_list, waveform_name, samples_to_read, timeout):
+    def _fetch_capture_waveform(self, site_list, waveform_name, samples_to_read, timeout):
         # This is slightly modified codegen from the function
         # We cannot use codegen without major modifications to the code generator
         # This function uses two 'ivi-dance' parameters and then multiplies them together - see
