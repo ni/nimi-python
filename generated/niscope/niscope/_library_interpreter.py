@@ -327,14 +327,14 @@ class LibraryInterpreter(object):
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
-        waveform_size = (num_samples * self._actual_num_wfms(channel_list))  # case B560
+        waveform_size = (num_samples * self.actual_num_wfms(channel_list))  # case B560
         waveform_array = array.array("d", [0] * waveform_size)  # case B560
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B560
-        wfm_info_size = self._actual_num_wfms(channel_list)  # case B560
+        wfm_info_size = self.actual_num_wfms(channel_list)  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms(channel_list))]
+        return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms(channel_list))]
 
     def fetch_into_numpy(self, channel_list, num_samples, waveform, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -342,11 +342,11 @@ class LibraryInterpreter(object):
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
-        wfm_info_size = self._actual_num_wfms(channel_list)  # case B560
+        wfm_info_size = self.actual_num_wfms(channel_list)  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms(channel_list))]
+        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms(channel_list))]
 
     def fetch_array_measurement(self, channel_list, array_meas_function, measurement_waveform_size, timeout=hightime.timedelta(seconds=5.0)):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -354,13 +354,13 @@ class LibraryInterpreter(object):
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         array_meas_function_ctype = _visatype.ViInt32(array_meas_function.value)  # case S130
         measurement_waveform_size_ctype = _visatype.ViInt32(measurement_waveform_size)  # case S150
-        meas_wfm_size = (measurement_waveform_size * self._actual_num_wfms(channel_list))  # case B560
+        meas_wfm_size = (measurement_waveform_size * self.actual_num_wfms(channel_list))  # case B560
         meas_wfm_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=meas_wfm_size)  # case B560
-        wfm_info_size = self._actual_num_wfms(channel_list)  # case B560
+        wfm_info_size = self.actual_num_wfms(channel_list)  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_FetchArrayMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, array_meas_function_ctype, measurement_waveform_size_ctype, meas_wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(meas_wfm_ctype[i]) for i in range((measurement_waveform_size * self._actual_num_wfms(channel_list)))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms(channel_list))]
+        return [float(meas_wfm_ctype[i]) for i in range((measurement_waveform_size * self.actual_num_wfms(channel_list)))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms(channel_list))]
 
     def fetch_binary16_into_numpy(self, channel_list, num_samples, waveform, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -368,11 +368,11 @@ class LibraryInterpreter(object):
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
-        wfm_info_size = self._actual_num_wfms(channel_list)  # case B560
+        wfm_info_size = self.actual_num_wfms(channel_list)  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_FetchBinary16(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms(channel_list))]
+        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms(channel_list))]
 
     def fetch_binary32_into_numpy(self, channel_list, num_samples, waveform, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -380,11 +380,11 @@ class LibraryInterpreter(object):
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
-        wfm_info_size = self._actual_num_wfms(channel_list)  # case B560
+        wfm_info_size = self.actual_num_wfms(channel_list)  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_FetchBinary32(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms(channel_list))]
+        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms(channel_list))]
 
     def fetch_binary8_into_numpy(self, channel_list, num_samples, waveform, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -392,32 +392,32 @@ class LibraryInterpreter(object):
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
-        wfm_info_size = self._actual_num_wfms(channel_list)  # case B560
+        wfm_info_size = self.actual_num_wfms(channel_list)  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_FetchBinary8(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms(channel_list))]
+        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms(channel_list))]
 
     def fetch_measurement_stats(self, channel_list, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
-        result_size = self._actual_num_wfms(channel_list)  # case B560
+        result_size = self.actual_num_wfms(channel_list)  # case B560
         result_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=result_size)  # case B560
-        mean_size = self._actual_num_wfms(channel_list)  # case B560
+        mean_size = self.actual_num_wfms(channel_list)  # case B560
         mean_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=mean_size)  # case B560
-        stdev_size = self._actual_num_wfms(channel_list)  # case B560
+        stdev_size = self.actual_num_wfms(channel_list)  # case B560
         stdev_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=stdev_size)  # case B560
-        min_size = self._actual_num_wfms(channel_list)  # case B560
+        min_size = self.actual_num_wfms(channel_list)  # case B560
         min_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=min_size)  # case B560
-        max_size = self._actual_num_wfms(channel_list)  # case B560
+        max_size = self.actual_num_wfms(channel_list)  # case B560
         max_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=max_size)  # case B560
-        num_in_stats_size = self._actual_num_wfms(channel_list)  # case B560
+        num_in_stats_size = self.actual_num_wfms(channel_list)  # case B560
         num_in_stats_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=num_in_stats_size)  # case B560
         error_code = self._library.niScope_FetchMeasurementStats(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype, mean_ctype, stdev_ctype, min_ctype, max_ctype, num_in_stats_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(result_ctype[i]) for i in range(self._actual_num_wfms(channel_list))], [float(mean_ctype[i]) for i in range(self._actual_num_wfms(channel_list))], [float(stdev_ctype[i]) for i in range(self._actual_num_wfms(channel_list))], [float(min_ctype[i]) for i in range(self._actual_num_wfms(channel_list))], [float(max_ctype[i]) for i in range(self._actual_num_wfms(channel_list))], [int(num_in_stats_ctype[i]) for i in range(self._actual_num_wfms(channel_list))]
+        return [float(result_ctype[i]) for i in range(self.actual_num_wfms(channel_list))], [float(mean_ctype[i]) for i in range(self.actual_num_wfms(channel_list))], [float(stdev_ctype[i]) for i in range(self.actual_num_wfms(channel_list))], [float(min_ctype[i]) for i in range(self.actual_num_wfms(channel_list))], [float(max_ctype[i]) for i in range(self.actual_num_wfms(channel_list))], [int(num_in_stats_ctype[i]) for i in range(self.actual_num_wfms(channel_list))]
 
     def get_attribute_vi_boolean(self, channel_list, attribute_id):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -548,14 +548,14 @@ class LibraryInterpreter(object):
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
-        waveform_size = (num_samples * self._actual_num_wfms(channel_list))  # case B560
+        waveform_size = (num_samples * self.actual_num_wfms(channel_list))  # case B560
         waveform_array = array.array("d", [0] * waveform_size)  # case B560
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B560
-        wfm_info_size = self._actual_num_wfms(channel_list)  # case B560
+        wfm_info_size = self.actual_num_wfms(channel_list)  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_Read(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms(channel_list))]
+        return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms(channel_list))]
 
     def reset_device(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

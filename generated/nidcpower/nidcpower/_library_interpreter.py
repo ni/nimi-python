@@ -450,10 +450,10 @@ class LibraryInterpreter(object):
     def measure_multiple(self, channel_name):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
-        voltage_measurements_size = self._parse_channel_count(channel_name)  # case B560
+        voltage_measurements_size = self.parse_channel_count(channel_name)  # case B560
         voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B560
         voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B560
-        current_measurements_size = self._parse_channel_count(channel_name)  # case B560
+        current_measurements_size = self.parse_channel_count(channel_name)  # case B560
         current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B560
         current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B560
         error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
@@ -463,11 +463,11 @@ class LibraryInterpreter(object):
     def measure_multiple_lcr(self, channel_name):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
-        measurements_size = self._parse_channel_count(channel_name)  # case B560
+        measurements_size = self.parse_channel_count(channel_name)  # case B560
         measurements_ctype = get_ctypes_pointer_for_buffer(library_type=lcr_measurement.struct_NILCRMeasurement, size=measurements_size)  # case B560
         error_code = self._library.niDCPower_MeasureMultipleLCR(vi_ctype, channel_name_ctype, measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [lcr_measurement.LCRMeasurement(measurements_ctype[i]) for i in range(self._parse_channel_count(channel_name))]
+        return [lcr_measurement.LCRMeasurement(measurements_ctype[i]) for i in range(self.parse_channel_count(channel_name))]
 
     def parse_channel_count(self, channels_string):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
