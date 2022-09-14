@@ -87,12 +87,12 @@ class SelfTestError(Error):
         super(SelfTestError, self).__init__('Self-test failed with code {0}: {1}'.format(code, msg))
 
 
-def handle_error(library, code, ignore_warnings, is_error_handling):
+def handle_error(library_interpreter, code, ignore_warnings, is_error_handling):
     '''handle_error
 
     Helper function for handling errors returned by nidmm.Library.
-    It calls back into the library to get the corresponding error description
-    and raises if necessary.
+    It calls back into the LibraryInterpreter to get the corresponding error
+    description and raises if necessary.
     '''
 
     if _is_success(code) or (_is_warning(code) and ignore_warnings):
@@ -103,7 +103,7 @@ def handle_error(library, code, ignore_warnings, is_error_handling):
         # Don't try to get the description or we'll start recursing until the stack overflows.
         description = ''
     else:
-        description = library.get_error_description(code)
+        description = library_interpreter.get_error_description(code)
 
     if _is_error(code):
         raise DriverError(code, description)

@@ -78,12 +78,12 @@ class InvalidRepeatedCapabilityError(Error):
         super(InvalidRepeatedCapabilityError, self).__init__('An invalid character ({0}) was found in repeated capability string ({1})'.format(invalid_character, invalid_string))
 
 
-def handle_error(library, code, ignore_warnings, is_error_handling):
+def handle_error(library_interpreter, code, ignore_warnings, is_error_handling):
     '''handle_error
 
     Helper function for handling errors returned by nise.Library.
-    It calls back into the library to get the corresponding error description
-    and raises if necessary.
+    It calls back into the LibraryInterpreter to get the corresponding error
+    description and raises if necessary.
     '''
 
     if _is_success(code) or (_is_warning(code) and ignore_warnings):
@@ -94,7 +94,7 @@ def handle_error(library, code, ignore_warnings, is_error_handling):
         # Don't try to get the description or we'll start recursing until the stack overflows.
         description = ''
     else:
-        description = library.get_error_description(code)
+        description = library_interpreter.get_error_description(code)
 
     if _is_error(code):
         raise DriverError(code, description)

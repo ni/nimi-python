@@ -145,8 +145,8 @@ class Session(object):
     def __init__(self, driver):
         self._item_count = 0
         self._current_item = 0
-        self._library = _library_interpreter.LibraryInterpreter('windows-1251')
-        self._library._handle, self._item_count = self._open_installed_devices_session(driver)
+        self._library_interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
+        self._library_interpreter._handle, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
 
         self.devices = []
@@ -186,9 +186,9 @@ class Session(object):
         try:
             self._close_installed_devices_session()
         except errors.DriverError:
-            self._library._handle = 0
+            self._library_interpreter._handle = 0
             raise
-        self._library._handle = 0
+        self._library_interpreter._handle = 0
 
     ''' These are code-generated '''
 
@@ -199,7 +199,7 @@ class Session(object):
         _open_installed_devices_session. Call this method when you are
         finished using the session handle and do not use this handle again.
         '''
-        return self._library.close_installed_devices_session()
+        return self._library_interpreter.close_installed_devices_session()
 
     def _get_extended_error_info(self):
         r'''_get_extended_error_info
@@ -223,7 +223,7 @@ class Session(object):
             error_info (str): The character buffer into which the error information string is copied.
 
         '''
-        return self._library.get_extended_error_info()
+        return self._library_interpreter.get_extended_error_info()
 
     def _get_installed_device_attribute_vi_int32(self, index, attribute_id):
         r'''_get_installed_device_attribute_vi_int32
@@ -260,7 +260,7 @@ class Session(object):
                 the requested property.
 
         '''
-        return self._library.get_installed_device_attribute_vi_int32(index, attribute_id)
+        return self._library_interpreter.get_installed_device_attribute_vi_int32(index, attribute_id)
 
     def _get_installed_device_attribute_vi_string(self, index, attribute_id):
         r'''_get_installed_device_attribute_vi_string
@@ -296,7 +296,7 @@ class Session(object):
             attribute_value (str): The character buffer into which the property value string is copied.
 
         '''
-        return self._library.get_installed_device_attribute_vi_string(index, attribute_id)
+        return self._library_interpreter.get_installed_device_attribute_vi_string(index, attribute_id)
 
     def _open_installed_devices_session(self, driver):
         r'''_open_installed_devices_session
@@ -334,4 +334,4 @@ class Session(object):
                 driver parameter.
 
         '''
-        return self._library.open_installed_devices_session(driver)
+        return self._library_interpreter.open_installed_devices_session(driver)

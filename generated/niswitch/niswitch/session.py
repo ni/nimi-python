@@ -68,7 +68,7 @@ class _RepeatedCapabilities(object):
         return _SessionBase(
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
-            library=self._session._library,
+            library_interpreter=self._session._library_interpreter,
             freeze_it=True
         )
 
@@ -554,16 +554,16 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.wire_mode`
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, library, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
-        self._library = library
+        self._library_interpreter = library_interpreter
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("library=" + pp.pformat(library))
+        param_list.append("library_interpreter=" + pp.pformat(library_interpreter))
         self._param_list = ', '.join(param_list)
 
         # Instantiate any repeated capability objects
@@ -634,7 +634,7 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        return self._library.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -687,7 +687,7 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        return self._library.get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_int32(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -740,7 +740,7 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        return self._library.get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -814,7 +814,7 @@ class _SessionBase(object):
                 on it or by selecting it and then pressing .
 
         '''
-        return self._library.get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
     def _get_error(self):
         r'''_get_error
@@ -854,7 +854,7 @@ class _SessionBase(object):
                 Size, you can pass VI_NULL for this parameter.
 
         '''
-        return self._library.get_error()
+        return self._library_interpreter.get_error()
 
     def lock(self):
         '''lock
@@ -896,7 +896,7 @@ class _SessionBase(object):
 
         Actual call to driver
         '''
-        self._library.lock()
+        self._library_interpreter.lock()
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -961,7 +961,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        return self._library.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -1026,7 +1026,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        return self._library.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -1091,7 +1091,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        return self._library.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -1156,7 +1156,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        return self._library.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
 
     def unlock(self):
         '''unlock
@@ -1165,7 +1165,7 @@ class _SessionBase(object):
         lock. Refer to lock for additional
         information on session locks.
         '''
-        self._library.unlock()
+        self._library_interpreter.unlock()
 
     def _error_message(self, error_code):
         r'''_error_message
@@ -1185,7 +1185,7 @@ class _SessionBase(object):
                 array with at least 256 bytes.
 
         '''
-        return self._library.error_message(error_code)
+        return self._library_interpreter.error_message(error_code)
 
 
 class Session(_SessionBase):
@@ -1429,14 +1429,14 @@ class Session(_SessionBase):
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library=None,
+            library_interpreter=None,
             freeze_it=False,
             all_channels_in_session=None
         )
-        self._library = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
-        self._library._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
+        self._library_interpreter._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -1449,7 +1449,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._library._vi` is set
+        # handle `self._library_interpreter._vi` is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -1500,9 +1500,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._library._vi = 0
+            self._library_interpreter._vi = 0
             raise
-        self._library._vi = 0
+        self._library_interpreter._vi = 0
 
     ''' These are code-generated '''
 
@@ -1514,7 +1514,7 @@ class Session(_SessionBase):
         initiate. If the switch module is not scanning,
         NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
         '''
-        return self._library.abort()
+        return self._library_interpreter.abort()
 
     @ivi_synchronized
     def can_connect(self, channel1, channel2):
@@ -1565,7 +1565,7 @@ class Session(_SessionBase):
                 configuration channel and thus unavailable for external connections.
 
         '''
-        return self._library.can_connect(channel1, channel2)
+        return self._library_interpreter.can_connect(channel1, channel2)
 
     @ivi_synchronized
     def commit(self):
@@ -1576,7 +1576,7 @@ class Session(_SessionBase):
         initiate. Use commit to arm triggers in a given
         order or to control when expensive hardware operations are performed.
         '''
-        return self._library.commit()
+        return self._library_interpreter.commit()
 
     @ivi_synchronized
     def connect(self, channel1, channel2):
@@ -1613,7 +1613,7 @@ class Session(_SessionBase):
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         '''
-        return self._library.connect(channel1, channel2)
+        return self._library_interpreter.connect(channel1, channel2)
 
     @ivi_synchronized
     def connect_multiple(self, connection_list):
@@ -1650,7 +1650,7 @@ class Session(_SessionBase):
                 r2 is a configuration channel. Default value: None
 
         '''
-        return self._library.connect_multiple(connection_list)
+        return self._library_interpreter.connect_multiple(connection_list)
 
     @ivi_synchronized
     def disable(self):
@@ -1660,7 +1660,7 @@ class Session(_SessionBase):
         impact on the system to which it is connected. All channels are
         disconnected and any scan in progress is aborted.
         '''
-        return self._library.disable()
+        return self._library_interpreter.disable()
 
     @ivi_synchronized
     def disconnect(self, channel1, channel2):
@@ -1683,7 +1683,7 @@ class Session(_SessionBase):
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         '''
-        return self._library.disconnect(channel1, channel2)
+        return self._library_interpreter.disconnect(channel1, channel2)
 
     @ivi_synchronized
     def disconnect_all(self):
@@ -1692,7 +1692,7 @@ class Session(_SessionBase):
         Breaks all existing paths. If the switch module cannot break all paths,
         NISWITCH_WARN_PATH_REMAINS warning is returned.
         '''
-        return self._library.disconnect_all()
+        return self._library_interpreter.disconnect_all()
 
     @ivi_synchronized
     def disconnect_multiple(self, disconnection_list):
@@ -1714,7 +1714,7 @@ class Session(_SessionBase):
                 None
 
         '''
-        return self._library.disconnect_multiple(disconnection_list)
+        return self._library_interpreter.disconnect_multiple(disconnection_list)
 
     @ivi_synchronized
     def get_channel_name(self, index):
@@ -1735,7 +1735,7 @@ class Session(_SessionBase):
                 specify.
 
         '''
-        return self._library.get_channel_name(index)
+        return self._library_interpreter.get_channel_name(index)
 
     @ivi_synchronized
     def get_path(self, channel1, channel2):
@@ -1772,7 +1772,7 @@ class Session(_SessionBase):
                 returned paths: ch0->com0, com0->ab0
 
         '''
-        return self._library.get_path(channel1, channel2)
+        return self._library_interpreter.get_path(channel1, channel2)
 
     @ivi_synchronized
     def get_relay_count(self, relay_name):
@@ -1794,7 +1794,7 @@ class Session(_SessionBase):
             relay_count (int): The number of relay cycles.
 
         '''
-        return self._library.get_relay_count(relay_name)
+        return self._library_interpreter.get_relay_count(relay_name)
 
     @ivi_synchronized
     def get_relay_name(self, index):
@@ -1814,7 +1814,7 @@ class Session(_SessionBase):
             relay_name_buffer (str): Returns the relay name for the index you specify.
 
         '''
-        return self._library.get_relay_name(index)
+        return self._library_interpreter.get_relay_name(index)
 
     @ivi_synchronized
     def get_relay_position(self, relay_name):
@@ -1834,7 +1834,7 @@ class Session(_SessionBase):
                 RelayPosition.CLOSED 11
 
         '''
-        return self._library.get_relay_position(relay_name)
+        return self._library_interpreter.get_relay_position(relay_name)
 
     def _init_with_topology(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
         r'''_init_with_topology
@@ -2076,7 +2076,7 @@ class Session(_SessionBase):
                 One or more of the referenced methods are not in the Python API for this driver.
 
         '''
-        return self._library.init_with_topology(resource_name, topology, simulate, reset_device)
+        return self._library_interpreter.init_with_topology(resource_name, topology, simulate, reset_device)
 
     @ivi_synchronized
     def _initiate_scan(self):
@@ -2091,7 +2091,7 @@ class Session(_SessionBase):
         scanning operation, To stop the scanning operation, call
         abort.
         '''
-        return self._library.initiate_scan()
+        return self._library_interpreter.initiate_scan()
 
     @ivi_synchronized
     def relay_control(self, relay_name, relay_action):
@@ -2116,7 +2116,7 @@ class Session(_SessionBase):
         '''
         if type(relay_action) is not enums.RelayAction:
             raise TypeError('Parameter relay_action must be of type ' + str(enums.RelayAction))
-        return self._library.relay_control(relay_name, relay_action)
+        return self._library_interpreter.relay_control(relay_name, relay_action)
 
     @ivi_synchronized
     def reset_with_defaults(self):
@@ -2127,7 +2127,7 @@ class Session(_SessionBase):
         created without a logical name, this method is equivalent to
         reset.
         '''
-        return self._library.reset_with_defaults()
+        return self._library_interpreter.reset_with_defaults()
 
     @ivi_synchronized
     def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False):
@@ -2162,7 +2162,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter scan_advanced_output_connector must be of type ' + str(enums.ScanAdvancedOutput))
         if type(scan_advanced_output_bus_line) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter scan_advanced_output_bus_line must be of type ' + str(enums.ScanAdvancedOutput))
-        return self._library.route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
+        return self._library_interpreter.route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
 
     @ivi_synchronized
     def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert=False):
@@ -2198,7 +2198,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter trigger_input_connector must be of type ' + str(enums.TriggerInput))
         if type(trigger_input_bus_line) is not enums.TriggerInput:
             raise TypeError('Parameter trigger_input_bus_line must be of type ' + str(enums.TriggerInput))
-        return self._library.route_trigger_input(trigger_input_connector, trigger_input_bus_line, invert)
+        return self._library_interpreter.route_trigger_input(trigger_input_connector, trigger_input_bus_line, invert)
 
     @ivi_synchronized
     def send_software_trigger(self):
@@ -2214,7 +2214,7 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        return self._library.send_software_trigger()
+        return self._library_interpreter.send_software_trigger()
 
     @ivi_synchronized
     def set_path(self, path_list):
@@ -2234,7 +2234,7 @@ class Session(_SessionBase):
                 previously created path with get_path.
 
         '''
-        return self._library.set_path(path_list)
+        return self._library_interpreter.set_path(path_list)
 
     @ivi_synchronized
     def wait_for_debounce(self, maximum_time_ms=hightime.timedelta(milliseconds=5000)):
@@ -2252,7 +2252,7 @@ class Session(_SessionBase):
                 Default Value:5000 ms
 
         '''
-        return self._library.wait_for_debounce(maximum_time_ms)
+        return self._library_interpreter.wait_for_debounce(maximum_time_ms)
 
     @ivi_synchronized
     def wait_for_scan_complete(self, maximum_time_ms=hightime.timedelta(milliseconds=5000)):
@@ -2271,7 +2271,7 @@ class Session(_SessionBase):
                 Value:5000 ms
 
         '''
-        return self._library.wait_for_scan_complete(maximum_time_ms)
+        return self._library_interpreter.wait_for_scan_complete(maximum_time_ms)
 
     def _close(self):
         r'''_close
@@ -2285,7 +2285,7 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        return self._library.close()
+        return self._library_interpreter.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -2319,7 +2319,7 @@ class Session(_SessionBase):
         at initialization. Configuration channel and source channel settings
         remain unchanged.
         '''
-        return self._library.reset()
+        return self._library_interpreter.reset()
 
     @ivi_synchronized
     def _self_test(self):
@@ -2334,4 +2334,4 @@ class Session(_SessionBase):
                 array with at least 256 bytes.
 
         '''
-        return self._library.self_test()
+        return self._library_interpreter.self_test()
