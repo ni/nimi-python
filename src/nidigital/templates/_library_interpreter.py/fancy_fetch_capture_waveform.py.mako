@@ -4,7 +4,7 @@
         # We cannot use codegen without major modifications to the code generator
         # This function uses two 'ivi-dance' parameters and then multiplies them together - see
         # the (modified) line below
-        # Also, we want to return the two sized that normally wouldn't be returned
+        # Also, we want to return the two sizes that normally wouldn't be returned
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
