@@ -2028,7 +2028,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': "\nnumpy array of the appropriate type and size that should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.\n\nTypes supported are\n\n- `numpy.float64`\n- `numpy.int8`\n- `numpy.in16`\n- `numpy.int32`\n\nExample:\n\n.. code-block:: python\n\n    waveform = numpy.ndarray(num_samples * session.actual_num_wfms(channel_list), dtype=numpy.float64)\n    wfm_info = session['0,1'].fetch_into(waveform, timeout=5.0)"
+                    'description': "\nnumpy array of the appropriate type and size that should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.\n\nTypes supported are\n\n- `numpy.float64`\n- `numpy.int8`\n- `numpy.in16`\n- `numpy.int32`\n\nExample:\n\n.. code-block:: python\n\n    waveform = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)\n    wfm_info = session['0,1'].fetch_into(waveform, timeout=5.0)"
                 },
                 'name': 'waveform',
                 'numpy': True,
