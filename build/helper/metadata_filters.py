@@ -45,7 +45,7 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'fixed, passed-in',
         'python_api_list': False,
     },
-    ParameterUsageOptions.LIBRARY_NUMPY_INTO_METHOD_DECLARATION: {
+    ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_DECLARATION: {
         'skip_session_handle': True,
         'skip_input_parameters': False,
         'skip_output_parameters': True,
@@ -84,7 +84,7 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'any',
         'python_api_list': True,
     },
-    ParameterUsageOptions.CTYPES_METHOD_DECLARATION: {
+    ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
         'skip_session_handle': False,
         'skip_input_parameters': False,
         'skip_output_parameters': False,
@@ -97,7 +97,7 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'any',
         'python_api_list': True,
     },
-    ParameterUsageOptions.CTYPES_CALL: {
+    ParameterUsageOptions.LIBRARY_METHOD_CALL: {
         'skip_session_handle': False,
         'skip_input_parameters': False,
         'skip_output_parameters': False,
@@ -123,7 +123,7 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'any',
         'python_api_list': True,
     },
-    ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
+    ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_DECLARATION: {
         'skip_session_handle': True,
         'skip_input_parameters': False,
         'skip_output_parameters': True,
@@ -235,9 +235,9 @@ _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION][
 # Only difference is we want to skip parameters not in api
 _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL].copy()
 
-_ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION].copy()
-_ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_NUMPY_INTO_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_NUMPY_INTO_METHOD_DECLARATION].copy()
-_ParameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_PASSTHROUGH_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL].copy()
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_DECLARATION].copy()
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_DECLARATION].copy()
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.CDLL_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL].copy()
 
 
 def filter_parameters(function, parameter_usage_options):

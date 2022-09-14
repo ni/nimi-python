@@ -25,11 +25,11 @@ _ParameterUsageOptionsSnippet = {
         'skip_self': False,
         'name_to_use': 'python_name_with_default',
     },
-    ParameterUsageOptions.LIBRARY_NUMPY_INTO_METHOD_DECLARATION: {
+    ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_DECLARATION: {
         'skip_self': False,
         'name_to_use': 'python_name',
     },
-    ParameterUsageOptions.LIBRARY_NUMPY_INTO_METHOD_CALL: {
+    ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_CALL: {
         'skip_self': True,
         'name_to_use': 'library_method_call_snippet',
     },
@@ -45,19 +45,19 @@ _ParameterUsageOptionsSnippet = {
         'skip_self': True,
         'name_to_use': 'python_name_with_doc_default',
     },
-    ParameterUsageOptions.CTYPES_METHOD_DECLARATION: {
+    ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
         'skip_self': False,
         'name_to_use': 'python_name',
     },
-    ParameterUsageOptions.CTYPES_CALL: {
+    ParameterUsageOptions.LIBRARY_METHOD_CALL: {
         'skip_self': True,
         'name_to_use': 'ctypes_method_call_snippet',
     },
-    ParameterUsageOptions.CTYPES_PASSTHROUGH_CALL: {
+    ParameterUsageOptions.CDLL_METHOD_CALL: {
         'skip_self': True,
         'name_to_use': 'python_name',
     },
-    ParameterUsageOptions.LIBRARY_METHOD_CALL: {
+    ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL: {
         'skip_self': True,
         'name_to_use': 'library_method_call_snippet',
     },
@@ -65,7 +65,7 @@ _ParameterUsageOptionsSnippet = {
         'skip_self': True,
         'name_to_use': 'ctypes_type_library_call',
     },
-    ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
+    ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_DECLARATION: {
         'skip_self': False,
         'name_to_use': 'python_name_with_default',
     },

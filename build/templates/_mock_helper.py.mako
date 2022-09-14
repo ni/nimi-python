@@ -61,7 +61,7 @@ output_params = helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_
 ivi_dance_params = helper.filter_ivi_dance_parameters(f)
 ivi_dance_size_param = helper.find_size_parameter(ivi_dance_params, params)
 %>\
-    def ${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.CTYPES_METHOD_DECLARATION)}):  # noqa: N802
+    def ${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_DECLARATION)}):  # noqa: N802
         if self._defaults['${func_name}']['return'] != 0:
             return self._defaults['${func_name}']['return']
 %    for p in output_params:

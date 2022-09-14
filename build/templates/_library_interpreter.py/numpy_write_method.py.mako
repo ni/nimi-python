@@ -5,8 +5,8 @@
     import build.helper as helper
 
     parameters = f['parameters']
-    param_names_method = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_DECLARATION)
-    param_names_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.CTYPES_CALL)
+    param_names_method = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_DECLARATION)
+    param_names_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)
     param_ctypes_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.CTYPES_ARGTYPES)
 
     ivi_dance_parameters = helper.filter_ivi_dance_parameters(f)
@@ -20,7 +20,7 @@
 %>\
 
     def ${full_func_name}(${param_names_method}):  # noqa: N802
-% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.CTYPES_CALL):
+% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
 <% ivi_dance_step = helper.IviDanceStep.QUERY_SIZE if (p in ivi_dance_parameters or p == ivi_dance_size_parameter) else helper.IviDanceStep.NOT_APPLICABLE %>\
 %   for declaration in helper.get_ctype_variable_declaration_snippet(p, parameters, ivi_dance_step, config, use_numpy_array=p['numpy']):
         ${declaration}
