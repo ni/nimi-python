@@ -727,7 +727,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
-                'interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -1101,7 +1101,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
-                'interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -1263,7 +1263,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_self_test'
             }

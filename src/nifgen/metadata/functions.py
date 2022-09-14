@@ -762,7 +762,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'create_waveform'
             }
@@ -808,12 +808,12 @@ functions = {
         'method_name_for_documentation': 'create_waveform',
         'method_templates': [
             {
-                'interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
-                'interpreter_filename': 'numpy_write_method',
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -999,7 +999,7 @@ functions = {
         'method_name_for_documentation': 'create_waveform',
         'method_templates': [
             {
-                'interpreter_filename': 'numpy_write_method',
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -1175,7 +1175,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'delete_waveform'
             }
@@ -1721,7 +1721,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'datetime_wrappers'
             }
@@ -1756,7 +1756,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'datetime_wrappers'
             }
@@ -2158,7 +2158,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
-                'interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -2427,7 +2427,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'send_software_edge_trigger'
             }
@@ -2710,7 +2710,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'set_next_write_position'
             }
@@ -2840,7 +2840,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
-                'interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -2903,7 +2903,7 @@ functions = {
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
-                'interpreter_filename': 'numpy_write_method',
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -2966,12 +2966,12 @@ functions = {
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
-                'interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
-                'interpreter_filename': 'numpy_write_method',
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -3034,7 +3034,7 @@ functions = {
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
-                'interpreter_filename': 'numpy_write_method',
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -3129,12 +3129,12 @@ functions = {
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
-                'interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
-                'interpreter_filename': 'numpy_write_method',
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -3197,7 +3197,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'write_waveform'
             }
@@ -3342,7 +3342,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_self_test'
             }

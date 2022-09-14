@@ -11,7 +11,7 @@ functions_additional_burst_pattern = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_burst_pattern',
             }
@@ -99,7 +99,7 @@ functions_additional_write_source_waveform_site_unique = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_write_source_waveform_site_unique',
             }
@@ -141,7 +141,7 @@ functions_additional_get_pin_results_pin_information = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_get_pin_results_pin_information',
             }
@@ -184,7 +184,7 @@ functions_additional_get_site_pass_fail = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_get_site_pass_fail',
             }
@@ -229,7 +229,7 @@ functions_additional_fetch_capture_waveform = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'fancy_fetch_capture_waveform',
+                'library_interpreter_filename': 'fancy_fetch_capture_waveform',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_fetch_capture_waveform',
             }
@@ -301,7 +301,7 @@ functions_additional_fetch_history_ram_cycle_information = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_fetch_history_ram_cycle_information',
             }
@@ -440,7 +440,7 @@ functions_additional_load_specifications_levels_and_timing = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_load_specifications_levels_and_timing',
             }
@@ -502,7 +502,7 @@ functions_additional_unload_specifications = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_unload_specifications',
             }

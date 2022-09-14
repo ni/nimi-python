@@ -10,7 +10,7 @@ functions_additional_create_advanced_sequence = {
         'returns': 'ViStatus',
         'python_name': 'create_advanced_sequence',
         'method_templates': [
-            { 'session_filename': 'fancy_advanced_sequence', 'interpreter_filename': 'none', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+            { 'session_filename': 'fancy_advanced_sequence', 'library_interpreter_filename': 'none', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
         ],
         'parameters': [
             {

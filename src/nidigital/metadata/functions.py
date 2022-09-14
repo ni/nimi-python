@@ -1313,7 +1313,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_self_test'
             }
@@ -2967,7 +2967,7 @@ the trigger conditions are met.
         'method_templates': [
             {
                 'documentation_filename': 'lock',
-                'interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -3644,7 +3644,7 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
-                'interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }

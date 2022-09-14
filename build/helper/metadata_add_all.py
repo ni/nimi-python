@@ -257,11 +257,11 @@ _repeated_capability_parameter_names = ['channelName', 'channelList', 'channel',
 def _add_method_templates(f):
     '''Adds a list of 'method_template_filenames' value to function metadata if not found. This are the mako templates that will be used to render the method.'''
     if 'method_templates' not in f:
-        f['method_templates'] = [{'session_filename': '/default_method', 'interpreter_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ]
+        f['method_templates'] = [{'session_filename': '/default_method', 'library_interpreter_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ]
     # Prefix the templates with a / so mako can find them. Not sure mako it works this way.
     for method_template in f['method_templates']:
         method_template['session_filename'] = '/' + method_template['session_filename'] if method_template['session_filename'][0] != '/' else method_template['session_filename']
-        method_template['interpreter_filename'] = '/' + method_template['interpreter_filename'] if method_template['interpreter_filename'][0] != '/' else method_template['interpreter_filename']
+        method_template['library_interpreter_filename'] = '/' + method_template['library_interpreter_filename'] if method_template['library_interpreter_filename'][0] != '/' else method_template['library_interpreter_filename']
         # Some functions don't get code-generated documentation (i.e. private methods) so no need to specify template for those.
         if 'documentation_filename' in method_template and method_template['documentation_filename'] is not None:
             method_template['documentation_filename'] = '/' + method_template['documentation_filename'] if method_template['documentation_filename'][0] != '/' else method_template['documentation_filename']
@@ -767,7 +767,7 @@ functions_input = {
     'MakeAFoo': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
-        'method_templates': [{'session_filename': '/cool_template', 'interpreter_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+        'method_templates': [{'session_filename': '/cool_template', 'library_interpreter_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
         'parameters': [
             {
                 'direction': 'in',
@@ -920,7 +920,7 @@ functions_input = {
         'method_templates': [
             {
                 'session_filename': '/cool_template',
-                'interpreter_filename': '/cool_template',
+                'library_interpreter_filename': '/cool_template',
                 'documentation_filename': '/cool_template',
                 'method_python_name_suffix': '',
             },
@@ -942,7 +942,7 @@ functions_expected = {
         'has_repeated_capability': False,
         'is_error_handling': False,
         'render_in_session_base': False,
-        'method_templates': [{'session_filename': '/cool_template', 'interpreter_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+        'method_templates': [{'session_filename': '/cool_template', 'library_interpreter_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
         'parameters': [
             {
                 'ctypes_method_call_snippet': 'vi_ctype',
@@ -1249,7 +1249,7 @@ functions_expected = {
         'codegen_method': 'private',
         'returns': 'ViStatus',
         'use_session_lock': True,
-        'method_templates': [{'session_filename': '/default_method', 'interpreter_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
+        'method_templates': [{'session_filename': '/default_method', 'library_interpreter_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
         'parameters': [
             {
                 'ctypes_method_call_snippet': 'vi_ctype',
@@ -1409,7 +1409,7 @@ functions_expected = {
         'method_templates': [
             {
                 'session_filename': '/cool_template',
-                'interpreter_filename': '/cool_template',
+                'library_interpreter_filename': '/cool_template',
                 'documentation_filename': '/cool_template',
                 'method_python_name_suffix': ''
             }

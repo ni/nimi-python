@@ -15,7 +15,7 @@ functions_additional_fetch_array_measurement = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_fetch_array_measurement'
             }
@@ -139,7 +139,7 @@ functions_additional_fetch_array_measurement_stats = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'interpreter_filename': 'none',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_fetch_measurement_stats'
             }

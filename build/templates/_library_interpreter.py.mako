@@ -74,6 +74,6 @@ class LibraryInterpreter(object):
 <%include file="/_library_interpreter.py/_get_error_description.py.mako" />\
 % for func_name in sorted(functions):
 % for method_template in functions[func_name]['method_templates']:
-<%include file="${'/_library_interpreter.py' + method_template['interpreter_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+<%include file="${'/_library_interpreter.py' + method_template['library_interpreter_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
