@@ -3127,6 +3127,10 @@ class Session(_SessionBase):
         self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
+        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # _initialize_with_channels fails, the error handler can reference it.
+        # And then once _initialize_with_channels succeeds, we can update _library_interpreter._vi
+        # with the actual session handle.
         self._library_interpreter._vi = self._initialize_with_channels(resource_name, channel_name, reset_device, options)
 
         self.tclk = nitclk.SessionReference(self._library_interpreter._vi)

@@ -146,6 +146,10 @@ class Session(object):
         self._item_count = 0
         self._current_item = 0
         self._library_interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
+        # Note that _library_interpreter sets _handle to 0 in its constructor, so that if
+        # _open_installed_devices_session fails, the error handler can reference it.
+        # And then once _open_installed_devices_session succeeds, we can update _library_interpreter._handle
+        # with the actual session handle.
         self._library_interpreter._handle, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
 

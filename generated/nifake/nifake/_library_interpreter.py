@@ -56,6 +56,8 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        # Initialize _vi to 0 for now.
+        # The Session will directly update it once its init function has been called.
         self._vi = 0
 
     def get_error_description(self, error_code):

@@ -7060,6 +7060,10 @@ class Session(_SessionBase):
         self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
+        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # _fancy_initialize fails, the error handler can reference it.
+        # And then once _fancy_initialize succeeds, we can update _library_interpreter._vi
+        # with the actual session handle.
         self._library_interpreter._vi = self._fancy_initialize(resource_name, channels, reset, options, independent_channels)
 
         # Store the parameter list for later printing in __repr__

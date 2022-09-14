@@ -4090,6 +4090,10 @@ class Session(_SessionBase):
         self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
+        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # _init_with_options fails, the error handler can reference it.
+        # And then once _init_with_options succeeds, we can update _library_interpreter._vi
+        # with the actual session handle.
         self._library_interpreter._vi = self._init_with_options(resource_name, id_query, reset_device, options)
 
         self.tclk = nitclk.SessionReference(self._library_interpreter._vi)

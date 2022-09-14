@@ -236,6 +236,10 @@ class Session(_SessionBase):
         self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
+        # Note that _library_interpreter sets _${config['session_handle_parameter_name']} to 0 in its constructor, so that if
+        # ${init_function['python_name']} fails, the error handler can reference it.
+        # And then once ${init_function['python_name']} succeeds, we can update _library_interpreter._${config['session_handle_parameter_name']}
+        # with the actual session handle.
         self._library_interpreter._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
 
 % if config['uses_nitclk']:

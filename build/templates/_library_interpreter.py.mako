@@ -69,6 +69,8 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        # Initialize _${config['session_handle_parameter_name']} to 0 for now.
+        # The Session will directly update it once its init function has been called.
         self._${config['session_handle_parameter_name']} = 0
 
 <%include file="/_library_interpreter.py/_get_error_description.py.mako" />\

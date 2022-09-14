@@ -175,6 +175,10 @@ class Session(_SessionBase):
         self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
+        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # _open_session fails, the error handler can reference it.
+        # And then once _open_session succeeds, we can update _library_interpreter._vi
+        # with the actual session handle.
         self._library_interpreter._vi = self._open_session(virtual_device_name, options)
 
         # Store the parameter list for later printing in __repr__
