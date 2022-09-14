@@ -45,7 +45,11 @@ def get_ctypes_and_array(value, array_type):
 
 
 class LibraryInterpreter(object):
-    '''Library C<->Python interpreter.'''
+    '''Library C<->Python interpreter.
+
+    This class handles ctypes conversions, string encoding, and raising exceptions if the library
+    function returns an error.
+    '''
 
     def __init__(self, encoding):
         self._encoding = encoding
