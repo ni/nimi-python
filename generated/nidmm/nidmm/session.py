@@ -480,17 +480,15 @@ class _SessionBase(object):
     For the NI 4070/4071/4072 only, specifies the rate of the waveform acquisition in Samples per second (S/s).  The valid Range is 10.0-1,800,000 S/s. Values are coerced to the  closest integer divisor of 1,800,000. The default value is 1,800,000.
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, library, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
-        self._vi = vi
         self._library = library
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("vi=" + pp.pformat(vi))
         param_list.append("library=" + pp.pformat(library))
         self._param_list = ', '.join(param_list)
 
@@ -1057,7 +1055,6 @@ class Session(_SessionBase):
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            vi=None,
             library=None,
             freeze_it=False,
             all_channels_in_session=None
@@ -1066,9 +1063,7 @@ class Session(_SessionBase):
         self._library = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
-        self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, options)
-        self._library._vi = self._vi
+        self._library._vi = self._init_with_options(resource_name, id_query, reset_device, options)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -1080,7 +1075,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._vi` is set
+        # handle `self._library._vi` is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -1121,9 +1116,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._vi = 0
+            self._library._vi = 0
             raise
-        self._vi = 0
+        self._library._vi = 0
 
     ''' These are code-generated '''
 

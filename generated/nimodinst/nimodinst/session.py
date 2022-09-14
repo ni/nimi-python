@@ -143,12 +143,10 @@ class Session(object):
     _is_frozen = False
 
     def __init__(self, driver):
-        self._handle = 0
         self._item_count = 0
         self._current_item = 0
         self._library = _library_interpreter.LibraryInterpreter('windows-1251')
-        self._handle, self._item_count = self._open_installed_devices_session(driver)
-        self._library._handle = self._handle
+        self._library._handle, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
 
         self.devices = []
@@ -188,9 +186,9 @@ class Session(object):
         try:
             self._close_installed_devices_session()
         except errors.DriverError:
-            self._handle = 0
+            self._library._handle = 0
             raise
-        self._handle = 0
+        self._library._handle = 0
 
     ''' These are code-generated '''
 

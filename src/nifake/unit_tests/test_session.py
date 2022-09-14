@@ -133,7 +133,7 @@ class TestSession(object):
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
-            assert session._vi == 0
+            assert session._library._vi == 0
         self.patched_library.niFake_close.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_session_context_manager_init_with_error(self):
