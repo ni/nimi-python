@@ -49,13 +49,18 @@ def _add_enum(n):
 
 
 def _add_python_method_name(function, name):
-    '''Adds 'python_name' and 'library_interpreter_name' to the function metadata if not already there'''
+    '''Adds 'python_name' to the function metadata if not already there'''
     if 'python_name' not in function:
         if function['codegen_method'] == 'private':
             function['python_name'] = '_' + camelcase_to_snakecase(name)
         else:
             function['python_name'] = camelcase_to_snakecase(name)
             assert function['codegen_method'] == 'no' or 'method_name_for_documentation' not in function, "'method_name_for_documentation' not allowed to be set: function['method_name_for_documentation'] = '{0}', function['python_name'] = '{1}'".format(function['method_name_for_documentation'], function['python_name'])
+    return function
+
+
+def _add_library_interpreter_method_name(function, name):
+    '''Adds 'library_interpreter_name' to the function metadata if not already there'''
     if 'library_interpreter_name' not in function:
         function['library_interpreter_name'] = function['python_name'].lstrip('_')
     return function
@@ -385,6 +390,7 @@ def add_all_function_metadata(functions, config):
     for f in functions:
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
+        _add_library_interpreter_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
         _add_method_templates(functions[f])
         _add_use_session_lock(functions[f])
