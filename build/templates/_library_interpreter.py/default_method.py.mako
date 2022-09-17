@@ -12,7 +12,7 @@
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameters, parameters)
     len_parameters = helper.filter_len_parameters(f)
     len_size_parameter = helper.find_size_parameter(len_parameters, parameters)
-    assert ivi_dance_size_parameter is None or len_size_parameter is None, str(f)
+    assert ivi_dance_size_parameter is None or len_size_parameter is None
 
     full_func_name = f['library_interpreter_name'] + method_template['method_python_name_suffix']
     c_func_name = config['c_function_prefix'] + f['name']
