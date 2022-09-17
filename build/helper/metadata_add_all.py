@@ -203,14 +203,14 @@ def _add_ctypes_method_call_snippet(parameter):
         parameter['ctypes_method_call_snippet'] = parameter['ctypes_variable_name']
 
 
-def _add_library_method_call_snippet(parameter, config):
+def _add_library_interpreter_method_call_snippet(parameter, config):
     '''Code snippet for calling a method of Library for this parameter.'''
     if parameter['is_session_handle']:
-        parameter['library_method_call_snippet'] = 'self._' + config['session_handle_parameter_name']
+        parameter['library_interpreter_method_call_snippet'] = 'self._' + config['session_handle_parameter_name']
     elif parameter['is_repeated_capability']:
-        parameter['library_method_call_snippet'] = 'self._repeated_capability'
+        parameter['library_interpreter_method_call_snippet'] = 'self._repeated_capability'
     else:
-        parameter['library_method_call_snippet'] = parameter['python_name']
+        parameter['library_interpreter_method_call_snippet'] = parameter['python_name']
 
 
 def _add_default_value_name(parameter):
@@ -412,7 +412,7 @@ def add_all_function_metadata(functions, config):
             _add_is_repeated_capability(p)
             _add_is_session_handle(p)
             _add_ctypes_method_call_snippet(p)
-            _add_library_method_call_snippet(p, config)
+            _add_library_interpreter_method_call_snippet(p, config)
 
         # We can't do these until the parameters have been processed
         _add_has_repeated_capability(functions[f])
@@ -973,7 +973,7 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViSession',
-                'library_method_call_snippet': 'self._vi',
+                'library_interpreter_method_call_snippet': 'self._vi',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
             },
@@ -1003,7 +1003,7 @@ functions_expected = {
                 'python_name_with_doc_default': 'name',
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'ViString',
-                'library_method_call_snippet': 'name',
+                'library_interpreter_method_call_snippet': 'name',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'name',
             },
@@ -1036,7 +1036,7 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViInt32',
-                'library_method_call_snippet': 'pin_data_buffer_size',
+                'library_interpreter_method_call_snippet': 'pin_data_buffer_size',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'pin_data_buffer_size',
             },
@@ -1069,7 +1069,7 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViInt32',
-                'library_method_call_snippet': 'actual_num_pin_data',
+                'library_interpreter_method_call_snippet': 'actual_num_pin_data',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'actual_num_pin_data',
             },
@@ -1104,7 +1104,7 @@ functions_expected = {
                     'value_twist': 'actualNumPinData'
                 },
                 'type': 'ViUInt8',
-                'library_method_call_snippet': 'expected_pin_states',
+                'library_interpreter_method_call_snippet': 'expected_pin_states',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'expected_pin_states',
             },
@@ -1137,7 +1137,7 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'struct_CustomStruct',
-                'library_method_call_snippet': 'custom_type_input',
+                'library_interpreter_method_call_snippet': 'custom_type_input',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_input',
             },
@@ -1170,7 +1170,7 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'struct_CustomStruct',
-                'library_method_call_snippet': 'custom_type_output',
+                'library_interpreter_method_call_snippet': 'custom_type_output',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_output',
             },
@@ -1203,7 +1203,7 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'struct_CustomStruct',
-                'library_method_call_snippet': 'custom_type_without_struct_prefix_input',
+                'library_interpreter_method_call_snippet': 'custom_type_without_struct_prefix_input',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_input',
             },
@@ -1236,7 +1236,7 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'struct_CustomStruct',
-                'library_method_call_snippet': 'custom_type_without_struct_prefix_output',
+                'library_interpreter_method_call_snippet': 'custom_type_without_struct_prefix_output',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_output',
             },
@@ -1280,7 +1280,7 @@ functions_expected = {
                 'python_name_with_doc_default': 'vi',
                 'is_repeated_capability': False,
                 'is_session_handle': True,
-                'library_method_call_snippet': 'self._vi',
+                'library_interpreter_method_call_snippet': 'self._vi',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
             },
@@ -1313,7 +1313,7 @@ functions_expected = {
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
                 'is_session_handle': False,
-                'library_method_call_snippet': 'status',
+                'library_interpreter_method_call_snippet': 'status',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
             },
@@ -1346,7 +1346,7 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViInt32',
-                'library_method_call_snippet': 'data_buffer_size',
+                'library_interpreter_method_call_snippet': 'data_buffer_size',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'data_buffer_size',
             },
@@ -1380,7 +1380,7 @@ functions_expected = {
                     'value': 'dataBufferSize',
                 },
                 'type': 'ViUInt32',
-                'library_method_call_snippet': 'data',
+                'library_interpreter_method_call_snippet': 'data',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'data',
             },
