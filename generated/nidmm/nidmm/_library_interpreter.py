@@ -71,9 +71,9 @@ class LibraryInterpreter(object):
 
         try:
             '''
-            It is expected for _get_error to raise when the session is invalid
+            It is expected for get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
-            Use _error_message instead. It doesn't require a session.
+            Use error_message instead. It doesn't require a session.
             '''
             error_string = self.error_message(error_code)
             return error_string
