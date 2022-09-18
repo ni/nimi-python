@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Renders a Intermediate method corresponding to the passed-in function metadata.'''
+    '''Renders a LibraryInterpreter method corresponding to the passed-in function metadata.'''
 
     import build.helper as helper
 
