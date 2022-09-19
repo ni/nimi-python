@@ -2830,17 +2830,10 @@ class _SessionBase(object):
             lock (context manager): When used in a with statement, nidigital.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        self._library_interpreter.lock()  # We do not call this in the context manager so that this function can
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
-
-    def _lock_session(self):
-        '''_lock_session
-
-        Actual call to driver
-        '''
-        self._library_interpreter.lock()
 
     @ivi_synchronized
     def ppmu_measure(self, measurement_type):
