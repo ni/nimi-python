@@ -7,7 +7,6 @@
     parameters = f['parameters']
     param_names_method = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_DECLARATION)
     param_names_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)
-    param_ctypes_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.CTYPES_ARGTYPES)
 
     full_func_name = f['library_interpreter_name'] + method_template['method_python_name_suffix']
     c_func_name = config['c_function_prefix'] + f['name']
