@@ -33,7 +33,7 @@ class TestSession(object):
         self.patched_library_singleton_get.start()
 
         self.patched_tclk_library = self.PatchedTClkLibrary(None)
-        self.patched_tclk_library_singleton_get = patch('nitclk._library_interpreter._library_singleton.get', return_value=self.patched_library)
+        self.patched_tclk_library_singleton_get = patch('nitclk._library_interpreter._library_singleton.get', return_value=self.patched_tclk_library)
         self.patched_tclk_library_singleton_get.start()
 
         self.side_effects_helper = _mock_helper.SideEffectsHelper()
