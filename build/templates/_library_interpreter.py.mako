@@ -77,7 +77,7 @@ class LibraryInterpreter(object):
         # The Session will directly update it once its init function has been called.
         self._${config['session_handle_parameter_name']} = 0
 
-<%include file="/_library_interpreter.py/_get_error_description.py.mako" />\
+<%include file="/_library_interpreter.py/_get_error_description.py.mako" args="config=config" />\
 % for func_name in sorted(functions):
 % for method_template in functions[func_name]['method_templates']:
 % if method_template['library_interpreter_filename'] != '/none':
