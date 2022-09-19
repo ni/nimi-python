@@ -51,6 +51,7 @@ _ParameterUsageOptionsSnippet = {
     },
     ParameterUsageOptions.LIBRARY_METHOD_CALL: {
         'skip_self': True,
+        # when calling into Library, we need to build and pass parameters as ctypes types
         'name_to_use': 'ctypes_method_call_snippet',
     },
     ParameterUsageOptions.CDLL_METHOD_CALL: {
