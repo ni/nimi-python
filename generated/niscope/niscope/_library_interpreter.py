@@ -7,7 +7,7 @@ import hightime  # noqa: F401
 import niscope._converters as _converters  # noqa: F401
 import niscope._library_singleton as _library_singleton
 import niscope._visatype as _visatype
-import niscope.enums as enums
+import niscope.enums as enums  # noqa: F401
 import niscope.errors as errors
 
 import niscope.waveform_info as waveform_info  # noqa: F401
@@ -145,7 +145,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
-    def self_cal(self, channel_list, option=enums.Option.SELF_CALIBRATE_ALL_CHANNELS):  # noqa: N802
+    def self_cal(self, channel_list, option):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         option_ctype = _visatype.ViInt32(option.value)  # case S130
@@ -153,7 +153,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def clear_waveform_measurement_stats(self, channel_list, clearable_measurement_function=enums.ClearableMeasurement.ALL_MEASUREMENTS):  # noqa: N802
+    def clear_waveform_measurement_stats(self, channel_list, clearable_measurement_function):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         clearable_measurement_function_ctype = _visatype.ViInt32(clearable_measurement_function.value)  # case S130
@@ -203,7 +203,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_ref_levels(self, low=10.0, mid=50.0, high=90.0):  # noqa: N802
+    def configure_ref_levels(self, low, mid, high):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         low_ctype = _visatype.ViReal64(low)  # case S150
         mid_ctype = _visatype.ViReal64(mid)  # case S150
@@ -212,7 +212,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_digital(self, trigger_source, slope=enums.TriggerSlope.POSITIVE, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):  # noqa: N802
+    def configure_trigger_digital(self, trigger_source, slope, holdoff, delay):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         slope_ctype = _visatype.ViInt32(slope.value)  # case S130
@@ -222,7 +222,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_edge(self, trigger_source, level, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):  # noqa: N802
+    def configure_trigger_edge(self, trigger_source, level, slope, trigger_coupling, holdoff, delay):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         level_ctype = _visatype.ViReal64(level)  # case S150
@@ -234,7 +234,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_hysteresis(self, trigger_source, level, hysteresis, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):  # noqa: N802
+    def configure_trigger_hysteresis(self, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         level_ctype = _visatype.ViReal64(level)  # case S150
@@ -253,7 +253,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_software(self, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):  # noqa: N802
+    def configure_trigger_software(self, holdoff, delay):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
         delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
@@ -261,7 +261,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_video(self, trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):  # noqa: N802
+    def configure_trigger_video(self, trigger_source, enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         enable_dc_restore_ctype = _visatype.ViBoolean(enable_dc_restore)  # case S150
@@ -276,7 +276,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_window(self, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0)):  # noqa: N802
+    def configure_trigger_window(self, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff, delay):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         low_level_ctype = _visatype.ViReal64(low_level)  # case S150
@@ -289,7 +289,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_vertical(self, channel_list, range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True):  # noqa: N802
+    def configure_vertical(self, channel_list, range, offset, coupling, probe_attenuation, enabled):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         range_ctype = _visatype.ViReal64(range)  # case S150
@@ -328,7 +328,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch(self, channel_list, num_samples, timeout=hightime.timedelta(seconds=5.0)):  # noqa: N802
+    def fetch(self, channel_list, timeout, num_samples):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -354,7 +354,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms(channel_list))]
 
-    def fetch_array_measurement(self, channel_list, array_meas_function, measurement_waveform_size, timeout=hightime.timedelta(seconds=5.0)):  # noqa: N802
+    def fetch_array_measurement(self, channel_list, timeout, array_meas_function, measurement_waveform_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -404,7 +404,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms(channel_list))]
 
-    def fetch_measurement_stats(self, channel_list, scalar_meas_function, timeout=hightime.timedelta(seconds=5.0)):  # noqa: N802
+    def fetch_measurement_stats(self, channel_list, timeout, scalar_meas_function):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -514,7 +514,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):  # noqa: N802
+    def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
@@ -549,7 +549,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def read(self, channel_list, num_samples, timeout=hightime.timedelta(seconds=5.0)):  # noqa: N802
+    def read(self, channel_list, timeout, num_samples):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140

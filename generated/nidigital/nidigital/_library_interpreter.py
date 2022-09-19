@@ -7,7 +7,7 @@ import hightime  # noqa: F401
 import nidigital._converters as _converters  # noqa: F401
 import nidigital._library_singleton as _library_singleton
 import nidigital._visatype as _visatype
-import nidigital.enums as enums
+import nidigital.enums as enums  # noqa: F401
 import nidigital.errors as errors
 
 import nidigital.history_ram_cycle_information as history_ram_cycle_information  # noqa: F401
@@ -94,7 +94,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def apply_levels_and_timing(self, site_list, levels_sheet, timing_sheet, initial_state_high_pins=None, initial_state_low_pins=None, initial_state_tristate_pins=None):  # noqa: N802
+    def apply_levels_and_timing(self, site_list, levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C010
         levels_sheet_ctype = ctypes.create_string_buffer(levels_sheet.encode(self._encoding))  # case C020
@@ -116,7 +116,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def burst_pattern(self, site_list, start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.timedelta(seconds=10.0)):  # noqa: N802
+    def burst_pattern(self, site_list, start_label, select_digital_function, wait_until_done, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C010
         start_label_ctype = ctypes.create_string_buffer(start_label.encode(self._encoding))  # case C020
@@ -134,7 +134,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def clock_generator_generate_clock(self, channel_list, frequency, select_digital_function=True):  # noqa: N802
+    def clock_generator_generate_clock(self, channel_list, frequency, select_digital_function):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         frequency_ctype = _visatype.ViReal64(frequency)  # case S150
@@ -287,7 +287,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_source_waveform_from_file_tdms(self, waveform_name, waveform_file_path, write_waveform_data=True):  # noqa: N802
+    def create_source_waveform_from_file_tdms(self, waveform_name, waveform_file_path, write_waveform_data):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         waveform_file_path_ctype = ctypes.create_string_buffer(waveform_file_path.encode(self._encoding))  # case C020
@@ -668,7 +668,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_seconds_real64_to_timedelta(float(period_ctype.value))
 
-    def init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):  # noqa: N802
+    def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
@@ -860,7 +860,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def tdr(self, channel_list, apply_offsets=True):  # noqa: N802
+    def tdr(self, channel_list, apply_offsets):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         apply_offsets_ctype = _visatype.ViBoolean(apply_offsets)  # case S150
@@ -876,7 +876,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_seconds_real64_to_timedeltas([float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)])
 
-    def unload_all_patterns(self, unload_keep_alive_pattern=False):  # noqa: N802
+    def unload_all_patterns(self, unload_keep_alive_pattern):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         unload_keep_alive_pattern_ctype = _visatype.ViBoolean(unload_keep_alive_pattern)  # case S150
         error_code = self._library.niDigital_UnloadAllPatterns(vi_ctype, unload_keep_alive_pattern_ctype)
@@ -897,7 +897,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(caller_has_lock_ctype.value)
 
-    def wait_until_done(self, timeout=hightime.timedelta(seconds=10.0)):  # noqa: N802
+    def wait_until_done(self, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         error_code = self._library.niDigital_WaitUntilDone(vi_ctype, timeout_ctype)

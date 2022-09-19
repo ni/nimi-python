@@ -21,7 +21,7 @@ import ${module_name}._converters as _converters  # noqa: F401
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
 % if config['enums']:
-import ${module_name}.enums as enums
+import ${module_name}.enums as enums  # noqa: F401
 % endif
 import ${module_name}.errors as errors
 % for c in config['custom_types']:

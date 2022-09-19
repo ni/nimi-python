@@ -7,7 +7,7 @@ import hightime  # noqa: F401
 import nidcpower._converters as _converters  # noqa: F401
 import nidcpower._library_singleton as _library_singleton
 import nidcpower._visatype as _visatype
-import nidcpower.enums as enums
+import nidcpower.enums as enums  # noqa: F401
 import nidcpower.errors as errors
 
 import nidcpower.lcr_load_compensation_spot as lcr_load_compensation_spot  # noqa: F401
@@ -113,7 +113,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_aperture_time(self, channel_name, aperture_time, units=enums.ApertureTimeUnits.SECONDS):  # noqa: N802
+    def configure_aperture_time(self, channel_name, aperture_time, units):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         aperture_time_ctype = _visatype.ViReal64(aperture_time)  # case S150
@@ -132,7 +132,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_advanced_sequence_commit_step(self, channel_name, set_as_active_step=True):  # noqa: N802
+    def create_advanced_sequence_commit_step(self, channel_name, set_as_active_step):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
@@ -140,7 +140,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_advanced_sequence_step(self, channel_name, set_as_active_step=True):  # noqa: N802
+    def create_advanced_sequence_step(self, channel_name, set_as_active_step):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
@@ -194,7 +194,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fancy_initialize(self, resource_name, channels=None, reset=False, option_string="", independent_channels=True):  # noqa: N802
+    def fancy_initialize(self, resource_name, channels, reset, option_string, independent_channels):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(resource_name).encode(self._encoding))  # case C040
         channels_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(channels).encode(self._encoding))  # case C040
         reset_ctype = _visatype.ViBoolean(reset)  # case S150
@@ -223,7 +223,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
 
-    def fetch_multiple_lcr(self, channel_name, count, timeout=hightime.timedelta(seconds=1.0)):  # noqa: N802
+    def fetch_multiple_lcr(self, channel_name, timeout, count):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
@@ -492,7 +492,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def perform_lcr_open_compensation(self, channel_name, additional_frequencies=None):  # noqa: N802
+    def perform_lcr_open_compensation(self, channel_name, additional_frequencies):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
@@ -508,7 +508,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def perform_lcr_short_compensation(self, channel_name, additional_frequencies=None):  # noqa: N802
+    def perform_lcr_short_compensation(self, channel_name, additional_frequencies):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
@@ -675,7 +675,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(caller_has_lock_ctype.value)
 
-    def wait_for_event(self, channel_name, event_id, timeout=hightime.timedelta(seconds=10.0)):  # noqa: N802
+    def wait_for_event(self, channel_name, event_id, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130

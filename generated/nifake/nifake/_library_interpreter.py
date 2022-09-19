@@ -7,7 +7,7 @@ import hightime  # noqa: F401
 import nifake._converters as _converters  # noqa: F401
 import nifake._library_singleton as _library_singleton
 import nifake._visatype as _visatype
-import nifake.enums as enums
+import nifake.enums as enums  # noqa: F401
 import nifake.errors as errors
 
 import nifake.custom_struct as custom_struct  # noqa: F401
@@ -128,7 +128,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
-    def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):  # noqa: N802
+    def enum_input_function_with_defaults(self, a_turtle):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         a_turtle_ctype = _visatype.ViInt16(a_turtle.value)  # case S130
         error_code = self._library.niFake_EnumInputFunctionWithDefaults(vi_ctype, a_turtle_ctype)
@@ -405,7 +405,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def init_with_options(self, resource_name, option_string, id_query=False, reset_device=False):  # noqa: N802
+    def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
@@ -428,7 +428,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(caller_has_lock_ctype.value)
 
-    def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers=None):  # noqa: N802
+    def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         output_array_size_ctype = _visatype.ViInt32(output_array_size)  # case S210
         output_array_size = output_array_size  # case B600
@@ -610,7 +610,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name=enums.MobileOSNames.ANDROID):  # noqa: N802
+    def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         a_mobile_os_name_ctype = ctypes.create_string_buffer(a_mobile_os_name.value.encode(self._encoding))  # case C030
         error_code = self._library.niFake_StringValuedEnumInputFunctionWithDefaults(vi_ctype, a_mobile_os_name_ctype)

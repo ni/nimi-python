@@ -7,7 +7,7 @@ import hightime  # noqa: F401
 import nidmm._converters as _converters  # noqa: F401
 import nidmm._library_singleton as _library_singleton
 import nidmm._visatype as _visatype
-import nidmm.enums as enums
+import nidmm.enums as enums  # noqa: F401
 import nidmm.errors as errors
 
 
@@ -104,7 +104,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=hightime.timedelta(seconds=-1)):  # noqa: N802
+    def configure_multi_point(self, trigger_count, sample_count, sample_trigger, sample_interval):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_count_ctype = _visatype.ViInt32(trigger_count)  # case S150
         sample_count_ctype = _visatype.ViInt32(sample_count)  # case S150
@@ -140,7 +140,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_thermocouple(self, thermocouple_type, reference_junction_type=enums.ThermocoupleReferenceJunctionType.FIXED):  # noqa: N802
+    def configure_thermocouple(self, thermocouple_type, reference_junction_type):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         thermocouple_type_ctype = _visatype.ViInt32(thermocouple_type.value)  # case S130
         reference_junction_type_ctype = _visatype.ViInt32(reference_junction_type.value)  # case S130
@@ -148,7 +148,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger(self, trigger_source, trigger_delay=hightime.timedelta(seconds=-1)):  # noqa: N802
+    def configure_trigger(self, trigger_source, trigger_delay):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = _visatype.ViInt32(trigger_source.value)  # case S130
         trigger_delay_ctype = _converters.convert_timedelta_to_seconds_real64(trigger_delay)  # case S140
@@ -193,7 +193,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch(self, maximum_time=hightime.timedelta(milliseconds=-1)):  # noqa: N802
+    def fetch(self, maximum_time):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         reading_ctype = _visatype.ViReal64()  # case S220
@@ -201,7 +201,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
-    def fetch_multi_point(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):  # noqa: N802
+    def fetch_multi_point(self, maximum_time, array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
@@ -213,7 +213,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return reading_array_array
 
-    def fetch_waveform(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):  # noqa: N802
+    def fetch_waveform(self, maximum_time, array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
@@ -289,7 +289,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
-    def get_dev_temp(self, options=""):  # noqa: N802
+    def get_dev_temp(self, options):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         options_ctype = ctypes.create_string_buffer(options.encode(self._encoding))  # case C020
         temperature_ctype = _visatype.ViReal64()  # case S220
@@ -348,7 +348,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):  # noqa: N802
+    def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
@@ -387,7 +387,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(resistance_ctype.value), float(reactance_ctype.value)
 
-    def read(self, maximum_time=hightime.timedelta(milliseconds=-1)):  # noqa: N802
+    def read(self, maximum_time):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         reading_ctype = _visatype.ViReal64()  # case S220
@@ -395,7 +395,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
-    def read_multi_point(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):  # noqa: N802
+    def read_multi_point(self, maximum_time, array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
@@ -415,7 +415,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
-    def read_waveform(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):  # noqa: N802
+    def read_waveform(self, maximum_time, array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210

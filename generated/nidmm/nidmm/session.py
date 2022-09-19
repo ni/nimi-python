@@ -1694,7 +1694,7 @@ class Session(_SessionBase):
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
 
         '''
-        return self._library_interpreter.fetch_multi_point(array_size, maximum_time)
+        return self._library_interpreter.fetch_multi_point(maximum_time, array_size)
 
     @ivi_synchronized
     def fetch_waveform(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):
@@ -1732,7 +1732,7 @@ class Session(_SessionBase):
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
 
         '''
-        return self._library_interpreter.fetch_waveform(array_size, maximum_time)
+        return self._library_interpreter.fetch_waveform(maximum_time, array_size)
 
     @ivi_synchronized
     def fetch_waveform_into(self, waveform_array, maximum_time=hightime.timedelta(milliseconds=-1)):
@@ -2263,7 +2263,7 @@ class Session(_SessionBase):
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
 
         '''
-        return self._library_interpreter.read_multi_point(array_size, maximum_time)
+        return self._library_interpreter.read_multi_point(maximum_time, array_size)
 
     @ivi_synchronized
     def read_status(self):
@@ -2346,7 +2346,7 @@ class Session(_SessionBase):
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
 
         '''
-        return self._library_interpreter.read_waveform(array_size, maximum_time)
+        return self._library_interpreter.read_waveform(maximum_time, array_size)
 
     @ivi_synchronized
     def reset_with_defaults(self):

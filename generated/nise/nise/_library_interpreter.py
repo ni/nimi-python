@@ -7,7 +7,7 @@ import hightime  # noqa: F401
 import nise._converters as _converters  # noqa: F401
 import nise._library_singleton as _library_singleton
 import nise._visatype as _visatype
-import nise.enums as enums
+import nise.enums as enums  # noqa: F401
 import nise.errors as errors
 
 
@@ -86,7 +86,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def connect(self, connect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, wait_for_debounce=True):  # noqa: N802
+    def connect(self, connect_spec, multiconnect_mode, wait_for_debounce):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         connect_spec_ctype = ctypes.create_string_buffer(connect_spec.encode(self._encoding))  # case C020
         multiconnect_mode_ctype = _visatype.ViInt32(multiconnect_mode.value)  # case S130
@@ -95,7 +95,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def connect_and_disconnect(self, connect_spec, disconnect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, operation_order=enums.OperationOrder.AFTER, wait_for_debounce=True):  # noqa: N802
+    def connect_and_disconnect(self, connect_spec, disconnect_spec, multiconnect_mode, operation_order, wait_for_debounce):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         connect_spec_ctype = ctypes.create_string_buffer(connect_spec.encode(self._encoding))  # case C020
         disconnect_spec_ctype = ctypes.create_string_buffer(disconnect_spec.encode(self._encoding))  # case C020
@@ -119,7 +119,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def expand_route_spec(self, route_spec, expand_action=enums.ExpandAction.ROUTES, expanded_route_spec_size=[1024]):  # noqa: N802
+    def expand_route_spec(self, route_spec, expand_action, expanded_route_spec_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         route_spec_ctype = ctypes.create_string_buffer(route_spec.encode(self._encoding))  # case C020
         expand_action_ctype = _visatype.ViInt32(expand_action.value)  # case S130
@@ -129,7 +129,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return expanded_route_spec_ctype.value.decode(self._encoding)
 
-    def find_route(self, channel1, channel2, route_spec_size=[1024]):  # noqa: N802
+    def find_route(self, channel1, channel2, route_spec_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
@@ -140,7 +140,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return route_spec_ctype.value.decode(self._encoding), enums.PathCapability(path_capability_ctype.value)
 
-    def get_all_connections(self, route_spec_size=[1024]):  # noqa: N802
+    def get_all_connections(self, route_spec_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         route_spec_ctype = (_visatype.ViChar * route_spec_size[0])()  # case C080
         route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=route_spec_size, library_type=_visatype.ViInt32)  # case B550
@@ -148,7 +148,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return route_spec_ctype.value.decode(self._encoding)
 
-    def get_error(self, error_description_size=[1024]):  # noqa: N802
+    def get_error(self, error_description_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_number_ctype = _visatype.ViInt32()  # case S220
         error_description_ctype = (_visatype.ViChar * error_description_size[0])()  # case C080
@@ -172,7 +172,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_debounced_ctype.value)
 
-    def open_session(self, virtual_device_name, option_string=""):  # noqa: N802
+    def open_session(self, virtual_device_name, option_string):  # noqa: N802
         virtual_device_name_ctype = ctypes.create_string_buffer(virtual_device_name.encode(self._encoding))  # case C020
         option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
         vi_ctype = _visatype.ViSession()  # case S220
@@ -180,7 +180,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
-    def wait_for_debounce(self, maximum_time_ms=hightime.timedelta(milliseconds=-1)):  # noqa: N802
+    def wait_for_debounce(self, maximum_time_ms):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
         error_code = self._library.niSE_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)

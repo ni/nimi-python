@@ -1509,7 +1509,7 @@ class _SessionBase(object):
         '''
         if type(waveform) is not enums.Waveform:
             raise TypeError('Parameter waveform must be of type ' + str(enums.Waveform))
-        return self._library_interpreter.configure_standard_waveform(self._repeated_capability, waveform, amplitude, frequency, dc_offset, start_phase)
+        return self._library_interpreter.configure_standard_waveform(self._repeated_capability, waveform, amplitude, dc_offset, frequency, start_phase)
 
     @ivi_synchronized
     def create_waveform(self, waveform_data_array):

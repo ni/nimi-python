@@ -1205,7 +1205,7 @@ class Session(_SessionBase):
             vi (int): Returns a ViSession handle that you use.
 
         '''
-        return self._library_interpreter.init_with_options(resource_name, option_string, id_query, reset_device)
+        return self._library_interpreter.init_with_options(resource_name, id_query, reset_device, option_string)
 
     @ivi_synchronized
     def _initiate(self):
