@@ -388,19 +388,6 @@ class _SessionBase(object):
         '''
         return self._library_interpreter.get_channel_names(indices)
 
-    def _get_error(self):
-        r'''_get_error
-
-        Returns the error information associated with the session.
-
-        Returns:
-            error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
-
-            description (str): At least bufferSize big, string comes out here.
-
-        '''
-        return self._library_interpreter.get_error()
-
     def lock(self):
         '''lock
 

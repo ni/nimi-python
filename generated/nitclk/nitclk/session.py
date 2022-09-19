@@ -248,24 +248,6 @@ class SessionReference(object):
         '''
         return self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
-    def _get_extended_error_info(self):
-        r'''_get_extended_error_info
-
-        Reports extended error information for the most recent NI-TClk method
-        that returned an error. To establish the method that returned an
-        error, use the return values of the individual methods because once
-        _get_extended_error_info reports an errorString, it does not report
-        an empty string again.
-
-        Returns:
-            error_string (str): Extended error description. If errorString is NULL, then it is not large
-                enough to hold the entire error description. In this case, the return
-                value of _get_extended_error_info is the size that you should use
-                for _get_extended_error_info to return the full error string.
-
-        '''
-        return self._library_interpreter.get_extended_error_info()
-
     def _set_attribute_vi_real64(self, attribute_id, value):
         r'''_set_attribute_vi_real64
 

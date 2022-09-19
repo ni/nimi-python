@@ -2475,21 +2475,6 @@ class _SessionBase(object):
         '''
         return self._library_interpreter.get_channel_names(indices)
 
-    def _get_error(self):
-        r'''_get_error
-
-        Returns the error information associated with the digital pattern instrument handle. This method retrieves and then clears the error information for the session. If **vi** is VI_NULL, this method retrieves and then clears the error information for the current thread. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the buffer size. If the current value of the error description, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the method copies (buffer size -1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the method places "123" into the buffer and returns 7. If you want to call this method just to get the required buffer size, you can pass 0 for the buffer size and VI_NULL for **errorDescription**.
-
-        Returns:
-            error_code (int): The returned error code for the session or execution thread.
-
-            error_description (str): The returned error description for the IVI session or execution thread.
-                If there is no description, the method returns an empty string. The buffer must contain at least as many elements as the value you specify with the buffer size parameter.
-                If you pass 0 for **errorDescriptionBufferSize**, you can pass VI_NULL for this parameter.
-
-        '''
-        return self._library_interpreter.get_error()
-
     @ivi_synchronized
     def get_fail_count(self):
         r'''get_fail_count

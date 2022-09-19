@@ -2123,44 +2123,6 @@ class _SessionBase(object):
         '''
         return self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
-    def _get_error(self):
-        r'''_get_error
-
-        Returns the error information associated with an IVI session or with the
-        current execution thread. If you specify a valid IVI session for the
-        **vi** parameter, this method retrieves and then clears the error
-        information for the session. If you pass VI_NULL for the **vi**
-        parameter, this method retrieves and then clears the error information
-        for the current execution thread.
-
-        The IVI Engine also maintains this error information separately for each
-        thread. This feature is useful if you do not have a session handle to
-        pass to the _get_error or ClearError methods. This
-        situation occurs when a call to the init or
-        InitWithOptions method fails.
-
-        Returns:
-            error_code (int): The error code for the session or execution thread.
-
-                A value of VI_SUCCESS (0) indicates that no error occurred. A positive
-                value indicates a warning. A negative value indicates an error.
-
-                You can call _error_message to get a text description of the
-                value.
-
-                If you are not interested in this value, you can pass VI_NULL.
-
-            error_description (str): The error description string for the session or execution thread. If the
-                error code is nonzero, the description string can further describe the
-                error or warning condition.
-
-                If you are not interested in this value, you can pass VI_NULL.
-                Otherwise, you must pass a ViChar array of a size specified with the
-                **errorDescriptionBufferSize** parameter.
-
-        '''
-        return self._library_interpreter.get_error()
-
     def lock(self):
         '''lock
 

@@ -204,11 +204,13 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
     ''' These are code-generated '''
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+% if method_template['session_filename'] != '/none':
 
 % if functions[func_name]['use_session_lock'] and config['use_locking']:
     @ivi_synchronized
 % endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+% endif
 % endfor
 % endfor
 
@@ -296,10 +298,12 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+% if method_template['session_filename'] != '/none':
 
 % if functions[func_name]['use_session_lock'] and config['use_locking']:
     @ivi_synchronized
 % endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+% endif
 % endfor
 % endfor

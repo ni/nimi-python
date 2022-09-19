@@ -80,6 +80,8 @@ class LibraryInterpreter(object):
 <%include file="/_library_interpreter.py/_get_error_description.py.mako" />\
 % for func_name in sorted(functions):
 % for method_template in functions[func_name]['method_templates']:
+% if method_template['library_interpreter_filename'] != '/none':
 <%include file="${'/_library_interpreter.py' + method_template['library_interpreter_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+% endif
 % endfor
 % endfor

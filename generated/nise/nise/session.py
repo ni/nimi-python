@@ -46,66 +46,6 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    def _get_error(self, error_description_size=[1024]):
-        r'''_get_error
-
-        Get error information of the first error that occurred. If a valid
-        pointer is passed to errorDescription or errorNumber, GetError will
-        clear the error on completion. errorDescriptionSize is an in/out
-        parameter that describes the size of the errorDescription buffer. On the
-        way in, it tells the method the size of string. On the way out, it
-        describes the number of bytes (including the trailing null string)
-        needed to hold the entire error description buffer. If NULL is passed
-        for errorDescription and the errorNumber, the method will not clear
-        the error. Users wanting to dynamically size the errorDescription string
-        can thus call the method twice. On the first call they can pass NULL
-        for the errorDescription and use the returned errorDescriptionSize to
-        allocate enough space for the entire errorDescription buffer. Note that
-        if a buffer is passed that is not large enough to hold the entire
-        description string, the portion of of the string that will fit in the
-        passed buffer will be returned and the error will still be cleared. All
-        of the parameters are NULL tolerant. Note that passing NULL for both
-        errorNumber and errorDescription can change the method's behavior.
-
-        Args:
-            error_description_size (list of int): As input, it is the size of the error description string buffer. As
-                output, it is the Size of the entire error description string (may be
-                larger than the buffer size as the method always returns the size
-                needed to hold the entire buffer). This parameter is a ViInt32 that is
-                passed by reference into the method. As an input, it is the size of
-                the error description buffer being passed. If the error description
-                string is larger than the string buffer being passed, only the portion
-                of the route string that can fit in the string buffer will be copied
-                into it. On return from the method, it holds the size required to hold
-                the entire error description string, including the NULL termination
-                character. Note that this size may be larger than the buffer size as the
-                method always returns the size needed to hold the entire buffer. You
-                may pass NULL for this parameter if you are not interested in the return
-                value for it.
-
-
-        Returns:
-            error_number (int): By reference parameter which returns the error number of the first error
-                which occurred on the session since the error was last cleared. You may
-                pass NULL for this parameter if you are not interested in the return
-                value.
-
-            error_description (str): By reference buffer which is to be filled with the error description
-                string. You may pass NULL for this parameter if you are not interested
-                in the return value. To obtain the error description string, you should
-                pass a buffer to this parameter. The size of the buffer required may be
-                obtained by calling the method with NULL for this parameter and a
-                valid ViInt32 to the error description size parameter. The error
-                description size will contain the size needed to hold the entire route
-                specification (including the NULL termination character). Common
-                operation is to call the method twice. The first time you call the
-                method you can determine the size needed to hold the route
-                specification string. Allocate a buffer of the appropriate size and then
-                re-call the method to obtain the entire buffer.
-
-        '''
-        return self._library_interpreter.get_error(error_description_size)
-
 
 class Session(_SessionBase):
     '''An NI Switch Executive session'''

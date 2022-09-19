@@ -24,6 +24,14 @@ functions = {
             'description': '\nReturns detailed information about the last error that occurred in the\ncurrent thread during a call to one of the NI-ModInst functions. When\none of the other functions returns a negative value as its return value,\nimmediately call this function to get detailed information about the\nerror. Because error information is stored on a thread-by-thread basis,\nbe sure to call this function in the same thread that called the\nfunction that returned an error. The extended error information is\nreturned as a string. To find out the length of the error information\nstring before you allocate a buffer for it, call this function and pass\n0 as the errorInfoBufferSize parameter or NULL as the errorInfo\nparameter. When you do this, the function returns the size of the buffer\nrequired to hold the error information string as its return value. You\ncan then allocate an appropriately sized string character buffer and\ncall this function again.\n'
         },
         'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',

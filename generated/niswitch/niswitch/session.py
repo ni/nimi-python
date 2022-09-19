@@ -816,46 +816,6 @@ class _SessionBase(object):
         '''
         return self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
-    def _get_error(self):
-        r'''_get_error
-
-        This method retrieves and then clears the IVI error information for
-        the session or the current execution thread. One exception exists: If
-        the buffer_size parameter is 0, the method does not clear the error
-        information. By passing 0 for the buffer size, the caller can ascertain
-        the buffer size required to get the entire error description string and
-        then call the method again with a sufficiently large buffer. If the
-        user specifies a valid IVI session for the InstrumentHandle parameter,
-        Get Error retrieves and then clears the error information for the
-        session. If the user passes VI_NULL for the InstrumentHandle parameter,
-        this method retrieves and then clears the error information for the
-        current execution thread. If the InstrumentHandle parameter is an
-        invalid session, the method does nothing and returns an error.
-        Normally, the error information describes the first error that occurred
-        since the user last called _get_error or ClearError.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
-
-        Returns:
-            code (int): Returns the error code for the session or execution thread. If you pass
-                0 for the Buffer Size, you can pass VI_NULL for this parameter.
-
-            description (str): Returns the error description for the IVI session or execution thread.
-                If there is no description, the method returns an empty string. The
-                buffer must contain at least as many elements as the value you specify
-                with the Buffer Size parameter. If the error description, including the
-                terminating NUL byte, contains more bytes than you indicate with the
-                Buffer Size parameter, the method copies Buffer Size - 1 bytes into
-                the buffer, places an ASCII NUL byte at the end of the buffer, and
-                returns the buffer size you must pass to get the entire value. For
-                example, if the value is "123456" and the Buffer Size is 4, the method
-                places "123" into the buffer and returns 7. If you pass 0 for the Buffer
-                Size, you can pass VI_NULL for this parameter.
-
-        '''
-        return self._library_interpreter.get_error()
-
     def lock(self):
         '''lock
 

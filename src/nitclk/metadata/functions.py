@@ -216,6 +216,14 @@ functions = {
             'description': '\nReports extended error information for the most recent NI-TClk function\nthat returned an error. To establish the function that returned an\nerror, use the return values of the individual functions because once\nniTClk_GetExtendedErrorInfo reports an errorString, it does not report\nan empty string again.\n'
         },
         'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'out',

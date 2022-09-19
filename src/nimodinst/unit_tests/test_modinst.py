@@ -101,9 +101,9 @@ class TestSession(object):
         self.patched_library.niModInst_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
         self.side_effects_helper['GetExtendedErrorInfo']['errorInfo'] = error_string
         with nimodinst.Session('') as session:
-            # Calling the private function directly, as _get_extended_error_info() functions differently than other IVI Dance functions.
+            # Calling the internal function directly, as get_extended_error_info() functions differently than other IVI Dance functions.
             # As a result, it cannot be used directly during error handling.
-            result = session._get_extended_error_info()
+            result = session._library_interpreter.get_extended_error_info()
             assert result == error_string
 
     def test_get_error_description_fails(self):

@@ -661,29 +661,6 @@ class _SessionBase(object):
         '''
         return self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
-    def _get_error(self):
-        r'''_get_error
-
-        Returns the error information associated with the
-        **Instrument_Handle**. This method retrieves and then clears the
-        error information for the session. If you leave the
-        **Instrument_Handle** unwired, this method retrieves and then clears
-        the error information for the process.
-
-        Returns:
-            error_code (int): Returns the **error_code** for the session or execution thread. If you
-                pass 0 for the **Buffer_Size**, you can pass VI_NULL for this
-                parameter.
-
-            description (str): Returns the error **description** for the IVI session or execution
-                thread. If there is no **description**, the method returns an empty
-                string. The buffer must contain at least as many elements as the value
-                you specify with the **Buffer_Size** parameter. If you pass 0 for the
-                **Buffer_Size**, you can pass VI_NULL for this parameter.
-
-        '''
-        return self._library_interpreter.get_error()
-
     def lock(self):
         '''lock
 

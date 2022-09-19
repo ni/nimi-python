@@ -177,7 +177,9 @@ class Session(object):
     ''' These are code-generated '''
 % for func_name in sorted(functions):
 % for method_template in functions[func_name]['method_templates']:
+% if method_template['session_filename'] != '/none':
 
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+% endif
 % endfor
 % endfor

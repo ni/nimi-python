@@ -74,8 +74,10 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
         return self._library_interpreter._${config['session_handle_parameter_name']}
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+% if method_template['session_filename'] != '/none':
 
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+% endif
 % endfor
 % endfor
 
@@ -106,8 +108,10 @@ class _Session(object):
     ''' These are code-generated '''
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+% if method_template['session_filename'] != '/none':
 
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+% endif
 % endfor
 % endfor
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):

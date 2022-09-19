@@ -205,30 +205,6 @@ class Session(object):
         '''
         return self._library_interpreter.close_installed_devices_session()
 
-    def _get_extended_error_info(self):
-        r'''_get_extended_error_info
-
-        Returns detailed information about the last error that occurred in the
-        current thread during a call to one of the NI-ModInst methods. When
-        one of the other methods returns a negative value as its return value,
-        immediately call this method to get detailed information about the
-        error. Because error information is stored on a thread-by-thread basis,
-        be sure to call this method in the same thread that called the
-        method that returned an error. The extended error information is
-        returned as a string. To find out the length of the error information
-        string before you allocate a buffer for it, call this method and pass
-        0 as the errorInfoBufferSize parameter or NULL as the errorInfo
-        parameter. When you do this, the method returns the size of the buffer
-        required to hold the error information string as its return value. You
-        can then allocate an appropriately sized string character buffer and
-        call this method again.
-
-        Returns:
-            error_info (str): The character buffer into which the error information string is copied.
-
-        '''
-        return self._library_interpreter.get_extended_error_info()
-
     def _get_installed_device_attribute_vi_int32(self, index, attribute_id):
         r'''_get_installed_device_attribute_vi_int32
 

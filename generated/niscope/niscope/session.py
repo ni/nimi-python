@@ -3510,45 +3510,6 @@ class _SessionBase(object):
         '''
         return self._library_interpreter.get_equalization_filter_coefficients(self._repeated_capability, number_of_coefficients)
 
-    def _get_error(self):
-        r'''_get_error
-
-        Reads an error code and message from the error queue. NI
-        digitizers do not contain an error queue. Errors are
-        reported as they occur. Therefore, this method does not detect errors.
-
-        Note:
-        This method is included for compliance with the IviScope Class
-        Specification.
-
-        Returns:
-            error_code (int): Passes the number of bytes in the ViChar array you specify for the
-                Description parameter.
-
-                If the error description, including the terminating NULL byte, contains
-                more bytes than you indicate in this parameter, the method copies
-                **bufferSize** – 1 bytes into the buffer, places an ASCII NULL byte at
-                the end of the buffer, and returns the buffer size you must pass to get
-                the entire value. For example, if the value is "123456" and the Buffer
-                Size is 4, the method places "123" into the buffer and returns 7.
-
-                If you pass a negative number, the method copies the value to the
-                buffer regardless of the number of bytes in the value.
-
-                If you pass 0, you can pass VI_NULL for the **description** parameter.
-
-            description (str): Returns the error description for the IVI session or execution thread.
-
-                If there is no description, the method returns an empty string. The
-                buffer must contain at least as many elements as the value you specify
-                with the Buffer Size parameter.
-
-                If you pass 0 for the **bufferSize**, you can pass VI_NULL for this
-                parameter.
-
-        '''
-        return self._library_interpreter.get_error()
-
     def lock(self):
         '''lock
 
