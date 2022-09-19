@@ -120,7 +120,7 @@ functions_additional_fetch_array_measurement = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms(channel_list)'
+                    'value': None
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
