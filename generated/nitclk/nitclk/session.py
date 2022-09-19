@@ -131,7 +131,7 @@ class SessionReference(object):
     def __init__(self, session_number, encoding='windows-1251'):
         self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding)
         self._library_interpreter._session_number = session_number
-        # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
+        # We need a self._repeated_capability string for passing down to function calls on the LibraryInterpreter class. We just need to set it to empty string.
         self._repeated_capability = ''
 
         # Store the parameter list for later printing in __repr__

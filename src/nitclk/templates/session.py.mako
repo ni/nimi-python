@@ -51,7 +51,7 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
     def __init__(self, ${config['session_handle_parameter_name']}, encoding='windows-1251'):
         self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding)
         self._library_interpreter._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
-        # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
+        # We need a self._repeated_capability string for passing down to function calls on the LibraryInterpreter class. We just need to set it to empty string.
         self._repeated_capability = ''
 
         # Store the parameter list for later printing in __repr__
