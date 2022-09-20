@@ -31,7 +31,7 @@ import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
+def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     if isinstance(value, array.array):
         assert library_type is not None, 'library_type is required for array.array'
         addr, _ = value.buffer_info()

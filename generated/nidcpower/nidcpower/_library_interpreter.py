@@ -16,7 +16,7 @@ import nidcpower.lcr_measurement as lcr_measurement  # noqa: F401
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
+def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     if isinstance(value, array.array):
         assert library_type is not None, 'library_type is required for array.array'
         addr, _ = value.buffer_info()
@@ -127,7 +127,7 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         custom_cable_compensation_data_size_ctype = _visatype.ViInt32(0 if custom_cable_compensation_data is None else len(custom_cable_compensation_data))  # case S160
         custom_cable_compensation_data_converted = _converters.convert_to_bytes(custom_cable_compensation_data)  # case B520
-        custom_cable_compensation_data_ctype = get_ctypes_pointer_for_buffer(value=custom_cable_compensation_data_converted, library_type=_visatype.ViInt8)  # case B520
+        custom_cable_compensation_data_ctype = _get_ctypes_pointer_for_buffer(value=custom_cable_compensation_data_converted, library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niDCPower_ConfigureLCRCustomCableCompensation(vi_ctype, channel_name_ctype, custom_cable_compensation_data_size_ctype, custom_cable_compensation_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -153,7 +153,7 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
         attribute_id_count_ctype = _visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case S160
-        attribute_ids_ctype = get_ctypes_pointer_for_buffer(value=attribute_ids, library_type=_visatype.ViInt32)  # case B550
+        attribute_ids_ctype = _get_ctypes_pointer_for_buffer(value=attribute_ids, library_type=_visatype.ViInt32)  # case B550
         set_as_active_sequence_ctype = _visatype.ViBoolean(set_as_active_sequence)  # case S150
         error_code = self._library.niDCPower_CreateAdvancedSequenceWithChannels(vi_ctype, channel_name_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -182,7 +182,7 @@ class LibraryInterpreter(object):
         size_ctype = _visatype.ViInt32(error_code)  # case S180
         configuration_size = size_ctype.value  # case B590
         configuration_array = array.array("b", [0] * configuration_size)  # case B590
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
+        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_to_bytes(configuration_array)
@@ -212,12 +212,12 @@ class LibraryInterpreter(object):
         count_ctype = _visatype.ViInt32(count)  # case S210
         voltage_measurements_size = count  # case B600
         voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B600
-        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B600
+        voltage_measurements_ctype = _get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B600
         current_measurements_size = count  # case B600
         current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B600
-        current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B600
+        current_measurements_ctype = _get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B600
         in_compliance_size = count  # case B600
-        in_compliance_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=in_compliance_size)  # case B600
+        in_compliance_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=in_compliance_size)  # case B600
         actual_count_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -229,7 +229,7 @@ class LibraryInterpreter(object):
         timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         count_ctype = _visatype.ViInt32(count)  # case S210
         measurements_size = count  # case B600
-        measurements_ctype = get_ctypes_pointer_for_buffer(library_type=lcr_measurement.struct_NILCRMeasurement, size=measurements_size)  # case B600
+        measurements_ctype = _get_ctypes_pointer_for_buffer(library_type=lcr_measurement.struct_NILCRMeasurement, size=measurements_size)  # case B600
         actual_count_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDCPower_FetchMultipleLCR(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, measurements_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -372,7 +372,7 @@ class LibraryInterpreter(object):
         custom_cable_compensation_data_size_ctype = _visatype.ViInt32(error_code)  # case S180
         custom_cable_compensation_data_size = custom_cable_compensation_data_size_ctype.value  # case B590
         custom_cable_compensation_data_array = array.array("b", [0] * custom_cable_compensation_data_size)  # case B590
-        custom_cable_compensation_data_ctype = get_ctypes_pointer_for_buffer(value=custom_cable_compensation_data_array, library_type=_visatype.ViInt8)  # case B590
+        custom_cable_compensation_data_ctype = _get_ctypes_pointer_for_buffer(value=custom_cable_compensation_data_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niDCPower_GetLCRCustomCableCompensationData(vi_ctype, channel_name_ctype, custom_cable_compensation_data_size_ctype, custom_cable_compensation_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_to_bytes(custom_cable_compensation_data_array)
@@ -399,7 +399,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
         configuration_converted = _converters.convert_to_bytes(configuration)  # case B520
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
+        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niDCPower_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -458,10 +458,10 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         voltage_measurements_size = self.parse_channel_count(channel_name)  # case B560
         voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B560
-        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B560
+        voltage_measurements_ctype = _get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B560
         current_measurements_size = self.parse_channel_count(channel_name)  # case B560
         current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B560
-        current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B560
+        current_measurements_ctype = _get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B560
         error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array
@@ -470,7 +470,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         measurements_size = self.parse_channel_count(channel_name)  # case B560
-        measurements_ctype = get_ctypes_pointer_for_buffer(library_type=lcr_measurement.struct_NILCRMeasurement, size=measurements_size)  # case B560
+        measurements_ctype = _get_ctypes_pointer_for_buffer(library_type=lcr_measurement.struct_NILCRMeasurement, size=measurements_size)  # case B560
         error_code = self._library.niDCPower_MeasureMultipleLCR(vi_ctype, channel_name_ctype, measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [lcr_measurement.LCRMeasurement(measurements_ctype[i]) for i in range(self.parse_channel_count(channel_name))]
@@ -487,7 +487,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         num_compensation_spots_ctype = _visatype.ViInt32(0 if compensation_spots is None else len(compensation_spots))  # case S160
-        compensation_spots_ctype = get_ctypes_pointer_for_buffer([lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot(c) for c in compensation_spots], library_type=lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot)  # case B540
+        compensation_spots_ctype = _get_ctypes_pointer_for_buffer([lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot(c) for c in compensation_spots], library_type=lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot)  # case B540
         error_code = self._library.niDCPower_PerformLCRLoadCompensation(vi_ctype, channel_name_ctype, num_compensation_spots_ctype, compensation_spots_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -496,7 +496,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
-        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies, library_type=_visatype.ViReal64)  # case B550
+        additional_frequencies_ctype = _get_ctypes_pointer_for_buffer(value=additional_frequencies, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niDCPower_PerformLCROpenCompensation(vi_ctype, channel_name_ctype, num_frequencies_ctype, additional_frequencies_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -512,7 +512,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
-        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies, library_type=_visatype.ViReal64)  # case B550
+        additional_frequencies_ctype = _get_ctypes_pointer_for_buffer(value=additional_frequencies, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niDCPower_PerformLCRShortCompensation(vi_ctype, channel_name_ctype, num_frequencies_ctype, additional_frequencies_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -659,8 +659,8 @@ class LibraryInterpreter(object):
     def set_sequence(self, channel_name, values, source_delays):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
-        values_ctype = get_ctypes_pointer_for_buffer(value=values, library_type=_visatype.ViReal64)  # case B550
-        source_delays_ctype = get_ctypes_pointer_for_buffer(value=source_delays, library_type=_visatype.ViReal64)  # case B550
+        values_ctype = _get_ctypes_pointer_for_buffer(value=values, library_type=_visatype.ViReal64)  # case B550
+        source_delays_ctype = _get_ctypes_pointer_for_buffer(value=source_delays, library_type=_visatype.ViReal64)  # case B550
         size_ctype = _visatype.ViUInt32(0 if values is None else len(values))  # case S160
         if source_delays is not None and len(source_delays) != len(values):  # case S160
             raise ValueError("Length of source_delays and values parameters do not match.")  # case S160

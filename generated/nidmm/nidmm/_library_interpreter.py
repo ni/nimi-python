@@ -12,7 +12,7 @@ import nidmm.errors as errors
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
+def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     if isinstance(value, array.array):
         assert library_type is not None, 'library_type is required for array.array'
         addr, _ = value.buffer_info()
@@ -181,7 +181,7 @@ class LibraryInterpreter(object):
         size_ctype = _visatype.ViInt32(error_code)  # case S180
         configuration_size = size_ctype.value  # case B590
         configuration_array = array.array("b", [0] * configuration_size)  # case B590
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
+        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niDMM_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_to_bytes(configuration_array)
@@ -207,7 +207,7 @@ class LibraryInterpreter(object):
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
-        reading_array_ctype = get_ctypes_pointer_for_buffer(value=reading_array_array, library_type=_visatype.ViReal64)  # case B600
+        reading_array_ctype = _get_ctypes_pointer_for_buffer(value=reading_array_array, library_type=_visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDMM_FetchMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -219,7 +219,7 @@ class LibraryInterpreter(object):
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600
-        waveform_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_array_array, library_type=_visatype.ViReal64)  # case B600
+        waveform_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_array_array, library_type=_visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -230,7 +230,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
-        waveform_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_array)  # case B510
+        waveform_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_array)  # case B510
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -336,7 +336,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
         configuration_converted = _converters.convert_to_bytes(configuration)  # case B520
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
+        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niDMM_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -401,7 +401,7 @@ class LibraryInterpreter(object):
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
-        reading_array_ctype = get_ctypes_pointer_for_buffer(value=reading_array_array, library_type=_visatype.ViReal64)  # case B600
+        reading_array_ctype = _get_ctypes_pointer_for_buffer(value=reading_array_array, library_type=_visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDMM_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -421,7 +421,7 @@ class LibraryInterpreter(object):
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600
-        waveform_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_array_array, library_type=_visatype.ViReal64)  # case B600
+        waveform_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_array_array, library_type=_visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDMM_ReadWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

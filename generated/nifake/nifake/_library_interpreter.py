@@ -18,7 +18,7 @@ import nifake.custom_struct_typedef as custom_struct_typedef  # noqa: F401
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
+def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     if isinstance(value, array.array):
         assert library_type is not None, 'library_type is required for array.array'
         addr, _ = value.buffer_info()
@@ -96,7 +96,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         count_ctype = _visatype.ViInt32(0 if delays is None else len(delays))  # case S160
         delays_converted = _converters.convert_timedeltas_to_seconds_real64(delays)  # case B520
-        delays_ctype = get_ctypes_pointer_for_buffer(value=delays_converted, library_type=_visatype.ViReal64)  # case B520
+        delays_ctype = _get_ctypes_pointer_for_buffer(value=delays_converted, library_type=_visatype.ViReal64)  # case B520
         error_code = self._library.niFake_AcceptListOfDurationsInSeconds(vi_ctype, count_ctype, delays_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -105,7 +105,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S210
         an_array_size = number_of_elements  # case B600
-        an_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=an_array_size)  # case B600
+        an_array_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=an_array_size)  # case B600
         error_code = self._library.niFake_BoolArrayOutputFunction(vi_ctype, number_of_elements_ctype, an_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [bool(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
@@ -114,7 +114,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_count_ctype = _visatype.ViInt32(0 if numbers is None else len(numbers))  # case S160
         numbers_converted = _converters.convert_double_each_element(numbers)  # case B520
-        numbers_ctype = get_ctypes_pointer_for_buffer(value=numbers_converted, library_type=_visatype.ViReal64)  # case B520
+        numbers_ctype = _get_ctypes_pointer_for_buffer(value=numbers_converted, library_type=_visatype.ViReal64)  # case B520
         error_code = self._library.niFake_DoubleAllTheNums(vi_ctype, number_count_ctype, numbers_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -123,7 +123,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S210
         an_array_size = number_of_elements  # case B600
-        an_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt16, size=an_array_size)  # case B600
+        an_array_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt16, size=an_array_size)  # case B600
         error_code = self._library.niFake_EnumArrayOutputFunction(vi_ctype, number_of_elements_ctype, an_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
@@ -144,7 +144,7 @@ class LibraryInterpreter(object):
         size_in_bytes_ctype = _visatype.ViInt32(error_code)  # case S180
         configuration_size = size_in_bytes_ctype.value  # case B590
         configuration_array = array.array("b", [0] * configuration_size)  # case B590
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
+        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niFake_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_to_bytes(configuration_array)
@@ -154,7 +154,7 @@ class LibraryInterpreter(object):
         number_of_samples_ctype = _visatype.ViInt32(number_of_samples)  # case S210
         waveform_data_size = number_of_samples  # case B600
         waveform_data_array = array.array("d", [0] * waveform_data_size)  # case B600
-        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViReal64)  # case B600
+        waveform_data_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViReal64)  # case B600
         actual_number_of_samples_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, None if actual_number_of_samples_ctype is None else (ctypes.pointer(actual_number_of_samples_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -164,7 +164,7 @@ class LibraryInterpreter(object):
         number_of_samples = len(waveform_data)
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = _visatype.ViInt32(number_of_samples)  # case S210
-        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data)  # case B510
+        waveform_data_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data)  # case B510
         actual_number_of_samples_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, None if actual_number_of_samples_ctype is None else (ctypes.pointer(actual_number_of_samples_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -235,7 +235,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(self.get_array_size_for_python_code())  # case S120
         array_out_size = self.get_array_size_for_python_code()  # case B560
-        array_out_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.struct_CustomStruct, size=array_out_size)  # case B560
+        array_out_ctype = _get_ctypes_pointer_for_buffer(library_type=custom_struct.struct_CustomStruct, size=array_out_size)  # case B560
         error_code = self._library.niFake_GetArrayForPythonCodeCustomType(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
@@ -244,7 +244,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(self.get_array_size_for_python_code())  # case S120
         array_out_size = self.get_array_size_for_python_code()  # case B560
-        array_out_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=array_out_size)  # case B560
+        array_out_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=array_out_size)  # case B560
         error_code = self._library.niFake_GetArrayForPythonCodeDouble(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
@@ -264,7 +264,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size_ctype = _visatype.ViInt32(error_code)  # case S180
         array_out_size = array_size_ctype.value  # case B590
-        array_out_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=array_out_size)  # case B590
+        array_out_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=array_out_size)  # case B590
         error_code = self._library.niFake_GetArrayUsingIviDance(vi_ctype, array_size_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
@@ -362,7 +362,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S210
         cs_size = number_of_elements  # case B600
-        cs_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.struct_CustomStruct, size=cs_size)  # case B600
+        cs_ctype = _get_ctypes_pointer_for_buffer(library_type=custom_struct.struct_CustomStruct, size=cs_size)  # case B600
         error_code = self._library.niFake_GetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [custom_struct.CustomStruct(cs_ctype[i]) for i in range(number_of_elements_ctype.value)]
@@ -400,7 +400,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
         configuration_converted = _converters.convert_to_bytes(configuration)  # case B520
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
+        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niFake_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -432,24 +432,24 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         output_array_size_ctype = _visatype.ViInt32(output_array_size)  # case S210
         output_array_size = output_array_size  # case B600
-        output_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=output_array_size)  # case B600
+        output_array_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=output_array_size)  # case B600
         output_array_of_fixed_length_size = 3  # case B570
-        output_array_of_fixed_length_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=output_array_of_fixed_length_size)  # case B570
+        output_array_of_fixed_length_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=output_array_of_fixed_length_size)  # case B570
         input_array_sizes_ctype = _visatype.ViInt32(0 if input_array_of_floats is None else len(input_array_of_floats))  # case S160
         if input_array_of_integers is not None and len(input_array_of_integers) != len(input_array_of_floats):  # case S160
             raise ValueError("Length of input_array_of_integers and input_array_of_floats parameters do not match.")  # case S160
-        input_array_of_floats_ctype = get_ctypes_pointer_for_buffer(value=input_array_of_floats, library_type=_visatype.ViReal64)  # case B550
-        input_array_of_integers_ctype = get_ctypes_pointer_for_buffer(value=input_array_of_integers, library_type=_visatype.ViInt16)  # case B550
+        input_array_of_floats_ctype = _get_ctypes_pointer_for_buffer(value=input_array_of_floats, library_type=_visatype.ViReal64)  # case B550
+        input_array_of_integers_ctype = _get_ctypes_pointer_for_buffer(value=input_array_of_integers, library_type=_visatype.ViInt16)  # case B550
         error_code = self._library.niFake_MultipleArrayTypes(vi_ctype, output_array_size_ctype, output_array_ctype, output_array_of_fixed_length_ctype, input_array_sizes_ctype, input_array_of_floats_ctype, input_array_of_integers_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(output_array_ctype[i]) for i in range(output_array_size_ctype.value)], [float(output_array_of_fixed_length_ctype[i]) for i in range(3)]
 
     def multiple_arrays_same_size(self, values1, values2, values3, values4):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        values1_ctype = get_ctypes_pointer_for_buffer(value=values1, library_type=_visatype.ViReal64)  # case B550
-        values2_ctype = get_ctypes_pointer_for_buffer(value=values2, library_type=_visatype.ViReal64)  # case B550
-        values3_ctype = get_ctypes_pointer_for_buffer(value=values3, library_type=_visatype.ViReal64)  # case B550
-        values4_ctype = get_ctypes_pointer_for_buffer(value=values4, library_type=_visatype.ViReal64)  # case B550
+        values1_ctype = _get_ctypes_pointer_for_buffer(value=values1, library_type=_visatype.ViReal64)  # case B550
+        values2_ctype = _get_ctypes_pointer_for_buffer(value=values2, library_type=_visatype.ViReal64)  # case B550
+        values3_ctype = _get_ctypes_pointer_for_buffer(value=values3, library_type=_visatype.ViReal64)  # case B550
+        values4_ctype = _get_ctypes_pointer_for_buffer(value=values4, library_type=_visatype.ViReal64)  # case B550
         size_ctype = _visatype.ViInt32(0 if values1 is None else len(values1))  # case S160
         if values2 is not None and len(values2) != len(values1):  # case S160
             raise ValueError("Length of values2 and values1 parameters do not match.")  # case S160
@@ -524,7 +524,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S210
         timedeltas_size = number_of_elements  # case B600
-        timedeltas_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=timedeltas_size)  # case B600
+        timedeltas_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=timedeltas_size)  # case B600
         error_code = self._library.niFake_ReturnListOfDurationsInSeconds(vi_ctype, number_of_elements_ctype, timedeltas_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_seconds_real64_to_timedeltas([float(timedeltas_ctype[i]) for i in range(number_of_elements_ctype.value)])
@@ -539,7 +539,7 @@ class LibraryInterpreter(object):
         a_float_enum_ctype = _visatype.ViReal64()  # case S220
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         an_array_size = array_size  # case B600
-        an_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=an_array_size)  # case B600
+        an_array_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=an_array_size)  # case B600
         string_size_ctype = _visatype.ViInt32()  # case S170
         a_string_ctype = None  # case C050
         error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, None if a_boolean_ctype is None else (ctypes.pointer(a_boolean_ctype)), None if an_int32_ctype is None else (ctypes.pointer(an_int32_ctype)), None if an_int64_ctype is None else (ctypes.pointer(an_int64_ctype)), None if an_int_enum_ctype is None else (ctypes.pointer(an_int_enum_ctype)), None if a_float_ctype is None else (ctypes.pointer(a_float_ctype)), None if a_float_enum_ctype is None else (ctypes.pointer(a_float_enum_ctype)), array_size_ctype, an_array_ctype, string_size_ctype, a_string_ctype)
@@ -605,7 +605,7 @@ class LibraryInterpreter(object):
     def set_custom_type_array(self, cs):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(0 if cs is None else len(cs))  # case S160
-        cs_ctype = get_ctypes_pointer_for_buffer([custom_struct.struct_CustomStruct(c) for c in cs], library_type=custom_struct.struct_CustomStruct)  # case B540
+        cs_ctype = _get_ctypes_pointer_for_buffer([custom_struct.struct_CustomStruct(c) for c in cs], library_type=custom_struct.struct_CustomStruct)  # case B540
         error_code = self._library.niFake_SetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -644,7 +644,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = _visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
         waveform_array = get_ctypes_and_array(value=waveform, array_type="d")  # case B550
-        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B550
+        waveform_ctype = _get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -652,7 +652,7 @@ class LibraryInterpreter(object):
     def write_waveform_numpy(self, waveform):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = _visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
-        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
+        waveform_ctype = _get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

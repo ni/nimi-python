@@ -14,7 +14,7 @@ import nidigital.history_ram_cycle_information as history_ram_cycle_information 
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
+def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     if isinstance(value, array.array):
         assert library_type is not None, 'library_type is required for array.array'
         addr, _ = value.buffer_info()
@@ -111,7 +111,7 @@ class LibraryInterpreter(object):
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         num_offsets_ctype = _visatype.ViInt32(0 if offsets is None else len(offsets))  # case S160
         offsets_converted = _converters.convert_timedeltas_to_seconds_real64(offsets)  # case B520
-        offsets_ctype = get_ctypes_pointer_for_buffer(value=offsets_converted, library_type=_visatype.ViReal64)  # case B520
+        offsets_ctype = _get_ctypes_pointer_for_buffer(value=offsets_converted, library_type=_visatype.ViReal64)  # case B520
         error_code = self._library.niDigital_ApplyTDROffsets(vi_ctype, channel_list_ctype, num_offsets_ctype, offsets_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -363,7 +363,7 @@ class LibraryInterpreter(object):
         data_buffer_size_ctype = _visatype.ViInt32(actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value)  # case S200 (modified)
         data_size = actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value  # case B620 (modified)
         data_array = array.array("L", [0] * data_size)  # case B620
-        data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViUInt32)  # case B620
+        data_ctype = _get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViUInt32)  # case B620
         error_code = self._library.niDigital_FetchCaptureWaveformU32(vi_ctype, site_list_ctype, waveform_name_ctype, samples_to_read_ctype, timeout_ctype, data_buffer_size_ctype, data_ctype, None if actual_num_waveforms_ctype is None else (ctypes.pointer(actual_num_waveforms_ctype)), None if actual_samples_per_waveform_ctype is None else (ctypes.pointer(actual_samples_per_waveform_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return data_array, actual_num_waveforms_ctype.value, actual_samples_per_waveform_ctype.value  # (modified)
@@ -396,11 +396,11 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         pin_data_buffer_size_ctype = _visatype.ViInt32(actual_num_pin_data_ctype.value)  # case S200
         expected_pin_states_size = actual_num_pin_data_ctype.value  # case B620
-        expected_pin_states_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=expected_pin_states_size)  # case B620
+        expected_pin_states_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=expected_pin_states_size)  # case B620
         actual_pin_states_size = actual_num_pin_data_ctype.value  # case B620
-        actual_pin_states_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=actual_pin_states_size)  # case B620
+        actual_pin_states_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=actual_pin_states_size)  # case B620
         per_pin_pass_fail_size = actual_num_pin_data_ctype.value  # case B620
-        per_pin_pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=per_pin_pass_fail_size)  # case B620
+        per_pin_pass_fail_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=per_pin_pass_fail_size)  # case B620
         error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [enums.PinState(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [enums.PinState(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
@@ -424,7 +424,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         frequencies_buffer_size_ctype = _visatype.ViInt32(actual_num_frequencies_ctype.value)  # case S200
         frequencies_size = actual_num_frequencies_ctype.value  # case B620
-        frequencies_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=frequencies_size)  # case B620
+        frequencies_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=frequencies_size)  # case B620
         error_code = self._library.niDigital_FrequencyCounter_MeasureFrequency(vi_ctype, channel_list_ctype, frequencies_buffer_size_ctype, frequencies_ctype, None if actual_num_frequencies_ctype is None else (ctypes.pointer(actual_num_frequencies_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(frequencies_ctype[i]) for i in range(frequencies_buffer_size_ctype.value)]
@@ -515,7 +515,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(actual_num_read_ctype.value)  # case S200
         failure_count_size = actual_num_read_ctype.value  # case B620
-        failure_count_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt64, size=failure_count_size)  # case B620
+        failure_count_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt64, size=failure_count_size)  # case B620
         error_code = self._library.niDigital_GetFailCount(vi_ctype, channel_list_ctype, buffer_size_ctype, failure_count_ctype, None if actual_num_read_ctype is None else (ctypes.pointer(actual_num_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(failure_count_ctype[i]) for i in range(buffer_size_ctype.value)]
@@ -579,11 +579,11 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(actual_num_values_ctype.value)  # case S200
         pin_indexes_size = actual_num_values_ctype.value  # case B620
-        pin_indexes_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=pin_indexes_size)  # case B620
+        pin_indexes_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=pin_indexes_size)  # case B620
         site_numbers_size = actual_num_values_ctype.value  # case B620
-        site_numbers_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=site_numbers_size)  # case B620
+        site_numbers_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=site_numbers_size)  # case B620
         channel_indexes_size = actual_num_values_ctype.value  # case B620
-        channel_indexes_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=channel_indexes_size)  # case B620
+        channel_indexes_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=channel_indexes_size)  # case B620
         error_code = self._library.niDigital_GetPinResultsPinInformation(vi_ctype, channel_list_ctype, buffer_size_ctype, pin_indexes_ctype, site_numbers_ctype, channel_indexes_ctype, None if actual_num_values_ctype is None else (ctypes.pointer(actual_num_values_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(pin_indexes_ctype[i]) for i in range(buffer_size_ctype.value)], [int(site_numbers_ctype[i]) for i in range(buffer_size_ctype.value)], [int(channel_indexes_ctype[i]) for i in range(buffer_size_ctype.value)]
@@ -598,7 +598,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         pass_fail_buffer_size_ctype = _visatype.ViInt32(actual_num_sites_ctype.value)  # case S200
         pass_fail_size = actual_num_sites_ctype.value  # case B620
-        pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=pass_fail_size)  # case B620
+        pass_fail_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=pass_fail_size)  # case B620
         error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [bool(pass_fail_ctype[i]) for i in range(pass_fail_buffer_size_ctype.value)]
@@ -614,7 +614,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         site_numbers_buffer_size_ctype = _visatype.ViInt32(actual_num_site_numbers_ctype.value)  # case S200
         site_numbers_size = actual_num_site_numbers_ctype.value  # case B620
-        site_numbers_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=site_numbers_size)  # case B620
+        site_numbers_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=site_numbers_size)  # case B620
         error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)]
@@ -752,7 +752,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(actual_num_read_ctype.value)  # case S200
         measurements_size = actual_num_read_ctype.value  # case B620
-        measurements_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=measurements_size)  # case B620
+        measurements_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=measurements_size)  # case B620
         error_code = self._library.niDigital_PPMU_Measure(vi_ctype, channel_list_ctype, measurement_type_ctype, buffer_size_ctype, measurements_ctype, None if actual_num_read_ctype is None else (ctypes.pointer(actual_num_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(measurements_ctype[i]) for i in range(buffer_size_ctype.value)]
@@ -790,7 +790,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(actual_num_read_ctype.value)  # case S200
         data_size = actual_num_read_ctype.value  # case B620
-        data_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=data_size)  # case B620
+        data_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=data_size)  # case B620
         error_code = self._library.niDigital_ReadStatic(vi_ctype, channel_list_ctype, buffer_size_ctype, data_ctype, None if actual_num_read_ctype is None else (ctypes.pointer(actual_num_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [enums.PinState(data_ctype[i]) for i in range(buffer_size_ctype.value)]
@@ -871,7 +871,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         offsets_buffer_size_ctype = _visatype.ViInt32(actual_num_offsets_ctype.value)  # case S200
         offsets_size = actual_num_offsets_ctype.value  # case B620
-        offsets_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=offsets_size)  # case B620
+        offsets_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=offsets_size)  # case B620
         error_code = self._library.niDigital_TDR(vi_ctype, channel_list_ctype, apply_offsets_ctype, offsets_buffer_size_ctype, offsets_ctype, None if actual_num_offsets_ctype is None else (ctypes.pointer(actual_num_offsets_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_seconds_real64_to_timedeltas([float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)])
@@ -924,7 +924,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         waveform_size_ctype = _visatype.ViInt32(0 if waveform_data is None else len(waveform_data))  # case S160
-        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data, library_type=_visatype.ViUInt32)  # case B550
+        waveform_data_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data, library_type=_visatype.ViUInt32)  # case B550
         error_code = self._library.niDigital_WriteSourceWaveformBroadcastU32(vi_ctype, waveform_name_ctype, waveform_size_ctype, waveform_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -944,7 +944,7 @@ class LibraryInterpreter(object):
         num_waveforms_ctype = _visatype.ViInt32(num_waveforms)  # case S150
         samples_per_waveform_ctype = _visatype.ViInt32(samples_per_waveform)  # case S150
         waveform_data_array = get_ctypes_and_array(value=waveform_data, array_type="L")  # case B550
-        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViUInt32)  # case B550
+        waveform_data_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViUInt32)  # case B550
         error_code = self._library.niDigital_WriteSourceWaveformSiteUniqueU32(vi_ctype, site_list_ctype, waveform_name_ctype, num_waveforms_ctype, samples_per_waveform_ctype, waveform_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
