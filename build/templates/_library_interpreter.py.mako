@@ -77,7 +77,8 @@ class LibraryInterpreter(object):
         self._encoding = encoding
         self._library = _library_singleton.get()
         # Initialize _${config['session_handle_parameter_name']} to 0 for now.
-        # The Session will directly update it once its init function has been called.
+        # Session will directly update it once the driver runtime init function has been called and
+        # we have a valid session handle.
         self._${config['session_handle_parameter_name']} = 0
 
 <%include file="/_library_interpreter.py/_get_error_description.py.mako" args="config=config" />\

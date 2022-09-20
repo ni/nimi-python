@@ -60,7 +60,8 @@ class LibraryInterpreter(object):
         self._encoding = encoding
         self._library = _library_singleton.get()
         # Initialize _vi to 0 for now.
-        # The Session will directly update it once its init function has been called.
+        # Session will directly update it once the driver runtime init function has been called and
+        # we have a valid session handle.
         self._vi = 0
 
     def get_error_description(self, error_code):
