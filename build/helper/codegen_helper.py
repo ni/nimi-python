@@ -394,7 +394,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         else:
             if parameter['use_array']:
                 # If the incoming type is array.array, we can just use that, otherwise we need to create an array.array that is initialized with the passed in value, which must be iterable
-                array_declaration = '{0}_array = get_ctypes_and_array(value=_converters.{2}({0}), array_type="{1}")  # case B520'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']), parameter['python_api_converter_name'])
+                array_declaration = '{0}_array = _convert_to_array(value=_converters.{2}({0}), array_type="{1}")  # case B520'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']), parameter['python_api_converter_name'])
                 definitions.append(array_declaration)
                 definition = '_get_ctypes_pointer_for_buffer(value={0}_array, library_type={1}.{2})  # case B520'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
             elif parameter['use_list']:
@@ -409,7 +409,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         else:
             if parameter['use_array']:
                 # If the incoming type is array.array, we can just use that, otherwise we need to create an array.array that is initialized with the passed in value, which must be iterable
-                array_declaration = '{0}_array = get_ctypes_and_array(value={0}, array_type="{1}")  # case B550'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
+                array_declaration = '{0}_array = _convert_to_array(value={0}, array_type="{1}")  # case B550'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
                 definitions.append(array_declaration)
                 definition = '_get_ctypes_pointer_for_buffer(value={0}_array, library_type={1}.{2})  # case B550'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
             elif parameter['use_list']:
@@ -1564,7 +1564,7 @@ def test_get_ctype_variable_declaration_snippet_case_b510():
 def test_get_ctype_variable_declaration_snippet_case_b520_array():
     actual = get_ctype_variable_declaration_snippet(parameters_for_testing[30], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     expected = [
-        'input_array_3_array = get_ctypes_and_array(value=_converters.convert_to_nitclk_session_num_list(input_array_3), array_type="d")  # case B520',
+        'input_array_3_array = _convert_to_array(value=_converters.convert_to_nitclk_session_num_list(input_array_3), array_type="d")  # case B520',
         'input_array_3_ctype = _get_ctypes_pointer_for_buffer(value=input_array_3_array, library_type=_visatype.ViReal64)  # case B520',
     ]
     assert len(actual) == len(expected)
@@ -1607,7 +1607,7 @@ def test_get_ctype_variable_declaration_snippet_case_b540():
 def test_get_ctype_variable_declaration_snippet_case_b550_array():
     actual = get_ctype_variable_declaration_snippet(parameters_for_testing[10], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     expected = [
-        'input_array_array = get_ctypes_and_array(value=input_array, array_type="d")  # case B550',
+        'input_array_array = _convert_to_array(value=input_array, array_type="d")  # case B550',
         'input_array_ctype = _get_ctypes_pointer_for_buffer(value=input_array_array, library_type=_visatype.ViReal64)  # case B550',
     ]
     assert len(actual) == len(expected)

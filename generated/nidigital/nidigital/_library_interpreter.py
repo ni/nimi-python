@@ -34,7 +34,7 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
             return None
 
 
-def get_ctypes_and_array(value, array_type):
+def _convert_to_array(value, array_type):
     if value is not None:
         if isinstance(value, array.array):
             value_array = value
@@ -943,7 +943,7 @@ class LibraryInterpreter(object):
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         num_waveforms_ctype = _visatype.ViInt32(num_waveforms)  # case S150
         samples_per_waveform_ctype = _visatype.ViInt32(samples_per_waveform)  # case S150
-        waveform_data_array = get_ctypes_and_array(value=waveform_data, array_type="L")  # case B550
+        waveform_data_array = _convert_to_array(value=waveform_data, array_type="L")  # case B550
         waveform_data_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViUInt32)  # case B550
         error_code = self._library.niDigital_WriteSourceWaveformSiteUniqueU32(vi_ctype, site_list_ctype, waveform_name_ctype, num_waveforms_ctype, samples_per_waveform_ctype, waveform_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

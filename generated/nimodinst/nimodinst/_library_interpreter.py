@@ -31,7 +31,7 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
             return None
 
 
-def get_ctypes_and_array(value, array_type):
+def _convert_to_array(value, array_type):
     if value is not None:
         if isinstance(value, array.array):
             value_array = value
