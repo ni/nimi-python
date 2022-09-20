@@ -46,8 +46,11 @@ def _convert_to_array(value, array_type):
 class LibraryInterpreter(object):
     '''Library C<->Python interpreter.
 
-    This class handles ctypes conversions, string encoding, and raising exceptions if the library
-    function returns an error.
+    This class is responsible for interpreting the Library's C API. It is responsible for:
+    * Converting ctypes to native Python types.
+    * Dealing with string encoding.
+    * Allocating memory.
+    * Converting errors returned by Library into Python exceptions.
     '''
 
     def __init__(self, encoding):
