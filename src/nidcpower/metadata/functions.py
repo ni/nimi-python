@@ -2014,7 +2014,7 @@ functions = {
                 'name': 'measurements',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self.parse_channel_count(session_handle, encoding, channel_name)'
+                    'value': 'self.parse_channel_count(channel_name)'
                 },
                 'type': 'NILCRMeasurement[]'
             }
@@ -3374,7 +3374,7 @@ functions = {
                 'name': 'voltageMeasurements',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self.parse_channel_count(session_handle, encoding, channel_name)'
+                    'value': 'self.parse_channel_count(channel_name)'
                 },
                 'type': 'ViReal64[]',
                 'use_array': True
@@ -3387,7 +3387,7 @@ functions = {
                 'name': 'currentMeasurements',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self.parse_channel_count(session_handle, encoding, channel_name)'
+                    'value': 'self.parse_channel_count(channel_name)'
                 },
                 'type': 'ViReal64[]',
                 'use_array': True
@@ -3513,7 +3513,7 @@ functions = {
                 'name': 'measurements',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self.parse_channel_count(session_handle, encoding, channel_name)'
+                    'value': 'self.parse_channel_count(channel_name)'
                 },
                 'type': 'NILCRMeasurement[]'
             }

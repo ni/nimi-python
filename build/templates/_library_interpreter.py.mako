@@ -73,8 +73,13 @@ class LibraryInterpreter(object):
     * Converting errors returned by Library into Python exceptions.
     '''
 
-    def __init__(self):
+    def __init__(self, encoding):
+        self._encoding = encoding
         self._library = _library_singleton.get()
+        # Initialize _${config['session_handle_parameter_name']} to 0 for now.
+        # Session will directly update it once the driver runtime init function has been called and
+        # we have a valid session handle.
+        self._${config['session_handle_parameter_name']} = 0
 
 <%include file="/_library_interpreter.py/_get_error_description.py.mako" args="config=config" />\
 % for func_name in sorted(functions):

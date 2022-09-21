@@ -103,11 +103,9 @@ class _RepeatedCapabilities(object):
         complete_rep_cap_list = [current_rep_cap + self._separator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
 
         return _SessionBase(
-            ${config['session_handle_parameter_name']}=self._session._${config['session_handle_parameter_name']},
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
             library_interpreter=self._session._library_interpreter,
-            encoding=self._session._encoding,
             freeze_it=True
         )
 
@@ -163,20 +161,16 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 % if attributes:
 
 % endif
-    def __init__(self, repeated_capability_list, all_channels_in_session, ${config['session_handle_parameter_name']}, library_interpreter, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
-        self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library_interpreter = library_interpreter
-        self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("${config['session_handle_parameter_name']}=" + pp.pformat(${config['session_handle_parameter_name']}))
         param_list.append("library_interpreter=" + pp.pformat(library_interpreter))
-        param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
 % if len(config['repeated_capabilities']) > 0:
@@ -232,9 +226,7 @@ class Session(_SessionBase):
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            ${config['session_handle_parameter_name']}=0,
             library_interpreter=None,
-            encoding='windows-1251',
             freeze_it=False,
             all_channels_in_session=None
         )
@@ -243,17 +235,17 @@ class Session(_SessionBase):
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']})
 %   endif
 % endfor
-        self._library_interpreter = _library_interpreter.LibraryInterpreter()
+        self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
-        # Note that we set _${config['session_handle_parameter_name']} to 0 in SessionBase, so that if
+        # Note that _library_interpreter sets _${config['session_handle_parameter_name']} to 0 in its constructor, so that if
         # ${init_function['python_name']} fails, the error handler can reference it.
-        # And then once ${init_function['python_name']} succeeds, we can update _${config['session_handle_parameter_name']}
+        # And then once ${init_function['python_name']} succeeds, we can update _library_interpreter._${config['session_handle_parameter_name']}
         # with the actual session handle.
-        self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
+        self._library_interpreter._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
 
 % if config['uses_nitclk']:
-        self.tclk = nitclk.SessionReference(self._${config['session_handle_parameter_name']})
+        self.tclk = nitclk.SessionReference(self._library_interpreter._${config['session_handle_parameter_name']})
 
 % endif
         # Store the parameter list for later printing in __repr__
@@ -266,7 +258,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._${config['session_handle_parameter_name']}` is set
+        # handle `self._library_interpreter._${config['session_handle_parameter_name']}` is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -299,9 +291,9 @@ class Session(_SessionBase):
         try:
             self._${close_function_name}()
         except errors.DriverError:
-            self._${config['session_handle_parameter_name']} = 0
+            self._library_interpreter._${config['session_handle_parameter_name']} = 0
             raise
-        self._${config['session_handle_parameter_name']} = 0
+        self._library_interpreter._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):

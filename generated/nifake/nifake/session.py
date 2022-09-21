@@ -73,11 +73,9 @@ class _RepeatedCapabilities(object):
         complete_rep_cap_list = [current_rep_cap + self._separator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
 
         return _SessionBase(
-            vi=self._session._vi,
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
             library_interpreter=self._session._library_interpreter,
-            encoding=self._session._encoding,
             freeze_it=True
         )
 
@@ -183,20 +181,16 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.read_write_string_repeated_capability`
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library_interpreter, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
-        self._vi = vi
         self._library_interpreter = library_interpreter
-        self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("vi=" + pp.pformat(vi))
         param_list.append("library_interpreter=" + pp.pformat(library_interpreter))
-        param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
         # Instantiate any repeated capability objects
@@ -235,7 +229,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.function_with_repeated_capability_type`
         '''
-        return self._library_interpreter.function_with_repeated_capability_type(self._vi, self._encoding, self._repeated_capability)
+        return self._library_interpreter.function_with_repeated_capability_type(self._repeated_capability)
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -262,7 +256,7 @@ class _SessionBase(object):
             attribute_value (bool): Returns the value of the property.
 
         '''
-        return self._library_interpreter.get_attribute_vi_boolean(self._vi, self._encoding, self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -289,7 +283,7 @@ class _SessionBase(object):
             attribute_value (int): Returns the value of the property.
 
         '''
-        return self._library_interpreter.get_attribute_vi_int32(self._vi, self._encoding, self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_int32(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute_id):
@@ -316,7 +310,7 @@ class _SessionBase(object):
             attribute_value (int): Returns the value of the property.
 
         '''
-        return self._library_interpreter.get_attribute_vi_int64(self._vi, self._encoding, self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_int64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -343,7 +337,7 @@ class _SessionBase(object):
             attribute_value (float): Returns the value of the property.
 
         '''
-        return self._library_interpreter.get_attribute_vi_real64(self._vi, self._encoding, self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -370,7 +364,7 @@ class _SessionBase(object):
             attribute_value (str): Returns the value of the property.
 
         '''
-        return self._library_interpreter.get_attribute_vi_string(self._vi, self._encoding, self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_channel_names(self, indices):
@@ -392,7 +386,7 @@ class _SessionBase(object):
             names (list of str): The channel name(s) at the specified indices.
 
         '''
-        return self._library_interpreter.get_channel_names(self._vi, self._encoding, indices)
+        return self._library_interpreter.get_channel_names(indices)
 
     def lock(self):
         '''lock
@@ -424,7 +418,7 @@ class _SessionBase(object):
             lock (context manager): When used in a with statement, nifake.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._library_interpreter.lock(self._vi, self._encoding)  # We do not call this in the context manager so that this function can
+        self._library_interpreter.lock()  # We do not call this in the context manager so that this function can
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
@@ -476,7 +470,7 @@ class _SessionBase(object):
             reading (float): The measured value.
 
         '''
-        return self._library_interpreter.read_from_channel(self._vi, self._encoding, self._repeated_capability, maximum_time)
+        return self._library_interpreter.read_from_channel(self._repeated_capability, maximum_time)
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -501,7 +495,7 @@ class _SessionBase(object):
             attribute_value (bool): Pass the value that you want to set the property to.
 
         '''
-        return self._library_interpreter.set_attribute_vi_boolean(self._vi, self._encoding, self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -526,7 +520,7 @@ class _SessionBase(object):
             attribute_value (int): Pass the value that you want to set the property to.
 
         '''
-        return self._library_interpreter.set_attribute_vi_int32(self._vi, self._encoding, self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
@@ -551,7 +545,7 @@ class _SessionBase(object):
             attribute_value (int): Pass the value that you want to set the property to.
 
         '''
-        return self._library_interpreter.set_attribute_vi_int64(self._vi, self._encoding, self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_int64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -576,7 +570,7 @@ class _SessionBase(object):
             attribute_value (float): Pass the value that you want to set the property to.
 
         '''
-        return self._library_interpreter.set_attribute_vi_real64(self._vi, self._encoding, self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -601,7 +595,7 @@ class _SessionBase(object):
             attribute_value (str): Pass the value that you want to set the property to.
 
         '''
-        return self._library_interpreter.set_attribute_vi_string(self._vi, self._encoding, self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
 
     def unlock(self):
         '''unlock
@@ -610,7 +604,7 @@ class _SessionBase(object):
         lock. Refer to lock for additional
         information on session locks.
         '''
-        self._library_interpreter.unlock(self._vi, self._encoding)
+        self._library_interpreter.unlock()
 
     def _error_message(self, error_code):
         r'''_error_message
@@ -625,7 +619,7 @@ class _SessionBase(object):
             error_message (str): The error information formatted into a string.
 
         '''
-        return self._library_interpreter.error_message(self._vi, self._encoding, error_code)
+        return self._library_interpreter.error_message(error_code)
 
 
 class Session(_SessionBase):
@@ -693,23 +687,21 @@ class Session(_SessionBase):
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            vi=0,
             library_interpreter=None,
-            encoding='windows-1251',
             freeze_it=False,
             all_channels_in_session=None
         )
         options = _converters.convert_init_with_options_dictionary(options)
-        self._library_interpreter = _library_interpreter.LibraryInterpreter()
+        self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
-        # Note that we set _vi to 0 in SessionBase, so that if
+        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
         # _init_with_options fails, the error handler can reference it.
-        # And then once _init_with_options succeeds, we can update _vi
+        # And then once _init_with_options succeeds, we can update _library_interpreter._vi
         # with the actual session handle.
-        self._vi = self._init_with_options(resource_name, options, id_query, reset_device)
+        self._library_interpreter._vi = self._init_with_options(resource_name, options, id_query, reset_device)
 
-        self.tclk = nitclk.SessionReference(self._vi)
+        self.tclk = nitclk.SessionReference(self._library_interpreter._vi)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -721,7 +713,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._vi` is set
+        # handle `self._library_interpreter._vi` is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -758,9 +750,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._vi = 0
+            self._library_interpreter._vi = 0
             raise
-        self._vi = 0
+        self._library_interpreter._vi = 0
 
     ''' These are code-generated '''
 
@@ -770,7 +762,7 @@ class Session(_SessionBase):
 
         Aborts a previously initiated thingie.
         '''
-        return self._library_interpreter.abort(self._vi, self._encoding)
+        return self._library_interpreter.abort()
 
     @ivi_synchronized
     def accept_list_of_durations_in_seconds(self, delays):
@@ -782,7 +774,7 @@ class Session(_SessionBase):
             delays (hightime.timedelta, datetime.timedelta, or float in seconds): A collection of time delay values.
 
         '''
-        return self._library_interpreter.accept_list_of_durations_in_seconds(self._vi, self._encoding, delays)
+        return self._library_interpreter.accept_list_of_durations_in_seconds(delays)
 
     @ivi_synchronized
     def bool_array_output_function(self, number_of_elements):
@@ -798,7 +790,7 @@ class Session(_SessionBase):
             an_array (list of bool): Contains an array of booleans
 
         '''
-        return self._library_interpreter.bool_array_output_function(self._vi, self._encoding, number_of_elements)
+        return self._library_interpreter.bool_array_output_function(number_of_elements)
 
     @ivi_synchronized
     def double_all_the_nums(self, numbers):
@@ -810,7 +802,7 @@ class Session(_SessionBase):
             numbers (list of float): numbers is an array of numbers we want to double.
 
         '''
-        return self._library_interpreter.double_all_the_nums(self._vi, self._encoding, numbers)
+        return self._library_interpreter.double_all_the_nums(numbers)
 
     @ivi_synchronized
     def enum_array_output_function(self, number_of_elements):
@@ -826,7 +818,7 @@ class Session(_SessionBase):
             an_array (list of enums.Turtle): Contains an array of enums, stored as 16 bit integers under the hood
 
         '''
-        return self._library_interpreter.enum_array_output_function(self._vi, self._encoding, number_of_elements)
+        return self._library_interpreter.enum_array_output_function(number_of_elements)
 
     @ivi_synchronized
     def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
@@ -850,7 +842,7 @@ class Session(_SessionBase):
         '''
         if type(a_turtle) is not enums.Turtle:
             raise TypeError('Parameter a_turtle must be of type ' + str(enums.Turtle))
-        return self._library_interpreter.enum_input_function_with_defaults(self._vi, self._encoding, a_turtle)
+        return self._library_interpreter.enum_input_function_with_defaults(a_turtle)
 
     @ivi_synchronized
     def export_attribute_configuration_buffer(self):
@@ -862,7 +854,7 @@ class Session(_SessionBase):
             configuration (bytes):
 
         '''
-        return self._library_interpreter.export_attribute_configuration_buffer(self._vi, self._encoding)
+        return self._library_interpreter.export_attribute_configuration_buffer()
 
     @ivi_synchronized
     def fetch_waveform(self, number_of_samples):
@@ -880,7 +872,7 @@ class Session(_SessionBase):
             actual_number_of_samples (int): Number of samples actually fetched.
 
         '''
-        return self._library_interpreter.fetch_waveform(self._vi, self._encoding, number_of_samples)
+        return self._library_interpreter.fetch_waveform(number_of_samples)
 
     @ivi_synchronized
     def fetch_waveform_into(self, waveform_data):
@@ -906,7 +898,7 @@ class Session(_SessionBase):
             raise TypeError('waveform_data must be in C-order')
         if waveform_data.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
-        return self._library_interpreter.fetch_waveform_into(self._vi, self._encoding, waveform_data)
+        return self._library_interpreter.fetch_waveform_into(waveform_data)
 
     @ivi_synchronized
     def get_a_boolean(self):
@@ -920,7 +912,7 @@ class Session(_SessionBase):
             a_boolean (bool): Contains a boolean.
 
         '''
-        return self._library_interpreter.get_a_boolean(self._vi, self._encoding)
+        return self._library_interpreter.get_a_boolean()
 
     @ivi_synchronized
     def get_a_number(self):
@@ -934,7 +926,7 @@ class Session(_SessionBase):
             a_number (int): Contains a number.
 
         '''
-        return self._library_interpreter.get_a_number(self._vi, self._encoding)
+        return self._library_interpreter.get_a_number()
 
     @ivi_synchronized
     def get_a_string_of_fixed_maximum_size(self):
@@ -946,7 +938,7 @@ class Session(_SessionBase):
             a_string (str): String comes back here. Buffer must be 256 big.
 
         '''
-        return self._library_interpreter.get_a_string_of_fixed_maximum_size(self._vi, self._encoding)
+        return self._library_interpreter.get_a_string_of_fixed_maximum_size()
 
     @ivi_synchronized
     def get_a_string_using_python_code(self, a_number):
@@ -964,7 +956,7 @@ class Session(_SessionBase):
             a_string (str): Contains a string of length aNumber.
 
         '''
-        return self._library_interpreter.get_a_string_using_python_code(self._vi, self._encoding, a_number)
+        return self._library_interpreter.get_a_string_using_python_code(a_number)
 
     @ivi_synchronized
     def get_an_ivi_dance_string(self):
@@ -976,7 +968,7 @@ class Session(_SessionBase):
             a_string (str): Returns the string.
 
         '''
-        return self._library_interpreter.get_an_ivi_dance_string(self._vi, self._encoding)
+        return self._library_interpreter.get_an_ivi_dance_string()
 
     @ivi_synchronized
     def get_an_ivi_dance_with_a_twist_string(self):
@@ -988,7 +980,7 @@ class Session(_SessionBase):
             a_string (str):
 
         '''
-        return self._library_interpreter.get_an_ivi_dance_with_a_twist_string(self._vi, self._encoding)
+        return self._library_interpreter.get_an_ivi_dance_with_a_twist_string()
 
     @ivi_synchronized
     def get_array_for_python_code_custom_type(self):
@@ -1000,7 +992,7 @@ class Session(_SessionBase):
             array_out (list of CustomStruct): Array of custom type using python-code size mechanism
 
         '''
-        return self._library_interpreter.get_array_for_python_code_custom_type(self._vi, self._encoding)
+        return self._library_interpreter.get_array_for_python_code_custom_type()
 
     @ivi_synchronized
     def get_array_for_python_code_double(self):
@@ -1012,7 +1004,7 @@ class Session(_SessionBase):
             array_out (list of float): Array of double using python-code size mechanism
 
         '''
-        return self._library_interpreter.get_array_for_python_code_double(self._vi, self._encoding)
+        return self._library_interpreter.get_array_for_python_code_double()
 
     @ivi_synchronized
     def get_array_size_for_python_code(self):
@@ -1024,7 +1016,7 @@ class Session(_SessionBase):
             size_out (int): Size of array
 
         '''
-        return self._library_interpreter.get_array_size_for_python_code(self._vi, self._encoding)
+        return self._library_interpreter.get_array_size_for_python_code()
 
     @ivi_synchronized
     def get_array_using_ivi_dance(self):
@@ -1036,7 +1028,7 @@ class Session(_SessionBase):
             array_out (list of float): The array returned by this method
 
         '''
-        return self._library_interpreter.get_array_using_ivi_dance(self._vi, self._encoding)
+        return self._library_interpreter.get_array_using_ivi_dance()
 
     @ivi_synchronized
     def _get_cal_date_and_time(self, cal_type):
@@ -1060,7 +1052,7 @@ class Session(_SessionBase):
             minute (int): Indicates the **minute** of the last calibration.
 
         '''
-        return self._library_interpreter.get_cal_date_and_time(self._vi, self._encoding, cal_type)
+        return self._library_interpreter.get_cal_date_and_time(cal_type)
 
     @ivi_synchronized
     def get_cal_interval(self):
@@ -1072,7 +1064,7 @@ class Session(_SessionBase):
             months (hightime.timedelta): Specifies the recommended maximum interval, in **months**, between external calibrations.
 
         '''
-        return self._library_interpreter.get_cal_interval(self._vi, self._encoding)
+        return self._library_interpreter.get_cal_interval()
 
     @ivi_synchronized
     def get_custom_type(self):
@@ -1084,7 +1076,7 @@ class Session(_SessionBase):
             cs (CustomStruct): Set using custom type
 
         '''
-        return self._library_interpreter.get_custom_type(self._vi, self._encoding)
+        return self._library_interpreter.get_custom_type()
 
     @ivi_synchronized
     def get_custom_type_array(self, number_of_elements):
@@ -1100,7 +1092,7 @@ class Session(_SessionBase):
             cs (list of CustomStruct): Get using custom type
 
         '''
-        return self._library_interpreter.get_custom_type_array(self._vi, self._encoding, number_of_elements)
+        return self._library_interpreter.get_custom_type_array(number_of_elements)
 
     @ivi_synchronized
     def get_custom_type_typedef(self):
@@ -1114,7 +1106,7 @@ class Session(_SessionBase):
             csnt (CustomStructNestedTypedef): An object of a custom type with nested typedef
 
         '''
-        return self._library_interpreter.get_custom_type_typedef(self._vi, self._encoding)
+        return self._library_interpreter.get_custom_type_typedef()
 
     @ivi_synchronized
     def get_enum_value(self):
@@ -1142,7 +1134,7 @@ class Session(_SessionBase):
                 +---+---------------+
 
         '''
-        return self._library_interpreter.get_enum_value(self._vi, self._encoding)
+        return self._library_interpreter.get_enum_value()
 
     @ivi_synchronized
     def get_cal_date_and_time(self, cal_type):
@@ -1171,7 +1163,7 @@ class Session(_SessionBase):
             configuration (bytes):
 
         '''
-        return self._library_interpreter.import_attribute_configuration_buffer(self._vi, self._encoding, configuration)
+        return self._library_interpreter.import_attribute_configuration_buffer(configuration)
 
     def _init_with_options(self, resource_name, option_string, id_query=False, reset_device=False):
         r'''_init_with_options
@@ -1206,7 +1198,7 @@ class Session(_SessionBase):
             vi (int): Returns a ViSession handle that you use.
 
         '''
-        return self._library_interpreter.init_with_options(self._vi, self._encoding, resource_name, id_query, reset_device, option_string)
+        return self._library_interpreter.init_with_options(resource_name, id_query, reset_device, option_string)
 
     @ivi_synchronized
     def _initiate(self):
@@ -1214,7 +1206,7 @@ class Session(_SessionBase):
 
         Initiates a thingie.
         '''
-        return self._library_interpreter.initiate(self._vi, self._encoding)
+        return self._library_interpreter.initiate()
 
     @ivi_synchronized
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers=None):
@@ -1238,7 +1230,7 @@ class Session(_SessionBase):
             output_array_of_fixed_length (list of float): An array of doubles with fixed size.
 
         '''
-        return self._library_interpreter.multiple_array_types(self._vi, self._encoding, output_array_size, input_array_of_floats, input_array_of_integers)
+        return self._library_interpreter.multiple_array_types(output_array_size, input_array_of_floats, input_array_of_integers)
 
     @ivi_synchronized
     def multiple_arrays_same_size(self, values1, values2, values3, values4):
@@ -1256,7 +1248,7 @@ class Session(_SessionBase):
             values4 (list of float): Array 4 of same size.
 
         '''
-        return self._library_interpreter.multiple_arrays_same_size(self._vi, self._encoding, values1, values2, values3, values4)
+        return self._library_interpreter.multiple_arrays_same_size(values1, values2, values3, values4)
 
     @ivi_synchronized
     def one_input_function(self, a_number):
@@ -1268,7 +1260,7 @@ class Session(_SessionBase):
             a_number (int): Contains a number
 
         '''
-        return self._library_interpreter.one_input_function(self._vi, self._encoding, a_number)
+        return self._library_interpreter.one_input_function(a_number)
 
     @ivi_synchronized
     def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):
@@ -1306,7 +1298,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter an_int_enum must be of type ' + str(enums.Turtle))
         if type(a_float_enum) is not enums.FloatEnum:
             raise TypeError('Parameter a_float_enum must be of type ' + str(enums.FloatEnum))
-        return self._library_interpreter.parameters_are_multiple_types(self._vi, self._encoding, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string)
+        return self._library_interpreter.parameters_are_multiple_types(a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string)
 
     @ivi_synchronized
     def simple_function(self):
@@ -1314,7 +1306,7 @@ class Session(_SessionBase):
 
         This method takes no parameters other than the session.
         '''
-        return self._library_interpreter.simple_function(self._vi, self._encoding)
+        return self._library_interpreter.simple_function()
 
     @ivi_synchronized
     def read(self, maximum_time):
@@ -1330,7 +1322,7 @@ class Session(_SessionBase):
             reading (float): The measured value.
 
         '''
-        return self._library_interpreter.read(self._vi, self._encoding, maximum_time)
+        return self._library_interpreter.read(maximum_time)
 
     @ivi_synchronized
     def return_a_number_and_a_string(self):
@@ -1346,7 +1338,7 @@ class Session(_SessionBase):
             a_string (str): Contains a string. Buffer must be 256 bytes or larger.
 
         '''
-        return self._library_interpreter.return_a_number_and_a_string(self._vi, self._encoding)
+        return self._library_interpreter.return_a_number_and_a_string()
 
     @ivi_synchronized
     def return_duration_in_seconds(self):
@@ -1358,7 +1350,7 @@ class Session(_SessionBase):
             timedelta (hightime.timedelta): Duration in seconds.
 
         '''
-        return self._library_interpreter.return_duration_in_seconds(self._vi, self._encoding)
+        return self._library_interpreter.return_duration_in_seconds()
 
     @ivi_synchronized
     def return_list_of_durations_in_seconds(self, number_of_elements):
@@ -1374,7 +1366,7 @@ class Session(_SessionBase):
             timedeltas (hightime.timedelta): Contains a list of hightime.timedelta instances.
 
         '''
-        return self._library_interpreter.return_list_of_durations_in_seconds(self._vi, self._encoding, number_of_elements)
+        return self._library_interpreter.return_list_of_durations_in_seconds(number_of_elements)
 
     @ivi_synchronized
     def return_multiple_types(self, array_size):
@@ -1416,7 +1408,7 @@ class Session(_SessionBase):
             a_string (str): An IVI dance string.
 
         '''
-        return self._library_interpreter.return_multiple_types(self._vi, self._encoding, array_size)
+        return self._library_interpreter.return_multiple_types(array_size)
 
     @ivi_synchronized
     def set_custom_type(self, cs):
@@ -1428,7 +1420,7 @@ class Session(_SessionBase):
             cs (CustomStruct): Set using custom type
 
         '''
-        return self._library_interpreter.set_custom_type(self._vi, self._encoding, cs)
+        return self._library_interpreter.set_custom_type(cs)
 
     @ivi_synchronized
     def set_custom_type_array(self, cs):
@@ -1440,7 +1432,7 @@ class Session(_SessionBase):
             cs (list of CustomStruct): Set using custom type
 
         '''
-        return self._library_interpreter.set_custom_type_array(self._vi, self._encoding, cs)
+        return self._library_interpreter.set_custom_type_array(cs)
 
     @ivi_synchronized
     def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name=enums.MobileOSNames.ANDROID):
@@ -1462,7 +1454,7 @@ class Session(_SessionBase):
         '''
         if type(a_mobile_os_name) is not enums.MobileOSNames:
             raise TypeError('Parameter a_mobile_os_name must be of type ' + str(enums.MobileOSNames))
-        return self._library_interpreter.string_valued_enum_input_function_with_defaults(self._vi, self._encoding, a_mobile_os_name)
+        return self._library_interpreter.string_valued_enum_input_function_with_defaults(a_mobile_os_name)
 
     @ivi_synchronized
     def two_input_function(self, a_number, a_string):
@@ -1476,7 +1468,7 @@ class Session(_SessionBase):
             a_string (str): Contains a string
 
         '''
-        return self._library_interpreter.two_input_function(self._vi, self._encoding, a_number, a_string)
+        return self._library_interpreter.two_input_function(a_number, a_string)
 
     @ivi_synchronized
     def use64_bit_number(self, input):
@@ -1494,7 +1486,7 @@ class Session(_SessionBase):
             output (int): A big number on its way out.
 
         '''
-        return self._library_interpreter.use64_bit_number(self._vi, self._encoding, input)
+        return self._library_interpreter.use64_bit_number(input)
 
     @ivi_synchronized
     def write_waveform(self, waveform):
@@ -1506,7 +1498,7 @@ class Session(_SessionBase):
             waveform (array.array("d")): Waveform data.
 
         '''
-        return self._library_interpreter.write_waveform(self._vi, self._encoding, waveform)
+        return self._library_interpreter.write_waveform(waveform)
 
     @ivi_synchronized
     def write_waveform_numpy(self, waveform):
@@ -1526,14 +1518,14 @@ class Session(_SessionBase):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
-        return self._library_interpreter.write_waveform_numpy(self._vi, self._encoding, waveform)
+        return self._library_interpreter.write_waveform_numpy(waveform)
 
     def _close(self):
         r'''_close
 
         Closes the specified session and deallocates resources that it reserved.
         '''
-        return self._library_interpreter.close(self._vi, self._encoding)
+        return self._library_interpreter.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -1558,4 +1550,4 @@ class Session(_SessionBase):
             self_test_message (str): This parameter contains the string returned from the instrument self-test. The array must contain at least 256 elements.
 
         '''
-        return self._library_interpreter.self_test(self._vi, self._encoding)
+        return self._library_interpreter.self_test()

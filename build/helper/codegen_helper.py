@@ -10,64 +10,64 @@ pp = pprint.PrettyPrinter(indent=4, width=200)
 
 _ParameterUsageOptionsSnippet = {
     ParameterUsageOptions.SESSION_METHOD_DECLARATION: {
-        'prefix_params': ['self'],
+        'skip_self': False,
         'name_to_use': 'python_name_with_default',
     },
     ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL: {
-        'prefix_params': [],
+        'skip_self': True,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.SESSION_INIT_DECLARATION: {
-        'prefix_params': ['self'],
+        'skip_self': False,
         'name_to_use': 'python_name_with_default',
     },
     ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION: {
-        'prefix_params': ['self'],
+        'skip_self': False,
         'name_to_use': 'python_name_with_default',
     },
     ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_DECLARATION: {
-        'prefix_params': ['self', 'session_handle', 'encoding'],
+        'skip_self': False,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_CALL: {
-        'prefix_params': ['self._{config[session_handle_parameter_name]}', 'self._encoding'],
+        'skip_self': True,
         'name_to_use': 'library_interpreter_method_call_snippet',
     },
     ParameterUsageOptions.SESSION_METHOD_CALL: {
-        'prefix_params': [],
+        'skip_self': True,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.SESSION_INIT_CALL: {
-        'prefix_params': [],
+        'skip_self': True,
         'name_to_use': 'python_name_or_default_for_init',
     },
     ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD: {
-        'prefix_params': [],
+        'skip_self': True,
         'name_to_use': 'python_name_with_doc_default',
     },
     ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
-        'prefix_params': ['self'],
+        'skip_self': False,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.LIBRARY_METHOD_CALL: {
-        'prefix_params': [],
+        'skip_self': True,
         # when calling into Library, we need to build and pass parameters as ctypes types
         'name_to_use': 'ctypes_method_call_snippet',
     },
     ParameterUsageOptions.CDLL_METHOD_CALL: {
-        'prefix_params': [],
+        'skip_self': True,
         'name_to_use': 'python_name',
     },
     ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL: {
-        'prefix_params': ['self._{config[session_handle_parameter_name]}', 'self._encoding'],
+        'skip_self': True,
         'name_to_use': 'library_interpreter_method_call_snippet',
     },
     ParameterUsageOptions.CTYPES_ARGTYPES: {
-        'prefix_params': [],
+        'skip_self': True,
         'name_to_use': 'ctypes_type_library_call',
     },
     ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_DECLARATION: {
-        'prefix_params': ['self', 'session_handle', 'encoding'],
+        'skip_self': False,
         'name_to_use': 'python_name',
     },
 }
@@ -80,7 +80,7 @@ _ParameterUsageOptionsSnippet = {
 
 
 # Functions that return snippets that can be placed directly in the templates.
-def get_params_snippet(function, parameter_usage_options, config=None):
+def get_params_snippet(function, parameter_usage_options):
     '''get_params_snippet
 
     Get a parameter list snippet based on parameter_usage_options.
@@ -93,8 +93,8 @@ def get_params_snippet(function, parameter_usage_options, config=None):
     parameters_to_use = filter_parameters(function, parameter_usage_options)
 
     snippets = []
-    for param in options_to_use['prefix_params']:
-        snippets.append(param.format(config=config))
+    if not options_to_use['skip_self']:
+        snippets.append('self')
 
     # Render based on options
     for p in parameters_to_use:
@@ -134,8 +134,8 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
         snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
     else:
         if output_parameter['is_string']:
-            # 'encoding' is a variable on the LibraryInterpreter object
-            snippet = output_parameter['ctypes_variable_name'] + '.value.decode(encoding)'
+            # '_encoding' is a variable on the LibraryInterpreter object
+            snippet = output_parameter['ctypes_variable_name'] + '.value.decode(self._encoding)'
         else:
             snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + val_suffix + ')'
 
@@ -220,10 +220,10 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
 def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name):
     '''These are the different cases for initializing the ctype variables for strings
 
-    C010. Input repeated capability:                                           ctypes.create_string_buffer(parameter_name.encode(encoding))
-    C020. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(encoding))
-    C030. Input string enum:                                                   ctypes.create_string_buffer(parameter_name.value.encode(encoding))
-    C040. Input uses converter:                                                ctypes.create_string_buffer(_converters.convert_foo(parameter_name).encode(encoding))
+    C010. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
+    C020. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(self._encoding))
+    C030. Input string enum:                                                   ctypes.create_string_buffer(parameter_name.value.encode(self._encoding))
+    C040. Input uses converter:                                                ctypes.create_string_buffer(_converters.convert_foo(parameter_name).encode(self._encoding))
     C050. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
     C060. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViChar * buffer_size_ctype.value)()
     C070. Output buffer with mechanism fixed-size:                             visatype.ViChar * 256
@@ -236,13 +236,13 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
 
     if parameter['direction'] == 'in':
         if parameter['is_repeated_capability'] is True:
-            definition = 'ctypes.create_string_buffer({0}.encode(encoding))  # case C010'.format(parameter['python_name'])
+            definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case C010'.format(parameter['python_name'])
         elif parameter['enum'] is not None:
-            definition = 'ctypes.create_string_buffer({0}.value.encode(encoding))  # case C030'.format(parameter['python_name'])
+            definition = 'ctypes.create_string_buffer({0}.value.encode(self._encoding))  # case C030'.format(parameter['python_name'])
         elif 'python_api_converter_name' in parameter:
-            definition = 'ctypes.create_string_buffer(_converters.{0}({1}).encode(encoding))  # case C040'.format(parameter['python_api_converter_name'], parameter['python_name'])
+            definition = 'ctypes.create_string_buffer(_converters.{0}({1}).encode(self._encoding))  # case C040'.format(parameter['python_api_converter_name'], parameter['python_name'])
         else:
-            definition = 'ctypes.create_string_buffer({0}.encode(encoding))  # case C020'.format(parameter['python_name'])
+            definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case C020'.format(parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
         if parameter['size']['mechanism'] == 'ivi-dance':
@@ -283,7 +283,7 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
 def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name, config):
     '''These are the different cases for initializing the ctype variable for scalars:
 
-        S110. Input session handle:                                                visatype.ViSession(session_handle)
+        S110. Input session handle:                                                visatype.ViSession(self._vi)
         S120. Input is size of buffer with mechanism is python-code:               visatype.ViInt32(<custom python code>)
         S130. Input enum:                                                          visatype.ViInt32(parameter_name.value)
         S140. Input uses converter                                                 timedelta_converter_seconds_real64(timeout)
@@ -308,7 +308,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 
     if parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
-            definition = '{0}.{1}(session_handle)  # case S110'.format(module_name, parameter['ctypes_type'])
+            definition = '{0}.{1}(self._{2})  # case S110'.format(module_name, parameter['ctypes_type'], config['session_handle_parameter_name'])
         elif parameter['size']['mechanism'] == 'python-code':
             definition = '{0}.{1}({2})  # case S120'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['enum'] is not None:
@@ -1413,7 +1413,7 @@ def test_get_method_return_snippet_int():
 
 def test_get_method_return_snippet_string():
     param = [parameters_for_testing[2]]
-    assert get_method_return_snippet(param, config_for_testing) == 'return error_message_ctype.value.decode(encoding)'
+    assert get_method_return_snippet(param, config_for_testing) == 'return error_message_ctype.value.decode(self._encoding)'
 
 
 def test_get_method_return_snippet_custom_type():
@@ -1448,22 +1448,22 @@ def test_get_buffer_parameters_for_size_parameter():
 
 def test_get_ctype_variable_declaration_snippet_case_c010():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[15], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(encoding))  # case C010"]
+    assert snippet == ["channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c020():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[16], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["a_string_ctype = ctypes.create_string_buffer(a_string.encode(encoding))  # case C020"]
+    assert snippet == ["a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case C020"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c030():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[33], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["a_string_enum_ctype = ctypes.create_string_buffer(a_string_enum.value.encode(encoding))  # case C030"]
+    assert snippet == ["a_string_enum_ctype = ctypes.create_string_buffer(a_string_enum.value.encode(self._encoding))  # case C030"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c040():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[34], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(encoding))  # case C040"]
+    assert snippet == ["indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c050():
@@ -1498,7 +1498,7 @@ def test_get_ctype_variable_declaration_snippet_case_c100():
 
 def test_get_ctype_variable_declaration_snippet_case_s110():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[0], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["vi_ctype = _visatype.ViSession(session_handle)  # case S110"]
+    assert snippet == ["vi_ctype = _visatype.ViSession(self._vi)  # case S110"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s120():

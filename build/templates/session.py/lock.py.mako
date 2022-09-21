@@ -1,8 +1,4 @@
 <%page args="f, config, method_template"/>\
-<%
-    import build.helper as helper
-    func_params = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL, config)
-%>\
     def ${f['python_name']}(self):
         '''${f['python_name']}
 
@@ -33,7 +29,7 @@
             lock (context manager): When used in a with statement, ${config['module_name']}.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._library_interpreter.lock(${func_params})  # We do not call this in the context manager so that this function can
+        self._library_interpreter.lock()  # We do not call this in the context manager so that this function can
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
