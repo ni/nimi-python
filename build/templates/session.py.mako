@@ -226,7 +226,7 @@ class Session(_SessionBase):
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library_interpreter=None,
+            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
             freeze_it=False,
             all_channels_in_session=None
         )
@@ -235,7 +235,6 @@ class Session(_SessionBase):
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']})
 %   endif
 % endfor
-        self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
         # Note that _library_interpreter sets _${config['session_handle_parameter_name']} to 0 in its constructor, so that if

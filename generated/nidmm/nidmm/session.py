@@ -1025,12 +1025,11 @@ class Session(_SessionBase):
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library_interpreter=None,
+            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
             freeze_it=False,
             all_channels_in_session=None
         )
         options = _converters.convert_init_with_options_dictionary(options)
-        self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Call specified init function
         # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
