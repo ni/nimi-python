@@ -103,7 +103,7 @@ class TestSession(object):
         with nimodinst.Session('') as session:
             # Calling the internal function directly, as get_extended_error_info() functions differently than other IVI Dance functions.
             # As a result, it cannot be used directly during error handling.
-            result = session._library_interpreter.get_extended_error_info()
+            result = session._library_interpreter.get_extended_error_info(session._handle, session._encoding)
             assert result == error_string
 
     def test_get_error_description_fails(self):

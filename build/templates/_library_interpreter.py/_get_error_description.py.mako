@@ -7,13 +7,13 @@
     assert all(p.get('default_value') for p in get_error_params), [[p['name'], p.get('default_value')] for p in get_error_params]
     get_error_params_snippet = ", ".join(str(p['default_value']) for p in get_error_params)
 %>\
-    def get_error_description(self, error_code):
+    def get_error_description(self, session_handle, encoding, error_code):
         '''get_error_description
 
         Returns the error description.
         '''
         try:
-            _, error_string = self.get_error(${get_error_params_snippet})
+            _, error_string = self.get_error(session_handle, encoding, ${get_error_params_snippet})
             return error_string
         except errors.Error:
 % if 'error_message' in config['functions']:
@@ -25,7 +25,7 @@
             (IVI spec requires GetError to fail).
             Use error_message instead. It doesn't require a session.
             '''
-            error_string = self.error_message(error_code)
+            error_string = self.error_message(session_handle, encoding, error_code)
             return error_string
         except errors.Error:
 % endif

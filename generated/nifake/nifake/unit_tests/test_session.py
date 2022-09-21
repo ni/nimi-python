@@ -81,7 +81,7 @@ class TestSession(object):
 
             session = nifake.Session('dev1')
             self.patched_library.niFake_InitWithOptions.assert_called_once_with(_matchers.ViStringMatcher('dev1'), _matchers.ViBooleanMatcher(False), _matchers.ViBooleanMatcher(False), _matchers.ViStringMatcher(''), _matchers.ViSessionPointerMatcher())
-            patched_errors.handle_error.assert_called_once_with(session._library_interpreter, self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False, is_error_handling=False)
+            patched_errors.handle_error.assert_called_once_with(session._library_interpreter, 0, 'windows-1251', self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False, is_error_handling=False)
             session.close()
             self.patched_library.niFake_close.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
@@ -133,7 +133,7 @@ class TestSession(object):
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
-            assert session._library_interpreter._vi == 0
+            assert session._vi == 0
         self.patched_library.niFake_close.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_session_context_manager_init_with_error(self):

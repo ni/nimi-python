@@ -70,9 +70,11 @@ class _RepeatedCapabilities(object):
         complete_rep_cap_list = [current_rep_cap + self._separator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
 
         return _SessionBase(
+            vi=self._session._vi,
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
             library_interpreter=self._session._library_interpreter,
+            encoding=self._session._encoding,
             freeze_it=True
         )
 
@@ -3983,16 +3985,20 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.voltage_pole_zero_ratio`
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library_interpreter, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
+        self._vi = vi
         self._library_interpreter = library_interpreter
+        self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
+        param_list.append("vi=" + pp.pformat(vi))
         param_list.append("library_interpreter=" + pp.pformat(library_interpreter))
+        param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
         # Instantiate any repeated capability objects
@@ -4084,7 +4090,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.abort`
         '''
-        return self._library_interpreter.abort(self._repeated_capability)
+        return self._library_interpreter.abort(self._vi, self._encoding, self._repeated_capability)
 
     @ivi_synchronized
     def self_cal(self):
@@ -4126,7 +4132,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.self_cal`
         '''
-        return self._library_interpreter.self_cal(self._repeated_capability)
+        return self._library_interpreter.self_cal(self._vi, self._encoding, self._repeated_capability)
 
     @ivi_synchronized
     def clear_latched_output_cutoff_state(self, output_cutoff_reason):
@@ -4172,7 +4178,7 @@ class _SessionBase(object):
         '''
         if type(output_cutoff_reason) is not enums.OutputCutoffReason:
             raise TypeError('Parameter output_cutoff_reason must be of type ' + str(enums.OutputCutoffReason))
-        return self._library_interpreter.clear_latched_output_cutoff_state(self._repeated_capability, output_cutoff_reason)
+        return self._library_interpreter.clear_latched_output_cutoff_state(self._vi, self._encoding, self._repeated_capability, output_cutoff_reason)
 
     @ivi_synchronized
     def commit(self):
@@ -4204,7 +4210,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.commit`
         '''
-        return self._library_interpreter.commit(self._repeated_capability)
+        return self._library_interpreter.commit(self._vi, self._encoding, self._repeated_capability)
 
     @ivi_synchronized
     def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
@@ -4256,7 +4262,7 @@ class _SessionBase(object):
         '''
         if type(units) is not enums.ApertureTimeUnits:
             raise TypeError('Parameter units must be of type ' + str(enums.ApertureTimeUnits))
-        return self._library_interpreter.configure_aperture_time(self._repeated_capability, aperture_time, units)
+        return self._library_interpreter.configure_aperture_time(self._vi, self._encoding, self._repeated_capability, aperture_time, units)
 
     @ivi_synchronized
     def configure_lcr_custom_cable_compensation(self, custom_cable_compensation_data):
@@ -4291,7 +4297,7 @@ class _SessionBase(object):
             custom_cable_compensation_data (bytes): The open and short custom cable compensation data to apply.
 
         '''
-        return self._library_interpreter.configure_lcr_custom_cable_compensation(self._repeated_capability, custom_cable_compensation_data)
+        return self._library_interpreter.configure_lcr_custom_cable_compensation(self._vi, self._encoding, self._repeated_capability, custom_cable_compensation_data)
 
     @ivi_synchronized
     def create_advanced_sequence_commit_step(self, set_as_active_step=True):
@@ -4340,7 +4346,7 @@ class _SessionBase(object):
             set_as_active_step (bool): Specifies whether the step created with this method is active in the Active advanced sequence.
 
         '''
-        return self._library_interpreter.create_advanced_sequence_commit_step(self._repeated_capability, set_as_active_step)
+        return self._library_interpreter.create_advanced_sequence_commit_step(self._vi, self._encoding, self._repeated_capability, set_as_active_step)
 
     @ivi_synchronized
     def create_advanced_sequence_step(self, set_as_active_step=True):
@@ -4387,7 +4393,7 @@ class _SessionBase(object):
             set_as_active_step (bool): Specifies whether the step created with this method is active in the Active advanced sequence.
 
         '''
-        return self._library_interpreter.create_advanced_sequence_step(self._repeated_capability, set_as_active_step)
+        return self._library_interpreter.create_advanced_sequence_step(self._vi, self._encoding, self._repeated_capability, set_as_active_step)
 
     @ivi_synchronized
     def _create_advanced_sequence_with_channels(self, sequence_name, attribute_ids, set_as_active_sequence):
@@ -4613,7 +4619,7 @@ class _SessionBase(object):
             set_as_active_sequence (bool): Specifies that this current sequence is active.
 
         '''
-        return self._library_interpreter.create_advanced_sequence_with_channels(self._repeated_capability, sequence_name, attribute_ids, set_as_active_sequence)
+        return self._library_interpreter.create_advanced_sequence_with_channels(self._vi, self._encoding, self._repeated_capability, sequence_name, attribute_ids, set_as_active_sequence)
 
     @ivi_synchronized
     def delete_advanced_sequence(self, sequence_name):
@@ -4655,7 +4661,7 @@ class _SessionBase(object):
             sequence_name (str): specifies the name of the sequence to delete.
 
         '''
-        return self._library_interpreter.delete_advanced_sequence(self._repeated_capability, sequence_name)
+        return self._library_interpreter.delete_advanced_sequence(self._vi, self._encoding, self._repeated_capability, sequence_name)
 
     @ivi_synchronized
     def create_advanced_sequence(self, sequence_name, property_names, set_as_active_sequence=True):
@@ -5254,7 +5260,7 @@ class _SessionBase(object):
                 device.
 
         '''
-        return self._library_interpreter.fetch_multiple(self._repeated_capability, timeout, count)
+        return self._library_interpreter.fetch_multiple(self._vi, self._encoding, self._repeated_capability, timeout, count)
 
     @ivi_synchronized
     def _fetch_multiple_lcr(self, count, timeout=hightime.timedelta(seconds=1.0)):
@@ -5333,7 +5339,7 @@ class _SessionBase(object):
             actual_count (int):
 
         '''
-        return self._library_interpreter.fetch_multiple_lcr(self._repeated_capability, timeout, count)
+        return self._library_interpreter.fetch_multiple_lcr(self._vi, self._encoding, self._repeated_capability, timeout, count)
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -5385,7 +5391,7 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        return self._library_interpreter.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_boolean(self._vi, self._encoding, self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -5437,7 +5443,7 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        return self._library_interpreter.get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_int32(self._vi, self._encoding, self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute_id):
@@ -5489,7 +5495,7 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        return self._library_interpreter.get_attribute_vi_int64(self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_int64(self._vi, self._encoding, self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -5541,7 +5547,7 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        return self._library_interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_real64(self._vi, self._encoding, self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -5603,7 +5609,7 @@ class _SessionBase(object):
                 selecting it and then pressing .
 
         '''
-        return self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return self._library_interpreter.get_attribute_vi_string(self._vi, self._encoding, self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def _get_channel_names(self, indices):
@@ -5625,7 +5631,7 @@ class _SessionBase(object):
             names (list of str): The channel name(s) at the specified indices.
 
         '''
-        return self._library_interpreter.get_channel_names(indices)
+        return self._library_interpreter.get_channel_names(self._vi, self._encoding, indices)
 
     @ivi_synchronized
     def _get_lcr_compensation_last_date_and_time(self, compensation_type):
@@ -5666,7 +5672,7 @@ class _SessionBase(object):
         '''
         if type(compensation_type) is not enums.LCRCompensationType:
             raise TypeError('Parameter compensation_type must be of type ' + str(enums.LCRCompensationType))
-        return self._library_interpreter.get_lcr_compensation_last_date_and_time(self._repeated_capability, compensation_type)
+        return self._library_interpreter.get_lcr_compensation_last_date_and_time(self._vi, self._encoding, self._repeated_capability, compensation_type)
 
     @ivi_synchronized
     def get_lcr_custom_cable_compensation_data(self):
@@ -5694,7 +5700,7 @@ class _SessionBase(object):
             custom_cable_compensation_data (bytes): The open and short custom cable compensation data to retrieve.
 
         '''
-        return self._library_interpreter.get_lcr_custom_cable_compensation_data(self._repeated_capability)
+        return self._library_interpreter.get_lcr_custom_cable_compensation_data(self._vi, self._encoding, self._repeated_capability)
 
     @ivi_synchronized
     def get_lcr_compensation_last_date_and_time(self, compensation_type):
@@ -5755,7 +5761,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session._initiate_with_channels`
         '''
-        return self._library_interpreter.initiate_with_channels(self._repeated_capability)
+        return self._library_interpreter.initiate_with_channels(self._vi, self._encoding, self._repeated_capability)
 
     def lock(self):
         '''lock
@@ -5787,7 +5793,7 @@ class _SessionBase(object):
             lock (context manager): When used in a with statement, nidcpower.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._library_interpreter.lock()  # We do not call this in the context manager so that this function can
+        self._library_interpreter.lock(self._vi, self._encoding)  # We do not call this in the context manager so that this function can
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
@@ -5831,7 +5837,7 @@ class _SessionBase(object):
         '''
         if type(measurement_type) is not enums.MeasurementTypes:
             raise TypeError('Parameter measurement_type must be of type ' + str(enums.MeasurementTypes))
-        return self._library_interpreter.measure(self._repeated_capability, measurement_type)
+        return self._library_interpreter.measure(self._vi, self._encoding, self._repeated_capability, measurement_type)
 
     @ivi_synchronized
     def _measure_multiple(self):
@@ -5866,7 +5872,7 @@ class _SessionBase(object):
                 returned array.
 
         '''
-        return self._library_interpreter.measure_multiple(self._repeated_capability)
+        return self._library_interpreter.measure_multiple(self._vi, self._encoding, self._repeated_capability)
 
     @ivi_synchronized
     def _measure_multiple_lcr(self):
@@ -5934,7 +5940,7 @@ class _SessionBase(object):
                 +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         '''
-        return self._library_interpreter.measure_multiple_lcr(self._repeated_capability)
+        return self._library_interpreter.measure_multiple_lcr(self._vi, self._encoding, self._repeated_capability)
 
     @ivi_synchronized
     def _parse_channel_count(self):
@@ -5957,7 +5963,7 @@ class _SessionBase(object):
             number_of_channels (int):
 
         '''
-        return self._library_interpreter.parse_channel_count(self._repeated_capability)
+        return self._library_interpreter.parse_channel_count(self._vi, self._encoding, self._repeated_capability)
 
     @ivi_synchronized
     def perform_lcr_load_compensation(self, compensation_spots):
@@ -6004,7 +6010,7 @@ class _SessionBase(object):
                 +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
 
         '''
-        return self._library_interpreter.perform_lcr_load_compensation(self._repeated_capability, compensation_spots)
+        return self._library_interpreter.perform_lcr_load_compensation(self._vi, self._encoding, self._repeated_capability, compensation_spots)
 
     @ivi_synchronized
     def perform_lcr_open_compensation(self, additional_frequencies=None):
@@ -6052,7 +6058,7 @@ class _SessionBase(object):
             additional_frequencies (list of float): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
 
         '''
-        return self._library_interpreter.perform_lcr_open_compensation(self._repeated_capability, additional_frequencies)
+        return self._library_interpreter.perform_lcr_open_compensation(self._vi, self._encoding, self._repeated_capability, additional_frequencies)
 
     @ivi_synchronized
     def perform_lcr_open_custom_cable_compensation(self):
@@ -6081,7 +6087,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.perform_lcr_open_custom_cable_compensation`
         '''
-        return self._library_interpreter.perform_lcr_open_custom_cable_compensation(self._repeated_capability)
+        return self._library_interpreter.perform_lcr_open_custom_cable_compensation(self._vi, self._encoding, self._repeated_capability)
 
     @ivi_synchronized
     def perform_lcr_short_compensation(self, additional_frequencies=None):
@@ -6129,7 +6135,7 @@ class _SessionBase(object):
             additional_frequencies (list of float): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
 
         '''
-        return self._library_interpreter.perform_lcr_short_compensation(self._repeated_capability, additional_frequencies)
+        return self._library_interpreter.perform_lcr_short_compensation(self._vi, self._encoding, self._repeated_capability, additional_frequencies)
 
     @ivi_synchronized
     def perform_lcr_short_custom_cable_compensation(self):
@@ -6161,7 +6167,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.perform_lcr_short_custom_cable_compensation`
         '''
-        return self._library_interpreter.perform_lcr_short_custom_cable_compensation(self._repeated_capability)
+        return self._library_interpreter.perform_lcr_short_custom_cable_compensation(self._vi, self._encoding, self._repeated_capability)
 
     @ivi_synchronized
     def query_in_compliance(self):
@@ -6206,7 +6212,7 @@ class _SessionBase(object):
             in_compliance (bool): Returns whether the device output channel is in compliance.
 
         '''
-        return self._library_interpreter.query_in_compliance(self._repeated_capability)
+        return self._library_interpreter.query_in_compliance(self._vi, self._encoding, self._repeated_capability)
 
     @ivi_synchronized
     def query_latched_output_cutoff_state(self, output_cutoff_reason):
@@ -6264,7 +6270,7 @@ class _SessionBase(object):
         '''
         if type(output_cutoff_reason) is not enums.OutputCutoffReason:
             raise TypeError('Parameter output_cutoff_reason must be of type ' + str(enums.OutputCutoffReason))
-        return self._library_interpreter.query_latched_output_cutoff_state(self._repeated_capability, output_cutoff_reason)
+        return self._library_interpreter.query_latched_output_cutoff_state(self._vi, self._encoding, self._repeated_capability, output_cutoff_reason)
 
     @ivi_synchronized
     def query_max_current_limit(self, voltage_level):
@@ -6294,7 +6300,7 @@ class _SessionBase(object):
                 **voltageLevel**.
 
         '''
-        return self._library_interpreter.query_max_current_limit(self._repeated_capability, voltage_level)
+        return self._library_interpreter.query_max_current_limit(self._vi, self._encoding, self._repeated_capability, voltage_level)
 
     @ivi_synchronized
     def query_max_voltage_level(self, current_limit):
@@ -6324,7 +6330,7 @@ class _SessionBase(object):
                 with the specified **currentLimit**.
 
         '''
-        return self._library_interpreter.query_max_voltage_level(self._repeated_capability, current_limit)
+        return self._library_interpreter.query_max_voltage_level(self._vi, self._encoding, self._repeated_capability, current_limit)
 
     @ivi_synchronized
     def query_min_current_limit(self, voltage_level):
@@ -6354,7 +6360,7 @@ class _SessionBase(object):
                 with the specified **voltageLevel**.
 
         '''
-        return self._library_interpreter.query_min_current_limit(self._repeated_capability, voltage_level)
+        return self._library_interpreter.query_min_current_limit(self._vi, self._encoding, self._repeated_capability, voltage_level)
 
     @ivi_synchronized
     def query_output_state(self, output_state):
@@ -6396,7 +6402,7 @@ class _SessionBase(object):
         '''
         if type(output_state) is not enums.OutputStates:
             raise TypeError('Parameter output_state must be of type ' + str(enums.OutputStates))
-        return self._library_interpreter.query_output_state(self._repeated_capability, output_state)
+        return self._library_interpreter.query_output_state(self._vi, self._encoding, self._repeated_capability, output_state)
 
     @ivi_synchronized
     def reset(self):
@@ -6420,7 +6426,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.reset`
         '''
-        return self._library_interpreter.reset(self._repeated_capability)
+        return self._library_interpreter.reset(self._vi, self._encoding, self._repeated_capability)
 
     @ivi_synchronized
     def send_software_edge_trigger(self, trigger):
@@ -6471,7 +6477,7 @@ class _SessionBase(object):
         '''
         if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
             raise TypeError('Parameter trigger must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
-        return self._library_interpreter.send_software_edge_trigger(self._repeated_capability, trigger)
+        return self._library_interpreter.send_software_edge_trigger(self._vi, self._encoding, self._repeated_capability, trigger)
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -6526,7 +6532,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        return self._library_interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_boolean(self._vi, self._encoding, self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -6581,7 +6587,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        return self._library_interpreter.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_int32(self._vi, self._encoding, self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
@@ -6636,7 +6642,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        return self._library_interpreter.set_attribute_vi_int64(self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_int64(self._vi, self._encoding, self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -6691,7 +6697,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        return self._library_interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_real64(self._vi, self._encoding, self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -6746,7 +6752,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        return self._library_interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
+        return self._library_interpreter.set_attribute_vi_string(self._vi, self._encoding, self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def set_sequence(self, values, source_delays):
@@ -6796,7 +6802,7 @@ class _SessionBase(object):
                 The valid values are between 0 and 167 seconds.
 
         '''
-        return self._library_interpreter.set_sequence(self._repeated_capability, values, source_delays)
+        return self._library_interpreter.set_sequence(self._vi, self._encoding, self._repeated_capability, values, source_delays)
 
     def unlock(self):
         '''unlock
@@ -6805,7 +6811,7 @@ class _SessionBase(object):
         lock. Refer to lock for additional
         information on session locks.
         '''
-        self._library_interpreter.unlock()
+        self._library_interpreter.unlock(self._vi, self._encoding)
 
     @ivi_synchronized
     def wait_for_event(self, event_id, timeout=hightime.timedelta(seconds=10.0)):
@@ -6866,7 +6872,7 @@ class _SessionBase(object):
         '''
         if type(event_id) is not enums.Event:
             raise TypeError('Parameter event_id must be of type ' + str(enums.Event))
-        return self._library_interpreter.wait_for_event(self._repeated_capability, event_id, timeout)
+        return self._library_interpreter.wait_for_event(self._vi, self._encoding, self._repeated_capability, event_id, timeout)
 
     def _error_message(self, error_code):
         r'''_error_message
@@ -6885,7 +6891,7 @@ class _SessionBase(object):
                 You must pass a ViChar array with at least 256 bytes.
 
         '''
-        return self._library_interpreter.error_message(error_code)
+        return self._library_interpreter.error_message(self._vi, self._encoding, error_code)
 
 
 class Session(_SessionBase):
@@ -7003,21 +7009,23 @@ class Session(_SessionBase):
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
+            vi=0,
             library_interpreter=None,
+            encoding='windows-1251',
             freeze_it=False,
             all_channels_in_session=None
         )
         resource_name = _converters.convert_repeated_capabilities_without_prefix(resource_name)
         channels = _converters.convert_repeated_capabilities_without_prefix(channels)
         options = _converters.convert_init_with_options_dictionary(options)
-        self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        self._library_interpreter = _library_interpreter.LibraryInterpreter()
 
         # Call specified init function
-        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # Note that we set _vi to 0 in SessionBase, so that if
         # _fancy_initialize fails, the error handler can reference it.
-        # And then once _fancy_initialize succeeds, we can update _library_interpreter._vi
+        # And then once _fancy_initialize succeeds, we can update _vi
         # with the actual session handle.
-        self._library_interpreter._vi = self._fancy_initialize(resource_name, channels, reset, options, independent_channels)
+        self._vi = self._fancy_initialize(resource_name, channels, reset, options, independent_channels)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -7031,7 +7039,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._library_interpreter._vi` is set
+        # handle `self._vi` is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -7071,9 +7079,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._library_interpreter._vi = 0
+            self._vi = 0
             raise
-        self._library_interpreter._vi = 0
+        self._vi = 0
 
     ''' These are code-generated '''
 
@@ -7088,7 +7096,7 @@ class Session(_SessionBase):
         This method opens the output relay on devices that have an output
         relay.
         '''
-        return self._library_interpreter.disable()
+        return self._library_interpreter.disable(self._vi, self._encoding)
 
     @ivi_synchronized
     def export_attribute_configuration_buffer(self):
@@ -7142,7 +7150,7 @@ class Session(_SessionBase):
                 property configuration.
 
         '''
-        return self._library_interpreter.export_attribute_configuration_buffer()
+        return self._library_interpreter.export_attribute_configuration_buffer(self._vi, self._encoding)
 
     @ivi_synchronized
     def export_attribute_configuration_file(self, file_path):
@@ -7198,7 +7206,7 @@ class Session(_SessionBase):
                 **Default file extension:** .nidcpowerconfig
 
         '''
-        return self._library_interpreter.export_attribute_configuration_file(file_path)
+        return self._library_interpreter.export_attribute_configuration_file(self._vi, self._encoding, file_path)
 
     def _fancy_initialize(self, resource_name, channels=None, reset=False, option_string="", independent_channels=True):
         '''_fancy_initialize
@@ -7348,7 +7356,7 @@ class Session(_SessionBase):
             channel_name (str): Returns the output channel name that corresponds to **index**.
 
         '''
-        return self._library_interpreter.get_channel_name(index)
+        return self._library_interpreter.get_channel_name(self._vi, self._encoding, index)
 
     @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
@@ -7372,7 +7380,7 @@ class Session(_SessionBase):
             minute (int): Returns the **minute** in which the device was last calibrated.
 
         '''
-        return self._library_interpreter.get_ext_cal_last_date_and_time()
+        return self._library_interpreter.get_ext_cal_last_date_and_time(self._vi, self._encoding)
 
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
@@ -7386,7 +7394,7 @@ class Session(_SessionBase):
                 during the last successful external calibration.
 
         '''
-        return self._library_interpreter.get_ext_cal_last_temp()
+        return self._library_interpreter.get_ext_cal_last_temp(self._vi, self._encoding)
 
     @ivi_synchronized
     def get_ext_cal_recommended_interval(self):
@@ -7400,7 +7408,7 @@ class Session(_SessionBase):
                 external calibrations.
 
         '''
-        return self._library_interpreter.get_ext_cal_recommended_interval()
+        return self._library_interpreter.get_ext_cal_recommended_interval(self._vi, self._encoding)
 
     @ivi_synchronized
     def get_ext_cal_last_date_and_time(self):
@@ -7460,7 +7468,7 @@ class Session(_SessionBase):
             minute (int): Returns the **minute** in which the device was last calibrated.
 
         '''
-        return self._library_interpreter.get_self_cal_last_date_and_time()
+        return self._library_interpreter.get_self_cal_last_date_and_time(self._vi, self._encoding)
 
     @ivi_synchronized
     def get_self_cal_last_temp(self):
@@ -7484,7 +7492,7 @@ class Session(_SessionBase):
                 during the oldest successful calibration.
 
         '''
-        return self._library_interpreter.get_self_cal_last_temp()
+        return self._library_interpreter.get_self_cal_last_temp(self._vi, self._encoding)
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
@@ -7537,7 +7545,7 @@ class Session(_SessionBase):
                 configuration to import.
 
         '''
-        return self._library_interpreter.import_attribute_configuration_buffer(configuration)
+        return self._library_interpreter.import_attribute_configuration_buffer(self._vi, self._encoding, configuration)
 
     @ivi_synchronized
     def import_attribute_configuration_file(self, file_path):
@@ -7592,7 +7600,7 @@ class Session(_SessionBase):
                 **Default File Extension:** .nidcpowerconfig
 
         '''
-        return self._library_interpreter.import_attribute_configuration_file(file_path)
+        return self._library_interpreter.import_attribute_configuration_file(self._vi, self._encoding, file_path)
 
     def _initialize_with_channels(self, resource_name, channels, reset, option_string):
         r'''_initialize_with_channels
@@ -7663,7 +7671,7 @@ class Session(_SessionBase):
                 subsequent NI-DCPower method calls.
 
         '''
-        return self._library_interpreter.initialize_with_channels(resource_name, channels, reset, option_string)
+        return self._library_interpreter.initialize_with_channels(self._vi, self._encoding, resource_name, channels, reset, option_string)
 
     def _initialize_with_independent_channels(self, resource_name, reset, option_string):
         r'''_initialize_with_independent_channels
@@ -7742,7 +7750,7 @@ class Session(_SessionBase):
                 subsequent NI-DCPower method calls.
 
         '''
-        return self._library_interpreter.initialize_with_independent_channels(resource_name, reset, option_string)
+        return self._library_interpreter.initialize_with_independent_channels(self._vi, self._encoding, resource_name, reset, option_string)
 
     @ivi_synchronized
     def get_channel_names(self, indices):
@@ -7777,7 +7785,7 @@ class Session(_SessionBase):
             temperature (float): Returns the onboard **temperature**, in degrees Celsius, of the device.
 
         '''
-        return self._library_interpreter.read_current_temperature()
+        return self._library_interpreter.read_current_temperature(self._vi, self._encoding)
 
     @ivi_synchronized
     def reset_device(self):
@@ -7797,7 +7805,7 @@ class Session(_SessionBase):
         This will also open the output relay on devices that have an output
         relay.
         '''
-        return self._library_interpreter.reset_device()
+        return self._library_interpreter.reset_device(self._vi, self._encoding)
 
     @ivi_synchronized
     def reset_with_defaults(self):
@@ -7811,7 +7819,7 @@ class Session(_SessionBase):
         method, this method can assign user-defined default values for
         configurable properties from the IVI configuration.
         '''
-        return self._library_interpreter.reset_with_defaults()
+        return self._library_interpreter.reset_with_defaults(self._vi, self._encoding)
 
     def _close(self):
         r'''_close
@@ -7831,7 +7839,7 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        return self._library_interpreter.close()
+        return self._library_interpreter.close(self._vi, self._encoding)
 
     @ivi_synchronized
     def self_test(self):
@@ -7890,4 +7898,4 @@ class Session(_SessionBase):
                 least 256 bytes.
 
         '''
-        return self._library_interpreter.self_test()
+        return self._library_interpreter.self_test(self._vi, self._encoding)

@@ -71,7 +71,7 @@ class DriverTooNewError(Error):
         super(DriverTooNewError, self).__init__('The NI-ModInst runtime returned an unexpected value. This can occur if it is too new for the nimodinst Python module. Upgrade the nimodinst Python module.')
 
 
-def handle_error(library_interpreter, code, ignore_warnings, is_error_handling):
+def handle_error(library_interpreter, session_handle, encoding, code, ignore_warnings, is_error_handling):
     '''handle_error
 
     Helper function for handling errors returned by nimodinst.Library.
@@ -87,7 +87,7 @@ def handle_error(library_interpreter, code, ignore_warnings, is_error_handling):
         # Don't try to get the description or we'll start recursing until the stack overflows.
         description = ''
     else:
-        description = library_interpreter.get_error_description(code)
+        description = library_interpreter.get_error_description(session_handle, encoding, code)
 
     if _is_error(code):
         raise DriverError(code, description)
