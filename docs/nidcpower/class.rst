@@ -1298,6 +1298,45 @@ get_ext_cal_recommended_interval
 
 
 
+get_lcr_compensation_data
+-------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: get_lcr_compensation_data()
+
+            Collects previously generated open, short, load, and custom cable compensation data so you can then apply it to LCR measurements with :py:meth:`nidcpower.Session.ConfigureLCRCompensation`.
+
+            Call this method after you have obtained the compensation data of all types (open, short, load, open custom cable compensation, and short custom cable compensation) you want to apply to your measurements. Pass the **compensation data** to :py:meth:`nidcpower.Session.ConfigureLCRCompensation`
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_lcr_compensation_data`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.get_lcr_compensation_data`
+
+
+            :rtype: bytes
+            :return:
+
+
+                    The open, short, load, and custom cable compensation data to retrieve.
+
+                    
+
+
+
 get_lcr_compensation_last_date_and_time
 ---------------------------------------
 

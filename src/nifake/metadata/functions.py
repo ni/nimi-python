@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 22.5.0d24
+# This file is generated from NI-FAKE API metadata version 22.8.0d9999
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -2573,6 +2573,7 @@ functions = {
         'documentation': {
             'description': 'Closes the specified session and deallocates resources that it reserved.'
         },
+        'grpc_name': 'Close',
         'parameters': [
             {
                 'direction': 'in',
@@ -2592,6 +2593,7 @@ functions = {
         'documentation': {
             'description': 'Takes the errorCode returned by a functiona and returns it as a user-readable string.'
         },
+        'grpc_name': 'ErrorMessage',
         'is_error_handling': True,
         'parameters': [
             {
@@ -2631,6 +2633,7 @@ functions = {
         'documentation': {
             'description': 'Performs a self-test'
         },
+        'grpc_name': 'FancySelfTest',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -2657,6 +2660,7 @@ functions = {
         'documentation': {
             'description': 'Performs a self-test.'
         },
+        'grpc_name': 'SelfTest',
         'parameters': [
             {
                 'direction': 'in',

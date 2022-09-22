@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 22.8.0d32
+# This file is generated from NI-SWITCH API metadata version 22.8.0d9999
 functions = {
     'AbortScan': {
         'documentation': {
@@ -1196,6 +1196,7 @@ functions = {
         'documentation': {
             'description': '\nTerminates the NI-SWITCH session and all of its attributes and\ndeallocates any memory resources the driver uses. Notes: (1) You must\nunlock the session before calling niSwitch_close. (2) After calling\nniSwitch_close, you cannot use the instrument driver again until you\ncall niSwitch_init or niSwitch_InitWithOptions.\n'
         },
+        'grpc_name': 'Close',
         'parameters': [
             {
                 'direction': 'in',
@@ -1215,6 +1216,7 @@ functions = {
         'documentation': {
             'description': '\nConverts an error code returned by NI-SWITCH into a user-readable\nstring. Generally this information is supplied in error out of any\nNI-SWITCH VI. Use niSwitch_error_message for a static lookup of an\nerror code description.\n'
         },
+        'grpc_name': 'ErrorMessage',
         'is_error_handling': True,
         'parameters': [
             {
@@ -1268,6 +1270,7 @@ functions = {
                 'Description'
             ]
         },
+        'grpc_name': 'FancySelfTest',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1293,6 +1296,7 @@ functions = {
         'documentation': {
             'description': '\nDisconnects all created paths and returns the switch module to the state\nat initialization. Configuration channel and source channel settings\nremain unchanged.\n'
         },
+        'grpc_name': 'Reset',
         'parameters': [
             {
                 'direction': 'in',
@@ -1310,6 +1314,7 @@ functions = {
         'documentation': {
             'description': 'Verifies that the driver can communicate with the switch module.'
         },
+        'grpc_name': 'SelfTest',
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {

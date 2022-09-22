@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 22.8.0d40
+# This file is generated from NI-FGEN API metadata version 22.8.0d9999
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -3274,6 +3274,7 @@ functions = {
                 'Other Devices'
             ]
         },
+        'grpc_name': 'Close',
         'parameters': [
             {
                 'direction': 'in',
@@ -3293,6 +3294,7 @@ functions = {
         'documentation': {
             'description': '\nConverts a status code returned by an NI-FGEN function into a\nuser-readable string.\n'
         },
+        'grpc_name': 'ErrorMessage',
         'is_error_handling': True,
         'parameters': [
             {
@@ -3347,6 +3349,7 @@ functions = {
                 'Description'
             ]
         },
+        'grpc_name': 'FancySelfTest',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -3373,6 +3376,7 @@ functions = {
             'description': '\nResets the instrument to a known state. This function aborts the\ngeneration, clears all routes, and resets session attributes to the\ndefault values. This function does not, however, commit the session\nproperties or configure the device hardware to its default state.\n',
             'note': '\nFor the NI 5401/5404/5411/5431, this function exhibits the same\nbehavior as the nifgen_ResetDevice function.\n'
         },
+        'grpc_name': 'Reset',
         'parameters': [
             {
                 'direction': 'in',
@@ -3391,6 +3395,7 @@ functions = {
             'description': 'Runs the instrument self-test routine and returns the test result(s).',
             'note': '\nWhen used on some signal generators, the device is reset after the\nniFgen_self_test function runs. If you use the niFgen_self_test\nfunction, your device may not be in its previously configured state\nafter the function runs.\n'
         },
+        'grpc_name': 'SelfTest',
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {

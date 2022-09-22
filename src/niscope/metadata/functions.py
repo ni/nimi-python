@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 22.8.0d53
+# This file is generated from NI-SCOPE API metadata version 22.8.0d9999
 functions = {
     'Abort': {
         'documentation': {
@@ -3151,6 +3151,7 @@ functions = {
         'documentation': {
             'description': '\nWhen you are finished using an instrument driver session, you must call\nthis function to perform the following actions:\n\n-  Closes the instrument I/O session.\n-  Destroys the IVI session and all of its attributes.\n-  Deallocates any memory resources used by the IVI session.\n'
         },
+        'grpc_name': 'Close',
         'parameters': [
             {
                 'direction': 'in',
@@ -3170,6 +3171,7 @@ functions = {
         'documentation': {
             'description': 'Takes the **Error_Code** returned by the instrument driver functions, interprets it, and returns it as a user-readable string.'
         },
+        'grpc_name': 'ErrorMessage',
         'is_error_handling': True,
         'parameters': [
             {
@@ -3223,6 +3225,7 @@ functions = {
                 'Description'
             ]
         },
+        'grpc_name': 'FancySelfTest',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -3248,6 +3251,7 @@ functions = {
         'documentation': {
             'description': "\nStops the acquisition, releases routes, and all session attributes are\nreset to their `default\nstates <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cviattribute_defaults)>`__.\n"
         },
+        'grpc_name': 'Reset',
         'parameters': [
             {
                 'direction': 'in',
@@ -3265,6 +3269,7 @@ functions = {
         'documentation': {
             'description': 'Runs the instrument self-test routine and returns the test result(s).'
         },
+        'grpc_name': 'SelfTest',
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {
