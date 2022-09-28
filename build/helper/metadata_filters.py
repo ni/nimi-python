@@ -162,7 +162,7 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'fixed, passed-in, len, python-code',  # any but ivi-dance
         'python_api_list': True,
     },
-    ParameterUsageOptions.OUTPUT_PARAMETERS_FOR_DOCS: {
+    ParameterUsageOptions.API_OUTPUT_PARAMETERS: {
         'skip_session_handle': True,
         'skip_input_parameters': True,
         'skip_output_parameters': False,

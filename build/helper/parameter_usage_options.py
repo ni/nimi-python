@@ -46,7 +46,7 @@ class ParameterUsageOptions(AutoNumber):
     '''Get all input parameters, other than self, rep caps, and size'''
     LIBRARY_OUTPUT_PARAMETERS = ()
     '''Get all output parameters, other than ivi-dance'''
-    OUTPUT_PARAMETERS_FOR_DOCS = ()
+    API_OUTPUT_PARAMETERS = ()
     '''We also want to skip size parameters'''
     IVI_DANCE_PARAMETER = ()
     '''Get the ivi-dance parameter'''

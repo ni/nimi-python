@@ -487,7 +487,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
     suffix = method_template['method_python_name_suffix']
     session_method = ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD
     session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
-    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS_FOR_DOCS
+    output_parameters = ParameterUsageOptions.API_OUTPUT_PARAMETERS
     if numpy:
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
@@ -561,7 +561,7 @@ def get_function_docstring(function, numpy, config, indent=0):
         str: docstring formatted documentation
     '''
     session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
-    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS_FOR_DOCS
+    output_parameters = ParameterUsageOptions.API_OUTPUT_PARAMETERS
     if numpy:
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
