@@ -44,7 +44,7 @@ class ParameterUsageOptions(AutoNumber):
     '''For declaring a LibraryInterpreter method.'''
     INPUT_PARAMETERS = ()
     '''Get all input parameters, other than self, rep caps, and size'''
-    OUTPUT_PARAMETERS = ()
+    LIBRARY_OUTPUT_PARAMETERS = ()
     '''Get all output parameters, other than ivi-dance'''
     OUTPUT_PARAMETERS_FOR_DOCS = ()
     '''We also want to skip size parameters'''

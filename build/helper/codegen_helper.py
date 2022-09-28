@@ -73,7 +73,7 @@ _ParameterUsageOptionsSnippet = {
 }
 # Only used for filtering
 #   ParameterUsageOptions.INPUT_PARAMETERS
-#   ParameterUsageOptions.OUTPUT_PARAMETERS
+#   ParameterUsageOptions.LIBRARY_OUTPUT_PARAMETERS
 #   ParameterUsageOptions.IVI_DANCE_PARAMETER
 #   ParameterUsageOptions.LEN_PARAMETER
 #   ParameterUsageOptions.INPUT_ENUM_PARAMETERS

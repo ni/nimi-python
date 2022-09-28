@@ -149,7 +149,7 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'any',
         'python_api_list': True,
     },
-    ParameterUsageOptions.OUTPUT_PARAMETERS: {
+    ParameterUsageOptions.LIBRARY_OUTPUT_PARAMETERS: {
         'skip_session_handle': True,
         'skip_input_parameters': True,
         'skip_output_parameters': False,
