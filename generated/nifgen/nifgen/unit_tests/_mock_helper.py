@@ -391,6 +391,7 @@ class SideEffectsHelper(object):
     def niFgen_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
             return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        # configuration
         if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
             raise MockFunctionCallError("niFgen_ExportAttributeConfigurationBuffer", param='configuration')
         if size_in_bytes.value == 0:
@@ -441,6 +442,7 @@ class SideEffectsHelper(object):
     def niFgen_GetAttributeViString(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
+        # attribute_value
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niFgen_GetAttributeViString", param='attributeValue')
         if array_size.value == 0:
@@ -451,6 +453,7 @@ class SideEffectsHelper(object):
     def niFgen_GetChannelName(self, vi, index, buffer_size, channel_string):  # noqa: N802
         if self._defaults['GetChannelName']['return'] != 0:
             return self._defaults['GetChannelName']['return']
+        # channel_string
         if self._defaults['GetChannelName']['channelString'] is None:
             raise MockFunctionCallError("niFgen_GetChannelName", param='channelString')
         if buffer_size.value == 0:
@@ -466,6 +469,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_GetError", param='errorCode')
         if error_code is not None:
             error_code.contents.value = self._defaults['GetError']['errorCode']
+        # error_description
         if self._defaults['GetError']['errorDescription'] is None:
             raise MockFunctionCallError("niFgen_GetError", param='errorDescription')
         if error_description_buffer_size.value == 0:

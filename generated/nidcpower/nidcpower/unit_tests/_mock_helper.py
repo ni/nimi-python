@@ -275,6 +275,7 @@ class SideEffectsHelper(object):
     def niDCPower_ExportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
         if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
             return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        # configuration
         if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
             raise MockFunctionCallError("niDCPower_ExportAttributeConfigurationBuffer", param='configuration')
         if size.value == 0:
@@ -409,6 +410,7 @@ class SideEffectsHelper(object):
     def niDCPower_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
+        # attribute_value
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niDCPower_GetAttributeViString", param='attributeValue')
         if buffer_size.value == 0:
@@ -419,6 +421,7 @@ class SideEffectsHelper(object):
     def niDCPower_GetChannelName(self, vi, index, buffer_size, channel_name):  # noqa: N802
         if self._defaults['GetChannelName']['return'] != 0:
             return self._defaults['GetChannelName']['return']
+        # channel_name
         if self._defaults['GetChannelName']['channelName'] is None:
             raise MockFunctionCallError("niDCPower_GetChannelName", param='channelName')
         if buffer_size.value == 0:
@@ -429,6 +432,7 @@ class SideEffectsHelper(object):
     def niDCPower_GetChannelNameFromString(self, vi, indices, buffer_size, names):  # noqa: N802
         if self._defaults['GetChannelNameFromString']['return'] != 0:
             return self._defaults['GetChannelNameFromString']['return']
+        # names
         if self._defaults['GetChannelNameFromString']['channelName'] is None:
             raise MockFunctionCallError("niDCPower_GetChannelNameFromString", param='channelName')
         if buffer_size.value == 0:
@@ -444,6 +448,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetError", param='code')
         if code is not None:
             code.contents.value = self._defaults['GetError']['code']
+        # description
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niDCPower_GetError", param='description')
         if buffer_size.value == 0:
@@ -504,6 +509,7 @@ class SideEffectsHelper(object):
     def niDCPower_GetLCRCompensationData(self, vi, channel_name, compensation_data_size, compensation_data):  # noqa: N802
         if self._defaults['GetLCRCompensationData']['return'] != 0:
             return self._defaults['GetLCRCompensationData']['return']
+        # compensation_data
         if self._defaults['GetLCRCompensationData']['compensationData'] is None:
             raise MockFunctionCallError("niDCPower_GetLCRCompensationData", param='compensationData')
         if compensation_data_size.value == 0:
@@ -549,6 +555,7 @@ class SideEffectsHelper(object):
     def niDCPower_GetLCRCustomCableCompensationData(self, vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data):  # noqa: N802
         if self._defaults['GetLCRCustomCableCompensationData']['return'] != 0:
             return self._defaults['GetLCRCustomCableCompensationData']['return']
+        # custom_cable_compensation_data
         if self._defaults['GetLCRCustomCableCompensationData']['customCableCompensationData'] is None:
             raise MockFunctionCallError("niDCPower_GetLCRCustomCableCompensationData", param='customCableCompensationData')
         if custom_cable_compensation_data_size.value == 0:

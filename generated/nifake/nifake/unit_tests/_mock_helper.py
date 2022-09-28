@@ -266,6 +266,7 @@ class SideEffectsHelper(object):
     def niFake_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
             return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        # configuration
         if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
             raise MockFunctionCallError("niFake_ExportAttributeConfigurationBuffer", param='configuration')
         if size_in_bytes.value == 0:
@@ -355,6 +356,7 @@ class SideEffectsHelper(object):
     def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
         if self._defaults['GetAnIviDanceString']['return'] != 0:
             return self._defaults['GetAnIviDanceString']['return']
+        # a_string
         if self._defaults['GetAnIviDanceString']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAnIviDanceString", param='aString')
         if buffer_size.value == 0:
@@ -370,6 +372,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetAnIviDanceWithATwistString", param='actualSize')
         if actual_size is not None:
             actual_size.contents.value = self._defaults['GetAnIviDanceWithATwistString']['actualSize']
+        # a_string
         if self._defaults['GetAnIviDanceWithATwistString']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAnIviDanceWithATwistString", param='aString')
         if buffer_size.value == 0:
@@ -422,6 +425,7 @@ class SideEffectsHelper(object):
     def niFake_GetArrayUsingIviDance(self, vi, array_size, array_out):  # noqa: N802
         if self._defaults['GetArrayUsingIviDance']['return'] != 0:
             return self._defaults['GetArrayUsingIviDance']['return']
+        # array_out
         if self._defaults['GetArrayUsingIviDance']['arrayOut'] is None:
             raise MockFunctionCallError("niFake_GetArrayUsingIviDance", param='arrayOut')
         if array_size.value == 0:
@@ -477,6 +481,7 @@ class SideEffectsHelper(object):
     def niFake_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
+        # attribute_value
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViString", param='attributeValue')
         if buffer_size.value == 0:
@@ -527,6 +532,7 @@ class SideEffectsHelper(object):
     def niFake_GetChannelNames(self, vi, indices, name_size, names):  # noqa: N802
         if self._defaults['GetChannelNames']['return'] != 0:
             return self._defaults['GetChannelNames']['return']
+        # names
         if self._defaults['GetChannelNames']['names'] is None:
             raise MockFunctionCallError("niFake_GetChannelNames", param='names')
         if name_size.value == 0:
@@ -601,6 +607,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetError", param='errorCode')
         if error_code is not None:
             error_code.contents.value = self._defaults['GetError']['errorCode']
+        # description
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niFake_GetError", param='description')
         if buffer_size.value == 0:
@@ -809,6 +816,7 @@ class SideEffectsHelper(object):
         assert len(an_array_ref) >= len(test_value)
         for i in range(len(test_value)):
             an_array_ref[i] = test_value[i]
+        # a_string
         if self._defaults['ReturnMultipleTypes']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aString')
         if string_size.value == 0:
