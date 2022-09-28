@@ -158,7 +158,7 @@ def get_library_interpreter_method_return_snippet(parameters, config, use_numpy_
     '''Returns a string suitable to use as the return argument of a LibraryInterpreter method, i.e. "return reading_ctype.value"'''
     snippets = []
     for x in parameters:
-        if x['direction'] == 'out' or x['size']['mechanism'] == 'ivi-dance':
+        if x['direction'] == 'out':
             if x['numpy'] is False or use_numpy_array is False:
                 if x['use_in_python_api']:
                     snippets.append(_get_library_interpreter_output_param_return_snippet(x, parameters, config))
