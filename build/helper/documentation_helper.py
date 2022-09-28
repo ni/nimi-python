@@ -500,7 +500,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
-    input_params = filter_parameters(function, session_declaration)
+    input_params = filter_parameters(function['parameters'], session_declaration)
     if len(input_params) > 0:
         rst += '\n'
     for p in input_params:
@@ -510,7 +510,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
         p_type = format_type_for_rst_documentation(p, numpy, config)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
-    output_params = filter_parameters(function, output_parameters)
+    output_params = filter_parameters(function['parameters'], output_parameters)
     if len(output_params) > 1:
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
@@ -573,7 +573,7 @@ def get_function_docstring(function, numpy, config, indent=0):
 
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
-    input_params = filter_parameters(function, session_declaration)
+    input_params = filter_parameters(function['parameters'], session_declaration)
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
@@ -583,7 +583,7 @@ def get_function_docstring(function, numpy, config, indent=0):
             docstring += ' ' + ds
         docstring += '\n'
 
-    output_params = filter_parameters(function, output_parameters)
+    output_params = filter_parameters(function['parameters'], output_parameters)
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:

@@ -271,10 +271,10 @@ _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_
 _ParameterUsageOptionsFiltering[ParameterUsageOptions.CDLL_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL].copy()
 
 
-def filter_parameters(function, parameter_usage_options):
+def filter_parameters(parameters, parameter_usage_options):
     '''filter_parameters
 
-    Filters and reorders the parameters of the function passed in based on parameter_usage_options.
+    Filters and reorders the parameters passed in based on parameter_usage_options.
     '''
     if type(parameter_usage_options) is not ParameterUsageOptions:
         raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
@@ -290,11 +290,11 @@ def filter_parameters(function, parameter_usage_options):
     #  not call back into ourselves, to avoid infinite recursion
     if parameter_usage_options not in [ParameterUsageOptions.IVI_DANCE_PARAMETER, ParameterUsageOptions.LEN_PARAMETER]:
         # Find the size parameter - we are assuming there can only be one type, either from ivi-dance or len
-        size_parameter = find_size_parameter(filter_ivi_dance_parameters(function), function['parameters'])
+        size_parameter = find_size_parameter(filter_ivi_dance_parameters(parameters), parameters)
         if size_parameter is None:
-            size_parameter = find_size_parameter(filter_len_parameters(function), function['parameters'])
-        size_twist_parameter = find_size_parameter(filter_ivi_dance_twist_parameters(function), function['parameters'], key='value_twist')
-    for x in function['parameters']:
+            size_parameter = find_size_parameter(filter_len_parameters(parameters), parameters)
+        size_twist_parameter = find_size_parameter(filter_ivi_dance_twist_parameters(parameters), parameters, key='value_twist')
+    for x in parameters:
         skip = False
         if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
             skip = True
@@ -337,36 +337,36 @@ def filter_parameters(function, parameter_usage_options):
     return parameters_to_use
 
 
-def filter_ivi_dance_parameters(function):
+def filter_ivi_dance_parameters(parameters):
     '''Returns the ivi-dance parameters of a session method if there are any. These are the parameters whose size is determined at runtime using the ivi-dance.
 
     asserts all parameters that use ivi-dance reference the same parameter
     Args:
-        function: function whose parameters should be checked
+        parameters: parameters to be checked
 
     Return:
         None if no ivi-dance parameter found
         Parameters dict if one is found
     '''
-    params = filter_parameters(function, ParameterUsageOptions.IVI_DANCE_PARAMETER)
+    params = filter_parameters(parameters, ParameterUsageOptions.IVI_DANCE_PARAMETER)
     if len(params) > 0:
         size_param = params[0]['size']['value']
         assert all(x['size']['value'] == size_param for x in params)
     return params
 
 
-def filter_ivi_dance_twist_parameters(function):
+def filter_ivi_dance_twist_parameters(parameters):
     '''Returns the ivi-dance parameters of a session method if there are any. These are the parameters whose size is determined at runtime using the ivi-dance.
 
     asserts all parameters that use ivi-dance reference the same parameter
     Args:
-        function: function whose parameters should be checked
+        parameters: parameters to be checked
 
     Return:
         None if no ivi-dance parameter found
         Parameters dict if one is found
     '''
-    params = filter_parameters(function, ParameterUsageOptions.IVI_DANCE_PARAMETER)
+    params = filter_parameters(parameters, ParameterUsageOptions.IVI_DANCE_PARAMETER)
     if len(params) > 0:
         if params[0]['size']['mechanism'] == 'ivi-dance-with-a-twist':
             size_param = params[0]['size']['value_twist']
@@ -374,18 +374,18 @@ def filter_ivi_dance_twist_parameters(function):
     return params
 
 
-def filter_len_parameters(function):
+def filter_len_parameters(parameters):
     '''Returns the len parameters of a session method if there are any. These are the parameters whose size is determined at runtime using the value of a different parameter.
 
     asserts all parameters that use len reference the same parameter
     Args:
-        function: function whose parameters should be checked
+        parameters: parameters to be checked
 
     Return:
         None if no len parameter found
         Parameters dict if one is found
     '''
-    params = filter_parameters(function, ParameterUsageOptions.LEN_PARAMETER)
+    params = filter_parameters(parameters, ParameterUsageOptions.LEN_PARAMETER)
     if len(params) > 0:
         size_param = params[0]['size']['value']
         assert all(x['size']['value'] == size_param for x in params)

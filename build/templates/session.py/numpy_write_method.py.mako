@@ -4,7 +4,7 @@
 
     import build.helper as helper
 
-    enum_input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
+    enum_input_parameters = helper.filter_parameters(f['parameters'], helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
     # TODO(marcoskirsch): Retrofit to call filter_parameters(function, parameter_usage_options)
     output_parameters = [p for p in f['parameters'] if p['direction'] == 'out' and p['use_in_python_api'] and not p['numpy']]
     output_parameters_snippet = ', '.join(p['python_name'] for p in output_parameters)
@@ -20,7 +20,7 @@
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
-% for parameter in helper.filter_parameters(f, helper.ParameterUsageOptions.NUMPY_PARAMETERS):
+% for parameter in helper.filter_parameters(f['parameters'], helper.ParameterUsageOptions.NUMPY_PARAMETERS):
         if type(${parameter['python_name']}) is not numpy.ndarray:
             raise TypeError('${parameter['python_name']} must be {0}, is {1}'.format(numpy.ndarray, type(${parameter['python_name']})))
         if numpy.isfortran(${parameter['python_name']}) is True:
@@ -28,7 +28,7 @@
         if ${parameter['python_name']}.dtype is not numpy.dtype('${parameter['numpy_type']}'):
             raise TypeError('${parameter['python_name']} must be numpy.ndarray of dtype=${parameter['numpy_type']}, is ' + str(${parameter['python_name']}.dtype))
 % endfor
-% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL):
+% for p in helper.filter_parameters(f['parameters'], helper.ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL):
 %   if 'python_api_converter_name' in p:
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']})
 %   endif

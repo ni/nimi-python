@@ -6,7 +6,7 @@
 
     suffix = method_template['method_python_name_suffix']
 
-    enum_input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
+    enum_input_parameters = helper.filter_parameters(f['parameters'], helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
     # TODO(marcoskirsch): Retrofit to call filter_parameters(function, parameter_usage_options)
     output_parameters = [p for p in f['parameters'] if p['direction'] == 'out' and p['use_in_python_api']]
     output_parameters_snippet = ', '.join(p['python_name'] for p in output_parameters)
@@ -19,7 +19,7 @@
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
-% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL):
+% for p in helper.filter_parameters(f['parameters'], helper.ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL):
 %   if 'python_api_converter_name' in p:
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']})
 %   endif

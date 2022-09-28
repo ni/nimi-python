@@ -33,11 +33,12 @@ class SideEffectsHelper(object):
 % for func_name in sorted(helper.filter_codegen_functions(functions)):
 <%
 f = functions[func_name]
-ivi_dance_params = helper.filter_ivi_dance_parameters(f)
+params = f['parameters']
+ivi_dance_params = helper.filter_ivi_dance_parameters(params)
 %>\
         self._defaults['${func_name}'] = {}
         self._defaults['${func_name}']['return'] = 0
-%   for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_OUTPUT_PARAMETERS):
+%   for p in helper.filter_parameters(params, helper.ParameterUsageOptions.LIBRARY_OUTPUT_PARAMETERS):
 %     if p not in ivi_dance_params:
         self._defaults['${func_name}']['${p['name']}'] = None
 %     endif
@@ -57,8 +58,8 @@ ivi_dance_params = helper.filter_ivi_dance_parameters(f)
 <%
 f = functions[func_name]
 params = f['parameters']
-output_params = helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_OUTPUT_PARAMETERS)
-ivi_dance_params = helper.filter_ivi_dance_parameters(f)
+output_params = helper.filter_parameters(params, helper.ParameterUsageOptions.LIBRARY_OUTPUT_PARAMETERS)
+ivi_dance_params = helper.filter_ivi_dance_parameters(params)
 ivi_dance_size_param = helper.find_size_parameter(ivi_dance_params, params)
 output_params_minus_ivi_dance_params = [p for p in output_params if p not in ivi_dance_params]
 %>\

@@ -92,7 +92,7 @@ def get_params_snippet(function, parameter_usage_options):
 
     options_to_use = _ParameterUsageOptionsSnippet[parameter_usage_options]
 
-    parameters_to_use = filter_parameters(function, parameter_usage_options)
+    parameters_to_use = filter_parameters(function['parameters'], parameter_usage_options)
 
     snippets = []
     if not options_to_use['skip_self']:

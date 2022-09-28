@@ -13,13 +13,13 @@
 %>\
 
     def ${full_func_name}(${param_names_method}):  # noqa: N802
-% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.NUMPY_PARAMETERS):
-<% size_param = helper.find_size_parameter(p, f['parameters']) if p['size']['mechanism'] == 'passed-in' else None %>\
+% for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.NUMPY_PARAMETERS):
+<% size_param = helper.find_size_parameter(p, parameters) if p['size']['mechanism'] == 'passed-in' else None %>\
 %   if size_param:
         ${size_param['python_name']} = len(${p['python_name']})
 %   endif
 % endfor
-% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
+% for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
 %   for declaration in helper.get_ctype_variable_declaration_snippet(p, parameters, None, config, use_numpy_array=p['numpy']):
         ${declaration}
 %   endfor
