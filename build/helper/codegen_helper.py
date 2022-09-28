@@ -155,27 +155,19 @@ def _get_session_output_param_return_snippet(output_parameter, parameters, confi
     return snippet
 
 
-# TODO(marcoskirsch): Retrofit to call filter_parameters(function, parameter_usage_options)
 def get_library_interpreter_method_return_snippet(parameters, config, use_numpy_array=False):
     '''Returns a string suitable to use as the return argument of a LibraryInterpreter method, i.e. "return reading_ctype.value"'''
-    snippets = []
-    for x in parameters:
-        if x['direction'] == 'out':
-            if x['numpy'] is False or use_numpy_array is False:
-                if x['use_in_python_api']:
-                    snippets.append(_get_library_interpreter_output_param_return_snippet(x, parameters, config))
+    options = ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS if use_numpy_array else ParameterUsageOptions.API_OUTPUT_PARAMETERS
+    parameters_to_use = filter_parameters(parameters, options)
+    snippets = [_get_library_interpreter_output_param_return_snippet(p, parameters, config) for p in parameters_to_use]
     return ('return ' + ', '.join(snippets)).strip()
 
 
-# TODO(marcoskirsch): Retrofit to call filter_parameters(function, parameter_usage_options)
 def get_session_method_return_snippet(parameters, config, use_numpy_array=False):
     '''Returns a string suitable to use as the return argument of a Session method'''
-    snippets = []
-    for x in parameters:
-        if x['direction'] == 'out':
-            if x['numpy'] is False or use_numpy_array is False:
-                if x['use_in_python_api']:
-                    snippets.append(_get_session_output_param_return_snippet(x, parameters, config))
+    options = ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS if use_numpy_array else ParameterUsageOptions.API_OUTPUT_PARAMETERS
+    parameters_to_use = filter_parameters(parameters, options)
+    snippets = [_get_session_output_param_return_snippet(p, parameters, config) for p in parameters_to_use]
     return ('return ' + ', '.join(snippets)).strip()
 
 
