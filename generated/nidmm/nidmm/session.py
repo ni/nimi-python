@@ -1693,8 +1693,6 @@ class Session(_SessionBase):
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
 
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
-
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
         reading_array = self._library_interpreter.fetch_multi_point(maximum_time, array_size)
@@ -1733,8 +1731,6 @@ class Session(_SessionBase):
             waveform_array (array.array("d")): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
-
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
         waveform_array = self._library_interpreter.fetch_waveform(maximum_time, array_size)
@@ -1770,8 +1766,6 @@ class Session(_SessionBase):
         Returns:
             waveform_array (numpy.array(dtype=numpy.float64)): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
-
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
 
         '''
         import numpy
@@ -2279,8 +2273,6 @@ class Session(_SessionBase):
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
 
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
-
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
         reading_array = self._library_interpreter.read_multi_point(maximum_time, array_size)
@@ -2364,8 +2356,6 @@ class Session(_SessionBase):
                 Note:
                 The size of the **Waveform_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
-
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
 
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)

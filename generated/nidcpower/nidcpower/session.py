@@ -5089,9 +5089,6 @@ class _SessionBase(object):
                 compliance at the time the measurement was taken. Ensure that sufficient
                 space has been allocated for the returned array.
 
-            actual_count (int): Indicates the number of measured values actually retrieved from the
-                device.
-
         '''
         timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
         voltage_measurements, current_measurements, in_compliance = self._library_interpreter.fetch_multiple(self._repeated_capability, timeout, count)
@@ -5170,8 +5167,6 @@ class _SessionBase(object):
                 +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
                 | unbalanced            | bool                 | Indicates whether the output was unbalanced at the time the measurement was taken.                                                                                                                    |
                 +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-            actual_count (int):
 
         '''
         timeout = _converters.convert_timedelta_to_seconds_real64(timeout)

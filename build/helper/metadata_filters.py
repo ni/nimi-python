@@ -173,7 +173,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_non_enum_parameter': False,
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',  # any but ivi-dance
-        'python_api_list': True,
+        'python_api_list': False,
     },
     ParameterUsageOptions.NUMPY_PARAMETERS: {
         'skip_session_handle': True,
