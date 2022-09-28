@@ -75,6 +75,7 @@ _ParameterUsageOptionsSnippet = {
 #   ParameterUsageOptions.INPUT_PARAMETERS
 #   ParameterUsageOptions.LIBRARY_OUTPUT_PARAMETERS
 #   ParameterUsageOptions.API_OUTPUT_PARAMETERS
+#   ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS
 #   ParameterUsageOptions.IVI_DANCE_PARAMETER
 #   ParameterUsageOptions.LEN_PARAMETER
 #   ParameterUsageOptions.INPUT_ENUM_PARAMETERS

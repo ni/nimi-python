@@ -1087,17 +1087,6 @@ fetch_waveform_into
 
             :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
-            :rtype: numpy.array(dtype=numpy.float64)
-            :return:
-
-
-                    **Waveform Array** is an array of measurement values stored in waveform
-                    data type.
-
-                    
-
-
-
 get_cal_date_and_time
 ---------------------
 

@@ -48,6 +48,8 @@ class ParameterUsageOptions(AutoNumber):
     '''Get all output parameters, other than ivi-dance'''
     API_OUTPUT_PARAMETERS = ()
     '''We also want to skip size parameters'''
+    API_NUMPY_OUTPUT_PARAMETERS = ()
+    '''Output parameters for numpy function'''
     IVI_DANCE_PARAMETER = ()
     '''Get the ivi-dance parameter'''
     NUMPY_PARAMETERS = ()

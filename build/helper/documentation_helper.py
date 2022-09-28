@@ -490,6 +490,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
     output_parameters = ParameterUsageOptions.API_OUTPUT_PARAMETERS
     if numpy:
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
+        output_parameters = ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS
 
     if function['has_repeated_capability'] is True:
         function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['repeated_capability_type'], function['python_name'])
@@ -564,6 +565,7 @@ def get_function_docstring(function, numpy, config, indent=0):
     output_parameters = ParameterUsageOptions.API_OUTPUT_PARAMETERS
     if numpy:
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
+        output_parameters = ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS
 
     docstring = ''
     if function['has_repeated_capability'] is True:

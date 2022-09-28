@@ -896,10 +896,6 @@ class Session(_SessionBase):
         Args:
             waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
 
-
-        Returns:
-            waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
-
         '''
         import numpy
 

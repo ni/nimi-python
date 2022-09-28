@@ -1762,11 +1762,6 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-
-        Returns:
-            waveform_array (numpy.array(dtype=numpy.float64)): **Waveform Array** is an array of measurement values stored in waveform
-                data type.
-
         '''
         import numpy
 
