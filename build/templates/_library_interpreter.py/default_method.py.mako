@@ -43,4 +43,4 @@
 % endif
         error_code = self._library.${c_func_name}(${param_names_library})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
-        ${helper.get_method_return_snippet(parameters, config)}
+        ${helper.get_library_interpreter_method_return_snippet(parameters, config)}

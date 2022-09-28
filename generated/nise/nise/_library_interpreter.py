@@ -4,7 +4,6 @@
 import array
 import ctypes
 import hightime  # noqa: F401
-import nise._converters as _converters  # noqa: F401
 import nise._library_singleton as _library_singleton
 import nise._visatype as _visatype
 import nise.enums as enums  # noqa: F401
@@ -167,7 +166,7 @@ class LibraryInterpreter(object):
 
     def open_session(self, virtual_device_name, option_string):  # noqa: N802
         virtual_device_name_ctype = ctypes.create_string_buffer(virtual_device_name.encode(self._encoding))  # case C020
-        option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niSE_OpenSession(virtual_device_name_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -175,7 +174,7 @@ class LibraryInterpreter(object):
 
     def wait_for_debounce(self, maximum_time_ms):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
+        maximum_time_ms_ctype = _visatype.ViInt32(maximum_time_ms)  # case S150
         error_code = self._library.niSE_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

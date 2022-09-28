@@ -203,7 +203,7 @@ class Session(object):
         _open_installed_devices_session. Call this method when you are
         finished using the session handle and do not use this handle again.
         '''
-        return self._library_interpreter.close_installed_devices_session()
+        self._library_interpreter.close_installed_devices_session()
 
     def _get_installed_device_attribute_vi_int32(self, index, attribute_id):
         r'''_get_installed_device_attribute_vi_int32
@@ -240,7 +240,8 @@ class Session(object):
                 the requested property.
 
         '''
-        return self._library_interpreter.get_installed_device_attribute_vi_int32(index, attribute_id)
+        attribute_value = self._library_interpreter.get_installed_device_attribute_vi_int32(index, attribute_id)
+        return attribute_value
 
     def _get_installed_device_attribute_vi_string(self, index, attribute_id):
         r'''_get_installed_device_attribute_vi_string
@@ -276,7 +277,8 @@ class Session(object):
             attribute_value (str): The character buffer into which the property value string is copied.
 
         '''
-        return self._library_interpreter.get_installed_device_attribute_vi_string(index, attribute_id)
+        attribute_value = self._library_interpreter.get_installed_device_attribute_vi_string(index, attribute_id)
+        return attribute_value
 
     def _open_installed_devices_session(self, driver):
         r'''_open_installed_devices_session
@@ -314,4 +316,5 @@ class Session(object):
                 driver parameter.
 
         '''
-        return self._library_interpreter.open_installed_devices_session(driver)
+        handle, device_count = self._library_interpreter.open_installed_devices_session(driver)
+        return handle, device_count

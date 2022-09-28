@@ -4,7 +4,6 @@
 import array
 import ctypes
 import hightime  # noqa: F401
-import nifgen._converters as _converters  # noqa: F401
 import nifgen._library_singleton as _library_singleton
 import nifgen._visatype as _visatype
 import nifgen.enums as enums  # noqa: F401
@@ -330,7 +329,7 @@ class LibraryInterpreter(object):
         configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niFgen_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_to_bytes(configuration_array)
+        return configuration_array
 
     def export_attribute_configuration_file(self, file_path):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -429,7 +428,7 @@ class LibraryInterpreter(object):
         months_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_month_to_timedelta(int(months_ctype.value))
+        return int(months_ctype.value)
 
     def get_hardware_state(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -466,8 +465,7 @@ class LibraryInterpreter(object):
     def import_attribute_configuration_buffer(self, configuration):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_converted = _converters.convert_to_bytes(configuration)  # case B520
-        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
+        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
         error_code = self._library.niFgen_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -481,9 +479,9 @@ class LibraryInterpreter(object):
 
     def initialize_with_channels(self, resource_name, channel_name, reset_device, option_string):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        channel_name_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(channel_name).encode(self._encoding))  # case C040
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C020
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niFgen_InitializeWithChannels(resource_name_ctype, channel_name_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -639,7 +637,7 @@ class LibraryInterpreter(object):
 
     def wait_until_done(self, max_time):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        max_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(max_time)  # case S140
+        max_time_ctype = _visatype.ViInt32(max_time)  # case S150
         error_code = self._library.niFgen_WaitUntilDone(vi_ctype, max_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

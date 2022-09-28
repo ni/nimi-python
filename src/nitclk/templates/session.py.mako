@@ -15,6 +15,7 @@
 import hightime
 
 import ${module_name}._attributes as _attributes
+import ${module_name}._converters as _converters
 import ${module_name}._library_interpreter as _library_interpreter
 
 # Used for __repr__ and __str__

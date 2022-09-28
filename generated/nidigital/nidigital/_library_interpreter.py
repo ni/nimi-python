@@ -4,7 +4,6 @@
 import array
 import ctypes
 import hightime  # noqa: F401
-import nidigital._converters as _converters  # noqa: F401
 import nidigital._library_singleton as _library_singleton
 import nidigital._visatype as _visatype
 import nidigital.enums as enums  # noqa: F401
@@ -103,9 +102,9 @@ class LibraryInterpreter(object):
         site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C010
         levels_sheet_ctype = ctypes.create_string_buffer(levels_sheet.encode(self._encoding))  # case C020
         timing_sheet_ctype = ctypes.create_string_buffer(timing_sheet.encode(self._encoding))  # case C020
-        initial_state_high_pins_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(initial_state_high_pins).encode(self._encoding))  # case C040
-        initial_state_low_pins_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(initial_state_low_pins).encode(self._encoding))  # case C040
-        initial_state_tristate_pins_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(initial_state_tristate_pins).encode(self._encoding))  # case C040
+        initial_state_high_pins_ctype = ctypes.create_string_buffer(initial_state_high_pins.encode(self._encoding))  # case C020
+        initial_state_low_pins_ctype = ctypes.create_string_buffer(initial_state_low_pins.encode(self._encoding))  # case C020
+        initial_state_tristate_pins_ctype = ctypes.create_string_buffer(initial_state_tristate_pins.encode(self._encoding))  # case C020
         error_code = self._library.niDigital_ApplyLevelsAndTiming(vi_ctype, site_list_ctype, levels_sheet_ctype, timing_sheet_ctype, initial_state_high_pins_ctype, initial_state_low_pins_ctype, initial_state_tristate_pins_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -114,8 +113,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         num_offsets_ctype = _visatype.ViInt32(0 if offsets is None else len(offsets))  # case S160
-        offsets_converted = _converters.convert_timedeltas_to_seconds_real64(offsets)  # case B520
-        offsets_ctype = _get_ctypes_pointer_for_buffer(value=offsets_converted, library_type=_visatype.ViReal64)  # case B520
+        offsets_ctype = _get_ctypes_pointer_for_buffer(value=offsets, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niDigital_ApplyTDROffsets(vi_ctype, channel_list_ctype, num_offsets_ctype, offsets_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -126,7 +124,7 @@ class LibraryInterpreter(object):
         start_label_ctype = ctypes.create_string_buffer(start_label.encode(self._encoding))  # case C020
         select_digital_function_ctype = _visatype.ViBoolean(select_digital_function)  # case S150
         wait_until_done_ctype = _visatype.ViBoolean(wait_until_done)  # case S150
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
+        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         error_code = self._library.niDigital_BurstPattern(vi_ctype, site_list_ctype, start_label_ctype, select_digital_function_ctype, wait_until_done_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -174,7 +172,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C010
         time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
+        strobe_edge_ctype = _visatype.ViReal64(strobe_edge)  # case S150
         error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe(vi_ctype, pin_list_ctype, time_set_name_ctype, strobe_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -183,8 +181,8 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C010
         time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
-        strobe2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe2_edge)  # case S140
+        strobe_edge_ctype = _visatype.ViReal64(strobe_edge)  # case S150
+        strobe2_edge_ctype = _visatype.ViReal64(strobe2_edge)  # case S150
         error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe2x(vi_ctype, pin_list_ctype, time_set_name_ctype, strobe_edge_ctype, strobe2_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -194,10 +192,10 @@ class LibraryInterpreter(object):
         pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C010
         time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         format_ctype = _visatype.ViInt32(format.value)  # case S130
-        drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
-        drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
-        drive_return_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return_edge)  # case S140
-        drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
+        drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
+        drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
+        drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
+        drive_off_edge_ctype = _visatype.ViReal64(drive_off_edge)  # case S150
         error_code = self._library.niDigital_ConfigureTimeSetDriveEdges(vi_ctype, pin_list_ctype, time_set_name_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -207,12 +205,12 @@ class LibraryInterpreter(object):
         pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C010
         time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         format_ctype = _visatype.ViInt32(format.value)  # case S130
-        drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
-        drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
-        drive_return_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return_edge)  # case S140
-        drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
-        drive_data2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data2_edge)  # case S140
-        drive_return2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return2_edge)  # case S140
+        drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
+        drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
+        drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
+        drive_off_edge_ctype = _visatype.ViReal64(drive_off_edge)  # case S150
+        drive_data2_edge_ctype = _visatype.ViReal64(drive_data2_edge)  # case S150
+        drive_return2_edge_ctype = _visatype.ViReal64(drive_return2_edge)  # case S150
         error_code = self._library.niDigital_ConfigureTimeSetDriveEdges2x(vi_ctype, pin_list_ctype, time_set_name_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype, drive_data2_edge_ctype, drive_return2_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -231,7 +229,7 @@ class LibraryInterpreter(object):
         pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C010
         time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        time_ctype = _converters.convert_timedelta_to_seconds_real64(time)  # case S140
+        time_ctype = _visatype.ViReal64(time)  # case S150
         error_code = self._library.niDigital_ConfigureTimeSetEdge(vi_ctype, pin_list_ctype, time_set_name_ctype, edge_ctype, time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -248,7 +246,7 @@ class LibraryInterpreter(object):
     def configure_time_set_period(self, time_set_name, period):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
-        period_ctype = _converters.convert_timedelta_to_seconds_real64(period)  # case S140
+        period_ctype = _visatype.ViReal64(period)  # case S150
         error_code = self._library.niDigital_ConfigureTimeSetPeriod(vi_ctype, time_set_name_ctype, period_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -357,7 +355,7 @@ class LibraryInterpreter(object):
         site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         samples_to_read_ctype = _visatype.ViInt32(samples_to_read)  # case S150
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
+        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         data_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
         data_ctype = None  # case B610
         actual_num_waveforms_ctype = _visatype.ViInt32()  # case S220
@@ -485,7 +483,7 @@ class LibraryInterpreter(object):
 
     def get_channel_names(self, indices):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
+        indices_ctype = ctypes.create_string_buffer(indices.encode(self._encoding))  # case C020
         name_buffer_size_ctype = _visatype.ViInt32()  # case S170
         names_ctype = None  # case C050
         error_code = self._library.niDigital_GetChannelNameFromString(vi_ctype, indices_ctype, name_buffer_size_ctype, names_ctype)
@@ -494,7 +492,7 @@ class LibraryInterpreter(object):
         names_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
         error_code = self._library.niDigital_GetChannelNameFromString(vi_ctype, indices_ctype, name_buffer_size_ctype, names_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
+        return names_ctype.value.decode(self._encoding)
 
     def get_error(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -556,7 +554,7 @@ class LibraryInterpreter(object):
         pin_list_ctype = (_visatype.ViChar * pin_list_buffer_size_ctype.value)()  # case C060
         error_code = self._library.niDigital_GetPatternPinList(vi_ctype, start_label_ctype, pin_list_buffer_size_ctype, pin_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_comma_separated_string_to_list(pin_list_ctype.value.decode(self._encoding))
+        return pin_list_ctype.value.decode(self._encoding)
 
     def get_pin_name(self, pin_index):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -640,7 +638,7 @@ class LibraryInterpreter(object):
         time_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDigital_GetTimeSetEdge(vi_ctype, pin_ctype, time_set_name_ctype, edge_ctype, None if time_ctype is None else (ctypes.pointer(time_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_seconds_real64_to_timedelta(float(time_ctype.value))
+        return float(time_ctype.value)
 
     def get_time_set_edge_multiplier(self, pin, time_set_name):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -670,13 +668,13 @@ class LibraryInterpreter(object):
         period_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDigital_GetTimeSetPeriod(vi_ctype, time_set_name_ctype, None if period_ctype is None else (ctypes.pointer(period_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_seconds_real64_to_timedelta(float(period_ctype.value))
+        return float(period_ctype.value)
 
     def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         new_vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niDigital_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if new_vi_ctype is None else (ctypes.pointer(new_vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -878,7 +876,7 @@ class LibraryInterpreter(object):
         offsets_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=offsets_size)  # case B620
         error_code = self._library.niDigital_TDR(vi_ctype, channel_list_ctype, apply_offsets_ctype, offsets_buffer_size_ctype, offsets_ctype, None if actual_num_offsets_ctype is None else (ctypes.pointer(actual_num_offsets_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_seconds_real64_to_timedeltas([float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)])
+        return [float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)]
 
     def unload_all_patterns(self, unload_keep_alive_pattern):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -903,7 +901,7 @@ class LibraryInterpreter(object):
 
     def wait_until_done(self, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
+        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         error_code = self._library.niDigital_WaitUntilDone(vi_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

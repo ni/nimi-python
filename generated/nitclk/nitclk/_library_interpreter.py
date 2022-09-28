@@ -4,7 +4,6 @@
 import array
 import ctypes
 import hightime  # noqa: F401
-import nitclk._converters as _converters  # noqa: F401
 import nitclk._library_singleton as _library_singleton
 import nitclk._visatype as _visatype
 import nitclk.errors as errors
@@ -74,17 +73,15 @@ class LibraryInterpreter(object):
 
     def configure_for_homogeneous_triggers(self, sessions):  # noqa: N802
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
+        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         error_code = self._library.niTClk_ConfigureForHomogeneousTriggers(session_count_ctype, sessions_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def finish_sync_pulse_sender_synchronize(self, sessions, min_time):  # noqa: N802
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        min_time_ctype = _converters.convert_timedelta_to_seconds_real64(min_time)  # case S140
+        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_FinishSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -134,16 +131,14 @@ class LibraryInterpreter(object):
 
     def initiate(self, sessions):  # noqa: N802
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
+        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         error_code = self._library.niTClk_Initiate(session_count_ctype, sessions_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def is_done(self, sessions):  # noqa: N802
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
+        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         done_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niTClk_IsDone(session_count_ctype, sessions_ctype, None if done_ctype is None else (ctypes.pointer(done_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -178,36 +173,32 @@ class LibraryInterpreter(object):
 
     def setup_for_sync_pulse_sender_synchronize(self, sessions, min_time):  # noqa: N802
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        min_time_ctype = _converters.convert_timedelta_to_seconds_real64(min_time)  # case S140
+        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_SetupForSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def synchronize(self, sessions, min_tclk_period):  # noqa: N802
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        min_tclk_period_ctype = _converters.convert_timedelta_to_seconds_real64(min_tclk_period)  # case S140
+        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        min_tclk_period_ctype = _visatype.ViReal64(min_tclk_period)  # case S150
         error_code = self._library.niTClk_Synchronize(session_count_ctype, sessions_ctype, min_tclk_period_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def synchronize_to_sync_pulse_sender(self, sessions, min_time):  # noqa: N802
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        min_time_ctype = _converters.convert_timedelta_to_seconds_real64(min_time)  # case S140
+        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_SynchronizeToSyncPulseSender(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def wait_until_done(self, sessions, timeout):  # noqa: N802
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_converted = _converters.convert_to_nitclk_session_number_list(sessions)  # case B520
-        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions_converted, library_type=_visatype.ViSession)  # case B520
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
+        sessions_ctype = _get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         error_code = self._library.niTClk_WaitUntilDone(session_count_ctype, sessions_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

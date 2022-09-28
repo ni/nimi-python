@@ -4,7 +4,6 @@
 import array
 import ctypes
 import hightime  # noqa: F401
-import nimodinst._converters as _converters  # noqa: F401
 import nimodinst._library_singleton as _library_singleton
 import nimodinst._visatype as _visatype
 import nimodinst.errors as errors

@@ -4,7 +4,6 @@
 import array
 import ctypes
 import hightime  # noqa: F401
-import nidmm._converters as _converters  # noqa: F401
 import nidmm._library_singleton as _library_singleton
 import nidmm._visatype as _visatype
 import nidmm.enums as enums  # noqa: F401
@@ -113,7 +112,7 @@ class LibraryInterpreter(object):
         trigger_count_ctype = _visatype.ViInt32(trigger_count)  # case S150
         sample_count_ctype = _visatype.ViInt32(sample_count)  # case S150
         sample_trigger_ctype = _visatype.ViInt32(sample_trigger.value)  # case S130
-        sample_interval_ctype = _converters.convert_timedelta_to_seconds_real64(sample_interval)  # case S140
+        sample_interval_ctype = _visatype.ViReal64(sample_interval)  # case S150
         error_code = self._library.niDMM_ConfigureMultiPoint(vi_ctype, trigger_count_ctype, sample_count_ctype, sample_trigger_ctype, sample_interval_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -155,7 +154,7 @@ class LibraryInterpreter(object):
     def configure_trigger(self, trigger_source, trigger_delay):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = _visatype.ViInt32(trigger_source.value)  # case S130
-        trigger_delay_ctype = _converters.convert_timedelta_to_seconds_real64(trigger_delay)  # case S140
+        trigger_delay_ctype = _visatype.ViReal64(trigger_delay)  # case S150
         error_code = self._library.niDMM_ConfigureTrigger(vi_ctype, trigger_source_ctype, trigger_delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -188,7 +187,7 @@ class LibraryInterpreter(object):
         configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niDMM_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_to_bytes(configuration_array)
+        return configuration_array
 
     def export_attribute_configuration_file(self, file_path):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -199,7 +198,7 @@ class LibraryInterpreter(object):
 
     def fetch(self, maximum_time):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
+        maximum_time_ctype = _visatype.ViInt32(maximum_time)  # case S150
         reading_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDMM_Fetch(vi_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -207,7 +206,7 @@ class LibraryInterpreter(object):
 
     def fetch_multi_point(self, maximum_time, array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
+        maximum_time_ctype = _visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
@@ -219,7 +218,7 @@ class LibraryInterpreter(object):
 
     def fetch_waveform(self, maximum_time, array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
+        maximum_time_ctype = _visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600
@@ -232,7 +231,7 @@ class LibraryInterpreter(object):
     def fetch_waveform_into(self, waveform_array, maximum_time):  # noqa: N802
         array_size = len(waveform_array)
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
+        maximum_time_ctype = _visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         waveform_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_array)  # case B510
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S220
@@ -319,7 +318,7 @@ class LibraryInterpreter(object):
         months_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDMM_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_month_to_timedelta(int(months_ctype.value))
+        return int(months_ctype.value)
 
     def get_last_cal_temp(self, cal_type):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -339,8 +338,7 @@ class LibraryInterpreter(object):
     def import_attribute_configuration_buffer(self, configuration):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_converted = _converters.convert_to_bytes(configuration)  # case B520
-        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
+        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
         error_code = self._library.niDMM_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -356,7 +354,7 @@ class LibraryInterpreter(object):
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niDMM_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -393,7 +391,7 @@ class LibraryInterpreter(object):
 
     def read(self, maximum_time):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
+        maximum_time_ctype = _visatype.ViInt32(maximum_time)  # case S150
         reading_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDMM_Read(vi_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -401,7 +399,7 @@ class LibraryInterpreter(object):
 
     def read_multi_point(self, maximum_time, array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
+        maximum_time_ctype = _visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
@@ -421,7 +419,7 @@ class LibraryInterpreter(object):
 
     def read_waveform(self, maximum_time, array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
+        maximum_time_ctype = _visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600

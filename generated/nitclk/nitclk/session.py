@@ -3,6 +3,7 @@
 import hightime
 
 import nitclk._attributes as _attributes
+import nitclk._converters as _converters
 import nitclk._library_interpreter as _library_interpreter
 
 # Used for __repr__ and __str__
@@ -178,7 +179,8 @@ class SessionReference(object):
             value (float): The value that you are getting
 
         '''
-        return self._library_interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        value = self._library_interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return value
 
     def _get_attribute_vi_session(self, attribute_id):
         r'''_get_attribute_vi_session
@@ -207,7 +209,8 @@ class SessionReference(object):
             value (int): The value that you are getting
 
         '''
-        return self._library_interpreter.get_attribute_vi_session(self._repeated_capability, attribute_id)
+        value = self._library_interpreter.get_attribute_vi_session(self._repeated_capability, attribute_id)
+        return value
 
     def _get_attribute_vi_string(self, attribute_id):
         r'''_get_attribute_vi_string
@@ -246,7 +249,8 @@ class SessionReference(object):
             value (str): The value that you are getting
 
         '''
-        return self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
+        value = self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return value
 
     def _set_attribute_vi_real64(self, attribute_id, value):
         r'''_set_attribute_vi_real64
@@ -275,7 +279,7 @@ class SessionReference(object):
             value (float): The value for the property
 
         '''
-        return self._library_interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, value)
+        self._library_interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, value)
 
     def _set_attribute_vi_session(self, attribute_id, value):
         r'''_set_attribute_vi_session
@@ -306,7 +310,7 @@ class SessionReference(object):
             value (int): The value for the property
 
         '''
-        return self._library_interpreter.set_attribute_vi_session(self._repeated_capability, attribute_id, value)
+        self._library_interpreter.set_attribute_vi_session(self._repeated_capability, attribute_id, value)
 
     def _set_attribute_vi_string(self, attribute_id, value):
         r'''_set_attribute_vi_string
@@ -337,7 +341,7 @@ class SessionReference(object):
             value (str): Pass the value for the property
 
         '''
-        return self._library_interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, value)
+        self._library_interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, value)
 
 
 class _Session(object):
@@ -471,7 +475,8 @@ class _Session(object):
             sessions (list of instrument-specific sessions or nitclk.SessionReference instances): sessions is an array of sessions that are being synchronized.
 
         '''
-        return self._library_interpreter.configure_for_homogeneous_triggers(sessions)
+        sessions = _converters.convert_to_nitclk_session_number_list(sessions)
+        self._library_interpreter.configure_for_homogeneous_triggers(sessions)
 
     def finish_sync_pulse_sender_synchronize(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
         r'''finish_sync_pulse_sender_synchronize
@@ -489,7 +494,9 @@ class _Session(object):
                 through the various devices and cables.
 
         '''
-        return self._library_interpreter.finish_sync_pulse_sender_synchronize(sessions, min_time)
+        sessions = _converters.convert_to_nitclk_session_number_list(sessions)
+        min_time = _converters.convert_timedelta_to_seconds_real64(min_time)
+        self._library_interpreter.finish_sync_pulse_sender_synchronize(sessions, min_time)
 
     def initiate(self, sessions):
         r'''initiate
@@ -504,7 +511,8 @@ class _Session(object):
             sessions (list of instrument-specific sessions or nitclk.SessionReference instances): sessions is an array of sessions that are being synchronized.
 
         '''
-        return self._library_interpreter.initiate(sessions)
+        sessions = _converters.convert_to_nitclk_session_number_list(sessions)
+        self._library_interpreter.initiate(sessions)
 
     def is_done(self, sessions):
         r'''is_done
@@ -522,7 +530,9 @@ class _Session(object):
                 reports an error.
 
         '''
-        return self._library_interpreter.is_done(sessions)
+        sessions = _converters.convert_to_nitclk_session_number_list(sessions)
+        done = self._library_interpreter.is_done(sessions)
+        return done
 
     def setup_for_sync_pulse_sender_synchronize(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
         r'''setup_for_sync_pulse_sender_synchronize
@@ -540,7 +550,9 @@ class _Session(object):
                 through the various devices and cables.
 
         '''
-        return self._library_interpreter.setup_for_sync_pulse_sender_synchronize(sessions, min_time)
+        sessions = _converters.convert_to_nitclk_session_number_list(sessions)
+        min_time = _converters.convert_timedelta_to_seconds_real64(min_time)
+        self._library_interpreter.setup_for_sync_pulse_sender_synchronize(sessions, min_time)
 
     def synchronize(self, sessions, min_tclk_period=hightime.timedelta(seconds=0.0)):
         r'''synchronize
@@ -563,7 +575,9 @@ class _Session(object):
                 through the various devices and cables.
 
         '''
-        return self._library_interpreter.synchronize(sessions, min_tclk_period)
+        sessions = _converters.convert_to_nitclk_session_number_list(sessions)
+        min_tclk_period = _converters.convert_timedelta_to_seconds_real64(min_tclk_period)
+        self._library_interpreter.synchronize(sessions, min_tclk_period)
 
     def synchronize_to_sync_pulse_sender(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
         r'''synchronize_to_sync_pulse_sender
@@ -581,7 +595,9 @@ class _Session(object):
                 through the various devices and cables.
 
         '''
-        return self._library_interpreter.synchronize_to_sync_pulse_sender(sessions, min_time)
+        sessions = _converters.convert_to_nitclk_session_number_list(sessions)
+        min_time = _converters.convert_timedelta_to_seconds_real64(min_time)
+        self._library_interpreter.synchronize_to_sync_pulse_sender(sessions, min_time)
 
     def wait_until_done(self, sessions, timeout=hightime.timedelta(seconds=0.0)):
         r'''wait_until_done
@@ -603,7 +619,9 @@ class _Session(object):
                 returns an error.
 
         '''
-        return self._library_interpreter.wait_until_done(sessions, timeout)
+        sessions = _converters.convert_to_nitclk_session_number_list(sessions)
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        self._library_interpreter.wait_until_done(sessions, timeout)
 
 
 def configure_for_homogeneous_triggers(sessions):

@@ -28,7 +28,7 @@ class AttributeViInt32TimeDeltaMilliseconds(Attribute):
         return hightime.timedelta(milliseconds=session._get_attribute_vi_int32(self._attribute_id))
 
     def __set__(self, session, value):
-        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_milliseconds_int32(value).value)
+        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_milliseconds_int32(value))
 
 
 class AttributeViInt64(Attribute):
@@ -55,7 +55,7 @@ class AttributeViReal64TimeDeltaSeconds(Attribute):
         return hightime.timedelta(seconds=session._get_attribute_vi_real64(self._attribute_id))
 
     def __set__(self, session, value):
-        session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_seconds_real64(value).value)
+        session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_seconds_real64(value))
 
 
 class AttributeViString(Attribute):
@@ -147,6 +147,3 @@ class AttributeSessionReference(Attribute):
 
     def __set__(self, session, value):
         session._set_attribute_vi_session(self._attribute_id, _converters.convert_to_nitclk_session_number(value))
-
-
-

@@ -102,8 +102,8 @@ def get_params_snippet(function, parameter_usage_options):
     return ', '.join(snippets)
 
 
-def _get_output_param_return_snippet(output_parameter, parameters, config):
-    '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
+def _get_library_interpreter_output_param_return_snippet(output_parameter, parameters, config):
+    '''Returns the snippet for returning a single output parameter from a LibraryInterpreter method, i.e. "reading_ctype.value"'''
     assert output_parameter['direction'] == 'out', 'Expected parameter {0} (a.k.a. {1}) to have direction out'.format(output_parameter['name'], output_parameter['python_name'])
     return_type_snippet = ''
 
@@ -139,6 +139,13 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
         else:
             snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + val_suffix + ')'
 
+    return snippet
+
+
+def _get_session_output_param_return_snippet(output_parameter, parameters, config):
+    '''Returns the snippet for returning a single output parameter from a Session method'''
+    snippet = output_parameter['python_name']
+
     # Handle output converter
     if 'python_api_converter_name' in output_parameter:
         snippet = '_converters.' + output_parameter['python_api_converter_name'] + '(' + snippet + ')'
@@ -147,14 +154,26 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
 
 
 # TODO(marcoskirsch): Retrofit to call filter_parameters(function, parameter_usage_options)
-def get_method_return_snippet(parameters, config, use_numpy_array=False):
-    '''Returns a string suitable to use as the return argument of a Session method, i.e. "return reading_ctype.value"'''
+def get_library_interpreter_method_return_snippet(parameters, config, use_numpy_array=False):
+    '''Returns a string suitable to use as the return argument of a LibraryInterpreter method, i.e. "return reading_ctype.value"'''
     snippets = []
     for x in parameters:
         if x['direction'] == 'out' or x['size']['mechanism'] == 'ivi-dance':
             if x['numpy'] is False or use_numpy_array is False:
                 if x['use_in_python_api']:
-                    snippets.append(_get_output_param_return_snippet(x, parameters, config))
+                    snippets.append(_get_library_interpreter_output_param_return_snippet(x, parameters, config))
+    return ('return ' + ', '.join(snippets)).strip()
+
+
+# TODO(marcoskirsch): Retrofit to call filter_parameters(function, parameter_usage_options)
+def get_session_method_return_snippet(parameters, config, use_numpy_array=False):
+    '''Returns a string suitable to use as the return argument of a Session method'''
+    snippets = []
+    for x in parameters:
+        if x['direction'] == 'out':
+            if x['numpy'] is False or use_numpy_array is False:
+                if x['use_in_python_api']:
+                    snippets.append(_get_session_output_param_return_snippet(x, parameters, config))
     return ('return ' + ', '.join(snippets)).strip()
 
 
@@ -223,7 +242,6 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
     C010. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
     C020. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(self._encoding))
     C030. Input string enum:                                                   ctypes.create_string_buffer(parameter_name.value.encode(self._encoding))
-    C040. Input uses converter:                                                ctypes.create_string_buffer(_converters.convert_foo(parameter_name).encode(self._encoding))
     C050. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
     C060. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViChar * buffer_size_ctype.value)()
     C070. Output buffer with mechanism fixed-size:                             visatype.ViChar * 256
@@ -239,8 +257,6 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
             definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case C010'.format(parameter['python_name'])
         elif parameter['enum'] is not None:
             definition = 'ctypes.create_string_buffer({0}.value.encode(self._encoding))  # case C030'.format(parameter['python_name'])
-        elif 'python_api_converter_name' in parameter:
-            definition = 'ctypes.create_string_buffer(_converters.{0}({1}).encode(self._encoding))  # case C040'.format(parameter['python_api_converter_name'], parameter['python_name'])
         else:
             definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case C020'.format(parameter['python_name'])
     else:
@@ -286,7 +302,6 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
         S110. Input session handle:                                                visatype.ViSession(self._vi)
         S120. Input is size of buffer with mechanism is python-code:               visatype.ViInt32(<custom python code>)
         S130. Input enum:                                                          visatype.ViInt32(parameter_name.value)
-        S140. Input uses converter                                                 timedelta_converter_seconds_real64(timeout)
         S150. Input scalar:                                                        visatype.ViInt32(parameter_name)
         S160. Input is size of input buffer:                                       visatype.ViInt32(0 if list is None else len(list))
         S170. Input is size of output buffer with mechanism ivi-dance, QUERY_SIZE: visatype.ViInt32()
@@ -313,8 +328,6 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
             definition = '{0}.{1}({2})  # case S120'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['enum'] is not None:
             definition = '{0}.{1}({2}.value)  # case S130'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
-        elif 'python_api_converter_name' in parameter:
-            definition = '_converters.{0}({1})  # case S140'.format(parameter['python_api_converter_name'], parameter['python_name'])
         elif not corresponding_buffer_parameters:
             definition = '{0}.{1}({2})  # case S150'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif corresponding_buffer_parameters and corresponding_buffer_parameters[0]['direction'] == 'in':  # We are only looking at the first one to see if it is 'in'. Assumes all are the same here, assert below if not
@@ -366,7 +379,6 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
     '''These are the different cases for initializing the ctype variable for buffers:
 
         B510. Input/output numpy array:                                            _get_ctypes_pointer_for_buffer(value=waveform)
-        B520. Input buffer of simple types with converter:                         _get_ctypes_pointer_for_buffer(value=convert(array.array('d', list)), library_type=visatype.ViReal64)
         B540. Input buffer (custom type):                                          _get_ctypes_pointer_for_buffer(value=[custom_struct(l) for l in list], library_type=custom_struct)
         B550. Input buffer of simple types:                                        _get_ctypes_pointer_for_buffer(value=array.array('d', list), library_type=visatype.ViReal64)
         B560. Output buffer with mechanism python-code:                            _get_ctypes_pointer_for_buffer(value=array.array('d'), library_type=ViInt32)
@@ -388,21 +400,6 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
 
     if parameter['numpy'] is True and use_numpy_array is True:
         definition = '_get_ctypes_pointer_for_buffer(value={0})  # case B510'.format(parameter['python_name'])
-    elif parameter['direction'] == 'in' and 'python_api_converter_name' in parameter:
-        if custom_type is not None:
-            assert False, 'Custom type {} is not supported with converters'.format(custom_type)
-        else:
-            if parameter['use_array']:
-                # If the incoming type is array.array, we can just use that, otherwise we need to create an array.array that is initialized with the passed in value, which must be iterable
-                array_declaration = '{0}_array = _convert_to_array(value=_converters.{2}({0}), array_type="{1}")  # case B520'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']), parameter['python_api_converter_name'])
-                definitions.append(array_declaration)
-                definition = '_get_ctypes_pointer_for_buffer(value={0}_array, library_type={1}.{2})  # case B520'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
-            elif parameter['use_list']:
-                conversion_declaration = '{0}_converted = _converters.{1}({0})  # case B520'.format(parameter['python_name'], parameter['python_api_converter_name'])
-                definitions.append(conversion_declaration)
-                definition = '_get_ctypes_pointer_for_buffer(value={0}_converted, library_type={1}.{2})  # case B520'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
-            else:
-                assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
     elif parameter['direction'] == 'in':
         if custom_type is not None:
             definition = '_get_ctypes_pointer_for_buffer([{0}.{1}(c) for c in {2}], library_type={0}.{1})  # case B540'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
@@ -1401,34 +1398,40 @@ parameters_for_testing = [
 ]
 
 
-def test_get_method_return_snippet_vi():
+def test_get_library_interpreter_method_return_snippet_vi():
     param = [parameters_for_testing[0]]
-    assert get_method_return_snippet(param, config_for_testing) == 'return'
+    assert get_library_interpreter_method_return_snippet(param, config_for_testing) == 'return'
 
 
-def test_get_method_return_snippet_int():
+def test_get_library_interpreter_method_return_snippet_int():
     param = [parameters_for_testing[1]]
-    assert get_method_return_snippet(param, config_for_testing) == 'return int(output_ctype.value)'
+    assert get_library_interpreter_method_return_snippet(param, config_for_testing) == 'return int(output_ctype.value)'
 
 
-def test_get_method_return_snippet_string():
+def test_get_library_interpreter_method_return_snippet_string():
     param = [parameters_for_testing[2]]
-    assert get_method_return_snippet(param, config_for_testing) == 'return error_message_ctype.value.decode(self._encoding)'
+    assert get_library_interpreter_method_return_snippet(param, config_for_testing) == 'return error_message_ctype.value.decode(self._encoding)'
 
 
-def test_get_method_return_snippet_custom_type():
+def test_get_library_interpreter_method_return_snippet_custom_type():
     param = [parameters_for_testing[3]]
-    assert get_method_return_snippet(param, config_for_testing) == 'return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]'
+    assert get_library_interpreter_method_return_snippet(param, config_for_testing) == 'return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]'
 
 
-def test_get_method_return_snippet_enum():
+def test_get_library_interpreter_method_return_snippet_enum():
     param = [parameters_for_testing[4], parameters_for_testing[5]]
-    assert get_method_return_snippet(param, config_for_testing) == 'return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]'
+    assert get_library_interpreter_method_return_snippet(param, config_for_testing) == 'return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]'
 
 
-def test_get_method_return_snippet_into():
+def test_get_library_interpreter_method_return_snippet_into():
     param = [parameters_for_testing[4], parameters_for_testing[7]]
-    assert get_method_return_snippet(param, config_for_testing, use_numpy_array=True) == 'return'
+    assert get_library_interpreter_method_return_snippet(param, config_for_testing, use_numpy_array=True) == 'return'
+
+
+def test_get_session_method_return_snippet():
+    param = [dict(parameters_for_testing[14])]
+    param[0]['direction'] = 'out'
+    assert get_session_method_return_snippet(param, config_for_testing) == 'return _converters.timedelta_converter_seconds_real64(timeout)'
 
 
 def test_get_enum_type_check_snippet():
@@ -1459,11 +1462,6 @@ def test_get_ctype_variable_declaration_snippet_case_c020():
 def test_get_ctype_variable_declaration_snippet_case_c030():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[33], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_enum_ctype = ctypes.create_string_buffer(a_string_enum.value.encode(self._encoding))  # case C030"]
-
-
-def test_get_ctype_variable_declaration_snippet_case_c040():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[34], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c050():
@@ -1511,11 +1509,6 @@ def test_get_ctype_variable_declaration_snippet_case_s130():
     assert snippet == ["an_int_enum_ctype = _visatype.ViInt16(an_int_enum.value)  # case S130"]
 
 
-def test_get_ctype_variable_declaration_snippet_case_s140():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[14], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["timeout_ctype = _converters.timedelta_converter_seconds_real64(timeout)  # case S140"]
-
-
 def test_get_ctype_variable_declaration_snippet_case_s150():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[9], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     assert snippet == ["input_ctype = _visatype.ViInt16(input)  # case S150"]
@@ -1559,44 +1552,6 @@ def test_get_ctype_variable_declaration_snippet_case_s220():
 def test_get_ctype_variable_declaration_snippet_case_b510():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=True)
     assert snippet == ["output_ctype = _get_ctypes_pointer_for_buffer(value=output)  # case B510"]
-
-
-def test_get_ctype_variable_declaration_snippet_case_b520_array():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[30], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    expected = [
-        'input_array_3_array = _convert_to_array(value=_converters.convert_to_nitclk_session_num_list(input_array_3), array_type="d")  # case B520',
-        'input_array_3_ctype = _get_ctypes_pointer_for_buffer(value=input_array_3_array, library_type=_visatype.ViReal64)  # case B520',
-    ]
-    assert len(actual) == len(expected)
-    for i in range(max(len(actual), len(expected))):
-        assert actual[i] == expected[i]
-
-
-def test_get_ctype_variable_declaration_snippet_case_b520_list():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[29], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    expected = [
-        'input_array_2_converted = _converters.convert_to_nitclk_session_num_list(input_array_2)  # case B520',
-        'input_array_2_ctype = _get_ctypes_pointer_for_buffer(value=input_array_2_converted, library_type=_visatype.ViReal64)  # case B520',
-    ]
-    assert len(actual) == len(expected)
-    for i in range(max(len(actual), len(expected))):
-        assert actual[i] == expected[i]
-
-
-def test_get_ctype_variable_declaration_snippet_case_b520_custom_type():
-    try:
-        get_ctype_variable_declaration_snippet(parameters_for_testing[31], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-        assert False
-    except AssertionError:
-        pass
-
-
-def test_get_ctype_variable_declaration_snippet_case_b520_not_array_or_list():
-    try:
-        get_ctype_variable_declaration_snippet(parameters_for_testing[32], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-        assert False
-    except AssertionError:
-        pass
 
 
 def test_get_ctype_variable_declaration_snippet_case_b540():

@@ -4,7 +4,6 @@
 import array
 import ctypes
 import hightime  # noqa: F401
-import niswitch._converters as _converters  # noqa: F401
 import niswitch._library_singleton as _library_singleton
 import niswitch._visatype as _visatype
 import niswitch.enums as enums  # noqa: F401
@@ -370,14 +369,14 @@ class LibraryInterpreter(object):
 
     def wait_for_debounce(self, maximum_time_ms):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
+        maximum_time_ms_ctype = _visatype.ViInt32(maximum_time_ms)  # case S150
         error_code = self._library.niSwitch_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def wait_for_scan_complete(self, maximum_time_ms):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
+        maximum_time_ms_ctype = _visatype.ViInt32(maximum_time_ms)  # case S150
         error_code = self._library.niSwitch_WaitForScanComplete(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

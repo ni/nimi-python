@@ -17,7 +17,6 @@ functions = helper.filter_codegen_functions(functions)
 import array
 import ctypes
 import hightime  # noqa: F401
-import ${module_name}._converters as _converters  # noqa: F401
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
 % if config['enums']:

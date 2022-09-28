@@ -4,7 +4,6 @@
 import array
 import ctypes
 import hightime  # noqa: F401
-import nifake._converters as _converters  # noqa: F401
 import nifake._library_singleton as _library_singleton
 import nifake._visatype as _visatype
 import nifake.enums as enums  # noqa: F401
@@ -99,8 +98,7 @@ class LibraryInterpreter(object):
     def accept_list_of_durations_in_seconds(self, delays):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         count_ctype = _visatype.ViInt32(0 if delays is None else len(delays))  # case S160
-        delays_converted = _converters.convert_timedeltas_to_seconds_real64(delays)  # case B520
-        delays_ctype = _get_ctypes_pointer_for_buffer(value=delays_converted, library_type=_visatype.ViReal64)  # case B520
+        delays_ctype = _get_ctypes_pointer_for_buffer(value=delays, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niFake_AcceptListOfDurationsInSeconds(vi_ctype, count_ctype, delays_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -117,8 +115,7 @@ class LibraryInterpreter(object):
     def double_all_the_nums(self, numbers):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_count_ctype = _visatype.ViInt32(0 if numbers is None else len(numbers))  # case S160
-        numbers_converted = _converters.convert_double_each_element(numbers)  # case B520
-        numbers_ctype = _get_ctypes_pointer_for_buffer(value=numbers_converted, library_type=_visatype.ViReal64)  # case B520
+        numbers_ctype = _get_ctypes_pointer_for_buffer(value=numbers, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niFake_DoubleAllTheNums(vi_ctype, number_count_ctype, numbers_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -151,7 +148,7 @@ class LibraryInterpreter(object):
         configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niFake_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_to_bytes(configuration_array)
+        return configuration_array
 
     def fetch_waveform(self, number_of_samples):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -340,11 +337,11 @@ class LibraryInterpreter(object):
         months_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFake_GetCalInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_month_to_timedelta(int(months_ctype.value))
+        return int(months_ctype.value)
 
     def get_channel_names(self, indices):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
+        indices_ctype = ctypes.create_string_buffer(indices.encode(self._encoding))  # case C020
         name_size_ctype = _visatype.ViInt32()  # case S170
         names_ctype = None  # case C050
         error_code = self._library.niFake_GetChannelNames(vi_ctype, indices_ctype, name_size_ctype, names_ctype)
@@ -353,7 +350,7 @@ class LibraryInterpreter(object):
         names_ctype = (_visatype.ViChar * name_size_ctype.value)()  # case C060
         error_code = self._library.niFake_GetChannelNames(vi_ctype, indices_ctype, name_size_ctype, names_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
+        return names_ctype.value.decode(self._encoding)
 
     def get_custom_type(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -403,8 +400,7 @@ class LibraryInterpreter(object):
     def import_attribute_configuration_buffer(self, configuration):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_converted = _converters.convert_to_bytes(configuration)  # case B520
-        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
+        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
         error_code = self._library.niFake_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -413,7 +409,7 @@ class LibraryInterpreter(object):
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niFake_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -494,7 +490,7 @@ class LibraryInterpreter(object):
 
     def read(self, maximum_time):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_seconds_real64(maximum_time)  # case S140
+        maximum_time_ctype = _visatype.ViReal64(maximum_time)  # case S150
         reading_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niFake_Read(vi_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -503,7 +499,7 @@ class LibraryInterpreter(object):
     def read_from_channel(self, channel_name, maximum_time):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
+        maximum_time_ctype = _visatype.ViInt32(maximum_time)  # case S150
         reading_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niFake_ReadFromChannel(vi_ctype, channel_name_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -522,7 +518,7 @@ class LibraryInterpreter(object):
         timedelta_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niFake_ReturnDurationInSeconds(vi_ctype, None if timedelta_ctype is None else (ctypes.pointer(timedelta_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_seconds_real64_to_timedelta(float(timedelta_ctype.value))
+        return float(timedelta_ctype.value)
 
     def return_list_of_durations_in_seconds(self, number_of_elements):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -531,7 +527,7 @@ class LibraryInterpreter(object):
         timedeltas_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=timedeltas_size)  # case B600
         error_code = self._library.niFake_ReturnListOfDurationsInSeconds(vi_ctype, number_of_elements_ctype, timedeltas_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_seconds_real64_to_timedeltas([float(timedeltas_ctype[i]) for i in range(number_of_elements_ctype.value)])
+        return [float(timedeltas_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
     def return_multiple_types(self, array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

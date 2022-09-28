@@ -175,7 +175,7 @@ class Session(_SessionBase):
         close method, you should not use the NI Switch Executive
         virtual device again until you call __init__.
         '''
-        return self._library_interpreter.close_session()
+        self._library_interpreter.close_session()
 
     def connect(self, connect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, wait_for_debounce=True):
         r'''connect
@@ -229,7 +229,7 @@ class Session(_SessionBase):
         '''
         if type(multiconnect_mode) is not enums.MulticonnectMode:
             raise TypeError('Parameter multiconnect_mode must be of type ' + str(enums.MulticonnectMode))
-        return self._library_interpreter.connect(connect_spec, multiconnect_mode, wait_for_debounce)
+        self._library_interpreter.connect(connect_spec, multiconnect_mode, wait_for_debounce)
 
     def connect_and_disconnect(self, connect_spec, disconnect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, operation_order=enums.OperationOrder.AFTER, wait_for_debounce=True):
         r'''connect_and_disconnect
@@ -316,7 +316,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter multiconnect_mode must be of type ' + str(enums.MulticonnectMode))
         if type(operation_order) is not enums.OperationOrder:
             raise TypeError('Parameter operation_order must be of type ' + str(enums.OperationOrder))
-        return self._library_interpreter.connect_and_disconnect(connect_spec, disconnect_spec, multiconnect_mode, operation_order, wait_for_debounce)
+        self._library_interpreter.connect_and_disconnect(connect_spec, disconnect_spec, multiconnect_mode, operation_order, wait_for_debounce)
 
     def disconnect(self, disconnect_spec):
         r'''disconnect
@@ -341,7 +341,7 @@ class Session(_SessionBase):
                 Executive Help for more information.
 
         '''
-        return self._library_interpreter.disconnect(disconnect_spec)
+        self._library_interpreter.disconnect(disconnect_spec)
 
     def disconnect_all(self):
         r'''disconnect_all
@@ -351,7 +351,7 @@ class Session(_SessionBase):
         ignores all multiconnect modes. Calling disconnect_all resets all
         of the switch states for the system.
         '''
-        return self._library_interpreter.disconnect_all()
+        self._library_interpreter.disconnect_all()
 
     def expand_route_spec(self, route_spec, expand_action=enums.ExpandAction.ROUTES, expanded_route_spec_size=[1024]):
         r'''expand_route_spec
@@ -410,7 +410,8 @@ class Session(_SessionBase):
         '''
         if type(expand_action) is not enums.ExpandAction:
             raise TypeError('Parameter expand_action must be of type ' + str(enums.ExpandAction))
-        return self._library_interpreter.expand_route_spec(route_spec, expand_action, expanded_route_spec_size)
+        expanded_route_spec = self._library_interpreter.expand_route_spec(route_spec, expand_action, expanded_route_spec_size)
+        return expanded_route_spec
 
     def find_route(self, channel1, channel2, route_spec_size=[1024]):
         r'''find_route
@@ -483,7 +484,8 @@ class Session(_SessionBase):
                 implicit path already exists.
 
         '''
-        return self._library_interpreter.find_route(channel1, channel2, route_spec_size)
+        route_spec, path_capability = self._library_interpreter.find_route(channel1, channel2, route_spec_size)
+        return route_spec, path_capability
 
     def get_all_connections(self, route_spec_size=[1024]):
         r'''get_all_connections
@@ -525,7 +527,8 @@ class Session(_SessionBase):
                 to obtain the entire buffer.
 
         '''
-        return self._library_interpreter.get_all_connections(route_spec_size)
+        route_spec = self._library_interpreter.get_all_connections(route_spec_size)
+        return route_spec
 
     def is_connected(self, route_spec):
         r'''is_connected
@@ -549,7 +552,8 @@ class Session(_SessionBase):
                 they are not.
 
         '''
-        return self._library_interpreter.is_connected(route_spec)
+        is_connected = self._library_interpreter.is_connected(route_spec)
+        return is_connected
 
     def is_debounced(self):
         r'''is_debounced
@@ -564,7 +568,8 @@ class Session(_SessionBase):
                 settling.
 
         '''
-        return self._library_interpreter.is_debounced()
+        is_debounced = self._library_interpreter.is_debounced()
+        return is_debounced
 
     def _open_session(self, virtual_device_name, option_string=""):
         r'''_open_session
@@ -597,7 +602,9 @@ class Session(_SessionBase):
             vi (int): The session referencing this NI Switch Executive virtual device session.
 
         '''
-        return self._library_interpreter.open_session(virtual_device_name, option_string)
+        option_string = _converters.convert_init_with_options_dictionary(option_string)
+        vi = self._library_interpreter.open_session(virtual_device_name, option_string)
+        return vi
 
     def wait_for_debounce(self, maximum_time_ms=hightime.timedelta(milliseconds=-1)):
         r'''wait_for_debounce
@@ -619,4 +626,5 @@ class Session(_SessionBase):
                 block for an infinite period of time until the system is debounced.
 
         '''
-        return self._library_interpreter.wait_for_debounce(maximum_time_ms)
+        maximum_time_ms = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)
+        self._library_interpreter.wait_for_debounce(maximum_time_ms)

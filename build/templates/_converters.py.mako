@@ -239,7 +239,7 @@ def _convert_timedelta(value, library_type, scaling):
     if library_type in [_visatype.ViInt64, _visatype.ViInt32, _visatype.ViUInt32, _visatype.ViInt16, _visatype.ViUInt16, _visatype.ViInt8]:
         scaled_value = int(scaled_value)
 
-    return library_type(scaled_value)
+    return scaled_value
 
 
 def convert_timedelta_to_seconds_real64(value):
