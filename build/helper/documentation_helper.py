@@ -1307,17 +1307,10 @@ def test_get_function_rst_numpy():
 
     :type waveform_data: numpy.array(dtype=numpy.float64)
 
-    :rtype: tuple (waveform_data, actual_number_of_samples)
+    :rtype: int
+    :return:
 
-        WHERE
-
-        waveform_data (numpy.array(dtype=numpy.float64)):
-
-            Samples fetched from the device. Array should be numberOfSamples big.
-
-        actual_number_of_samples (int):
-
-            Number of samples actually fetched.
+        Number of samples actually fetched.
 '''
     assert_rst_strings_are_equal(expected_fuction_rst, actual_function_rst)
 
@@ -1426,8 +1419,6 @@ def test_get_function_docstring_numpy():
         waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
 
     Returns:
-        waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
-
         actual_number_of_samples (int): Number of samples actually fetched.
 '''
     assert_rst_strings_are_equal(expected_fuction_docstring, actual_function_docstring)
