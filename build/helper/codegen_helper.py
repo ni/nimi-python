@@ -1434,6 +1434,16 @@ def test_get_session_method_return_snippet():
     assert get_session_method_return_snippet(param, config_for_testing) == 'return _converters.timedelta_converter_seconds_real64(timeout)'
 
 
+def test_get_session_method_return_snippet_non_numpy():
+    param = [parameters_for_testing[4], parameters_for_testing[7]]
+    assert get_session_method_return_snippet(param, config_for_testing) == 'return output'
+
+
+def test_get_session_method_return_snippet_numpy():
+    param = [parameters_for_testing[4], parameters_for_testing[7]]
+    assert get_session_method_return_snippet(param, config_for_testing, use_numpy_array=True) == 'return'
+
+
 def test_get_enum_type_check_snippet():
     param = parameters_for_testing[6]
     assert get_enum_type_check_snippet(param, 0) == "if type(an_int_enum) is not enums.Turtle:\nraise TypeError('Parameter an_int_enum must be of type ' + str(enums.Turtle))"
