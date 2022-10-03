@@ -411,29 +411,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'DiscoverCurrentRanges': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'out',
-                'name': 'currentRanges',
-                'type': 'lvdataconv::LVArrayPrimitive<ViReal64>*'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'ExportAttributeConfigurationBuffer': {
         'documentation': {
             'description': '\nExports the attribute configuration of the session to the specified\nconfiguration buffer.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers and the same number of configured\nchannels.\n\nThis function verifies that the attributes you have configured for the\nsession are valid. If the configuration is invalid, NI‑DCPower returns\nan error.\n\n**Support for this Function**\n\nCalling this function in `Sequence Source\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.\n\n**Channel Mapping Behavior for Multichannel Sessions**\n\nWhen importing and exporting session attribute configurations between\nNI‑DCPower sessions that were initialized with different channels, the\nconfigurations of the exporting channels are mapped to the importing\nchannels in the order you specify in the **channelName** input to the\nniDCPower_InitializeWithChannels function.\n\nFor example, if your entry for **channelName** is 0,1 for the exporting\nsession and 1,2 for the importing session:\n\n-  The configuration exported from channel 0 is imported into channel 1.\n-  The configuration exported from channel 1 is imported into channel 2.\n\n**Related Topics:**\n\n`Using Properties and\nAttributes <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__\n\n`Setting Properties and Attributes Before Reading\nThem <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__\n',
@@ -2002,29 +1979,6 @@ functions = {
         ],
         'python_name': 'get_self_cal_last_date_and_time',
         'real_datetime_call': 'GetSelfCalLastDateAndTime',
-        'returns': 'ViStatus'
-    },
-    'GetNextInstructionSequence': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'out',
-                'name': 'instructions',
-                'type': 'lvdataconv::LVArrayPrimitive<ViUInt32>*'
-            }
-        ],
         'returns': 'ViStatus'
     },
     'GetSelfCalLastDateAndTime': {
