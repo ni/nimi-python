@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.8.0d129
+# This file is generated from NI-DCPower API metadata version 23.0.0d43
 config = {
-    'api_version': '22.8.0d129',
+    'api_version': '23.0.0d43',
     'c_function_prefix': 'niDCPower_',
     'close_function': 'close',
     'context_manager_name': {
@@ -26,6 +26,7 @@ config = {
         'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
+    'grpc_service_class_prefix': 'NiDCPower',
     'init_function': 'FancyInitialize',
     'library_info': {
         'Linux': {
@@ -45,7 +46,6 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'nidcpower',
     'repeated_capabilities': [
         {

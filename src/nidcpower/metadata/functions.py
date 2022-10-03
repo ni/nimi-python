@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.8.0d9999
+# This file is generated from NI-DCPower API metadata version 23.0.0d43
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -407,6 +407,29 @@ functions = {
                 },
                 'name': 'vi',
                 'type': 'ViSession'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'DiscoverCurrentRanges': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'out',
+                'name': 'currentRanges',
+                'type': 'lvdataconv::LVArrayPrimitive<ViReal64>*'
             }
         ],
         'returns': 'ViStatus'
@@ -1979,6 +2002,29 @@ functions = {
         ],
         'python_name': 'get_self_cal_last_date_and_time',
         'real_datetime_call': 'GetSelfCalLastDateAndTime',
+        'returns': 'ViStatus'
+    },
+    'GetNextInstructionSequence': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'out',
+                'name': 'instructions',
+                'type': 'lvdataconv::LVArrayPrimitive<ViUInt32>*'
+            }
+        ],
         'returns': 'ViStatus'
     },
     'GetSelfCalLastDateAndTime': {

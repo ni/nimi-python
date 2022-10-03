@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI Switch Executive API metadata version 22.8.0d9999
+# This file is generated from NI Switch Executive API metadata version 23.0.0d8
 functions = {
     'CloseSession': {
         'codegen_method': 'private',

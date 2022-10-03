@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 22.8.0d40
+# This file is generated from NI-FGEN API metadata version 23.0.0d13
 config = {
-    'api_version': '22.8.0d40',
+    'api_version': '23.0.0d13',
     'c_function_prefix': 'niFgen_',
     'close_function': 'close',
     'context_manager_name': {
@@ -16,6 +16,7 @@ config = {
         'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
+    'grpc_service_class_prefix': 'NiFgen',
     'init_function': 'InitializeWithChannels',
     'library_info': {
         'Linux': {
@@ -35,7 +36,6 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'nifgen',
     'repeated_capabilities': [
         {

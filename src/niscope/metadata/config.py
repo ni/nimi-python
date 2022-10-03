@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 22.8.0d53
+# This file is generated from NI-SCOPE API metadata version 23.0.0d28
 config = {
-    'api_version': '22.8.0d53',
+    'api_version': '23.0.0d28',
     'c_function_prefix': 'niScope_',
     'close_function': 'close',
     'context_manager_name': {
@@ -21,6 +21,7 @@ config = {
         'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
+    'grpc_service_class_prefix': 'NiScope',
     'init_function': 'InitWithOptions',
     'library_info': {
         'Linux': {
@@ -40,7 +41,6 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'niscope',
     'repeated_capabilities': [
         {

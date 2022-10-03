@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 22.8.0d9999
+# This file is generated from NI-FGEN API metadata version 23.0.0d13
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -135,6 +135,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the handle of the arbitrary sequence that you want the signal\ngenerator to remove. You can create an arbitrary sequence using the\nnifgen_CreateArbSequence or nifgen_CreateAdvancedArbSequence function.\nThese functions return a handle that you use to identify the sequence.\n\n| **Defined Value**:\n| NIFGEN_VAL_ALL_SEQUENCES—Remove all sequences from the signal\n  generator\n\n**Default Value**: None\n'
                 },
+                'grpc_enum': 'SequenceHandle',
                 'name': 'sequenceHandle',
                 'type': 'ViInt32'
             }
@@ -162,6 +163,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the handle of the arbitrary waveform that you want the signal\ngenerator to remove.\n\nYou can create multiple arbitrary waveforms using one of the following\nniFgen Create Waveform functions:\n\n-  niFgen_CreateWaveformF64\n-  niFgen_CreateWaveformI16\n-  niFgen_CreateWaveformFromFileI16\n-  niFgen_CreateWaveformFromFileF64\n\n**Defined Value**:\n\nNIFGEN_VAL_ALL_WAVEFORMS—Remove all waveforms from the signal\ngenerator.\n\n**Default Value**: None\n'
                 },
+                'grpc_enum': 'WaveformHandle',
                 'name': 'waveformHandle',
                 'type': 'ViInt32'
             }
@@ -187,6 +189,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the handle of the frequency list you want the signal generator\nto remove. You create multiple frequency lists using\nniFgen_CreateFreqList. niFgen_CreateFreqList returns a handle that you\nuse to identify each list. Specify a value of -1 to clear all frequency\nlists.\n\n**Defined Value**\n\nNIFGEN_VAL_ALL_FLISTS—Remove all frequency lists from the signal\ngenerator.\n\n**Default Value**: None\n'
                 },
+                'grpc_enum': 'FrequencyListOptions',
                 'name': 'frequencyListHandle',
                 'type': 'ViInt32'
             }

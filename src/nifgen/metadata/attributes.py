@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 22.8.0d40
+# This file is generated from NI-FGEN API metadata version 23.0.0d13
 attributes = {
     1050005: {
         'access': 'read-write',
@@ -225,6 +225,7 @@ attributes = {
         'documentation': {
             'description': 'Sets which frequency list the signal generator  produces. Create a frequency list using niFgen_CreateFreqList.  niFgen_CreateFreqList returns a handle that you can  use to identify the list.'
         },
+        'grpc_enum': 'FrequencyListHandle',
         'lv_property': 'Standard Function:Frequency List Mode:Frequency List Handle',
         'name': 'FREQ_LIST_HANDLE',
         'type': 'ViInt32'
@@ -316,6 +317,7 @@ attributes = {
         'documentation': {
             'description': 'This channel-based attribute specifies the load impedance connected to the analog output of the channel. If you set this attribute to NIFGEN_VAL_MATCHED_LOAD_IMPEDANCE (-1.0), NI-FGEN assumes that the load impedance matches the output impedance. NI-FGEN compensates to give the desired peak-to-peak voltage amplitude or arbitrary gain (relative to 1 V).'
         },
+        'grpc_enum': 'LoadImpedance',
         'lv_property': 'Output:Load Impedance',
         'name': 'LOAD_IMPEDANCE',
         'type': 'ViReal64'
@@ -968,6 +970,7 @@ attributes = {
         'documentation': {
             'description': 'This channel-based attribute specifies the signal generator output impedance at the output connector. NI signal sources modules have an output impedance of 50 ohms and an optional 75 ohms on select modules. If the load impedance matches the output impedance, then the voltage at the signal output connector is at the needed level. The voltage at the signal output connector varies with load output impedance, up to doubling the voltage for a high-impedance load.'
         },
+        'grpc_enum': 'OutputImpedance',
         'lv_property': 'Output:Output Impedance',
         'name': 'OUTPUT_IMPEDANCE',
         'supported_rep_caps': [
@@ -1057,6 +1060,7 @@ attributes = {
         'documentation': {
             'description': '\nSelects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform functions:\nniFgen_CreateWaveformF64\nniFgen_CreateWaveformI16\nniFgen_CreateWaveformFromFileI16\nniFgen_CreateWaveformFromFileF64\nThese functions return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this attribute to the waveform handle.\nUse this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.\n'
         },
+        'grpc_enum': 'ArbitraryWaveformHandle',
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Arbitrary Waveform Handle',
         'name': 'ARB_WAVEFORM_HANDLE',
         'supported_rep_caps': [
@@ -1093,6 +1097,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the rate at which the signal generator outputs the points in arbitrary waveforms.  Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set  to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ.\nUnits: Samples/s\n'
         },
+        'grpc_enum': 'SampleRate',
         'lv_property': 'Clocks:Sample Clock:Rate',
         'name': 'ARB_SAMPLE_RATE',
         'type': 'ViReal64'
@@ -1138,6 +1143,7 @@ attributes = {
         'documentation': {
             'description': '\nThis channel-based attribute identifies which sequence the signal generator produces. You can create multiple sequences using niFgen_CreateArbSequence. niFgen_CreateArbSequence returns a handle that you can use to identify the particular sequence. To configure the signal generator to produce a particular sequence, set this attribute to the sequence handle.\nUse this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SEQ.\n'
         },
+        'grpc_enum': 'ArbitrarySequenceHandle',
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Arbitrary Sequence Handle',
         'name': 'ARB_SEQUENCE_HANDLE',
         'supported_rep_caps': [
@@ -1179,6 +1185,15 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Max Loop Count',
         'name': 'MAX_LOOP_COUNT',
+        'type': 'ViInt32'
+    },
+    1250350: {
+        'access': 'read-write',
+        'grpc_enum': 'BurstCount',
+        'name': 'BURST_COUNT',
+        'supported_rep_caps': [
+            'channels'
+        ],
         'type': 'ViInt32'
     }
 }

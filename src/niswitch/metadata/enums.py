@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 22.8.0d32
+# This file is generated from NI-SWITCH API metadata version 23.0.0d23
 enums = {
     'CabledModuleScanAdvancedBus': {
         'values': [
@@ -985,6 +985,22 @@ enums = {
                 },
                 'name': 'NISWITCH_VAL_SLAVE',
                 'value': 2
+            }
+        ]
+    },
+    'WireMode': {
+        'values': [
+            {
+                'name': 'NISWITCH_VAL_1_WIRE',
+                'value': 1
+            },
+            {
+                'name': 'NISWITCH_VAL_2_WIRE',
+                'value': 2
+            },
+            {
+                'name': 'NISWITCH_VAL_4_WIRE',
+                'value': 4
             }
         ]
     }

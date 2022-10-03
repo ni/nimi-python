@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 22.5.0d21
+# This file is generated from NI-FAKE API metadata version 23.0.0d13
 config = {
-    'api_version': '22.5.0d21',
+    'api_version': '23.0.0d13',
     'c_function_prefix': 'niFake_',
     'close_function': 'close',
     'context_manager_name': {
@@ -34,6 +34,7 @@ config = {
         'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
+    'grpc_service_class_prefix': 'NiFake',
     'init_function': 'InitWithOptions',
     'library_info': {
         'Linux': {
@@ -53,7 +54,6 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'nifake',
     'repeated_capabilities': [
         {

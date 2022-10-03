@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 22.8.0d38
+# This file is generated from NI-DMM API metadata version 23.0.0d13
 enums = {
     'ADCCalibration': {
         'values': [
@@ -176,6 +176,45 @@ enums = {
                 },
                 'name': 'NIDMM_VAL_DCNR_HIGH_ORDER',
                 'value': 2
+            }
+        ]
+    },
+    'DigitsResolution': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Specifies 3.5 digits resolution.'
+                },
+                'name': 'NIDMM_VAL__3_5',
+                'value': 3.5
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies 4.5 digits resolution.'
+                },
+                'name': 'NIDMM_VAL__4_5',
+                'value': 4.5
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies 5.5 digits resolution.'
+                },
+                'name': 'NIDMM_VAL__5_5',
+                'value': 5.5
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies 6.5 digits resolution.'
+                },
+                'name': 'NIDMM_VAL__6_5',
+                'value': 6.5
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies 7.5 digits resolution.'
+                },
+                'name': 'NIDMM_VAL__7_5',
+                'value': 7.5
             }
         ]
     },

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI Switch Executive API metadata version 22.8.0d1
+# This file is generated from NI Switch Executive API metadata version 23.0.0d8
 config = {
-    'api_version': '22.8.0d1',
+    'api_version': '23.0.0d8',
     'c_function_prefix': 'niSE_',
     'close_function': 'CloseSession',
     'context_manager_name': {
@@ -13,6 +13,7 @@ config = {
     'extra_errors_used': [
         'InvalidRepeatedCapabilityError'
     ],
+    'grpc_service_class_prefix': 'NiSE',
     'init_function': 'OpenSession',
     'library_info': {
         'Linux': {
@@ -32,7 +33,6 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'nise',
     'repeated_capabilities': [
     ],

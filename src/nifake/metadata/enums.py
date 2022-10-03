@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 22.5.0d24
+# This file is generated from NI-FAKE API metadata version 23.0.0d13
 enums = {
     'AltColor': {
         'values': [
@@ -113,6 +113,70 @@ enums = {
             }
         ]
     },
+    'DecimalMixedNumber': {
+        'values': [
+            {
+                'name': 'NIFAKE_VAL_TWENTY_TWO',
+                'value': 22.0
+            },
+            {
+                'name': 'NIFAKE_VAL_TWO_POINT_TWO',
+                'value': 2.2
+            },
+            {
+                'name': 'NIFAKE_VAL_NEGATIVE_THREE',
+                'value': -3.0
+            },
+            {
+                'name': 'NIFAKE_VAL_MAX_INT_32',
+                'value': 2147483647.0
+            },
+            {
+                'name': 'NIFAKE_VAL_MAX_INT_32_PLUS_ONE',
+                'value': 2147483648.0
+            },
+            {
+                'name': 'NIFAKE_VAL_MIN_INT_32',
+                'value': -2147483648.0
+            },
+            {
+                'name': 'NIFAKE_VAL_MIN_INT_32_MINUS_ONE',
+                'value': -2147483649.0
+            }
+        ]
+    },
+    'DecimalWholeNumber': {
+        'values': [
+            {
+                'name': 'NIFAKE_VAL_NEGATIVE_ONE',
+                'value': -1.0
+            },
+            {
+                'name': 'NIFAKE_VAL_TWENTY_TWO',
+                'value': 22.0
+            },
+            {
+                'name': 'NIFAKE_VAL_ZERO',
+                'value': 0.0
+            }
+        ]
+    },
+    'DecimalWholeNumberMapped': {
+        'values': [
+            {
+                'name': 'NIFAKE_VAL_NEGATIVE_ONE',
+                'value': -1.0
+            },
+            {
+                'name': 'NIFAKE_VAL_TWENTY_TWO',
+                'value': 22.0
+            },
+            {
+                'name': 'NIFAKE_VAL_ZERO',
+                'value': 0.0
+            }
+        ]
+    },
     'EnumWithConverter': {
         'converted_value_to_enum_function_name': 'convert_to_enum_with_converter_enum',
         'enum_to_converted_value_function_name': 'convert_from_enum_with_converter_enum',
@@ -136,6 +200,18 @@ enums = {
                 'converts_to_value': 42,
                 'name': 'NIFAKE_VAL_BLACK',
                 'value': 42
+            }
+        ]
+    },
+    'EnumWithGrpcNameValues': {
+        'values': [
+            {
+                'name': 'NIFAKE_VAL_ONE',
+                'value': 1
+            },
+            {
+                'name': 'NIFAKE_VAL_TWO',
+                'value': 2
             }
         ]
     },
