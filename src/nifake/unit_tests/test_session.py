@@ -23,8 +23,8 @@ class TestSession(object):
 
     def setup_method(self, method):
         self.patched_library_interpreter = self.PatchedLibraryInterpreter(None)
-        self.patched_library_singleton_get = patch('nifake.session._library_interpreter.LibraryInterpreter', return_value=self.patched_library_interpreter)
-        self.patched_library_singleton_get.start()
+        self.patched_library_interpreter_ctor = patch('nifake.session._library_interpreter.LibraryInterpreter', return_value=self.patched_library_interpreter)
+        self.patched_library_interpreter_ctor.start()
 
         # We don't actually call into the nitclk DLL, but we do need to mock the function since it is called
         self.tclk_patched_library_singleton_get = patch('nitclk._library_interpreter._library_singleton.get', return_value=None)
@@ -38,7 +38,7 @@ class TestSession(object):
         self.patched_library_interpreter.unlock.side_effect = lambda *args: None
 
     def teardown_method(self, method):
-        self.patched_library_singleton_get.stop()
+        self.patched_library_interpreter_ctor.stop()
         self.tclk_patched_library_singleton_get.stop()
 
     # Session management
