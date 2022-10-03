@@ -42,6 +42,7 @@ All notable changes to this project will be documented in this file.
             * Methods added:
                 * `get_lcr_compensation_data`
     * #### Changed
+        * Added enum values to the `OutputStates` enum, and renamed existing enum values.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
@@ -49,10 +50,15 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidmm` (NI-DMM)
     * #### Added
+        * Added enum `DigitsResolution`, to clarify the available options for the `resolution_digits` attribute.
     * #### Changed
+        * The `resolution_digits` attribute's type is now `enums.DigitsResolution`.
     * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
+        * API parity with next NI-FGEN release.
+            * Attributes added:
+                * `burst_count`
     * #### Changed
     * #### Removed
 * ### `nimodinst` (NI-ModInst)
