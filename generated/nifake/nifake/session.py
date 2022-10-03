@@ -1243,6 +1243,31 @@ class Session(_SessionBase):
         self._library_interpreter.initiate()
 
     @ivi_synchronized
+    def method_using_whole_mapped_numbers(self):
+        r'''method_using_whole_mapped_numbers
+
+        TBD
+
+        Returns:
+            whole_number (float):
+
+        '''
+        whole_number = self._library_interpreter.method_using_whole_mapped_numbers()
+        return whole_number
+
+    @ivi_synchronized
+    def method_with_grpc_only_param(self, simple_param):
+        r'''method_with_grpc_only_param
+
+        TBD
+
+        Args:
+            simple_param (int):
+
+        '''
+        self._library_interpreter.method_with_grpc_only_param(simple_param)
+
+    @ivi_synchronized
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers=None):
         r'''multiple_array_types
 

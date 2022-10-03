@@ -256,6 +256,61 @@ DCNoiseRejection
 
 
 
+DigitsResolution
+----------------
+
+.. py:class:: DigitsResolution
+
+    .. py:attribute:: DigitsResolution._3
+
+
+
+        Specifies 3.5 digits resolution.
+
+        
+
+
+
+    .. py:attribute:: DigitsResolution._4
+
+
+
+        Specifies 4.5 digits resolution.
+
+        
+
+
+
+    .. py:attribute:: DigitsResolution._5
+
+
+
+        Specifies 5.5 digits resolution.
+
+        
+
+
+
+    .. py:attribute:: DigitsResolution._6
+
+
+
+        Specifies 6.5 digits resolution.
+
+        
+
+
+
+    .. py:attribute:: DigitsResolution._7
+
+
+
+        Specifies 7.5 digits resolution.
+
+        
+
+
+
 Function
 --------
 

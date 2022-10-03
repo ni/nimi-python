@@ -111,7 +111,7 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString']['value'] = None
         self._defaults['GetChannelNameFromString'] = {}
         self._defaults['GetChannelNameFromString']['return'] = 0
-        self._defaults['GetChannelNameFromString']['names'] = None
+        self._defaults['GetChannelNameFromString']['name'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
@@ -558,11 +558,11 @@ class SideEffectsHelper(object):
     def niDigital_GetChannelNameFromString(self, vi, indices, name_buffer_size, names):  # noqa: N802
         if self._defaults['GetChannelNameFromString']['return'] != 0:
             return self._defaults['GetChannelNameFromString']['return']
-        if self._defaults['GetChannelNameFromString']['names'] is None:
-            raise MockFunctionCallError("niDigital_GetChannelNameFromString", param='names')
+        if self._defaults['GetChannelNameFromString']['name'] is None:
+            raise MockFunctionCallError("niDigital_GetChannelNameFromString", param='name')
         if name_buffer_size.value == 0:
-            return len(self._defaults['GetChannelNameFromString']['names'])
-        names.value = self._defaults['GetChannelNameFromString']['names'].encode('ascii')
+            return len(self._defaults['GetChannelNameFromString']['name'])
+        names.value = self._defaults['GetChannelNameFromString']['name'].encode('ascii')
         return self._defaults['GetChannelNameFromString']['return']
 
     def niDigital_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802

@@ -161,11 +161,29 @@ class DCNoiseRejection(Enum):
 
 class Event(Enum):
     SOURCE_COMPLETE = 1030
+    r'''
+    Specifies the Source Complete event.
+    '''
     MEASURE_COMPLETE = 1031
+    r'''
+    Specifies the Measure Complete event.
+    '''
     SEQUENCE_ITERATION_COMPLETE = 1032
+    r'''
+    Specifies the Sequence Iteration Complete event.
+    '''
     SEQUENCE_ENGINE_DONE = 1033
+    r'''
+    Specifies the Sequence Engine Done event.
+    '''
     PULSE_COMPLETE = 1051
+    r'''
+    Specifies the Pulse Complete event.
+    '''
     READY_FOR_PULSE_TRIGGER = 1052
+    r'''
+    Specifies the Ready for Pulse Trigger event.
+    '''
 
 
 class InstrumentMode(Enum):
@@ -411,13 +429,25 @@ class OutputFunction(Enum):
 
 
 class OutputStates(Enum):
-    VOLTAGE = 0
+    CONSTANT_VOLTAGE = 0
     r'''
-    The device maintains a constant voltage by adjusting the current
+    The channel maintains a constant voltage by adjusting the current.
     '''
-    CURRENT = 1
+    CONSTANT_CURRENT = 1
     r'''
-    The device maintains a constant current by adjusting the voltage.
+    The channel maintains a constant current by adjusting the voltage.
+    '''
+    OVER_VOLTAGE = 2
+    r'''
+    The channel is in the over voltage state.
+    '''
+    OVER_CURRENT = 3
+    r'''
+    The channel is in the over current state.
+    '''
+    UNREGULATED = 4
+    r'''
+    The channel is in the unregulated state.
     '''
 
 
@@ -486,11 +516,29 @@ class SelfCalibrationPersistence(Enum):
 
 class SendSoftwareEdgeTriggerType(Enum):
     START = 1034
+    r'''
+    Asserts the Start trigger.
+    '''
     SOURCE = 1035
+    r'''
+    Asserts the Source trigger.
+    '''
     MEASURE = 1036
+    r'''
+    Asserts the Measure trigger.
+    '''
     SEQUENCE_ADVANCE = 1037
+    r'''
+    Asserts the Sequence Advance trigger.
+    '''
     PULSE = 1053
+    r'''
+    Asserts the Pulse trigger.
+    '''
     SHUTDOWN = 1118
+    r'''
+    Asserts the Shutdown trigger.
+    '''
 
 
 class Sense(Enum):

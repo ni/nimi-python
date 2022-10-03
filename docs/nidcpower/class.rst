@@ -2398,11 +2398,11 @@ query_output_state
                 Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
-                +--------------------------------------------+-------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputStates.VOLTAGE` | The device maintains a constant voltage by adjusting the current. |
-                +--------------------------------------------+-------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputStates.CURRENT` | The device maintains a constant current by adjusting the voltage. |
-                +--------------------------------------------+-------------------------------------------------------------------+
+                +-----------------------------------------------------+-------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.CONSTANT_VOLTAGE` | The device maintains a constant voltage by adjusting the current. |
+                +-----------------------------------------------------+-------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.CONSTANT_CURRENT` | The device maintains a constant current by adjusting the voltage. |
+                +-----------------------------------------------------+-------------------------------------------------------------------+
 
 
             :type output_state: :py:data:`nidcpower.OutputStates`
@@ -2625,19 +2625,19 @@ send_software_edge_trigger
                 Specifies which trigger to assert.
                 **Defined Values:**
 
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_START_TRIGGER`            | Asserts the Start trigger.            |
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SOURCE_TRIGGER`           | Asserts the Source trigger.           |
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_MEASURE_TRIGGER`          | Asserts the Measure trigger.          |
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER` | Asserts the Sequence Advance trigger. |
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_TRIGGER`            | Asserts the Pulse trigger.            |
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SHUTDOWN_TRIGGER`         | Asserts the Shutdown trigger.         |
-                +--------------------------------------------------------------+---------------------------------------+
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.START`            | Asserts the Start trigger.            |
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.SOURCE`           | Asserts the Source trigger.           |
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.MEASURE`          | Asserts the Measure trigger.          |
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE` | Asserts the Sequence Advance trigger. |
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.PULSE`            | Asserts the Pulse trigger.            |
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.SHUTDOWN`         | Asserts the Shutdown trigger.         |
+                +--------------------------------------------------------------------+---------------------------------------+
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -2758,19 +2758,19 @@ wait_for_event
                 Specifies which event to wait for.
                 **Defined Values:**
 
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT`             | Waits for the Source Complete event.             |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT`            | Waits for the Measure Complete event.            |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT` | Waits for the Sequence Iteration Complete event. |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT`        | Waits for the Sequence Engine Done event.        |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_COMPLETE_EVENT`              | Waits for the Pulse Complete event.              |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT`     | Waits for the Ready for Pulse Trigger event.     |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.SOURCE_COMPLETE`             | Waits for the Source Complete event.             |
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.MEASURE_COMPLETE`            | Waits for the Measure Complete event.            |
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.SEQUENCE_ITERATION_COMPLETE` | Waits for the Sequence Iteration Complete event. |
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.SEQUENCE_ENGINE_DONE`        | Waits for the Sequence Engine Done event.        |
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.PULSE_COMPLETE`              | Waits for the Pulse Complete event.              |
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.READY_FOR_PULSE_TRIGGER`     | Waits for the Ready for Pulse Trigger event.     |
+                +---------------------------------------------------------+--------------------------------------------------+
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -3166,7 +3166,11 @@ autorange_maximum_delay_after_range_change
     .. py:attribute:: autorange_maximum_delay_after_range_change
 
         Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
-        **Valid Values:** The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.
+        **Valid Values:** The minimum and maximum values of this property are hardware-dependent.
+        PXIe-4135/4136/4137: 0 to 9 seconds
+        PXIe-4138/4139: 0 to 9 seconds
+        PXIe-4147: 0 to 9 seconds
+        PXIe-4163: 0 to 0.1 seconds.
 
 
 

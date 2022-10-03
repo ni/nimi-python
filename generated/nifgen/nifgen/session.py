@@ -243,6 +243,19 @@ class _SessionBase(object):
 
     Controls the specified auxiliary power pin. Setting this property to TRUE energizes the auxiliary power when the session is committed. When this property is FALSE, the power pin of the connector outputs no power.
     '''
+    burst_count = _attributes.AttributeViInt32(1250350)
+    '''Type: int
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].burst_count`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.burst_count`
+    '''
     bus_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.BusType, 1150215)
     '''Type: enums.BusType
 

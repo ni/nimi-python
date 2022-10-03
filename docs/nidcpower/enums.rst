@@ -380,7 +380,19 @@ Event
 
 
 
+        Specifies the Source Complete event.
+
+        
+
+
+
     .. py:attribute:: Event.MEASURE_COMPLETE
+
+
+
+        Specifies the Measure Complete event.
+
+        
 
 
 
@@ -388,7 +400,19 @@ Event
 
 
 
+        Specifies the Sequence Iteration Complete event.
+
+        
+
+
+
     .. py:attribute:: Event.SEQUENCE_ENGINE_DONE
+
+
+
+        Specifies the Sequence Engine Done event.
+
+        
 
 
 
@@ -396,7 +420,19 @@ Event
 
 
 
+        Specifies the Pulse Complete event.
+
+        
+
+
+
     .. py:attribute:: Event.READY_FOR_PULSE_TRIGGER
+
+
+
+        Specifies the Ready for Pulse Trigger event.
+
+        
 
 
 
@@ -935,21 +971,51 @@ OutputStates
 
 .. py:class:: OutputStates
 
-    .. py:attribute:: OutputStates.VOLTAGE
+    .. py:attribute:: OutputStates.CONSTANT_VOLTAGE
 
 
 
-        The device maintains a constant voltage by adjusting the current
+        The channel maintains a constant voltage by adjusting the current.
 
         
 
 
 
-    .. py:attribute:: OutputStates.CURRENT
+    .. py:attribute:: OutputStates.CONSTANT_CURRENT
 
 
 
-        The device maintains a constant current by adjusting the voltage.
+        The channel maintains a constant current by adjusting the voltage.
+
+        
+
+
+
+    .. py:attribute:: OutputStates.OVER_VOLTAGE
+
+
+
+        The channel is in the over voltage state.
+
+        
+
+
+
+    .. py:attribute:: OutputStates.OVER_CURRENT
+
+
+
+        The channel is in the over current state.
+
+        
+
+
+
+    .. py:attribute:: OutputStates.UNREGULATED
+
+
+
+        The channel is in the unregulated state.
 
         
 
@@ -1109,7 +1175,19 @@ SendSoftwareEdgeTriggerType
 
 
 
+        Asserts the Start trigger.
+
+        
+
+
+
     .. py:attribute:: SendSoftwareEdgeTriggerType.SOURCE
+
+
+
+        Asserts the Source trigger.
+
+        
 
 
 
@@ -1117,7 +1195,19 @@ SendSoftwareEdgeTriggerType
 
 
 
+        Asserts the Measure trigger.
+
+        
+
+
+
     .. py:attribute:: SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE
+
+
+
+        Asserts the Sequence Advance trigger.
+
+        
 
 
 
@@ -1125,7 +1215,19 @@ SendSoftwareEdgeTriggerType
 
 
 
+        Asserts the Pulse trigger.
+
+        
+
+
+
     .. py:attribute:: SendSoftwareEdgeTriggerType.SHUTDOWN
+
+
+
+        Asserts the Shutdown trigger.
+
+        
 
 
 

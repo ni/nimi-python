@@ -273,8 +273,8 @@ class _SessionBase(object):
     Specifies the measurement resolution in absolute units. Setting this  property to higher values increases the measurement accuracy. Setting this  property to lower values increases the measurement speed.
     NI-DMM ignores this property for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the lc_number_meas_to_average property.
     '''
-    resolution_digits = _attributes.AttributeViReal64(1250003)
-    '''Type: float
+    resolution_digits = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.DigitsResolution, 1250003)
+    '''Type: enums.DigitsResolution
 
     Specifies the measurement resolution in digits. Setting this  property to higher values increases the measurement accuracy. Setting this  property to lower values increases the measurement speed.
     NI-DMM ignores this property for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the lc_number_meas_to_average property.
@@ -925,10 +925,10 @@ class _SessionBase(object):
 
 
 class Session(_SessionBase):
-    '''An NI-DMM session to an NI digital multimeter.'''
+    '''An NI-DMM session to an NI digital multimeter'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
-        r'''An NI-DMM session to an NI digital multimeter.
+        r'''An NI-DMM session to an NI digital multimeter
 
         This method completes the following tasks:
 

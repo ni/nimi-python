@@ -54,7 +54,7 @@ class TestSession(object):
         self.patched_library.niDigital_GetAttributeViInt32.side_effect = self.side_effects_helper.niDigital_GetAttributeViInt32
         self.side_effects_helper['GetAttributeViInt32']['value'] = 1  # channel_count
         self.patched_library.niDigital_GetChannelNameFromString.side_effect = self.side_effects_helper.niDigital_GetChannelNameFromString
-        self.side_effects_helper['GetChannelNameFromString']['names'] = '0'  # get_channel_names()
+        self.side_effects_helper['GetChannelNameFromString']['name'] = '0'  # get_channel_names()
 
         # for niDigital_FetchHistoryRAMCycleInformation_looping
         self.pattern_indices_looping = [0, 0, 0, 0, 0, 0, 0]

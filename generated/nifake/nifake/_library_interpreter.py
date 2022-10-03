@@ -428,6 +428,18 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(caller_has_lock_ctype.value)
 
+    def method_using_whole_mapped_numbers(self):  # noqa: N802
+        whole_number_ctype = _visatype.ViReal64()  # case S220
+        error_code = self._library.niFake_MethodUsingWholeMappedNumbers(None if whole_number_ctype is None else (ctypes.pointer(whole_number_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(whole_number_ctype.value)
+
+    def method_with_grpc_only_param(self, simple_param):  # noqa: N802
+        simple_param_ctype = _visatype.ViInt32(simple_param)  # case S150
+        error_code = self._library.niFake_MethodWithGrpcOnlyParam(simple_param_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         output_array_size_ctype = _visatype.ViInt32(output_array_size)  # case S210

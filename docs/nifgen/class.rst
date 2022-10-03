@@ -3025,6 +3025,37 @@ aux_power_enabled
                 - LabVIEW Property: **Output:Advanced:AUX Power Enabled**
                 - C Attribute: **NIFGEN_ATTR_AUX_POWER_ENABLED**
 
+burst_count
+-----------
+
+    .. py:attribute:: burst_count
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].burst_count`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.burst_count`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | int        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIFGEN_ATTR_BURST_COUNT**
+
 bus_type
 --------
 

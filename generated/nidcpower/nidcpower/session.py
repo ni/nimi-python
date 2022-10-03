@@ -277,7 +277,11 @@ class _SessionBase(object):
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
-    **Valid Values:** The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.
+    **Valid Values:** The minimum and maximum values of this property are hardware-dependent.
+    PXIe-4135/4136/4137: 0 to 9 seconds
+    PXIe-4138/4139: 0 to 9 seconds
+    PXIe-4147: 0 to 9 seconds
+    PXIe-4163: 0 to 0.1 seconds.
 
     Note:
     This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
@@ -6271,11 +6275,11 @@ class _SessionBase(object):
             output_state (enums.OutputStates): Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
-                +----------------------+-------------------------------------------------------------------+
-                | OutputStates.VOLTAGE | The device maintains a constant voltage by adjusting the current. |
-                +----------------------+-------------------------------------------------------------------+
-                | OutputStates.CURRENT | The device maintains a constant current by adjusting the voltage. |
-                +----------------------+-------------------------------------------------------------------+
+                +-------------------------------+-------------------------------------------------------------------+
+                | OutputStates.CONSTANT_VOLTAGE | The device maintains a constant voltage by adjusting the current. |
+                +-------------------------------+-------------------------------------------------------------------+
+                | OutputStates.CONSTANT_CURRENT | The device maintains a constant current by adjusting the voltage. |
+                +-------------------------------+-------------------------------------------------------------------+
 
 
         Returns:
@@ -6341,19 +6345,19 @@ class _SessionBase(object):
             trigger (enums.SendSoftwareEdgeTriggerType): Specifies which trigger to assert.
                 **Defined Values:**
 
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_START_TRIGGER            | Asserts the Start trigger.            |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_TRIGGER           | Asserts the Source trigger.           |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_TRIGGER          | Asserts the Measure trigger.          |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER | Asserts the Sequence Advance trigger. |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_PULSE_TRIGGER            | Asserts the Pulse trigger.            |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SHUTDOWN_TRIGGER         | Asserts the Shutdown trigger.         |
-                +----------------------------------------+---------------------------------------+
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.START            | Asserts the Start trigger.            |
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.SOURCE           | Asserts the Source trigger.           |
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.MEASURE          | Asserts the Measure trigger.          |
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE | Asserts the Sequence Advance trigger. |
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.PULSE            | Asserts the Pulse trigger.            |
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.SHUTDOWN         | Asserts the Shutdown trigger.         |
+                +----------------------------------------------+---------------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -6727,19 +6731,19 @@ class _SessionBase(object):
             event_id (enums.Event): Specifies which event to wait for.
                 **Defined Values:**
 
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT             | Waits for the Source Complete event.             |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT            | Waits for the Measure Complete event.            |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT | Waits for the Sequence Iteration Complete event. |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT        | Waits for the Sequence Engine Done event.        |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_PULSE_COMPLETE_EVENT              | Waits for the Pulse Complete event.              |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT     | Waits for the Ready for Pulse Trigger event.     |
-                +-------------------------------------------------+--------------------------------------------------+
+                +-----------------------------------+--------------------------------------------------+
+                | Event.SOURCE_COMPLETE             | Waits for the Source Complete event.             |
+                +-----------------------------------+--------------------------------------------------+
+                | Event.MEASURE_COMPLETE            | Waits for the Measure Complete event.            |
+                +-----------------------------------+--------------------------------------------------+
+                | Event.SEQUENCE_ITERATION_COMPLETE | Waits for the Sequence Iteration Complete event. |
+                +-----------------------------------+--------------------------------------------------+
+                | Event.SEQUENCE_ENGINE_DONE        | Waits for the Sequence Engine Done event.        |
+                +-----------------------------------+--------------------------------------------------+
+                | Event.PULSE_COMPLETE              | Waits for the Pulse Complete event.              |
+                +-----------------------------------+--------------------------------------------------+
+                | Event.READY_FOR_PULSE_TRIGGER     | Waits for the Ready for Pulse Trigger event.     |
+                +-----------------------------------+--------------------------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.

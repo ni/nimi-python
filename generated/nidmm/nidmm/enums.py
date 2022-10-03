@@ -110,6 +110,29 @@ class DCNoiseRejection(Enum):
     '''
 
 
+class DigitsResolution(Enum):
+    _3 = 3.5
+    r'''
+    Specifies 3.5 digits resolution.
+    '''
+    _4 = 4.5
+    r'''
+    Specifies 4.5 digits resolution.
+    '''
+    _5 = 5.5
+    r'''
+    Specifies 5.5 digits resolution.
+    '''
+    _6 = 6.5
+    r'''
+    Specifies 6.5 digits resolution.
+    '''
+    _7 = 7.5
+    r'''
+    Specifies 7.5 digits resolution.
+    '''
+
+
 class Function(Enum):
     DC_VOLTS = 1
     r'''

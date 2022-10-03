@@ -61,6 +61,8 @@ class Library(object):
         self.niFake_InitWithOptions_cfunc = None
         self.niFake_Initiate_cfunc = None
         self.niFake_LockSession_cfunc = None
+        self.niFake_MethodUsingWholeMappedNumbers_cfunc = None
+        self.niFake_MethodWithGrpcOnlyParam_cfunc = None
         self.niFake_MultipleArrayTypes_cfunc = None
         self.niFake_MultipleArraysSameSize_cfunc = None
         self.niFake_OneInputFunction_cfunc = None
@@ -382,6 +384,22 @@ class Library(object):
                 self.niFake_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFake_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_LockSession_cfunc(vi, caller_has_lock)
+
+    def niFake_MethodUsingWholeMappedNumbers(self, whole_number):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_MethodUsingWholeMappedNumbers_cfunc is None:
+                self.niFake_MethodUsingWholeMappedNumbers_cfunc = self._get_library_function('niFake_MethodUsingWholeMappedNumbers')
+                self.niFake_MethodUsingWholeMappedNumbers_cfunc.argtypes = [ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_MethodUsingWholeMappedNumbers_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_MethodUsingWholeMappedNumbers_cfunc(whole_number)
+
+    def niFake_MethodWithGrpcOnlyParam(self, simple_param):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_MethodWithGrpcOnlyParam_cfunc is None:
+                self.niFake_MethodWithGrpcOnlyParam_cfunc = self._get_library_function('niFake_MethodWithGrpcOnlyParam')
+                self.niFake_MethodWithGrpcOnlyParam_cfunc.argtypes = [ViInt32]  # noqa: F405
+                self.niFake_MethodWithGrpcOnlyParam_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_MethodWithGrpcOnlyParam_cfunc(simple_param)
 
     def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         with self._func_lock:

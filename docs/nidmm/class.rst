@@ -2798,13 +2798,13 @@ resolution_digits
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
+            +----------------+------------------------+
+            | Characteristic | Value                  |
+            +================+========================+
+            | Datatype       | enums.DigitsResolution |
+            +----------------+------------------------+
+            | Permissions    | read-write             |
+            +----------------+------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
