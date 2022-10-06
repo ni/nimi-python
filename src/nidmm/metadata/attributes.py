@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 23.0.0d13
+# This file is generated from NI-DMM API metadata version 23.0.0d21
 attributes = {
     1050005: {
         'access': 'read-write',
@@ -440,7 +440,6 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the measurement resolution in digits. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.\nNI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE attribute.\n'
         },
-        'enum': 'DigitsResolution',
         'lv_property': 'Configuration:Digits Resolution',
         'name': 'RESOLUTION_DIGITS',
         'type': 'ViReal64'

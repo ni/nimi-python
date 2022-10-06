@@ -273,8 +273,8 @@ class _SessionBase(object):
     Specifies the measurement resolution in absolute units. Setting this  property to higher values increases the measurement accuracy. Setting this  property to lower values increases the measurement speed.
     NI-DMM ignores this property for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the lc_number_meas_to_average property.
     '''
-    resolution_digits = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.DigitsResolution, 1250003)
-    '''Type: enums.DigitsResolution
+    resolution_digits = _attributes.AttributeViReal64(1250003)
+    '''Type: float
 
     Specifies the measurement resolution in digits. Setting this  property to higher values increases the measurement accuracy. Setting this  property to lower values increases the measurement speed.
     NI-DMM ignores this property for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the lc_number_meas_to_average property.

@@ -50,9 +50,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidmm` (NI-DMM)
     * #### Added
-        * Added enum `DigitsResolution`, to clarify the available options for the `resolution_digits` attribute.
     * #### Changed
-        * The `resolution_digits` attribute's type is now `enums.DigitsResolution`.
     * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
