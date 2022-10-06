@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.0.0d13
+# This file is generated from NI-FGEN API metadata version 23.0.0d25
 enums = {
     'AnalogPath': {
         'values': [
@@ -61,14 +61,6 @@ enums = {
             },
             {
                 'name': 'NIFGEN_VAL_NO_WAVEFORM',
-                'value': -1
-            }
-        ]
-    },
-    'BurstCount': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_GENERATE_CONTINUOUS',
                 'value': -1
             }
         ]
@@ -135,59 +127,6 @@ enums = {
             {
                 'name': 'NIFGEN_VAL_BIG_ENDIAN',
                 'value': 1
-            }
-        ]
-    },
-    'CalAdcInput': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies that the ADC measures the analog output.'
-                },
-                'name': 'NIFGEN_VAL_ANALOG_OUTPUT',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the ADC measures the internal voltage reference.'
-                },
-                'name': 'NIFGEN_VAL_INTERNAL_VOLTAGE_REFERENCE',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the ADC measures the ground voltage.'
-                },
-                'name': 'NIFGEN_VAL_GROUND',
-                'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the ADC measures the differential analog output.'
-                },
-                'name': 'NIFGEN_VAL_ANALOG_OUTPUT_DIFFERENTIAL',
-                'value': 3
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the ADC measures the positive differential analog output.'
-                },
-                'name': 'NIFGEN_VAL_ANALOG_OUTPUT_PLUS',
-                'value': 4
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the ADC measures the negative differential analog output.'
-                },
-                'name': 'NIFGEN_VAL_ANALOG_OUTPUT_MINUS',
-                'value': 5
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the ADC measures the idle analog output.'
-                },
-                'name': 'NIFGEN_VAL_ANALOG_OUTPUT_IDLE',
-                'value': 6
             }
         ]
     },
@@ -599,70 +538,6 @@ enums = {
             }
         ]
     },
-    'OspOverflowStatus': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_NONE',
-                'value': 0
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_PRE_FILTER_GAIN_I',
-                'value': 1
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_PRE_FILTER_GAIN_Q',
-                'value': 2
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_PRE_FILTER_OFFSET_I',
-                'value': 4
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_PRE_FILTER_OFFSET_Q',
-                'value': 8
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_FIR_FILTER_I',
-                'value': 16
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_PFIR_FILTER_I',
-                'value': 16
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_FIR_FILTER_Q',
-                'value': 32
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_PFIR_FILTER_Q',
-                'value': 32
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_CIC_FILTER_I',
-                'value': 64
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_CIC_FILTER_Q',
-                'value': 128
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_COMPLEX_DATA',
-                'value': 256
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_CFIR_FILTER_I',
-                'value': 512
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_CFIR_FILTER_Q',
-                'value': 1024
-            },
-            {
-                'name': 'NIFGEN_VAL_OSP_OVERFLOW_EQUALIZER',
-                'value': 2048
-            }
-        ]
-    },
     'OutputImpedance': {
         'values': [
             {
@@ -803,138 +678,6 @@ enums = {
             {
                 'name': 'NIFGEN_VAL_WAVEFORM_POSITION_CURRENT',
                 'value': 1
-            }
-        ]
-    },
-    'RouteSignalFrom': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_MARKER',
-                'value': 1001
-            },
-            {
-                'name': 'NIFGEN_VAL_SYNC_OUT',
-                'value': 1002
-            },
-            {
-                'name': 'NIFGEN_VAL_OUT_START_TRIGGER',
-                'value': 1004
-            },
-            {
-                'name': 'NIFGEN_VAL_BOARD_CLOCK',
-                'value': 1006
-            },
-            {
-                'name': 'NIFGEN_VAL_SYNCHRONIZATION',
-                'value': 1007
-            },
-            {
-                'name': 'NIFGEN_VAL_SOFTWARE_TRIG',
-                'value': 2
-            },
-            {
-                'name': 'NIFGEN_VAL_REF_OUT',
-                'value': 1008
-            },
-            {
-                'name': 'NIFGEN_VAL_CLOCK_OUT',
-                'value': 1009
-            },
-            {
-                'name': 'NIFGEN_VAL_PXI_STAR',
-                'value': 131
-            },
-            {
-                'name': 'NIFGEN_VAL_PFI_0',
-                'value': 1011
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_0',
-                'value': 141
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_1',
-                'value': 142
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_2',
-                'value': 143
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_3',
-                'value': 144
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_4',
-                'value': 145
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_5',
-                'value': 146
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_6',
-                'value': 147
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_7',
-                'value': 1010
-            },
-            {
-                'name': 'NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK',
-                'value': 1019
-            }
-        ]
-    },
-    'RouteSignalTo': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_RTSI_0',
-                'value': 141
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_1',
-                'value': 142
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_2',
-                'value': 143
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_3',
-                'value': 144
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_4',
-                'value': 145
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_5',
-                'value': 146
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_6',
-                'value': 147
-            },
-            {
-                'name': 'NIFGEN_VAL_RTSI_7',
-                'value': 1010
-            },
-            {
-                'name': 'NIFGEN_VAL_REF_OUT',
-                'value': 1008
-            },
-            {
-                'name': 'NIFGEN_VAL_PFI_0',
-                'value': 1011
-            },
-            {
-                'name': 'NIFGEN_VAL_PFI_1',
-                'value': 1012
-            },
-            {
-                'name': 'NIFGEN_VAL_PXI_STAR',
-                'value': 131
             }
         ]
     },

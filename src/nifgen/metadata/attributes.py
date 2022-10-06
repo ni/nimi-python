@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.0.0d13
+# This file is generated from NI-FGEN API metadata version 23.0.0d25
 attributes = {
     1050005: {
         'access': 'read-write',
@@ -1185,15 +1185,6 @@ attributes = {
         },
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Max Loop Count',
         'name': 'MAX_LOOP_COUNT',
-        'type': 'ViInt32'
-    },
-    1250350: {
-        'access': 'read-write',
-        'grpc_enum': 'BurstCount',
-        'name': 'BURST_COUNT',
-        'supported_rep_caps': [
-            'channels'
-        ],
         'type': 'ViInt32'
     }
 }

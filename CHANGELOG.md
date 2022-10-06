@@ -54,9 +54,6 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
-        * API parity with next NI-FGEN release.
-            * Attributes added:
-                * `burst_count`
     * #### Changed
     * #### Removed
 * ### `nimodinst` (NI-ModInst)
