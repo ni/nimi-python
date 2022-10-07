@@ -15,4 +15,3 @@
 
         year, month, day = self._cal_fetch_date(enums._CalibrationTypes.${calibration_type})
         return hightime.datetime(year, month, day)
-

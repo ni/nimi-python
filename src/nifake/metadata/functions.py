@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 22.5.0d24
+# This file is generated from NI-FAKE API metadata version 23.0.0d13
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -252,11 +252,13 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
                 'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_read_method',
                 'method_python_name_suffix': '_into',
                 'session_filename': 'numpy_read_method'
             }
@@ -1180,6 +1182,14 @@ functions = {
             'description': 'Returns the error information associated with the session.'
         },
         'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -1229,6 +1239,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'datetime_wrappers'
             }
@@ -1396,6 +1407,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -1422,6 +1434,33 @@ functions = {
         'render_in_session_base': True,
         'returns': 'ViStatus',
         'use_session_lock': False
+    },
+    'MethodUsingWholeMappedNumbers': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'out',
+                'grpc_enum': 'DecimalWholeNumberMapped',
+                'name': 'wholeNumber',
+                'type': 'ViReal64'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'MethodWithGrpcOnlyParam': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'simpleParam',
+                'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
     },
     'MultipleArrayTypes': {
         'codegen_method': 'public',
@@ -1734,6 +1773,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'get_channel_names'
             }
@@ -2440,6 +2480,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -2509,11 +2550,13 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
                 'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -2557,6 +2600,7 @@ functions = {
         'documentation': {
             'description': 'Closes the specified session and deallocates resources that it reserved.'
         },
+        'grpc_name': 'Close',
         'parameters': [
             {
                 'direction': 'in',
@@ -2576,6 +2620,7 @@ functions = {
         'documentation': {
             'description': 'Takes the errorCode returned by a functiona and returns it as a user-readable string.'
         },
+        'grpc_name': 'ErrorMessage',
         'is_error_handling': True,
         'parameters': [
             {
@@ -2615,9 +2660,11 @@ functions = {
         'documentation': {
             'description': 'Performs a self-test'
         },
+        'grpc_name': 'FancySelfTest',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_self_test'
             }
@@ -2640,6 +2687,7 @@ functions = {
         'documentation': {
             'description': 'Performs a self-test.'
         },
+        'grpc_name': 'SelfTest',
         'parameters': [
             {
                 'direction': 'in',

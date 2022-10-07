@@ -91,7 +91,7 @@ table_contents = [
          ]
 if helper.module_supports_repeated_caps(config):
     table_contents.append(('Repeated Capabilities', helper.get_attribute_repeated_caps(a)))
-  
+
 table = helper.as_rest_table(table_contents)
 
 helper.add_attribute_rep_cap_tip(a, config)
@@ -115,5 +115,3 @@ desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 % endfor
 
 .. contents:: nitclk
-
-

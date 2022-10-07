@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 22.8.0d53
+# This file is generated from NI-SCOPE API metadata version 23.0.0d28
 functions = {
     'Abort': {
         'documentation': {
@@ -1218,6 +1218,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_fetch'
             }
@@ -1305,7 +1306,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms())'
+                    'value': '(num_samples * self.actual_num_wfms(channel_list))'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1321,6 +1322,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'get_equalization_filter_coefficients'
             }
@@ -1354,6 +1356,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_get_cal_last_date'
             }
@@ -1389,6 +1392,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_get_cal_last_temp'
             }
@@ -1422,6 +1426,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_get_cal_last_date'
             }
@@ -1457,6 +1462,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_get_cal_last_temp'
             }
@@ -1491,6 +1497,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_fetch'
             }
@@ -1578,7 +1585,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms())'
+                    'value': '(num_samples * self.actual_num_wfms(channel_list))'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1595,10 +1602,12 @@ functions = {
         'method_name_for_documentation': 'fetch',
         'method_templates': [
             {
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
+                'library_interpreter_filename': 'numpy_read_method',
                 'method_python_name_suffix': '_into_numpy',
                 'session_filename': 'numpy_read_method'
             }
@@ -1648,7 +1657,7 @@ functions = {
                 'numpy': True,
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms())'
+                    'value': '(num_samples * self.actual_num_wfms(channel_list))'
                 },
                 'type': 'ViReal64[]',
                 'use_array': True
@@ -1661,7 +1670,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1729,7 +1738,7 @@ functions = {
                 'name': 'measWfm',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(measurement_waveform_size * self._actual_num_wfms())'
+                    'value': '(measurement_waveform_size * self.actual_num_wfms(channel_list))'
                 },
                 'type': 'ViReal64[]'
             },
@@ -1741,7 +1750,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1757,6 +1766,7 @@ functions = {
         'method_name_for_documentation': 'fetch_into',
         'method_templates': [
             {
+                'library_interpreter_filename': 'numpy_read_method',
                 'method_python_name_suffix': '_into_numpy',
                 'session_filename': 'numpy_read_method'
             }
@@ -1806,7 +1816,7 @@ functions = {
                 'numpy': True,
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms())'
+                    'value': '(num_samples * self.actual_num_wfms(channel_list))'
                 },
                 'type': 'ViInt16[]',
                 'use_array': True
@@ -1819,7 +1829,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1835,6 +1845,7 @@ functions = {
         'method_name_for_documentation': 'fetch_into',
         'method_templates': [
             {
+                'library_interpreter_filename': 'numpy_read_method',
                 'method_python_name_suffix': '_into_numpy',
                 'session_filename': 'numpy_read_method'
             }
@@ -1884,7 +1895,7 @@ functions = {
                 'numpy': True,
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms())'
+                    'value': '(num_samples * self.actual_num_wfms(channel_list))'
                 },
                 'type': 'ViInt32[]',
                 'use_array': True
@@ -1897,7 +1908,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1913,6 +1924,7 @@ functions = {
         'method_name_for_documentation': 'fetch_into',
         'method_templates': [
             {
+                'library_interpreter_filename': 'numpy_read_method',
                 'method_python_name_suffix': '_into_numpy',
                 'session_filename': 'numpy_read_method'
             }
@@ -1962,7 +1974,7 @@ functions = {
                 'numpy': True,
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms())'
+                    'value': '(num_samples * self.actual_num_wfms(channel_list))'
                 },
                 'type': 'ViInt8[]',
                 'use_array': True
@@ -1975,7 +1987,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -1991,6 +2003,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '_into',
                 'session_filename': 'fetch_waveform'
             }
@@ -2077,7 +2090,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -2135,7 +2148,7 @@ functions = {
                 'name': 'result',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'ViReal64[]'
             },
@@ -2147,7 +2160,7 @@ functions = {
                 'name': 'mean',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'ViReal64[]'
             },
@@ -2159,7 +2172,7 @@ functions = {
                 'name': 'stdev',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'ViReal64[]'
             },
@@ -2171,7 +2184,7 @@ functions = {
                 'name': 'min',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'ViReal64[]'
             },
@@ -2183,7 +2196,7 @@ functions = {
                 'name': 'max',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'ViReal64[]'
             },
@@ -2195,7 +2208,7 @@ functions = {
                 'name': 'numInStats',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'ViInt32[]'
             }
@@ -2471,6 +2484,14 @@ functions = {
             'note': '\nThis function is included for compliance with the IviScope Class\nSpecification.\n'
         },
         'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -2692,6 +2713,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -2802,7 +2824,7 @@ functions = {
                 'name': 'waveform',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms())'
+                    'value': '(num_samples * self.actual_num_wfms(channel_list))'
                 },
                 'type': 'ViReal64[]',
                 'use_array': True
@@ -2815,7 +2837,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': 'self._actual_num_wfms()'
+                    'value': 'self.actual_num_wfms(channel_list)'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
@@ -3096,6 +3118,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -3128,6 +3151,7 @@ functions = {
         'documentation': {
             'description': '\nWhen you are finished using an instrument driver session, you must call\nthis function to perform the following actions:\n\n-  Closes the instrument I/O session.\n-  Destroys the IVI session and all of its attributes.\n-  Deallocates any memory resources used by the IVI session.\n'
         },
+        'grpc_name': 'Close',
         'parameters': [
             {
                 'direction': 'in',
@@ -3147,6 +3171,7 @@ functions = {
         'documentation': {
             'description': 'Takes the **Error_Code** returned by the instrument driver functions, interprets it, and returns it as a user-readable string.'
         },
+        'grpc_name': 'ErrorMessage',
         'is_error_handling': True,
         'parameters': [
             {
@@ -3200,9 +3225,11 @@ functions = {
                 'Description'
             ]
         },
+        'grpc_name': 'FancySelfTest',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_self_test'
             }
@@ -3224,6 +3251,7 @@ functions = {
         'documentation': {
             'description': "\nStops the acquisition, releases routes, and all session attributes are\nreset to their `default\nstates <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cviattribute_defaults)>`__.\n"
         },
+        'grpc_name': 'Reset',
         'parameters': [
             {
                 'direction': 'in',
@@ -3241,6 +3269,7 @@ functions = {
         'documentation': {
             'description': 'Runs the instrument self-test routine and returns the test result(s).'
         },
+        'grpc_name': 'SelfTest',
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {

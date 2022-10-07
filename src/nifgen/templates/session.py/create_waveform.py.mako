@@ -26,4 +26,3 @@
                 raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(waveform_data_array.typecode, 'd (double)', 'h (16 bit int)'))
 
         return self._create_waveform_f64(waveform_data_array)
-

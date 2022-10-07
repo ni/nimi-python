@@ -22,7 +22,6 @@ ${template_parameters['encoding_tag']}
         render_initiate_in_session_base = functions[config['context_manager_name']['initiate_function']]['render_in_session_base']
 %>\
 import array  # noqa: F401
-import ctypes
 % if config['use_locking']:
 # Used by @ivi_synchronized
 from functools import wraps
@@ -32,8 +31,7 @@ from functools import wraps
 import ${module_name}._attributes as _attributes
 % endif
 import ${module_name}._converters as _converters
-import ${module_name}._library_singleton as _library_singleton
-import ${module_name}._visatype as _visatype
+import ${module_name}._library_interpreter as _library_interpreter
 import ${module_name}.enums as enums
 import ${module_name}.errors as errors
 % for c in config['custom_types']:
@@ -49,39 +47,6 @@ import nitclk
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
-
-
-# Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
-    if isinstance(value, array.array):
-        assert library_type is not None, 'library_type is required for array.array'
-        addr, _ = value.buffer_info()
-        return ctypes.cast(addr, ctypes.POINTER(library_type))
-    elif str(type(value)).find("'numpy.ndarray'") != -1:
-        import numpy
-        return numpy.ctypeslib.as_ctypes(value)
-    elif isinstance(value, bytes):
-        return ctypes.cast(value, ctypes.POINTER(library_type))
-    elif isinstance(value, list):
-        assert library_type is not None, 'library_type is required for list'
-        return (library_type * len(value))(*value)
-    else:
-        if library_type is not None and size is not None:
-            return (library_type * size)()
-        else:
-            return None
-
-
-def get_ctypes_and_array(value, array_type):
-    if value is not None:
-        if isinstance(value, array.array):
-            value_array = value
-        else:
-            value_array = array.array(array_type, value)
-    else:
-        value_array = None
-
-    return value_array
 
 
 % if session_context_manager is not None:
@@ -138,11 +103,9 @@ class _RepeatedCapabilities(object):
         complete_rep_cap_list = [current_rep_cap + self._separator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
 
         return _SessionBase(
-            ${config['session_handle_parameter_name']}=self._session._${config['session_handle_parameter_name']},
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
-            library=self._session._library,
-            encoding=self._session._encoding,
+            library_interpreter=self._session._library_interpreter,
             freeze_it=True
         )
 
@@ -198,20 +161,16 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 % if attributes:
 
 % endif
-    def __init__(self, repeated_capability_list, all_channels_in_session, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
-        self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
-        self._library = library
-        self._encoding = encoding
+        self._library_interpreter = library_interpreter
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("${config['session_handle_parameter_name']}=" + pp.pformat(${config['session_handle_parameter_name']}))
-        param_list.append("library=" + pp.pformat(library))
-        param_list.append("encoding=" + pp.pformat(encoding))
+        param_list.append("library_interpreter=" + pp.pformat(library_interpreter))
         self._param_list = ', '.join(param_list)
 
 % if len(config['repeated_capabilities']) > 0:
@@ -233,28 +192,6 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
-
-        Returns the error description.
-        '''
-        try:
-            _, error_string = self._get_error()
-            return error_string
-        except errors.Error:
-            pass
-
-        try:
-            '''
-            It is expected for _get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use _error_message instead. It doesn't require a session.
-            '''
-            error_string = self._error_message(error_code)
-            return error_string
-        except errors.Error:
-            return "Failed to retrieve error description."
-
 % if session_context_manager is not None and render_initiate_in_session_base:
     def initiate(self):
         '''initiate
@@ -265,15 +202,18 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 
 % endif
     ''' These are code-generated '''
-
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+% if method_template['session_filename'] != '/none':
+
 % if functions[func_name]['use_session_lock'] and config['use_locking']:
     @ivi_synchronized
 % endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+% endif
 % endfor
 % endfor
+
 
 class Session(_SessionBase):
     '''${config['session_class_description']}'''
@@ -286,9 +226,7 @@ class Session(_SessionBase):
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            ${config['session_handle_parameter_name']}=None,
-            library=None,
-            encoding=None,
+            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
             freeze_it=False,
             all_channels_in_session=None
         )
@@ -297,15 +235,16 @@ class Session(_SessionBase):
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']})
 %   endif
 % endfor
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
 
         # Call specified init function
-        self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
-        self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
+        # Note that _library_interpreter sets _${config['session_handle_parameter_name']} to 0 in its constructor, so that if
+        # ${init_function['python_name']} fails, the error handler can reference it.
+        # And then once ${init_function['python_name']} succeeds, we can update _library_interpreter._${config['session_handle_parameter_name']}
+        # with the actual session handle.
+        self._library_interpreter._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
 
 % if config['uses_nitclk']:
-        self.tclk = nitclk.SessionReference(self._${config['session_handle_parameter_name']})
+        self.tclk = nitclk.SessionReference(self._library_interpreter._${config['session_handle_parameter_name']})
 
 % endif
         # Store the parameter list for later printing in __repr__
@@ -318,7 +257,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._${config['session_handle_parameter_name']}` is set
+        # handle `self._library_interpreter._${config['session_handle_parameter_name']}` is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -351,19 +290,19 @@ class Session(_SessionBase):
         try:
             self._${close_function_name}()
         except errors.DriverError:
-            self._${config['session_handle_parameter_name']} = 0
+            self._library_interpreter._${config['session_handle_parameter_name']} = 0
             raise
-        self._${config['session_handle_parameter_name']} = 0
+        self._library_interpreter._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
-
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+% if method_template['session_filename'] != '/none':
+
 % if functions[func_name]['use_session_lock'] and config['use_locking']:
     @ivi_synchronized
 % endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+% endif
 % endfor
 % endfor
-
-

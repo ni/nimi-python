@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-ModInst API metadata version 22.8.0d21
+# This file is generated from NI-ModInst API metadata version 23.0.0d6
 functions = {
     'CloseInstalledDevicesSession': {
         'codegen_method': 'private',
@@ -24,6 +24,14 @@ functions = {
             'description': '\nReturns detailed information about the last error that occurred in the\ncurrent thread during a call to one of the NI-ModInst functions. When\none of the other functions returns a negative value as its return value,\nimmediately call this function to get detailed information about the\nerror. Because error information is stored on a thread-by-thread basis,\nbe sure to call this function in the same thread that called the\nfunction that returned an error. The extended error information is\nreturned as a string. To find out the length of the error information\nstring before you allocate a buffer for it, call this function and pass\n0 as the errorInfoBufferSize parameter or NULL as the errorInfo\nparameter. When you do this, the function returns the size of the buffer\nrequired to hold the error information string as its return value. You\ncan then allocate an appropriately sized string character buffer and\ncall this function again.\n'
         },
         'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -145,7 +153,7 @@ functions = {
     'OpenInstalledDevicesSession': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCreates a handle to a list of installed devices supported by the\nspecified driver. Call this function and pass in the name of an NI\ninstrument driver, such as "NI-SCOPE". This function\nsearches the system and constructs a list of all the installed devices\nthat are supported by that driver, and then returns both a handle to\nthis list and the number of devices found. The handle is used with other\nfunctions to query for attributes such as device name and model, and to\nsafely discard the list when finished. Note This handle reflects the\nsystem state when the handle is created (that is, when you call this\nfunction. If you remove devices from the system or rename them in\nMeasurement & Automation Explorer (MAX), this handle may not refer to an\naccurate list of devices. You should destroy the handle using\nniModInst_CloseInstalledDevicesSession and create a new handle using\nthis function.\n'
+            'description': '\nCreates a handle to a list of installed devices supported by the\nspecified driver. Call this function and pass in the name of an NI \ninstrument driver, such as "NI-SCOPE". This function\nsearches the system and constructs a list of all the installed devices\nthat are supported by that driver, and then returns both a handle to\nthis list and the number of devices found. The handle is used with other\nfunctions to query for attributes such as device name and model, and to\nsafely discard the list when finished. Note This handle reflects the\nsystem state when the handle is created (that is, when you call this\nfunction. If you remove devices from the system or rename them in\nMeasurement & Automation Explorer (MAX), this handle may not refer to an\naccurate list of devices. You should destroy the handle using\nniModInst_CloseInstalledDevicesSession and create a new handle using\nthis function.\n'
         },
         'parameters': [
             {

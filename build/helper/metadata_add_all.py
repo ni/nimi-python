@@ -49,13 +49,20 @@ def _add_enum(n):
 
 
 def _add_python_method_name(function, name):
-    '''Adds a python_name' key/value pair to the function metadata if not already specified'''
+    '''Adds 'python_name' to the function metadata if not already there'''
     if 'python_name' not in function:
         if function['codegen_method'] == 'private':
             function['python_name'] = '_' + camelcase_to_snakecase(name)
         else:
             function['python_name'] = camelcase_to_snakecase(name)
             assert function['codegen_method'] == 'no' or 'method_name_for_documentation' not in function, "'method_name_for_documentation' not allowed to be set: function['method_name_for_documentation'] = '{0}', function['python_name'] = '{1}'".format(function['method_name_for_documentation'], function['python_name'])
+    return function
+
+
+def _add_library_interpreter_method_name(function, name):
+    '''Adds 'library_interpreter_name' to the function metadata if not already there'''
+    if 'library_interpreter_name' not in function:
+        function['library_interpreter_name'] = function['python_name'].lstrip('_')
     return function
 
 
@@ -188,12 +195,22 @@ def _add_buffer_info(parameter, config):
     return parameter
 
 
-def _add_library_method_call_snippet(parameter):
-    '''Code snippet for calling a method of Library for this parameter.'''
+def _add_ctypes_method_call_snippet(parameter):
+    '''Code snippet for calling a ctypes method for this parameter.'''
     if parameter['direction'] == 'out' and not parameter['is_buffer'] and not parameter['is_string']:
-        parameter['library_method_call_snippet'] = 'None if {0} is None else (ctypes.pointer({0}))'.format(parameter['ctypes_variable_name'])
+        parameter['ctypes_method_call_snippet'] = 'None if {0} is None else (ctypes.pointer({0}))'.format(parameter['ctypes_variable_name'])
     else:
-        parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
+        parameter['ctypes_method_call_snippet'] = parameter['ctypes_variable_name']
+
+
+def _add_library_interpreter_method_call_snippet(parameter, config):
+    '''Code snippet for calling a method of Library for this parameter.'''
+    if parameter['is_session_handle']:
+        parameter['library_interpreter_method_call_snippet'] = 'self._' + config['session_handle_parameter_name']
+    elif parameter['is_repeated_capability']:
+        parameter['library_interpreter_method_call_snippet'] = 'self._repeated_capability'
+    else:
+        parameter['library_interpreter_method_call_snippet'] = parameter['python_name']
 
 
 def _add_default_value_name(parameter):
@@ -240,10 +257,11 @@ _repeated_capability_parameter_names = ['channelName', 'channelList', 'channel',
 def _add_method_templates(f):
     '''Adds a list of 'method_template_filenames' value to function metadata if not found. This are the mako templates that will be used to render the method.'''
     if 'method_templates' not in f:
-        f['method_templates'] = [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ]
+        f['method_templates'] = [{'session_filename': '/default_method', 'library_interpreter_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ]
     # Prefix the templates with a / so mako can find them. Not sure mako it works this way.
     for method_template in f['method_templates']:
         method_template['session_filename'] = '/' + method_template['session_filename'] if method_template['session_filename'][0] != '/' else method_template['session_filename']
+        method_template['library_interpreter_filename'] = '/' + method_template['library_interpreter_filename'] if method_template['library_interpreter_filename'][0] != '/' else method_template['library_interpreter_filename']
         # Some functions don't get code-generated documentation (i.e. private methods) so no need to specify template for those.
         if 'documentation_filename' in method_template and method_template['documentation_filename'] is not None:
             method_template['documentation_filename'] = '/' + method_template['documentation_filename'] if method_template['documentation_filename'][0] != '/' else method_template['documentation_filename']
@@ -372,6 +390,7 @@ def add_all_function_metadata(functions, config):
     for f in functions:
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
+        _add_library_interpreter_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
         _add_method_templates(functions[f])
         _add_use_session_lock(functions[f])
@@ -392,7 +411,8 @@ def add_all_function_metadata(functions, config):
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
             _add_is_session_handle(p)
-            _add_library_method_call_snippet(p)
+            _add_ctypes_method_call_snippet(p)
+            _add_library_interpreter_method_call_snippet(p, config)
 
         # We can't do these until the parameters have been processed
         _add_has_repeated_capability(functions[f])
@@ -585,11 +605,12 @@ def _add_enum_value_python_name(enum_info, config):
         for v in enum_info['values']:
             assert v['python_name'].endswith(suffix), '{0} does not end with {1}'.format(v['name'], suffix)
             v['suffix'] = suffix
-            v['python_name'] = v['python_name'].replace(suffix, '')
+            v['python_name'] = v['python_name'][:-len(suffix)]
 
     # We need to check again to see if we have any values that start with a digit
     # If we are not going to code generate this enum, we don't care about this
     for v in enum_info['values']:
+        assert v['python_name'], enum_info
         if enum_info['codegen_method'] != 'no' and v['python_name'][0].isdigit():
             raise ValueError('Invalid name: {}'.format(v['python_name']))  # pragma: no cover
 
@@ -747,7 +768,7 @@ functions_input = {
     'MakeAFoo': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
-        'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+        'method_templates': [{'session_filename': '/cool_template', 'library_interpreter_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
         'parameters': [
             {
                 'direction': 'in',
@@ -900,6 +921,7 @@ functions_input = {
         'method_templates': [
             {
                 'session_filename': '/cool_template',
+                'library_interpreter_filename': '/cool_template',
                 'documentation_filename': '/cool_template',
                 'method_python_name_suffix': '',
             },
@@ -921,9 +943,10 @@ functions_expected = {
         'has_repeated_capability': False,
         'is_error_handling': False,
         'render_in_session_base': False,
-        'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+        'method_templates': [{'session_filename': '/cool_template', 'library_interpreter_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
         'parameters': [
             {
+                'ctypes_method_call_snippet': 'vi_ctype',
                 'ctypes_type': 'ViSession',
                 'ctypes_variable_name': 'vi_ctype',
                 'ctypes_type_library_call': 'ViSession',
@@ -951,11 +974,12 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViSession',
-                'library_method_call_snippet': 'vi_ctype',
+                'library_interpreter_method_call_snippet': 'self._vi',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
             },
             {
+                'ctypes_method_call_snippet': 'name_ctype',
                 'ctypes_type': 'ViString',
                 'ctypes_variable_name': 'name_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
@@ -980,11 +1004,12 @@ functions_expected = {
                 'python_name_with_doc_default': 'name',
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'ViString',
-                'library_method_call_snippet': 'name_ctype',
+                'library_interpreter_method_call_snippet': 'name',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'name',
             },
             {
+                'ctypes_method_call_snippet': 'pin_data_buffer_size_ctype',
                 'ctypes_type': 'ViInt32',
                 'ctypes_variable_name': 'pin_data_buffer_size_ctype',
                 'ctypes_type_library_call': 'ViInt32',
@@ -1012,11 +1037,12 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViInt32',
-                'library_method_call_snippet': 'pin_data_buffer_size_ctype',
+                'library_interpreter_method_call_snippet': 'pin_data_buffer_size',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'pin_data_buffer_size',
             },
             {
+                'ctypes_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
                 'ctypes_type': 'ViInt32',
                 'ctypes_variable_name': 'actual_num_pin_data_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
@@ -1044,11 +1070,12 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViInt32',
-                'library_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
+                'library_interpreter_method_call_snippet': 'actual_num_pin_data',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'actual_num_pin_data',
             },
             {
+                'ctypes_method_call_snippet': 'expected_pin_states_ctype',
                 'ctypes_type': 'ViUInt8',
                 'ctypes_variable_name': 'expected_pin_states_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViUInt8)',
@@ -1078,11 +1105,12 @@ functions_expected = {
                     'value_twist': 'actualNumPinData'
                 },
                 'type': 'ViUInt8',
-                'library_method_call_snippet': 'expected_pin_states_ctype',
+                'library_interpreter_method_call_snippet': 'expected_pin_states',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'expected_pin_states',
             },
             {
+                'ctypes_method_call_snippet': 'custom_type_input_ctype',
                 'ctypes_type': 'struct_CustomStruct',
                 'ctypes_variable_name': 'custom_type_input_ctype',
                 'ctypes_type_library_call': 'custom_struct.struct_CustomStruct',
@@ -1110,11 +1138,12 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'struct_CustomStruct',
-                'library_method_call_snippet': 'custom_type_input_ctype',
+                'library_interpreter_method_call_snippet': 'custom_type_input',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_input',
             },
             {
+                'ctypes_method_call_snippet': 'None if custom_type_output_ctype is None else (ctypes.pointer(custom_type_output_ctype))',
                 'ctypes_type': 'struct_CustomStruct',
                 'ctypes_variable_name': 'custom_type_output_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(custom_struct.struct_CustomStruct)',
@@ -1142,11 +1171,12 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'struct_CustomStruct',
-                'library_method_call_snippet': 'None if custom_type_output_ctype is None else (ctypes.pointer(custom_type_output_ctype))',
+                'library_interpreter_method_call_snippet': 'custom_type_output',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_output',
             },
             {
+                'ctypes_method_call_snippet': 'custom_type_without_struct_prefix_input_ctype',
                 'ctypes_type': 'struct_CustomStruct',
                 'ctypes_variable_name': 'custom_type_without_struct_prefix_input_ctype',
                 'ctypes_type_library_call': 'custom_struct.struct_CustomStruct',
@@ -1174,11 +1204,12 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'struct_CustomStruct',
-                'library_method_call_snippet': 'custom_type_without_struct_prefix_input_ctype',
+                'library_interpreter_method_call_snippet': 'custom_type_without_struct_prefix_input',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_input',
             },
             {
+                'ctypes_method_call_snippet': 'None if custom_type_without_struct_prefix_output_ctype is None else (ctypes.pointer(custom_type_without_struct_prefix_output_ctype))',
                 'ctypes_type': 'struct_CustomStruct',
                 'ctypes_variable_name': 'custom_type_without_struct_prefix_output_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(custom_struct.struct_CustomStruct)',
@@ -1206,21 +1237,23 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'struct_CustomStruct',
-                'library_method_call_snippet': 'None if custom_type_without_struct_prefix_output_ctype is None else (ctypes.pointer(custom_type_without_struct_prefix_output_ctype))',
+                'library_interpreter_method_call_snippet': 'custom_type_without_struct_prefix_output',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_output',
             },
         ],
         'python_name': 'make_a_foo',
+        'library_interpreter_name': 'make_a_foo',
         'returns': 'ViStatus',
     },
     'MakeAPrivateMethod': {
         'codegen_method': 'private',
         'returns': 'ViStatus',
         'use_session_lock': True,
-        'method_templates': [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
+        'method_templates': [{'session_filename': '/default_method', 'library_interpreter_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
         'parameters': [
             {
+                'ctypes_method_call_snippet': 'vi_ctype',
                 'direction': 'in',
                 'enum': None,
                 'numpy': False,
@@ -1248,11 +1281,12 @@ functions_expected = {
                 'python_name_with_doc_default': 'vi',
                 'is_repeated_capability': False,
                 'is_session_handle': True,
-                'library_method_call_snippet': 'vi_ctype',
+                'library_interpreter_method_call_snippet': 'self._vi',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
             },
             {
+                'ctypes_method_call_snippet': 'status_ctype',
                 'direction': 'out',
                 'enum': None,
                 'numpy': False,
@@ -1280,11 +1314,12 @@ functions_expected = {
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
                 'is_session_handle': False,
-                'library_method_call_snippet': 'status_ctype',
+                'library_interpreter_method_call_snippet': 'status',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
             },
             {
+                'ctypes_method_call_snippet': 'data_buffer_size_ctype',
                 'ctypes_type': 'ViInt32',
                 'ctypes_variable_name': 'data_buffer_size_ctype',
                 'ctypes_type_library_call': 'ViInt32',
@@ -1312,11 +1347,12 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViInt32',
-                'library_method_call_snippet': 'data_buffer_size_ctype',
+                'library_interpreter_method_call_snippet': 'data_buffer_size',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'data_buffer_size',
             },
             {
+                'ctypes_method_call_snippet': 'data_ctype',
                 'ctypes_type': 'ViUInt32',
                 'ctypes_variable_name': 'data_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViUInt32)',
@@ -1345,7 +1381,7 @@ functions_expected = {
                     'value': 'dataBufferSize',
                 },
                 'type': 'ViUInt32',
-                'library_method_call_snippet': 'data_ctype',
+                'library_interpreter_method_call_snippet': 'data',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'data',
             },
@@ -1355,6 +1391,7 @@ functions_expected = {
         },
         'name': 'MakeAPrivateMethod',
         'python_name': '_make_a_private_method',
+        'library_interpreter_name': 'make_a_private_method',
         'is_error_handling': False,
         'render_in_session_base': False,
         'has_repeated_capability': False
@@ -1373,12 +1410,14 @@ functions_expected = {
         'method_templates': [
             {
                 'session_filename': '/cool_template',
+                'library_interpreter_filename': '/cool_template',
                 'documentation_filename': '/cool_template',
                 'method_python_name_suffix': ''
             }
         ],
         'parameters': [],
         'python_name': 'make_a_no_codegen_method',
+        'library_interpreter_name': 'make_a_no_codegen_method',
         'returns': 'ViStatus',
     }
 }

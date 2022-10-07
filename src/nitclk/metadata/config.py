@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-TClk API metadata version 22.8.0d22
+# This file is generated from NI-TClk API metadata version 23.0.0d7
 config = {
-    'api_version': '22.8.0d22',
+    'api_version': '23.0.0d7',
     'c_function_prefix': 'niTClk_',
     'close_function': None,
     'context_manager_name': {
@@ -11,6 +11,7 @@ config = {
     'driver_name': 'NI-TClk',
     'extra_errors_used': [
     ],
+    'grpc_service_class_prefix': 'NiTClk',
     'init_function': None,
     'library_info': {
         'Linux': {
@@ -30,7 +31,6 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'nitclk',
     'repeated_capabilities': [
     ],

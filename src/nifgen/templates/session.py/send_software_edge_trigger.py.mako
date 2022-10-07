@@ -28,10 +28,4 @@
 
         if type(trigger) is not enums.Trigger:
             raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
-        error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
+        self._library_interpreter.send_software_edge_trigger(trigger, trigger_id)

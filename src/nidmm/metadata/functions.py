@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 22.8.0d38
+# This file is generated from NI-DMM API metadata version 23.0.0d21
 functions = {
     'Abort': {
         'documentation': {
@@ -724,11 +724,13 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
                 'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_read_method',
                 'method_python_name_suffix': '_into',
                 'session_filename': 'numpy_read_method'
             }
@@ -1083,6 +1085,14 @@ functions = {
             'description': '\nReturns the error information associated with the\n**Instrument_Handle**. This function retrieves and then clears the\nerror information for the session. If you leave the\n**Instrument_Handle** unwired, this function retrieves and then clears\nthe error information for the process.\n'
         },
         'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -1161,6 +1171,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'datetime_wrappers'
             }
@@ -1498,6 +1509,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -2017,6 +2029,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -2049,6 +2062,7 @@ functions = {
         'documentation': {
             'description': 'Closes the specified session and deallocates resources that it reserved.'
         },
+        'grpc_name': 'Close',
         'parameters': [
             {
                 'direction': 'in',
@@ -2068,6 +2082,7 @@ functions = {
         'documentation': {
             'description': '\nTakes the **Error_Code** returned by the instrument driver functions,\ninterprets it, and returns it as a user-readable string.\n'
         },
+        'grpc_name': 'ErrorMessage',
         'is_error_handling': True,
         'parameters': [
             {
@@ -2111,9 +2126,11 @@ functions = {
                 'This function calls niDMM_reset, and any configurations previous to the call will be lost. All attributes will be set to their default values after the call returns.'
             ]
         },
+        'grpc_name': 'FancySelfTest',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_self_test'
             }
@@ -2135,6 +2152,7 @@ functions = {
         'documentation': {
             'description': '\nResets the instrument to a known state and sends initialization commands\nto the instrument. The initialization commands set instrument settings\nto the state necessary for the operation of the instrument driver.\n'
         },
+        'grpc_name': 'Reset',
         'parameters': [
             {
                 'direction': 'in',
@@ -2153,6 +2171,7 @@ functions = {
             'description': '\nPerforms a self-test on the DMM to ensure that the DMM is functioning\nproperly. Self-test does not calibrate the DMM.\n',
             'note': '\nThis function calls niDMM_reset, and any configurations previous to\nthe call will be lost. All attributes will be set to their default\nvalues after the call returns.\n'
         },
+        'grpc_name': 'SelfTest',
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {

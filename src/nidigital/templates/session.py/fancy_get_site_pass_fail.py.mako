@@ -15,4 +15,3 @@
         assert len(site_list) == len(result_list)
 
         return dict(zip(site_list, result_list))
-

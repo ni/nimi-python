@@ -5,6 +5,20 @@ def find_parameter(name, parameters):
     return parameter[0]
 
 
+def find_session_handle_parameter(parameters):
+    '''Returns the ViSession parameter.
+
+    Usually it's the one marked as is_session_handle. For Init functions, it's the output parameter.
+    '''
+    matching = [p for p in parameters if p['is_session_handle']]
+    assert len(matching) <= 1, 'More than one parameter found with is_session_handle=True:\n{0}'.format(parameters)
+    if len(matching) == 0:
+        matching = [p for p in parameters if p['type'] == 'ViSession']
+        assert len(matching) <= 1, 'More than one ViSession parameter found:\n{0}'.format(parameters)
+        assert len(matching) > 0, 'No ViSession parameter found:\n{0}'.format(parameters)
+    return matching[0]
+
+
 def find_size_parameter(parameter_list, parameters, key='value'):
     '''Returns the parameter that is used to specify the size other parameters. Applies to 'ivi-dance', 'ivi-dance-with-a-twist' and 'passed-in'.
 

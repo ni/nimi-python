@@ -16,4 +16,3 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         return self._${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL)})
-

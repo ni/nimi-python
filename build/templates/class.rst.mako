@@ -115,5 +115,3 @@ ${helper.get_rst_header_snippet('NI-TClk Support', '=')}
 
 % endif
 .. contents:: Session
-
-

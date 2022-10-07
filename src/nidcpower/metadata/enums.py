@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.8.0d129
+# This file is generated from NI-DCPower API metadata version 23.0.0d83
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -247,14 +247,14 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': ''
+                    'description': 'The channel acts to restrict the output current to the value of the Current Limit property when the actual output on the channel reaches or exceeds that value.'
                 },
                 'name': 'NIDCPOWER_VAL_CURRENT_REGULATE',
                 'value': 0
             },
             {
                 'documentation': {
-                    'description': ''
+                    'description': 'The channel disables the output when the actual output current on the channel reaches or exceeds the value of the Current Limit property.'
                 },
                 'name': 'NIDCPOWER_VAL_CURRENT_TRIP',
                 'value': 1
@@ -300,27 +300,51 @@ enums = {
     'Event': {
         'values': [
             {
-                'name': 'NIDCPOWER_VAL_SOURCE_COMPLETE',
+                'documentation': {
+                    'description': 'Specifies the Source Complete event.'
+                },
+                'name': 'NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT',
+                'python_name': 'NIDCPOWER_VAL_SOURCE_COMPLETE',
                 'value': 1030
             },
             {
-                'name': 'NIDCPOWER_VAL_MEASURE_COMPLETE',
+                'documentation': {
+                    'description': 'Specifies the Measure Complete event.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT',
+                'python_name': 'NIDCPOWER_VAL_MEASURE_COMPLETE',
                 'value': 1031
             },
             {
-                'name': 'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE',
+                'documentation': {
+                    'description': 'Specifies the Sequence Iteration Complete event.'
+                },
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT',
+                'python_name': 'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE',
                 'value': 1032
             },
             {
-                'name': 'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE',
+                'documentation': {
+                    'description': 'Specifies the Sequence Engine Done event.'
+                },
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT',
+                'python_name': 'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE',
                 'value': 1033
             },
             {
-                'name': 'NIDCPOWER_VAL_PULSE_COMPLETE',
+                'documentation': {
+                    'description': 'Specifies the Pulse Complete event.'
+                },
+                'name': 'NIDCPOWER_VAL_PULSE_COMPLETE_EVENT',
+                'python_name': 'NIDCPOWER_VAL_PULSE_COMPLETE',
                 'value': 1051
             },
             {
-                'name': 'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER',
+                'documentation': {
+                    'description': 'Specifies the Ready for Pulse Trigger event.'
+                },
+                'name': 'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT',
+                'python_name': 'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER',
                 'value': 1052
             }
         ]
@@ -836,14 +860,14 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': 'The device maintains a constant voltage by adjusting the current '
+                    'description': 'The channel maintains a constant voltage by adjusting the current.'
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE',
                 'value': 0
             },
             {
                 'documentation': {
-                    'description': 'The device maintains a constant current by adjusting the voltage.'
+                    'description': 'The channel maintains a constant current by adjusting the voltage.'
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT',
                 'value': 1
@@ -957,27 +981,51 @@ enums = {
     'SendSoftwareEdgeTriggerType': {
         'values': [
             {
-                'name': 'NIDCPOWER_VAL_START',
+                'documentation': {
+                    'description': 'Asserts the Start trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_START_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_START',
                 'value': 1034
             },
             {
-                'name': 'NIDCPOWER_VAL_SOURCE',
+                'documentation': {
+                    'description': 'Asserts the Source trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_SOURCE_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_SOURCE',
                 'value': 1035
             },
             {
-                'name': 'NIDCPOWER_VAL_MEASURE',
+                'documentation': {
+                    'description': 'Asserts the Measure trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASURE_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_MEASURE',
                 'value': 1036
             },
             {
-                'name': 'NIDCPOWER_VAL_SEQUENCE_ADVANCE',
+                'documentation': {
+                    'description': 'Asserts the Sequence Advance trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_SEQUENCE_ADVANCE',
                 'value': 1037
             },
             {
-                'name': 'NIDCPOWER_VAL_PULSE',
+                'documentation': {
+                    'description': 'Asserts the Pulse trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_PULSE_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_PULSE',
                 'value': 1053
             },
             {
-                'name': 'NIDCPOWER_VAL_SHUTDOWN',
+                'documentation': {
+                    'description': 'Asserts the Shutdown trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_SHUTDOWN_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_SHUTDOWN',
                 'value': 1118
             }
         ]

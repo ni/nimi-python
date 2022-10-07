@@ -50,9 +50,8 @@ class Library(object):
 <%
     f = functions[func_name]
     c_func_name = c_function_prefix + func_name
-    params = f['parameters']
     param_names_method = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_DECLARATION)
-    param_names_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.CTYPES_CALL)
+    param_names_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.CDLL_METHOD_CALL)
     param_ctypes_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.CTYPES_ARGTYPES)
 %>\
 

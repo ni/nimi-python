@@ -2152,7 +2152,6 @@ lock
         When used in a `with` statement, :py:meth:`niscope.Session.lock` acts as
         a context manager and unlock will be called when the `with` block is exited
 
-
 probe_compensation_signal_start
 -------------------------------
 
@@ -2468,8 +2467,6 @@ unlock
     Releases a lock that you acquired on an device session using
     :py:meth:`niscope.Session.lock`. Refer to :py:meth:`niscope.Session.unlock` for additional
     information on session locks.
-
-
 
 
 Properties
@@ -7435,5 +7432,3 @@ NI-TClk Support
 
 
 .. contents:: Session
-
-

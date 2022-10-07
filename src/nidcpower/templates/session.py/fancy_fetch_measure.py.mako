@@ -56,4 +56,3 @@
                 voltage_measurements, current_measurements${in_compliances_return}${channel_names_zipped}
             )
         ]
-

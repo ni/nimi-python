@@ -754,5 +754,3 @@ tclk_actual_period
 
 
 .. contents:: nitclk
-
-

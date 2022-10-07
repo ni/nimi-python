@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 22.8.0d32
+# This file is generated from NI-SWITCH API metadata version 23.0.0d23
 functions = {
     'AbortScan': {
         'documentation': {
@@ -445,6 +445,14 @@ functions = {
             'description': '\nThis function retrieves and then clears the IVI error information for\nthe session or the current execution thread. One exception exists: If\nthe buffer_size parameter is 0, the function does not clear the error\ninformation. By passing 0 for the buffer size, the caller can ascertain\nthe buffer size required to get the entire error description string and\nthen call the function again with a sufficiently large buffer. If the\nuser specifies a valid IVI session for the InstrumentHandle parameter,\nGet Error retrieves and then clears the error information for the\nsession. If the user passes VI_NULL for the InstrumentHandle parameter,\nthis function retrieves and then clears the error information for the\ncurrent execution thread. If the InstrumentHandle parameter is an\ninvalid session, the function does nothing and returns an error.\nNormally, the error information describes the first error that occurred\nsince the user last called niSwitch_GetError or niSwitch_ClearError.\n'
         },
         'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -727,6 +735,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -1100,6 +1109,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -1186,6 +1196,7 @@ functions = {
         'documentation': {
             'description': '\nTerminates the NI-SWITCH session and all of its attributes and\ndeallocates any memory resources the driver uses. Notes: (1) You must\nunlock the session before calling niSwitch_close. (2) After calling\nniSwitch_close, you cannot use the instrument driver again until you\ncall niSwitch_init or niSwitch_InitWithOptions.\n'
         },
+        'grpc_name': 'Close',
         'parameters': [
             {
                 'direction': 'in',
@@ -1205,6 +1216,7 @@ functions = {
         'documentation': {
             'description': '\nConverts an error code returned by NI-SWITCH into a user-readable\nstring. Generally this information is supplied in error out of any\nNI-SWITCH VI. Use niSwitch_error_message for a static lookup of an\nerror code description.\n'
         },
+        'grpc_name': 'ErrorMessage',
         'is_error_handling': True,
         'parameters': [
             {
@@ -1258,9 +1270,11 @@ functions = {
                 'Description'
             ]
         },
+        'grpc_name': 'FancySelfTest',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_self_test'
             }
@@ -1282,6 +1296,7 @@ functions = {
         'documentation': {
             'description': '\nDisconnects all created paths and returns the switch module to the state\nat initialization. Configuration channel and source channel settings\nremain unchanged.\n'
         },
+        'grpc_name': 'Reset',
         'parameters': [
             {
                 'direction': 'in',
@@ -1299,6 +1314,7 @@ functions = {
         'documentation': {
             'description': 'Verifies that the driver can communicate with the switch module.'
         },
+        'grpc_name': 'SelfTest',
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {

@@ -12,42 +12,15 @@
     functions = helper.filter_codegen_functions(functions)
 %>\
 
-import array
-import ctypes
 import hightime
-import threading
 
 import ${module_name}._attributes as _attributes
 import ${module_name}._converters as _converters
-import ${module_name}._library_singleton as _library_singleton
-import ${module_name}._visatype as _visatype
-import ${module_name}.errors as errors
+import ${module_name}._library_interpreter as _library_interpreter
 
 # Used for __repr__ and __str__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
-
-_session_instance = None
-_session_instance_lock = threading.Lock()
-
-
-# Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
-    if isinstance(value, array.array):
-        assert library_type is not None, 'library_type is required for array.array'
-        addr, _ = value.buffer_info()
-        return ctypes.cast(addr, ctypes.POINTER(library_type))
-    elif str(type(value)).find("'numpy.ndarray'") != -1:
-        import numpy
-        return numpy.ctypeslib.as_ctypes(value)
-    elif isinstance(value, list):
-        assert library_type is not None, 'library_type is required for list'
-        return (library_type * len(value))(*value)
-    else:
-        if library_type is not None and size is not None:
-            return (library_type * size)()
-        else:
-            return None
 
 
 class SessionReference(object):
@@ -77,10 +50,9 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 % endfor
 
     def __init__(self, ${config['session_handle_parameter_name']}, encoding='windows-1251'):
-        self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
-        self._library = _library_singleton.get()
-        self._encoding = encoding
-        # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
+        self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding)
+        self._library_interpreter._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
+        # We need a self._repeated_capability string for passing down to function calls on the LibraryInterpreter class. We just need to set it to empty string.
         self._repeated_capability = ''
 
         # Store the parameter list for later printing in __repr__
@@ -99,39 +71,19 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
-
-        Returns the error description.
-        '''
-        try:
-            '''
-            It is expected for _get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use _error_message instead. It doesn't require a session.
-            '''
-            error_string = self._get_extended_error_info()
-            return error_string
-        except errors.Error:
-            return "Failed to retrieve error description."
-
     def _get_tclk_session_reference(self):
-        return self._${config['session_handle_parameter_name']}
-
-<%
-# We need _get_extended_error_info() to exist in both this class as well as the _Session class, so we will
-# Set then unset the 'render_in_session_base' flag to get it added to both
-functions['GetExtendedErrorInfo']['render_in_session_base'] = True
-%>\
+        return self._library_interpreter._${config['session_handle_parameter_name']}
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+% if method_template['session_filename'] != '/none':
+
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+% endif
 % endfor
 % endfor
 
-<%
-# The main reason for having this class is to allow reusing the default method template.
-%>\
+
+## The main reason for having this class is to allow reusing the default method template.
 class _Session(object):
     '''Private class
 
@@ -141,8 +93,7 @@ class _Session(object):
     '''
 
     def __init__(self):
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
+        self._library_interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
 
         # Instantiate any repeated capability objects
 % for rep_cap in config['repeated_capabilities']:
@@ -155,41 +106,18 @@ class _Session(object):
 
         self._is_frozen = True
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
-
-        Returns the error description.
-        '''
-        try:
-            '''
-            It is expected for _get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use _error_message instead. It doesn't require a session.
-            '''
-            error_string = self._get_extended_error_info()
-            return error_string
-        except errors.Error:
-            return "Failed to retrieve error description."
-
     ''' These are code-generated '''
-<%
-# We need _get_extended_error_info() to exist in both this class as well as the SessionReference class, so we will
-# Set then unset the 'render_in_session_base' flag to get it added to both
-functions['GetExtendedErrorInfo']['render_in_session_base'] = False
-%>\
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
-<%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
-% endfor
-% endfor
+% if method_template['session_filename'] != '/none':
 
-<%
-# We need _get_extended_error_info() to exist in both this class as well as the _Session class, so we will
-# Set then unset the 'render_in_session_base' flag to get it added to both. We do not want it in the standalone
-# functions so we set it back to True here to remove it from this list
-functions['GetExtendedErrorInfo']['render_in_session_base'] = True
-%>\
+<%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+% endif
+% endfor
+% endfor
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
+
+
 <%
 f = functions[func_name]
 name = f['python_name']
@@ -201,7 +129,4 @@ def ${name}(${parameter_list}):
     ${helper.get_function_docstring(f, False, config, indent=4)}
     '''
     return _Session().${name}(${parameter_list})
-
-
 % endfor
-

@@ -553,7 +553,7 @@ def get_function_docstring(function, numpy, config, indent=0):
 
     Args:
         function (dict): function dictionary
-        config (dict): configuration dictoionary (from metadata)
+        config (dict): configuration dictionary (from metadata)
         numpy (boolean): Is the entry we are processing a numpy based method
         indent (int): default 0 - initial indentation
 
@@ -957,7 +957,7 @@ config = {
                     'python_name_with_doc_default': 'vi',
                     'is_repeated_capability': False,
                     'is_session_handle': True,
-                    'library_method_call_snippet': 'self._vi',
+                    'library_interpreter_method_call_snippet': 'self._vi',
                     'use_in_python_api': True,
                 },
                 {
@@ -995,7 +995,7 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'turtle_type',
                     'is_repeated_capability': False,
                     'is_session_handle': False,
-                    'library_method_call_snippet': 'turtle_type',
+                    'library_interpreter_method_call_snippet': 'turtle_type',
                     'use_in_python_api': True,
                 },
                 {
@@ -1025,7 +1025,7 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'turtleId',
                     'is_repeated_capability': False,
                     'is_session_handle': False,
-                    'library_method_call_snippet': 'ctypes.pointer(turtleId_ctype)',
+                    'library_interpreter_method_call_snippet': 'ctypes.pointer(turtleId_ctype)',
                     'use_in_python_api': True,
                 }
             ],
@@ -1039,6 +1039,7 @@ wanted to choose.''',
             },
             'name': 'GetTurtleID',
             'python_name': 'get_turtle_id',
+            'library_interpreter_name': 'get_turtle_id',
             'is_error_handling': False,
             'has_repeated_capability': False
         },
@@ -1063,7 +1064,7 @@ wanted to choose.''',
                     'use_array': False,
                     'is_repeated_capability': False,
                     'is_session_handle': True,
-                    'library_method_call_snippet': 'vi_ctype',
+                    'library_interpreter_method_call_snippet': 'vi_ctype',
                     'name': 'vi',
                     'numpy': False,
                     'python_name': 'vi',
@@ -1089,7 +1090,7 @@ wanted to choose.''',
                     'use_array': False,
                     'is_repeated_capability': False,
                     'is_session_handle': False,
-                    'library_method_call_snippet': 'number_of_samples_ctype',
+                    'library_interpreter_method_call_snippet': 'number_of_samples_ctype',
                     'name': 'numberOfSamples',
                     'numpy': False,
                     'python_name': 'number_of_samples',
@@ -1115,7 +1116,7 @@ wanted to choose.''',
                     'use_array': True,
                     'is_repeated_capability': False,
                     'is_session_handle': False,
-                    'library_method_call_snippet': 'waveform_data_ctype',
+                    'library_interpreter_method_call_snippet': 'waveform_data_ctype',
                     'name': 'waveformData',
                     'numpy': True,
                     'numpy_type': 'float64',
@@ -1143,7 +1144,7 @@ wanted to choose.''',
                     'use_array': False,
                     'is_repeated_capability': False,
                     'is_session_handle': False,
-                    'library_method_call_snippet': 'ctypes.pointer(actual_number_of_samples_ctype)',
+                    'library_interpreter_method_call_snippet': 'ctypes.pointer(actual_number_of_samples_ctype)',
                     'name': 'actualNumberOfSamples',
                     'numpy': False,
                     'python_name': 'actual_number_of_samples',
@@ -1158,6 +1159,7 @@ wanted to choose.''',
                 }
             ],
             'python_name': 'fetch_waveform',
+            'library_interpreter_name': 'fetch_waveform',
             'render_in_session_base': False,
             'returns': 'ViStatus'
         },
@@ -1570,6 +1572,7 @@ def test_add_notes_re_links():
                 'description': 'Performs a foo, and performs it well.',
             },
             'python_name': 'make_a_foo',
+            'library_interpreter_name': 'make_a_foo',
         },
     }
     attributes = {

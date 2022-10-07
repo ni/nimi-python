@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 22.8.0d40
+# This file is generated from NI-FGEN API metadata version 23.0.0d25
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -135,6 +135,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the handle of the arbitrary sequence that you want the signal\ngenerator to remove. You can create an arbitrary sequence using the\nnifgen_CreateArbSequence or nifgen_CreateAdvancedArbSequence function.\nThese functions return a handle that you use to identify the sequence.\n\n| **Defined Value**:\n| NIFGEN_VAL_ALL_SEQUENCES—Remove all sequences from the signal\n  generator\n\n**Default Value**: None\n'
                 },
+                'grpc_enum': 'SequenceHandle',
                 'name': 'sequenceHandle',
                 'type': 'ViInt32'
             }
@@ -162,6 +163,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the handle of the arbitrary waveform that you want the signal\ngenerator to remove.\n\nYou can create multiple arbitrary waveforms using one of the following\nniFgen Create Waveform functions:\n\n-  niFgen_CreateWaveformF64\n-  niFgen_CreateWaveformI16\n-  niFgen_CreateWaveformFromFileI16\n-  niFgen_CreateWaveformFromFileF64\n\n**Defined Value**:\n\nNIFGEN_VAL_ALL_WAVEFORMS—Remove all waveforms from the signal\ngenerator.\n\n**Default Value**: None\n'
                 },
+                'grpc_enum': 'WaveformHandle',
                 'name': 'waveformHandle',
                 'type': 'ViInt32'
             }
@@ -187,6 +189,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the handle of the frequency list you want the signal generator\nto remove. You create multiple frequency lists using\nniFgen_CreateFreqList. niFgen_CreateFreqList returns a handle that you\nuse to identify each list. Specify a value of -1 to clear all frequency\nlists.\n\n**Defined Value**\n\nNIFGEN_VAL_ALL_FLISTS—Remove all frequency lists from the signal\ngenerator.\n\n**Default Value**: None\n'
                 },
+                'grpc_enum': 'FrequencyListOptions',
                 'name': 'frequencyListHandle',
                 'type': 'ViInt32'
             }
@@ -762,6 +765,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'create_waveform'
             }
@@ -807,10 +811,12 @@ functions = {
         'method_name_for_documentation': 'create_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -996,6 +1002,7 @@ functions = {
         'method_name_for_documentation': 'create_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -1171,6 +1178,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'delete_waveform'
             }
@@ -1511,6 +1519,14 @@ functions = {
             'description': '\nReturns the error information associated with an IVI session or with the\ncurrent execution thread. If you specify a valid IVI session for the\n**vi** parameter, this function retrieves and then clears the error\ninformation for the session. If you pass VI_NULL for the **vi**\nparameter, this function retrieves and then clears the error information\nfor the current execution thread.\n\nThe IVI Engine also maintains this error information separately for each\nthread. This feature is useful if you do not have a session handle to\npass to the niFgen_GetError or nifgen_ClearError functions. This\nsituation occurs when a call to the nifgen_init or\nnifgen_InitWithOptions function fails.\n'
         },
         'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -1716,6 +1732,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'datetime_wrappers'
             }
@@ -1750,6 +1767,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'datetime_wrappers'
             }
@@ -2151,6 +2169,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -2419,6 +2438,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'send_software_edge_trigger'
             }
@@ -2701,6 +2721,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'set_next_write_position'
             }
@@ -2830,6 +2851,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -2892,6 +2914,7 @@ functions = {
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -2954,10 +2977,12 @@ functions = {
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -3020,6 +3045,7 @@ functions = {
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -3114,10 +3140,12 @@ functions = {
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -3180,6 +3208,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'write_waveform'
             }
@@ -3248,6 +3277,7 @@ functions = {
                 'Other Devices'
             ]
         },
+        'grpc_name': 'Close',
         'parameters': [
             {
                 'direction': 'in',
@@ -3267,6 +3297,7 @@ functions = {
         'documentation': {
             'description': '\nConverts a status code returned by an NI-FGEN function into a\nuser-readable string.\n'
         },
+        'grpc_name': 'ErrorMessage',
         'is_error_handling': True,
         'parameters': [
             {
@@ -3321,9 +3352,11 @@ functions = {
                 'Description'
             ]
         },
+        'grpc_name': 'FancySelfTest',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_self_test'
             }
@@ -3346,6 +3379,7 @@ functions = {
             'description': '\nResets the instrument to a known state. This function aborts the\ngeneration, clears all routes, and resets session attributes to the\ndefault values. This function does not, however, commit the session\nproperties or configure the device hardware to its default state.\n',
             'note': '\nFor the NI 5401/5404/5411/5431, this function exhibits the same\nbehavior as the nifgen_ResetDevice function.\n'
         },
+        'grpc_name': 'Reset',
         'parameters': [
             {
                 'direction': 'in',
@@ -3364,6 +3398,7 @@ functions = {
             'description': 'Runs the instrument self-test routine and returns the test result(s).',
             'note': '\nWhen used on some signal generators, the device is reset after the\nniFgen_self_test function runs. If you use the niFgen_self_test\nfunction, your device may not be in its previously configured state\nafter the function runs.\n'
         },
+        'grpc_name': 'SelfTest',
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {

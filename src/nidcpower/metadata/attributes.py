@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 22.8.0d129
+# This file is generated from NI-DCPower API metadata version 23.0.0d83
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -2470,7 +2470,7 @@ attributes = {
         'access': 'read-write',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'documentation': {
-            'description': '\nBalances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.\n**Valid Values:** The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.\n',
+            'description': '\nBalances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.\n**Valid Values:** The minimum and maximum values of this property are hardware-dependent. \nPXIe-4135/4136/4137: 0 to 9 seconds \nPXIe-4138/4139: 0 to 9 seconds \nPXIe-4147: 0 to 9 seconds \nPXIe-4163: 0 to 0.1 seconds.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Measurement:Advanced:Autorange Maximum Delay After Range Change',
@@ -2522,6 +2522,7 @@ attributes = {
     },
     1250004: {
         'access': 'read-write',
+        'grpc_enum': 'CurrentLimitBehavior',
         'name': 'CURRENT_LIMIT_BEHAVIOR',
         'supported_rep_caps': [
             'channels'

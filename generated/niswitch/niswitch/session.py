@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import array  # noqa: F401
-import ctypes
 # Used by @ivi_synchronized
 from functools import wraps
 
 import niswitch._attributes as _attributes
 import niswitch._converters as _converters
-import niswitch._library_singleton as _library_singleton
-import niswitch._visatype as _visatype
+import niswitch._library_interpreter as _library_interpreter
 import niswitch.enums as enums
 import niswitch.errors as errors
 
@@ -17,39 +15,6 @@ import hightime
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
-
-
-# Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
-    if isinstance(value, array.array):
-        assert library_type is not None, 'library_type is required for array.array'
-        addr, _ = value.buffer_info()
-        return ctypes.cast(addr, ctypes.POINTER(library_type))
-    elif str(type(value)).find("'numpy.ndarray'") != -1:
-        import numpy
-        return numpy.ctypeslib.as_ctypes(value)
-    elif isinstance(value, bytes):
-        return ctypes.cast(value, ctypes.POINTER(library_type))
-    elif isinstance(value, list):
-        assert library_type is not None, 'library_type is required for list'
-        return (library_type * len(value))(*value)
-    else:
-        if library_type is not None and size is not None:
-            return (library_type * size)()
-        else:
-            return None
-
-
-def get_ctypes_and_array(value, array_type):
-    if value is not None:
-        if isinstance(value, array.array):
-            value_array = value
-        else:
-            value_array = array.array(array_type, value)
-    else:
-        value_array = None
-
-    return value_array
 
 
 class _Scan(object):
@@ -101,11 +66,9 @@ class _RepeatedCapabilities(object):
         complete_rep_cap_list = [current_rep_cap + self._separator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
 
         return _SessionBase(
-            vi=self._session._vi,
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
-            library=self._session._library,
-            encoding=self._session._encoding,
+            library_interpreter=self._session._library_interpreter,
             freeze_it=True
         )
 
@@ -591,20 +554,16 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.wire_mode`
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
-        self._vi = vi
-        self._library = library
-        self._encoding = encoding
+        self._library_interpreter = library_interpreter
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("vi=" + pp.pformat(vi))
-        param_list.append("library=" + pp.pformat(library))
-        param_list.append("encoding=" + pp.pformat(encoding))
+        param_list.append("library_interpreter=" + pp.pformat(library_interpreter))
         self._param_list = ', '.join(param_list)
 
         # Instantiate any repeated capability objects
@@ -621,28 +580,6 @@ class _SessionBase(object):
         if self._is_frozen and key not in dir(self):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
-
-    def _get_error_description(self, error_code):
-        '''_get_error_description
-
-        Returns the error description.
-        '''
-        try:
-            _, error_string = self._get_error()
-            return error_string
-        except errors.Error:
-            pass
-
-        try:
-            '''
-            It is expected for _get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use _error_message instead. It doesn't require a session.
-            '''
-            error_string = self._error_message(error_code)
-            return error_string
-        except errors.Error:
-            return "Failed to retrieve error description."
 
     ''' These are code-generated '''
 
@@ -697,13 +634,8 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niSwitch_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(attribute_value_ctype.value)
+        attribute_value = self._library_interpreter.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        return attribute_value
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -756,13 +688,8 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niSwitch_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(attribute_value_ctype.value)
+        attribute_value = self._library_interpreter.get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        return attribute_value
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -815,13 +742,8 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niSwitch_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(attribute_value_ctype.value)
+        attribute_value = self._library_interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return attribute_value
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -895,68 +817,8 @@ class _SessionBase(object):
                 on it or by selecting it and then pressing .
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        array_size_ctype = _visatype.ViInt32()  # case S170
-        attribute_value_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        attribute_value_ctype = (_visatype.ViChar * array_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode(self._encoding)
-
-    def _get_error(self):
-        r'''_get_error
-
-        This method retrieves and then clears the IVI error information for
-        the session or the current execution thread. One exception exists: If
-        the buffer_size parameter is 0, the method does not clear the error
-        information. By passing 0 for the buffer size, the caller can ascertain
-        the buffer size required to get the entire error description string and
-        then call the method again with a sufficiently large buffer. If the
-        user specifies a valid IVI session for the InstrumentHandle parameter,
-        Get Error retrieves and then clears the error information for the
-        session. If the user passes VI_NULL for the InstrumentHandle parameter,
-        this method retrieves and then clears the error information for the
-        current execution thread. If the InstrumentHandle parameter is an
-        invalid session, the method does nothing and returns an error.
-        Normally, the error information describes the first error that occurred
-        since the user last called _get_error or ClearError.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
-
-        Returns:
-            code (int): Returns the error code for the session or execution thread. If you pass
-                0 for the Buffer Size, you can pass VI_NULL for this parameter.
-
-            description (str): Returns the error description for the IVI session or execution thread.
-                If there is no description, the method returns an empty string. The
-                buffer must contain at least as many elements as the value you specify
-                with the Buffer Size parameter. If the error description, including the
-                terminating NUL byte, contains more bytes than you indicate with the
-                Buffer Size parameter, the method copies Buffer Size - 1 bytes into
-                the buffer, places an ASCII NUL byte at the end of the buffer, and
-                returns the buffer size you must pass to get the entire value. For
-                example, if the value is "123456" and the Buffer Size is 4, the method
-                places "123" into the buffer and returns 7. If you pass 0 for the Buffer
-                Size, you can pass VI_NULL for this parameter.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        code_ctype = _visatype.ViStatus()  # case S220
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        description_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
+        attribute_value = self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return attribute_value
 
     def lock(self):
         '''lock
@@ -988,20 +850,10 @@ class _SessionBase(object):
             lock (context manager): When used in a with statement, niswitch.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        self._library_interpreter.lock()  # We do not call this in the context manager so that this function can
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
-
-    def _lock_session(self):
-        '''_lock_session
-
-        Actual call to driver
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_LockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -1066,13 +918,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViBoolean(attribute_value)  # case S150
-        error_code = self._library.niSwitch_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -1137,13 +983,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
-        error_code = self._library.niSwitch_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -1208,13 +1048,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViReal64(attribute_value)  # case S150
-        error_code = self._library.niSwitch_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -1279,13 +1113,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
 
     def unlock(self):
         '''unlock
@@ -1294,10 +1122,7 @@ class _SessionBase(object):
         lock. Refer to lock for additional
         information on session locks.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_UnlockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return
+        self._library_interpreter.unlock()
 
     def _error_message(self, error_code):
         r'''_error_message
@@ -1317,12 +1142,8 @@ class _SessionBase(object):
                 array with at least 256 bytes.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = _visatype.ViStatus(error_code)  # case S150
-        error_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niSwitch_error_message(vi_ctype, error_code_ctype, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
+        error_message = self._library_interpreter.error_message(error_code)
+        return error_message
 
 
 class Session(_SessionBase):
@@ -1566,18 +1387,17 @@ class Session(_SessionBase):
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            vi=None,
-            library=None,
-            encoding=None,
+            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
             freeze_it=False,
             all_channels_in_session=None
         )
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
 
         # Call specified init function
-        self._vi = 0  # This must be set before calling _init_with_topology().
-        self._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
+        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # _init_with_topology fails, the error handler can reference it.
+        # And then once _init_with_topology succeeds, we can update _library_interpreter._vi
+        # with the actual session handle.
+        self._library_interpreter._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -1590,7 +1410,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._vi` is set
+        # handle `self._library_interpreter._vi` is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -1641,9 +1461,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._vi = 0
+            self._library_interpreter._vi = 0
             raise
-        self._vi = 0
+        self._library_interpreter._vi = 0
 
     ''' These are code-generated '''
 
@@ -1655,10 +1475,7 @@ class Session(_SessionBase):
         initiate. If the switch module is not scanning,
         NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_AbortScan(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.abort()
 
     @ivi_synchronized
     def can_connect(self, channel1, channel2):
@@ -1709,13 +1526,8 @@ class Session(_SessionBase):
                 configuration channel and thus unavailable for external connections.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        path_capability_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niSwitch_CanConnect(vi_ctype, channel1_ctype, channel2_ctype, None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return enums.PathCapability(path_capability_ctype.value)
+        path_capability = self._library_interpreter.can_connect(channel1, channel2)
+        return path_capability
 
     @ivi_synchronized
     def commit(self):
@@ -1726,10 +1538,7 @@ class Session(_SessionBase):
         initiate. Use commit to arm triggers in a given
         order or to control when expensive hardware operations are performed.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_Commit(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.commit()
 
     @ivi_synchronized
     def connect(self, channel1, channel2):
@@ -1766,12 +1575,7 @@ class Session(_SessionBase):
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_Connect(vi_ctype, channel1_ctype, channel2_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.connect(channel1, channel2)
 
     @ivi_synchronized
     def connect_multiple(self, connection_list):
@@ -1808,11 +1612,7 @@ class Session(_SessionBase):
                 r2 is a configuration channel. Default value: None
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        connection_list_ctype = ctypes.create_string_buffer(connection_list.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_ConnectMultiple(vi_ctype, connection_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.connect_multiple(connection_list)
 
     @ivi_synchronized
     def disable(self):
@@ -1822,10 +1622,7 @@ class Session(_SessionBase):
         impact on the system to which it is connected. All channels are
         disconnected and any scan in progress is aborted.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_Disable(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.disable()
 
     @ivi_synchronized
     def disconnect(self, channel1, channel2):
@@ -1848,12 +1645,7 @@ class Session(_SessionBase):
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_Disconnect(vi_ctype, channel1_ctype, channel2_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.disconnect(channel1, channel2)
 
     @ivi_synchronized
     def disconnect_all(self):
@@ -1862,10 +1654,7 @@ class Session(_SessionBase):
         Breaks all existing paths. If the switch module cannot break all paths,
         NISWITCH_WARN_PATH_REMAINS warning is returned.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_DisconnectAll(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.disconnect_all()
 
     @ivi_synchronized
     def disconnect_multiple(self, disconnection_list):
@@ -1887,11 +1676,7 @@ class Session(_SessionBase):
                 None
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        disconnection_list_ctype = ctypes.create_string_buffer(disconnection_list.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_DisconnectMultiple(vi_ctype, disconnection_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.disconnect_multiple(disconnection_list)
 
     @ivi_synchronized
     def get_channel_name(self, index):
@@ -1912,17 +1697,8 @@ class Session(_SessionBase):
                 specify.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        channel_name_buffer_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        channel_name_buffer_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return channel_name_buffer_ctype.value.decode(self._encoding)
+        channel_name_buffer = self._library_interpreter.get_channel_name(index)
+        return channel_name_buffer
 
     @ivi_synchronized
     def get_path(self, channel1, channel2):
@@ -1959,18 +1735,8 @@ class Session(_SessionBase):
                 returned paths: ch0->com0, com0->ab0
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        path_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        path_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return path_ctype.value.decode(self._encoding)
+        path = self._library_interpreter.get_path(channel1, channel2)
+        return path
 
     @ivi_synchronized
     def get_relay_count(self, relay_name):
@@ -1992,12 +1758,8 @@ class Session(_SessionBase):
             relay_count (int): The number of relay cycles.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
-        relay_count_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niSwitch_GetRelayCount(vi_ctype, relay_name_ctype, None if relay_count_ctype is None else (ctypes.pointer(relay_count_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(relay_count_ctype.value)
+        relay_count = self._library_interpreter.get_relay_count(relay_name)
+        return relay_count
 
     @ivi_synchronized
     def get_relay_name(self, index):
@@ -2017,17 +1779,8 @@ class Session(_SessionBase):
             relay_name_buffer (str): Returns the relay name for the index you specify.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        relay_name_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        relay_name_buffer_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        relay_name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        relay_name_buffer_ctype = (_visatype.ViChar * relay_name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return relay_name_buffer_ctype.value.decode(self._encoding)
+        relay_name_buffer = self._library_interpreter.get_relay_name(index)
+        return relay_name_buffer
 
     @ivi_synchronized
     def get_relay_position(self, relay_name):
@@ -2047,12 +1800,8 @@ class Session(_SessionBase):
                 RelayPosition.CLOSED 11
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
-        relay_position_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niSwitch_GetRelayPosition(vi_ctype, relay_name_ctype, None if relay_position_ctype is None else (ctypes.pointer(relay_position_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return enums.RelayPosition(relay_position_ctype.value)
+        relay_position = self._library_interpreter.get_relay_position(relay_name)
+        return relay_position
 
     def _init_with_topology(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
         r'''_init_with_topology
@@ -2294,14 +2043,8 @@ class Session(_SessionBase):
                 One or more of the referenced methods are not in the Python API for this driver.
 
         '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        topology_ctype = ctypes.create_string_buffer(topology.encode(self._encoding))  # case C020
-        simulate_ctype = _visatype.ViBoolean(simulate)  # case S150
-        reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
-        vi_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library.niSwitch_InitWithTopology(resource_name_ctype, topology_ctype, simulate_ctype, reset_device_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(vi_ctype.value)
+        vi = self._library_interpreter.init_with_topology(resource_name, topology, simulate, reset_device)
+        return vi
 
     @ivi_synchronized
     def _initiate_scan(self):
@@ -2316,10 +2059,7 @@ class Session(_SessionBase):
         scanning operation, To stop the scanning operation, call
         abort.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_InitiateScan(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.initiate_scan()
 
     @ivi_synchronized
     def relay_control(self, relay_name, relay_action):
@@ -2344,12 +2084,7 @@ class Session(_SessionBase):
         '''
         if type(relay_action) is not enums.RelayAction:
             raise TypeError('Parameter relay_action must be of type ' + str(enums.RelayAction))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
-        relay_action_ctype = _visatype.ViInt32(relay_action.value)  # case S130
-        error_code = self._library.niSwitch_RelayControl(vi_ctype, relay_name_ctype, relay_action_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.relay_control(relay_name, relay_action)
 
     @ivi_synchronized
     def reset_with_defaults(self):
@@ -2360,10 +2095,7 @@ class Session(_SessionBase):
         created without a logical name, this method is equivalent to
         reset.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_ResetWithDefaults(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.reset_with_defaults()
 
     @ivi_synchronized
     def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False):
@@ -2398,13 +2130,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter scan_advanced_output_connector must be of type ' + str(enums.ScanAdvancedOutput))
         if type(scan_advanced_output_bus_line) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter scan_advanced_output_bus_line must be of type ' + str(enums.ScanAdvancedOutput))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        scan_advanced_output_connector_ctype = _visatype.ViInt32(scan_advanced_output_connector.value)  # case S130
-        scan_advanced_output_bus_line_ctype = _visatype.ViInt32(scan_advanced_output_bus_line.value)  # case S130
-        invert_ctype = _visatype.ViBoolean(invert)  # case S150
-        error_code = self._library.niSwitch_RouteScanAdvancedOutput(vi_ctype, scan_advanced_output_connector_ctype, scan_advanced_output_bus_line_ctype, invert_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
 
     @ivi_synchronized
     def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert=False):
@@ -2440,13 +2166,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter trigger_input_connector must be of type ' + str(enums.TriggerInput))
         if type(trigger_input_bus_line) is not enums.TriggerInput:
             raise TypeError('Parameter trigger_input_bus_line must be of type ' + str(enums.TriggerInput))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_input_connector_ctype = _visatype.ViInt32(trigger_input_connector.value)  # case S130
-        trigger_input_bus_line_ctype = _visatype.ViInt32(trigger_input_bus_line.value)  # case S130
-        invert_ctype = _visatype.ViBoolean(invert)  # case S150
-        error_code = self._library.niSwitch_RouteTriggerInput(vi_ctype, trigger_input_connector_ctype, trigger_input_bus_line_ctype, invert_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.route_trigger_input(trigger_input_connector, trigger_input_bus_line, invert)
 
     @ivi_synchronized
     def send_software_trigger(self):
@@ -2462,10 +2182,7 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_SendSoftwareTrigger(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.send_software_trigger()
 
     @ivi_synchronized
     def set_path(self, path_list):
@@ -2485,11 +2202,7 @@ class Session(_SessionBase):
                 previously created path with get_path.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        path_list_ctype = ctypes.create_string_buffer(path_list.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_SetPath(vi_ctype, path_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.set_path(path_list)
 
     @ivi_synchronized
     def wait_for_debounce(self, maximum_time_ms=hightime.timedelta(milliseconds=5000)):
@@ -2507,11 +2220,8 @@ class Session(_SessionBase):
                 Default Value:5000 ms
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
-        error_code = self._library.niSwitch_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        maximum_time_ms = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)
+        self._library_interpreter.wait_for_debounce(maximum_time_ms)
 
     @ivi_synchronized
     def wait_for_scan_complete(self, maximum_time_ms=hightime.timedelta(milliseconds=5000)):
@@ -2530,11 +2240,8 @@ class Session(_SessionBase):
                 Value:5000 ms
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
-        error_code = self._library.niSwitch_WaitForScanComplete(vi_ctype, maximum_time_ms_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        maximum_time_ms = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)
+        self._library_interpreter.wait_for_scan_complete(maximum_time_ms)
 
     def _close(self):
         r'''_close
@@ -2548,10 +2255,7 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_close(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -2585,10 +2289,7 @@ class Session(_SessionBase):
         at initialization. Configuration channel and source channel settings
         remain unchanged.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_reset(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.reset()
 
     @ivi_synchronized
     def _self_test(self):
@@ -2603,12 +2304,5 @@ class Session(_SessionBase):
                 array with at least 256 bytes.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = _visatype.ViInt16()  # case S220
-        self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niSwitch_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
-
-
-
+        self_test_result, self_test_message = self._library_interpreter.self_test()
+        return self_test_result, self_test_message

@@ -19,21 +19,29 @@ class ParameterUsageOptions(AutoNumber):
     SESSION_INIT_DECLARATION = ()
     '''For declaring an init method in Session'''
     SESSION_NUMPY_INTO_METHOD_DECLARATION = ()
-    '''For calling into a Session method that uses numpy arrays.'''
+    '''For declaring a Session method that uses numpy arrays.'''
+    LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_DECLARATION = ()
+    '''For declaring a LibraryInterpreter method that uses numpy arrays.'''
+    LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_CALL = ()
+    '''For calling into a LibraryInterpreter method (from Session) that uses numpy arrays.'''
     SESSION_METHOD_CALL = ()
     '''For calling into a regular Session method.'''
     SESSION_INIT_CALL = ()
     '''For calling into an init Session method.'''
     DOCUMENTATION_SESSION_METHOD = ()
     '''For documentation (rst) of Session methods'''
-    CTYPES_CALL = ()
-    '''For Library implementation calling into the DLL via ctypes'''
+    LIBRARY_METHOD_DECLARATION = ()
+    '''For declaring a Library method.'''
+    CDLL_METHOD_CALL = ()
+    '''For calling into a CDLL method (from Library).'''
     LIBRARY_METHOD_CALL = ()
-    '''For calling into a method in Library.'''
+    '''For calling into a Library method (from LibraryInterpreter).'''
+    LIBRARY_INTERPRETER_METHOD_CALL = ()
+    '''For calling into a LibraryInterpreter method (from Session).'''
     CTYPES_ARGTYPES = ()
     '''For setting up the ctypes argument types'''
-    LIBRARY_METHOD_DECLARATION = ()
-    '''For declaring a method in Library'''
+    LIBRARY_INTERPRETER_METHOD_DECLARATION = ()
+    '''For declaring a LibraryInterpreter method.'''
     INPUT_PARAMETERS = ()
     '''Get all input parameters, other than self, rep caps, and size'''
     OUTPUT_PARAMETERS = ()

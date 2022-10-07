@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import array  # noqa: F401
-import ctypes
 # Used by @ivi_synchronized
 from functools import wraps
 
 import nidcpower._attributes as _attributes
 import nidcpower._converters as _converters
-import nidcpower._library_singleton as _library_singleton
-import nidcpower._visatype as _visatype
+import nidcpower._library_interpreter as _library_interpreter
 import nidcpower.enums as enums
 import nidcpower.errors as errors
 
@@ -21,39 +19,6 @@ import hightime
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
-
-
-# Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
-    if isinstance(value, array.array):
-        assert library_type is not None, 'library_type is required for array.array'
-        addr, _ = value.buffer_info()
-        return ctypes.cast(addr, ctypes.POINTER(library_type))
-    elif str(type(value)).find("'numpy.ndarray'") != -1:
-        import numpy
-        return numpy.ctypeslib.as_ctypes(value)
-    elif isinstance(value, bytes):
-        return ctypes.cast(value, ctypes.POINTER(library_type))
-    elif isinstance(value, list):
-        assert library_type is not None, 'library_type is required for list'
-        return (library_type * len(value))(*value)
-    else:
-        if library_type is not None and size is not None:
-            return (library_type * size)()
-        else:
-            return None
-
-
-def get_ctypes_and_array(value, array_type):
-    if value is not None:
-        if isinstance(value, array.array):
-            value_array = value
-        else:
-            value_array = array.array(array_type, value)
-    else:
-        value_array = None
-
-    return value_array
 
 
 class _Acquisition(object):
@@ -105,11 +70,9 @@ class _RepeatedCapabilities(object):
         complete_rep_cap_list = [current_rep_cap + self._separator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
 
         return _SessionBase(
-            vi=self._session._vi,
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
-            library=self._session._library,
-            encoding=self._session._encoding,
+            library_interpreter=self._session._library_interpreter,
             freeze_it=True
         )
 
@@ -314,7 +277,11 @@ class _SessionBase(object):
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
-    **Valid Values:** The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.
+    **Valid Values:** The minimum and maximum values of this property are hardware-dependent.
+    PXIe-4135/4136/4137: 0 to 9 seconds
+    PXIe-4138/4139: 0 to 9 seconds
+    PXIe-4147: 0 to 9 seconds
+    PXIe-4163: 0 to 0.1 seconds.
 
     Note:
     This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
@@ -4020,20 +3987,16 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.voltage_pole_zero_ratio`
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, vi, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
-        self._vi = vi
-        self._library = library
-        self._encoding = encoding
+        self._library_interpreter = library_interpreter
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("vi=" + pp.pformat(vi))
-        param_list.append("library=" + pp.pformat(library))
-        param_list.append("encoding=" + pp.pformat(encoding))
+        param_list.append("library_interpreter=" + pp.pformat(library_interpreter))
         self._param_list = ', '.join(param_list)
 
         # Instantiate any repeated capability objects
@@ -4051,28 +4014,6 @@ class _SessionBase(object):
         if self._is_frozen and key not in dir(self):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
-
-    def _get_error_description(self, error_code):
-        '''_get_error_description
-
-        Returns the error description.
-        '''
-        try:
-            _, error_string = self._get_error()
-            return error_string
-        except errors.Error:
-            pass
-
-        try:
-            '''
-            It is expected for _get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use _error_message instead. It doesn't require a session.
-            '''
-            error_string = self._error_message(error_code)
-            return error_string
-        except errors.Error:
-            return "Failed to retrieve error description."
 
     def initiate(self):
         '''initiate
@@ -4147,11 +4088,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.abort`
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_AbortWithChannels(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.abort(self._repeated_capability)
 
     @ivi_synchronized
     def self_cal(self):
@@ -4193,11 +4130,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.self_cal`
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_CalSelfCalibrate(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.self_cal(self._repeated_capability)
 
     @ivi_synchronized
     def clear_latched_output_cutoff_state(self, output_cutoff_reason):
@@ -4243,12 +4176,7 @@ class _SessionBase(object):
         '''
         if type(output_cutoff_reason) is not enums.OutputCutoffReason:
             raise TypeError('Parameter output_cutoff_reason must be of type ' + str(enums.OutputCutoffReason))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        output_cutoff_reason_ctype = _visatype.ViInt32(output_cutoff_reason.value)  # case S130
-        error_code = self._library.niDCPower_ClearLatchedOutputCutoffState(vi_ctype, channel_name_ctype, output_cutoff_reason_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.clear_latched_output_cutoff_state(self._repeated_capability, output_cutoff_reason)
 
     @ivi_synchronized
     def commit(self):
@@ -4280,11 +4208,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.commit`
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_CommitWithChannels(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.commit(self._repeated_capability)
 
     @ivi_synchronized
     def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
@@ -4336,13 +4260,7 @@ class _SessionBase(object):
         '''
         if type(units) is not enums.ApertureTimeUnits:
             raise TypeError('Parameter units must be of type ' + str(enums.ApertureTimeUnits))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        aperture_time_ctype = _visatype.ViReal64(aperture_time)  # case S150
-        units_ctype = _visatype.ViInt32(units.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureApertureTime(vi_ctype, channel_name_ctype, aperture_time_ctype, units_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.configure_aperture_time(self._repeated_capability, aperture_time, units)
 
     @ivi_synchronized
     def configure_lcr_custom_cable_compensation(self, custom_cable_compensation_data):
@@ -4377,14 +4295,8 @@ class _SessionBase(object):
             custom_cable_compensation_data (bytes): The open and short custom cable compensation data to apply.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        custom_cable_compensation_data_size_ctype = _visatype.ViInt32(0 if custom_cable_compensation_data is None else len(custom_cable_compensation_data))  # case S160
-        custom_cable_compensation_data_converted = _converters.convert_to_bytes(custom_cable_compensation_data)  # case B520
-        custom_cable_compensation_data_ctype = get_ctypes_pointer_for_buffer(value=custom_cable_compensation_data_converted, library_type=_visatype.ViInt8)  # case B520
-        error_code = self._library.niDCPower_ConfigureLCRCustomCableCompensation(vi_ctype, channel_name_ctype, custom_cable_compensation_data_size_ctype, custom_cable_compensation_data_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        custom_cable_compensation_data = _converters.convert_to_bytes(custom_cable_compensation_data)
+        self._library_interpreter.configure_lcr_custom_cable_compensation(self._repeated_capability, custom_cable_compensation_data)
 
     @ivi_synchronized
     def create_advanced_sequence_commit_step(self, set_as_active_step=True):
@@ -4433,12 +4345,7 @@ class _SessionBase(object):
             set_as_active_step (bool): Specifies whether the step created with this method is active in the Active advanced sequence.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
-        error_code = self._library.niDCPower_CreateAdvancedSequenceCommitStepWithChannels(vi_ctype, channel_name_ctype, set_as_active_step_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.create_advanced_sequence_commit_step(self._repeated_capability, set_as_active_step)
 
     @ivi_synchronized
     def create_advanced_sequence_step(self, set_as_active_step=True):
@@ -4485,12 +4392,7 @@ class _SessionBase(object):
             set_as_active_step (bool): Specifies whether the step created with this method is active in the Active advanced sequence.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
-        error_code = self._library.niDCPower_CreateAdvancedSequenceStepWithChannels(vi_ctype, channel_name_ctype, set_as_active_step_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.create_advanced_sequence_step(self._repeated_capability, set_as_active_step)
 
     @ivi_synchronized
     def _create_advanced_sequence_with_channels(self, sequence_name, attribute_ids, set_as_active_sequence):
@@ -4543,188 +4445,14 @@ class _SessionBase(object):
             sequence_name (str): Specifies the name of the sequence to create.
 
             attribute_ids (list of int): Specifies the properties you reconfigure per step in the advanced
-                sequence. The following table lists which properties can be configured
-                in an advanced sequence for each NI-DCPower device that supports
-                advanced sequencing. A Yes indicates that the property can be configured
-                in advanced sequencing. An No indicates that the property cannot be
-                configured in advanced sequencing.
-
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | Property                       | PXIe-4135 | PXIe-4136 | PXIe-4137 | PXIe-4138 | PXIe-4139 | PXIe-4140/4142/4144 | PXIe-4141/4143/4145 | PXIe-4147 | PXIe-4162/4163 | PXIe-4190 |
-                +================================+===========+===========+===========+===========+===========+=====================+=====================+===========+================+===========+
-                | aperture_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | dc_noise_rejection             | Yes       | No        | Yes       | No        | Yes       | No                  | No                  | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | instrument_mode                | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_actual_load_reactance      | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_actual_load_resistance     | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_current_amplitude          | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_current_range              | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_custom_measurement_time    | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_dc_bias_current_level      | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_dc_bias_current_range      | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_dc_bias_source             | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_dc_bias_voltage_level      | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_dc_bias_voltage_range      | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_frequency                  | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_impedance_auto_range       | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_impedance_range            | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_load_compensation_enabled  | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_measured_load_reactance    | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_measured_load_resistance   | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_measurement_time           | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_open_compensation_enabled  | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_open_conductance           | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_open_susceptance           | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_short_compensation_enabled | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_short_reactance            | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_short_resistance           | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_source_delay_mode          | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_stimulus_function          | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_voltage_amplitude          | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_voltage_range              | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | measure_record_length          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | sense                          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | ovp_enabled                    | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | ovp_limit                      | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_delay               | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_off_time                 | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_on_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | source_delay                   | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | output_enabled                 | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | output_function                | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | output_resistance              | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_current_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_voltage_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_voltage_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_voltage_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_current_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_current_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_current_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_voltage_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | transient_response             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
+                sequence. For more information about which properties can be configured
+                in an advanced sequence for each NI-DCPower device that supports advanced
+                sequencing, search ni.com for Supported Properties by Device.
 
             set_as_active_sequence (bool): Specifies that this current sequence is active.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
-        attribute_id_count_ctype = _visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case S160
-        attribute_ids_ctype = get_ctypes_pointer_for_buffer(value=attribute_ids, library_type=_visatype.ViInt32)  # case B550
-        set_as_active_sequence_ctype = _visatype.ViBoolean(set_as_active_sequence)  # case S150
-        error_code = self._library.niDCPower_CreateAdvancedSequenceWithChannels(vi_ctype, channel_name_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.create_advanced_sequence_with_channels(self._repeated_capability, sequence_name, attribute_ids, set_as_active_sequence)
 
     @ivi_synchronized
     def delete_advanced_sequence(self, sequence_name):
@@ -4766,12 +4494,7 @@ class _SessionBase(object):
             sequence_name (str): specifies the name of the sequence to delete.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_DeleteAdvancedSequenceWithChannels(vi_ctype, channel_name_ctype, sequence_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.delete_advanced_sequence(self._repeated_capability, sequence_name)
 
     @ivi_synchronized
     def create_advanced_sequence(self, sequence_name, property_names, set_as_active_sequence=True):
@@ -5370,22 +5093,9 @@ class _SessionBase(object):
                 device.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        count_ctype = _visatype.ViInt32(count)  # case S210
-        voltage_measurements_size = count  # case B600
-        voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B600
-        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B600
-        current_measurements_size = count  # case B600
-        current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B600
-        current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B600
-        in_compliance_size = count  # case B600
-        in_compliance_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=in_compliance_size)  # case B600
-        actual_count_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        voltage_measurements, current_measurements, in_compliance = self._library_interpreter.fetch_multiple(self._repeated_capability, timeout, count)
+        return voltage_measurements, current_measurements, in_compliance
 
     @ivi_synchronized
     def _fetch_multiple_lcr(self, count, timeout=hightime.timedelta(seconds=1.0)):
@@ -5464,16 +5174,9 @@ class _SessionBase(object):
             actual_count (int):
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        count_ctype = _visatype.ViInt32(count)  # case S210
-        measurements_size = count  # case B600
-        measurements_ctype = get_ctypes_pointer_for_buffer(library_type=lcr_measurement.struct_NILCRMeasurement, size=measurements_size)  # case B600
-        actual_count_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_FetchMultipleLCR(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, measurements_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [lcr_measurement.LCRMeasurement(measurements_ctype[i]) for i in range(count_ctype.value)]
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        measurements = self._library_interpreter.fetch_multiple_lcr(self._repeated_capability, timeout, count)
+        return measurements
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -5525,13 +5228,8 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niDCPower_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(attribute_value_ctype.value)
+        attribute_value = self._library_interpreter.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        return attribute_value
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -5583,13 +5281,8 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(attribute_value_ctype.value)
+        attribute_value = self._library_interpreter.get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        return attribute_value
 
     @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute_id):
@@ -5641,13 +5334,8 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt64()  # case S220
-        error_code = self._library.niDCPower_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(attribute_value_ctype.value)
+        attribute_value = self._library_interpreter.get_attribute_vi_int64(self._repeated_capability, attribute_id)
+        return attribute_value
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -5699,13 +5387,8 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(attribute_value_ctype.value)
+        attribute_value = self._library_interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return attribute_value
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -5767,18 +5450,8 @@ class _SessionBase(object):
                 selecting it and then pressing .
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        attribute_value_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        attribute_value_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode(self._encoding)
+        attribute_value = self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return attribute_value
 
     @ivi_synchronized
     def _get_channel_names(self, indices):
@@ -5800,67 +5473,41 @@ class _SessionBase(object):
             names (list of str): The channel name(s) at the specified indices.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        names_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelNameFromString(vi_ctype, indices_ctype, buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
+        indices = _converters.convert_repeated_capabilities_without_prefix(indices)
+        names = self._library_interpreter.get_channel_names(indices)
+        return _converters.convert_comma_separated_string_to_list(names)
 
-    def _get_error(self):
-        r'''_get_error
+    @ivi_synchronized
+    def get_lcr_compensation_data(self):
+        r'''get_lcr_compensation_data
 
-        | Retrieves and then clears the IVI error information for the session or
-          the current execution thread unless **bufferSize** is 0, in which case
-          the method does not clear the error information. By passing 0 for
-          the buffer size, you can ascertain the buffer size required to get the
-          entire error description string and then call the method again with
-          a sufficiently large buffer size.
-        | If the user specifies a valid IVI session for **vi**, this method
-          retrieves and then clears the error information for the session. If
-          the user passes VI_NULL for **vi**, this method retrieves and then
-          clears the error information for the current execution thread. If
-          **vi** is an invalid session, the method does nothing and returns an
-          error. Normally, the error information describes the first error that
-          occurred since the user last called _get_error or
-          ClearError.
+        Collects previously generated open, short, load, and custom cable compensation data so you can then apply it to LCR measurements with ConfigureLCRCompensation.
+
+        Call this method after you have obtained the compensation data of all types (open, short, load, open custom cable compensation, and short custom cable compensation) you want to apply to your measurements. Pass the **compensation data** to ConfigureLCRCompensation
+
+        Note:
+        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
 
-        Returns:
-            code (int): Returns the error code for the session or execution thread.
+        Tip:
+        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
 
-            description (str): Returns the error description for the IVI session or execution thread.
-                If there is no description, the method returns an empty string.
-                The buffer must contain at least as many elements as the value you
-                specify with **bufferSize**. If the error description, including the
-                terminating NUL byte, contains more bytes than you indicate with
-                **bufferSize**, the method copies (buffer size - 1) bytes into the
-                buffer, places an ASCII NUL byte at the end of the buffer, and returns
-                the buffer size you must pass to get the entire value. For example, if
-                the value is 123456 and the buffer size is 4, the method places 123
-                into the buffer and returns 7.
-                If you pass 0 for **bufferSize**, you can pass VI_NULL for this
-                property.
+        Example: :py:meth:`my_session.channels[ ... ].get_lcr_compensation_data`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+        Example: :py:meth:`my_session.get_lcr_compensation_data`
+
+        Returns:
+            compensation_data (bytes): The open, short, load, and custom cable compensation data to retrieve.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        code_ctype = _visatype.ViStatus()  # case S220
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        description_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
+        compensation_data = self._library_interpreter.get_lcr_compensation_data(self._repeated_capability)
+        return _converters.convert_to_bytes(compensation_data)
 
     @ivi_synchronized
     def _get_lcr_compensation_last_date_and_time(self, compensation_type):
@@ -5901,17 +5548,8 @@ class _SessionBase(object):
         '''
         if type(compensation_type) is not enums.LCRCompensationType:
             raise TypeError('Parameter compensation_type must be of type ' + str(enums.LCRCompensationType))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        compensation_type_ctype = _visatype.ViInt32(compensation_type.value)  # case S130
-        year_ctype = _visatype.ViInt32()  # case S220
-        month_ctype = _visatype.ViInt32()  # case S220
-        day_ctype = _visatype.ViInt32()  # case S220
-        hour_ctype = _visatype.ViInt32()  # case S220
-        minute_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_GetLCRCompensationLastDateAndTime(vi_ctype, channel_name_ctype, compensation_type_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+        year, month, day, hour, minute = self._library_interpreter.get_lcr_compensation_last_date_and_time(self._repeated_capability, compensation_type)
+        return year, month, day, hour, minute
 
     @ivi_synchronized
     def get_lcr_custom_cable_compensation_data(self):
@@ -5939,19 +5577,8 @@ class _SessionBase(object):
             custom_cable_compensation_data (bytes): The open and short custom cable compensation data to retrieve.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        custom_cable_compensation_data_size_ctype = _visatype.ViInt32()  # case S170
-        custom_cable_compensation_data_ctype = None  # case B580
-        error_code = self._library.niDCPower_GetLCRCustomCableCompensationData(vi_ctype, channel_name_ctype, custom_cable_compensation_data_size_ctype, custom_cable_compensation_data_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        custom_cable_compensation_data_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        custom_cable_compensation_data_size = custom_cable_compensation_data_size_ctype.value  # case B590
-        custom_cable_compensation_data_array = array.array("b", [0] * custom_cable_compensation_data_size)  # case B590
-        custom_cable_compensation_data_ctype = get_ctypes_pointer_for_buffer(value=custom_cable_compensation_data_array, library_type=_visatype.ViInt8)  # case B590
-        error_code = self._library.niDCPower_GetLCRCustomCableCompensationData(vi_ctype, channel_name_ctype, custom_cable_compensation_data_size_ctype, custom_cable_compensation_data_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_to_bytes(custom_cable_compensation_data_array)
+        custom_cable_compensation_data = self._library_interpreter.get_lcr_custom_cable_compensation_data(self._repeated_capability)
+        return _converters.convert_to_bytes(custom_cable_compensation_data)
 
     @ivi_synchronized
     def get_lcr_compensation_last_date_and_time(self, compensation_type):
@@ -6012,11 +5639,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session._initiate_with_channels`
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_InitiateWithChannels(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.initiate_with_channels(self._repeated_capability)
 
     def lock(self):
         '''lock
@@ -6048,20 +5671,10 @@ class _SessionBase(object):
             lock (context manager): When used in a with statement, nidcpower.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        self._library_interpreter.lock()  # We do not call this in the context manager so that this function can
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
-
-    def _lock_session(self):
-        '''_lock_session
-
-        Actual call to driver
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_LockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return
 
     @ivi_synchronized
     def measure(self, measurement_type):
@@ -6102,13 +5715,8 @@ class _SessionBase(object):
         '''
         if type(measurement_type) is not enums.MeasurementTypes:
             raise TypeError('Parameter measurement_type must be of type ' + str(enums.MeasurementTypes))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        measurement_type_ctype = _visatype.ViInt32(measurement_type.value)  # case S130
-        measurement_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_Measure(vi_ctype, channel_name_ctype, measurement_type_ctype, None if measurement_ctype is None else (ctypes.pointer(measurement_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(measurement_ctype.value)
+        measurement = self._library_interpreter.measure(self._repeated_capability, measurement_type)
+        return measurement
 
     @ivi_synchronized
     def _measure_multiple(self):
@@ -6143,17 +5751,8 @@ class _SessionBase(object):
                 returned array.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        voltage_measurements_size = self._parse_channel_count()  # case B560
-        voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B560
-        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B560
-        current_measurements_size = self._parse_channel_count()  # case B560
-        current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B560
-        current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B560
-        error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return voltage_measurements_array, current_measurements_array
+        voltage_measurements, current_measurements = self._library_interpreter.measure_multiple(self._repeated_capability)
+        return voltage_measurements, current_measurements
 
     @ivi_synchronized
     def _measure_multiple_lcr(self):
@@ -6221,13 +5820,8 @@ class _SessionBase(object):
                 +-----------------------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        measurements_size = self._parse_channel_count()  # case B560
-        measurements_ctype = get_ctypes_pointer_for_buffer(library_type=lcr_measurement.struct_NILCRMeasurement, size=measurements_size)  # case B560
-        error_code = self._library.niDCPower_MeasureMultipleLCR(vi_ctype, channel_name_ctype, measurements_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [lcr_measurement.LCRMeasurement(measurements_ctype[i]) for i in range(self._parse_channel_count())]
+        measurements = self._library_interpreter.measure_multiple_lcr(self._repeated_capability)
+        return measurements
 
     @ivi_synchronized
     def _parse_channel_count(self):
@@ -6250,12 +5844,8 @@ class _SessionBase(object):
             number_of_channels (int):
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channels_string_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        number_of_channels_ctype = _visatype.ViUInt32()  # case S220
-        error_code = self._library.niDCPower_ParseChannelCount(vi_ctype, channels_string_ctype, None if number_of_channels_ctype is None else (ctypes.pointer(number_of_channels_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(number_of_channels_ctype.value)
+        number_of_channels = self._library_interpreter.parse_channel_count(self._repeated_capability)
+        return number_of_channels
 
     @ivi_synchronized
     def perform_lcr_load_compensation(self, compensation_spots):
@@ -6302,13 +5892,7 @@ class _SessionBase(object):
                 +----------------------+----------------------------------------------------------------------------------------------------------------------------------------+
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        num_compensation_spots_ctype = _visatype.ViInt32(0 if compensation_spots is None else len(compensation_spots))  # case S160
-        compensation_spots_ctype = get_ctypes_pointer_for_buffer([lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot(c) for c in compensation_spots], library_type=lcr_load_compensation_spot.struct_NILCRLoadCompensationSpot)  # case B540
-        error_code = self._library.niDCPower_PerformLCRLoadCompensation(vi_ctype, channel_name_ctype, num_compensation_spots_ctype, compensation_spots_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.perform_lcr_load_compensation(self._repeated_capability, compensation_spots)
 
     @ivi_synchronized
     def perform_lcr_open_compensation(self, additional_frequencies=None):
@@ -6356,13 +5940,7 @@ class _SessionBase(object):
             additional_frequencies (list of float): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
-        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies, library_type=_visatype.ViReal64)  # case B550
-        error_code = self._library.niDCPower_PerformLCROpenCompensation(vi_ctype, channel_name_ctype, num_frequencies_ctype, additional_frequencies_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.perform_lcr_open_compensation(self._repeated_capability, additional_frequencies)
 
     @ivi_synchronized
     def perform_lcr_open_custom_cable_compensation(self):
@@ -6391,11 +5969,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.perform_lcr_open_custom_cable_compensation`
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_PerformLCROpenCustomCableCompensation(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.perform_lcr_open_custom_cable_compensation(self._repeated_capability)
 
     @ivi_synchronized
     def perform_lcr_short_compensation(self, additional_frequencies=None):
@@ -6443,13 +6017,7 @@ class _SessionBase(object):
             additional_frequencies (list of float): Defines a further set of frequencies, in addition to the default frequencies, to perform the compensation for. You can specify <=200 additional frequencies.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        num_frequencies_ctype = _visatype.ViInt32(0 if additional_frequencies is None else len(additional_frequencies))  # case S160
-        additional_frequencies_ctype = get_ctypes_pointer_for_buffer(value=additional_frequencies, library_type=_visatype.ViReal64)  # case B550
-        error_code = self._library.niDCPower_PerformLCRShortCompensation(vi_ctype, channel_name_ctype, num_frequencies_ctype, additional_frequencies_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.perform_lcr_short_compensation(self._repeated_capability, additional_frequencies)
 
     @ivi_synchronized
     def perform_lcr_short_custom_cable_compensation(self):
@@ -6481,11 +6049,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.perform_lcr_short_custom_cable_compensation`
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_PerformLCRShortCustomCableCompensation(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.perform_lcr_short_custom_cable_compensation(self._repeated_capability)
 
     @ivi_synchronized
     def query_in_compliance(self):
@@ -6530,12 +6094,8 @@ class _SessionBase(object):
             in_compliance (bool): Returns whether the device output channel is in compliance.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        in_compliance_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niDCPower_QueryInCompliance(vi_ctype, channel_name_ctype, None if in_compliance_ctype is None else (ctypes.pointer(in_compliance_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(in_compliance_ctype.value)
+        in_compliance = self._library_interpreter.query_in_compliance(self._repeated_capability)
+        return in_compliance
 
     @ivi_synchronized
     def query_latched_output_cutoff_state(self, output_cutoff_reason):
@@ -6593,13 +6153,8 @@ class _SessionBase(object):
         '''
         if type(output_cutoff_reason) is not enums.OutputCutoffReason:
             raise TypeError('Parameter output_cutoff_reason must be of type ' + str(enums.OutputCutoffReason))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        output_cutoff_reason_ctype = _visatype.ViInt32(output_cutoff_reason.value)  # case S130
-        output_cutoff_state_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niDCPower_QueryLatchedOutputCutoffState(vi_ctype, channel_name_ctype, output_cutoff_reason_ctype, None if output_cutoff_state_ctype is None else (ctypes.pointer(output_cutoff_state_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(output_cutoff_state_ctype.value)
+        output_cutoff_state = self._library_interpreter.query_latched_output_cutoff_state(self._repeated_capability, output_cutoff_reason)
+        return output_cutoff_state
 
     @ivi_synchronized
     def query_max_current_limit(self, voltage_level):
@@ -6629,13 +6184,8 @@ class _SessionBase(object):
                 **voltageLevel**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
-        max_current_limit_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_QueryMaxCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if max_current_limit_ctype is None else (ctypes.pointer(max_current_limit_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(max_current_limit_ctype.value)
+        max_current_limit = self._library_interpreter.query_max_current_limit(self._repeated_capability, voltage_level)
+        return max_current_limit
 
     @ivi_synchronized
     def query_max_voltage_level(self, current_limit):
@@ -6665,13 +6215,8 @@ class _SessionBase(object):
                 with the specified **currentLimit**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        current_limit_ctype = _visatype.ViReal64(current_limit)  # case S150
-        max_voltage_level_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_QueryMaxVoltageLevel(vi_ctype, channel_name_ctype, current_limit_ctype, None if max_voltage_level_ctype is None else (ctypes.pointer(max_voltage_level_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(max_voltage_level_ctype.value)
+        max_voltage_level = self._library_interpreter.query_max_voltage_level(self._repeated_capability, current_limit)
+        return max_voltage_level
 
     @ivi_synchronized
     def query_min_current_limit(self, voltage_level):
@@ -6701,13 +6246,8 @@ class _SessionBase(object):
                 with the specified **voltageLevel**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
-        min_current_limit_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_QueryMinCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if min_current_limit_ctype is None else (ctypes.pointer(min_current_limit_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(min_current_limit_ctype.value)
+        min_current_limit = self._library_interpreter.query_min_current_limit(self._repeated_capability, voltage_level)
+        return min_current_limit
 
     @ivi_synchronized
     def query_output_state(self, output_state):
@@ -6749,13 +6289,8 @@ class _SessionBase(object):
         '''
         if type(output_state) is not enums.OutputStates:
             raise TypeError('Parameter output_state must be of type ' + str(enums.OutputStates))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        output_state_ctype = _visatype.ViInt32(output_state.value)  # case S130
-        in_state_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niDCPower_QueryOutputState(vi_ctype, channel_name_ctype, output_state_ctype, None if in_state_ctype is None else (ctypes.pointer(in_state_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(in_state_ctype.value)
+        in_state = self._library_interpreter.query_output_state(self._repeated_capability, output_state)
+        return in_state
 
     @ivi_synchronized
     def reset(self):
@@ -6779,11 +6314,7 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session.reset`
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_ResetWithChannels(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.reset(self._repeated_capability)
 
     @ivi_synchronized
     def send_software_edge_trigger(self, trigger):
@@ -6814,19 +6345,19 @@ class _SessionBase(object):
             trigger (enums.SendSoftwareEdgeTriggerType): Specifies which trigger to assert.
                 **Defined Values:**
 
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_START_TRIGGER            | Asserts the Start trigger.            |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_TRIGGER           | Asserts the Source trigger.           |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_TRIGGER          | Asserts the Measure trigger.          |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER | Asserts the Sequence Advance trigger. |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_PULSE_TRIGGER            | Asserts the Pulse trigger.            |
-                +----------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SHUTDOWN_TRIGGER         | Asserts the Shutdown trigger.         |
-                +----------------------------------------+---------------------------------------+
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.START            | Asserts the Start trigger.            |
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.SOURCE           | Asserts the Source trigger.           |
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.MEASURE          | Asserts the Measure trigger.          |
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE | Asserts the Sequence Advance trigger. |
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.PULSE            | Asserts the Pulse trigger.            |
+                +----------------------------------------------+---------------------------------------+
+                | SendSoftwareEdgeTriggerType.SHUTDOWN         | Asserts the Shutdown trigger.         |
+                +----------------------------------------------+---------------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -6834,12 +6365,7 @@ class _SessionBase(object):
         '''
         if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
             raise TypeError('Parameter trigger must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        error_code = self._library.niDCPower_SendSoftwareEdgeTriggerWithChannels(vi_ctype, channel_name_ctype, trigger_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.send_software_edge_trigger(self._repeated_capability, trigger)
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -6894,13 +6420,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViBoolean(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -6955,13 +6475,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
@@ -7016,13 +6530,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt64(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.set_attribute_vi_int64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -7077,13 +6585,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViReal64(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -7138,13 +6640,7 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def set_sequence(self, values, source_delays):
@@ -7194,16 +6690,7 @@ class _SessionBase(object):
                 The valid values are between 0 and 167 seconds.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        values_ctype = get_ctypes_pointer_for_buffer(value=values, library_type=_visatype.ViReal64)  # case B550
-        source_delays_ctype = get_ctypes_pointer_for_buffer(value=source_delays, library_type=_visatype.ViReal64)  # case B550
-        size_ctype = _visatype.ViUInt32(0 if values is None else len(values))  # case S160
-        if source_delays is not None and len(source_delays) != len(values):  # case S160
-            raise ValueError("Length of source_delays and values parameters do not match.")  # case S160
-        error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.set_sequence(self._repeated_capability, values, source_delays)
 
     def unlock(self):
         '''unlock
@@ -7212,10 +6699,7 @@ class _SessionBase(object):
         lock. Refer to lock for additional
         information on session locks.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_UnlockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return
+        self._library_interpreter.unlock()
 
     @ivi_synchronized
     def wait_for_event(self, event_id, timeout=hightime.timedelta(seconds=10.0)):
@@ -7247,19 +6731,19 @@ class _SessionBase(object):
             event_id (enums.Event): Specifies which event to wait for.
                 **Defined Values:**
 
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT             | Waits for the Source Complete event.             |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT            | Waits for the Measure Complete event.            |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT | Waits for the Sequence Iteration Complete event. |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT        | Waits for the Sequence Engine Done event.        |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_PULSE_COMPLETE_EVENT              | Waits for the Pulse Complete event.              |
-                +-------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT     | Waits for the Ready for Pulse Trigger event.     |
-                +-------------------------------------------------+--------------------------------------------------+
+                +-----------------------------------+--------------------------------------------------+
+                | Event.SOURCE_COMPLETE             | Waits for the Source Complete event.             |
+                +-----------------------------------+--------------------------------------------------+
+                | Event.MEASURE_COMPLETE            | Waits for the Measure Complete event.            |
+                +-----------------------------------+--------------------------------------------------+
+                | Event.SEQUENCE_ITERATION_COMPLETE | Waits for the Sequence Iteration Complete event. |
+                +-----------------------------------+--------------------------------------------------+
+                | Event.SEQUENCE_ENGINE_DONE        | Waits for the Sequence Engine Done event.        |
+                +-----------------------------------+--------------------------------------------------+
+                | Event.PULSE_COMPLETE              | Waits for the Pulse Complete event.              |
+                +-----------------------------------+--------------------------------------------------+
+                | Event.READY_FOR_PULSE_TRIGGER     | Waits for the Ready for Pulse Trigger event.     |
+                +-----------------------------------+--------------------------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -7276,13 +6760,8 @@ class _SessionBase(object):
         '''
         if type(event_id) is not enums.Event:
             raise TypeError('Parameter event_id must be of type ' + str(enums.Event))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        error_code = self._library.niDCPower_WaitForEventWithChannels(vi_ctype, channel_name_ctype, event_id_ctype, timeout_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        self._library_interpreter.wait_for_event(self._repeated_capability, event_id, timeout)
 
     def _error_message(self, error_code):
         r'''_error_message
@@ -7301,12 +6780,8 @@ class _SessionBase(object):
                 You must pass a ViChar array with at least 256 bytes.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = _visatype.ViStatus(error_code)  # case S150
-        error_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niDCPower_error_message(vi_ctype, error_code_ctype, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
+        error_message = self._library_interpreter.error_message(error_code)
+        return error_message
 
 
 class Session(_SessionBase):
@@ -7424,21 +6899,20 @@ class Session(_SessionBase):
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            vi=None,
-            library=None,
-            encoding=None,
+            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
             freeze_it=False,
             all_channels_in_session=None
         )
         resource_name = _converters.convert_repeated_capabilities_without_prefix(resource_name)
         channels = _converters.convert_repeated_capabilities_without_prefix(channels)
         options = _converters.convert_init_with_options_dictionary(options)
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
 
         # Call specified init function
-        self._vi = 0  # This must be set before calling _fancy_initialize().
-        self._vi = self._fancy_initialize(resource_name, channels, reset, options, independent_channels)
+        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # _fancy_initialize fails, the error handler can reference it.
+        # And then once _fancy_initialize succeeds, we can update _library_interpreter._vi
+        # with the actual session handle.
+        self._library_interpreter._vi = self._fancy_initialize(resource_name, channels, reset, options, independent_channels)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -7452,7 +6926,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._vi` is set
+        # handle `self._library_interpreter._vi` is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -7492,9 +6966,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._vi = 0
+            self._library_interpreter._vi = 0
             raise
-        self._vi = 0
+        self._library_interpreter._vi = 0
 
     ''' These are code-generated '''
 
@@ -7509,10 +6983,7 @@ class Session(_SessionBase):
         This method opens the output relay on devices that have an output
         relay.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_Disable(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.disable()
 
     @ivi_synchronized
     def export_attribute_configuration_buffer(self):
@@ -7566,18 +7037,8 @@ class Session(_SessionBase):
                 property configuration.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        size_ctype = _visatype.ViInt32()  # case S170
-        configuration_ctype = None  # case B580
-        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        size_ctype = _visatype.ViInt32(error_code)  # case S180
-        configuration_size = size_ctype.value  # case B590
-        configuration_array = array.array("b", [0] * configuration_size)  # case B590
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
-        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_to_bytes(configuration_array)
+        configuration = self._library_interpreter.export_attribute_configuration_buffer()
+        return _converters.convert_to_bytes(configuration)
 
     @ivi_synchronized
     def export_attribute_configuration_file(self, file_path):
@@ -7633,11 +7094,7 @@ class Session(_SessionBase):
                 **Default file extension:** .nidcpowerconfig
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.export_attribute_configuration_file(file_path)
 
     def _fancy_initialize(self, resource_name, channels=None, reset=False, option_string="", independent_channels=True):
         '''_fancy_initialize
@@ -7787,17 +7244,8 @@ class Session(_SessionBase):
             channel_name (str): Returns the output channel name that corresponds to **index**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        channel_name_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return channel_name_ctype.value.decode(self._encoding)
+        channel_name = self._library_interpreter.get_channel_name(index)
+        return channel_name
 
     @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
@@ -7821,15 +7269,8 @@ class Session(_SessionBase):
             minute (int): Returns the **minute** in which the device was last calibrated.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        year_ctype = _visatype.ViInt32()  # case S220
-        month_ctype = _visatype.ViInt32()  # case S220
-        day_ctype = _visatype.ViInt32()  # case S220
-        hour_ctype = _visatype.ViInt32()  # case S220
-        minute_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_GetExtCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+        year, month, day, hour, minute = self._library_interpreter.get_ext_cal_last_date_and_time()
+        return year, month, day, hour, minute
 
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
@@ -7843,11 +7284,8 @@ class Session(_SessionBase):
                 during the last successful external calibration.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(temperature_ctype.value)
+        temperature = self._library_interpreter.get_ext_cal_last_temp()
+        return temperature
 
     @ivi_synchronized
     def get_ext_cal_recommended_interval(self):
@@ -7861,11 +7299,8 @@ class Session(_SessionBase):
                 external calibrations.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        months_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_month_to_timedelta(int(months_ctype.value))
+        months = self._library_interpreter.get_ext_cal_recommended_interval()
+        return _converters.convert_month_to_timedelta(months)
 
     @ivi_synchronized
     def get_ext_cal_last_date_and_time(self):
@@ -7925,15 +7360,8 @@ class Session(_SessionBase):
             minute (int): Returns the **minute** in which the device was last calibrated.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        year_ctype = _visatype.ViInt32()  # case S220
-        month_ctype = _visatype.ViInt32()  # case S220
-        day_ctype = _visatype.ViInt32()  # case S220
-        hour_ctype = _visatype.ViInt32()  # case S220
-        minute_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDCPower_GetSelfCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+        year, month, day, hour, minute = self._library_interpreter.get_self_cal_last_date_and_time()
+        return year, month, day, hour, minute
 
     @ivi_synchronized
     def get_self_cal_last_temp(self):
@@ -7957,11 +7385,8 @@ class Session(_SessionBase):
                 during the oldest successful calibration.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_GetSelfCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(temperature_ctype.value)
+        temperature = self._library_interpreter.get_self_cal_last_temp()
+        return temperature
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
@@ -8014,13 +7439,8 @@ class Session(_SessionBase):
                 configuration to import.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_converted = _converters.convert_to_bytes(configuration)  # case B520
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_converted, library_type=_visatype.ViInt8)  # case B520
-        error_code = self._library.niDCPower_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        configuration = _converters.convert_to_bytes(configuration)
+        self._library_interpreter.import_attribute_configuration_buffer(configuration)
 
     @ivi_synchronized
     def import_attribute_configuration_file(self, file_path):
@@ -8075,11 +7495,7 @@ class Session(_SessionBase):
                 **Default File Extension:** .nidcpowerconfig
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_ImportAttributeConfigurationFile(vi_ctype, file_path_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.import_attribute_configuration_file(file_path)
 
     def _initialize_with_channels(self, resource_name, channels, reset, option_string):
         r'''_initialize_with_channels
@@ -8150,14 +7566,8 @@ class Session(_SessionBase):
                 subsequent NI-DCPower method calls.
 
         '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        channels_ctype = ctypes.create_string_buffer(channels.encode(self._encoding))  # case C020
-        reset_ctype = _visatype.ViBoolean(reset)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
-        vi_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library.niDCPower_InitializeWithChannels(resource_name_ctype, channels_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(vi_ctype.value)
+        vi = self._library_interpreter.initialize_with_channels(resource_name, channels, reset, option_string)
+        return vi
 
     def _initialize_with_independent_channels(self, resource_name, reset, option_string):
         r'''_initialize_with_independent_channels
@@ -8236,13 +7646,8 @@ class Session(_SessionBase):
                 subsequent NI-DCPower method calls.
 
         '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        reset_ctype = _visatype.ViBoolean(reset)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
-        vi_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library.niDCPower_InitializeWithIndependentChannels(resource_name_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(vi_ctype.value)
+        vi = self._library_interpreter.initialize_with_independent_channels(resource_name, reset, option_string)
+        return vi
 
     @ivi_synchronized
     def get_channel_names(self, indices):
@@ -8277,11 +7682,8 @@ class Session(_SessionBase):
             temperature (float): Returns the onboard **temperature**, in degrees Celsius, of the device.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDCPower_ReadCurrentTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(temperature_ctype.value)
+        temperature = self._library_interpreter.read_current_temperature()
+        return temperature
 
     @ivi_synchronized
     def reset_device(self):
@@ -8301,10 +7703,7 @@ class Session(_SessionBase):
         This will also open the output relay on devices that have an output
         relay.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_ResetDevice(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.reset_device()
 
     @ivi_synchronized
     def reset_with_defaults(self):
@@ -8318,10 +7717,7 @@ class Session(_SessionBase):
         method, this method can assign user-defined default values for
         configurable properties from the IVI configuration.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_ResetWithDefaults(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.reset_with_defaults()
 
     def _close(self):
         r'''_close
@@ -8341,10 +7737,7 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_close(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._library_interpreter.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -8403,12 +7796,5 @@ class Session(_SessionBase):
                 least 256 bytes.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = _visatype.ViInt16()  # case S220
-        self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niDCPower_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
-
-
-
+        self_test_result, self_test_message = self._library_interpreter.self_test()
+        return self_test_result, self_test_message

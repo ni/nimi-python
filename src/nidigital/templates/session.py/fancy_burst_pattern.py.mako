@@ -15,4 +15,3 @@
             return self.get_site_pass_fail()
         else:
             return None
-

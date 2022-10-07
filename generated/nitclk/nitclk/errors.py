@@ -71,12 +71,12 @@ class DriverTooNewError(Error):
         super(DriverTooNewError, self).__init__('The NI-TClk runtime returned an unexpected value. This can occur if it is too new for the nitclk Python module. Upgrade the nitclk Python module.')
 
 
-def handle_error(session, code, ignore_warnings, is_error_handling):
+def handle_error(library_interpreter, code, ignore_warnings, is_error_handling):
     '''handle_error
 
     Helper function for handling errors returned by nitclk.Library.
-    It calls back into the session to get the corresponding error description
-    and raises if necessary.
+    It calls back into the LibraryInterpreter to get the corresponding error
+    description and raises if necessary.
     '''
 
     if _is_success(code) or (_is_warning(code) and ignore_warnings):
@@ -87,12 +87,10 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
         # Don't try to get the description or we'll start recursing until the stack overflows.
         description = ''
     else:
-        description = session._get_error_description(code)
+        description = library_interpreter.get_error_description(code)
 
     if _is_error(code):
         raise DriverError(code, description)
 
     assert _is_warning(code)
     warnings.warn(DriverWarning(code, description))
-
-

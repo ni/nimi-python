@@ -32,4 +32,3 @@
         waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
 
         return wfm_info
-

@@ -1298,6 +1298,45 @@ get_ext_cal_recommended_interval
 
 
 
+get_lcr_compensation_data
+-------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: get_lcr_compensation_data()
+
+            Collects previously generated open, short, load, and custom cable compensation data so you can then apply it to LCR measurements with :py:meth:`nidcpower.Session.ConfigureLCRCompensation`.
+
+            Call this method after you have obtained the compensation data of all types (open, short, load, open custom cable compensation, and short custom cable compensation) you want to apply to your measurements. Pass the **compensation data** to :py:meth:`nidcpower.Session.ConfigureLCRCompensation`
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_lcr_compensation_data`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.get_lcr_compensation_data`
+
+
+            :rtype: bytes
+            :return:
+
+
+                    The open, short, load, and custom cable compensation data to retrieve.
+
+                    
+
+
+
 get_lcr_compensation_last_date_and_time
 ---------------------------------------
 
@@ -1650,7 +1689,6 @@ lock
     :return:
         When used in a `with` statement, :py:meth:`nidcpower.Session.lock` acts as
         a context manager and unlock will be called when the `with` block is exited
-
 
 measure
 -------
@@ -2587,19 +2625,19 @@ send_software_edge_trigger
                 Specifies which trigger to assert.
                 **Defined Values:**
 
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_START_TRIGGER`            | Asserts the Start trigger.            |
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SOURCE_TRIGGER`           | Asserts the Source trigger.           |
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_MEASURE_TRIGGER`          | Asserts the Measure trigger.          |
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER` | Asserts the Sequence Advance trigger. |
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_TRIGGER`            | Asserts the Pulse trigger.            |
-                +--------------------------------------------------------------+---------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SHUTDOWN_TRIGGER`         | Asserts the Shutdown trigger.         |
-                +--------------------------------------------------------------+---------------------------------------+
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.START`            | Asserts the Start trigger.            |
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.SOURCE`           | Asserts the Source trigger.           |
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.MEASURE`          | Asserts the Measure trigger.          |
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE` | Asserts the Sequence Advance trigger. |
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.PULSE`            | Asserts the Pulse trigger.            |
+                +--------------------------------------------------------------------+---------------------------------------+
+                | :py:data:`~nidcpower.SendSoftwareEdgeTriggerType.SHUTDOWN`         | Asserts the Shutdown trigger.         |
+                +--------------------------------------------------------------------+---------------------------------------+
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -2683,8 +2721,6 @@ unlock
     :py:meth:`nidcpower.Session.lock`. Refer to :py:meth:`nidcpower.Session.unlock` for additional
     information on session locks.
 
-
-
 wait_for_event
 --------------
 
@@ -2722,19 +2758,19 @@ wait_for_event
                 Specifies which event to wait for.
                 **Defined Values:**
 
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT`             | Waits for the Source Complete event.             |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT`            | Waits for the Measure Complete event.            |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT` | Waits for the Sequence Iteration Complete event. |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT`        | Waits for the Sequence Engine Done event.        |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_COMPLETE_EVENT`              | Waits for the Pulse Complete event.              |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
-                | :py:data:`~nidcpower.NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT`     | Waits for the Ready for Pulse Trigger event.     |
-                +-----------------------------------------------------------------------+--------------------------------------------------+
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.SOURCE_COMPLETE`             | Waits for the Source Complete event.             |
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.MEASURE_COMPLETE`            | Waits for the Measure Complete event.            |
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.SEQUENCE_ITERATION_COMPLETE` | Waits for the Sequence Iteration Complete event. |
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.SEQUENCE_ENGINE_DONE`        | Waits for the Sequence Engine Done event.        |
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.PULSE_COMPLETE`              | Waits for the Pulse Complete event.              |
+                +---------------------------------------------------------+--------------------------------------------------+
+                | :py:data:`~nidcpower.Event.READY_FOR_PULSE_TRIGGER`     | Waits for the Ready for Pulse Trigger event.     |
+                +---------------------------------------------------------+--------------------------------------------------+
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -3130,7 +3166,11 @@ autorange_maximum_delay_after_range_change
     .. py:attribute:: autorange_maximum_delay_after_range_change
 
         Balances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.
-        **Valid Values:** The minimum and maximum values of this property are hardware-dependent. PXIe-4135/4136/4137: 0 to 9 seconds PXIe-4138/4139: 0 to 9 seconds PXIe-4163: 0 to 0.1 seconds.
+        **Valid Values:** The minimum and maximum values of this property are hardware-dependent.
+        PXIe-4135/4136/4137: 0 to 9 seconds
+        PXIe-4138/4139: 0 to 9 seconds
+        PXIe-4147: 0 to 9 seconds
+        PXIe-4163: 0 to 0.1 seconds.
 
 
 
@@ -10791,5 +10831,3 @@ voltage_pole_zero_ratio
 
 
 .. contents:: Session
-
-
