@@ -42,7 +42,6 @@ All notable changes to this project will be documented in this file.
             * Methods added:
                 * `get_lcr_compensation_data`
     * #### Changed
-        * Added enum values to the `OutputStates` enum, and renamed existing enum values.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
