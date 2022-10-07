@@ -2398,11 +2398,11 @@ query_output_state
                 Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
-                +-----------------------------------------------------+-------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputStates.CONSTANT_VOLTAGE` | The device maintains a constant voltage by adjusting the current. |
-                +-----------------------------------------------------+-------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputStates.CONSTANT_CURRENT` | The device maintains a constant current by adjusting the voltage. |
-                +-----------------------------------------------------+-------------------------------------------------------------------+
+                +--------------------------------------------+-------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.VOLTAGE` | The device maintains a constant voltage by adjusting the current. |
+                +--------------------------------------------+-------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.CURRENT` | The device maintains a constant current by adjusting the voltage. |
+                +--------------------------------------------+-------------------------------------------------------------------+
 
 
             :type output_state: :py:data:`nidcpower.OutputStates`

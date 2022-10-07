@@ -429,25 +429,13 @@ class OutputFunction(Enum):
 
 
 class OutputStates(Enum):
-    CONSTANT_VOLTAGE = 0
+    VOLTAGE = 0
     r'''
     The channel maintains a constant voltage by adjusting the current.
     '''
-    CONSTANT_CURRENT = 1
+    CURRENT = 1
     r'''
     The channel maintains a constant current by adjusting the voltage.
-    '''
-    OVER_VOLTAGE = 2
-    r'''
-    The channel is in the over voltage state.
-    '''
-    OVER_CURRENT = 3
-    r'''
-    The channel is in the over current state.
-    '''
-    UNREGULATED = 4
-    r'''
-    The channel is in the unregulated state.
     '''
 
 

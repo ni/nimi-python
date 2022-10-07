@@ -6275,11 +6275,11 @@ class _SessionBase(object):
             output_state (enums.OutputStates): Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
-                +-------------------------------+-------------------------------------------------------------------+
-                | OutputStates.CONSTANT_VOLTAGE | The device maintains a constant voltage by adjusting the current. |
-                +-------------------------------+-------------------------------------------------------------------+
-                | OutputStates.CONSTANT_CURRENT | The device maintains a constant current by adjusting the voltage. |
-                +-------------------------------+-------------------------------------------------------------------+
+                +----------------------+-------------------------------------------------------------------+
+                | OutputStates.VOLTAGE | The device maintains a constant voltage by adjusting the current. |
+                +----------------------+-------------------------------------------------------------------+
+                | OutputStates.CURRENT | The device maintains a constant current by adjusting the voltage. |
+                +----------------------+-------------------------------------------------------------------+
 
 
         Returns:

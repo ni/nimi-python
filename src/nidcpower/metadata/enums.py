@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.0.0d43
+# This file is generated from NI-DCPower API metadata version 23.0.0d83
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -871,27 +871,6 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT',
                 'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'The channel is in the over voltage state.'
-                },
-                'name': 'NIDCPOWER_VAL_OUTPUT_OVER_VOLTAGE',
-                'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'The channel is in the over current state.'
-                },
-                'name': 'NIDCPOWER_VAL_OUTPUT_OVER_CURRENT',
-                'value': 3
-            },
-            {
-                'documentation': {
-                    'description': 'The channel is in the unregulated state.'
-                },
-                'name': 'NIDCPOWER_VAL_OUTPUT_UNREGULATED',
-                'value': 4
             }
         ]
     },

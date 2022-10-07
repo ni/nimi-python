@@ -971,7 +971,7 @@ OutputStates
 
 .. py:class:: OutputStates
 
-    .. py:attribute:: OutputStates.CONSTANT_VOLTAGE
+    .. py:attribute:: OutputStates.VOLTAGE
 
 
 
@@ -981,41 +981,11 @@ OutputStates
 
 
 
-    .. py:attribute:: OutputStates.CONSTANT_CURRENT
+    .. py:attribute:: OutputStates.CURRENT
 
 
 
         The channel maintains a constant current by adjusting the voltage.
-
-        
-
-
-
-    .. py:attribute:: OutputStates.OVER_VOLTAGE
-
-
-
-        The channel is in the over voltage state.
-
-        
-
-
-
-    .. py:attribute:: OutputStates.OVER_CURRENT
-
-
-
-        The channel is in the over current state.
-
-        
-
-
-
-    .. py:attribute:: OutputStates.UNREGULATED
-
-
-
-        The channel is in the unregulated state.
 
         
 
