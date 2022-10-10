@@ -2325,7 +2325,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The returned index of channels corresponding to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.\nCall niDigital_GetChannelNameFromString to get the name of the channel associated with an index. Channel indexes are one-based.\n'
+                    'description': 'The returned index of channels corresponding to data read from the digital pattern instrument using the specified repeated capabilities. If you do not want to use this parameter, pass VI_NULL.\nCall niDigital_GetChannelName to get the name of the channel associated with an index. Channel indexes are one-based.\n'
                 },
                 'name': 'channelIndexes',
                 'size': {
