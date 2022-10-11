@@ -44,10 +44,12 @@ class ParameterUsageOptions(AutoNumber):
     '''For declaring a LibraryInterpreter method.'''
     INPUT_PARAMETERS = ()
     '''Get all input parameters, other than self, rep caps, and size'''
-    OUTPUT_PARAMETERS = ()
+    LIBRARY_OUTPUT_PARAMETERS = ()
     '''Get all output parameters, other than ivi-dance'''
-    OUTPUT_PARAMETERS_FOR_DOCS = ()
+    API_OUTPUT_PARAMETERS = ()
     '''We also want to skip size parameters'''
+    API_NUMPY_OUTPUT_PARAMETERS = ()
+    '''Output parameters for numpy function'''
     IVI_DANCE_PARAMETER = ()
     '''Get the ivi-dance parameter'''
     NUMPY_PARAMETERS = ()

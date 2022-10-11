@@ -487,9 +487,10 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
     suffix = method_template['method_python_name_suffix']
     session_method = ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD
     session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
-    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS_FOR_DOCS
+    output_parameters = ParameterUsageOptions.API_OUTPUT_PARAMETERS
     if numpy:
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
+        output_parameters = ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS
 
     if function['has_repeated_capability'] is True:
         function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['repeated_capability_type'], function['python_name'])
@@ -499,7 +500,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
-    input_params = filter_parameters(function, session_declaration)
+    input_params = filter_parameters(function['parameters'], session_declaration)
     if len(input_params) > 0:
         rst += '\n'
     for p in input_params:
@@ -509,7 +510,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
         p_type = format_type_for_rst_documentation(p, numpy, config)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
-    output_params = filter_parameters(function, output_parameters)
+    output_params = filter_parameters(function['parameters'], output_parameters)
     if len(output_params) > 1:
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
@@ -561,9 +562,10 @@ def get_function_docstring(function, numpy, config, indent=0):
         str: docstring formatted documentation
     '''
     session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
-    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS_FOR_DOCS
+    output_parameters = ParameterUsageOptions.API_OUTPUT_PARAMETERS
     if numpy:
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
+        output_parameters = ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS
 
     docstring = ''
     if function['has_repeated_capability'] is True:
@@ -571,7 +573,7 @@ def get_function_docstring(function, numpy, config, indent=0):
 
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
-    input_params = filter_parameters(function, session_declaration)
+    input_params = filter_parameters(function['parameters'], session_declaration)
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
@@ -581,7 +583,7 @@ def get_function_docstring(function, numpy, config, indent=0):
             docstring += ' ' + ds
         docstring += '\n'
 
-    output_params = filter_parameters(function, output_parameters)
+    output_params = filter_parameters(function['parameters'], output_parameters)
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
@@ -1305,17 +1307,10 @@ def test_get_function_rst_numpy():
 
     :type waveform_data: numpy.array(dtype=numpy.float64)
 
-    :rtype: tuple (waveform_data, actual_number_of_samples)
+    :rtype: int
+    :return:
 
-        WHERE
-
-        waveform_data (numpy.array(dtype=numpy.float64)):
-
-            Samples fetched from the device. Array should be numberOfSamples big.
-
-        actual_number_of_samples (int):
-
-            Number of samples actually fetched.
+        Number of samples actually fetched.
 '''
     assert_rst_strings_are_equal(expected_fuction_rst, actual_function_rst)
 
@@ -1424,8 +1419,6 @@ def test_get_function_docstring_numpy():
         waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
 
     Returns:
-        waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
-
         actual_number_of_samples (int): Number of samples actually fetched.
 '''
     assert_rst_strings_are_equal(expected_fuction_docstring, actual_function_docstring)

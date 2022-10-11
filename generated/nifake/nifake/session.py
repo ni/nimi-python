@@ -883,8 +883,6 @@ class Session(_SessionBase):
         Returns:
             waveform_data (array.array("d")): Samples fetched from the device. Array should be numberOfSamples big.
 
-            actual_number_of_samples (int): Number of samples actually fetched.
-
         '''
         waveform_data = self._library_interpreter.fetch_waveform(number_of_samples)
         return waveform_data
@@ -897,12 +895,6 @@ class Session(_SessionBase):
 
         Args:
             waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
-
-
-        Returns:
-            waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
-
-            actual_number_of_samples (int): Number of samples actually fetched.
 
         '''
         import numpy
