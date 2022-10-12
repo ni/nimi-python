@@ -236,16 +236,16 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
-<% grpc_channel_param = ", *, grpc_channel=None" if grpc_supported else "" %>\
+<% grpc_channel_param = ", *, _grpc_channel=None" if grpc_supported else "" %>\
     def __init__(${init_method_params}${grpc_channel_param}):
         r'''${config['session_class_description']}
 
         ${helper.get_function_docstring(init_function, False, config, indent=8)}
         '''
 % if grpc_supported:
-        if grpc_channel:
+        if _grpc_channel:
             import ${module_name}._grpc as _grpc
-            library_interpreter = _grpc.LibraryInterpreter(grpc_channel)
+            library_interpreter = _grpc.LibraryInterpreter(_grpc_channel)
         else:
             library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 % else:
@@ -258,7 +258,7 @@ class Session(_SessionBase):
             library_interpreter=library_interpreter,
             freeze_it=False,
 % if grpc_supported:
-            grpc_channel=grpc_channel,
+            grpc_channel=_grpc_channel,
 % endif
             all_channels_in_session=None
         )
@@ -278,7 +278,7 @@ class Session(_SessionBase):
 % if config['uses_nitclk']:
 %   if grpc_supported:
         ## TODO(DavidCurtiss): Figure out what to do here when we add grpc support for NI-TClk
-        if not grpc_channel:
+        if not _grpc_channel:
             self.tclk = nitclk.SessionReference(self._library_interpreter._${config['session_handle_parameter_name']})
 %   else:
         self.tclk = nitclk.SessionReference(self._library_interpreter._${config['session_handle_parameter_name']})

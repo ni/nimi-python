@@ -643,7 +643,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, options={}, id_query=False, reset_device=False, *, grpc_channel=None):
+    def __init__(self, resource_name, options={}, id_query=False, reset_device=False, *, _grpc_channel=None):
         r'''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation
 
         Creates a new IVI instrument driver session.
@@ -702,9 +702,9 @@ class Session(_SessionBase):
             session (nifake.Session): A session object representing the device.
 
         '''
-        if grpc_channel:
+        if _grpc_channel:
             import nifake._grpc as _grpc
-            library_interpreter = _grpc.LibraryInterpreter(grpc_channel)
+            library_interpreter = _grpc.LibraryInterpreter(_grpc_channel)
         else:
             library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
@@ -713,7 +713,7 @@ class Session(_SessionBase):
             repeated_capability_list=[],
             library_interpreter=library_interpreter,
             freeze_it=False,
-            grpc_channel=grpc_channel,
+            grpc_channel=_grpc_channel,
             all_channels_in_session=None
         )
         options = _converters.convert_init_with_options_dictionary(options)
@@ -725,7 +725,7 @@ class Session(_SessionBase):
         # with the actual session handle.
         self._library_interpreter._vi = self._init_with_options(resource_name, options, id_query, reset_device)
 
-        if not grpc_channel:
+        if not _grpc_channel:
             self.tclk = nitclk.SessionReference(self._library_interpreter._vi)
 
         # Store the parameter list for later printing in __repr__
