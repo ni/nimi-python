@@ -67,10 +67,12 @@ class LibraryInterpreter(object):
         Returns the error description.
         '''
         try:
-            _, error_string = self.get_error([1024])
-            return error_string
+            returned_error_code, error_string = self.get_error([1024])
+            if returned_error_code == error_code:
+                return error_string
         except errors.Error:
-            return "Failed to retrieve error description."
+            pass
+        return "Failed to retrieve error description."
 
     def close_session(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

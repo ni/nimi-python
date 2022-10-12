@@ -1,5 +1,8 @@
 <%
     import build.helper as helper
+    import os
+
+    grpc_supported = os.environ.get('GRPC_SUPPORTED')
 
     config = template_parameters['metadata'].config
     module_name = config['module_name']
@@ -77,6 +80,10 @@ deps =
     ${module_name}-system_tests: hightime
     ${module_name}-system_tests: fasteners
     ${module_name}-system_tests: pytest-json
+% if grpc_supported:
+    ${module_name}-system_tests: grpcio
+    ${module_name}-system_tests: protobuf
+% endif
 
     ${module_name}-coverage: coverage
     ${module_name}-coverage: codecov

@@ -94,6 +94,24 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'CustomNestedStructRoundtrip': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'nestedCustomTypeIn',
+                'type': 'CustomStructNestedTypedef'
+            },
+            {
+                'direction': 'out',
+                'name': 'nestedCustomTypeOut',
+                'type': 'CustomStructNestedTypedef'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'DoubleAllTheNums': {
         'documentation': {
             'description': 'Test for buffer with converter'

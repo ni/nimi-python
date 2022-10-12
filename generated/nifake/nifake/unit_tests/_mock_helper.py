@@ -23,6 +23,9 @@ class SideEffectsHelper(object):
         self._defaults['BoolArrayOutputFunction'] = {}
         self._defaults['BoolArrayOutputFunction']['return'] = 0
         self._defaults['BoolArrayOutputFunction']['anArray'] = None
+        self._defaults['CustomNestedStructRoundtrip'] = {}
+        self._defaults['CustomNestedStructRoundtrip']['return'] = 0
+        self._defaults['CustomNestedStructRoundtrip']['nestedCustomTypeOut'] = None
         self._defaults['DoubleAllTheNums'] = {}
         self._defaults['DoubleAllTheNums']['return'] = 0
         self._defaults['EnumArrayOutputFunction'] = {}
@@ -236,6 +239,17 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             an_array_ref[i] = test_value[i]
         return self._defaults['BoolArrayOutputFunction']['return']
+
+    def niFake_CustomNestedStructRoundtrip(self, nested_custom_type_in, nested_custom_type_out):  # noqa: N802
+        if self._defaults['CustomNestedStructRoundtrip']['return'] != 0:
+            return self._defaults['CustomNestedStructRoundtrip']['return']
+        # nested_custom_type_out
+        if self._defaults['CustomNestedStructRoundtrip']['nestedCustomTypeOut'] is None:
+            raise MockFunctionCallError("niFake_CustomNestedStructRoundtrip", param='nestedCustomTypeOut')
+        for field in self._defaults['CustomNestedStructRoundtrip']['nested_custom_type_out']._fields_:
+            field_name = field[0]
+            setattr(nested_custom_type_out.contents, field_name, getattr(self._defaults['CustomNestedStructRoundtrip']['nested_custom_type_out'], field_name))
+        return self._defaults['CustomNestedStructRoundtrip']['return']
 
     def niFake_DoubleAllTheNums(self, vi, number_count, numbers):  # noqa: N802
         if self._defaults['DoubleAllTheNums']['return'] != 0:
@@ -940,6 +954,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_AcceptListOfDurationsInSeconds.return_value = 0
         mock_library.niFake_BoolArrayOutputFunction.side_effect = MockFunctionCallError("niFake_BoolArrayOutputFunction")
         mock_library.niFake_BoolArrayOutputFunction.return_value = 0
+        mock_library.niFake_CustomNestedStructRoundtrip.side_effect = MockFunctionCallError("niFake_CustomNestedStructRoundtrip")
+        mock_library.niFake_CustomNestedStructRoundtrip.return_value = 0
         mock_library.niFake_DoubleAllTheNums.side_effect = MockFunctionCallError("niFake_DoubleAllTheNums")
         mock_library.niFake_DoubleAllTheNums.return_value = 0
         mock_library.niFake_EnumArrayOutputFunction.side_effect = MockFunctionCallError("niFake_EnumArrayOutputFunction")

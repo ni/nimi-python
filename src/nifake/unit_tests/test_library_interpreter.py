@@ -81,8 +81,8 @@ class TestLibraryInterpreter(object):
         self.patched_library.niFake_OneInputFunction.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(test_number))
 
     def test_vi_int_64_function(self):
-        input_value = 1099511627776  # 2^40
-        output_value = 2199023255552  # 2^41
+        input_value = 2 ** 40
+        output_value = 2 ** 41
         self.patched_library.niFake_Use64BitNumber.side_effect = self.side_effects_helper.niFake_Use64BitNumber
         self.side_effects_helper['Use64BitNumber']['output'] = output_value
         interpreter = self.get_initialized_library_interpreter()
@@ -425,6 +425,7 @@ class TestLibraryInterpreter(object):
             assert len(w) == 1
             assert issubclass(w[0].category, nifake.DriverWarning)
             assert test_error_desc in str(w[0].message)
+            assert f'Warning {test_error_code} occurred.' in str(w[0].message)
 
     def test_read_with_warning(self):
         # We want to capture all of our warnings, not just the first one
@@ -446,6 +447,7 @@ class TestLibraryInterpreter(object):
             assert len(w) == 1
             assert issubclass(w[0].category, nifake.DriverWarning)
             assert test_error_desc in str(w[0].message)
+            assert f'Warning {test_error_code} occurred.' in str(w[0].message)
 
     # Retrieving buffers and strings
 
@@ -633,6 +635,28 @@ class TestLibraryInterpreter(object):
 
     # Error descriptions
 
+    def test_get_error_returns_mismatched_error_code(self):
+        test_error_code = -42
+        test_error_desc = "The answer to the ultimate question, only positive"
+        wrong_error_code = 54
+        wrong_error_desc = "What is six times nine"
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
+        self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = wrong_error_code
+        self.side_effects_helper['GetError']['description'] = wrong_error_desc
+        self.patched_library.niFake_error_message.side_effect = self.side_effects_helper.niFake_error_message
+        self.side_effects_helper['error_message']['errorMessage'] = test_error_desc
+        interpreter = self.get_initialized_library_interpreter()
+        try:
+            interpreter.simple_function()
+            assert False
+        except nifake.Error as e:
+            assert e.code == test_error_code
+            assert e.description == test_error_desc
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+        self.patched_library.niFake_error_message.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(test_error_code), _matchers.ViCharBufferMatcher(256))
+
     def test_get_error_and_error_message_returns_error(self):
         test_error_code = -42
         self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
@@ -647,6 +671,7 @@ class TestLibraryInterpreter(object):
         interpreter = self.get_initialized_library_interpreter()
         try:
             interpreter.simple_function()
+            assert False
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == 'Failed to retrieve error description.'
@@ -665,6 +690,7 @@ class TestLibraryInterpreter(object):
         interpreter = self.get_initialized_library_interpreter()
         try:
             interpreter.simple_function()
+            assert False
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc

@@ -76,6 +76,7 @@ class _RepeatedCapabilities(object):
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
             library_interpreter=self._session._library_interpreter,
+            grpc_channel=self._session._grpc_channel,
             freeze_it=True
         )
 
@@ -181,11 +182,12 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.read_write_string_repeated_capability`
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, grpc_channel, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
         self._library_interpreter = library_interpreter
+        self._grpc_channel = grpc_channel
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -197,6 +199,12 @@ class _SessionBase(object):
         self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
         self.sites = _RepeatedCapabilities(self, 'site', repeated_capability_list)
         self.instruments = _RepeatedCapabilities(self, '', repeated_capability_list)
+
+        # Locking is not supported over gRPC
+        if grpc_channel:
+            import contextlib
+            self.lock = contextlib.nullcontext
+            self.unlock = lambda: None
 
         # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
         # members when trying to set a property with a typo.
@@ -635,7 +643,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, options={}, id_query=False, reset_device=False):
+    def __init__(self, resource_name, options={}, id_query=False, reset_device=False, *, grpc_channel=None):
         r'''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation
 
         Creates a new IVI instrument driver session.
@@ -694,11 +702,18 @@ class Session(_SessionBase):
             session (nifake.Session): A session object representing the device.
 
         '''
+        if grpc_channel:
+            import nifake._grpc as _grpc
+            library_interpreter = _grpc.LibraryInterpreter(grpc_channel)
+        else:
+            library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
+            library_interpreter=library_interpreter,
             freeze_it=False,
+            grpc_channel=grpc_channel,
             all_channels_in_session=None
         )
         options = _converters.convert_init_with_options_dictionary(options)
@@ -710,7 +725,8 @@ class Session(_SessionBase):
         # with the actual session handle.
         self._library_interpreter._vi = self._init_with_options(resource_name, options, id_query, reset_device)
 
-        self.tclk = nitclk.SessionReference(self._library_interpreter._vi)
+        if not grpc_channel:
+            self.tclk = nitclk.SessionReference(self._library_interpreter._vi)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -802,6 +818,23 @@ class Session(_SessionBase):
         '''
         an_array = self._library_interpreter.bool_array_output_function(number_of_elements)
         return an_array
+
+    @ivi_synchronized
+    def custom_nested_struct_roundtrip(self, nested_custom_type_in):
+        r'''custom_nested_struct_roundtrip
+
+        TBD
+
+        Args:
+            nested_custom_type_in (CustomStructNestedTypedef):
+
+
+        Returns:
+            nested_custom_type_out (CustomStructNestedTypedef):
+
+        '''
+        nested_custom_type_out = self._library_interpreter.custom_nested_struct_roundtrip(nested_custom_type_in)
+        return nested_custom_type_out
 
     @ivi_synchronized
     def double_all_the_nums(self, numbers):

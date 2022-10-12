@@ -38,6 +38,17 @@ class CustomStructNestedTypedef(object):
             self.struct_custom_struct = struct_custom_struct
             self.struct_custom_struct_typedef = struct_custom_struct_typedef
 
+    def create_copy(self, cls):
+        sample_object = cls()
+        return cls(
+            struct_custom_struct=self.struct_custom_struct.create_copy(
+                type(sample_object.struct_custom_struct)
+            ),
+            struct_custom_struct_typedef=self.struct_custom_struct_typedef.create_copy(
+                type(sample_object.struct_custom_struct_typedef)
+            ),
+        )
+
     def __repr__(self):
         return '{0}(data=None, struct_custom_struct={1}, struct_custom_struct_typedef={2})'.format(
             self.__class__.__name__,

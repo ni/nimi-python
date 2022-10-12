@@ -2,6 +2,9 @@ ${template_parameters['encoding_tag']}
 # This file was generated
 <%
     import build.helper as helper
+    import os
+
+    grpc_supported = os.environ.get('GRPC_SUPPORTED')
 
     config = template_parameters['metadata'].config
     attributes = config['attributes']
@@ -106,6 +109,9 @@ class _RepeatedCapabilities(object):
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
             library_interpreter=self._session._library_interpreter,
+% if grpc_supported:
+            grpc_channel=self._session._grpc_channel,
+% endif
             freeze_it=True
         )
 
@@ -161,11 +167,15 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 % if attributes:
 
 % endif
-    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
+<% grpc_channel_param = " grpc_channel," if grpc_supported else "" %>\
+    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter,${grpc_channel_param} freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
         self._library_interpreter = library_interpreter
+% if grpc_supported:
+        self._grpc_channel = grpc_channel
+% endif
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -178,6 +188,14 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 %   for rep_cap in config['repeated_capabilities']:
         self.${rep_cap['python_name']} = _RepeatedCapabilities(self, '${rep_cap["prefix"]}', repeated_capability_list)
 %   endfor
+
+% endif
+% if grpc_supported and config['use_locking']:
+        # Locking is not supported over gRPC
+        if grpc_channel:
+            import contextlib
+            self.lock = contextlib.nullcontext
+            self.unlock = lambda: None
 
 % endif
         # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
@@ -218,16 +236,30 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
-    def __init__(${init_method_params}):
+<% grpc_channel_param = ", *, grpc_channel=None" if grpc_supported else "" %>\
+    def __init__(${init_method_params}${grpc_channel_param}):
         r'''${config['session_class_description']}
 
         ${helper.get_function_docstring(init_function, False, config, indent=8)}
         '''
+% if grpc_supported:
+        if grpc_channel:
+            import ${module_name}._grpc as _grpc
+            library_interpreter = _grpc.LibraryInterpreter(grpc_channel)
+        else:
+            library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+% else:
+        library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+% endif
+
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
+            library_interpreter=library_interpreter,
             freeze_it=False,
+% if grpc_supported:
+            grpc_channel=grpc_channel,
+% endif
             all_channels_in_session=None
         )
 % for p in init_function['parameters']:
@@ -244,7 +276,13 @@ class Session(_SessionBase):
         self._library_interpreter._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
 
 % if config['uses_nitclk']:
+%   if grpc_supported:
+        ## TODO(DavidCurtiss): Figure out what to do here when we add grpc support for NI-TClk
+        if not grpc_channel:
+            self.tclk = nitclk.SessionReference(self._library_interpreter._${config['session_handle_parameter_name']})
+%   else:
         self.tclk = nitclk.SessionReference(self._library_interpreter._${config['session_handle_parameter_name']})
+%   endif
 
 % endif
         # Store the parameter list for later printing in __repr__

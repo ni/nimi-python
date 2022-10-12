@@ -42,6 +42,7 @@ $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 # We set up some additional dependencies for specific files
 # examples.rst needs to use find since there may be folders of files and it needs to be recursive. wildcard is not recursive
 $(MODULE_DIR)/session.py: $(wildcard $(TEMPLATE_DIR)/session.py/*.mako) $(wildcard $(DRIVER_DIR)/templates/session.py/*.mako)
+$(MODULE_DIR)/_grpc.py: $(wildcard $(TEMPLATE_DIR)/_grpc.py/*.mako) $(wildcard $(DRIVER_DIR)/templates/_grpc.py/*.mako)
 $(MODULE_DIR)/_library_interpreter.py: $(wildcard $(TEMPLATE_DIR)/_library_interpreter.py/*.mako) $(wildcard $(DRIVER_DIR)/templates/_library_interpreter.py/*.mako)
 $(DRIVER_DOCS_DIR)/class.rst: $(wildcard $(TEMPLATE_DIR)/functions.rst/*.mako) $(wildcard $(DRIVER_DIR)/templates/functions.rst/*.mako)
 $(DRIVER_DOCS_DIR)/examples.rst: $(EXAMPLE_FILES) $(MODULE_DIR)/VERSION
@@ -57,6 +58,18 @@ $(MODULE_DIR)/unit_tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILE
 $(MODULE_DIR)/%: %.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
+
+$(MODULE_DIR)/%_pb2.py: %.proto
+	$(call trace_to_console, "Generating",$@ and $(notdir $*)_pb2_grpc.py)
+	$(_hide_cmds)$(call log_command,mkdir -p $(OUTPUT_DIR)/build/proto/$(dir $*))
+	$(_hide_cmds)$(call log_command,python -m grpc_tools.protoc $(addprefix -I=,$(METADATA_DIRS)) --python_out=$(MODULE_DIR) --grpc_python_out=$(MODULE_DIR) $*.proto)
+	$(_hide_cmds)$(call log_command,sed -i 's/^import session_pb2/from . import session_pb2/' $(MODULE_DIR)/$*_pb2*.py)
+	$(_hide_cmds)$(call log_command,sed -i 's/^import nidevice_pb2/from . import nidevice_pb2/' $(MODULE_DIR)/$*_pb2*.py)
+	$(_hide_cmds)$(call log_command,sed -i 's/^import $(notdir $*)_pb2/from . import $(notdir $*)_pb2/' $(MODULE_DIR)/$*_pb2*.py)
+
+vpath %.proto $(METADATA_DIRS)
+
+$(MODULE_DIR)/%_pb2_grpc.py: $(MODULE_DIR)/%_pb2.py
 
 $(MODULE_DIR)/%.py: %.py
 	$(call trace_to_console, "Copying",$@)

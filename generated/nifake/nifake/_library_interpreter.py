@@ -73,8 +73,9 @@ class LibraryInterpreter(object):
         Returns the error description.
         '''
         try:
-            _, error_string = self.get_error()
-            return error_string
+            returned_error_code, error_string = self.get_error()
+            if returned_error_code == error_code:
+                return error_string
         except errors.Error:
             pass
 
@@ -87,7 +88,8 @@ class LibraryInterpreter(object):
             error_string = self.error_message(error_code)
             return error_string
         except errors.Error:
-            return "Failed to retrieve error description."
+            pass
+        return "Failed to retrieve error description."
 
     def abort(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -111,6 +113,13 @@ class LibraryInterpreter(object):
         error_code = self._library.niFake_BoolArrayOutputFunction(vi_ctype, number_of_elements_ctype, an_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [bool(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
+
+    def custom_nested_struct_roundtrip(self, nested_custom_type_in):  # noqa: N802
+        nested_custom_type_in_ctype = custom_struct_nested_typedef.struct_CustomStructNestedTypedef(nested_custom_type_in)  # case S150
+        nested_custom_type_out_ctype = custom_struct_nested_typedef.struct_CustomStructNestedTypedef()  # case S220
+        error_code = self._library.niFake_CustomNestedStructRoundtrip(nested_custom_type_in_ctype, None if nested_custom_type_out_ctype is None else (ctypes.pointer(nested_custom_type_out_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return custom_struct_nested_typedef.CustomStructNestedTypedef(nested_custom_type_out_ctype)
 
     def double_all_the_nums(self, numbers):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
