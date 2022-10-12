@@ -345,12 +345,12 @@ class LibraryInterpreter(object):
         )
         return response.caller_has_lock
 
-    def method_using_whole_mapped_numbers(self):  # noqa: N802
+    def method_using_whole_and_fractional_numbers(self):  # noqa: N802
         response = self._invoke(
-            self._client.MethodUsingWholeMappedNumbers,
-            grpc_types.MethodUsingWholeMappedNumbersRequest(),
+            self._client.MethodUsingWholeAndFractionalNumbers,
+            grpc_types.MethodUsingWholeAndFractionalNumbersRequest(),
         )
-        return response.whole_number_raw
+        return response.whole_number_raw, response.fractional_number_raw
 
     def method_with_grpc_only_param(self, simple_param):  # noqa: N802
         self._invoke(

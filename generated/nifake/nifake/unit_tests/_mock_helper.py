@@ -129,9 +129,10 @@ class SideEffectsHelper(object):
         self._defaults['LockSession'] = {}
         self._defaults['LockSession']['return'] = 0
         self._defaults['LockSession']['callerHasLock'] = None
-        self._defaults['MethodUsingWholeMappedNumbers'] = {}
-        self._defaults['MethodUsingWholeMappedNumbers']['return'] = 0
-        self._defaults['MethodUsingWholeMappedNumbers']['wholeNumber'] = None
+        self._defaults['MethodUsingWholeAndFractionalNumbers'] = {}
+        self._defaults['MethodUsingWholeAndFractionalNumbers']['return'] = 0
+        self._defaults['MethodUsingWholeAndFractionalNumbers']['wholeNumber'] = None
+        self._defaults['MethodUsingWholeAndFractionalNumbers']['fractionalNumber'] = None
         self._defaults['MethodWithGrpcOnlyParam'] = {}
         self._defaults['MethodWithGrpcOnlyParam']['return'] = 0
         self._defaults['MultipleArrayTypes'] = {}
@@ -659,15 +660,20 @@ class SideEffectsHelper(object):
             caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
         return self._defaults['LockSession']['return']
 
-    def niFake_MethodUsingWholeMappedNumbers(self, whole_number):  # noqa: N802
-        if self._defaults['MethodUsingWholeMappedNumbers']['return'] != 0:
-            return self._defaults['MethodUsingWholeMappedNumbers']['return']
+    def niFake_MethodUsingWholeAndFractionalNumbers(self, whole_number, fractional_number):  # noqa: N802
+        if self._defaults['MethodUsingWholeAndFractionalNumbers']['return'] != 0:
+            return self._defaults['MethodUsingWholeAndFractionalNumbers']['return']
         # whole_number
-        if self._defaults['MethodUsingWholeMappedNumbers']['wholeNumber'] is None:
-            raise MockFunctionCallError("niFake_MethodUsingWholeMappedNumbers", param='wholeNumber')
+        if self._defaults['MethodUsingWholeAndFractionalNumbers']['wholeNumber'] is None:
+            raise MockFunctionCallError("niFake_MethodUsingWholeAndFractionalNumbers", param='wholeNumber')
         if whole_number is not None:
-            whole_number.contents.value = self._defaults['MethodUsingWholeMappedNumbers']['wholeNumber']
-        return self._defaults['MethodUsingWholeMappedNumbers']['return']
+            whole_number.contents.value = self._defaults['MethodUsingWholeAndFractionalNumbers']['wholeNumber']
+        # fractional_number
+        if self._defaults['MethodUsingWholeAndFractionalNumbers']['fractionalNumber'] is None:
+            raise MockFunctionCallError("niFake_MethodUsingWholeAndFractionalNumbers", param='fractionalNumber')
+        if fractional_number is not None:
+            fractional_number.contents.value = self._defaults['MethodUsingWholeAndFractionalNumbers']['fractionalNumber']
+        return self._defaults['MethodUsingWholeAndFractionalNumbers']['return']
 
     def niFake_MethodWithGrpcOnlyParam(self, simple_param):  # noqa: N802
         if self._defaults['MethodWithGrpcOnlyParam']['return'] != 0:
@@ -1022,8 +1028,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_Initiate.return_value = 0
         mock_library.niFake_LockSession.side_effect = MockFunctionCallError("niFake_LockSession")
         mock_library.niFake_LockSession.return_value = 0
-        mock_library.niFake_MethodUsingWholeMappedNumbers.side_effect = MockFunctionCallError("niFake_MethodUsingWholeMappedNumbers")
-        mock_library.niFake_MethodUsingWholeMappedNumbers.return_value = 0
+        mock_library.niFake_MethodUsingWholeAndFractionalNumbers.side_effect = MockFunctionCallError("niFake_MethodUsingWholeAndFractionalNumbers")
+        mock_library.niFake_MethodUsingWholeAndFractionalNumbers.return_value = 0
         mock_library.niFake_MethodWithGrpcOnlyParam.side_effect = MockFunctionCallError("niFake_MethodWithGrpcOnlyParam")
         mock_library.niFake_MethodWithGrpcOnlyParam.return_value = 0
         mock_library.niFake_MultipleArrayTypes.side_effect = MockFunctionCallError("niFake_MultipleArrayTypes")

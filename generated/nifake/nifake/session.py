@@ -1268,17 +1268,19 @@ class Session(_SessionBase):
         self._library_interpreter.initiate()
 
     @ivi_synchronized
-    def method_using_whole_mapped_numbers(self):
-        r'''method_using_whole_mapped_numbers
+    def method_using_whole_and_fractional_numbers(self):
+        r'''method_using_whole_and_fractional_numbers
 
         TBD
 
         Returns:
-            whole_number (float):
+            whole_number (int):
+
+            fractional_number (float):
 
         '''
-        whole_number = self._library_interpreter.method_using_whole_mapped_numbers()
-        return whole_number
+        whole_number, fractional_number = self._library_interpreter.method_using_whole_and_fractional_numbers()
+        return whole_number, fractional_number
 
     @ivi_synchronized
     def method_with_grpc_only_param(self, simple_param):

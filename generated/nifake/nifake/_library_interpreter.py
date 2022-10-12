@@ -437,11 +437,12 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(caller_has_lock_ctype.value)
 
-    def method_using_whole_mapped_numbers(self):  # noqa: N802
-        whole_number_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niFake_MethodUsingWholeMappedNumbers(None if whole_number_ctype is None else (ctypes.pointer(whole_number_ctype)))
+    def method_using_whole_and_fractional_numbers(self):  # noqa: N802
+        whole_number_ctype = _visatype.ViInt32()  # case S220
+        fractional_number_ctype = _visatype.ViReal64()  # case S220
+        error_code = self._library.niFake_MethodUsingWholeAndFractionalNumbers(None if whole_number_ctype is None else (ctypes.pointer(whole_number_ctype)), None if fractional_number_ctype is None else (ctypes.pointer(fractional_number_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(whole_number_ctype.value)
+        return int(whole_number_ctype.value), float(fractional_number_ctype.value)
 
     def method_with_grpc_only_param(self, simple_param):  # noqa: N802
         simple_param_ctype = _visatype.ViInt32(simple_param)  # case S150

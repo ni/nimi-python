@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d13
+# This file is generated from NI-FAKE API metadata version 23.0.0d33
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -1453,15 +1453,21 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'MethodUsingWholeMappedNumbers': {
+    'MethodUsingWholeAndFractionalNumbers': {
         'documentation': {
             'description': 'TBD'
         },
         'parameters': [
             {
                 'direction': 'out',
-                'grpc_enum': 'DecimalWholeNumberMapped',
+                'grpc_enum': 'DecimalWholeNumber',
                 'name': 'wholeNumber',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'grpc_enum': 'DecimalMixedNumber',
+                'name': 'fractionalNumber',
                 'type': 'ViReal64'
             }
         ],
