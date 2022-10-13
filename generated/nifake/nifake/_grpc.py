@@ -71,7 +71,6 @@ class LibraryInterpreter(object):
             warnings.warn(errors.DriverWarning(error_code, error_message))
         return response
 
-
     def abort(self):  # noqa: N802
         self._invoke(
             self._client.Abort,

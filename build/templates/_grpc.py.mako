@@ -78,7 +78,6 @@ class LibraryInterpreter(object):
                     error_message = 'Failed to retrieve error description.'
             warnings.warn(errors.DriverWarning(error_code, error_message))
         return response
-
 % for func_name in sorted(functions):
 % for method_template in functions[func_name]['method_templates']:
 % if method_template['library_interpreter_filename'] != '/none':
