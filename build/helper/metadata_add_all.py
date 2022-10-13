@@ -33,7 +33,6 @@ def _add_name(n, name):
     '''Adds a name' key/value pair to the function metadata'''
     assert 'name' not in n, "'name' is already populated which means issue #372 is closed, rendering _add_name() redundant."
     n['name'] = name
-    return n
 
 
 def _add_codegen_method(n):
@@ -54,7 +53,7 @@ def _add_grpc_enum(n):
         if 'enum' in n:
             n['grpc_enum'] = n['enum']
         else:
-            n['enum'] = None
+            n['grpc_enum'] = None
 
 
 def _add_python_method_name(function, name):
@@ -65,28 +64,24 @@ def _add_python_method_name(function, name):
         else:
             function['python_name'] = camelcase_to_snakecase(name)
             assert function['codegen_method'] == 'no' or 'method_name_for_documentation' not in function, "'method_name_for_documentation' not allowed to be set: function['method_name_for_documentation'] = '{0}', function['python_name'] = '{1}'".format(function['method_name_for_documentation'], function['python_name'])
-    return function
 
 
 def _add_library_interpreter_method_name(function, name):
     '''Adds 'library_interpreter_name' to the function metadata if not already there'''
     if 'library_interpreter_name' not in function:
         function['library_interpreter_name'] = function['python_name'].lstrip('_')
-    return function
 
 
 def _add_python_parameter_name(parameter):
     '''Adds a python_name key/value pair to the parameter metadata'''
     if 'python_name' not in parameter:
         parameter['python_name'] = camelcase_to_snakecase(parameter['name'])
-    return parameter
 
 
 def _add_grpc_parameter_name(parameter):
     '''Adds a grpc_name key/value pair to the parameter metadata'''
     if 'grpc_name' not in parameter:
         parameter['grpc_name'] = parameter['python_name']
-    return parameter
 
 
 def _add_python_type(item, config):
@@ -103,13 +98,10 @@ def _add_python_type(item, config):
         item['type_in_documentation'] = item['python_type']
         item['type_in_documentation_was_calculated'] = True
 
-    return item
-
 
 def _add_ctypes_variable_name(parameter):
     '''Adds a ctypes_variable_name key/value pair to the parameter metadata for a corresponding ctypes variable'''
     parameter['ctypes_variable_name'] = parameter['python_name'] + '_ctype'
-    return parameter
 
 
 def _add_ctypes_type(parameter, config):
@@ -126,8 +118,6 @@ def _add_ctypes_type(parameter, config):
         parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['ctypes_type'] + ")"
     else:
         parameter['ctypes_type_library_call'] = module_name + parameter['ctypes_type']
-
-    return parameter
 
 
 def _add_numpy_info(parameter, parameters, config):
@@ -148,8 +138,6 @@ def _add_numpy_info(parameter, parameters, config):
             if size_param:
                 size_param['use_in_python_api'] = False
 
-    return parameter
-
 
 def _add_is_error_handling(f):
     '''Adds is_error_handling information to the function metadata if it isn't already defined. Defaults to False.'''
@@ -158,7 +146,6 @@ def _add_is_error_handling(f):
     if 'is_error_handling' not in f:
         # Not populated, assume False
         f['is_error_handling'] = False
-    return f
 
 
 def _add_buffer_info(parameter, config):
@@ -207,8 +194,6 @@ def _add_buffer_info(parameter, config):
     parameter['is_buffer'] = parameter['is_buffer'] if 'is_buffer' in parameter else (use_array or use_list)
 
     assert parameter['is_buffer'] is False or parameter['is_string'] is False
-
-    return parameter
 
 
 def _add_ctypes_method_call_snippet(parameter):

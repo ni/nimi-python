@@ -200,12 +200,6 @@ class _SessionBase(object):
         self.sites = _RepeatedCapabilities(self, 'site', repeated_capability_list)
         self.instruments = _RepeatedCapabilities(self, '', repeated_capability_list)
 
-        # Locking is not supported over gRPC
-        if grpc_channel:
-            import contextlib
-            self.lock = contextlib.nullcontext
-            self.unlock = lambda: None
-
         # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
         # members when trying to set a property with a typo.
         self._is_frozen = freeze_it
@@ -696,6 +690,8 @@ class Session(_SessionBase):
                 +----------------+---+--------------+
                 | False          | 0 | Don't Reset  |
                 +----------------+---+--------------+
+
+            _grpc_channel (grpc.Channel): MeasurementLink gRPC channel
 
 
         Returns:

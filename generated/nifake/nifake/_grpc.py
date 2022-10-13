@@ -3,6 +3,7 @@
 
 import grpc
 import hightime  # noqa: F401
+import threading
 import warnings
 
 from . import enums as enums
@@ -24,6 +25,7 @@ class LibraryInterpreter(object):
     '''
 
     def __init__(self, grpc_channel):
+        self._lock = threading.RLock()
         self._client = grpc_library.NiFakeStub(grpc_channel)
         self._vi = 0
 
@@ -62,33 +64,13 @@ class LibraryInterpreter(object):
             raise errors.DriverError(error_code, error_message)
         elif error_code > 0:
             if not error_message:
-                error_message = self.get_error_description(error_code)
+                try:
+                    error_message = self.error_message(error_code)
+                except errors.Error:
+                    error_message = 'Failed to retrieve error description.'
             warnings.warn(errors.DriverWarning(error_code, error_message))
         return response
 
-    def get_error_description(self, error_code):
-        '''get_error_description
-
-        Returns the error description.
-        '''
-        try:
-            returned_error_code, error_string = self.get_error()
-            if returned_error_code == error_code:
-                return error_string
-        except errors.Error:
-            pass
-
-        try:
-            '''
-            It is expected for get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use error_message instead. It doesn't require a session.
-            '''
-            error_string = self.error_message(error_code)
-            return error_string
-        except errors.Error:
-            pass
-        return "Failed to retrieve error description."
 
     def abort(self):  # noqa: N802
         self._invoke(
@@ -339,11 +321,7 @@ class LibraryInterpreter(object):
         )
 
     def lock(self):  # noqa: N802
-        response = self._invoke(
-            self._client.LockSession,
-            grpc_types.LockSessionRequest(vi=self._vi),
-        )
-        return response.caller_has_lock
+        self._lock.acquire()
 
     def method_using_whole_and_fractional_numbers(self):  # noqa: N802
         response = self._invoke(
@@ -486,11 +464,7 @@ class LibraryInterpreter(object):
         )
 
     def unlock(self):  # noqa: N802
-        response = self._invoke(
-            self._client.UnlockSession,
-            grpc_types.UnlockSessionRequest(vi=self._vi),
-        )
-        return response.caller_has_lock
+        self._lock.release()
 
     def use64_bit_number(self, input):  # noqa: N802
         response = self._invoke(

@@ -11,6 +11,7 @@ functions = helper.filter_library_functions(config['functions'])
 
 import grpc
 import hightime  # noqa: F401
+import threading
 import warnings
 
 % if config['enums']:
@@ -32,6 +33,7 @@ class LibraryInterpreter(object):
     '''
 
     def __init__(self, grpc_channel):
+        self._lock = threading.RLock()
         self._client = grpc_library.${service_class_prefix}Stub(grpc_channel)
         self._${config['session_handle_parameter_name']} = 0
 
@@ -70,11 +72,13 @@ class LibraryInterpreter(object):
             raise errors.DriverError(error_code, error_message)
         elif error_code > 0:
             if not error_message:
-                error_message = self.get_error_description(error_code)
+                try:
+                    error_message = self.error_message(error_code)
+                except errors.Error:
+                    error_message = 'Failed to retrieve error description.'
             warnings.warn(errors.DriverWarning(error_code, error_message))
         return response
 
-<%include file="/_library_interpreter.py/_get_error_description.py.mako" args="config=config" />\
 % for func_name in sorted(functions):
 % for method_template in functions[func_name]['method_templates']:
 % if method_template['library_interpreter_filename'] != '/none':

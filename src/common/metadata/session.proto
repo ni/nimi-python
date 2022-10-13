@@ -27,6 +27,12 @@ service SessionUtilities {
   rpc ResetServer(ResetServerRequest) returns (ResetServerResponse);
 }
 
+enum SessionInitializationBehavior {
+  SESSION_INITIALIZATION_BEHAVIOR_UNSPECIFIED = 0;
+  SESSION_INITIALIZATION_BEHAVIOR_INITIALIZE_NEW = 1;
+  SESSION_INITIALIZATION_BEHAVIOR_ATTACH_TO_EXISTING = 2;
+}
+
 message Session {
   oneof session {
     string name = 1;

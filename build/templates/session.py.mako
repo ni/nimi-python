@@ -190,14 +190,6 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 %   endfor
 
 % endif
-% if grpc_supported and config['use_locking']:
-        # Locking is not supported over gRPC
-        if grpc_channel:
-            import contextlib
-            self.lock = contextlib.nullcontext
-            self.unlock = lambda: None
-
-% endif
         # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
         # members when trying to set a property with a typo.
         self._is_frozen = freeze_it
@@ -236,11 +228,32 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
-<% grpc_channel_param = ", *, _grpc_channel=None" if grpc_supported else "" %>\
+<% grpc_channel_param = ', *, _grpc_channel=None' if grpc_supported else '' %>\
     def __init__(${init_method_params}${grpc_channel_param}):
         r'''${config['session_class_description']}
 
-        ${helper.get_function_docstring(init_function, False, config, indent=8)}
+<%
+ctor_for_docs = init_function
+if grpc_supported:
+    import copy
+    ctor_for_docs = copy.deepcopy(ctor_for_docs)
+    ctor_for_docs['parameters'].append(
+        {
+            'default_value': None,
+            'direction': 'in',
+            'documentation': { 'description': 'MeasurementLink gRPC channel' },
+            'enum': None,
+            'is_repeated_capability': False,
+            'is_session_handle': False,
+            'python_name': '_grpc_channel',
+            'size': {'mechanism': 'fixed', 'value': 1},
+            'type_in_documentation': 'grpc.Channel',
+            'type_in_documentation_was_calculated': False,
+            'use_in_python_api': False,
+        },
+    )
+%>\
+        ${helper.get_function_docstring(ctor_for_docs, False, config, indent=8)}
         '''
 % if grpc_supported:
         if _grpc_channel:

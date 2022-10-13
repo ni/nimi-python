@@ -5,6 +5,7 @@ import math
 import nifake
 import nifake.errors
 import numpy
+import pytest
 import warnings
 
 from unittest.mock import MagicMock
@@ -160,6 +161,15 @@ class TestGrpcLibraryInterpreter(object):
         return getattr(self.patched_grpc_types, function_name + 'Request')
 
     # Methods
+
+    @pytest.mark.timeout(2)
+    def test_lock_unlock(self):
+        # Note: this is purely local; don't set up any grpc mocks
+        interpreter = self._get_initialized_library_interpreter()
+        interpreter.lock()
+        interpreter.lock()  # ensure recurive locking is allowed
+        interpreter.unlock()
+        interpreter.unlock()
 
     def test_simple_function(self):
         library_func = 'PoorlyNamedSimpleFunction'
@@ -517,7 +527,7 @@ class TestGrpcLibraryInterpreter(object):
         test_error_code = 42
         test_error_desc = 'The answer to the ultimate question, only positive'
         response_object = self._set_side_effect(library_func, status=test_error_code)
-        error_response_object = self._set_side_effect('GetError', error_code=test_error_code, description=test_error_desc)
+        error_response_object = self._set_side_effect('ErrorMessage', error_message=test_error_desc)
         interpreter = self._get_initialized_library_interpreter()
         with warnings.catch_warnings(record=True) as w:
             assert interpreter.simple_function() is None  # no outputs
@@ -526,7 +536,9 @@ class TestGrpcLibraryInterpreter(object):
             assert test_error_desc in str(w[0].message)
             assert f'Warning {test_error_code} occurred.' in str(w[0].message)
         self._assert_call(library_func, response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
-        self._assert_call('GetError', error_response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
+        self._assert_call('ErrorMessage', error_response_object).assert_called_once_with(
+            vi=GRPC_SESSION_OBJECT_FOR_TEST, error_code=test_error_code
+        )
 
     def test_read_with_warning(self):
         # We want to capture all of our warnings, not just the first one
@@ -538,7 +550,7 @@ class TestGrpcLibraryInterpreter(object):
         test_error_code = 42
         test_error_desc = 'The answer to the ultimate question, only positive'
         response_object = self._set_side_effect(library_func, status=test_error_code, reading=test_reading)
-        error_response_object = self._set_side_effect('GetError', error_code=test_error_code, description=test_error_desc)
+        error_response_object = self._set_side_effect('ErrorMessage', error_message=test_error_desc)
         interpreter = self._get_initialized_library_interpreter()
         with warnings.catch_warnings(record=True) as w:
             assert math.isnan(interpreter.read(test_maximum_time_s))
@@ -549,7 +561,9 @@ class TestGrpcLibraryInterpreter(object):
         self._assert_call(library_func, response_object).assert_called_once_with(
             vi=GRPC_SESSION_OBJECT_FOR_TEST, maximum_time=test_maximum_time_s
         )
-        self._assert_call('GetError', error_response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
+        self._assert_call('ErrorMessage', error_response_object).assert_called_once_with(
+            vi=GRPC_SESSION_OBJECT_FOR_TEST, error_code=test_error_code
+        )
 
     # Retrieving buffers and strings
 
@@ -561,20 +575,6 @@ class TestGrpcLibraryInterpreter(object):
         returned_string = interpreter.get_a_string_of_fixed_maximum_size()
         assert returned_string == test_string
         self._assert_call(library_func, response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
-
-    """
-    def test_get_a_string_of_size_python_code(self):
-        library_func = 'GetAStringUsingPythonCode'
-        test_size = 4
-        expected_string_size = test_size - 1
-        test_string = 'A string that is larger than test_size.'
-        expected_string = test_string[:expected_string_size]
-        response_object = self._set_side_effect(library_func, a_string=expected_string)
-        interpreter = self._get_initialized_library_interpreter()
-        returned_string = interpreter.get_a_string_using_python_code(test_size)
-        assert returned_string == expected_string
-        self._assert_call(library_func, response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST, a_number=test_size)
-    """
 
     def test_return_a_number_and_a_string(self):
         library_func = 'ReturnANumberAndAString'
@@ -756,37 +756,13 @@ class TestGrpcLibraryInterpreter(object):
 
     # Error descriptions
 
-    def test_get_error_returns_mismatched_error_code(self):
-        # We want to capture all of our warnings, not just the first one
-        warnings.filterwarnings('always', category=nifake.DriverWarning)
-
-        library_func = 'PoorlyNamedSimpleFunction'
-        test_error_code = 42
-        test_error_desc = 'The answer to the ultimate question, only positive'
-        wrong_error_code = 54
-        wrong_error_desc = 'What is six times nine'
-        response_object = self._set_side_effect(library_func, status=test_error_code)
-        error_response_object = self._set_side_effect('GetError', error_code=wrong_error_code, description=wrong_error_desc)
-        error_msg_response_object = self._set_side_effect('ErrorMessage', error_message=test_error_desc)
-        interpreter = self._get_initialized_library_interpreter()
-        with warnings.catch_warnings(record=True) as w:
-            assert interpreter.simple_function() is None  # no outputs
-            assert len(w) == 1
-            assert issubclass(w[0].category, nifake.DriverWarning)
-            assert test_error_desc in str(w[0].message)
-            assert f'Warning {test_error_code} occurred.' in str(w[0].message)
-        self._assert_call(library_func, response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
-        self._assert_call('GetError', error_response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
-        self._assert_call('ErrorMessage', error_msg_response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST, error_code=test_error_code)
-
-    def test_get_error_and_error_message_returns_error(self):
+    def test_error_message_returns_error(self):
         # We want to capture all of our warnings, not just the first one
         warnings.filterwarnings('always', category=nifake.DriverWarning)
 
         test_error_code = 42
         library_func = 'PoorlyNamedSimpleFunction'
         response_object = self._set_side_effect(library_func, status=test_error_code)
-        error_response_object = self._set_side_effect('GetError', side_effect=MyRpcError(-2, 'GetError failed'))
         error_msg_response_object = self._set_side_effect('ErrorMessage', side_effect=MyRpcError(-3, 'ErrorMessage failed'))
         interpreter = self._get_initialized_library_interpreter()
         with warnings.catch_warnings(record=True) as w:
@@ -796,28 +772,6 @@ class TestGrpcLibraryInterpreter(object):
             assert 'Failed to retrieve error description.' in str(w[0].message)
             assert f'Warning {test_error_code} occurred.' in str(w[0].message)
         self._assert_call(library_func, response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
-        self._assert_call('GetError', error_response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
-        self._assert_call('ErrorMessage', error_msg_response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST, error_code=test_error_code)
-
-    def test_get_error_description_error_message_error(self):
-        # We want to capture all of our warnings, not just the first one
-        warnings.filterwarnings('always', category=nifake.DriverWarning)
-
-        test_error_code = 42
-        test_error_desc = 'The answer to the ultimate question'
-        library_func = 'PoorlyNamedSimpleFunction'
-        response_object = self._set_side_effect(library_func, status=test_error_code)
-        error_response_object = self._set_side_effect('GetError', side_effect=MyRpcError(-2, 'GetError failed'))
-        error_msg_response_object = self._set_side_effect('ErrorMessage', error_message=test_error_desc)
-        interpreter = self._get_initialized_library_interpreter()
-        with warnings.catch_warnings(record=True) as w:
-            assert interpreter.simple_function() is None  # no outputs
-            assert len(w) == 1
-            assert issubclass(w[0].category, nifake.DriverWarning)
-            assert test_error_desc in str(w[0].message)
-            assert f'Warning {test_error_code} occurred.' in str(w[0].message)
-        self._assert_call(library_func, response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
-        self._assert_call('GetError', error_response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
         self._assert_call('ErrorMessage', error_msg_response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST, error_code=test_error_code)
 
     # Custom types

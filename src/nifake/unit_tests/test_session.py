@@ -821,9 +821,9 @@ class TestGrpcSession(object):
         self.patched_grpc_interpreter.init_with_options.side_effect = [GRPC_SESSION_OBJECT_FOR_TEST]
         self.patched_grpc_interpreter.close.side_effect = [None]
 
-        # Lock/unlock should never be called
-        self.patched_grpc_interpreter.lock.side_effect = AssertionError('Lock should not be called for grpc')
-        self.patched_grpc_interpreter.unlock.side_effect = AssertionError('Unlock should not be called for grpc')
+        # Mock lock/unlock
+        self.patched_grpc_interpreter.lock.side_effect = lambda *args: None
+        self.patched_grpc_interpreter.unlock.side_effect = lambda *args: None
 
     def teardown_method(self, method):
         self.patched_grpc_constructor.stop()
@@ -838,26 +838,34 @@ class TestGrpcSession(object):
         session.close()
         self.patched_grpc_interpreter.close.assert_called_once_with()
 
-    # Session locking (not supported for grpc)
+    # Session locking
 
-    def test_lock_session(self):
+    def test_lock_session_none(self):
         with nifake.Session('dev1', _grpc_channel=object()) as session:
-            # grpc.LibraryInterpreter.lock should not be called
-            # - note that in setup_method we set it to assert if called
             session.lock()
+            self.patched_grpc_interpreter.lock.assert_called_once_with()
 
-    def test_unlock_session(self):
+    def test_unlock_session_none(self):
         with nifake.Session('dev1', _grpc_channel=object()) as session:
-            # grpc.LibraryInterpreter.unlock should not be called
-            # - note that in setup_method we set it to assert if called
             session.unlock()
+            self.patched_grpc_interpreter.unlock.assert_called_once_with()
 
     def test_lock_context_manager(self):
         with nifake.Session('dev1', _grpc_channel=object()) as session:
-            # grpc.LibraryInterpreter.lock/unlock should not be called
-            # - note that in setup_method we set them to assert if called
             with session.lock():
                 pass
+            self.patched_grpc_interpreter.lock.assert_called_once_with()
+            self.patched_grpc_interpreter.unlock.assert_called_once_with()
+
+    def test_lock_context_manager_abnormal_exit(self):
+        with nifake.Session('dev1', _grpc_channel=object()) as session:
+            try:
+                with session.lock():
+                    raise nifake.Error('Fake exception')
+            except nifake.Error:
+                pass
+            self.patched_grpc_interpreter.lock.assert_called_once_with()
+            self.patched_grpc_interpreter.unlock.assert_called_once_with()
 
     # Methods
 
