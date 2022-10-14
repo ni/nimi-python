@@ -4,7 +4,7 @@ ${template_parameters['encoding_tag']}
     import build.helper as helper
     import os
 
-    grpc_supported = os.environ.get('GRPC_SUPPORTED')
+    grpc_supported = template_parameters['include_grpc_support']
 
     config = template_parameters['metadata'].config
     attributes = config['attributes']

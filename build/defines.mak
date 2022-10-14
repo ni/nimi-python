@@ -24,9 +24,14 @@ MKDIRECTORIES += \
 
 VPATH = $(TEMPLATE_DIR)
 
+true := T
+false :=
+GRPC_SUPPORTED := $(if $(wildcard $(METADATA_DIR)/$(DRIVER).proto),$(true))
+
 PYTHON_CMD ?= python
+GRPC_SUPPORT_PARAM := $(if $(GRPC_SUPPORTED),--include-grpc-support)
 define GENERATE_SCRIPT
-$(PYTHON_CMD) -m build --template $1 --dest-dir $2 --metadata $3 $(if $(PRINT),-v,)
+$(PYTHON_CMD) -m build --template $1 --dest-dir $2 --metadata $3 $(if $(PRINT),-v,) $(GRPC_SUPPORT_PARAM)
 endef
 
 ifeq (,$(PRINT))
@@ -37,10 +42,6 @@ LOG_OUTPUT := | tee
 endif
 
 TARGETS := $(filter-out run_unit_tests,$(DEFAULT_TARGETS))
-
-true := T
-false :=
-export GRPC_SUPPORTED := $(if $(wildcard $(METADATA_DIR)/$(DRIVER).proto),$(true))
 
 .PHONY:
 all: $(TARGETS)
