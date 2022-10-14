@@ -36,7 +36,7 @@ class MyRpcError(grpc.RpcError):
         return [Metadatum('ni-error', str(self._error_code))]
 
 
-class TestGrpcLibraryInterpreter(object):
+class TestGrpcStubInterpreter(object):
 
     class PatchedGrpcTypes:
         def __init__(self):
@@ -48,7 +48,7 @@ class TestGrpcLibraryInterpreter(object):
                 else:
                     setattr(self, f, getattr(nifake._grpc.grpc_types, f))
 
-    class PatchedGrpcStub(nifake._grpc.grpc_library.NiFakeServicer):
+    class PatchedGrpcStub(nifake._grpc.nifake_grpc.NiFakeServicer):
         def _sample_func(self, request):
             pass
 
@@ -67,7 +67,7 @@ class TestGrpcLibraryInterpreter(object):
         self.patched_grpc_stub = self.PatchedGrpcStub()
         self.real_grpc_types = nifake._grpc.grpc_types
         self.grpc_types_patch = patch('nifake._grpc.grpc_types', self.patched_grpc_types)
-        self.grpc_stub_patch = patch('nifake._grpc.grpc_library.NiFakeStub', side_effect=self.patched_grpc_stub)
+        self.grpc_stub_patch = patch('nifake._grpc.nifake_grpc.NiFakeStub', side_effect=self.patched_grpc_stub)
         self.grpc_types_patch.start()
         self.grpc_stub_patch.start()
 
@@ -79,7 +79,7 @@ class TestGrpcLibraryInterpreter(object):
         self.grpc_types_patch.stop()
 
     def _get_initialized_library_interpreter(self, grpc_channel=object()):
-        interpreter = nifake._grpc.LibraryInterpreter(grpc_channel)
+        interpreter = nifake._grpc.GrpcStubInterpreter(grpc_channel)
         assert interpreter._client is self.patched_grpc_stub
         assert interpreter._vi == 0
         assert self.patched_grpc_stub._grpc_channel is grpc_channel

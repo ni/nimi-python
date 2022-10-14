@@ -109,9 +109,6 @@ class _RepeatedCapabilities(object):
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
             library_interpreter=self._session._library_interpreter,
-% if grpc_supported:
-            grpc_channel=self._session._grpc_channel,
-% endif
             freeze_it=True
         )
 
@@ -167,15 +164,11 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 % if attributes:
 
 % endif
-<% grpc_channel_param = " grpc_channel," if grpc_supported else "" %>\
-    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter,${grpc_channel_param} freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
         self._library_interpreter = library_interpreter
-% if grpc_supported:
-        self._grpc_channel = grpc_channel
-% endif
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -258,7 +251,7 @@ if grpc_supported:
 % if grpc_supported:
         if _grpc_channel:
             import ${module_name}._grpc as _grpc
-            library_interpreter = _grpc.LibraryInterpreter(_grpc_channel)
+            library_interpreter = _grpc.GrpcStubInterpreter(_grpc_channel)
         else:
             library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 % else:
@@ -270,9 +263,6 @@ if grpc_supported:
             repeated_capability_list=[],
             library_interpreter=library_interpreter,
             freeze_it=False,
-% if grpc_supported:
-            grpc_channel=_grpc_channel,
-% endif
             all_channels_in_session=None
         )
 % for p in init_function['parameters']:
@@ -290,7 +280,7 @@ if grpc_supported:
 
 % if config['uses_nitclk']:
 %   if grpc_supported:
-        ## TODO(DavidCurtiss): Figure out what to do here when we add grpc support for NI-TClk
+        # NI-TClk does not work over NI gRPC Device Server
         if not _grpc_channel:
             self.tclk = nitclk.SessionReference(self._library_interpreter._${config['session_handle_parameter_name']})
 %   else:

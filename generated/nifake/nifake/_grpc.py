@@ -9,7 +9,7 @@ import warnings
 from . import enums as enums
 from . import errors as errors
 from . import nifake_pb2 as grpc_types
-from . import nifake_pb2_grpc as grpc_library
+from . import nifake_pb2_grpc as nifake_grpc
 
 from . import custom_struct as custom_struct  # noqa: F401
 
@@ -18,15 +18,12 @@ from . import custom_struct_nested_typedef as custom_struct_nested_typedef  # no
 from . import custom_struct_typedef as custom_struct_typedef  # noqa: F401
 
 
-class LibraryInterpreter(object):
-    '''LibraryInterpreter
-
-    Wrapper around driver grpc library.
-    '''
+class GrpcStubInterpreter(object):
+    '''Interpreter for interacting with a gRPC Stub class'''
 
     def __init__(self, grpc_channel):
         self._lock = threading.RLock()
-        self._client = grpc_library.NiFakeStub(grpc_channel)
+        self._client = nifake_grpc.NiFakeStub(grpc_channel)
         self._vi = 0
 
     def _invoke(self, func, request):
@@ -131,7 +128,7 @@ class LibraryInterpreter(object):
         return response.waveform_data
 
     def fetch_waveform_into(self, number_of_samples):  # noqa: N802
-        raise NotImplementedError('Cannot use numpy over grpc')
+        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
     def function_with_repeated_capability_type(self, site_list):  # noqa: N802
         self._invoke(
@@ -479,7 +476,7 @@ class LibraryInterpreter(object):
         )
 
     def write_waveform_numpy(self, waveform):  # noqa: N802
-        raise NotImplementedError('Cannot use numpy over grpc')
+        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
     def close(self):  # noqa: N802
         self._invoke(

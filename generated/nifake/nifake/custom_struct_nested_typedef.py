@@ -38,9 +38,9 @@ class CustomStructNestedTypedef(object):
             self.struct_custom_struct = struct_custom_struct
             self.struct_custom_struct_typedef = struct_custom_struct_typedef
 
-    def create_copy(self, cls):
-        sample_object = cls()
-        return cls(
+    def create_copy(self, target_class):
+        sample_object = target_class()
+        return target_class(
             struct_custom_struct=self.struct_custom_struct.create_copy(
                 type(sample_object.struct_custom_struct)
             ),

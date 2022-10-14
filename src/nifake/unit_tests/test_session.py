@@ -32,7 +32,7 @@ class TestSession(object):
         self.tclk_patched_library_singleton_get.start()
 
         # We shouldn't call into grpc
-        self.patched_grpc_interpreter = patch('nifake._grpc.LibraryInterpreter', side_effect=AssertionError('Called into grpc!'))
+        self.patched_grpc_interpreter = patch('nifake._grpc.GrpcStubInterpreter', side_effect=AssertionError('Called into grpc!'))
         self.patched_grpc_interpreter.start()
 
         self.patched_library_interpreter.init_with_options.side_effect = [SESSION_NUM_FOR_TEST]
@@ -803,7 +803,7 @@ class TestSession(object):
 
 class TestGrpcSession(object):
 
-    class PatchedGrpcInterpreter(nifake._grpc.LibraryInterpreter):
+    class PatchedGrpcInterpreter(nifake._grpc.GrpcStubInterpreter):
         def __init__(self, encoding):
             for f in dir(self):
                 if not f.startswith("_"):
@@ -811,7 +811,7 @@ class TestGrpcSession(object):
 
     def setup_method(self, method):
         self.patched_grpc_interpreter = self.PatchedGrpcInterpreter(None)
-        self.patched_grpc_constructor = patch('nifake._grpc.LibraryInterpreter', return_value=self.patched_grpc_interpreter)
+        self.patched_grpc_constructor = patch('nifake._grpc.GrpcStubInterpreter', return_value=self.patched_grpc_interpreter)
         self.patched_grpc_constructor.start()
 
         # We don't actually call into the nitclk DLL, but we do need to mock the function since it is called

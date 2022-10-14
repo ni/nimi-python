@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Renders a grpc LibraryInterpreter method corresponding to the passed-in function metadata.'''
+    '''Renders a NotImplemented method for to the passed-in function metadata, because numpy is not supported over grpc.'''
 
     import build.helper as helper
 
@@ -9,4 +9,4 @@
 %>\
 
     def ${full_func_name}(${method_decl_params}):  # noqa: N802
-        raise NotImplementedError('Cannot use numpy over grpc')
+        raise NotImplementedError('numpy-specific methods are not supported over gRPC')

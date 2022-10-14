@@ -76,7 +76,6 @@ class _RepeatedCapabilities(object):
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
             library_interpreter=self._session._library_interpreter,
-            grpc_channel=self._session._grpc_channel,
             freeze_it=True
         )
 
@@ -182,12 +181,11 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.read_write_string_repeated_capability`
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, grpc_channel, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
         self._library_interpreter = library_interpreter
-        self._grpc_channel = grpc_channel
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -700,7 +698,7 @@ class Session(_SessionBase):
         '''
         if _grpc_channel:
             import nifake._grpc as _grpc
-            library_interpreter = _grpc.LibraryInterpreter(_grpc_channel)
+            library_interpreter = _grpc.GrpcStubInterpreter(_grpc_channel)
         else:
             library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
@@ -709,7 +707,6 @@ class Session(_SessionBase):
             repeated_capability_list=[],
             library_interpreter=library_interpreter,
             freeze_it=False,
-            grpc_channel=_grpc_channel,
             all_channels_in_session=None
         )
         options = _converters.convert_init_with_options_dictionary(options)
@@ -721,6 +718,7 @@ class Session(_SessionBase):
         # with the actual session handle.
         self._library_interpreter._vi = self._init_with_options(resource_name, options, id_query, reset_device)
 
+        # NI-TClk does not work over NI gRPC Device Server
         if not _grpc_channel:
             self.tclk = nitclk.SessionReference(self._library_interpreter._vi)
 
