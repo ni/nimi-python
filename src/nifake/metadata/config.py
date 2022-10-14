@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d33
+# This file is generated from NI-FAKE API metadata version 23.0.0d38
 config = {
-    'api_version': '23.0.0d33',
+    'api_version': '23.0.0d38',
     'c_function_prefix': 'niFake_',
     'close_function': 'close',
     'context_manager_name': {
