@@ -118,6 +118,20 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'any',
         'python_api_list': True,
     },
+    ParameterUsageOptions.GRPC_REQUEST_PARAMETERS: {
+        'skip_session_handle': False,
+        'skip_input_parameters': False,
+        'skip_output_parameters': True,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': True,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_numpy_parameters': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'any',
+        'python_api_list': True,
+    },
     ParameterUsageOptions.CTYPES_ARGTYPES: {
         'skip_session_handle': False,
         'skip_input_parameters': False,
@@ -202,6 +216,20 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'any',
         'python_api_list': False,
     },
+    ParameterUsageOptions.GRPC_OUTPUT_PARAMETERS: {
+        'skip_session_handle': True,
+        'skip_input_parameters': True,
+        'skip_output_parameters': False,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': True,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_numpy_parameters': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'any',
+        'python_api_list': False,
+    },
     ParameterUsageOptions.NUMPY_PARAMETERS: {
         'skip_session_handle': True,
         'skip_input_parameters': False,
@@ -259,6 +287,7 @@ _ParameterUsageOptionsFiltering = {
         'python_api_list': True,
     },
 }
+
 # Only difference is we want to skip parameters not in api
 _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION].copy()
 _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION]['python_api_list'] = False

@@ -1,3 +1,5 @@
+import builtins
+
 from .helper import get_array_type_for_api_type
 from .metadata_filters import filter_parameters
 from .metadata_find import find_custom_type
@@ -70,6 +72,10 @@ _ParameterUsageOptionsSnippet = {
         'skip_self': False,
         'name_to_use': 'python_name',
     },
+    ParameterUsageOptions.GRPC_REQUEST_PARAMETERS: {
+        'skip_self': True,
+        'name_to_use': 'grpc_request_snippet',
+    },
 }
 # Only used for filtering
 #   ParameterUsageOptions.INPUT_PARAMETERS
@@ -79,6 +85,7 @@ _ParameterUsageOptionsSnippet = {
 #   ParameterUsageOptions.IVI_DANCE_PARAMETER
 #   ParameterUsageOptions.LEN_PARAMETER
 #   ParameterUsageOptions.INPUT_ENUM_PARAMETERS
+#   ParameterUsageOptions.GRPC_OUTPUT_PARAMETERS
 
 
 # Functions that return snippets that can be placed directly in the templates.
@@ -104,23 +111,25 @@ def get_params_snippet(function, parameter_usage_options):
     return ', '.join(snippets)
 
 
-def _get_library_interpreter_output_param_return_snippet(output_parameter, parameters, config):
-    '''Returns the snippet for returning a single output parameter from a LibraryInterpreter method, i.e. "reading_ctype.value"'''
+def _get_interpreter_output_param_return_type(output_parameter, config):
     assert output_parameter['direction'] == 'out', 'Expected parameter {0} (a.k.a. {1}) to have direction out'.format(output_parameter['name'], output_parameter['python_name'])
-    return_type_snippet = ''
 
-    # Custom types (I.e. inherit from ctypes.Structure) don't need a .value but do need a module name
-    val_suffix = '.value'
-    module_name = ''
     custom_type = find_custom_type(output_parameter, config)
-    if custom_type is not None:
-        val_suffix = ''
-        module_name = custom_type['file_name'] + '.'
+    is_custom_type = custom_type is not None
+
+    module_name = custom_type['file_name'] + '.' if is_custom_type else ''
 
     if output_parameter['enum'] is not None:
-        return_type_snippet = 'enums.' + output_parameter['enum'] + '('
+        return 'enums.' + output_parameter['enum'], is_custom_type
     else:
-        return_type_snippet = module_name + output_parameter['python_type'] + '('
+        return module_name + output_parameter['python_type'], is_custom_type
+
+
+def _get_library_interpreter_output_param_return_snippet(output_parameter, parameters, config):
+    '''Returns the snippet for returning a single output parameter from a LibraryInterpreter method, i.e. "reading_ctype.value"'''
+    return_type, is_custom_type = _get_interpreter_output_param_return_type(output_parameter, config)
+    # Custom types (i.e. inherit from ctypes.Structure) don't need a .value
+    val_suffix = '' if is_custom_type else '.value'
 
     if output_parameter['use_array']:
         snippet = '{0}_array'.format(output_parameter['python_name'])
@@ -133,15 +142,37 @@ def _get_library_interpreter_output_param_return_snippet(output_parameter, param
             size_parameter = find_size_parameter(output_parameter, parameters)
             size = size_parameter['ctypes_variable_name'] + '.value'
 
-        snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
+        snippet = '[' + return_type + '(' + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
     else:
         if output_parameter['is_string']:
             # '_encoding' is a variable on the LibraryInterpreter object
             snippet = output_parameter['ctypes_variable_name'] + '.value.decode(self._encoding)'
         else:
-            snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + val_suffix + ')'
+            snippet = return_type + '(' + output_parameter['ctypes_variable_name'] + val_suffix + ')'
 
     return snippet
+
+
+def _get_grpc_interpreter_output_param_return_snippet(output_parameter, parameters, config):
+    param_accessor = 'response.' + output_parameter['python_name']
+    if output_parameter['grpc_enum'] is not None:
+        param_accessor += '_raw'
+
+    return_type, is_custom_type = _get_interpreter_output_param_return_type(output_parameter, config)
+    if hasattr(builtins, return_type):
+        return_type = None
+
+    convert_array_elements = output_parameter['is_buffer'] and return_type is not None
+    if output_parameter.get('python_api_converter_name') == 'convert_to_bytes':
+        # Don't convert individual array elements; convert_to_bytes will handle it
+        convert_array_elements = False
+
+    if convert_array_elements:
+        return '[' + return_type + '(x) for x in ' + param_accessor + ']'
+    elif return_type is not None:
+        return return_type + '(' + param_accessor + ')'
+    else:
+        return param_accessor
 
 
 def _get_session_output_param_return_snippet(output_parameter, parameters, config):
@@ -160,6 +191,13 @@ def get_library_interpreter_method_return_snippet(parameters, config, use_numpy_
     options = ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS if use_numpy_array else ParameterUsageOptions.API_OUTPUT_PARAMETERS
     parameters_to_use = filter_parameters(parameters, options)
     snippets = [_get_library_interpreter_output_param_return_snippet(p, parameters, config) for p in parameters_to_use]
+    return ('return ' + ', '.join(snippets)).strip()
+
+
+def get_grpc_interpreter_method_return_snippet(parameters, config):
+    '''Returns a string suitable to use as the return argument of a _gprc.LibraryInterpreter method'''
+    parameters_to_use = filter_parameters(parameters, ParameterUsageOptions.API_OUTPUT_PARAMETERS)
+    snippets = [_get_grpc_interpreter_output_param_return_snippet(p, parameters, config) for p in parameters_to_use]
     return ('return ' + ', '.join(snippets)).strip()
 
 
@@ -528,6 +566,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Identifies a particular instrument session.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': False,
         'is_repeated_capability': False,
@@ -551,6 +590,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'A big number on its way out.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': False,
         'use_array': False,
@@ -577,6 +617,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'The error information formatted into a string.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'use_array': False,
         'use_list': False,
@@ -602,6 +643,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'Array of custom type using python-code size mechanism'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'use_array': False,
         'use_list': True,
@@ -628,6 +670,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Number of elements in the array.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': False,
         'is_repeated_capability': False,
@@ -651,6 +694,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'Contains an array of enums, stored as 16 bit integers under the hood '},
         'enum': 'Turtle',
+        'grpc_enum': 'Turtle',
         'is_buffer': True,
         'use_array': False,
         'use_list': True,
@@ -679,6 +723,7 @@ parameters_for_testing = [
             'table_body': [['0', 'Leonardo'], ['1', 'Donatello'], ['2', 'Raphael'], ['3', 'Mich elangelo']]
         },
         'enum': 'Turtle',
+        'grpc_enum': 'Turtle',
         'is_buffer': False,
         'is_string': False,
         'is_repeated_capability': False,
@@ -702,6 +747,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'A big number on its way out.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'use_array': True,
         'use_list': False,
@@ -729,6 +775,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Number of elements in the array, determined via mechanism python-code.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': False,
         'is_repeated_capability': False,
@@ -752,6 +799,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'An input value.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': False,
         'is_repeated_capability': False,
@@ -776,6 +824,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Input array of floats'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'is_string': False,
         'use_array': True,
@@ -801,6 +850,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Size of inputArray'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': False,
         'is_repeated_capability': False,
@@ -824,6 +874,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Number of bytes allocated for aString'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': False,
         'is_repeated_capability': False,
@@ -847,6 +898,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'An IVI dance string.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': True,
         'is_repeated_capability': False,
@@ -871,6 +923,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Timeout in seconds'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': False,
         'is_repeated_capability': False,
@@ -897,6 +950,7 @@ parameters_for_testing = [
             'description': 'The channel to configure. For more information, refer to `Channel String'
         },
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': True,
         'is_repeated_capability': True,
@@ -921,6 +975,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'An input string.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': True,
         'is_repeated_capability': False,
@@ -944,6 +999,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Array of custom type using python-code size mechanism'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'is_string': False,
         'is_repeated_capability': False,
@@ -970,6 +1026,7 @@ parameters_for_testing = [
             'description': 'Indicates a ninja turtle',
         },
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'use_array': True,
         'use_list': False,
@@ -995,6 +1052,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'A fixed size string.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': True,
         'is_repeated_capability': False,
@@ -1018,6 +1076,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'A python-code size string.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': True,
         'is_repeated_capability': False,
@@ -1041,6 +1100,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'An IVI dance with a twist string.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': True,
         'is_repeated_capability': False,
@@ -1064,6 +1124,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'A big number on its way out.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': False,
         'use_array': False,
@@ -1090,6 +1151,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Number of bytes allocated for aStringTwist'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': False,
         'is_repeated_capability': False,
@@ -1113,6 +1175,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'An IVI dance buffer using array.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'is_string': False,
         'is_repeated_capability': False,
@@ -1138,6 +1201,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'An IVI dance buffer using a list.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'is_string': False,
         'is_repeated_capability': False,
@@ -1163,6 +1227,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'An IVI dance with a twist buffer using an array.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'is_string': False,
         'is_repeated_capability': False,
@@ -1188,6 +1253,7 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'An IVI dance with a twist buffer using a list.'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'is_string': False,
         'is_repeated_capability': False,
@@ -1214,6 +1280,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Input array of floats'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'is_string': False,
         'use_array': False,
@@ -1240,6 +1307,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Input array of floats'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'is_string': False,
         'use_array': False,
@@ -1267,6 +1335,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Input array of floats'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'is_string': False,
         'use_array': True,
@@ -1294,6 +1363,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Input array of floats'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'is_string': False,
         'use_array': False,
@@ -1321,6 +1391,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'Input array of floats'},
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': True,
         'is_string': False,
         'use_array': False,
@@ -1347,6 +1418,7 @@ parameters_for_testing = [
         'direction': 'in',
         'documentation': {'description': 'An input string-valued enum.'},
         'enum': 'Color',
+        'grpc_enum': 'Color',
         'is_buffer': False,
         'is_string': True,
         'is_repeated_capability': False,
@@ -1372,6 +1444,7 @@ parameters_for_testing = [
             'description': 'Specifies a list of indices for the channels in the session.'
         },
         'enum': None,
+        'grpc_enum': None,
         'is_buffer': False,
         'is_string': True,
         'is_repeated_capability': False,
@@ -1387,6 +1460,34 @@ parameters_for_testing = [
         'python_type': 'str',
         'size': {'mechanism': 'fixed', 'value': 1},
         'type': 'ViConstString',
+        'use_in_python_api': True,
+    },
+    {  # 35
+        'ctypes_method_call_snippet': 'an_array_ctype',
+        'ctypes_type': 'ViInt8',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViInt8)',
+        'ctypes_variable_name': 'an_array_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'Contains an array of enums, stored as 8 bit integers under the hood '},
+        'enum': None,
+        'grpc_enum': None,
+        'grpc_enum': None,
+        'is_buffer': True,
+        'use_array': False,
+        'use_list': True,
+        'is_string': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_interpreter_method_call_snippet': 'an_array',
+        'name': 'anArray',
+        'python_api_converter_name': 'convert_to_bytes',
+        'python_name': 'an_array',
+        'python_name_with_default': 'an_array',
+        'python_name_with_doc_default': 'an_array',
+        'python_type': 'int',
+        'size': {'mechanism': 'passed-in', 'value': 'numberOfElements'},
+        'type': 'ViInt8',
+        'numpy': False,
         'use_in_python_api': True,
     },
 ]
@@ -1420,6 +1521,36 @@ def test_get_library_interpreter_method_return_snippet_enum():
 def test_get_library_interpreter_method_return_snippet_into():
     param = [parameters_for_testing[4], parameters_for_testing[7]]
     assert get_library_interpreter_method_return_snippet(param, config_for_testing, use_numpy_array=True) == 'return'
+
+
+def test_get_grpc_interpreter_method_return_snippet_vi():
+    param = [parameters_for_testing[0]]
+    assert get_grpc_interpreter_method_return_snippet(param, config_for_testing) == 'return'
+
+
+def test_get_grpc_interpreter_method_return_snippet_int():
+    param = [parameters_for_testing[1]]
+    assert get_grpc_interpreter_method_return_snippet(param, config_for_testing) == 'return response.output'
+
+
+def test_get_grpc_interpreter_method_return_snippet_string():
+    param = [parameters_for_testing[2]]
+    assert get_grpc_interpreter_method_return_snippet(param, config_for_testing) == 'return response.error_message'
+
+
+def test_get_grpc_interpreter_method_return_snippet_custom_type():
+    param = [parameters_for_testing[3]]
+    assert get_grpc_interpreter_method_return_snippet(param, config_for_testing) == 'return [custom_struct.CustomStruct(x) for x in response.array_out]'
+
+
+def test_get_grpc_interpreter_method_return_snippet_enum():
+    param = [parameters_for_testing[4], parameters_for_testing[5]]
+    assert get_grpc_interpreter_method_return_snippet(param, config_for_testing) == 'return [enums.Turtle(x) for x in response.an_array_raw]'
+
+
+def test_get_grpc_interpreter_method_return_snippet_bytes():
+    param = [parameters_for_testing[35]]
+    assert get_grpc_interpreter_method_return_snippet(param, config_for_testing) == 'return response.an_array'
 
 
 def test_get_session_method_return_snippet():

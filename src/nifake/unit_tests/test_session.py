@@ -11,6 +11,7 @@ from unittest.mock import patch
 import _mock_helper
 
 SESSION_NUM_FOR_TEST = 42
+GRPC_SESSION_OBJECT_FOR_TEST = object()
 
 
 class TestSession(object):
@@ -30,6 +31,10 @@ class TestSession(object):
         self.tclk_patched_library_singleton_get = patch('nitclk._library_interpreter._library_singleton.get', return_value=None)
         self.tclk_patched_library_singleton_get.start()
 
+        # We shouldn't call into grpc
+        self.patched_grpc_interpreter = patch('nifake._grpc.GrpcStubInterpreter', side_effect=AssertionError('Called into grpc!'))
+        self.patched_grpc_interpreter.start()
+
         self.patched_library_interpreter.init_with_options.side_effect = [SESSION_NUM_FOR_TEST]
         self.patched_library_interpreter.close.side_effect = [None]
 
@@ -38,6 +43,7 @@ class TestSession(object):
         self.patched_library_interpreter.unlock.side_effect = lambda *args: None
 
     def teardown_method(self, method):
+        self.patched_grpc_interpreter.stop()
         self.patched_library_interpreter_ctor.stop()
         self.tclk_patched_library_singleton_get.stop()
 
@@ -793,6 +799,100 @@ class TestSession(object):
             assert len(returned_timedeltas) == len(expected_timedeltas)
             assert returned_timedeltas == expected_timedeltas
             self.patched_library_interpreter.return_list_of_durations_in_seconds.assert_called_once_with(len(time_values))
+
+
+class TestGrpcSession(object):
+
+    class PatchedGrpcInterpreter(nifake._grpc.GrpcStubInterpreter):
+        def __init__(self, encoding):
+            for f in dir(self):
+                if not f.startswith("_"):
+                    setattr(self, f, MagicMock(spec_set=getattr(self, f), side_effect=_mock_helper.MockFunctionCallError(f)))
+
+    def setup_method(self, method):
+        self.patched_grpc_interpreter = self.PatchedGrpcInterpreter(None)
+        self.patched_grpc_constructor = patch('nifake._grpc.GrpcStubInterpreter', return_value=self.patched_grpc_interpreter)
+        self.patched_grpc_constructor.start()
+
+        # We don't actually call into the nitclk DLL, but we do need to mock the function since it is called
+        self.tclk_patched_library_singleton_get = patch('nitclk._library_interpreter._library_singleton.get', return_value=None)
+        self.tclk_patched_library_singleton_get.start()
+
+        self.patched_grpc_interpreter.init_with_options.side_effect = [GRPC_SESSION_OBJECT_FOR_TEST]
+        self.patched_grpc_interpreter.close.side_effect = [None]
+
+        # Mock lock/unlock
+        self.patched_grpc_interpreter.lock.side_effect = lambda *args: None
+        self.patched_grpc_interpreter.unlock.side_effect = lambda *args: None
+
+    def teardown_method(self, method):
+        self.patched_grpc_constructor.stop()
+        self.tclk_patched_library_singleton_get.stop()
+
+    # Session management
+
+    def test_init_with_options_and_close(self):
+        session = nifake.Session('dev1', _grpc_channel=object())
+        self.patched_grpc_interpreter.init_with_options.assert_called_once_with('dev1', False, False, '')
+        assert session._library_interpreter._vi == GRPC_SESSION_OBJECT_FOR_TEST
+        session.close()
+        self.patched_grpc_interpreter.close.assert_called_once_with()
+
+    # Session locking
+
+    def test_lock_session_none(self):
+        with nifake.Session('dev1', _grpc_channel=object()) as session:
+            session.lock()
+            self.patched_grpc_interpreter.lock.assert_called_once_with()
+
+    def test_unlock_session_none(self):
+        with nifake.Session('dev1', _grpc_channel=object()) as session:
+            session.unlock()
+            self.patched_grpc_interpreter.unlock.assert_called_once_with()
+
+    def test_lock_context_manager(self):
+        with nifake.Session('dev1', _grpc_channel=object()) as session:
+            with session.lock():
+                pass
+            self.patched_grpc_interpreter.lock.assert_called_once_with()
+            self.patched_grpc_interpreter.unlock.assert_called_once_with()
+
+    def test_lock_context_manager_abnormal_exit(self):
+        with nifake.Session('dev1', _grpc_channel=object()) as session:
+            try:
+                with session.lock():
+                    raise nifake.Error('Fake exception')
+            except nifake.Error:
+                pass
+            self.patched_grpc_interpreter.lock.assert_called_once_with()
+            self.patched_grpc_interpreter.unlock.assert_called_once_with()
+
+    # Methods
+
+    def test_self_test(self):
+        test_error_code = 0
+        self.patched_grpc_interpreter.self_test.side_effect = [(test_error_code, '')]
+        with nifake.Session('dev1', _grpc_channel=object()) as session:
+            session.self_test()
+
+    def test_export_attribute_configuration_buffer(self):
+        expected_buffer = b'abcd'
+        self.patched_grpc_interpreter.export_attribute_configuration_buffer.side_effect = [expected_buffer]
+        with nifake.Session('dev1', _grpc_channel=object()) as session:
+            actual_configuration = session.export_attribute_configuration_buffer()
+            assert type(actual_configuration) is bytes
+            assert actual_configuration == bytes(expected_buffer)
+        self.patched_grpc_interpreter.export_attribute_configuration_buffer.assert_called_once_with()
+
+    # Attributes
+
+    def test_get_attribute_int32(self):
+        test_number = 3
+        self.patched_grpc_interpreter.get_attribute_vi_int32.side_effect = [test_number]
+        with nifake.Session('dev1', _grpc_channel=object()) as session:
+            attr_int = session.read_write_integer
+            assert(attr_int == test_number)
+            self.patched_grpc_interpreter.get_attribute_vi_int32.assert_called_once_with('', 1000004)
 
 
 # not session tests per se

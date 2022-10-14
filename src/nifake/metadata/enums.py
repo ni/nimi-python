@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d13
+# This file is generated from NI-FAKE API metadata version 23.0.0d38
 enums = {
     'AltColor': {
         'values': [
@@ -142,22 +142,6 @@ enums = {
             {
                 'name': 'NIFAKE_VAL_MIN_INT_32_MINUS_ONE',
                 'value': -2147483649.0
-            }
-        ]
-    },
-    'DecimalWholeNumber': {
-        'values': [
-            {
-                'name': 'NIFAKE_VAL_NEGATIVE_ONE',
-                'value': -1.0
-            },
-            {
-                'name': 'NIFAKE_VAL_TWENTY_TWO',
-                'value': 22.0
-            },
-            {
-                'name': 'NIFAKE_VAL_ZERO',
-                'value': 0.0
             }
         ]
     },

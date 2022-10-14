@@ -23,6 +23,9 @@ class SideEffectsHelper(object):
         self._defaults['BoolArrayOutputFunction'] = {}
         self._defaults['BoolArrayOutputFunction']['return'] = 0
         self._defaults['BoolArrayOutputFunction']['anArray'] = None
+        self._defaults['CustomNestedStructRoundtrip'] = {}
+        self._defaults['CustomNestedStructRoundtrip']['return'] = 0
+        self._defaults['CustomNestedStructRoundtrip']['nestedCustomTypeOut'] = None
         self._defaults['DoubleAllTheNums'] = {}
         self._defaults['DoubleAllTheNums']['return'] = 0
         self._defaults['EnumArrayOutputFunction'] = {}
@@ -126,9 +129,10 @@ class SideEffectsHelper(object):
         self._defaults['LockSession'] = {}
         self._defaults['LockSession']['return'] = 0
         self._defaults['LockSession']['callerHasLock'] = None
-        self._defaults['MethodUsingWholeMappedNumbers'] = {}
-        self._defaults['MethodUsingWholeMappedNumbers']['return'] = 0
-        self._defaults['MethodUsingWholeMappedNumbers']['wholeNumber'] = None
+        self._defaults['MethodUsingWholeAndFractionalNumbers'] = {}
+        self._defaults['MethodUsingWholeAndFractionalNumbers']['return'] = 0
+        self._defaults['MethodUsingWholeAndFractionalNumbers']['wholeNumber'] = None
+        self._defaults['MethodUsingWholeAndFractionalNumbers']['fractionalNumber'] = None
         self._defaults['MethodWithGrpcOnlyParam'] = {}
         self._defaults['MethodWithGrpcOnlyParam']['return'] = 0
         self._defaults['MultipleArrayTypes'] = {}
@@ -236,6 +240,17 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             an_array_ref[i] = test_value[i]
         return self._defaults['BoolArrayOutputFunction']['return']
+
+    def niFake_CustomNestedStructRoundtrip(self, nested_custom_type_in, nested_custom_type_out):  # noqa: N802
+        if self._defaults['CustomNestedStructRoundtrip']['return'] != 0:
+            return self._defaults['CustomNestedStructRoundtrip']['return']
+        # nested_custom_type_out
+        if self._defaults['CustomNestedStructRoundtrip']['nestedCustomTypeOut'] is None:
+            raise MockFunctionCallError("niFake_CustomNestedStructRoundtrip", param='nestedCustomTypeOut')
+        for field in self._defaults['CustomNestedStructRoundtrip']['nested_custom_type_out']._fields_:
+            field_name = field[0]
+            setattr(nested_custom_type_out.contents, field_name, getattr(self._defaults['CustomNestedStructRoundtrip']['nested_custom_type_out'], field_name))
+        return self._defaults['CustomNestedStructRoundtrip']['return']
 
     def niFake_DoubleAllTheNums(self, vi, number_count, numbers):  # noqa: N802
         if self._defaults['DoubleAllTheNums']['return'] != 0:
@@ -645,15 +660,20 @@ class SideEffectsHelper(object):
             caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
         return self._defaults['LockSession']['return']
 
-    def niFake_MethodUsingWholeMappedNumbers(self, whole_number):  # noqa: N802
-        if self._defaults['MethodUsingWholeMappedNumbers']['return'] != 0:
-            return self._defaults['MethodUsingWholeMappedNumbers']['return']
+    def niFake_MethodUsingWholeAndFractionalNumbers(self, whole_number, fractional_number):  # noqa: N802
+        if self._defaults['MethodUsingWholeAndFractionalNumbers']['return'] != 0:
+            return self._defaults['MethodUsingWholeAndFractionalNumbers']['return']
         # whole_number
-        if self._defaults['MethodUsingWholeMappedNumbers']['wholeNumber'] is None:
-            raise MockFunctionCallError("niFake_MethodUsingWholeMappedNumbers", param='wholeNumber')
+        if self._defaults['MethodUsingWholeAndFractionalNumbers']['wholeNumber'] is None:
+            raise MockFunctionCallError("niFake_MethodUsingWholeAndFractionalNumbers", param='wholeNumber')
         if whole_number is not None:
-            whole_number.contents.value = self._defaults['MethodUsingWholeMappedNumbers']['wholeNumber']
-        return self._defaults['MethodUsingWholeMappedNumbers']['return']
+            whole_number.contents.value = self._defaults['MethodUsingWholeAndFractionalNumbers']['wholeNumber']
+        # fractional_number
+        if self._defaults['MethodUsingWholeAndFractionalNumbers']['fractionalNumber'] is None:
+            raise MockFunctionCallError("niFake_MethodUsingWholeAndFractionalNumbers", param='fractionalNumber')
+        if fractional_number is not None:
+            fractional_number.contents.value = self._defaults['MethodUsingWholeAndFractionalNumbers']['fractionalNumber']
+        return self._defaults['MethodUsingWholeAndFractionalNumbers']['return']
 
     def niFake_MethodWithGrpcOnlyParam(self, simple_param):  # noqa: N802
         if self._defaults['MethodWithGrpcOnlyParam']['return'] != 0:
@@ -940,6 +960,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_AcceptListOfDurationsInSeconds.return_value = 0
         mock_library.niFake_BoolArrayOutputFunction.side_effect = MockFunctionCallError("niFake_BoolArrayOutputFunction")
         mock_library.niFake_BoolArrayOutputFunction.return_value = 0
+        mock_library.niFake_CustomNestedStructRoundtrip.side_effect = MockFunctionCallError("niFake_CustomNestedStructRoundtrip")
+        mock_library.niFake_CustomNestedStructRoundtrip.return_value = 0
         mock_library.niFake_DoubleAllTheNums.side_effect = MockFunctionCallError("niFake_DoubleAllTheNums")
         mock_library.niFake_DoubleAllTheNums.return_value = 0
         mock_library.niFake_EnumArrayOutputFunction.side_effect = MockFunctionCallError("niFake_EnumArrayOutputFunction")
@@ -1006,8 +1028,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_Initiate.return_value = 0
         mock_library.niFake_LockSession.side_effect = MockFunctionCallError("niFake_LockSession")
         mock_library.niFake_LockSession.return_value = 0
-        mock_library.niFake_MethodUsingWholeMappedNumbers.side_effect = MockFunctionCallError("niFake_MethodUsingWholeMappedNumbers")
-        mock_library.niFake_MethodUsingWholeMappedNumbers.return_value = 0
+        mock_library.niFake_MethodUsingWholeAndFractionalNumbers.side_effect = MockFunctionCallError("niFake_MethodUsingWholeAndFractionalNumbers")
+        mock_library.niFake_MethodUsingWholeAndFractionalNumbers.return_value = 0
         mock_library.niFake_MethodWithGrpcOnlyParam.side_effect = MockFunctionCallError("niFake_MethodWithGrpcOnlyParam")
         mock_library.niFake_MethodWithGrpcOnlyParam.return_value = 0
         mock_library.niFake_MultipleArrayTypes.side_effect = MockFunctionCallError("niFake_MultipleArrayTypes")

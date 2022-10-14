@@ -13,11 +13,12 @@
         Returns the error description.
         '''
         try:
-            _, error_string = self.get_error(${get_error_params_snippet})
-            return error_string
+            returned_error_code, error_string = self.get_error(${get_error_params_snippet})
+            if returned_error_code == error_code:
+                return error_string
         except errors.Error:
-% if 'error_message' in config['functions']:
             pass
+% if 'error_message' in config['functions']:
 
         try:
             '''
@@ -28,5 +29,6 @@
             error_string = self.error_message(error_code)
             return error_string
         except errors.Error:
+            pass
 % endif
-            return "Failed to retrieve error description."
+        return "Failed to retrieve error description."

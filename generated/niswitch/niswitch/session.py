@@ -1384,10 +1384,12 @@ class Session(_SessionBase):
             session (niswitch.Session): A session object representing the device.
 
         '''
+        library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
+            library_interpreter=library_interpreter,
             freeze_it=False,
             all_channels_in_session=None
         )

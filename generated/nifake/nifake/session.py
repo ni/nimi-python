@@ -635,7 +635,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, options={}, id_query=False, reset_device=False):
+    def __init__(self, resource_name, options={}, id_query=False, reset_device=False, *, _grpc_channel=None):
         r'''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation
 
         Creates a new IVI instrument driver session.
@@ -689,15 +689,23 @@ class Session(_SessionBase):
                 | False          | 0 | Don't Reset  |
                 +----------------+---+--------------+
 
+            _grpc_channel (grpc.Channel): MeasurementLink gRPC channel
+
 
         Returns:
             session (nifake.Session): A session object representing the device.
 
         '''
+        if _grpc_channel:
+            import nifake._grpc as _grpc
+            library_interpreter = _grpc.GrpcStubInterpreter(_grpc_channel)
+        else:
+            library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
+            library_interpreter=library_interpreter,
             freeze_it=False,
             all_channels_in_session=None
         )
@@ -710,7 +718,9 @@ class Session(_SessionBase):
         # with the actual session handle.
         self._library_interpreter._vi = self._init_with_options(resource_name, options, id_query, reset_device)
 
-        self.tclk = nitclk.SessionReference(self._library_interpreter._vi)
+        # NI-TClk does not work over NI gRPC Device Server
+        if not _grpc_channel:
+            self.tclk = nitclk.SessionReference(self._library_interpreter._vi)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -802,6 +812,23 @@ class Session(_SessionBase):
         '''
         an_array = self._library_interpreter.bool_array_output_function(number_of_elements)
         return an_array
+
+    @ivi_synchronized
+    def custom_nested_struct_roundtrip(self, nested_custom_type_in):
+        r'''custom_nested_struct_roundtrip
+
+        TBD
+
+        Args:
+            nested_custom_type_in (CustomStructNestedTypedef):
+
+
+        Returns:
+            nested_custom_type_out (CustomStructNestedTypedef):
+
+        '''
+        nested_custom_type_out = self._library_interpreter.custom_nested_struct_roundtrip(nested_custom_type_in)
+        return nested_custom_type_out
 
     @ivi_synchronized
     def double_all_the_nums(self, numbers):
@@ -1235,17 +1262,19 @@ class Session(_SessionBase):
         self._library_interpreter.initiate()
 
     @ivi_synchronized
-    def method_using_whole_mapped_numbers(self):
-        r'''method_using_whole_mapped_numbers
+    def method_using_whole_and_fractional_numbers(self):
+        r'''method_using_whole_and_fractional_numbers
 
         TBD
 
         Returns:
-            whole_number (float):
+            whole_number (int):
+
+            fractional_number (float):
 
         '''
-        whole_number = self._library_interpreter.method_using_whole_mapped_numbers()
-        return whole_number
+        whole_number, fractional_number = self._library_interpreter.method_using_whole_and_fractional_numbers()
+        return whole_number, fractional_number
 
     @ivi_synchronized
     def method_with_grpc_only_param(self, simple_param):

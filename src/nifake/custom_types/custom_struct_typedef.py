@@ -28,6 +28,9 @@ class CustomStructTypedef(object):
             self.struct_int = struct_int
             self.struct_double = struct_double
 
+    def create_copy(self, target_class):
+        return target_class(struct_int=self.struct_int, struct_double=self.struct_double)
+
     def __repr__(self):
         return '{0}(data=None, struct_int={1}, struct_double={2})'.format(
             self.__class__.__name__,
