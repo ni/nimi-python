@@ -60,7 +60,7 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     _converters.py \
     VERSION \
     $(if $(GRPC_SUPPORTED), \
-        _grpc.py \
+        _grpc_stub_interpreter.py \
         $(DRIVER)_pb2.py \
         $(DRIVER)_pb2_grpc.py \
         nidevice_pb2.py \

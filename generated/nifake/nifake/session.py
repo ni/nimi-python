@@ -697,8 +697,8 @@ class Session(_SessionBase):
 
         '''
         if _grpc_channel:
-            import nifake._grpc as _grpc
-            library_interpreter = _grpc.GrpcStubInterpreter(_grpc_channel)
+            import nifake._grpc_stub_interpreter as _grpc_stub_interpreter
+            library_interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_channel)
         else:
             library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
