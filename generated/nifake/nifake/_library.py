@@ -28,6 +28,7 @@ class Library(object):
         self.niFake_Abort_cfunc = None
         self.niFake_AcceptListOfDurationsInSeconds_cfunc = None
         self.niFake_BoolArrayOutputFunction_cfunc = None
+        self.niFake_CustomNestedStructRoundtrip_cfunc = None
         self.niFake_DoubleAllTheNums_cfunc = None
         self.niFake_EnumArrayOutputFunction_cfunc = None
         self.niFake_EnumInputFunctionWithDefaults_cfunc = None
@@ -61,7 +62,7 @@ class Library(object):
         self.niFake_InitWithOptions_cfunc = None
         self.niFake_Initiate_cfunc = None
         self.niFake_LockSession_cfunc = None
-        self.niFake_MethodUsingWholeMappedNumbers_cfunc = None
+        self.niFake_MethodUsingWholeAndFractionalNumbers_cfunc = None
         self.niFake_MethodWithGrpcOnlyParam_cfunc = None
         self.niFake_MultipleArrayTypes_cfunc = None
         self.niFake_MultipleArraysSameSize_cfunc = None
@@ -120,6 +121,14 @@ class Library(object):
                 self.niFake_BoolArrayOutputFunction_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFake_BoolArrayOutputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_BoolArrayOutputFunction_cfunc(vi, number_of_elements, an_array)
+
+    def niFake_CustomNestedStructRoundtrip(self, nested_custom_type_in, nested_custom_type_out):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_CustomNestedStructRoundtrip_cfunc is None:
+                self.niFake_CustomNestedStructRoundtrip_cfunc = self._get_library_function('niFake_CustomNestedStructRoundtrip')
+                self.niFake_CustomNestedStructRoundtrip_cfunc.argtypes = [custom_struct_nested_typedef.struct_CustomStructNestedTypedef, ctypes.POINTER(custom_struct_nested_typedef.struct_CustomStructNestedTypedef)]  # noqa: F405
+                self.niFake_CustomNestedStructRoundtrip_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_CustomNestedStructRoundtrip_cfunc(nested_custom_type_in, nested_custom_type_out)
 
     def niFake_DoubleAllTheNums(self, vi, number_count, numbers):  # noqa: N802
         with self._func_lock:
@@ -385,13 +394,13 @@ class Library(object):
                 self.niFake_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_LockSession_cfunc(vi, caller_has_lock)
 
-    def niFake_MethodUsingWholeMappedNumbers(self, whole_number):  # noqa: N802
+    def niFake_MethodUsingWholeAndFractionalNumbers(self, whole_number, fractional_number):  # noqa: N802
         with self._func_lock:
-            if self.niFake_MethodUsingWholeMappedNumbers_cfunc is None:
-                self.niFake_MethodUsingWholeMappedNumbers_cfunc = self._get_library_function('niFake_MethodUsingWholeMappedNumbers')
-                self.niFake_MethodUsingWholeMappedNumbers_cfunc.argtypes = [ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niFake_MethodUsingWholeMappedNumbers_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_MethodUsingWholeMappedNumbers_cfunc(whole_number)
+            if self.niFake_MethodUsingWholeAndFractionalNumbers_cfunc is None:
+                self.niFake_MethodUsingWholeAndFractionalNumbers_cfunc = self._get_library_function('niFake_MethodUsingWholeAndFractionalNumbers')
+                self.niFake_MethodUsingWholeAndFractionalNumbers_cfunc.argtypes = [ctypes.POINTER(ViInt32), ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_MethodUsingWholeAndFractionalNumbers_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_MethodUsingWholeAndFractionalNumbers_cfunc(whole_number, fractional_number)
 
     def niFake_MethodWithGrpcOnlyParam(self, simple_param):  # noqa: N802
         with self._func_lock:

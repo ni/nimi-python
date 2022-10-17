@@ -1027,10 +1027,12 @@ class Session(_SessionBase):
             session (nidmm.Session): A session object representing the device.
 
         '''
+        library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
+            library_interpreter=library_interpreter,
             freeze_it=False,
             all_channels_in_session=None
         )
@@ -1693,8 +1695,6 @@ class Session(_SessionBase):
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
 
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
-
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
         reading_array = self._library_interpreter.fetch_multi_point(maximum_time, array_size)
@@ -1733,8 +1733,6 @@ class Session(_SessionBase):
             waveform_array (array.array("d")): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
-
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
         waveform_array = self._library_interpreter.fetch_waveform(maximum_time, array_size)
@@ -1765,13 +1763,6 @@ class Session(_SessionBase):
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-        Returns:
-            waveform_array (numpy.array(dtype=numpy.float64)): **Waveform Array** is an array of measurement values stored in waveform
-                data type.
-
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
 
         '''
         import numpy
@@ -2279,8 +2270,6 @@ class Session(_SessionBase):
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
 
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
-
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
         reading_array = self._library_interpreter.read_multi_point(maximum_time, array_size)
@@ -2364,8 +2353,6 @@ class Session(_SessionBase):
                 Note:
                 The size of the **Waveform_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
-
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
 
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)

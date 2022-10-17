@@ -5,11 +5,11 @@ UNIT_TEST_DIR := $(MODULE_DIR)/unit_tests
 TEMPLATE_DIR := $(BUILD_HELPER_DIR)/templates
 TOX_INI := $(OUTPUT_DIR)/tox.ini
 
-TOX_INI := $(OUTPUT_DIR)/tox.ini
-
 DRIVER_DIR := $(ROOT_DIR)/src/$(DRIVER)
 METADATA_DIR := $(DRIVER_DIR)/metadata
 METADATA_FILES := $(wildcard $(METADATA_DIR)/*.py)
+COMMON_METADATA_DIR := $(ROOT_DIR)/src/common/metadata
+METADATA_DIRS := $(METADATA_DIR) $(COMMON_METADATA_DIR)
 
 BUILD_HELPER_SCRIPTS := $(wildcard $(BUILD_HELPER_DIR)/*.py $(BUILD_HELPER_DIR)/helper/*.py)
 
@@ -24,9 +24,14 @@ MKDIRECTORIES += \
 
 VPATH = $(TEMPLATE_DIR)
 
+true := T
+false :=
+GRPC_SUPPORTED := $(if $(wildcard $(METADATA_DIR)/$(DRIVER).proto),$(true))
+
 PYTHON_CMD ?= python
+GRPC_SUPPORT_PARAM := $(if $(GRPC_SUPPORTED),--include-grpc-support)
 define GENERATE_SCRIPT
-$(PYTHON_CMD) -m build --template $1 --dest-dir $2 --metadata $3 $(if $(PRINT),-v,)
+$(PYTHON_CMD) -m build --template $1 --dest-dir $2 --metadata $3 $(if $(PRINT),-v,) $(GRPC_SUPPORT_PARAM)
 endef
 
 ifeq (,$(PRINT))
@@ -54,6 +59,15 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     __init__.py \
     _converters.py \
     VERSION \
+    $(if $(GRPC_SUPPORTED), \
+        _grpc.py \
+        $(DRIVER)_pb2.py \
+        $(DRIVER)_pb2_grpc.py \
+        nidevice_pb2.py \
+        nidevice_pb2_grpc.py \
+        session_pb2.py \
+        session_pb2_grpc.py \
+    ) \
 
 DEFAULT_PY_FILES_TO_COPY := \
     _visatype.py \

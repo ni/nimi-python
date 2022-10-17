@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d13
+# This file is generated from NI-FAKE API metadata version 23.0.0d38
 config = {
-    'api_version': '23.0.0d13',
+    'api_version': '23.0.0d38',
     'c_function_prefix': 'niFake_',
     'close_function': 'close',
     'context_manager_name': {
@@ -13,16 +13,19 @@ config = {
         {
             'ctypes_type': 'struct_CustomStruct',
             'file_name': 'custom_struct',
+            'grpc_name': 'FakeCustomStruct',
             'python_name': 'CustomStruct'
         },
         {
             'ctypes_type': 'struct_CustomStructNestedTypedef',
             'file_name': 'custom_struct_nested_typedef',
+            'grpc_name': 'CustomStructNestedTypedef',
             'python_name': 'CustomStructNestedTypedef'
         },
         {
             'ctypes_type': 'struct_CustomStructTypedef',
             'file_name': 'custom_struct_typedef',
+            'grpc_name': 'CustomStructTypedef',
             'python_name': 'CustomStructTypedef'
         }
     ],

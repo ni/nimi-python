@@ -13,7 +13,7 @@
 %>\
 
     def ${full_func_name}(${param_names_method}):  # noqa: N802
-% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
+% for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
 %   for declaration in helper.get_ctype_variable_declaration_snippet(p, parameters, None, config, use_numpy_array=p['numpy']):
         ${declaration}
 %   endfor

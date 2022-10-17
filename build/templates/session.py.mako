@@ -2,6 +2,9 @@ ${template_parameters['encoding_tag']}
 # This file was generated
 <%
     import build.helper as helper
+    import os
+
+    grpc_supported = template_parameters['include_grpc_support']
 
     config = template_parameters['metadata'].config
     attributes = config['attributes']
@@ -156,7 +159,7 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 init_function = config['functions']['_init_function']
 init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
-constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
+constructor_params = helper.filter_parameters(init_function['parameters'], helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
 %>\
 % if attributes:
 
@@ -218,15 +221,47 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
-    def __init__(${init_method_params}):
+<% grpc_channel_param = ', *, _grpc_channel=None' if grpc_supported else '' %>\
+    def __init__(${init_method_params}${grpc_channel_param}):
         r'''${config['session_class_description']}
 
-        ${helper.get_function_docstring(init_function, False, config, indent=8)}
+<%
+ctor_for_docs = init_function
+if grpc_supported:
+    import copy
+    ctor_for_docs = copy.deepcopy(ctor_for_docs)
+    ctor_for_docs['parameters'].append(
+        {
+            'default_value': None,
+            'direction': 'in',
+            'documentation': { 'description': 'MeasurementLink gRPC channel' },
+            'enum': None,
+            'is_repeated_capability': False,
+            'is_session_handle': False,
+            'python_name': '_grpc_channel',
+            'size': {'mechanism': 'fixed', 'value': 1},
+            'type_in_documentation': 'grpc.Channel',
+            'type_in_documentation_was_calculated': False,
+            'use_in_python_api': False,
+        },
+    )
+%>\
+        ${helper.get_function_docstring(ctor_for_docs, False, config, indent=8)}
         '''
+% if grpc_supported:
+        if _grpc_channel:
+            import ${module_name}._grpc as _grpc
+            library_interpreter = _grpc.GrpcStubInterpreter(_grpc_channel)
+        else:
+            library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+% else:
+        library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+% endif
+
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
+            library_interpreter=library_interpreter,
             freeze_it=False,
             all_channels_in_session=None
         )
@@ -244,7 +279,13 @@ class Session(_SessionBase):
         self._library_interpreter._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
 
 % if config['uses_nitclk']:
+%   if grpc_supported:
+        # NI-TClk does not work over NI gRPC Device Server
+        if not _grpc_channel:
+            self.tclk = nitclk.SessionReference(self._library_interpreter._${config['session_handle_parameter_name']})
+%   else:
         self.tclk = nitclk.SessionReference(self._library_interpreter._${config['session_handle_parameter_name']})
+%   endif
 
 % endif
         # Store the parameter list for later printing in __repr__

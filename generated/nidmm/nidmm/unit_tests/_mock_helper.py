@@ -217,6 +217,7 @@ class SideEffectsHelper(object):
     def niDMM_ExportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
         if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
             return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        # configuration
         if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
             raise MockFunctionCallError("niDMM_ExportAttributeConfigurationBuffer", param='configuration')
         if size.value == 0:
@@ -319,6 +320,7 @@ class SideEffectsHelper(object):
     def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
+        # attribute_value
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niDMM_GetAttributeViString", param='attributeValue')
         if buffer_size.value == 0:
@@ -374,6 +376,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetError", param='errorCode')
         if error_code is not None:
             error_code.contents.value = self._defaults['GetError']['errorCode']
+        # description
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niDMM_GetError", param='description')
         if buffer_size.value == 0:

@@ -38,16 +38,22 @@ class ParameterUsageOptions(AutoNumber):
     '''For calling into a Library method (from LibraryInterpreter).'''
     LIBRARY_INTERPRETER_METHOD_CALL = ()
     '''For calling into a LibraryInterpreter method (from Session).'''
+    GRPC_REQUEST_PARAMETERS = ()
+    '''For creating a gRPC Request object.'''
     CTYPES_ARGTYPES = ()
     '''For setting up the ctypes argument types'''
     LIBRARY_INTERPRETER_METHOD_DECLARATION = ()
     '''For declaring a LibraryInterpreter method.'''
     INPUT_PARAMETERS = ()
     '''Get all input parameters, other than self, rep caps, and size'''
-    OUTPUT_PARAMETERS = ()
+    LIBRARY_OUTPUT_PARAMETERS = ()
     '''Get all output parameters, other than ivi-dance'''
-    OUTPUT_PARAMETERS_FOR_DOCS = ()
+    API_OUTPUT_PARAMETERS = ()
     '''We also want to skip size parameters'''
+    API_NUMPY_OUTPUT_PARAMETERS = ()
+    '''Output parameters for numpy function'''
+    GRPC_OUTPUT_PARAMETERS = ()
+    '''Get all gRPC output parameters'''
     IVI_DANCE_PARAMETER = ()
     '''Get the ivi-dance parameter'''
     NUMPY_PARAMETERS = ()
@@ -56,6 +62,3 @@ class ParameterUsageOptions(AutoNumber):
     '''Get the len parameter'''
     INPUT_ENUM_PARAMETERS = ()
     '''Get any input parameters whose type is enum'''
-
-
-

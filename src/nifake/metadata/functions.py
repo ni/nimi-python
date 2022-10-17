@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d13
+# This file is generated from NI-FAKE API metadata version 23.0.0d38
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -90,6 +90,24 @@ functions = {
                     'value': 'numberOfElements'
                 },
                 'type': 'ViBoolean[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'CustomNestedStructRoundtrip': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'nestedCustomTypeIn',
+                'type': 'CustomStructNestedTypedef'
+            },
+            {
+                'direction': 'out',
+                'name': 'nestedCustomTypeOut',
+                'type': 'CustomStructNestedTypedef'
             }
         ],
         'returns': 'ViStatus'
@@ -1407,7 +1425,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'lock',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -1435,15 +1453,21 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'MethodUsingWholeMappedNumbers': {
+    'MethodUsingWholeAndFractionalNumbers': {
         'documentation': {
             'description': 'TBD'
         },
         'parameters': [
             {
                 'direction': 'out',
-                'grpc_enum': 'DecimalWholeNumberMapped',
+                'grpc_enum': 'DecimalWholeNumber',
                 'name': 'wholeNumber',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'grpc_enum': 'DecimalMixedNumber',
+                'name': 'fractionalNumber',
                 'type': 'ViReal64'
             }
         ],
@@ -2480,7 +2504,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'unlock',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }

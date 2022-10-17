@@ -30,8 +30,8 @@
 
     init_function = config['functions']['_init_function']
     init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
-    constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
-    input_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
+    constructor_params = helper.filter_parameters(init_function['parameters'], helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
+    input_params = helper.filter_parameters(init_function['parameters'], helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 %>\
 .. py:module:: ${module_name}
 

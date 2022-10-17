@@ -34,6 +34,10 @@ build_group.add_argument(
     "--metadata",
     action='append', dest='metadata', default=[],
     help='Absolute or relative path to metadata package. Multiple allowed. Will build in order added to command line.')
+build_group.add_argument(
+    "--include-grpc-support",
+    action='store_true', dest='include_grpc_support', default=[],
+    help='Include gRPC support in the generated files.')
 utility_group = parser.add_argument_group("Utility")
 utility_group.add_argument(
     "--template",
@@ -69,6 +73,7 @@ for m in args.metadata:
 
     template_params = {}
     template_params['metadata'] = metadata
+    template_params['include_grpc_support'] = args.include_grpc_support
 
     logging.debug(pp.pformat(template_params))
 
@@ -77,4 +82,3 @@ for m in args.metadata:
         file_name = os.path.basename(args.template).replace('.mako', '')
     dest_file = os.path.join(args.dest_dir, file_name)
     generate_template.generate_template(args.template, template_params, dest_file)
-

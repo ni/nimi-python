@@ -2597,27 +2597,6 @@ class _SessionBase(object):
 
 
         Returns:
-            waveform (numpy.array(dtype=numpy.float64)): Returns an array whose length is the **numSamples** times number of
-                waveforms. Call ActualNumwfms to determine the number of
-                waveforms.
-
-                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-                first. For example, with a channel list of 0,1, you would have the
-                following index values:
-
-                index 0 = record 0, channel 0
-
-                index *x* = record 0, channel 1
-
-                index 2\ *x* = record 1, channel 0
-
-                index 3\ *x* = record 1, channel 1
-
-                Where *x* = the record length
-
-                Note:
-                One or more of the referenced methods are not in the Python API for this driver.
-
             wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns a list of class instances with the following timing and scaling
                 information about each waveform:
 
@@ -2817,27 +2796,6 @@ class _SessionBase(object):
 
 
         Returns:
-            waveform (numpy.array(dtype=numpy.int16)): Returns an array whose length is the **numSamples** times number of
-                waveforms. Call ActualNumwfms to determine the number of
-                waveforms.
-
-                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-                first. For example, with a channel list of 0,1, you would have the
-                following index values:
-
-                index 0 = record 0, channel 0
-
-                index *x* = record 0, channel 1
-
-                index 2\ *x* = record 1, channel 0
-
-                index 3\ *x* = record 1, channel 1
-
-                Where *x* = the record length
-
-                Note:
-                One or more of the referenced methods are not in the Python API for this driver.
-
             wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns a list of class instances with the following timing and scaling
                 information about each waveform:
 
@@ -2940,27 +2898,6 @@ class _SessionBase(object):
 
 
         Returns:
-            waveform (numpy.array(dtype=numpy.int32)): Returns an array whose length is the **numSamples** times number of
-                waveforms. Call ActualNumwfms to determine the number of
-                waveforms.
-
-                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-                first. For example, with a channel list of 0,1, you would have the
-                following index values:
-
-                index 0 = record 0, channel 0
-
-                index *x* = record 0, channel 1
-
-                index 2\ *x* = record 1, channel 0
-
-                index 3\ *x* = record 1, channel 1
-
-                Where *x* = the record length
-
-                Note:
-                One or more of the referenced methods are not in the Python API for this driver.
-
             wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns a list of class instances with the following timing and scaling
                 information about each waveform:
 
@@ -3063,27 +3000,6 @@ class _SessionBase(object):
 
 
         Returns:
-            waveform (numpy.array(dtype=numpy.int8)): Returns an array whose length is the **numSamples** times number of
-                waveforms. Call ActualNumwfms to determine the number of
-                waveforms.
-
-                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-                first. For example, with a channel list of 0,1, you would have the
-                following index values:
-
-                index 0 = record 0, channel 0
-
-                index *x* = record 0, channel 1
-
-                index 2\ *x* = record 1, channel 0
-
-                index 3\ *x* = record 1, channel 1
-
-                Where *x* = the record length
-
-                Note:
-                One or more of the referenced methods are not in the Python API for this driver.
-
             wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns a list of class instances with the following timing and scaling
                 information about each waveform:
 
@@ -4058,10 +3974,12 @@ class Session(_SessionBase):
             session (niscope.Session): A session object representing the device.
 
         '''
+        library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library_interpreter=_library_interpreter.LibraryInterpreter(encoding='windows-1251'),
+            library_interpreter=library_interpreter,
             freeze_it=False,
             all_channels_in_session=None
         )

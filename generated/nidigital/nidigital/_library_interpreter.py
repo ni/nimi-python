@@ -69,8 +69,9 @@ class LibraryInterpreter(object):
         Returns the error description.
         '''
         try:
-            _, error_string = self.get_error()
-            return error_string
+            returned_error_code, error_string = self.get_error()
+            if returned_error_code == error_code:
+                return error_string
         except errors.Error:
             pass
 
@@ -83,7 +84,8 @@ class LibraryInterpreter(object):
             error_string = self.error_message(error_code)
             return error_string
         except errors.Error:
-            return "Failed to retrieve error description."
+            pass
+        return "Failed to retrieve error description."
 
     def abort(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

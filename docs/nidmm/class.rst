@@ -969,11 +969,8 @@ fetch_multi_point
 
             :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
-            :rtype: tuple (reading_array, actual_number_of_points)
-
-                WHERE
-
-                reading_array (array.array("d")): 
+            :rtype: array.array("d")
+            :return:
 
 
                     An array of measurement values.
@@ -982,14 +979,6 @@ fetch_multi_point
 
                     .. note:: The size of the **Reading_Array** must be at least the size that you
                         specify for the **Array_Size** parameter.
-
-
-                actual_number_of_points (int): 
-
-
-                    Indicates the number of measured values actually retrieved from the DMM.
-
-                    
 
 
 
@@ -1041,23 +1030,12 @@ fetch_waveform
 
             :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
-            :rtype: tuple (waveform_array, actual_number_of_points)
-
-                WHERE
-
-                waveform_array (array.array("d")): 
+            :rtype: array.array("d")
+            :return:
 
 
                     **Waveform Array** is an array of measurement values stored in waveform
                     data type.
-
-                    
-
-
-                actual_number_of_points (int): 
-
-
-                    Indicates the number of measured values actually retrieved from the DMM.
 
                     
 
@@ -1108,28 +1086,6 @@ fetch_waveform_into
 
 
             :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
-
-            :rtype: tuple (waveform_array, actual_number_of_points)
-
-                WHERE
-
-                waveform_array (numpy.array(dtype=numpy.float64)): 
-
-
-                    **Waveform Array** is an array of measurement values stored in waveform
-                    data type.
-
-                    
-
-
-                actual_number_of_points (int): 
-
-
-                    Indicates the number of measured values actually retrieved from the DMM.
-
-                    
-
-
 
 get_cal_date_and_time
 ---------------------
@@ -1673,11 +1629,8 @@ read_multi_point
 
             :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
-            :rtype: tuple (reading_array, actual_number_of_points)
-
-                WHERE
-
-                reading_array (array.array("d")): 
+            :rtype: array.array("d")
+            :return:
 
 
                     An array of measurement values.
@@ -1686,14 +1639,6 @@ read_multi_point
 
                     .. note:: The size of the **Reading_Array** must be at least the size that you
                         specify for the **Array_Size** parameter.
-
-
-                actual_number_of_points (int): 
-
-
-                    Indicates the number of measured values actually retrieved from the DMM.
-
-                    
 
 
 
@@ -1804,11 +1749,8 @@ read_waveform
 
             :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
-            :rtype: tuple (waveform_array, actual_number_of_points)
-
-                WHERE
-
-                waveform_array (array.array("d")): 
+            :rtype: array.array("d")
+            :return:
 
 
                     An array of measurement values.
@@ -1817,14 +1759,6 @@ read_waveform
 
                     .. note:: The size of the **Waveform_Array** must be at least the size that you
                         specify for the **Array_Size** parameter.
-
-
-                actual_number_of_points (int): 
-
-
-                    Indicates the number of measured values actually retrieved from the DMM.
-
-                    
 
 
 
