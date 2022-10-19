@@ -19,14 +19,14 @@
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
-% for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL):
+% for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.INTERPRETER_METHOD_CALL):
 %   if 'python_api_converter_name' in p:
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']})
 %   endif
 % endfor
 % if output_parameters:
-        ${output_parameters_snippet} = self._interpreter.${f['library_interpreter_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL)})
+        ${output_parameters_snippet} = self._interpreter.${f['interpreter_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.INTERPRETER_METHOD_CALL)})
         ${helper.get_session_method_return_snippet(parameters, config)}
 % else:
-        self._interpreter.${f['library_interpreter_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL)})
+        self._interpreter.${f['interpreter_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.INTERPRETER_METHOD_CALL)})
 % endif

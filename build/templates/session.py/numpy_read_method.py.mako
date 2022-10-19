@@ -28,14 +28,14 @@
         if ${parameter['python_name']}.dtype is not numpy.dtype('${parameter['numpy_type']}'):
             raise TypeError('${parameter['python_name']} must be numpy.ndarray of dtype=${parameter['numpy_type']}, is ' + str(${parameter['python_name']}.dtype))
 % endfor
-% for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_CALL):
+% for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.INTERPRETER_NUMPY_INTO_METHOD_CALL):
 %   if 'python_api_converter_name' in p:
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']})
 %   endif
 % endfor
 % if output_parameters:
-        ${output_parameters_snippet} = self._interpreter.${f['library_interpreter_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_CALL)})
+        ${output_parameters_snippet} = self._interpreter.${f['interpreter_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.INTERPRETER_NUMPY_INTO_METHOD_CALL)})
         ${helper.get_session_method_return_snippet(parameters, config, use_numpy_array=True)}
 % else:
-        self._interpreter.${f['library_interpreter_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_CALL)})
+        self._interpreter.${f['interpreter_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.INTERPRETER_NUMPY_INTO_METHOD_CALL)})
 % endif
