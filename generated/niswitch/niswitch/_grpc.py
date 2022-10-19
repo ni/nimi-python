@@ -201,11 +201,7 @@ class GrpcStubInterpreter(object):
         )
 
     def lock(self):  # noqa: N802
-        response = self._invoke(
-            self._client.LockSession,
-            grpc_types.LockSessionRequest(vi=self._vi),
-        )
-        return response.caller_has_lock
+        self._lock.acquire()
 
     def relay_control(self, relay_name, relay_action):  # noqa: N802
         self._invoke(
@@ -268,11 +264,7 @@ class GrpcStubInterpreter(object):
         )
 
     def unlock(self):  # noqa: N802
-        response = self._invoke(
-            self._client.UnlockSession,
-            grpc_types.UnlockSessionRequest(vi=self._vi),
-        )
-        return response.caller_has_lock
+        self._lock.release()
 
     def wait_for_debounce(self, maximum_time_ms):  # noqa: N802
         self._invoke(
