@@ -145,12 +145,12 @@ class Session(object):
     def __init__(self, driver):
         self._item_count = 0
         self._current_item = 0
-        self._library_interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
+        self._interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
         # Note that _library_interpreter sets _handle to 0 in its constructor, so that if
         # _open_installed_devices_session fails, the error handler can reference it.
         # And then once _open_installed_devices_session succeeds, we can update _library_interpreter._handle
         # with the actual session handle.
-        self._library_interpreter._handle, self._item_count = self._open_installed_devices_session(driver)
+        self._interpreter._handle, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
 
         self.devices = []
@@ -190,9 +190,9 @@ class Session(object):
         try:
             self._close_installed_devices_session()
         except errors.DriverError:
-            self._library_interpreter._handle = 0
+            self._interpreter._handle = 0
             raise
-        self._library_interpreter._handle = 0
+        self._interpreter._handle = 0
 
     ''' These are code-generated '''
 
@@ -203,7 +203,7 @@ class Session(object):
         _open_installed_devices_session. Call this method when you are
         finished using the session handle and do not use this handle again.
         '''
-        self._library_interpreter.close_installed_devices_session()
+        self._interpreter.close_installed_devices_session()
 
     def _get_installed_device_attribute_vi_int32(self, index, attribute_id):
         r'''_get_installed_device_attribute_vi_int32
@@ -240,7 +240,7 @@ class Session(object):
                 the requested property.
 
         '''
-        attribute_value = self._library_interpreter.get_installed_device_attribute_vi_int32(index, attribute_id)
+        attribute_value = self._interpreter.get_installed_device_attribute_vi_int32(index, attribute_id)
         return attribute_value
 
     def _get_installed_device_attribute_vi_string(self, index, attribute_id):
@@ -277,7 +277,7 @@ class Session(object):
             attribute_value (str): The character buffer into which the property value string is copied.
 
         '''
-        attribute_value = self._library_interpreter.get_installed_device_attribute_vi_string(index, attribute_id)
+        attribute_value = self._interpreter.get_installed_device_attribute_vi_string(index, attribute_id)
         return attribute_value
 
     def _open_installed_devices_session(self, driver):
@@ -316,5 +316,5 @@ class Session(object):
                 driver parameter.
 
         '''
-        handle, device_count = self._library_interpreter.open_installed_devices_session(driver)
+        handle, device_count = self._interpreter.open_installed_devices_session(driver)
         return handle, device_count

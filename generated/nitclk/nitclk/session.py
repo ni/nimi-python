@@ -130,8 +130,8 @@ class SessionReference(object):
     '''
 
     def __init__(self, session_number, encoding='windows-1251'):
-        self._library_interpreter = _library_interpreter.LibraryInterpreter(encoding)
-        self._library_interpreter._session_number = session_number
+        self._interpreter = _library_interpreter.LibraryInterpreter(encoding)
+        self._interpreter._session_number = session_number
         # We need a self._repeated_capability string for passing down to function calls on the LibraryInterpreter class. We just need to set it to empty string.
         self._repeated_capability = ''
 
@@ -152,7 +152,7 @@ class SessionReference(object):
         object.__setattr__(self, key, value)
 
     def _get_tclk_session_reference(self):
-        return self._library_interpreter._session_number
+        return self._interpreter._session_number
 
     def _get_attribute_vi_real64(self, attribute_id):
         r'''_get_attribute_vi_real64
@@ -179,7 +179,7 @@ class SessionReference(object):
             value (float): The value that you are getting
 
         '''
-        value = self._library_interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        value = self._interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
         return value
 
     def _get_attribute_vi_session(self, attribute_id):
@@ -209,7 +209,7 @@ class SessionReference(object):
             value (int): The value that you are getting
 
         '''
-        value = self._library_interpreter.get_attribute_vi_session(self._repeated_capability, attribute_id)
+        value = self._interpreter.get_attribute_vi_session(self._repeated_capability, attribute_id)
         return value
 
     def _get_attribute_vi_string(self, attribute_id):
@@ -249,7 +249,7 @@ class SessionReference(object):
             value (str): The value that you are getting
 
         '''
-        value = self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
+        value = self._interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
         return value
 
     def _set_attribute_vi_real64(self, attribute_id, value):
@@ -279,7 +279,7 @@ class SessionReference(object):
             value (float): The value for the property
 
         '''
-        self._library_interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, value)
+        self._interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, value)
 
     def _set_attribute_vi_session(self, attribute_id, value):
         r'''_set_attribute_vi_session
@@ -310,7 +310,7 @@ class SessionReference(object):
             value (int): The value for the property
 
         '''
-        self._library_interpreter.set_attribute_vi_session(self._repeated_capability, attribute_id, value)
+        self._interpreter.set_attribute_vi_session(self._repeated_capability, attribute_id, value)
 
     def _set_attribute_vi_string(self, attribute_id, value):
         r'''_set_attribute_vi_string
@@ -341,7 +341,7 @@ class SessionReference(object):
             value (str): Pass the value for the property
 
         '''
-        self._library_interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, value)
+        self._interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, value)
 
 
 class _Session(object):
@@ -353,7 +353,7 @@ class _Session(object):
     '''
 
     def __init__(self):
-        self._library_interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
+        self._interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
 
         # Instantiate any repeated capability objects
 
@@ -476,7 +476,7 @@ class _Session(object):
 
         '''
         sessions = _converters.convert_to_nitclk_session_number_list(sessions)
-        self._library_interpreter.configure_for_homogeneous_triggers(sessions)
+        self._interpreter.configure_for_homogeneous_triggers(sessions)
 
     def finish_sync_pulse_sender_synchronize(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
         r'''finish_sync_pulse_sender_synchronize
@@ -496,7 +496,7 @@ class _Session(object):
         '''
         sessions = _converters.convert_to_nitclk_session_number_list(sessions)
         min_time = _converters.convert_timedelta_to_seconds_real64(min_time)
-        self._library_interpreter.finish_sync_pulse_sender_synchronize(sessions, min_time)
+        self._interpreter.finish_sync_pulse_sender_synchronize(sessions, min_time)
 
     def initiate(self, sessions):
         r'''initiate
@@ -512,7 +512,7 @@ class _Session(object):
 
         '''
         sessions = _converters.convert_to_nitclk_session_number_list(sessions)
-        self._library_interpreter.initiate(sessions)
+        self._interpreter.initiate(sessions)
 
     def is_done(self, sessions):
         r'''is_done
@@ -531,7 +531,7 @@ class _Session(object):
 
         '''
         sessions = _converters.convert_to_nitclk_session_number_list(sessions)
-        done = self._library_interpreter.is_done(sessions)
+        done = self._interpreter.is_done(sessions)
         return done
 
     def setup_for_sync_pulse_sender_synchronize(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
@@ -552,7 +552,7 @@ class _Session(object):
         '''
         sessions = _converters.convert_to_nitclk_session_number_list(sessions)
         min_time = _converters.convert_timedelta_to_seconds_real64(min_time)
-        self._library_interpreter.setup_for_sync_pulse_sender_synchronize(sessions, min_time)
+        self._interpreter.setup_for_sync_pulse_sender_synchronize(sessions, min_time)
 
     def synchronize(self, sessions, min_tclk_period=hightime.timedelta(seconds=0.0)):
         r'''synchronize
@@ -577,7 +577,7 @@ class _Session(object):
         '''
         sessions = _converters.convert_to_nitclk_session_number_list(sessions)
         min_tclk_period = _converters.convert_timedelta_to_seconds_real64(min_tclk_period)
-        self._library_interpreter.synchronize(sessions, min_tclk_period)
+        self._interpreter.synchronize(sessions, min_tclk_period)
 
     def synchronize_to_sync_pulse_sender(self, sessions, min_time=hightime.timedelta(seconds=0.0)):
         r'''synchronize_to_sync_pulse_sender
@@ -597,7 +597,7 @@ class _Session(object):
         '''
         sessions = _converters.convert_to_nitclk_session_number_list(sessions)
         min_time = _converters.convert_timedelta_to_seconds_real64(min_time)
-        self._library_interpreter.synchronize_to_sync_pulse_sender(sessions, min_time)
+        self._interpreter.synchronize_to_sync_pulse_sender(sessions, min_time)
 
     def wait_until_done(self, sessions, timeout=hightime.timedelta(seconds=0.0)):
         r'''wait_until_done
@@ -621,7 +621,7 @@ class _Session(object):
         '''
         sessions = _converters.convert_to_nitclk_session_number_list(sessions)
         timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
-        self._library_interpreter.wait_until_done(sessions, timeout)
+        self._interpreter.wait_until_done(sessions, timeout)
 
 
 def configure_for_homogeneous_triggers(sessions):
