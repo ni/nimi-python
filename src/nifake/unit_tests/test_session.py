@@ -32,7 +32,7 @@ class TestSession(object):
         self.tclk_patched_library_singleton_get.start()
 
         # We shouldn't call into grpc
-        self.patched_grpc_interpreter = patch('nifake._grpc.GrpcStubInterpreter', side_effect=AssertionError('Called into grpc!'))
+        self.patched_grpc_interpreter = patch('nifake._grpc_stub_interpreter.GrpcStubInterpreter', side_effect=AssertionError('Called into grpc!'))
         self.patched_grpc_interpreter.start()
 
         self.patched_library_interpreter.init_with_options.side_effect = [SESSION_NUM_FOR_TEST]
@@ -52,31 +52,31 @@ class TestSession(object):
     def test_init_with_options_and_close(self):
         session = nifake.Session('dev1')
         self.patched_library_interpreter.init_with_options.assert_called_once_with('dev1', False, False, '')
-        assert session._library_interpreter._vi == SESSION_NUM_FOR_TEST
+        assert session._interpreter._vi == SESSION_NUM_FOR_TEST
         session.close()
         self.patched_library_interpreter.close.assert_called_once_with()
 
     def test_init_with_options_nondefault_and_close(self):
         session = nifake.Session('FakeDevice', 'Some string', True, True)
         self.patched_library_interpreter.init_with_options.assert_called_once_with('FakeDevice', True, True, 'Some string')
-        assert session._library_interpreter._vi == SESSION_NUM_FOR_TEST
+        assert session._interpreter._vi == SESSION_NUM_FOR_TEST
         session.close()
         self.patched_library_interpreter.close.assert_called_once_with()
 
     def test_close(self):
         session = nifake.Session('dev1')
-        assert session._library_interpreter._vi == SESSION_NUM_FOR_TEST
+        assert session._interpreter._vi == SESSION_NUM_FOR_TEST
         session.close()
         self.patched_library_interpreter.close.assert_called_once_with()
-        assert session._library_interpreter._vi == 0
+        assert session._interpreter._vi == 0
 
     def test_session_context_manager(self):
         with nifake.Session('dev1') as session:
             assert type(session) == nifake.Session
             self.patched_library_interpreter.init_with_options.assert_called_once_with('dev1', False, False, '')
-            assert session._library_interpreter._vi == SESSION_NUM_FOR_TEST
+            assert session._interpreter._vi == SESSION_NUM_FOR_TEST
         self.patched_library_interpreter.close.assert_called_once_with()
-        assert session._library_interpreter._vi == 0
+        assert session._interpreter._vi == 0
 
     def test_init_with_error(self):
         test_error_code = -1
@@ -93,7 +93,7 @@ class TestSession(object):
         test_error_code = -1
         test_error_desc = 'Test'
         session = nifake.Session('dev1')
-        assert session._library_interpreter._vi == SESSION_NUM_FOR_TEST
+        assert session._interpreter._vi == SESSION_NUM_FOR_TEST
         self.patched_library_interpreter.close.side_effect = nifake.errors.DriverError(test_error_code, test_error_desc)
         try:
             session.close()
@@ -102,7 +102,7 @@ class TestSession(object):
             assert e.code == test_error_code
             assert e.description == test_error_desc
         self.patched_library_interpreter.close.assert_called_once_with()
-        assert session._library_interpreter._vi == 0
+        assert session._interpreter._vi == 0
 
     def test_session_context_manager_init_with_error(self):
         test_error_code = -1
@@ -803,7 +803,7 @@ class TestSession(object):
 
 class TestGrpcSession(object):
 
-    class PatchedGrpcInterpreter(nifake._grpc.GrpcStubInterpreter):
+    class PatchedGrpcInterpreter(nifake._grpc_stub_interpreter.GrpcStubInterpreter):
         def __init__(self, encoding):
             for f in dir(self):
                 if not f.startswith("_"):
@@ -811,7 +811,7 @@ class TestGrpcSession(object):
 
     def setup_method(self, method):
         self.patched_grpc_interpreter = self.PatchedGrpcInterpreter(None)
-        self.patched_grpc_constructor = patch('nifake._grpc.GrpcStubInterpreter', return_value=self.patched_grpc_interpreter)
+        self.patched_grpc_constructor = patch('nifake._grpc_stub_interpreter.GrpcStubInterpreter', return_value=self.patched_grpc_interpreter)
         self.patched_grpc_constructor.start()
 
         # We don't actually call into the nitclk DLL, but we do need to mock the function since it is called
@@ -834,7 +834,7 @@ class TestGrpcSession(object):
     def test_init_with_options_and_close(self):
         session = nifake.Session('dev1', _grpc_channel=object())
         self.patched_grpc_interpreter.init_with_options.assert_called_once_with('dev1', False, False, '')
-        assert session._library_interpreter._vi == GRPC_SESSION_OBJECT_FOR_TEST
+        assert session._interpreter._vi == GRPC_SESSION_OBJECT_FOR_TEST
         session.close()
         self.patched_grpc_interpreter.close.assert_called_once_with()
 

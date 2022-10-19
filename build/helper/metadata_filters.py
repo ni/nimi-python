@@ -48,7 +48,7 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'fixed, passed-in',
         'python_api_list': False,
     },
-    ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_DECLARATION: {
+    ParameterUsageOptions.INTERPRETER_NUMPY_INTO_METHOD_DECLARATION: {
         'skip_session_handle': True,
         'skip_input_parameters': False,
         'skip_output_parameters': True,
@@ -146,7 +146,7 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'any',
         'python_api_list': True,
     },
-    ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_DECLARATION: {
+    ParameterUsageOptions.INTERPRETER_METHOD_DECLARATION: {
         'skip_session_handle': True,
         'skip_input_parameters': False,
         'skip_output_parameters': True,
@@ -295,8 +295,8 @@ _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION][
 # Only difference is we want to skip parameters not in api
 _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL].copy()
 
-_ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_INTERPRETER_METHOD_DECLARATION].copy()
-_ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_DECLARATION].copy()
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.INTERPRETER_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.INTERPRETER_METHOD_DECLARATION].copy()
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.INTERPRETER_NUMPY_INTO_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.INTERPRETER_NUMPY_INTO_METHOD_DECLARATION].copy()
 _ParameterUsageOptionsFiltering[ParameterUsageOptions.CDLL_METHOD_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL].copy()
 
 
