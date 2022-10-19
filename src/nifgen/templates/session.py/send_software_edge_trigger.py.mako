@@ -28,4 +28,4 @@
 
         if type(trigger) is not enums.Trigger:
             raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))
-        self._library_interpreter.send_software_edge_trigger(trigger, trigger_id)
+        self._interpreter.send_software_edge_trigger(trigger, trigger_id)

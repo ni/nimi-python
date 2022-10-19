@@ -29,7 +29,7 @@
             lock (context manager): When used in a with statement, ${config['module_name']}.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._library_interpreter.lock()  # We do not call this in the context manager so that this function can
+        self._interpreter.lock()  # We do not call this in the context manager so that this function can
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
