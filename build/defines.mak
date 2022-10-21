@@ -8,8 +8,8 @@ TOX_INI := $(OUTPUT_DIR)/tox.ini
 DRIVER_DIR := $(ROOT_DIR)/src/$(DRIVER)
 METADATA_DIR := $(DRIVER_DIR)/metadata
 METADATA_FILES := $(wildcard $(METADATA_DIR)/*.py)
-COMMON_METADATA_DIR := $(ROOT_DIR)/src/common/metadata
-METADATA_DIRS := $(METADATA_DIR) $(COMMON_METADATA_DIR)
+SHARED_PROTOS_DIR := $(ROOT_DIR)/src/shared_protos
+PROTO_DIRS := $(METADATA_DIR) $(SHARED_PROTOS_DIR)
 
 BUILD_HELPER_SCRIPTS := $(wildcard $(BUILD_HELPER_DIR)/*.py $(BUILD_HELPER_DIR)/helper/*.py)
 
@@ -60,7 +60,7 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     _converters.py \
     VERSION \
     $(if $(GRPC_SUPPORTED), \
-        _grpc.py \
+        _grpc_stub_interpreter.py \
         $(DRIVER)_pb2.py \
         $(DRIVER)_pb2_grpc.py \
         nidevice_pb2.py \

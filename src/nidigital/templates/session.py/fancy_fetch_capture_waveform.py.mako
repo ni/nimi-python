@@ -9,7 +9,7 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
-        data, actual_num_waveforms, actual_samples_per_waveform = self._library_interpreter.fetch_capture_waveform(self._repeated_capability, waveform_name, samples_to_read, timeout)
+        data, actual_num_waveforms, actual_samples_per_waveform = self._interpreter.fetch_capture_waveform(self._repeated_capability, waveform_name, samples_to_read, timeout)
 
         # Get the site list
         site_list = self._get_site_results_site_numbers(enums._SiteResultType.CAPTURE_WAVEFORM)

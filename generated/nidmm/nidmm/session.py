@@ -480,16 +480,16 @@ class _SessionBase(object):
     For the NI 4070/4071/4072 only, specifies the rate of the waveform acquisition in Samples per second (S/s).  The valid Range is 10.0-1,800,000 S/s. Values are coerced to the  closest integer divisor of 1,800,000. The default value is 1,800,000.
     '''
 
-    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
-        self._library_interpreter = library_interpreter
+        self._interpreter = interpreter
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("library_interpreter=" + pp.pformat(library_interpreter))
+        param_list.append("interpreter=" + pp.pformat(interpreter))
         self._param_list = ', '.join(param_list)
 
         # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
@@ -541,7 +541,7 @@ class _SessionBase(object):
                 ViBoolean variable.
 
         '''
-        attribute_value = self._library_interpreter.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        attribute_value = self._interpreter.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
         return attribute_value
 
     @ivi_synchronized
@@ -579,7 +579,7 @@ class _SessionBase(object):
                 ViInt32 variable.
 
         '''
-        attribute_value = self._library_interpreter.get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        attribute_value = self._interpreter.get_attribute_vi_int32(self._repeated_capability, attribute_id)
         return attribute_value
 
     @ivi_synchronized
@@ -617,7 +617,7 @@ class _SessionBase(object):
                 ViReal64 variable.
 
         '''
-        attribute_value = self._library_interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        attribute_value = self._interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
         return attribute_value
 
     @ivi_synchronized
@@ -662,7 +662,7 @@ class _SessionBase(object):
                 VI_NULL for this parameter.
 
         '''
-        attribute_value = self._library_interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
+        attribute_value = self._interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
         return attribute_value
 
     def lock(self):
@@ -695,7 +695,7 @@ class _SessionBase(object):
             lock (context manager): When used in a with statement, nidmm.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._library_interpreter.lock()  # We do not call this in the context manager so that this function can
+        self._interpreter.lock()  # We do not call this in the context manager so that this function can
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
@@ -747,7 +747,7 @@ class _SessionBase(object):
             attribute_value (bool): Pass the value that you want to set the property to.
 
         '''
-        self._library_interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
+        self._interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -796,7 +796,7 @@ class _SessionBase(object):
             attribute_value (int): Pass the value that you want to set the property to.
 
         '''
-        self._library_interpreter.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
+        self._interpreter.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -845,7 +845,7 @@ class _SessionBase(object):
             attribute_value (float): Pass the value that you want to set the property to.
 
         '''
-        self._library_interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
+        self._interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -894,7 +894,7 @@ class _SessionBase(object):
             attribute_value (str): Pass the value that you want to set the property to.
 
         '''
-        self._library_interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
+        self._interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
 
     def unlock(self):
         '''unlock
@@ -903,7 +903,7 @@ class _SessionBase(object):
         lock. Refer to lock for additional
         information on session locks.
         '''
-        self._library_interpreter.unlock()
+        self._interpreter.unlock()
 
     def _error_message(self, error_code):
         r'''_error_message
@@ -920,7 +920,7 @@ class _SessionBase(object):
             error_message (str): The error information formatted into a string.
 
         '''
-        error_message = self._library_interpreter.error_message(error_code)
+        error_message = self._interpreter.error_message(error_code)
         return error_message
 
 
@@ -1027,12 +1027,12 @@ class Session(_SessionBase):
             session (nidmm.Session): A session object representing the device.
 
         '''
-        library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library_interpreter=library_interpreter,
+            interpreter=interpreter,
             freeze_it=False,
             all_channels_in_session=None
         )
@@ -1043,7 +1043,7 @@ class Session(_SessionBase):
         # _init_with_options fails, the error handler can reference it.
         # And then once _init_with_options succeeds, we can update _library_interpreter._vi
         # with the actual session handle.
-        self._library_interpreter._vi = self._init_with_options(resource_name, id_query, reset_device, options)
+        self._interpreter._vi = self._init_with_options(resource_name, id_query, reset_device, options)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -1055,7 +1055,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._library_interpreter._vi` is set
+        # handle `self._interpreter._vi` is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -1096,9 +1096,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._library_interpreter._vi = 0
+            self._interpreter._vi = 0
             raise
-        self._library_interpreter._vi = 0
+        self._interpreter._vi = 0
 
     ''' These are code-generated '''
 
@@ -1109,7 +1109,7 @@ class Session(_SessionBase):
         Aborts a previously initiated measurement and returns the DMM to the
         Idle state.
         '''
-        self._library_interpreter.abort()
+        self._interpreter.abort()
 
     @ivi_synchronized
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
@@ -1170,7 +1170,7 @@ class Session(_SessionBase):
         '''
         if type(measurement_function) is not enums.Function:
             raise TypeError('Parameter measurement_function must be of type ' + str(enums.Function))
-        self._library_interpreter.configure_measurement_absolute(measurement_function, range, resolution_absolute)
+        self._interpreter.configure_measurement_absolute(measurement_function, range, resolution_absolute)
 
     @ivi_synchronized
     def configure_measurement_digits(self, measurement_function, range, resolution_digits):
@@ -1232,7 +1232,7 @@ class Session(_SessionBase):
         '''
         if type(measurement_function) is not enums.Function:
             raise TypeError('Parameter measurement_function must be of type ' + str(enums.Function))
-        self._library_interpreter.configure_measurement_digits(measurement_function, range, resolution_digits)
+        self._interpreter.configure_measurement_digits(measurement_function, range, resolution_digits)
 
     @ivi_synchronized
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=hightime.timedelta(seconds=-1)):
@@ -1286,7 +1286,7 @@ class Session(_SessionBase):
         if type(sample_trigger) is not enums.SampleTrigger:
             raise TypeError('Parameter sample_trigger must be of type ' + str(enums.SampleTrigger))
         sample_interval = _converters.convert_timedelta_to_seconds_real64(sample_interval)
-        self._library_interpreter.configure_multi_point(trigger_count, sample_count, sample_trigger, sample_interval)
+        self._interpreter.configure_multi_point(trigger_count, sample_count, sample_trigger, sample_interval)
 
     @ivi_synchronized
     def configure_rtd_custom(self, rtd_a, rtd_b, rtd_c):
@@ -1308,7 +1308,7 @@ class Session(_SessionBase):
                 The default is -4.183e-12 (Pt3851).
 
         '''
-        self._library_interpreter.configure_rtd_custom(rtd_a, rtd_b, rtd_c)
+        self._interpreter.configure_rtd_custom(rtd_a, rtd_b, rtd_c)
 
     @ivi_synchronized
     def configure_rtd_type(self, rtd_type, rtd_resistance):
@@ -1347,7 +1347,7 @@ class Session(_SessionBase):
         '''
         if type(rtd_type) is not enums.RTDType:
             raise TypeError('Parameter rtd_type must be of type ' + str(enums.RTDType))
-        self._library_interpreter.configure_rtd_type(rtd_type, rtd_resistance)
+        self._interpreter.configure_rtd_type(rtd_type, rtd_resistance)
 
     @ivi_synchronized
     def configure_thermistor_custom(self, thermistor_a, thermistor_b, thermistor_c):
@@ -1378,7 +1378,7 @@ class Session(_SessionBase):
                 One or more of the referenced methods are not in the Python API for this driver.
 
         '''
-        self._library_interpreter.configure_thermistor_custom(thermistor_a, thermistor_b, thermistor_c)
+        self._interpreter.configure_thermistor_custom(thermistor_a, thermistor_b, thermistor_c)
 
     @ivi_synchronized
     def configure_thermocouple(self, thermocouple_type, reference_junction_type=enums.ThermocoupleReferenceJunctionType.FIXED):
@@ -1423,7 +1423,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter thermocouple_type must be of type ' + str(enums.ThermocoupleType))
         if type(reference_junction_type) is not enums.ThermocoupleReferenceJunctionType:
             raise TypeError('Parameter reference_junction_type must be of type ' + str(enums.ThermocoupleReferenceJunctionType))
-        self._library_interpreter.configure_thermocouple(thermocouple_type, reference_junction_type)
+        self._interpreter.configure_thermocouple(thermocouple_type, reference_junction_type)
 
     @ivi_synchronized
     def configure_trigger(self, trigger_source, trigger_delay=hightime.timedelta(seconds=-1)):
@@ -1465,7 +1465,7 @@ class Session(_SessionBase):
         if type(trigger_source) is not enums.TriggerSource:
             raise TypeError('Parameter trigger_source must be of type ' + str(enums.TriggerSource))
         trigger_delay = _converters.convert_timedelta_to_seconds_real64(trigger_delay)
-        self._library_interpreter.configure_trigger(trigger_source, trigger_delay)
+        self._interpreter.configure_trigger(trigger_source, trigger_delay)
 
     @ivi_synchronized
     def configure_waveform_acquisition(self, measurement_function, range, rate, waveform_points):
@@ -1514,7 +1514,7 @@ class Session(_SessionBase):
         '''
         if type(measurement_function) is not enums.Function:
             raise TypeError('Parameter measurement_function must be of type ' + str(enums.Function))
-        self._library_interpreter.configure_waveform_acquisition(measurement_function, range, rate, waveform_points)
+        self._interpreter.configure_waveform_acquisition(measurement_function, range, rate, waveform_points)
 
     @ivi_synchronized
     def disable(self):
@@ -1524,7 +1524,7 @@ class Session(_SessionBase):
         impact on the system to which it is connected. If a measurement is in
         progress when this method is called, the measurement is aborted.
         '''
-        self._library_interpreter.disable()
+        self._interpreter.disable()
 
     @ivi_synchronized
     def export_attribute_configuration_buffer(self):
@@ -1571,7 +1571,7 @@ class Session(_SessionBase):
                 property configuration.
 
         '''
-        configuration = self._library_interpreter.export_attribute_configuration_buffer()
+        configuration = self._interpreter.export_attribute_configuration_buffer()
         return _converters.convert_to_bytes(configuration)
 
     @ivi_synchronized
@@ -1621,7 +1621,7 @@ class Session(_SessionBase):
                 **Default file extension:**\  .nidmmconfig
 
         '''
-        self._library_interpreter.export_attribute_configuration_file(file_path)
+        self._interpreter.export_attribute_configuration_file(file_path)
 
     @ivi_synchronized
     def fetch(self, maximum_time=hightime.timedelta(milliseconds=-1)):
@@ -1651,7 +1651,7 @@ class Session(_SessionBase):
 
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
-        reading = self._library_interpreter.fetch(maximum_time)
+        reading = self._interpreter.fetch(maximum_time)
         return reading
 
     @ivi_synchronized
@@ -1697,7 +1697,7 @@ class Session(_SessionBase):
 
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
-        reading_array = self._library_interpreter.fetch_multi_point(maximum_time, array_size)
+        reading_array = self._interpreter.fetch_multi_point(maximum_time, array_size)
         return reading_array
 
     @ivi_synchronized
@@ -1735,7 +1735,7 @@ class Session(_SessionBase):
 
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
-        waveform_array = self._library_interpreter.fetch_waveform(maximum_time, array_size)
+        waveform_array = self._interpreter.fetch_waveform(maximum_time, array_size)
         return waveform_array
 
     @ivi_synchronized
@@ -1774,7 +1774,7 @@ class Session(_SessionBase):
         if waveform_array.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform_array must be numpy.ndarray of dtype=float64, is ' + str(waveform_array.dtype))
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
-        self._library_interpreter.fetch_waveform_into(waveform_array, maximum_time)
+        self._interpreter.fetch_waveform_into(waveform_array, maximum_time)
 
     @ivi_synchronized
     def _get_cal_date_and_time(self, cal_type):
@@ -1812,7 +1812,7 @@ class Session(_SessionBase):
             minute (int): Indicates the **minute** of the last calibration.
 
         '''
-        month, day, year, hour, minute = self._library_interpreter.get_cal_date_and_time(cal_type)
+        month, day, year, hour, minute = self._interpreter.get_cal_date_and_time(cal_type)
         return month, day, year, hour, minute
 
     @ivi_synchronized
@@ -1831,7 +1831,7 @@ class Session(_SessionBase):
             temperature (float): Returns the current **temperature** of the device.
 
         '''
-        temperature = self._library_interpreter.get_dev_temp(options)
+        temperature = self._interpreter.get_dev_temp(options)
         return temperature
 
     @ivi_synchronized
@@ -1848,7 +1848,7 @@ class Session(_SessionBase):
                 calibrations.
 
         '''
-        months = self._library_interpreter.get_ext_cal_recommended_interval()
+        months = self._interpreter.get_ext_cal_recommended_interval()
         return _converters.convert_month_to_timedelta(months)
 
     @ivi_synchronized
@@ -1909,7 +1909,7 @@ class Session(_SessionBase):
             temperature (float): Returns the **temperature** during the last calibration.
 
         '''
-        temperature = self._library_interpreter.get_last_cal_temp(cal_type)
+        temperature = self._interpreter.get_last_cal_temp(cal_type)
         return temperature
 
     @ivi_synchronized
@@ -1930,7 +1930,7 @@ class Session(_SessionBase):
                 +-------+---+-------------------------------------------------------------+
 
         '''
-        self_cal_supported = self._library_interpreter.get_self_cal_supported()
+        self_cal_supported = self._interpreter.get_self_cal_supported()
         return self_cal_supported
 
     @ivi_synchronized
@@ -1975,7 +1975,7 @@ class Session(_SessionBase):
 
         '''
         configuration = _converters.convert_to_bytes(configuration)
-        self._library_interpreter.import_attribute_configuration_buffer(configuration)
+        self._interpreter.import_attribute_configuration_buffer(configuration)
 
     @ivi_synchronized
     def import_attribute_configuration_file(self, file_path):
@@ -2020,7 +2020,7 @@ class Session(_SessionBase):
                 **Default File Extension:**\  .nidmmconfig
 
         '''
-        self._library_interpreter.import_attribute_configuration_file(file_path)
+        self._interpreter.import_attribute_configuration_file(file_path)
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         r'''_init_with_options
@@ -2130,7 +2130,7 @@ class Session(_SessionBase):
 
         '''
         option_string = _converters.convert_init_with_options_dictionary(option_string)
-        vi = self._library_interpreter.init_with_options(resource_name, id_query, reset_device, option_string)
+        vi = self._interpreter.init_with_options(resource_name, id_query, reset_device, option_string)
         return vi
 
     @ivi_synchronized
@@ -2143,7 +2143,7 @@ class Session(_SessionBase):
         fetch, fetch_multi_point, or fetch_waveform to
         retrieve the measurement data.
         '''
-        self._library_interpreter.initiate()
+        self._interpreter.initiate()
 
     @ivi_synchronized
     def perform_open_cable_comp(self):
@@ -2170,7 +2170,7 @@ class Session(_SessionBase):
                 **susceptance**.
 
         '''
-        conductance, susceptance = self._library_interpreter.perform_open_cable_comp()
+        conductance, susceptance = self._interpreter.perform_open_cable_comp()
         return conductance, susceptance
 
     @ivi_synchronized
@@ -2197,7 +2197,7 @@ class Session(_SessionBase):
                 **reactance**.
 
         '''
-        resistance, reactance = self._library_interpreter.perform_short_cable_comp()
+        resistance, reactance = self._interpreter.perform_short_cable_comp()
         return resistance, reactance
 
     @ivi_synchronized
@@ -2227,7 +2227,7 @@ class Session(_SessionBase):
 
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
-        reading = self._library_interpreter.read(maximum_time)
+        reading = self._interpreter.read(maximum_time)
         return reading
 
     @ivi_synchronized
@@ -2272,7 +2272,7 @@ class Session(_SessionBase):
 
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
-        reading_array = self._library_interpreter.read_multi_point(maximum_time, array_size)
+        reading_array = self._interpreter.read_multi_point(maximum_time, array_size)
         return reading_array
 
     @ivi_synchronized
@@ -2313,7 +2313,7 @@ class Session(_SessionBase):
                 +---+----------------------------+
 
         '''
-        acquisition_backlog, acquisition_status = self._library_interpreter.read_status()
+        acquisition_backlog, acquisition_status = self._interpreter.read_status()
         return acquisition_backlog, acquisition_status
 
     @ivi_synchronized
@@ -2356,7 +2356,7 @@ class Session(_SessionBase):
 
         '''
         maximum_time = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)
-        waveform_array = self._library_interpreter.read_waveform(maximum_time, array_size)
+        waveform_array = self._interpreter.read_waveform(maximum_time, array_size)
         return waveform_array
 
     @ivi_synchronized
@@ -2368,7 +2368,7 @@ class Session(_SessionBase):
         state necessary for the operation of NI-DMM. All user-defined default
         values associated with a logical name are applied after setting the DMM.
         '''
-        self._library_interpreter.reset_with_defaults()
+        self._interpreter.reset_with_defaults()
 
     @ivi_synchronized
     def self_cal(self):
@@ -2382,7 +2382,7 @@ class Session(_SessionBase):
         the call will be lost. All properties will be set to their default
         values after the call returns.
         '''
-        self._library_interpreter.self_cal()
+        self._interpreter.self_cal()
 
     @ivi_synchronized
     def send_software_trigger(self):
@@ -2399,14 +2399,14 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
         '''
-        self._library_interpreter.send_software_trigger()
+        self._interpreter.send_software_trigger()
 
     def _close(self):
         r'''_close
 
         Closes the specified session and deallocates resources that it reserved.
         '''
-        self._library_interpreter.close()
+        self._interpreter.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -2441,7 +2441,7 @@ class Session(_SessionBase):
         to the instrument. The initialization commands set instrument settings
         to the state necessary for the operation of the instrument driver.
         '''
-        self._library_interpreter.reset()
+        self._interpreter.reset()
 
     @ivi_synchronized
     def _self_test(self):
@@ -2484,5 +2484,5 @@ class Session(_SessionBase):
                 This error code indicates that the DMM should be repaired.
 
         '''
-        self_test_result, self_test_message = self._library_interpreter.self_test()
+        self_test_result, self_test_message = self._interpreter.self_test()
         return self_test_result, self_test_message

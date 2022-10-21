@@ -40,15 +40,15 @@ class TestGrpcStubInterpreter(object):
 
     class PatchedGrpcTypes:
         def __init__(self):
-            for f in dir(nifake._grpc.grpc_types):
+            for f in dir(nifake._grpc_stub_interpreter.grpc_types):
                 if f.endswith('Request'):
-                    real_func = getattr(nifake._grpc.grpc_types, f)
+                    real_func = getattr(nifake._grpc_stub_interpreter.grpc_types, f)
                     error_func = _mock_helper.MockFunctionCallError(f)
                     setattr(self, f, MagicMock(spec_set=real_func, side_effect=error_func))
                 else:
-                    setattr(self, f, getattr(nifake._grpc.grpc_types, f))
+                    setattr(self, f, getattr(nifake._grpc_stub_interpreter.grpc_types, f))
 
-    class PatchedGrpcStub(nifake._grpc.nifake_grpc.NiFakeServicer):
+    class PatchedGrpcStub(nifake._grpc_stub_interpreter.nifake_grpc.NiFakeServicer):
         def _sample_func(self, request):
             pass
 
@@ -65,9 +65,9 @@ class TestGrpcStubInterpreter(object):
     def setup_method(self, method):
         self.patched_grpc_types = self.PatchedGrpcTypes()
         self.patched_grpc_stub = self.PatchedGrpcStub()
-        self.real_grpc_types = nifake._grpc.grpc_types
-        self.grpc_types_patch = patch('nifake._grpc.grpc_types', self.patched_grpc_types)
-        self.grpc_stub_patch = patch('nifake._grpc.nifake_grpc.NiFakeStub', side_effect=self.patched_grpc_stub)
+        self.real_grpc_types = nifake._grpc_stub_interpreter.grpc_types
+        self.grpc_types_patch = patch('nifake._grpc_stub_interpreter.grpc_types', self.patched_grpc_types)
+        self.grpc_stub_patch = patch('nifake._grpc_stub_interpreter.nifake_grpc.NiFakeStub', side_effect=self.patched_grpc_stub)
         self.grpc_types_patch.start()
         self.grpc_stub_patch.start()
 
@@ -79,7 +79,7 @@ class TestGrpcStubInterpreter(object):
         self.grpc_types_patch.stop()
 
     def _get_initialized_library_interpreter(self, grpc_channel=object()):
-        interpreter = nifake._grpc.GrpcStubInterpreter(grpc_channel)
+        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_channel)
         assert interpreter._client is self.patched_grpc_stub
         assert interpreter._vi == 0
         assert self.patched_grpc_stub._grpc_channel is grpc_channel
@@ -328,10 +328,10 @@ class TestGrpcStubInterpreter(object):
         int32_val = 32
         int64_val = 6000000000
         expected_enum_val = nifake.Turtle.LEONARDO
-        enum_val = nifake._grpc.grpc_types.Turtle.TURTLE_LEONARDO
+        enum_val = nifake._grpc_stub_interpreter.grpc_types.Turtle.TURTLE_LEONARDO
         float_val = 1.23
         expected_float_enum_val = nifake.FloatEnum.SIX_POINT_FIVE
-        float_enum_val = nifake._grpc.grpc_types.FloatEnum.FLOAT_ENUM_SIX_POINT_FIVE
+        float_enum_val = nifake._grpc_stub_interpreter.grpc_types.FloatEnum.FLOAT_ENUM_SIX_POINT_FIVE
         raw_float_enum_val = 6.5
         array_val = [0.0, 1.0, 2.0]
         array_size = len(array_val)
@@ -780,7 +780,7 @@ class TestGrpcStubInterpreter(object):
         library_func = 'SetCustomType'
         response_object = self._set_side_effect(library_func)
         cs = nifake.CustomStruct(struct_int=42, struct_double=4.2)
-        grpc_cs = nifake._grpc.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.2)
+        grpc_cs = nifake._grpc_stub_interpreter.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.2)
         interpreter = self._get_initialized_library_interpreter()
         assert interpreter.set_custom_type(cs) is None  # no outputs
         self._assert_call(library_func, response_object).assert_called_once_with(
@@ -790,7 +790,7 @@ class TestGrpcStubInterpreter(object):
     def test_get_custom_type(self):
         library_func = 'GetCustomType'
         expected_cs = nifake.CustomStruct(struct_int=42, struct_double=4.2)
-        grpc_cs = nifake._grpc.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.2)
+        grpc_cs = nifake._grpc_stub_interpreter.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.2)
         response_object = self._set_side_effect(library_func, cs=grpc_cs)
         interpreter = self._get_initialized_library_interpreter()
         cs = interpreter.get_custom_type()
@@ -803,7 +803,7 @@ class TestGrpcStubInterpreter(object):
         library_func = 'SetCustomTypeArray'
         response_object = self._set_side_effect(library_func)
         cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
-        grpc_cs = [nifake._grpc.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.2), nifake._grpc.grpc_types.FakeCustomStruct(struct_int=43, struct_double=4.3), nifake._grpc.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.3)]
+        grpc_cs = [nifake._grpc_stub_interpreter.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.2), nifake._grpc_stub_interpreter.grpc_types.FakeCustomStruct(struct_int=43, struct_double=4.3), nifake._grpc_stub_interpreter.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.3)]
         interpreter = self._get_initialized_library_interpreter()
         assert interpreter.set_custom_type_array(cs) is None  # no outputs
         self._assert_call(library_func, response_object).assert_called_once_with(
@@ -813,7 +813,7 @@ class TestGrpcStubInterpreter(object):
     def test_get_custom_type_array(self):
         library_func = 'GetCustomTypeArray'
         cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
-        grpc_cs = [nifake._grpc.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.2), nifake._grpc.grpc_types.FakeCustomStruct(struct_int=43, struct_double=4.3), nifake._grpc.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.3)]
+        grpc_cs = [nifake._grpc_stub_interpreter.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.2), nifake._grpc_stub_interpreter.grpc_types.FakeCustomStruct(struct_int=43, struct_double=4.3), nifake._grpc_stub_interpreter.grpc_types.FakeCustomStruct(struct_int=42, struct_double=4.3)]
         response_object = self._set_side_effect(library_func, cs=grpc_cs)
         interpreter = self._get_initialized_library_interpreter()
         cs_test = interpreter.get_custom_type_array(len(cs))
@@ -832,9 +832,9 @@ class TestGrpcStubInterpreter(object):
             struct_custom_struct=nifake.CustomStruct(struct_int=43, struct_double=4.3),
             struct_custom_struct_typedef=nifake.CustomStructTypedef(struct_int=44, struct_double=4.4)
         )
-        grpc_csnt = nifake._grpc.grpc_types.CustomStructNestedTypedef(
-            struct_custom_struct=nifake._grpc.grpc_types.FakeCustomStruct(struct_int=43, struct_double=4.3),
-            struct_custom_struct_typedef=nifake._grpc.grpc_types.CustomStructTypedef(struct_int=44, struct_double=4.4)
+        grpc_csnt = nifake._grpc_stub_interpreter.grpc_types.CustomStructNestedTypedef(
+            struct_custom_struct=nifake._grpc_stub_interpreter.grpc_types.FakeCustomStruct(struct_int=43, struct_double=4.3),
+            struct_custom_struct_typedef=nifake._grpc_stub_interpreter.grpc_types.CustomStructTypedef(struct_int=44, struct_double=4.4)
         )
         response_object = self._set_side_effect(library_func, nested_custom_type_out=grpc_csnt)
         interpreter = self._get_initialized_library_interpreter()

@@ -5,10 +5,10 @@
     import build.helper as helper
 
     parameters = f['parameters']
-    param_names_method = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_DECLARATION)
+    param_names_method = helper.get_params_snippet(f, helper.ParameterUsageOptions.INTERPRETER_NUMPY_INTO_METHOD_DECLARATION)
     param_names_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)
 
-    full_func_name = f['library_interpreter_name'] + method_template['method_python_name_suffix']
+    full_func_name = f['interpreter_name'] + method_template['method_python_name_suffix']
     c_func_name = config['c_function_prefix'] + f['name']
 %>\
 

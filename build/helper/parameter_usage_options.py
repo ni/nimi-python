@@ -20,10 +20,10 @@ class ParameterUsageOptions(AutoNumber):
     '''For declaring an init method in Session'''
     SESSION_NUMPY_INTO_METHOD_DECLARATION = ()
     '''For declaring a Session method that uses numpy arrays.'''
-    LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_DECLARATION = ()
-    '''For declaring a LibraryInterpreter method that uses numpy arrays.'''
-    LIBRARY_INTERPRETER_NUMPY_INTO_METHOD_CALL = ()
-    '''For calling into a LibraryInterpreter method (from Session) that uses numpy arrays.'''
+    INTERPRETER_NUMPY_INTO_METHOD_DECLARATION = ()
+    '''For declaring a **Interpreter method that uses numpy arrays.'''
+    INTERPRETER_NUMPY_INTO_METHOD_CALL = ()
+    '''For calling into a **Interpreter method (from Session) that uses numpy arrays.'''
     SESSION_METHOD_CALL = ()
     '''For calling into a regular Session method.'''
     SESSION_INIT_CALL = ()
@@ -36,14 +36,14 @@ class ParameterUsageOptions(AutoNumber):
     '''For calling into a CDLL method (from Library).'''
     LIBRARY_METHOD_CALL = ()
     '''For calling into a Library method (from LibraryInterpreter).'''
-    LIBRARY_INTERPRETER_METHOD_CALL = ()
-    '''For calling into a LibraryInterpreter method (from Session).'''
+    INTERPRETER_METHOD_CALL = ()
+    '''For calling into a **Interpreter method (from Session).'''
     GRPC_REQUEST_PARAMETERS = ()
     '''For creating a gRPC Request object.'''
     CTYPES_ARGTYPES = ()
     '''For setting up the ctypes argument types'''
-    LIBRARY_INTERPRETER_METHOD_DECLARATION = ()
-    '''For declaring a LibraryInterpreter method.'''
+    INTERPRETER_METHOD_DECLARATION = ()
+    '''For declaring a **Interpreter method.'''
     INPUT_PARAMETERS = ()
     '''Get all input parameters, other than self, rep caps, and size'''
     LIBRARY_OUTPUT_PARAMETERS = ()

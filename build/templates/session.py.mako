@@ -108,7 +108,7 @@ class _RepeatedCapabilities(object):
         return _SessionBase(
             repeated_capability_list=complete_rep_cap_list,
             all_channels_in_session=self._session._all_channels_in_session,
-            library_interpreter=self._session._library_interpreter,
+            interpreter=self._session._interpreter,
             freeze_it=True
         )
 
@@ -164,16 +164,16 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 % if attributes:
 
 % endif
-    def __init__(self, repeated_capability_list, all_channels_in_session, library_interpreter, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._all_channels_in_session = all_channels_in_session
-        self._library_interpreter = library_interpreter
+        self._interpreter = interpreter
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("library_interpreter=" + pp.pformat(library_interpreter))
+        param_list.append("interpreter=" + pp.pformat(interpreter))
         self._param_list = ', '.join(param_list)
 
 % if len(config['repeated_capabilities']) > 0:
@@ -250,18 +250,18 @@ if grpc_supported:
         '''
 % if grpc_supported:
         if _grpc_channel:
-            import ${module_name}._grpc as _grpc
-            library_interpreter = _grpc.GrpcStubInterpreter(_grpc_channel)
+            import ${module_name}._grpc_stub_interpreter as _grpc_stub_interpreter
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_channel)
         else:
-            library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 % else:
-        library_interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 % endif
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
             repeated_capability_list=[],
-            library_interpreter=library_interpreter,
+            interpreter=interpreter,
             freeze_it=False,
             all_channels_in_session=None
         )
@@ -276,15 +276,15 @@ if grpc_supported:
         # ${init_function['python_name']} fails, the error handler can reference it.
         # And then once ${init_function['python_name']} succeeds, we can update _library_interpreter._${config['session_handle_parameter_name']}
         # with the actual session handle.
-        self._library_interpreter._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
+        self._interpreter._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
 
 % if config['uses_nitclk']:
 %   if grpc_supported:
         # NI-TClk does not work over NI gRPC Device Server
         if not _grpc_channel:
-            self.tclk = nitclk.SessionReference(self._library_interpreter._${config['session_handle_parameter_name']})
+            self.tclk = nitclk.SessionReference(self._interpreter._${config['session_handle_parameter_name']})
 %   else:
-        self.tclk = nitclk.SessionReference(self._library_interpreter._${config['session_handle_parameter_name']})
+        self.tclk = nitclk.SessionReference(self._interpreter._${config['session_handle_parameter_name']})
 %   endif
 
 % endif
@@ -298,7 +298,7 @@ if grpc_supported:
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._library_interpreter._${config['session_handle_parameter_name']}` is set
+        # handle `self._interpreter._${config['session_handle_parameter_name']}` is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -331,9 +331,9 @@ if grpc_supported:
         try:
             self._${close_function_name}()
         except errors.DriverError:
-            self._library_interpreter._${config['session_handle_parameter_name']} = 0
+            self._interpreter._${config['session_handle_parameter_name']} = 0
             raise
-        self._library_interpreter._${config['session_handle_parameter_name']} = 0
+        self._interpreter._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):

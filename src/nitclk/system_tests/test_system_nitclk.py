@@ -34,8 +34,8 @@ def test_nitclk_session_reference(single_niscope_session):
     # We need to look at the actual session number inside the class
     # we know the type returned from session.tclk.pause_trigger_master_session will be nitclk.SessionReference
     # This test assumes knowledge of the class internals
-    assert single_niscope_session.tclk.ref_trigger_master_session._library_interpreter._session_number == test_session.tclk._get_tclk_session_reference()
-    assert single_niscope_session.tclk.ref_trigger_master_session._library_interpreter._session_number == test_session._library_interpreter._vi
+    assert single_niscope_session.tclk.ref_trigger_master_session._interpreter._session_number == test_session.tclk._get_tclk_session_reference()
+    assert single_niscope_session.tclk.ref_trigger_master_session._interpreter._session_number == test_session._interpreter._vi
 
 
 def test_nitclk_vi_real64(single_niscope_session):

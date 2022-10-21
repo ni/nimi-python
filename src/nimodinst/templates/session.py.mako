@@ -125,12 +125,12 @@ class Session(object):
     def __init__(self, driver):
         self._item_count = 0
         self._current_item = 0
-        self._library_interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
+        self._interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
         # Note that _library_interpreter sets _${config['session_handle_parameter_name']} to 0 in its constructor, so that if
         # _open_installed_devices_session fails, the error handler can reference it.
         # And then once _open_installed_devices_session succeeds, we can update _library_interpreter._${config['session_handle_parameter_name']}
         # with the actual session handle.
-        self._library_interpreter._${config['session_handle_parameter_name']}, self._item_count = self._open_installed_devices_session(driver)
+        self._interpreter._${config['session_handle_parameter_name']}, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
 
         self.devices = []
@@ -170,9 +170,9 @@ class Session(object):
         try:
             self._${close_function_name}()
         except errors.DriverError:
-            self._library_interpreter._${config['session_handle_parameter_name']} = 0
+            self._interpreter._${config['session_handle_parameter_name']} = 0
             raise
-        self._library_interpreter._${config['session_handle_parameter_name']} = 0
+        self._interpreter._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
