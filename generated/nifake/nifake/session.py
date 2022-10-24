@@ -635,7 +635,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, options={}, id_query=False, reset_device=False, *, _grpc_channel=None):
+    def __init__(self, resource_name, options={}, id_query=False, reset_device=False, *, _grpc_options=None):
         r'''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation
 
         Creates a new IVI instrument driver session.
@@ -689,18 +689,21 @@ class Session(_SessionBase):
                 | False          | 0 | Don't Reset  |
                 +----------------+---+--------------+
 
-            _grpc_channel (grpc.Channel): MeasurementLink gRPC channel
+            _grpc_options (GrpcOptions): MeasurementLink gRPC options
 
 
         Returns:
             session (nifake.Session): A session object representing the device.
 
         '''
-        if _grpc_channel:
+        if _grpc_options:
             import nifake._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_channel)
+            import nifake.GrpcOptions as GrpcOptions
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options.grpc_channel)
+            self._auto_close_session = _grpc_options.auto_close_grpc_session
         else:
             interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+            self._auto_close_session = True
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
@@ -719,7 +722,7 @@ class Session(_SessionBase):
         self._interpreter._vi = self._init_with_options(resource_name, options, id_query, reset_device)
 
         # NI-TClk does not work over NI gRPC Device Server
-        if not _grpc_channel:
+        if not _grpc_options:
             self.tclk = nitclk.SessionReference(self._interpreter._vi)
 
         # Store the parameter list for later printing in __repr__
@@ -746,7 +749,8 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._auto_close_session:
+            self.close()
 
     def initiate(self):
         '''initiate

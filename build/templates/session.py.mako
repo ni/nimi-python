@@ -221,8 +221,8 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
-<% grpc_channel_param = ', *, _grpc_channel=None' if grpc_supported else '' %>\
-    def __init__(${init_method_params}${grpc_channel_param}):
+<% grpc_options_param = ', *, _grpc_options=None' if grpc_supported else '' %>\
+    def __init__(${init_method_params}${grpc_options_param}):
         r'''${config['session_class_description']}
 
 <%
@@ -234,13 +234,13 @@ if grpc_supported:
         {
             'default_value': None,
             'direction': 'in',
-            'documentation': { 'description': 'MeasurementLink gRPC channel' },
+            'documentation': { 'description': 'MeasurementLink gRPC options' },
             'enum': None,
             'is_repeated_capability': False,
             'is_session_handle': False,
-            'python_name': '_grpc_channel',
+            'python_name': '_grpc_options',
             'size': {'mechanism': 'fixed', 'value': 1},
-            'type_in_documentation': 'grpc.Channel',
+            'type_in_documentation': 'GrpcOptions',
             'type_in_documentation_was_calculated': False,
             'use_in_python_api': False,
         },
@@ -249,11 +249,14 @@ if grpc_supported:
         ${helper.get_function_docstring(ctor_for_docs, False, config, indent=8)}
         '''
 % if grpc_supported:
-        if _grpc_channel:
+        if _grpc_options:
             import ${module_name}._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_channel)
+            import ${module_name}.GrpcOptions as GrpcOptions
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options.grpc_channel)
+            self._auto_close_session = _grpc_options.auto_close_grpc_session
         else:
             interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+            self._auto_close_session = True
 % else:
         interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 % endif
@@ -281,7 +284,7 @@ if grpc_supported:
 % if config['uses_nitclk']:
 %   if grpc_supported:
         # NI-TClk does not work over NI gRPC Device Server
-        if not _grpc_channel:
+        if not _grpc_options:
             self.tclk = nitclk.SessionReference(self._interpreter._${config['session_handle_parameter_name']})
 %   else:
         self.tclk = nitclk.SessionReference(self._interpreter._${config['session_handle_parameter_name']})
@@ -312,7 +315,12 @@ if grpc_supported:
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
+% if grpc_supported:
+        if self._auto_close_session:
+            self.close()
+% else:
         self.close()
+% endif
 
 % if session_context_manager is not None and not render_initiate_in_session_base:
     def initiate(self):

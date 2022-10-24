@@ -71,6 +71,9 @@ DEFAULT_PY_FILES_TO_GENERATE := \
 
 DEFAULT_PY_FILES_TO_COPY := \
     _visatype.py \
+    $(if $(GRPC_SUPPORTED), \
+        GrpcOptions.py \
+    ) \
 
 DEFAULT_RST_FILES_TO_GENERATE := \
     enums.rst \

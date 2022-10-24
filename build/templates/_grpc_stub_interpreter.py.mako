@@ -18,6 +18,7 @@ import warnings
 from . import enums as enums
 % endif
 from . import errors as errors
+from . import GrpcOptions as GrpcOptions
 from . import ${module_name}_pb2 as grpc_types
 from . import ${module_name}_pb2_grpc as ${module_name}_grpc
 % for c in config['custom_types']:
@@ -29,9 +30,10 @@ from . import ${c['file_name']} as ${c['file_name']}  # noqa: F401
 class GrpcStubInterpreter(object):
     '''Interpreter for interacting with a gRPC Stub class'''
 
-    def __init__(self, grpc_channel):
+    def __init__(self, grpc_options):
+        self._grpc_options = grpc_options
         self._lock = threading.RLock()
-        self._client = ${module_name}_grpc.${service_class_prefix}Stub(grpc_channel)
+        self._client = ${module_name}_grpc.${service_class_prefix}Stub(grpc_options.grpc_channel)
         self._${config['session_handle_parameter_name']} = 0
 
     def _invoke(self, func, request):
