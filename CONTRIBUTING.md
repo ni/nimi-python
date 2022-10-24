@@ -26,19 +26,19 @@ In order to have the ability to build and run the tests you will need a few thin
   - GNU Make: ``sudo apt-get install make``
   - zip: ``sudo apt-get install zip``
   - 64-bit [Python](https://www.python.org/downloads/)
-    -- Use the version that `build_test` uses. See [tox.ini](https://github.com/ni/nimi-python/blob/e13087eb67e2399de2dfa83fd504f8ebd0e0e263/tox.ini#L10)
+    -- Use the version that `build_test` uses. See `envlist` definition in [tox.ini](./tox.ini)
 
 ### macOS:
 
 - Install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
 - Install command line developer tools
 - Install [Python](https://www.python.org/downloads/)
-    - Use the version that `build_test` uses. See [tox.ini](https://github.com/ni/nimi-python/blob/e13087eb67e2399de2dfa83fd504f8ebd0e0e263/tox.ini#L10)
+    - Use the version that `build_test` uses. See `envlist` definition in [tox.ini](./tox.ini)
 
 ### Linux:
 
 - Install Python: ``sudo apt-get install python3-pip``
-    - Use the version that `build_test` uses. See [tox.ini](https://github.com/ni/nimi-python/blob/e13087eb67e2399de2dfa83fd504f8ebd0e0e263/tox.ini#L10)
+    - Use the version that `build_test` uses. See `envlist` definition in [tox.ini](./tox.ini)
 
 ### All:
 
