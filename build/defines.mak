@@ -72,7 +72,7 @@ DEFAULT_PY_FILES_TO_GENERATE := \
 DEFAULT_PY_FILES_TO_COPY := \
     _visatype.py \
     $(if $(GRPC_SUPPORTED), \
-        GrpcOptions.py \
+        grpc_session_options.py \
     ) \
 
 DEFAULT_RST_FILES_TO_GENERATE := \
