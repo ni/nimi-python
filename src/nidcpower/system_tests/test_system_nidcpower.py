@@ -526,7 +526,7 @@ def test_create_and_delete_advanced_sequence_bad_type(session):
 @pytest.mark.resource_name("4190/0")
 @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
 def test_create_and_delete_advanced_sequence_attribute_enum_with_converter(session):
-    properties_used = ['lcr_impedance_auto_range']
+    properties_used = ['voltage_level']
     sequence_name = 'my_sequence'
     session.source_mode = nidcpower.SourceMode.SEQUENCE
     session.create_advanced_sequence(
