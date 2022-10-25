@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.0.0d25
+# This file is generated from NI-FGEN API metadata version 23.0.0d41
 enums = {
     'AnalogPath': {
         'values': [
@@ -30,38 +30,6 @@ enums = {
                 },
                 'name': 'NIFGEN_VAL_FIXED_HIGH_GAIN_ANALOG_PATH',
                 'value': 3
-            }
-        ]
-    },
-    'ArbitrarySequenceHandle': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_FIRST_SEQUENCE_HANDLE',
-                'value': 100000
-            },
-            {
-                'name': 'NIFGEN_VAL_LAST_SEQUENCE_HANDLE',
-                'value': 109999
-            },
-            {
-                'name': 'NIFGEN_VAL_NO_SEQUENCE',
-                'value': -1
-            }
-        ]
-    },
-    'ArbitraryWaveformHandle': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_FIRST_WAVEFORM_HANDLE',
-                'value': 10000
-            },
-            {
-                'name': 'NIFGEN_VAL_LAST_WAVEFORM_HANDLE',
-                'value': 10999
-            },
-            {
-                'name': 'NIFGEN_VAL_NO_WAVEFORM',
-                'value': -1
             }
         ]
     },
@@ -320,30 +288,6 @@ enums = {
             }
         ]
     },
-    'FrequencyListHandle': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_FIRST_FREQ_LIST_HANDLE',
-                'value': 200000
-            },
-            {
-                'name': 'NIFGEN_VAL_LAST_FREQ_LIST_HANDLE',
-                'value': 209999
-            },
-            {
-                'name': 'NIFGEN_VAL_NO_FREQ_LIST',
-                'value': -1
-            }
-        ]
-    },
-    'FrequencyListOptions': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_ALL_FLISTS',
-                'value': -1
-            }
-        ]
-    },
     'HardwareState': {
         'values': [
             {
@@ -383,14 +327,6 @@ enums = {
                 },
                 'name': 'NIFGEN_VAL_JUMP_TO_VALUE',
                 'value': 401
-            }
-        ]
-    },
-    'LoadImpedance': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_MATCHED_LOAD_IMPEDANCE',
-                'value': -1.0
             }
         ]
     },
@@ -535,18 +471,6 @@ enums = {
                 },
                 'name': 'NIFGEN_VAL_ERROR_REPORTING_DISABLED',
                 'value': 2
-            }
-        ]
-    },
-    'OutputImpedance': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_50_OHMS',
-                'value': 50.0
-            },
-            {
-                'name': 'NIFGEN_VAL_75_OHMS',
-                'value': 75.0
             }
         ]
     },
@@ -787,14 +711,6 @@ enums = {
             }
         ]
     },
-    'SampleRate': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_EXTERNAL_SAMPLE_RATE',
-                'value': -1.0
-            }
-        ]
-    },
     'ScriptTriggerDigitalEdgeEdge': {
         'values': [
             {
@@ -860,14 +776,6 @@ enums = {
                 },
                 'name': 'NIFGEN_VAL_SOFTWARE_EDGE',
                 'value': 104
-            }
-        ]
-    },
-    'SequenceHandle': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_ALL_SEQUENCES',
-                'value': -1
             }
         ]
     },
@@ -1703,14 +1611,6 @@ enums = {
                 },
                 'name': 'NIFGEN_VAL_WFM_USER',
                 'value': 102
-            }
-        ]
-    },
-    'WaveformHandle': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_ALL_WAVEFORMS',
-                'value': -1
             }
         ]
     }
