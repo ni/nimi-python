@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from enum import Enum
+from enum import IntEnum
 
 
-class SessionInitializationBehavior(Enum):
+class SessionInitializationBehavior(IntEnum):
     UNSPECIFIED = 0
     r'''
     It is acceptable to either initialize a new session or attach to an existing one.
