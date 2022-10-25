@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Renders a GrpcStubInterpreter method corresponding to the passed-in function metadata.'''
+    '''Renders a GrpcStubInterpreter initialization method, adding proto-specific fields to the passed-in function metadata.'''
 
     import build.helper as helper
 
