@@ -8,7 +8,7 @@ import warnings
 
 from . import enums as enums
 from . import errors as errors
-from . import GrpcOptions as GrpcOptions
+from . import grpc_session_options as grpc_session_options
 from . import nifake_pb2 as grpc_types
 from . import nifake_pb2_grpc as nifake_grpc
 
@@ -308,7 +308,7 @@ class GrpcStubInterpreter(object):
     def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         response = self._invoke(
             self._client.InitWithOptions,
-            grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string),
+            grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
         )
         return response.vi
 

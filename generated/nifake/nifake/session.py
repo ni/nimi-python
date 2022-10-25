@@ -698,7 +698,7 @@ class Session(_SessionBase):
         '''
         if _grpc_options:
             import nifake._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options.grpc_channel)
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
             self._auto_close_session = _grpc_options.auto_close_grpc_session
         else:
             interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
