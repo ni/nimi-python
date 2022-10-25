@@ -2974,7 +2974,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FGEN session to an NI signal generator.'''
 
-    def __init__(self, resource_name, channel_name=None, reset_device=False, options={}):
+    def __init__(self, resource_name, channel_name=None, reset_device=False, options={}, *, _grpc_channel=None):
         r'''An NI-FGEN session to an NI signal generator.
 
         Creates and returns a new NI-FGEN session to the specified channel of a
@@ -3076,12 +3076,18 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
+            _grpc_channel (grpc.Channel): MeasurementLink gRPC channel
+
 
         Returns:
             session (nifgen.Session): A session object representing the device.
 
         '''
-        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        if _grpc_channel:
+            import nifgen._grpc_stub_interpreter as _grpc_stub_interpreter
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_channel)
+        else:
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
@@ -3100,7 +3106,9 @@ class Session(_SessionBase):
         # with the actual session handle.
         self._interpreter._vi = self._initialize_with_channels(resource_name, channel_name, reset_device, options)
 
-        self.tclk = nitclk.SessionReference(self._interpreter._vi)
+        # NI-TClk does not work over NI gRPC Device Server
+        if not _grpc_channel:
+            self.tclk = nitclk.SessionReference(self._interpreter._vi)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
