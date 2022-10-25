@@ -350,11 +350,7 @@ class GrpcStubInterpreter(object):
         return response.done
 
     def lock(self):  # noqa: N802
-        response = self._invoke(
-            self._client.LockSession,
-            grpc_types.LockSessionRequest(vi=self._vi),
-        )
-        return response.caller_has_lock
+        self._lock.acquire()
 
     def query_arb_seq_capabilities(self):  # noqa: N802
         response = self._invoke(
@@ -445,11 +441,7 @@ class GrpcStubInterpreter(object):
         )
 
     def unlock(self):  # noqa: N802
-        response = self._invoke(
-            self._client.UnlockSession,
-            grpc_types.UnlockSessionRequest(vi=self._vi),
-        )
-        return response.caller_has_lock
+        self._lock.release()
 
     def wait_until_done(self, max_time):  # noqa: N802
         self._invoke(
