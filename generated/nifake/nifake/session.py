@@ -689,7 +689,7 @@ class Session(_SessionBase):
                 | False          | 0 | Don't Reset  |
                 +----------------+---+--------------+
 
-            _grpc_options (GrpcOptions): MeasurementLink gRPC options
+            _grpc_options (nifake.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
 
 
         Returns:
@@ -698,7 +698,6 @@ class Session(_SessionBase):
         '''
         if _grpc_options:
             import nifake._grpc_stub_interpreter as _grpc_stub_interpreter
-            import nifake.GrpcOptions as GrpcOptions
             interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options.grpc_channel)
             self._auto_close_session = _grpc_options.auto_close_grpc_session
         else:

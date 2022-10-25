@@ -18,7 +18,7 @@ import warnings
 from . import enums as enums
 % endif
 from . import errors as errors
-from . import GrpcOptions as GrpcOptions
+from . import grpc_session_options as grpc_session_options
 from . import ${module_name}_pb2 as grpc_types
 from . import ${module_name}_pb2_grpc as ${module_name}_grpc
 % for c in config['custom_types']:

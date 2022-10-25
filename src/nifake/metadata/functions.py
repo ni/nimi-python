@@ -1326,6 +1326,14 @@ functions = {
         'documentation': {
             'description': 'Creates a new IVI instrument driver session.'
         },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',

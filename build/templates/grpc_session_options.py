@@ -17,11 +17,11 @@ class SessionInitializationBehavior(Enum):
     '''
 
 
-class GrpcOptions(object):
-    '''Collection of options that specifies behaviors related to gRPC.'''
+class GrpcSessionOptions(object):
+    '''Collection of options that specifies session behaviors related to gRPC.'''
 
-    def __init__(self, grpc_channel, session_name, initialization_behavior=SessionInitializationBehavior.UNSPECIFIED, auto_close_grpc_session=False):
-        r'''Collection of options that specifies behaviors related to gRPC.
+    def __init__(self, grpc_channel, session_name, initialization_behavior=SessionInitializationBehavior.UNSPECIFIED, auto_close_grpc_session=True):
+        r'''Collection of options that specifies session behaviors related to gRPC.
 
         Creates and returns an object you can pass to a session constructor.
 
@@ -39,8 +39,7 @@ class GrpcOptions(object):
                 To attach to an existing session, you must specify a non-empty session name.
 
             auto_close_grpc_session (bool): Specifies whether to have the NI gRPC Device Server close
-                the session when the Python session goes out of scope. Specifying True is usually
-                only paired with the initialization behavior **INITIALIZE_NEW**.
+                the session when the Python session goes out of scope.
         '''
         self.grpc_channel = grpc_channel
         self.session_name = session_name

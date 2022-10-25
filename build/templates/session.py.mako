@@ -234,13 +234,13 @@ if grpc_supported:
         {
             'default_value': None,
             'direction': 'in',
-            'documentation': { 'description': 'MeasurementLink gRPC options' },
+            'documentation': { 'description': 'MeasurementLink gRPC session options' },
             'enum': None,
             'is_repeated_capability': False,
             'is_session_handle': False,
             'python_name': '_grpc_options',
             'size': {'mechanism': 'fixed', 'value': 1},
-            'type_in_documentation': 'GrpcOptions',
+            'type_in_documentation': module_name + '.grpc_session_options.GrpcSessionOptions',
             'type_in_documentation_was_calculated': False,
             'use_in_python_api': False,
         },
@@ -251,7 +251,6 @@ if grpc_supported:
 % if grpc_supported:
         if _grpc_options:
             import ${module_name}._grpc_stub_interpreter as _grpc_stub_interpreter
-            import ${module_name}.GrpcOptions as GrpcOptions
             interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options.grpc_channel)
             self._auto_close_session = _grpc_options.auto_close_grpc_session
         else:
