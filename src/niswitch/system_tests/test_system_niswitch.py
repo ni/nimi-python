@@ -46,7 +46,7 @@ class SystemTests:
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_EXISTS
         session.disconnect_all()
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
-    
+
     @pytest.mark.skip(reason="TODO(sbethur): Intermittent failures, GitHub issue #1622.")
     def test_continuous_software_scanning(self, session_2532):
         scan_list = 'r0->c0; r1->c1'
