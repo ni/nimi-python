@@ -46,6 +46,28 @@ class SystemTests:
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_EXISTS
         session.disconnect_all()
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
+    
+    @pytest.mark.skip(reason="TODO(sbethur): Intermittent failures, GitHub issue #1622.")
+    def test_continuous_software_scanning(self, session_2532):
+        scan_list = 'r0->c0; r1->c1'
+        session_2532.scan_list = scan_list
+        assert session_2532.scan_list == scan_list
+        session_2532.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE)
+        session_2532.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.TTL0)
+        session_2532.trigger_input = niswitch.TriggerInput.SOFTWARE_TRIG
+        session_2532.scan_advanced_output = niswitch.ScanAdvancedOutput.NONE
+        session_2532.scan_list = scan_list
+        session_2532.scan_mode = niswitch.ScanMode.BREAK_BEFORE_MAKE
+        session_2532.continuous_scan = True
+        session_2532.commit()
+        with session_2532.initiate():
+            assert session_2532.is_scanning is True
+            session_2532.send_software_trigger()
+            try:
+                session_2532.wait_for_scan_complete()
+                assert False
+            except niswitch.Error as e:
+                assert e.code == -1074126826  # Error : Max time exceeded.
 
     # Attribute Tests
     # No R/W non-IVI boolean attributes on all devices
@@ -66,6 +88,10 @@ class SystemTests:
     def test_vi_real64_attribute(self, session):
         session.settling_time = hightime.timedelta(seconds=0.1)
         assert session.settling_time.total_seconds() == 0.1
+
+    @pytest.mark.skip(reason="TODO(sbethur): Intermittent failures, GitHub issue #1622.")
+    def test_enum_attribute(self, session_2532):
+        assert session_2532.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
 
     def test_write_only_attribute(self, session):
         try:
@@ -119,32 +145,6 @@ class SystemTests:
         session.connect(channel1, channel2)
         session.disable()   # expect no errors
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
-
-    @pytest.mark.skip(reason="TODO(sbethur): Intermittent failures, GitHub issue #1622.")
-    def test_continuous_software_scanning(self, session_2532):
-        scan_list = 'r0->c0; r1->c1'
-        session_2532.scan_list = scan_list
-        assert session_2532.scan_list == scan_list
-        session_2532.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE)
-        session_2532.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.TTL0)
-        session_2532.trigger_input = niswitch.TriggerInput.SOFTWARE_TRIG
-        session_2532.scan_advanced_output = niswitch.ScanAdvancedOutput.NONE
-        session_2532.scan_list = scan_list
-        session_2532.scan_mode = niswitch.ScanMode.BREAK_BEFORE_MAKE
-        session_2532.continuous_scan = True
-        session_2532.commit()
-        with session_2532.initiate():
-            assert session_2532.is_scanning is True
-            session_2532.send_software_trigger()
-            try:
-                session_2532.wait_for_scan_complete()
-                assert False
-            except niswitch.Error as e:
-                assert e.code == -1074126826  # Error : Max time exceeded.
-
-    @pytest.mark.skip(reason="TODO(sbethur): Intermittent failures, GitHub issue #1622.")
-    def test_enum_attribute(self, session_2532):
-        assert session_2532.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
 
 
 class TestLibrary(SystemTests):
