@@ -74,6 +74,7 @@ deps =
     ${wheel_env_no_py}: packaging
 
 % endif
+    ${module_name}-system_tests: py
     ${module_name}-system_tests: pytest
     ${module_name}-system_tests: coverage
     ${module_name}-system_tests: numpy

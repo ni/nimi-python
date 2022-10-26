@@ -56,7 +56,7 @@ class GrpcStubInterpreter(object):
             error_message = 'Failed to connect to server'
         elif grpc_error == grpc.StatusCode.UNIMPLEMENTED:
             error_message = (
-                'The operation is not implemented or is not supported/enabled in this service'
+                'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
             )
         elif grpc_error == grpc.StatusCode.NOT_FOUND:
             raise errors.DriverTooOldError()
