@@ -502,7 +502,7 @@ class TestLibrary(SystemTests):
         assert session.func_waveform == nifgen.Waveform.SQUARE
         assert session.func_amplitude == 2.0
 
-    # Test doesn't run over gRPC because the exception isn't caught from create_advanced_arb_sequence.
+    # Test doesn't run over gRPC because the exception isn't caught from create_advanced_arb_sequence().
     # TODO(sbethur): When internal bug# 227842 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1376)
     def test_create_advanced_arb_sequence_wrong_size(self, session_5421):
         waveform_data = [x * (1.0 / 256.0) for x in range(256)]
