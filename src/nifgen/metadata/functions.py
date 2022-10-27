@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.0.0d25
+# This file is generated from NI-FGEN API metadata version 23.0.0d41
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -2169,7 +2169,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'lock',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -2851,7 +2851,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'unlock',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
