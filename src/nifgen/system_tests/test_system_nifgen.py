@@ -380,6 +380,14 @@ class SystemTests:
         name = session.get_channel_name(1)
         assert name == '0'
 
+    def test_create_waveform_wrong_type(self, session):
+        for data in invalid_waveforms:
+            try:
+                session.create_waveform(data)
+                assert False
+            except (TypeError, ValueError):
+                pass
+
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='function')
@@ -438,51 +446,51 @@ class TestLibrary(SystemTests):
         with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe') as simulated_session:
             assert simulated_session.channel_count == 2
 
+    # Test doesn't run over gRPC because numpy isn't supported by gRPC.
     def test_create_waveform_from_numpy_array_float64(self, session):
         data = numpy.ndarray(10000, dtype=numpy.float64)
         data.fill(0.5)
         assert type(session.create_waveform(data)) is int
 
+    # Test doesn't run over gRPC because numpy isn't supported by gRPC.
     def test_create_waveform_numpy_array_int16(self, session):
         data = numpy.ndarray(10000, dtype=numpy.int16)
         data.fill(256)
         assert type(session.create_waveform(data)) is int
 
+    # Test doesn't run over gRPC because numpy isn't supported by gRPC.
     def test_create_waveform_numpy_array_int16(self, session):
         data = numpy.ndarray(10000, dtype=numpy.int16)
         data.fill(256)
         assert type(session.create_waveform(data)) is int
 
-    def test_create_waveform_wrong_type(self, session):
-        for data in invalid_waveforms:
-            try:
-                session.create_waveform(data)
-                assert False
-            except (TypeError, ValueError):
-                pass
-
+    # Test doesn't run over gRPC because numpy isn't supported by gRPC.
     def test_write_waveform_from_numpy_array_float64(self, session):
         data = numpy.ndarray(10000, dtype=numpy.float64)
         data.fill(0.5)
         session.write_waveform(session.allocate_waveform(len(data)), data)
 
+    # Test doesn't run over gRPC because numpy isn't supported by gRPC.
     def test_write_waveform_numpy_array_int16(self, session):
         data = numpy.ndarray(10000, dtype=numpy.int16)
         data.fill(256)
         session.write_waveform(session.allocate_waveform(len(data)), data)
 
+    # Test doesn't run over gRPC because numpy isn't supported by gRPC.
     def test_write_named_waveform_from_numpy_array_float64(self, session):
         data = numpy.ndarray(10000, dtype=numpy.float64)
         data.fill(0.5)
         session.allocate_named_waveform('foo', len(data))
         session.write_waveform('foo', data)
 
+    # Test doesn't run over gRPC because numpy isn't supported by gRPC.
     def test_write_named_waveform_numpy_array_int16(self, session):
         data = numpy.ndarray(10000, dtype=numpy.int16)
         data.fill(256)
         session.allocate_named_waveform('foo', len(data))
         session.write_waveform('foo', data)
 
+    # Test doesn't run over gRPC because the message SetAttributeViBooleanRequest's attribute is called attribute_value rather than attribute_value_raw.
     def test_frequency_list(self, session):
         session.output_mode = nifgen.OutputMode.FREQ_LIST
         duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
@@ -494,6 +502,7 @@ class TestLibrary(SystemTests):
         assert session.func_waveform == nifgen.Waveform.SQUARE
         assert session.func_amplitude == 2.0
 
+    # Test doesn't run over gRPC because the exception isn't caught from create_advanced_arb_sequence.
     # TODO(sbethur): When internal bug# 227842 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1376)
     def test_create_advanced_arb_sequence_wrong_size(self, session_5421):
         waveform_data = [x * (1.0 / 256.0) for x in range(256)]
