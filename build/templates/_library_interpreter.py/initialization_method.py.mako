@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Renders a LibraryInterpreter method corresponding to the passed-in function metadata.'''
+    '''Renders a LibraryInterpreter initialization method, specifying the session should be closed on exit.'''
 
     import build.helper as helper
 
