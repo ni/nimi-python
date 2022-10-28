@@ -19,6 +19,7 @@
             self._client.${grpc_name},
             grpc_types.${grpc_name}Request(${grpc_request_args}, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
         )
+        self._auto_close_session = response.new_session_initialized
 % if return_statement:
         ${return_statement}
 % endif
