@@ -2520,7 +2520,7 @@ functions = {
                     'description': '\nSpecifies the value to which you want to set the attribute. **Default\nValue**: None\n',
                     'note': '\nSome of the values might not be valid depending on the current\nsettings of the instrument session.\n'
                 },
-                'name': 'attributeValue',
+                'name': 'attributeValueRaw',
                 'type': 'ViBoolean'
             }
         ],

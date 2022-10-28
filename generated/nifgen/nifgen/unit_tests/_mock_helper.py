@@ -747,7 +747,7 @@ class SideEffectsHelper(object):
             return self._defaults['SendSoftwareEdgeTrigger']['return']
         return self._defaults['SendSoftwareEdgeTrigger']['return']
 
-    def niFgen_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFgen_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value_raw):  # noqa: N802
         if self._defaults['SetAttributeViBoolean']['return'] != 0:
             return self._defaults['SetAttributeViBoolean']['return']
         return self._defaults['SetAttributeViBoolean']['return']

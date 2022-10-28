@@ -404,10 +404,10 @@ class GrpcStubInterpreter(object):
             grpc_types.SendSoftwareEdgeTriggerRequest(vi=self._vi, trigger_raw=trigger.value, trigger_id=trigger_id),
         )
 
-    def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value_raw):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViBoolean,
-            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value_raw),
         )
 
     def set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):  # noqa: N802

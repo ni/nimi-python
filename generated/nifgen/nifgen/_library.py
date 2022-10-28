@@ -521,13 +521,13 @@ class Library(object):
                 self.niFgen_SendSoftwareEdgeTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SendSoftwareEdgeTrigger_cfunc(vi, trigger, trigger_id)
 
-    def niFgen_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+    def niFgen_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value_raw):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetAttributeViBoolean_cfunc is None:
                 self.niFgen_SetAttributeViBoolean_cfunc = self._get_library_function('niFgen_SetAttributeViBoolean')
                 self.niFgen_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
                 self.niFgen_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
+        return self.niFgen_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value_raw)
 
     def niFgen_SetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:

@@ -101,6 +101,17 @@ class SystemTests:
             assert session.func_start_phase == 0.0
             assert session.is_done() is False
 
+    def test_frequency_list(self, session):
+        session.output_mode = nifgen.OutputMode.FREQ_LIST
+        duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
+        frequency_array = [1000, 100900, 200800, 300700, 400600, 500500, 600400, 700300, 800200, 900100]
+        waveform_handle = session.create_freq_list(nifgen.Waveform.SQUARE, frequency_array, duration_array)
+        session.configure_freq_list(waveform_handle, 2.0, 0, 0)
+        session.trigger_mode = nifgen.TriggerMode.CONTINUOUS
+        session.output_enabled = True
+        assert session.func_waveform == nifgen.Waveform.SQUARE
+        assert session.func_amplitude == 2.0
+
     def test_clear_freq_list(self, session):
         session.clear_freq_list(-1)
 
@@ -489,18 +500,6 @@ class TestLibrary(SystemTests):
         data.fill(256)
         session.allocate_named_waveform('foo', len(data))
         session.write_waveform('foo', data)
-
-    # Test doesn't run over gRPC because the message SetAttributeViBooleanRequest's attribute is called attribute_value rather than attribute_value_raw.
-    def test_frequency_list(self, session):
-        session.output_mode = nifgen.OutputMode.FREQ_LIST
-        duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
-        frequency_array = [1000, 100900, 200800, 300700, 400600, 500500, 600400, 700300, 800200, 900100]
-        waveform_handle = session.create_freq_list(nifgen.Waveform.SQUARE, frequency_array, duration_array)
-        session.configure_freq_list(waveform_handle, 2.0, 0, 0)
-        session.trigger_mode = nifgen.TriggerMode.CONTINUOUS
-        session.output_enabled = True
-        assert session.func_waveform == nifgen.Waveform.SQUARE
-        assert session.func_amplitude == 2.0
 
     # Test doesn't run over gRPC because the exception isn't caught from create_advanced_arb_sequence().
     # TODO(sbethur): When internal bug# 227842 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1376)

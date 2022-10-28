@@ -2219,7 +2219,7 @@ class _SessionBase(object):
         self._interpreter.send_software_edge_trigger(trigger, trigger_id)
 
     @ivi_synchronized
-    def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
+    def _set_attribute_vi_boolean(self, attribute_id, attribute_value_raw):
         r'''_set_attribute_vi_boolean
 
         Sets the value of a ViBoolean property.
@@ -2261,7 +2261,7 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Specifies the ID of a property.
 
-            attribute_value (bool): Specifies the value to which you want to set the property. **Default
+            attribute_value_raw (bool): Specifies the value to which you want to set the property. **Default
                 Value**: None
 
                 Note:
@@ -2269,7 +2269,7 @@ class _SessionBase(object):
                 settings of the instrument session.
 
         '''
-        self._interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
+        self._interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value_raw)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
