@@ -255,17 +255,17 @@ class SystemTests:
         multi_instrument_session.self_test()
 
     def test_reset(self, multi_instrument_session):
-        deault_fetch_relative_to = multi_instrument_session._fetch_relative_to
-        assert deault_fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
+        default_fetch_relative_to = multi_instrument_session._fetch_relative_to
+        assert default_fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
         multi_instrument_session._fetch_relative_to = niscope.FetchRelativeTo.READ_POINTER
-        non_default_acqusition_type = multi_instrument_session._fetch_relative_to
-        assert non_default_acqusition_type == niscope.FetchRelativeTo.READ_POINTER
+        non_default_acquisition_type = multi_instrument_session._fetch_relative_to
+        assert non_default_acquisition_type == niscope.FetchRelativeTo.READ_POINTER
         multi_instrument_session.reset()
         assert multi_instrument_session._fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
 
     def test_reset_device(self, multi_instrument_session):
-        deault_meas_time_histogram_high_time = multi_instrument_session.meas_time_histogram_high_time
-        assert deault_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
+        default_meas_time_histogram_high_time = multi_instrument_session.meas_time_histogram_high_time
+        assert default_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
         multi_instrument_session.meas_time_histogram_high_time = hightime.timedelta(microseconds=1000)
         non_default_meas_time_histogram_high_time = multi_instrument_session.meas_time_histogram_high_time
         assert non_default_meas_time_histogram_high_time == hightime.timedelta(microseconds=1000)
@@ -273,8 +273,8 @@ class SystemTests:
         assert multi_instrument_session.meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
 
     def test_reset_with_defaults(self, multi_instrument_session):
-        deault_meas_time_histogram_high_time = multi_instrument_session.meas_time_histogram_high_time
-        assert deault_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
+        default_meas_time_histogram_high_time = multi_instrument_session.meas_time_histogram_high_time
+        assert default_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
         multi_instrument_session.meas_time_histogram_high_time = hightime.timedelta(microseconds=1000)
         non_default_meas_time_histogram_high_time = multi_instrument_session.meas_time_histogram_high_time
         assert non_default_meas_time_histogram_high_time == hightime.timedelta(microseconds=1000)
