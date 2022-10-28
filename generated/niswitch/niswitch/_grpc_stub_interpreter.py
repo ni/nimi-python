@@ -8,7 +8,6 @@ import warnings
 
 from . import enums as enums
 from . import errors as errors
-from . import grpc_session_options as grpc_session_options
 from . import niswitch_pb2 as grpc_types
 from . import niswitch_pb2_grpc as niswitch_grpc
 

@@ -8,7 +8,6 @@ import warnings
 
 from . import enums as enums
 from . import errors as errors
-from . import grpc_session_options as grpc_session_options
 from . import nifgen_pb2 as grpc_types
 from . import nifgen_pb2_grpc as nifgen_grpc
 
