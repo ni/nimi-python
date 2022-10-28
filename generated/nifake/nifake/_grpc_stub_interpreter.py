@@ -310,6 +310,7 @@ class GrpcStubInterpreter(object):
             self._client.InitWithOptions,
             grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
         )
+        self._auto_close_session = response.new_session_initialized
         return response.vi
 
     def initiate(self):  # noqa: N802
@@ -332,6 +333,12 @@ class GrpcStubInterpreter(object):
         self._invoke(
             self._client.MethodWithGrpcOnlyParam,
             grpc_types.MethodWithGrpcOnlyParamRequest(simple_param=simple_param),
+        )
+
+    def method_with_proto_only_parameter(self, attribute_value):  # noqa: N802
+        self._invoke(
+            self._client.MethodWithProtoOnlyParameter,
+            grpc_types.MethodWithProtoOnlyParameterRequest(attribute_value_raw=attribute_value),
         )
 
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers):  # noqa: N802

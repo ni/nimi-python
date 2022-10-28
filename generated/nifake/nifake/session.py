@@ -699,10 +699,8 @@ class Session(_SessionBase):
         if _grpc_options:
             import nifake._grpc_stub_interpreter as _grpc_stub_interpreter
             interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
-            self._auto_close_session = _grpc_options.auto_close_grpc_session
         else:
             interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
-            self._auto_close_session = True
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
@@ -748,7 +746,7 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if self._auto_close_session:
+        if self._interpreter._auto_close_session:
             self.close()
 
     def initiate(self):
@@ -1290,6 +1288,18 @@ class Session(_SessionBase):
 
         '''
         self._interpreter.method_with_grpc_only_param(simple_param)
+
+    @ivi_synchronized
+    def method_with_proto_only_parameter(self, attribute_value):
+        r'''method_with_proto_only_parameter
+
+        TBD
+
+        Args:
+            attribute_value (int):
+
+        '''
+        self._interpreter.method_with_proto_only_parameter(attribute_value)
 
     @ivi_synchronized
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers=None):

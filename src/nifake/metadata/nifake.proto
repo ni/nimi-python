@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-FAKE API metadata version 23.0.0
+// This file is generated from NI-FAKE API metadata version 23.0.0d63
 //---------------------------------------------------------------------
 // Proto file for the NI-FAKE Metadata
 //---------------------------------------------------------------------
@@ -73,6 +73,7 @@ service NiFake {
   rpc MethodWithGetLastErrorParam(MethodWithGetLastErrorParamRequest) returns (MethodWithGetLastErrorParamResponse);
   rpc MethodWithGrpcFieldNumber(MethodWithGrpcFieldNumberRequest) returns (MethodWithGrpcFieldNumberResponse);
   rpc MethodWithGrpcOnlyParam(MethodWithGrpcOnlyParamRequest) returns (MethodWithGrpcOnlyParamResponse);
+  rpc MethodWithProtoOnlyParameter(MethodWithProtoOnlyParameterRequest) returns (MethodWithProtoOnlyParameterResponse);
   rpc MultipleArrayTypes(MultipleArrayTypesRequest) returns (MultipleArrayTypesResponse);
   rpc MultipleArraysSameSize(MultipleArraysSameSizeRequest) returns (MultipleArraysSameSizeResponse);
   rpc MultipleArraysSameSizeWithOptional(MultipleArraysSameSizeWithOptionalRequest) returns (MultipleArraysSameSizeWithOptionalResponse);
@@ -714,11 +715,13 @@ message InitWithOptionsRequest {
   bool id_query = 3;
   bool reset_device = 4;
   string option_string = 5;
+  nidevice_grpc.SessionInitializationBehavior initialization_behavior = 6;
 }
 
 message InitWithOptionsResponse {
   int32 status = 1;
   nidevice_grpc.Session vi = 2;
+  bool new_session_initialized = 3;
 }
 
 message InitWithVarArgsRequest {
@@ -786,6 +789,14 @@ message MethodWithGrpcOnlyParamRequest {
 message MethodWithGrpcOnlyParamResponse {
   int32 status = 1;
   sint32 grpc_only_param = 2;
+}
+
+message MethodWithProtoOnlyParameterRequest {
+  sint32 attribute_value = 1;
+}
+
+message MethodWithProtoOnlyParameterResponse {
+  int32 status = 1;
 }
 
 message MultipleArrayTypesRequest {

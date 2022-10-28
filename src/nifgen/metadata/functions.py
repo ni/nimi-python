@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.0.0d41
+# This file is generated from NI-FGEN API metadata version 23.0.0d52
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -1980,6 +1980,14 @@ functions = {
             'description': '\nCreates and returns a new NI-FGEN session to the specified channel of a\nwaveform generator that is used in all subsequent NI-FGEN function\ncalls.\n'
         },
         'method_name_for_documentation': '__init__',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -2604,6 +2612,7 @@ functions = {
                     'description': '\nSpecifies the value to which you want to set the attribute. **Default\nValue**: None\n',
                     'note': '\nSome of the values might not be valid depending on the current\nsettings of the instrument session.\n'
                 },
+                'grpc_name': 'attributeValue_raw',
                 'name': 'attributeValue',
                 'type': 'ViReal64'
             }
@@ -2768,6 +2777,7 @@ functions = {
                     ]
                 },
                 'enum': 'RelativeTo',
+                'grpc_enum': None,
                 'name': 'relativeTo',
                 'type': 'ViInt32'
             },

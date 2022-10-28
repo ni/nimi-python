@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d38
+# This file is generated from NI-FAKE API metadata version 23.0.0d63
 attributes = {
     1000000: {
         'access': 'read-write',
@@ -113,6 +113,7 @@ attributes = {
     1000011: {
         'access': 'read-write',
         'enum': 'EnumWithConverter',
+        'grpc_enum': None,
         'name': 'READ_WRITE_ENUM_WITH_CONVERTER',
         'type': 'ViInt32'
     }

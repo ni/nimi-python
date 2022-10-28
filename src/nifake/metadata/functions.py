@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d38
+# This file is generated from NI-FAKE API metadata version 23.0.0d63
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -1489,6 +1489,19 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'simpleParam',
+                'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'MethodWithProtoOnlyParameter': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'attributeValue',
                 'type': 'ViInt32'
             }
         ],

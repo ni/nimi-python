@@ -4,6 +4,7 @@
 
     import build.helper as helper
 
+    grpc_supported = template_parameters['include_grpc_support']
     parameters = f['parameters']
     param_names_method = helper.get_params_snippet(f, helper.ParameterUsageOptions.INTERPRETER_METHOD_DECLARATION)
     param_names_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)

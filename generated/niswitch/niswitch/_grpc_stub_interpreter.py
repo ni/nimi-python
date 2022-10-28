@@ -8,6 +8,7 @@ import warnings
 
 from . import enums as enums
 from . import errors as errors
+from . import grpc_session_options as grpc_session_options
 from . import niswitch_pb2 as grpc_types
 from . import niswitch_pb2_grpc as niswitch_grpc
 
@@ -15,9 +16,10 @@ from . import niswitch_pb2_grpc as niswitch_grpc
 class GrpcStubInterpreter(object):
     '''Interpreter for interacting with a gRPC Stub class'''
 
-    def __init__(self, grpc_channel):
+    def __init__(self, grpc_options):
+        self._grpc_options = grpc_options
         self._lock = threading.RLock()
-        self._client = niswitch_grpc.NiSwitchStub(grpc_channel)
+        self._client = niswitch_grpc.NiSwitchStub(grpc_options.grpc_channel)
         self._vi = 0
 
     def _invoke(self, func, request):
@@ -190,8 +192,9 @@ class GrpcStubInterpreter(object):
     def init_with_topology(self, resource_name, topology, simulate, reset_device):  # noqa: N802
         response = self._invoke(
             self._client.InitWithTopology,
-            grpc_types.InitWithTopologyRequest(resource_name=resource_name, topology=topology, simulate=simulate, reset_device=reset_device),
+            grpc_types.InitWithTopologyRequest(resource_name=resource_name, topology=topology, simulate=simulate, reset_device=reset_device, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
         )
+        self._auto_close_session = response.new_session_initialized
         return response.vi
 
     def initiate_scan(self):  # noqa: N802

@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-SWITCH API metadata version 23.0.0
+// This file is generated from NI-SWITCH API metadata version 23.0.0d69
 //---------------------------------------------------------------------
 // Proto file for the NI-SWITCH Metadata
 //---------------------------------------------------------------------
@@ -707,7 +707,7 @@ message InitRequest {
   string resource_name = 2;
   bool id_query = 3;
   bool reset_device = 4;
-  nidevice_grpc.SessionInitializationBehavior requested_behavior = 5;
+  nidevice_grpc.SessionInitializationBehavior initialization_behavior = 5;
 }
 
 message InitResponse {
@@ -723,7 +723,7 @@ message InitWithOptionsRequest {
   bool id_query = 3;
   bool reset_device = 4;
   string option_string = 5;
-  nidevice_grpc.SessionInitializationBehavior requested_behavior = 6;
+  nidevice_grpc.SessionInitializationBehavior initialization_behavior = 6;
 }
 
 message InitWithOptionsResponse {
@@ -739,7 +739,7 @@ message InitWithTopologyRequest {
   string topology = 3;
   bool simulate = 4;
   bool reset_device = 5;
-  nidevice_grpc.SessionInitializationBehavior requested_behavior = 6;
+  nidevice_grpc.SessionInitializationBehavior initialization_behavior = 6;
 }
 
 message InitWithTopologyResponse {
