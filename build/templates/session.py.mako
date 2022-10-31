@@ -313,7 +313,7 @@ if grpc_supported:
 
     def __exit__(self, exc_type, exc_value, traceback):
 % if grpc_supported:
-        if self._interpreter._auto_close_session:
+        if self._interpreter._close_on_exit:
             self.close()
 % else:
         self.close()

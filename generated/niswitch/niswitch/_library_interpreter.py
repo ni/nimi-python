@@ -266,7 +266,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niSwitch_InitWithTopology(resource_name_ctype, topology_ctype, simulate_ctype, reset_device_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        self._auto_close_session = True
+        self._close_on_exit = True
         return int(vi_ctype.value)
 
     def initiate_scan(self):  # noqa: N802

@@ -746,7 +746,7 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if self._interpreter._auto_close_session:
+        if self._interpreter._close_on_exit:
             self.close()
 
     def initiate(self):

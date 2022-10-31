@@ -45,6 +45,6 @@
         error_code = self._library.${c_func_name}(${param_names_library})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
 % if grpc_supported:
-        self._auto_close_session = True
+        self._close_on_exit = True
 % endif
         ${helper.get_library_interpreter_method_return_snippet(parameters, config)}

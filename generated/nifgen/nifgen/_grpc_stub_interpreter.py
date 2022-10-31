@@ -335,7 +335,7 @@ class GrpcStubInterpreter(object):
             self._client.InitializeWithChannels,
             grpc_types.InitializeWithChannelsRequest(resource_name=resource_name, channel_name=channel_name, reset_device=reset_device, option_string=option_string, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
         )
-        self._auto_close_session = response.new_session_initialized
+        self._close_on_exit = response.new_session_initialized
         return response.vi
 
     def initiate_generation(self):  # noqa: N802
