@@ -1,18 +1,23 @@
 <%page args="f, config, method_template"/>\
 <%
     '''Renders a LibraryInterpreter initialization method, specifying the session should be closed on exit.'''
+
     import build.helper as helper
+
     grpc_supported = template_parameters['include_grpc_support']
     parameters = f['parameters']
     param_names_method = helper.get_params_snippet(f, helper.ParameterUsageOptions.INTERPRETER_METHOD_DECLARATION)
     param_names_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)
+
     ivi_dance_parameters = helper.filter_ivi_dance_parameters(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameters, parameters)
     len_parameters = helper.filter_len_parameters(parameters)
     len_size_parameter = helper.find_size_parameter(len_parameters, parameters)
     assert ivi_dance_size_parameter is None or len_size_parameter is None
+
     full_func_name = f['interpreter_name'] + method_template['method_python_name_suffix']
     c_func_name = config['c_function_prefix'] + f['name']
+
     # If a method uses codegen_method=python-only, it should specify non-default method_templates
     assert f['codegen_method'] != 'python-only', full_func_name + ' uses default_method method_template, but is python-only!'
 %>\

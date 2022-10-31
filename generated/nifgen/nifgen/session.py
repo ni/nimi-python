@@ -2974,7 +2974,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FGEN session to an NI signal generator.'''
 
-    def __init__(self, resource_name, channel_name=None, reset_device=False, options={}, *, _grpc_channel=None):
+    def __init__(self, resource_name, channel_name=None, reset_device=False, options={}, *, _grpc_options=None):
         r'''An NI-FGEN session to an NI signal generator.
 
         Creates and returns a new NI-FGEN session to the specified channel of a
@@ -3076,16 +3076,16 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
-            _grpc_channel (grpc.Channel): MeasurementLink gRPC channel
+            _grpc_options (nifgen.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
 
 
         Returns:
             session (nifgen.Session): A session object representing the device.
 
         '''
-        if _grpc_channel:
+        if _grpc_options:
             import nifgen._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_channel)
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
         else:
             interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
@@ -3107,7 +3107,7 @@ class Session(_SessionBase):
         self._interpreter._vi = self._initialize_with_channels(resource_name, channel_name, reset_device, options)
 
         # NI-TClk does not work over NI gRPC Device Server
-        if not _grpc_channel:
+        if not _grpc_options:
             self.tclk = nitclk.SessionReference(self._interpreter._vi)
 
         # Store the parameter list for later printing in __repr__
@@ -3135,7 +3135,8 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._interpreter._close_on_exit:
+            self.close()
 
     def initiate(self):
         '''initiate

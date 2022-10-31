@@ -135,6 +135,8 @@ class SideEffectsHelper(object):
         self._defaults['MethodUsingWholeAndFractionalNumbers']['fractionalNumber'] = None
         self._defaults['MethodWithGrpcOnlyParam'] = {}
         self._defaults['MethodWithGrpcOnlyParam']['return'] = 0
+        self._defaults['MethodWithProtoOnlyParameter'] = {}
+        self._defaults['MethodWithProtoOnlyParameter']['return'] = 0
         self._defaults['MultipleArrayTypes'] = {}
         self._defaults['MultipleArrayTypes']['return'] = 0
         self._defaults['MultipleArrayTypes']['outputArray'] = None
@@ -680,6 +682,11 @@ class SideEffectsHelper(object):
             return self._defaults['MethodWithGrpcOnlyParam']['return']
         return self._defaults['MethodWithGrpcOnlyParam']['return']
 
+    def niFake_MethodWithProtoOnlyParameter(self, attribute_value):  # noqa: N802
+        if self._defaults['MethodWithProtoOnlyParameter']['return'] != 0:
+            return self._defaults['MethodWithProtoOnlyParameter']['return']
+        return self._defaults['MethodWithProtoOnlyParameter']['return']
+
     def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         if self._defaults['MultipleArrayTypes']['return'] != 0:
             return self._defaults['MultipleArrayTypes']['return']
@@ -1032,6 +1039,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_MethodUsingWholeAndFractionalNumbers.return_value = 0
         mock_library.niFake_MethodWithGrpcOnlyParam.side_effect = MockFunctionCallError("niFake_MethodWithGrpcOnlyParam")
         mock_library.niFake_MethodWithGrpcOnlyParam.return_value = 0
+        mock_library.niFake_MethodWithProtoOnlyParameter.side_effect = MockFunctionCallError("niFake_MethodWithProtoOnlyParameter")
+        mock_library.niFake_MethodWithProtoOnlyParameter.return_value = 0
         mock_library.niFake_MultipleArrayTypes.side_effect = MockFunctionCallError("niFake_MultipleArrayTypes")
         mock_library.niFake_MultipleArrayTypes.return_value = 0
         mock_library.niFake_MultipleArraysSameSize.side_effect = MockFunctionCallError("niFake_MultipleArraysSameSize")
