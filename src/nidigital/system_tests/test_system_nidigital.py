@@ -3,6 +3,7 @@ import collections
 import os
 import pathlib
 import subprocess
+import time
 
 import grpc
 import hightime
@@ -1340,6 +1341,7 @@ class TestGrpc(SystemTests):
     def grpc_channel(self):
         server_exe = self._get_grpc_server_exe()
         proc = subprocess.Popen([str(server_exe)])
+        time.sleep(3)
         try:
             channel = grpc.insecure_channel(f"{self.server_address}:{self.server_port}")
             yield channel
