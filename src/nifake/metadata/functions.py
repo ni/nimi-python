@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d38
+# This file is generated from NI-FAKE API metadata version 23.0.0d65
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -1326,6 +1326,14 @@ functions = {
         'documentation': {
             'description': 'Creates a new IVI instrument driver session.'
         },
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -1481,6 +1489,19 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'simpleParam',
+                'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'MethodWithProtoOnlyParameter': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'attributeValue',
                 'type': 'ViInt32'
             }
         ],
@@ -2273,6 +2294,7 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
+                'grpc_name': 'attributeValue_raw',
                 'name': 'attributeValue',
                 'type': 'ViInt64'
             }
@@ -2355,6 +2377,7 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
+                'grpc_name': 'attributeValue_raw',
                 'name': 'attributeValue',
                 'type': 'ViConstString'
             }
