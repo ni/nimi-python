@@ -635,7 +635,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, options={}, id_query=False, reset_device=False, *, _grpc_channel=None):
+    def __init__(self, resource_name, options={}, id_query=False, reset_device=False, *, _grpc_options=None):
         r'''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation
 
         Creates a new IVI instrument driver session.
@@ -689,16 +689,16 @@ class Session(_SessionBase):
                 | False          | 0 | Don't Reset  |
                 +----------------+---+--------------+
 
-            _grpc_channel (grpc.Channel): MeasurementLink gRPC channel
+            _grpc_options (nifake.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
 
 
         Returns:
             session (nifake.Session): A session object representing the device.
 
         '''
-        if _grpc_channel:
+        if _grpc_options:
             import nifake._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_channel)
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
         else:
             interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
@@ -719,7 +719,7 @@ class Session(_SessionBase):
         self._interpreter._vi = self._init_with_options(resource_name, options, id_query, reset_device)
 
         # NI-TClk does not work over NI gRPC Device Server
-        if not _grpc_channel:
+        if not _grpc_options:
             self.tclk = nitclk.SessionReference(self._interpreter._vi)
 
         # Store the parameter list for later printing in __repr__
@@ -746,7 +746,8 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._interpreter._close_on_exit:
+            self.close()
 
     def initiate(self):
         '''initiate
@@ -1287,6 +1288,18 @@ class Session(_SessionBase):
 
         '''
         self._interpreter.method_with_grpc_only_param(simple_param)
+
+    @ivi_synchronized
+    def method_with_proto_only_parameter(self, attribute_value):
+        r'''method_with_proto_only_parameter
+
+        TBD
+
+        Args:
+            attribute_value (int):
+
+        '''
+        self._interpreter.method_with_proto_only_parameter(attribute_value)
 
     @ivi_synchronized
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers=None):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 23.0.0d23
+# This file is generated from NI-SWITCH API metadata version 23.0.0d69
 functions = {
     'AbortScan': {
         'documentation': {
@@ -661,6 +661,14 @@ functions = {
             'description': '\nReturns a session handle used to identify the switch in all subsequent\ninstrument driver calls and sets the topology of the switch.\nniSwitch_InitWithTopology creates a new IVI instrument driver session\nfor the switch specified in the resourceName parameter. The driver uses\nthe topology specified in the topology parameter and overrides the\ntopology specified in MAX. Note: When initializing an NI SwitchBlock\ndevice with topology, you must specify the toplogy created when you\nconfigured the device in MAX, using either\nNISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY or the toplogy string of the\ndevice. Refer to the Initializing with Toplogy for NI SwitchBlock\nDevices topic in the NI Switches Help for information about determining\nthe topology string of an NI SwitchBlock device. By default, the switch\nis reset to a known state. Enable simulation by specifying the topology\nand setting the simulate parameter to VI_TRUE.\n'
         },
         'method_name_for_documentation': '__init__',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -735,7 +743,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'lock',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -1109,7 +1117,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'unlock',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }

@@ -6,6 +6,7 @@ import build.helper as helper
 enums = template_parameters['metadata'].enums
 functions = helper.filter_codegen_functions(template_parameters['metadata'].functions)
 config = template_parameters['metadata'].config
+grpc_supported = template_parameters['include_grpc_support']
 module_name = config['module_name']
 registry_name = config['driver_registry'] if 'driver_registry' in config else config['driver_name']
 %>
@@ -17,6 +18,9 @@ from ${module_name}.enums import *  # noqa: F403,F401,H303
 % endif
 from ${module_name}.errors import DriverWarning  # noqa: F401
 from ${module_name}.errors import Error  # noqa: F401
+% if grpc_supported:
+from ${module_name}.grpc_session_options import *  # noqa: F403,F401,H303
+% endif
 <%
 # nitclk is different. It does not have a Session class that we open a session on
 # Instead it is a bunch of stateless function calls. So if we are NOT building for

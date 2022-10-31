@@ -23,6 +23,7 @@ generated/*/coverage.xml
 
 .eggs/
 .tox/
+.venv/
 .coverage
 nidcpowerunittest.xml
 nidigitalunittest.xml

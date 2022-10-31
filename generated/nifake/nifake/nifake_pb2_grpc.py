@@ -299,6 +299,11 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.MethodWithGrpcOnlyParamRequest.SerializeToString,
                 response_deserializer=nifake__pb2.MethodWithGrpcOnlyParamResponse.FromString,
                 )
+        self.MethodWithProtoOnlyParameter = channel.unary_unary(
+                '/nifake_grpc.NiFake/MethodWithProtoOnlyParameter',
+                request_serializer=nifake__pb2.MethodWithProtoOnlyParameterRequest.SerializeToString,
+                response_deserializer=nifake__pb2.MethodWithProtoOnlyParameterResponse.FromString,
+                )
         self.MultipleArrayTypes = channel.unary_unary(
                 '/nifake_grpc.NiFake/MultipleArrayTypes',
                 request_serializer=nifake__pb2.MultipleArrayTypesRequest.SerializeToString,
@@ -791,6 +796,12 @@ class NiFakeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def MethodWithProtoOnlyParameter(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def MultipleArrayTypes(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1252,6 +1263,11 @@ def add_NiFakeServicer_to_server(servicer, server):
                     servicer.MethodWithGrpcOnlyParam,
                     request_deserializer=nifake__pb2.MethodWithGrpcOnlyParamRequest.FromString,
                     response_serializer=nifake__pb2.MethodWithGrpcOnlyParamResponse.SerializeToString,
+            ),
+            'MethodWithProtoOnlyParameter': grpc.unary_unary_rpc_method_handler(
+                    servicer.MethodWithProtoOnlyParameter,
+                    request_deserializer=nifake__pb2.MethodWithProtoOnlyParameterRequest.FromString,
+                    response_serializer=nifake__pb2.MethodWithProtoOnlyParameterResponse.SerializeToString,
             ),
             'MultipleArrayTypes': grpc.unary_unary_rpc_method_handler(
                     servicer.MultipleArrayTypes,
@@ -2374,6 +2390,23 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodWithGrpcOnlyParam',
             nifake__pb2.MethodWithGrpcOnlyParamRequest.SerializeToString,
             nifake__pb2.MethodWithGrpcOnlyParamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MethodWithProtoOnlyParameter(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodWithProtoOnlyParameter',
+            nifake__pb2.MethodWithProtoOnlyParameterRequest.SerializeToString,
+            nifake__pb2.MethodWithProtoOnlyParameterResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
