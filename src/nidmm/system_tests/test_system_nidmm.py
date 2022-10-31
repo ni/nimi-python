@@ -337,13 +337,15 @@ class TestGrpc(SystemTests):
 
     @pytest.fixture(scope='function')
     def session(self, grpc_channel):
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_channel=grpc_channel) as simulated_session:
+        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, "")
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             yield simulated_session
 
     def test_error_message(self, grpc_channel):
+        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, "")
         try:
             # We pass in an invalid model name to force going to error_message
-            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', _grpc_channel=grpc_channel):
+            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', _grpc_options=grpc_options):
                 assert False
         except nidmm.Error as e:
             assert e.code == -1074134964
