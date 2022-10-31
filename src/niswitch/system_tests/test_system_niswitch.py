@@ -9,6 +9,7 @@ import pathlib
 import pytest
 import subprocess
 import tempfile
+import time
 
 # We need a lock file so multiple tests aren't hitting the db at the same time
 # Trying to create simulated DAQmx devices at the same time (which can happen when running
@@ -194,6 +195,7 @@ class TestGrpc(SystemTests):
     def grpc_channel(self):
         server_exe = self._get_grpc_server_exe()
         proc = subprocess.Popen([str(server_exe)])
+        time.sleep(3)
         try:
             channel = grpc.insecure_channel(f"{self.server_address}:{self.server_port}")
             yield channel
