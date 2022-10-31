@@ -21,9 +21,10 @@ from . import custom_struct_typedef as custom_struct_typedef  # noqa: F401
 class GrpcStubInterpreter(object):
     '''Interpreter for interacting with a gRPC Stub class'''
 
-    def __init__(self, grpc_channel):
+    def __init__(self, grpc_options):
+        self._grpc_options = grpc_options
         self._lock = threading.RLock()
-        self._client = nifake_grpc.NiFakeStub(grpc_channel)
+        self._client = nifake_grpc.NiFakeStub(grpc_options.grpc_channel)
         self._vi = 0
 
     def _invoke(self, func, request):
@@ -306,8 +307,9 @@ class GrpcStubInterpreter(object):
     def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         response = self._invoke(
             self._client.InitWithOptions,
-            grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string),
+            grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
         )
+        self._close_on_exit = response.new_session_initialized
         return response.vi
 
     def initiate(self):  # noqa: N802
@@ -330,6 +332,12 @@ class GrpcStubInterpreter(object):
         self._invoke(
             self._client.MethodWithGrpcOnlyParam,
             grpc_types.MethodWithGrpcOnlyParamRequest(simple_param=simple_param),
+        )
+
+    def method_with_proto_only_parameter(self, attribute_value):  # noqa: N802
+        self._invoke(
+            self._client.MethodWithProtoOnlyParameter,
+            grpc_types.MethodWithProtoOnlyParameterRequest(attribute_value_raw=attribute_value),
         )
 
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers):  # noqa: N802
@@ -420,7 +428,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_int64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViInt64,
-            grpc_types.SetAttributeViInt64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViInt64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attributeValue_raw=attribute_value),
         )
 
     def set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -432,7 +440,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViString,
-            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attributeValue_raw=attribute_value),
         )
 
     def set_custom_type(self, cs):  # noqa: N802

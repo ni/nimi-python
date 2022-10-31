@@ -1149,7 +1149,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-SWITCH session to an NI switch module.'''
 
-    def __init__(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False, *, _grpc_channel=None):
+    def __init__(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False, *, _grpc_options=None):
         r'''An NI-SWITCH session to an NI switch module.
 
         Returns a session handle used to identify the switch in all subsequent
@@ -1379,16 +1379,16 @@ class Session(_SessionBase):
                 process. Valid Values: True - Reset Device (Default Value) False
                 - Currently unsupported. The device will not reset.
 
-            _grpc_channel (grpc.Channel): MeasurementLink gRPC channel
+            _grpc_options (niswitch.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
 
 
         Returns:
             session (niswitch.Session): A session object representing the device.
 
         '''
-        if _grpc_channel:
+        if _grpc_options:
             import niswitch._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_channel)
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
         else:
             interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
@@ -1432,7 +1432,8 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._interpreter._close_on_exit:
+            self.close()
 
     def initiate(self):
         '''initiate

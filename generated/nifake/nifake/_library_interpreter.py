@@ -422,6 +422,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niFake_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        self._close_on_exit = True
         return int(vi_ctype.value)
 
     def initiate(self):  # noqa: N802
@@ -447,6 +448,12 @@ class LibraryInterpreter(object):
     def method_with_grpc_only_param(self, simple_param):  # noqa: N802
         simple_param_ctype = _visatype.ViInt32(simple_param)  # case S150
         error_code = self._library.niFake_MethodWithGrpcOnlyParam(simple_param_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def method_with_proto_only_parameter(self, attribute_value):  # noqa: N802
+        attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
+        error_code = self._library.niFake_MethodWithProtoOnlyParameter(attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
