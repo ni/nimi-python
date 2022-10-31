@@ -10,6 +10,7 @@ import pathlib
 import pytest
 import subprocess
 import tempfile
+import time
 
 
 class SystemTests:
@@ -496,7 +497,8 @@ class TestGrpc(SystemTests):
         import winreg
         try:
             reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
-            with winreg.OpenKey(reg, r"SOFTWARE\National Instruments\Common\Installer") as key:
+            read64key = winreg.KEY_READ | winreg.KEY_WOW64_64KEY
+            with winreg.OpenKey(reg, r"SOFTWARE\National Instruments\Common\Installer", access=read64key) as key:
                 shared_dir, _ = winreg.QueryValueEx(key, "NISHAREDDIR64")
         except OSError:
             pytest.skip("NI gRPC Device Server not installed")
@@ -509,6 +511,7 @@ class TestGrpc(SystemTests):
     def grpc_channel(self):
         server_exe = self._get_grpc_server_exe()
         proc = subprocess.Popen([str(server_exe)])
+        time.sleep(3)
         try:
             channel = grpc.insecure_channel(f"{self.server_address}:{self.server_port}")
             yield channel
