@@ -2125,7 +2125,7 @@ class _SessionBase(object):
 
         wfm, wfm_info = self._fetch(num_samples, timeout)
 
-        mv = memoryview(wfm)
+        mv = memoryview(wfm if isinstance(wfm, bytes) else bytes(wfm))
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
@@ -2422,7 +2422,7 @@ class _SessionBase(object):
 
         wfm, wfm_info = self._read(num_samples, timeout)
 
-        mv = memoryview(wfm)
+        mv = memoryview(wfm if isinstance(wfm, bytes) else bytes(wfm))
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 

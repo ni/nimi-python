@@ -21,7 +21,7 @@
 
         wfm, wfm_info = self._${f['python_name']}(num_samples, timeout)
 
-        mv = memoryview(wfm)
+        mv = memoryview(wfm if isinstance(wfm, bytes) else bytes(wfm))
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 

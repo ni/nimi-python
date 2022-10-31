@@ -108,7 +108,7 @@ class GrpcStubInterpreter(object):
     def cal_fetch_date(self, which_one):  # noqa: N802
         response = self._invoke(
             self._client.CalFetchDate,
-            grpc_types.CalFetchDateRequest(vi=self._vi, which_one_raw=which_one.value),
+            grpc_types.CalFetchDateRequest(vi=self._vi, which_one=which_one.value),
         )
         return response.year, response.month, response.day
 
@@ -396,7 +396,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_int64(self, channel_list, attribute_id, value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViInt64,
-            grpc_types.SetAttributeViInt64Request(vi=self._vi, channel_list=channel_list, attribute_id=attribute_id, value=value),
+            grpc_types.SetAttributeViInt64Request(vi=self._vi, channel_list=channel_list, attribute_id=attribute_id, value_raw=value),
         )
 
     def set_attribute_vi_real64(self, channel_list, attribute_id, value):  # noqa: N802
@@ -408,7 +408,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_string(self, channel_list, attribute_id, value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViString,
-            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_list=channel_list, attribute_id=attribute_id, value=value),
+            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_list=channel_list, attribute_id=attribute_id, value_raw=value),
         )
 
     def unlock(self):  # noqa: N802

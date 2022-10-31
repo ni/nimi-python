@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 23.0.0d68
+# This file is generated from NI-SCOPE API metadata version 23.0.0d72
 functions = {
     'Abort': {
         'documentation': {
@@ -272,6 +272,7 @@ functions = {
             {
                 'direction': 'in',
                 'enum': 'CalibrationTypes',
+                'grpc_enum': None,
                 'name': 'whichOne',
                 'type': 'ViInt32'
             },
@@ -1256,6 +1257,7 @@ functions = {
                     'description': 'Position to start fetching within one record.'
                 },
                 'enum': 'FetchRelativeTo',
+                'grpc_enum': None,
                 'name': 'relativeTo',
                 'type': 'ViInt32'
             },
@@ -1535,6 +1537,7 @@ functions = {
                     'description': 'Position to start fetching within one record.'
                 },
                 'enum': 'FetchRelativeTo',
+                'grpc_enum': None,
                 'name': 'relativeTo',
                 'type': 'ViInt32'
             },
@@ -2042,6 +2045,7 @@ functions = {
                     'description': 'Position to start fetching within one record.'
                 },
                 'enum': 'FetchRelativeTo',
+                'grpc_enum': None,
                 'name': 'relativeTo',
                 'type': 'ViInt32'
             },
@@ -3021,6 +3025,7 @@ functions = {
                 'documentation': {
                     'description': '\nThe value that you want to set the attribute. Some values might not be\nvalid depending on the current settings of the instrument session.\n'
                 },
+                'grpc_name': 'value_raw',
                 'name': 'value',
                 'type': 'ViInt64'
             }
@@ -3105,6 +3110,7 @@ functions = {
                 'documentation': {
                     'description': '\nThe value that you want to set the attribute to. Some values might not\nbe valid depending on the current settings of the instrument session.\n'
                 },
+                'grpc_name': 'value_raw',
                 'name': 'value',
                 'type': 'ViConstString'
             }
