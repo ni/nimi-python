@@ -202,21 +202,24 @@ class TestGrpc(SystemTests):
 
     @pytest.fixture(scope='function')
     def session(self, grpc_channel):
-        with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True, _grpc_channel=grpc_channel) as simulated_session:
+        session_options = niswitch.GrpcSessionOptions(grpc_channel, "", niswitch.SessionInitializationBehavior.AUTO)
+        with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True, _grpc_options=session_options) as simulated_session:
             yield simulated_session
 
     @pytest.fixture(scope='function')
     def session_2532(self, grpc_channel):
+        session_options = niswitch.GrpcSessionOptions(grpc_channel, "", niswitch.SessionInitializationBehavior.AUTO)
         with daqmx_sim_db_lock:
-            simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False, _grpc_channel=grpc_channel)
+            simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False, _grpc_options=session_options)
         yield simulated_session
         with daqmx_sim_db_lock:
             simulated_session.close()
 
     def test_error_message(self, grpc_channel):
+        session_options = niswitch.GrpcSessionOptions(grpc_channel, "", niswitch.SessionInitializationBehavior.AUTO)
         try:
             # We pass in an invalid model name to force going to error_message
-            with niswitch.Session('', 'Invalid Topology', True, True, _grpc_channel=grpc_channel):
+            with niswitch.Session('', 'Invalid Topology', True, True, _grpc_options=session_options):
                 assert False
         except niswitch.Error as e:
             assert e.code == -1074118654
