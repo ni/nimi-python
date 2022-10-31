@@ -518,20 +518,25 @@ class TestGrpc(SystemTests):
         finally:
             proc.kill()
 
+    @pytest.fixture(scope='class')
+    def grpc_options(self, grpc_channel):
+        grpc_options = niscope.GrpcSessionOptions(grpc_channel, "")
+        yield grpc_options
+
     @pytest.fixture(scope='function')
-    def single_instrument_session(self, grpc_channel):
-        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', _grpc_channel=grpc_channel) as simulated_session:
+    def single_instrument_session(self, grpc_options):
+        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             yield simulated_session
 
     @pytest.fixture(scope='function')
-    def multi_instrument_session(self, grpc_channel):
-        with niscope.Session(','.join(self._instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', _grpc_channel=grpc_channel) as simulated_session:
+    def multi_instrument_session(self, grpc_options):
+        with niscope.Session(','.join(self._instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             yield simulated_session
 
-    def test_error_message(self, grpc_channel):
+    def test_error_message(self, grpc_options):
         try:
             # We pass in an invalid model name to force going to error_message
-            with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', _grpc_channel=grpc_channel):
+            with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', _grpc_options=grpc_options):
                 assert False
         except niscope.Error as e:
             assert e.code == -1074118609

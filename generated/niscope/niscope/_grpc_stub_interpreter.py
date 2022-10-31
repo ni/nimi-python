@@ -19,9 +19,10 @@ from . import measurement_stats as measurement_stats  # noqa: F401
 class GrpcStubInterpreter(object):
     '''Interpreter for interacting with a gRPC Stub class'''
 
-    def __init__(self, grpc_channel):
+    def __init__(self, grpc_options):
+        self._grpc_options = grpc_options
         self._lock = threading.RLock()
-        self._client = niscope_grpc.NiScopeStub(grpc_channel)
+        self._client = niscope_grpc.NiScopeStub(grpc_options.grpc_channel)
         self._vi = 0
 
     def _invoke(self, func, request):
@@ -331,8 +332,9 @@ class GrpcStubInterpreter(object):
     def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         response = self._invoke(
             self._client.InitWithOptions,
-            grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string),
+            grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
         )
+        self._close_on_exit = response.new_session_initialized
         return response.vi
 
     def initiate_acquisition(self):  # noqa: N802

@@ -2607,6 +2607,14 @@ functions = {
             'description': '\nPerforms the following initialization actions:\n\n-  Creates a new IVI instrument driver and optionally sets the initial\n   state of the following session properties: Range Check, Cache,\n   Simulate, Record Value Coercions\n-  Opens a session to the specified device using the interface and\n   address you specify for the **resourceName**\n-  Resets the digitizer to a known state if **resetDevice** is set to\n   VI_TRUE\n-  Queries the instrument ID and verifies that it is valid for this\n   instrument driver if the **IDQuery** is set to VI_TRUE\n-  Returns an instrument handle that you use to identify the instrument\n   in all subsequent instrument driver function calls\n'
         },
         'method_name_for_documentation': '__init__',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',

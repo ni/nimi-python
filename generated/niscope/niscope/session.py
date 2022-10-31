@@ -3844,7 +3844,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-SCOPE session to an NI digitizer.'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options={}, *, _grpc_channel=None):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}, *, _grpc_options=None):
         r'''An NI-SCOPE session to an NI digitizer.
 
         Performs the following initialization actions:
@@ -3969,16 +3969,16 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
-            _grpc_channel (grpc.Channel): MeasurementLink gRPC channel
+            _grpc_options (niscope.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
 
 
         Returns:
             session (niscope.Session): A session object representing the device.
 
         '''
-        if _grpc_channel:
+        if _grpc_options:
             import niscope._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_channel)
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
         else:
             interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
@@ -3999,7 +3999,7 @@ class Session(_SessionBase):
         self._interpreter._vi = self._init_with_options(resource_name, id_query, reset_device, options)
 
         # NI-TClk does not work over NI gRPC Device Server
-        if not _grpc_channel:
+        if not _grpc_options:
             self.tclk = nitclk.SessionReference(self._interpreter._vi)
 
         # Store the parameter list for later printing in __repr__
@@ -4027,7 +4027,8 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._interpreter._close_on_exit:
+            self.close()
 
     def initiate(self):
         '''initiate
