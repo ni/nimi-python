@@ -15,9 +15,10 @@ from . import nidmm_pb2_grpc as nidmm_grpc
 class GrpcStubInterpreter(object):
     '''Interpreter for interacting with a gRPC Stub class'''
 
-    def __init__(self, grpc_channel):
+    def __init__(self, grpc_options):
+        self._grpc_options = grpc_options
         self._lock = threading.RLock()
-        self._client = nidmm_grpc.NiDmmStub(grpc_channel)
+        self._client = nidmm_grpc.NiDmmStub(grpc_options.grpc_channel)
         self._vi = 0
 
     def _invoke(self, func, request):
