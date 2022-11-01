@@ -1350,16 +1350,19 @@ class TestGrpc(SystemTests):
 
     @pytest.fixture(scope='function')
     def multi_instrument_session(self, grpc_channel):
-        with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', _grpc_channel=grpc_channel) as simulated_session:
+        grpc_options = nidigital.GrpcSessionOptions(grpc_channel, '')
+        with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', _grpc_options=grpc_options) as simulated_session:
             yield simulated_session
 
     @pytest.fixture(scope='function')
     def single_instrument_session(self, grpc_channel):
-        with nidigital.Session(resource_name=instruments[0], options='Simulate=1, DriverSetup=Model:6570', _grpc_channel=grpc_channel) as simulated_session:
+        grpc_options = nidigital.GrpcSessionOptions(grpc_channel, '')
+        with nidigital.Session(resource_name=instruments[0], options='Simulate=1, DriverSetup=Model:6570', _grpc_options=grpc_options) as simulated_session:
             yield simulated_session
 
     def test_close(self, grpc_channel):
-        session = nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', _grpc_channel=grpc_channel)
+        grpc_options = nidigital.GrpcSessionOptions(grpc_channel, '')
+        session = nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', _grpc_options=grpc_options)
         session.vil = 1
         session.close()
         try:
