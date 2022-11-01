@@ -199,6 +199,16 @@ class NiDmmStub(object):
                 request_serializer=nidmm__pb2.ControlRequest.SerializeToString,
                 response_deserializer=nidmm__pb2.ControlResponse.FromString,
                 )
+        self.ConvertAbsoluteToDigits = channel.unary_unary(
+                '/nidmm_grpc.NiDmm/ConvertAbsoluteToDigits',
+                request_serializer=nidmm__pb2.ConvertAbsoluteToDigitsRequest.SerializeToString,
+                response_deserializer=nidmm__pb2.ConvertAbsoluteToDigitsResponse.FromString,
+                )
+        self.ConvertDigitsToAbsolute = channel.unary_unary(
+                '/nidmm_grpc.NiDmm/ConvertDigitsToAbsolute',
+                request_serializer=nidmm__pb2.ConvertDigitsToAbsoluteRequest.SerializeToString,
+                response_deserializer=nidmm__pb2.ConvertDigitsToAbsoluteResponse.FromString,
+                )
         self.Disable = channel.unary_unary(
                 '/nidmm_grpc.NiDmm/Disable',
                 request_serializer=nidmm__pb2.DisableRequest.SerializeToString,
@@ -671,6 +681,18 @@ class NiDmmServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def Control(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ConvertAbsoluteToDigits(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ConvertDigitsToAbsolute(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1163,6 +1185,16 @@ def add_NiDmmServicer_to_server(servicer, server):
                     servicer.Control,
                     request_deserializer=nidmm__pb2.ControlRequest.FromString,
                     response_serializer=nidmm__pb2.ControlResponse.SerializeToString,
+            ),
+            'ConvertAbsoluteToDigits': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConvertAbsoluteToDigits,
+                    request_deserializer=nidmm__pb2.ConvertAbsoluteToDigitsRequest.FromString,
+                    response_serializer=nidmm__pb2.ConvertAbsoluteToDigitsResponse.SerializeToString,
+            ),
+            'ConvertDigitsToAbsolute': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConvertDigitsToAbsolute,
+                    request_deserializer=nidmm__pb2.ConvertDigitsToAbsoluteRequest.FromString,
+                    response_serializer=nidmm__pb2.ConvertDigitsToAbsoluteResponse.SerializeToString,
             ),
             'Disable': grpc.unary_unary_rpc_method_handler(
                     servicer.Disable,
@@ -2050,6 +2082,40 @@ class NiDmm(object):
         return grpc.experimental.unary_unary(request, target, '/nidmm_grpc.NiDmm/Control',
             nidmm__pb2.ControlRequest.SerializeToString,
             nidmm__pb2.ControlResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ConvertAbsoluteToDigits(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidmm_grpc.NiDmm/ConvertAbsoluteToDigits',
+            nidmm__pb2.ConvertAbsoluteToDigitsRequest.SerializeToString,
+            nidmm__pb2.ConvertAbsoluteToDigitsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ConvertDigitsToAbsolute(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidmm_grpc.NiDmm/ConvertDigitsToAbsolute',
+            nidmm__pb2.ConvertDigitsToAbsoluteRequest.SerializeToString,
+            nidmm__pb2.ConvertDigitsToAbsoluteResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

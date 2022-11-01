@@ -123,6 +123,20 @@ class GrpcStubInterpreter(object):
             grpc_types.ConfigureWaveformAcquisitionRequest(vi=self._vi, measurement_function_raw=measurement_function.value, range=range, rate=rate, waveform_points=waveform_points),
         )
 
+    def convert_absolute_to_digits(self, product_id, function, range, resolution):  # noqa: N802
+        response = self._invoke(
+            self._client.ConvertAbsoluteToDigits,
+            grpc_types.ConvertAbsoluteToDigitsRequest(product_id=product_id, function=function, range=range, resolution=resolution),
+        )
+        return response.digits
+
+    def convert_digits_to_absolute(self, product_id, function, range, resolution):  # noqa: N802
+        response = self._invoke(
+            self._client.ConvertDigitsToAbsolute,
+            grpc_types.ConvertDigitsToAbsoluteRequest(product_id=product_id, function=function, range=range, resolution=resolution),
+        )
+        return response.absolute_units
+
     def disable(self):  # noqa: N802
         self._invoke(
             self._client.Disable,
@@ -251,8 +265,9 @@ class GrpcStubInterpreter(object):
     def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         response = self._invoke(
             self._client.InitWithOptions,
-            grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string),
+            grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
         )
+        self._close_on_exit = response.new_session_initialized
         return response.vi
 
     def initiate(self):  # noqa: N802

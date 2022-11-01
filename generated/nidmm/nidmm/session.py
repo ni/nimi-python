@@ -396,10 +396,7 @@ class _SessionBase(object):
     temp_tc_ref_junc_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ThermocoupleReferenceJunctionType, 1250232)
     '''Type: enums.ThermocoupleReferenceJunctionType
 
-    Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, NIDMM_VAL_TEMP_REF_JUNC_FIXED, is fixed.
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, ThermocoupleReferenceJunctionType.FIXED, is fixed.
     '''
     temp_tc_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ThermocoupleType, 1250231)
     '''Type: enums.ThermocoupleType
@@ -1420,10 +1417,7 @@ class Session(_SessionBase):
             reference_junction_type (enums.ThermocoupleReferenceJunctionType): Specifies the type of reference junction to be used in the reference
                 junction compensation of a thermocouple measurement. NI-DMM uses this
                 value to set the Reference Junction Type property. The only supported
-                value is NIDMM_VAL_TEMP_REF_JUNC_FIXED.
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                value is ThermocoupleReferenceJunctionType.FIXED.
 
         '''
         if type(thermocouple_type) is not enums.ThermocoupleType:
@@ -1522,6 +1516,52 @@ class Session(_SessionBase):
         if type(measurement_function) is not enums.Function:
             raise TypeError('Parameter measurement_function must be of type ' + str(enums.Function))
         self._interpreter.configure_waveform_acquisition(measurement_function, range, rate, waveform_points)
+
+    @ivi_synchronized
+    def convert_absolute_to_digits(self, product_id, function, range, resolution):
+        r'''convert_absolute_to_digits
+
+        TBD
+
+        Args:
+            product_id (int):
+
+            function (int):
+
+            range (float):
+
+            resolution (float):
+
+
+        Returns:
+            digits (float):
+
+        '''
+        digits = self._interpreter.convert_absolute_to_digits(product_id, function, range, resolution)
+        return digits
+
+    @ivi_synchronized
+    def convert_digits_to_absolute(self, product_id, function, range, resolution):
+        r'''convert_digits_to_absolute
+
+        TBD
+
+        Args:
+            product_id (int):
+
+            function (int):
+
+            range (float):
+
+            resolution (float):
+
+
+        Returns:
+            absolute_units (float):
+
+        '''
+        absolute_units = self._interpreter.convert_digits_to_absolute(product_id, function, range, resolution)
+        return absolute_units
 
     @ivi_synchronized
     def disable(self):

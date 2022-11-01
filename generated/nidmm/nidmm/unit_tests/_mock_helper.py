@@ -36,6 +36,12 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureTrigger']['return'] = 0
         self._defaults['ConfigureWaveformAcquisition'] = {}
         self._defaults['ConfigureWaveformAcquisition']['return'] = 0
+        self._defaults['ConvertAbsoluteToDigits'] = {}
+        self._defaults['ConvertAbsoluteToDigits']['return'] = 0
+        self._defaults['ConvertAbsoluteToDigits']['digits'] = None
+        self._defaults['ConvertDigitsToAbsolute'] = {}
+        self._defaults['ConvertDigitsToAbsolute']['return'] = 0
+        self._defaults['ConvertDigitsToAbsolute']['absoluteUnits'] = None
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
         self._defaults['ExportAttributeConfigurationBuffer'] = {}
@@ -208,6 +214,26 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureWaveformAcquisition']['return'] != 0:
             return self._defaults['ConfigureWaveformAcquisition']['return']
         return self._defaults['ConfigureWaveformAcquisition']['return']
+
+    def niDMM_ConvertAbsoluteToDigits(self, product_id, function, range, resolution, digits):  # noqa: N802
+        if self._defaults['ConvertAbsoluteToDigits']['return'] != 0:
+            return self._defaults['ConvertAbsoluteToDigits']['return']
+        # digits
+        if self._defaults['ConvertAbsoluteToDigits']['digits'] is None:
+            raise MockFunctionCallError("niDMM_ConvertAbsoluteToDigits", param='digits')
+        if digits is not None:
+            digits.contents.value = self._defaults['ConvertAbsoluteToDigits']['digits']
+        return self._defaults['ConvertAbsoluteToDigits']['return']
+
+    def niDMM_ConvertDigitsToAbsolute(self, product_id, function, range, resolution, absolute_units):  # noqa: N802
+        if self._defaults['ConvertDigitsToAbsolute']['return'] != 0:
+            return self._defaults['ConvertDigitsToAbsolute']['return']
+        # absolute_units
+        if self._defaults['ConvertDigitsToAbsolute']['absoluteUnits'] is None:
+            raise MockFunctionCallError("niDMM_ConvertDigitsToAbsolute", param='absoluteUnits')
+        if absolute_units is not None:
+            absolute_units.contents.value = self._defaults['ConvertDigitsToAbsolute']['absoluteUnits']
+        return self._defaults['ConvertDigitsToAbsolute']['return']
 
     def niDMM_Disable(self, vi):  # noqa: N802
         if self._defaults['Disable']['return'] != 0:
@@ -656,6 +682,10 @@ class SideEffectsHelper(object):
         mock_library.niDMM_ConfigureTrigger.return_value = 0
         mock_library.niDMM_ConfigureWaveformAcquisition.side_effect = MockFunctionCallError("niDMM_ConfigureWaveformAcquisition")
         mock_library.niDMM_ConfigureWaveformAcquisition.return_value = 0
+        mock_library.niDMM_ConvertAbsoluteToDigits.side_effect = MockFunctionCallError("niDMM_ConvertAbsoluteToDigits")
+        mock_library.niDMM_ConvertAbsoluteToDigits.return_value = 0
+        mock_library.niDMM_ConvertDigitsToAbsolute.side_effect = MockFunctionCallError("niDMM_ConvertDigitsToAbsolute")
+        mock_library.niDMM_ConvertDigitsToAbsolute.return_value = 0
         mock_library.niDMM_Disable.side_effect = MockFunctionCallError("niDMM_Disable")
         mock_library.niDMM_Disable.return_value = 0
         mock_library.niDMM_ExportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niDMM_ExportAttributeConfigurationBuffer")

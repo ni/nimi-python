@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 23.0.0d40
+# This file is generated from NI-DMM API metadata version 23.0.0d9999
 functions = {
     'Abort': {
         'documentation': {
@@ -547,6 +547,72 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'ConvertAbsoluteToDigits': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'productId',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'name': 'function',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'name': 'range',
+                'type': 'ViReal64'
+            },
+            {
+                'direction': 'in',
+                'name': 'resolution',
+                'type': 'ViReal64'
+            },
+            {
+                'direction': 'out',
+                'name': 'digits',
+                'type': 'ViReal64'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'ConvertDigitsToAbsolute': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'productId',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'name': 'function',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'name': 'range',
+                'type': 'ViReal64'
+            },
+            {
+                'direction': 'in',
+                'name': 'resolution',
+                'type': 'ViReal64'
+            },
+            {
+                'direction': 'out',
+                'name': 'absoluteUnits',
+                'type': 'ViReal64'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'Disable': {
         'documentation': {
             'description': '\nPlaces the instrument in a quiescent state where it has minimal or no\nimpact on the system to which it is connected. If a measurement is in\nprogress when this function is called, the measurement is aborted.\n'
@@ -592,11 +658,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'size'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes',
                 'use_array': True
             }
@@ -1339,11 +1406,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'size'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes'
             }
         ],
@@ -1380,6 +1448,14 @@ functions = {
             'description': '\nThis function completes the following tasks:\n\n-  Creates a new IVI instrument driver session and, optionally, sets the\n   initial state of the following session attributes:\n   NIDMM_ATTR_RANGE_CHECK, NIDMM_ATTR_QUERY_INSTR_STATUS,\n   NIDMM_ATTR_CACHE, NIDMM_ATTR_SIMULATE,\n   NIDMM_ATTR_RECORD_COERCIONS.\n-  Opens a session to the device you specify for the **Resource_Name**\n   parameter. If the **ID_Query** parameter is set to VI_TRUE, this\n   function queries the instrument ID and checks that it is valid for\n   this instrument driver.\n-  If the **Reset_Device** parameter is set to VI_TRUE, this function\n   resets the instrument to a known state. Sends initialization commands\n   to set the instrument to the state necessary for the operation of the\n   instrument driver.\n-  Returns a ViSession handle that you use to identify the instrument in\n   all subsequent instrument driver function calls.\n'
         },
         'method_name_for_documentation': '__init__',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -2028,6 +2104,7 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViString'
             }

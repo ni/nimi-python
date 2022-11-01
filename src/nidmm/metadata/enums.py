@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 23.0.0d40
+# This file is generated from NI-DMM API metadata version 23.0.0d9999
 enums = {
     'ADCCalibration': {
         'values': [
@@ -653,7 +653,7 @@ enums = {
                 'documentation': {
                     'description': '\nThermocouple reference juction is fixed at the user-specified\ntemperature.\n'
                 },
-                'name': 'NIDMM_VAL_FIXED',
+                'name': 'NIDMM_VAL_TEMP_REF_JUNC_FIXED',
                 'value': 2
             }
         ]
