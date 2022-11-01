@@ -561,3 +561,4 @@ class TestLibrary(SystemTests):
         yield simulated_session
         with daqmx_sim_db_lock:
             simulated_session.close()
+
