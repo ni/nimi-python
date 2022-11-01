@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 23.0.0d15
+# This file is generated from NI-Digital Pattern Driver API metadata version 23.0.0d50
 attributes = {
     1050002: {
         'access': 'read-write',

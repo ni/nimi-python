@@ -1,7 +1,10 @@
 import array
 import collections
 import os
+import pathlib
+import subprocess
 
+import grpc
 import hightime
 import numpy
 import pytest
@@ -12,27 +15,7 @@ instruments = ['PXI1Slot2', 'PXI1Slot5']
 test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
 
 
-class TestLibrary:
-    @pytest.fixture(scope='function')
-    def multi_instrument_session(self):
-        with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
-            yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def single_instrument_session(self):
-        with nidigital.Session(resource_name=instruments[0], options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
-            yield simulated_session
-
-    def test_close(self):
-        session = nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570')
-        session.vil = 1
-        session.close()
-        try:
-            session.vil = 1
-            assert False
-        except nidigital.Error as e:
-            assert e.code == -1074130544
-
+class SystemTests:
     def test_reset(self, multi_instrument_session):
         multi_instrument_session.selected_function = nidigital.SelectedFunction.PPMU
         assert multi_instrument_session.selected_function == nidigital.SelectedFunction.PPMU
@@ -1309,3 +1292,76 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
             timing_sheet='timing',
             initial_state_high_pins=['HI0', 'LowPins'],
             initial_state_tristate_pins='HI1, HI2')
+
+
+class TestLibrary(SystemTests):
+    @pytest.fixture(scope='function')
+    def multi_instrument_session(self):
+        with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def single_instrument_session(self):
+        with nidigital.Session(resource_name=instruments[0], options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
+            yield simulated_session
+
+    def test_close(self):
+        session = nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570')
+        session.vil = 1
+        session.close()
+        try:
+            session.vil = 1
+            assert False
+        except nidigital.Error as e:
+            assert e.code == -1074130544
+
+
+class TestGrpc(SystemTests):
+    server_address = "localhost"
+    server_port = "31763"
+
+    def _get_grpc_server_exe(self):
+        if os.name != "nt":
+            pytest.skip("Only supported on Windows")
+        import winreg
+        try:
+            reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+            read64key = winreg.KEY_READ | winreg.KEY_WOW64_64KEY
+            with winreg.OpenKey(reg, r"SOFTWARE\National Instruments\Common\Installer", access=read64key) as key:
+                shared_dir, _ = winreg.QueryValueEx(key, "NISHAREDDIR64")
+        except OSError:
+            pytest.skip("NI gRPC Device Server not installed")
+        server_exe = pathlib.Path(shared_dir) / "NI gRPC Device Server" / "ni_grpc_device_server.exe"
+        if not server_exe.exists():
+            pytest.skip("NI gRPC Device Server not installed")
+        return server_exe
+
+    @pytest.fixture(scope='class')
+    def grpc_channel(self):
+        server_exe = self._get_grpc_server_exe()
+        proc = subprocess.Popen([str(server_exe)])
+        try:
+            channel = grpc.insecure_channel(f"{self.server_address}:{self.server_port}")
+            yield channel
+        finally:
+            proc.kill()
+
+    @pytest.fixture(scope='function')
+    def multi_instrument_session(self, grpc_channel):
+        with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', _grpc_channel=grpc_channel) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def single_instrument_session(self, grpc_channel):
+        with nidigital.Session(resource_name=instruments[0], options='Simulate=1, DriverSetup=Model:6570', _grpc_channel=grpc_channel) as simulated_session:
+            yield simulated_session
+
+    def test_close(self, grpc_channel):
+        session = nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', _grpc_channel=grpc_channel)
+        session.vil = 1
+        session.close()
+        try:
+            session.vil = 1
+            assert False
+        except nidigital.Error as e:
+            assert e.code == -1074130544

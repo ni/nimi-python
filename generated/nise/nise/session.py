@@ -116,11 +116,11 @@ class Session(_SessionBase):
         options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
-        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # Note that _library_interpreter clears the session handle in its constructor, so that if
         # _open_session fails, the error handler can reference it.
-        # And then once _open_session succeeds, we can update _library_interpreter._vi
-        # with the actual session handle.
-        self._interpreter._vi = self._open_session(virtual_device_name, options)
+        # And then once _open_session succeeds, we can call this again with the
+        # actual session handle.
+        self._interpreter._set_session_handle(self._open_session(virtual_device_name, options))
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -131,7 +131,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._interpreter._vi` is set
+        # handle is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -162,9 +162,9 @@ class Session(_SessionBase):
         try:
             self._close_session()
         except errors.DriverError:
-            self._interpreter._vi = 0
+            self._interpreter._set_session_handle()
             raise
-        self._interpreter._vi = 0
+        self._interpreter._set_session_handle()
 
     ''' These are code-generated '''
 

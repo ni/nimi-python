@@ -49,15 +49,15 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 %   endif
 % endfor
 
-    def __init__(self, ${config['session_handle_parameter_name']}, encoding='windows-1251'):
+    def __init__(self, session_handle, encoding='windows-1251'):
         self._interpreter = _library_interpreter.LibraryInterpreter(encoding)
-        self._interpreter._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
+        self._interpreter._set_session_handle(session_handle)
         # We need a self._repeated_capability string for passing down to function calls on the LibraryInterpreter class. We just need to set it to empty string.
         self._repeated_capability = ''
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("${config['session_handle_parameter_name']}=" + pp.pformat(${config['session_handle_parameter_name']}))
+        param_list.append("session_handle=" + pp.pformat(session_handle))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
@@ -72,7 +72,7 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
         object.__setattr__(self, key, value)
 
     def _get_tclk_session_reference(self):
-        return self._interpreter._${config['session_handle_parameter_name']}
+        return self._interpreter._get_session_handle()
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
 % if method_template['session_filename'] != '/none':

@@ -10,6 +10,7 @@ METADATA_DIR := $(DRIVER_DIR)/metadata
 METADATA_FILES := $(wildcard $(METADATA_DIR)/*.py)
 SHARED_PROTOS_DIR := $(ROOT_DIR)/src/shared_protos
 PROTO_DIRS := $(METADATA_DIR) $(SHARED_PROTOS_DIR)
+PROTO_FILE ?= $(METADATA_DIR)/$(DRIVER).proto
 
 BUILD_HELPER_SCRIPTS := $(wildcard $(BUILD_HELPER_DIR)/*.py $(BUILD_HELPER_DIR)/helper/*.py)
 
@@ -26,7 +27,7 @@ VPATH = $(TEMPLATE_DIR)
 
 true := T
 false :=
-GRPC_SUPPORTED := $(if $(wildcard $(METADATA_DIR)/$(DRIVER).proto),$(true))
+GRPC_SUPPORTED := $(if $(wildcard $(PROTO_FILE)),$(true))
 
 PYTHON_CMD ?= python
 GRPC_SUPPORT_PARAM := $(if $(GRPC_SUPPORTED),--include-grpc-support)
@@ -61,8 +62,8 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     VERSION \
     $(if $(GRPC_SUPPORTED), \
         _grpc_stub_interpreter.py \
-        $(DRIVER)_pb2.py \
-        $(DRIVER)_pb2_grpc.py \
+        $(basename $(notdir $(PROTO_FILE)))_pb2.py \
+        $(basename $(notdir $(PROTO_FILE)))_pb2_grpc.py \
         nidevice_pb2.py \
         nidevice_pb2_grpc.py \
         session_pb2.py \
