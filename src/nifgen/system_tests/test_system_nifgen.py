@@ -27,21 +27,6 @@ def get_test_file_path(file_name):
     return os.path.join(test_files_base_dir, file_name)
 
 
-@pytest.fixture(scope='function')
-def session():
-    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
-        yield simulated_session
-
-
-@pytest.fixture(scope='function')
-def session_5421():
-    with daqmx_sim_db_lock:
-        simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI')
-    yield simulated_session
-    with daqmx_sim_db_lock:
-        simulated_session.close()
-
-
 invalid_waveforms = ['Not waveform data',
                      numpy.zeros(100, dtype=numpy.uint16),
                      numpy.zeros(100, dtype=numpy.float32),
