@@ -35,7 +35,11 @@ class TestSession(object):
         self.patched_grpc_interpreter = patch('nifake._grpc_stub_interpreter.GrpcStubInterpreter', side_effect=AssertionError('Called into grpc!'))
         self.patched_grpc_interpreter.start()
 
-        self.patched_library_interpreter.init_with_options.side_effect = [SESSION_NUM_FOR_TEST]
+        def interpreter_init(*args, **kwargs):
+            self.patched_library_interpreter._close_on_exit = True
+            return SESSION_NUM_FOR_TEST
+
+        self.patched_library_interpreter.init_with_options.side_effect = interpreter_init
         self.patched_library_interpreter.close.side_effect = [None]
 
         # Mock lock/unlock
@@ -818,7 +822,11 @@ class TestGrpcSession(object):
         self.tclk_patched_library_singleton_get = patch('nitclk._library_interpreter._library_singleton.get', return_value=None)
         self.tclk_patched_library_singleton_get.start()
 
-        self.patched_grpc_interpreter.init_with_options.side_effect = [GRPC_SESSION_OBJECT_FOR_TEST]
+        def interpreter_init(*args, **kwargs):
+            self.patched_grpc_interpreter._close_on_exit = True
+            return GRPC_SESSION_OBJECT_FOR_TEST
+
+        self.patched_grpc_interpreter.init_with_options.side_effect = interpreter_init
         self.patched_grpc_interpreter._close_on_exit = True
         self.patched_grpc_interpreter.close.side_effect = [None]
 
