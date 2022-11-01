@@ -696,6 +696,7 @@ class Session(_SessionBase):
             session (nifake.Session): A session object representing the device.
 
         '''
+        self._grpc_options = _grpc_options
         if _grpc_options:
             import nifake._grpc_stub_interpreter as _grpc_stub_interpreter
             interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
@@ -746,7 +747,7 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if self._interpreter._close_on_exit:
+        if not self._grpc_options or self._interpreter._close_on_exit:
             self.close()
 
     def initiate(self):
