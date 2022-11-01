@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-DMM API metadata version 23.0.0d65
+// This file is generated from NI-DMM API metadata version 23.0.0d9999
 //---------------------------------------------------------------------
 // Proto file for the NI-DMM Metadata
 //---------------------------------------------------------------------
@@ -977,7 +977,7 @@ message ExportAttributeConfigurationBufferRequest {
 
 message ExportAttributeConfigurationBufferResponse {
   int32 status = 1;
-  repeated fixed64 configuration = 2;
+  bytes configuration = 2;
 }
 
 message ExportAttributeConfigurationFileRequest {
@@ -1225,7 +1225,7 @@ message GetSelfCalSupportedResponse {
 
 message ImportAttributeConfigurationBufferRequest {
   nidevice_grpc.Session vi = 1;
-  repeated fixed64 configuration = 2;
+  bytes configuration = 2;
 }
 
 message ImportAttributeConfigurationBufferResponse {
