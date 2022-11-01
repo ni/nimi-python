@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 23.0.0d21
+# This file is generated from NI-DMM API metadata version 23.0.0d40
 config = {
-    'api_version': '23.0.0d21',
+    'api_version': '23.0.0d40',
     'c_function_prefix': 'niDMM_',
     'close_function': 'close',
     'context_manager_name': {

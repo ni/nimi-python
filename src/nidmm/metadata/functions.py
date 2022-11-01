@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 23.0.0d21
+# This file is generated from NI-DMM API metadata version 23.0.0d40
 functions = {
     'Abort': {
         'documentation': {
@@ -155,6 +155,7 @@ functions = {
                 'documentation': {
                     'description': '\nSets the number of triggers you want the DMM to receive before returning\nto the Idle state. The driver sets NIDMM_ATTR_TRIGGER_COUNT to this\nvalue. The default value is 1.\n'
                 },
+                'grpc_enum': 'TriggerCount',
                 'name': 'triggerCount',
                 'type': 'ViInt32'
             },
@@ -163,6 +164,7 @@ functions = {
                 'documentation': {
                     'description': '\nSets the number of measurements the DMM makes in each measurement\nsequence initiated by a trigger. The driver sets\nNIDMM_ATTR_SAMPLE_COUNT to this value. The default value is 1.\n'
                 },
+                'grpc_enum': 'SampleCount',
                 'name': 'sampleCount',
                 'type': 'ViInt32'
             },
@@ -184,6 +186,7 @@ functions = {
                     'description': '\nSets the amount of time in seconds the DMM waits between measurement\ncycles. The driver sets NIDMM_ATTR_SAMPLE_INTERVAL to this value.\nSpecify a sample interval to add settling time between measurement\ncycles or to decrease the measurement rate. **sample_interval** only\napplies when the **Sample_Trigger** is set to INTERVAL.\n\nOn the NI 4060, the **sample_interval** value is used as the settling\ntime. When sample interval is set to 0, the DMM does not settle between\nmeasurement cycles. The NI 4065 and NI 4070/4071/4072 use the value\nspecified in **sample_interval** as additional delay. The default value\n(-1) ensures that the DMM settles for a recommended time. This is the\nsame as using an Immediate trigger.\n',
                     'note': 'This attribute is not used on the NI 4080/4081/4082 and the NI 4050.'
                 },
+                'grpc_enum': 'SampleInterval',
                 'name': 'sampleInterval',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -474,6 +477,7 @@ functions = {
                     'description': '\nSpecifies the time that the DMM waits after it has received a trigger\nbefore taking a measurement. The driver sets the\nNIDMM_ATTR_TRIGGER_DELAY attribute to this value. By default,\n**trigger_delay** is NIDMM_VAL_AUTO_DELAY (-1), which means the DMM\nwaits an appropriate settling time before taking the measurement. On the\nNI 4060, if you set **trigger_delay** to 0, the DMM does not settle\nbefore taking the measurement. The NI 4065 and NI 4070/4071/4072 use the\nvalue specified in **trigger_delay** as additional settling time.\n',
                     'note': '\nWhen using the NI 4050, **Trigger_Delay** must be set to\nNIDMM_VAL_AUTO_DELAY (-1).\n'
                 },
+                'grpc_enum': 'TriggerDelays',
                 'name': 'triggerDelay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -643,6 +647,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -678,6 +683,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -750,6 +756,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -999,6 +1006,7 @@ functions = {
                         ]
                     ]
                 },
+                'grpc_enum': 'CalibrationType',
                 'name': 'calType',
                 'type': 'ViInt32'
             },
@@ -1251,6 +1259,7 @@ functions = {
                         ]
                     ]
                 },
+                'grpc_enum': 'CalibrationType',
                 'name': 'calType',
                 'type': 'ViInt32'
             },
@@ -1509,7 +1518,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'lock',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -1620,6 +1629,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -1655,6 +1665,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -1770,6 +1781,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -2029,7 +2041,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'unlock',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }

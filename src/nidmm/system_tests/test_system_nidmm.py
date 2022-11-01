@@ -1,19 +1,17 @@
+import grpc
 import hightime
 import math
 import nidmm
 import numpy
 import os
+import pathlib
 import pytest
+import subprocess
 import tempfile
 import time
 
 
-class TestLibrary:
-    @pytest.fixture(scope='function')
-    def session(self):
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe') as simulated_session:
-            yield simulated_session
-
+class SystemTests:
     # Basic usability tests
     def test_take_simple_measurement_works(self, session):
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
@@ -194,17 +192,6 @@ class TestLibrary:
             assert len(measurements) == number_of_points_to_read
             assert isinstance(measurements[1], float)
 
-    def test_fetch_waveform_into(self, session):
-        number_of_points_to_read = 100
-        session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
-        with session.initiate():
-            waveform = numpy.empty(number_of_points_to_read, dtype=numpy.float64)
-            # Initialize with NaN so we can later verify all samples were overwritten by the driver.
-            waveform.fill(float('nan'))
-            session.fetch_waveform_into(waveform)
-        for sample in waveform:
-            assert not math.isnan(sample)
-
     def test_fetch_waveform_error(self, session):
         number_of_points_to_read = 100
         try:
@@ -273,15 +260,6 @@ class TestLibrary:
         assert session.sample_count == test_value_1
         os.remove(path)
 
-    def test_error_message(self):
-        try:
-            # We pass in an invalid model name to force going to error_message
-            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
-                assert False
-        except nidmm.Error as e:
-            assert e.code == -1074134964
-            assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1
-
     # No boolean attributes that aren't IVI
     '''
     def test_vi_boolean_attribute(self, session):
@@ -297,3 +275,74 @@ class TestLibrary:
     def test_get_ext_cal_recommended_interval(self, session):
         interval = session.get_ext_cal_recommended_interval()
         assert interval.days == 730
+
+
+class TestLibrary(SystemTests):
+    @pytest.fixture(scope='function')
+    def session(self):
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe') as simulated_session:
+            yield simulated_session
+
+    def test_fetch_waveform_into(self, session):
+        number_of_points_to_read = 100
+        session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
+        with session.initiate():
+            waveform = numpy.empty(number_of_points_to_read, dtype=numpy.float64)
+            # Initialize with NaN so we can later verify all samples were overwritten by the driver.
+            waveform.fill(float('nan'))
+            session.fetch_waveform_into(waveform)
+        for sample in waveform:
+            assert not math.isnan(sample)
+
+    def test_error_message(self):
+        try:
+            # We pass in an invalid model name to force going to error_message
+            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
+                assert False
+        except nidmm.Error as e:
+            assert e.code == -1074134964
+            assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1
+
+
+class TestGrpc(SystemTests):
+    server_address = "localhost"
+    server_port = "31763"
+
+    def _get_grpc_server_exe(self):
+        if os.name != "nt":
+            pytest.skip("Only supported on Windows")
+        import winreg
+        try:
+            reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+            with winreg.OpenKey(reg, r"SOFTWARE\National Instruments\Common\Installer") as key:
+                shared_dir, _ = winreg.QueryValueEx(key, "NISHAREDDIR64")
+        except OSError:
+            pytest.skip("NI gRPC Device Server not installed")
+        server_exe = pathlib.Path(shared_dir) / "NI gRPC Device Server" / "ni_grpc_device_server.exe"
+        if not server_exe.exists():
+            pytest.skip("NI gRPC Device Server not installed")
+        return server_exe
+
+    @pytest.fixture(scope='class')
+    def grpc_channel(self):
+        server_exe = self._get_grpc_server_exe()
+        proc = subprocess.Popen([str(server_exe)])
+        try:
+            channel = grpc.insecure_channel(f"{self.server_address}:{self.server_port}")
+            yield channel
+        finally:
+            proc.kill()
+
+    @pytest.fixture(scope='function')
+    def session(self, grpc_channel):
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_channel=grpc_channel) as simulated_session:
+            yield simulated_session
+
+    def test_error_message(self, grpc_channel):
+        try:
+            # We pass in an invalid model name to force going to error_message
+            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', _grpc_channel=grpc_channel):
+                assert False
+        except nidmm.Error as e:
+            assert e.code == -1074134964
+            assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1

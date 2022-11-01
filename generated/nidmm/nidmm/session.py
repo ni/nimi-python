@@ -927,7 +927,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-DMM session to an NI digital multimeter'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}, *, _grpc_channel=None):
         r'''An NI-DMM session to an NI digital multimeter
 
         This method completes the following tasks:
@@ -1022,12 +1022,18 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
+            _grpc_channel (grpc.Channel): MeasurementLink gRPC channel
+
 
         Returns:
             session (nidmm.Session): A session object representing the device.
 
         '''
-        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        if _grpc_channel:
+            import nidmm._grpc_stub_interpreter as _grpc_stub_interpreter
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_channel)
+        else:
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
