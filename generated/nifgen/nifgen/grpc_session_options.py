@@ -5,8 +5,8 @@ from enum import IntEnum
 
 
 # This constant specifies the gRPC package and service used by this API.
-# MeasurementLink customers should pass this value to the discovery manager to resolve the server instance that provides this interface.
-GRPC_SERVICE_INTERFACE = 'nifgen_grpc.NiFgen'
+# Customers can pass this value to the MeasurementLink discovery service to resolve the server instance that provides this interface.
+GRPC_SERVICE_INTERFACE_NAME = 'nifgen_grpc.NiFgen'
 
 
 class SessionInitializationBehavior(IntEnum):
