@@ -8,6 +8,7 @@ import pathlib
 import pytest
 import subprocess
 import tempfile
+import time
 import warnings
 
 
@@ -527,7 +528,8 @@ class TestGrpc(SystemTests):
         import winreg
         try:
             reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
-            with winreg.OpenKey(reg, r"SOFTWARE\National Instruments\Common\Installer") as key:
+            read64key = winreg.KEY_READ | winreg.KEY_WOW64_64KEY
+            with winreg.OpenKey(reg, r"SOFTWARE\National Instruments\Common\Installer", access=read64key) as key:
                 shared_dir, _ = winreg.QueryValueEx(key, "NISHAREDDIR64")
         except OSError:
             pytest.skip("NI gRPC Device Server not installed")
@@ -540,6 +542,7 @@ class TestGrpc(SystemTests):
     def grpc_channel(self):
         server_exe = self._get_grpc_server_exe()
         proc = subprocess.Popen([str(server_exe)])
+        time.sleep(3)
         try:
             channel = grpc.insecure_channel(f"{self.server_address}:{self.server_port}")
             yield channel
@@ -548,28 +551,32 @@ class TestGrpc(SystemTests):
 
     @pytest.fixture(scope='function')
     def session(self, grpc_channel):
-        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_channel=grpc_channel) as simulated_session:
+        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             yield simulated_session
 
     @pytest.fixture(scope='function')
     def session_5421(self, grpc_channel):
         with daqmx_sim_db_lock:
-            simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI', _grpc_channel=grpc_channel)
+            grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
+            simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI', _grpc_options=grpc_options)
         yield simulated_session
         with daqmx_sim_db_lock:
             simulated_session.close()
 
     def test_error_message(self, grpc_channel):
         try:
+            grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
             # We pass in an invalid model name to force going to error_message
-            with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:invalid_model (2CH);BoardType:PXIe', _grpc_channel=grpc_channel):
+            with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:invalid_model (2CH);BoardType:PXIe', _grpc_options=grpc_options):
                 assert False
         except nifgen.Error as e:
             assert e.code == -1074134944
             assert e.description.find('Insufficient location information or resource not present in the system.') != -1
 
     def test_channels_rep_cap(self, grpc_channel):
-        with nifgen.Session('', '', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_channel=grpc_channel) as session:
+        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
+        with nifgen.Session('', '', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as session:
             session.func_amplitude = 0.5
             assert session.channels[0:1].func_amplitude == 0.5
 
@@ -579,7 +586,8 @@ class TestGrpc(SystemTests):
 
     ''' Removed due to OSP disabled - #891
     def test_fir_filter_coefficients(self, grpc_channel):
-        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI', _grpc_channel=grpc_channel) as session:
+        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI', _grpc_options=grpc_options) as session:
             coeff_array = [0 for i in range(95)]
             coeff_array[0] = -1.0
             coeff_array[2] = 1.0
@@ -591,13 +599,14 @@ class TestGrpc(SystemTests):
     '''
 
     def test_channel_format_types(self, grpc_channel):
-        with nifgen.Session('', [0, 1], False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_channel=grpc_channel) as simulated_session:
+        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
+        with nifgen.Session('', [0, 1], False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session('', range(2), False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_channel=grpc_channel) as simulated_session:
+        with nifgen.Session('', range(2), False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session('', '0,1', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_channel=grpc_channel) as simulated_session:
+        with nifgen.Session('', '0,1', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session('', None, False, 'Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe', _grpc_channel=grpc_channel) as simulated_session:
+        with nifgen.Session('', None, False, 'Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe', _grpc_channel=grpc_channel) as simulated_session:
+        with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             assert simulated_session.channel_count == 2
