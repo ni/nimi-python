@@ -272,7 +272,7 @@ if grpc_supported:
 % endfor
 
         # Call specified init function
-        # Note that _library_interpreter clears the session handle in its constructor, so that if
+        # Note that _interpreter clears the session handle in its constructor, so that if
         # ${init_function['python_name']} fails, the error handler can reference it.
         # And then once ${init_function['python_name']} succeeds, we can call this again with the
         # actual session handle.
