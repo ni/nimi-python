@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 23.0.0d9999
+# This file is generated from NI-DMM API metadata version 23.0.0d67
 attributes = {
     1050005: {
         'access': 'read-write',
