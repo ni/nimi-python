@@ -424,8 +424,9 @@ class GrpcStubInterpreter(object):
     def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         response = self._invoke(
             self._client.InitWithOptions,
-            grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string),
+            grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
         )
+        self._close_on_exit = response.new_session_initialized
         return response.vi
 
     def initiate(self):  # noqa: N802
@@ -542,7 +543,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_int32(self, channel_name, attribute, value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViInt32,
-            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute=attribute, value=value),
+            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute=attribute, value_raw=value),
         )
 
     def set_attribute_vi_int64(self, channel_name, attribute, value):  # noqa: N802

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 23.0.0d50
+# This file is generated from NI-Digital Pattern Driver API metadata version 23.0.0d57
 functions = {
     'Abort': {
         'documentation': {
@@ -2697,6 +2697,14 @@ functions = {
             'description': 'Creates and returns a new session to the specified digital pattern instrument to use in all subsequent function calls. To place the instrument in a known startup state when creating a new session, set the reset parameter to VI_TRUE, which is equivalent to calling the niDigital_reset function immediately after initializing the session.\n'
         },
         'method_name_for_documentation': '__init__',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -3360,6 +3368,7 @@ functions = {
                 'documentation': {
                     'description': 'The value to which you want to set the attribute; some of the values might not be valid depending on the current settings of the instrument session.\n'
                 },
+                'grpc_enum': 'NiDigitalInt32AttributeValues',
                 'name': 'value',
                 'type': 'ViInt32'
             }
