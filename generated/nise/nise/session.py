@@ -116,7 +116,7 @@ class Session(_SessionBase):
         options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
-        # Note that _library_interpreter clears the session handle in its constructor, so that if
+        # Note that _interpreter clears the session handle in its constructor, so that if
         # _open_session fails, the error handler can reference it.
         # And then once _open_session succeeds, we can call this again with the
         # actual session handle.

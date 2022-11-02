@@ -1401,7 +1401,7 @@ class Session(_SessionBase):
         )
 
         # Call specified init function
-        # Note that _library_interpreter clears the session handle in its constructor, so that if
+        # Note that _interpreter clears the session handle in its constructor, so that if
         # _init_with_topology fails, the error handler can reference it.
         # And then once _init_with_topology succeeds, we can call this again with the
         # actual session handle.
