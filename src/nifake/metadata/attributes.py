@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d65
+# This file is generated from NI-FAKE API metadata version 23.0.0d70
 attributes = {
     1000000: {
         'access': 'read-write',
@@ -49,6 +49,7 @@ attributes = {
     },
     1000005: {
         'access': 'read-write',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'An attribute with an enum that is also a float'
         },

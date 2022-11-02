@@ -30,6 +30,7 @@ daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
 def get_test_file_path(file_name):
     return os.path.join(test_files_base_dir, file_name)
 
+
 invalid_waveforms = ['Not waveform data',
                      numpy.zeros(100, dtype=numpy.uint16),
                      numpy.zeros(100, dtype=numpy.float32),
