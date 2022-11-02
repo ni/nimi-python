@@ -18,9 +18,10 @@ from . import history_ram_cycle_information as history_ram_cycle_information  # 
 class GrpcStubInterpreter(object):
     '''Interpreter for interacting with a gRPC Stub class'''
 
-    def __init__(self, grpc_channel):
+    def __init__(self, grpc_options):
+        self._grpc_options = grpc_options
         self._lock = threading.RLock()
-        self._client = nidigital_grpc.NiDigitalStub(grpc_channel)
+        self._client = nidigital_grpc.NiDigitalStub(grpc_options.grpc_channel)
         self._set_session_handle()
 
     def _set_session_handle(self, value=session_grpc_types.Session()):

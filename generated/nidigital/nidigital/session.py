@@ -3205,7 +3205,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-Digital Pattern Driver session'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options={}, *, _grpc_channel=None):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}, *, _grpc_options=None):
         r'''An NI-Digital Pattern Driver session
 
         Creates and returns a new session to the specified digital pattern instrument to use in all subsequent method calls. To place the instrument in a known startup state when creating a new session, set the reset parameter to True, which is equivalent to calling the reset method immediately after initializing the session.
@@ -3253,16 +3253,16 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
-            _grpc_channel (grpc.Channel): MeasurementLink gRPC channel
+            _grpc_options (nidigital.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
 
 
         Returns:
             new_vi (int): The returned instrument session.
 
         '''
-        if _grpc_channel:
+        if _grpc_options:
             import nidigital._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_channel)
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
         else:
             interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
@@ -3283,7 +3283,7 @@ class Session(_SessionBase):
         self._interpreter._set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
 
         # NI-TClk does not work over NI gRPC Device Server
-        if not _grpc_channel:
+        if not _grpc_options:
             self.tclk = nitclk.SessionReference(self._interpreter._get_session_handle())
 
         # Store the parameter list for later printing in __repr__
@@ -3310,7 +3310,8 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._interpreter._close_on_exit:
+            self.close()
 
     def initiate(self):
         '''initiate
