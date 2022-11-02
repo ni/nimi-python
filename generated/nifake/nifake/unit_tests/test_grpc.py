@@ -58,8 +58,8 @@ class TestGrpcStubInterpreter(object):
                     error_func = _mock_helper.MockFunctionCallError(f)
                     setattr(self, f, MagicMock(spec_set=self._sample_func, side_effect=error_func))
 
-        def __call__(self, session_options):
-            self._session_options = session_options
+        def __call__(self, grpc_channel):
+            self._grpc_channel = grpc_channel
             return self
 
     def setup_method(self, method):
@@ -83,7 +83,7 @@ class TestGrpcStubInterpreter(object):
         interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(session_options)
         assert interpreter._client is self.patched_grpc_stub
         assert interpreter._vi == 0
-        assert self.patched_grpc_stub._session_options.grpc_channel is grpc_channel
+        assert self.patched_grpc_stub._grpc_channel is grpc_channel
         interpreter._vi = GRPC_SESSION_OBJECT_FOR_TEST
         return interpreter
 

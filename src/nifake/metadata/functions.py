@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d65
+# This file is generated from NI-FAKE API metadata version 23.0.0d70
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -2294,7 +2294,7 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
-                'grpc_name': 'attributeValue_raw',
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViInt64'
             }
@@ -2377,7 +2377,7 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
-                'grpc_name': 'attributeValue_raw',
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViConstString'
             }
