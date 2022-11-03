@@ -107,18 +107,10 @@ class GrpcStubInterpreter(object):
         )
 
     def cal_fetch_date(self, which_one):  # noqa: N802
-        response = self._invoke(
-            self._client.CalFetchDate,
-            grpc_types.CalFetchDateRequest(vi=self._vi, which_one=which_one.value),
-        )
-        return response.year, response.month, response.day
+        raise NotImplementedError('cal_fetch_date is not supported over gRPC')
 
     def cal_fetch_temperature(self, which_one):  # noqa: N802
-        response = self._invoke(
-            self._client.CalFetchTemperature,
-            grpc_types.CalFetchTemperatureRequest(vi=self._vi, which_one=which_one),
-        )
-        return response.temperature
+        raise NotImplementedError('cal_fetch_temperature is not supported over gRPC')
 
     def self_cal(self, channel_list, option):  # noqa: N802
         self._invoke(
@@ -163,10 +155,7 @@ class GrpcStubInterpreter(object):
         )
 
     def configure_ref_levels(self, low, mid, high):  # noqa: N802
-        self._invoke(
-            self._client.ConfigureRefLevels,
-            grpc_types.ConfigureRefLevelsRequest(vi=self._vi, low=low, mid=mid, high=high),
-        )
+        raise NotImplementedError('configure_ref_levels is not supported over gRPC')
 
     def configure_trigger_digital(self, trigger_source, slope, holdoff, delay):  # noqa: N802
         self._invoke(
@@ -372,10 +361,7 @@ class GrpcStubInterpreter(object):
         )
 
     def reset_with_defaults(self):  # noqa: N802
-        self._invoke(
-            self._client.ResetWithDefaults,
-            grpc_types.ResetWithDefaultsRequest(vi=self._vi),
-        )
+        raise NotImplementedError('reset_with_defaults is not supported over gRPC')
 
     def send_software_trigger_edge(self, which_trigger):  # noqa: N802
         self._invoke(
@@ -392,7 +378,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_int32(self, channel_list, attribute_id, value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViInt32,
-            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_list=channel_list, attribute_id=attribute_id, value=value),
+            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_list=channel_list, attribute_id=attribute_id, value_raw=value),
         )
 
     def set_attribute_vi_int64(self, channel_list, attribute_id, value):  # noqa: N802
@@ -404,7 +390,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_real64(self, channel_list, attribute_id, value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViReal64,
-            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_list=channel_list, attribute_id=attribute_id, value=value),
+            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_list=channel_list, attribute_id=attribute_id, value_raw=value),
         )
 
     def set_attribute_vi_string(self, channel_list, attribute_id, value):  # noqa: N802
@@ -423,11 +409,7 @@ class GrpcStubInterpreter(object):
         )
 
     def error_message(self, error_code):  # noqa: N802
-        response = self._invoke(
-            self._client.ErrorMessage,
-            grpc_types.ErrorMessageRequest(vi=self._vi, error_code=error_code),
-        )
-        return response.error_message
+        raise NotImplementedError('error_message is not supported over gRPC')
 
     def reset(self):  # noqa: N802
         self._invoke(

@@ -227,30 +227,6 @@ class SystemTests:
         assert isinstance(measurement_stat[0].__str__(), str)
         assert isinstance(measurement_stat[0].__repr__(), str)
 
-    def test_get_self_cal_last_date_time(self, single_instrument_session):
-        last_cal = single_instrument_session.get_self_cal_last_date_and_time()
-        assert last_cal.month == 12
-        assert last_cal.day == 21
-        assert last_cal.year == 1999
-        assert last_cal.hour == 0
-        assert last_cal.minute == 0
-
-    def test_get_ext_cal_last_date_time(self, single_instrument_session):
-        last_cal = single_instrument_session.get_ext_cal_last_date_and_time()
-        assert last_cal.month == 12
-        assert last_cal.day == 21
-        assert last_cal.year == 1999
-        assert last_cal.hour == 0
-        assert last_cal.minute == 0
-
-    def test_get_self_cal_last_temperature(self, single_instrument_session):
-        last_cal_temp = single_instrument_session.get_self_cal_last_temp()
-        assert last_cal_temp == 25
-
-    def test_get_ext_cal_last_temperature(self, single_instrument_session):
-        last_cal_temp = single_instrument_session.get_ext_cal_last_temp()
-        assert last_cal_temp == 25
-
     def test_self_test(self, multi_instrument_session):
         # We should not get an assert if self_test passes
         multi_instrument_session.self_test()
@@ -324,10 +300,6 @@ class SystemTests:
         assert multi_instrument_session.allow_more_records_than_memory is False
 
     # Basic configuration tests
-    def test_configure_ref_levels(self, single_instrument_session):
-        single_instrument_session._configure_ref_levels()
-        assert 90.0 == single_instrument_session.meas_chan_high_ref_level
-
     def test_configure_trigger_digital(self, multi_instrument_session):
         trigger_source = '/{0}/VAL_RTSI_0'.format(self._instruments[1])
         multi_instrument_session.configure_trigger_digital(trigger_source)
@@ -486,6 +458,34 @@ class TestLibrary(SystemTests):
             assert e.code == -1074118609
             assert e.description.find('Simulation does not support the selected model and board type.') != -1
 
+    def test_get_self_cal_last_date_time(self, single_instrument_session):
+        last_cal = single_instrument_session.get_self_cal_last_date_and_time()
+        assert last_cal.month == 12
+        assert last_cal.day == 21
+        assert last_cal.year == 1999
+        assert last_cal.hour == 0
+        assert last_cal.minute == 0
+    
+    def test_get_ext_cal_last_date_time(self, single_instrument_session):
+        last_cal = single_instrument_session.get_ext_cal_last_date_and_time()
+        assert last_cal.month == 12
+        assert last_cal.day == 21
+        assert last_cal.year == 1999
+        assert last_cal.hour == 0
+        assert last_cal.minute == 0
+
+    def test_get_self_cal_last_temperature(self, single_instrument_session):
+        last_cal_temp = single_instrument_session.get_self_cal_last_temp()
+        assert last_cal_temp == 25
+
+    def test_get_ext_cal_last_temperature(self, single_instrument_session):
+        last_cal_temp = single_instrument_session.get_ext_cal_last_temp()
+        assert last_cal_temp == 25
+
+    def test_configure_ref_levels(self, single_instrument_session):
+        single_instrument_session._configure_ref_levels()
+        assert 90.0 == single_instrument_session.meas_chan_high_ref_level
+
 
 class TestGrpc(SystemTests):
     server_address = "localhost"
@@ -541,3 +541,33 @@ class TestGrpc(SystemTests):
         except niscope.Error as e:
             assert e.code == -1074118609
             assert e.description.find('Simulation does not support the selected model and board type.') != -1
+
+    def test_get_self_cal_last_date_time(self, single_instrument_session):
+        with pytest.raises(NotImplementedError) as exc_info:
+            single_instrument_session.get_self_cal_last_date_and_time()
+        assert exc_info.value.args[0] == 'cal_fetch_date is not supported over gRPC'
+        assert str(exc_info.value) == 'cal_fetch_date is not supported over gRPC'
+
+    def test_get_ext_cal_last_date_time(self, single_instrument_session):
+        with pytest.raises(NotImplementedError) as exc_info:
+            single_instrument_session.get_ext_cal_last_date_and_time()
+        assert exc_info.value.args[0] == 'cal_fetch_date is not supported over gRPC'
+        assert str(exc_info.value) == 'cal_fetch_date is not supported over gRPC'
+
+    def test_get_self_cal_last_temperature(self, single_instrument_session):
+        with pytest.raises(NotImplementedError) as exc_info:
+            single_instrument_session.get_self_cal_last_temp()
+        assert exc_info.value.args[0] == 'cal_fetch_temperature is not supported over gRPC'
+        assert str(exc_info.value) == 'cal_fetch_temperature is not supported over gRPC'
+
+    def test_get_ext_cal_last_temperature(self, single_instrument_session):
+        with pytest.raises(NotImplementedError) as exc_info:
+            single_instrument_session.get_ext_cal_last_temp()
+        assert exc_info.value.args[0] == 'cal_fetch_temperature is not supported over gRPC'
+        assert str(exc_info.value) == 'cal_fetch_temperature is not supported over gRPC'
+
+    def test_configure_ref_levels(self, single_instrument_session):
+        with pytest.raises(NotImplementedError) as exc_info:
+            single_instrument_session._configure_ref_levels()
+        assert exc_info.value.args[0] == 'configure_ref_levels is not supported over gRPC'
+        assert str(exc_info.value) == 'configure_ref_levels is not supported over gRPC'

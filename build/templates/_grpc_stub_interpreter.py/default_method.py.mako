@@ -12,13 +12,18 @@
     if return_statement == 'return':
         return_statement = None
     capture_response = 'response = ' if return_statement else ''
+    included_in_proto = f.get('included_in_proto', True)
 %>\
 
     def ${full_func_name}(${method_decl_params}):  # noqa: N802
+% if included_in_proto:
         ${capture_response}self._invoke(
             self._client.${grpc_name},
             grpc_types.${grpc_name}Request(${grpc_request_args}),
         )
 % if return_statement:
         ${return_statement}
+% endif
+% else:
+        raise NotImplementedError('${full_func_name} is not supported over gRPC')
 % endif
