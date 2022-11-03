@@ -82,10 +82,10 @@ class TestGrpcStubInterpreter(object):
         session_options = nifake.GrpcSessionOptions(grpc_channel, "", nifake.SessionInitializationBehavior.AUTO)
         interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(session_options)
         assert interpreter._client is self.patched_grpc_stub
-        assert interpreter._get_session_handle().id == 0
-        assert interpreter._get_session_handle().name == ""
+        assert interpreter.get_session_handle().id == 0
+        assert interpreter.get_session_handle().name == ""
         assert self.patched_grpc_stub._grpc_channel is grpc_channel
-        interpreter._set_session_handle(GRPC_SESSION_OBJECT_FOR_TEST)
+        interpreter.set_session_handle(GRPC_SESSION_OBJECT_FOR_TEST)
         return interpreter
 
     def _check_fields(self, response_class, **kwargs):

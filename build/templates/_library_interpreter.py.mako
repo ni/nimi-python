@@ -78,12 +78,12 @@ class LibraryInterpreter(object):
         # Initialize _${config['session_handle_parameter_name']} to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.
-        self._set_session_handle()
+        self.set_session_handle()
 
-    def _set_session_handle(self, value=0):
+    def set_session_handle(self, value=0):
         self._${config['session_handle_parameter_name']} = value
 
-    def _get_session_handle(self):
+    def get_session_handle(self):
         return self._${config['session_handle_parameter_name']}
 
 <%include file="/_library_interpreter.py/_get_error_description.py.mako" args="config=config" />\

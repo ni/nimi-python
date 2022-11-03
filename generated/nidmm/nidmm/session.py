@@ -1046,7 +1046,7 @@ class Session(_SessionBase):
         # _init_with_options fails, the error handler can reference it.
         # And then once _init_with_options succeeds, we can call this again with the
         # actual session handle.
-        self._interpreter._set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
+        self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -1100,9 +1100,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._interpreter._set_session_handle()
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._set_session_handle()
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 

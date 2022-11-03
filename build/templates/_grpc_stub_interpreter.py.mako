@@ -35,12 +35,12 @@ class GrpcStubInterpreter(object):
         self._grpc_options = grpc_options
         self._lock = threading.RLock()
         self._client = ${module_name}_grpc.${service_class_prefix}Stub(grpc_options.grpc_channel)
-        self._set_session_handle()
+        self.set_session_handle()
 
-    def _set_session_handle(self, value=session_grpc_types.Session()):
+    def set_session_handle(self, value=session_grpc_types.Session()):
         self._${config['session_handle_parameter_name']} = value
 
-    def _get_session_handle(self):
+    def get_session_handle(self):
         return self._${config['session_handle_parameter_name']}
 
     def _invoke(self, func, request):

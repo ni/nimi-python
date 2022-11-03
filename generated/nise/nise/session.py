@@ -120,7 +120,7 @@ class Session(_SessionBase):
         # _open_session fails, the error handler can reference it.
         # And then once _open_session succeeds, we can call this again with the
         # actual session handle.
-        self._interpreter._set_session_handle(self._open_session(virtual_device_name, options))
+        self._interpreter.set_session_handle(self._open_session(virtual_device_name, options))
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -162,9 +162,9 @@ class Session(_SessionBase):
         try:
             self._close_session()
         except errors.DriverError:
-            self._interpreter._set_session_handle()
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._set_session_handle()
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 

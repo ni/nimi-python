@@ -1405,7 +1405,7 @@ class Session(_SessionBase):
         # _init_with_topology fails, the error handler can reference it.
         # And then once _init_with_topology succeeds, we can call this again with the
         # actual session handle.
-        self._interpreter._set_session_handle(self._init_with_topology(resource_name, topology, simulate, reset_device))
+        self._interpreter.set_session_handle(self._init_with_topology(resource_name, topology, simulate, reset_device))
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -1470,9 +1470,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._interpreter._set_session_handle()
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._set_session_handle()
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 

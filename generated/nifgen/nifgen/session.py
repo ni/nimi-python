@@ -3104,11 +3104,11 @@ class Session(_SessionBase):
         # _initialize_with_channels fails, the error handler can reference it.
         # And then once _initialize_with_channels succeeds, we can call this again with the
         # actual session handle.
-        self._interpreter._set_session_handle(self._initialize_with_channels(resource_name, channel_name, reset_device, options))
+        self._interpreter.set_session_handle(self._initialize_with_channels(resource_name, channel_name, reset_device, options))
 
         # NI-TClk does not work over NI gRPC Device Server
         if not _grpc_options:
-            self.tclk = nitclk.SessionReference(self._interpreter._get_session_handle())
+            self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -3183,9 +3183,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._interpreter._set_session_handle()
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._set_session_handle()
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 

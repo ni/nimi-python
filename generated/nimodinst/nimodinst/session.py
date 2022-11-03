@@ -151,7 +151,7 @@ class Session(object):
         # And then once _open_installed_devices_session succeeds, we can call this again with the
         # actual session handle.
         session_handle, self._item_count = self._open_installed_devices_session(driver)
-        self._interpreter._set_session_handle(session_handle)
+        self._interpreter.set_session_handle(session_handle)
         self._param_list = "driver=" + pp.pformat(driver)
 
         self.devices = []
@@ -191,9 +191,9 @@ class Session(object):
         try:
             self._close_installed_devices_session()
         except errors.DriverError:
-            self._interpreter._set_session_handle()
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._set_session_handle()
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 

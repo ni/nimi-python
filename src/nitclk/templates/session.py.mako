@@ -51,7 +51,7 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 
     def __init__(self, session_handle, encoding='windows-1251'):
         self._interpreter = _library_interpreter.LibraryInterpreter(encoding)
-        self._interpreter._set_session_handle(session_handle)
+        self._interpreter.set_session_handle(session_handle)
         # We need a self._repeated_capability string for passing down to function calls on the LibraryInterpreter class. We just need to set it to empty string.
         self._repeated_capability = ''
 
@@ -72,7 +72,7 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
         object.__setattr__(self, key, value)
 
     def _get_tclk_session_reference(self):
-        return self._interpreter._get_session_handle()
+        return self._interpreter.get_session_handle()
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
 % if method_template['session_filename'] != '/none':

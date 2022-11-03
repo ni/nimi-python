@@ -276,15 +276,15 @@ if grpc_supported:
         # ${init_function['python_name']} fails, the error handler can reference it.
         # And then once ${init_function['python_name']} succeeds, we can call this again with the
         # actual session handle.
-        self._interpreter._set_session_handle(self.${init_function['python_name']}(${init_call_params}))
+        self._interpreter.set_session_handle(self.${init_function['python_name']}(${init_call_params}))
 
 % if config['uses_nitclk']:
 %   if grpc_supported:
         # NI-TClk does not work over NI gRPC Device Server
         if not _grpc_options:
-            self.tclk = nitclk.SessionReference(self._interpreter._get_session_handle())
+            self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 %   else:
-        self.tclk = nitclk.SessionReference(self._interpreter._get_session_handle())
+        self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 %   endif
 
 % endif
@@ -336,9 +336,9 @@ if grpc_supported:
         try:
             self._${close_function_name}()
         except errors.DriverError:
-            self._interpreter._set_session_handle()
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._set_session_handle()
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):

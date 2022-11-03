@@ -6909,7 +6909,7 @@ class Session(_SessionBase):
         # _fancy_initialize fails, the error handler can reference it.
         # And then once _fancy_initialize succeeds, we can call this again with the
         # actual session handle.
-        self._interpreter._set_session_handle(self._fancy_initialize(resource_name, channels, reset, options, independent_channels))
+        self._interpreter.set_session_handle(self._fancy_initialize(resource_name, channels, reset, options, independent_channels))
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -6963,9 +6963,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._interpreter._set_session_handle()
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._set_session_handle()
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 
