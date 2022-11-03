@@ -541,6 +541,7 @@ class TestGrpc(SystemTests):
 
     @pytest.fixture(scope='class')
     def grpc_channel(self):
+        # TODO(DavidCurtiss): Remove the next 3 lines once (and the above method) the server is started automatically
         server_exe = self._get_grpc_server_exe()
         proc = subprocess.Popen([str(server_exe)])
         time.sleep(3)
