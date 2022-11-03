@@ -1,5 +1,15 @@
-# -*- coding: utf-8 -*-
+${template_parameters['encoding_tag']}
+# This file was generated
+<%
+    config = template_parameters['metadata'].config
+%>\
+
 from enum import IntEnum
+
+
+# This constant specifies the gRPC package and service used by this API.
+# Customers can pass this value to the MeasurementLink discovery service to resolve the server instance that provides this interface.
+GRPC_SERVICE_INTERFACE_NAME = '${config["module_name"]}_grpc.${config["grpc_service_class_prefix"]}'
 
 
 class SessionInitializationBehavior(IntEnum):
