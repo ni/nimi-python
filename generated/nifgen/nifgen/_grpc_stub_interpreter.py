@@ -91,19 +91,19 @@ class GrpcStubInterpreter(object):
     def clear_arb_sequence(self, sequence_handle):  # noqa: N802
         self._invoke(
             self._client.ClearArbSequence,
-            grpc_types.ClearArbSequenceRequest(vi=self._vi, sequence_handle_raw=sequence_handle),
+            grpc_types.ClearArbSequenceRequest(vi=self._vi, sequence_handle=sequence_handle),
         )
 
     def clear_arb_waveform(self, waveform_handle):  # noqa: N802
         self._invoke(
             self._client.ClearArbWaveform,
-            grpc_types.ClearArbWaveformRequest(vi=self._vi, waveform_handle_raw=waveform_handle),
+            grpc_types.ClearArbWaveformRequest(vi=self._vi, waveform_handle=waveform_handle),
         )
 
     def clear_freq_list(self, frequency_list_handle):  # noqa: N802
         self._invoke(
             self._client.ClearFreqList,
-            grpc_types.ClearFreqListRequest(vi=self._vi, frequency_list_handle_raw=frequency_list_handle),
+            grpc_types.ClearFreqListRequest(vi=self._vi, frequency_list_handle=frequency_list_handle),
         )
 
     def clear_user_standard_waveform(self, channel_name):  # noqa: N802
@@ -139,7 +139,7 @@ class GrpcStubInterpreter(object):
     def configure_standard_waveform(self, channel_name, waveform, amplitude, dc_offset, frequency, start_phase):  # noqa: N802
         self._invoke(
             self._client.ConfigureStandardWaveform,
-            grpc_types.ConfigureStandardWaveformRequest(vi=self._vi, channel_name=channel_name, waveform_raw=waveform.value, amplitude=amplitude, dc_offset=dc_offset, frequency=frequency, start_phase=start_phase),
+            grpc_types.ConfigureStandardWaveformRequest(vi=self._vi, channel_name=channel_name, waveform=waveform.value, amplitude=amplitude, dc_offset=dc_offset, frequency=frequency, start_phase=start_phase),
         )
 
     def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array):  # noqa: N802
@@ -159,7 +159,7 @@ class GrpcStubInterpreter(object):
     def create_freq_list(self, waveform, frequency_array, duration_array):  # noqa: N802
         response = self._invoke(
             self._client.CreateFreqList,
-            grpc_types.CreateFreqListRequest(vi=self._vi, waveform_raw=waveform.value, frequency_array=frequency_array, duration_array=duration_array),
+            grpc_types.CreateFreqListRequest(vi=self._vi, waveform=waveform.value, frequency_array=frequency_array, duration_array=duration_array),
         )
         return response.frequency_list_handle
 
@@ -176,14 +176,14 @@ class GrpcStubInterpreter(object):
     def create_waveform_from_file_f64(self, channel_name, file_name, byte_order):  # noqa: N802
         response = self._invoke(
             self._client.CreateWaveformFromFileF64,
-            grpc_types.CreateWaveformFromFileF64Request(vi=self._vi, channel_name=channel_name, file_name=file_name, byte_order_raw=byte_order.value),
+            grpc_types.CreateWaveformFromFileF64Request(vi=self._vi, channel_name=channel_name, file_name=file_name, byte_order=byte_order.value),
         )
         return response.waveform_handle
 
     def create_waveform_from_file_i16(self, channel_name, file_name, byte_order):  # noqa: N802
         response = self._invoke(
             self._client.CreateWaveformFromFileI16,
-            grpc_types.CreateWaveformFromFileI16Request(vi=self._vi, channel_name=channel_name, file_name=file_name, byte_order_raw=byte_order.value),
+            grpc_types.CreateWaveformFromFileI16Request(vi=self._vi, channel_name=channel_name, file_name=file_name, byte_order=byte_order.value),
         )
         return response.waveform_handle
 
@@ -403,7 +403,7 @@ class GrpcStubInterpreter(object):
     def send_software_edge_trigger(self, trigger, trigger_id):  # noqa: N802
         self._invoke(
             self._client.SendSoftwareEdgeTrigger,
-            grpc_types.SendSoftwareEdgeTriggerRequest(vi=self._vi, trigger_raw=trigger.value, trigger_id=trigger_id),
+            grpc_types.SendSoftwareEdgeTriggerRequest(vi=self._vi, trigger=trigger.value, trigger_id=trigger_id),
         )
 
     def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -424,22 +424,22 @@ class GrpcStubInterpreter(object):
             grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
         )
 
-    def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value_raw):  # noqa: N802
+    def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViString,
-            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value_raw),
+            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
         )
 
     def set_named_waveform_next_write_position(self, channel_name, waveform_name, relative_to, offset):  # noqa: N802
         self._invoke(
             self._client.SetNamedWaveformNextWritePosition,
-            grpc_types.SetNamedWaveformNextWritePositionRequest(vi=self._vi, channel_name=channel_name, waveform_name=waveform_name, relative_to_raw=relative_to.value, offset=offset),
+            grpc_types.SetNamedWaveformNextWritePositionRequest(vi=self._vi, channel_name=channel_name, waveform_name=waveform_name, relative_to=relative_to.value, offset=offset),
         )
 
     def set_waveform_next_write_position(self, channel_name, waveform_handle, relative_to, offset):  # noqa: N802
         self._invoke(
             self._client.SetWaveformNextWritePosition,
-            grpc_types.SetWaveformNextWritePositionRequest(vi=self._vi, channel_name=channel_name, waveform_handle=waveform_handle, relative_to_raw=relative_to.value, offset=offset),
+            grpc_types.SetWaveformNextWritePositionRequest(vi=self._vi, channel_name=channel_name, waveform_handle=waveform_handle, relative_to=relative_to.value, offset=offset),
         )
 
     def unlock(self):  # noqa: N802

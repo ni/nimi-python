@@ -81,8 +81,10 @@ def _add_python_parameter_name(parameter):
 def _add_grpc_parameter_name(parameter):
     '''Adds a grpc_name key/value pair to the parameter metadata'''
     if 'grpc_name' not in parameter:
-        parameter['grpc_name'] = parameter['python_name']
-
+        if parameter.get('grpc_mapped_enum') is not None:
+            parameter['grpc_name'] = parameter['python_name'] + '_raw'
+        else:
+            parameter['grpc_name'] = parameter['python_name']
 
 def _add_python_type(item, config):
     '''Adds the type to use in the Python API and the documentation to the item metadata, if not already there'''
@@ -216,8 +218,6 @@ def _add_interpreter_method_call_snippet(parameter, config):
 
 def _add_grpc_request_snippet(parameter, config):
     param_name = parameter['grpc_name']
-    if parameter['grpc_enum'] is not None:
-        param_name += '_raw'
 
     if parameter['use_list']:
         param_accessor = 'x'

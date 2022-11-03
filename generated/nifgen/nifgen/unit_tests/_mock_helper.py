@@ -762,7 +762,7 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViReal64']['return']
         return self._defaults['SetAttributeViReal64']['return']
 
-    def niFgen_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value_raw):  # noqa: N802
+    def niFgen_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['SetAttributeViString']['return'] != 0:
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']

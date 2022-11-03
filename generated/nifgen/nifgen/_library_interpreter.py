@@ -252,7 +252,8 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         waveform_size_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array)  # case B510
+        waveform_data_array_array = _convert_to_array(value=waveform_data_array, array_type="d")  # case B550
+        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array_array, library_type=_visatype.ViReal64)  # case B550
         waveform_handle_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -282,7 +283,8 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         waveform_size_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array)  # case B510
+        waveform_data_array_array = _convert_to_array(value=waveform_data_array, array_type="h")  # case B550
+        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array_array, library_type=_visatype.ViInt16)  # case B550
         waveform_handle_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_CreateWaveformI16(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -602,12 +604,12 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value_raw):  # noqa: N802
+    def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_raw_ctype = ctypes.create_string_buffer(attribute_value_raw.encode(self._encoding))  # case C020
-        error_code = self._library.niFgen_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_raw_ctype)
+        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
+        error_code = self._library.niFgen_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -650,7 +652,8 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         waveform_handle_ctype = _visatype.ViInt32(waveform_handle)  # case S150
         size_ctype = _visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = _get_ctypes_pointer_for_buffer(value=data)  # case B510
+        data_array = _convert_to_array(value=data, array_type="h")  # case B550
+        data_ctype = _get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViInt16)  # case B550
         error_code = self._library.niFgen_WriteBinary16Waveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -671,7 +674,8 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         size_ctype = _visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = _get_ctypes_pointer_for_buffer(value=data)  # case B510
+        data_array = _convert_to_array(value=data, array_type="d")  # case B550
+        data_ctype = _get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -681,7 +685,8 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         size_ctype = _visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = _get_ctypes_pointer_for_buffer(value=data)  # case B510
+        data_array = _convert_to_array(value=data, array_type="h")  # case B550
+        data_ctype = _get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViInt16)  # case B550
         error_code = self._library.niFgen_WriteNamedWaveformI16(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -710,7 +715,8 @@ class LibraryInterpreter(object):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
         waveform_handle_ctype = _visatype.ViInt32(waveform_handle)  # case S150
         size_ctype = _visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = _get_ctypes_pointer_for_buffer(value=data)  # case B510
+        data_array = _convert_to_array(value=data, array_type="d")  # case B550
+        data_ctype = _get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

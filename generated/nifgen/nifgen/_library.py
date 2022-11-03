@@ -545,13 +545,13 @@ class Library(object):
                 self.niFgen_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def niFgen_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value_raw):  # noqa: N802
+    def niFgen_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_SetAttributeViString_cfunc is None:
                 self.niFgen_SetAttributeViString_cfunc = self._get_library_function('niFgen_SetAttributeViString')
                 self.niFgen_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value_raw)
+        return self.niFgen_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
     def niFgen_SetNamedWaveformNextWritePosition(self, vi, channel_name, waveform_name, relative_to, offset):  # noqa: N802
         with self._func_lock:
