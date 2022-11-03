@@ -62,6 +62,7 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     VERSION \
     $(if $(GRPC_SUPPORTED), \
         _grpc_stub_interpreter.py \
+        grpc_session_options.py \
         $(basename $(notdir $(PROTO_FILE)))_pb2.py \
         $(basename $(notdir $(PROTO_FILE)))_pb2_grpc.py \
         nidevice_pb2.py \
@@ -72,9 +73,6 @@ DEFAULT_PY_FILES_TO_GENERATE := \
 
 DEFAULT_PY_FILES_TO_COPY := \
     _visatype.py \
-    $(if $(GRPC_SUPPORTED), \
-        grpc_session_options.py \
-    ) \
 
 DEFAULT_RST_FILES_TO_GENERATE := \
     enums.rst \
