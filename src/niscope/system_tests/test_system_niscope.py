@@ -18,6 +18,20 @@ class SystemTests:
     # TODO(sbethur): Use `get_channel_names` when #1402 is fixed
     _test_channels = 'FakeDevice2/0,FakeDevice1/1'
 
+    # There are system tests below that need either a PXI-5124 or a PXI-5142 instead of the PXIe-5164 we use everywhere else
+    # because of specific capabilities on those models. Due to internal NI bug 969274, opening a simulated session to those models
+    # sometimes fails. As a workaround, the nimi-bot VMs are configured with one persistently simulated instrument of each kind respectively
+    # named "5124" and "5142". If you want to run these tests on your own system, you will need to create these two simulated
+    # instruments using MAX.
+    # In addition, we need a global lock in order to keep us from opening more than one session to the same simulated instrument
+    # at the same time. This is because NI-SCOPE (like other MI driver runtimes) disallow two simultaneous sessions to the same
+    # instrument, even when the instrument is simulated. This will impact the performance at which system tests run because we
+    # parallelize at the tox level :(.
+    _daqmx_sim_5124_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5124.lock')
+    _daqmx_sim_5124_lock = fasteners.InterProcessLock(_daqmx_sim_5124_lock_file)
+    _daqmx_sim_5142_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5142.lock')
+    _daqmx_sim_5142_lock = fasteners.InterProcessLock(_daqmx_sim_5142_lock_file)
+
     # Attribute tests
     def test_vi_boolean_attribute(self, multi_instrument_session):
         multi_instrument_session.allow_more_records_than_memory = False
@@ -170,6 +184,25 @@ class SystemTests:
         assert len(measurement_stats) == test_num_channels * test_num_records
         for stat in measurement_stats:
             assert stat.result == 0.0
+
+    def test_filter_coefficients(self, session_5142):
+        assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients()  # coefficients list should have 35 items
+        try:
+            filter_coefficients = [1.0, 0.0, 0.0]
+            session_5142.configure_equalization_filter_coefficients(filter_coefficients)
+        except niscope.Error as e:
+            assert "Incorrect number of filter coefficients." in e.description
+            assert e.code == -1074135024
+        filter_coefficients = [0.01] * 35
+        session_5142.configure_equalization_filter_coefficients(filter_coefficients)
+        assert filter_coefficients == session_5142.get_equalization_filter_coefficients()
+
+    def test_configure_trigger_video(self, session_5124):
+        session_5124.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
+        assert niscope.VideoSignalFormat.PAL == session_5124.tv_trigger_signal_format
+        assert niscope.VideoTriggerEvent.FIELD1 == session_5124.tv_trigger_event
+        assert niscope.VideoPolarity.POSITIVE == session_5124.tv_trigger_polarity
+        assert niscope.TriggerCoupling.DC == session_5124.trigger_coupling
 
     def test_clear_waveform_measurement_stats(self, multi_instrument_session):
         test_voltage = 1.0
@@ -358,20 +391,6 @@ class SystemTests:
 
 
 class TestLibrary(SystemTests):
-    # There are system tests below that need either a PXI-5124 or a PXI-5142 instead of the PXIe-5164 we use everywhere else
-    # because of specific capabilities on those models. Due to internal NI bug 969274, opening a simulated session to those models
-    # sometimes fails. As a workaround, the nimi-bot VMs are configured with one persistently simulated instrument of each kind respectively
-    # named "5124" and "5142". If you want to run these tests on your own system, you will need to create these two simulated
-    # instruments using MAX.
-    # In addition, we need a global lock in order to keep us from opening more than one session to the same simulated instrument
-    # at the same time. This is because NI-SCOPE (like other MI driver runtimes) disallow two simultaneous sessions to the same
-    # instrument, even when the instrument is simulated. This will impact the performance at which system tests run because we
-    # parallelize at the tox level :(.
-    _daqmx_sim_5124_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5124.lock')
-    _daqmx_sim_5124_lock = fasteners.InterProcessLock(_daqmx_sim_5124_lock_file)
-    _daqmx_sim_5142_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5142.lock')
-    _daqmx_sim_5142_lock = fasteners.InterProcessLock(_daqmx_sim_5142_lock_file)
-
     @pytest.fixture(scope='function')
     def single_instrument_session(self):
         with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as simulated_session:
@@ -393,13 +412,6 @@ class TestLibrary(SystemTests):
         with self._daqmx_sim_5142_lock:
             with niscope.Session('5142') as simulated_session:  # 5142 is needed for OSP
                 yield simulated_session
-
-    def test_configure_trigger_video(self, session_5124):
-        session_5124.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
-        assert niscope.VideoSignalFormat.PAL == session_5124.tv_trigger_signal_format
-        assert niscope.VideoTriggerEvent.FIELD1 == session_5124.tv_trigger_event
-        assert niscope.VideoPolarity.POSITIVE == session_5124.tv_trigger_polarity
-        assert niscope.TriggerCoupling.DC == session_5124.trigger_coupling
 
     @pytest.fixture(params=[numpy.int8, numpy.int16, numpy.int32, numpy.float64])
     def fetch_waveform_type(self, request):
@@ -436,18 +448,6 @@ class TestLibrary(SystemTests):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
             assert waveforms[i].channel == expected_channels[i]
             assert waveforms[i].record == expected_records[i]
-
-    def test_filter_coefficients(self, session_5142):
-        assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients()  # coefficients list should have 35 items
-        try:
-            filter_coefficients = [1.0, 0.0, 0.0]
-            session_5142.configure_equalization_filter_coefficients(filter_coefficients)
-        except niscope.Error as e:
-            assert "Incorrect number of filter coefficients." in e.description
-            assert e.code == -1074135024
-        filter_coefficients = [0.01] * 35
-        session_5142.configure_equalization_filter_coefficients(filter_coefficients)
-        assert filter_coefficients == session_5142.get_equalization_filter_coefficients()
 
     def test_error_message(self):
         try:
@@ -532,6 +532,18 @@ class TestGrpc(SystemTests):
     def multi_instrument_session(self, grpc_options):
         with niscope.Session(','.join(self._instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def session_5124(self, grpc_options):
+        with self._daqmx_sim_5124_lock:
+            with niscope.Session('5124', _grpc_options=grpc_options) as simulated_session:  # 5124 is needed for video triggering
+                yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def session_5142(self, grpc_options):
+        with self._daqmx_sim_5142_lock:
+            with niscope.Session('5142', _grpc_options=grpc_options) as simulated_session:  # 5142 is needed for OSP
+                yield simulated_session
 
     def test_error_message(self, grpc_options):
         try:
