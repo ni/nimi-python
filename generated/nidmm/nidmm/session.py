@@ -396,10 +396,7 @@ class _SessionBase(object):
     temp_tc_ref_junc_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ThermocoupleReferenceJunctionType, 1250232)
     '''Type: enums.ThermocoupleReferenceJunctionType
 
-    Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, NIDMM_VAL_TEMP_REF_JUNC_FIXED, is fixed.
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, ThermocoupleReferenceJunctionType.FIXED, is fixed.
     '''
     temp_tc_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ThermocoupleType, 1250231)
     '''Type: enums.ThermocoupleType
@@ -927,7 +924,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-DMM session to an NI digital multimeter'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}, *, _grpc_options=None):
         r'''An NI-DMM session to an NI digital multimeter
 
         This method completes the following tasks:
@@ -1022,12 +1019,18 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
+            _grpc_options (nidmm.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
+
 
         Returns:
             session (nidmm.Session): A session object representing the device.
 
         '''
-        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        if _grpc_options:
+            import nidmm._grpc_stub_interpreter as _grpc_stub_interpreter
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
+        else:
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
@@ -1069,7 +1072,8 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._interpreter._close_on_exit:
+            self.close()
 
     def initiate(self):
         '''initiate
@@ -1413,10 +1417,7 @@ class Session(_SessionBase):
             reference_junction_type (enums.ThermocoupleReferenceJunctionType): Specifies the type of reference junction to be used in the reference
                 junction compensation of a thermocouple measurement. NI-DMM uses this
                 value to set the Reference Junction Type property. The only supported
-                value is NIDMM_VAL_TEMP_REF_JUNC_FIXED.
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                value is ThermocoupleReferenceJunctionType.FIXED.
 
         '''
         if type(thermocouple_type) is not enums.ThermocoupleType:
