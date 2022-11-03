@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
+# This file was generated
+
 from enum import IntEnum
+
+
+# This constant specifies the gRPC package and service used by this API.
+# Customers can pass this value to the MeasurementLink discovery service to resolve the server instance that provides this interface.
+GRPC_SERVICE_INTERFACE_NAME = 'nidigital_grpc.NiDigital'
 
 
 class SessionInitializationBehavior(IntEnum):
