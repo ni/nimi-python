@@ -54,7 +54,7 @@ class TestGrpcStubInterpreter(object):
 
         def __init__(self):
             for f in dir(self):
-                if not f.startswith('_'):
+                if not f.startswith('_') and f not in {'get_session_handle', 'set_session_handle'}:
                     error_func = _mock_helper.MockFunctionCallError(f)
                     setattr(self, f, MagicMock(spec_set=self._sample_func, side_effect=error_func))
 
