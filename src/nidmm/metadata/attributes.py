@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 23.0.0d21
+# This file is generated from NI-DMM API metadata version 23.0.0d68
 attributes = {
     1050005: {
         'access': 'read-write',
@@ -209,6 +209,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the settling time in seconds. To override the default settling time,  set this attribute. To return to the default, set this attribute to  NIDMM_VAL_SETTLE_TIME_AUTO (-1).\nThe NI 4050 and NI 4060 are not supported.\n'
         },
+        'grpc_enum': 'SettleTime',
         'lv_property': 'Configuration:Advanced:Settle Time',
         'name': 'SETTLE_TIME',
         'type': 'ViReal64',
@@ -237,6 +238,7 @@ attributes = {
         'documentation': {
             'description': '\nSize in samples of the internal data buffer. Maximum is 134,217,727 (OX7FFFFFF) samples. When  set to NIDMM_VAL_BUFFER_SIZE_AUTO (-1), NI-DMM chooses the buffer size.\n'
         },
+        'grpc_enum': 'BufferSize',
         'lv_property': 'Multi Point Acquisition:Advanced:Buffer Size',
         'name': 'BUFFER_SIZE',
         'type': 'ViInt32'
@@ -431,6 +433,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the measurement range. Use positive values to represent the  absolute value of the maximum expected measurement. The value is in units  appropriate for the current value of the NIDMM_ATTR_FUNCTION attribute. For  example, if NIDMM_ATTR_FUNCTION is set to NIDMM_VAL_VOLTS, the units are  volts.\nThe NI 4050 and NI 4060 only support Auto Range when the trigger and  sample trigger is set to IMMEDIATE.\nNIDMM_VAL_AUTO_RANGE_ON -1.0\nNI-DMM performs an Auto Range before acquiring the measurement.\nNIDMM_VAL_AUTO_RANGE_OFF -2.0\nNI-DMM sets the Range to the current NIDMM_ATTR_AUTO_RANGE_VALUE and uses this range  for all subsequent measurements until the measurement configuration is changed.\nNIDMM_VAL_AUTO_RANGE_ONCE -3.0\nNI-DMM performs an Auto Range before acquiring the next measurement. The NIDMM_ATTR_AUTO_RANGE_VALUE  is stored and used for all subsequent measurements until the measurement configuration is changed.\n'
         },
+        'grpc_enum': 'Range',
         'lv_property': 'Configuration:Range',
         'name': 'RANGE',
         'type': 'ViReal64'
@@ -460,6 +463,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the time (in seconds) that the DMM waits after it has received a trigger before taking a measurement.  The default value is AUTO DELAY (-1), which means that the DMM waits an appropriate settling time before taking  the measurement. (-1) signifies that AUTO DELAY is on, and (-2) signifies that AUTO DELAY is off.\nThe NI 4065 and NI 4070/4071/4072 use the value specified in this attribute as additional settling time.  For the The NI 4065 and NI 4070/4071/4072, the valid range for Trigger Delay is AUTO DELAY (-1) or 0.0-149.0  seconds and the onboard timing resolution is 34.72 ns.\nOn the NI 4060, if this attribute is set to 0, the DMM does not settle before taking the measurement.  On the NI 4060, the valid range for AUTO DELAY (-1) is 0.0-12.0 seconds and the onboard timing resolution  is 100 ms.\nWhen using the NI 4050, this attribute must be set to AUTO DELAY (-1).\nUse positive values to set the trigger delay in seconds.\nValid Range: NIDMM_VAL_AUTO_DELAY (-1.0), 0.0-12.0 seconds (NI 4060 only)\nDefault Value: NIDMM_VAL_AUTO_DELAY\n'
         },
+        'grpc_enum': 'TriggerDelays',
         'lv_property': 'Trigger:Trigger Delay',
         'name': 'TRIGGER_DELAY',
         'type': 'ViReal64',
@@ -497,6 +501,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the maximum amplitude of the input signal for frequency  measurements.\n'
         },
+        'grpc_enum': 'FrequencyVoltageRange',
         'lv_property': 'Configuration:Measurement Options:Frequency Voltage Range',
         'name': 'FREQ_VOLTAGE_RANGE',
         'type': 'ViReal64'
@@ -554,6 +559,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the number of measurements the DMM takes each time it receives a  trigger in a multiple point acquisition.\n'
         },
+        'grpc_enum': 'SampleCount',
         'lv_property': 'Multi Point Acquisition:Sample Count',
         'name': 'SAMPLE_COUNT',
         'type': 'ViInt32'
@@ -574,6 +580,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the amount of time in seconds the DMM waits between measurement cycles.  This attribute only applies when the NIDMM_ATTR_SAMPLE_TRIGGER attribute is set to INTERVAL.\nOn the NI 4060, the value for this attribute is used as the settling time.  When this attribute is set to 0, the NI 4060 does not settle between  measurement cycles. The onboard timing resolution is 1 µs on the NI 4060.\nThe NI 4065 and NI 4070/4071/4072 use the value specified in this attribute as additional  delay. On the NI 4065 and NI 4070/4071/4072, the onboard timing resolution is 34.72 ns and  the valid range is 0-149 s.\nOnly positive values are valid when setting the sample interval.\nThe NI 4050 is not supported.\n'
         },
+        'grpc_enum': 'SampleInterval',
         'lv_property': 'Multi Point Acquisition:Sample Interval',
         'name': 'SAMPLE_INTERVAL',
         'type': 'ViReal64',
@@ -584,6 +591,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the number of triggers the DMM receives before returning to the  Idle state.\nThis attribute can be set to any positive ViInt32 value for the NI 4065 and NI 4070/4071/4072.\nThe NI 4050 and NI 4060 support this attribute being set to 1.\nRefer to the Multiple Point Acquisitions section of the NI Digital Multimeters Help for more information.\n'
         },
+        'grpc_enum': 'TriggerCount',
         'lv_property': 'Multi Point Acquisition:Trigger Count',
         'name': 'TRIGGER_COUNT',
         'type': 'ViInt32'
@@ -603,6 +611,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the measurement aperture time for the current configuration.  Aperture time is specified in units set by NIDMM_ATTR_APERTURE_TIME_UNITS. To  override the default aperture, set this attribute to the desired  aperture time after calling niDMM_ConfigureMeasurement. To return to the  default, set this attribute to NIDMM_VAL_APERTURE_TIME_AUTO (-1).\nOn the NI 4070/4071/4072, the minimum aperture time is 8.89 usec,  and the maximum aperture time is 149 sec. Any number of powerline cycles (PLCs)  within the minimum and maximum ranges is allowed on the NI 4070/4071/4072.\nOn the NI 4065 the minimum aperture time is 333 µs, and the maximum aperture time  is 78.2 s. If setting the number of averages directly, the total measurement time is  aperture time X the number of averages, which must be less than 72.8 s. The aperture  times allowed are 333 µs, 667 µs, or multiples of 1.11 ms-for example 1.11 ms, 2.22 ms,  3.33 ms, and so on. If you set an aperture time other than 333 µs, 667 µs, or multiples  of 1.11 ms, the value will be coerced up to the next supported aperture time.\nOn the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed are  1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50 Hz, the  PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.\n'
         },
+        'grpc_enum': 'ApertureTime',
         'lv_property': 'Configuration:Advanced:Aperture Time',
         'name': 'APERTURE_TIME',
         'type': 'ViReal64'
