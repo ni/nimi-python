@@ -35,7 +35,11 @@ class TestSession(object):
         self.patched_grpc_interpreter = patch('nifake._grpc_stub_interpreter.GrpcStubInterpreter', side_effect=AssertionError('Called into grpc!'))
         self.patched_grpc_interpreter.start()
 
-        self.patched_library_interpreter.init_with_options.side_effect = [SESSION_NUM_FOR_TEST]
+        def interpreter_init(*args, **kwargs):
+            self.patched_library_interpreter._close_on_exit = True
+            return SESSION_NUM_FOR_TEST
+
+        self.patched_library_interpreter.init_with_options.side_effect = interpreter_init
         self.patched_library_interpreter.close.side_effect = [None]
 
         # Mock lock/unlock
@@ -804,7 +808,7 @@ class TestSession(object):
 class TestGrpcSession(object):
 
     class PatchedGrpcInterpreter(nifake._grpc_stub_interpreter.GrpcStubInterpreter):
-        def __init__(self, encoding):
+        def __init__(self, grpc_options):
             for f in dir(self):
                 if not f.startswith("_"):
                     setattr(self, f, MagicMock(spec_set=getattr(self, f), side_effect=_mock_helper.MockFunctionCallError(f)))
@@ -818,7 +822,12 @@ class TestGrpcSession(object):
         self.tclk_patched_library_singleton_get = patch('nitclk._library_interpreter._library_singleton.get', return_value=None)
         self.tclk_patched_library_singleton_get.start()
 
-        self.patched_grpc_interpreter.init_with_options.side_effect = [GRPC_SESSION_OBJECT_FOR_TEST]
+        def interpreter_init(*args, **kwargs):
+            self.patched_grpc_interpreter._close_on_exit = True
+            return GRPC_SESSION_OBJECT_FOR_TEST
+
+        self.patched_grpc_interpreter.init_with_options.side_effect = interpreter_init
+        self.patched_grpc_interpreter._close_on_exit = True
         self.patched_grpc_interpreter.close.side_effect = [None]
 
         # Mock lock/unlock
@@ -832,7 +841,7 @@ class TestGrpcSession(object):
     # Session management
 
     def test_init_with_options_and_close(self):
-        session = nifake.Session('dev1', _grpc_channel=object())
+        session = nifake.Session('dev1', _grpc_options=nifake.GrpcSessionOptions(object(), ''))
         self.patched_grpc_interpreter.init_with_options.assert_called_once_with('dev1', False, False, '')
         assert session._interpreter._vi == GRPC_SESSION_OBJECT_FOR_TEST
         session.close()
@@ -841,24 +850,24 @@ class TestGrpcSession(object):
     # Session locking
 
     def test_lock_session_none(self):
-        with nifake.Session('dev1', _grpc_channel=object()) as session:
+        with nifake.Session('dev1', _grpc_options=nifake.GrpcSessionOptions(object(), '')) as session:
             session.lock()
             self.patched_grpc_interpreter.lock.assert_called_once_with()
 
     def test_unlock_session_none(self):
-        with nifake.Session('dev1', _grpc_channel=object()) as session:
+        with nifake.Session('dev1', _grpc_options=nifake.GrpcSessionOptions(object(), '')) as session:
             session.unlock()
             self.patched_grpc_interpreter.unlock.assert_called_once_with()
 
     def test_lock_context_manager(self):
-        with nifake.Session('dev1', _grpc_channel=object()) as session:
+        with nifake.Session('dev1', _grpc_options=nifake.GrpcSessionOptions(object(), '')) as session:
             with session.lock():
                 pass
             self.patched_grpc_interpreter.lock.assert_called_once_with()
             self.patched_grpc_interpreter.unlock.assert_called_once_with()
 
     def test_lock_context_manager_abnormal_exit(self):
-        with nifake.Session('dev1', _grpc_channel=object()) as session:
+        with nifake.Session('dev1', _grpc_options=nifake.GrpcSessionOptions(object(), '')) as session:
             try:
                 with session.lock():
                     raise nifake.Error('Fake exception')
@@ -872,13 +881,13 @@ class TestGrpcSession(object):
     def test_self_test(self):
         test_error_code = 0
         self.patched_grpc_interpreter.self_test.side_effect = [(test_error_code, '')]
-        with nifake.Session('dev1', _grpc_channel=object()) as session:
+        with nifake.Session('dev1', _grpc_options=nifake.GrpcSessionOptions(object(), '')) as session:
             session.self_test()
 
     def test_export_attribute_configuration_buffer(self):
         expected_buffer = b'abcd'
         self.patched_grpc_interpreter.export_attribute_configuration_buffer.side_effect = [expected_buffer]
-        with nifake.Session('dev1', _grpc_channel=object()) as session:
+        with nifake.Session('dev1', _grpc_options=nifake.GrpcSessionOptions(object(), '')) as session:
             actual_configuration = session.export_attribute_configuration_buffer()
             assert type(actual_configuration) is bytes
             assert actual_configuration == bytes(expected_buffer)
@@ -889,7 +898,7 @@ class TestGrpcSession(object):
     def test_get_attribute_int32(self):
         test_number = 3
         self.patched_grpc_interpreter.get_attribute_vi_int32.side_effect = [test_number]
-        with nifake.Session('dev1', _grpc_channel=object()) as session:
+        with nifake.Session('dev1', _grpc_options=nifake.GrpcSessionOptions(object(), '')) as session:
             attr_int = session.read_write_integer
             assert(attr_int == test_number)
             self.patched_grpc_interpreter.get_attribute_vi_int32.assert_called_once_with('', 1000004)
