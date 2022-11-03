@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d65
+# This file is generated from NI-FAKE API metadata version 23.0.0d70
 enums = {
     'AltColor': {
         'values': [
@@ -162,6 +162,7 @@ enums = {
         ]
     },
     'EnumWithConverter': {
+        'codegen_method': 'public',
         'converted_value_to_enum_function_name': 'convert_to_enum_with_converter_enum',
         'enum_to_converted_value_function_name': 'convert_from_enum_with_converter_enum',
         'values': [
