@@ -465,7 +465,7 @@ class TestLibrary(SystemTests):
         assert last_cal.year == 1999
         assert last_cal.hour == 0
         assert last_cal.minute == 0
-    
+
     def test_get_ext_cal_last_date_time(self, single_instrument_session):
         last_cal = single_instrument_session.get_ext_cal_last_date_and_time()
         assert last_cal.month == 12
