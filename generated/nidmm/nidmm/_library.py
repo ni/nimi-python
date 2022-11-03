@@ -29,8 +29,6 @@ class Library(object):
         self.niDMM_ConfigureThermocouple_cfunc = None
         self.niDMM_ConfigureTrigger_cfunc = None
         self.niDMM_ConfigureWaveformAcquisition_cfunc = None
-        self.niDMM_ConvertAbsoluteToDigits_cfunc = None
-        self.niDMM_ConvertDigitsToAbsolute_cfunc = None
         self.niDMM_Disable_cfunc = None
         self.niDMM_ExportAttributeConfigurationBuffer_cfunc = None
         self.niDMM_ExportAttributeConfigurationFile_cfunc = None
@@ -157,22 +155,6 @@ class Library(object):
                 self.niDMM_ConfigureWaveformAcquisition_cfunc.argtypes = [ViSession, ViInt32, ViReal64, ViReal64, ViInt32]  # noqa: F405
                 self.niDMM_ConfigureWaveformAcquisition_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureWaveformAcquisition_cfunc(vi, measurement_function, range, rate, waveform_points)
-
-    def niDMM_ConvertAbsoluteToDigits(self, product_id, function, range, resolution, digits):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_ConvertAbsoluteToDigits_cfunc is None:
-                self.niDMM_ConvertAbsoluteToDigits_cfunc = self._get_library_function('niDMM_ConvertAbsoluteToDigits')
-                self.niDMM_ConvertAbsoluteToDigits_cfunc.argtypes = [ViInt32, ViInt32, ViReal64, ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niDMM_ConvertAbsoluteToDigits_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_ConvertAbsoluteToDigits_cfunc(product_id, function, range, resolution, digits)
-
-    def niDMM_ConvertDigitsToAbsolute(self, product_id, function, range, resolution, absolute_units):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_ConvertDigitsToAbsolute_cfunc is None:
-                self.niDMM_ConvertDigitsToAbsolute_cfunc = self._get_library_function('niDMM_ConvertDigitsToAbsolute')
-                self.niDMM_ConvertDigitsToAbsolute_cfunc.argtypes = [ViInt32, ViInt32, ViReal64, ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niDMM_ConvertDigitsToAbsolute_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_ConvertDigitsToAbsolute_cfunc(product_id, function, range, resolution, absolute_units)
 
     def niDMM_Disable(self, vi):  # noqa: N802
         with self._func_lock:

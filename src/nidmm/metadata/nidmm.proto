@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-DMM API metadata version 23.0.0d67
+// This file is generated from NI-DMM API metadata version 23.0.0d68
 //---------------------------------------------------------------------
 // Proto file for the NI-DMM Metadata
 //---------------------------------------------------------------------
@@ -53,8 +53,6 @@ service NiDmm {
   rpc ConfigureWaveformAcquisition(ConfigureWaveformAcquisitionRequest) returns (ConfigureWaveformAcquisitionResponse);
   rpc ConfigureWaveformCoupling(ConfigureWaveformCouplingRequest) returns (ConfigureWaveformCouplingResponse);
   rpc Control(ControlRequest) returns (ControlResponse);
-  rpc ConvertAbsoluteToDigits(ConvertAbsoluteToDigitsRequest) returns (ConvertAbsoluteToDigitsResponse);
-  rpc ConvertDigitsToAbsolute(ConvertDigitsToAbsoluteRequest) returns (ConvertDigitsToAbsoluteResponse);
   rpc Disable(DisableRequest) returns (DisableResponse);
   rpc ExportAttributeConfigurationBuffer(ExportAttributeConfigurationBufferRequest) returns (ExportAttributeConfigurationBufferResponse);
   rpc ExportAttributeConfigurationFile(ExportAttributeConfigurationFileRequest) returns (ExportAttributeConfigurationFileResponse);
@@ -937,30 +935,6 @@ message ControlRequest {
 
 message ControlResponse {
   int32 status = 1;
-}
-
-message ConvertAbsoluteToDigitsRequest {
-  sint32 product_id = 1;
-  sint32 function = 2;
-  double range = 3;
-  double resolution = 4;
-}
-
-message ConvertAbsoluteToDigitsResponse {
-  int32 status = 1;
-  double digits = 2;
-}
-
-message ConvertDigitsToAbsoluteRequest {
-  sint32 product_id = 1;
-  sint32 function = 2;
-  double range = 3;
-  double resolution = 4;
-}
-
-message ConvertDigitsToAbsoluteResponse {
-  int32 status = 1;
-  double absolute_units = 2;
 }
 
 message DisableRequest {

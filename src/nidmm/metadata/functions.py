@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 23.0.0d67
+# This file is generated from NI-DMM API metadata version 23.0.0d68
 functions = {
     'Abort': {
         'documentation': {
@@ -543,72 +543,6 @@ functions = {
                 },
                 'name': 'waveformPoints',
                 'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConvertAbsoluteToDigits': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'productId',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'function',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'range',
-                'type': 'ViReal64'
-            },
-            {
-                'direction': 'in',
-                'name': 'resolution',
-                'type': 'ViReal64'
-            },
-            {
-                'direction': 'out',
-                'name': 'digits',
-                'type': 'ViReal64'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConvertDigitsToAbsolute': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'productId',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'function',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'range',
-                'type': 'ViReal64'
-            },
-            {
-                'direction': 'in',
-                'name': 'resolution',
-                'type': 'ViReal64'
-            },
-            {
-                'direction': 'out',
-                'name': 'absoluteUnits',
-                'type': 'ViReal64'
             }
         ],
         'returns': 'ViStatus'

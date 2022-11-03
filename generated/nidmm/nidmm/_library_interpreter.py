@@ -171,26 +171,6 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def convert_absolute_to_digits(self, product_id, function, range, resolution):  # noqa: N802
-        product_id_ctype = _visatype.ViInt32(product_id)  # case S150
-        function_ctype = _visatype.ViInt32(function)  # case S150
-        range_ctype = _visatype.ViReal64(range)  # case S150
-        resolution_ctype = _visatype.ViReal64(resolution)  # case S150
-        digits_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDMM_ConvertAbsoluteToDigits(product_id_ctype, function_ctype, range_ctype, resolution_ctype, None if digits_ctype is None else (ctypes.pointer(digits_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(digits_ctype.value)
-
-    def convert_digits_to_absolute(self, product_id, function, range, resolution):  # noqa: N802
-        product_id_ctype = _visatype.ViInt32(product_id)  # case S150
-        function_ctype = _visatype.ViInt32(function)  # case S150
-        range_ctype = _visatype.ViReal64(range)  # case S150
-        resolution_ctype = _visatype.ViReal64(resolution)  # case S150
-        absolute_units_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDMM_ConvertDigitsToAbsolute(product_id_ctype, function_ctype, range_ctype, resolution_ctype, None if absolute_units_ctype is None else (ctypes.pointer(absolute_units_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(absolute_units_ctype.value)
-
     def disable(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_Disable(vi_ctype)

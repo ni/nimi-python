@@ -123,20 +123,6 @@ class GrpcStubInterpreter(object):
             grpc_types.ConfigureWaveformAcquisitionRequest(vi=self._vi, measurement_function_raw=measurement_function.value, range=range, rate=rate, waveform_points=waveform_points),
         )
 
-    def convert_absolute_to_digits(self, product_id, function, range, resolution):  # noqa: N802
-        response = self._invoke(
-            self._client.ConvertAbsoluteToDigits,
-            grpc_types.ConvertAbsoluteToDigitsRequest(product_id=product_id, function=function, range=range, resolution=resolution),
-        )
-        return response.digits
-
-    def convert_digits_to_absolute(self, product_id, function, range, resolution):  # noqa: N802
-        response = self._invoke(
-            self._client.ConvertDigitsToAbsolute,
-            grpc_types.ConvertDigitsToAbsoluteRequest(product_id=product_id, function=function, range=range, resolution=resolution),
-        )
-        return response.absolute_units
-
     def disable(self):  # noqa: N802
         self._invoke(
             self._client.Disable,

@@ -1518,52 +1518,6 @@ class Session(_SessionBase):
         self._interpreter.configure_waveform_acquisition(measurement_function, range, rate, waveform_points)
 
     @ivi_synchronized
-    def convert_absolute_to_digits(self, product_id, function, range, resolution):
-        r'''convert_absolute_to_digits
-
-        TBD
-
-        Args:
-            product_id (int):
-
-            function (int):
-
-            range (float):
-
-            resolution (float):
-
-
-        Returns:
-            digits (float):
-
-        '''
-        digits = self._interpreter.convert_absolute_to_digits(product_id, function, range, resolution)
-        return digits
-
-    @ivi_synchronized
-    def convert_digits_to_absolute(self, product_id, function, range, resolution):
-        r'''convert_digits_to_absolute
-
-        TBD
-
-        Args:
-            product_id (int):
-
-            function (int):
-
-            range (float):
-
-            resolution (float):
-
-
-        Returns:
-            absolute_units (float):
-
-        '''
-        absolute_units = self._interpreter.convert_digits_to_absolute(product_id, function, range, resolution)
-        return absolute_units
-
-    @ivi_synchronized
     def disable(self):
         r'''disable
 

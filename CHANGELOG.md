@@ -49,10 +49,6 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidmm` (NI-DMM)
     * #### Added
-        * API parity with next NI-DMM release.
-            * Methods added:
-                * `convert_absolute_to_digits`
-                * `convert_digits_to_absolute`
     * #### Changed
     * #### Removed
 * ### `nifgen` (NI-FGEN)
