@@ -131,25 +131,6 @@ class SystemTests:
         for stat in measurement_stats:
             assert stat.result == 0.0
 
-    def test_filter_coefficients(self, session_5142):
-        assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients()  # coefficients list should have 35 items
-        try:
-            filter_coefficients = [1.0, 0.0, 0.0]
-            session_5142.configure_equalization_filter_coefficients(filter_coefficients)
-        except niscope.Error as e:
-            assert "Incorrect number of filter coefficients." in e.description
-            assert e.code == -1074135024
-        filter_coefficients = [0.01] * 35
-        session_5142.configure_equalization_filter_coefficients(filter_coefficients)
-        assert filter_coefficients == session_5142.get_equalization_filter_coefficients()
-
-    def test_configure_trigger_video(self, session_5124):
-        session_5124.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
-        assert niscope.VideoSignalFormat.PAL == session_5124.tv_trigger_signal_format
-        assert niscope.VideoTriggerEvent.FIELD1 == session_5124.tv_trigger_event
-        assert niscope.VideoPolarity.POSITIVE == session_5124.tv_trigger_polarity
-        assert niscope.TriggerCoupling.DC == session_5124.trigger_coupling
-
     def test_clear_waveform_measurement_stats(self, multi_instrument_session):
         test_voltage = 1.0
         test_record_length = 1000
@@ -269,6 +250,18 @@ class SystemTests:
         multi_instrument_session.configure_chan_characteristics(50, 0)
         assert 50.0 == multi_instrument_session.input_impedance
 
+    def test_filter_coefficients(self, session_5142):
+        assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients()  # coefficients list should have 35 items
+        try:
+            filter_coefficients = [1.0, 0.0, 0.0]
+            session_5142.configure_equalization_filter_coefficients(filter_coefficients)
+        except niscope.Error as e:
+            assert "Incorrect number of filter coefficients." in e.description
+            assert e.code == -1074135024
+        filter_coefficients = [0.01] * 35
+        session_5142.configure_equalization_filter_coefficients(filter_coefficients)
+        assert filter_coefficients == session_5142.get_equalization_filter_coefficients()
+
     def test_send_software_trigger_edge(self, multi_instrument_session):
         multi_instrument_session.send_software_trigger_edge(niscope.WhichTrigger.ARM_REFERENCE)
 
@@ -328,6 +321,13 @@ class SystemTests:
 
     def test_configure_trigger_software(self, multi_instrument_session):
         multi_instrument_session.configure_trigger_software()
+
+    def test_configure_trigger_video(self, session_5124):
+        session_5124.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
+        assert niscope.VideoSignalFormat.PAL == session_5124.tv_trigger_signal_format
+        assert niscope.VideoTriggerEvent.FIELD1 == session_5124.tv_trigger_event
+        assert niscope.VideoPolarity.POSITIVE == session_5124.tv_trigger_polarity
+        assert niscope.TriggerCoupling.DC == session_5124.trigger_coupling
 
     def test_configure_trigger_window(self, multi_instrument_session):
         trigger_source = '{0}/1'.format(self._instruments[1])
