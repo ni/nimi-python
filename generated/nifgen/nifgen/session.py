@@ -1629,6 +1629,17 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session._create_waveform_f64`
 
+        Args:
+            waveform_data_array (numpy.array(dtype=numpy.float64)): Specifies the array of data you want to use for the new arbitrary
+                waveform. The array must have at least as many elements as the value
+                that you specify in **waveformSize**.
+
+                You must normalize the data points in the array to be between –1.00 and
+                +1.00.
+
+                **Default Value**: None
+
+
         Returns:
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
@@ -1636,6 +1647,12 @@ class _SessionBase(object):
         '''
         import numpy
 
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('float64'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=float64, is ' + str(waveform_data_array.dtype))
         waveform_handle = self._interpreter.create_waveform_f64_numpy(self._repeated_capability, waveform_data_array)
         return waveform_handle
 
@@ -1787,6 +1804,15 @@ class _SessionBase(object):
 
         Example: :py:meth:`my_session._create_waveform_i16`
 
+        Args:
+            waveform_data_array (numpy.array(dtype=numpy.int16)): Specify the array of data that you want to use for the new arbitrary
+                waveform. The array must have at least as many elements as the value
+                that you specify in the Waveform Size parameter.
+                You must normalize the data points in the array to be between -32768 and
+                +32767.
+                ****Default Value**:** None
+
+
         Returns:
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
@@ -1794,6 +1820,12 @@ class _SessionBase(object):
         '''
         import numpy
 
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('int16'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
         waveform_handle = self._interpreter.create_waveform_i16_numpy(self._repeated_capability, waveform_data_array)
         return waveform_handle
 
@@ -2592,9 +2624,19 @@ class _SessionBase(object):
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the allocate_waveform method.
 
+            data (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. The array must
+                have at least as many elements as the value in **size**. The binary data
+                is left-justified.
+
         '''
         import numpy
 
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('int16'):
+            raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
         self._interpreter.write_binary16_waveform_numpy(self._repeated_capability, waveform_handle, data)
 
     @ivi_synchronized
@@ -2677,9 +2719,18 @@ class _SessionBase(object):
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
+            data (numpy.array(dtype=numpy.float64)): Specifies the array of data to load into the waveform. The array must
+                have at least as many elements as the value in **size**.
+
         '''
         import numpy
 
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('float64'):
+            raise TypeError('data must be numpy.ndarray of dtype=float64, is ' + str(data.dtype))
         self._interpreter.write_named_waveform_f64_numpy(self._repeated_capability, waveform_name, data)
 
     @ivi_synchronized
@@ -2711,9 +2762,18 @@ class _SessionBase(object):
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
+            data (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. The array must
+                have at least as many elements as the value in **size**.
+
         '''
         import numpy
 
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('int16'):
+            raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
         self._interpreter.write_named_waveform_i16_numpy(self._repeated_capability, waveform_name, data)
 
     @ivi_synchronized
@@ -2825,9 +2885,18 @@ class _SessionBase(object):
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the allocate_waveform method.
 
+            data (numpy.array(dtype=numpy.float64)): Specifies the array of data to load into the waveform. The array must
+                have at least as many elements as the value in **size**.
+
         '''
         import numpy
 
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('float64'):
+            raise TypeError('data must be numpy.ndarray of dtype=float64, is ' + str(data.dtype))
         self._interpreter.write_waveform_numpy(self._repeated_capability, waveform_handle, data)
 
     @ivi_synchronized

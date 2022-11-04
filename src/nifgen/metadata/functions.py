@@ -870,6 +870,7 @@ functions = {
                     'description': '\nSpecifies the array of data you want to use for the new arbitrary\nwaveform. The array must have at least as many elements as the value\nthat you specify in **waveformSize**.\n\nYou must normalize the data points in the array to be between –1.00 and\n+1.00.\n\n**Default Value**: None\n'
                 },
                 'name': 'waveformDataArray',
+                'numpy': True,
                 'size': {
                     'mechanism': 'len',
                     'value': 'waveformSize'
@@ -1058,6 +1059,7 @@ functions = {
                     'description': '\nSpecify the array of data that you want to use for the new arbitrary\nwaveform. The array must have at least as many elements as the value\nthat you specify in the Waveform Size parameter.\nYou must normalize the data points in the array to be between -32768 and\n+32767.\n****Default Value**:** None\n'
                 },
                 'name': 'waveformDataArray',
+                'numpy': True,
                 'size': {
                     'mechanism': 'len',
                     'value': 'waveformSize'
@@ -3036,6 +3038,7 @@ functions = {
                     'description': '\nSpecifies the array of data to load into the waveform. The array must\nhave at least as many elements as the value in **size**. The binary data\nis left-justified.\n'
                 },
                 'name': 'data',
+                'numpy': True,
                 'size': {
                     'mechanism': 'len',
                     'value': 'size'
@@ -3104,6 +3107,7 @@ functions = {
                     'description': '\nSpecifies the array of data to load into the waveform. The array must\nhave at least as many elements as the value in **size**.\n'
                 },
                 'name': 'data',
+                'numpy': True,
                 'size': {
                     'mechanism': 'len',
                     'value': 'size'
@@ -3167,6 +3171,7 @@ functions = {
                     'description': '\nSpecifies the array of data to load into the waveform. The array must\nhave at least as many elements as the value in **size**.\n'
                 },
                 'name': 'data',
+                'numpy': True,
                 'size': {
                     'mechanism': 'len',
                     'value': 'size'
@@ -3268,6 +3273,7 @@ functions = {
                     'description': '\nSpecifies the array of data to load into the waveform. The array must\nhave at least as many elements as the value in **size**.\n'
                 },
                 'name': 'data',
+                'numpy': True,
                 'size': {
                     'mechanism': 'len',
                     'value': 'size'
