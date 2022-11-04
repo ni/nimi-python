@@ -57,7 +57,7 @@ class GrpcStubInterpreter(object):
         if grpc_error == grpc.StatusCode.INVALID_ARGUMENT:
             raise ValueError(error_message)
         elif error_code is None:
-            raise errors.Error(error_message)
+            raise errors.RpcError(grpc_error, error_message)
         elif error_code < 0:
             raise errors.DriverError(error_code, error_message)
         elif error_code > 0:

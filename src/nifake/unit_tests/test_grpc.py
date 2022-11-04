@@ -33,7 +33,10 @@ class MyRpcError(grpc.RpcError):
         return self._error_message
 
     def trailing_metadata(self):
-        return [Metadatum('ni-error', str(self._error_code))]
+        if self._error_code is None:
+            return []
+        else:
+            return [Metadatum('ni-error', str(self._error_code))]
 
 
 class TestGrpcStubInterpreter(object):
@@ -162,6 +165,40 @@ class TestGrpcStubInterpreter(object):
         return getattr(self.patched_grpc_types, function_name + 'Request')
 
     # Methods
+
+    def test_new_session_already_exists(self):
+        library_func = 'InitWithOptions'
+        session_name = 'existing_session'
+        error_message = "Cannot initialize '" + session_name + "' when a session already exists."
+        grpc_error = grpc.StatusCode.ALREADY_EXISTS
+        self._set_side_effect(library_func, side_effect=MyRpcError(None, error_message, grpc_error=grpc_error))
+        init_behavior = nifake.SessionInitializationBehavior.INITIALIZE_SERVER_SESSION
+        grpc_options = nifake.GrpcSessionOptions(object(), session_name, init_behavior)
+        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        try:
+            interpreter.init_with_options('dev1', False, False, '')
+            assert False
+        except nifake.Error as e:
+            assert e.rpc_code == grpc_error
+            assert e.description == error_message
+            assert str(e) == f'StatusCode.ALREADY_EXISTS: {error_message}'
+
+    def test_attach_to_non_existent_session(self):
+        library_func = 'InitWithOptions'
+        session_name = 'non_existent_session'
+        error_message = "Cannot attach to '" + session_name + "' because a session has not been initialized."
+        grpc_error = grpc.StatusCode.FAILED_PRECONDITION
+        self._set_side_effect(library_func, side_effect=MyRpcError(None, error_message, grpc_error=grpc_error))
+        init_behavior = nifake.SessionInitializationBehavior.ATTACH_TO_SERVER_SESSION
+        grpc_options = nifake.GrpcSessionOptions(object(), session_name, init_behavior)
+        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        try:
+            interpreter.init_with_options('dev1', False, False, '')
+            assert False
+        except nifake.Error as e:
+            assert e.rpc_code == grpc_error
+            assert e.description == error_message
+            assert str(e) == f'StatusCode.FAILED_PRECONDITION: {error_message}'
 
     @pytest.mark.timeout(2)
     def test_lock_unlock(self):

@@ -351,3 +351,32 @@ class TestGrpc(SystemTests):
         except nidmm.Error as e:
             assert e.code == -1074134964
             assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1
+
+    def test_new_session_already_exists(self, grpc_channel):
+        session_name = 'existing_session'
+        expected_error_message = "Cannot initialize '" + session_name + "' when a session already exists."
+        expected_grpc_error = grpc.StatusCode.ALREADY_EXISTS
+        init_behavior = nidmm.SessionInitializationBehavior.INITIALIZE_SERVER_SESSION
+        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, session_name, init_behavior)
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options):
+            try:
+                with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options):
+                    assert False
+            except nidmm.Error as e:
+                assert e.rpc_code == expected_grpc_error
+                assert e.description == expected_error_message
+                assert str(e) == f'{expected_grpc_error}: {expected_error_message}'
+
+    def test_attach_to_non_existent_session(self, grpc_channel):
+        session_name = 'non_existent_session'
+        expected_error_message = "Cannot attach to '" + session_name + "' because a session has not been initialized."
+        expected_grpc_error = grpc.StatusCode.FAILED_PRECONDITION
+        init_behavior = nidmm.SessionInitializationBehavior.ATTACH_TO_SERVER_SESSION
+        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, session_name, init_behavior)
+        try:
+            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options):
+                assert False
+        except nidmm.Error as e:
+            assert e.rpc_code == expected_grpc_error
+            assert e.description == expected_error_message
+            assert str(e) == f'{expected_grpc_error}: {expected_error_message}'
