@@ -5,7 +5,7 @@ NI-SWITCH Python API Status
 +-------------------------------+-------------------------+
 | NI-SWITCH (niswitch)          |                         |
 +===============================+=========================+
-| Driver Version Tested Against | 21.3.0                  |
+| Driver Version Tested Against | 2022 Q4                 |
 +-------------------------------+-------------------------+
 | PyPI Version                  | |niswitchLatestVersion| |
 +-------------------------------+-------------------------+

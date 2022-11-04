@@ -70,7 +70,7 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | NI-DCPower (nidcpower)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 2022 Q3                  |
+| Driver Version Tested Against | 2022 Q4                  |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
@@ -109,7 +109,7 @@ NI-Digital Pattern Driver Python API Status
 +---------------------------------------+--------------------------+
 | NI-Digital Pattern Driver (nidigital) |                          |
 +=======================================+==========================+
-| Driver Version Tested Against         | 21.8.0                   |
+| Driver Version Tested Against         | 2022 Q4                  |
 +---------------------------------------+--------------------------+
 | PyPI Version                          | |nidigitalLatestVersion| |
 +---------------------------------------+--------------------------+
@@ -226,7 +226,7 @@ NI-ModInst Python API Status
 +-------------------------------+--------------------------+
 | NI-ModInst (nimodinst)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 2022 Q3                  |
+| Driver Version Tested Against | 2022 Q4                  |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nimodinstLatestVersion| |
 +-------------------------------+--------------------------+
@@ -343,7 +343,7 @@ NI-SWITCH Python API Status
 +-------------------------------+-------------------------+
 | NI-SWITCH (niswitch)          |                         |
 +===============================+=========================+
-| Driver Version Tested Against | 21.3.0                  |
+| Driver Version Tested Against | 2022 Q4                 |
 +-------------------------------+-------------------------+
 | PyPI Version                  | |niswitchLatestVersion| |
 +-------------------------------+-------------------------+
@@ -382,7 +382,7 @@ NI-TClk Python API Status
 +-------------------------------+-----------------------+
 | NI-TClk (nitclk)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 2022 Q3               |
+| Driver Version Tested Against | 2022 Q4               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nitclkLatestVersion| |
 +-------------------------------+-----------------------+
