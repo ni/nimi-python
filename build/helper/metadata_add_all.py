@@ -108,7 +108,10 @@ def _add_ctypes_variable_name(parameter):
 
 def _add_ctypes_type(parameter, config):
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
-    parameter['ctypes_type'] = parameter['type']
+    if parameter['type'] == 'ViAddr' and (parameter['use_array'] or parameter['use_list']):
+        parameter['ctypes_type'] = 'ViInt8'
+    else:
+        parameter['ctypes_type'] = parameter['type']
     module_name = ''
     custom_type = find_custom_type(parameter, config)
     if custom_type is not None:
