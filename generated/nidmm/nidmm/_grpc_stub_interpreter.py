@@ -72,19 +72,19 @@ class GrpcStubInterpreter(object):
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):  # noqa: N802
         self._invoke(
             self._client.ConfigureMeasurementAbsolute,
-            grpc_types.ConfigureMeasurementAbsoluteRequest(vi=self._vi, measurement_function_raw=measurement_function.value, range=range, resolution_absolute=resolution_absolute),
+            grpc_types.ConfigureMeasurementAbsoluteRequest(vi=self._vi, measurement_function=measurement_function.value, range=range, resolution_absolute=resolution_absolute),
         )
 
     def configure_measurement_digits(self, measurement_function, range, resolution_digits):  # noqa: N802
         self._invoke(
             self._client.ConfigureMeasurementDigits,
-            grpc_types.ConfigureMeasurementDigitsRequest(vi=self._vi, measurement_function_raw=measurement_function.value, range=range, resolution_digits=resolution_digits),
+            grpc_types.ConfigureMeasurementDigitsRequest(vi=self._vi, measurement_function=measurement_function.value, range=range, resolution_digits=resolution_digits),
         )
 
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger, sample_interval):  # noqa: N802
         self._invoke(
             self._client.ConfigureMultiPoint,
-            grpc_types.ConfigureMultiPointRequest(vi=self._vi, trigger_count_raw=trigger_count, sample_count_raw=sample_count, sample_trigger_raw=sample_trigger.value, sample_interval_raw=sample_interval),
+            grpc_types.ConfigureMultiPointRequest(vi=self._vi, trigger_count=trigger_count, sample_count=sample_count, sample_trigger=sample_trigger.value, sample_interval=sample_interval),
         )
 
     def configure_rtd_custom(self, rtd_a, rtd_b, rtd_c):  # noqa: N802
@@ -96,7 +96,7 @@ class GrpcStubInterpreter(object):
     def configure_rtd_type(self, rtd_type, rtd_resistance):  # noqa: N802
         self._invoke(
             self._client.ConfigureRTDType,
-            grpc_types.ConfigureRTDTypeRequest(vi=self._vi, rtd_type_raw=rtd_type.value, rtd_resistance=rtd_resistance),
+            grpc_types.ConfigureRTDTypeRequest(vi=self._vi, rtd_type=rtd_type.value, rtd_resistance=rtd_resistance),
         )
 
     def configure_thermistor_custom(self, thermistor_a, thermistor_b, thermistor_c):  # noqa: N802
@@ -108,19 +108,19 @@ class GrpcStubInterpreter(object):
     def configure_thermocouple(self, thermocouple_type, reference_junction_type):  # noqa: N802
         self._invoke(
             self._client.ConfigureThermocouple,
-            grpc_types.ConfigureThermocoupleRequest(vi=self._vi, thermocouple_type_raw=thermocouple_type.value, reference_junction_type_raw=reference_junction_type.value),
+            grpc_types.ConfigureThermocoupleRequest(vi=self._vi, thermocouple_type=thermocouple_type.value, reference_junction_type=reference_junction_type.value),
         )
 
     def configure_trigger(self, trigger_source, trigger_delay):  # noqa: N802
         self._invoke(
             self._client.ConfigureTrigger,
-            grpc_types.ConfigureTriggerRequest(vi=self._vi, trigger_source_raw=trigger_source.value, trigger_delay_raw=trigger_delay),
+            grpc_types.ConfigureTriggerRequest(vi=self._vi, trigger_source=trigger_source.value, trigger_delay=trigger_delay),
         )
 
     def configure_waveform_acquisition(self, measurement_function, range, rate, waveform_points):  # noqa: N802
         self._invoke(
             self._client.ConfigureWaveformAcquisition,
-            grpc_types.ConfigureWaveformAcquisitionRequest(vi=self._vi, measurement_function_raw=measurement_function.value, range=range, rate=rate, waveform_points=waveform_points),
+            grpc_types.ConfigureWaveformAcquisitionRequest(vi=self._vi, measurement_function=measurement_function.value, range=range, rate=rate, waveform_points=waveform_points),
         )
 
     def disable(self):  # noqa: N802
@@ -145,21 +145,21 @@ class GrpcStubInterpreter(object):
     def fetch(self, maximum_time):  # noqa: N802
         response = self._invoke(
             self._client.Fetch,
-            grpc_types.FetchRequest(vi=self._vi, maximum_time_raw=maximum_time),
+            grpc_types.FetchRequest(vi=self._vi, maximum_time=maximum_time),
         )
         return response.reading
 
     def fetch_multi_point(self, maximum_time, array_size):  # noqa: N802
         response = self._invoke(
             self._client.FetchMultiPoint,
-            grpc_types.FetchMultiPointRequest(vi=self._vi, maximum_time_raw=maximum_time, array_size=array_size),
+            grpc_types.FetchMultiPointRequest(vi=self._vi, maximum_time=maximum_time, array_size=array_size),
         )
         return response.reading_array
 
     def fetch_waveform(self, maximum_time, array_size):  # noqa: N802
         response = self._invoke(
             self._client.FetchWaveform,
-            grpc_types.FetchWaveformRequest(vi=self._vi, maximum_time_raw=maximum_time, array_size=array_size),
+            grpc_types.FetchWaveformRequest(vi=self._vi, maximum_time=maximum_time, array_size=array_size),
         )
         return response.waveform_array
 
@@ -197,7 +197,7 @@ class GrpcStubInterpreter(object):
     def get_cal_date_and_time(self, cal_type):  # noqa: N802
         response = self._invoke(
             self._client.GetCalDateAndTime,
-            grpc_types.GetCalDateAndTimeRequest(vi=self._vi, cal_type_raw=cal_type),
+            grpc_types.GetCalDateAndTimeRequest(vi=self._vi, cal_type=cal_type),
         )
         return response.month, response.day, response.year, response.hour, response.minute
 
@@ -225,7 +225,7 @@ class GrpcStubInterpreter(object):
     def get_last_cal_temp(self, cal_type):  # noqa: N802
         response = self._invoke(
             self._client.GetLastCalTemp,
-            grpc_types.GetLastCalTempRequest(vi=self._vi, cal_type_raw=cal_type),
+            grpc_types.GetLastCalTempRequest(vi=self._vi, cal_type=cal_type),
         )
         return response.temperature
 
@@ -282,14 +282,14 @@ class GrpcStubInterpreter(object):
     def read(self, maximum_time):  # noqa: N802
         response = self._invoke(
             self._client.Read,
-            grpc_types.ReadRequest(vi=self._vi, maximum_time_raw=maximum_time),
+            grpc_types.ReadRequest(vi=self._vi, maximum_time=maximum_time),
         )
         return response.reading
 
     def read_multi_point(self, maximum_time, array_size):  # noqa: N802
         response = self._invoke(
             self._client.ReadMultiPoint,
-            grpc_types.ReadMultiPointRequest(vi=self._vi, maximum_time_raw=maximum_time, array_size=array_size),
+            grpc_types.ReadMultiPointRequest(vi=self._vi, maximum_time=maximum_time, array_size=array_size),
         )
         return response.reading_array
 
@@ -303,7 +303,7 @@ class GrpcStubInterpreter(object):
     def read_waveform(self, maximum_time, array_size):  # noqa: N802
         response = self._invoke(
             self._client.ReadWaveform,
-            grpc_types.ReadWaveformRequest(vi=self._vi, maximum_time_raw=maximum_time, array_size=array_size),
+            grpc_types.ReadWaveformRequest(vi=self._vi, maximum_time=maximum_time, array_size=array_size),
         )
         return response.waveform_array
 
@@ -328,19 +328,19 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViBoolean,
-            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViInt32,
-            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViReal64,
-            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802
