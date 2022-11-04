@@ -208,7 +208,7 @@ class GrpcStubInterpreter(object):
     def relay_control(self, relay_name, relay_action):  # noqa: N802
         self._invoke(
             self._client.RelayControl,
-            grpc_types.RelayControlRequest(vi=self._vi, relay_name=relay_name, relay_action_raw=relay_action.value),
+            grpc_types.RelayControlRequest(vi=self._vi, relay_name=relay_name, relay_action=relay_action.value),
         )
 
     def reset_with_defaults(self):  # noqa: N802
@@ -220,13 +220,13 @@ class GrpcStubInterpreter(object):
     def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):  # noqa: N802
         self._invoke(
             self._client.RouteScanAdvancedOutput,
-            grpc_types.RouteScanAdvancedOutputRequest(vi=self._vi, scan_advanced_output_connector_raw=scan_advanced_output_connector.value, scan_advanced_output_bus_line_raw=scan_advanced_output_bus_line.value, invert=invert),
+            grpc_types.RouteScanAdvancedOutputRequest(vi=self._vi, scan_advanced_output_connector=scan_advanced_output_connector.value, scan_advanced_output_bus_line=scan_advanced_output_bus_line.value, invert=invert),
         )
 
     def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert):  # noqa: N802
         self._invoke(
             self._client.RouteTriggerInput,
-            grpc_types.RouteTriggerInputRequest(vi=self._vi, trigger_input_connector_raw=trigger_input_connector.value, trigger_input_bus_line_raw=trigger_input_bus_line.value, invert=invert),
+            grpc_types.RouteTriggerInputRequest(vi=self._vi, trigger_input_connector=trigger_input_connector.value, trigger_input_bus_line=trigger_input_bus_line.value, invert=invert),
         )
 
     def send_software_trigger(self):  # noqa: N802
@@ -238,25 +238,25 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViBoolean,
-            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViInt32,
-            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViReal64,
-            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViString,
-            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_path(self, path_list):  # noqa: N802

@@ -111,7 +111,7 @@ class GrpcStubInterpreter(object):
     def enum_input_function_with_defaults(self, a_turtle):  # noqa: N802
         self._invoke(
             self._client.EnumInputFunctionWithDefaults,
-            grpc_types.EnumInputFunctionWithDefaultsRequest(vi=self._vi, a_turtle_raw=a_turtle.value),
+            grpc_types.EnumInputFunctionWithDefaultsRequest(vi=self._vi, a_turtle=a_turtle.value),
         )
 
     def export_attribute_configuration_buffer(self):  # noqa: N802
@@ -337,7 +337,7 @@ class GrpcStubInterpreter(object):
     def method_with_proto_only_parameter(self, attribute_value):  # noqa: N802
         self._invoke(
             self._client.MethodWithProtoOnlyParameter,
-            grpc_types.MethodWithProtoOnlyParameterRequest(attribute_value_raw=attribute_value),
+            grpc_types.MethodWithProtoOnlyParameterRequest(attribute_value=attribute_value),
         )
 
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers):  # noqa: N802
@@ -362,7 +362,7 @@ class GrpcStubInterpreter(object):
     def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):  # noqa: N802
         self._invoke(
             self._client.ParametersAreMultipleTypes,
-            grpc_types.ParametersAreMultipleTypesRequest(vi=self._vi, a_boolean=a_boolean, an_int32=an_int32, an_int64=an_int64, an_int_enum_raw=an_int_enum.value, a_float=a_float, a_float_enum_raw=a_float_enum.value, a_string=a_string),
+            grpc_types.ParametersAreMultipleTypesRequest(vi=self._vi, a_boolean=a_boolean, an_int32=an_int32, an_int64=an_int64, an_int_enum=an_int_enum.value, a_float=a_float, a_float_enum=a_float_enum.value, a_string=a_string),
         )
 
     def simple_function(self):  # noqa: N802
@@ -416,13 +416,13 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViBoolean,
-            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViInt32,
-            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_attribute_vi_int64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -434,7 +434,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViReal64,
-            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -458,7 +458,7 @@ class GrpcStubInterpreter(object):
     def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name):  # noqa: N802
         self._invoke(
             self._client.StringValuedEnumInputFunctionWithDefaults,
-            grpc_types.StringValuedEnumInputFunctionWithDefaultsRequest(vi=self._vi, a_mobile_os_name_raw=a_mobile_os_name.value),
+            grpc_types.StringValuedEnumInputFunctionWithDefaultsRequest(vi=self._vi, a_mobile_os_name=a_mobile_os_name.value),
         )
 
     def two_input_function(self, a_number, a_string):  # noqa: N802
