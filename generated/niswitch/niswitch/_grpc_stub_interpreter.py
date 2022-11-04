@@ -250,13 +250,13 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViReal64,
-            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
+            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
         )
 
     def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViString,
-            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
+            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
         )
 
     def set_path(self, path_list):  # noqa: N802

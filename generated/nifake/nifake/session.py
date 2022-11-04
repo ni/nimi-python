@@ -1357,7 +1357,7 @@ class Session(_SessionBase):
         self._interpreter.one_input_function(a_number)
 
     @ivi_synchronized
-    def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):
+    def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):
         r'''parameters_are_multiple_types
 
         Has parameters of multiple types.
@@ -1385,6 +1385,8 @@ class Session(_SessionBase):
 
             a_float_enum (enums.FloatEnum): A float enum.
 
+            string_size (int): Number of bytes allocated for aString
+
             a_string (str): An IVI dance string.
 
         '''
@@ -1392,7 +1394,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter an_int_enum must be of type ' + str(enums.Turtle))
         if type(a_float_enum) is not enums.FloatEnum:
             raise TypeError('Parameter a_float_enum must be of type ' + str(enums.FloatEnum))
-        self._interpreter.parameters_are_multiple_types(a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string)
+        self._interpreter.parameters_are_multiple_types(a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string)
 
     @ivi_synchronized
     def simple_function(self):

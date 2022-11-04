@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 23.0.0d69
+# This file is generated from NI-SWITCH API metadata version 23.0.0d75
 functions = {
     'AbortScan': {
         'documentation': {
             'description': '\nAborts the scan in progress. Initiate a scan with\nniSwitch_InitiateScan. If the switch module is not scanning,\nNISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -22,6 +23,7 @@ functions = {
         'documentation': {
             'description': '\nVerifies that a path between channel 1 and channel 2 can be created. If\na path is possible in the switch module, the availability of that path\nis returned given the existing connections. If the path is possible but\nin use, a NISWITCH_WARN_IMPLICIT_CONNECTION_EXISTS warning is\nreturned.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -63,6 +65,7 @@ functions = {
         'documentation': {
             'description': '\nDownloads the configured scan list and trigger settings to hardware.\nCalling niSwitch_Commit optional as it is implicitly called during\nniSwitch_InitiateScan. Use niSwitch_Commit to arm triggers in a given\norder or to control when expensive hardware operations are performed.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -79,6 +82,7 @@ functions = {
         'documentation': {
             'description': '\nCreates a path between channel 1 and channel 2. The driver calculates\nand uses the shortest path between the two channels. Refer to Immediate\nOperations for information about Channel Usage types. If a path is not\navailable, the function returns one of the following errors: -\nNISWITCH_ERROR_EXPLICIT_CONNECTION_EXISTS, if the two channels are\nalready explicitly connected by calling either the niSwitch_Connect or\nniSwitch_SetPath function. -\nNISWITCH_ERROR_IS_CONFIGURATION_CHANNEL, if a channel is a\nconfiguration channel. Error elaboration contains information about\nwhich of the two channels is a configuration channel. -\nNISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES, if both channels are\nconnected to a different source. Error elaboration contains information\nabout sources channel 1 and 2 connect to. -\nNISWITCH_ERROR_CANNOT_CONNECT_TO_ITSELF, if channels 1 and 2 are\none and the same channel. - NISWITCH_ERROR_PATH_NOT_FOUND, if the\ndriver cannot find a path between the two channels. Note: Paths are\nbidirectional. For example, if a path exists between channels CH1 and\nCH2, then the path also exists between channels CH2 and CH1.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -111,6 +115,7 @@ functions = {
         'documentation': {
             'description': '\nCreates the connections between channels specified in Connection List.\nSpecify connections with two endpoints only or the explicit path between\ntwo endpoints. NI-SWITCH calculates and uses the shortest path between\nthe channels. Refer to Setting Source and Configuration Channels for\ninformation about channel usage types. In the event of an error,\nconnecting stops at the point in the list where the error occurred. If a\npath is not available, the function returns one of the following errors:\n- NISWITCH_ERROR_EXPLICIT_CONNECTION_EXISTS, if the two channels are\nalready explicitly connected. -\nNISWITCH_ERROR_IS_CONFIGURATION_CHANNEL, if a channel is a\nconfiguration channel. Error elaboration contains information about\nwhich of the two channels is a configuration channel. -\nNISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES, if both channels are\nconnected to a different source. Error elaboration contains information\nabout sources channel 1 and 2 to connect. -\nNISWITCH_ERROR_CANNOT_CONNECT_TO_ITSELF, if channels 1 and 2 are\none and the same channel. - NISWITCH_ERROR_PATH_NOT_FOUND, if the\ndriver cannot find a path between the two channels. Note: Paths are\nbidirectional. For example, if a path exists between channels ch1 and\nch2, then the path also exists between channels ch1 and ch2.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -135,6 +140,7 @@ functions = {
         'documentation': {
             'description': '\nPlaces the switch module in a quiescent state where it has minimal or no\nimpact on the system to which it is connected. All channels are\ndisconnected and any scan in progress is aborted.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -151,6 +157,7 @@ functions = {
         'documentation': {
             'description': '\nThis function destroys the path between two channels that you create\nwith the niSwitch_Connect or niSwitch_SetPath function. If a path is\nnot connected or not available, the function returns the\nIVISWTCH_ERROR_NO_SUCH_PATH error.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -183,6 +190,7 @@ functions = {
         'documentation': {
             'description': '\nBreaks all existing paths. If the switch module cannot break all paths,\nNISWITCH_WARN_PATH_REMAINS warning is returned.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -199,6 +207,7 @@ functions = {
         'documentation': {
             'description': '\nBreaks the connections between channels specified in Disconnection List.\nIf no connections exist between channels, NI-SWITCH returns an error. In\nthe event of an error, the VI stops at the point in the list where the\nerror occurred.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -224,6 +233,7 @@ functions = {
         'documentation': {
             'description': '\nThis function queries the value of a ViBoolean attribute. You can use\nthis function to get the values of instrument specific attributes and\ninherent IVI attributes. If the attribute represents an instrument\nstate, this function performs instrument I/O in the following cases: -\nState caching is disabled for the entire session or for the particular\nattribute. - State caching is enabled and the currently cached value is\ninvalid.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -265,6 +275,7 @@ functions = {
         'documentation': {
             'description': '\nThis function queries the value of a ViInt32 attribute. You can use this\nfunction to get the values of instrument specific attributes and\ninherent IVI attributes. If the attribute represents an instrument\nstate, this function performs instrument I/O in the following cases: -\nState caching is disabled for the entire session or for the particular\nattribute. - State caching is enabled and the currently cached value is\ninvalid.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -306,6 +317,7 @@ functions = {
         'documentation': {
             'description': '\nThis function queries the value of a ViReal64 attribute. You can use\nthis function to get the values of instrument specific attributes and\ninherent IVI attributes. If the attribute represents an instrument\nstate, this function performs instrument I/O in the following cases: -\nState caching is disabled for the entire session or for the particular\nattribute. - State caching is enabled and the currently cached value is\ninvalid.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -347,6 +359,7 @@ functions = {
         'documentation': {
             'description': '\nThis function queries the value of a ViString attribute. You can use\nthis function to get the values of instrument specific attributes and\ninherent IVI attributes. If the attribute represents an instrument\nstate, this function performs instrument I/O in the following cases: -\nState caching is disabled for the entire session or for the particular\nattribute. - State caching is enabled and the currently cached value is\ninvalid. You must provide a ViChar array to serve as a buffer for the\nvalue. You pass the number of bytes in the buffer as the Array Size\nparameter. If the current value of the attribute, including the\nterminating NULL byte, is larger than the size you indicate in the Array\nSize parameter, the function copies Array Size-1 bytes into the buffer,\nplaces an ASCII NULL byte at the end of the buffer, and returns the\narray size you must pass to get the entire value. For example, if the\nvalue is "123456" and the Array Size is 4, the function places "123"\ninto the buffer and returns 7. If you want to call this function just to\nget the required array size, you can pass 0 for the Array Size and\nVI_NULL for the Attribute Value buffer. If you want the function to\nfill in the buffer regardless of the number of bytes in the value, pass\na negative number for the Array Size parameter.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -399,6 +412,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the channel string that is in the channel table at the specified\nindex. Use niSwitch_GetChannelName in a For Loop to get a complete list\nof valid channel names for the switch module. Use the Channel Count\nattribute to determine the number of channels.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -444,6 +458,7 @@ functions = {
         'documentation': {
             'description': '\nThis function retrieves and then clears the IVI error information for\nthe session or the current execution thread. One exception exists: If\nthe buffer_size parameter is 0, the function does not clear the error\ninformation. By passing 0 for the buffer size, the caller can ascertain\nthe buffer size required to get the entire error description string and\nthen call the function again with a sufficiently large buffer. If the\nuser specifies a valid IVI session for the InstrumentHandle parameter,\nGet Error retrieves and then clears the error information for the\nsession. If the user passes VI_NULL for the InstrumentHandle parameter,\nthis function retrieves and then clears the error information for the\ncurrent execution thread. If the InstrumentHandle parameter is an\ninvalid session, the function does nothing and returns an error.\nNormally, the error information describes the first error that occurred\nsince the user last called niSwitch_GetError or niSwitch_ClearError.\n'
         },
+        'included_in_proto': True,
         'is_error_handling': True,
         'method_templates': [
             {
@@ -498,6 +513,7 @@ functions = {
         'documentation': {
             'description': '\nReturns a string that identifies the explicit path created with\nniSwitch_Connect. Pass this string to niSwitch_SetPath to establish\nthe exact same path in future connections. In some cases, multiple paths\nare available between two channels. When you call niSwitch_Connect, the\ndriver selects an available path. With niSwitch_Connect, there is no\nguarantee that the driver selected path will always be the same path\nthrough the switch module. niSwitch_GetPath only returns those paths\nexplicitly created by niSwitch Connect Channels or niSwitch_SetPath.\nFor example, if you connect channels CH1 and CH3,and then channels CH2\nand CH3, an explicit path between channels CH1 and CH2 does not exist an\nerror is returned\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -550,6 +566,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the number of times the relay has changed from Closed to Open.\nRelay count is useful for tracking relay lifetime and usage. Call\nniSwitch_WaitForDebounce before niSwitch_GetRelayCount to ensure an\naccurate count. Refer to the Relay Count topic in the NI Switches Help\nto determine if the switch module supports relay counting.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -582,6 +599,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the relay name string that is in the relay list at the specified\nindex. Use niSwitch_GetRelayName in a For Loop to get a complete list\nof valid relay names for the switch module. Use the Number of Relays\nattribute to determine the number of relays.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -626,6 +644,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the relay position for the relay specified in the Relay Name\nparameter.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -660,6 +679,7 @@ functions = {
         'documentation': {
             'description': '\nReturns a session handle used to identify the switch in all subsequent\ninstrument driver calls and sets the topology of the switch.\nniSwitch_InitWithTopology creates a new IVI instrument driver session\nfor the switch specified in the resourceName parameter. The driver uses\nthe topology specified in the topology parameter and overrides the\ntopology specified in MAX. Note: When initializing an NI SwitchBlock\ndevice with topology, you must specify the toplogy created when you\nconfigured the device in MAX, using either\nNISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY or the toplogy string of the\ndevice. Refer to the Initializing with Toplogy for NI SwitchBlock\nDevices topic in the NI Switches Help for information about determining\nthe topology string of an NI SwitchBlock device. By default, the switch\nis reset to a known state. Enable simulation by specifying the topology\nand setting the simulate parameter to VI_TRUE.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': '__init__',
         'method_templates': [
             {
@@ -723,6 +743,7 @@ functions = {
         'documentation': {
             'description': '\nCommits the configured scan list and trigger settings to hardware and\ninitiates the scan. If niSwitch Commit was called earlier, niSwitch\nInitiate Scan only initiates the scan and returns immediately. Once the\nscanning operation begins, you cannot perform any other operation other\nthan GetAttribute, AbortScan, or SendSoftwareTrigger. All other\nfunctions return NISWITCH_ERROR_SCAN_IN_PROGRESS. To stop the\nscanning operation, To stop the scanning operation, call\nniSwitch_AbortScan.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'initiate',
         'parameters': [
             {
@@ -740,6 +761,7 @@ functions = {
         'documentation': {
             'description': "\nThis function obtains a multithread lock on the instrument session.\nBefore it does so, it waits until all other execution threads have\nreleased their locks on the instrument session. Other threads might have\nobtained a lock on this session in the following ways: - The user's\napplication called niSwitch_LockSession. - A call to the instrument\ndriver locked the session. - A call to the IVI engine locked the\nsession. After your call to niSwitch_LockSession returns successfully,\nno other threads can access the instrument session until you call\nniSwitch_UnlockSession. Use niSwitch_LockSession and\nniSwitch_UnlockSession around a sequence of calls to instrument driver\nfunctions if you require that the instrument retain its settings through\nthe end of the sequence. You can safely make nested calls to\nniSwitch_LockSession within the same thread. To completely unlock the\nsession, you must balance each call to niSwitch_LockSession with a call\nto niSwitch_UnlockSession. If, however, you use the Caller Has Lock\nparameter in all calls to niSwitch_LockSession and\nniSwitch_UnlockSession within a function, the IVI Library locks the\nsession only once within the function regardless of the number of calls\nyou make to niSwitch_LockSession. This allows you to call\nniSwitch_UnlockSession just once at the end of the function.\n"
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'lock',
@@ -775,6 +797,7 @@ functions = {
         'documentation': {
             'description': '\nControls individual relays of the switch. When controlling individual\nrelays, the protection offered by setting the usage of source channels\nand configuration channels, and by enabling or disabling analog bus\nsharing on the NI SwitchBlock, does not apply. Refer to the device book\nfor your switch in the NI Switches Help to determine if the switch\nsupports individual relay control.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -808,6 +831,7 @@ functions = {
         'documentation': {
             'description': '\nResets the switch module and applies initial user specified settings\nfrom the logical name used to initialize the session. If the session was\ncreated without a logical name, this function is equivalent to\nniSwitch_reset.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -824,6 +848,7 @@ functions = {
         'documentation': {
             'description': '\nRoutes the scan advanced output trigger from a trigger bus line (TTLx)\nto the front or rear connector.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -867,6 +892,7 @@ functions = {
         'documentation': {
             'description': '\nRoutes the input trigger from the front or rear connector to a trigger\nbus line (TTLx). To disconnect the route, call this function again and\nspecify None for trigger bus line parameter.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -910,6 +936,7 @@ functions = {
         'documentation': {
             'description': '\nSends a software trigger to the switch module specified in the NI-SWITCH\nsession. When the trigger input is set to NISWITCH_VAL_SOFTWARE_TRIG\nthrough either the niSwitch_ConfigureScanTrigger or the\nNISWITCH_ATTR_TRIGGER_INPUT attribute, the scan does not proceed from\na semi-colon (wait for trigger) until niSwitch_SendSoftwareTrigger is\ncalled.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -927,6 +954,7 @@ functions = {
         'documentation': {
             'description': '\nThis function sets the value of a ViBoolean attribute. This is a\nlow-level function that you can use to set the values of\ninstrument-specific attributes and inherent IVI attributes. If the\nattribute represents an instrument state, this function performs\ninstrument I/O in the following cases: - State caching is disabled for\nthe entire session or for the particular attribute. - State caching is\nenabled and the currently cached value is invalid or is different than\nthe value you specify. This instrument driver contains high-level\nfunctions that set most of the instrument attributes. It is best to use\nthe high-level driver functions as much as possible. They handle order\ndependencies and multithread locking for you. In addition, they perform\nstatus checking only after setting all of the attributes. In contrast,\nwhen you set multiple attributes using the SetAttribute functions, the\nfunctions check the instrument status after each call. Also, when state\ncaching is enabled, the high-level functions that configure multiple\nattributes perform instrument I/O only for the attributes whose value\nyou change. Thus, you can safely call the high-level functions without\nthe penalty of redundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -968,6 +996,7 @@ functions = {
         'documentation': {
             'description': '\nThis function sets the value of a ViInt32 attribute. This is a low-level\nfunction that you can use to set the values of instrument-specific\nattributes and inherent IVI attributes. If the attribute represents an\ninstrument state, this function performs instrument I/O in the following\ncases: - State caching is disabled for the entire session or for the\nparticular attribute. - State caching is enabled and the currently\ncached value is invalid or is different than the value you specify. This\ninstrument driver contains high-level functions that set most of the\ninstrument attributes. It is best to use the high-level driver functions\nas much as possible. They handle order dependencies and multithread\nlocking for you. In addition, they perform status checking only after\nsetting all of the attributes. In contrast, when you set multiple\nattributes using the SetAttribute functions, the functions check the\ninstrument status after each call. Also, when state caching is enabled,\nthe high-level functions that configure multiple attributes perform\ninstrument I/O only for the attributes whose value you change. Thus, you\ncan safely call the high-level functions without the penalty of\nredundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -998,6 +1027,7 @@ functions = {
                 'documentation': {
                     'description': '\nPass the value to which you want to set the attribute. From the function\npanel window, you can use this control as follows. - If the attribute\ncurrently showing in the Attribute ID ring control has constants as\nvalid values, you can view a list of the constants by pressing on this\ncontrol. Select a value by double-clicking on it or by selecting it and\nthen pressing . Note: Some of the values might not be valid depending on\nthe current settings of the instrument session. Default Value: none\n'
                 },
+                'grpc_enum': 'NiSwitchInt32AttributeValues',
                 'name': 'attributeValue',
                 'type': 'ViInt32'
             }
@@ -1009,6 +1039,7 @@ functions = {
         'documentation': {
             'description': '\nThis function sets the value of a ViReal64 attribute. This is a\nlow-level function that you can use to set the values of\ninstrument-specific attributes and inherent IVI attributes. If the\nattribute represents an instrument state, this function performs\ninstrument I/O in the following cases: - State caching is disabled for\nthe entire session or for the particular attribute. - State caching is\nenabled and the currently cached value is invalid or is different than\nthe value you specify. This instrument driver contains high-level\nfunctions that set most of the instrument attributes. It is best to use\nthe high-level driver functions as much as possible. They handle order\ndependencies and multithread locking for you. In addition, they perform\nstatus checking only after setting all of the attributes. In contrast,\nwhen you set multiple attributes using the SetAttribute functions, the\nfunctions check the instrument status after each call. Also, when state\ncaching is enabled, the high-level functions that configure multiple\nattributes perform instrument I/O only for the attributes whose value\nyou change. Thus, you can safely call the high-level functions without\nthe penalty of redundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1039,6 +1070,7 @@ functions = {
                 'documentation': {
                     'description': '\nPass the value to which you want to set the attribute. From the function\npanel window, you can use this control as follows. - If the attribute\ncurrently showing in the Attribute ID ring control has constants as\nvalid values, you can view a list of the constants by pressing on this\ncontrol. Select a value by double-clicking on it or by selecting it and\nthen pressing . Note: Some of the values might not be valid depending on\nthe current settings of the instrument session. Default Value: none\n'
                 },
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViReal64'
             }
@@ -1050,6 +1082,7 @@ functions = {
         'documentation': {
             'description': '\nThis function sets the value of a ViString attribute. This is a\nlow-level function that you can use to set the values of\ninstrument-specific attributes and inherent IVI attributes. If the\nattribute represents an instrument state, this function performs\ninstrument I/O in the following cases: - State caching is disabled for\nthe entire session or for the particular attribute. - State caching is\nenabled and the currently cached value is invalid or is different than\nthe value you specify. This instrument driver contains high-level\nfunctions that set most of the instrument attributes. It is best to use\nthe high-level driver functions as much as possible. They handle order\ndependencies and multithread locking for you. In addition, they perform\nstatus checking only after setting all of the attributes. In contrast,\nwhen you set multiple attributes using the SetAttribute functions, the\nfunctions check the instrument status after each call. Also, when state\ncaching is enabled, the high-level functions that configure multiple\nattributes perform instrument I/O only for the attributes whose value\nyou change. Thus, you can safely call the high-level functions without\nthe penalty of redundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1080,6 +1113,7 @@ functions = {
                 'documentation': {
                     'description': '\nPass the value to which you want to set the attribute. From the function\npanel window, you can use this control as follows. - If the attribute\ncurrently showing in the Attribute ID ring control has constants as\nvalid values, you can view a list of the constants by pressing on this\ncontrol. Select a value by double-clicking on it or by selecting it and\nthen pressing . Note: Some of the values might not be valid depending on\nthe current settings of the instrument session. Default Value: none\n'
                 },
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViString'
             }
@@ -1090,6 +1124,7 @@ functions = {
         'documentation': {
             'description': '\nConnects two channels by specifying an explicit path in the path list\nparameter. niSwitch_SetPath is particularly useful where path\nrepeatability is important, such as in calibrated signal paths. If this\nis not necessary, use niSwitch_Connect.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1114,6 +1149,7 @@ functions = {
         'documentation': {
             'description': '\nThis function releases a lock that you acquired on an instrument session\nusing niSwitch_LockSession. Refer to niSwitch_LockSession for\nadditional information on session locks.\n'
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
@@ -1149,6 +1185,7 @@ functions = {
         'documentation': {
             'description': '\nPauses until all created paths have settled. If the time you specify\nwith the Maximum Time (ms) parameter elapsed before the switch paths\nhave settled, this function returns the\nNISWITCH_ERROR_MAX_TIME_EXCEEDED error.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1176,6 +1213,7 @@ functions = {
         'documentation': {
             'description': '\nPauses until the switch module stops scanning or the maximum time has\nelapsed and returns a timeout error. If the time you specify with the\nMaximum Time (ms) parameter elapsed before the scanning operation has\nfinished, this function returns the NISWITCH_ERROR_MAX_TIME_EXCEEDED\nerror.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1205,6 +1243,7 @@ functions = {
             'description': '\nTerminates the NI-SWITCH session and all of its attributes and\ndeallocates any memory resources the driver uses. Notes: (1) You must\nunlock the session before calling niSwitch_close. (2) After calling\nniSwitch_close, you cannot use the instrument driver again until you\ncall niSwitch_init or niSwitch_InitWithOptions.\n'
         },
         'grpc_name': 'Close',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1225,6 +1264,7 @@ functions = {
             'description': '\nConverts an error code returned by NI-SWITCH into a user-readable\nstring. Generally this information is supplied in error out of any\nNI-SWITCH VI. Use niSwitch_error_message for a static lookup of an\nerror code description.\n'
         },
         'grpc_name': 'ErrorMessage',
+        'included_in_proto': True,
         'is_error_handling': True,
         'parameters': [
             {
@@ -1279,6 +1319,7 @@ functions = {
             ]
         },
         'grpc_name': 'FancySelfTest',
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1305,6 +1346,7 @@ functions = {
             'description': '\nDisconnects all created paths and returns the switch module to the state\nat initialization. Configuration channel and source channel settings\nremain unchanged.\n'
         },
         'grpc_name': 'Reset',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1323,6 +1365,7 @@ functions = {
             'description': 'Verifies that the driver can communicate with the switch module.'
         },
         'grpc_name': 'SelfTest',
+        'included_in_proto': True,
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {

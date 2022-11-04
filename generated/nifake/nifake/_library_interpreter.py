@@ -497,7 +497,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):  # noqa: N802
+    def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         a_boolean_ctype = _visatype.ViBoolean(a_boolean)  # case S150
         an_int32_ctype = _visatype.ViInt32(an_int32)  # case S150
@@ -505,7 +505,7 @@ class LibraryInterpreter(object):
         an_int_enum_ctype = _visatype.ViInt16(an_int_enum.value)  # case S130
         a_float_ctype = _visatype.ViReal64(a_float)  # case S150
         a_float_enum_ctype = _visatype.ViReal64(a_float_enum.value)  # case S130
-        string_size_ctype = _visatype.ViInt32(0 if a_string is None else len(a_string))  # case S160
+        string_size_ctype = _visatype.ViInt32(string_size)  # case S150
         a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case C020
         error_code = self._library.niFake_ParametersAreMultipleTypes(vi_ctype, a_boolean_ctype, an_int32_ctype, an_int64_ctype, an_int_enum_ctype, a_float_ctype, a_float_enum_ctype, string_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

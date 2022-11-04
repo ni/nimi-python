@@ -359,10 +359,10 @@ class GrpcStubInterpreter(object):
             grpc_types.OneInputFunctionRequest(vi=self._vi, a_number=a_number),
         )
 
-    def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):  # noqa: N802
+    def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):  # noqa: N802
         self._invoke(
             self._client.ParametersAreMultipleTypes,
-            grpc_types.ParametersAreMultipleTypesRequest(vi=self._vi, a_boolean=a_boolean, an_int32=an_int32, an_int64=an_int64, an_int_enum=an_int_enum.value, a_float=a_float, a_float_enum=a_float_enum.value, a_string=a_string),
+            grpc_types.ParametersAreMultipleTypesRequest(vi=self._vi, a_boolean=a_boolean, an_int32=an_int32, an_int64=an_int64, an_int_enum=an_int_enum.value, a_float=a_float, a_float_enum=a_float_enum.value, string_size=string_size, a_string=a_string),
         )
 
     def simple_function(self):  # noqa: N802
@@ -434,7 +434,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViReal64,
-            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
+            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
         )
 
     def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802

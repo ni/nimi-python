@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d70
+# This file is generated from NI-FAKE API metadata version 23.0.0d76
 functions = {
     'Abort': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'Aborts a previously initiated thingie.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -23,6 +24,7 @@ functions = {
         'documentation': {
             'description': 'Accepts list of hightime.timedelta or datetime.timedelta or float instances representing time delays.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -62,6 +64,7 @@ functions = {
         'documentation': {
             'description': 'This function returns an array of booleans.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -98,6 +101,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -116,6 +120,7 @@ functions = {
         'documentation': {
             'description': 'Test for buffer with converter'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -154,6 +159,7 @@ functions = {
         'documentation': {
             'description': 'This function returns an array of enums, stored as 16 bit integers under the hood.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -192,6 +198,7 @@ functions = {
         'documentation': {
             'description': 'This function takes one parameter other than the session, which happens to be an enum and has a default value.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -236,6 +243,7 @@ functions = {
         'documentation': {
             'description': 'Export configuration buffer.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -267,6 +275,7 @@ functions = {
         'documentation': {
             'description': 'Returns waveform data.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -329,6 +338,7 @@ functions = {
             'description': 'A function with a parameter that specifies repeated_capability_type.'
         },
         'has_repeated_capability': True,
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -358,6 +368,7 @@ functions = {
             'description': 'Returns a boolean.',
             'note': 'This function rules!'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -384,6 +395,7 @@ functions = {
             'description': 'Returns a number.',
             'note': 'This function rules!'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -409,6 +421,7 @@ functions = {
         'documentation': {
             'description': 'Illustrates returning a string of fixed size.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -439,6 +452,7 @@ functions = {
             'description': 'Returns a number and a string.',
             'note': 'This function rules!'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -476,6 +490,7 @@ functions = {
         'documentation': {
             'description': 'Returns a string using the IVI dance.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -513,6 +528,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -548,6 +564,7 @@ functions = {
         'documentation': {
             'description': 'This function returns an array for use in python-code size mechanism.'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -589,6 +606,7 @@ functions = {
         'documentation': {
             'description': 'This function returns an array for use in python-code size mechanism.'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -630,6 +648,7 @@ functions = {
         'documentation': {
             'description': 'This function returns the size of the array for use in python-code size mechanism.'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -655,6 +674,7 @@ functions = {
         'documentation': {
             'description': 'This function returns an array of float whose size is determined with the IVI dance.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -692,6 +712,7 @@ functions = {
         'documentation': {
             'description': 'Queries the value of a ViBoolean attribute.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -733,6 +754,7 @@ functions = {
         'documentation': {
             'description': 'Queries the value of a ViInt32 attribute.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -774,6 +796,7 @@ functions = {
         'documentation': {
             'description': 'Queries the value of a ViInt64 attribute.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -815,6 +838,7 @@ functions = {
         'documentation': {
             'description': 'Queries the value of a ViReal attribute.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -856,6 +880,7 @@ functions = {
         'documentation': {
             'description': 'Queries the value of a ViBoolean attribute.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -909,6 +934,7 @@ functions = {
         'documentation': {
             'description': 'Returns the date and time of the last calibration performed.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -973,6 +999,7 @@ functions = {
         'documentation': {
             'description': 'Returns the recommended maximum interval, in **months**, between external calibrations.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1000,6 +1027,7 @@ functions = {
         'documentation': {
             'description': 'Returns a list of channel names for the given channel indices.'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -1050,6 +1078,7 @@ functions = {
         'documentation': {
             'description': 'This function returns a custom type.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1075,6 +1104,7 @@ functions = {
         'documentation': {
             'description': 'This function returns a custom type.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1112,6 +1142,7 @@ functions = {
         'documentation': {
             'description': 'This function returns a custom type with typedef and a custom type with nested typedef.'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -1146,6 +1177,7 @@ functions = {
             'description': 'Returns an enum value',
             'note': 'Splinter is not supported.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1199,6 +1231,7 @@ functions = {
         'documentation': {
             'description': 'Returns the error information associated with the session.'
         },
+        'included_in_proto': True,
         'is_error_handling': True,
         'method_templates': [
             {
@@ -1254,6 +1287,7 @@ functions = {
         'documentation': {
             'description': 'Returns the date and time of the last calibration performed.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1296,6 +1330,7 @@ functions = {
         'documentation': {
             'description': 'Import configuration buffer.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1326,6 +1361,7 @@ functions = {
         'documentation': {
             'description': 'Creates a new IVI instrument driver session.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1414,6 +1450,7 @@ functions = {
         'documentation': {
             'description': 'Initiates a thingie.'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -1430,6 +1467,7 @@ functions = {
         'documentation': {
             'description': 'Lock.'
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'lock',
@@ -1465,6 +1503,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'out',
@@ -1485,6 +1524,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1498,6 +1538,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1512,6 +1553,7 @@ functions = {
         'documentation': {
             'description': 'Receives and returns multiple types of arrays.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1594,6 +1636,7 @@ functions = {
         'documentation': {
             'description': 'Function to test multiple arrays that use the same size'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1667,6 +1710,7 @@ functions = {
         'documentation': {
             'description': 'This function takes one parameter other than the session.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1692,6 +1736,7 @@ functions = {
         'documentation': {
             'description': 'Has parameters of multiple types.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1783,10 +1828,6 @@ functions = {
                     'description': 'An IVI dance string.'
                 },
                 'name': 'aString',
-                'size': {
-                    'mechanism': 'len',
-                    'value': 'stringSize'
-                },
                 'type': 'ViConstString'
             }
         ],
@@ -1797,6 +1838,7 @@ functions = {
         'documentation': {
             'description': 'This function takes no parameters other than the session.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1815,6 +1857,7 @@ functions = {
         'documentation': {
             'description': 'Returns a list of channel names for the given channel indices.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1874,6 +1917,7 @@ functions = {
         'documentation': {
             'description': 'Acquires a single measurement and returns the measured value.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1909,6 +1953,7 @@ functions = {
         'documentation': {
             'description': 'Acquires a single measurement and returns the measured value.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1953,6 +1998,7 @@ functions = {
             'description': 'Returns a number and a string.',
             'note': 'This function rules!'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1990,6 +2036,7 @@ functions = {
         'documentation': {
             'description': 'Returns a hightime.timedelta instance.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2017,6 +2064,7 @@ functions = {
         'documentation': {
             'description': 'Returns a list of hightime.timedelta instances.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2056,6 +2104,7 @@ functions = {
         'documentation': {
             'description': 'Returns multiple types.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2182,6 +2231,7 @@ functions = {
         'documentation': {
             'description': 'This function sets the value of a ViBoolean attribute.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2223,6 +2273,7 @@ functions = {
         'documentation': {
             'description': 'This function sets the value of a ViInt32 attribute.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2253,6 +2304,7 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
+                'grpc_enum': 'NiFakeInt32AttributeValues',
                 'name': 'attributeValue',
                 'type': 'ViInt32'
             }
@@ -2264,6 +2316,7 @@ functions = {
         'documentation': {
             'description': 'This function sets the value of a ViInt64 attribute.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2306,6 +2359,7 @@ functions = {
         'documentation': {
             'description': 'This function sets the value of a ViReal64 attribute.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2336,6 +2390,7 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
+                'grpc_mapped_enum': 'NiFakeReal64AttributeValuesMapped',
                 'name': 'attributeValue',
                 'type': 'ViReal64'
             }
@@ -2347,6 +2402,7 @@ functions = {
         'documentation': {
             'description': 'This function sets the value of a ViString attribute.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2389,6 +2445,7 @@ functions = {
         'documentation': {
             'description': 'This function takes a custom type.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2414,6 +2471,7 @@ functions = {
         'documentation': {
             'description': 'This function takes an array of custom types.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2451,6 +2509,7 @@ functions = {
         'documentation': {
             'description': 'This function takes one parameter other than the session, which happens to be a string-valued enum and has a default value.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2492,6 +2551,7 @@ functions = {
         'documentation': {
             'description': 'This function takes two parameters other than the session.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2524,6 +2584,7 @@ functions = {
         'documentation': {
             'description': 'Unlock'
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
@@ -2561,6 +2622,7 @@ functions = {
             'description': 'Returns a number and a string.',
             'note': 'This function rules!'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2594,6 +2656,7 @@ functions = {
         'documentation': {
             'description': 'Writes waveform to the driver'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -2648,6 +2711,7 @@ functions = {
             'description': 'Closes the specified session and deallocates resources that it reserved.'
         },
         'grpc_name': 'Close',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2668,6 +2732,7 @@ functions = {
             'description': 'Takes the errorCode returned by a functiona and returns it as a user-readable string.'
         },
         'grpc_name': 'ErrorMessage',
+        'included_in_proto': True,
         'is_error_handling': True,
         'parameters': [
             {
@@ -2708,6 +2773,7 @@ functions = {
             'description': 'Performs a self-test'
         },
         'grpc_name': 'FancySelfTest',
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -2735,6 +2801,7 @@ functions = {
             'description': 'Performs a self-test.'
         },
         'grpc_name': 'SelfTest',
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
