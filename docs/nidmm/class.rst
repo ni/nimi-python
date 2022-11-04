@@ -598,11 +598,9 @@ configure_thermocouple
                 Specifies the type of reference junction to be used in the reference
                 junction compensation of a thermocouple measurement. NI-DMM uses this
                 value to set the Reference Junction Type property. The only supported
-                value is :py:data:`~nidmm.NIDMM_VAL_TEMP_REF_JUNC_FIXED`.
+                value is :py:data:`~nidmm.ThermocoupleReferenceJunctionType.FIXED`.
 
                 
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type reference_junction_type: :py:data:`nidmm.ThermocoupleReferenceJunctionType`
@@ -3226,11 +3224,7 @@ temp_tc_ref_junc_type
 
     .. py:attribute:: temp_tc_ref_junc_type
 
-        Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, :py:data:`~nidmm.NIDMM_VAL_TEMP_REF_JUNC_FIXED`, is fixed.
-
-
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, :py:data:`~nidmm.ThermocoupleReferenceJunctionType.FIXED`, is fixed.
 
         The following table lists the characteristics of this property.
 
