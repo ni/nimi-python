@@ -52,7 +52,9 @@ class GrpcStubInterpreter(object):
             elif error_code is None:
                 raise errors.RpcError(grpc_error, error_message)
 
-        if error_code < 0:
+        if error_code is None:
+            raise errors.Error(error_message)
+        elif error_code < 0:
             raise errors.DriverError(error_code, error_message)
         elif error_code > 0:
             if not error_message:
