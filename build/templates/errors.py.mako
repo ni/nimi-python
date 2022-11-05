@@ -2,6 +2,7 @@ ${template_parameters['encoding_tag']}
 # This file was generated
 <%
 config            = template_parameters['metadata'].config
+grpc_supported    = template_parameters['include_grpc_support']
 attributes        = config['attributes']
 functions         = config['functions']
 extra_errors_used = config['extra_errors_used']
@@ -55,6 +56,7 @@ class DriverWarning(Warning):
         super(DriverWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
 
 
+% if grpc_supported:
 class RpcError(Error):
     '''An error specific to gRPC-based sessions'''
 
@@ -69,6 +71,7 @@ class RpcError(Error):
         super(RpcError, self).__init__(rpc_error + ": " + self.description)
 
 
+% endif
 class UnsupportedConfigurationError(Error):
     '''An error due to using this module in an usupported platform.'''
 

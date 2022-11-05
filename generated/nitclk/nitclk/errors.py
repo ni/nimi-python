@@ -43,20 +43,6 @@ class DriverWarning(Warning):
         super(DriverWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
 
 
-class RpcError(Error):
-    '''An error specific to gRPC-based sessions'''
-
-    def __init__(self, rpc_code, description):
-        self.rpc_code = rpc_code
-        self.description = description
-        try:
-            import grpc
-            rpc_error = str(grpc.StatusCode(self.rpc_code))
-        except Exception:
-            rpc_error = str(self.rpc_code)
-        super(RpcError, self).__init__(rpc_error + ": " + self.description)
-
-
 class UnsupportedConfigurationError(Error):
     '''An error due to using this module in an usupported platform.'''
 
