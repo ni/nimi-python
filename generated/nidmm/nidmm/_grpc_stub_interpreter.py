@@ -22,7 +22,6 @@ class GrpcStubInterpreter(object):
         self._vi = 0
 
     def _invoke(self, func, request):
-        grpc_error = None
         try:
             response = func(request)
             error_code = response.status
