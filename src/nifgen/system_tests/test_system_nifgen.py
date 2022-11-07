@@ -406,12 +406,6 @@ class TestLibrary(SystemTests):
         assert type(session.create_waveform(data)) is int
 
     # Test doesn't run over gRPC because numpy isn't supported by gRPC.
-    def test_create_waveform_numpy_array_int16(self, session):
-        data = numpy.ndarray(10000, dtype=numpy.int16)
-        data.fill(256)
-        assert type(session.create_waveform(data)) is int
-
-    # Test doesn't run over gRPC because numpy isn't supported by gRPC.
     def test_write_waveform_from_numpy_array_float64(self, session):
         data = numpy.ndarray(10000, dtype=numpy.float64)
         data.fill(0.5)
