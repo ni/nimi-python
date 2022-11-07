@@ -58,7 +58,7 @@ class DriverWarning(Warning):
 
 % if grpc_supported:
 class RpcError(Error):
-    '''An error specific to gRPC-based sessions'''
+    '''An error specific to gRPC sessions'''
 
     def __init__(self, rpc_code, description):
         self.rpc_code = rpc_code
