@@ -164,6 +164,37 @@ class TestGrpcStubInterpreter(object):
         getattr(self.patched_grpc_stub, function_name).assert_called_once_with(request_object)
         return getattr(self.patched_grpc_types, function_name + 'Request')
 
+    # gRPC errors
+
+    def test_server_unavailable(self):
+        library_func = 'InitWithOptions'
+        grpc_error = grpc.StatusCode.UNAVAILABLE
+        expected_error_message = 'Failed to connect to server'
+        self._set_side_effect(library_func, side_effect=MyRpcError(None, "", grpc_error=grpc_error))
+        grpc_options = nifake.GrpcSessionOptions(object(), "", nifake.SessionInitializationBehavior.AUTO)
+        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        try:
+            interpreter.init_with_options('dev1', False, False, '')
+            assert False
+        except nifake.Error as e:
+            assert e.rpc_code == grpc_error
+            assert e.description == expected_error_message
+            assert str(e) == f'StatusCode.UNAVAILABLE: {expected_error_message}'
+
+    def test_function_not_implemented(self):
+        library_func = 'PoorlyNamedSimpleFunction'
+        grpc_error = grpc.StatusCode.UNIMPLEMENTED
+        expected_error_message_intro = 'This operation is not supported'
+        self._set_side_effect(library_func, side_effect=MyRpcError(None, "", grpc_error=grpc_error))
+        interpreter = self._get_initialized_library_interpreter()
+        try:
+            interpreter.simple_function()
+            assert False
+        except nifake.Error as e:
+            assert e.rpc_code == grpc_error
+            assert e.description.startswith(expected_error_message_intro)
+            assert str(e).startswith(f'StatusCode.UNIMPLEMENTED: {expected_error_message_intro}')
+
     # Methods
 
     def test_new_session_already_exists(self):
