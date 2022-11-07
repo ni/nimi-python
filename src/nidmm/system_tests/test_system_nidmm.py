@@ -276,6 +276,12 @@ class SystemTests:
         interval = session.get_ext_cal_recommended_interval()
         assert interval.days == 730
 
+    def test_locks_are_reentrant(self, session):
+        with session.lock():
+            with session.lock():
+                interval = session.get_ext_cal_recommended_interval()
+                assert interval.days == 730
+
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='function')

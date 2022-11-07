@@ -127,6 +127,12 @@ class SystemTests:
         # We should not get an assert if self_test passes
         session.self_test()
 
+    def test_locks_are_reentrant(self, session):
+        with session.lock():
+            with session.lock():
+                # We should not get an assert if self_test passes
+                session.self_test()
+
     def test_functions_get_path(self, session):
         channel1 = 'r0'
         channel2 = 'c0'
