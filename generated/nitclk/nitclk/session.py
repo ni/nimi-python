@@ -129,15 +129,15 @@ class SessionReference(object):
     Indicates the computed TClk period that will be used during the acquisition.
     '''
 
-    def __init__(self, session_handle, encoding='windows-1251'):
+    def __init__(self, session_number, encoding='windows-1251'):
         self._interpreter = _library_interpreter.LibraryInterpreter(encoding)
-        self._interpreter.set_session_handle(session_handle)
+        self._interpreter.set_session_handle(session_number)
         # We need a self._repeated_capability string for passing down to function calls on the LibraryInterpreter class. We just need to set it to empty string.
         self._repeated_capability = ''
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("session_handle=" + pp.pformat(session_handle))
+        param_list.append("session_number=" + pp.pformat(session_number))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
