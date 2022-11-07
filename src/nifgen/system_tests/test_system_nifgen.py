@@ -37,6 +37,7 @@ invalid_waveforms = ['Not waveform data',
                      42,
                      3.14159, ]
 
+
 class SystemTests:
     def test_self_test(self, session):
         # We should not get an assert if self_test passes
