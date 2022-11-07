@@ -142,11 +142,17 @@ class LCRMeasurement(object):
         self.vdc = data.vdc
         self.idc = data.idc
         self.stimulus_frequency = data.stimulus_frequency
-        self.ac_voltage = complex(data.ac_voltage_real, data.ac_voltage_imaginary)
-        self.ac_current = complex(data.ac_current_real, data.ac_current_imaginary)
-        self.z = complex(data.z_real, data.z_imaginary)
+        if hasattr(data, "ac_voltage_real"):
+            self.ac_voltage = complex(data.ac_voltage_real, data.ac_voltage_imaginary)
+            self.ac_current = complex(data.ac_current_real, data.ac_current_imaginary)
+            self.z = complex(data.z_real, data.z_imaginary)
+            self.y = complex(data.y_real, data.y_imaginary)
+        else:
+            self.ac_voltage = complex(data.ac_voltage.real, data.ac_voltage.imaginary)
+            self.ac_current = complex(data.ac_current.real, data.ac_current.imaginary)
+            self.z = complex(data.z.real, data.z.imaginary)
+            self.y = complex(data.y.real, data.y.imaginary)
         self.z_magnitude_and_phase = (data.z_magnitude, data.z_phase)
-        self.y = complex(data.y_real, data.y_imaginary)
         self.y_magnitude_and_phase = (data.y_magnitude, data.y_phase)
         self.series_lcr = LCRMeasurement.LCR(
             inductance=data.ls, capacitance=data.cs, resistance=data.rs

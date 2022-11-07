@@ -19,9 +19,10 @@ from . import lcr_measurement as lcr_measurement  # noqa: F401
 class GrpcStubInterpreter(object):
     '''Interpreter for interacting with a gRPC Stub class'''
 
-    def __init__(self, grpc_channel):
+    def __init__(self, grpc_options):
+        self._grpc_options = grpc_options
         self._lock = threading.RLock()
-        self._client = nidcpower_grpc.NiDCPowerStub(grpc_channel)
+        self._client = nidcpower_grpc.NiDCPowerStub(grpc_options.grpc_channel)
         self._vi = 0
 
     def _invoke(self, func, request):
@@ -79,10 +80,7 @@ class GrpcStubInterpreter(object):
         )
 
     def clear_latched_output_cutoff_state(self, channel_name, output_cutoff_reason):  # noqa: N802
-        self._invoke(
-            self._client.ClearLatchedOutputCutoffState,
-            grpc_types.ClearLatchedOutputCutoffStateRequest(vi=self._vi, channel_name=channel_name, output_cutoff_reason_raw=output_cutoff_reason.value),
-        )
+        raise NotImplementedError('clear_latched_output_cutoff_state is not supported over gRPC')
 
     def commit(self, channel_name):  # noqa: N802
         self._invoke(
@@ -211,9 +209,9 @@ class GrpcStubInterpreter(object):
     def get_channel_names(self, indices):  # noqa: N802
         response = self._invoke(
             self._client.GetChannelNameFromString,
-            grpc_types.GetChannelNameFromStringRequest(vi=self._vi, indices=indices),
+            grpc_types.GetChannelNameFromStringRequest(vi=self._vi, index=indices),
         )
-        return response.names
+        return response.channel_name
 
     def get_error(self):  # noqa: N802
         response = self._invoke(
@@ -293,15 +291,17 @@ class GrpcStubInterpreter(object):
     def initialize_with_channels(self, resource_name, channels, reset, option_string):  # noqa: N802
         response = self._invoke(
             self._client.InitializeWithChannels,
-            grpc_types.InitializeWithChannelsRequest(resource_name=resource_name, channels=channels, reset=reset, option_string=option_string),
+            grpc_types.InitializeWithChannelsRequest(resource_name=resource_name, channels=channels, reset=reset, option_string=option_string, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
         )
+        self._close_on_exit = response.new_session_initialized
         return response.vi
 
     def initialize_with_independent_channels(self, resource_name, reset, option_string):  # noqa: N802
         response = self._invoke(
             self._client.InitializeWithIndependentChannels,
-            grpc_types.InitializeWithIndependentChannelsRequest(resource_name=resource_name, reset=reset, option_string=option_string),
+            grpc_types.InitializeWithIndependentChannelsRequest(resource_name=resource_name, reset=reset, option_string=option_string, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
         )
+        self._close_on_exit = response.new_session_initialized
         return response.vi
 
     def initiate_with_channels(self, channel_name):  # noqa: N802
@@ -311,11 +311,7 @@ class GrpcStubInterpreter(object):
         )
 
     def lock(self):  # noqa: N802
-        response = self._invoke(
-            self._client.LockSession,
-            grpc_types.LockSessionRequest(vi=self._vi),
-        )
-        return response.caller_has_lock
+        self._lock.acquire()
 
     def measure(self, channel_name, measurement_type):  # noqa: N802
         response = self._invoke(
@@ -339,16 +335,12 @@ class GrpcStubInterpreter(object):
         return [lcr_measurement.LCRMeasurement(x) for x in response.measurements]
 
     def parse_channel_count(self, channels_string):  # noqa: N802
-        response = self._invoke(
-            self._client.ParseChannelCount,
-            grpc_types.ParseChannelCountRequest(vi=self._vi, channels_string=channels_string),
-        )
-        return response.number_of_channels
+        raise NotImplementedError('parse_channel_count is not supported over gRPC')
 
     def perform_lcr_load_compensation(self, channel_name, compensation_spots):  # noqa: N802
         self._invoke(
             self._client.PerformLCRLoadCompensation,
-            grpc_types.PerformLCRLoadCompensationRequest(vi=self._vi, channel_name=channel_name, compensation_spots=compensation_spots and [x.create_copy(grpc_types.LCRLoadCompensationSpot) for x in compensation_spots]),
+            grpc_types.PerformLCRLoadCompensationRequest(vi=self._vi, channel_name=channel_name, compensation_spots=compensation_spots and [x.create_copy(grpc_types.NILCRLoadCompensationSpot) for x in compensation_spots]),
         )
 
     def perform_lcr_open_compensation(self, channel_name, additional_frequencies):  # noqa: N802
@@ -383,11 +375,7 @@ class GrpcStubInterpreter(object):
         return response.in_compliance
 
     def query_latched_output_cutoff_state(self, channel_name, output_cutoff_reason):  # noqa: N802
-        response = self._invoke(
-            self._client.QueryLatchedOutputCutoffState,
-            grpc_types.QueryLatchedOutputCutoffStateRequest(vi=self._vi, channel_name=channel_name, output_cutoff_reason_raw=output_cutoff_reason.value),
-        )
-        return response.output_cutoff_state
+        raise NotImplementedError('query_latched_output_cutoff_state is not supported over gRPC')
 
     def query_max_current_limit(self, channel_name, voltage_level):  # noqa: N802
         response = self._invoke(
@@ -485,11 +473,7 @@ class GrpcStubInterpreter(object):
         )
 
     def unlock(self):  # noqa: N802
-        response = self._invoke(
-            self._client.UnlockSession,
-            grpc_types.UnlockSessionRequest(vi=self._vi),
-        )
-        return response.caller_has_lock
+        self._lock.release()
 
     def wait_for_event(self, channel_name, event_id, timeout):  # noqa: N802
         self._invoke(
