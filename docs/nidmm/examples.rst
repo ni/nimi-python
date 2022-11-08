@@ -21,6 +21,15 @@ nidmm_measurement.py
    :encoding: utf8
    :caption: `(nidmm_measurement.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measurement.py>`_
 
+nidmm_measurement_grpc.py
+-------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measurement_grpc.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measurement_grpc.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measurement_grpc.py>`_
+
 nidmm_multi_point_measurement.py
 --------------------------------
 
