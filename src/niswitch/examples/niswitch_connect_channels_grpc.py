@@ -6,14 +6,13 @@ import niswitch
 import sys
 
 
-def example(resource_name, channel1, channel2, topology, simulate):
+def example(resource_name, channel1, channel2, topology, simulate, address, port):
     # if we are simulating resource name must be blank
     resource_name = '' if simulate else resource_name
-    # Connect to an already running server using the following server information
-    server_address = 'localhost'
-    server_port = '31763'
     session_name = ''  # user-specified name; empty string means use a new, unnamed session
-    channel = grpc.insecure_channel(f'{server_address}:{server_port}')
+
+    # Connect to the grpc server
+    channel = grpc.insecure_channel(f'{address}:{port}')
     session_options = niswitch.GrpcSessionOptions(channel, session_name, niswitch.SessionInitializationBehavior.AUTO)
 
     with niswitch.Session(resource_name=resource_name, topology=topology, simulate=simulate, _grpc_options=session_options) as session:
@@ -30,8 +29,12 @@ def _main(argsv):
     parser.add_argument('-ch2', '--channel2', default='r0', help='Channel Two.')
     parser.add_argument('-t', '--topology', default='Configured Topology', help='Topology.')
     parser.add_argument('-s', '--simulate', default=False, action='store_true', help='Simulate device.')
+    parser.add_argument('-a', '--address', default='localhost', help='Server address.')
+    parser.add_argument('-p', '--port', default='31763', help='Server port.')
     args = parser.parse_args(argsv)
-    example(args.resource_name, args.channel1, args.channel2, args.topology, args.simulate)
+    example(args.resource_name, args.channel1, args.channel2, args.topology, args.simulate, args.address, args.port)
+
+# TODO(danestull) Add example and main tests once the gRPC server is started automatically
 
 
 def main():
