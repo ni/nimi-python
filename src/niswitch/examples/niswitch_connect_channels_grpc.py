@@ -33,15 +33,6 @@ def _main(argsv):
     example(args.resource_name, args.channel1, args.channel2, args.topology, args.simulate)
 
 
-def test_example():
-    example('', 'c0', 'r0', '2737/2-Wire 4x64 Matrix', True)
-
-
-def test_main():
-    cmd_line = ['--topology', '2737/2-Wire 4x64 Matrix', '--simulate']
-    _main(cmd_line)
-
-
 def main():
     _main(sys.argv[1:])
 
