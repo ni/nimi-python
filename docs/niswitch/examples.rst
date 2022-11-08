@@ -12,6 +12,15 @@ niswitch_connect_channels.py
    :encoding: utf8
    :caption: `(niswitch_connect_channels.py) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/niswitch_connect_channels.py>`_
 
+niswitch_connect_channels_grpc.py
+---------------------------------
+
+.. literalinclude:: ../../src/niswitch/examples/niswitch_connect_channels_grpc.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(niswitch_connect_channels_grpc.py) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/niswitch_connect_channels_grpc.py>`_
+
 niswitch_get_device_info.py
 ---------------------------
 
