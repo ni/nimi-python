@@ -187,7 +187,7 @@ class TestGrpcStubInterpreter(object):
         grpc_error = grpc.StatusCode.UNIMPLEMENTED
         expected_error_message_intro = 'This operation is not supported'
         self._set_side_effect(library_func, side_effect=MyRpcError(None, "", grpc_error=grpc_error))
-        interpreter = self._get_initialized_library_interpreter()
+        interpreter = self._get_initialized_stub_interpreter()
         try:
             interpreter.simple_function()
             assert False
