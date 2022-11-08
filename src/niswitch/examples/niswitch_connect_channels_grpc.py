@@ -10,10 +10,11 @@ def example(resource_name, channel1, channel2, topology, simulate):
     # if we are simulating resource name must be blank
     resource_name = '' if simulate else resource_name
     # Connect to an already running server using the following server information
-    server_address = "localhost"
-    server_port = "31763"
-    channel = grpc.insecure_channel(f"{server_address}:{server_port}")
-    session_options = niswitch.GrpcSessionOptions(channel, "", niswitch.SessionInitializationBehavior.AUTO)
+    server_address = 'localhost'
+    server_port = '31763'
+    session_name = ''  # user-specified name; empty string means use a new, unnamed session
+    channel = grpc.insecure_channel(f'{server_address}:{server_port}')
+    session_options = niswitch.GrpcSessionOptions(channel, session_name, niswitch.SessionInitializationBehavior.AUTO)
 
     with niswitch.Session(resource_name=resource_name, topology=topology, simulate=simulate, _grpc_options=session_options) as session:
         session.connect(channel1=channel1, channel2=channel2)
