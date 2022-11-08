@@ -6,7 +6,7 @@ import hightime  # noqa: F401
 import threading
 import warnings
 
-from . import enums as enums # noqa: F401
+from . import enums as enums  # noqa: F401
 from . import errors as errors
 from . import niswitch_pb2 as grpc_types
 from . import niswitch_pb2_grpc as niswitch_grpc
