@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.0.0d83
+# This file is generated from NI-DCPower API metadata version 23.0.0d270
 functions = {
     'AbortWithChannels': {
         'documentation': {
             'description': '\nTransitions the specified channel(s) from the Running state to the\nUncommitted state. If a sequence is running, it is stopped. Any\nconfiguration functions called after this function are not applied until\nthe niDCPower_InitiateWithChannels function is called. If power output is enabled\nwhen you call the niDCPower_AbortWithChannels function, the output channels remain\nin their current state and continue providing power.\n\nUse the niDCPower_ConfigureOutputEnabled function to disable power\noutput on a per channel basis. Use the niDCPower_reset function to\ndisable output on all channels.\n\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for information about the\nspecific NI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -28,6 +29,7 @@ functions = {
             'description': '\nPerforms a self-calibration upon the specified channel(s).\n\nThis function disables the output, performs several internal\ncalculations, and updates calibration values. The updated calibration\nvalues are written to the device hardware if the\nNIDCPOWER_ATTR_SELF_CALIBRATION_PERSISTENCE attribute is set to\nNIDCPOWER_VAL_WRITE_TO_EEPROM. Refer to the\nNIDCPOWER_ATTR_SELF_CALIBRATION_PERSISTENCE attribute topic for more\ninformation about the settings for this attribute.\n\nWhen calling niDCPower_CalSelfCalibrate with the PXIe-4162/4163,\nspecify all channels of your PXIe-4162/4163 with the channelName input.\nYou cannot self-calibrate a subset of PXIe-4162/4163 channels.\n\nRefer to the\n`Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__ topic for\nmore information about this function.\n\n**Related Topics:**\n\n`Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -53,6 +55,7 @@ functions = {
         'documentation': {
             'description': 'Clears the state of an output cutoff that was engaged.\nTo clear the state for all output cutoff reasons, use NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL.\n'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -114,6 +117,7 @@ functions = {
                     ]
                 },
                 'enum': 'OutputCutoffReason',
+                'grpc_enum': None,
                 'name': 'outputCutoffReason',
                 'type': 'ViInt32'
             }
@@ -124,6 +128,7 @@ functions = {
         'documentation': {
             'description': '\nApplies previously configured settings to the specified channel(s). Calling this\nfunction moves the NI-DCPower session from the Uncommitted state into\nthe Committed state. After calling this function, modifying any\nattribute reverts the NI-DCPower session to the Uncommitted state. Use\nthe niDCPower_InitiateWithChannels function to transition to the Running state.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for details about the specific\nNI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -147,6 +152,7 @@ functions = {
             'description': '\nConfigures the aperture time on the specified channel(s).\n\nThe supported values depend on the **units**. Refer to the *Aperture\nTime* topic for your device in the *NI DC Power Supplies and SMUs Help*\nfor more information. In general, devices support discrete\n**apertureTime** values, and if you configure **apertureTime** to some\nunsupported value, NI-DCPower coerces it up to the next supported value.\n\nRefer to the *Measurement Configuration and Timing* or *DC Noise\nRejection* topic for your device in the *NI DC Power Supplies and SMUs\nHelp* for more information about how to configure your measurements.\n\n**Related Topics:**\n\n`Aperture Time <REPLACE_DRIVER_SPECIFIC_URL_1(aperture)>`__\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -200,6 +206,7 @@ functions = {
             'description': '\nApplies previously generated open and short custom cable compensation data to LCR measurements.\n\nThis function applies custom cable compensation data when you have set NIDCPOWER_ATTR_CABLE_LENGTH property to NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED.\n\nCall this function after you have obtained custom cable compensation data.\n\nIf NIDCPOWER_ATTR_LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED property is set to VI_TRUE, you must generate data with both niDCPower_PerformLCROpenCustomCableCompensation and niDCPower_PerformLCRShortCustomCableCompensation;\nif VI_FALSE, you must only use niDCPower_PerformLCROpenCustomCableCompensation, and NI-DCPower uses default short data.\n\nCall niDCPower_GetLCRCustomCableCompensationData and pass the **custom cable compensation data** to this function.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -230,11 +237,12 @@ functions = {
                 },
                 'name': 'customCableCompensationData',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'customCableCompensationDataSize'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes'
             }
         ],
@@ -245,6 +253,7 @@ functions = {
             'description': '\nCreates a Commit step in the Active advanced sequence. A Commit step\nconfigures channels to a user-defined known state before starting the advanced sequence.\nWhen a Commit step exists in the Active advanced sequence, you cannot\nset the output function to Pulse Voltage or Pulse Current in either\nthe Commit step (-1) or step 0. When you create an advanced sequence\nstep, each attribute you passed to the niDCPower_CreateAdvancedSequenceWithChannels\nfunction is reset to its default value for that step unless otherwise specified.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceWithChannels\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -277,6 +286,7 @@ functions = {
             'description': '\nCreates a new advanced sequence step in the advanced sequence specified\nby the Active advanced sequence. When you create an advanced sequence\nstep, each attribute you passed to the niDCPower_CreateAdvancedSequenceWithChannels\nfunction is reset to its default value for that step unless otherwise\nspecified.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceWithChannels\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -310,6 +320,7 @@ functions = {
             'description': '\nCreates an empty advanced sequence. Call the\nniDCPower_CreateAdvancedSequenceStepWithChannels function to add steps to the\nactive advanced sequence.\n\nYou can create multiple advanced sequences for a channel.\n\n**Support for this function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\nUse this function in the Uncommitted or Committed programming states.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nNI-DCPower programming states.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceStepWithChannels\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'create_advanced_sequence',
         'parameters': [
             {
@@ -369,6 +380,7 @@ functions = {
             'description': '\nDeletes a previously created advanced sequence and all the advanced\nsequence steps in the advanced sequence.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -399,6 +411,7 @@ functions = {
         'documentation': {
             'description': '\nThis function performs the same actions as the niDCPower_ResetWithChannels\nfunction, except that this function also immediately sets the\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute to VI_FALSE.\n\nThis function opens the output relay on devices that have an output\nrelay.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -416,6 +429,7 @@ functions = {
             'description': '\nExports the attribute configuration of the session to the specified\nconfiguration buffer.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers and the same number of configured\nchannels.\n\nThis function verifies that the attributes you have configured for the\nsession are valid. If the configuration is invalid, NI‑DCPower returns\nan error.\n\n**Support for this Function**\n\nCalling this function in `Sequence Source\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.\n\n**Channel Mapping Behavior for Multichannel Sessions**\n\nWhen importing and exporting session attribute configurations between\nNI‑DCPower sessions that were initialized with different channels, the\nconfigurations of the exporting channels are mapped to the importing\nchannels in the order you specify in the **channelName** input to the\nniDCPower_InitializeWithChannels function.\n\nFor example, if your entry for **channelName** is 0,1 for the exporting\nsession and 1,2 for the importing session:\n\n-  The configuration exported from channel 0 is imported into channel 1.\n-  The configuration exported from channel 1 is imported into channel 2.\n\n**Related Topics:**\n\n`Using Properties and\nAttributes <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__\n\n`Setting Properties and Attributes Before Reading\nThem <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__\n',
             'note': '\nThis function will return an error if the total number of channels\ninitialized for the exporting session is not equal to the total number\nof channels initialized for the importing session.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -440,11 +454,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'size'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes',
                 'use_array': True
             }
@@ -456,6 +471,7 @@ functions = {
             'description': '\nExports the attribute configuration of the session to the specified\nfile.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers and the same number of configured\nchannels.\n\nThis function verifies that the attributes you have configured for the\nsession are valid. If the configuration is invalid, NI‑DCPower returns\nan error.\n\n**Support for this Function**\n\nCalling this function in `Sequence Source\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.\n\n**Channel Mapping Behavior for Multichannel Sessions**\n\nWhen importing and exporting session attribute configurations between\nNI‑DCPower sessions that were initialized with different channels, the\nconfigurations of the exporting channels are mapped to the importing\nchannels in the order you specify in the **channelName** input to the\nniDCPower_InitializeWithChannels function.\n\nFor example, if your entry for **channelName** is 0,1 for the exporting\nsession and 1,2 for the importing session:\n\n-  The configuration exported from channel 0 is imported into channel 1.\n-  The configuration exported from channel 1 is imported into channel 2.\n\n**Related Topics:**\n\n`Using Properties and\nAttributes <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__\n\n`Setting Properties and Attributes Before Reading\nThem <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__\n',
             'note': '\nThis function will return an error if the total number of channels\ninitialized for the exporting session is not equal to the total number\nof channels initialized for the importing session.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -482,6 +498,7 @@ functions = {
             'description': '\nReturns a list of named tuples (Measurement) that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool)\n- **channel** (str)\n\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -550,6 +567,7 @@ functions = {
             'description': '\nReturns a list of previously measured LCRMeasurement instances on the specified channel that have been taken and stored in a buffer.\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER\n-  Put the channel in the Running state (call niDCPower_InitiateWithChannels)\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -708,6 +726,7 @@ functions = {
         'documentation': {
             'description': '\nCreates and returns a new NI-DCPower session to the instrument(s) and channel(s) specified\nin **resource name** to be used in all subsequent NI-DCPower function calls. With this function,\nyou can optionally set the initial state of the following session attributes:\n\n-  NIDCPOWER_ATTR_SIMULATE\n-  NIDCPOWER_ATTR_DRIVER_SETUP\n\nAfter calling this function, the specified channel or channels will be in the Uncommitted\nstate.\n\nTo place channel(s) in a known start-up state when creating a new session, set **reset** to\nVI_TRUE. This action is equivalent to using the niDCPower_ResetWithChannels function immediately after initializing the\nsession.\n\nTo open a session and leave the channel(s) in an existing configuration without passing\nthrough a transitional output state, set **reset** to VI_FALSE. Next, configure the channel(s)\nas in the previous session, change the desired settings, and then call the niDCPower_InitiateWithChannels function\nto write both settings.\n\n**Details of Independent Channel Operation**\n\nWith this function and channel-based NI-DCPower functions and attributes, you can use any\nchannels in the session independently. For example, you can initiate a subset of channels in\nthe session with niDCPower_InitiateWithChannels, and the other channels in the session remain in the Uncommitted\nstate.\n\nWhen you initialize with independent channels, each channel steps through the NI-DCPower\nprogramming state model independently of all other channels, and you can specify a subset of\nchannels for most operations.\n\n**Note** You can make concurrent calls to a session from multiple threads, but the session\nexecutes the calls one at a time. If you specify multiple channels for a function or attribute,\nthe session may perform the operation on multiple channels in parallel, though this is not\nguaranteed, and some operations may execute sequentially.\n'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -786,6 +805,7 @@ functions = {
             'description': '\nReturns a list of named tuples (Measurement) containing the measured voltage\nand current values on the specified output channel(s). Each call to this function\nblocks other function calls until the measurements are returned from the device.\nThe order of the measurements returned in the array corresponds to the order\non the specified output channel(s).\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n- **channel** (str)\n\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -834,6 +854,7 @@ functions = {
             'description': '\nMeasures and returns a list of LCRMeasurement instances on the specified output channel(s).\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_INSTRUMENT_MODE property to NIDCPOWER_VAL_LCR\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_ON_DEMAND\n-  Put the channel(s) in the Running state (call niDCPower_InitiateWithChannels)\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -973,6 +994,7 @@ functions = {
             'description': '\nReturns an array of voltage measurements, an array of current\nmeasurements, and an array of compliance measurements that were\npreviously taken and are stored in the NI-DCPower buffer. This function\nshould not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is\nset to NIDCPOWER_VAL_ON_DEMAND. You must first call\nniDCPower_InitiateWithChannels before calling this function.\n\nRefer to the `Acquiring\nMeasurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__\nand `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nconfiguring this function.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'fetch_multiple',
         'parameters': [
             {
@@ -1066,6 +1088,7 @@ functions = {
             'description': '\nReturns a list of previously measured LCRMeasurement instances on the specified channel that have been taken and stored in a buffer.\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER\n-  Put the channel in the Running state (call niDCPower_InitiateWithChannels)\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1216,6 +1239,7 @@ functions = {
         'documentation': {
             'description': '\n| Queries the value of a ViBoolean attribute.\n| You can use this function to get the values of device-specific\n  attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1257,6 +1281,7 @@ functions = {
         'documentation': {
             'description': '\n| Queries the value of a ViInt32 attribute.\n| You can use this function to get the values of device-specific\n  attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1298,6 +1323,7 @@ functions = {
         'documentation': {
             'description': '\n| Queries the value of a ViInt64 attribute.\n| You can use this function to get the values of device-specific\n  attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1339,6 +1365,7 @@ functions = {
         'documentation': {
             'description': '\n| Queries the value of a ViReal64 attribute.\n| You can use this function to get the values of device-specific\n  attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1380,6 +1407,7 @@ functions = {
         'documentation': {
             'description': '\n| Queries the value of a ViString attribute.\n| You can use this function to get the values of device-specific\n  attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1432,6 +1460,7 @@ functions = {
         'documentation': {
             'description': '\nRetrieves the output **channelName** that corresponds to the requested\n**index**. Use the NIDCPOWER_ATTR_CHANNEL_COUNT attribute to\ndetermine the upper bound of valid values for **index**.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1478,6 +1507,7 @@ functions = {
         'documentation': {
             'description': '\nReturns a list of channel names for the given channel indices.'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'get_channel_name_from_string',
         'parameters': [
             {
@@ -1493,6 +1523,7 @@ functions = {
                 'documentation': {
                     'description': '\nIndex list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
                 },
+                'grpc_name': 'index',
                 'name': 'index',
                 'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
                 'python_name': 'indices',
@@ -1512,6 +1543,7 @@ functions = {
                 'documentation': {
                     'description': 'The channel name(s) at the specified indices.'
                 },
+                'grpc_name': 'channel_name',
                 'is_repeated_capability': False,
                 'name': 'channelName',
                 'python_api_converter_name': 'convert_comma_separated_string_to_list',
@@ -1533,6 +1565,7 @@ functions = {
         'documentation': {
             'description': '\n| Retrieves and then clears the IVI error information for the session or\n  the current execution thread unless **bufferSize** is 0, in which case\n  the function does not clear the error information. By passing 0 for\n  the buffer size, you can ascertain the buffer size required to get the\n  entire error description string and then call the function again with\n  a sufficiently large buffer size.\n| If the user specifies a valid IVI session for **vi**, this function\n  retrieves and then clears the error information for the session. If\n  the user passes VI_NULL for **vi**, this function retrieves and then\n  clears the error information for the current execution thread. If\n  **vi** is an invalid session, the function does nothing and returns an\n  error. Normally, the error information describes the first error that\n  occurred since the user last called niDCPower_GetError or\n  niDCPower_ClearError.\n'
         },
+        'included_in_proto': True,
         'is_error_handling': True,
         'method_templates': [
             {
@@ -1588,6 +1621,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the date and time of the last successful calibration. The time\nreturned is 24-hour (military) local time; for example, if the device\nwas calibrated at 2:30 PM, this function returns 14 for **hours** and 30\nfor **minutes**.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'get_ext_cal_last_date_and_time',
         'parameters': [
             {
@@ -1645,6 +1679,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the onboard **temperature** of the device, in degrees Celsius,\nduring the last successful external calibration.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1669,6 +1704,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the recommended maximum interval, in **months**, between\nexternal calibrations.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1696,6 +1732,7 @@ functions = {
             'description': '\nCollects previously generated open, short, load, and custom cable compensation data so you can then apply it to LCR measurements with niDCPower_ConfigureLCRCompensation.\n\nCall this function after you have obtained the compensation data of all types (open, short, load, open custom cable compensation, and short custom cable compensation) you want to apply to your measurements. Pass the **compensation data** to niDCPower_ConfigureLCRCompensation\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1725,11 +1762,12 @@ functions = {
                 },
                 'name': 'compensationData',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'compensationDataSize'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes',
                 'use_array': True
             }
@@ -1742,6 +1780,7 @@ functions = {
             'description': '\nReturns the date and time the specified type of compensation data for LCR measurements was most recently generated.\nThe time returned is 24-hour (military) local time; for example, if the selected type of compensation data was generated at 2:30 PM, this function returns 14 for **hours** and 30 for **minutes**.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'get_lcr_compensation_last_date_and_time',
         'parameters': [
             {
@@ -1817,6 +1856,7 @@ functions = {
             'description': '\nCollects previously generated open and short custom cable compensation data so you can then apply it to LCR measurements with niDCPower_ConfigureLCRCustomCableCompensation.\n\nCall this function after you have obtained open and short custom cable compensation data. Pass the **custom cable compensation data** to niDCPower_ConfigureLCRCustomCableCompensation\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1846,11 +1886,12 @@ functions = {
                 },
                 'name': 'customCableCompensationData',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'customCableCompensationDataSize'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes',
                 'use_array': True
             }
@@ -1862,6 +1903,7 @@ functions = {
         'documentation': {
             'description': 'Returns the date and time of the last successful calibration.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1898,6 +1940,7 @@ functions = {
             'description': '\nReturns the date and time the specified type of compensation data for LCR measurements was most recently generated.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1929,6 +1972,7 @@ functions = {
                     'description': '\nSpecifies the type of compensation for LCR measurements.\n'
                 },
                 'enum': 'LCRCompensationType',
+                'grpc_enum': None,
                 'name': 'compensationType',
                 'type': 'ViInt32'
             },
@@ -1951,6 +1995,7 @@ functions = {
             'description': 'Returns the date and time of the oldest successful self-calibration from among the channels in the session.',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1987,6 +2032,7 @@ functions = {
             'description': '\nReturns the date and time of the oldest successful self-calibration from\namong the channels in the session.\n\nThe time returned is 24-hour (military) local time; for example, if you\nhave a session using channels 1 and 2, and a self-calibration was\nperformed on channel 1 at 2:30 PM, and a self-calibration was performed\non channel 2 at 3:00 PM on the same day, this function returns 14 for\n**hours** and 30 for **minutes**.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'get_self_cal_last_date_and_time',
         'parameters': [
             {
@@ -2045,6 +2091,7 @@ functions = {
             'description': '\nReturns the onboard temperature of the device, in degrees Celsius,\nduring the oldest successful self-calibration from among the channels in\nthe session.\n\nFor example, if you have a session using channels 1 and 2, and you\nperform a self-calibration on channel 1 with a device temperature of 25\ndegrees Celsius at 2:00, and a self-calibration was performed on channel\n2 at 27 degrees Celsius at 3:00 on the same day, this function returns\n25 for the **temperature** parameter.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2070,6 +2117,7 @@ functions = {
             'description': '\nImports an attribute configuration to the session from the specified\nconfiguration buffer.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers and the same number of configured\nchannels.\n\n**Support for this Function**\n\nCalling this function in `Sequence Source\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.\n\n**Channel Mapping Behavior for Multichannel Sessions**\n\nWhen importing and exporting session attribute configurations between\nNI‑DCPower sessions that were initialized with different channels, the\nconfigurations of the exporting channels are mapped to the importing\nchannels in the order you specify in the **channelName** input to the\nniDCPower_InitializeWithChannels function.\n\nFor example, if your entry for **channelName** is 0,1 for the exporting\nsession and 1,2 for the importing session:\n\n-  The configuration exported from channel 0 is imported into channel 1.\n-  The configuration exported from channel 1 is imported into channel 2.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\n`Using Properties and\nAttributes <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__\n\n`Setting Properties and Attributes Before Reading\nThem <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__\n',
             'note': '\nThis function will return an error if the total number of channels\ninitialized for the exporting session is not equal to the total number\nof channels initialized for the importing session.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2094,11 +2142,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'size'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes'
             }
         ],
@@ -2109,6 +2158,7 @@ functions = {
             'description': '\nImports an attribute configuration to the session from the specified\nfile.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers and the same number of configured\nchannels.\n\n**Support for this Function**\n\nCalling this function in `Sequence Source\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.\n\n**Channel Mapping Behavior for Multichannel Sessions**\n\nWhen importing and exporting session attribute configurations between\nNI‑DCPower sessions that were initialized with different channels, the\nconfigurations of the exporting channels are mapped to the importing\nchannels in the order you specify in the **channelName** input to the\nniDCPower_InitializeWithChannels function.\n\nFor example, if your entry for **channelName** is 0,1 for the exporting\nsession and 1,2 for the importing session:\n\n-  The configuration exported from channel 0 is imported into channel 1.\n-  The configuration exported from channel 1 is imported into channel 2.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\n`Using Properties and\nAttributes <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__\n\n`Setting Properties and Attributes Before Reading\nThem <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__\n',
             'note': '\nThis function will return an error if the total number of channels\ninitialized for the exporting session is not equal to the total number\nof channels initialized for the importing session.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2134,7 +2184,16 @@ functions = {
         'documentation': {
             'description': '\nCreates and returns a new NI-DCPower session to the power supply or SMU\nspecified in **resource name** to be used in all subsequent NI-DCPower\nfunction calls. With this function, you can optionally set the initial\nstate of the following session attributes:\n\n-  NIDCPOWER_ATTR_SIMULATE\n-  NIDCPOWER_ATTR_DRIVER_SETUP\n\nAfter calling this function, the session will be in the Uncommitted\nstate. Refer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\ndetails about specific software states.\n\nTo place the device in a known start-up state when creating a new\nsession, set **reset** to VI_TRUE. This action is equivalent to using\nthe niDCPower_ResetWithChannels function immediately after initializing the\nsession.\n\nTo open a session and leave the device in its existing configuration\nwithout passing through a transitional output state, set **reset** to\nVI_FALSE. Then configure the device as in the previous session,\nchanging only the desired settings, and then call the\nniDCPower_InitiateWithChannels function.\n\n**Related Topics:**\n\n`Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': '__init__',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -2186,7 +2245,16 @@ functions = {
         'documentation': {
             'description': '\nCreates a new NI-DCPower session to the specified instrument(s) and channel(s) and returns a\nsession handle to be used in all subsequent NI-DCPower function calls.\n\nAfter calling this function, the specified channel or channels will be in the Uncommitted\nstate.\n\nWith this function and channel-based NI-DCPower functions and attributes, you can use any\nchannels in the session independently. For example, you can initiate a subset of channels in\nthe session with niDCPower_InitiateWithChannels, and the other channels in the session\nremain in the Uncommitted state.\n\n**Details of Independent Channel Operation**\n\nWhen you initialize with independent channels, each channel steps through the NI-DCPower\nprogramming state model independently of all other channels, and you can specify a subset\nof channels for most operations.\n\n**Note** You can make concurrent calls to a session from multiple threads, but the session\nexecutes the calls one at a time. If you specify multiple channels for a function or\nattribute, the session may perform the operation on multiple channels in parallel, though\nthis is not guaranteed, and some operations may execute sequentially.\n\n**Related Topics:**\n\n`Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': '__init__',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -2229,6 +2297,7 @@ functions = {
         'documentation': {
             'description': '\nStarts generation or acquisition, causing the specified channel(s) to\nleave the Uncommitted state or Committed state and enter the Running\nstate. To return to the Uncommitted state call the niDCPower_AbortWithChannels\nfunction. Refer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for information about the\nspecific NI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'initiate',
         'parameters': [
             {
@@ -2251,10 +2320,11 @@ functions = {
         'documentation': {
             'description': '\n| Obtains a multithread lock on the device session. Before doing so, the\n  software waits until all other execution threads release their locks\n  on the device session.\n| Other threads may have obtained a lock on this session for the\n  following reasons:\n\n-  The application called the niDCPower_LockSession function.\n-  A call to NI-DCPower locked the session.\n-  A call to the IVI engine locked the session.\n-  After a call to the niDCPower_LockSession function returns\n   successfully, no other threads can access the device session until\n   you call the niDCPower_UnlockSession function.\n-  Use the niDCPower_LockSession function and the\n   niDCPower_UnlockSession function around a sequence of calls to\n   instrument driver functions if you require that the device retain its\n   settings through the end of the sequence.\n\nYou can safely make nested calls to the niDCPower_LockSession function\nwithin the same thread. To completely unlock the session, you must\nbalance each call to the niDCPower_LockSession function with a call to\nthe niDCPower_UnlockSession function. If, however, you use\n**Caller_Has_Lock** in all calls to the niDCPower_LockSession and\nniDCPower_UnlockSession function within a function, the IVI Library\nlocks the session only once within the function regardless of the number\nof calls you make to the niDCPower_LockSession function. This behavior\nallows you to call the niDCPower_UnlockSession function just once at\nthe end of the function.\n'
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'lock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'lock',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -2286,6 +2356,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the measured value of either the voltage or current on the\nspecified output channel. Each call to this function blocks other\nfunction calls until the hardware returns the **measurement**. To\nmeasure multiple output channels, use the niDCPower_MeasureMultiple\nfunction.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2338,6 +2409,7 @@ functions = {
         'documentation': {
             'description': '\nReturns arrays of the measured voltage and current values on the\nspecified output channel(s). Each call to this function blocks other\nfunction calls until the measurements are returned from the device. The\norder of the measurements returned in the array corresponds to the order\non the specified output channel(s).\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'measure_multiple',
         'parameters': [
             {
@@ -2391,6 +2463,7 @@ functions = {
             'description': '\nMeasures and returns a list of LCRMeasurement instances on the specified output channel(s).\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_INSTRUMENT_MODE property to NIDCPOWER_VAL_LCR\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_ON_DEMAND\n-  Put the channel(s) in the Running state (call niDCPower_InitiateWithChannels)\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2505,7 +2578,8 @@ functions = {
                     'mechanism': 'python-code',
                     'value': 'self.parse_channel_count(channel_name)'
                 },
-                'type': 'NILCRMeasurement[]'
+                'type': 'NILCRMeasurement[]',
+                'use_array': False
             }
         ],
         'returns': 'ViStatus'
@@ -2515,6 +2589,7 @@ functions = {
         'documentation': {
             'description': 'Returns the number of channels.'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -2539,6 +2614,7 @@ functions = {
             'description': '\nGenerates load compensation data for LCR measurements for the test spots you specify.\n\nYou must physically configure your LCR circuit with an appropriate reference load to use this function to generate valid load compensation data.\n\nWhen you call this function:\n\n-  The load compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n\nTo apply the load compensation data you generate with this function to your LCR measurements, set the NIDCPOWER_ATTR_LCR_LOAD_COMPENSATION_ENABLED property to VI_TRUE.\n\nLoad compensation data are generated only for those specific frequencies you define with this function; load compensation is not interpolated from the specific frequencies you define and applied to other frequencies.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2601,6 +2677,7 @@ functions = {
                 '\nDefault Open Compensation Frequencies:\nBy default, NI-DCPower uses the following frequencies for LCR open compensation:\n\n-  10 logarithmic steps at 1 kHz frequency decade\n-  10 logarithmic steps at 10 kHz frequency decade\n-  100 logarithmic steps at 100 kHz frequency decade\n-  100 logarithmic steps at 1 MHz frequency decade\n\nThe actual frequencies used depend on the bandwidth of your instrument.\n'
             ]
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2647,6 +2724,7 @@ functions = {
             'description': '\nGenerates open custom cable compensation data for LCR measurements.\n\nTo use this function, you must physically configure an open LCR circuit to generate valid open custom cable compensation data.\n\nWhen you call this function:\n\n-  The open compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower attributes in the session are reset to their default values. Rewrite the values of any attributes you want to maintain.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2675,6 +2753,7 @@ functions = {
                 '\nDefault Short Compensation Frequencies:\nBy default, NI-DCPower uses the following frequencies for LCR short compensation:\n\n-  10 logarithmic steps at 1 kHz frequency decade\n-  10 logarithmic steps at 10 kHz frequency decade\n-  100 logarithmic steps at 100 kHz frequency decade\n-  100 logarithmic steps at 1 MHz frequency decade\n\nThe actual frequencies used depend on the bandwidth of your instrument.'
             ]
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2721,6 +2800,7 @@ functions = {
             'description': '\nGenerates short custom cable compensation data for LCR measurements.\n\nTo use this function:\n\n-  You must physically configure your LCR circuit with a short to generate valid short custom cable compensation data.\n-  Set NIDCPOWER_ATTR_LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED property to VI_TRUE \n\nWhen you call this function:\n\n-  The short compensation data is written to the onboard storage of the instrument. Onboard storage can contain only the most recent set of data.\n-  Most NI-DCPower properties in the session are reset to their default values. Rewrite the values of any properties you want to maintain.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2746,6 +2826,7 @@ functions = {
         'documentation': {
             'description': '\nReturns a list of channel names for the given channel indices.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -2768,6 +2849,7 @@ functions = {
                 'documentation': {
                     'description': '\nIndex list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
                 },
+                'grpc_name': 'index',
                 'name': 'index',
                 'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
                 'python_name': 'indices',
@@ -2787,6 +2869,7 @@ functions = {
                 'documentation': {
                     'description': 'The channel name(s) at the specified indices.'
                 },
+                'grpc_name': 'channel_name',
                 'is_repeated_capability': False,
                 'name': 'channelName',
                 'python_api_converter_name': 'convert_comma_separated_string_to_list',
@@ -2806,6 +2889,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the specified output device to determine if it is operating at\nthe `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.\n\nThe compliance limit is the current limit when the output function is\nset to NIDCPOWER_VAL_DC_VOLTAGE. If the output is operating at the\ncompliance limit, the output reaches the current limit before the\ndesired voltage level. Refer to the niDCPower_ConfigureOutputFunction\nfunction and the niDCPower_ConfigureCurrentLimit function for more\ninformation about output function and current limit, respectively.\n\nThe compliance limit is the voltage limit when the output function is\nset to NIDCPOWER_VAL_DC_CURRENT. If the output is operating at the\ncompliance limit, the output reaches the voltage limit before the\ndesired current level. Refer to the niDCPower_ConfigureOutputFunction\nfunction and the niDCPower_ConfigureVoltageLimit function for more\ninformation about output function and voltage limit, respectively.\n\n**Related Topics:**\n\n`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2838,6 +2922,7 @@ functions = {
         'documentation': {
             'description': '\nDiscovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.\nIf a limit was exceeded, the state is latched until you clear it with the niDCPower_ClearLatchedOutputCutoffState function or the niDCPower_ResetWithChannels function.\n\noutputCutoffReason specifies the conditions for which an output is disconnected.\n'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -2899,6 +2984,7 @@ functions = {
                     ]
                 },
                 'enum': 'OutputCutoffReason',
+                'grpc_enum': None,
                 'name': 'outputCutoffReason',
                 'type': 'ViInt32'
             },
@@ -2927,6 +3013,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the maximum current limit on an output channel if the output\nchannel is set to the specified **voltageLevel**.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2967,6 +3054,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the maximum voltage level on an output channel if the output\nchannel is set to the specified **currentLimit**.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3007,6 +3095,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the minimum current limit on an output channel if the output\nchannel is set to the specified **voltageLevel**.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3047,6 +3136,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the specified output channel to determine if the output channel\nis currently in the state specified by **outputState**.\n\n**Related Topics:**\n\n`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3098,6 +3188,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the current onboard **temperature**, in degrees Celsius, of the\ndevice.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3122,6 +3213,7 @@ functions = {
         'documentation': {
             'description': '\nResets the device to a known state. The function disables power\ngeneration, resets session attributes to their default values, clears\nerrors such as overtemperature and unexpected loss of auxiliary power,\ncommits the session attributes, and leaves the session in the\nUncommitted state. This function also performs a hard reset on the\ndevice and driver software. This function has the same functionality as\nusing reset in Measurement & Automation Explorer. Refer to the\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\nmore information about NI-DCPower software states.\n\nThis will also open the output relay on devices that have an output\nrelay.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3138,6 +3230,7 @@ functions = {
         'documentation': {
             'description': '\nResets the specified channel(s) to a known state. This function disables power\ngeneration, resets session attributes to their default values, commits\nthe session attributes, and leaves the session in the Uncommitted state.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\nmore information about NI-DCPower software states.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3160,6 +3253,7 @@ functions = {
         'documentation': {
             'description': "\nResets the device to a known state. This function disables power\ngeneration, resets session attributes to their default values, commits\nthe session attributes, and leaves the session in the\n`Running <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#running')>`__\nstate. In addition to exhibiting the behavior of the niDCPower_ResetWithChannels\nfunction, this function can assign user-defined default values for\nconfigurable attributes from the IVI configuration.\n"
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3177,6 +3271,7 @@ functions = {
             'description': '\nAsserts the specified trigger. This function can override an external\nedge trigger.\n\n**Related Topics:**\n\n`Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3235,6 +3330,7 @@ functions = {
         'documentation': {
             'description': '\n| Sets the value of a ViBoolean attribute.\n| This is a low-level function that you can use to set the values of\n  device-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3277,6 +3373,7 @@ functions = {
         'documentation': {
             'description': '\n| Sets the value of a ViInt32 attribute.\n| This is a low-level function that you can use to set the values of\n  device-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3308,6 +3405,7 @@ functions = {
                     'description': '\nSpecifies the value to which you want to set the attribute. If the\nattribute currently showing in the attribute ring control has constants\nas valid values, you can view a list of the constants by pressing\n**Enter** on this control. Select a value by double-clicking on it or by\nselecting it and then pressing **Enter**.\n',
                     'note': '\nSome of the values might not be valid depending upon the current\nsettings of the device session.\n'
                 },
+                'grpc_enum': 'NiDCPowerInt32AttributeValues',
                 'name': 'attributeValue',
                 'type': 'ViInt32'
             }
@@ -3319,6 +3417,7 @@ functions = {
         'documentation': {
             'description': '\n| Sets the value of a ViInt64 attribute.\n| This is a low-level function that you can use to set the values of\n  device-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3350,6 +3449,7 @@ functions = {
                     'description': '\nSpecifies the value to which you want to set the attribute. If the\nattribute currently showing in the attribute ring control has constants\nas valid values, you can view a list of the constants by pressing\n**Enter** on this control. Select a value by double-clicking on it or by\nselecting it and then pressing **Enter**.\n',
                     'note': '\nSome of the values might not be valid depending upon the current\nsettings of the device session.\n'
                 },
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViInt64'
             }
@@ -3361,6 +3461,7 @@ functions = {
         'documentation': {
             'description': '\n| Sets the value of a ViReal64 attribute.\n| This is a low-level function that you can use to set the values of\n  device-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3392,6 +3493,7 @@ functions = {
                     'description': '\nSpecifies the value to which you want to set the attribute. If the\nattribute currently showing in the attribute ring control has constants\nas valid values, you can view a list of the constants by pressing\n**Enter** on this control. Select a value by double-clicking on it or by\nselecting it and then pressing **Enter**.\n',
                     'note': '\nSome of the values might not be valid depending upon the current\nsettings of the device session.\n'
                 },
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViReal64'
             }
@@ -3403,6 +3505,7 @@ functions = {
         'documentation': {
             'description': '\n| Sets the value of a ViString attribute.\n| This is a low-level function that you can use to set the values of\n  device-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3434,6 +3537,7 @@ functions = {
                     'description': '\nSpecifies the value to which you want to set the attribute. If the\nattribute currently showing in the attribute ring control has constants\nas valid values, you can view a list of the constants by pressing\n**Enter** on this control. Select a value by double-clicking on it or by\nselecting it and then pressing **Enter**.\n',
                     'note': '\nSome of the values might not be valid depending upon the current\nsettings of the device session.\n'
                 },
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViConstString'
             }
@@ -3445,6 +3549,7 @@ functions = {
             'description': '\nConfigures a series of voltage or current outputs and corresponding\nsource delays. The source mode must be set to\n`Sequence <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for this\nfunction to take effect.\n\nRefer to the `Configuring the Source\nUnit <REPLACE_DRIVER_SPECIFIC_URL_1(configuringthesourceunit)>`__ topic\nin the *NI DC Power Supplies and SMUs Help* for more information about\nhow to configure your device.\n\nUse this function in the Uncommitted or Committed programming states.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nNI-DCPower programming states.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3501,10 +3606,11 @@ functions = {
         'documentation': {
             'description': '\nReleases a lock that you acquired on an device session using\nniDCPower_LockSession. Refer to niDCPower_LockSession for additional\ninformation on session locks.\n'
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'unlock',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -3537,6 +3643,7 @@ functions = {
             'description': '\nWaits until the specified channel(s) have generated the specified event.\n\nThe session monitors whether each type of event has occurred at least\nonce since the last time this function or the niDCPower_InitiateWithChannels\nfunction were called. If an event has only been generated once and you\ncall this function successively, the function times out. Individual\nevents must be generated between separate calls of this function.\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3608,6 +3715,7 @@ functions = {
             'description': '\nCloses the session specified in **vi** and deallocates the resources\nthat NI-DCPower reserves. If power output is enabled when you call this\nfunction, the output channels remain in their existing state and\ncontinue providing power. Use the niDCPower_ConfigureOutputEnabled\nfunction to disable power output on a per channel basis. Use the\nniDCPower_ResetWithChannels function to disable power output on all channel(s).\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
         'grpc_name': 'Close',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3628,6 +3736,7 @@ functions = {
             'description': '\nConverts a status code returned by an instrument driver function into a\nuser-readable string.\n'
         },
         'grpc_name': 'ErrorMessage',
+        'included_in_proto': True,
         'is_error_handling': True,
         'parameters': [
             {
@@ -3682,6 +3791,7 @@ functions = {
             ]
         },
         'grpc_name': 'FancySelfTest',
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -3709,6 +3819,7 @@ functions = {
             'description': '\nPerforms the device self-test routine and returns the test result(s).\nCalling this function implicitly calls the niDCPower_ResetWithChannels function.\n\nWhen calling niDCPower_self_test with the PXIe-4162/4163, specify all\nchannels of your PXIe-4162/4163 with the channels input of\nniDCPower_InitializeWithChannels. You cannot self test a subset of\nPXIe-4162/4163 channels.\n'
         },
         'grpc_name': 'SelfTest',
+        'included_in_proto': True,
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {
