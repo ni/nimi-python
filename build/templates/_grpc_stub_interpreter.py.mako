@@ -15,7 +15,7 @@ import threading
 import warnings
 
 % if config['enums']:
-from . import enums as enums
+from . import enums as enums # noqa: F401
 % endif
 from . import errors as errors
 from . import ${module_name}_pb2 as grpc_types
