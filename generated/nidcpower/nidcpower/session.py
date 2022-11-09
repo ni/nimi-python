@@ -6913,8 +6913,8 @@ class Session(_SessionBase):
         # Call specified init function
         # Note that _interpreter clears the session handle in its constructor, so that if
         # _fancy_initialize fails, the error handler can reference it.
-        # And then once _fancy_initialize succeeds, we can call this again with the
-        # actual session handle.
+        # And then once _fancy_initialize succeeds, we can call set_session_handle
+        # with the actual session handle.
         self._interpreter.set_session_handle(self._fancy_initialize(resource_name, channels, reset, options, independent_channels))
 
         # Store the parameter list for later printing in __repr__

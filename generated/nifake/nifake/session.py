@@ -714,8 +714,8 @@ class Session(_SessionBase):
         # Call specified init function
         # Note that _interpreter clears the session handle in its constructor, so that if
         # _init_with_options fails, the error handler can reference it.
-        # And then once _init_with_options succeeds, we can call this again with the
-        # actual session handle.
+        # And then once _init_with_options succeeds, we can call set_session_handle
+        # with the actual session handle.
         self._interpreter.set_session_handle(self._init_with_options(resource_name, options, id_query, reset_device))
 
         # NI-TClk does not work over NI gRPC Device Server

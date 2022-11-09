@@ -274,8 +274,8 @@ if grpc_supported:
         # Call specified init function
         # Note that _interpreter clears the session handle in its constructor, so that if
         # ${init_function['python_name']} fails, the error handler can reference it.
-        # And then once ${init_function['python_name']} succeeds, we can call this again with the
-        # actual session handle.
+        # And then once ${init_function['python_name']} succeeds, we can call set_session_handle
+        # with the actual session handle.
         self._interpreter.set_session_handle(self.${init_function['python_name']}(${init_call_params}))
 
 % if config['uses_nitclk']:

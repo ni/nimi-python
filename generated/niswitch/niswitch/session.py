@@ -1403,8 +1403,8 @@ class Session(_SessionBase):
         # Call specified init function
         # Note that _interpreter clears the session handle in its constructor, so that if
         # _init_with_topology fails, the error handler can reference it.
-        # And then once _init_with_topology succeeds, we can call this again with the
-        # actual session handle.
+        # And then once _init_with_topology succeeds, we can call set_session_handle
+        # with the actual session handle.
         self._interpreter.set_session_handle(self._init_with_topology(resource_name, topology, simulate, reset_device))
 
         # Store the parameter list for later printing in __repr__
