@@ -6782,7 +6782,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-DCPower session to an NI programmable power supply or source measure unit.'''
 
-    def __init__(self, resource_name, channels=None, reset=False, options={}, independent_channels=True):
+    def __init__(self, resource_name, channels=None, reset=False, options={}, independent_channels=True, *, _grpc_options=None):
         r'''An NI-DCPower session to an NI programmable power supply or source measure unit.
 
         Creates and returns a new NI-DCPower session to the instrument(s) and channel(s) specified
@@ -6886,12 +6886,18 @@ class Session(_SessionBase):
                 independent channels. Set this argument to False on legacy applications or if you
                 are unable to upgrade your NI-DCPower driver runtime to 20.6 or higher.
 
+            _grpc_options (nidcpower.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
+
 
         Returns:
             session (nidcpower.Session): A session object representing the device.
 
         '''
-        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        if _grpc_options:
+            import nidcpower._grpc_stub_interpreter as _grpc_stub_interpreter
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
+        else:
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
@@ -6937,7 +6943,8 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._interpreter._close_on_exit:
+            self.close()
 
     def close(self):
         '''close
