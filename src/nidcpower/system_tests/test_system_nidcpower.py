@@ -144,6 +144,13 @@ class SystemTests:
         session.reset_with_defaults()
         assert channel.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
 
+    def test_reset(self, session):
+        channel = session.channels['0']
+        assert channel.output_enabled is True
+        channel.output_enabled = False
+        session.reset()
+        assert channel.output_enabled is True
+
     def test_disable(self, session):
         channel = session.channels['0']
         assert channel.output_enabled is True
@@ -652,6 +659,14 @@ class SystemTests:
         assert e.value.code == -1074118656
         # Error Description: Device was not recognized. The device is not supported with this driver or version.
 
+    @pytest.mark.include_legacy_session
+    def test_repeated_capabilities_on_method_when_all_channels_are_specified(self, session):
+        """Sessions should not error when specifying all channels by number."""
+        assert session.channels['0'].output_enabled is True
+        session.channels['0'].output_enabled = False
+        session.channels['0-11'].reset()
+        assert session.channels['0'].output_enabled is True
+
     @pytest.mark.legacy_session_only
     def test_error_channel_name_not_allowed_in_legacy_session(self, session):
         with pytest.raises(nidcpower.Error) as e:
@@ -970,6 +985,34 @@ class SystemTests:
 
     @pytest.mark.resource_name("4190/0")
     @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+    def test_perform_lcr_load_compensation(self, session):
+        session.perform_lcr_load_compensation(
+            [
+                nidcpower.LCRLoadCompensationSpot(
+                    frequency=100_000.0,
+                    reference_value_type=nidcpower.LCRReferenceValueType.IMPEDANCE,
+                    reference_value=complex(100.0, 1000.0)
+                ),
+                nidcpower.LCRLoadCompensationSpot(
+                    frequency=200_000.0,
+                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_CAPACITANCE,
+                    reference_value=300.0e-9
+                ),
+                nidcpower.LCRLoadCompensationSpot(
+                    frequency=300_000.0,
+                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_INDUCTANCE,
+                    reference_value=400.0e-6
+                ),
+                nidcpower.LCRLoadCompensationSpot(
+                    frequency=400_000.0,
+                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_RESISTANCE,
+                    reference_value=200.0
+                )
+            ]
+        )
+
+    @pytest.mark.resource_name("4190/0")
+    @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
     @pytest.mark.parametrize(
         "compensation_function",
         [
@@ -1015,49 +1058,6 @@ class SystemTests:
         assert last_compensation_datetime.day == 1
         assert last_compensation_datetime.hour == 0
         assert last_compensation_datetime.minute == 0
-
-    def test_reset(self, session):
-        channel = session.channels['0']
-        assert channel.output_enabled is True
-        channel.output_enabled = False
-        session.reset()
-        assert channel.output_enabled is True
-
-    @pytest.mark.include_legacy_session
-    def test_repeated_capabilities_on_method_when_all_channels_are_specified(self, session):
-        """Sessions should not error when specifying all channels by number."""
-        assert session.channels['0'].output_enabled is True
-        session.channels['0'].output_enabled = False
-        session.channels['0-11'].reset()
-        assert session.channels['0'].output_enabled is True
-
-    @pytest.mark.resource_name("4190/0")
-    @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
-    def test_perform_lcr_load_compensation(self, session):
-        session.perform_lcr_load_compensation(
-            [
-                nidcpower.LCRLoadCompensationSpot(
-                    frequency=100_000.0,
-                    reference_value_type=nidcpower.LCRReferenceValueType.IMPEDANCE,
-                    reference_value=complex(100.0, 1000.0)
-                ),
-                nidcpower.LCRLoadCompensationSpot(
-                    frequency=200_000.0,
-                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_CAPACITANCE,
-                    reference_value=300.0e-9
-                ),
-                nidcpower.LCRLoadCompensationSpot(
-                    frequency=300_000.0,
-                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_INDUCTANCE,
-                    reference_value=400.0e-6
-                ),
-                nidcpower.LCRLoadCompensationSpot(
-                    frequency=400_000.0,
-                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_RESISTANCE,
-                    reference_value=200.0
-                )
-            ]
-        )
 
 
 class TestLibrary(SystemTests):
