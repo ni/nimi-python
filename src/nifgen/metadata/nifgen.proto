@@ -1992,7 +1992,7 @@ message SetAttributeViStringRequest {
   string channel_name = 2;
   NiFgenAttribute attribute_id = 3;
   oneof attribute_value_enum {
-    string attribute_value_raw = 4;
+    string attribute_value = 4;
     NiFgenStringAttributeValuesMapped attribute_value_mapped = 5;
   }
 }
