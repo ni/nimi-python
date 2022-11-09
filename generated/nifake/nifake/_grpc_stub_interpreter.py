@@ -27,9 +27,12 @@ class GrpcStubInterpreter(object):
         self._client = nifake_grpc.NiFakeStub(grpc_options.grpc_channel)
         self._vi = 0
 
-    def _invoke(self, func, request):
+    def _invoke(self, func, request, metadata=None):
         try:
-            response = func(request)
+            if metadata is not None:
+                response = func(request, metadata=metadata)
+            else:
+                response = func(request)
             error_code = response.status
             error_message = ''
         except grpc.RpcError as rpc_error:
@@ -305,9 +308,13 @@ class GrpcStubInterpreter(object):
         )
 
     def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
+        metadata = (
+            ('x-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.InitWithOptions,
             grpc_types.InitWithOptionsRequest(resource_name=resource_name, id_query=id_query, reset_device=reset_device, option_string=option_string, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
+            metadata=metadata,
         )
         self._close_on_exit = response.new_session_initialized
         return response.vi

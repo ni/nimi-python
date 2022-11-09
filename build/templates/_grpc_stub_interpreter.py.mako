@@ -35,9 +35,12 @@ class GrpcStubInterpreter(object):
         self._client = ${module_name}_grpc.${service_class_prefix}Stub(grpc_options.grpc_channel)
         self._${config['session_handle_parameter_name']} = 0
 
-    def _invoke(self, func, request):
+    def _invoke(self, func, request, metadata=None):
         try:
-            response = func(request)
+            if metadata is not None:
+                response = func(request, metadata=metadata)
+            else:
+                response = func(request)
             error_code = response.status
             error_message = ''
         except grpc.RpcError as rpc_error:

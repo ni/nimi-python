@@ -344,12 +344,12 @@ class TestGrpc(SystemTests):
 
     @pytest.fixture(scope='function')
     def session(self, grpc_channel):
-        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, "")
+        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
         with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             yield simulated_session
 
     def test_error_message(self, grpc_channel):
-        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, "")
+        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
         try:
             # We pass in an invalid model name to force going to error_message
             with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', _grpc_options=grpc_options):
@@ -363,7 +363,7 @@ class TestGrpc(SystemTests):
         expected_error_message = "Cannot initialize '" + session_name + "' when a session already exists."
         expected_grpc_error = grpc.StatusCode.ALREADY_EXISTS
         init_behavior = nidmm.SessionInitializationBehavior.INITIALIZE_SERVER_SESSION
-        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, session_name, init_behavior)
+        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, session_name, initialization_behavior=init_behavior)
         with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options):
             try:
                 with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options):
@@ -378,7 +378,7 @@ class TestGrpc(SystemTests):
         expected_error_message = "Cannot attach to '" + session_name + "' because a session has not been initialized."
         expected_grpc_error = grpc.StatusCode.FAILED_PRECONDITION
         init_behavior = nidmm.SessionInitializationBehavior.ATTACH_TO_SERVER_SESSION
-        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, session_name, init_behavior)
+        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, session_name, initialization_behavior=init_behavior)
         try:
             with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options):
                 assert False

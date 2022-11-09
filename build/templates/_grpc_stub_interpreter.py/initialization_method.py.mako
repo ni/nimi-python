@@ -15,9 +15,13 @@
 %>\
 
     def ${full_func_name}(${method_decl_params}):  # noqa: N802
+        metadata = (
+            ('x-api-key', self._grpc_options.api_key),
+        )
         ${capture_response}self._invoke(
             self._client.${grpc_name},
             grpc_types.${grpc_name}Request(${grpc_request_args}, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
+            metadata=metadata,
         )
         self._close_on_exit = response.new_session_initialized
 % if return_statement:

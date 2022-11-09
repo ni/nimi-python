@@ -554,14 +554,14 @@ class TestGrpc(SystemTests):
 
     @pytest.fixture(scope='function')
     def session(self, grpc_channel):
-        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
+        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, '')
         with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             yield simulated_session
 
     @pytest.fixture(scope='function')
     def session_5421(self, grpc_channel):
         with daqmx_sim_db_lock:
-            grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
+            grpc_options = nifgen.GrpcSessionOptions(grpc_channel, '')
             simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI', _grpc_options=grpc_options)
         yield simulated_session
         with daqmx_sim_db_lock:
@@ -569,7 +569,7 @@ class TestGrpc(SystemTests):
 
     def test_error_message(self, grpc_channel):
         try:
-            grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
+            grpc_options = nifgen.GrpcSessionOptions(grpc_channel, '')
             # We pass in an invalid model name to force going to error_message
             with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:invalid_model (2CH);BoardType:PXIe', _grpc_options=grpc_options):
                 assert False
@@ -579,7 +579,7 @@ class TestGrpc(SystemTests):
 
     ''' Removed due to OSP disabled - #891
     def test_fir_filter_coefficients(self, grpc_channel):
-        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
+        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, '')
         with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI', _grpc_options=grpc_options) as session:
             coeff_array = [0 for i in range(95)]
             coeff_array[0] = -1.0
@@ -592,7 +592,7 @@ class TestGrpc(SystemTests):
     '''
 
     def test_channel_format_types(self, grpc_channel):
-        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
+        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, '')
         with nifgen.Session('', [0, 1], False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
             assert simulated_session.channel_count == 2
         with nifgen.Session('', range(2), False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:

@@ -21,9 +21,12 @@ class GrpcStubInterpreter(object):
         self._client = niswitch_grpc.NiSwitchStub(grpc_options.grpc_channel)
         self._vi = 0
 
-    def _invoke(self, func, request):
+    def _invoke(self, func, request, metadata=None):
         try:
-            response = func(request)
+            if metadata is not None:
+                response = func(request, metadata=metadata)
+            else:
+                response = func(request)
             error_code = response.status
             error_message = ''
         except grpc.RpcError as rpc_error:
@@ -189,9 +192,13 @@ class GrpcStubInterpreter(object):
         return enums.RelayPosition(response.relay_position_raw)
 
     def init_with_topology(self, resource_name, topology, simulate, reset_device):  # noqa: N802
+        metadata = (
+            ('x-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.InitWithTopology,
             grpc_types.InitWithTopologyRequest(resource_name=resource_name, topology=topology, simulate=simulate, reset_device=reset_device, session_name=self._grpc_options.session_name, initialization_behavior=self._grpc_options.initialization_behavior),
+            metadata=metadata,
         )
         self._close_on_exit = response.new_session_initialized
         return response.vi
