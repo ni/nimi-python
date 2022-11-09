@@ -49,10 +49,16 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidmm` (NI-DMM)
     * #### Added
+        * gRPC NI-DMM Example 
+            * Example added:
+                * `nidmm_measurement_grpc.py`
     * #### Changed
     * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
+        * gRPC NI-FGEN Example 
+            * Example added:
+                * `nifgen_standard_function_grpc.py`
     * #### Changed
     * #### Removed
 * ### `nimodinst` (NI-ModInst)
@@ -65,6 +71,9 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
     * #### Added
+        * gRPC NI-SWITCH Example 
+            * Example added:
+                * `niswitch_connect_channels_grpc.py`
     * #### Changed
     * #### Removed
 * ### `nise` (NI Switch Executive)
